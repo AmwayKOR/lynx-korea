@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
  [y] hybris Platform
 
@@ -9,16 +8,11 @@
  Information and shall use it only in accordance with the terms of the
  license agreement you entered into with SAP.
 -->
-
-<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="items.xsd">
-
-    <itemtypes>
-
-        <!-- Add your item definitions here -->
-
-
-        <!-- TypeGroups are for structure of this file only -->
-
-
-    </itemtypes>
-</items>
+<groups xmlns="http://www.isdc.ro/wro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.isdc.ro/wro wro.xsd">
+	<group name="addons_responsive">
+	</group>
+	
+	<group name="addons_desktop">
+	</group>
+	
+</groups>
