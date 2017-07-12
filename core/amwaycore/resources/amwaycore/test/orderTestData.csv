@@ -1,0 +1,58 @@
+#%impex.setLocale(Locale.US)
+#We need orders that cover most common ranges: a day, a week, a month, 6 months, a year.
+
+$certainDay01_date_01=27.04.2010 00:00:00
+$certainDay02_date_01=27.12.2014 11:01:27
+$certainDay03_date_01=27.04.2015 11:53:00
+
+INSERT_UPDATE Order;code[unique=true];date[dateformat=dd.MM.yyyy HH:mm:ss];net;currency(isocode);calculated;user(uid);;type(code)[default='web'];store(uid)[default='defaultstore'];site(uid)[default='storetemplate']
+;certainDay01_date_01;$certainDay01_date_01;false;USD;false;amway_party_test_1;3108051595;;
+;certainDay02_date_01;$certainDay02_date_01;false;USD;false;amway_party_test_1;3108051595;;
+;certainDay02_date_01_ac1;$certainDay02_date_01;false;USD;false;amway_party_test_2;3106990436;;
+;certainDay02_date_01_ac2;$certainDay02_date_01;false;USD;false;amway_party_test_2;3106990436;;
+;certainDay03_date_01;$certainDay03_date_01;false;USD;false;amway_party_test_1;3108051595;;
+;certainDay03_date_02;$certainDay03_date_01;false;USD;false;amway_party_test_1;3108051595;;
+#Order Entries for certain day 01
+INSERT_UPDATE OrderEntry;order(Order.code)[unique=true];wareHouse(code);creationTime[dateformat=dd.MM.yyyy HH:mm:ss];product(code,catalogVersion(catalog(id),version))[unique=true];quantity;unit(code);basePrice;aboBasePrice;
+;certainDay01_date_01;warehouseK1;$certainDay01_date_01;HW1210-3422:testCatalog:Online;1;pieces;12.95;10.95;
+;certainDay01_date_01;warehouseK1;$certainDay01_date_01;HW1210-3423:testCatalog:Online;3;pieces;22.95;20.95;
+
+;certainDay02_date_01;;$certainDay02_date_01;HW1210-3422:testCatalog:Online;1;pieces;12.95;10.95;
+;certainDay02_date_01;;$certainDay02_date_01;HW1210-3423:testCatalog:Online;1;pieces;22.95;20.95;
+;certainDay02_date_01;;$certainDay02_date_01;HW1210-3424:testCatalog:Online;1;pieces;30.95;25.95;
+
+;certainDay02_date_01_ac1;;$certainDay02_date_01;HW1210-3422:testCatalog:Online;1;pieces;12.95;10.95;
+;certainDay02_date_01_ac1;;$certainDay02_date_01;HW1210-3423:testCatalog:Online;1;pieces;22.95;20.95;
+;certainDay02_date_01_ac1;;$certainDay02_date_01;HW1210-3424:testCatalog:Online;1;pieces;30.95;;
+
+;certainDay02_date_01_ac2;;$certainDay02_date_01;HW1210-3424:testCatalog:Online;1;pieces;30.95;;
+;certainDay02_date_01_ac2;;$certainDay02_date_01;HW1210-3425:testCatalog:Online;1;pieces;35.95;;
+
+;certainDay03_date_01;;$certainDay03_date_01;HW1210-3423:testCatalog:Online;2;pieces;22.95;20.95;
+
+;certainDay03_date_02;;$certainDay03_date_01;HW1210-3423:testCatalog:Online;2;pieces;22.95;20.95;
+
+#Recalculating orders for certain day 01
+UPDATE Order;code[unique=true];status(code)
+;certainDay01_date_01;CREATED
+#%   impex.getLastImportedItem().setPaymentAddress(impex.getLastImportedItem().getUser().getAllAddresses().iterator().next());
+#%   impex.getLastImportedItem().recalculate(); 
+;certainDay02_date_01;CREATED
+#%   impex.getLastImportedItem().setPaymentAddress(impex.getLastImportedItem().getUser().getAllAddresses().iterator().next());
+#%   impex.getLastImportedItem().recalculate();
+;certainDay02_date_01_ac1;CREATED
+#%   impex.getLastImportedItem().setPaymentAddress(impex.getLastImportedItem().getUser().getAllAddresses().iterator().next());
+#%   impex.getLastImportedItem().recalculate();
+;certainDay02_date_01_ac2;CREATED
+#%   impex.getLastImportedItem().setPaymentAddress(impex.getLastImportedItem().getUser().getAllAddresses().iterator().next());
+#%   impex.getLastImportedItem().recalculate();
+;certainDay03_date_01;CREATED
+#%   impex.getLastImportedItem().setPaymentAddress(impex.getLastImportedItem().getUser().getAllAddresses().iterator().next());
+#%   impex.getLastImportedItem().recalculate();
+;certainDay03_date_02;CANCELLED
+#%   impex.getLastImportedItem().setPaymentAddress(impex.getLastImportedItem().getUser().getAllAddresses().iterator().next());
+#%   impex.getLastImportedItem().recalculate();
+
+
+INSERT_UPDATE OrderCancelRecord;identifier[unique=true];order(Order.code);
+;cancel_certainDay03_date_02;certainDay03_date_02

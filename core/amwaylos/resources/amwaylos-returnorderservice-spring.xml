@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ######### PUT DETAILS FOR SERVICE ###########
+###########PUT:  http://uslx135:5656/rest/v1/bonus/order ######-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		   http://www.springframework.org/schema/beans/spring-beans.xsd
+		   http://www.springframework.org/schema/util
+		   http://www.springframework.org/schema/util/spring-util.xsd">
+
+	
+	<alias alias="returnOrderBonusSubmitService" name="defaultReturnOrderBonusSubmitService" />
+	<bean id="defaultReturnOrderBonusSubmitService"
+		class="com.amway.integration.cis.los.order.service.DefaultLosReturnOrderBonusService" parent="abstractLosOrderService">
+		<property name="inputConverter" ref="losBonusOrderInputConverter" />
+		<property name="outputConverter" ref="losBonusOrderOutputConverter" />
+		<property name="urlPath" value="${cis.client.los.returnorderservice.urlPath}"/>
+	</bean>
+	<!--
+	<bean id="returnOrderBonusSubmitServiceFactory" parent="abstractMockFactory">
+		<property name="mockInterface"
+			value="com.amway.core.los.service.LosService" />
+		<property name="mockMode"
+			value="${cis.client.los.returnorderservice.mock}" />
+		<lookup-method name="getDefaultObject" bean="defaultReturnOrderBonusSubmitService" />
+		<property name="customMock" ref="mockOrderBonusService"/>
+			<!- - <bean
+				class="com.amway.integration.cis.los.orderbonusservice.mock.impl.MockOrderBonusService"
+				autowire-candidate="false" />
+		</property> - ->
+	</bean>
+-->
+</beans>

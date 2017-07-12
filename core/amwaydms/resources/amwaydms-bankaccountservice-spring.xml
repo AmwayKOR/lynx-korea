@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		   http://www.springframework.org/schema/beans/spring-beans.xsd
+		   http://www.springframework.org/schema/util
+		   http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <!-- ##########################################################################
+		##########  1.  Bank Account Service  #####################
+		##########################################################################  -->		   
+	
+	<bean id="dmsBankAccountDetailsInputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.integration.dms.services.BankAccountDetailRequest" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonRequestFieldsPopulator" />
+				<ref bean="dmsBankAccountInputPopulator" />
+			</list>
+		</property>
+	</bean>
+	<bean id="dmsBankAccountInputPopulator"
+		class="com.amway.integration.cis.dms.populators.DmsBankAccountInputPopulator">	
+	</bean>
+		
+	 <bean id="dmsBankAccountOutputConverter" parent="abstractPopulatingConverter">
+		  <property name="targetClass" value="com.amway.core.dms.data.BankAccountDetailsResponseData" />
+		  <property name="populators">
+		   <list>
+		    <ref bean="amwayCommonResponseFieldsPopulator" />
+		    <ref bean="dmsBankAccountOutputPopulator"/>
+		   </list>
+		  </property>
+	  </bean>
+	  
+	  <bean id="dmsBankAccountOutputPopulator"
+		class="com.amway.integration.cis.dms.populators.DmsBankAccountOutputPopulator">	
+	</bean>
+	  
+ 	
+	<bean id="defaultBankAccountService"
+		class="com.amway.integration.cis.dms.bankaccountservice.impl.DefaultBankAccountService"
+		parent="abstractDmsService">
+		<property name="inputConverter" ref="dmsBankAccountDetailsInputConverter" />
+		<property name="outputConverter" ref="dmsBankAccountOutputConverter" />
+		<property name="urlPath" value="${cis.client.dms.getBankAccount.urlPath}" />
+	</bean>
+	
+	<bean id="mockBankAccountService"
+		class="com.amway.integration.cis.dms.bankaccountservice.mock.impl.MockBankAccountService"
+		parent="abstractDmsService">
+		<property name="inputConverter" ref="dmsBankAccountDetailsInputConverter" />
+		<property name="outputConverter" ref="dmsBankAccountOutputConverter" />
+		<property name="hystrixCommandConfig" ref="dmsCommandConfig" />
+		<property name="ondemandHystrixCommandFactory" ref="ondemandHystrixCommandFactory" />
+		<property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
+		<property name="serviceAvailCode" value="#{configurationService.configuration.getProperty('amwaydms.availablity.code')}"/>
+	</bean>
+
+	<alias alias="bankAccountService" name="defaultBankAccountService" />
+	<!--
+	<alias alias="bankAccountService" name="bankAccountServiceFactory" />
+	<bean id="bankAccountServiceFactory" parent="abstractMockFactory">
+		<property name="mockInterface" value="com.amway.core.dms.service.DmsService" />
+		<property name="mockMode" value="${cis.client.dms.bankAccountService.mock}" />
+		<lookup-method name="getDefaultObject" bean="defaultBankAccountService" />
+		<property name="customMock" ref="mockBankAccountService"/>
+			<!- - <bean
+				class="com.amway.integration.cis.dms.bankaccountservice.mock.impl.MockBankAccountService"
+				autowire-candidate="false">
+			</bean>
+		</property> - ->
+	</bean>
+	-->
+	
+	<!-- ##########################################################################
+		########## Update Bank Account Service #####################
+		##########################################################################  -->		   
+      <bean id="dmsUpdateBankAccountInputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.integration.dms.services.AddBankAccountRequest" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonRequestFieldsPopulator" />
+				<ref bean="dmsUpdateBankAccountInputPopulator" />
+			</list>
+		</property>
+	</bean>
+	<bean id="dmsUpdateBankAccountInputPopulator"
+		class="com.amway.integration.cis.dms.populators.DmsUpdateBankAccountInputPopulator">
+	</bean>
+		
+	 <bean id="dmsUpdateBankAccountResponseConverter" parent="abstractPopulatingConverter">
+		  <property name="targetClass" value="com.amway.core.data.CommonResponseFieldsData" />
+		  <property name="populators">
+		   <list>
+		    <ref bean="amwayCommonResponseFieldsPopulator" />
+		   </list>
+		  </property>
+	  </bean>
+	
+	<bean id="defaultUpdateBankAccountService"
+		class="com.amway.integration.cis.dms.bankaccountservice.impl.DefaultUpdateBankAccountService"
+		parent="abstractDmsService">
+		<property name="inputConverter" ref="dmsUpdateBankAccountInputConverter" />
+		<property name="outputConverter" ref="dmsUpdateBankAccountResponseConverter" />
+		<property name="urlPath" value="${cis.client.dms.updateBankAccount.urlPath}" />
+	</bean>
+
+
+	<bean id="mockDefaultUpdateBankAccountService"
+		class="com.amway.integration.cis.dms.bankaccountservice.mock.impl.MockDefaultUpdateBankAccountService">
+		<property name="inputConverter" ref="dmsUpdateBankAccountInputConverter" />
+		<property name="outputConverter" ref="dmsUpdateBankAccountResponseConverter" />
+		<property name="hystrixCommandConfig" ref="dmsCommandConfig" />
+		<property name="ondemandHystrixCommandFactory" ref="ondemandHystrixCommandFactory" />
+		<property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
+		<property name="serviceAvailCode" value="#{configurationService.configuration.getProperty('amwaydms.availablity.code')}"/>
+	</bean>
+	<!--
+        <alias alias="updateBankAccountService" name="updateBankAccountServiceFactory" />
+        <bean id="updateBankAccountServiceFactory" parent="abstractMockFactory">
+            <property name="mockInterface" value="com.amway.core.dms.service.DmsService" />
+            <property name="mockMode" value="${cis.client.dms.updateBankAccountService.mock}" />
+            <lookup-method name="getDefaultObject" bean="defaultUpdateBankAccountService" />
+            <property name="customMock" ref="mockDefaultUpdateBankAccountService"/>
+                <!- - <bean
+                    class="com.amway.integration.cis.dms.bankaccountservice.mock.impl.MockDefaultUpdateBankAccountService"
+                    autowire-candidate="false">
+                </bean>
+            </property> - ->
+        </bean>
+      -->
+	<alias alias="updateBankAccountService" name="defaultUpdateBankAccountService" />
+</beans>

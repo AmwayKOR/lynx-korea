@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2016 SAP SE or an SAP affiliate company.
+ All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+
+
+-->
+
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="items.xsd">
+    <collectiontypes>
+        <collectiontype code="SerialNumbersList" elementtype="ConsignmentSerialNumber" autocreate="true" generate="true"
+                        type="list"/>
+    </collectiontypes>
+
+    <enumtypes>
+        <enumtype code="DeliveryStatus" autocreate="false" generate="true">
+            <value code="IN_PROGRESS">
+                <description>In Progress</description>
+            </value>
+            <value code="WITH_COURIER">
+                <description>With Courier</description>
+            </value>
+            <value code="PICKED_UP">
+                <description>Picked-Up</description>
+            </value>
+            <value code="COMPLETE_RETURN">
+                <description>Complete Return</description>
+            </value>
+            <value code="DELIVERED">
+                <description>Delivered</description>
+            </value>
+            <value code="PENDING">
+                <description>Pending</description>
+            </value>
+        </enumtype>
+        <enumtype code="ConsignmentStatus" autocreate="false" generate="true">
+            <value code="IGNORE">
+                <description>Ignore</description>
+            </value>
+        </enumtype>
+    </enumtypes>
+
+    <itemtypes>
+        <typegroup name="Consignments">
+            <itemtype code="Consignment" autocreate="false" generate="false">
+                <attributes>
+                    <attribute qualifier="trackingLink" type="java.lang.String">
+                        <description>Tracking link</description>
+                        <modifiers optional="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                </attributes>
+            </itemtype>
+            <itemtype code="ConsignmentEntry" autocreate="false" generate="false">
+                <attributes>
+                    <attribute qualifier="lot" type="java.lang.String">
+                        <description>LOT code</description>
+                        <modifiers optional="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="version" type="java.lang.String">
+                        <description>Revision</description>
+                        <modifiers optional="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="packageId" type="java.lang.String">
+                        <description>Package identifier</description>
+                        <modifiers optional="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="packageSeq" type="java.lang.String">
+                        <description>Package sequence</description>
+                        <modifiers optional="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="serialNumbers" type="SerialNumbersList">
+                        <description>List of serial numbers</description>
+                        <modifiers optional="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                </attributes>
+            </itemtype>
+            <itemtype code="ConsignmentSerialNumber" generate="true">
+                <description>Serial number for consignment entry</description>
+                <deployment table="ConsignmentSerialNumber" typecode="25010"/>
+                <attributes>
+                    <attribute qualifier="serialNumber" type="java.lang.String">
+                        <description>Serial number</description>
+                        <modifiers optional="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                </attributes>
+            </itemtype>
+        </typegroup>
+    </itemtypes>
+</items>

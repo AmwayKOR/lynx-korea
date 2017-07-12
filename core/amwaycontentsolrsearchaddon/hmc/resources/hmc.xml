@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+-->
+<configuration xmlns="hybris.de/schemas/hmc/generic"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="hybris.de/schemas/hmc/generic hmc.xsd">
+
+
+	<!-- Configuration for extension amwaycontentsolrsearchaddon -->
+
+	<type name="BaseStore" mode="append">
+		<organizer mode="append">
+			<editor mode="append">
+				<essentials mode="append">
+					<columnlayout>
+						<row>
+							<attribute name="net"/>
+						</row>
+						<row>
+							<attribute name="defaultCurrency"/>
+							<attribute name="defaultLanguage"/>
+						</row>
+					</columnlayout>
+				</essentials>
+				<tab name="locations" mode="append">
+					<section name="section.basecommerce.locations">
+						<listlayout mode="append">
+							<attribute name="defaultDeliveryOrigin"/>
+						</listlayout>
+					</section>
+				</tab>
+				<tab name="properties" position="1" mode="append">
+					<section name="section.basecommerce.catalogs" mode="append">
+						<listlayout>
+							<attribute name="currencies" width="300"/>
+						</listlayout>
+					</section>
+					<section name="section.basecommerce.solr.config" mode="append">
+						<listlayout>
+							<attribute name="solrFacetSearchConfiguration" width="300"/>
+							<attribute name="solrContentFacetSearchConfiguration" width="300"/>
+						</listlayout>
+					</section>
+					<section name="section.basestore.warehouses" mode="append">
+						<listlayout>
+							<attribute name="warehouses" width="500"/>
+						</listlayout>
+					</section>
+					<section name="section.baseStore.customerallowedtoignoresuggestions" mode="append">
+						<listlayout>
+							<attribute name="customerAllowedToIgnoreSuggestions" width="300"/>
+						</listlayout>
+					</section>
+					<section name="section.baseStore.deliverycountries" mode="append">
+						<listlayout>
+							<attribute name="deliveryCountries" width="300"/>
+						</listlayout>
+					</section>
+					<section name="section.baseStore.externaltaxenabled" mode="append">
+						<listlayout>
+							<attribute name="externalTaxEnabled" width="300"/>
+						</listlayout>
+					</section>
+					<section name="section.baseStore.paymentprovider" mode="append">
+						<listlayout>
+							<attribute name="paymentProvider" width="300"/>
+						</listlayout>
+					</section>
+					<section name="section.baseStore.pickupinstoremode" mode="append">
+						<listlayout>
+							<attribute name="pickupInStoreMode" width="300"/>
+						</listlayout>
+					</section>
+					<section name="section.baseStore.submitorderprocesscode" mode="append">
+						<listlayout>
+							<attribute name="submitOrderProcessCode" width="300"/>
+						</listlayout>
+					</section>
+					<section name="section.baseStore.taxgroup" mode="append">
+						<listlayout>
+							<attribute name="taxGroup" width="300"/>
+						</listlayout>
+					</section>
+					<section name="section.basestore.storelocatordistanceunit" mode="append">
+						<listlayout>
+							<attribute name="storelocatorDistanceUnit" width="300"/>
+						</listlayout>
+					</section>
+				</tab>
+			</editor>
+		</organizer>
+		<defaultreference mode="replace" searchattribute="name">
+			<itemlayout>
+				<attribute name="name"/>
+			</itemlayout>
+		</defaultreference>
+	</type>
+	
+	<type name="BaseSite" mode="append">
+		<organizer>
+			<editor>
+				<tab name="properties" position="0" mode="append">
+					<section name="section.basesite.config" mode="append">
+						<listlayout>
+							<attribute name="theme"/>
+							<attribute name="channel"/>
+							<attribute name="defaultLanguage"/>
+							<attribute name="locale"/>
+							<attribute name="solrFacetSearchConfiguration"/>
+							<attribute name="solrContentFacetSearchConfiguration"/>
+						</listlayout>
+					</section>
+				</tab>
+			</editor>
+		</organizer>
+	</type>
+
+<!--
+	<explorertree>
+		<group name="amwaycontentsolrsearchaddongroup">
+			<externalnode classname="com.amway.hmc.AmwaycontentsolrsearchaddonTreeLeafChip"/>		
+		</group>
+	</explorertree>
+-->
+
+</configuration>

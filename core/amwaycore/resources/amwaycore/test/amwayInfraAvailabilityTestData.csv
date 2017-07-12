@@ -1,0 +1,6 @@
+INSERT_UPDATE AmwayInfraAvailability;code[unique=true];store(uid)[unique=true][default=defaultstore]
+;lynx_dms_services_test;
+;lynx_los_services_test;
+;lynx_los_order_services_test;
+;lynx_los_return_order_services_test;
+;lynx_oms_order_services_test;

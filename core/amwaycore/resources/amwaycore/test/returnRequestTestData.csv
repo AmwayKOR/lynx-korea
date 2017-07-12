@@ -1,0 +1,36 @@
+$certainDay01_date_01=27.04.2010 00:00:00
+$certainDay02_date_01=27.12.2014 11:01:27
+$certainDay03_date_01=27.04.2015 11:53:00
+
+UPDATE OrderEntry;&orderEntry;order(Order.code)[unique=true];creationTime[dateformat=dd.MM.yyyy HH:mm:ss];product(code,catalogVersion(catalog(id),version))[unique=true];quantity;unit(code);basePrice;aboBasePrice;
+;certainDay01_date_01_0;certainDay01_date_01;$certainDay01_date_01;HW1210-3422:testCatalog:Online;1;pieces;12.95;10.95;
+;certainDay01_date_01_1;certainDay01_date_01;$certainDay01_date_01;HW1210-3423:testCatalog:Online;3;pieces;22.95;20.95;
+
+;certainDay02_date_01_0;certainDay02_date_01;$certainDay02_date_01;HW1210-3422:testCatalog:Online;1;pieces;12.95;10.95;
+;certainDay02_date_01_1;certainDay02_date_01;$certainDay02_date_01;HW1210-3423:testCatalog:Online;1;pieces;22.95;20.95;
+;certainDay02_date_01_2;certainDay02_date_01;$certainDay02_date_01;HW1210-3424:testCatalog:Online;1;pieces;30.95;25.95;
+
+;certainDay02_date_01_ac1_0;certainDay02_date_01_ac1;$certainDay02_date_01;HW1210-3422:testCatalog:Online;1;pieces;12.95;10.95;
+;certainDay02_date_01_ac1_1;certainDay02_date_01_ac1;$certainDay02_date_01;HW1210-3423:testCatalog:Online;1;pieces;22.95;20.95;
+;certainDay02_date_01_ac1_2;certainDay02_date_01_ac1;$certainDay02_date_01;HW1210-3424:testCatalog:Online;1;pieces;30.95;;
+
+;certainDay02_date_01_ac2_0;certainDay02_date_01_ac2;$certainDay02_date_01;HW1210-3424:testCatalog:Online;1;pieces;30.95;;
+;certainDay02_date_01_ac2_1;certainDay02_date_01_ac2;$certainDay02_date_01;HW1210-3425:testCatalog:Online;1;pieces;35.95;;
+
+;certainDay03_date_01_0;certainDay03_date_01;$certainDay03_date_01;HW1210-3423:testCatalog:Online;2;pieces;22.95;20.95;
+
+INSERT_UPDATE RefundEntry;action(code);status(code);reason(code);orderEntry(&orderEntry)[unique=true];expectedQuantity;receivedQuantity;returnRequest(&retrunRequest)
+;IMMEDIATE;RECEIVED;LateDelivery;certainDay02_date_01_0;1;1;1000
+;IMMEDIATE;RECEIVED;LateDelivery;certainDay02_date_01_1;1;1;1000
+;IMMEDIATE;RECEIVED;LateDelivery;certainDay02_date_01_2;1;1;1000
+
+;IMMEDIATE;RECEIVED;LateDelivery;certainDay02_date_01_ac1_0;1;1;2000
+;IMMEDIATE;RECEIVED;LateDelivery;certainDay02_date_01_ac1_1;1;1;2000
+;IMMEDIATE;RECEIVED;LateDelivery;certainDay02_date_01_ac1_2;1;1;2000
+
+;IMMEDIATE;RECEIVED;LateDelivery;certainDay03_date_01_0;2;2;3000
+
+INSERT_UPDATE ReturnRequest;code[unique=true];rma;currency(isocode);date[dateformat=dd/MM/yyy];consolidateDate[dateformat=dd/MM/yyy];order(code);&retrunRequest;replacementOrder(code);
+;1000;1001;BRL;18/02/2016;24/02/2016;certainDay02_date_01;1000;
+;2000;2001;BRL;18/02/2016;27/02/2016;certainDay02_date_01_ac1;2000;
+;3000;3001;BRL;18/03/2016;27/03/2016;certainDay03_date_01;3000;

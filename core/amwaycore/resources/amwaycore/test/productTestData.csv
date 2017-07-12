@@ -1,0 +1,142 @@
+$siteid=storetemplate
+
+$currencies=USD
+$defaultCurrency=USD
+$defaultLanguage=en
+$deliveryCountries=US
+
+$catalog-id=testCatalog
+$catalog-version=Online
+
+$testCategory0-id=testCategory0
+$testCategory1-id=testCategory1
+
+$catalogversion=catalogversion(catalog(id),version)[unique=true,default=$catalog-id:$catalog-version]
+$supercategories=supercategories(code,catalogversion(catalog(id[default=$catalog-id]),version[default=$catalog-version]))
+$prices=europe1prices[translator=de.hybris.platform.europe1.jalo.impex.Europe1PricesTranslator]
+$product=product(code, catalogVersion(catalog(id[default='testCatalog']),version[default='Online']));
+$baseProduct=baseProduct(code, catalogVersion(catalog(id[default='$catalog-id']),version[default='$catalog-version']))
+
+
+INSERT_UPDATE Language;isocode[unique=true];active;;;;;;
+;de;true;;;;;;
+;en;true;;;;;;
+
+UPDATE Language;isocode[unique=true];name[lang=de];name[lang=en];;;;;
+;de;Deutsch;German;;;;;
+;en;Englisch;English;;;;;
+
+INSERT_UPDATE Unit;unitType[unique=true];code[unique=true];name[lang=de];name[lang=en];conversion;;;
+;pieces;pieces;pieces;pieces;1
+
+INSERT_UPDATE Currency;isocode[unique=true];name[lang=de];name[lang=en];active;base;conversion;digits;symbol
+;USD;USD;USD;true;true;1;2;$
+
+INSERT_UPDATE Title;code[unique=true];name[lang=de];name[lang=en];;
+;dr;Dr.;dr.;;
+
+INSERT_UPDATE Country;isocode[unique=true];name[lang=de];name[lang=en];active;
+;US;Vereinigte Staaten von Amerika;United States of America;true;
+
+INSERT_UPDATE UserGroup;uid[unique=true];groups(uid);
+;cockpitgroup;;
+;customergroup;cockpitgroup;
+
+INSERT_UPDATE Customer;uid[unique=true];customerID;name;description;sessionLanguage(isocode);sessionCurrency(isocode);groups(uid);accounts(AmwayAccount.code)
+;amway_party_test_1;K2006-C0007;Max de Jol;;en;USD;customergroup;3108051595
+;amway_party_test_12;K2006-C0007-2;Max de Jol;;en;USD;customergroup;3106990436
+;amway_party_test_2 ;K2006-C0007-3 ;Max de Jol;;en;USD;customergroup;3106990436
+INSERT_UPDATE Address;owner(Customer.uid)[unique=true];streetname[unique=true];streetnumber[unique=true];postalcode[unique=true];duplicate[unique=true];town;country(isocode);billingAddress;contactAddress;shippingAddress;unloadingAddress;firstname;lastname;email;gender(code);middlename;phone1;title(code);url;company;fax;department
+;amway_party_test_1;Zennerstrasse;45;28277;false;Bremen;US;false;false;false;true;Anja;Hertz;ahertz@na-du.de;FEMALE;;;;;hybris GmbH
+;amway_party_test_1;Schiller Allee;8;28277;false;Bremen;US;true;true;true;false;Anja;Hertz;ahertz@na-du.de;FEMALE;;;;;hybris GmbH
+
+;amway_party_test_2;Zennerstrasse;45;28277;false;Bremen;US;false;false;false;true;Anja;Hertz;ahertz@na-du.de;FEMALE;;;;;hybris GmbH
+;amway_party_test_2;Schiller Allee;8;28277;false;Bremen;US;true;true;true;false;Anja;Hertz;ahertz@na-du.de;FEMALE;;;;;hybris GmbH
+
+INSERT_UPDATE Customer;uid[unique=true];defaultPaymentaddress(owner(Customer.uid), streetname, streetnumber, postalcode,duplicate);defaultShipmentAddress(owner(Customer.uid), streetname, streetnumber, postalcode, duplicate)
+;amway_party_test_1;amway_party_test_1:Schiller Allee:8:28277:false;amway_party_test_1:Zennerstrasse:45:28277:false
+;amway_party_test_2;amway_party_test_2:Schiller Allee:8:28277:false;amway_party_test_2:Zennerstrasse:45:28277:false
+
+#Sample AmwayBusinessLevels
+INSERT_UPDATE AmwayBusinessLevel;segmentaionLevel(code)[unique=true];qualificationLevel(code);bonusPercentage;
+;SegmentationLevelTypeEnum_2;;10
+;SegmentationLevelTypeEnum_4;;20
+;SegmentationLevelTypeEnum_6;;30
+;SegmentationLevelTypeEnum_9;;40
+
+INSERT_UPDATE UserPriceGroup;code[unique=true];name[lang=en];
+;AmwayDefaultEmployeePriceGroup;Amway Default Employee Price Group;
+;AmwayDefaultRetailPriceGroup;Amway Default Retail Price Group;
+;AmwayDefaultABOPriceGroup;Amway Default ABO Price Group;
+
+INSERT_UPDATE AmwayAccount;code[unique=true];businessNature(code);userPriceGroup(code);name;;owner(Customer.uid);expiryDate[dateformat=dd.MM.yyyy HH:mm];status(code);primaryParty(Customer.uid);level(AmwayBusinessLevel.segmentaionLevel(code)[unique=true])
+#;ABO_NUMBER;TYPE;PRICE_GROUP;DIST_NM;DIST_NM;DEFAULT_PARTY_ID;
+;3108051595;AmwayBusinessNature_1;AmwayDefaultABOPriceGroup;"BV ENTERPRISES COM E REPRES LTDA II";"BV ENTERPRISES COM E REPRES LTDA II";amway_party_test_1;01.12.2016 15:10;ACTIVE;amway_party_test_1;SegmentationLevelTypeEnum_2
+#;3109204069;AmwayBusinessNature_4;AmwayDefaultEmployeePriceGroup;"MULLER MEERKATZ, PETER ERNST";"MULLER MEERKATZ, PETER ERNST";28480830000;01.12.2016 15:10;ACTIVE;28480830000;SegmentationLevelTypeEnum_6
+;3106990436;AmwayBusinessNature_7;AmwayDefaultRetailPriceGroup;"MARIANA, PAULO ROBERTO G";"MARIANA, PAULO ROBERTO G";amway_party_test_2;01.12.2016 15:10;ACTIVE;amway_party_test_12;SegmentationLevelTypeEnum_9
+
+INSERT_UPDATE Catalog;id[unique=true];name[lang=de];name[lang=en];defaultCatalog
+;$catalog-id;$catalog-id;$catalog-id;true
+
+INSERT_UPDATE CatalogVersion; catalog(id)[unique=true]; version[unique=true]; active;defaultCurrency(isocode)
+;$catalog-id;$catalog-version;true;USD;en
+
+INSERT_UPDATE Category;code[unique=true];$catalogversion;name[lang=de];name[lang=en];$supercategories
+;$testCategory0-id;;$testCategory0-id;$testCategory0-id;
+;$testCategory1-id;;$testCategory1-id;$testCategory1-id;$testCategory0-id
+
+INSERT_UPDATE Product;code[unique=true];$catalogversion;name[lang=de];name[lang=en];unit(code);approvalStatus(code);owner(Principal.uid);startLineNumber;$supercategories;picture(code);thumbnail(code);normal(code);logo(code);averageRating;manufacturerName;
+;HW1210-3422;;testDE;testEN;pieces;approved;amway_party_test_1;0;$testCategory0-id;;;;;;;
+;HW1210-3423;;test2DE;test2EN;pieces;approved;amway_party_test_1;0;$testCategory1-id;;;;;;;
+;HW1210-3424;;test3DE;test3EN;pieces;approved;amway_party_test_1;0;$testCategory1-id;;;;;testManufacturer;
+;HW1210-3425;;test3DE;test4EN;pieces;approved;amway_party_test_1;0;$testCategory1-id;;;;;;;
+
+#to load ABO prices
+INSERT_UPDATE PriceRow;$product[unique=true];price[unique=true];unit(code)[default=pieces];startTime[dateformat=yyyy-MM-dd];pointValue;businessVolume;giftPoint;currency(isocode)[unique=true];ug(code)[unique=true, default='AmwayDefaultABOPriceGroup']
+;HW1210-3422;10,95;;;13,94;30,63;0;USD;
+;HW1210-3423;20,95;;;10,94;35,63;0;USD;
+;HW1210-3424;25,95;;;12,94;25,63;0;USD;
+;HW1210-3425;30,95;;;11,94;20,63;0;USD;
+#to load retail prices
+INSERT_UPDATE PriceRow;$product[unique=true];price[unique=true];unit(code)[default=pieces];startTime[dateformat=yyyy-MM-dd];pointValue;businessVolume;currency(isocode)[unique=true];ug(code)[unique=true, default='']
+;HW1210-3422;12,95;;;13,94;30,63;USD;
+;HW1210-3423;22,95;;;10,94;35,63;USD;
+;HW1210-3424;30,95;;;12,94;25,63;USD;
+;HW1210-3425;35,95;;;11,94;20,63;USD;
+
+INSERT_UPDATE CustomerReview;$product[unique=true];rating[unique=true];user(uid)[unique=true];comment;headline;creationTime[dateformat='yyyy-MM-dd''T''HH:mm:ss'];approvalStatus(code);alias;language(isocode)
+;HW1210-3422;1;amway_party_test_1;comment;headline;2009-01-01T00:00:00;approved;alias;en
+;HW1210-3423;2;amway_party_test_1;comment;headline;2010-01-01T00:00:00;approved;alias;en
+;HW1210-3424;3;amway_party_test_1;pending;headline;2010-01-01T00:00:00;pending;alias;en
+;HW1210-3424;4;amway_party_test_12;pending;headline;2010-01-01T00:00:00;pending;alias;en
+;HW1210-3425;4;amway_party_test_1;rejected;headline;2010-01-01T00:00:00;rejected;alias;en
+
+INSERT_UPDATE PromotionGroup;Identifier[unique=true];
+;default;
+
+INSERT_UPDATE PromotionPriceRow;currency(isocode)[unique=true];price[unique=true];
+;USD;12;
+
+#INSERT_UPDATE ProductFixedPricePromotion;code[unique=true];title;description;enabled;products(code,catalogVersion(catalog(id),version));productFixedUnitPrice(price,currency(isocode));productBanner(code);PromotionGroup(Identifier);
+#;FixedPriceDefault;clearance sale;Fixed Price for default;true;HW1210-3425:$catalog-id:$catalog-version;12:USD;;default;
+
+INSERT_UPDATE Vendor;code[unique=true];
+;vendorkk1;
+
+INSERT_UPDATE Warehouse;code[unique=true];vendor(code);default;baseStores(uid)
+;warehouseK1;vendorkk1;true;defaultstore
+;warehouseK2;vendorkk1;true;defaultstore
+
+INSERT_UPDATE StockLevel;productCode;available;warehouse(code)[unique=true];
+;HW1210-3423;122;warehouseK1;
+
+
+
+INSERT_UPDATE PointOfService;name[unique=true];displayname;description;type(code);address(&addrID);latitude;longitude;basestore(uid)[default=defaultstore];warehouses(code);
+;pos1;"POS 1";"Point of Service";STORE;pos1-address;-23.561833;-46.663968;;;warehouseK1
+
+INSERT_UPDATE Address;owner(PointOfService.name)[unique=true];&addrID;streetname[unique=true];streetnumber[unique=true];postalcode[unique=true];duplicate[unique=true];town;country(isocode);billingAddress;contactAddress;shippingAddress;unloadingAddress;firstname;lastname;email;gender(code);middlename;phone1;title(code);url;company;fax;department;
+;pos1;pos1-address;Zennerstrasse;45;28277;false;Bremen;US;false;false;false;true;Anja;Hertz;ahertz@na-du.de;FEMALE;;;;;hybris GmbH;
+
+INSERT_UPDATE Product;code[unique=true];$catalogversion;name[lang=de];name[lang=en];unit(code);$prices;approvalStatus(code);startLineNumber;$supercategories;varianttype(code)
+;HW1210-9999;;var1DE;var1EN;pieces;;approved;0;$testCategory1-id;

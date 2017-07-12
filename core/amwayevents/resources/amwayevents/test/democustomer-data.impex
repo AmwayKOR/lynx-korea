@@ -1,0 +1,2 @@
+INSERT_UPDATE OAuthClientDetails;clientId[unique=true] ;resourceIds ;scope ;authorizedGrantTypes ;authorities ;clientSecret ;registeredRedirectUri
+;events-consumer-test ;hybris ;basic ;implicit,client_credentials ;ROLE_TRUSTED_CLIENT ;secret

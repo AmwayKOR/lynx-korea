@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		   http://www.springframework.org/schema/beans/spring-beans.xsd
+		   http://www.springframework.org/schema/util
+		   http://www.springframework.org/schema/util/spring-util.xsd">
+
+
+
+	<!-- Get address information converter and populator -->
+	<bean id="dmsAddressInformationInputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.integration.dms.services.GetPartyAddressInput" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonRequestFieldsPopulator" />
+				<ref bean="dmsAddressInformationInputPopulator" />
+			</list>
+		</property>
+	</bean>
+	<bean id="dmsAddressInformationInputPopulator"
+		class="com.amway.integration.cis.dms.populators.DmsAddressInformationInputPopulator"></bean>
+
+	<bean id="dmsAddressInformationOutputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.amway.core.dms.data.AddressResultData" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonResponseFieldsPopulator" />
+				<ref bean="dmsAddressInformationOutputReversePopulator" />
+			</list>
+		</property>
+	</bean>
+	<bean id="dmsAddressInformationOutputReversePopulator"
+		class="com.amway.integration.cis.dms.populators.DmsAddressInformationOutputReversePopulator">
+		<property name="modelService" ref="modelService" />
+		<property name="commonI18NService" ref="commonI18NService"/>
+		<property name="regionConverter" ref="regionConverter"/>
+		<property name="countryConverter" ref="countryConverter"/>
+	</bean>
+
+
+	<!-- Get address mock and actual service -->
+	<alias alias="addressInformationService" name="defaultAddressInformationService" />
+	<bean id="defaultAddressInformationService"
+		class="com.amway.integration.cis.dms.customeraddress.impl.DefaultAddressInformationService"
+		parent="abstractDmsService">
+		<property name="inputConverter" ref="dmsAddressInformationInputConverter" />
+		<property name="outputConverter" ref="dmsAddressInformationOutputConverter" />
+		<property name="urlPath" value="${cis.client.dms.addressinformation.urlPath}" />
+	</bean>
+
+
+	<bean id="mockAddressInformationService"
+		class="com.amway.integration.cis.dms.customeraddress.mock.impl.MockAddressInformationImpl" >
+		<property name="inputConverter" ref="dmsAddressInformationInputConverter" />
+		<property name="outputConverter" ref="dmsAddressInformationOutputConverter" />
+		<property name="hystrixCommandConfig" ref="dmsCommandConfig" />
+		<property name="ondemandHystrixCommandFactory" ref="ondemandHystrixCommandFactory" />
+		<property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
+		<property name="serviceAvailCode" value="#{configurationService.configuration.getProperty('amwaydms.availablity.code')}"/>
+	</bean>
+
+    <!-- ah
+        <bean id="addressInformationServiceFactory" parent="abstractMockFactory">
+            <property name="mockInterface" value="com.amway.core.dms.service.DmsService" />
+            <property name="mockMode" value="${cis.client.dms.addressinformation.mock}" />
+            <lookup-method name="getDefaultObject" bean="defaultAddressInformationService" />
+            <property name="customMock" ref="mockAddressInformationService"/>
+                <!- - <bean
+                    class="com.amway.integration.cis.dms.customeraddress.mock.impl.MockAddressInformationImpl"
+                    autowire-candidate="false">
+                    <property name="modelService" ref="modelService" />
+                    <property name="commonI18NService" ref="commonI18NService" />
+                </bean>
+            </property> - ->
+        </bean>
+
+       ah -->
+
+	<!--2. Entries related to Saveaddresservice -->
+
+	<bean id="dmsSaveAddressInputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.integration.dms.services.AddPartyAddressRequest" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonRequestFieldsPopulator" />
+				<ref bean="dmsSaveAddressInputPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="dmsSaveAddressInputPopulator"
+		class="com.amway.integration.cis.dms.populators.DmsSaveAddressInputPopulator">
+		<property name="baseStoreService" ref="baseStoreService" />
+	</bean>
+
+	<bean id="dmsSaveAddressOutputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.core.data.CommonResponseFieldsData" />
+		<property name="populators">
+			<list>
+				<ref bean="dmsSaveAddressOutputPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="dmsSaveAddressOutputPopulator"
+		class="com.amway.integration.cis.dms.populators.DmsSaveAddressOutputPopulator">
+	</bean>
+
+	<alias alias="saveAddressInformationService" name="defaultSaveAddressInformationService" />
+	<bean id="defaultSaveAddressInformationService"
+		class="com.amway.integration.cis.dms.customeraddress.impl.DefaultSaveAddressInformationService"
+		parent="abstractDmsService">
+		<property name="inputConverter" ref="dmsSaveAddressInputConverter" />
+		<property name="outputConverter" ref="dmsSaveAddressOutputConverter" />
+		<property name="urlPath" value="${cis.client.dms.saveaddressinformation.urlPath}"></property>
+	</bean>
+
+
+
+	<bean id="mockSaveAddressInformationService"
+		class="com.amway.integration.cis.dms.customeraddress.mock.impl.MockSaveAddressInformationImpl">
+		<property name="inputConverter" ref="dmsSaveAddressInputConverter" />
+		<property name="outputConverter" ref="dmsSaveAddressOutputConverter" />
+		<property name="urlPath" value="${cis.client.dms.saveaddressinformation.urlPath}"></property>
+		<property name="hystrixCommandConfig" ref="dmsCommandConfig" />
+		<property name="ondemandHystrixCommandFactory" ref="ondemandHystrixCommandFactory" />
+		<property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
+		<property name="serviceAvailCode" value="#{configurationService.configuration.getProperty('amwaydms.availablity.code')}"/>
+	</bean>
+
+    <!-- ah
+   <bean id="saveAddressInformationServiceFactory" parent="abstractMockFactory">
+       <property name="mockInterface" value="com.amway.core.dms.service.DmsService" />
+       <property name="mockMode"
+           value="${cis.client.dms.saveaddressinformation.mock}" />
+       <lookup-method name="getDefaultObject"
+           bean="defaultSaveAddressInformationService" />
+       <property name="customMock" ref="mockSaveAddressInformationService"/>
+           <!- - <bean
+               class="com.amway.integration.cis.dms.customeraddress.mock.impl.MockSaveAddressInformationImpl"
+               autowire-candidate="false">
+           </bean>
+       </property> - ->
+   </bean>
+   ah
+   -->
+
+	<!-- 3. Entries related to Updateaddresservice -->
+	<bean id="dmsUpdateAddressInputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+
+			value="com.amway.integration.dms.services.UpdatePartyAddressRequest" />
+		<property name="populators">
+			<list>
+			    <ref bean="amwayCommonRequestFieldsPopulator" />
+				<ref bean="dmsUpdateAddressInputPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="dmsUpdateAddressInputPopulator"
+		class=" com.amway.integration.cis.dms.populators.DmsUpdateAddressInputPopulator">
+		<!-- <property name="baseStoreService" ref="baseStoreService"/> -->
+	</bean>
+
+	<!-- <bean id="dmsSaveAddressOutputConverter" parent="abstractPopulatingConverter"> 
+		<property name="targetClass" value="com.amway.core.data.CommonResponseFieldsData" 
+		/> <property name="populators"> <list> <ref bean="dmsSaveAddressOutputPopulator" 
+		/> </list> </property> </bean> <bean id="dmsSaveAddressOutputPopulator" class="com.amway.integration.cis.dms.populators.DmsSaveAddressOutputPopulator"> 
+		</bean> -->
+
+	<alias alias="updateAddressInformationService" name="defaultUpdateAddressInformationService" />
+	<bean id="defaultUpdateAddressInformationService"
+		class="com.amway.integration.cis.dms.customeraddress.impl.DefaultUpdateAddressInformationService"
+		parent="abstractDmsService">
+		<property name="inputConverter" ref="dmsUpdateAddressInputConverter"></property>
+		<property name="outputConverter" ref="dmsSaveAddressOutputConverter"></property>
+		<property name="urlPath" value="${cis.client.dms.updateaddressinformation.urlPath}"></property>
+	</bean>
+
+
+	<bean id="mockUpdateAddressInformationService"
+		class="com.amway.integration.cis.dms.customeraddress.mock.impl.MockUpdateAddressInformationImpl">
+		<property name="inputConverter" ref="dmsUpdateAddressInputConverter"></property>
+		<property name="outputConverter" ref="dmsSaveAddressOutputConverter"></property>
+		<property name="hystrixCommandConfig" ref="dmsCommandConfig" />
+		<property name="ondemandHystrixCommandFactory" ref="ondemandHystrixCommandFactory" />
+		<property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
+		<property name="serviceAvailCode" value="#{configurationService.configuration.getProperty('amwaydms.availablity.code')}"/>
+	</bean>
+
+    <!-- ah
+       <bean id="updateAddressInformationServiceFactory" parent="abstractMockFactory">
+           <property name="mockInterface" value="com.amway.core.dms.service.DmsService" />
+           <property name="mockMode"
+               value="${cis.client.dms.updateaddressinformation.mock}" />
+           <lookup-method name="getDefaultObject"
+               bean="defaultUpdateAddressInformationService" />
+           <property name="customMock" ref="mockUpdateAddressInformationService"/>
+               <!- - <bean
+                   class="com.amway.integration.cis.dms.customeraddress.mock.impl.MockUpdateAddressInformationImpl"
+                   autowire-candidate="false">
+               </bean>
+           </property> - ->
+       </bean>
+       -->
+
+	<!-- 4. Entries related to deletePartyAddresService -->
+	
+	<bean id="dmsDeletePartyAddressInputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.amway.integration.dms.services.DeletePartyAddressRequest" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonRequestFieldsPopulator" />
+				<ref bean="dmsDeletePartyAddressInputPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="dmsDeletePartyAddressInputPopulator" class="com.amway.integration.cis.dms.populators.DmsDeletePartyAddressInputPopulator">
+	</bean>
+	
+	<alias alias="deletePartyAddressService" name="defaultDeletePartyAddressService" />
+	<bean id="defaultDeletePartyAddressService"
+		class="com.amway.integration.cis.dms.deletepartyaddressservice.impl.DefaultDeletePartyAddressService"
+		parent="abstractDmsService">
+		<property name="inputConverter" ref="dmsDeletePartyAddressInputConverter"></property>
+		<property name="outputConverter" ref="dmsSaveAddressOutputConverter"></property>
+		<property name="urlPath" value="${cis.client.dms.deletepartyaddress.urlPath}"></property>
+	</bean>
+
+	<bean id="mockDeletePartyAddressService" class="com.amway.integration.cis.dms.updateinformation.common.mock.CommonMockService">
+		<property name="inputConverter" ref="dmsDeletePartyAddressInputConverter"></property>
+		<property name="outputConverter" ref="dmsSaveAddressOutputConverter"></property>
+		<property name="hystrixCommandConfig" ref="dmsCommandConfig" />
+		<property name="ondemandHystrixCommandFactory" ref="ondemandHystrixCommandFactory" />
+		<property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
+		<property name="serviceAvailCode" value="#{configurationService.configuration.getProperty('amwaydms.availablity.code')}"/>
+	</bean>
+    <!-- ah
+    <bean id="deletePartyAddressServiceFactory" parent="abstractMockFactory">
+        <property name="mockInterface" value="com.amway.core.dms.service.DmsService" />
+        <property name="mockMode"
+            value="${cis.client.dms.deletepartyaddress.mock}" />
+        <lookup-method name="getDefaultObject" bean="defaultDeletePartyAddressService" />
+        <property name="customMock" ref="mockDeletePartyAddressService">
+            <!- - <bean
+                class="com.amway.integration.cis.dms.updateinformation.common.mock.CommonMockService"
+                autowire-candidate="false">
+            </bean> - ->
+        </property>
+    </bean>
+    -->
+</beans>
+

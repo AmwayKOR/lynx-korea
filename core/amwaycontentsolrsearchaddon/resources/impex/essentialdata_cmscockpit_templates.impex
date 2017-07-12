@@ -1,0 +1,12 @@
+#
+# Import CMS Cockpit customizations
+#
+
+$jarResource=jar:com.amway.constants.AmwaycontentsolrsearchaddonConstants&/amwaycontentsolrsearchaddon/cmscockpit/import/config
+
+
+INSERT_UPDATE CockpitUIScriptConfigMedia;code[unique=true];allowScriptEvaluation;mime;realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true]
+
+INSERT_UPDATE CockpitUIComponentConfiguration;code[unique=true];factoryBean;objectTemplateCode[unique=true];principal(uid)[unique=true];media(code);
+
+INSERT_UPDATE CockpitItemTemplate;code[unique=true];name[lang=de];name[lang=en];description[lang=de];description[lang=en];relatedType(code);

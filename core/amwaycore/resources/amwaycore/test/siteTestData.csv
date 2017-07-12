@@ -1,0 +1,51 @@
+INSERT_UPDATE Currency;isocode[unique=true];
+;BRL;
+
+INSERT_UPDATE Language;isocode[unique=true];active;;;;;;
+;pt;true;;;;;;
+;en;true;;;;;;
+
+UPDATE Language;isocode[unique=true];name[lang=pt];name[lang=en];;;;;
+;pt;Portugue;Portugue;;;;;
+;en;Englisch;English;;;;;
+
+INSERT_UPDATE Currency;isocode[unique=true];active[default=true]
+;BRL;
+
+INSERT_UPDATE Title;code[unique=true]
+;mr
+;mrs
+;miss
+;ms
+;dr
+;rev
+
+#Base Site
+INSERT_UPDATE CMSSite;uid[unique=true];
+;storetemplate;
+
+INSERT_UPDATE Country;isocode[unique=true];name[lang=en];active;;;;;;
+;US;United States of America;true;;;;;;
+
+INSERT_UPDATE Currency;isocode[unique=true];name[lang=en];active;symbol;
+;USD;US dollars;true;USD;
+
+INSERT_UPDATE Language;isocode[unique=true];active;;;;;;
+;pt;true;;;;;;
+;en;true;;;;;;
+
+UPDATE Language;isocode[unique=true];name[lang=pt];name[lang=en];;;;;
+;pt;Portugue;Portugue;;;;;
+;en;Englisch;English;;;;;
+
+#Base store
+INSERT_UPDATE BaseStore;uid[unique=true];name[lang=en];cmsSites(uid);currencies(isocode);defaultCurrency(isocode);languages(isoCode);defaultLanguage(isoCode);
+;defaultstore;Default Store;storetemplate;USD;USD;en;en;
+
+INSERT_UPDATE CMSSite;uid[unique=true];stores(uid);timeZone;name[lang=en]
+;storetemplate;defaultstore;Brazil/East;test site
+
+INSERT_UPDATE UserPriceGroup;code[unique=true];name[lang=en];
+;AmwayDefaultEmployeePriceGroup;Amway Default Employee Price Group;
+;AmwayDefaultRetailPriceGroup;Amway Default Retail Price Group;
+;AmwayDefaultABOPriceGroup;Amway Default ABO Price Group;

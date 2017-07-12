@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		   http://www.springframework.org/schema/beans/spring-beans.xsd
+		   http://www.springframework.org/schema/util
+		   http://www.springframework.org/schema/util/spring-util.xsd">
+		   
+		   
+<!-- Entries for Sponsor List converter and populator -->
+	<bean id="dmsSponsorSearchInputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.integration.dms.services.GetSponsorListRequest" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonRequestFieldsPopulator" />
+				<ref bean="dmsSponsorSearchInputPopulator" />
+			</list>
+		</property>
+	</bean>
+	<bean id="dmsSponsorSearchInputPopulator"
+		class="com.amway.integration.cis.dms.populators.DmsSponsorSearchInputPopulator">
+	</bean>
+		
+	<bean id="dmsSponsorSearchOutputConverter" parent="abstractPopulatingConverter">
+		  <property name="targetClass" value="com.amway.core.dms.data.SponsorResponseData" />
+		  <property name="populators">
+		   <list>
+		    <ref bean="dmsSponsorSearchOutputPopulator" />
+		   </list>
+		  </property>
+	  </bean>
+ 
+	 <bean id="dmsSponsorSearchOutputPopulator" class="com.amway.integration.cis.dms.populators.DmsSponsorSearchOutputPopulator">
+	 </bean>
+	
+	<!-- Sponsor Search  mock and actual service -->
+	
+	<bean id="defaultSponsorSearchService"
+		class="com.amway.integration.cis.dms.sponsorsearch.services.impl.DefaultSponsorSearchService"
+		parent="abstractDmsService">
+		<property name="inputConverter" ref="dmsSponsorSearchInputConverter" />
+		<property name="outputConverter" ref="dmsSponsorSearchOutputConverter" />
+		<property name="urlPath" value="${cis.client.dms.sponsorsearch.urlPath}" />
+	</bean>
+
+
+	<bean id="mockSponsorSearchService"
+		class="com.amway.integration.cis.dms.sponsorsearch.services.mock.MockSponsorSearchService">
+		<property name="inputConverter" ref="dmsSponsorSearchInputConverter" />
+		<property name="outputConverter" ref="dmsSponsorSearchOutputConverter" />
+		<property name="hystrixCommandConfig" ref="dmsCommandConfig" />
+		<property name="ondemandHystrixCommandFactory" ref="ondemandHystrixCommandFactory" />
+		<property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
+		<property name="serviceAvailCode" value="#{configurationService.configuration.getProperty('amwaydms.availablity.code')}"/>
+	</bean> 
+
+	<alias alias="sponsorSearchService" name="defaultSponsorSearchService" />
+
+	<!--
+	<bean id="sponsorSearchServiceFactory" parent="abstractMockFactory">
+		<property name="mockInterface" value="com.amway.core.dms.service.DmsService" />
+		<property name="mockMode" value="${cis.client.dms.sponsorsearch.mock}" />
+		<lookup-method name="getDefaultObject" bean="defaultSponsorSearchService" />
+		<property name="customMock" ref="mockSponsorSearchService"/>
+			<!- - <bean
+				class="com.amway.integration.cis.dms.sponsorsearch.services.mock.MockSponsorSearchService"
+				autowire-candidate="false">
+			</bean>
+		</property> - ->
+	</bean>
+	-->
+</beans>

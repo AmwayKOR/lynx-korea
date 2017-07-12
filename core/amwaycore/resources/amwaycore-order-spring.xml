@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2013 hybris AG All rights reserved. 
+	This software is the confidential and proprietary information of hybris ("Confidential 
+	Information"). You shall not disclose such Confidential Information and shall 
+	use it only in accordance with the terms of the license agreement you entered 
+	into with hybris. -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:util="http://www.springframework.org/schema/util"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+             http://www.springframework.org/schema/beans/spring-beans.xsd
+             http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<alias name="defaultAmwayOrderDao" alias="orderDao" />
+	<bean id="defaultAmwayOrderDao"
+		class="com.amway.core.order.dao.impl.DefaultAmwayOrderDao"
+		parent="defaultOrderDao">
+	</bean>
+
+	<alias name="defaultAmwayOrderService" alias="orderService" />
+	<bean id="defaultAmwayOrderService"
+		class="com.amway.core.order.services.impl.DefaultAmwayOrderService"
+		parent="acceleratorDefaultOrderService">
+		<property name="searchService" ref="flexibleSearchService" />
+		<property name="orderCancelDao" ref="orderCancelDao"/>
+		<property name="amwayOrderDao" ref="orderDao"/>
+	</bean>
+
+	<alias name="defaultAmwayCalculationService" alias="calculationService" />
+	<bean id="defaultAmwayCalculationService"
+		class="com.amway.core.order.services.impl.DefaultAmwayCalculationService"
+		parent="defaultCalculationService">
+		<property name="modelService" ref="modelService" />
+		<property name="commercePriceService" ref="commercePriceService" />
+		<property name="amwayNetPriceService" ref="defaultAmwayNetPriceService"/>
+		<property name="baseSiteService" ref="baseSiteService" />
+	</bean>
+
+	<alias name="amwayCartCodeGenerator" alias="orderCodeGenerator" />
+	<bean id="amwayCartCodeGenerator"
+		class="de.hybris.platform.servicelayer.keygenerator.impl.PersistentKeyGenerator">
+		<property name="key" value="${keygen.amway.cart.code.name.msb}" />
+		<property name="digits" value="${keygen.amway.cart.code.digits.msb}" />
+		<property name="start" value="${keygen.amway.cart.code.start.msb}" />
+		<property name="numeric" value="${keygen.amway.cart.code.numeric.msb}" />
+		<property name="template" value="${keygen.amway.cart.code.template.msb}" />
+	</bean>
+
+	<bean id="amwayOrderCodeGenerator"
+		class="de.hybris.platform.servicelayer.keygenerator.impl.PersistentKeyGenerator">
+		<property name="key" value="${keygen.amway.order.code.name}" />
+		<property name="digits" value="${keygen.amway.order.code.digits}" />
+		<property name="start" value="${keygen.amway.order.code.start}" />
+		<property name="numeric" value="${keygen.amway.order.code.numeric}" />
+		<property name="template" value="${keygen.amway.order.code.template}" />
+	</bean>
+
+	<alias name="amway.core.orderManager" alias="core.orderManager" />
+	<bean id="amway.core.orderManager" class="de.hybris.platform.jalo.order.OrderManager">
+		<property name="cloneOrderStrategy" ref="core.cloneorder.default" />
+		<property name="cloneCartStrategy" ref="core.clonecart.default" />
+		<property name="deliveryCostsStrategy" ref="core.deliverycostsstrategy.default" />
+		<property name="orderCodeGenerator" ref="amwayOrderCodeGenerator" />
+	</bean>
+
+	<alias name="defaultAmwayOrderPeriodDao" alias="orderPeriodDao" />
+	<bean id="defaultAmwayOrderPeriodDao"
+		class="com.amway.core.orderperiod.dao.impl.DefaultAmwayOrderPeriodDao" />
+
+	<alias name="defaultAmwayBonusPeriodDao" alias="bonusPeriodDao" />
+	<bean id="defaultAmwayBonusPeriodDao"
+		class="com.amway.core.orderperiod.dao.impl.DefaultAmwayBonusPeriodDao" />
+
+     <bean id="orderPeriodClosedService" class="com.amway.core.account.service.impl.MockOrderPeriodClosedService" autowire-candidate="false" >
+     </bean>
+
+	<alias name="defaultAmwayOrderPeriodService" alias="orderPeriodService" />
+	<bean id="defaultAmwayOrderPeriodService"
+		class="com.amway.core.orderperiod.services.impl.DefaultAmwayOrderPeriodService"
+		parent="abstractBusinessService">
+		<property name="amwayOrderPeriodDao" ref="orderPeriodDao" />
+		<property name="cmsSiteService" ref="cmsSiteService" />
+		<property name="orderPeriodClosedService" ref="orderPeriodClosedService"/>
+	</bean>
+
+	<alias name="defaultAmwayBonusPeriodService" alias="bonusPeriodService" />
+	<bean id="defaultAmwayBonusPeriodService"
+		class="com.amway.core.bonusperiod.services.impl.DefaultAmwayBonusPeriodService"
+		parent="abstractBusinessService">
+		<property name="amwayBonusPeriodDao" ref="bonusPeriodDao" />
+		<property name="cmsSiteService" ref="cmsSiteService" />
+		<property name="userService" ref="userService"/>
+	</bean>
+
+	<alias name="defaultAmwayOrderMarginService" alias="amwayOrderMarginService" />
+	<bean id="defaultAmwayOrderMarginService"
+		class="com.amway.core.ordermargin.services.impl.DefaultAmwayOrderMarginService"
+		parent="abstractBusinessService">
+	</bean>
+
+	<alias alias="cartFactory" name="amwayCommerceCartFactory" />
+	<bean id="amwayCommerceCartFactory"
+		class="com.amway.core.commerceservices.order.impl.AmwayCommerceCartFactory"
+		parent="commerceCartFactory">
+		<property name="amwayAccountCommerceService" ref="amwayAccountCommerceService" />
+	</bean>
+
+	<alias name="defaultAmwayOrderStatusHistoryEntryDao" alias="amwayOrderStatusHistoryEntryDao" />
+	<bean id="defaultAmwayOrderStatusHistoryEntryDao"
+		class="com.amway.core.order.status.dao.impl.DefaultAmwayOrderStatusHistoryEntryDao"
+		parent="defaultGenericDao" />
+
+	<alias name="defaultAmwayOrderStatusHistoryService" alias="amwayOrderStatusHistoryService" />
+	<bean id="defaultAmwayOrderStatusHistoryService"
+		class="com.amway.core.order.statushistory.service.impl.DefaultAmwayOrderStatusHistoryService"
+		parent="abstractBusinessService">
+		<property name="amwayOrderStatusHistoryEntryDao" ref="amwayOrderStatusHistoryEntryDao" />
+	</bean>
+
+	<alias name="defaultAmwayStaleCartRemovalStrategy" alias="staleCartRemovalStrategy" />
+	<bean id="defaultAmwayStaleCartRemovalStrategy"
+		class="com.amway.core.commerceservices.order.impl.DefaultAmwayStaleCartRemovalStrategy"
+		parent="defaultStaleCartRemovalStrategy" />
+
+
+	<alias name="defaultAmwayReturnOrderMarginService" alias="amwayReturnOrderMarginService" />
+	<bean id="defaultAmwayReturnOrderMarginService"
+		class="com.amway.core.ordermargin.services.impl.DefaultAmwayReturnOrderMarginService"
+		parent="abstractBusinessService">
+		<property name="marginPercentage" value="0.833"/>
+	</bean>
+
+	<alias name="defaultAmwayReturnBonusPeriodService" alias="amwayReturnBonusPeriodService" />
+	<bean id="defaultAmwayReturnBonusPeriodService"
+		class="com.amway.core.bonusperiod.services.impl.DefaultAmwayReturnBonusPeriodService"
+		parent="abstractBusinessService">
+		<property name="amwayBonusPeriodDao" ref="bonusPeriodDao" />
+		<property name="cmsSiteService" ref="cmsSiteService" />
+	</bean>
+
+	<alias name="defaultAmwayReturnOrderPeriodService" alias="amwayReturnOrderPeriodService" />
+	<bean id="defaultAmwayReturnOrderPeriodService"
+		class="com.amway.core.orderperiod.services.impl.DefaultAmwayReturnOrderPeriodService"
+		parent="abstractBusinessService">
+		<property name="amwayOrderPeriodDao" ref="orderPeriodDao" />
+		<property name="cmsSiteService" ref="cmsSiteService" />
+	</bean>
+	
+	<bean id="partialCancelRulesViolationStrategy"
+	      class="de.hybris.platform.ordercancel.impl.denialstrategies.PartialCancelRulesViolationStrategy"
+	      scope="prototype">
+		<property name="reason">
+			<bean class="de.hybris.platform.ordercancel.DefaultOrderCancelDenialReason">
+				<property name="code" value="5"/>
+				<property name="description"
+	          		value="Partial Order cancellations are not allowed"/>
+			</bean>
+		</property>
+	</bean>     
+	
+	<alias name="defaultAmwayOrderProrationService" alias="amwayOrderProrationService" />
+	<bean id="defaultAmwayOrderProrationService"
+	      class="com.amway.core.order.services.impl.DefaultAmwayOrderProrationService"
+	      scope="prototype">
+		<property name="modelService" ref="modelService"/>
+		<property name="promotionsService" ref="promotionsService"/>
+	</bean> 
+	
+	<alias name="defaultAmwayConsignmentService" alias="consignmentService"/>
+	<bean id="defaultAmwayConsignmentService" class="com.amway.core.order.consignment.service.impl.DefaultAmwayConsignmentService" 
+			parent="defaultConsignmentService">
+	</bean>
+	
+	<!--alias alias="dynamicAttributesOrderStatusDisplay" name="amwayDynamicAttributesOrderStatusDisplayByMap"/>
+	<bean id="amwayDynamicAttributesOrderStatusDisplayByMap" parent="acceleratorDynamicAttributesOrderStatusDisplayByMap">
+		<property name="statusDisplayMap">
+			<map merge="true">
+				<entry key="PICKED_UP" value="pickedup"/>
+				<entry key="RETURNED_AND_REPLACE" value="returnedAndReplaced"/>
+				<entry key="PARTIAL_REPLACED" value="partialReplaced"/>
+				<entry key="REPLACED" value="replaced"/>
+				<entry key="PARTIAL_RETURNED" value="partialReturned"/>
+				<entry key="RETURNED" value="returned"/>
+			</map>
+		</property>
+	</bean -->
+
+	<util:map id="acceleratorStatusDisplayMap">
+		<entry key="PICKED_UP" value="pickedup"/>
+		<entry key="RETURNED_AND_REPLACE" value="returnedAndReplaced"/>
+		<entry key="PARTIAL_REPLACED" value="partialReplaced"/>
+		<entry key="REPLACED" value="replaced"/>
+		<entry key="PARTIAL_RETURNED" value="partialReturned"/>
+		<entry key="RETURNED" value="returned"/>
+	</util:map>
+
+
+	<!-- start relacement order code generator configuration  -->
+	<bean id="amwayPrepareReplacementOrderInterceptor"
+	      class="de.hybris.platform.returns.impl.PrepareReplacementOrderInterceptor"
+	      scope="tenant">
+		<property name="keyGenerator" ref="amwayOrderCodeGenerator"/>
+	</bean>
+	
+	<bean id="amwayPrepareReturnOrderInterceptorMapping"
+	      class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping"
+	      scope="tenant">
+		<property name="interceptor" ref="amwayPrepareReplacementOrderInterceptor"/>
+		<property name="typeCode" value="ReplacementOrder"/>
+		<!-- <property name="replacedInterceptors" ref="PrepareReplacementOrderInterceptor"/> -->
+		<property name="order" value="2147483646"/>
+	</bean>
+	<!-- End relacement order code generator configuration  -->
+	
+	<alias name="defaultAmwayReturnRequestDao" alias="returnRequestDao"/>
+	<bean id="defaultAmwayReturnRequestDao" class="com.amway.core.returns.dao.impl.DefaultAmwayReturnRequestDao" parent="defaultReturnRequestDao"/>
+
+	<alias name="defaultAmwayReturnService" alias="returnService"/>
+	<bean id="defaultAmwayReturnService" class="com.amway.core.returns.services.impl.DefaultAmwayReturnService" parent="defaultReturnService" >
+		<property name="businessProcessService" ref="businessProcessService" />
+		<property name="amwayStockService" ref="amwayStockService" />
+		<property name="amwayCommerceStockService" ref="commerceStockService" />
+		<property name="amwayReturnRequestDao" ref="returnRequestDao" />
+	</bean>
+
+</beans>
