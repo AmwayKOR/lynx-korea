@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		   http://www.springframework.org/schema/beans/spring-beans.xsd
+		   http://www.springframework.org/schema/util
+		   http://www.springframework.org/schema/util/spring-util.xsd">
+
+	
+	<!-- ########################################################################## 
+		########## Process Block Prev Service ####################################### -->
+
+	<alias name="defaultProcessBlockPrevService" alias="processBlockPrevService" />
+	<bean id="defaultProcessBlockPrevService"
+		class="com.amway.integration.cis.dms.blockprevservices.impl.DefaultProcessBlockPrevService"
+		parent="abstractDmsService">
+		<property name="inputConverter" ref="processBlockPrevServiceInputConverter" />
+		<property name="outputConverter" ref="processBlockPrevServiceOutputConverter" />
+		<property name="urlPath"
+			value="${cis.client.dms.processBlockPrevService.urlPath}" />
+	</bean>
+
+	<bean id="mockProcessBlockPrevService"
+		class="com.amway.integration.cis.dms.blockprevservices.mock.impl.MockProcessBlockPrevService">
+		<property name="inputConverter" ref="processBlockPrevServiceInputConverter" />
+		<property name="outputConverter" ref="processBlockPrevServiceOutputConverter" />
+		<property name="hystrixCommandConfig" ref="dmsCommandConfig" />
+		<property name="ondemandHystrixCommandFactory" ref="ondemandHystrixCommandFactory" />
+		<property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
+		<property name="serviceAvailCode" value="#{configurationService.configuration.getProperty('amwaydms.availablity.code')}"/>
+	</bean> 
+
+	<bean id="processBlockPrevServiceInputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.integration.dms.services.AddABOBlockPrivRequest" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonRequestFieldsPopulator" />
+				<ref bean="processBlockPrevServiceInputPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="processBlockPrevServiceInputPopulator"
+		class="com.amway.integration.cis.dms.populators.DmsProcessBlockPrevDetailsInputPopulator"
+		parent="abstractDmsPopulator" />
+
+	<bean id="processBlockPrevServiceOutputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.core.data.CommonResponseFieldsData" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonResponseFieldsPopulator" />
+			</list>
+		</property>
+	</bean>
+	
+	<!-- ########################################################################## 
+		########## Get Block Prev Service ######################################## -->
+	<alias name="defaultGetBlockPrevService" alias="getBlockPrevService" />
+	<bean id="defaultGetBlockPrevService"
+		class="com.amway.integration.cis.dms.blockprevservices.impl.DefaultGetBlockPrevService"
+		parent="abstractDmsService">
+		<property name="inputConverter" ref="getBlockPrevServiceInputConverter" />
+		<property name="outputConverter" ref="getBlockPrevServiceOutputConverter" />
+		<property name="urlPath"
+			value="${cis.client.dms.getBlockPrevService.urlPath}" />
+	</bean>
+	
+	<bean id="mockGetBlockPrevService"
+		class="com.amway.integration.cis.dms.blockprevservices.mock.impl.MockGetBlockPrevService">
+		<property name="inputConverter" ref="getBlockPrevServiceInputConverter" />
+		<property name="outputConverter" ref="getBlockPrevServiceOutputConverter" />
+		<property name="hystrixCommandConfig" ref="dmsCommandConfig" />
+		<property name="ondemandHystrixCommandFactory" ref="ondemandHystrixCommandFactory" />
+		<property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
+		<property name="serviceAvailCode" value="#{configurationService.configuration.getProperty('amwaydms.availablity.code')}"/>
+	</bean> 
+
+	<bean id="getBlockPrevServiceInputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.integration.dms.services.GetBlockPrivDetInput" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonRequestFieldsPopulator" />
+				<ref bean="getBlockPrevServiceInputPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="getBlockPrevServiceInputPopulator"
+		class="com.amway.integration.cis.dms.populators.DmsGetBlockPrevInputPopulator"
+		parent="abstractDmsPopulator" />
+
+	<bean id="getBlockPrevServiceOutputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.core.dms.data.BlockPrevResponseDataList" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonResponseFieldsPopulator" />
+				<ref bean="getBlockPrevServiceOutputPopulator" />
+			</list>
+		</property>
+	</bean>
+	<bean id="getBlockPrevServiceOutputPopulator"
+		class="com.amway.integration.cis.dms.populators.DmsGetBlockPrevOutputPopulator"
+		parent="abstractDmsPopulator" />
+	
+</beans>	
+	

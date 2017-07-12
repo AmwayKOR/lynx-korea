@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="amwayConsolidatedBeanImportService"
+          class="com.amway.amwayinventory.service.stock.impl.AmwayConsolidatedBeanImportServiceImpl"/>
+
+    <bean id="amwayStockConsolidationService"
+          class="com.amway.amwayinventory.service.stock.impl.AmwayStockConsolidationServiceImpl"/>
+
+    <bean id="amwayInventoryStockService"
+          class="com.amway.amwayinventory.service.stock.impl.AmwayInventoryStockServiceImpl"/>
+
+    <bean id="amwayConsolidationStockStrategy"
+          class="com.amway.amwayinventory.strategy.stock.impl.AmwayConsolidationStockByBaseItemNumberStrategy"/>
+
+    <bean id="amwayInventoryValidator" class="com.amway.amwayinventory.validator.stock.impl.AmwayInventoryValidator"/>
+    <bean id="amwayFullInventoryValidator" parent="amwayInventoryValidator"
+          class="com.amway.amwayinventory.validator.stock.impl.AmwayFullInventoryValidator"/>
+
+    <bean id="amwayInventoryProductCodeValidator"
+          class="com.amway.amwayinventory.validator.stock.impl.AmwayInventoryProductCodeValidator"/>
+
+
+    <bean id="inventoryThreadFactory" class="de.hybris.platform.core.TenantAwareThreadFactory">
+        <constructor-arg ref="tenantFactory"/>
+    </bean>
+    <bean id="inventoryExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+        <property name="maxPoolSize" value="1" />
+        <property name="threadFactory" ref="inventoryThreadFactory"/>
+        <property name="keepAliveSeconds" value="600"/>
+    </bean>
+
+    <bean id="amwayInventoryValidationMessageSource"
+          class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basenames">
+            <list>
+                <value>amwayinventory/ValidationMessages</value>
+            </list>
+        </property>
+        <property name="defaultEncoding" value="UTF-8"/>
+    </bean>
+</beans>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		   http://www.springframework.org/schema/beans/spring-beans.xsd
+		   http://www.springframework.org/schema/util
+		   http://www.springframework.org/schema/util/spring-util.xsd">
+		   
+
+	<alias name="defaultAccountRenewalService" alias="accountRenewalService"/>
+	<bean id="defaultAccountRenewalService" class="com.amway.integration.cis.dms.accountrenewal.service.impl.DefaultAccountRenewalService" parent="abstractDmsService">
+		<property name="inputConverter" ref="accountRenewalServiceInputConverter"/>
+		<property name="outputConverter" ref="accountRenewalServiceOutputConverter"/>
+		<property name="urlPath" value="${cis.client.dms.accountRenewalService.urlPath}"/>
+	</bean> 
+
+
+	<bean id="mockAccountRenewalService" class="com.amway.integration.cis.dms.updateinformation.common.mock.CommonMockService">
+		<property name="inputConverter" ref="accountRenewalServiceInputConverter"/>
+		<property name="outputConverter" ref="accountRenewalServiceOutputConverter"/>
+		<property name="hystrixCommandConfig" ref="dmsCommandConfig" />
+		<property name="ondemandHystrixCommandFactory" ref="ondemandHystrixCommandFactory" />
+		<property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
+		<property name="serviceAvailCode" value="#{configurationService.configuration.getProperty('amwaydms.availablity.code')}"/>
+	</bean> 
+
+
+	<bean id="accountRenewalServiceInputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.amway.integration.dms.services.AccountRenewalRequest" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonRequestFieldsPopulator"/>
+				<ref bean="dmsAccountRenewalInputPopulator"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="dmsAccountRenewalInputPopulator" class="com.amway.integration.cis.dms.populators.DmsAccountRenewalInputPopulator">
+		<property name="renewalCd" value="Renewal1Years"/>
+	</bean>
+	
+	<bean id="accountRenewalServiceOutputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.amway.core.data.CommonResponseFieldsData"/>
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonResponseFieldsPopulator"/>
+			</list>
+		</property>
+	</bean>
+
+<!--
+	<bean id="accountRenewalServiceFactory" parent="abstractMockFactory">
+		<property name="mockInterface" value="com.amway.core.dms.service.DmsService"/>
+		<property name="mockMode" value="${cis.client.dms.accountRenewalService.mock}"/>
+		<lookup-method name="getDefaultObject" bean="defaultAccountRenewalService"/>
+		<property name="customMock" ref="mockAccountRenewalService"/>
+			<!- - <bean class="com.amway.integration.cis.dms.updateinformation.common.mock.CommonMockService" autowire-candidate="false"/>
+		</property> - ->
+	</bean>
+    -->
+
+</beans> 

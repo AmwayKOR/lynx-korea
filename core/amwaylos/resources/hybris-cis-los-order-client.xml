@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+          ">
+	<!--<alias name="amwayLOSHttpClientConfig" alias="httpClientConfig"/>
+	<bean id="amwayLOSHttpClientConfig" class="com.amway.integration.cis.los.client.impl.AmwayLosClientConfigFactoryBean" parent="defaultHttpClientConfig"/>
+
+	<bean id="defaultLOSHttpClient" parent="defaultHttpClient">
+		<property name="clientConfig" ref="amwayLOSHttpClientConfig"/>
+	</bean>-->
+
+	<!-- Each rest client needs its own instance to not share the decorator configuration, so it is prototype -->
+	<bean id="losOrderRestCallDecoratorRegistry" class="com.hybris.commons.client.RestCallDecoratorRegistry" scope="prototype">
+		<property name="decorators">
+			<list>
+				<ref bean="losTypeDefaultRestCallDecorator"/>
+				<ref bean="losOrderClientDecorator"/>
+			</list>
+		</property>
+	</bean>
+
+	<bean name="losOrderClientDecorator" class="com.amway.core.commons.client.auth.basic.AmwayHttpBasicAuthDecorator">
+		<constructor-arg name="user" value="${los.order.security.http.basic.auth.username}"/>
+		<constructor-arg name="password" value="${los.order.security.http.basic.auth.password}"/>
+	</bean>
+
+	<alias alias="losOrderClient" name="defaultLosOrderClient" />
+	<bean id="defaultLosOrderClient" class="com.amway.integration.cis.los.client.impl.LOSClientImpl" >
+		<property name="client">
+		<bean parent="genericRestClient" lazy-init="false">
+			<property name="endpointProvider">
+			    <bean class="com.hybris.commons.client.SimpleEndpointProvider">
+			        <property name="endpointURI" value="${losOrder.client.endpoint.uri}"/>
+			    </bean>
+			</property>
+			<property name="endpointName" value="${losOrder.client.endpoint.name:los}"/>
+			<property name="restResponseHandlers" ref="cisRestResponseHandlers"/>
+			<!--property name="clientDecorator" ref="losOrderClientDecorator"/-->
+			<property name="restCallDecoratorRegistry" ref="losOrderRestCallDecoratorRegistry"/>
+			<!--property name="httpSecurityEnabled" value="${los.order.security.http.basic.auth.enable}"/-->
+		</bean>
+		</property>
+	</bean>
+
+    <bean id="amwayLosOrderJsonMessageBodyWriter" class="com.amway.integration.cis.los.jaxb.JsonMessageBodyWriter"/>
+</beans>

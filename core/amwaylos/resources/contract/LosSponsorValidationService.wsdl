@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:impl="http://service.ebsui.alticor.com" xmlns:tns2="http://dataobject.glos.amway.com"
+                  xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  targetNamespace="http://service.ebsui.alticor.com">
+    <wsdl:types>
+        <schema xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                targetNamespace="http://dataobject.glos.amway.com" xmlns="http://www.w3.org/2001/XMLSchema">
+            <complexType name="LosSponsorValidation">
+                <sequence>
+                    <element name="affiliate" type="xsd:int"/>
+                    <element name="country" nillable="true" type="xsd:string"/>
+                    <element name="busNatr" nillable="true" type="xsd:string"/>
+                    <element name="sponsorNo" type="xsd:long"/>
+                    <element name="sponTypeCd" nillable="true" type="xsd:string"/>
+                </sequence>
+            </complexType>
+            <complexType name="LosSponsorValidationResults">
+                <sequence>
+                    <element name="sponAffId" type="xsd:int"/>
+                    <element name="sponIboNo" type="xsd:long"/>
+                    <element name="shouldBeSponAff" type="xsd:int"/>
+                    <element name="shouldBeSponIBO" type="xsd:long"/>
+                    <element name="losValReturnCode" type="xsd:int"/>
+                    <element name="sponsorName" type="xsd:string"/>
+                    <element name="losValReturnMessage" nillable="true" type="xsd:string"/>
+                </sequence>
+            </complexType>
+        </schema>
+        <schema xmlns:tns2="http://dataobject.glos.amway.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://service.ebsui.alticor.com"
+                xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://dataobject.glos.amway.com"/>
+            <element name="validateSponsorResponse">
+                <complexType>
+                    <sequence>
+                        <element name="validateSponsorReturn" nillable="true" type="tns2:LosSponsorValidationResults"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <element name="validateSponsor">
+                <complexType>
+                    <sequence>
+                        <element name="losSponVldnData" nillable="true" type="tns2:LosSponsorValidation"/>
+                    </sequence>
+                </complexType>
+            </element>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="validateSponsorResponse">
+        <wsdl:part element="impl:validateSponsorResponse" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="validateSponsorRequest">
+        <wsdl:part element="impl:validateSponsor" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="LosSponsorValidationService">
+        <wsdl:operation name="validateSponsor">
+            <wsdl:input message="impl:validateSponsorRequest" name="validateSponsorRequest">
+            </wsdl:input>
+            <wsdl:output message="impl:validateSponsorResponse" name="validateSponsorResponse">
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="LosSponsorValidationServiceSoapBinding" type="impl:LosSponsorValidationService">
+        <wsaw:UsingAddressing wsdl:required="false"/>
+        <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="validateSponsor">
+            <wsdlsoap:operation soapAction="validateSponsor"/>
+            <wsdl:input name="validateSponsorRequest">
+                <wsdlsoap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="validateSponsorResponse">
+                <wsdlsoap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="LosSponsorValidationServiceService">
+        <wsdl:port binding="impl:LosSponsorValidationServiceSoapBinding" name="LosSponsorValidationService">
+            <wsdlsoap:address location="http://magic-beta:9083/EBS_UI_Service/services/LosSponsorValidationService"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

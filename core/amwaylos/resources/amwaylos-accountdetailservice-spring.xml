@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		   http://www.springframework.org/schema/beans/spring-beans.xsd
+		   http://www.springframework.org/schema/util
+		   http://www.springframework.org/schema/util/spring-util.xsd">
+		
+		
+	<alias name="defaultLosAccountDetailService" alias="losAccountDetailService"/>
+	<bean id="defaultLosAccountDetailService" class="com.amway.integration.cis.los.account.detail.service.DefaultLosAccountDetailService" parent="abstractLosOrderService">
+		<property name="inputConverter" ref="losAccountDetailInputConverter"/>
+		<property name="outputConverter" ref="losAccountDetailOutputConverter"/>
+		<property name="urlPath" value="${cis.client.los.accountdetailservice.urlPath}" />
+	</bean>
+
+	<bean id="losAccountDetailInputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.amway.integration.cis.los.pojo.LosAccountRequest"/>
+		<property name="populators">
+			<list>
+				<ref bean="losAccountDetailInputPopulator"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="losAccountDetailInputPopulator" class="com.amway.integration.cis.los.populators.LosAccountDetailInputPopulator" parent="losAccountInputPopulator"/>
+
+	<bean id="losAccountDetailOutputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.amway.core.los.data.LosAccountDetailResponseData"/>
+		<property name="populators">
+			<list>
+				<ref bean="losAccountDetailOutputPopulator"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="losAccountDetailOutputPopulator" class="com.amway.integration.cis.los.populators.LosAccountDetailOutputPopulator">
+		<property name="baseStoreService" ref="baseStoreService"/>
+		<property name="enumerationService" ref="enumerationService"/>
+	</bean>
+
+
+	<bean id="mockLosAccountDetailService" class="com.amway.integration.cis.los.account.detail.service.mock.impl.MockLosAccountDetailService">
+		<property name="inputConverter" ref="losAccountDetailInputConverter"/>
+		<property name="outputConverter" ref="losAccountDetailOutputConverter"/>
+		<property name="hystrixCommandConfig" ref="losCommandConfig" />
+		<property name="ondemandHystrixCommandFactory" ref="ondemandHystrixCommandFactory" />
+		<property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
+		<property name="serviceAvailCode" value="#{configurationService.configuration.getProperty('amwaylos.availablity.code')}"/>
+	</bean>
+	<!--
+	<bean id="losAccountDetailService" parent="abstractMockFactory">
+		<property name="mockInterface" value="com.amway.core.los.service.LosService"/>
+		<property name="mockMode" value="${cis.client.los.accountdetailservice.mock}"/>
+		<lookup-method name="getDefaultObject" bean="defaultLosAccountDetailService"/>
+		<property name="customMock" ref="mockLosAccountDetailService"/>
+			<!- - <bean class="com.amway.integration.cis.los.account.detail.service.mock.impl.MockLosAccountDetailService" autowire-candidate="false"/>
+		</property> - ->
+	</bean>
+	-->
+
+</beans>

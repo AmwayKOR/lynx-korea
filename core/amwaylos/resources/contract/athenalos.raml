@@ -1,0 +1,121 @@
+#%RAML 0.8
+title: AmwayLOS
+protocols: ["HTTPS","HTTP"]
+mediaType: application/json
+baseUri: http://uslx186:5656/rest/{version}
+version: v1
+/account:
+  description: This path supports functions for the logged in ABO
+  /{AFF}-{ABONo}/los/{BONUSPERIOD}:
+    uriParameters:
+     AFF:
+      type: string
+      description: This is the Amway affiliate code
+      example: '010'
+      required: true
+     ABONo:
+      type: string
+      description: This is the ABO number as a string
+      example: '1234'
+      required: true
+     BONUSPERIOD:
+      type: integer
+      minimum: 195901
+      description: Bonus period as yyyyMM
+      example: 201402
+      required: true
+    get:
+      description: gets line of sponsorship for ABO specified in URI as root with only a couple attributes
+      queryParameters:
+        requestingabo:
+          type: string
+          description: single ABO ID to get which defaults to the logged-in user, where the ABO is denoted as {Aff}-{ABONo}
+          example: '010-679'
+          required: false
+        depth:
+          type: number
+          required: false
+          default: 0
+          description: Depth to return for LOS tree. Depth 0 means full depth, Depth 1 means root only, etc.
+        activeonly:
+          type: boolean
+          required: false
+          default: false
+          description: if true, only returns active ABOs for the requested period
+      responses:
+        200:
+          body:
+            application/json:
+              schema:  '{"type":"object","$schema": "http://json-schema.org/draft-03/schema","required":false,"properties":{"LOS": {"type":"array","required":false,"items":{"type":"object","required":false,"properties":{"ABONo": {"type":"string","required":false},"Aff": {"type":"string","required":false},"Country": {"type":"string","required":false},"GroupABOCount": {"type":"integer","required":false},"Downlines": {"type":"array","required":false},"EntryDate": {"type":"string","required":false},"International": {"type":"boolean","required":false},"Name": {"type":"string","required":false},"PrivacyFlag": {"type":"boolean","required":false}}}}}}'
+              example: '{"LOS": [{"Aff": "010","ABONo": "1234","Name": "Bob Jenkins","Country": "US","EntryDate": "2012-02-13","Downlines": [{"Aff": "010","ABONo": "1234","Name": "Rob Perkins","Country": "US","EntryDate": "2013-02-13","Status": "Inactive","GroupABOCount": 23},{"Aff": "010","ABONo": "1234","PrivacyFlag": true,"Country": "US","EntryDate": "2013-02-13","GroupABOCount": 23,"Downlines":[{"Aff": "060","ABONo": "1234","Name": "Jorge Brink","Country": "US","EntryDate": "2013-02-13","GroupABOCount": 12,"International":true}]}]}]}'
+        500:
+          description: Error
+  /detail/{BONUSPERIOD}:
+    uriParameters:
+     BONUSPERIOD:
+      type: integer
+      minimum: 195901
+      description: Bonus period as yyyyMM
+      example: 201402
+      required: true
+    get:
+      description: Gets various details (see get* parameters) about one or more ABOs
+      queryParameters:
+        requestingabo:
+          type: string
+          description: single ABO ID where the requestingabo is denoted as {Aff}-{ABONo}, defaults to logged-in user
+          example: '010-679'
+          required: true
+        abo:
+          type: string
+          description: comma delimited list of ABOs to get, where the ABO is denoted as{Aff}-{ABONo}, defaults to logged-in user
+          example: '010-679,010-1234'
+          required: true
+        bonusperiodcount:
+          type: integer
+          minimum: 1
+          default: 1
+          description: number of bonus periods to get starting with {BonusPeriod}
+          required: false
+        getvolume:
+          type: boolean
+          default: true
+          description: add International, CurrentAward, HighestAward, and BonusPeriodStats to response payload
+          required: false
+        getphoto:
+          type: boolean
+          default: false
+          description: add image URL to response payload
+          required: false
+        getextattributes:
+          type: boolean
+          default: false
+          description: add extended attributes (address, email, phone, dates) to response payload
+          required: false
+        getqualification:
+          type: boolean
+          default: false
+          description: add qualifications to response payload
+          required: false
+        getsponsorstats:
+          type: boolean
+          default: false
+          description: add sponsoring statistics to response payload
+          required: false
+        losdepth:
+          type: integer
+          default: 1
+          description: if greater than 1 or 0, will return details for those under requested ABOs
+          required: false
+        volumetypes:
+          type: string
+          default: "001,005,019,105"
+          required: false
+          description: Volume types to return for bonus period stats
+      responses:
+        200:
+          body:
+            application/json:
+              schema: '{"$schema":"http://json-schema.org/draft-04/schema#","id":"http://jsonschema.net#","type":"object","required":false,"properties":{"Details":{"id":"#Details","type":"array","required":false,"items":{"id":"#0","type":"object","required":false,"properties":{"Aff":{"id":"#Aff","type":"string","required":false},"ABONo":{"id":"#ABONo","type":"string","required":false},"International":{"id":"#International","type":"boolean","required":false},"CurrentAward":{"id":"#CurrentAward","type":"object","required":false,"properties":{"Code":{"id":"#Code","type":"string","required":false},"Name":{"id":"#Name","type":"string","required":false},"Rank":{"id":"#Rank","type":"string","required":false},"QualifcationPeriod":{"id":"#QualifcationPeriod","type":"string","required":false}}},"HighestAward":{"id":"#HighestAward","type":"object","required":false,"properties":{"Code":{"id":"#Code","type":"string","required":false},"Name":{"id":"#Name","type":"string","required":false},"Rank":{"id":"#Rank","type":"string","required":false},"QualifcationPeriod":{"id":"#QualifcationPeriod","type":"string","required":false}}},"Extended":{"id":"#Extended","type":"object","required":false,"properties":{"Name":{"id":"#Name","type":"array","required":false,"items":{"id":"#0","type":"object","required":false,"properties":{"NameType":{"id":"#NameType","type":"string","required":false},"Name":{"id":"#Name","type":"string","required":false}}}},"Address":{"id":"#Address","type":"array","required":false,"items":{"id":"#0","type":"object","required":false,"properties":{"Line":{"id":"#Line","type":"array","required":false,"items":{"id":"#0","type":"string","required":false}},"City":{"id":"#City","type":"string","required":false},"State":{"id":"#State","type":"string","required":false},"PostalCode":{"id":"#PostalCode","type":"string","required":false},"Country":{"id":"#Country","type":"string","required":false},"CountryName":{"id":"#CountryName","type":"string","required":false}}}},"EntryDate":{"id":"#EntryDate","type":"string","required":false},"RenewalDate":{"id":"#RenewalDate","type":"string","required":false},"ExpireDate":{"id":"#ExpireDate","type":"string","required":false},"PrimaryPhoneNo":{"id":"#PrimaryPhoneNo","type":"string","required":false},"PrimaryEmail":{"id":"#PrimaryEmail","type":"string","required":false}}},"BonusPeriodStats":{"id":"#BonusPeriodStats","type":"array","required":false,"items":{"id":"#6","type":"object","required":false,"properties":{"BonusPeriod":{"id":"#BonusPeriod","type":"string","required":false},"Sponsor":{"id":"#Sponsor","type":"object","required":false,"properties":{"Aff":{"id":"#Aff","type":"string","required":false},"ABONo":{"id":"#ABONo","type":"string","required":false}}},"FosterSponsorABO":{"id":"#FosterSponsorABO","type":"object","required":false,"properties":{"Aff":{"id":"#Aff","type":"string","required":false},"ABONo":{"id":"#ABONo","type":"string","required":false}}},"UplinePlatinumABO":{"id":"#UplinePlatinumABO","type":"object","required":false,"properties":{"Aff":{"id":"#Aff","type":"string","required":false},"ABONo":{"id":"#ABONo","type":"string","required":false}}},"Volumes":{"id":"#Volumes","type":"array","required":false,"items":{"id":"#0","type":"object","required":false,"properties":{"Name":{"id":"#Name","type":"string","required":false},"PV":{"id":"#PV","type":"number","required":false},"Country":{"id":"#Country","type":"string","required":false},"Currency":{"id":"#Currency","type":"string","required":false}}}},"CurrentPersonalPercentage":{"id":"#CurrentPersonalPercentage","type":"object","required":false,"properties":{"BonusPercent":{"id":"#BonusPercent","type":"string","required":false}}},"CurrentLeadershipPercentage":{"id":"#CurrentLeadershipPercentage","type":"object","required":false,"properties":{"BonusPercent":{"id":"#BonusPercent","type":"string","required":false}}},"NextGroupPercentage":{"id":"#NextGroupPercentage","type":"object","required":false,"properties":{"BonusPercent":{"id":"#BonusPercent","type":"string","required":false},"Volume":{"id":"#Volume","type":"string","required":false}}},"QualifiedLegs":{"id":"#QualifiedLegs","type":"string","required":false},"InternationalQualifiedLegs":{"id":"#InternationalQualifiedLegs","type":"string","required":false},"InternationalMarketQualifiedLegs":{"id":"#InternationalMarketQualifiedLegs","type":"string","required":false},"FosterQualifiedLegs":{"id":"#FosterQualifiedLegs","type":"string","required":false}}}},"SponsoringStats":{"id":"#SponsoringStats","type":"array","required":false,"items":{"id":"#0","type":"object","required":false,"properties":{"BonusPeriod":{"id":"#BonusPeriod","type":"string","required":false},"Award":{"id":"#Award","type":"array","required":false,"items":{"id":"#0","type":"object","required":false,"properties":{"BonusAwardCode":{"id":"#BonusAwardCode","type":"string","required":false},"BusinessNatureDesc":{"id":"#BusinessNatureDesc","type":"string","required":false},"Country":{"id":"#Country","type":"array","required":false,"items":{"id":"#0","type":"object","required":false,"properties":{"Country":{"id":"#Country","type":"string","required":false},"Currency":{"id":"#Currency","type":"string","required":false},"SponsoredCount":{"id":"#SponsoredCount","type":"integer","required":false},"PersonalOrderCount":{"id":"#PersonalOrderCount","type":"integer","required":false},"GroupABOCount":{"id":"#GroupABOCount","type":"integer","required":false},"GroupOrderCount":{"id":"#GroupOrderCount","type":"integer","required":false},"NewABOCount":{"id":"#NewABOCount","type":"integer","required":false}}}}}}}}}},"Qualifications":{"id":"#Qualifications","type":"array","required":false,"items":{"id":"#0","type":"object","required":false,"properties":{"PerformanceYear":{"id":"#PerformanceYear","type":"integer","required":false},"BonusPeriod":{"id":"#BonusPeriod","type":"integer","required":false},"QualCode":{"id":"#QualCode","type":"string","required":false}}}},"Photo":{"id":"#Photo","type":"array","required":false,"items":{"id":"#1","type":"object","required":false,"properties":{"Type":{"id":"#Type","type":"string","required":false},"URL":{"id":"#URL","type":"string","required":false},"Date":{"id":"#Date","type":"string","required":false}}}},"Businesses":{"id":"#Businesses","type":"array","required":false,"items":{"id":"#1","type":"object","required":false,"properties":{"Aff":{"id":"#Aff","type":"string","required":false},"ABONo":{"id":"#ABONo","type":"string","required":false},"Name":{"id":"#Name","type":"string","required":false},"CountryName":{"id":"#CountryName","type":"string","required":false},"Status":{"id":"#Status","type":"boolean","required":false},"BusinessType":{"id":"#BusinessType","type":"string","required":false}}}},"FAAStrongestMarket":{"id":"#FAAStrongestMarket","type":"array","required":false,"items":{"id":"#0","type":"object","required":false,"properties":{"PerformanceYear":{"id":"#PerformanceYear","type":"integer","required":false},"Aff":{"id":"#Aff","type":"string","required":false},"ABONo":{"id":"#ABONo","type":"string","required":false},"Country":{"id":"#Country","type":"string","required":false},"CountryName":{"id":"#CountryName","type":"string","required":false}}}},"FAASum":{"id":"#FAASum","type":"object","required":false,"properties":{"BonusPeriod":{"id":"#BonusPeriod","type":"string","required":false},"PerformanceYear":{"id":"#PerformanceYear","type":"integer","required":false},"Country":{"id":"#Country","type":"string","required":false},"CountryName":{"id":"#CountryName","type":"string","required":false},"QualifiedLegsYearToDate":{"id":"#QualifiedLegsYearToDate","type":"integer","required":false},"FAAPointsYearTodDate":{"id":"#FAAPointsYearTodDate","type":"number","required":false},"QualifiedLegs":{"id":"#QualifiedLegs","type":"object","required":false,"properties":{"AwardLegs":{"id":"#AwardLegs","type":"integer","required":false},"BonusLegs":{"id":"#BonusLegs","type":"integer","required":false},"FounderLegs":{"id":"#FounderLegs","type":"integer","required":false}}},"QualifiedExceptionLegs":{"id":"#QualifiedExceptionLegs","type":"object","required":false,"properties":{"AwardLegs":{"id":"#AwardLegs","type":"integer","required":false},"BonusLegs":{"id":"#BonusLegs","type":"integer","required":false},"FounderLegs":{"id":"#FounderLegs","type":"integer","required":false}}},"TrackingLegs":{"id":"#TrackingLegs","type":"object","required":false,"properties":{"AwardLegs":{"id":"#AwardLegs","type":"integer","required":false},"BonusLegs":{"id":"#BonusLegs","type":"integer","required":false},"FounderLegs":{"id":"#FounderLegs","type":"integer","required":false}}},"TrackingExecptionLegs":{"id":"#TrackingExecptionLegs","type":"object","required":false,"properties":{"AwardLegs":{"id":"#AwardLegs","type":"integer","required":false},"BonusLegs":{"id":"#BonusLegs","type":"integer","required":false},"FounderLegs":{"id":"#FounderLegs","type":"integer","required":false}}}}},"FAADetail":{"id":"#FAADetail","type":"array","required":false,"items":{"id":"#0","type":"object","required":false,"properties":{"PerformanceYear":{"id":"#PerformanceYear","type":"integer","required":false},"Aff":{"id":"#Aff","type":"string","required":false},"ABONo":{"id":"#ABONo","type":"string","required":false},"FAAPointsYearToDate":{"id":"#FAAPointsYearToDate","type":"integer","required":false},"QualifiedLegsYearToDate":{"id":"#QualifiedLegsYearToDate","type":"integer","required":false},"Qualfications":{"id":"#Qualfications","type":"array","required":false,"items":{"id":"#2","type":"object","required":false,"properties":{"BonusPeriod":{"id":"#BonusPeriod","type":"string","required":false},"QualCode":{"id":"#QualCode","type":"string","required":false}}}}}}}}}},"RetrieveDate":{"id":"#RetrieveDate","type":"string","required":false}}}'
+        500:
+          description: Error

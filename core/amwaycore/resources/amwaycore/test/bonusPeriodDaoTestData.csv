@@ -1,0 +1,5 @@
+INSERT_UPDATE AmwayBonusPeriod;code[unique=true];startDate[unique=true,dateformat=dd-MM-yyyy];endDate[unique=true,dateformat=dd-MM-yyyy];cutoffDate[dateformat=dd-MM-yyyy];status(code)[default=INACTIVE];store(uid)[unique=true,default=defaultstore]
+;012016-op;01-01-2016;31-01-2016;27-01-2016;ACTIVE;;
+;022016-op;18-02-2016;29-02-2016;19-02-2016;INACTIVE;;
+;032016-op;01-03-2016;31-03-2016;27-03-2016;INACTIVE;;
+;042016-op;01-03-2016;30-04-2016;25-04-2016;;;

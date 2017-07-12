@@ -1,0 +1,2208 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<application xmlns="http://wadl.dev.java.net/2009/02">
+    <doc xmlns:jersey="http://jersey.java.net/" jersey:generatedBy="Jersey: 1.17 01/17/2013 03:31 PM"/>
+    <grammars/>
+    <resources base="http://magic-beta:9083/EBS_UI_Service/rest/">
+        <resource path="/MyBusinessService">
+            <resource path="/getMultiBusSponsorList">
+                <method name="POST" id="getMultiBusSponsorList">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/getGlobalMultiBusSponsorList">
+                <method name="POST" id="getGlobalMultiBusSponsorList">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/getIntlSponsorList">
+                <method name="POST" id="getIntlSponsorList">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/v2/CountryInfo">
+            <resource path="/get">
+                <method name="GET" id="get">
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/v2/MultiBusActivity">
+            <resource path="/get">
+                <method name="GET" id="getABOListWithMultiBusActivity">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="fromDate"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="toDate"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/IBOLOSVolumeInquiryService">
+            <resource path="/retrieveCustomersLOSPVBVDataMultiplePeriods">
+                <method name="POST" id="retrieveCustomersLOSPVBVDataMultiplePeriods">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/getCustomerPVBVDataForPeriod">
+                <method name="POST" id="getCustomerPVBVDataForPeriod">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/getCustomersLOSPVBVDataMultiplePeriods">
+                <method name="POST" id="getCustomersLOSPVBVDataMultiplePeriods">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/getCustomersPVBVDataList">
+                <method name="POST" id="getCustomersPVBVDataList">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/getLiteCustLOS">
+                <method name="POST" id="getLiteCustLOS">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/getLiteCustList">
+                <method name="POST" id="getLiteCustList">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/getLastOrdDate">
+                <method name="POST" id="getLastOrdDate">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/v2/ProcessMonitor">
+            <resource path="/getTimerInfo">
+                <method name="GET" id="getTimerDetails">
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/v2/PaymentAmount">
+            <resource path="/get">
+                <method name="GET" id="get">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="reqAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="reqAbo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="period"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="invoiceType"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/v2/LMSIntegrationByAward">
+            <resource path="/globalPlatinumMultiTest">
+                <method name="GET" id="globalPlatinumMultiTest">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="v2/ReportMonitor">
+            <resource path="/get">
+                <method name="GET" id="getReportMonitorData">
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/LosSponsorValidationService">
+            <resource path="/validateSponsor">
+                <method name="POST" id="validateSponsor">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/v2/FAA">
+            <resource path="/getEuropeanFAA">
+                <method name="GET" id="getEuropeanFAA">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="affAbo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="period"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="getStrongestMarketForPoints">
+                <method name="GET" id="getStrongestMarketForPoints">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="fiscalYear"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="reqAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="reqAbo"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="getFrontlinerStrongestMktInfo">
+                <method name="GET" id="getFrontlinerStrongestMktInfo">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="fiscalYear"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="reqAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="reqAbo"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="getQualPointSummary">
+                <method name="GET" id="getFAAQualPointSummary">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="fiscalYear"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="period"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="affAbo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="reqAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="reqAbo"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/FAAQualificationInquiry">
+            <resource path="/getFAAStrongestMarketForPoints">
+                <method name="POST" id="getFAAStrongestMarketForPoints">
+                    <request>
+                        <representation mediaType="*/*"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/getFrontlinerStrongestMktInfo">
+                <method name="POST" id="getFrontlinerStrongestMktInfo">
+                    <request>
+                        <representation mediaType="*/*"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/getFAAQualPointSummary">
+                <method name="POST" id="getFAAQualPointSummary">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/v2/Frontline">
+            <resource path="/getLosMB">
+                <method name="GET" id="getLosMB">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="reqAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="reqAbo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="period"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/getGlobalMB">
+                <method name="GET" id="getGlobalMB">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="reqAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="reqAbo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="period"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/getIntl">
+                <method name="GET" id="getIntl">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="reqAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="reqAbo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="period"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/getInMarket">
+                <method name="GET" id="getInMarket">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="reqAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="reqAbo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="period"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/getAnnualInMarket">
+                <method name="GET" id="getAnnualInMarket">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="reqAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="reqAbo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="period"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/getAnnualIntl">
+                <method name="GET" id="getAnnualIntl">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="reqAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="reqAbo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="period"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/getAnnual">
+                <method name="GET" id="getAnnual">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="reqAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="reqAbo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="period"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/getMonthly">
+                <method name="GET" id="getMonthly">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="reqAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="reqAbo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="period"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/getAboWithMBSponsorList">
+                <method name="GET" id="getAboWithMBSponsorList">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="period"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="v2/SponStats">
+            <resource path="/get">
+                <method name="GET" id="getSponStats">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="reqAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="reqAbo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="affAbo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="period"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="bonusAwd"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="keyStatInd"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="busNature"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/DiamondAutoRenewalInquiry">
+            <resource path="/retreiveFrontLines">
+                <method name="POST" id="retreiveFrontLines">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="affNo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="iboNo"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/insertFrontLiners">
+                <method name="POST" id="insertFrontLiners">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/v2/Period">
+            <resource path="/getLastPaidILB">
+                <method name="GET" id="getLastPaidILB">
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/getCurrent">
+                <method name="GET" id="getCurrent">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/getCurrentCal">
+                <method name="GET" id="getCurrentCalPeriod">
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/HighestCurrentAwards">
+            <resource path="/getHighestCurrentAwardsInfo">
+                <method name="POST" id="getHighestCurrentAwardsInfo">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/HigherAwdTrackingInquiryService">
+            <resource path="/activeFrontlinersInquiryService">
+                <method name="POST" id="activeFrontlinersInquiryService">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/activeFrontlinersInquiryServiceForPeriod">
+                <method name="POST" id="activeFrontlinersInquiryService">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/isHATavailable">
+                <method name="POST" id="isHATavailable">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/expandedComboLegInquiryService">
+                <method name="POST" id="expandedComboLegInquiryService">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/expandedComboLegInquiryServiceForPeriod">
+                <method name="POST" id="expandedComboLegInquiryService">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/qualificationHistoryInquiryService">
+                <method name="POST" id="qualificationHistoryInquiryService">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/qualificationHistoryInquiryServiceForPeriod">
+                <method name="POST" id="qualificationHistoryInquiryService">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/awardInformationInquiryService">
+                <method name="POST" id="awardInformationInquiryService">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/awardInformationInquiryServiceForPeriod">
+                <method name="POST" id="awardInformationInquiryService">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/trackingLegsInquiryService">
+                <method name="POST" id="trackingLegsInquiryService">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/trackingLegsInquiryServiceForPeriod">
+                <method name="POST" id="trackingLegsInquiryService">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/awardTrackingInquiryService">
+                <method name="POST" id="awardTrackingInquiryService">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/awardTrackingInquiryServiceForPeriod">
+                <method name="POST" id="awardTrackingInquiryService">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/awardTrackingInquiryForCurrentAward">
+                <method name="POST" id="awardTrackingInquiryForCurrentAward">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/awardTrackingInquiryForCurrentAwardForPeriod">
+                <method name="POST" id="awardTrackingInquiryForCurrentAward">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/awardTrackingInquiryForHighestAward">
+                <method name="POST" id="awardTrackingInquiryForHighestAward">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/awardTrackingInquiryForHighestAwardForPeriod">
+                <method name="POST" id="awardTrackingInquiryForHighestAward">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/awardTrackingInquiryForHighestGlobalAward">
+                <method name="POST" id="awardTrackingInquiryForHighestGlobalAward">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/awardTrackingInquiryForHighestGlobalAwardForPeriod">
+                <method name="POST" id="awardTrackingInquiryForHighestGlobalAward">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/awardTrackingInquiryForHighestTrackingAward">
+                <method name="POST" id="awardTrackingInquiryForHighestTrackingAward">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/awardTrackingInquiryForHighestTrackingAwardForPeriod">
+                <method name="POST" id="awardTrackingInquiryForHighestTrackingAward">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/awardTrackingInquiryForHighestGlobalTrackingAward">
+                <method name="POST" id="awardTrackingInquiryForHighestGlobalTrackingAward">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/awardTrackingInquiryForHighestGlobalTrackingAwardForPeriod">
+                <method name="POST" id="awardTrackingInquiryForHighestGlobalTrackingAward">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/awardTrackingInquiryForHighestTrackingAwardWithFAA">
+                <method name="POST" id="awardTrackingInquiryForHighestTrackingAwardWithFAA">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/awardTrackingInquiryForHighestTrackingAwardWithFAAForPeriod">
+                <method name="POST" id="awardTrackingInquiryForHighestTrackingAwardWithFAA">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/awardTrackingInquiryForHighestGlobalTrackingWithFAA">
+                <method name="POST" id="awardTrackingInquiryForHighestGlobalTrackingWithFAA">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/awardTrackingInquiryForHighestGlobalTrackingWithFAAForPeriod">
+                <method name="POST" id="awardTrackingInquiryForHighestGlobalTrackingWithFAA">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/v2/Preferences">
+            <resource path="/delete">
+                <method name="DELETE" id="delete">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="reqAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="reqAbo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="affAbo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="prefType"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/add">
+                <method name="POST" id="add">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/get">
+                <method name="GET" id="get">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="reqAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="reqAbo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="affAbo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="prefType"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/FirstTimeEligible">
+            <resource path="/getEligibleByAward">
+                <method name="POST" id="getEligibleByAward">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/Heartbeat">
+            <resource path="/checkStatus">
+                <method name="POST" id="checkStatus">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/v2/RmsPaymentService">
+            <resource path="/getStatusToRunRmsPayment">
+                <method name="GET" id="getStatusToRunRmsPayment">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="period"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/MenuService">
+            <resource path="/addMenuItem">
+                <method name="POST" id="addMenuItem">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/editMenuItem">
+                <method name="POST" id="editMenuItem">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/PrivacyBlocks">
+            <resource path="/isIBOBlockPriv">
+                <method name="POST" id="isIBOBlockPriv">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/createIBOBlockPriv">
+                <method name="POST" id="createIBOBlockPriv">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/expireIBOBlockPriv">
+                <method name="POST" id="expireIBOBlockPriv">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/NRTEmailUpdate">
+            <resource path="/emailUpdateForNRT">
+                <method name="POST" id="emailUpdateForNRT">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/QualificationInquiryService">
+            <resource path="/getQualInqData">
+                <method name="POST" id="getQualInqData">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/v2/ImageProcess">
+            <resource path="/changeRestricted">
+                <method name="PUT" id="changeRestriction">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:boolean" style="query" name="restricted"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="imageType"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="reqAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="reqAbo"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/removeImage">
+                <method name="DELETE" id="removeImage">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="affAboImages"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="reqAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="reqAbo"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/fetchImageInfo">
+                <method name="GET" id="fetchImageInfo">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="affAboImages"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="reqAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="reqAbo"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/v2/AboAttributes">
+            <resource path="/get">
+                <method name="GET" id="getAttributes">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="reqAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="reqAbo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="affAbo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="addressType"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/LOSUplineValidation">
+            <resource path="/isAllowed">
+                <method name="POST" id="isAllowed">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="v2/AwardLevel">
+            <resource path="/HighestCurrentAwardsInfo">
+                <method name="GET" id="getHighestCurrentAwardsInfo">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="reqAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="reqAbo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="affAbo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="period"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:boolean" style="query" name="returnInMarketOnly"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:boolean" style="query" name="returnGlobalOnly"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/LMSIntegrationByAward">
+            <resource path="/getAwardLevel">
+                <method name="POST" id="LMSIntegrationByAwardLevel">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/getCurrHghstAwardLevel">
+                <method name="POST" id="LMSIntegrationByCurrHghstAwardLevel">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/getAwardLevelAndStatus">
+                <method name="POST" id="LMSIntegrationByAwardLevelAndStatus">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/receiveTestCert">
+                <method name="POST" id="receiveTestCertification">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/globalPlatinumMultiTest">
+                <method name="POST" id="globalPlatinumMultiTest">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/RequestorRequestedAuthService">
+            <resource path="/isAllowed">
+                <method name="POST" id="isAllowed">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/isAllowedMultiIbo">
+                <method name="POST" id="isAllowedMultiIbo">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/getInliners">
+                <method name="POST" id="getInlinersList">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/v2/Qualifications">
+            <resource path="/get">
+                <method name="GET" id="getQualInqData">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="affAbo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="fiscalYear"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="qualStatCd"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="reqAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="reqAbo"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/ImageProcess">
+            <resource path="/changeRestricted">
+                <method name="POST" id="changeRestriction">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/removeImage">
+                <method name="POST" id="removeImage">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/fetchImageInfo">
+                <method name="POST" id="fetchImageInfo">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/CountryInquiryService">
+            <resource path="/getCountryInformation">
+                <method name="POST" id="getCountryInformation">
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/v2/DataExport">
+            <resource path="/get">
+                <method name="GET" id="getData">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="reqAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="reqAbo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="affAbo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="period"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="columns"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/Preferences">
+            <resource path="/remove">
+                <method name="POST" id="removePreferences">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/add">
+                <method name="POST" id="addPreferences">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/fetch">
+                <method name="POST" id="fetchPreferences">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/v2/AboTransaction">
+            <resource path="/updateBusNature">
+                <method name="PUT" id="updateBusNature">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="source"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="userId"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="busNature"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="newSponAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="newSponAbo"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/updateCountry">
+                <method name="PUT" id="updateCountry">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="source"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="userId"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="isoCountry"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/updateBlock">
+                <method name="PUT" id="updateBlock">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="source"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="userId"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="effDate"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="endDate"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="blockType"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/updatePhone">
+                <method name="PUT" id="updatePhone">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="phoneTypeCd"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="source"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="userId"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="phoneCountry"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="phoneArea"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="phone"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="phoneExt"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="phoneLegacy"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/updateEmail">
+                <method name="PUT" id="updateEmail">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="emailTypeCd"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="source"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="userId"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="email"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/updateLegalEntity">
+                <method name="PUT" id="updateLegalEntity">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="source"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="userId"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:boolean" style="query" name="isBusEntity"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="legalEntityType"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/updateName">
+                <method name="PUT" id="updateName">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="nameType"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="source"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="userId"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="firstName"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="middleName"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="lastName"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="title"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="suffix"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="legacyName"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/updateAddress">
+                <method name="PUT" id="updateAddress">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="addressType"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="source"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="userId"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="addressLineOne"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="addressLineTwo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="addressLineThree"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="addressLineFour"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="city"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="stateProvince"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="postalCode"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="country"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/newApplication">
+                <method name="POST" id="newApplication">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/miniPurge">
+                <method name="DELETE" id="miniPurge">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="source"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="userId"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/renew">
+                <method name="PUT" id="renew">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="source"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="userId"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="expireDate"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/renewReverse">
+                <method name="PUT" id="renewReverse">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="source"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="userId"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="expireDate"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/reactivate">
+                <method name="PUT" id="reactivate">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="source"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="userId"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:boolean" style="query" name="withGroup"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/reactivateRenew">
+                <method name="PUT" id="reactivateRenew">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="source"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="userId"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:boolean" style="query" name="withGroup"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="expireDate"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/delete">
+                <method name="DELETE" id="delete">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="source"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="userId"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="reasonCode"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/updateBirthdateGender">
+                <method name="PUT" id="updateBirthdateGender">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="source"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="userId"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="app1birthdate"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="app2birthdate"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="app1gender"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="app2gender"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/v2/DiamondAutoRenew">
+            <resource path="/renew">
+                <method name="PUT" id="processDiamondAutoRenewal">
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/v2/BonusAmount">
+            <resource path="/get">
+                <method name="GET" id="getData">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="reqAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="reqAbo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="period"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="bonusAwd"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/v2/EligibleSponsor">
+            <resource path="/get">
+                <method name="GET" id="getEligibleSponsors">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="isoCountryCd"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="period"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="pvLimit"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="jobId"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="v2/LOSAuthorization">
+            <resource path="/isAuthorized">
+                <method name="GET" id="isAuthorized">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="reqAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="reqAbo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="period"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/isAuthorizedVerbose">
+                <method name="GET" id="isAuthorizedVerbose">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="reqAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="reqAbo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="period"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/isAuthorizedMulti">
+                <method name="GET" id="isAuthorizedMulti">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="reqAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="reqAbo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="affAbo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="period"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/isAuthorizedMaxPeriod">
+                <method name="GET" id="isAuthorizedMaxPeriod">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="reqAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="reqAbo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="period"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/isAuthorizedMultiMaxPeriod">
+                <method name="GET" id="isAuthorizedMultiMaxPeriod">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="reqAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="reqAbo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="affAbo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="period"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/SponsStatsInquiryService">
+            <resource path="/getSponsStats">
+                <method name="POST" id="getSponsStatsInquiryService">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="v2/IntlLeaderBonusService">
+            <resource path="/getGeneratorDetails">
+                <method name="GET" id="getGeneratorDetails">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="period"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="reqAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="reqAbo"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/getIntlPaymentsFlow">
+                <method name="GET" id="getIntlPaymentsFlow">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="period"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="generatorAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="generatorAbo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="reqAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="reqAbo"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/getMonthlyDetails">
+                <method name="GET" id="getMonthlyDetails">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="period"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="reqAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="reqAbo"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/PeriodWebService">
+            <resource path="/getLastPaidILBPeriod">
+                <method name="POST" id="getLastPaidILBPeriod">
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/getCurrentPeriod">
+                <method name="POST" id="getCurrentPeriod">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/getCurrentCalPeriod">
+                <method name="POST" id="getCurrentCalPeriod">
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/LosTransactionInsertService">
+            <resource path="/insertNewApplication">
+                <method name="POST" id="insertNewApplication">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/insertNameAddressChange">
+                <method name="POST" id="insertNameAddressChange">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/insertMiniPurge">
+                <method name="POST" id="insertMiniPurge">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/v2/Statement">
+            <resource path="/getILB">
+                <method name="GET" id="getILB">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="reqAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="reqAbo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="period"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="v2/Awards">
+            <resource path="/getInformation">
+                <method name="GET" id="getAwardInformation">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="reqAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="reqAbo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="period"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/getGeneratorQual">
+                <method name="GET" id="getGenQual">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="reqAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="reqAbo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="period"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="frontlineAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="frontlineAbo"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/getFaaGen">
+                <method name="GET" id="getFaaGen">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="reqAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="reqAbo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="frontlineAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="frontlineAbo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="period"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:boolean" style="query" name="strongestMkt"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/getLegCounts">
+                <method name="GET" id="getLegCounts">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="fiscalYear"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="period"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="affAbo"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/getQualHistory">
+                <method name="GET" id="getQualHistory">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="period"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:boolean" style="query" name="fiscalOnly"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="reqAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="reqAbo"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/isAvailable">
+                <method name="GET" id="isAvailable">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="reqAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="reqAbo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="period"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/getAnnualFrontline">
+                <method name="GET" id="getAnnualFrontline">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:boolean" style="query" name="showPercentages"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:boolean" style="query" name="showAllFrontliners"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:boolean" style="query" name="showActiveFrontliners"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:boolean" style="query" name="showComboLegs"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="period"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="reqAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="reqAbo"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/getFoundersCouncil">
+                <method name="GET" id="getFoundersCouncil">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="year"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/v2/AboAccountLog">
+            <resource path="/get">
+                <method name="GET" id="getIboActLogList">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="resignationFromDate"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="resignationToDate"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="v2/Upline">
+            <resource path="/getInMarket">
+                <method name="GET" id="getInMarket">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="period"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="reqAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="reqAbo"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/getAnnualInMarket">
+                <method name="GET" id="getAnnualInMarket">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="period"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="reqAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="reqAbo"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/getIntl">
+                <method name="GET" id="getIntl">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="period"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="reqAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="reqAbo"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/getAnnualIntl">
+                <method name="GET" id="getAnnualIntl">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="period"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="reqAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="reqAbo"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/getLosMb">
+                <method name="GET" id="getLosMb">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="period"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="reqAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="reqAbo"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/getGlobalMb">
+                <method name="GET" id="getGlobalMb">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="period"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="reqAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="reqAbo"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/getISD">
+                <method name="GET" id="getISD">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="period"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="reqAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="reqAbo"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/getSponsorByType">
+                <method name="GET" id="getSponsorByType">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="period"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="sponsorTypes"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="reqAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="reqAbo"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/getUplineLevelInfo">
+                <method name="GET" id="getUplineLevelInfo">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="period"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="reqAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="reqAbo"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/getFoundersCouncil">
+                <method name="GET" id="getFoundersCouncil">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="year"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/getPlatinum">
+                <method name="GET" id="getPlatinumUpline">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="affAbo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="period"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/v2/TransactionDetail">
+            <resource path="/get">
+                <method name="GET" id="getTransactionDetails">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="period"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:boolean" style="query" name="adjustmentsOnly"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/ABOAttributesInquiryService">
+            <resource path="/getABOAttributes">
+                <method name="POST" id="getABOAttributes">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/v2/HigherAwardMap">
+            <resource path="/getEmeraldDiamondMap">
+                <method name="GET" id="getEmeraldDiamondMap">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="period"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/uploadAff">
+                <method name="PUT" id="pedUpload">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/uploadAbo">
+                <method name="PUT" id="pedUpload">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/uploadPrior">
+                <method name="PUT" id="pedUpload">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="period"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/uploadAboPrior">
+                <method name="PUT" id="pedUpload">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="period"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/v2/PrivacyBlock">
+            <resource path="/get">
+                <method name="GET" id="getPrivacyBlock">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="reqAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="reqAbo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="effDate"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="blockPrivId"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/create">
+                <method name="POST" id="addPrivacyBlock">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/updateExpireDate">
+                <method name="PUT" id="updateBlockExpire">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="reqAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="reqAbo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="blockPrivId"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="expDate"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="userId"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/v2/Volume">
+            <resource path="/getDetails">
+                <method name="GET" id="getDetails">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="affAbo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="period"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="busNature"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="volumeTypes"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:boolean" style="query" name="showActiveOnly"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:boolean" style="query" name="stopAtPlatinum"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="intlFrontline"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="maxLevels"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="reqAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="reqAbo"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/getDetailsList">
+                <method name="GET" id="getDetailsList">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="affAbo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="period"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="busNature"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="volumeTypes"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:boolean" style="query" name="showActiveOnly"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:boolean" style="query" name="stopAtPlatinum"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="intlFrontline"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="maxLevels"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="reqAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="reqAbo"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/getABOPerformancePercentList">
+                <method name="GET" id="getABOPerformancePercentList">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="country"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="bonusPercent"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:boolean" style="query" name="onePeriodOnly"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="period"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/getLastOrderDate">
+                <method name="GET" id="getLastOrderDate">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="affAbo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="period"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="reqAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="reqAbo"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/getPVBV">
+                <method name="GET" id="getPVBV">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="abo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="reqAff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="reqAbo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="volumeTypes"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="period"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="v2/TransmitDataToRMS">
+            <resource path="/transmitData">
+                <method name="PUT" id="transmitData">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="affNo"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="fileTypeCode"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="fileName"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/runMonthEndToRMS">
+                <method name="PUT" id="runMonthEndToRMSaProcess">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="aff"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:int" style="query" name="period"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="userId"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="processId"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/v2/SysRule">
+            <resource path="/getILBstmtGenInfo">
+                <method name="GET" id="get">
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+    </resources>
+</application>

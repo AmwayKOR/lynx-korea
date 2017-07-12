@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+
+	<!-- event system -->
+	<!-- converters -->
+    <bean id="eventToQueueEntryPopulator" class="com.amway.core.events.populators.AmwayBusinessEventToEventQueueEntryModelPopulator" />
+    <bean id="eventToQueueEntryConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="com.amway.core.events.model.AmwayEventQueueEntryModel" />
+        <property name="populators">
+            <list>
+                <ref bean="eventToQueueEntryPopulator" />
+            </list>
+        </property>
+    </bean>
+
+    <bean id="eventQueueEntityToABEEventPopulator" class="com.amway.core.events.populators.AmwayEventQueueEntityToAmwayBusinessEventPopulator" />
+    <bean id="queueEntryToEventConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="com.amway.core.events.beans.AmwayBusinessEvent" />
+        <property name="populators">
+            <list>
+                <ref bean="eventQueueEntityToABEEventPopulator" />
+            </list>
+        </property>
+    </bean>
+
+	<bean id="eventToEventWsPopulator" class="com.amway.core.events.populators.AmwayBusinessEventToAmwayBusinessEventWsPopulator"/>
+	<bean id="eventToEventWsConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.amway.core.events.dto.AmwayBusinessEventWsDTO" />
+		<property name="populators">
+			<list>
+				<ref bean="eventToEventWsPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="eventWsToEventPopulator" class="com.amway.core.events.populators.AmwayBusinessEventWsToAmwayBusinessEventPopulator"/>
+	<bean id="eventWsToEventConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.amway.core.events.beans.AmwayBusinessEvent" />
+		<property name="populators">
+			<list>
+				<ref bean="eventWsToEventPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- [end] converters -->
+
+	<alias alias="amwayBusinessEventsQueueDao" name="defaultAmwayBusinessEventsQueueDao"/>
+	<bean id="defaultAmwayBusinessEventsQueueDao" class="com.amway.core.events.dao.impl.DefaultEventQueueDao">
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+	</bean>
+
+	<alias alias="amwayBusinessEventsProcessing" name="defaultBusinessEventsProcessing"/>
+	<bean id="defaultBusinessEventsProcessing" class="com.amway.core.events.listener.AmwayBusinessEventsProcessing">
+		<property name="processors">
+			<!-- empty list by default -->
+			<list>
+			</list>
+		</property>
+		<property name="internalProcessingJobNames">
+			<!-- empty list by default -->
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<alias alias="amwayBusinessEventQueueService" name="defaultAmwayBusinessEventQueueService"/>
+	<bean id="defaultAmwayBusinessEventQueueService" class="com.amway.core.events.services.impl.DefaultAmwayBusinessEventQueueService">
+        <property name="modelService" ref="modelService"/>
+		<property name="queueDao" ref="amwayBusinessEventsQueueDao"/>
+		<property name="eventToQueueEntryConverter" ref="eventToQueueEntryConverter"/>
+		<property name="queueEntryToEventConverter" ref="queueEntryToEventConverter"/>
+		<property name="cronJobService" ref="cronJobService"/>
+		<property name="processing" ref="amwayBusinessEventsProcessing"/>
+    </bean>
+
+	<bean id="amwayBusinessEventsListener" class="com.amway.core.events.listener.AmwayBusinessEventsListener">
+		<property name="queueService" ref="amwayBusinessEventQueueService"/>
+		<property name="processing" ref="amwayBusinessEventsProcessing"/>
+		<property name="tenantService" ref="tenantService"/>
+		<property name="clusterService" ref="clusterService"/>
+	</bean>
+
+	<!-- purge events job -->
+	<bean id="amwayPurgeEventsJob" class="com.amway.core.events.job.AmwayBusinessEventPurgePerformable"
+		  parent="abstractJobPerformable"/>
+
+	<!-- [end] event system -->
+
+	<beans profile="tenant_junit">
+	<!-- Configuration needed for tests to run properly. -->
+		<util:list id="jaxbTypeAdaptersList">
+			<value>de.hybris.platform.webservicescommons.jaxb.adapters.DateAdapter</value>
+			<value>de.hybris.platform.webservicescommons.jaxb.adapters.VariableMapAdapter</value>
+			<value>de.hybris.platform.webservicescommons.jaxb.adapters.XSSStringAdapter</value>
+		</util:list>
+	
+	
+		<util:list id="jaxbContextClasses">
+			<value>java.lang.Long</value>
+			<value>java.lang.String</value>
+			<value>java.util.ArrayList</value>
+		</util:list>
+	
+		<bean id="jaxbWrapperSupport" class="de.hybris.platform.webservicescommons.jaxb.wrapper.JaxbWrapperSupport">
+		<property name="wrapperFactories">
+			<list>
+				<bean class="de.hybris.platform.webservicescommons.jaxb.wrapper.impl.JaxbStringWrapperFactory"/>
+				<bean class="de.hybris.platform.webservicescommons.jaxb.wrapper.impl.JaxbLongWrapperFactory"/>
+				<bean class="de.hybris.platform.webservicescommons.jaxb.wrapper.impl.JaxbDoubleWrapperFactory"/>
+				<bean class="de.hybris.platform.webservicescommons.jaxb.wrapper.impl.JaxbListWrapperFactory"/>
+				<bean class="de.hybris.platform.webservicescommons.jaxb.wrapper.impl.JaxbMapWrapperFactory"/>
+			</list>
+		</property>
+		</bean>
+	</beans>
+</beans>

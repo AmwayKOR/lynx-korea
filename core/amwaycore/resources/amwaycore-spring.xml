@@ -1,0 +1,714 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2014 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/util
+		   http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<import	resource="amwaycore-metrics.xml" />
+	<import	resource="amwaycore-message-spring.xml" />
+	<import	resource="amwaycore-customer-spring.xml" />
+	<import	resource="amwaycore-order-spring.xml" />
+	<import	resource="amwaycore-interceptors-spring.xml" />
+	<import	resource="amwaycore-infraavail-spring.xml" />
+	<import	resource="amwaycore-productdimensions-spring.xml" />
+
+
+	<alias name="defaultCommerceSearchTextPopulator" alias="commerceSearchTextPopulator" />
+	<bean id="defaultCommerceSearchTextPopulator" class="de.hybris.platform.commerceservices.search.solrfacetsearch.populators.SearchTextPopulator">
+		<property name="freeTextQueryBuilders">
+			<list>
+				<bean class="de.hybris.platform.commerceservices.search.solrfacetsearch.querybuilder.impl.DefaultFreeTextQueryBuilder">
+					<property name="propertyName" value="ean" />
+					<property name="boost" value="100" />
+				</bean>
+				<bean class="de.hybris.platform.commerceservices.search.solrfacetsearch.querybuilder.impl.DefaultFreeTextQueryBuilder">
+					<property name="propertyName" value="code" />
+					<property name="boost" value="90" />
+				</bean>
+				<bean class="de.hybris.platform.commerceservices.search.solrfacetsearch.querybuilder.impl.DefaultFreeTextQueryBuilder">
+					<property name="propertyName" value="name" />
+					<property name="boost" value="50" />
+				</bean>
+				<bean class="de.hybris.platform.commerceservices.search.solrfacetsearch.querybuilder.impl.DefaultFreeTextQueryBuilder">
+					<property name="propertyName" value="manufacturerName" />
+					<property name="boost" value="40" />
+				</bean>
+				<bean class="de.hybris.platform.commerceservices.search.solrfacetsearch.querybuilder.impl.DefaultFreeTextQueryBuilder">
+					<property name="propertyName" value="alias" />
+					<property name="boost" value="80" />
+				</bean>
+				<bean
+						class="de.hybris.platform.commerceservices.search.solrfacetsearch.querybuilder.impl.ClassificationFreeTextQueryBuilder">
+					<property name="boost" value="30" />
+				</bean>
+				<bean class="de.hybris.platform.commerceservices.search.solrfacetsearch.querybuilder.impl.DefaultFreeTextQueryBuilder">
+					<property name="propertyName" value="keywords" />
+					<property name="boost" value="20" />
+				</bean>
+				<bean class="de.hybris.platform.commerceservices.search.solrfacetsearch.querybuilder.impl.DefaultFreeTextQueryBuilder">
+					<property name="propertyName" value="categoryName" />
+					<property name="boost" value="10" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+
+
+	<!-- SystemSetup for the AmwayCore -->
+	<bean id="acceleratorCoreSystemSetup" class="com.amway.core.setup.CoreSystemSetup"
+	       parent="abstractCoreSystemSetup"/>
+
+	<bean id="jalosession"   class="de.hybris.platform.jalo.JaloSessionFactory">
+		<property name="targetClassName" value="com.amway.core.jalo.AmwaycoreJaloSession"/>
+	</bean>	
+	<!-- Amway Solr field value providers -->
+	<bean id="amwayCategorySource" parent="abstractCategorySource">
+		<property name="rootCategory" value="CAT" />
+	</bean>
+			
+	<bean id="defaultGenericDao"
+		class="de.hybris.platform.servicelayer.internal.dao.DefaultGenericDao"
+		abstract="true" scope="tenant">
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+	</bean>	
+	<bean id="amwayBrandCategorySource" parent="abstractCategorySource">
+		<property name="rootCategory" value="BRAND" />
+		<!-- 'brands' is the root of the brands hierarchy -->
+	</bean>
+
+	<!-- POS -->
+	<bean id="batchDao" class="com.amway.core.pos.dao.impl.DefaultAmwayBatchDao" scope="tenant">
+		<property name="modelService" ref="modelService" />
+		<property name="pagedFlexibleSearchService" ref="pagedFlexibleSearchService" />
+	</bean>
+
+	<bean id="terminalDao" class="com.amway.core.pos.dao.impl.DefaultAmwayTerminalDao" scope="tenant">
+		<property name="modelService" ref="modelService" />
+	</bean>
+
+	<bean id="amwayPOSService" class="com.amway.core.pos.service.impl.DefaultAmwayPOSService" scope="tenant">
+		<property name="batchDao" ref="batchDao"/>
+		<property name="terminalDao" ref="terminalDao"/>
+		<property name="userService" ref="userService"/>
+		<property name="pointOfServiceService" ref="pointOfServiceService"/>
+	</bean>
+
+	<!-- Custom Restriction for Amway Account -->
+	<bean id="cmsAccountRestrictionEvaluator" class="com.amway.core.cms.services.evaluator.impl.CMSAccountRestrictionEvaluator" scope="tenant">
+		<property name="sessionService" ref="sessionService"/>
+	</bean>	
+	<bean id="amwayNeedCategorySource" parent="abstractCategorySource">
+		<property name="rootCategory" value="NEED" />
+	</bean>
+
+	<bean id="cmsAccountRestrictionEvaluatorMapping" class="de.hybris.platform.cms2.servicelayer.services.evaluator.CMSRestrictionEvaluatorMapping" scope="tenant">
+		<property name="restrictionTypeCode" value="CMSAccountRestriction" />
+		<property name="restrictionEvaluator" ref="cmsAccountRestrictionEvaluator" />
+	</bean>	
+	<bean id="abstractCategoryCodeValueProvider" abstract="true"
+		  class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.CategoryCodeValueProvider"
+		  parent="abstractPropertyFieldValueProvider" >
+		<property name="fieldNameProvider" ref="solrFieldNameProvider"/>
+		<property name="commonI18NService" ref="commonI18NService"/>
+	</bean>
+	
+    	<bean id="amwayVariantProductService" 
+    		class="com.amway.core.varaintproduct.service.impl.AmwayVariantProductServiceImpl" >
+    	</bean>	
+	<bean id="abstractCategoryNameValueProvider" abstract="true"
+		  class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.CategoryNameValueProvider"
+		  parent="abstractPropertyFieldValueProvider" >
+		<property name="fieldNameProvider" ref="solrFieldNameProvider"/>
+		<property name="commonI18NService" ref="commonI18NService"/>
+    	</bean>
+    
+    	<bean id="amwaycoreSystemSetup" class="com.amway.core.setup.AmwaycoreSystemSetup" parent="abstractCoreSystemSetup"/>
+	<bean id="amwayCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
+		<property name="categorySource" ref="amwayCategorySource" />
+	</bean>
+	<bean id="amwayBrandCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
+		<property name="categorySource" ref="amwayBrandCategorySource" />
+	</bean>
+	<bean id="amwayNeedCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
+		<property name="categorySource" ref="amwayNeedCategorySource" />
+	</bean>
+	<bean id="amwayCategoryNameValueProvider" parent="abstractCategoryNameValueProvider">
+		<property name="categorySource" ref="amwayCategorySource" />
+	</bean>
+	<bean id="amwayBrandCategoryNameValueProvider" parent="abstractCategoryNameValueProvider">
+		<property name="categorySource" ref="amwayBrandCategorySource" />
+	</bean>
+	<bean id="amwayNeedCategoryNameValueProvider" parent="abstractCategoryNameValueProvider">
+		<property name="categorySource" ref="amwayNeedCategorySource" />
+	</bean>
+	
+    <alias alias="customerEmailResolutionService" name="defaultAmwayCustomerEmailResolutionService"/>
+	<bean id="defaultAmwayCustomerEmailResolutionService"
+	      class="com.amway.core.customer.impl.DefaultAmwayCustomerEmailResolutionService" parent="defaultCustomerEmailResolutionService">
+	</bean>      
+	<bean id="pointValueValueProvider"
+		  class="com.amway.core.search.solrfacetsearch.provider.impl.PointValueValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="modelService" ref="modelService" />
+		<property name="sessionService" ref="sessionService" />
+		<property name="userService" ref="userService" />
+		<property name="priceService" ref="priceService" />
+		<property name="catalogVersionService" ref="catalogVersionService" />
+		<property name="localeService" ref="localizationService" />
+		<property name="i18nService" ref="i18nService" />
+		<property name="rangeNameProvider" ref="rangeNameProvider" />
+	</bean>
+	
+	<!-- START: dynamic attribute providers -->
+	<alias name="defaultOrderVolumeAboAttributeProvider" alias="orderVolumeAboAttributeProvider"/>
+	<bean id="defaultOrderVolumeAboAttributeProvider" class="com.amway.core.order.provider.impl.OrderVolumeAboAttributeProvider"/>
+	<bean id="businessVolumeValueProvider"
+		  class="com.amway.core.search.solrfacetsearch.provider.impl.BusinessVolumeValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="modelService" ref="modelService" />
+		<property name="sessionService" ref="sessionService" />
+		<property name="userService" ref="userService" />
+		<property name="priceService" ref="priceService" />
+		<property name="catalogVersionService" ref="catalogVersionService" />
+	</bean>
+
+	<alias name="defaultOrderTotalWeightAttributeProvider" alias="orderTotalWeightAttributeProvider"/>
+	<bean id="defaultOrderTotalWeightAttributeProvider" class="com.amway.core.order.provider.impl.OrderTotalWeightAttributeProvider">
+		<property name="productDimensionService" ref="amwayProductDimensionService" />
+	</bean>	
+	<bean id="aboPriceValueProvider"
+		  class="com.amway.core.search.solrfacetsearch.provider.impl.ABOPriceValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="modelService" ref="modelService" />
+		<property name="sessionService" ref="sessionService" />
+		<property name="userService" ref="userService" />
+		<property name="priceService" ref="priceService" />
+		<property name="catalogVersionService" ref="catalogVersionService" />
+		<property name="localeService" ref="localizationService" />
+		<property name="i18nService" ref="i18nService" />
+		<property name="rangeNameProvider" ref="rangeNameProvider" />
+	</bean>
+
+	<alias name="defaultAmwayAccountUidAttributeProvider" alias="amwayAccountUidAttributeProvider"/>
+	<bean id="defaultAmwayAccountUidAttributeProvider" class="com.amway.core.account.provider.impl.AmwayaccountUidAttributeProvider"/>
+	<!-- End Amway Solr field value providers -->
+
+
+	<alias alias="netPriceService" name="defaultAmwayNetPriceService"/>
+	<bean id="defaultAmwayNetPriceService" class="com.amway.core.price.service.impl.DefaultAmwayNetPriceService">
+		<property name="commonI18NService" ref="commonI18NService"/>
+		<property name="netGrossStrategy" ref="netGrossStrategy"/>
+		<property name="timeService" ref="timeService"/>
+		<property name="sessionService" ref="sessionService" />
+		<property name="findPriceStrategy" ref="currentFactoryFindPricingStrategy"/>
+		<property name="modelService" ref="modelService"/>
+	</bean>
+	<!-- END: dynamic attribute providers -->
+
+	
+	<alias alias="stockLevelDao" name="defaultAmwayStockLevelDao"/>
+	<bean id="defaultAmwayStockLevelDao" class="com.amway.core.stock.dao.impl.DefaultAmwayStockLevelDao" parent="defaultStockLevelDao" scope="tenant">
+		<property name="typeService" ref="typeService"/>
+		<property name="transactionTemplate">
+			<bean class="org.springframework.transaction.support.TransactionTemplate" scope="tenant">
+				<property name="transactionManager" ref="txManager"/>
+			</bean>
+		</property>
+		<property name="jdbcTemplate">
+			<bean class="org.springframework.jdbc.core.JdbcTemplate" scope="tenant">
+				<property name="dataSource" ref="dataSource"/>
+			</bean>
+		</property>
+		<property name="stockLevelDao" ref="defaultStockLevelDao"/> <!-- TODO: -->
+	</bean>
+	
+	<alias alias="stockService" name="amwayStockService" />
+	<bean id="amwayStockService" class="com.amway.core.stock.service.impl.DefaultAmwayStockService" parent="defaultStockService">
+		<property name="amwayStockLevelDao" ref="stockLevelDao"/>
+	</bean>	
+
+	<!-- Solr field value providers -->
+	
+
+	<alias alias="amwayWarehouseSelectionStrategy" name="defaultAmwayWarehouseSelectionStrategy"/>
+	<bean id="defaultAmwayWarehouseSelectionStrategy" class="com.amway.core.stock.strategy.impl.DefaultAmwayWarehouseSelectionStrategy"
+		  parent="warehousingWarehouseSelectionStrategy">
+	</bean>	
+	
+	<alias alias="commerceStockService" name="defaultAmwayCommerceStockService"/>
+	<bean id="defaultAmwayCommerceStockService" class="com.amway.core.stock.service.impl.DefaultAmwayCommerceStockService"
+		  parent="warehousingCommerceStockService">
+		<property name="amwayWarehouseSelectionStrategy" ref="amwayWarehouseSelectionStrategy"/>
+		<property name="amwayStockService" ref="stockService"/>
+		<property name="pickupWarehouseSelectionStrategy" ref="pickupWarehouseSelectionStrategy"/>
+	</bean>
+
+	<alias name="amwayPlaceOrderHook" alias="placeOrderHook"/>
+	<bean id="amwayPlaceOrderHook" class="com.amway.core.order.hook.impl.AmwayPlaceOrderMethodHookImpl">
+		<property name="modelService" ref="modelService" />
+		<property name="cartService" ref="cartService" />
+		<property name="commerceStockService" ref="commerceStockService"/>
+		<property name="amwayOrderProrationService" ref="amwayOrderProrationService"/>
+		<property name="returnCalculationService" ref="returnCalculationService"/>
+	</bean>
+	
+	<util:list id="commercePlaceOrderMethodHooks" value-type="de.hybris.platform.commerceservices.order.hook.CommercePlaceOrderMethodHook">
+		<ref bean="placeOrderHook" />
+	</util:list>
+
+	<alias name="defaultAmwayCartValidationStrategy" alias="cartValidationStrategy"/>
+	<bean id="defaultAmwayCartValidationStrategy"  class="com.amway.core.cart.strategy.impl.DefaultAmwayCartValidationStrategy" parent="defaultCartValidationStrategy">
+		<property name="accountExpirationRestriction" ref="accountExpirationRestriction"/>
+		<property name="amwayAccountCommerceService" ref="amwayAccountCommerceService"/>
+		<property name="amwayCommerceStockService" ref="commerceStockService"/>
+		<property name="amwayAccountService" ref="amwayAccountService"/>
+	</bean>	
+	<bean id="image515ValueProvider" parent="abstractImageValueProvider" >
+		<property name="mediaFormat" value="515Wx515H"/>
+	</bean>
+	<bean id="image300ValueProvider" parent="abstractImageValueProvider" >
+		<property name="mediaFormat" value="300Wx300H"/>
+	</bean>
+	<bean id="image96ValueProvider" parent="abstractImageValueProvider" >
+		<property name="mediaFormat" value="96Wx96H"/>
+	</bean>
+	<bean id="image65ValueProvider" parent="abstractImageValueProvider" >
+		<property name="mediaFormat" value="65Wx65H"/>
+	</bean>
+	<bean id="image30ValueProvider" parent="abstractImageValueProvider" >
+		<property name="mediaFormat" value="30Wx30H"/>
+	</bean>
+	
+	<bean id="starterKitEvaluator" class="com.amway.core.cms.services.evaluator.impl.CheckServiceKitEvaluator">
+		<property name="serviceKitCode" value="SRV0006"/>
+	</bean>	
+	<bean id="productUrlValueProvider"
+	      class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.ProductUrlValueProvider"
+	      parent="abstractPropertyFieldValueProvider" >
+		<property name="urlResolver" ref="productModelUrlResolver"/>
+		<property name="fieldNameProvider" ref="solrFieldNameProvider"/>
+		<property name="i18nService" ref="i18nService"/>
+		<property name="commonI18NService" ref="commonI18NService"/>
+	</bean>
+	
+	<bean id="renewalKitEvaluator" class="com.amway.core.cms.services.evaluator.impl.CheckServiceKitEvaluator">
+		<property name="serviceKitCode" value="SRV0005"/>
+	</bean>	
+	<bean id="promotionCodeValueProvider"
+	      class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.PromotionCodeValueProvider"
+	      parent="abstractPropertyFieldValueProvider" >
+		<property name="promotionsService" ref="promotionsService"/>
+		<property name="fieldNameProvider" ref="solrFieldNameProvider"/>
+	</bean>
+	
+	<bean id="lateRenewalKitEvaluator" class="com.amway.core.cms.services.evaluator.impl.CheckServiceKitEvaluator">
+		<property name="serviceKitCode" value="SRV0013"/>
+	</bean>	
+	<bean id="promotionImageValueProvider"
+	      class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.PrimaryPromotionImageValueProvider"
+	      parent="abstractPropertyFieldValueProvider" >
+		<property name="promotionsService" ref="promotionsService"/>
+		<property name="fieldNameProvider" ref="solrFieldNameProvider"/>
+	</bean>
+	
+	<bean id="accountExpirationRestriction" class="com.amway.core.account.restrictions.impl.AccountExpirationRestriction">
+		<property name="lateRenewalKitEvaluator" ref="lateRenewalKitEvaluator"/>
+	</bean>
+
+	
+	<bean id="accountInStorePickUpRestriction" class="com.amway.core.account.restrictions.impl.AccountInStorePickUpRestriction"/>
+	<!--
+		Event listeners are singletons, therefore the dependency for a bean in tenant-scope
+		must be configured with a lookup method.
+	-->
+	<bean id="customerRegistrationEventListener"
+	      class="com.amway.core.event.RegistrationEventListener" parent="abstractSiteEventListener">
+		<property name="modelService" ref="modelService"/>
+		<property name="businessProcessService" ref="businessProcessService"/>
+	</bean>
+	<bean id="submitOrderEventListener" class="com.amway.core.event.SubmitOrderEventListener" parent="abstractSiteEventListener">
+		<property name="businessProcessService" ref="businessProcessService"/>
+		<property name="modelService" ref="modelService"/>
+		<property name="baseStoreService" ref="baseStoreService"/>
+	</bean>
+	<bean id="orderConfirmationEventListener"
+	      class="com.amway.core.event.OrderConfirmationEventListener" parent="abstractSiteEventListener">
+		<property name="modelService" ref="modelService"/>
+		<property name="businessProcessService" ref="businessProcessService"/>
+	</bean>
+	<bean id="sendDeliveryMessageEventListener"
+	      class="com.amway.core.event.SendDeliveryMessageEventListener" parent="abstractEventListener">
+		<property name="modelService" ref="modelService"/>
+		<property name="businessProcessService" ref="businessProcessService"/>
+	</bean>
+	<bean id="sendReadyForPickupMessageEventListener"
+	      class="com.amway.core.event.SendReadyForPickupMessageEventListener" parent="abstractEventListener">
+		<property name="modelService" ref="modelService"/>
+		<property name="businessProcessService" ref="businessProcessService"/>
+	</bean>
+	<bean id="sendOrderPartiallyCanceledMessageEventListener"
+	      class="com.amway.core.event.SendOrderPartiallyCanceledMessageEventListener" parent="abstractEventListener">
+		<property name="modelService" ref="modelService"/>
+		<property name="businessProcessService" ref="businessProcessService"/>
+	</bean>
+	<bean id="sendOrderPartiallyRefundedMessageEventListener"
+	      class="com.amway.core.event.SendOrderPartiallyRefundedMessageEventListener" parent="abstractEventListener">
+		<property name="modelService" ref="modelService"/>
+		<property name="businessProcessService" ref="businessProcessService"/>
+	</bean>
+	<bean id="sendNotPickedUpConsignmentCanceledMessageEventListener"
+	      class="com.amway.core.event.SendNotPickedUpConsignmentCanceledMessageEventListener" parent="abstractEventListener">
+		<property name="modelService" ref="modelService"/>
+		<property name="businessProcessService" ref="businessProcessService"/>
+	</bean>
+	<bean id="orderCompletedEventListener" class="com.amway.core.event.OrderCompletedEventListener" parent="abstractSiteEventListener">
+		<property name="modelService" ref="modelService"/>
+		<property name="businessProcessService" ref="businessProcessService"/>
+	</bean>
+	
+	<bean id="accountLoginRestriction" class="com.amway.core.account.restrictions.impl.AccountLoginRestriction"/>
+	<!-- Process resources definition -->
+	
+	<bean id="accountOrderRestriction" class="com.amway.core.account.restrictions.impl.AccountOrderRestriction"/>
+	<bean id="customerRegistrationEmailProcessDefinitionResource"
+	      class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+		<property name="resource" value="classpath:/amwaycore/processes/customerRegistrationEmailProcess.xml"/>
+	</bean>
+	<bean id="orderConfirmationEmailProcessDefinitionResource"
+	      class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+		<property name="resource" value="classpath:/amwaycore/processes/orderConfirmationEmailProcess.xml"/>
+	</bean>
+	<bean id="sendDeliveryEmailProcessDefinitionResource"
+	      class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+		<property name="resource" value="classpath:/amwaycore/processes/sendDeliveryEmailProcess.xml"/>
+	</bean>
+	<bean id="sendReadyForPickupEmailProcessDefinitionResource"
+	      class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+		<property name="resource" value="classpath:/amwaycore/processes/sendReadyForPickupEmailProcess.xml"/>
+	</bean>
+	<bean id="sendOrderCancelledEmailProcessDefinitionResource"
+	      class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+		<property name="resource" value="classpath:/amwaycore/processes/sendOrderCancelledEmailProcess.xml"/>
+	</bean>
+	<bean id="sendOrderRefundEmailProcessDefinitionResource"
+	      class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+		<property name="resource" value="classpath:/amwaycore/processes/sendOrderRefundEmailProcess.xml"/>
+	</bean>
+	<bean id="sendOrderPartiallyCanceledEmailProcessDefinitionResource"
+	      class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+		<property name="resource" value="classpath:/amwaycore/processes/sendOrderPartiallyCanceledEmailProcess.xml"/>
+	</bean>
+	<bean id="sendOrderPartiallyRefundedEmailProcessDefinitionResource"
+	      class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+		<property name="resource" value="classpath:/amwaycore/processes/sendOrderPartiallyRefundedEmailProcess.xml"/>
+	</bean>
+	<bean id="sendNotPickedUpConsignmentCanceledEmailProcessDefinitionResource"
+	      class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+		<property name="resource" value="classpath:/amwaycore/processes/sendNotPickedUpConsignmentCanceledEmailProcess.xml"/>
+	</bean>
+	
+	<bean id="accountRenewalRestriction" class="com.amway.core.account.restrictions.impl.AccountRenewalRestriction"/>
+	<!-- Actions -->
+	<bean id="abstractAction" class="de.hybris.platform.processengine.action.AbstractAction"
+	      abstract="true">
+		<property name="modelService" ref="modelService"/>
+		<property name="processParameterHelper" ref="processParameterHelper"/>
+	</bean>
+	
+	<bean id="accountSponsorRestriction" class="com.amway.core.account.restrictions.impl.AccountSponsorRestriction"/>
+	<bean id="sendEmail" class="de.hybris.platform.acceleratorservices.process.email.actions.SendEmailAction"
+	       parent="abstractAction">
+		<property name="emailService" ref="emailService"/>
+	</bean>
+	
+	<bean id="accountVirtualStoreRestriction" class="com.amway.core.account.restrictions.impl.AccountVirtualStoreRestriction"/>
+	<bean id="abstractGenerateEmailAction" class="de.hybris.platform.acceleratorservices.process.email.actions.GenerateEmailAction"
+	      parent="abstractAction" abstract="true">
+		<property name="modelService" ref="modelService"/>
+		<property name="cmsEmailPageService" ref="cmsEmailPageService"/>
+		<property name="contextResolutionStrategy" ref="processContextResolutionStrategy"/>
+		<property name="emailGenerationService" ref="emailGenerationService"/>
+	</bean>
+
+	<alias name="defaultAmwayRefundAmountCalculationStrategy" alias="amwayRefundAmountCalculationStrategy" />
+	<bean id="defaultAmwayRefundAmountCalculationStrategy"
+		class="com.amway.core.refund.amount.strategies.impl.DefaultAmwayRefundAmountCalculationStrategy">
+	</bean>	
+	<bean id="generateCustomerRegistrationEmail" parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="CustomerRegistrationEmailTemplate"/>
+	</bean>
+	
+    <bean id="createBalanceAccountService" class="com.amway.core.account.service.impl.MockCreateAccountBalanceService"
+               autowire-candidate="false">
+    </bean>
+
+	<bean id="getBalanceAccountService" class="com.amway.core.account.service.impl.MockGetBalanceAccountService"
+           autowire-candidate="false">
+	</bean>
+   
+    <alias name="defaultAmwayAccountBalanceService" alias="amwayAccountBalanceService" />
+	<bean id="defaultAmwayAccountBalanceService" class="com.amway.core.balance.services.impl.DefaultAmwayAccountBalanceService">
+		<property name="createBalanceService" ref="createBalanceAccountService"/>
+		<property name="baseStoreService" ref="baseStoreService" />
+		<property name="amwayAccountCommerceService" ref="amwayAccountCommerceService" />
+		<property name="getBalanceService" ref="getBalanceAccountService"/>
+	</bean>
+
+    <bean id="processBlockPrevService" class="com.amway.core.account.service.impl.MockProcessBlockPrevService"
+           autowire-candidate="false">
+    </bean>
+ 
+    <bean id="defaultGetBlockPrevService" class="com.amway.core.account.service.impl.MockGetBlockPrevService"
+           autowire-candidate="false">
+    </bean>
+	
+
+    <alias name="defaultAmwayBlocksPrivilegeService" alias="amwayBlocksPrivilegeService" />
+	<bean id="defaultAmwayBlocksPrivilegeService" class="com.amway.core.account.service.impl.DefaultAmwayBlocksPrivilegeService">
+		<property name="processBlockPrevService" ref="processBlockPrevService"/>
+		<property name="getBlockPrevService" ref="defaultGetBlockPrevService"/>
+	</bean>	
+	<bean id="generateOrderConfirmationEmail" parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="OrderConfirmationEmailTemplate"/>
+	</bean>
+
+	<alias name="returnsConsolidateDateAttributeProvider" alias="returnsConsolidateDateAttributeProvider"/>
+	<bean id="returnsConsolidateDateAttributeProvider" class="com.amway.core.order.provider.impl.ReturnsConsolidateDateAttributeProvider"/>
+	<bean id="generateDeliverySentEmail" parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="DeliverySentEmailTemplate"/>
+	</bean>
+	
+	<alias alias="paymentModeService" name="defaultAmwayPaymentModeService" />
+	<bean id="defaultAmwayPaymentModeService"
+		class="com.amway.core.payment.service.impl.DefaultAmwayPaymentModeService" parent="defaultPaymentModeService">
+		<property name="paymentModeDao" ref="paymentModeDao" />
+	</bean>	
+	<bean id="generateReadyForPickupEmail" parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="ReadyForPickupEmailTemplate"/>
+	</bean>
+	
+	<alias alias="amwayCommerceCheckoutService" name="defaultAmwayCommerceCheckoutService" />
+	<bean id="defaultAmwayCommerceCheckoutService"
+		class="com.amway.core.checkout.services.impl.DefaultAmwayCommerceCheckoutService"
+		parent="defaultCommerceCheckoutService">
+		<property name="amwayAccountBalanceService" ref="amwayAccountBalanceService" />
+		 <property name="amwayAccountCommerceService" ref="amwayAccountCommerceService" />
+		 <property name="accountOrderRestriction" ref="accountOrderRestriction"/>
+		 <property name="sessionService" ref="sessionService"/>
+	</bean>	 
+	<bean id="generateOrderCancelledEmail" parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="OrderCancelledEmailTemplate"/>
+	</bean>
+	
+	<alias alias="amwayPaymentTransactionDao" name="defaultAmwayPaymentTransactionDao" />
+	<bean id="defaultAmwayPaymentTransactionDao" class="com.amway.core.order.transaction.dao.impl.DefaultAmwayPaymentTransactionDaoImpl" scope="tenant"></bean>
+	<bean id="generateOrderRefundEmail" parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="OrderRefundEmailTemplate"/>
+	</bean>
+	
+	<bean id="amwayFetchProcessStatusEmailJob" class="com.amway.core.processes.job.AmwayFetchProcessStatusEmailJob" parent="abstractJobPerformable">
+	<property name="i18nService" ref="i18nService"/>
+	<property name="fetchProcessStatusService" ref="defaultAmwayFetchProcessStatusService"/>
+	</bean>
+	<bean id="generateOrderPartiallyCanceledEmail" parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="OrderPartiallyCanceledEmailTemplate"/>
+	</bean>
+	<bean id="generateOrderPartiallyRefundedEmail" parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="OrderPartiallyRefundedEmailTemplate"/>
+	</bean>
+	<bean id="generateNotPickedUpConsignmentCanceledEmail" parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="NotPickedUpConsignmentCanceledEmailTemplate"/>
+	</bean>
+	
+	<bean id="defaultAmwayFetchProcessStatusService" class="com.amway.core.processes.services.impl.DefaultAmwayFetchProcessStatusService">
+	<property name="fetchProcessStatusDao" ref="defaultAmwayFetchProcessStatusDao"/>
+	<property name="emailService" ref="emailService" />
+	<property name="modelService" ref="modelService" />
+	<property name="cmsEmailPageService" ref="cmsEmailPageService" />
+	<property name="contextResolutionStrategy" ref="processContextResolutionStrategy" />
+	<property name="emailGenerationService" ref="emailGenerationService" />
+	<property name="frontendTemplateName" value="OrderProcessFailureEmailTemplate" />
+	</bean>
+
+	<bean id="removeSentEmail"
+	      class="de.hybris.platform.acceleratorservices.process.email.actions.RemoveSentEmailAction"
+	      parent="abstractAction">
+		<property name="modelService" ref="modelService"/>
+	</bean>	
+	
+	<!-- Simple Suggestion Service -->
+	<alias alias="simpleSuggestionService" name="defaultSimpleSuggestionService"/>
+	<bean id="defaultSimpleSuggestionService"
+	      class="com.amway.core.suggestion.impl.DefaultSimpleSuggestionService" >
+		<property name="simpleSuggestionDao" ref="simpleSuggestionDao"/>
+	</bean>
+	<alias alias="simpleSuggestionDao" name="defaultSimpleSuggestionDao"/>
+	<bean id="defaultSimpleSuggestionDao"
+	      class="com.amway.core.suggestion.dao.impl.DefaultSimpleSuggestionDao"
+	      parent="abstractItemDao" >
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+	</bean>
+	<bean id="defaultAmwayFetchProcessStatusDao" class="com.amway.core.processes.dao.impl.DefaultAmwayFetchProcessStatusDao">
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+	</bean>
+	
+	<bean id="amwayKitEntryProductPrepareInterceptor"
+	       class="com.amway.core.interceptor.impl.AmwayKitEntryProductPrepareInterceptor" />
+	<!-- checkout flow configuration -->
+	
+	<bean id="amwayKitEntryProductPrepareInterceptorMapping"
+		class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="amwayKitEntryProductPrepareInterceptor" />
+		<property name="typeCode" value="AmwayKitEntryProduct" />
+	</bean>	
+
+	
+	<bean id="amwayBusinessProcessStatusJob" class="com.amway.core.processes.job.AmwayBusinessProcessStatusJob" parent="abstractJobPerformable">
+		<property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
+		<property name="amwayInfraAvailabilityEventPublishService" ref="amwayInfraAvailabilityEventPublishService" />
+	</bean>	
+
+	
+	<bean id="amwayOrderPeriodStatusJobPerformable" class="com.amway.core.orderperiod.job.AmwayOrderPeriodStatusJobPerformable" parent="abstractJobPerformable">
+   		<property name="i18nService" ref="i18nService"/>
+   		<property name="orderPeriodService" ref="orderPeriodService" />
+   		<property name="emailService" ref="emailService" />
+   		<property name="modelService" ref="modelService" />
+   	</bean>	
+
+    
+    <bean id="amwayBonusPeriodStatusJobPerformable" class="com.amway.core.bonusperiod.job.AmwayBonusPeriodStatusJobPerformable" parent="abstractJobPerformable">
+   		<property name="i18nService" ref="i18nService"/>
+   		<property name="bonusPeriodService" ref="bonusPeriodService" />
+   		<property name="emailService" ref="emailService" />
+   		<property name="modelService" ref="modelService" />
+     </bean>		
+
+    <alias name="defaultAmwayCustomerAccountDao" alias="amwayCustomerAccountDao"/>
+	<bean id="defaultAmwayCustomerAccountDao" class="com.amway.core.customer.dao.impl.DefaultAmwayCustomerAccountDao" parent="defaultCustomerAccountDao"/>
+	
+	<alias name="defaultAmwayCustomerAccountService" alias="amwayCustomerAccountService"/>
+	<bean id="defaultAmwayCustomerAccountService" class="com.amway.core.customer.service.impl.DefaultAmwayCustomerAccountService" parent="defaultCustomerAccountService">
+		<property name="amwayCustomerAccountDao" ref="amwayCustomerAccountDao"/>
+		<property name="amwayAccountCommerceService" ref="amwayAccountCommerceService"/>
+	</bean>
+
+	
+	<alias alias="paymentModeDao" name="defaultAmwayPaymentModeDao"/>
+	<bean id="defaultAmwayPaymentModeDao" class="com.amway.core.order.dao.impl.DefaultAmwayPaymentModeDao" parent="defaultPaymentModeDao"> </bean>
+
+	
+	<alias alias="voucherService" name="defaultAmwayVoucherService" />
+	<bean id="defaultAmwayVoucherService" class="com.amway.core.service.DefaultAmwayVoucherService" parent="defaultVoucherService"></bean>
+
+
+	<alias alias="voucherModelService" name="defaultAmwayVoucherModelService" />
+	<bean id="defaultAmwayVoucherModelService" class="com.amway.core.service.impl.DefaultAmwayVoucherModelService" parent="defaultVoucherModelService">
+	</bean>
+
+	<alias alias="paymentModeValidator" name="amwayPaymentModeValidator" />
+	<bean id="amwayPaymentModeValidator" class="com.amway.core.validators.AmwayPaymentModeValidator">
+		<property name="paymentModeService" ref="paymentModeService" />
+	</bean>	
+	<alias name="amwaySetupSyncJobService" alias="setupSyncJobService"/>
+	<bean id="amwaySetupSyncJobService"	class="com.amway.core.commerceservices.setup.AmwaySetupSyncJobService" parent="defaultSetupSyncJobService">
+	</bean>
+	
+	<alias alias="paymentService" name="defaultAmwayPaymentService" />
+	<bean id="defaultAmwayPaymentService" class="com.amway.core.payment.service.impl.DefaultAmwayPaymentService" parent="defaultPaymentService">
+		<property name="amwayAccountBalanceService" ref="amwayAccountBalanceService" />
+		<property name="modelService" ref="modelService" />
+		<property name="amwayRefundAmountCalculationStrategy" ref="amwayRefundAmountCalculationStrategy" />
+		<property name="sessionService" ref="sessionService" />
+	</bean>
+	<alias name="defaultAmwayCalculationService" alias="calculationService" />
+	<bean id="defaultAmwayCalculationService"
+		  class="com.amway.core.order.services.impl.DefaultAmwayCalculationService"
+		  parent="defaultCalculationService">
+		<property name="modelService" ref="modelService" />
+		<property name="commercePriceService" ref="commercePriceService" />
+		<property name="amwayNetPriceService" ref="priceService"/>
+		<property name="baseSiteService" ref="baseSiteService" />
+		<property name="orderRequiresCalculationStrategy" ref="orderRequiresCalculationStrategy"/>
+	</bean>	
+	
+	
+	<alias name="defaultAmwayOrderCancelService" alias="orderCancelService" />
+	<bean id="defaultAmwayOrderCancelService" class="com.amway.core.ordercancel.services.impl.DefaultAmwayOrderCancelService" parent="defaultOrderCancelService">
+	</bean>
+	<!-- PickupAddress -->
+	<bean id="addressLocalizedLine1Attribute" class="com.amway.core.model.AddressLocalizedLine1Attribute" scope="tenant"/>
+	<bean id="addressLocalizedLine2Attribute" class="com.amway.core.model.AddressLocalizedLine2Attribute" scope="tenant"/>
+
+	<!--Pickup Date and Time-->
+	
+	<bean id="pickupDateTimeAttribute" class="com.amway.core.model.PickupDateTimeAttribute"/>
+
+	<alias alias="stockLevelStatusStrategy" name="amwayCommerceStockLevelStatusStrategy"/>
+	<bean id="amwayCommerceStockLevelStatusStrategy" class="com.amway.core.stock.strategies.impl.AmwayCommerceStockLevelStatusStrategy" parent="commerceStockLevelStatusStrategy">
+		<property name="defaultLowStockThreshold" value="5"/>
+		<property name="commerceStockLevelCalculationStrategy" ref="commerceStockLevelCalculationStrategy"/>
+	</bean>
+
+	<bean id="magicSessionDataHelper"
+		  class="com.amway.core.session.MagicSessionDataHelper">
+		<property name="amwayCustomerAccountService" ref="amwayCustomerAccountService"/>
+		<property name="amwayAccountService" ref="amwayAccountService" />
+		<property name="baseStoreService" ref="baseStoreService" />
+		<property name="baseSiteService" ref="baseSiteService" />
+		<property name="sessionService" ref="sessionService" />
+	</bean>
+
+	<bean id="europe1.manager" class="com.amway.core.customjalo.price.AmwayEurope1PriceFactory" init-method="init" destroy-method="destroy">
+		<property name="retrieveChannelStrategy" ref="retrieveChannelStrategy"/>
+	</bean>
+	
+	<util:list id="commerceCartCalculationMethodHooks" value-type="de.hybris.platform.commerceservices.order.hook.CommerceCartCalculationMethodHook">
+		<ref bean="amwayCartCalculationHook" />
+	</util:list>
+		
+	<bean id="amwayCartCalculationHook" class="com.amway.core.order.hook.impl.AmwayCartCalculationHook">
+		<property name="amwayCalculationService" ref="calculationService" />
+		<property name="amwayPaymentService" ref="paymentService" />
+	</bean>	  
+	
+	<alias name="defaultAmwayReturnCalculationService" alias="returnCalculationService"/>
+	<bean id="defaultAmwayReturnCalculationService" class="com.amway.core.order.returns.impl.DefaultAmwayReturnCalculationService" >
+		<property name="modelService" ref="modelService" />
+	</bean>
+	
+	<alias name="amwayPaymentInfoService" alias="paymentInfoService" />
+        <bean id="amwayPaymentInfoService" parent="defaultPaymentInfoService" class="com.amway.core.payment.service.impl.DefaultAmwayPaymentInfoService"/>
+	
+	<alias alias="wishlistService" name="amwayWishlistService" />
+	<bean id="amwayWishlistService" parent="defaultWishlistService" class="com.amway.core.wishlist.services.impl.AmwayWishlistServiceImpl">
+		<property name="amwayWishlistDao" ref="amwayWishlistDao" />
+		<property name="baseSiteService" ref="baseSiteService" />
+	</bean>
+
+	<alias alias="wishlistDao" name="amwayWishlistDao" />
+	<bean id="amwayWishlistDao" class="com.amway.core.wishlist.daos.impl.AmwayWishlistDaoImpl" parent="defaultWishlistDao"/>
+	
+	 <!-- Dynamic Attributes -->
+ 	<bean id="emailContactInfoAttributeHandler" class="com.amway.core.attributeHandlers.AmwayEmailContactInfoAttributeHandler" />
+	
+</beans>

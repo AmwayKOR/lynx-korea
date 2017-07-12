@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
+
+    <bean class="com.amway.amwayfulfillment.order.ShippingEvent">
+        <property name="warehouseId" type="java.lang.String"/>
+        <property name="carrier" type="java.lang.String"/>
+        <property name="trackingId" type="java.lang.String"/>
+        <property name="trackingLink" type="java.lang.String"/>
+        <property name="shippingDate" type="java.util.Date"/>
+        <property name="packages" type="java.util.List&lt;com.amway.amwayfulfillment.order.ShippingPackage>"/>
+    </bean>
+
+    <bean class="com.amway.amwayfulfillment.order.ShippingPackage">
+        <property name="packageId" type="java.lang.String"/>
+        <property name="packageSeq" type="java.lang.String"/>
+        <property name="entries" type="java.util.List&lt;com.amway.amwayfulfillment.order.PackageEntry>"/>
+    </bean>
+
+    <bean class="com.amway.amwayfulfillment.order.PackageEntry">
+        <property name="lot" type="java.lang.String"/>
+        <property name="version" type="java.lang.String"/>
+        <property name="productCode" type="java.lang.String"/>
+        <property name="shippedQuantity" type="java.lang.String"/>
+        <property name="serialNumbers" type="java.util.List&lt;com.amway.amwayfulfillment.order.SerialNumber>"/>
+    </bean>
+
+    <bean class="com.amway.amwayfulfillment.order.SerialNumber">
+        <property name="serialNumber" type="java.lang.String"/>
+    </bean>
+
+    <bean class="com.amway.amwayfulfillment.ws.dto.ShippingError">
+        <property name="message" type="java.lang.String"/>
+        <property name="type" type="java.lang.String"/>
+    </bean>
+
+    <bean class="com.amway.amwayfulfillment.ws.dto.ShippingResponse">
+        <property name="errors" type="java.util.List&lt;com.amway.amwayfulfillment.ws.dto.ShippingError>" />
+    </bean>
+
+    <bean class="com.amway.amwayfulfillment.order.data.AmwayConsignmentCreationInfo">
+        <property name="errorCode" type="java.lang.String" />
+        <property name="statusMessage" type="java.lang.String" />
+        <property name="statusCode" type="java.lang.Integer" />
+    </bean>
+
+</beans>

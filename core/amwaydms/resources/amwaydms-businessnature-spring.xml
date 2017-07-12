@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		   http://www.springframework.org/schema/beans/spring-beans.xsd
+		   http://www.springframework.org/schema/util
+		   http://www.springframework.org/schema/util/spring-util.xsd">
+		   
+		   
+<!-- Entries for Update Business nature converter and populator -->
+	<bean id="dmsBusinessNatureInputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.integration.dms.services.UpdateBusinessNatureRequest" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonRequestFieldsPopulator" />
+				<ref bean="dmsBusinessNatureInputPopulator" />
+			</list>
+		</property>
+	</bean>
+	<bean id="dmsBusinessNatureInputPopulator"
+		class="com.amway.integration.cis.dms.populators.DmsUpdateBusinessNatureInputPopulator">
+	</bean>
+		
+	<bean id="dmsUpdateBusinessNatureOutputConverter" parent="abstractPopulatingConverter">
+		  <property name="targetClass" value="com.amway.core.data.CommonResponseFieldsData" />
+		  <property name="populators">
+		   <list>
+		    <ref bean="amwayCommonResponseFieldsPopulator" />
+		   </list>
+		  </property>
+	  </bean>
+ 
+	 <bean id="dmsReturnInfoOutputPopulator" class="com.amway.integration.cis.dms.populators.DmsReturnInfoOutputPopulator">
+	 </bean>
+	
+	<!-- Update Business nature  mock and actual service -->
+	
+	<bean id="defaultUpdateBusinessNatureService"
+		class="com.amway.integration.cis.dms.updatebusinessnatureservice.impl.DefaultUpdateBusinessNatureService"
+		parent="abstractDmsService">
+		<property name="inputConverter" ref="dmsBusinessNatureInputConverter" />
+		<property name="outputConverter" ref="dmsUpdateBusinessNatureOutputConverter" />
+		<property name="urlPath" value="${cis.client.dms.updatebusinessnature.urlPath}" />
+	</bean>
+	
+	<bean id="mockUpdateBusinessNatureService"
+		class="com.amway.integration.cis.dms.updatebusinessnature.mock.impl.MockUpdateBusinessNatureService">
+		<property name="inputConverter" ref="dmsBusinessNatureInputConverter" />
+		<property name="outputConverter" ref="dmsUpdateBusinessNatureOutputConverter" />
+		<property name="hystrixCommandConfig" ref="dmsCommandConfig" />
+		<property name="ondemandHystrixCommandFactory" ref="ondemandHystrixCommandFactory" />
+		<property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
+		<property name="serviceAvailCode" value="#{configurationService.configuration.getProperty('amwaydms.availablity.code')}"/>
+	</bean>
+
+	<!--
+	<alias alias="updateBusinessNatureService" name="updateBusinessNatureServiceFactory" />
+	<bean id="updateBusinessNatureServiceFactory" parent="abstractMockFactory">
+		<property name="mockInterface" value="com.amway.core.dms.service.DmsService" />
+		<property name="mockMode" value="${cis.client.dms.updatebusinessnature.mock}" />
+		<lookup-method name="getDefaultObject" bean="defaultUpdateBusinessNatureService" />
+		<property name="customMock" ref="mockUpdateBusinessNatureService"/>
+			<!- - <bean
+				class="com.amway.integration.cis.dms.updatebusinessnature.mock.impl.MockUpdateBusinessNatureService"
+				autowire-candidate="false">
+			</bean>
+		</property> - ->
+	</bean>
+	-->
+
+	<alias alias="updateBusinessNatureService" name="defaultUpdateBusinessNatureService" />
+</beans>

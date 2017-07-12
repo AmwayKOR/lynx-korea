@@ -1,0 +1,33 @@
+.search.tab.product {
+	position: relative;
+	top: -10px;
+	left: 0px;
+	background-color: #EEE;
+	width: 150px;
+	text-align: center;
+	margin-left: 0px;
+	margin-top: -10px;
+	height: 25px;
+	vertical-align: middle;
+	padding-top: 10px;
+	float: left;
+}
+
+.search.tab.content {
+	position: relative;
+	top: -10px;
+	left: 0px;
+	background-color: #CCC;
+	width: 150px;
+	text-align: center;
+	margin-left: 0px;
+	margin-top: -10px;
+	height: 25px;
+	vertical-align: middle;
+	padding-top: 10px;
+	float: left;
+}
+
+.span-18.content{
+	width: 100%;
+}
