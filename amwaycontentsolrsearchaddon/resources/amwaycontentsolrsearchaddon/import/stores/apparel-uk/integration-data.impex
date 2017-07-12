@@ -1,0 +1,25 @@
+#
+# Import the CMS content for the Apparel site
+#
+$contentCatalog=apparel-ukContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+
+UPDATE ContentPage                                ; $contentCV[unique=true]    ; uid[unique=true]      ;displayInSearch[default=false]                               
+                                                  ;                            ; faq                   ;true
+                                                  ;                            ; mobile-faq                   ;true                                                                                 
+
+UPDATE ContentPage                                ; $contentCV[unique=true]    ; uid[unique=true]      ;displayInSearch[default=false]                                
+                                                  ;                            ; termsAndConditions    ;true
+                                                  ;                            ; mobile-termsAndConditions    ;true          
+                                                  
+UPDATE CategoryPage;$contentCV[unique=true];uid[unique=true];displayInSearch[default=false]  
+;;SunglassesCategoryPage;true
+;;ShirtsCategoryPage;true
+;;SnowCategoryPage;true
+;;StreetCategoryPage;true
+;;SurfCategoryPage;true
+;;
+;;
+;;
+;;
+;;

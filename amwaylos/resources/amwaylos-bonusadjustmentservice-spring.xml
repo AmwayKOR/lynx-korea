@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		   http://www.springframework.org/schema/beans/spring-beans.xsd
+		   http://www.springframework.org/schema/util
+		   http://www.springframework.org/schema/util/spring-util.xsd">
+		   
+		   
+	<alias alias="bonusAdjustmentService" name="defaultBonusAdjustmentService" />
+	<bean id="defaultBonusAdjustmentService"
+		class="com.amway.integration.cis.los.bonusadjustment.service.DefaultLosBonusAdjustmentService" parent="abstractLosOrderService">
+		<property name="inputConverter" ref="losBonusOrderInputConverter" />
+		<property name="outputConverter" ref="losBonusOrderOutputConverter" />
+		<property name="urlPath" value="${cis.client.los.bonusadjustmentservice.urlPath}"/>
+	</bean>
+	<bean id="losBonusOrderInputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.amway.integration.cis.los.pojo.TransactionGroup" />
+		<property name="populators">
+			<list>
+				<ref bean="losBonusOrderInputPopulator" />
+			</list>
+		</property>
+	</bean>
+	<bean id="losBonusOrderInputPopulator" class="com.amway.integration.cis.los.populators.LosBonusOrderInputPopulator"/>
+		
+	<bean id="losBonusOrderOutputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.amway.core.los.data.BonusOrderResultData" />
+		<property name="populators">
+			<list>
+				<ref bean="losBonusOrderOutputPopulator" />
+			</list>
+		</property>
+	</bean>
+	<bean id="losBonusOrderOutputPopulator" class="com.amway.integration.cis.los.populators.LosBonusOrderOutputPopulator"/>	
+
+	<!--
+	<bean id="bonusAdjustmentServiceFactory" parent="abstractMockFactory">
+		<property name="mockInterface"
+			value="com.amway.core.los.service.LosService" />
+		<property name="mockMode"
+			value="${cis.client.los.bonusadjustmentservice.mock}" />
+		<lookup-method name="getDefaultObject" bean="defaultBonusAdjustmentService" />
+		<property name="customMock" ref="mockOrderBonusService"/>
+			<!- - <bean class="com.amway.integration.cis.los.orderbonusservice.mock.impl.MockOrderBonusService" autowire-candidate="false" />
+		</property> - ->
+	</bean>
+-->
+</beans>

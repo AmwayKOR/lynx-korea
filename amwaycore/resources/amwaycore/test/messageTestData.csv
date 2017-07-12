@@ -1,0 +1,10 @@
+INSERT_UPDATE Language;isocode[unique=true];active;;;;;;
+;pt;true;;;;;;
+;en;true;;;;;;
+
+UPDATE Language;isocode[unique=true];name[lang=pt];name[lang=en];;;;;
+;pt;Portugue;Portugue;;;;;
+;en;Englisch;English;;;;;
+INSERT_UPDATE AmwayMessage ; code[unique=true] ; message[lang=en];message[lang=pt] 
+;account.confirmation.address.added ;Your address was created.; O seu endere�o foi criado.
+;account.confirmation.address.removed ;Your address was removed.; O seu endere�o foi exclu�do.

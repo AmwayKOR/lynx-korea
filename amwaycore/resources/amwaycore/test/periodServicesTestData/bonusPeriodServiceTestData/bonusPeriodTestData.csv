@@ -1,0 +1,22 @@
+#% import java.util.Calendar;
+INSERT_UPDATE AmwayBonusPeriod;code[unique=true];startDate[unique=true,dateformat=dd-MM-yyyy];cutoffDate[dateformat=dd-MM-yyyy];endDate[unique=true,dateformat=dd-MM-yyyy];status(code);store(uid)[unique=true,default=defaultstore]
+;PREVIOUS_MONTH_BP;01-01-2016;22-01-2016;31-01-2016;CLOSED;;
+#% 	 Calendar cal = Calendar.getInstance();
+#% 	 cal.add(Calendar.MONTH,-1);
+#%	 cal.set(Calendar.DAY_OF_MONTH,1);
+#%   impex.getLastImportedItem().setStartDate(cal.getTime());
+#%   cal.set(Calendar.DAY_OF_MONTH,cal.getActualMaximum(Calendar.DAY_OF_MONTH));
+#%   impex.getLastImportedItem().setEndDate(cal.getTime());
+;CURRENT_MONTH_BP;01-02-2016;21-02-2016;28-02-2016;ACTIVE;;
+#% 	 Calendar cal = Calendar.getInstance();
+#%	 cal.set(Calendar.DAY_OF_MONTH,1);
+#%   impex.getLastImportedItem().setStartDate(cal.getTime());
+#%   cal.set(Calendar.DAY_OF_MONTH,cal.getActualMaximum(Calendar.DAY_OF_MONTH));
+#%   impex.getLastImportedItem().setEndDate(cal.getTime());
+;NEXT_MONTH_BP;01-03-2016;21-03-2016;28-03-2016;INACTIVE;;
+#% 	 Calendar cal = Calendar.getInstance();
+#% 	 cal.add(Calendar.MONTH,1);
+#%	 cal.set(Calendar.DAY_OF_MONTH,1);
+#%   impex.getLastImportedItem().setStartDate(cal.getTime());
+#%   cal.set(Calendar.DAY_OF_MONTH,cal.getActualMaximum(Calendar.DAY_OF_MONTH));
+#%   impex.getLastImportedItem().setEndDate(cal.getTime());

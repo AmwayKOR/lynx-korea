@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2013 hybris AG All rights reserved. 
+	This software is the confidential and proprietary information of hybris ("Confidential 
+	Information"). You shall not disclose such Confidential Information and shall 
+	use it only in accordance with the terms of the license agreement you entered 
+	into with hybris. -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<alias name="defaultAmwayInfraAvailabilityDao" alias="amwayInfraAvailabilityDao" />
+	<bean id="defaultAmwayInfraAvailabilityDao"
+		class="com.amway.core.infraavail.dao.impl.DefaultAmwayInfraAvailabilityDao" />
+
+	<alias name="defaultAmwayInfraAvailabilityService" alias="amwayInfraAvailabilityService" />
+	<bean id="defaultAmwayInfraAvailabilityService"
+		class="com.amway.core.infraavail.service.impl.DefaultAmwayInfraAvailabilityService">
+		<property name="amwayInfraAvailabilityDao" ref="amwayInfraAvailabilityDao" />
+		<property name="baseStoreService" ref="baseStoreService"/>
+	</bean>
+
+	<bean id="amwayInfraAvailJobPerformable"
+		class="com.amway.core.infraavail.cronjob.AmwayInfraAvailJob" parent="abstractJobPerformable">
+		<property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
+		<property name="amwayInfraAvailabilityEventPublishService" ref="amwayInfraAvailabilityEventPublishService" />
+	</bean>
+	
+	<alias name="defaultAmwayTaskConditionDao" alias="amwayTaskConditionDao" />
+	<bean id="defaultAmwayTaskConditionDao"
+		class="com.amway.core.taskcondition.dao.impl.DefaultAmwayTaskConditionDao" />
+		
+	<alias name="defaultAmwayInfraAvailabilityEventPublishService" alias="amwayInfraAvailabilityEventPublishService" />
+	<bean id="defaultAmwayInfraAvailabilityEventPublishService"
+		class="com.amway.core.infraavail.service.impl.DefaultAmwayInfraAvailabilityEventPublishService" parent="abstractBusinessService">
+		<property name="businessProcessService" ref="businessProcessService" />
+		<property name="amwayTaskConditionDao" ref="amwayTaskConditionDao"/>
+	</bean>	
+
+</beans>

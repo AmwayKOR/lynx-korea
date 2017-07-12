@@ -1,0 +1,6 @@
+INSERT_UPDATE CronJob;code[unique=true];job(code)[forceWrite = true];singleExecutable;sessionLanguage(isocode)
+;amwayBusinessEventPurgeJob;amwayPurgeEventsJob;false;en
+
+INSERT_UPDATE Trigger; cronJob(code)[unique=true]; cronExpression
+#% afterEach: impex.getLastImportedItem().setActivationTime(new Date());
+; amwayBusinessEventPurgeJob; 0 0 0 * * ?

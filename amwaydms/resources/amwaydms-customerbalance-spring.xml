@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		   http://www.springframework.org/schema/beans/spring-beans.xsd
+		   http://www.springframework.org/schema/util
+		   http://www.springframework.org/schema/util/spring-util.xsd">
+
+
+	<alias alias="getBalanceAccountService" name="defaultGetBalanceAccountService" />
+	<bean id="defaultGetBalanceAccountService"
+		class="com.amway.integration.cis.dms.customer.balance.impl.DefaultGetBalanceAccountService"
+		parent="abstractDmsService">
+		<property name="inputConverter" ref="dmsGetBalanceAccountInputConverter" />
+		<property name="outputConverter" ref="dmsGetBalanceAccountOutputConverter" />
+		<property name="urlPath" value="${cis.client.dms.getAccountBalance.urlPath}" />
+	</bean>
+
+	<bean id="mockGetBalanceAccountService"
+		class="com.amway.integration.cis.dms.customer.balance.mock.impl.MockGetBalanceAccountService">
+		<property name="inputConverter" ref="dmsGetBalanceAccountInputConverter" />
+		<property name="outputConverter" ref="dmsGetBalanceAccountOutputConverter" />
+		<property name="hystrixCommandConfig" ref="dmsCommandConfig" />
+		<property name="ondemandHystrixCommandFactory" ref="ondemandHystrixCommandFactory" />
+		<property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
+		<property name="serviceAvailCode" value="#{configurationService.configuration.getProperty('amwaydms.availablity.code')}"/>
+	</bean>
+
+	<!--
+        <bean id="defaultGetBalanceAccountServiceFactory" parent="abstractMockFactory">
+            <property name="mockInterface" value="com.amway.core.dms.service.DmsService" />
+            <property name="mockMode" value="${cis.client.dms.getAccountBalance.mock}" />
+            <lookup-method name="getDefaultObject" bean="defaultGetBalanceAccountService" />
+            <property name="customMock" ref="mockGetBalanceAccountService"/>
+                <!- - <bean
+                    class="com.amway.integration.cis.dms.customer.balance.mock.impl.MockGetBalanceAccountService"
+                    autowire-candidate="false">
+                </bean>
+            </property> - ->
+        </bean>
+        -->
+
+	<bean id="dmsGetBalanceAccountInputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.integration.dms.services.AccountBalanceRequest" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonRequestFieldsPopulator" />
+				<ref bean="dmsGetAccountBalanceInputPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="dmsGetBalanceAccountOutputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.core.dms.data.GetBalanceResponseData" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonResponseFieldsPopulator" />
+				<ref bean="dmsGetAccountBalanceOutputPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="dmsGetAccountBalanceOutputPopulator"
+		class="com.amway.integration.cis.dms.populators.DmsGetAccountBalanceOutputPopulator"
+		parent="abstractDmsPopulator">
+	<property name="commonI18NService" ref="commonI18NService"/>
+	</bean>
+	
+	<bean id="dmsGetAccountBalanceInputPopulator"
+		class="com.amway.integration.cis.dms.populators.DmsGetAccountBalanceInputPopulator"
+		parent="abstractDmsPopulator">
+	</bean>
+
+</beans>

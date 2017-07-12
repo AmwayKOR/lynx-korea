@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		   http://www.springframework.org/schema/beans/spring-beans.xsd
+		   http://www.springframework.org/schema/util
+		   http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<bean id="dmsPartyAndNameInputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.magic.PartyAndNameSearchInputRequest" />
+		<property name="populators">
+			<list>
+				<ref bean="dmsPartyAndNameInputPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="dmsPartyAndNameInputPopulator"
+		class="com.amway.integration.cis.dms.populators.DmsPartyAndNameInputPopulator">
+
+	</bean>
+
+
+	<bean id="dmsPartyNameDetailResponseConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.amway.core.dms.party.data.PartyData" />
+		<property name="populators">
+			<list>
+				<ref bean="dmsPartyNameDetailResponsePopulator" />
+			</list>
+		</property>
+	</bean>
+
+
+
+	<bean id="dmsPartyNameDetailResponsePopulator"
+		class="com.amway.integration.cis.dms.populators.DmsPartyNameDetailResponsePopulator">
+	</bean>
+
+
+	<alias alias="partyAndNameService" name="partyAndNameServiceFactory" />
+	<bean id="defaultPartyAndNameDetailsService"
+		class="com.amway.integration.cis.dms.partyandnameservice.impl.DefaultPartyAndNameService" parent="abstractDmsService">
+	</bean>
+
+	<bean id="partyAndNameServiceFactory" parent="abstractMockFactory">
+		<property name="mockInterface" value="com.amway.core.dms.service.DmsService" />
+		<property name="mockMode" value="${cis.client.dms.partydetails.mock}" />
+		<lookup-method name="getDefaultObject" bean="defaultPartyAndNameDetailsService" />
+		<property name="customMock">
+			<bean
+				class="com.amway.integration.cis.dms.partyandnameservice.mock.impl.MockPartyAndNameServiceImpl"
+				autowire-candidate="false">
+			</bean>
+		</property>
+	</bean>
+
+
+</beans>

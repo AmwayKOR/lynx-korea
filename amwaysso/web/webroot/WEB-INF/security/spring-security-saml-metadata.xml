@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+              http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd 
+			  http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- IDP Metadata configuration - paths to metadata of IDPs in circle of trust is here -->
+    <alias name="defaultLynxMetadata" alias="metadata"/>
+    <bean id="defaultLynxMetadata" class="org.springframework.security.saml.metadata.CachingMetadataManager">
+        <constructor-arg>
+            <list>
+            	<!-- Internal backoffice  -->
+                <bean class="org.opensaml.saml2.metadata.provider.FilesystemMetadataProvider">
+                    <!-- URL containing the metadata -->
+                    <constructor-arg>
+                        <value type="java.io.File">${sso.internal.idp.metadata.location}</value>
+                    </constructor-arg>
+                    <property name="parserPool" ref="parserPool"/>
+                </bean>
+                <!-- SP metadata -->
+			    <bean class="org.springframework.security.saml.metadata.ExtendedMetadataDelegate">
+					<constructor-arg>
+						 <bean class="org.opensaml.saml2.metadata.provider.FilesystemMetadataProvider">
+		                    <!-- URL containing the metadata -->
+		                    <constructor-arg>
+		                        <value type="java.io.File">${sso.internal.sp.metadata.location}</value>
+		                    </constructor-arg>
+		                    <property name="parserPool" ref="parserPool"/>
+		                </bean>
+					</constructor-arg>
+					<constructor-arg>
+						<bean class="org.springframework.security.saml.metadata.ExtendedMetadata">
+							<property name="local" value="true" />
+							<property name="alias" value="backoffice" />
+						</bean>
+					</constructor-arg>
+				</bean>
+				<!-- / Internal backoffice  -->
+
+				<!-- Example of configuring Okta for multiple site domains -->
+                <!-- Default Lynx US site -->
+                <!-- IDP metadata -->
+                <!-- <bean class="org.opensaml.saml2.metadata.provider.FilesystemMetadataProvider">
+                    <constructor-arg>
+                        <value type="java.io.File">${sso.lynx.idp.metadata.location}</value>
+                    </constructor-arg>
+                    <property name="parserPool" ref="parserPool"/>
+			    </bean>
+			    <bean class="org.springframework.security.saml.metadata.ExtendedMetadataDelegate">
+					<constructor-arg>
+						 <bean class="org.opensaml.saml2.metadata.provider.FilesystemMetadataProvider">
+		                    <constructor-arg>
+		                        <value type="java.io.File">${sso.lynx.sp.metadata.location}</value>
+		                    </constructor-arg>
+		                    <property name="parserPool" ref="parserPool"/>
+		                </bean>
+					</constructor-arg>
+					<constructor-arg>
+						<bean class="org.springframework.security.saml.metadata.ExtendedMetadata">
+							<property name="local" value="true" />
+							<property name="alias" value="lynx" />
+						</bean>
+					</constructor-arg>
+				</bean>
+				-->
+			     <!-- / Default Lynx US site -->
+			    
+			    <!-- Lynx CA site -->
+                <!-- IDP metadata -->
+                <!-- <bean class="org.opensaml.saml2.metadata.provider.FilesystemMetadataProvider">
+                    <constructor-arg>
+                        <value type="java.io.File">${sso.lynx-ca.idp.metadata.location}</value>
+                    </constructor-arg>
+                    <property name="parserPool" ref="parserPool"/>
+			    </bean>
+			    <bean class="org.springframework.security.saml.metadata.ExtendedMetadataDelegate">
+					<constructor-arg>
+						 <bean class="org.opensaml.saml2.metadata.provider.FilesystemMetadataProvider">
+		                    <constructor-arg>
+		                        <value type="java.io.File">${sso.lynx-ca.sp.metadata.location}</value>
+		                    </constructor-arg>
+		                    <property name="parserPool" ref="parserPool"/>
+		                </bean>
+					</constructor-arg>
+					<constructor-arg>
+						<bean class="org.springframework.security.saml.metadata.ExtendedMetadata">
+							<property name="local" value="true" />
+							<property name="alias" value="lynx-ca" />
+						</bean>
+					</constructor-arg>
+				</bean>
+				-->
+			     <!-- / Lynx CA site -->
+			    
+			    <!-- Lynx DO site -->
+                <!-- IDP metadata -->
+                <!-- <bean class="org.opensaml.saml2.metadata.provider.FilesystemMetadataProvider">
+                    <constructor-arg>
+                        <value type="java.io.File">${sso.lynx-do.idp.metadata.location}</value>
+                    </constructor-arg>
+                    <property name="parserPool" ref="parserPool"/>
+			    </bean>
+			    <bean class="org.springframework.security.saml.metadata.ExtendedMetadataDelegate">
+					<constructor-arg>
+						 <bean class="org.opensaml.saml2.metadata.provider.FilesystemMetadataProvider">
+		                    <constructor-arg>
+		                        <value type="java.io.File">${sso.lynx-do.sp.metadata.location}</value>
+		                    </constructor-arg>
+		                    <property name="parserPool" ref="parserPool"/>
+		                </bean>
+					</constructor-arg>
+					<constructor-arg>
+						<bean class="org.springframework.security.saml.metadata.ExtendedMetadata">
+							<property name="local" value="true" />
+							<property name="alias" value="lynx-do" />
+						</bean>
+					</constructor-arg>
+				</bean>
+				-->
+			     <!-- / Lynx DO site -->
+            </list>
+        </constructor-arg>
+        <property name="hostedSPName" value="${sso.lynx.entity.id:urn:ssoextension:hybris:de}" />
+    </bean>
+</beans>

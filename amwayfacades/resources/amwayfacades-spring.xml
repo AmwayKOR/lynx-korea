@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2014 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<!-- Facades -->
+	<alias alias="simpleSuggestionFacade" name="defaultSimpleSuggestionFacade"/>
+	<bean id="defaultSimpleSuggestionFacade" class="com.amway.facades.suggestion.impl.DefaultSimpleSuggestionFacade" >
+		<property name="simpleSuggestionService" ref="simpleSuggestionService"/>
+		<property name="userService" ref="userService"/>
+		<property name="categoryService" ref="categoryService"/>
+		<property name="productService" ref="productService"/>
+		<property name="productPricePopulator" ref="productPricePopulator"/>
+		<property name="productPrimaryImagePopulator" ref="productPrimaryImagePopulator"/>
+		<property name="productConverter" ref="productConverter"/>
+	</bean>
+
+    <alias name="defaultAmwayWishlistFacade" alias="wishlistFacade"/>
+    <bean id="defaultAmwayWishlistFacade" class="com.amway.facades.wishlist.impl.DefaultAmwayWishlistFacade">
+        <property name="userService" ref="userService"/>
+        <property name="productService" ref="productService"/>
+        <property name="modelService" ref="modelService"/>
+        <property name="wishlistService" ref="wishlistService"/>
+
+        <property name="wishlistConverter" ref="wishlistConverter"/>
+    </bean>
+
+
+
+
+    <!-- Converters and Populators -->
+
+	<alias name="acceleratorVariantOptionDataConverter" alias="variantOptionDataConverter"/> 
+	<bean id="acceleratorVariantOptionDataConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.product.data.VariantOptionData"/>
+			<property name="populators">
+				<list>
+					<ref bean="acceleratorVariantOptionDataPopulator"/>
+				</list>
+			</property>
+	</bean>
+
+	<alias name="defaultAcceleratorVariantOptionDataPopulator" alias="acceleratorVariantOptionDataPopulator"/>
+	<bean id="defaultAcceleratorVariantOptionDataPopulator"  class="com.amway.facades.populators.AcceleratorVariantOptionDataPopulator"
+	      parent="variantOptionDataPopulator" >
+		<property name="mediaService" ref="mediaService"/>
+		<property name="mediaContainerService" ref="mediaContainerService"/>
+		<property name="typeService" ref="typeService"/>
+		<property name="imageFormatMapping" ref="imageFormatMapping"/>
+		<property name="variantAttributeMapping">
+			<map>
+				<entry key="ApparelStyleVariantProduct.style" value="styleSwatch"/>
+			</map>
+		</property>
+	</bean>
+
+
+	<alias name="acceleratorGenderConverter" alias="genderConverter"/> 
+	<bean id="acceleratorGenderConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.amway.facades.product.data.GenderData"/>
+			<property name="populators">
+				<list>
+					<ref bean="genderDataPopulator"/>
+				</list>
+			</property>
+	</bean>
+
+	<alias name="defaultGenderDataPopulator" alias="genderDataPopulator"/>
+	<bean id="defaultGenderDataPopulator" class="com.amway.facades.populators.GenderDataPopulator" >
+		<property name="typeService" ref="typeService"/>
+	</bean>
+
+
+	<!-- accelerator Image Format Mappings -->
+	<alias name="acceleratorImageFormatMapping" alias="imageFormatMapping"/>
+	<bean id="acceleratorImageFormatMapping" parent="defaultImageFormatMapping">
+		<property name="mapping">
+			<map>
+				<entry key="superZoom" value="1200Wx1200H"/>
+				<entry key="zoom" value="515Wx515H"/>
+				<entry key="store" value="365Wx246H"/>
+				<entry key="product" value="300Wx300H"/>
+				<entry key="thumbnail" value="96Wx96H"/>
+				<entry key="cartIcon" value="65Wx65H"/>
+				<entry key="styleSwatch" value="30Wx30H"/>
+			</map>
+		</property>
+	</bean>
+
+	<alias name="acceleratorProductPrimaryImagePopulator" alias="productPrimaryImagePopulator" />
+	<bean id="acceleratorProductPrimaryImagePopulator" parent="defaultProductPrimaryImagePopulator">
+		<property name="imageFormats">
+			<list>
+				<value>zoom</value>
+				<value>product</value>
+				<value>thumbnail</value>
+				<value>cartIcon</value>
+			</list>
+		</property>
+	</bean>
+
+	<alias name="acceleratorProductGalleryImagesPopulator" alias="productGalleryImagesPopulator" />
+	<bean id="acceleratorProductGalleryImagesPopulator" parent="defaultProductGalleryImagesPopulator">
+		<property name="imageFormats">
+			<list>
+				<value>superZoom</value>
+				<value>zoom</value>
+				<value>product</value>
+				<value>thumbnail</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="customerEmailContext" class="com.amway.facades.process.email.context.CustomerEmailContext" parent="abstractEmailContext" scope="prototype" >
+		<property name="customerConverter" ref="customerConverter"/>
+	</bean>
+
+	<bean id="forgottenPasswordEmailContext" class="com.amway.facades.process.email.context.ForgottenPasswordEmailContext" parent="customerEmailContext" scope="prototype" >
+		<property name="customerConverter" ref="customerConverter"/>
+	</bean>
+	
+	<bean id="orderNotificationEmailContext" class="com.amway.facades.process.email.context.OrderNotificationEmailContext" parent="abstractEmailContext" scope="prototype" >
+		<property name="orderConverter" ref="orderConverter"/>
+	</bean>
+	
+	<bean id="deliverySentEmailContext" class="com.amway.facades.process.email.context.DeliverySentEmailContext" parent="abstractEmailContext" scope="prototype" >
+		<property name="consignmentConverter" ref="consignmentConverter"/>
+	</bean>
+	
+	<bean id="readyForPickupEmailContext" class="com.amway.facades.process.email.context.ReadyForPickupEmailContext" parent="abstractEmailContext" scope="prototype" >
+		<property name="consignmentConverter" ref="consignmentConverter"/>
+	</bean>
+	
+	<bean id="orderCancelledEmailContext" class="com.amway.facades.process.email.context.OrderCancelledEmailContext" parent="abstractEmailContext" scope="prototype" >
+		<property name="orderConverter" ref="orderConverter"/>
+	</bean>
+	
+	<bean id="orderRefundEmailContext" class="com.amway.facades.process.email.context.OrderRefundEmailContext" parent="abstractEmailContext" scope="prototype" >
+		<property name="orderConverter" ref="orderConverter"/>
+	</bean>
+	<bean id="consignmentCollectionReminderEmailContext" class="com.amway.facades.process.email.context.ConsignmentCollectionReminderEmailContext" parent="abstractEmailContext" scope="prototype">
+        <property name="consignmentConverter" ref="consignmentConverter"/>
+        <property name="formatFactory" ref="formatFactory"/>
+        <property name="customerServiceUncollectedConsignmentStrategy" ref="customerServiceUncollectedConsignmentStrategy" />
+        <property name="orderConverter" ref="orderConverter"/>
+    </bean>
+
+	<bean id="orderPartiallyModifiedEmailContext" class="com.amway.facades.process.email.context.OrderPartiallyModifiedEmailContext" parent="abstractEmailContext" scope="prototype" >
+		<property name="orderConverter" ref="orderConverter"/>
+		<property name="orderEntryConverter" ref="orderEntryConverter"/>
+		<property name="priceDataFactory" ref="priceDataFactory"/>		
+	</bean>
+
+	<bean id="orderPartiallyCanceledEmailContext" class="com.amway.facades.process.email.context.OrderPartiallyCanceledEmailContext" parent="orderPartiallyModifiedEmailContext" scope="prototype" >
+	</bean>
+
+	<bean id="orderPartiallyRefundedEmailContext" class="com.amway.facades.process.email.context.OrderPartiallyRefundedEmailContext" parent="orderPartiallyModifiedEmailContext" scope="prototype" >
+	</bean>
+
+	<bean id="notPickedUpConsignmentCanceledEmailContext" class="com.amway.facades.process.email.context.NotPickedUpConsignmentCanceledEmailContext" parent="abstractEmailContext" scope="prototype" >
+		<property name="consignmentConverter" ref="consignmentConverter"/>
+		<property name="priceDataFactory" ref="priceDataFactory"/>
+	</bean>
+
+	<alias name="yacceleratorSearchPagePointOfServiceDistancePopulator" alias="searchPagePointOfServiceDistancePopulator" />
+	<bean id="yacceleratorSearchPagePointOfServiceDistancePopulator" class="com.amway.facades.storefinder.populators.SearchPagePointOfServiceDistancePopulator" >
+		<property name="pointOfServiceDistanceConverter" ref="pointOfServiceDistanceConverter"/>
+	</bean>
+
+	<bean id="genderData" class="com.amway.facades.product.data.GenderData" scope="prototype"/>
+	
+	<bean id="amwayProductPopulator" class="com.amway.facades.populators.AmwayProductPopulator">
+        <property name="userService" ref="userService"/>
+		<property name="dimensionConverter" ref="amwayDimensionConverter"/>
+    </bean>
+
+
+	<bean id="amwayOrderEntryPopulator" class="com.amway.facades.populators.AmwayOrderEntryPopulator">
+		<property name="userService" ref="userService"/>
+	</bean>
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="orderEntryConverter"/>
+		<property name="add" ref="amwayOrderEntryPopulator"/>
+	</bean>
+
+	<bean id="amwayCartPopulator" class="com.amway.facades.populators.AmwayCartPopulator">
+		<property name="userService" ref="userService"/>
+		<property name="l10NService" ref="l10nService"/>
+	</bean>
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="accExtendedCartConverter"/>
+		<property name="add" ref="amwayCartPopulator"/>
+	</bean>
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="orderConverter"/>
+		<property name="add" ref="amwayCartPopulator"/>
+	</bean>
+
+	<bean id="amwayOrderPricePopulator" class="com.amway.facades.populators.AmwayOrderPricePopulator">
+		<property name="userService" ref="userService"/>
+	</bean>
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="orderConverter"/>
+		<property name="add" ref="amwayOrderPricePopulator"/>
+	</bean>
+
+	<bean parent="modifyPopulatorList">
+    	<property name="list" ref="defaultProductBasicPopulatorList"/>
+        <property name="add" ref="amwayProductPopulator"/>
+    </bean>
+
+    <bean id="amwayProductPricePopulator" class="com.amway.facades.populators.AmwayProductPricePopulator">
+        <property name="commercePriceService" ref="commercePriceService"/>
+        <property name="modelService" ref="modelService"/>
+        <property name="sessionService" ref="sessionService"/>
+        <property name="userService" ref="userService"/>
+    </bean>
+
+	<bean id="retailPriceConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.product.data.ProductData"/>
+		<property name="populators">
+			<list>
+				<ref bean="amwayProductPricePopulator"/>
+			</list>
+		</property>
+	</bean>
+
+    <bean parent="modifyPopulatorList">
+        <property name="list" ref="defaultProductPricePopulatorList"/>
+        <property name="add" ref="amwayProductPricePopulator"/>
+    </bean>
+
+    <bean id="amwayCartPricePopulator" class="com.amway.facades.populators.AmwayCartPricePopulator">
+        <property name="commercePriceService" ref="commercePriceService"/>
+        <property name="modelService" ref="modelService"/>
+		<property name="userService" ref="userService"/>
+		<property name="accountCommerceService" ref="amwayAccountCommerceService"/>
+    </bean>
+
+    <bean parent="modifyPopulatorList">
+        <property name="list" ref="accExtendedCartConverter"/>
+        <property name="add" ref="amwayCartPricePopulator"/>
+    </bean>
+
+	<bean id="amwayProductEntryPopulator" class="com.amway.facades.populators.AmwayProductEntryPopulator">
+		<property name="dimensionConverter" ref="amwayDimensionConverter"/>
+	</bean>
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="defaultOrderEntryProductConverter"/>
+		<property name="add" ref="amwayProductEntryPopulator"/>
+	</bean>
+
+	<bean id="amwayPromotionsPopulator" class="com.amway.facades.populators.AmwayPromotionsPopulator">
+        <property name="commonI18NService" ref="commonI18NService"/>
+        <property name="userService" ref="userService"/>
+	</bean>
+
+    <bean parent="modifyPopulatorList">
+        <property name="list" ref="promotionsConverter"/>
+        <property name="add" ref="amwayPromotionsPopulator"/>
+    </bean>
+	
+    <bean id="amwayCartModificationPopulator" class="com.amway.facades.populators.AmwayCartModificationPopulator">
+        <property name="commercePriceService" ref="commercePriceService"/>
+        <property name="modelService" ref="modelService"/>
+		<property name="userService" ref="userService"/>
+		<property name="accountCommerceService" ref="amwayAccountCommerceService"/>
+    </bean>
+
+    <bean parent="modifyPopulatorList">
+        <property name="list" ref="defaultCartModificationConverter"/>
+        <property name="add" ref="amwayCartModificationPopulator"/>
+    </bean>
+    
+    <alias name="amwayCustomerPopulator" alias="customerPopulator"/>
+    <bean id="amwayCustomerPopulator" class="com.amway.facades.populators.AmwayCustomerPopulator" parent="defaultCustomerPopulator">
+    	<property name="userService" ref="userService"/>
+    </bean>
+
+	<alias name="amwayPriceDataFactory" alias="priceDataFactory"/>
+	<bean id="amwayPriceDataFactory" class="com.amway.facades.product.impl.AmwayPriceDataFactory">
+		<property name="commonI18NService" ref="commonI18NService"/>
+		<property name="i18NService" ref="i18NService"/>
+		<property name="commerceCommonI18NService" ref="commerceCommonI18NService"/>
+	</bean>
+
+	<bean name="amwayKitProductPopulator"
+		class="com.amway.facades.populators.AmwayKitProductPopulator">
+		<property name="productConverter" ref="productConverter" />
+	</bean>
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="productConverter" />
+		<property name="add" ref="amwayKitProductPopulator" />
+	</bean>
+
+    <alias name="amwayWishlistConverter" alias="wishlistConverter"/>
+    <bean id="amwayWishlistConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="com.amway.facades.product.data.WishlistData"/>
+        <property name="populators">
+            <list>
+                <ref bean="wishlistPopulator"/>
+            </list>
+        </property>
+    </bean>
+
+    <alias name="amwayWishlistPopulator" alias="wishlistPopulator"/>
+    <bean id="amwayWishlistPopulator" class="com.amway.facades.populators.AmwayWishlistPopulator">
+        <property name="productConverter" ref="defaultProductConverter"/>
+        <property name="stockConverter" ref="defaultStockConverter" />
+    </bean>
+
+	<alias name="defaultAmwayCartFacade" alias="amwayCartFacade"/>
+	<bean id="defaultAmwayCartFacade" class="com.amway.facades.cart.impl.DefaultAmwayCartFacade" parent="defaultCartFacade">
+		<property name="calculationService" ref="calculationService"/>
+		<property name="modelService" ref="modelService"/>
+	</bean>    
+	<bean id="amwayAccountConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.amway.facades.data.AmwayAccountData"/>
+		<property name="populators">
+			<list>
+				<ref bean="amwayAccountPopulator" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="amwayDimensionConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.amway.facades.product.data.AmwayDimensionData"/>
+		<property name="populators">
+			<list>
+				<ref bean="amwayDimensionPopulator"/>
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultAmwayAccountPopulator" alias="amwayAccountPopulator"/>
+	<bean id="defaultAmwayAccountPopulator" class="com.amway.facades.amwayaccount.populators.AmwayAccountPopulator">
+	</bean>			
+	
+	<bean id="amwayAbstractOrderPopulator" class="com.amway.facades.populators.AmwayAbstractOrderPopulator" parent="baseOrderPopulator">
+		<property name="amwayAccountConverter" ref="amwayAccountConverter" />
+	</bean>
+
+	<bean id="paymentModeData" class="com.amway.facades.order.data.PaymentModeData" scope="prototype"/>
+	
+	<alias name="defaultPaymentModeConverter" alias="paymentModeConverter"/> 
+	<bean id="defaultPaymentModeConverter" parent="abstractPopulatingConverter">
+			<lookup-method name="createTarget" bean="paymentModeData"/>
+			<property name="populators">
+				<list>
+					<ref bean="paymentModePopulator"/>
+				</list>
+			</property>
+	</bean>
+
+
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="orderConverter" />
+		<property name="add" ref="amwayAbstractOrderPopulator" />
+	</bean>
+
+	<bean id="amwayDimensionPopulator" class="com.amway.facades.populators.AmwayDimensionPopulator">
+		<property name="amwayDimensionDescriptorConverter" ref="amwayDimensionDescriptorConverter"/>
+	</bean>
+
+
+	<bean id="amwayDimensionDescriptorConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.amway.facades.product.data.AmwayDimensionDescriptorData"/>
+		<property name="populators">
+			<list>
+				<ref bean="amwayDimensionDescriptorPopulator"/>
+			</list>
+		</property>
+	</bean>	
+	
+	<alias name="defaultAmwayOrderFacade" alias="amwayOrderFacade"/>
+	<bean id="defaultAmwayOrderFacade" class="com.amway.core.facades.order.impl.DefaultAmwayOrderFacade" parent="defaultOrderFacade">
+		<property name="amwayCustomerAccountService" ref="amwayCustomerAccountService"/>
+		<property name="amwayReturnService" ref="returnService"/>
+	</bean>
+
+	<alias name="defaultPaymentModePopulator" alias="paymentModePopulator"/>
+	<bean id="defaultPaymentModePopulator" class="com.amway.facades.populators.PaymentModePopulator" >
+	</bean>
+
+	<bean id="amwayDimensionDescriptorPopulator" class="com.amway.facades.populators.AmwayDimensionDescriptorPopulator">
+		<property name="amwayUnitConverter" ref="amwayUnitConverter"/>
+	</bean>
+
+	<bean id="amwayUnitPopulator" class="com.amway.facades.populators.AmwayUnitPopulator"/>
+
+	<bean id="amwayUnitConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.amway.facades.product.data.AmwayUnitData"/>
+		<property name="populators">
+			<list>
+				<ref bean="amwayUnitPopulator"/>
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultAmwayCheckoutFacade" alias="checkoutFacade"/>
+
+	<alias name="defaultAmwayCheckoutFacade" alias="amwayCheckoutFacade"/>
+	<bean id="defaultAmwayCheckoutFacade"
+		class="com.amway.facades.checkout.impl.DefaultAmwayCheckoutFacade"
+		parent="defaultAcceleratorCheckoutFacade">
+		<property name="paymentModeConverter" ref="paymentModeConverter" />
+		<property name="paymentModeService" ref="paymentModeService" />
+		<property name="amwayCommerceCheckoutService" ref="amwayCommerceCheckoutService" />
+		<property name="paymentService" ref="paymentService" />
+		<property name="modelService" ref="modelService" />
+		<property name="magicSessionDataHelper" ref="magicSessionDataHelper"/>
+		<property name="amwayAccountBalanceService" ref="amwayAccountBalanceService" />
+		
+	</bean>
+
+	<alias name="amwayCommerceSearchResultProductPopulator" alias="commerceSearchResultProductPopulator"/>
+	<bean id="amwayCommerceSearchResultProductPopulator"
+		  class="com.amway.facades.populators.AmwaySearchResultProductPopulator">
+		<property name="commonI18NService" ref="commonI18NService"/>
+		<property name="imageFormatMapping" ref="imageFormatMapping"/>
+		<property name="priceDataFactory" ref="priceDataFactory"/>
+		<property name="productDataUrlResolver" ref="productDataUrlResolver"/>
+		<property name="productFeatureListPopulator" ref="productFeatureListPopulator"/>
+		<property name="productService" ref="productService"/>
+		<property name="stockConverter" ref="stockConverter" />
+		<property name="stockLevelStatusConverter" ref="stockLevelStatusConverter"/>
+		<property name="userService" ref="userService"/>
+		<property name="commercePromotionService" ref="commercePromotionService"/>
+	</bean>	
+	
+	<alias name="defaultAmwayCustomerFacade" alias="amwayCustomerFacade"/>
+	<bean id="defaultAmwayCustomerFacade" class="com.amway.core.facades.customer.impl.DefaultAmwayCustomerFacade" parent="defaultCustomerFacade">
+		<property name="amwayAccountCommerceService" ref="amwayAccountCommerceService"/>
+		<property name="amwayAccountConverter" ref="amwayAccountConverter"/>
+		<property name="amwayCustomerPopulator" ref="amwayCustomerPopulator"/>
+		<property name="magicSessionDataHelper" ref="magicSessionDataHelper"/>
+		<property name="amwayAccountService" ref="amwayAccountService"/>
+	</bean>
+
+	<!--alias name="amwayOmsOrderPopulator" alias="omsOrderPopulator" />
+	<bean id="amwayOmsOrderPopulator"
+		  class="com.amway.facades.populators.AmwayOmsOrderPopulator"
+		  scope="tenant">
+		<property name="orderLineConverter" ref="omsOrderLineConverter" />
+		<property name="paymentInfoConverter" ref="omsPaymentInfoConverter" />
+		<property name="addressConverter" ref="omsAddressConverter" />
+		<property name="customerNameStrategy" ref="customerNameStrategy" />
+		<property name="customerEmailResolutionService" ref="customerEmailResolutionService" />
+		<property name="ondemandPromotionService" ref="onDemandPromotionService" />
+		<property name="ondemandTaxCalculationService" ref="ondemandTaxCalculationService" />
+		<property name="ondemandDeliveryAddressStrategy" ref="ondemandDeliveryAddressStrategy" />
+		<property name="shippingAttributeStrategy" ref="shippingAttributeStrategy" />
+		<property name="impersonationService" ref="impersonationService" />
+		<property name="commerceCommonI18NService" ref="commerceCommonI18NService" />
+		<property name="commonI18NService" ref="commonI18NService" />
+		<property name="omsZoneDeliveryModeValueStrategy" ref="omsZoneDeliveryModeValueStrategy" />
+		<property name="taxCodeStrategy" ref="taxCodeStrategy" />
+		<property name="useBaseStoreForSourcing" value="${oms.useBaseStoreForSourcing}" />
+	</bean-->
+	
+</beans>

@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		   http://www.springframework.org/schema/beans/spring-beans.xsd
+		   http://www.springframework.org/schema/util
+		   http://www.springframework.org/schema/util/spring-util.xsd">
+
+<!-- ############### 1. Get Party Credit Profile Service #####################  -->
+
+	<alias alias="partyCreditProfileService" name="defaultPartyCreditProfileService" />
+	<bean id="defaultPartyCreditProfileService"
+		class="com.amway.integration.cis.dms.creditprofile.services.impl.DefaultPartyCreditProfileService"
+		parent="abstractDmsService">
+		<property name="inputConverter" ref="dmsGetPartyCreditProfileInputConverter" />
+		<property name="outputConverter" ref="dmsGetPartyCreditProfileOutputConverter" />
+		<property name="urlPath" value="${cis.client.dms.getPartyCreditProfile.urlPath}" />
+	</bean>
+
+	<bean id="mockPartyCreditProfileService"
+		class="com.amway.integration.cis.dms.creditprofile.services.mock.impl.MockGetPartyProfileService">
+		<property name="inputConverter" ref="dmsGetPartyCreditProfileInputConverter" />
+		<property name="outputConverter" ref="dmsGetPartyCreditProfileOutputConverter" />
+		<property name="hystrixCommandConfig" ref="dmsCommandConfig" />
+		<property name="ondemandHystrixCommandFactory" ref="ondemandHystrixCommandFactory" />
+		<property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
+		<property name="serviceAvailCode" value="#{configurationService.configuration.getProperty('amwaydms.availablity.code')}"/>
+	</bean>
+<!--
+	<bean id="partyCreditProfileService" parent="abstractMockFactory">
+		<property name="mockInterface" value="com.amway.core.dms.service.DmsService" />
+		<property name="mockMode" value="${cis.client.dms.getPartyCreditProfile.mock}" />
+		<lookup-method name="getDefaultObject" bean="defaultPartyCreditProfileService" />
+		<property name="customMock" ref="mockPartyCreditProfileService"/>
+			<!- - <bean
+				class="com.amway.integration.cis.dms.creditprofile.services.mock.impl.MockGetPartyProfileService"
+				autowire-candidate="false">
+			</bean>
+		</property> - ->
+	</bean>
+	-->
+	<bean id="dmsGetPartyCreditProfileInputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.integration.dms.services.CreditProfileRequest" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonRequestFieldsPopulator" />
+				<ref bean="dmsPartyCreditProfileInputPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="dmsGetPartyCreditProfileOutputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.core.dms.data.CreditProfileResponseData" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonResponseFieldsPopulator" />
+				<ref bean="dmsPartyCreditProfileOutputPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="dmsPartyCreditProfileOutputPopulator"
+		class="com.amway.integration.cis.dms.populators.DmsPartyCreditProfileOutputPopulator"
+		parent="abstractDmsPopulator">
+	</bean>
+	
+	<bean id="dmsPartyCreditProfileInputPopulator"
+		class="com.amway.integration.cis.dms.populators.DmsPartyCreditProfileInputPopulator"
+		parent="abstractDmsPopulator">
+	</bean>
+	
+	<!-- ############### 2. Add Party Credit Profile Service #####################  -->
+	<alias alias="addPartyCreditProfileService" name="defaultAddPartyCreditProfileService" />
+	<bean id="defaultAddPartyCreditProfileService"
+		class="com.amway.integration.cis.dms.creditprofile.services.impl.DefaultAddPartyCreditProfileService"
+		parent="abstractDmsService">
+		<property name="inputConverter" ref="dmsAddPartyCreditProfileInputConverter" />
+		<property name="outputConverter" ref="dmsAddPartyCreditProfileOutputConverter" />
+		<property name="urlPath" value="${cis.client.dms.addPartyCreditProfile.urlPath}" />
+	</bean>
+
+	<bean id="mockAddPartyCreditProfileService"
+		class="com.amway.integration.cis.dms.updateinformation.common.mock.CommonMockService">
+		<property name="inputConverter" ref="dmsAddPartyCreditProfileInputConverter" />
+		<property name="outputConverter" ref="dmsAddPartyCreditProfileOutputConverter" />
+		<property name="hystrixCommandConfig" ref="dmsCommandConfig" />
+		<property name="ondemandHystrixCommandFactory" ref="ondemandHystrixCommandFactory" />
+		<property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
+		<property name="serviceAvailCode" value="#{configurationService.configuration.getProperty('amwaydms.availablity.code')}"/>
+	</bean>
+
+	<bean id="dmsAddPartyCreditProfileInputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.integration.dms.services.AddPartyCreditProfileRequest" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonRequestFieldsPopulator" />
+				<ref bean="dmsAddPartyCreditProfileInputPopulator" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="dmsAddPartyCreditProfileOutputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.core.data.CommonResponseFieldsData" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonResponseFieldsPopulator" />
+			</list>
+		</property>
+	</bean>
+	
+	
+	
+	<bean id="dmsAddPartyCreditProfileInputPopulator"
+		class="com.amway.integration.cis.dms.populators.DmsAddPartyCreditProfileInputPopulator"
+		parent="abstractDmsPopulator">
+	</bean>
+	<!--
+	<bean id="addPartyCreditProfileService" parent="abstractMockFactory">
+		<property name="mockInterface" value="com.amway.core.dms.service.DmsService" />
+		<property name="mockMode" value="${cis.client.dms.addPartyCreditProfile.mock}" />
+		<lookup-method name="getDefaultObject" bean="defaultAddPartyCreditProfileService" />
+		<property name="customMock" ref="mockAddPartyCreditProfileService"/>
+			<!- - <bean
+				class="com.amway.integration.cis.dms.updateinformation.common.mock.CommonMockService"
+				autowire-candidate="false">
+			</bean> - ->
+	</bean>
+	-->
+
+	<!-- ############### 3. Update Party Credit Profile Service #####################  -->
+	<alias alias="updatePartyCreditProfileService" name="defaultUpdatePartyCreditProfileService" />
+	<bean id="defaultUpdatePartyCreditProfileService"
+		class="com.amway.integration.cis.dms.creditprofile.services.impl.DefaultUpdatePartyCreditProfileService"
+		parent="abstractDmsService">
+		<property name="inputConverter" ref="dmsUpdatePartyCreditProfileInputConverter" />
+		<property name="outputConverter" ref="dmsUpdatePartyCreditProfileOutputConverter" />
+		<property name="urlPath" value="${cis.client.dms.updatePartyCreditProfile.urlPath}" />
+	</bean>
+
+	<bean id="mockUpdatePartyCreditProfileService"
+		class="com.amway.integration.cis.dms.updateinformation.common.mock.CommonMockService">
+		<property name="inputConverter" ref="dmsUpdatePartyCreditProfileInputConverter" />
+		<property name="outputConverter" ref="dmsUpdatePartyCreditProfileOutputConverter" />
+		<property name="hystrixCommandConfig" ref="dmsCommandConfig" />
+		<property name="ondemandHystrixCommandFactory" ref="ondemandHystrixCommandFactory" />
+		<property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
+		<property name="serviceAvailCode" value="#{configurationService.configuration.getProperty('amwaydms.availablity.code')}"/>
+	</bean>
+
+	<bean id="dmsUpdatePartyCreditProfileInputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.integration.dms.services.UpdatePartyCreditProfileRequest" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonRequestFieldsPopulator" />
+				<ref bean="dmsUpdatePartyCreditProfileInputPopulator" />
+			</list>
+		</property>
+	</bean>
+		
+	<bean id="dmsUpdatePartyCreditProfileOutputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.core.data.CommonResponseFieldsData" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonResponseFieldsPopulator" />
+			</list>
+		</property>
+	</bean>
+	
+	
+	<bean id="dmsUpdatePartyCreditProfileInputPopulator"
+		class="com.amway.integration.cis.dms.populators.DmsUpdatePartyCreditProfileInputPopulator"
+		parent="abstractDmsPopulator">
+	</bean>
+	
+	<!--
+	<bean id="updatePartyCreditProfileService" parent="abstractMockFactory">
+		<property name="mockInterface" value="com.amway.core.dms.service.DmsService" />
+		<property name="mockMode" value="${cis.client.dms.updatePartyCreditProfile.mock}" />
+		<lookup-method name="getDefaultObject" bean="defaultUpdatePartyCreditProfileService" />
+		<property name="customMock" ref="mockUpdatePartyCreditProfileService"/>
+			<!- - <bean
+				class="com.amway.integration.cis.dms.updateinformation.common.mock.CommonMockService"
+				autowire-candidate="false">
+			</bean>
+		</property> - ->
+	</bean>
+	-->
+
+	<!-- ############### 4. Delete Party Credit Profile Service #####################  -->
+	<alias alias="deletePartyCreditProfileService" name="defaultDeletePartyCreditProfileService" />
+	<bean id="defaultDeletePartyCreditProfileService"
+		class="com.amway.integration.cis.dms.creditprofile.services.impl.DefaultDeletePartyCreditProfileService"
+		parent="abstractDmsService">
+		<property name="inputConverter" ref="dmsDeletePartyCreditProfileInputConverter" />
+		<property name="outputConverter" ref="dmsDeletePartyCreditProfileOutputConverter" />
+		<property name="urlPath" value="${cis.client.dms.deletePartyCreditProfile.urlPath}" />
+	</bean>
+
+	<bean id="mockDeletePartyCreditProfileService"
+		class="com.amway.integration.cis.dms.updateinformation.common.mock.CommonMockService">
+		<property name="inputConverter" ref="dmsDeletePartyCreditProfileInputConverter" />
+		<property name="outputConverter" ref="dmsDeletePartyCreditProfileOutputConverter" />
+		<property name="hystrixCommandConfig" ref="dmsCommandConfig" />
+		<property name="ondemandHystrixCommandFactory" ref="ondemandHystrixCommandFactory" />
+		<property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
+		<property name="serviceAvailCode" value="#{configurationService.configuration.getProperty('amwaydms.availablity.code')}"/>
+	</bean>
+
+	<bean id="dmsDeletePartyCreditProfileInputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.integration.dms.services.DeleteCreditProfileDataRequest" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonRequestFieldsPopulator" />
+				<ref bean="dmsDeletePartyCreditProfileInputPopulator" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="dmsDeletePartyCreditProfileOutputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.core.data.CommonResponseFieldsData" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonResponseFieldsPopulator" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="dmsDeletePartyCreditProfileInputPopulator"
+		class="com.amway.integration.cis.dms.populators.DmsDeletePartyCreditProfileInputPopulator"
+		parent="abstractDmsPopulator">
+	</bean>
+	<!--
+	<bean id="deletePartyCreditProfileService" parent="abstractMockFactory">
+		<property name="mockInterface" value="com.amway.core.dms.service.DmsService" />
+		<property name="mockMode" value="${cis.client.dms.deletePartyCreditProfile.mock}" />
+		<lookup-method name="getDefaultObject" bean="defaultDeletePartyCreditProfileService" />
+		<property name="customMock" ref="mockDeletePartyCreditProfileService"/>
+			<!- - <bean
+				class="com.amway.integration.cis.dms.updateinformation.common.mock.CommonMockService"
+				autowire-candidate="false">
+			</bean>
+		</property> - ->
+	</bean>
+	-->
+	
+</beans>

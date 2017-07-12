@@ -1,0 +1,105 @@
+<div>
+	<table width="100%" cellspacing="0" style="margin:0;padding:0;table-layout:auto;border:1px solid #1E4EBF;">
+		<tbody>
+			<tr>
+				<td  colspan="1" class="structureViewSection">
+					<cockpit code="LanguageSlot" />
+				</td>
+				<td  colspan="1" class="structureViewSection">
+					<cockpit code="CountrySlot" />
+				</td>
+
+				<td  colspan="1" class="structureViewSection">
+					<cockpit code="AmwayInfoLinkSlot" />
+				</td>
+				
+				<td colspan="3" rowspan="2" class="structureViewSection">	
+					<cockpit code="HeaderSideLinks" />
+				</td>
+	
+			</tr>
+			<tr>
+				<td colspan="1"  class="structureViewSection">
+					<cockpit code="SiteLogo" />
+				</td>
+				<td colspan="2" class="structureViewSection">
+					<cockpit code="SearchBox" />
+				</td>
+			</tr>
+			<tr>
+				<td colspan="6" class="structureViewSection">
+					<cockpit code="NavigationBar" />
+				</td>
+			</tr>
+			<tr>
+				<td colspan="6" class="structureViewSection">
+					<cockpit code="HeaderCategorySlot"/>
+				</td>
+			</tr>
+			<tr>
+				<td height="300px" colspan="2" class="structureViewSection" style="vertical-align:middle;">
+					<div>Product</div>
+				</td>
+				<td colspan="2" class="structureViewSection" style="vertical-align:top;">
+					<cockpit code="VariantSelector" />
+					<cockpit code="AddToCart" />
+				</td>
+				<td colspan="2" class="structureViewSection" style="vertical-align:middle;">
+					<div>Promotion Section</div>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="6" class="structureViewSection">
+					<cockpit code="BestSellers" />
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="structureViewSection">
+					<cockpit code="Tab1Title" />
+				</td>
+				<td colspan="1" class="structureViewSection">
+					<cockpit code="Tab2Title" />
+				</td>
+				<td colspan="1" class="structureViewSection">
+					<cockpit code="Tab3Title" />
+				</td>
+				<td colspan="1" class="structureViewSection">
+					<cockpit code="Tab4Title" />
+				</td>
+				<td colspan="1" class="structureViewSection">
+					<cockpit code="Tab5Title" />
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="structureViewSection">
+					<cockpit code="Tab1Content" />
+				</td>
+				<td colspan="1" class="structureViewSection">
+					<cockpit code="Tab2Content" />
+				</td>
+				<td colspan="1" class="structureViewSection">
+					<cockpit code="Tab3Content" />
+				</td>
+				<td colspan="1" class="structureViewSection">
+					<cockpit code="Tab4Content" />
+				</td>
+				<td colspan="1" class="structureViewSection">
+					<cockpit code="Tab5Content" />
+				</td>
+			</tr>
+			<tr>
+				<td colspan="6" class="structureViewSection">
+					<cockpit code="OtherProducts" />
+				</td>
+			</tr>
+			<tr>
+				<td colspan="6" class="structureViewSection">
+					<cockpit code="Footer" />
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<div style="width:100%; border-top: 2px solid #bbb" class="cmsContentEditor">
+		<cockpit code="editor" />
+	</div>
+</div>

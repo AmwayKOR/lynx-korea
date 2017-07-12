@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		   http://www.springframework.org/schema/beans/spring-beans.xsd
+		   http://www.springframework.org/schema/util
+		   http://www.springframework.org/schema/util/spring-util.xsd">
+
+
+<!-- ############### 1. Update Party Tax ID Service #####################  -->
+
+<alias alias="updatePartyTaxIdService" name="defaultUpdatePartyTaxIdService" />
+	<bean id="defaultUpdatePartyTaxIdService"
+		class="com.amway.integration.cis.dms.taxid.services.impl.DefaultUpdatePartyTaxIdService"
+		parent="abstractDmsService">
+		<property name="inputConverter" ref="dmsUpdatePartyTaxIdInputConverter" />
+		<property name="outputConverter" ref="dmsUpdatePartyTaxIdOutputConverter" />
+		<property name="urlPath" value="${cis.client.dms.updatePartyTaxId.urlPath}" />
+	</bean>
+
+	<bean id="mockUpdatePartyTaxIdService"
+		class="com.amway.integration.cis.dms.updateinformation.common.mock.CommonMockService">
+		<property name="inputConverter" ref="dmsUpdatePartyTaxIdInputConverter" />
+		<property name="outputConverter" ref="dmsUpdatePartyTaxIdOutputConverter" />
+		<property name="hystrixCommandConfig" ref="dmsCommandConfig" />
+		<property name="ondemandHystrixCommandFactory" ref="ondemandHystrixCommandFactory" />
+		<property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
+		<property name="serviceAvailCode" value="#{configurationService.configuration.getProperty('amwaydms.availablity.code')}"/>
+	</bean> 
+
+	<bean id="dmsUpdatePartyTaxIdInputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.integration.dms.services.UpdateTaxIdRequest" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonRequestFieldsPopulator" />
+				<ref bean="dmsUpdatePartyTaxIdInputPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="dmsUpdatePartyTaxIdOutputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.core.data.CommonResponseFieldsData" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonResponseFieldsPopulator" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="dmsUpdatePartyTaxIdInputPopulator"
+		class="com.amway.integration.cis.dms.populators.DmsUpdatePartyTaxIdInputPopulator"
+		parent="abstractDmsPopulator">
+	</bean>
+
+	<!--
+	<bean id="updatePartyTaxIdService" parent="abstractMockFactory">
+		<property name="mockInterface" value="com.amway.core.dms.service.DmsService" />
+		<property name="mockMode" value="${cis.client.dms.updatePartyTaxId.mock}" />
+		<lookup-method name="getDefaultObject" bean="defaultUpdatePartyTaxIdService" />
+		<property name="customMock" ref="mockUpdatePartyTaxIdService"/>
+			<!- - <bean
+				class="com.amway.integration.cis.dms.updateinformation.common.mock.CommonMockService"
+				autowire-candidate="false">
+			</bean>
+		</property> - ->
+	</bean>
+	-->
+	
+	<!-- ############### 2. Get Party Tax ID Service #####################  -->
+
+<alias alias="getPartyTaxService" name="defaultGetPartyTaxIdService" />
+	<bean id="defaultGetPartyTaxIdService"
+		class="com.amway.integration.cis.dms.taxid.services.impl.DefaultGetPartyTaxIdService"
+		parent="abstractDmsService">
+		<property name="inputConverter" ref="dmsGetPartyTaxIdInputConverter" />
+		<property name="outputConverter" ref="dmsGetPartyTaxIdOutputConverter" />
+		<property name="urlPath" value="${cis.client.dms.getPartyTaxId.urlPath}" />
+	</bean>
+	
+	<bean id="dmsGetPartyTaxIdInputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.integration.dms.services.GetPartyTaxIdDetailsRequest" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonRequestFieldsPopulator" />
+				<ref bean="dmsGetPartyTaxIdInputPopulator" />
+			</list>
+		</property>
+	</bean>
+	
+		<bean id="dmsGetPartyTaxIdInputPopulator"
+		class="com.amway.integration.cis.dms.populators.DmsGetPartyTaxIdInputPopulator"
+		parent="abstractDmsPopulator">
+	</bean>
+
+	<bean id="dmsGetPartyTaxIdOutputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.core.dms.data.TaxIdDetailsResponseData" />
+		<property name="populators">
+			<list>
+				<ref bean="dmsGetPartyTaxIdOutputPopulator" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="dmsGetPartyTaxIdOutputPopulator"
+		class="com.amway.integration.cis.dms.populators.DmsGetPartyTaxIdOutputPopulator"
+		parent="abstractDmsPopulator">
+	</bean>
+
+
+	<bean id="mockGetPartyTaxIdService"
+		class="com.amway.integration.cis.dms.taxservices.mock.impl.MockGetPartyTaxService">
+		<property name="inputConverter" ref="dmsGetPartyTaxIdInputConverter" />
+		<property name="outputConverter" ref="dmsGetPartyTaxIdOutputConverter" />
+		<property name="hystrixCommandConfig" ref="dmsCommandConfig" />
+		<property name="ondemandHystrixCommandFactory" ref="ondemandHystrixCommandFactory" />
+		<property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
+		<property name="serviceAvailCode" value="#{configurationService.configuration.getProperty('amwaydms.availablity.code')}"/>
+	</bean> 
+<!--
+	<bean id="getPartyTaxService" parent="abstractMockFactory">
+		<property name="mockInterface" value="com.amway.core.dms.service.DmsService" />
+		<property name="mockMode" value="${cis.client.dms.getPartyTaxId.mock}" />
+		<lookup-method name="getDefaultObject" bean="defaultGetPartyTaxIdService" />
+		<property name="customMock" ref="mockGetPartyTaxIdService"/>
+			<!- - <bean
+				class="com.amway.integration.cis.dms.taxservices.mock.impl.MockGetPartyTaxService"
+				autowire-candidate="false">
+			</bean>
+		</property> - ->
+	</bean>
+	-->
+	
+	
+		<!-- ############### 3. ADD Party Tax ID Service #####################  -->
+
+<alias alias="addPartyTaxService" name="defaultAddPartyTaxIdService" />
+	<bean id="defaultAddPartyTaxIdService"
+		class="com.amway.integration.cis.dms.taxid.services.impl.DefaultAddPartyTaxIdService"
+		parent="abstractDmsService">
+		<property name="inputConverter" ref="dmsAddPartyTaxIdInputConverter" />
+		<property name="outputConverter" ref="dmsAddPartyTaxIdOutputConverter" />
+		<property name="urlPath" value="${cis.client.dms.addPartyTaxId.urlPath}" />
+	</bean>
+	
+	<bean id="dmsAddPartyTaxIdInputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.integration.dms.services.AddTaxIdRequest" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonRequestFieldsPopulator" />
+				<ref bean="dmsAddPartyTaxIdInputPopulator" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="dmsAddPartyTaxIdInputPopulator"
+		class="com.amway.integration.cis.dms.populators.DmsAddPartyTaxIdInputPopulator"
+		parent="abstractDmsPopulator">
+	</bean>
+
+	<bean id="dmsAddPartyTaxIdOutputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.amway.core.data.CommonResponseFieldsData" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonResponseFieldsPopulator" />
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="mockAddPartyTaxIdService"
+		class="com.amway.integration.cis.dms.updateinformation.common.mock.CommonMockService">
+		<property name="inputConverter" ref="dmsAddPartyTaxIdInputConverter" />
+		<property name="outputConverter" ref="dmsAddPartyTaxIdOutputConverter" />
+		<property name="hystrixCommandConfig" ref="dmsCommandConfig" />
+		<property name="ondemandHystrixCommandFactory" ref="ondemandHystrixCommandFactory" />
+		<property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
+		<property name="serviceAvailCode" value="#{configurationService.configuration.getProperty('amwaydms.availablity.code')}"/>
+	</bean> 
+	<!--
+	<bean id="addPartyTaxService" parent="abstractMockFactory">
+		<property name="mockInterface" value="com.amway.core.dms.service.DmsService" />
+		<property name="mockMode" value="${cis.client.dms.addPartyTaxId.mock}" />
+		<lookup-method name="getDefaultObject" bean="defaultGetPartyTaxIdService" />
+		<property name="customMock" ref="mockAddPartyTaxIdService"/>
+			<!- - <bean
+				class="com.amway.integration.cis.dms.updateinformation.common.mock.CommonMockService"
+				autowire-candidate="false">
+			</bean>
+		</property> - ->
+	</bean>
+	-->
+</beans>

@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		   http://www.springframework.org/schema/beans/spring-beans.xsd
+		   http://www.springframework.org/schema/util
+		   http://www.springframework.org/schema/util/spring-util.xsd">
+
+<!-- ############### 1. Add Party Personal ID Service #####################  -->
+
+	<alias alias="addPartyPersonalIdService" name="defaultAddPartyPersonalIdService" />
+	<bean id="defaultAddPartyPersonalIdService"
+		class="com.amway.integration.cis.dms.personalid.services.impl.DefaultAddPartyPersonalIdService"
+		parent="abstractDmsService">
+		<property name="inputConverter" ref="dmsAddPartyPersonalIdInputConverter" />
+		<property name="outputConverter" ref="dmsAddPartyPersonalIdOutputConverter" />
+		<property name="urlPath" value="${cis.client.dms.addPartyPersonalId.urlPath}" />
+	</bean>
+
+	<bean id="mockAddPartyPersonalIdService"
+		class="com.amway.integration.cis.dms.updateinformation.common.mock.CommonMockService">
+		<property name="inputConverter" ref="dmsAddPartyPersonalIdInputConverter" />
+		<property name="outputConverter" ref="dmsAddPartyPersonalIdOutputConverter" />
+		<property name="hystrixCommandConfig" ref="dmsCommandConfig" />
+		<property name="ondemandHystrixCommandFactory" ref="ondemandHystrixCommandFactory" />
+		<property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
+		<property name="serviceAvailCode" value="#{configurationService.configuration.getProperty('amwaydms.availablity.code')}"/>
+	</bean> 
+
+	
+	<bean id="dmsAddPartyPersonalIdInputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.integration.dms.services.AddPersonalIdRequest" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonRequestFieldsPopulator" />
+				<ref bean="dmsAddPartyPersonalIdInputPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="dmsAddPartyPersonalIdOutputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.core.data.CommonResponseFieldsData" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonResponseFieldsPopulator" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="dmsAddPartyPersonalIdInputPopulator"
+		class="com.amway.integration.cis.dms.populators.DmsAddPartyPersonalIdInputPopulator"
+		parent="abstractDmsPopulator">
+	</bean>
+	<!--
+	<bean id="addPartyPersonalIdService" parent="abstractMockFactory">
+		<property name="mockInterface" value="com.amway.core.dms.service.DmsService" />
+		<property name="mockMode" value="${cis.client.dms.addPartyPersonalId.mock}" />
+		<lookup-method name="getDefaultObject" bean="defaultAddPartyPersonalIdService" />
+		<property name="customMock" ref="mockAddPartyPersonalIdService"/>
+			<!- - <bean
+				class="com.amway.integration.cis.dms.updateinformation.common.mock.CommonMockService"
+				autowire-candidate="false">
+			</bean>
+		</property> - ->
+	</bean>
+	-->
+<!-- ############### 2. Update Party Personal ID Service #####################  -->
+
+<alias alias="updatePartyPersonalIdService" name="defaultUpdatePartyPersonalIdService" />
+	<bean id="defaultUpdatePartyPersonalIdService"
+		class="com.amway.integration.cis.dms.personalid.services.impl.DefaultUpdatePartyPersonalIdService"
+		parent="abstractDmsService">
+		<property name="inputConverter" ref="dmsUpdatePartyPersonalIdInputConverter" />
+		<property name="outputConverter" ref="dmsUpdatePartyPersonalIdOutputConverter" />
+		<property name="urlPath" value="${cis.client.dms.updatePartyPersonalId.urlPath}" />
+	</bean>
+
+	<bean id="mockUpdatePartyPersonalIdService" class="com.amway.integration.cis.dms.updateinformation.common.mock.CommonMockService">
+		<property name="inputConverter" ref="dmsUpdatePartyPersonalIdInputConverter" />
+		<property name="outputConverter" ref="dmsUpdatePartyPersonalIdOutputConverter" />
+		<property name="hystrixCommandConfig" ref="dmsCommandConfig" />
+		<property name="ondemandHystrixCommandFactory" ref="ondemandHystrixCommandFactory" />
+		<property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
+		<property name="serviceAvailCode" value="#{configurationService.configuration.getProperty('amwaydms.availablity.code')}"/>
+	</bean> 
+
+	<bean id="dmsUpdatePartyPersonalIdInputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.integration.dms.services.UpdatePersonalIdRequest" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonRequestFieldsPopulator" />
+				<ref bean="dmsUpdatePartyPersonalIdInputPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="dmsUpdatePartyPersonalIdOutputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.core.data.CommonResponseFieldsData" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonResponseFieldsPopulator" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="dmsUpdatePartyPersonalIdInputPopulator"
+		class="com.amway.integration.cis.dms.populators.DmsUpdatePartyPersonalIdInputPopulator"
+		parent="abstractDmsPopulator">
+	</bean>
+	<!--
+	<bean id="updatePartyPersonalIdService" parent="abstractMockFactory">
+		<property name="mockInterface" value="com.amway.core.dms.service.DmsService" />
+		<property name="mockMode" value="${cis.client.dms.updatePartyPersonalId.mock}" />
+		<lookup-method name="getDefaultObject" bean="defaultUpdatePartyPersonalIdService" />
+		<property name="customMock" ref="mockUpdatePartyPersonalIdService"/>
+			<!- - <bean
+				class="com.amway.integration.cis.dms.updateinformation.common.mock.CommonMockService"
+				autowire-candidate="false">
+			</bean>
+		</property> - ->
+	</bean>
+	-->
+<!-- ############### 3. Delete Party Personal ID Service #####################  -->
+
+<alias alias="deletePartyPersonalIdService" name="defaultDeletePartyPersonalIdService" />
+	<bean id="defaultDeletePartyPersonalIdService"
+		class="com.amway.integration.cis.dms.personalid.services.impl.DefaultDeletePartyPersonalIdService"
+		parent="abstractDmsService">
+		<property name="inputConverter" ref="dmsDeletePartyPersonalIdInputConverter" />
+		<property name="outputConverter" ref="dmsDeletePartyPersonalIdOutputConverter" />
+		<property name="urlPath" value="${cis.client.dms.deletePartyPersonalId.urlPath}" />
+	</bean>
+	<bean id="mockDeletePartyPersonalIdService" class="com.amway.integration.cis.dms.updateinformation.common.mock.CommonMockService">
+		<property name="inputConverter" ref="dmsDeletePartyPersonalIdInputConverter" />
+		<property name="outputConverter" ref="dmsDeletePartyPersonalIdOutputConverter" />
+		<property name="hystrixCommandConfig" ref="dmsCommandConfig" />
+		<property name="ondemandHystrixCommandFactory" ref="ondemandHystrixCommandFactory" />
+		<property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
+		<property name="serviceAvailCode" value="#{configurationService.configuration.getProperty('amwaydms.availablity.code')}"/>
+	</bean>
+
+	<bean id="dmsDeletePartyPersonalIdInputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.integration.dms.services.DeletePersonalIdRequest" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonRequestFieldsPopulator" />
+				<ref bean="dmsDeletePartyPersonalIdInputPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="dmsDeletePartyPersonalIdOutputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.core.data.CommonResponseFieldsData" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonResponseFieldsPopulator" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="dmsDeletePartyPersonalIdInputPopulator"
+		class="com.amway.integration.cis.dms.populators.DmsDeletePartyPersonalIdInputPopulator"
+		parent="abstractDmsPopulator">
+	</bean>
+	<!--
+	<bean id="deletePartyPersonalIdService" parent="abstractMockFactory">
+		<property name="mockInterface" value="com.amway.core.dms.service.DmsService" />
+		<property name="mockMode" value="${cis.client.dms.deletePartyPersonalId.mock}" />
+		<lookup-method name="getDefaultObject" bean="defaultDeletePartyPersonalIdService" />
+		<property name="customMock" ref="mockDeletePartyPersonalIdService"/>
+			<!- - <bean
+				class="com.amway.integration.cis.dms.updateinformation.common.mock.CommonMockService"
+				autowire-candidate="false">
+			</bean>
+		</property> - ->
+	</bean>
+	-->
+</beans>

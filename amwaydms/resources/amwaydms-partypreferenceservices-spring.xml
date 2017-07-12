@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		   http://www.springframework.org/schema/beans/spring-beans.xsd
+		   http://www.springframework.org/schema/util
+		   http://www.springframework.org/schema/util/spring-util.xsd">
+		   
+		   <!--##########  Get Preference List Service  ##########-->		   
+	
+	<alias name="defaultGetPreferenceListService" alias="getPreferenceListService" />
+	<bean id="defaultGetPreferenceListService"
+		class="com.amway.integration.cis.dms.partypreferenceservice.impl.DefaultGetPreferenceListService"
+		parent="abstractDmsService">
+		<property name="inputConverter" ref="dmsGetPreferenceListInputConverter" />
+		<property name="outputConverter" ref="dmsGetPreferenceListOutputConverter" />
+		<property name="urlPath" value="${cis.client.dms.getPreferenceList.urlPath}" />
+	</bean>
+		
+	<bean id="dmsGetPreferenceListInputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.integration.dms.services.GetPrefrenceListRequest" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonRequestFieldsPopulator" />
+				<ref bean="dmsGetPreferenceListInputPopulator" />
+			</list>
+		</property>
+	</bean>
+	<bean id="dmsGetPreferenceListInputPopulator"
+		class="com.amway.integration.cis.dms.populators.DmsGetPreferenceListInputPopulator">
+	</bean>
+		
+	 <bean id="dmsGetPreferenceListOutputConverter" parent="abstractPopulatingConverter">
+		  <property name="targetClass" value="com.amway.integration.dms.services.GetPreferenceResponse" />
+		  <property name="populators">
+		   <list>
+		    <ref bean="amwayCommonResponseFieldsPopulator" />
+				<ref bean="dmsGetPreferenceListOutputPopulator" />
+		   </list>
+		  </property>
+	  </bean>
+	  <bean id="dmsGetPreferenceListOutputPopulator"
+		class="com.amway.integration.cis.dms.populators.DmsGetPreferenceListOutputPopulator">
+	</bean>
+
+	<bean id="mockGetPreferenceListService" class="com.amway.integration.cis.dms.partypreferenceservice.mock.impl.MockGetPreferenceListService">
+		<property name="inputConverter" ref="dmsGetPreferenceListInputConverter"/>
+		<property name="outputConverter" ref="dmsGetPreferenceListOutputConverter"/>
+		<property name="hystrixCommandConfig" ref="dmsCommandConfig" />
+		<property name="ondemandHystrixCommandFactory" ref="ondemandHystrixCommandFactory" />
+		<property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
+		<property name="serviceAvailCode" value="#{configurationService.configuration.getProperty('amwaydms.availablity.code')}"/>
+	</bean>
+	<!--
+	<bean id="getPreferenceListService" parent="abstractMockFactory">
+		<property name="mockInterface" value="com.amway.core.dms.service.DmsService"/>
+		<property name="mockMode" value="${cis.client.dms.getPartyPreferenceList.mock}"/>
+		<lookup-method name="getDefaultObject" bean="defaultGetPreferenceListService"/>
+		<property name="customMock" ref="mockGetPreferenceListService"/>
+	</bean>
+	
+	-->
+	<!--##########  Get Party Preference Service  ##########-->		   
+	
+	<alias name="defaultGetPartyPreferenceService" alias="getPartyPreferenceService" />
+	<bean id="defaultGetPartyPreferenceService"
+		class="com.amway.integration.cis.dms.partypreferenceservice.impl.DefaultGetPartyPreferenceService"
+		parent="abstractDmsService">
+		<property name="inputConverter" ref="dmsGetPartyPreferenceInputConverter" />
+		<property name="outputConverter" ref="dmsGetPartyPreferenceOutputConverter" />
+		<property name="urlPath" value="${cis.client.dms.getPartyPreference.urlPath}" />
+	</bean>
+		
+	<bean id="dmsGetPartyPreferenceInputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.integration.dms.services.GetPartyPrefrenceListRequest" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonRequestFieldsPopulator" />
+				<ref bean="dmsGetPartyPreferenceInputPopulator" />
+			</list>
+		</property>
+	</bean>
+	<bean id="dmsGetPartyPreferenceInputPopulator"
+		class="com.amway.integration.cis.dms.populators.DmsGetPartyPreferenceInputPopulator">
+	</bean>
+		
+	 <bean id="dmsGetPartyPreferenceOutputConverter" parent="abstractPopulatingConverter">
+		  <property name="targetClass" value="com.amway.integration.dms.services.GetPartyPreferenceResponse" />
+		  <property name="populators">
+		   <list>
+		    <ref bean="amwayCommonResponseFieldsPopulator" />
+				<ref bean="dmsGetPartyPreferenceOutputPopulator" />
+		   </list>
+		  </property>
+	  </bean>
+	  <bean id="dmsGetPartyPreferenceOutputPopulator"
+		class="com.amway.integration.cis.dms.populators.DmsGetPartyPreferenceOutputPopulator">
+	</bean>
+
+
+	<bean id="mockGetPartyPreferenceService" class="com.amway.integration.cis.dms.partypreferenceservice.mock.impl.MockGetPartyPreferenceService">
+		<property name="inputConverter" ref="dmsGetPartyPreferenceInputConverter"/>
+		<property name="outputConverter" ref="dmsGetPartyPreferenceOutputConverter"/>
+		<property name="hystrixCommandConfig" ref="dmsCommandConfig" />
+		<property name="ondemandHystrixCommandFactory" ref="ondemandHystrixCommandFactory" />
+		<property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
+		<property name="serviceAvailCode" value="#{configurationService.configuration.getProperty('amwaydms.availablity.code')}"/>
+	</bean>
+<!--
+	<bean id="getPartyPreferenceService" parent="abstractMockFactory">
+		<property name="mockInterface" value="com.amway.core.dms.service.DmsService"/>
+		<property name="mockMode" value="${cis.client.dms.getPartyPreference.mock}"/>
+		<lookup-method name="getDefaultObject" bean="defaultGetPartyPreferenceService"/>
+		<property name="customMock" ref="mockGetPartyPreferenceService"/>
+	</bean>
+
+ -->
+
+	<!-- <alias alias="addPartyEcommService" name="addPartyEcommServiceFactory" />
+	<bean id="addPartyEcommServiceFactory" parent="abstractMockFactory">
+		<property name="mockInterface" value="com.amway.core.dms.service.DmsService" />
+		<property name="mockMode" value="${cis.client.dms.addPartyEcommService.mock}" />
+		<lookup-method name="getDefaultObject" bean="defaultAddPartyEcommService" />
+		<property name="customMock">
+			<bean
+				class="com.amway.integration.cis.dms.ecommservice.mock.impl.MockAddPartyEcommService"
+				autowire-candidate="false">
+			</bean>
+		</property>
+	</bean> -->
+	
+	<!--##########  Add Party Preference Service  ##########-->		   
+	
+	<alias name="defaultAddPartyPreferenceService" alias="addPartyPreferenceService" />
+	<bean id="defaultAddPartyPreferenceService"
+		class="com.amway.integration.cis.dms.partypreferenceservice.impl.DefaultAddPartyPreferenceService"
+		parent="abstractDmsService">
+		<property name="inputConverter" ref="dmsAddPartyPreferenceInputConverter" />
+		<property name="outputConverter" ref="dmsAddPartyPreferenceOutputConverter" />
+		<property name="urlPath" value="${cis.client.dms.addPartyPreference.urlPath}" />
+	</bean>
+		
+	<bean id="dmsAddPartyPreferenceInputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.integration.dms.services.CreatePartyPreferenceRequest" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonRequestFieldsPopulator" />
+				<ref bean="dmsAddPartyPreferenceInputPopulator" />
+			</list>
+		</property>
+	</bean>
+	<bean id="dmsAddPartyPreferenceInputPopulator"
+		class="com.amway.integration.cis.dms.populators.DmsAddPartyPreferenceInputPopulator">
+	</bean>
+		
+	 <bean id="dmsAddPartyPreferenceOutputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.core.data.CommonResponseFieldsData" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonResponseFieldsPopulator" />
+			</list>
+		</property>
+	</bean>
+
+ 	<bean id="mockAddPartyPreferenceService" class="com.amway.integration.cis.dms.partypreferenceservice.mock.impl.MockAddPartyPreferenceService">
+		<property name="inputConverter" ref="dmsAddPartyPreferenceInputConverter"/>
+		<property name="outputConverter" ref="dmsAddPartyPreferenceOutputConverter"/>
+		<property name="hystrixCommandConfig" ref="dmsCommandConfig" />
+		<property name="ondemandHystrixCommandFactory" ref="ondemandHystrixCommandFactory" />
+		<property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
+		<property name="serviceAvailCode" value="#{configurationService.configuration.getProperty('amwaydms.availablity.code')}"/>
+	</bean>
+	<!--
+	<bean id="addPartyPreferenceService" parent="abstractMockFactory">
+		<property name="mockInterface" value="com.amway.core.dms.service.DmsService"/>
+		<property name="mockMode" value="${cis.client.dms.addPartyPreference.mock}"/>
+		<lookup-method name="getDefaultObject" bean="defaultAddPartyPreferenceService"/>
+		<property name="customMock" ref="mockAddPartyPreferenceService"/>
+	</bean>
+ -->
+ 
+ <!--##########  Update Party Preference Service  ##########-->		   
+	
+	<alias name="defaultUpdatePartyPreferenceService" alias="updatePartyPreferenceService" />
+	<bean id="defaultUpdatePartyPreferenceService"
+		class="com.amway.integration.cis.dms.partypreferenceservice.impl.DefaultUpdatePartyPreferenceService"
+		parent="abstractDmsService">
+		<property name="inputConverter" ref="dmsUpdatePartyPreferenceInputConverter" />
+		<property name="outputConverter" ref="dmsUpdatePartyPreferenceOutputConverter" />
+		<property name="urlPath" value="${cis.client.dms.updatePartyPreference.urlPath}" />
+	</bean>
+		
+	<bean id="dmsUpdatePartyPreferenceInputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.integration.dms.services.UpdatePartyPreferenceRequest" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonRequestFieldsPopulator" />
+				<ref bean="dmsUpdatePartyPreferenceInputPopulator" />
+			</list>
+		</property>
+	</bean>
+	<bean id="dmsUpdatePartyPreferenceInputPopulator"
+		class="com.amway.integration.cis.dms.populators.DmsUpdatePartyPreferenceInputPopulator">
+	</bean>
+		
+	 <bean id="dmsUpdatePartyPreferenceOutputConverter" parent="abstractPopulatingConverter">
+		 <property name="targetClass"
+			value="com.amway.core.data.CommonResponseFieldsData" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonResponseFieldsPopulator" />
+			</list>
+		</property>
+	</bean>
+
+ <bean id="mockUpdatePartyPreferenceService" class="com.amway.integration.cis.dms.partypreferenceservice.mock.impl.MockUpdatePartyPreferenceService">
+		<property name="inputConverter" ref="dmsUpdatePartyPreferenceInputConverter"/>
+		<property name="outputConverter" ref="dmsUpdatePartyPreferenceOutputConverter"/>
+		<property name="hystrixCommandConfig" ref="dmsCommandConfig" />
+		<property name="ondemandHystrixCommandFactory" ref="ondemandHystrixCommandFactory" />
+		<property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
+		<property name="serviceAvailCode" value="#{configurationService.configuration.getProperty('amwaydms.availablity.code')}"/>
+	</bean>
+<!--
+	<bean id="updatePartyPreferenceService" parent="abstractMockFactory">
+		<property name="mockInterface" value="com.amway.core.dms.service.DmsService"/>
+		<property name="mockMode" value="${cis.client.dms.updatePartyPreference.mock}"/>
+		<lookup-method name="getDefaultObject" bean="defaultUpdatePartyPreferenceService"/>
+		<property name="customMock" ref="mockUpdatePartyPreferenceService"/>
+	</bean>
+ -->
+ 
+	</beans>

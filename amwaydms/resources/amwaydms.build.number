@@ -1,0 +1,9 @@
+#Ant properties
+#Mon Jun 23 17:52:49 CEST 2014
+builddate=20140623 1752
+description=amwaydms
+name=amwaydms
+releasedate=20160304 1912
+vendor=hybris
+version=6.0.0.0-SNAPSHOT
+version.api=6.0.0

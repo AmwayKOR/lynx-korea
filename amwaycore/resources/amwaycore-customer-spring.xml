@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2013 hybris AG All rights reserved. 
+	This software is the confidential and proprietary information of hybris ("Confidential 
+	Information"). You shall not disclose such Confidential Information and shall 
+	use it only in accordance with the terms of the license agreement you entered 
+	into with hybris. -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<alias name="defaultAmwayAccountDao" alias="amwayAccountDao" />
+	<bean id="defaultAmwayAccountDao"
+		class="com.amway.core.account.dao.impl.DefaultAmwayAccountDao" >
+		<property name="sessionService" ref="sessionService"/>
+		<property name="userService" ref="userService"/>
+	</bean>	
+
+    <bean id="amwayProfileService" class="com.amway.core.account.service.impl.MockAmwayProfileService" autowire-candidate="false">
+    </bean>
+
+
+	<alias name="defaultAmwayAccountService" alias="amwayAccountService" />
+	<bean id="defaultAmwayAccountService"
+		class="com.amway.core.account.service.impl.DefaultAmwayAccountService">
+		<property name="amwayAccountDao" ref="amwayAccountDao" />
+		<property name="baseStoreService" ref="baseStoreService" />
+		<property name="baseSiteService" ref="baseSiteService" />
+		<property name="amwayAccountCommerceService" ref="amwayAccountCommerceService" />
+		<property name="amwayProfileService" ref="amwayProfileService" />
+		<property name="sessionService" ref="sessionService" />
+	</bean>
+
+	<alias name="defaultAmwayAccountHierarchyService" alias="amwayAccountHierarchyService" />
+	<bean id="defaultAmwayAccountHierarchyService"
+		class="com.amway.core.account.hierarchy.service.impl.DefaultAmwayAccountHierarchyService">
+		<property name="baseStoreService" ref="baseStoreService" />
+		<property name="baseSiteService" ref="baseSiteService" />
+		<property name="losAccountService" ref="losAccountService" />
+		<property name="losAccountDetailService" ref="losAccountDetailService" />
+		<property name="configurationService" ref="configurationService" />
+	</bean>	
+	
+
+     <bean id="losAccountService" class="com.amway.core.account.service.impl.MockLosAccountService" autowire-candidate="false">
+     </bean>
+
+     <bean id="losAccountDetailService" class="com.amway.core.account.service.impl.MockLosAccountDetailService" autowire-candidate="false">
+     </bean>
+     
+      <bean id="bonusStatementService" class="com.amway.core.account.service.impl.MockLosBonusStatementService" autowire-candidate="false">
+       </bean>
+
+       <bean id="bonusAdjustmentService" class="com.amway.core.account.service.impl.MockOrderBonusService" autowire-candidate="false" >
+        </bean>
+
+	<alias name="defaultAmwayAccountCommerceService" alias="amwayAccountCommerceService"/>
+	<bean id="defaultAmwayAccountCommerceService" class="com.amway.core.service.impl.DefaultAmwayAccountCommerceService">
+    	<property name="amwayAccountService" ref="amwayAccountService"/>
+    	<property name="configurationService" ref="configurationService"/>
+    	<property name="sessionService" ref="sessionService"/>
+    	<property name="userService" ref="userService"/>
+    	<property name="modelService" ref="modelService"/>
+    	<property name="cartService" ref="cartService"/>
+    	<property name="calculationService" ref="calculationService"/>
+    	<property name="addressReverseConverter" ref="addressReverseConverter"/>
+    	<property name="cmsSiteService" ref="cmsSiteService"/>
+    	<property name="losAccountService" ref="losAccountService" />
+    	<property name="baseStoreService" ref="baseStoreService" />
+		<property name="losAccountDetailService" ref="losAccountDetailService" />
+		<property name="enumerationService" ref="enumerationService"/>
+		<property name="losBonusStatementService" ref="bonusStatementService" />
+		<property name="bonusAdjustmentService" ref="bonusAdjustmentService" />
+		<property name="amwayBonusPeriodService" ref="bonusPeriodService" />
+		<property name="commercePriceService" ref="commercePriceService" />		
+		<property name="amwayAccountDao" ref="amwayAccountDao" />
+    </bean>
+
+
+	<alias name="defaultAsynLosAccountDetailTask" alias="asynLosAccountDetailTask"/>
+	<bean id="defaultAsynLosAccountDetailTask" class="com.amway.core.los.async.service.LosAsynTask" scope="prototype">
+    	<property name="losService" ref="losAccountDetailService"/>
+    	<property name="baseSiteService" ref="baseSiteService"/>
+    </bean>
+    
+    <alias name="defaultAsynLosTaskExecutor" alias="asynLosTaskExecutor"/>
+    <bean id="defaultAsynLosTaskExecutor"
+		class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+		<property name="corePoolSize" value="5" />
+		<property name="maxPoolSize" value="10" />
+		<property name="WaitForTasksToCompleteOnShutdown" value="true" />
+	</bean>
+</beans>

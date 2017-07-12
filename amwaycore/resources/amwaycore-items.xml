@@ -1,0 +1,2727 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2014 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<collectiontypes>
+		<collectiontype code="AmwayChannelCollection"
+			elementtype="SalesApplication" autocreate="true" generate="true"
+			type="collection" />
+		<collectiontype code="AmwayCartTypeCollection"
+			elementtype="AmwayCartType" autocreate="true" generate="true" type="list" />
+		<collectiontype code="orderStatusTypeList" elementtype="OrderStatus" autocreate="true" generate="true" type="list" />
+	</collectiontypes>
+
+	<enumtypes>
+
+		<enumtype code="RefundReason" autocreate="false" generate="false"
+			dynamic="true">
+			<value code="SatisfactionGuaranteed" />
+			<value code="DeliveryError" />
+			<value code="MerchandizeDamaged" />
+			<value code="DamagedDuringTransport" />
+			<value code="Accident" />
+			<value code="ErrorCode" />
+			<value code="Stolen" />
+			<value code="WrongProduct" />
+			<value code="TypingError" />
+			<value code="DuplicatedOrder" />
+			<value code="ExcessiveStock" />
+			<value code="Others" />
+		</enumtype>
+
+		<enumtype generate="true" code="ServiceTypeEnum" autocreate="true"
+			dynamic="true">
+			<value code="MEMBERSHIP_FEE" />
+			<value code="RENEWAL" />
+			<value code="LATE_RENEWAL" />
+		</enumtype>
+
+        <enumtype code="ProductReferenceTypeEnum" autocreate="false" generate="true">
+            <value code="COMPATIBLE_ITEMS"/>
+        </enumtype>
+
+        <enumtype code="InStockStatus" autocreate="false" generate="true">
+            <value code="shipElseTemporaryNotAvailable" />
+            <value code="shipElseNoLongerAvailable" />
+            <value code="shipElseBackOrder" />
+            <value code="noLongerAvailable" />
+            <value code="backOrder" />
+        </enumtype>
+
+		<enumtype code="StockLevelStatus" generate="true" autocreate="false" dynamic="true">
+			<description>Flag for real stock level status</description>
+			<value code="noLongerAvailable" />
+		</enumtype>
+
+		<enumtype code="AmwayBusinessNature" autocreate="true"
+				  generate="true">
+			<value code="AmwayBusinessNature_1">
+				<description>Amway Business Owner</description>
+			</value>
+			<value code="AmwayBusinessNature_4">
+				<description>Customer / Client</description>
+			</value>
+			<value code="AmwayBusinessNature_7">
+				<description>Employee</description>
+			</value>
+		</enumtype>
+
+		<enumtype code="AmwayAccountStatus" autocreate="true"
+				  generate="true">
+			<value code="ACTIVE" />
+			<value code="INACTIVE" />
+			<value code="OTP_VERIFIED" />
+			<value code="PAYMENT_CAPTURED" />
+			<value code="RENEWAL_PENDING" />
+		</enumtype>
+
+		<enumtype code="AmwayAccountBalanceType" autocreate="true"
+			generate="true">
+			<value code="CREDIT" />
+			<value code="MONETARY" />
+		</enumtype>
+
+		<enumtype code="AmwayPrinterType" autocreate="true"
+				  generate="true">
+			<value code="RECEIPT" />
+			<value code="REPORT" />
+		</enumtype>
+
+		<enumtype generate="true" code="SegmentationLevelTypeEnum"
+				  autocreate="true" dynamic="true">
+			<value code="SegmentationLevelTypeEnum_2" />
+			<value code="SegmentationLevelTypeEnum_4" />
+			<value code="SegmentationLevelTypeEnum_6" />
+			<value code="SegmentationLevelTypeEnum_9" />
+		</enumtype>
+
+		<enumtype generate="true" code="QualificationLevelTypeEnum"
+			autocreate="true" dynamic="true">
+			<value code="QualificationLevelTypeEnum_203" />
+			<value code="QualificationLevelTypeEnum_206" />
+			<value code="QualificationLevelTypeEnum_209" />
+			<value code="QualificationLevelTypeEnum_212" />
+			<value code="QualificationLevelTypeEnum_215" />
+			<value code="QualificationLevelTypeEnum_218" />
+			<value code="QualificationLevelTypeEnum_221" />
+			<value code="QualificationLevelTypeEnum_223" />
+			<value code="QualificationLevelTypeEnum_305" />
+			<value code="QualificationLevelTypeEnum_310" />
+			<value code="QualificationLevelTypeEnum_320" />
+			<value code="QualificationLevelTypeEnum_330" />
+			<value code="QualificationLevelTypeEnum_340" />
+			<value code="QualificationLevelTypeEnum_342" />
+			<value code="QualificationLevelTypeEnum_345" />
+			<value code="QualificationLevelTypeEnum_350" />
+			<value code="QualificationLevelTypeEnum_365" />
+			<value code="QualificationLevelTypeEnum_367" />
+			<value code="QualificationLevelTypeEnum_370" />
+			<value code="QualificationLevelTypeEnum_375" />
+			<value code="QualificationLevelTypeEnum_380" />
+			<value code="QualificationLevelTypeEnum_385" />
+			<value code="QualificationLevelTypeEnum_390" />
+			<value code="QualificationLevelTypeEnum_395" />
+			<value code="QualificationLevelTypeEnum_400" />
+			<value code="QualificationLevelTypeEnum_405" />
+			<value code="QualificationLevelTypeEnum_410" />
+			<value code="QualificationLevelTypeEnum_415" />
+			<value code="QualificationLevelTypeEnum_420" />
+			<value code="QualificationLevelTypeEnum_425" />
+			<value code="QualificationLevelTypeEnum_430" />
+			<value code="QualificationLevelTypeEnum_435" />
+			<value code="QualificationLevelTypeEnum_440" />
+			<value code="QualificationLevelTypeEnum_445" />
+			<value code="QualificationLevelTypeEnum_450" />
+			<value code="QualificationLevelTypeEnum_455" />
+			<value code="QualificationLevelTypeEnum_460" />
+			<value code="QualificationLevelTypeEnum_465" />
+			<value code="QualificationLevelTypeEnum_470" />
+		</enumtype>
+
+
+		<enumtype generate="true" code="ProductAttributesTypeEnum"
+			autocreate="true" dynamic="true">
+			<value code="INFORMATION" />
+			<value code="BENEFITS" />
+			<value code="INGREDIENTS" />
+			<value code="INDICATIONS" />
+			<value code="RECOMMENDATIONS" />
+			<value code="IDEALFOR" />
+			<value code="MATERIALS" />
+			<value code="INSTRUCTIONS" />
+			<value code="DETAILS" />
+			<value code="FAQ" />
+			<value code="COMPETITIVEINFO" />
+			<value code="RETAILINGINFO" />
+		</enumtype>
+
+		<enumtype generate="true" code="AmwayPeriodTypeEnum"
+			autocreate="true" dynamic="true">
+			<value code="ACTIVE" />
+			<value code="INACTIVE" />
+			<value code="CLOSED" />
+		</enumtype>
+
+		<enumtype code="CustomerType" generate="false" autocreate="false"
+			dynamic="true">
+			<value code="CustomerType_1">
+				<description>Person</description>
+			</value>
+			<value code="CustomerType_2">
+				<description>Organization</description>
+			</value>
+		</enumtype>
+
+		<enumtype code="SalesApplication" generate="false"
+			autocreate="false" dynamic="true">
+			<value code="pos" />
+		</enumtype>
+
+		<enumtype code="AmwayCartType" generate="true" autocreate="true"
+			dynamic="true">
+			<value code="web" />
+			<value code="pos" />
+			<value code="webgroup" />
+			<value code="webrecurring" />
+			<value code="replacement" />
+		</enumtype>
+		<enumtype code="OrderStatus" autocreate="false" generate="true"
+			dynamic="true">
+			<value code="REPLACED" />
+			<value code="PARTIAL_REPLACED" />
+			<value code="RETURNED" />
+			<value code="PARTIAL_RETURNED" />
+			<value code="RETURNED_AND_REPLACE" />
+			<value code="PAYMENT_PART_PAID" />
+            <value code="ACTIVE" />
+            <value code="LOCKED" />
+		</enumtype>
+
+		<enumtype code="PaymentTransactionType" autocreate="false"
+			generate="false">
+			<value code="EXTERNAL_CAPTURE" />
+			<value code="FRAUD_DECISION" />
+		</enumtype>
+
+		<enumtype code="AmwayInfraAvlStatus" autocreate="true"
+			generate="true">
+			<description>Amway Infrastructure availability status</description>
+			<value code="ACTIVE" />
+			<value code="INACTIVE" />
+			<value code="DISABLED" />
+		</enumtype>
+
+		<enumtype code="CreditCardType" autocreate="false" generate="false">
+			<value code="discover" />
+			<value code="elo" />
+			<value code="hipercard" />
+		</enumtype>
+
+		<enumtype code="ReturnStatus" autocreate="false" generate="false"
+			dynamic="true">
+			<value code="DAMAGED" />
+		</enumtype>
+		<enumtype code="OrderFailureStatusTypeEnum" autocreate="true"
+			generate="true">
+			<value code="CREATED" />
+			<value code="RUNNING" />
+			<value code="WAITING" />
+			<value code="SUCCEEDED" />
+			<value code="FAILED" />
+			<value code="ERROR" />
+		</enumtype>
+		<enumtype code="LosExportStatus" autocreate="true" generate="true">
+			<value code="LOSNOTUPDATED"/>
+			<value code="LOSUPDATED"/>
+			<value code="LOSFAILED"/>
+		</enumtype>
+
+		<enumtype code="AmwayPaymentModeGroupType">
+			<description>This enumeration denotes payment mode group type.</description>
+			<value code="OFFLINE_WITH_VERIFICATION" />
+			<value code="OFFLINE_WITHOUT_VERIFICATION" />
+			<value code="ONLINE_PAYMENT" />
+		</enumtype>
+
+		<enumtype generate="true" code="Citizenship" autocreate="true">
+			<value code="PERMANENT_CITIZEN">
+				<description>Permanent Citizen</description>
+			</value>
+			<value code="PERMANENT_RESIDENT">
+				<description>Permanent Resident</description>
+			</value>
+			<value code="NOT_CITIZEN">
+				<description>Not a citizen</description>
+			</value>
+		</enumtype>
+
+		<enumtype generate="true" code="SponsorType" autocreate="true">
+			<value code="LOCAL" />
+			<value code="INTERNATIONAL" />
+			<value code="MULTIPLE_BUSINESS"/>
+		</enumtype>
+
+		<enumtype generate="true" code="IdentityType" autocreate="true">
+			<value code="MYS_NEW_IC_NO" />
+			<value code="MYS_OLD_IC_NO" />
+			<value code="MYS_MILITARY_NO" />
+			<value code="SGP_NRIC" />
+			<value code="BRN_IC_NO" />
+			<value code="PASSPORT_NO" />
+		</enumtype>
+
+		<enumtype generate="true" code="Race" autocreate="true">
+			<value code="MALAY" />
+			<value code="CHINESE" />
+			<value code="INDIAN" />
+			<value code="OTHER" />
+		</enumtype>
+		<enumtype code="ServiceabilityStatus" autocreate="true"
+			generate="true">
+			<value code="HD" />
+			<value code="PIS" />
+			<value code="BOTH" />
+			<value code="NONE" />
+		</enumtype>
+		
+        <enumtype code="AmwayKitProductType" autocreate="true"
+            generate="true">
+            <description>This enum decides the type of the product whether it is bundled type (Inventory and prices at the child products) or 
+            pre-packed type(Inventory and prices at the parent products).</description>
+            <value code="BUNDLED" />
+            <value code="PREPACKED" />
+        </enumtype>
+        
+         <enumtype generate="true" code="RestrictionTypeEnum" autocreate="true"
+			dynamic="true">
+			<value code="MOP" />
+			<value code="ORDERING" />
+		</enumtype>
+		
+	</enumtypes>
+
+	<maptypes>
+		<maptype argumenttype="ServiceTypeEnum" returntype="java.lang.String"
+			code="AmwayServiceProductMapType" autocreate="true" generate="true" />
+		<maptype argumenttype="java.lang.Double" returntype="java.lang.String"
+			code="AmwayinstallmentMapType" autocreate="true" generate="true" />
+
+		<maptype code="ProductAttributesMapType" argumenttype="ProductAttributesTypeEnum"
+			returntype="java.lang.String" autocreate="true" generate="true" />
+			
+		<maptype code="localized:ProductAttributesMapType"
+               argumenttype="Language"
+               returntype="ProductAttributesMapType"
+               autocreate="true"
+               generate="true"/>
+
+	</maptypes>
+
+	<relations>
+
+
+		<relation code="AmwayPaymentMode2PaymentVerificationCountry" localized="false">
+			<description>Specifies countries where payment verification generation should happen.</description>
+			<deployment table="amwaypaymode2payverco" typecode="20423" />
+			<sourceElement type="PaymentMode" qualifier="verifiedPaymentModes" cardinality="many" collectiontype="set">
+				<description>Payment mode with the reference number generation.</description>
+			</sourceElement>
+			<targetElement type="Country" qualifier="paymentVerificationCountries" cardinality="many" collectiontype="set">
+				<description>Countries for the payment verification generation.</description>
+			</targetElement>
+		</relation>
+		<relation code="AmwayPaymentModeGroup2PaymentMode" localized="false">
+			<description>This relation combines payment modes in groups.</description>
+			<sourceElement type="AmwayPaymentModeGroup" qualifier="group" cardinality="one">
+				<description>Source payment mode group.</description>
+			</sourceElement>
+			<targetElement type="PaymentMode" qualifier="paymentModes" cardinality="many" collectiontype="set">
+				<description>Payment modes for given group.</description>
+			</targetElement>
+		</relation>
+
+		<relation code="OrderPeriodsForStore" generate="true"
+			localized="false" autocreate="true">
+			<sourceElement qualifier="store" type="BaseStore"
+				cardinality="one" />
+			<targetElement qualifier="orderPeriods" type="AmwayOrderPeriod"
+				cardinality="many" collectiontype="set" ordered="false" />
+		</relation>
+		<relation code="BonusPeriodsForStore" generate="true"
+			localized="false" autocreate="true">
+			<deployment table="bonusPeriodStats" typecode="21051" />
+			<sourceElement qualifier="store" type="BaseStore"
+				cardinality="many" />
+			<targetElement qualifier="bonusPeriods" type="AmwayBonusPeriod"
+				cardinality="many" collectiontype="set" ordered="false" />
+		</relation>			
+
+
+		<relation code="CustomersForAmwayAccount" generate="true"
+			localized="false" autocreate="true">
+			<deployment table="CustsForAmwayAccttbl" typecode="20601" />
+			<sourceElement qualifier="accounts" type="AmwayAccount"
+				cardinality="many" collectiontype="set" ordered="false" navigable="true" />
+			<targetElement qualifier="parties" type="Customer"
+				cardinality="many" collectiontype="set" ordered="false" navigable="true" />
+		</relation>
+		<relation code="AmBusRestrsForAmwayAccount" generate="true"
+			localized="false" autocreate="true">
+			<deployment table="AmBusRestrsAmwayAccttbl" typecode="20602" />
+			<sourceElement qualifier="accounts" type="AmwayAccount"
+				cardinality="many" collectiontype="set" ordered="false" navigable="true" />
+			<targetElement qualifier="restrictions" type="AmwayBusinessRestriction"
+				cardinality="many" collectiontype="set" ordered="false" navigable="true" />
+		</relation>
+		<relation code="InfraAvailsForStore" generate="true"
+			localized="false" autocreate="true">
+			<sourceElement qualifier="store" type="BaseStore"
+				cardinality="one" />
+			<targetElement qualifier="infraAvails" type="AmwayInfraAvailability"
+				cardinality="many" collectiontype="set" ordered="false" />
+		</relation>
+		<relation code="AmwayOrderStatusHistoryRelation" autocreate="true"
+			generate="false" localized="false">
+			<sourceElement type="Order" qualifier="order"
+				cardinality="one">
+				<modifiers read="true" write="false" initial="true"
+					search="true" optional="false" />
+			</sourceElement>
+			<targetElement type="AmwayOrderStatusHistoryEntry"
+				qualifier="orderStatusHistoryEntries" collectiontype="set"
+				cardinality="many" ordered="false">
+				<modifiers read="true" write="true" search="true"
+					optional="true" />
+			</targetElement>
+		</relation>
+
+		<relation code="AmwayOrderTMSEventHistoryRelation"
+			autocreate="true" generate="false" localized="false">
+			<sourceElement type="Order" qualifier="order"
+				cardinality="one">
+				<modifiers read="true" write="false" initial="true"
+					search="true" optional="false" />
+			</sourceElement>
+			<targetElement type="AmwayOrderTMSEventHistory"
+				qualifier="orderTMSEventHistoryEntries" collectiontype="list"
+				cardinality="many" ordered="false">
+				<modifiers read="true" write="true" search="true"
+					optional="true" />
+			</targetElement>
+		</relation>
+
+		<relation generate="true" localized="false"
+			code="AmwayOrderMarginToReturnRequest" autocreate="true">
+			<sourceElement type="AmwayOrderMargin" cardinality="one"
+				qualifier="amwayOrderMargin">
+				<modifiers initial="true" optional="true" />
+			</sourceElement>
+			<targetElement type="ReturnRequest" cardinality="many"
+				qualifier="returnRequest">
+				<modifiers initial="true" optional="true" />
+			</targetElement>
+		</relation>
+
+		<relation generate="true" localized="false"
+			code="AbstractOrderEntryToReturnEntry" autocreate="true">
+			<sourceElement type="AmwayOrderMargin" cardinality="one"
+				qualifier="amwayOrderMargin">
+				<modifiers initial="true" optional="true" />
+			</sourceElement>
+			<targetElement type="ReturnEntry" cardinality="many"
+				qualifier="returnEntry">
+				<modifiers initial="true" optional="true" />
+			</targetElement>
+		</relation>
+
+		<relation generate="true" localized="false"
+			code="WarehouseToReturnRequest" autocreate="true">
+			<sourceElement type="Warehouse" cardinality="one"
+				qualifier="warehouse">
+				<modifiers initial="true" optional="true" />
+			</sourceElement>
+			<targetElement type="ReturnRequest" cardinality="many"
+				qualifier="returnRequest">
+				<modifiers initial="true" optional="true" />
+			</targetElement>
+		</relation>
+
+		<relation code="AmwayKitPrdToKitEntryRel" autocreate="true"
+			generate="false" localized="false">
+			<sourceElement type="AmwayKitProduct" qualifier="kitProduct"
+				cardinality="one">
+				<modifiers read="true" write="true" optional="false"
+					search="true" initial="true" unique="true" />
+			</sourceElement>
+			<targetElement type="AmwayKitEntryProduct" qualifier="kitEntry"
+				collectiontype="set" cardinality="many" ordered="false">
+				<modifiers read="true" write="true" search="true"
+					optional="true" initial="false" />
+			</targetElement>
+		</relation>
+
+
+		<relation code="ProdAttributeToProdRel" autocreate="true"
+			generate="false" localized="false">
+			<sourceElement type="Product" qualifier="product"
+				cardinality="one">
+				<modifiers read="true" write="true" optional="false"
+					search="true" unique="true" />
+			</sourceElement>
+			<targetElement type="ProductAttribute" qualifier="productAttributes"
+				collectiontype="list" cardinality="many" ordered="false">
+				<modifiers read="true" write="true" search="true"
+					optional="true" />
+			</targetElement>
+		</relation>
+		<relation code="AmwayPaymentConfig2AmwayPaymentTypeConfig"
+			generate="true" localized="false" autocreate="true">
+			<sourceElement qualifier="config" type="AmwayPaymentConfig"
+				cardinality="one" />
+			<targetElement qualifier="typeConfigs" type="AmwayPaymentTypeConfig"
+				cardinality="many" collectiontype="set" ordered="false" />
+		</relation>
+		<relation code="AbstractOrder2PaymentInfo" generate="true"
+			localized="false" autocreate="true">
+			<deployment table="PaymentInfoListtbl" typecode="21000" />
+			<sourceElement qualifier="paymentInfos" type="PaymentInfo"
+				cardinality="many" collectiontype="set" ordered="true" />
+			<targetElement qualifier="order" type="AbstractOrder"
+				cardinality="many" collectiontype="set" ordered="false" />
+		</relation>
+
+		<relation code="AmwayBatch2AbstractOrder" generate="true" localized="false" autocreate="true">
+			<sourceElement qualifier="batch" type="AmwayBatch" cardinality="one"/>
+			<targetElement qualifier="orders" type="AbstractOrder" cardinality="many" collectiontype="list" ordered="false" />
+		</relation>
+
+		<relation code="AmwayTerminal2Printer" generate="true" localized="false" autocreate="true">
+			<deployment table="PrinterListtbl" typecode="23002" />
+			<sourceElement qualifier="terminal" type="AmwayTerminal" cardinality="many" collectiontype="set" />
+			<targetElement qualifier="printer" type="AmwayPrinter" cardinality="many" collectiontype="set" ordered="false" />
+		</relation>
+
+		<relation code="AmwayPointOfService2Terminal" generate="true" localized="false" autocreate="true">
+			<sourceElement qualifier="pointOfService" type="PointOfService" cardinality="one"/>
+			<targetElement qualifier="terminals" type="AmwayTerminal" cardinality="many" collectiontype="list" ordered="false" />
+		</relation>
+
+	</relations>
+
+	<itemtypes>
+		<typegroup name="customer">
+			<itemtype code="Employee" generate="false" autocreate="false">
+				<attributes>
+					<attribute qualifier="timeZone" type="java.lang.String">
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+						<description>Time zone associated to the employee</description>
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="Customer" generate="false" autocreate="false">
+				<attributes>
+
+					<attribute qualifier="amwayPaymentReferenceNumber" type="int">
+						<description>Last generated reference number for customer.</description>
+						<persistence type="property" />
+						<modifiers optional="false" />
+						<defaultvalue>Integer.valueOf(0)</defaultvalue>
+					</attribute>
+
+					<attribute qualifier="clientipaddress" type="java.lang.String">
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+						<description>ip address from where the customer made the registration</description>
+					</attribute>
+					<attribute qualifier="active" type="java.lang.boolean">
+						<modifiers read="true" write="true" search="true" />
+						<persistence type="property" />
+						<defaultvalue>Boolean.FALSE</defaultvalue>
+						<description>Is the customer active</description>
+					</attribute>
+					<attribute type="boolean" qualifier="includeInAboship">
+						<description>Include spouse in Aboship</description>
+						<persistence type="property" />
+						<defaultvalue>Boolean.FALSE</defaultvalue>
+						<modifiers write="true" read="true" />
+					</attribute>
+					<attribute type="boolean" qualifier="spouse">
+						<description>Is the customer spouse</description>
+						<persistence type="property" />
+						<defaultvalue>Boolean.FALSE</defaultvalue>
+						<modifiers write="true" read="true" />
+					</attribute>
+				</attributes>
+				<indexes>
+					<index name="customerIDIDX" unique="false">
+						<key attribute="customerID" />
+					</index>
+				</indexes>
+			</itemtype>
+
+			<itemtype code="AmwayAccount" generate="true" autocreate="true"
+				jaloclass="com.amway.core.jalo.AmwayAccount" extends="GenericItem">
+				<description>Represents Amway account.</description>
+				<deployment table="AmwayAccounttbl" typecode="20402" />
+				<attributes>
+					<attribute qualifier="code" type="java.lang.String">
+						<persistence type="property" />
+						<modifiers read="true" write="true" search="true"
+								   optional="false" unique="true" />
+						<custom-properties>
+							<property name="hmcIndexField">
+								<value>"thefield"</value>
+							</property>
+						</custom-properties>
+					</attribute>
+					<attribute qualifier="name" type="java.lang.String">
+						<description>name of this account</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+						<custom-properties>
+							<property name="hmcIndexField">
+								<value>"thefield"</value>
+							</property>
+						</custom-properties>
+					</attribute>
+					<attribute qualifier="businessNature" type="AmwayBusinessNature">
+						<modifiers read="true" write="true" search="true"
+							optional="false" />
+						<persistence type="property" />
+						<description></description>
+					</attribute>
+					<attribute qualifier="userPriceGroup" type="UserPriceGroup">
+						<persistence type="property" />
+						<modifiers read="true" write="true" search="true"
+							initial="false" optional="true" />
+					</attribute>
+					<attribute qualifier="expiryDate" type="java.util.Date">
+						<persistence type="property" />
+						<modifiers read="true" write="true" search="true"
+							initial="false" optional="true" />
+					</attribute>
+					<attribute qualifier="status" type="AmwayAccountStatus">
+						<persistence type="property" />
+						<modifiers read="true" write="true" search="true"
+							initial="true" optional="false" />
+						<defaultvalue>em().getEnumerationValue("AmwayAccountStatus", "ACTIVE")</defaultvalue>
+					</attribute>
+					<attribute qualifier="level" type="AmwayBusinessLevel">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="primaryParty" type="Customer">
+						<persistence type="property" />
+						<modifiers read="true" write="true" search="true"
+							initial="false" optional="false" />
+					</attribute>
+					<attribute qualifier="entryDate" type="java.util.Date">
+						<persistence type="property" />
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+					</attribute>
+					<attribute qualifier="registeredAddress" type="Address">
+						<persistence type="property" />
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+					</attribute>
+					<attribute qualifier="controllingAffiliate" type="Country">
+						<persistence type="property" />
+						<modifiers read="true" write="true" search="true"
+							optional="true" unique="false" />
+					</attribute>
+					<attribute qualifier="country" type="Country">
+						<persistence type="property" />
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+					</attribute>
+				</attributes>
+				<indexes>
+					<index name="codeIDX" unique="true">
+						<key attribute="code" />
+						<key attribute="controllingAffiliate" />
+					</index>
+					<index name="acctNamIDX" unique="false">
+						<key attribute="name" />
+					</index>
+					<index name="acctBusinessNatureIDX" unique="false">
+						<key attribute="businessNature" />
+					</index>
+					<index name="acctUserPriceGroupIDX" unique="false">
+						<key attribute="userPriceGroup" />
+					</index>
+					<index name="acctExpiryDateIDX" unique="false">
+						<key attribute="expiryDate" />
+					</index>
+					<index name="acctStatusIDX" unique="false">
+						<key attribute="status" />
+					</index>
+					<index name="acctLevelIDX" unique="false">
+						<key attribute="level" />
+					</index>
+					<index name="acctPrimaryPartyIDX" unique="false">
+						<key attribute="primaryParty" />
+					</index>
+					<index name="acctControllingAffiliateIDX" unique="false">
+						<key attribute="controllingAffiliate" />
+					</index>
+					<index name="acctCountryIDX" unique="false">
+						<key attribute="country" />
+					</index>
+				</indexes>
+			</itemtype>
+
+			<itemtype code="AmwayBusinessLevel" generate="true"
+				autocreate="true" jaloclass="com.amway.core.jalo.AmwayBusinessLevel"
+				extends="GenericItem">
+				<description>Represents Amway Business Qualification.</description>
+				<deployment table="AmwayBusLvltbl" typecode="20403" />
+				<attributes>
+					<attribute qualifier="segmentaionLevel" type="SegmentationLevelTypeEnum">
+						<persistence type="property" />
+						<description>Segmentation level for an account(e.g. silver, platinum....).</description>
+					</attribute>
+					<attribute qualifier="qualificationLevel" type="QualificationLevelTypeEnum">
+						<persistence type="property" />
+						<description>Qualification level for an account.</description>
+					</attribute>
+					<attribute qualifier="bonusPercentage" type="double">
+						<persistence type="property" />
+						<description>Bonus Percentage for an account.</description>
+					</attribute>
+				</attributes>
+				<indexes>
+					<index name="bussLvlOwnerIDX" unique="false">
+						<key attribute="owner" />
+					</index>
+					<index name="bussLvlSegmentaionLevelIDX" unique="false">
+						<key attribute="segmentaionLevel" />
+					</index>
+					<index name="bussLvlQualificationLevelIDX" unique="false">
+						<key attribute="qualificationLevel" />
+					</index>
+					<index name="bussLvlBonusPercentageIDX" unique="false">
+						<key attribute="bonusPercentage" />
+					</index>
+				</indexes>
+			</itemtype>
+
+			<itemtype code="AmwayBusinessRestriction" generate="true"
+				autocreate="true" jaloclass="com.amway.core.jalo.AmwayBusinessRestriction"
+				extends="GenericItem">
+				<description>Represents Amway Business Restriction.</description>
+				<deployment table="AmwayBusRsttbl" typecode="20404" />
+				<attributes>
+					<attribute qualifier="code" type="java.lang.String">
+						<modifiers read="true" write="true" search="true"
+							optional="false" unique="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="restrictionId" type="java.lang.String">
+						<persistence type="property" />
+						<description>DMS restriction id.</description>
+					</attribute>
+					<attribute qualifier="description" type="localized:java.lang.String">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="type" type="RestrictionTypeEnum">
+						<modifiers read="true" write="true" search="true"
+							optional="false" />
+						<persistence type="property" />
+						<!-- CoE Rule: Mandatory attribute added to existing item must have a default value -->
+						<defaultvalue>em().getEnumerationValue("RestrictionTypeEnum","MOP")</defaultvalue>
+					</attribute>
+				</attributes>
+				<indexes>
+					<index name="bussRstcodeIDX" unique="false">
+						<key attribute="code" />
+					</index>
+					<index name="bussRstRestrictionIdIDX" unique="false">
+						<key attribute="restrictionId" />
+					</index>
+					<index name="bussRstDescriptionIDX" unique="false">
+						<key attribute="description" />
+					</index>
+				</indexes>
+			</itemtype>
+
+			<itemtype code="User" autocreate="false" generate="false">
+				<attributes>
+					<attribute type="java.lang.String" qualifier="taxId">
+						<description>CPF number for an individual / CNPJ for a legal entity.</description>
+						<modifiers />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="customerEmail" type="java.lang.String">
+						<description>email of the customer</description>
+						<modifiers read="true" write="true" optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="primaryEmail" type="AmwayEmailContactInfo">
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+						<description>Email of the user</description>
+					</attribute>
+					<attribute qualifier="primaryMobileNo" type="PhoneContactInfo">
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+						<description>Phone of the user</description>
+					</attribute>
+
+					<attribute qualifier="identity" type="AmwayUserIdentity">
+						<description>Identity of the customer</description>
+						<modifiers read="true" write="true" optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="Race" qualifier="race">
+						<description>Race of the customer</description>
+						<persistence type="property" />
+						<modifiers optional="true" write="true" read="true" />
+					</attribute>
+					<attribute type="java.util.date" qualifier="dateOfBirth">
+						<description>Date of birth of customer</description>
+						<persistence type="property" />
+						<modifiers optional="true" write="true" read="true" />
+					</attribute>
+					<attribute type="boolean" qualifier="isMarried">
+						<description>Is person married or not</description>
+						<persistence type="property" />
+						<defaultvalue>Boolean.FALSE</defaultvalue>
+						<modifiers write="true" read="true" />
+					</attribute>
+					<attribute qualifier="citizenship" type="Citizenship">
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+						<description>Citizenship of user</description>
+					</attribute>
+					<attribute type="Country" qualifier="country">
+						<description>Country</description>
+						<persistence type="property" />
+						<modifiers optional="true" write="true" read="true" />
+					</attribute>
+				</attributes>
+				<indexes>
+					<index name="taxIdIDX" unique="false">
+						<key attribute="taxId" />
+					</index>
+					<index name="customerEmailIDX" unique="false">
+						<key attribute="customerEmail" />
+					</index>
+				</indexes>
+			</itemtype>
+			<itemtype code="AmwayEmailContactInfo" generate="true"
+				autocreate="true" extends="AbstractContactInfo">
+				<description>Represents Email Contact info</description>
+				<deployment table="EmailContacttbl" typecode="21001" />
+
+				<attributes>
+					<attribute qualifier="email" type="java.lang.String">
+						<modifiers read="true" write="true" />
+						<persistence type="dynamic" attributeHandler="emailContactInfoAttributeHandler" />
+					</attribute>
+				</attributes>
+			</itemtype>
+			<itemtype code="AmwayRegSponsorDetails" generate="true"
+				autocreate="true" extends="GenericItem">
+				<description>Represents Amway Sponsor Account</description>
+				<deployment table="AmwayRegSponsorDetails" typecode="21002" />
+				<attributes>
+					<attribute qualifier="prospectABO" type="Customer">
+						<persistence type="property" />
+						<modifiers read="true" write="true" search="true"
+							optional="false" />
+						<description>The applicant</description>
+					</attribute>
+					<attribute qualifier="type" type="SponsorType">
+						<persistence type="property" />
+						<description>Type of the sponsor</description>
+					</attribute>
+					<attribute qualifier="name" type="java.lang.String">
+						<persistence type="property" />
+						<description>Name of the sponsor</description>
+					</attribute>
+					<attribute qualifier="aboId" type="java.lang.String">
+						<persistence type="property" />
+						<description>ABO Id</description>
+					</attribute>
+					<attribute qualifier="country" type="Country">
+						<persistence type="property" />
+						<description>Country of sponsor</description>
+					</attribute>
+				</attributes>
+			</itemtype>
+			<itemtype code="AmwayUserIdentity" generate="true"
+				autocreate="true" extends="GenericItem">
+				<description>Represents Amway Identity</description>
+				<deployment table="AmwayUserIdentitytbl" typecode="21003" />
+				<attributes>
+					<attribute qualifier="code" type="java.lang.String">
+						<modifiers read="true" write="true" search="true"
+							optional="false" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="type" type="IdentityType">
+						<persistence type="property" />
+						<description>Identity Type of User</description>
+					</attribute>
+				</attributes>
+				<indexes>
+					<index name="useridentityCodeIDX" unique="false">
+						<key attribute="code" />
+					</index>
+					<index name="useridentityTypeIDX" unique="false">
+						<key attribute="type" />
+					</index>
+				</indexes>
+			</itemtype>
+		</typegroup>
+
+		<typegroup name="product">
+			<itemtype code="ProductAttribute" generate="true"
+					  autocreate="true" jaloclass="com.amway.core.jalo.ProductAttribute">
+				<description>Item to store ProductAttributesTypeEnum and its value.</description>
+				<deployment table="ProductAttribute" typecode="20405" />
+				<custom-properties>
+					<property name="catalogItemType">
+						<value>java.lang.Boolean.TRUE</value>
+					</property>
+					<property name="catalogVersionAttributeQualifier">
+						<value>"catalogVersion"</value>
+					</property>
+					<property name="catalog.sync.default.root.type">
+						<value>Boolean.TRUE</value>
+					</property>
+					<property name="catalog.sync.default.root.type.order">
+						<value>Integer.valueOf(7)</value>
+					</property>
+					<property name="uniqueKeyAttributeQualifier">
+						<value>"product, attributeType"</value>
+					</property>
+				</custom-properties>
+				<attributes>
+					<attribute qualifier="catalogVersion" type="CatalogVersion">
+						<modifiers read="true" write="true" search="true"
+								   optional="false" unique="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="attributeType" type="ProductAttributesTypeEnum">
+						<description>ProductAttributesTypeEnum of the product.</description>
+						<modifiers unique="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="attributeValue" type="localized:java.lang.String">
+						<description>value of productAttribute type</description>
+						<modifiers />
+						<persistence type="property">
+							<columntype database="oracle">
+								<value>CLOB</value>
+							</columntype>
+							<columntype database="sap">
+								<value>NCLOB</value>
+							</columntype>
+							<columntype>
+								<value>HYBRIS.LONG_STRING</value>
+							</columntype>
+						</persistence>
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="Product" generate="false" autocreate="false">
+				<description>Extending the Product type from core with additional attributes.</description>
+				<attributes>
+					<attribute qualifier="variantAttributeName1" type="localized:java.lang.String">
+						<description>Variant Descriptor 1 of the product.</description>
+						<modifiers />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="variantAttributeName2" type="localized:java.lang.String">
+						<description>Variant Descriptor 2 of the product.</description>
+						<modifiers />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="variantAttribute1" type="localized:java.lang.String">
+						<description>Variant Descriptor 1 of the product.</description>
+						<modifiers />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="variantAttribute2" type="localized:java.lang.String">
+						<description>Variant Descriptor 2 of the product.</description>
+						<modifiers />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="variantMediaAttributeName" type="localized:java.lang.String">
+						<description>Variant Descriptor For Product Media Attribute.</description>
+						<modifiers />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="variantMediaAttribute" type="Media">
+						<description>Variant Descriptor For Product Media Attribute.</description>
+						<modifiers />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="dimensions" type="AmwayDimension">
+						<description>place holder for dimensions of the product</description>
+						<modifiers partof="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="bvcode" type="java.lang.Boolean">
+						<defaultvalue>Boolean.FALSE</defaultvalue>
+						<modifiers read="true" write="true" search="true"
+							optional="false" />
+						<persistence type="property" />
+					</attribute>
+
+					<attribute qualifier="popularityScore" generate="true"
+						type="java.lang.Double">
+						<description>Score of product edited by business user</description>
+						<persistence type="property" />
+						<modifiers read="true" write="true" search="true"
+							encrypted="false" optional="true" removable="true" initial="false"
+							unique="false" private="false" partof="false" />
+					</attribute>
+					<!-- amwaycommerce branch -->
+					<!--attribute qualifier="productAttributes" type="localized:ProductAttributesMapType">
+						<modifiers />
+						<persistence type="property" />
+					</attribute -->
+					<attribute qualifier="alias" type="java.lang.String">
+						<modifiers />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="AmwayKitProduct" extends="Product"
+				autocreate="true" generate="true" jaloclass="com.amway.core.jalo.AmwayKitProduct">
+				<description>KitProduct 
+				represents a list of Products grouped together. This on the web site will 
+				have a different page where all the included products can be shown in one 
+				page and user can select different variants from the included products. The 
+				price is calculated individually based of the variants selected by the user.</description>
+				<attributes>
+                    <attribute qualifier="type" type="AmwayKitProductType">
+                        <description>Decides the type of kit product, whether it is bundled type (Inventory and prices at the child products) or 
+                        pre-packed type(Inventory and prices at the parent products).</description>
+                        <persistence type="property" />
+                        <modifiers optional="false" />
+						<!-- CoE Rule: Mandatory attribute added to existing item must have a default value -->
+						<defaultvalue>em().getEnumerationValue("AmwayKitProductType","BUNDLED")</defaultvalue>
+                    </attribute>
+                     <attribute qualifier="bundleDescription" type="localized:java.lang.String">
+                        <description>Extended description for the kit product.</description>
+                        <persistence type="property" />
+                        <modifiers dontOptimize="true" />
+                    </attribute>
+                </attributes>
+				
+			</itemtype>
+
+			<itemtype code="AmwayKitEntryProduct" autocreate="true"
+				generate="true" jaloclass="com.amway.core.jalo.AmwayKitEntryProduct">
+				<deployment table="amwayKitEntryProduct" typecode="20061" />
+				<custom-properties>
+					<!-- marking the type as synchronizing capable here: -->
+					<property name="catalogItemType">
+						<value>java.lang.Boolean.TRUE</value>
+					</property>
+
+					<!-- define catalog version attribute here: -->
+					<property name="catalogVersionAttributeQualifier">
+						<value>"catalogVersion"</value>
+					</property>
+					<!-- define unique key attributes here; separate multiple attribute 
+						qualifiers by commas: -->
+					<property name="uniqueKeyAttributeQualifier">
+						<value>"code"</value>
+					</property>
+				</custom-properties>
+				<attributes>
+					<attribute qualifier="code" type="java.lang.String">
+						<modifiers read="true" write="true" search="true"
+							optional="true" unique="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="catalogVersion" type="CatalogVersion">
+						<modifiers read="true" write="true" search="true"
+							optional="false" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="entry" type="Product">
+						<description>Product that should be part of kit</description>
+						<modifiers read="true" write="true" search="true"
+							optional="false" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="configuredQty" type="java.lang.Double">
+						<description>Pre-Configured quantity</description>
+						<modifiers read="true" write="true" search="true"
+							optional="false" />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+
+			<itemtype code="AmwayDimension" autocreate="true" generate="true"
+				jaloclass="com.amway.core.jalo.AmwayDimension" extends="GenericItem">
+				<description>This contains all the dimensions associated to a product.</description>
+				<deployment table="AmwayDimensiontbl" typecode="20051" />
+				<custom-properties>
+					<property name="catalogVersionAttributeQualifier">
+						<value>"catalogVersion"</value>
+					</property>
+					<property name="uniqueKeyAttributeQualifier">
+						<value>"code"</value>
+					</property>
+					<property name="catalogItemType">
+						<value>java.lang.Boolean.TRUE</value>
+					</property>
+					<property name="catalog.sync.default.root.type">
+						<value>Boolean.TRUE</value>
+					</property>		
+					<property name="catalog.sync.default.root.type.order">
+						<value>Integer.valueOf(9)</value>
+					</property>
+				</custom-properties>
+				<attributes>
+					<attribute qualifier="code" type="java.lang.String">
+						<persistence type="property" />
+						<modifiers read="true" write="true" search="true"
+							optional="false" unique="true" />
+						<custom-properties>
+							<property name="hmcIndexField">
+								<value>"thefield"</value>
+							</property>
+						</custom-properties>
+					</attribute>
+					<attribute qualifier="catalogVersion" type="CatalogVersion">
+						<modifiers read="true" write="true" search="true"
+							optional="false" unique="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="length" type="AmwayDimensionDescriptor">
+						<persistence type="property" />
+						<modifiers optional="true" write="true" read="true" partof="true"/>
+					</attribute>
+					<attribute qualifier="width" type="AmwayDimensionDescriptor">
+						<persistence type="property" />
+						<modifiers optional="true" write="true" read="true" partof="true"/>
+					</attribute>
+					<attribute qualifier="height" type="AmwayDimensionDescriptor">
+						<persistence type="property" />
+						<modifiers optional="true" write="true" read="true" partof="true"/>
+					</attribute>
+					<attribute qualifier="weight" type="AmwayDimensionDescriptor">
+						<persistence type="property" />
+						<modifiers optional="true" write="true" read="true" partof="true"/>
+					</attribute>
+					<attribute qualifier="count" type="AmwayDimensionDescriptor">
+						<persistence type="property" />
+						<modifiers optional="true" write="true" read="true" partof="true"/>
+					</attribute>
+					<attribute qualifier="volume" type="AmwayDimensionDescriptor">
+						<persistence type="property" />
+						<modifiers optional="true" write="true" read="true" partof="true"/>
+					</attribute>
+				</attributes>
+				<indexes>
+					<index name="codeIDX" unique="false">
+						<key attribute="code" />
+					</index>
+					<index name="versionIDX" unique="false">
+						<key attribute="catalogVersion" />
+					</index>
+					<index name="codeVersionIDX" unique="false">
+						<key attribute="code" />
+						<key attribute="catalogVersion" />
+					</index>
+				</indexes>
+			</itemtype>
+
+			<itemtype code="AmwayDimensionDescriptor" autocreate="true"
+				generate="true" jaloclass="com.amway.core.jalo.AmwayDimensionDescriptor"
+				extends="GenericItem">
+				<description>Describes a dimension attribute.</description>
+				<deployment table="AmwayDimnDescriptortbl" typecode="20052" />
+				<custom-properties>
+					<property name="catalogVersionAttributeQualifier">
+						<value>"catalogVersion"</value>
+					</property>
+					<property name="uniqueKeyAttributeQualifier">
+						<value>"code"</value>
+					</property>
+					<property name="catalogItemType">
+						<value>java.lang.Boolean.TRUE</value>
+					</property>
+					<property name="catalog.sync.default.root.type">
+						<value>Boolean.TRUE</value>
+					</property>		
+					<property name="catalog.sync.default.root.type.order">
+						<value>Integer.valueOf(9)</value>
+					</property>
+				</custom-properties>
+				<attributes>
+					<attribute qualifier="code" type="java.lang.String">
+						<persistence type="property" />
+						<modifiers read="true" write="true" search="true"
+							optional="false" unique="true" />
+						<custom-properties>
+							<property name="hmcIndexField">
+								<value>"thefield"</value>
+							</property>
+						</custom-properties>
+					</attribute>
+					<attribute qualifier="catalogVersion" type="CatalogVersion">
+						<modifiers read="true" write="true" search="true"
+							optional="false" unique="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="value" type="double">
+						<persistence type="property" />
+						<modifiers optional="false" write="true" read="true" />
+					</attribute>
+					<attribute qualifier="unit" type="AmwayUnit">
+						<persistence type="property" />
+						<modifiers optional="false" write="true" read="true" />
+					</attribute>
+				</attributes>
+				<indexes>
+					<index name="codeIDX" unique="false">
+						<key attribute="code" />
+					</index>
+					<index name="versionIDX" unique="false">
+						<key attribute="catalogVersion" />
+					</index>
+					<index name="codeVersionIDX" unique="false">
+						<key attribute="code" />
+						<key attribute="catalogVersion" />
+					</index>
+				</indexes>
+			</itemtype>
+
+			<itemtype code="AmwayUnit" generate="true" autocreate="true"
+				jaloclass="com.amway.core.jalo.AmwayUnit" extends="GenericItem">
+				<deployment table="AmwayUnittbl" typecode="20053" />
+				<custom-properties>
+					<property name="catalogItemType">
+						<value>java.lang.Boolean.TRUE</value>
+					</property>
+					<property name="catalogVersionAttributeQualifier">
+						<value>"catalogVersion"</value>
+					</property>
+					<property name="uniqueKeyAttributeQualifier">
+						<value>"code"</value>
+					</property>
+				</custom-properties>
+				<attributes>
+					<attribute qualifier="code" type="java.lang.String">
+						<description>external identifier refering to the actual classification system definition</description>
+						<modifiers read="true" write="true" search="true"
+							optional="false" unique="true" />
+						<persistence type="property" />
+						<custom-properties>
+							<property name="hmcIndexField">
+								<value>"thefield"</value>
+							</property>
+						</custom-properties>
+					</attribute>
+					<attribute qualifier="catalogVersion" type="CatalogVersion">
+						<modifiers read="true" write="true" search="true"
+							optional="false" unique="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="name" type="localized:java.lang.String">
+						<description>optional localized name of this unit</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+						<custom-properties>
+							<property name="hmcIndexField">
+								<value>"thefield"</value>
+							</property>
+						</custom-properties>
+					</attribute>
+					<attribute qualifier="symbol" type="java.lang.String">
+						<description>Symbol</description>
+						<modifiers read="true" write="true" search="true"
+							optional="false" />
+						<persistence type="property" />
+						<custom-properties>
+							<property name="hmcIndexField">
+								<value>"thefield"</value>
+							</property>
+						</custom-properties>
+					</attribute>
+				</attributes>
+				<indexes>
+					<index name="catVer" unique="false">
+						<key attribute="catalogVersion" />
+					</index>
+					<index name="codeIdx" unique="false">
+						<key attribute="code" />
+					</index>
+				</indexes>
+			</itemtype>
+
+		</typegroup>
+
+		<typegroup name="Price">
+
+			<itemtype code="PriceRow" generate="false" autocreate="false">
+				<description>Extending the PriceRow type from core with additional attributes.</description>
+				<attributes>
+					<attribute qualifier="pointValue" type="double">
+						<description>Point Value.</description>
+						<modifiers read="true" write="true" search="true"
+								   optional="false" />
+						<defaultvalue>Double.valueOf(0.0D)</defaultvalue>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="businessVolume" type="double">
+						<description>Business Volume.</description>
+						<modifiers read="true" write="true" search="true"
+								   optional="false" />
+						<defaultvalue>Double.valueOf(0.0D)</defaultvalue>
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.Double" qualifier="giftPoint">
+						<persistence type="property"></persistence>
+					</attribute>
+				</attributes>
+				<indexes>
+					<index name="pointValueIDX" unique="false">
+						<key attribute="pointValue" />
+					</index>
+					<index name="businessVolumeIDX" unique="false">
+						<key attribute="businessVolume" />
+					</index>
+				</indexes>
+			</itemtype>
+
+
+		</typegroup>
+
+		<typegroup name="BaseSite">
+			<itemtype code="BaseSite" autocreate="false" generate="false">
+				<description>Extending BaseSite type with additional attributes.</description>
+				<attributes>
+					<attribute type="java.lang.Double" qualifier="giftWrapPrice">
+						<description>The Giftwrap attribute to store giftwrap price</description>
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+		</typegroup>
+
+		<typegroup name="pos">
+
+			<itemtype code="PaymentTransaction" autocreate="false" generate="false">
+				<attributes>
+					<attribute qualifier="receiptNo" type="java.lang.String">
+						<persistence type="property"></persistence>
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="AmwayTerminal" autocreate="true" generate="true"
+					  jaloclass="com.amway.core.jalo.AmwayTerminal">
+				<description>POS Cashier terminal</description>
+				<deployment table="AmwayPOSTerminal" typecode="22005"/>
+
+				<attributes>
+					<attribute qualifier="id" type="java.lang.String">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="location" type="java.lang.String">
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="AmwayBatch" autocreate="true" generate="true"
+					  jaloclass="com.amway.core.jalo.AmwayBatch">
+				<description>Batch of POS Orders</description>
+				<deployment table="AmwayPOSBatch" typecode="22003"/>
+
+				<attributes>
+					<attribute qualifier="batchNo" type="java.lang.String">
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute qualifier="cashier" type="Employee">
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute qualifier="terminal" type="AmwayTerminal">
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute qualifier="startingBalance" type="java.lang.Double">
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute qualifier="endingBalance" type="java.lang.Double">
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute qualifier="dateOfBatchOpen" type="java.util.Date">
+						<description>Start date and time for the batch period</description>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="dateOfBatchClosed" type="java.util.Date">
+						<description>End date and time for the batch period</description>
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="AmwayPrinter" autocreate="true" generate="true"
+					  jaloclass="com.amway.core.jalo.AmwayPrinter">
+				<description>POS device that prints receipts or reports.</description>
+				<deployment table="AmwayPOSPrinter" typecode="22004" />
+
+				<attributes>
+					<attribute qualifier="model" type="java.lang.String">
+						<persistence type="property" />
+					</attribute>
+
+					<attribute qualifier="description" type="java.lang.String">
+						<description>End date for the batch period</description>
+						<persistence type="property" />
+					</attribute>
+
+					<attribute qualifier="serialNumber" type="java.lang.String">
+						<persistence type="property" />
+					</attribute>
+
+					<attribute qualifier="dateInService" type="java.util.Date">
+						<persistence type="property" />
+					</attribute>
+
+					<attribute qualifier="printerType" type="AmwayPrinterType">
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+		</typegroup>
+
+		<typegroup name="order">
+			<itemtype code="Cart" autocreate="false" generate="false">
+				<description>Extending Order type with lynx specific attributes.</description>
+				<attributes>
+					<attribute qualifier="paymentDetails" type="java.util.Map">
+						<description>Map to store additional payment details.</description>
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="AmwayPeriod" autocreate="true" generate="true"
+				jaloclass="com.amway.core.jalo.AmwayPeriod">
+				<description>This is the abstract calendar period. Will be used by bonus and order periods.</description>
+				<deployment table="AmwayPeriodtbl" typecode="20001" />
+				<attributes>
+					<attribute qualifier="code" type="java.lang.String">
+						<description>Identifier for the given period</description>
+						<persistence type="property" />
+						<modifiers optional="false" write="true" read="true" />
+					</attribute>
+					<attribute qualifier="startDate" type="java.util.Date">
+						<description>Start date for the given period</description>
+						<persistence type="property" />
+						<modifiers optional="false" write="true" read="true" />
+					</attribute>
+					<attribute qualifier="endDate" type="java.util.Date">
+						<description>Start date for the given period</description>
+						<persistence type="property" />
+						<modifiers optional="false" write="true" read="true" />
+					</attribute>
+					<attribute qualifier="status" type="AmwayPeriodTypeEnum">
+						<description>Status for the given period</description>
+						<persistence type="property" />
+						<modifiers optional="false" write="true" read="true" />
+						<defaultvalue>em().getEnumerationValue("AmwayPeriodTypeEnum", "INACTIVE")</defaultvalue>
+					</attribute>
+				</attributes>
+				<indexes>
+					<index name="codeIDX" unique="false">
+						<key attribute="code" />
+					</index>
+					<index name="startDateIDX" unique="false">
+						<key attribute="startDate" />
+					</index>
+					<index name="endDateIDX" unique="false">
+						<key attribute="endDate" />
+					</index>
+				</indexes>
+			</itemtype>
+			<itemtype code="AmwayOrderPeriod" autocreate="true"
+				generate="true" jaloclass="com.amway.core.jalo.AmwayOrderPeriod"
+				extends="AmwayPeriod">
+				<description>This is the Amway calendar order period.</description>
+			</itemtype>
+			<itemtype code="AmwayBonusPeriod" autocreate="true"
+				generate="true" jaloclass="com.amway.core.jalo.AmwayBonusPeriod"
+				extends="AmwayPeriod">
+				<description>This is the Amway calendar bonus period.</description>
+				<attributes>
+					<attribute qualifier="cutoffDate" type="java.util.Date">
+						<description>Cut off date for the given bonus period</description>
+						<persistence type="property" />
+						<modifiers optional="false" write="true" read="true" />
+					</attribute>
+				</attributes>
+			</itemtype>
+			<itemtype code="AbstractOrder" autocreate="false" generate="false">
+				<description>Extending AbstractOrder type with additional attributes.</description>
+				<attributes>
+					<attribute qualifier="account" type="AmwayAccount">
+						<description>The account for which the cart was created and the order was placed.</description>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="orderPeriod" type="AmwayOrderPeriod">
+						<description>The order period for which the cart was created and the order was placed.</description>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="bonusPeriod" type="AmwayBonusPeriod">
+						<description>The bonus period for which the cart was created and the order was placed.</description>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="margin" type="AmwayOrderMargin">
+						<modifiers read="true" write="true" search="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="pointValue" type="double">
+						<description>Point Value</description>
+						<modifiers />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="businessVolume" type="double">
+						<description>Business Volume</description>
+						<modifiers />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="type" type="AmwayCartType">
+						<description>The sales application for which the cart was created.</description>
+						<persistence type="property" />
+						<modifiers read="true" write="true" search="true"
+							optional="false" />
+						<defaultvalue>em().getEnumerationValue("AmwayCartType", "web")</defaultvalue>
+					</attribute>
+					<attribute qualifier="volumeAbo" type="java.lang.String">
+						<modifiers write="false" read="true" search="true" />
+						<persistence type="dynamic" attributeHandler="orderVolumeAboAttributeProvider" />
+					</attribute>
+ 					<attribute qualifier="volumeAmwayAccount" type="java.lang.String">
+ 						<description>This attribute stores the abo id of the abo for whom the order is placed.</description>
+						<modifiers />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="totalWeight" type="double">
+						<modifiers write="false" read="true" search="false" />
+						<persistence type="dynamic" attributeHandler="orderTotalWeightAttributeProvider" />
+					</attribute>
+					<attribute qualifier="orderName" type="java.lang.String">
+						<description>The orderName attribute store recurring order name </description>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="giftWrap" type="java.lang.Boolean">
+						<description>The Giftwrap attribute to store giftwrap status </description>
+						<defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="giftWrapPrice" type="double">
+						<description>Attribute to store giftwrap price </description>
+						<modifiers write="true" read="true" search="false" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="employee" type="User">
+						<description>The employee who haas palced the order on behalf of an abo.</description>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="prorated" type="java.lang.Boolean">
+						<description>speciifes the values on the order are prorated or not</description>
+						<defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="pickupDateTime" type="java.util.Date">
+						<description>Dynamic attribute for pickup date and time</description>
+						<persistence type="dynamic" attributeHandler="pickupDateTimeAttribute"/>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="affiliateOrderNumber">
+						<description>Affiliate order number</description>
+						<modifiers read="true" write="true" search="true"/>
+						<persistence type="property"/>
+					</attribute>
+					<attribute type="java.lang.Double" qualifier="deliveryTax">
+						<description>Delivery Tax</description>
+						<modifiers read="true" write="true" search="false"/>
+						<persistence type="property"/>
+					</attribute>
+
+				</attributes>
+				<indexes>
+					<index name="AbOrderAccount">
+						<key attribute="account" />
+					</index>
+					<index name="AbOrderStore">
+						<key attribute="store" />
+					</index>
+				</indexes>
+			</itemtype>
+
+			<itemtype code="Wishlist2Entry" autocreate="false" generate="false">
+				<attributes>
+					<attribute type="java.lang.Long" qualifier="quantity">
+						<modifiers read="true" write="true"/>
+						<persistence type="property"/>
+						<description>Quantity of wishlistEntry</description>
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="Wishlist2" autocreate="false" generate="false">
+				<description>Adding site to the wish list model to make it site specific.</description>
+				<attributes>
+					<attribute qualifier="uid" type="java.lang.String">
+						<description>Unique identifier for the wish list, created by combining the customer id and created time stamp separated by underscore.</description>
+						<modifiers read="true" write="false" initial="true" optional="true" unique="true"/>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="site" type="BaseSite">
+						<description>Site to which the wish list belongs.</description>
+						<modifiers read="true" write="false" initial="true" optional="true"/>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="favorite" type="java.lang.Boolean">
+						<description>Flag that decides whether the wish list is the favorite wish list.</description>
+						<modifiers read="true" write="true" initial="false" optional="true" />
+						<defaultvalue>Boolean.FALSE</defaultvalue>
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+				<indexes>
+					<index name="siteIDX" unique="false">
+						<key attribute="site" />
+					</index>
+				</indexes>
+			</itemtype>
+				
+			<itemtype code="AbstractOrderEntry" autocreate="false"
+				generate="false">
+				<attributes>
+					<attribute qualifier="orderEntryNumber" type="java.lang.String">
+						<modifiers read="true" write="true" search="true" />
+						<description>Avoids performance issues when loading order history for returns and consignments into Hybris.  SAP Hybris was unable to propose a method to avoid table scans and temp tables during impex loading for order history in these cases.  The only work around was to use a key, this is that key.  This will come up for all markets.  This field should not be used in regular site operation.</description>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="margin" type="AmwayOrderMargin">
+						<modifiers read="true" write="true" search="true" />
+						<description>retail profit for the ABO</description>
+						<persistence type="property" />
+					</attribute>
+
+					<attribute qualifier="pointValue" type="double">
+						<description>Point Value</description>
+						<modifiers />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="businessVolume" type="double">
+						<description>Business Volume</description>
+						<modifiers />
+						<persistence type="property" />
+					</attribute>
+
+					<attribute qualifier="volumeAbo" type="java.lang.String">
+						<description>For simple group ordering, the ABO that gets the volume credit</description>
+						<modifiers read="true" write="true" search="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="aboBasePrice" type="java.lang.Double"
+						generate="true" autocreate="true">
+						<persistence type="property">
+							<columntype>
+								<value>java.math.BigDecimal</value>
+							</columntype>
+						</persistence>
+						<modifiers read="true" write="true" search="false"
+							optional="true" />
+						<defaultvalue>Double.valueOf(0.0d)</defaultvalue>
+					</attribute>
+					<attribute qualifier="retailBasePrice" type="java.lang.Double"
+						generate="true" autocreate="true">
+						<persistence type="property">
+							<columntype>
+								<value>java.math.BigDecimal</value>
+							</columntype>
+						</persistence>
+						<modifiers read="true" write="true" search="false"
+							optional="true" />
+						<defaultvalue>Double.valueOf(0.0d)</defaultvalue>
+					</attribute>
+					<attribute qualifier="skuVersion" type="java.lang.String">
+						<description>sku version for order history</description>
+						<modifiers read="true" write="true" optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="kitOrderEntry" type="AbstractOrderEntry">
+						<modifiers read="true" write="true" search="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="wareHouse" type="Warehouse">
+						<modifiers read="true" write="true" optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="proRatedPrice" type="java.lang.Double"
+						generate="true" autocreate="true">
+						<persistence type="property">
+							<columntype>
+								<value>java.math.BigDecimal</value>
+							</columntype>
+						</persistence>
+						<modifiers read="true" write="true" search="false"
+							optional="true" />
+						<defaultvalue>Double.valueOf(0.0d)</defaultvalue>
+					</attribute>
+					<attribute qualifier="pickupDateTime" type="java.util.Date">
+						<modifiers read="true" write="true" search="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="unitReturnPrice" type="java.lang.Double"
+						generate="true" autocreate="true">
+						<persistence type="property">
+							<columntype>
+								<value>java.math.BigDecimal</value>
+							</columntype>
+						</persistence>
+						<modifiers read="true" write="true" search="false"
+							optional="true" />
+						<defaultvalue>Double.valueOf(0.0d)</defaultvalue>
+					</attribute>
+				</attributes>
+				<indexes>
+					<index name="AbOrdrEntryVolAbo">
+						<key attribute="volumeAbo" />
+					</index>
+					<index name="OrdrEntryEntryNum">
+						<key attribute="entryNumber" />
+					</index>
+					<index name="odrEntNumbIdx">
+						<key attribute="orderEntryNumber" />
+					</index>
+				</indexes>
+			</itemtype>
+
+			<itemtype code="Order" autocreate="false" generate="false">
+				<attributes>
+					<attribute qualifier="clientipaddress" type="java.lang.String">
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+						<description>ip address from where the customer placed the order</description>
+					</attribute>
+					<attribute qualifier="losExportStatus" type="LosExportStatus">
+						<modifiers read="true" write="true" search="true" optional="true" />
+						<persistence type="property" />
+						<defaultvalue>em().getEnumerationValue("LosExportStatus", "LOSNOTUPDATED")</defaultvalue>
+						<description>Order status update in LOS</description>
+					</attribute>
+					<attribute qualifier="batchID" type="AmwayBatch">
+						<description>The POS batch number for the order.</description>
+						<persistence type="property" />
+					</attribute>
+
+				</attributes>
+				<indexes>
+					<index name="OrderAccount">
+						<key attribute="account" />
+					</index>
+					<index name="OrderVersion">
+						<key attribute="versionID" />
+					</index>
+					<index name="OrderStore">
+						<key attribute="store" />
+					</index>
+					<index name="OrderBatch">
+						<key attribute="batchID" />
+					</index>
+				</indexes>
+			</itemtype>
+
+			<itemtype code="OrderEntry" autocreate="false" generate="false">
+				<indexes>
+					<index name="OrdrEntryOrder">
+						<key attribute="order" />
+					</index>
+				</indexes>
+			</itemtype>
+
+			<itemtype code="AmwayOrderMargin" autocreate="true"
+				generate="true" jaloclass="com.amway.core.jalo.AmwayOrderMargin">
+				<description>This is the Amway order margin which will be stored at entry and order header level.</description>
+				<deployment table="AmwayOrderMargintbl" typecode="20002" />
+				<attributes>
+					<attribute qualifier="price" type="java.lang.Double"
+						autocreate="true">
+						<description>ABO unit price for the product/products</description>
+						<persistence type="property" />
+						<modifiers read="true" write="true" search="false"
+							optional="false" removable="false" initial="true" private="false"
+							partof="false" />
+					</attribute>
+					<attribute qualifier="margin" type="java.lang.Double"
+						autocreate="true">
+						<description>Calculated margin against ABO price and Customer price</description>
+						<persistence type="property" />
+						<modifiers read="true" write="true" search="false"
+							optional="false" removable="false" initial="true" private="false"
+							partof="false" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="AmwayOrderStatusHistoryEntry"
+				jaloclass="com.amway.core.jalo.AmwayOrderStatusHistoryEntry"
+				extends="GenericItem" autocreate="true" generate="true">
+				<deployment table="OrdStsHistoryEntries" typecode="20004" />
+				<attributes>
+					<attribute qualifier="timestamp" type="java.util.Date">
+						<modifiers initial="true" read="true" write="false"
+							optional="false" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="description" type="java.lang.String">
+						<modifiers read="true" write="true" optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="previousStatus" type="OrderStatus">
+						<modifiers read="true" write="true" optional="false" />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="AmwayOrderTMSEventHistory"
+				jaloclass="com.amway.core.jalo.AmwayOrderTMSEventHistory" extends="GenericItem"
+				autocreate="true" generate="true">
+				<deployment table="OrdTMSEventHistory" typecode="20005" />
+				<attributes>
+					<attribute qualifier="eventName" type="java.lang.String">
+						<modifiers read="true" write="false" optional="false"
+							initial="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="eventSequence" type="long">
+						<modifiers read="true" write="true" optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="displayValue" type="java.lang.String">
+						<modifiers read="true" write="true" optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="eventTime" type="java.util.Date">
+						<modifiers initial="false" read="true" write="true"
+							optional="false" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="description" type="java.lang.String">
+						<modifiers read="true" write="true" optional="true" />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+				<indexes>
+					<index name="otmsetNmIdx" unique="false">
+						<key attribute="eventName" />
+					</index>
+				</indexes>
+			</itemtype>
+
+			<itemtype code="Address" autocreate="false" generate="false">
+				<attributes>
+					<attribute type="java.lang.String" qualifier="landMark">
+						<description>Landmark</description>
+						<persistence type="property" />
+						<modifiers optional="true" write="true" read="true" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="contactPointName">
+						<description>Used as unique id for address at Magic and hybris</description>
+						<persistence type="property" />
+						<modifiers optional="true" write="true" read="true" />
+					</attribute>
+					<attribute type="boolean" qualifier="isAddressValidated">
+						<description>This flag is for address is validated by AVS or not</description>
+						<persistence type="property" />
+						<defaultvalue>Boolean.FALSE</defaultvalue>
+						<modifiers optional="true" write="true" read="true" />
+					</attribute>
+				</attributes>
+				 <indexes>
+                    <index name="addPstcdIdx">
+                     	<key attribute="postalcode" />
+                     </index>
+                     <index name="addTwnIdx">
+                     	<key attribute="town" />
+                     </index>
+                </indexes>
+			</itemtype>
+
+			<itemtype code="CreditCardPaymentInfo" autocreate="false"
+				generate="false">
+				<description>Extending CreditCardPaymentInfo type with additional attributes.</description>
+				<attributes>
+					<attribute qualifier="customerTaxId" type="java.lang.String">
+						<description>Tax Id provided while giving credit card details</description>
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+			
+			<itemtype code="AmwayPayPalPaymentInfo" autocreate="true"
+				generate="true" extends="PaymentInfo">
+				<description>PayPal Payment Info to store paypal payment information</description>
+			</itemtype>
+
+
+			<itemtype code="AmwayCreditPaymentInfo" extends="PaymentInfo"
+				jaloclass="com.amway.core.jalo.AmwayCreditPaymentInfo" autocreate="true"
+				generate="true">
+				<description>Payment info to store AR credits payment information</description>
+			</itemtype>
+
+			<itemtype code="AmwayMonetaryPaymentInfo" extends="PaymentInfo"
+				jaloclass="com.amway.core.jalo.AmwayMonetaryPaymentInfo" autocreate="true"
+				generate="true">
+				<description>Payment info to store AR monetary payment information</description>
+			</itemtype>
+
+			<itemtype code="AmwayCashPaymentInfo" extends="PaymentInfo"
+				jaloclass="com.amway.core.jalo.AmwayCashPaymentInfo" autocreate="true"
+				generate="true">
+				<description>Payment info to store cash payment information</description>
+			</itemtype>
+
+			<itemtype code="AmwayDebitCardPaymentInfo" extends="CreditCardPaymentInfo"
+				jaloclass="com.amway.core.jalo.AmwayDebitCardPaymentInfo"
+				autocreate="true" generate="true">
+				<description>Debit card Payment info to store debit payment information</description>
+			</itemtype>
+
+			<itemtype code="PaymentInfo" autocreate="false" generate="false">
+				<description>Extending PaymentInfo type with additional attributes.</description>
+				<attributes>
+					<attribute qualifier="verificationReferenceNumber" type="java.lang.String">
+						<description>Determines generated payment verification reference number.</description>
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+				<indexes>
+					<index name="PaymtInfoCodeIdx">
+						<key attribute="code" />
+					</index>
+				</indexes>
+			</itemtype>
+
+			<itemtype code="StockLevel" generate="false" autocreate="false">
+				<description>Extending the StockLevel type from core with additional attributes.</description>
+				<attributes>
+					<attribute qualifier="skuId" type="java.lang.String">
+						<description>Sku id, containing the version of substitute product.</description>
+						<modifiers />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="version" type="java.lang.String">
+						<description>Version, If specified differently than the skuid in the stocklevel.</description>
+						<modifiers />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+				<indexes>
+					<index name="AmwayStockLevelSkuIdIdx">
+						<key attribute="skuId" />
+					</index>
+					<index name="AmwayStockLevelSkuVersionIdx">
+						<key attribute="version" />
+					</index>
+					<index name="AmwayStockLevelWarehouseIdx">
+						<key attribute="warehouse" />
+					</index>
+					<index name="prdCdWhSkuIndex">
+						<key attribute="productCode" />
+						<key attribute="warehouse" />
+						<key attribute="skuId" />
+					</index>
+					<index name="prdCdWhSkuVrIndex">
+						<key attribute="productCode" />
+						<key attribute="warehouse" />
+						<key attribute="skuId" />
+						<key attribute="version" />
+					</index>
+				</indexes>
+			</itemtype>
+
+			<itemtype code="OrderProcess" autocreate="false" generate="false">
+				<attributes>
+					<attribute qualifier="returnRequestCode" type="java.lang.String">
+						<modifiers initial="false" optional="true" write="true" />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="ConsignmentEntry" autocreate="false"
+				generate="false">
+				<indexes>
+					<index name="ConsignmentEntryorderEntryIdx">
+						<key attribute="orderEntry" />
+					</index>
+					<index name="ConsignmentEntryConsignmentIdx">
+						<key attribute="consignment" />
+					</index>
+				</indexes>
+			</itemtype>
+
+			<itemtype code="Consignment" autocreate="false" generate="false">
+				<indexes>
+					<index name="ConsignmentCodeIdx">
+						<key attribute="code" />
+					</index>
+				</indexes>
+			</itemtype>
+
+			<itemtype code="PaymentMode" autocreate="false" generate="false">
+				<description>Extending PaymentMode type with additional attributes.</description>
+				<attributes>
+					<attribute qualifier="amwayGeneratePaymentVerificationNumber" type="boolean">
+						<description>The property specifies whether a verification number should be generated.</description>
+						<persistence type="property" />
+						<modifiers optional="false" />
+						<defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+					</attribute>
+				</attributes>
+				<indexes>
+					<index name="pytModeCodeIdx">
+						<key attribute="code" />
+					</index>
+				</indexes>
+			</itemtype>
+
+			<itemtype code="AmwayPaymentModeGroup" jaloclass="com.amway.core.jalo.payment.AmwayPaymentModeGroup">
+				<description>Determines the group of payment mode</description>
+				<deployment table="amwaypaymentmodegroups" typecode="20424" />
+				<attributes>
+					<attribute qualifier="type" type="AmwayPaymentModeGroupType">
+						<description>Unique type that identifies group.</description>
+						<persistence type="property" />
+						<modifiers write="false" optional="false" unique="true" initial="true" />
+					</attribute>
+					<attribute qualifier="name" type="localized:java.lang.String">
+						<description>Name of group.</description>
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+				<indexes>
+					<index name="typeIDX" unique="true">
+						<key attribute="type" />
+					</index>
+				</indexes>
+			</itemtype>
+
+			<itemtype code="DeliveryMode" autocreate="false" generate="false">
+				<indexes>
+					<index name="dlyModeCodeIdx">
+						<key attribute="code" />
+					</index>
+				</indexes>
+			</itemtype>
+
+ 			<itemtype code="BaseSite" autocreate="false" generate="false">
+				<indexes>
+					<index name="bsSiteUidIdx">
+						<key attribute="uid" />
+					</index>
+				</indexes>
+			</itemtype>
+
+			<itemtype code="BaseStore" autocreate="false" generate="false">
+				<indexes>
+					<index name="bsStoreUidIdx">
+						<key attribute="uid" />
+					</index>
+				</indexes>
+			</itemtype>
+
+			<itemtype code="PointOfService" autocreate="false" generate="false">
+				<indexes>
+					<index name="ptSrvNmIdx">
+						<key attribute="name" />
+					</index>
+				</indexes>
+			</itemtype>
+
+			<itemtype code="Warehouse" autocreate="false" generate="false">
+				<indexes>
+					<index name="wrCodeIdx">
+						<key attribute="code" />
+					</index>
+				</indexes>
+			</itemtype>
+
+			<itemtype code="Unit" autocreate="false" generate="false">
+				<indexes>
+					<index name="utCodeIdx">
+						<key attribute="code" />
+					</index>
+				</indexes>
+			</itemtype>
+
+			<itemtype code="PaymentTransaction" autocreate="false" generate="false">
+				<indexes>
+					<index name="ptCodeIdx">
+						<key attribute="code" />
+					</index>
+				</indexes>
+			</itemtype>
+		</typegroup>
+
+		<typegroup name="cms">
+			<itemtype code="BaseSite" autocreate="false" generate="false">
+				<description>Extending BaseSite type with additional attributes.</description>
+				<attributes>
+					<attribute type="Country" qualifier="defaultCountry">
+						<description>Default Country for this site.</description>
+						<persistence type="property" />
+					</attribute>
+					<attribute type="AmwayServiceProductMapType" qualifier="serviceVariant">
+						<description>kit product for site</description>
+						<persistence type="property" />
+					</attribute>
+					<attribute type="int" qualifier="returnPeriod">
+						<description>Return period days of Order</description>
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="CMSAccountRestriction" autocreate="true"
+				generate="true" jaloclass="com.amway.core.jalo.CMSAccountRestriction"
+				extends="AbstractRestriction">
+				<description>Restriction to check for B2B user</description>
+				<attributes>
+					<attribute type="AmwayBusinessNature" qualifier="accountType">
+						<description>Account type of restriction</description>
+						<persistence type="property" />
+						<modifiers optional="false" write="true" read="true" />
+					</attribute>
+				</attributes>
+			</itemtype>
+		</typegroup>
+
+		<typegroup name="BaseStore">
+			<itemtype code="BaseStore" autocreate="false" generate="false">
+				<description>Extending BaseStore type with additional attributes.</description>
+				<attributes>
+					<attribute qualifier="affiliateNumber" type="java.lang.String">
+						<description>affiliate number for a region,specific to Magic systems </description>
+						<modifiers />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="arCredit" type="java.lang.String">
+						<description>AR Credit threshold</description>
+						<modifiers />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="splitCreditCardThreshold" type="java.lang.String">
+						<description>Split Credit threshold</description>
+						<modifiers />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="AmwayinstallmentMapType" qualifier="installmentRange">
+						<description>kit product for site</description>
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="AmwayInfraAvailability" autocreate="true"
+				generate="true">
+				<description>Availalbilty of specific infrastructure</description>
+				<deployment table="AmwayInfraAvailtbl" typecode="20701" />
+				<attributes>
+					<attribute qualifier="code" type="java.lang.String">
+						<description>code for specific service/system </description>
+						<modifiers optional="false" write="true" read="true"
+							search="true" unique="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="status" type="AmwayInfraAvlStatus">
+						<description>status of the service / system </description>
+						<modifiers optional="false" write="true" read="true"
+							search="true" unique="true" />
+						<persistence type="property" />
+						<defaultvalue>em().getEnumerationValue("AmwayInfraAvlStatus", "ACTIVE")</defaultvalue>
+					</attribute>
+				</attributes>
+			</itemtype>
+			<itemtype code="AmwayPaymentConfig" autocreate="true"
+				generate="true">
+				<description>Availalbilty of specific payment mode</description>
+				<deployment table="AmwayPaymentConfigs" typecode="20902" />
+				<attributes>
+					<attribute qualifier="code" type="java.lang.String">
+						<description>code for specific config  </description>
+						<modifiers optional="false" write="true" read="true"
+							search="true" unique="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="channel" autocreate="true"
+						generate="true" type="SalesApplication">
+						<description> Channel for config</description>
+						<persistence type="property" />
+						<modifiers read="true" write="true" search="false"
+							optional="true" />
+					</attribute>
+					<attribute qualifier="type" type="AmwayCartType">
+						<description>Cart type for config.</description>
+						<persistence type="property" />
+						<modifiers read="true" write="true" search="true"
+							optional="false" />
+						<defaultvalue>em().getEnumerationValue("AmwayCartType", "web")</defaultvalue>
+					</attribute>
+					<attribute autocreate="true" qualifier="subtotal" type="java.lang.Double"
+						generate="true">
+						<persistence type="property" qualifier="SubTotal">
+							<columntype>
+								<value>java.math.BigDecimal</value>
+							</columntype>
+						</persistence>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<defaultvalue>Double.valueOf(0.0d)</defaultvalue>
+					</attribute>
+					<attribute qualifier="active" type="java.lang.Boolean">
+						<description>active status of config </description>
+						<defaultvalue>java.lang.Boolean.TRUE</defaultvalue>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="businessNature" type="AmwayBusinessNature">
+						<modifiers read="true" write="true" search="true"
+							optional="false" />
+						<persistence type="property" />
+						<description></description>
+					</attribute>
+				</attributes>
+				<indexes>
+					<index name="amPayCfgCodeIdx" unique="true">
+						<key attribute="code" />
+					</index>
+					<index name="amPayCfgChnlIdx">
+						<key attribute="channel" />
+					</index>
+					<index name="amPayCfgTypeIdx">
+						<key attribute="type" />
+					</index>
+					<index name="amPayCfgTotIdx">
+						<key attribute="subtotal" />
+					</index>
+					<index name="amPayCfgActIdx">
+						<key attribute="active" />
+					</index>
+					<index name="amPayCfgNatIdx">
+						<key attribute="businessNature" />
+					</index>
+				</indexes>
+			</itemtype>
+			<itemtype code="AmwayPaymentTypeConfig" autocreate="true"
+				generate="true">
+				<description>Availalbilty of specific payment mode</description>
+				<deployment table="AmwayPaymentTypeConfigs" typecode="20901" />
+				<attributes>
+					<attribute autocreate="true" qualifier="paymentMode"
+						type="PaymentMode" generate="true">
+						<persistence type="property" />
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+					</attribute>
+					<attribute qualifier="repeatableCount" type="int">
+						<description>repeatable count in combination</description>
+						<modifiers read="true" write="true" initial="false"
+							optional="false" />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+				<indexes>
+					<index name="amPayCfgTypMdIdx">
+						<key attribute="paymentMode" />
+					</index>
+					<index name="amPayCfgTypCntIdx">
+						<key attribute="repeatableCount" />
+					</index>
+				</indexes>
+			</itemtype>
+		</typegroup>
+
+		<typegroup name="message">
+			<itemtype code="AmwayMessage" autocreate="true" generate="true"
+				jaloclass="com.amway.core.jalo.AmwayMessage">
+				<description>Messages to be store in database. Used instead of local.properties</description>
+				<deployment table="AmwayMessagetbl" typecode="20301" />
+				<attributes>
+					<attribute qualifier="code" type="java.lang.String">
+						<description>Identifier for the message</description>
+						<modifiers optional="false" write="true" read="true"
+							search="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="message" type="localized:java.lang.String">
+						<description>message</description>
+						<modifiers optional="true" write="true" read="true"
+							search="true" />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+				<indexes>
+					<index name="amMsgCodeIdx" unique="true">
+						<key attribute="code" />
+					</index>
+				</indexes>
+			</itemtype>
+		</typegroup>
+
+		<typegroup name="cronjob">
+			<itemtype code="AmwayInfraAvailCronJob"
+				jaloclass="com.amway.core.cronjob.jalo.AmwayInfraAvailCronJob"
+				extends="CronJob" autocreate="true" generate="true">
+				<attributes>
+					<attribute qualifier="baseStore" type="BaseStore">
+						<description>The base store to run against</description>
+						<persistence type="property" />
+						<modifiers read="true" write="true" initial="false"
+							optional="false" />
+					</attribute>
+					<attribute qualifier="infraAvailCode" type="java.lang.String">
+						<description>Infrastructure availability code.</description>
+						<modifiers read="true" write="true" initial="false"
+							optional="false" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="infraAvailCheckUrl" type="java.lang.String">
+						<description>Infrastructure availability health check url.</description>
+						<modifiers read="true" write="true" initial="false"
+							optional="false" />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+			<itemtype code="FetchProcessStatusEmailCronJob"
+				jaloclass="com.amway.core.cronjob.jalo.FetchProcessStatusEmailCronJob"
+				extends="CronJob" autocreate="true" generate="true">
+				<attributes>
+					<attribute qualifier="processStatusValue" type="OrderFailureStatusTypeEnum">
+						<description>Process Status Code.</description>
+						<modifiers read="true" write="true" initial="false"
+							optional="false" />
+						<defaultvalue>em().getEnumerationValue("OrderFailureStatusTypeEnum", "FAILED")</defaultvalue>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="returnStatusCode" type="java.lang.String">
+						<description>Return Status Code.</description>
+						<modifiers read="true" write="true" initial="false"
+							optional="false" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="lastRemoteUpdateTime" type="java.util.Date">
+						<description>The time of the last sync with the remote system (remote system time).
+						</description>
+						<modifiers read="true" write="true" initial="false"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+			<itemtype code="AmwayPublishEventCronJob"
+				jaloclass="com.amway.core.cronjob.jalo.AmwayPublishEventCronJob"
+				extends="CronJob" autocreate="true" generate="true">
+				<attributes>
+					<attribute qualifier="serviceId" type="java.lang.String">
+						<description>Services Id.</description>
+						<modifiers read="true" write="true" initial="false"
+							optional="false" />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+			<itemtype code="AmwayProcessUnpaidExpiredOrdersCronJob"
+				extends="CronJob" autocreate="true" generate="true">
+				<attributes>
+					<attribute qualifier="expireDays" type="int">
+						<description>Expire number of days.</description>
+						<modifiers read="true" write="true" initial="false"
+							optional="false" />
+						<persistence type="property" />
+						<defaultvalue>2</defaultvalue>
+					</attribute>
+					<attribute type="orderStatusTypeList" qualifier="orderStatuses">
+						<description>list of statuses for which orders have to be checked.</description>
+						<modifiers read="true" write="true" initial="false"
+							optional="false" />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+		</typegroup>
+
+		<typegroup name="restriction">
+			<itemtype code="AmwayChannelPromotionRestriction" extends="AbstractPromotionRestriction"
+				jaloclass="com.amway.core.jalo.promotions.AmwayChannelPromotionRestriction"
+				autocreate="true" generate="true">
+				<attributes>
+					<attribute qualifier="channel" autocreate="true"
+						generate="true" type="AmwayChannelCollection">
+						<description>It checkes the Channel for which promotion gets applied</description>
+						<persistence type="property" />
+						<modifiers read="true" write="true" search="false"
+							optional="true" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="AmwayCartTypePromotionRestriction" extends="AbstractPromotionRestriction"
+				jaloclass="com.amway.core.jalo.promotions.AmwayCartTypePromotionRestriction"
+				autocreate="true" generate="true">
+				<attributes>
+					<attribute qualifier="cartTypes" autocreate="true"
+						generate="true" type="AmwayCartTypeCollection">
+						<description>It checkes the cart types for which promotion gets applied</description>
+						<persistence type="property" />
+						<modifiers read="true" write="true" search="false"
+							optional="true" />
+					</attribute>
+					<attribute qualifier="positive" type="java.lang.Boolean">
+						<defaultvalue>Boolean.TRUE</defaultvalue>
+						<description>
+						Specifies if this restriction is a positive (true) or negative
+						(false) one.
+					</description>
+						<persistence type="property" />
+						<modifiers search="false" optional="false" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="AmwayBusinessNaturePromotionRestriction"
+				extends="AbstractPromotionRestriction"
+				jaloclass="com.amway.core.jalo.promotions.AmwayBusinessNaturePromotionRestriction"
+				generate="true" autocreate="true">
+				<attributes>
+					<attribute type="AmwayBusinessNature" qualifier="businessNature">
+						<description>It checks the business nature of account for which Promotions gets applied</description>
+						<persistence type="property" />
+						<modifiers read="true" write="true" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="AmwayQualificationLevelPromotionRestriction"
+				extends="AbstractPromotionRestriction"
+				jaloclass="com.amway.core.jalo.promotions.AmwayQualificationLevelPromotionRestriction"
+				generate="true" autocreate="true">
+				<attributes>
+					<attribute type="QualificationLevelTypeEnum" qualifier="qualificationLevel">
+						<description>It checks the Qualification Level on amway account for which promotion gets applied </description>
+						<persistence type="property" />
+						<modifiers read="true" write="true" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="AmwaySegmentaionLevelPromotionRestriction"
+				extends="AbstractPromotionRestriction"
+				jaloclass="com.amway.core.jalo.promotions.AmwaySegmentaionLevelPromotionRestriction"
+				generate="true" autocreate="true">
+				<attributes>
+					<attribute type="SegmentationLevelTypeEnum" qualifier="segmentationLevel">
+						<description>It checks the Segmentaion Level on amway account for which promotion gets applied </description>
+						<persistence type="property" />
+						<modifiers read="true" write="true" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="AmwayBonusPercentagePromotionRestriction"
+				extends="AbstractPromotionRestriction"
+				jaloclass="com.amway.core.jalo.promotions.AmwayBonusPercentagePromotionRestriction"
+				generate="true" autocreate="true">
+				<attributes>
+					<attribute type="BonusPercentageRange" qualifier="bonusPercentageRange">
+						<description>It checks the Bonus Percentage exists in this range for which promotion gets applied </description>
+						<persistence type="property" />
+						<modifiers read="true" write="true" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="BonusPercentageRange" generate="true"
+				autocreate="true" extends="GenericItem" jaloclass="com.amway.core.jalo.BonusPercentageRange">
+				<deployment table="BonusPercentageRangebl" typecode="20302" />
+				<attributes>
+					<attribute type="java.lang.String" qualifier="from">
+						<modifiers read="true" write="true" optional="false"
+							search="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="to">
+						<modifiers read="true" write="true" optional="false"
+							search="true" />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<!-- Voucher Restrictions -->
+
+			<itemtype code="AmwayBusinessNatureVoucherRestriction"
+				extends="Restriction"
+				jaloclass="com.amway.core.jalo.vouchers.AmwayBusinessNatureVoucherRestriction"
+				generate="true" autocreate="true">
+				<attributes>
+					<attribute type="AmwayBusinessNature" qualifier="businessNature">
+						<description>It checks the business nature of account for which voucher gets applied</description>
+						<persistence type="property" />
+						<modifiers read="true" write="true" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="AmwayQualificationLevelVoucherRestriction"
+				extends="Restriction"
+				jaloclass="com.amway.core.jalo.vouchers.AmwayQualificationLevelVoucherRestriction"
+				generate="true" autocreate="true">
+				<attributes>
+					<attribute type="QualificationLevelTypeEnum" qualifier="qualificationLevel">
+						<description>It checks the Qualification Level on amway account for which voucher gets applied </description>
+						<persistence type="property" />
+						<modifiers read="true" write="true" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="AmwaySegmentaionLevelVoucherRestriction"
+				extends="Restriction"
+				jaloclass="com.amway.core.jalo.vouchers.AmwaySegmentaionLevelVoucherRestriction"
+				generate="true" autocreate="true">
+				<attributes>
+					<attribute type="SegmentationLevelTypeEnum" qualifier="segmentationLevel">
+						<description>It checks the Segmentaion Level on amway account for which voucher gets applied </description>
+						<persistence type="property" />
+						<modifiers read="true" write="true" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="AmwayBonusPercentageVoucherRestriction"
+				extends="Restriction"
+				jaloclass="com.amway.core.jalo.vouchers.AmwayBonusPercentageVoucherRestriction"
+				generate="true" autocreate="true">
+				<attributes>
+					<attribute type="BonusPercentageRange" qualifier="bonusPercentageRange">
+						<description>It checks the Bonus Percentage exists in this range for which voucher gets applied </description>
+						<persistence type="property" />
+						<modifiers read="true" write="true" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+
+			<!-- End of Voucher Restriction -->
+
+			<itemtype code="AmwayBonusPromotion" autocreate="true"
+				generate="true" extends="ProductPromotion"
+				jaloclass="com.amway.core.jalo.promotions.AmwayBonusPromotion">
+				<attributes>
+					<attribute qualifier="points" type="double">
+						<description>It indicates the points that will get added to Point Value on Order in percentage .</description>
+						<modifiers read="true" write="true" search="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="messageFired" type="localized:java.lang.String">
+						<description>The message to show when the promotion has fired.</description>
+						<modifiers read="true" write="true" optional="true" />
+						<persistence type="property">
+							<columntype>
+								<value>HYBRIS.LONG_STRING</value>
+							</columntype>
+						</persistence>
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="PromotionProductRestriction" autocreate="false"
+				generate="false">
+				<attributes>
+					<attribute qualifier="positive" type="java.lang.Boolean">
+						<persistence type="property" />
+						<defaultvalue>Boolean.TRUE</defaultvalue>
+						<description>
+			       Specifies if this restriction is a positive (true) or negative
+			       (false) one.
+			      </description>
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="ReturnRequest" autocreate="false" generate="false">
+				<description>Extending Request type with additional attributes.</description>
+				<attributes>
+
+					<attribute qualifier="returnPeriod" type="AmwayOrderPeriod">
+						<description>The return order period for which the cart was created and the order was placed.</description>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="returnBonusPeriod" type="AmwayBonusPeriod">
+						<description>The return bonus period for which the cart was created and the order was placed.</description>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="date" type="java.util.Date">
+						<persistence type="property" />
+						<modifiers read="true" write="true" search="true"
+							initial="false" optional="true" />
+					</attribute>
+					<attribute qualifier="consolidateDate" type="java.util.Date">
+						<modifiers write="false" read="true" search="false" />
+						<persistence type="dynamic"
+							attributeHandler="returnsConsolidateDateAttributeProvider" />
+					</attribute>
+					<attribute qualifier="batchID" type="AmwayBatch">
+						<description>The POS batch number for the return.</description>
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+				<indexes>
+					<index name="returnBatch">
+						<key attribute="batchID" />
+					</index>
+				</indexes>
+
+			</itemtype>
+
+			<itemtype code="Country" autocreate="false" generate="false">
+				<attributes>
+					<attribute qualifier="affiliateNumber" type="java.lang.String">
+						<description>Affiliate Number for the Countries</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="adaCountryCode" type="java.lang.String">
+						<description>Ada Country Code for the Countries</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="countryCode" type="java.lang.String">
+						<description>Country Code mapped with AS400</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<!-- amwaycommerce branch - itemtype code="BaseSite" autocreate="false" generate="false">
+				<description>Extending BaseSite type with additional attributes.</description>
+				<attributes>
+					<attribute type="java.lang.Double" qualifier="giftWrapPrice">
+						<description>The Giftwrap attribute to store giftwrap price</description>
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype -->
+
+			<itemtype code="CMSSite" autocreate="false" generate="false">
+				<description>Extends existing type with additional attributes.</description>
+				<attributes>
+					<attribute qualifier="expirationPeriod" type="int">
+						<persistence type="property" />
+						<modifiers optional="true" read="true" write="true" />
+						<description>Determines the number of days for ABO renewal befor expiration.</description>
+					</attribute>
+				</attributes>
+			</itemtype>
+			<itemtype code="BaseSite" autocreate="false" generate="false">
+				<description>Extends existing type with additional attributes.</description>
+				<attributes>
+					<attribute qualifier="timeZone" type="java.lang.String">
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+						<description>Time zone associated to the site</description>
+					</attribute>
+				</attributes>
+			</itemtype>
+		</typegroup>
+
+		<typegroup name="Language">
+			<itemtype code="Language" autocreate="false" generate="false">
+				<description>Extending Language type with lynx specific attributes.</description>
+				<attributes>
+					<attribute type="localized:Media" qualifier="flag">
+						<persistence type="property"></persistence>
+						<modifiers optional="true" />
+					</attribute>
+				</attributes>
+			</itemtype>
+		</typegroup>
+
+		<typegroup>
+			<itemtype code="PickupAddress" extends="Address">
+				<description>Extending Address type with localized attributes for pickup store.</description>
+				<deployment table="PickupAddresses" typecode="10023"/>
+				<attributes>
+					<attribute qualifier="pickupLocationName" type="localized:java.lang.String">
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="localizedStreetname" type="localized:java.lang.String" >
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="localizedTown" type="localized:java.lang.String">
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="localizedStreetnumber" type="localized:java.lang.String" >
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="localizedPostalcode" type="localized:java.lang.String" >
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="localizedLine1" type="java.lang.String">
+						<description>Address localized line1 is a dynamic attribute that is stored in the PickupAddress.localizedStreetname field</description>
+						<persistence type="dynamic" attributeHandler="addressLocalizedLine1Attribute" />
+					</attribute>
+					<attribute qualifier="localizedLine2" type="java.lang.String">
+						<description>Address localized line2 is a dynamic attribute that is stored in the Address.localizedStreetnumber field</description>
+						<persistence type="dynamic" attributeHandler="addressLocalizedLine2Attribute" />
+					</attribute>
+				</attributes>
+			</itemtype>
+		</typegroup>
+	</itemtypes>
+</items>
