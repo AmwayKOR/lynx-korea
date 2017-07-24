@@ -15,7 +15,7 @@
 		<!-- you should add all required extensions to this list, except platform 
 			extensions which are automatically required -->
 		<requires-extension name="acceleratorcms"/>
-		<requires-extension name="solrserver"/>
+		<!-- <requires-extension name="solrserver"/> -->
 		<requires-extension name="amwaycore"/>
 
 		<coremodule generated="true" manager="com.amway.apac.core.jalo.AmwayapacCoreManager" packageroot="com.amway.apac.core"/>
