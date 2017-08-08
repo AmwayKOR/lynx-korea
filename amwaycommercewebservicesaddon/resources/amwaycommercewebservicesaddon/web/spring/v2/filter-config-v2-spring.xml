@@ -58,7 +58,7 @@
 
     <alias alias="posMatchingFilter" name="defaultposMatchingFilter" />
     <bean id="defaultposMatchingFilter" class="com.amway.core.v2.filter.PosMatchingFilter">
-        <property name="regexp" value="^/[^/]+/pos/account/([^/]+)" />
+        <property name="regexp" value="/account/([^/]+)" />
     </bean>
 
 

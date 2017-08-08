@@ -41,12 +41,8 @@ public class DefaultGetPartyHistoryService
 	@Override
 	protected PartyHistoryResponse executeEvent(final Object input)
 	{
-		final RestResponse<PartyHistoryResponse> dmsResultRestResponse = getDmsClient()
-				.executeDmsRequest(getXclientRefId(), getUrlPath(),
-						 input,
-						PartyHistoryResponse.class);
-		Assert.notNull(dmsResultRestResponse, "Get Party Ecomm failure");
-		return dmsResultRestResponse.getResult();
+		//see Deprecated comment above
+		return null;
 	}
 
 }

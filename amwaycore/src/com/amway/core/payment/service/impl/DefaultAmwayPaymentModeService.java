@@ -64,13 +64,28 @@ public class DefaultAmwayPaymentModeService extends DefaultPaymentModeService im
 	 */
 	@Override
 	public Map<String, List<AmwayPaymentModeData>> getSupportedPaymentModesCombination(final CartModel cart,
-			final AmwayProfileResponseData amwayProfileData, final boolean skipSelectedMode)
-	{
-		final Map<String, List<AmwayPaymentModeData>> supportedConfig = new HashMap<>();
+			final AmwayProfileResponseData amwayProfileData, final boolean skipSelectedMode) {
 
-		final BigDecimal cartTotal = BigDecimal.valueOf(cart.getTotalPrice().doubleValue());
+
 		final Map<String, BigDecimal> payModeLimits = new HashMap<>();
 		payModeLimits.put(AmwaycoreConstants.PaymentMode.ARCREDIT, AmwayCustomerHelper.getARCreditLimit(amwayProfileData));
+		return getSupportedPaymentModesCombination(cart, payModeLimits,skipSelectedMode );
+
+	}
+
+	/**
+	 * Gets all Supported split payment modes combinations configured in system
+	 *
+	 * @param cart
+	 * @param payModeLimits
+	 * @param skipSelectedMode
+	 */
+	public Map<String, List<AmwayPaymentModeData>> getSupportedPaymentModesCombination(final CartModel cart,
+		final Map<String, BigDecimal> payModeLimits, final boolean skipSelectedMode){
+
+		final Map<String, List<AmwayPaymentModeData>> supportedConfig = new HashMap<>();
+		final BigDecimal cartTotal = BigDecimal.valueOf(cart.getTotalPrice().doubleValue());
+
 		final SalesApplication currentChannel = this.sessionService.getCurrentSession().getAttribute("currentChannel");
 
 		final HashMap<String, Integer> selectedPayModes = skipSelectedMode ? new HashMap<>()
@@ -96,6 +111,8 @@ public class DefaultAmwayPaymentModeService extends DefaultPaymentModeService im
 		return supportedConfig;
 
 	}
+
+
 
 	/**
 	 * To get supported payment modes.
@@ -156,22 +173,9 @@ public class DefaultAmwayPaymentModeService extends DefaultPaymentModeService im
 	@Override
 	public Map<String, List<AmwayPaymentModeData>> getSupportedPaymentModesCombination(final CartModel cart)
 	{
-		//HPOS-40 and HPOS-33 fix (see Athena code)  this is demo code
-		final Map<String, List<AmwayPaymentModeData>> supportedConfig = new HashMap<>();
-		final List<AmwayPaymentModeData> ccConfigListForCode = new ArrayList<>();
 
-		final AmwayPaymentModeData cc = new AmwayPaymentModeData();
-		cc.setCode(AmwaycoreConstants.PaymentMode.CREDITCARD);
-		ccConfigListForCode.add(cc);
-		supportedConfig.put(AmwaycoreConstants.PaymentMode.CREDITCARD, ccConfigListForCode);
-
-		final List<AmwayPaymentModeData> cashConfigListForCode = new ArrayList<>();
-		final AmwayPaymentModeData cash = new AmwayPaymentModeData();
-		cash.setCode(AmwaycoreConstants.PaymentMode.CASH);
-		cashConfigListForCode.add(cash);
-		supportedConfig.put(AmwaycoreConstants.PaymentMode.CASH, cashConfigListForCode);
-
-		return supportedConfig;
+		final Map<String, BigDecimal> payModeLimits = new HashMap<>();
+		return getSupportedPaymentModesCombination(cart, payModeLimits, true);
 
 	}
 

@@ -45,13 +45,8 @@ public class DefaultGetPartyEcommService
 	@Override
 	protected GetPartyEcommResponse executeEvent(final Object input)
 	{
-		LOG.info("Calling webservice EcommService/getPartyEcomm.....");
-		final RestResponse<GetPartyEcommResponse> dmsResultRestResponse = getDmsClient()
-				.executeDmsRequest(getXclientRefId(), getUrlPath(),
-						 input,
-						GetPartyEcommResponse.class);
-		Assert.notNull(dmsResultRestResponse, "Get Party Ecomm failure");
-		return dmsResultRestResponse.getResult();
+		//see Deprecated comment above
+		return null;
 	}
 
 }

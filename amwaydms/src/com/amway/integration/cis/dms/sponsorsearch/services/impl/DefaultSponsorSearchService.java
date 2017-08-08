@@ -42,12 +42,8 @@ public class DefaultSponsorSearchService
 	@Override
 	protected GetSponsorListResponse executeEvent(final Object input)
 	{
-		final RestResponse<GetSponsorListResponse> dmsResultRestResponse = getDmsClient()
-				.executeDmsRequest(getXclientRefId(), getUrlPath(),
-						input,
-						GetSponsorListResponse.class);
-		Assert.notNull(dmsResultRestResponse, "Failed to get Sponsors for Zip code");
-		return dmsResultRestResponse.getResult();
+		//see Deprecated comment above
+		return null;
 	}
 
 

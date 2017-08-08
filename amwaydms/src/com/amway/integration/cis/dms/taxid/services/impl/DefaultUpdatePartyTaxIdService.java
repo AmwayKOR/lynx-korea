@@ -27,12 +27,8 @@ public class DefaultUpdatePartyTaxIdService
 	@Override
 	protected TaxIdResponse executeEvent(final Object input)
 	{
-		LOG.info("Calling webservice UpdatePartyTaxIDService....");
-		final RestResponse<TaxIdResponse> dmsResultRestResponse = getDmsClient()
-				.executeDmsRequest(getXclientRefId(), getUrlPath(), input, TaxIdResponse.class);
-		Assert.notNull(dmsResultRestResponse, "Failed to update party tax id details");
-
-		return dmsResultRestResponse.getResult();
+		//see Deprecated comment above
+		return null;
 	}
 
 	@Override

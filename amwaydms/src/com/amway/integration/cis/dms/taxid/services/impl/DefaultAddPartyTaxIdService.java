@@ -38,10 +38,7 @@ public class DefaultAddPartyTaxIdService extends AbstractDmsService<CommonRespon
 	@Override
 	protected TaxIdResponse executeEvent(final Object input)
 	{
-		final RestResponse<TaxIdResponse> dmsResultRestResponse = getDmsClient()
-				.executeDmsRequest(getXclientRefId(), getUrlPath(),
-						input, TaxIdResponse.class);
-		Assert.notNull(dmsResultRestResponse, "Add Party TaxId Details failure");
-		return dmsResultRestResponse.getResult();
+		//see Deprecated comment above
+		return null;
 	}
 }

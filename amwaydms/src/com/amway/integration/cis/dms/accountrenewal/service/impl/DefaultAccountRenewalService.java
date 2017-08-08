@@ -13,7 +13,7 @@ import org.apache.log4j.Logger;
 import org.springframework.util.Assert;
 
 
-/** @deprecated  To reduce dependency on any particular version of DMS, it was decided to limit direct
+/** @deprecated To reduce dependency on any particular version of DMS, it was decided to limit direct
  * hybris-to-DMS communication to the minimum that is absolutely required to support order capture flow.
  * More information:  https://jira.amway.com:8444/display/HC/amwaydms
  *
@@ -61,12 +61,7 @@ public class DefaultAccountRenewalService
 	@Override
 	protected ReturnInfoService executeEvent(final Object input)
 	{
-		LOG.info("Calling webservice RenewalService/processABORenewal.....");
-		final RestResponse<ReturnInfoService> dmsResultRestResponse = getDmsClient()
-				.executeDmsRequest(getXclientRefId(), getUrlPath(), input,
-						ReturnInfoService.class);
-		Assert.notNull(dmsResultRestResponse, "Failed to renew the account");
-
-		return dmsResultRestResponse.getResult();
+		//see Deprecated comment above
+		return null;
 	}
 }
