@@ -41,12 +41,8 @@ public class DefaultGetPartyPhoneService
 	@Override
 	protected GetPartyPhoneResponse executeEvent(final Object input)
 	{
-		final RestResponse<GetPartyPhoneResponse> dmsResultRestResponse = getDmsClient()
-				.executeDmsRequest(getXclientRefId(), getUrlPath(),
-						 input,
-						GetPartyPhoneResponse.class);
-		Assert.notNull(dmsResultRestResponse, "Get Party Ecomm failure");
-		return dmsResultRestResponse.getResult();
+		//see Deprecated comment above
+		return null;
 	}
 
 }

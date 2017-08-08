@@ -24,15 +24,8 @@ public class DefaultSaveAddressInformationService
 	@Override
 	protected ReturnInfoService executeEvent(final Object input)
 	{
-		final RestResponse<ReturnInfoService> dmsResultRestResponse = getDmsClient()
-				.executeDmsRequest(getXclientRefId(), getUrlPath(),
-						input,
-
-						ReturnInfoService.class);
-
-		Assert.notNull(dmsResultRestResponse, "Failed to save address");
-
-		return dmsResultRestResponse.getResult();
+		//see Deprecated comment above
+		return null;
 	}
 
 	@Override

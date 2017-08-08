@@ -41,13 +41,7 @@ public class DefaultProcessPartyEcommService
 	@Override
 	protected ReturnInfoService executeEvent(final Object input)
 	{
-		LOG.info("Calling webservice EcommService/processPartyEcomm.....");
-		final RestResponse<ReturnInfoService> dmsResultRestResponse = getDmsClient()
-				.executeDmsRequest(getXclientRefId(), getUrlPath(),
-						input,
-						ReturnInfoService.class);
-		Assert.notNull(dmsResultRestResponse, "Failed to process party ecomm.");
-
-		return dmsResultRestResponse.getResult();
+		//see Deprecated comment above
+		return null;
 	}
 }

@@ -29,12 +29,8 @@ public class DefaultPartyCreditProfileService
 	@Override
 	protected CreditProfileResponse executeEvent(final Object input)
 	{
-		final RestResponse<CreditProfileResponse> dmsResultRestResponse = getDmsClient()
-				.executeDmsRequest(getXclientRefId(), getUrlPath(),
-						 input,
-						CreditProfileResponse.class);
-		Assert.notNull(dmsResultRestResponse, "Get Credit Profile failure");
-		return dmsResultRestResponse.getResult();
+		//see Deprecated comment above
+		return null;
 	}
 
 	@Override
