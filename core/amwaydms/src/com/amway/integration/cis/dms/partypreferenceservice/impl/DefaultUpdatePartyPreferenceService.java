@@ -43,12 +43,8 @@ public class DefaultUpdatePartyPreferenceService
 	@Override
 	protected ReturnInfoService executeEvent(final Object input)
 	{
-		LOG.info("Calling webservice PartyPreferenceService/updatePartyPreference.....");
-		final RestResponse<ReturnInfoService> dmsResultRestResponse = getDmsClient()
-				.executeDmsRequest(getXclientRefId(), getUrlPath(), input,
-						ReturnInfoService.class);
-		Assert.notNull(dmsResultRestResponse, "Update Party Preference  failure");
-		return dmsResultRestResponse.getResult();
+		//see Deprecated comment above
+		return null;
 	}
 
 }

@@ -30,10 +30,8 @@ public class DefaultProcessCustomerRegistrationService
 	@Override
 	protected CustomerRegistrationOutput executeEvent(final Object input)
 	{
-		final RestResponse<CustomerRegistrationOutput> dmsResultRestResponse = getDmsClient()
-				.executeDmsRequest(getXclientRefId(), getUrlPath(), input, CustomerRegistrationOutput.class);
-		Assert.notNull(dmsResultRestResponse, "Failed to register user");
-		return dmsResultRestResponse.getResult();
+		//see Deprecated comment above
+		return null;
 
 	}
 

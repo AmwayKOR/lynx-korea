@@ -26,14 +26,8 @@ public class DefaultDeletePartyAddressService
 	@Override
 	protected ReturnInfoService executeEvent(final Object input)
 	{
-		LOG.info("Calling webservice AddressService/deletePartyAddress.....");
-		final RestResponse<ReturnInfoService> dmsResultRestResponse = getDmsClient()
-				.executeDmsRequest(getXclientRefId(), getUrlPath(),
-						input,
-						ReturnInfoService.class);
-		Assert.notNull(dmsResultRestResponse, "Failed to delete party address info");
-
-		return dmsResultRestResponse.getResult();
+		//see Deprecated comment above
+		return null;
 	}
 
 	@Override

@@ -30,13 +30,8 @@ public class DefaultSubscriptionService
 	@Override
 	protected SubscriptionResponse executeEvent(final Object input)
 	{
-		final RestResponse<SubscriptionResponse> dmsResultRestResponse = getDmsClient()
-				.executeDmsRequest(getXclientRefId(), getUrlPath(),
-						input,
-						SubscriptionResponse.class);
-
-		Assert.notNull(dmsResultRestResponse, "Updation Failure");
-		return dmsResultRestResponse.getResult();
+		//see Deprecated comment above
+		return null;
 	}
 
 	@Override
