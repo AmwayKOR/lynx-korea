@@ -24,12 +24,8 @@ public class DefaultValidatePrePrintedNumberService
 	@Override
 	protected ValidatePrePrntdNmbrResponse executeEvent(final Object input)
 	{
-		final RestResponse<ValidatePrePrntdNmbrResponse> dmsResultRestResponse = getDmsClient()
-				.executeDmsRequest(getXclientRefId(), getUrlPath(),
-						input,
-						ValidatePrePrntdNmbrResponse.class);
-		Assert.notNull(dmsResultRestResponse, "Registration failure");
-		return dmsResultRestResponse.getResult();
+		//see Deprecated comment above
+		return null;
 	}
 
 	@Override

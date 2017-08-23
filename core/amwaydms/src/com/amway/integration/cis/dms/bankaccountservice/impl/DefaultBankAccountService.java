@@ -47,13 +47,8 @@ public class DefaultBankAccountService
 	@Override
 	protected BankAccountDetailResponse executeEvent(final Object input)
 	{
-		LOG.info("Calling webservice BankAccountService/getBankAccount.....");
-		final RestResponse<BankAccountDetailResponse> dmsResultRestResponse = getDmsClient()
-				.executeDmsRequest(getXclientRefId(), getUrlPath(),
-						 input,
-						BankAccountDetailResponse.class);
-		Assert.notNull(dmsResultRestResponse, "Failed to get Bank Account information");
-		return dmsResultRestResponse.getResult();
+		//see Deprecated comment above
+		return null;
 	}
 
 }

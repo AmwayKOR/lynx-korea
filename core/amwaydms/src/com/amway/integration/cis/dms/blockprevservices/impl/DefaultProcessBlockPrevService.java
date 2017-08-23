@@ -44,12 +44,8 @@ public class DefaultProcessBlockPrevService
 	@Override
 	protected ReturnInfoService executeEvent(final Object input)
 	{
-		final RestResponse<ReturnInfoService> dmsResultRestResponse = getDmsClient()
-				.executeDmsRequest(getXclientRefId(), getUrlPath(),
-						 input,
-						ReturnInfoService.class);
-		Assert.notNull(dmsResultRestResponse, "Process Block Prev Service failure");
-		return dmsResultRestResponse.getResult();
+		//see Deprecated comment above
+		return null;
 	}
 
 }

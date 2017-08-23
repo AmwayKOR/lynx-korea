@@ -27,13 +27,8 @@ public class DefaultUpdatePartyCreditProfileService
 	@Override
 	protected ReturnInfoService executeEvent(final Object input)
 	{
-		LOG.info("Calling webservice UpdatePartyCreditProfileService....");
-		final RestResponse<ReturnInfoService> dmsResultRestResponse = getDmsClient()
-				.executeDmsRequest(getXclientRefId(), getUrlPath(), input,
-						ReturnInfoService.class);
-		Assert.notNull(dmsResultRestResponse, "Failed to update party credit profile details");
-
-		return dmsResultRestResponse.getResult();
+		//see Deprecated comment above
+		return null;
 	}
 
 	@Override

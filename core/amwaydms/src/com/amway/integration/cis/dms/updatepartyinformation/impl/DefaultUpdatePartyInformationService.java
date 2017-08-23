@@ -26,12 +26,8 @@ public class DefaultUpdatePartyInformationService
 	@Override
 	protected ReturnInfoService executeEvent(final Object input)
 	{
-		LOG.info("Calling webservice PartyService/updateParty.....");
-		final RestResponse<ReturnInfoService> dmsResultRestResponse = getDmsClient()
-				.executeDmsRequest(getXclientRefId(), getUrlPath(), input, ReturnInfoService.class);
-		Assert.notNull(dmsResultRestResponse, "Failed to update party personal info");
-
-		return dmsResultRestResponse.getResult();
+		//see Deprecated comment above
+		return null;
 	}
 
 	@Override

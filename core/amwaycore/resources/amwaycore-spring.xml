@@ -243,7 +243,6 @@
 	
 	<alias alias="stockService" name="amwayStockService" />
 	<bean id="amwayStockService" class="com.amway.core.stock.service.impl.DefaultAmwayStockService" parent="defaultStockService">
-		<property name="amwayStockLevelDao" ref="stockLevelDao"/>
 	</bean>	
 
 	<!-- Solr field value providers -->
