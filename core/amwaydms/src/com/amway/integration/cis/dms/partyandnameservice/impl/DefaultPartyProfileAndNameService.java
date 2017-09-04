@@ -35,45 +35,8 @@ public class DefaultPartyProfileAndNameService implements PartyProfileAndNameSer
 	@Override
 	public PartyNameDetailResponseData getPartyProfileAndNameService(final PartyProfileAndNameInputRequestData partyInfo)
 	{
-		validateParameterNotNullStandardMessage("ABO Number", partyInfo.getAboNum());
-		validateParameterNotNullStandardMessage("Affiliate Number", partyInfo.getSalesPlanAff());
-		final PartyProfileAndNameInputRequest dmsRequest = getDmsPartyProfileAndNameInputConverter().convert(partyInfo);
-
-		final PartyNameDetailResponse dmsResponse = getOndemandHystrixCommandFactory().newCommand(getHystrixCommandConfig(),
-				new de.hybris.platform.integration.commons.hystrix.HystrixExecutable<PartyNameDetailResponse>()
-				{
-					@Override
-					public PartyNameDetailResponse runEvent()
-					{
-						LOG.debug("Executing request");
-						final RestResponse<PartyNameDetailResponse> dmsResultRestResponse = getDmsClient()
-								.executeDmsRequest("x-ref", "v2/PartyService/getPartyProfileAndName", dmsRequest,
-										PartyNameDetailResponse.class);
-						return dmsResultRestResponse.getResult();
-					}
-
-					@Override
-					public PartyNameDetailResponse fallbackEvent()
-					{
-						LOG.debug("Executing fallback");
-						return null;
-					}
-
-					@Override
-					public PartyNameDetailResponse defaultEvent()
-					{
-						return null;
-					}
-
-
-				}).execute();
-
-		if (dmsResponse == null)
-		{
-			return createPartyDataResult();
-
-		}
-		return extractOutput(dmsResponse);
+		//see Deprecated comment above
+		return null;
 	}
 
 	private PartyNameDetailResponseData createPartyDataResult()

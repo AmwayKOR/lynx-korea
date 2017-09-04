@@ -3,18 +3,27 @@
  */
 package com.amway.core.stock.service.impl;
 
-import de.hybris.platform.core.GenericSearchConstants.LOG;
+import de.hybris.platform.basecommerce.enums.PointOfServiceTypeEnum;
+import de.hybris.platform.commerceservices.stock.impl.DefaultCommerceStockService;
+import de.hybris.platform.warehousing.atp.services.impl.WarehousingCommerceStockService;
 import de.hybris.platform.core.model.order.AbstractOrderEntryModel;
 import de.hybris.platform.core.model.order.AbstractOrderModel;
 import de.hybris.platform.core.model.order.OrderModel;
+import de.hybris.platform.core.model.product.ProductModel;
+import de.hybris.platform.ordersplitting.model.StockLevelModel;
+import de.hybris.platform.ordersplitting.model.WarehouseModel;
+import de.hybris.platform.servicelayer.util.ServicesUtil;
 import de.hybris.platform.stock.exception.InsufficientStockLevelException;
-import de.hybris.platform.warehousing.atp.services.impl.WarehousingCommerceStockService;
+import de.hybris.platform.store.BaseStoreModel;
+import de.hybris.platform.storelocator.model.PointOfServiceModel;
 
 import org.apache.log4j.Logger;
 
+import com.amway.core.enums.AmwayCartType;
 import com.amway.core.stock.service.AmwayCommerceStockService;
 import com.amway.core.stock.service.AmwayStockService;
 import com.amway.core.stock.strategy.AmwayWarehouseSelectionStrategy;
+import com.amway.core.util.AmwayCartHelper;
 
 
 /**
@@ -29,7 +38,6 @@ public class DefaultAmwayCommerceStockService extends WarehousingCommerceStockSe
 
 	/**
 	 * This method is just here to support POS testing for stock reserve. Override this!
-	 *
 	 * @param abstractOrderModel
 	 */
 	@Deprecated
@@ -39,7 +47,9 @@ public class DefaultAmwayCommerceStockService extends WarehousingCommerceStockSe
 		{
 			try
 			{
-				getAmwayStockService().reserve(abstractOrderEntryModel.getProduct(), abstractOrderEntryModel.getWareHouse(),
+				WarehouseModel warehouse = abstractOrderEntryModel.getDeliveryPointOfService().getWarehouses().get(0);
+
+				getAmwayStockService().reserve(abstractOrderEntryModel.getProduct(), warehouse,
 						abstractOrderEntryModel.getQuantity().intValue(), abstractOrderEntryModel.getSkuVersion());
 			}
 			catch (final InsufficientStockLevelException e)
@@ -50,20 +60,6 @@ public class DefaultAmwayCommerceStockService extends WarehousingCommerceStockSe
 		}
 	}
 
-	/**
-	 * Method to commit stock for an order entry
-	 *
-	 * @param orderModel
-	 */
-	@Override
-	public void commit(final OrderModel orderModel)
-	{
-		for (final AbstractOrderEntryModel abstractOrderEntryModel : orderModel.getEntries())
-		{
-			getAmwayStockService().commit(abstractOrderEntryModel, abstractOrderEntryModel.getWareHouse(),
-					abstractOrderEntryModel.getQuantity().intValue(), abstractOrderEntryModel.getSkuVersion());
-		}
-	}
 
 	/**
 	 * @return amwayWarehouseSelectionStrategy
@@ -74,8 +70,7 @@ public class DefaultAmwayCommerceStockService extends WarehousingCommerceStockSe
 	}
 
 	/**
-	 * @param amwayWarehouseSelectionStrategy
-	 *           the amwayWarehouseSelectionStrategy to set
+	 * @param amwayWarehouseSelectionStrategy the amwayWarehouseSelectionStrategy to set
 	 */
 	public void setAmwayWarehouseSelectionStrategy(final AmwayWarehouseSelectionStrategy amwayWarehouseSelectionStrategy)
 	{
@@ -91,12 +86,10 @@ public class DefaultAmwayCommerceStockService extends WarehousingCommerceStockSe
 	}
 
 	/**
-	 * @param amwayStockService
-	 *           the amwayStockService to set
+	 * @param amwayStockService the amwayStockService to set
 	 */
 	public void setAmwayStockService(final AmwayStockService amwayStockService)
 	{
 		this.amwayStockService = amwayStockService;
 	}
-
 }

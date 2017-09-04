@@ -28,11 +28,8 @@ public class DefaultAddAdditionalApplicantService
 	@Override
 	protected AddPartyResponse executeEvent(final Object input)
 	{
-		final RestResponse<AddPartyResponse> dmsResultRestResponse = getDmsClient()
-				.executeDmsRequest(getXclientRefId(), getUrlPath(),
-						 input, AddPartyResponse.class);
-		Assert.notNull(dmsResultRestResponse, "Add Applicant failure");
-		return dmsResultRestResponse.getResult();
+		//see Deprecated comment above
+		return null;
 
 	}
 

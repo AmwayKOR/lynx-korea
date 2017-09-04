@@ -26,12 +26,8 @@ public class DefaultGetPartyTaxIdService
 	@Override
 	protected GetPartyTaxIdDetailsResponse executeEvent(final Object input)
 	{
-		final RestResponse<GetPartyTaxIdDetailsResponse> dmsResultRestResponse = getDmsClient()
-				.executeDmsRequest(getXclientRefId(), getUrlPath(),
-						 input,
-						GetPartyTaxIdDetailsResponse.class);
-		Assert.notNull(dmsResultRestResponse, "Get Party TaxId Details failure");
-		return dmsResultRestResponse.getResult();
+		//see Deprecated comment above
+		return null;
 	}
 
 

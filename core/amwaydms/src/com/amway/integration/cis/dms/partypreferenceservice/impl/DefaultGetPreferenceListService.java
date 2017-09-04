@@ -41,13 +41,8 @@ public class DefaultGetPreferenceListService
 	@Override
 	protected GetPreferenceResponse executeEvent(final Object input)
 	{
-		LOG.info("Calling webservice PartyPreferenceService/getPreferenceList.....");
-		final RestResponse<GetPreferenceResponse> dmsResultRestResponse = getDmsClient()
-				.executeDmsRequest(getXclientRefId(), getUrlPath(),
-						 input,
-						GetPreferenceResponse.class);
-		Assert.notNull(dmsResultRestResponse, "Get Party History failure");
-		return dmsResultRestResponse.getResult();
+		//see Deprecated comment above
+		return null;
 	}
 
 }

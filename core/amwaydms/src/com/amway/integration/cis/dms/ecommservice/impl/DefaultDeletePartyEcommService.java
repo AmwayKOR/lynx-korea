@@ -43,13 +43,8 @@ public class DefaultDeletePartyEcommService
 	@Override
 	protected ReturnInfoService executeEvent(final Object input)
 	{
-		LOG.info("Calling webservice EcommService/deletePartyEcomm.....");
-		final RestResponse<ReturnInfoService> dmsResultRestResponse = getDmsClient()
-				.executeDmsRequest(getXclientRefId(), getUrlPath(),
-						input,
-						ReturnInfoService.class);
-		Assert.notNull(dmsResultRestResponse, "Failed to remove party Ecomm details");
-		return dmsResultRestResponse.getResult();
+		//see Deprecated comment above
+		return null;
 	}
 
 }
