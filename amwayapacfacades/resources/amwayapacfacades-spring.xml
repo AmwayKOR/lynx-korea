@@ -20,16 +20,6 @@
 		
 	<context:annotation-config/> 
 
-	<alias alias="simpleSuggestionFacade" name="defaultSimpleSuggestionFacade"/>
-	<bean id="defaultSimpleSuggestionFacade" class="com.amway.apac.facades.suggestion.impl.DefaultSimpleSuggestionFacade" >
-		<property name="simpleSuggestionService" ref="simpleSuggestionService"/>
-		<property name="userService" ref="userService"/>
-		<property name="categoryService" ref="categoryService"/>
-		<property name="productService" ref="productService"/>
-		<property name="productConverter" ref="carouselProductConverter"/>
-		<property name="cartService" ref="cartService"/>
-	</bean>
-
 	<bean id="carouselProductConverter" parent="defaultProductConverter">
 		<property name="populators">
 			<list merge="true">
@@ -38,47 +28,4 @@
 		</property>
 	</bean>
 
-
-
-	<!-- Add the apparelProductPopulator to the productConverter -->
-
-	<!-- accelerator Image Format Mappings -->
-	<alias name="acceleratorImageFormatMapping" alias="imageFormatMapping"/>
-	<bean id="acceleratorImageFormatMapping" parent="defaultImageFormatMapping">
-		<property name="mapping">
-			<map>
-				<entry key="superZoom" value="1200Wx1200H"/>
-				<entry key="zoom" value="515Wx515H"/>
-				<entry key="store" value="365Wx246H"/>
-				<entry key="product" value="300Wx300H"/>
-				<entry key="thumbnail" value="96Wx96H"/>
-				<entry key="cartIcon" value="65Wx65H"/>
-				<entry key="styleSwatch" value="30Wx30H"/>
-			</map>
-		</property>
-	</bean>
-
-	<alias name="acceleratorProductPrimaryImagePopulator" alias="productPrimaryImagePopulator" />
-	<bean id="acceleratorProductPrimaryImagePopulator" parent="defaultProductPrimaryImagePopulator">
-		<property name="imageFormats">
-			<list>
-				<value>zoom</value>
-				<value>product</value>
-				<value>thumbnail</value>
-				<value>cartIcon</value>
-			</list>
-		</property>
-	</bean>
-
-	<alias name="acceleratorProductGalleryImagesPopulator" alias="productGalleryImagesPopulator" />
-	<bean id="acceleratorProductGalleryImagesPopulator" parent="defaultProductGalleryImagesPopulator">
-		<property name="imageFormats">
-			<list>
-				<value>superZoom</value>
-				<value>zoom</value>
-				<value>product</value>
-				<value>thumbnail</value>
-			</list>
-		</property>
-	</bean>
 </beans>

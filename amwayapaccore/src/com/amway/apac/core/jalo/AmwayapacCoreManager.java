@@ -10,15 +10,16 @@
  */
 package com.amway.apac.core.jalo;
 
+import de.hybris.platform.core.systemsetup.CoreSystemSetup;
 import de.hybris.platform.jalo.JaloSession;
 import de.hybris.platform.jalo.extension.ExtensionManager;
+
 import com.amway.apac.core.constants.AmwayapacCoreConstants;
-import com.amway.apac.core.setup.CoreSystemSetup;
 
 
 /**
  * Do not use, please use {@link CoreSystemSetup} instead.
- * 
+ *
  */
 @SuppressWarnings("PMD")
 public class AmwayapacCoreManager extends GeneratedAmwayapacCoreManager

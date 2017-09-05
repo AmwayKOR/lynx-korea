@@ -16,6 +16,7 @@
 			extensions which are automatically required -->
 		<requires-extension name="acceleratorfacades"/>
 		<requires-extension name="amwayapaccore"/>
+		<requires-extension name="amwayfacades"/>
 
 		<coremodule generated="true" manager="de.hybris.platform.jalo.extension.GenericManager" packageroot="com.amway.apac.facades"/>
 
