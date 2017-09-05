@@ -140,7 +140,7 @@ public class AmwayEurope1PriceFactory extends CatalogAwareEurope1PriceFactory
 		if (!(rows.isEmpty()))
 		{
 			final PriceRowChannel channel = getAmwayRetrieveChannelStrategy().getChannel(ctx);
-			final List list = filterPriceRows4Price(rows, qtd, unit, currency, date, giveAwayMode, channel);
+			final List list = filterPriceRows4Price(rows, qtd, unit, currency, new Date(), giveAwayMode, channel);
 
 			if (list.isEmpty())
 			{
