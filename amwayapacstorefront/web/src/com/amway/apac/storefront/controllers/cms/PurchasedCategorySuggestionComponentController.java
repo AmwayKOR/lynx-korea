@@ -14,8 +14,6 @@ import de.hybris.platform.acceleratorcms.model.components.PurchasedCategorySugge
 import de.hybris.platform.acceleratorcms.model.components.SimpleSuggestionComponentModel;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.cms.AbstractCMSComponentController;
 import de.hybris.platform.commercefacades.product.data.ProductData;
-import com.amway.apac.facades.suggestion.SimpleSuggestionFacade;
-import com.amway.apac.storefront.controllers.ControllerConstants;
 
 import java.util.List;
 
@@ -27,14 +25,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.amway.apac.storefront.controllers.ControllerConstants;
+import com.amway.facades.suggestion.SimpleSuggestionFacade;
+
 
 /**
  * Controller for CMS PurchasedCategorySuggestionComponent
  */
 @Controller("PurchasedCategorySuggestionComponentController")
 @RequestMapping(value = ControllerConstants.Actions.Cms.PurchasedCategorySuggestionComponent)
-public class PurchasedCategorySuggestionComponentController extends
-		AbstractCMSComponentController<PurchasedCategorySuggestionComponentModel>
+public class PurchasedCategorySuggestionComponentController
+		extends AbstractCMSComponentController<PurchasedCategorySuggestionComponentModel>
 {
 	@Resource(name = "simpleSuggestionFacade")
 	private SimpleSuggestionFacade simpleSuggestionFacade;
@@ -43,9 +44,9 @@ public class PurchasedCategorySuggestionComponentController extends
 	protected void fillModel(final HttpServletRequest request, final Model model,
 			final PurchasedCategorySuggestionComponentModel component)
 	{
-		final List<ProductData> productSuggestions = simpleSuggestionFacade
-				.getReferencesForPurchasedInCategory(component.getCategory().getCode(), component.getProductReferenceTypes(),
-						component.isFilterPurchased(), component.getMaximumNumberProducts());
+		final List<ProductData> productSuggestions = simpleSuggestionFacade.getReferencesForPurchasedInCategory(
+				component.getCategory().getCode(), component.getProductReferenceTypes(), component.isFilterPurchased(),
+				component.getMaximumNumberProducts());
 
 		model.addAttribute("title", component.getTitle());
 		model.addAttribute("suggestions", productSuggestions);

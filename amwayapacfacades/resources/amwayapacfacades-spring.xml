@@ -28,4 +28,10 @@
 		</property>
 	</bean>
 
+	<alias alias="simpleSuggestionFacade" name="defaultAmwaySimpleSuggestionFacade"/>
+	<bean id="defaultAmwaySimpleSuggestionFacade" class="com.amway.apac.facades.suggestion.impl.DefaultAmwaySimpleSuggestionFacade" 
+			parent="defaultSimpleSuggestionFacade">
+		<property name="cartService" ref="cartService"/>
+	</bean>
+
 </beans>
