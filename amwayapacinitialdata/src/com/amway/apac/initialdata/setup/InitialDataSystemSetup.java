@@ -10,22 +10,31 @@
  */
 package com.amway.apac.initialdata.setup;
 
+import static com.amway.apac.initialdata.constants.AmwayapacInitialDataConstants.AMWAY_APAC_CONTENT_CATALOG_NAME;
+import static com.amway.apac.initialdata.constants.AmwayapacInitialDataConstants.AMWAY_APAC_PRODUCT_CATALOG_NAME;
+import static com.amway.apac.initialdata.constants.AmwayapacInitialDataConstants.AMWAY_APAC_STORE_NAME;
+
 import de.hybris.platform.commerceservices.dataimport.impl.CoreDataImportService;
 import de.hybris.platform.commerceservices.dataimport.impl.SampleDataImportService;
 import de.hybris.platform.commerceservices.setup.AbstractSystemSetup;
+import de.hybris.platform.commerceservices.setup.data.ImportData;
+import de.hybris.platform.commerceservices.setup.events.CoreDataImportedEvent;
+import de.hybris.platform.commerceservices.setup.events.SampleDataImportedEvent;
 import de.hybris.platform.core.initialization.SystemSetup;
 import de.hybris.platform.core.initialization.SystemSetup.Process;
 import de.hybris.platform.core.initialization.SystemSetup.Type;
 import de.hybris.platform.core.initialization.SystemSetupContext;
 import de.hybris.platform.core.initialization.SystemSetupParameter;
 import de.hybris.platform.core.initialization.SystemSetupParameterMethod;
-import com.amway.apac.initialdata.constants.AmwayapacInitialDataConstants;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
+
+import com.amway.apac.initialdata.constants.AmwayapacInitialDataConstants;
 
 
 /**
@@ -64,7 +73,7 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 	/**
 	 * Implement this method to create initial objects. This method will be called by system creator during
 	 * initialization and system update. Be sure that this method can be called repeatedly.
-	 * 
+	 *
 	 * @param context
 	 *           the context provides the selected parameters and values
 	 */
@@ -75,25 +84,7 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 	}
 
 	/**
-	 * Implement this method to create data that is used in your project. This method will be called during the system
-	 * initialization. <br>
-	 * Add import data for each site you have configured
-	 *
-	 * <pre>
-	 * final List<ImportData> importData = new ArrayList<ImportData>();
-	 *
-	 * final ImportData sampleImportData = new ImportData();
-	 * sampleImportData.setProductCatalogName(SAMPLE_PRODUCT_CATALOG_NAME);
-	 * sampleImportData.setContentCatalogNames(Arrays.asList(SAMPLE_CONTENT_CATALOG_NAME));
-	 * sampleImportData.setStoreNames(Arrays.asList(SAMPLE_STORE_NAME));
-	 * importData.add(sampleImportData);
-	 *
-	 * getCoreDataImportService().execute(this, context, importData);
-	 * getEventService().publishEvent(new CoreDataImportedEvent(context, importData));
-	 *
-	 * getSampleDataImportService().execute(this, context, importData);
-	 * getEventService().publishEvent(new SampleDataImportedEvent(context, importData));
-	 * </pre>
+	 * Project data import
 	 *
 	 * @param context
 	 *           the context provides the selected parameters and values
@@ -101,9 +92,19 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 	@SystemSetup(type = Type.PROJECT, process = Process.ALL)
 	public void createProjectData(final SystemSetupContext context)
 	{
-		/*
-		 * Add import data for each site you have configured
-		 */
+		final List<ImportData> importData = new ArrayList<ImportData>();
+
+		final ImportData sampleImportData = new ImportData();
+		sampleImportData.setProductCatalogName(AMWAY_APAC_CONTENT_CATALOG_NAME);
+		sampleImportData.setContentCatalogNames(Arrays.asList(AMWAY_APAC_PRODUCT_CATALOG_NAME));
+		sampleImportData.setStoreNames(Arrays.asList(AMWAY_APAC_STORE_NAME));
+		importData.add(sampleImportData);
+
+		getCoreDataImportService().execute(this, context, importData);
+		getEventService().publishEvent(new CoreDataImportedEvent(context, importData));
+
+		getSampleDataImportService().execute(this, context, importData);
+		getEventService().publishEvent(new SampleDataImportedEvent(context, importData));
 	}
 
 	public CoreDataImportService getCoreDataImportService()
