@@ -13,6 +13,7 @@
 	<extension abstractclassprefix="Generated" classprefix="AmwayapacStorefront" name="amwayapacstorefront" usemaven="false">		
         <requires-extension name="acceleratorstorefrontcommons"/>
 		<requires-extension name="amwayapacfacades"/>
+		<requires-extension name="amwayapacstorefrontcomponents"/>
 
 		<webmodule jspcompile="false" webroot="/amwayapacstorefront"/>
 
