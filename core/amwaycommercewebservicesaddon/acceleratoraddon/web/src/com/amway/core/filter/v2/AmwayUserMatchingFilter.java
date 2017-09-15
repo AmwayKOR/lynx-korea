@@ -168,7 +168,7 @@ public class AmwayUserMatchingFilter extends AbstractUrlMatchingFilter
 			currentAccount = accountCommerceService.getCurrentAccount();
 		}
 
-		if (!currentAccount.getParties().contains(userModel))
+		if (currentAccount!=null && currentAccount.getParties()!=null &&!currentAccount.getParties().contains(userModel))
 			throw new AccessDeniedException("Invalid user (party) associated to the b2bunit (account)");
 
 	}
