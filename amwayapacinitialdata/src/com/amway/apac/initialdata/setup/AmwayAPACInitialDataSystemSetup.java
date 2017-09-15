@@ -10,9 +10,7 @@
  */
 package com.amway.apac.initialdata.setup;
 
-import static com.amway.apac.initialdata.constants.AmwayapacInitialDataConstants.AMWAY_APAC_CONTENT_CATALOG_NAME;
-import static com.amway.apac.initialdata.constants.AmwayapacInitialDataConstants.AMWAY_APAC_PRODUCT_CATALOG_NAME;
-import static com.amway.apac.initialdata.constants.AmwayapacInitialDataConstants.AMWAY_APAC_STORE_NAME;
+import static com.amway.apac.initialdata.constants.AmwayapacInitialDataConstants.AMWAY_APAC;
 
 import de.hybris.platform.commerceservices.dataimport.impl.CoreDataImportService;
 import de.hybris.platform.commerceservices.dataimport.impl.SampleDataImportService;
@@ -95,9 +93,9 @@ public class AmwayAPACInitialDataSystemSetup extends AbstractSystemSetup
 		final List<ImportData> importData = new ArrayList<ImportData>();
 
 		final ImportData sampleImportData = new ImportData();
-		sampleImportData.setProductCatalogName(AMWAY_APAC_CONTENT_CATALOG_NAME);
-		sampleImportData.setContentCatalogNames(Arrays.asList(AMWAY_APAC_PRODUCT_CATALOG_NAME));
-		sampleImportData.setStoreNames(Arrays.asList(AMWAY_APAC_STORE_NAME));
+		sampleImportData.setProductCatalogName(AMWAY_APAC);
+		sampleImportData.setContentCatalogNames(Arrays.asList(AMWAY_APAC));
+		sampleImportData.setStoreNames(Arrays.asList(AMWAY_APAC));
 		importData.add(sampleImportData);
 
 		getCoreDataImportService().execute(this, context, importData);
