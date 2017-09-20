@@ -105,7 +105,8 @@
 		<property name="modelService" ref="modelService" />
 	</bean>
 
-	<bean id="amwayPOSService" class="com.amway.core.pos.service.impl.DefaultAmwayPOSService" scope="tenant">
+     <alias name="defaultAmwayPOSService" alias="amwayPOSService"/>
+	<bean id="defaultAmwayPOSService" class="com.amway.core.pos.service.impl.DefaultAmwayPOSService" scope="tenant">
 		<property name="batchDao" ref="batchDao"/>
 		<property name="terminalDao" ref="terminalDao"/>
 		<property name="userService" ref="userService"/>
