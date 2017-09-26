@@ -20,6 +20,448 @@ $categories=target(code, $catalogVersion)[unique=true]
 
 # Insert Categories
 INSERT_UPDATE Category;code[unique=true];allowedPrincipals(uid)[default='customergroup'];$catalogVersion
+;root
+;nutrition
+;beauty
+;personalcare
+;homeliving
+;personalcatalogue
+;essentials
+;childrenshealth
+;healthyadult
+;generalhealth
+;immunity
+;weightmanagement
+;wellnesspacks
+;nutritionaccessories
+;skincare
+;makeup
+;beautyaccessories
+;personalitemsfragrances
+;beautyfragrances
+;bodycare
+;haircare
+;oralcare
+;childcare
+;airtreatment
+;watertreatment
+;cookware
+;laundrycare
+;homelivingothers
+;dishcare
+;surfacecare
+;carcare
+;homealarm
+;dishcareothers
+;otherpersonalitems
+;morehomeproducts
+;foodandbeverages
+;personalitems
+;exerciseandhealthdevices
+;babyandchildrenproducts
+;automotive
+;mooncakes
+;cleansers
+;removersandexfoliators
+;toners
+;serumsandintensivecare
+;eyecare
+;moisturisers
+;masks
+;suncare
+;systempacks
+;eyesmakeup
+;facemakeup
+;lipsmakeup
+;bathandshower
+;deodorants
+;handandbodylotions
+;bodypowder
+;shampoosandconditioners
+;colourants
+;stylingandtreatments
+;airpurifiers
+;replacementfilters
+;airtreatmentaccessories
+;waterpurifiers
+;replacementcartridges
+;watertreatmentaccessories
+;watertreatmentaccessoriesespring
+;watertreatmentaccessorieswtsii
+;airtreatmentaccessoriesatmosphere
+;airtreatmentaccessoriesats     
+;watertreatmentaccessorieswts
+;limitededitionset
+;comforter					
+;matressprotector
+;amwayqueencookware
+;amwayqueenaccessories
+;icookaccessories
+;detergents
+;softeners
+;laundarytreatments
+;dishcleaners
+;dishcareothers
+;multipurposecleaner
+;bathroomcleaners
+;kitchencleaners
+;othersurfacecleaners
+;carwash
+;carshine
+;airfresheners
+;salesaids
+;electricalappliances
+;mattresses
+;externalwaterfilter
+;insecticidesandgarden
+;beverages
+;cakesandcookies
+;desserts
+;healthfoods 
+;condimentsandpremixes
+;festive
+;femininecare
+;smallleathergoods
+;timepieces
+;personalgrooming
+;exercisemassageequipment
+;healthdevices
+;stationery
+;exerciseandmassage
+;businessSupportMaterials
+;productCatalogue
+;salesKits
+;collectibles&Merchandise
+;magazines
+;businessForms
+;multimedia
+;awards&pins
 
 # Insert Category Structure
 INSERT_UPDATE CategoryCategoryRelation;$categories;$supercategories
+						                 ;nutrition                         ;root    
+						                 ;beauty                            ;root    
+						                 ;personalcare                      ;root    
+						                 ;homeliving                        ;root    
+						                 ;personalcatalogue                 ;root    
+										 ;essentials                        ;nutrition
+										 ;childrenshealth                   ;nutrition
+										 ;healthyadult                      ;nutrition
+										 ;generalhealth                     ;nutrition
+										 ;immunity                          ;nutrition
+										 ;weightmanagement                  ;nutrition
+										 ;nutritionaccessories              ;nutrition
+										 ;wellnesspacks						;nutrition
+										 ;skincare                          ;beauty
+										 ;makeup                            ;beauty
+										 ;beautyaccessories                 ;beauty
+										 ;beautyfragrances                  ;beauty
+										 ;bodycare                          ;personalcare
+										 ;haircare                          ;personalcare
+										 ;oralcare                          ;personalcare
+										 ;childcare                         ;personalcare
+										 ;airtreatment                      ;homeliving
+										 ;watertreatment                    ;homeliving
+										 ;cookware                          ;homeliving
+										 ;laundrycare                       ;homeliving
+										 ;dishcare                          ;homeliving
+										 ;surfacecare                       ;homeliving
+										 ;carcare                           ;homeliving
+										 ;homealarm                         ;homeliving
+										 ;homelivingothers                  ;homeliving
+										 ;morehomeproducts                  ;personalcatalogue
+										 ;foodandbeverages                  ;personalcatalogue
+										 ;personalitems                     ;personalcatalogue
+										 ;exerciseandhealthdevices          ;personalcatalogue
+										 ;babyandchildrenproducts           ;personalcatalogue
+										 ;automotive                        ;personalcatalogue
+										 ;cleansers                         ;skincare
+										 ;removersandexfoliators            ;skincare
+										 ;toners                            ;skincare
+										 ;serumsandintensivecare            ;skincare
+										 ;eyecare                           ;skincare
+										 ;moisturisers                      ;skincare
+										 ;masks                             ;skincare
+										 ;suncare                           ;skincare
+										 ;systempacks						;skincare
+										 ;eyesmakeup                        ;makeup
+										 ;facemakeup                        ;makeup
+										 ;lipsmakeup                        ;makeup
+										 ;bathandshower                     ;bodycare
+										 ;deodorants                        ;bodycare
+										 ;handandbodylotions                ;bodycare
+										 ;bodypowder                        ;bodycare
+										 ;shampoosandconditioners           ;haircare
+										 ;colourants                        ;haircare
+										 ;stylingandtreatments              ;haircare
+										 ;airpurifiers                      ;airtreatment
+										 ;replacementfilters                ;airtreatment
+										 ;airtreatmentaccessories           ;airtreatment
+										 ;airtreatmentaccessoriesatmosphere ;airtreatment 
+										 ;waterpurifiers                    ;watertreatment
+										 ;replacementcartridges             ;watertreatment
+										 ;watertreatmentaccessories         ;watertreatment
+										 ;watertreatmentaccessories         ;watertreatment
+										 ;watertreatmentaccessories			;watertreatment
+										 ;watertreatmentaccessoriesespring	;watertreatment
+										 ;watertreatmentaccessorieswtsii	;watertreatment
+										 ;watertreatmentaccessorieswts		;watertreatment
+									     ;airtreatmentaccessoriesatmosphere ;airtreatment
+										 ;limitededitionset                 ;skincare
+  										 ;comforter				            ;morehomeproducts;
+										 ;matressprotector		            ;morehomeproducts;
+										 ;amwayqueencookware                ;cookware
+										 ;amwayqueenaccessories             ;cookware
+										 ;icookaccessories                  ;cookware
+										 ;detergents                        ;laundrycare
+										 ;softeners                         ;laundrycare
+										 ;laundarytreatments                ;laundrycare
+										 ;dishcleaners                      ;dishcare
+										 ;dishcareothers                    ;dishcare
+										 ;multipurposecleaner               ;surfacecare
+										 ;bathroomcleaners                  ;surfacecare
+                                         ;kitchencleaners                   ;surfacecare
+                                         ;othersurfacecleaners              ;surfacecare
+                                         ;carwash                           ;carcare
+                                         ;carshine                          ;carcare
+                                         ;airfresheners                     ;homelivingothers
+                                         ;salesaids                         ;homelivingothers
+                                         ;electricalappliances              ;morehomeproducts
+                                         ;mattresses                        ;morehomeproducts
+                                         ;externalwaterfilter               ;morehomeproducts
+                                         ;insecticidesandgarden             ;morehomeproducts
+                                         ;beverages                         ;foodandbeverages
+                                         ;cakesandcookies                   ;foodandbeverages
+                                         ;desserts                          ;foodandbeverages
+                                         ;healthfoods                       ;foodandbeverages
+                                         ;condimentsandpremixes             ;foodandbeverages
+                                         ;festive                           ;foodandbeverages
+                                         ;femininecare                      ;personalitems
+                                         ;personalitemsfragrances           ;personalitems
+                                         ;smallleathergoods                 ;personalitems
+                                         ;timepieces                        ;personalitems
+                                         ;otherpersonalitems				;personalitems
+                                         ;personalgrooming                  ;personalitems
+										 ;stationery		                ;personalitems
+										 ;exercisemassageequipment			;exerciseandhealthdevices
+										 ;healthdevices						;exerciseandhealthdevices
+										 ;exerciseandmassage                ;exerciseandhealthdevices
+										 ;businessSupportMaterials;root
+                                         ;productCatalogue;businessSupportMaterials
+                                         ;salesKits;businessSupportMaterials
+                                         ;collectibles&Merchandise;businessSupportMaterials
+                                         ;magazines;businessSupportMaterials
+                                         ;businessForms;businessSupportMaterials
+                                         ;multimedia;businessSupportMaterials
+                                         ;awards&pins;businessSupportMaterials
+
+                                         
+# Insert Brands
+INSERT_UPDATE Category;code[unique=true];allowedPrincipals(uid)[default='customergroup'];$catalogVersion
+;brands
+;nutrilite
+;bodykeybynutrilite
+;tropicalherbs
+;beetreasures
+;satinique
+;allano
+;aloecare
+;bodyseries
+;gh
+;glister
+;colourcreation
+;artistryyouthxtend
+;artistryyouthxtendultra
+;artistrytimedefiance
+;artistryidealradiance
+;newartistryidealradiance
+;artistryhydrav
+;artistryessentials
+;artistryspecialcare
+;artistryintensiveskincare
+;artistrysupremelx
+;artistrycremelx
+;artistrymen
+;artistry
+;artistryexactfit
+;artistrypurewhite
+;artistryyoutheffect
+;artistryexactfit
+;artistrysignatureeyes
+;artistrysignaturecolor
+;artistrypurewhite
+;artistry
+;sa8
+;loc
+;amwayhome
+;amway
+;espring
+;amwaywts
+;atmosphere
+;amwayats
+;homealarmsystem
+;amwayqueen
+;icook
+;kitchenaid
+;noxxa
+;sharp
+;philips
+;dreamland
+;isens
+;rossmax
+;sanita
+;femimeplus
+;bum
+;crocodile
+;truespring
+;fusionx
+;salvatoreferragamo
+;elizabetharden
+;calvinklein
+;orlando
+;target
+;coolscents
+;elf
+;lovelycloth
+;impact
+;nuk
+;evian
+;ridbac
+;samson
+;countrybake
+;cookielovers
+;vergold
+;progyms
+;idamansuri
+;caresens
+;loacker
+;sleepjoy
+;skylight
+;vergold
+;lejia
+;mapleton
+;fabercastell
+;genova
+;louiscasa
+;artistry
+;amwaywts
+;inbody
+;underarmour
+;untold
+;idamansuri
+;impactergo
+;isens
+;celebrationmooncake
+;omron
+;premiumgold
+;samson
+;target
+;artistrysignaturecolor
+;personalshopperscatalogue
+;amwaylifestylecatalogue
+
+
+# Insert brand Structure
+INSERT_UPDATE CategoryCategoryRelation;$categories;$supercategories
+;nutrilite;brands;
+;bodykeybynutrilite;brands;
+;tropicalherbs;brands;
+;beetreasures;brands;
+;satinique;brands;
+;allano;brands;
+;aloecare;brands;
+;bodyseries;brands;
+;gh;brands;
+;glister;brands;
+;colourcreation;brands;
+;artistryyouthxtend;artistry;
+;artistryyouthxtendultra;artistry;
+;artistrytimedefiance;artistry;
+;artistryidealradiance;artistry;
+;newartistryidealradiance;artistry;
+;artistryhydrav;artistry;
+;artistryessentials;artistry;
+;artistryspecialcare;artistry;
+;artistryintensiveskincare;artistry;
+;artistrysupremelx;artistry;
+;artistrycremelx;artistry;
+;artistrymen;artistry;
+;artistry;brands;
+;artistryexactfit;artistry;
+;artistrypurewhite;artistry;
+;artistryyoutheffect;artistry;
+;artistryexactfit;artistry;
+;artistrysignatureeyes;artistry;
+;artistrysignaturecolor;artistry;
+;artistrypurewhite;artistry;
+;artistry;brands;
+;sa8;brands;
+;loc;brands;
+;amwayhome;brands;
+;amway;brands;
+;espring;brands;
+;amwaywts;brands;
+;atmosphere;brands;
+;amwayats;brands;
+;homealarmsystem;brands;
+;amwayqueen;brands;
+;icook;brands;
+;kitchenaid;brands;
+;noxxa;brands;
+;sharp;brands;
+;philips;brands;
+;dreamland;brands;
+;isens;brands;
+;rossmax;brands;
+;sanita;brands;
+;femimeplus;brands;
+;bum;brands;
+;crocodile;brands;
+;truespring;brands;
+;fusionx;brands;
+;salvatoreferragamo;brands;
+;elizabetharden;brands;
+;calvinklein;brands;
+;orlando;brands;
+;target;brands;
+;coolscents;brands;
+;elf;brands;
+;lovelycloth;brands;
+;impact;brands;
+;nuk;brands;
+;evian;brands;
+;ridbac;brands;
+;samson;brands;
+;countrybake;brands;
+;cookielovers;brands;
+;vergold;brands;
+;progyms;brands;
+;idamansuri;brands;
+;caresens;brands;
+;loacker;brands;
+;sleepjoy;brands;
+;skylight;brands;
+;vergold;brands;
+;lejia;brands;
+;mapleton;brands;
+;fabercastell;brands;
+;genova;brands;
+;louiscasa;brands;
+;artistry;brands;
+;amwaywts;brands;
+;inbody;brands;
+;underarmour;brands;
+;untold;brands;
+;idamansuri;brands;
+;impactergo;brands;
+;isens;brands;
+;celebrationmooncake;brands;
+;omron;brands;
+;premiumgold;brands;
+;samson;brands;
+;target;brands;
+;artistrysignaturecolor;brands;
+;personalshopperscatalogue;brands
+;amwaylifestylecatalogue;brands
+
+                                         
