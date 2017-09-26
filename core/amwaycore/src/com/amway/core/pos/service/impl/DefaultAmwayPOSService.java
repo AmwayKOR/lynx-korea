@@ -1,187 +1,263 @@
 package com.amway.core.pos.service.impl;
 
-import com.amway.core.model.AmwayBatchModel;
-import com.amway.core.model.AmwayTerminalModel;
-import com.amway.core.pos.dao.AmwayBatchDao;
-import com.amway.core.pos.dao.AmwayTerminalDao;
-import com.amway.core.pos.service.AmwayPOSService;
-import com.google.common.base.Preconditions;
 import de.hybris.platform.commerceservices.search.pagedata.PageableData;
 import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.platform.servicelayer.util.ServicesUtil;
+import de.hybris.platform.store.BaseStoreModel;
 import de.hybris.platform.storelocator.model.PointOfServiceModel;
 import de.hybris.platform.storelocator.pos.PointOfServiceService;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
+
+import com.amway.core.constants.AmwaycoreConstants;
+import com.amway.core.model.AmwayBatchModel;
+import com.amway.core.model.AmwayTerminalModel;
+import com.amway.core.pos.dao.AmwayBatchDao;
+import com.amway.core.pos.dao.AmwayTerminalDao;
+import com.amway.core.pos.service.AmwayPOSService;
+import com.google.common.base.Preconditions;
+
 
 /**
  */
-public class DefaultAmwayPOSService implements AmwayPOSService {
+public class DefaultAmwayPOSService implements AmwayPOSService
+{
 
-    private AmwayBatchDao batchDao;
-    private AmwayTerminalDao terminalDao;
-    private UserService userService;
-    private PointOfServiceService pointOfServiceService;
+	private AmwayBatchDao batchDao;
+	private AmwayTerminalDao terminalDao;
+	private UserService userService;
+	private PointOfServiceService pointOfServiceService;
 
-    @Override
-    public AmwayBatchModel updateBatch(String batchNo, String balance) {
-        AmwayBatchModel batch = getBatch(batchNo);
+   @Override
+   public AmwayBatchModel updateBatch(String batchNo, String balance) {
+       AmwayBatchModel batch = getBatch(batchNo);
 
-        return batchDao.updateBatch(batch, Double.parseDouble(balance));
-    }
+       return batchDao.updateBatch(batch, Double.parseDouble(balance));
+   }
 
-    @Override
-    public List<AmwayBatchModel> getBatches(String userId, Date startDate, Date endDate) {
-        final UserModel userModel = userService.getUserForUID(userId);
+	@Override
+	public AmwayBatchModel updateBatch(final String batchNo, final String balance, final UserModel user)
+	{
+		final AmwayBatchModel batch = getBatch(batchNo);
 
-        List<AmwayBatchModel> batchList = batchDao.getBatches(userModel, startDate, endDate);
+		final UserModel closedBy = userService.getUserForUID(user.getUid());
 
-        return batchList;
-    }
+		return batchDao.updateBatch(batch, Double.parseDouble(balance), closedBy);
+	}
 
-    @Override
-    public List<AmwayBatchModel> getBatches(String pickupStore, String terminal, Date startDate, Date endDate) {
+	@Override
+	public List<AmwayBatchModel> getBatches(final String userId, final Date startDate, final Date endDate)
+	{
+		final UserModel userModel = userService.getUserForUID(userId);
+
+		final List<AmwayBatchModel> batchList = batchDao.getBatches(userModel, startDate, endDate);
+
+		return batchList;
+	}
+
+	@Override
+	public List<AmwayBatchModel> getBatches(final String pickupStore, final String terminal, final Date startDate,
+			final Date endDate)
+	{
 
 
-        AmwayTerminalModel resolvedTerminal = resolveTerminal(pickupStore, terminal);
-        Preconditions.checkNotNull(resolvedTerminal, "POS Terminal can't be resolved.");
+		final AmwayTerminalModel resolvedTerminal = resolveTerminal(pickupStore, terminal);
+		Preconditions.checkNotNull(resolvedTerminal, "POS Terminal can't be resolved.");
 
-        List<AmwayBatchModel> batchList = batchDao.getBatches(resolvedTerminal, startDate, endDate);
+		final List<AmwayBatchModel> batchList = batchDao.getBatches(resolvedTerminal, startDate, endDate);
 
-        return batchList;
-    }
+		return batchList;
+	}
 
-    private AmwayTerminalModel resolveTerminal(String pickupStore, String terminal) {
-        final List <AmwayTerminalModel> terminals = getPOSTerminals(pickupStore);
+	private AmwayTerminalModel resolveTerminal(final String pickupStore, final String terminal)
+	{
+		final List<AmwayTerminalModel> terminals = getPOSTerminals(pickupStore);
 
-        AmwayTerminalModel resolvedTerminal = null;
-        for(AmwayTerminalModel terminalModel:terminals) {
-            if (terminalModel.getId().equalsIgnoreCase(terminal)) {
-                resolvedTerminal = terminalModel;
-                break;
-            }
-        }
+		AmwayTerminalModel resolvedTerminal = null;
+		for (final AmwayTerminalModel terminalModel : terminals)
+		{
+			if (terminalModel.getId().equalsIgnoreCase(terminal))
+			{
+				resolvedTerminal = terminalModel;
+				break;
+			}
+		}
 
-        return resolvedTerminal;
-    }
+		return resolvedTerminal;
+	}
 
-    @Override
-    public AmwayBatchModel getOpenBatch(String pickupStore, String terminal) {
+	@Override
+	public AmwayBatchModel getOpenBatch(final String pickupStore, final String terminal)
+	{
 
-        AmwayTerminalModel resolvedTerminal = resolveTerminal(pickupStore, terminal);
-        Preconditions.checkNotNull(resolvedTerminal, "POS Terminal can't be resolved.");
+		final AmwayTerminalModel resolvedTerminal = resolveTerminal(pickupStore, terminal);
+		Preconditions.checkNotNull(resolvedTerminal, "POS Terminal can't be resolved.");
 
-        List<AmwayBatchModel> batchList = batchDao.getOpenBatches(resolvedTerminal);
+		final List<AmwayBatchModel> batchList = batchDao.getOpenBatches(resolvedTerminal);
 
-        ServicesUtil.validateIfAnyResult(batchList, "No open Batch found for this terminal: " + terminal);
-        ServicesUtil.validateIfSingleResult(batchList, "More than one open Batch found for terminal: " + terminal, terminal) ;
+		ServicesUtil.validateIfAnyResult(batchList, "No open Batch found for this terminal: " + terminal);
+		ServicesUtil.validateIfSingleResult(batchList, "More than one open Batch found for terminal: " + terminal, terminal);
 
-        return batchList.get(0);
-    }
+		final AmwayBatchModel resolvedBatch = null;
+		//		= CollectionUtils.isEmpty(openBatches) ? null : openBatches.get(0);
 
-    @Override
-    public List<AmwayTerminalModel> getPOSTerminals(String pickupStore) {
+		if (Objects.nonNull(resolvedBatch))
+		{
+			resolvedBatch.setEndingBalance(getAccuredCashBalanceByBatchAndTxnType(resolvedBatch,
+					AmwaycoreConstants.POS.BATCH_ENDING_BALANCE_CALCULATION_PAYMENT_MODES));
+		}
+		return resolvedBatch;
 
-        final PointOfServiceModel pointOfServiceModel = getPointOfServiceService().getPointOfServiceForName(pickupStore);
-        Preconditions.checkNotNull(pointOfServiceModel, "POS can't be resolved.");
+	}
 
-        final List <AmwayTerminalModel> terminals = terminalDao.findTerminals(pointOfServiceModel);
-        ServicesUtil.validateIfAnyResult(terminals, "No terminals found for POS: " + pickupStore);
 
-        return terminals;
-    }
+	@Override
+	public List<AmwayBatchModel> getOpenBatches(final BaseStoreModel baseStore)
+	{
+		return batchDao.getOpenBatches(baseStore);
+	}
 
-    @Override
-    public AmwayBatchModel createBatch(String baseSiteId, String pickupStore, String terminal, String userId, String startingBalance) {
+	@Override
+	public List<AmwayTerminalModel> getPOSTerminals(final String pickupStore)
+	{
 
-        final UserModel userModel = userService.getUserForUID(userId);
+		final PointOfServiceModel pointOfServiceModel = getPointOfServiceService().getPointOfServiceForName(pickupStore);
+		Preconditions.checkNotNull(pointOfServiceModel, "POS can't be resolved.");
 
-        final List <AmwayTerminalModel> terminals = getPOSTerminals(pickupStore);
+		final List<AmwayTerminalModel> terminals = terminalDao.findTerminals(pointOfServiceModel);
+		ServicesUtil.validateIfAnyResult(terminals, "No terminals found for POS: " + pickupStore);
 
-        AmwayTerminalModel resolvedTerminal = null;
-        for(AmwayTerminalModel terminalModel:terminals) {
-            if (terminalModel.getId().equalsIgnoreCase(terminal)) {
-                resolvedTerminal = terminalModel;
-                break;
-            }
-        }
+		return terminals;
+	}
 
-        Preconditions.checkNotNull(resolvedTerminal, "POS Terminal can't be resolved.");
+	@Override
+	public AmwayBatchModel createBatch(final String baseSiteId, final String pickupStore, final String terminal,
+			final String userId, final String startingBalance)
+	{
 
-        String batchNo = generateBatchNo(baseSiteId, pickupStore, terminal);
-        return batchDao.createBatch(resolvedTerminal, batchNo, userModel, Double.parseDouble(startingBalance));
-    }
+		final UserModel userModel = userService.getUserForUID(userId);
 
-    protected String generateBatchNo(String baseSiteId, String storeId, String terminal) {
-        Date currentDate = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("ddmmss");
+		final List<AmwayTerminalModel> terminals = getPOSTerminals(pickupStore);
 
-        return baseSiteId +"-"+storeId+"-"+terminal+"-"+formatter.format(currentDate);
-    }
+		AmwayTerminalModel resolvedTerminal = null;
+		for (final AmwayTerminalModel terminalModel : terminals)
+		{
+			if (terminalModel.getId().equalsIgnoreCase(terminal))
+			{
+				resolvedTerminal = terminalModel;
+				break;
+			}
+		}
 
-    @Override
-    public AmwayBatchModel getBatch(String batch_id) {
+		Preconditions.checkNotNull(resolvedTerminal, "POS Terminal can't be resolved.");
 
-        List<AmwayBatchModel> batchList = batchDao.getBatch(batch_id);
+		final String batchNo = generateBatchNo(baseSiteId, pickupStore, terminal);
+		return batchDao.createBatch(resolvedTerminal, batchNo, userModel, Double.parseDouble(startingBalance));
+	}
 
-        ServicesUtil.validateIfAnyResult(batchList, "No valid Batch found for this batchNo: " + batch_id);
-        ServicesUtil.validateIfSingleResult(batchList, "More than one Batch found for this batchNo:" + batch_id, batch_id) ;
+	protected String generateBatchNo(final String baseSiteId, final String storeId, final String terminal)
+	{
+		final Date currentDate = new Date();
+		final SimpleDateFormat formatter = new SimpleDateFormat("ddmmss");
 
-        return batchList.get(0);
-    }
+		return baseSiteId + "-" + storeId + "-" + terminal + "-" + formatter.format(currentDate);
+	}
 
-    @Override
-    public SearchPageData<OrderModel> getOrders(PageableData pageableData, String batch_id) {
-        AmwayBatchModel batchModel = getBatch(batch_id);
-        SearchPageData<OrderModel> orders = batchDao.getOrders(pageableData, batchModel);
-        return orders;
-    }
+	@Override
+	public AmwayBatchModel getBatch(final String batch_id)
+	{
 
-    @Override
-    public SearchPageData<OrderModel> getOrders(PageableData pageableData, String pickupStore, Date startDate, Date endDate) {
+		final List<AmwayBatchModel> batchList = batchDao.getBatch(batch_id);
 
-        final List <AmwayTerminalModel> terminals = getPOSTerminals(pickupStore);
+		ServicesUtil.validateIfAnyResult(batchList, "No valid Batch found for this batchNo: " + batch_id);
+		ServicesUtil.validateIfSingleResult(batchList, "More than one Batch found for this batchNo:" + batch_id, batch_id);
 
-        List<AmwayBatchModel> batchList = batchDao.getBatches(terminals, startDate, endDate);
-        SearchPageData<OrderModel> orders = batchDao.getOrders(pageableData, batchList, startDate, endDate);
+		final AmwayBatchModel resolvedBatch = batchList.get(0);
+		resolvedBatch.setEndingBalance(getAccuredCashBalanceByBatchAndTxnType(resolvedBatch,
+				AmwaycoreConstants.POS.BATCH_ENDING_BALANCE_CALCULATION_PAYMENT_MODES));
+		return resolvedBatch;
+	}
 
-        return orders;
-    }
+	@Override
+	public Double getAccuredBalanceByBatchAndTxnType(final String batchId, final List<String> paymentModes)
+	{
+		return batchDao.getAccuredBalanceByBatchAndTxnType(batchId, paymentModes);
+	}
 
-    public AmwayTerminalDao getTerminalDao() {
-        return terminalDao;
-    }
+	public Double getAccuredCashBalanceByBatchAndTxnType(final AmwayBatchModel batch, final List<String> paymentModes)
+	{
 
-    public void setTerminalDao(AmwayTerminalDao terminalDao) {
-        this.terminalDao = terminalDao;
-    }
+		final Double accurredCashBalance = batchDao.getAccuredBalanceByBatchAndTxnType(batch.getBatchNo(), paymentModes);
 
-    public AmwayBatchDao getBatchDao() {
-        return batchDao;
-    }
+		return (accurredCashBalance + batch.getStartingBalance());
+	}
 
-    public void setBatchDao(AmwayBatchDao batchDao) {
-        this.batchDao = batchDao;
-    }
+	@Override
+	public SearchPageData<OrderModel> getOrders(final PageableData pageableData, final String batch_id)
+	{
+		final AmwayBatchModel batchModel = getBatch(batch_id);
+		final SearchPageData<OrderModel> orders = batchDao.getOrders(pageableData, batchModel);
+		return orders;
+	}
 
-    public UserService getUserService() {
-        return userService;
-    }
+	@Override
+	public SearchPageData<OrderModel> getOrders(final PageableData pageableData, final String pickupStore, final Date startDate,
+			final Date endDate)
+	{
 
-    public void setUserService(UserService userService) {
-        this.userService = userService;
-    }
+		final List<AmwayTerminalModel> terminals = getPOSTerminals(pickupStore);
 
-    public PointOfServiceService getPointOfServiceService() {
-        return pointOfServiceService;
-    }
+		final List<AmwayBatchModel> batchList = batchDao.getBatches(terminals, startDate, endDate);
+		final SearchPageData<OrderModel> orders = batchDao.getOrders(pageableData, batchList, startDate, endDate);
 
-    public void setPointOfServiceService(PointOfServiceService pointOfServiceService) {
-        this.pointOfServiceService = pointOfServiceService;
-    }
+		return orders;
+	}
+
+	public AmwayTerminalDao getTerminalDao()
+	{
+		return terminalDao;
+	}
+
+	public void setTerminalDao(final AmwayTerminalDao terminalDao)
+	{
+		this.terminalDao = terminalDao;
+	}
+
+	public AmwayBatchDao getBatchDao()
+	{
+		return batchDao;
+	}
+
+	public void setBatchDao(final AmwayBatchDao batchDao)
+	{
+		this.batchDao = batchDao;
+	}
+
+	public UserService getUserService()
+	{
+		return userService;
+	}
+
+	public void setUserService(final UserService userService)
+	{
+		this.userService = userService;
+	}
+
+	public PointOfServiceService getPointOfServiceService()
+	{
+		return pointOfServiceService;
+	}
+
+	public void setPointOfServiceService(final PointOfServiceService pointOfServiceService)
+	{
+		this.pointOfServiceService = pointOfServiceService;
+	}
+
+
 }
