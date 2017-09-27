@@ -1,0 +1,813 @@
+/*Ditto-Lynx-Site.html*/
+.ditto-landing-hero-component .hero-link-wrap .primary-link span{
+    display: inline-block;
+}
+.amway-theme .ditto-promo-component .promo-element .promo-header{
+    margin:0;
+}
+.new-ditto-accordion-wrapper .title-element.accordion-header-icon.icon-Hamburger-Plus:before{
+    content:'';
+}
+.ditto-creat-new-list {
+    position: relative;
+    top: -2px;
+}
+.ditto-account-section-content{
+    border-bottom:0;
+}
+.amway-theme .ditto-schedule-table-content .ditto-schedule-table td .ditto-schedule-link,.ditto-schedule-table-content .ditto-remove-button.btn.link-btn,.amway-theme .create-ditto-schedule-form .new-ditto-search-contacts a{
+    color:#0075A4;
+}
+.amway-theme .ditto-schedule-table-content .ditto-schedule-table td .ditto-schedule-link:hover,.ditto-schedule-table-content .ditto-remove-button.btn.link-btn:hover,.amway-theme .create-ditto-schedule-form .new-ditto-search-contacts a:hover{
+    color:#002f5f;
+}
+.new-ditto-button-wrapper button.btn.primary{
+    text-transform: uppercase;
+}
+.new-ditto-button-wrapper button.btn.primary:hover{
+    border:2px solid #002f5f;
+}
+.amway-theme .create-ditto-schedule-form label.amw-radio-wrap .amw-radio-overlay {
+    top: 18px;
+}
+.amway-theme .ditto-schedule-table .ditto-schedule-checkbox-wrapper input.amw-global-checkbox:checked + .amw-checkbox-overlay:before,.amway-theme .ditto-nav-tabs-wrap input.amw-global-checkbox:checked + .amw-checkbox-overlay:before{
+    left:2px;
+}
+.amway-theme .ditto-schedule-table-content .ditto-panel-element .amw-checkbox-overlay{
+    top:10px;
+}
+.los-search-widget-container .table-content-x-scroll--wrapper{
+    /*min-width:300px;*/
+}
+#ditto-search-contacts .cart-popup__item-info{
+    height:auto;
+}
+.amway-theme #myDittoContent .ditto-schedule-table-content .ditto-schedule-table,.amway-theme #downlineDittoContent .ditto-schedule-table-content .ditto-schedule-table{
+    width:100%;
+}
+.amway-theme #myDittoContent .ditto-schedule-table-content .ditto-schedule-table thead .ditto-field-name,.amway-theme #downlineDittoContent .ditto-schedule-table-content .ditto-schedule-table thead .ditto-field-name{
+    width:15%;
+}
+.amway-theme .ditto-article-links-wrap .article-link-component .article-link-wrap a span.icon-chevron-right{
+    display:inline-block;
+}
+.amway-theme .ditto-article-links-wrap .article-link-component .article-link-wrap a span:first-child{
+    display: inherit;
+}
+.los-search-widget-container .body-container .quickfind-input-container #ibo-customer-name{
+    margin-left:1px;
+}
+.create-ditto-box .new-ditto-search-contacts{
+    position: relative;
+    left:30px;
+}
+.create-ditto-box .cancel-delete{
+    padding-left:10px;
+}
+.ditto-box-prev {
+    font-weight: 600;
+}
+.ditto-box-prev:before{
+    content: "\e257";
+    font-family: 'Glyphicons Halflings';
+    font-weight: 100;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    position: relative;
+    top: 2px;
+}
+.create-ditto-box-two .quick-find{
+    padding-top: 20px;
+    padding-bottom: 5px;
+    color: #55565a;
+}
+.create-ditto-box-two .upper-font{
+    text-transform: uppercase;
+    color:#002f5f;
+}
+.create-ditto-box-two .select-customer{
+    font-size: 16px;
+}
+.create-ditto-box-two .list-header .icon-arrow-dropdown:before{
+    content: "\e959";
+}
+.create-ditto-box-two .list-header div:last-child{
+    text-align: center;
+}
+.create-ditto-box-two .list-header span{
+    position: relative;
+    top: 1px;
+    left: 5px;
+}
+.create-ditto-box-two .product-list-item .product-item-element:last-child{
+    text-align: center;
+}
+.create-ditto-box-two .customer-list .product-list-item{
+    padding:20px 0;
+}
+.create-ditto-box-two .customer-list .product-list-item:nth-child(2n+1){
+    background-color: #F4F4F4;
+}
+.create-ditto-box-two .product-details{
+    display: inline-flex;
+    margin-bottom:0;
+}
+.create-ditto-box-two #cboxLoadedContent .shopping-cart-item-list {
+    max-height: 238px;
+    border: 1px solid #e3e3e3;
+}
+.create-ditto-box-two .customer-list .customer-list-header{
+    padding:0!important;
+}
+.create-ditto-box-two .recipient-list {
+    padding-top: 30px;
+}
+.create-ditto-box-two .recipient-list .product-list-item{
+    padding:20px;
+}
+.create-ditto-box-two .recipient-list .product-list-item .customer-remove{
+    float: right;
+    color: #0075A4;
+    font-weight: 700;
+    font-size: 16px;
+}
+.search-my-contacts #cboxContent{
+    width:100%;
+}
+@media (max-width: 767px){
+    .amway-theme .ditto-nav-tabs-wrap a.tab-toggle {
+        padding: 5px 10px !important;
+    }
+    .los-search-widget-container .body-container .recipient-list-table-container {
+        margin:0;
+    }
+    .los-search-widget-container .table-content-x-scroll {
+        overflow-x: auto !important;
+        min-width:315px;
+        max-width:358px;
+    }
+    .los-search-widget-container .table-content-x-scroll--wrapper {
+        width: 550px;
+    }
+    .create-ditto-box-two .customer-list .customer-name{
+        position: relative;
+        top: -8px;
+        padding-left:0;
+    }
+}
+@media(max-width: 768px){
+    .amway-theme #myDittoContent .ditto-schedule-table-content .ditto-schedule-table,.amway-theme #downlineDittoContent .ditto-schedule-table-content .ditto-schedule-table{
+        width:1200px;
+    }
+    .create-ditto-box-two .product-details{
+        margin-top:0!important;
+    }
+    .create-ditto-box-two .product-list-item:nth-child(2){
+        margin-top:0;
+    }
+}
+/*Ditto-Details-Lynx-Site.html*/
+.ditto-details-accordion .panel-body {
+    padding: 1.25em 3em 2em 3em;
+}
+.ditto-details-accordion .icon-document:before {
+    content: "\e913";
+    color:#0075A4;
+}
+.account-ditto-details-wrapper .ditto-details-header-panel .ditto-edit-wrapper .ditto-edit-link ,.account-ditto-details-wrapper .ditto-details-header-panel .ditto-remove-wrapper .ditto-remove-link,.account-ditto-details-wrapper .panel-heading .panel-title .ditto-tab-toggle .icon-ditto{
+    color: #0075a4;
+}
+.back-link .glyphicon{
+    color:#0075A4;
+}
+.back-link .glyphicon:hover{
+    color:#002f5f;
+}
+.item-list .item-list-item .item-business-volume, .item-list .item-list-item .item-point-value {
+    display: table-cell;
+    padding: 0 10px;
+    vertical-align: middle;
+}
+.ditto-quick-shop-wrapper .icon-shopping-cart:before {
+    content: "\ea31";
+}
+.account-ditto-details-wrapper .ditto-details-accordion{
+    padding:0;
+}
+.ditto-account-section-content #quickOrder.shopping-cart-quick-shop-wrapper{
+    padding: 0;
+    margin:0 0 20px 0;
+    border-bottom: 1px solid #e3e3e3;
+}
+.ditto-account-section-content .shopping-cart-quick-shop-wrapper .quick-shop-container #quickShopAccordion .panel .panel-heading .panel-title div {
+    padding: 24px 20px;
+}
+.ditto-quick-order .accordion-custom .panel .panel-heading{
+    padding:0 1em!important;
+}
+.ditto-account-section-content .shopping-cart-quick-shop-wrapper .quick-shop-container #quickShopAccordion .panel .panel-heading .panel-title div .icon-minus{
+    font-size: 14px;
+}
+.account-section .account-section-content .ditto-view-by-month-wrapper form,.account-section .account-section-content .ditto-view-by-year-wrapper form{
+    padding:0;
+}
+.ditto-tabs-container.amway-theme .form-group label{
+    padding-top:0;
+}
+.ditto-view-by-month-wrapper,.ditto-view-by-year-wrapper{
+    padding:0;
+}
+.ditto-view-by-month-wrapper .cart-detail__update-cart .text-action-btn{
+    line-height: 2.25;
+}
+.ditto-view-by-month-wrapper .cart-detail__size,.ditto-view-by-year-wrapper .cart-detail__size{
+    min-width: 20%;
+    max-width:50%;
+}
+.ditto-view-by-month-wrapper label.amw-checkbox-wrap .amw-global-checkbox,.ditto-view-by-month-wrapper label.amw-checkbox-wrap .amw-checkbox-overlay{
+    top:10px;
+}
+.ditto-view-by-month-wrapper .product-details-cell label.amw-checkbox-wrap .amw-global-checkbox,.ditto-view-by-month-wrapper .product-details-cell label.amw-checkbox-wrap .amw-checkbox-overlay{
+    top:34px;
+}
+.ditto-view-by-month-wrapper .payment-forms__apply.btn-blue-white.cart-detail__mob-hide{
+    background-color: #002f5f;
+    color:#fff;
+    position: relative;
+    top:-1px;
+}
+.ditto-view-by-month-wrapper .payment-forms__apply.btn-blue-white.cart-detail__mob-hide:hover{
+    background-color: #fff;
+    color:#002F5F;
+    border:2px solid #002F5F;
+}
+.ditto-view-by-month-wrapper .col-md-3 .select2-container{
+    width:66%!important;
+}
+.ditto-view-by-month-wrapper .proceed-to-checkout-container.visible-sm .primary,.ditto-view-by-year-wrapper .proceed-to-checkout-container.visible-sm .primary{
+    width:100%;
+}
+.ditto-view-by-month-wrapper .ditto-list-action-panel .link-btn,.ditto-view-by-year-wrapper .ditto-list-action-panel .link-btn{
+    background-color: #fff;
+    color:#0075A4;
+}
+.ditto-view-by-month-wrapper .shopping-cart-total{
+    margin-top:0;
+}
+.ditto-view-by-month-wrapper .ditto-select-month-wrapper{
+    padding-top:30px;
+    padding-right:0;
+    padding-left:6px;
+}
+.ditto-view-by-year-wrapper .product-details-cell .ditto-entry-checkbox,.ditto-view-by-year-wrapper .product-details-cell .amw-checkbox-overlay{
+    top: 34px!important;
+}
+.ditto-view-by-year-wrapper .item-list-action-panel label.amw-checkbox-wrap .amw-global-checkbox,.ditto-view-by-year-wrapper .item-list-action-panel label.amw-checkbox-wrap .amw-checkbox-overlay{
+    top:10px;
+}
+.ditto-view-by-year-wrapper .payment-forms__apply.btn-blue-white.cart-detail__mob-hide{
+    background-color: #002f5f;
+    color:#fff;
+}
+
+.ditto-view-by-year-wrapper .payment-forms__apply.btn-blue-white.cart-detail__mob-hide:hover{
+    background-color: #fff;
+    color:#002F5F;
+    border:2px solid #002F5F;
+}
+.ditto-account-section-content.account-section .accountActions-bottom .button-wrapper:last-child{
+    right:0;
+}
+.ditto-account-section-content .accordion-custom{
+    border-top:none;
+}
+.ditto-account-section-content .account-ditto-details-wrapper .panel-collapse .ditto-panel-wrapper .ditto-schedule-summary-edit{
+    border:2px solid #002F5F;
+}
+.ditto-view-by-year-wrapper .ditto-item-list .ditto-product-item-wrapper .product-prop-tools .prop-tool-button{
+    color:#0075A4;
+}
+.ditto-view-by-month-wrapper .ditto-list-colomn-wrapper,.ditto-view-by-year-wrapper .ditto-list-colomn-wrapper{
+    padding-left: 0;
+    padding-right:0;
+}
+.ditto-quick-shop-wrapper .quick-shop-container label{
+    margin-bottom:6px;
+}
+.ditto-quick-order .quick-shop-qty{
+    border: 1px solid #dadada;
+}
+.ditto-view-by-year-wrapper .ditto-item-list .product-list-head .head-item-title{
+    padding-top:12px;
+    padding-bottom: 12px;
+}
+.account-ditto-details-wrapper .panel-collapse .ditto-details-item-value .activate-ditto-button-wrapper .ditto-activate-buttons{
+    display: inline-block;
+    float:left;
+}
+#delet-ditto .cart-popup__item-info.amwahover,#deactivate-ditto .cart-popup__item-info.amwahover,#easy-schedule .cart-popup__item-info.amwahover{
+    padding:40px;
+    height:auto;
+}
+#easy-schedule .cart-popup__item-info.amwahover {
+    height: 364px;
+    max-width:600px;
+}
+.easy-schedule-select{
+    width:50%;
+    margin-top:20px;
+}
+.easy-schedule-select .select2-container{
+    width: 100%!important;
+}
+.easy-schedule-cart-pop img{
+    width:80px;
+    margin-left: 0;
+    border: 1px solid #dadada;
+}
+.easy-schedule-cart-pop{
+    margin-top:20px;
+}
+.easy-schedule-cart-pop .cart-popup__qty{
+    border-right:0;
+}
+.easy-schedule-cart-pop .cart-popup__qty input{
+    border: 1px solid #dadada;
+    height: 40px;
+    color: #002f5f;
+    padding-left: 10px;
+    width: 75px;
+    outline: none;
+}
+.easy-schedule-cart-pop .cart-popup__qty input:focus{
+    border:1px solid #002f5f;
+}
+#delet-ditto .delete-cancel{
+    padding:0 25px;
+    font-size: 16px;
+}
+.kit-entry-item-list-wrapper .panel .panel-heading .kit-tab-toggle .icon-plus {
+    display: none;
+}
+.kit-entry-item-list-wrapper .panel .panel-heading .kit-tab-toggle.collapsed .icon-plus {
+    display:inline-block;
+}
+.kit-entry-item-list-wrapper .panel .panel-heading .kit-tab-toggle .icon-minus{
+    display:inline-block;
+}
+.kit-entry-item-list-wrapper .panel .panel-heading .kit-tab-toggle.collapsed .icon-minus{
+    display: none;
+}
+.kit-entry-item-list-wrapper .panel .panel-heading .kit-tab-toggle .icon-minus:before{
+    content: "\ea78";
+}
+.kit-entry-item-list-wrapper .panel .panel-heading .kit-tab-toggle .icon {
+    color: #007eb0;
+    font-size: 0.75em;
+    line-height: 40px;
+    font-weight: 400;
+    margin-right: 8px;
+}
+.account-ditto-details-wrapper .panel-heading .panel-title .ditto-tab-toggle.collapsed .icon-minus:before,.ditto-quick-shop-wrapper .quick-shop-container #quickShopAccordion .panel .panel-heading .panel-title div.collapsed .icon-minus:before, .shopping-cart-quick-shop-wrapper .quick-shop-container #quickShopAccordion .panel .panel-heading .panel-title div.collapsed .icon-minus:before {
+    content: "\ea79"!important;
+}
+.account-ditto-details-wrapper .panel-heading .panel-title .ditto-tab-toggle .icon-minus:before,.ditto-quick-shop-wrapper .quick-shop-container #quickShopAccordion .panel .panel-heading .panel-title div .icon-minus:before, .shopping-cart-quick-shop-wrapper .quick-shop-container #quickShopAccordion .panel .panel-heading .panel-title div .icon-minus:before {
+    content: "\ea78"!important;
+    color:#0075A4;
+}
+.account-section .ditto-account-section-content .accountActions-bottom .button-wrapper:last-child {
+    position: initial;
+}
+.account-section .accountActions-bottom .button-wrapper button{
+    border:2px solid #002f5f;
+}
+.ditto-summary-colomn-wrapper .proceed-to-checkout-container button{
+    width:100%;
+}
+.ditto-item-list .proceed-to-checkout-container button.btn-blue-white{
+    border:2px solid #002f5f;
+}
+.amway-theme .ditto-list-action-panel label.amw-checkbox-wrap{
+    padding-top: 0;
+}
+.amway-theme .ditto-list-action-panel input.amw-global-checkbox:checked + .amw-checkbox-overlay:before{
+    left:0;
+}
+.amway-theme .ditto-year-list input.amw-global-checkbox:checked + .amw-checkbox-overlay:before,.amway-theme .ditto-month-list input.amw-global-checkbox:checked + .amw-checkbox-overlay:before{
+    left: 2px;
+}
+.ditto-details-accordion #headingDittoSummaryTab .pull-right{
+    position: relative;
+    top:-7px;
+}
+.ditto-details-accordion #headingDittoDetailsTab .pull-right{
+    position: relative;
+    top:-3px;
+}
+#deactivate-ditto .cart-popup__item-link{
+    text-align: center;
+}
+#deactivate-ditto .cart-popup__item-link .btn-blue-white{
+    width:45%;
+    display:inline-block;
+}
+#deactivate-ditto .cart-popup__item-link .btn-blue-white:first-child{
+    margin-right:3%;
+}
+#deactivate-ditto .cart-popup__item-link .btn-blue-white:last-child{
+    margin-left:3%;
+}
+.ditto-view-by-month-wrapper .ditto-list-colomn-wrapper .ditto-item-list .ditto-product-item-wrapper .product-details-wrapper .product-item-description .item-name{
+    color:#0075A4;
+}
+.ditto-view-by-month-wrapper .ditto-list-colomn-wrapper .ditto-item-list .ditto-product-item-wrapper .product-details-wrapper .product-item-description .item-name:hover{
+    color:#002f5f;;
+}
+.ditto-list-colomn-wrapper .action-panel-wrapper .list-action-accordion .panel-heading{
+    height:auto;
+}
+.ditto-list-colomn-wrapper .action-panel-wrapper .list-action-accordion .icon-minus:before {
+    content: "\ea78";
+}
+.ditto-list-action-panel .product-category__item-header {
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 2;
+    text-transform: uppercase;
+    color: #002F5F;
+    margin-top:10px;
+    margin-bottom:10px;
+}
+.ditto-list-action-panel .cart-detail__addto-options{
+    padding-top:0;
+}
+.ditto-list-action-panel .btn-blue-white {
+    border: 2px solid transparent;
+    font-weight: 100;
+    background-color: #002F5F;
+    color: #fff;
+    font-size: 16px;
+    padding: 11px 19px 14px;
+}
+.ditto-list-action-panel .btn-blue-white:hover {
+    background-color: #fff;
+    color: #002f5f;
+    border-color:#002f5f;
+}
+.ditto-list-action-panel .cart-detail__addto{
+    color:#0075A4;
+}
+.ditto-list-action-panel .product-category__item-header.empty-content:after {
+    content:"";
+}
+.ditto-list-action-panel .cart-detail__panel-body-link .cartlist__cancelorder{
+    color:#0075A4;
+    cursor: pointer;
+}
+.ditto-list-action-panel .cart-detail__panel-body-link .cartlist__cancelorder:hover{
+    color:#002f5f;
+}
+.ditto-month .cart-voucher{
+    margin-top:0;
+}
+.account-ditto-details-wrapper .panel-collapse .ditto-details-item-value .ditto-status-incomplete {
+    display: none;
+    top: 6px;
+    position: relative;
+}
+.ditto-view-by-year-wrapper .ditto-delivery-details-table-container .ditto-delivery-details-table{
+    width:100%;
+}
+.ditto-view-by-year-wrapper .ditto-delivery-details-table-container .ditto-delivery-details-table .year-view{
+    color:#0075A4;
+    cursor: pointer;
+}
+.ditto-view-by-year-wrapper .ditto-delivery-details-table-container .ditto-delivery-details-table .year-view:hover{
+    color:#002f5f;
+}
+.ditto-view-by-month-wrapper .ditto-item-list .js-ditto-product-item {
+    margin-top: 20px;
+}
+#cboxWrapper {
+    top:0;
+}
+#cboxContent{
+    display: table;
+}
+#cboxLoadedContent {
+    max-height: calc(90vh - 160px);
+}
+#cboxLoadedContent .shopping-cart-item-list .list-header .list-item-info{
+    padding-left:23px;
+}
+#cboxLoadedContent .date-choose{
+    font-size: 16px;
+    color: #002f5f;
+    font-weight: 600;
+    padding-bottom: 30px;
+}
+#cboxLoadedContent .date-choose input{
+    min-width: 150px;
+    outline: none;
+    -webkit-appearance: none;
+    border: 1px solid #CCCCCC;
+    color:#0075A4;
+}
+#cboxLoadedContent .date-choose div label{
+    font-size: 16px;
+    padding-right: 20px;
+}
+#cboxLoadedContent .date-choose .print-link{
+    float: right!important;
+    color:#0075A4;
+}
+#cboxLoadedContent .date-choose .print-link:hover{
+    color:#002f5f;
+}
+#cboxLoadedContent .list-item-quantity input{
+    display: inline-block;
+}
+#cboxLoadedContent  .shopping-cart-item-list{
+    overflow-y: auto;
+    max-height: 358px;
+}
+.bonus-payment-method #bonus-payment-form.bonus-payment-method-form .bonus-payment-method-form__cancel{
+    color:#0075A4;
+}
+.bonus-payment-method #bonus-payment-form.bonus-payment-method-form .bonus-payment-method-form__cancel:hover{
+    color:#002f5f;
+}
+#cboxLoadedContent .project-order{
+    font-size: 16px;
+    font-weight: 600;
+    color: #002f5f;
+    padding: 10px 0;
+    border-bottom: 1px solid #e3e3e3;
+    border-top: 1px solid #e3e3e3;
+    height: auto;
+    clear: both;
+    overflow: hidden;;
+}
+#cboxLoadedContent .order-note{
+    padding-top: 20px;
+    padding-bottom:20px;
+    border-bottom:1px solid #e3e3e3;
+}
+#cboxLoadedContent .order-note .col-xs-12 span:first-child{
+    font-weight: 700;
+}
+#cboxLoadedContent .order-note .col-xs-12 span:last-child{
+    padding-left:5px;
+}
+#cboxLoadedContent .bonus-payment-method-form__control button{
+    height: 35px!important;
+    padding: 12px 24px;
+    line-height: 0px!important;
+}
+#cboxLoadedContent .glyphicon.glyphicon-print{
+    padding-right:5px;
+}
+#cboxLoadedContent .date-choose .pull-left{
+    position: relative;
+}
+#cboxLoadedContent .glyphicon.glyphicon-calendar{
+    position: absolute;
+    right: 10px;
+    top: 6px;
+    color: #0075a4;
+}
+#colorbox.Ditto-colorbox.bonus-payment-method #cboxTitle{
+    padding-top:0;
+    background-color: #002f5f;
+    color:#fff;
+}
+#colorbox.Ditto-colorbox.bonus-payment-method #cboxClose {
+    color: #fff;
+    top: 0;
+}
+#colorbox.Ditto-colorbox.bonus-payment-method #cboxTitle .headline {
+    border-top:none;
+    text-align: center;
+}
+#colorbox.Ditto-colorbox.bonus-payment-method-history #cboxClose:before,#colorbox.Ditto-colorbox.bonus-payment-method #cboxClose:before {
+    content: '';
+}
+#colorbox.Ditto-colorbox.bonus-payment-method #cboxLoadedContent{
+    margin-top:100px;
+}
+
+@media(max-width:767px){
+    .ditto-quick-order .accordion-custom .panel .panel-heading{
+        padding:0!important;
+    }
+    .ditto-view-by-month-wrapper .cart-detail__dropdown{
+        width:98%;
+    }
+}
+@media (max-width: 768px){
+    .ditto-account-section-content .product-quantity-wrapper .col-sm-3{
+        width:25%;
+    }
+    .ditto-account-section-content .account-ditto-details-wrapper .panel-collapse .ditto-panel-wrapper *{
+        font-size: 16px;
+    }
+    .ditto-tabs-container .tab-toggle-wrap {
+        width: 50%;
+    }
+    .ditto-tabs-container .tab-toggle-wrap .tab-toggle {
+        width: 100%;
+    }
+    #tabDittoViewByMonth .product-details-cell.product-item-toggle,#tabDittoViewByYear .product-details-cell.product-item-toggle {
+        display: block;
+        width: 100%;
+        position: absolute;
+        margin-left: -2px;
+        margin-top: -60px;
+    }
+    .ditto-view-by-month-wrapper .ditto-view-by-month-header,.ditto-view-by-year-wrapper .ditto-view-by-year-header  {
+        padding: 1em;
+    }
+    #tabDittoViewByMonth .add-to-widget{
+        position: absolute;
+        right: 0;
+        top: -41px;
+        width: 50%;
+        padding-right: 0;
+    }
+    #tabDittoViewByMonth .ditto-sort-by-container{
+        position: absolute;
+        margin-top: 52px;
+        padding-left: 0;
+    }
+    .ditto-view-by-month-wrapper .col-md-3 .select2-container,.ditto-view-by-year-wrapper .col-md-3 .select2-container{
+        width: 100%!important;
+    }
+    .ditto-view-by-month-wrapper .ditto-list-colomn-wrapper .ditto-list-action-panel .list-select-all-checkbox,.ditto-view-by-year-wrapper .ditto-list-colomn-wrapper .ditto-list-action-panel .list-select-all-checkbox {
+        margin: 8px 0 0 12px;
+    }
+    #tabDittoViewByMonth .item-list-action-panel .list-select-all-checkbox,#tabDittoViewByYear .item-list-action-panel .list-select-all-checkbox  {
+        padding-top: 0;
+        padding-left: 0;
+        margin-top: 0;
+        margin-left: 0;
+    }
+    .ditto-view-by-month-wrapper .ditto-select-month-wrapper,.ditto-view-by-year-wrapper .ditto-select-year-wrapper{
+        padding:0;
+    }
+    #tabDittoViewByMonth .ditto-list-colomn-wrapper{
+        margin-top:52px;
+    }
+    .ditto-view-by-month-wrapper .sort-control form .select2-container{
+        width:98%!important;
+    }
+    #tabDittoViewByMonth .add-to-widget button.dropdown-btn,#tabDittoViewByYear .add-to-widget button.dropdown-btn  {
+        width: 100%;
+    }
+    #tabDittoViewByMonth .item-list-action-panel button ,#tabDittoViewByYear .item-list-action-panel button{
+        padding: 0 10px;
+    }
+    .add-to-component-container .action-panel-wrapper .list-action-dropdown{
+        padding-left:5px;
+    }
+    .ditto-list-action-panel .pull-right{
+        position: relative;
+        top:0;
+    }
+    .ditto-view-by-year-wrapper .ditto-list-action-panel .pull-right{
+        top:0.15em;
+    }
+    .ditto-view-by-month-wrapper .ditto-list-colomn-wrapper .ditto-item-list .ditto-product-item-wrapper .product-details-wrapper .product-item-toggle,.ditto-view-by-year-wrapper .ditto-list-colomn-wrapper .ditto-item-list .ditto-product-item-wrapper .product-details-wrapper .product-item-toggle{
+        padding-left:0;
+    }
+    .ditto-view-by-month-wrapper .ditto-list-colomn-wrapper .ditto-item-list .ditto-product-item-wrapper .product-details-wrapper .product-item-image,.ditto-view-by-year-wrapper .ditto-list-colomn-wrapper .ditto-item-list .ditto-product-item-wrapper .product-details-wrapper .product-item-image{
+        padding-left:0;
+    }
+    #tabDittoViewByYear .add-to-widget {
+        position: absolute;
+        margin-top: -61px;
+        right:0;
+        width: 50%;
+    }
+    .ditto-view-by-year-wrapper .sort-control form .select2-container{
+        width: 100% !important;~
+    }
+    .ditto-sort-by-container .sort-control__label {
+        display: none;
+    }
+    .ditto-quick-shop-wrapper .quick-shop-container #quickShopAccordion .panel #quickShopBody .panel-body #quickShopForm .item-name-container input, .shopping-cart-quick-shop-wrapper .quick-shop-container #quickShopAccordion .panel #quickShopBody .panel-body #quickShopForm .item-name-container input {
+        width: 100%;
+        border: 1px solid #dadada;
+    }
+    .ditto-account-section-content #quickOrder.shopping-cart-quick-shop-wrapper{
+        padding:0;
+    }
+    .ditto-quick-shop-wrapper .quick-shop-container #quickShopAccordion .panel #quickShopBody .panel-body #quickShopForm .item-name-container, .shopping-cart-quick-shop-wrapper .quick-shop-container #quickShopAccordion .panel #quickShopBody .panel-body #quickShopForm .item-name-container {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .ditto-view-by-month-wrapper .ditto-list-colomn-wrapper .ditto-item-list .ditto-product-item-wrapper .product-prop-wrapper .product-prop-pvbv span:nth-child(2), .ditto-view-by-month-wrapper .ditto-list-colomn-wrapper .ditto-item-list .ditto-product-item-wrapper .product-prop-wrapper .product-prop-total span:nth-child(2){
+        line-height:36px;
+    }
+    .ditto-account-section-content .shopping-cart-quick-shop-wrapper .quick-shop-container #quickShopAccordion .panel .panel-heading .panel-title div {
+        padding: 17px 20px;
+    }
+    .ditto-item-list .proceed-to-checkout-container button.btn-blue-white {
+        width: 100%;
+    }
+    .ditto-view-by-year-wrapper .ditto-delivery-details-table-container .ditto-delivery-details-table{
+        width:1200px;
+    }
+    #cboxLoadedContent  .shopping-cart-item-list{
+        border:1px solid #CCCCCC;
+    }
+    #cboxLoadedContent  .shopping-cart-item-list li{
+        padding:20px;
+    }
+    #cboxLoadedContent .project-order .value-wrapper{
+        float: right;
+        margin-left:0;
+        margin-right:0;
+    }
+}
+
+/*PRW-Landing-Lynx-Site.html*/
+
+.PRW-account-section .account-section-content .account-section-header{
+    border-bottom:none;
+    padding-left:0;
+}
+.PRW-account-section .account-section-content{
+    border-bottom:none;
+}
+.PRW-account-section .prw-nav{
+    margin-left:0;
+    width: auto;
+}
+.amway-theme .prw-nav .prw-nav-container .edit-button-wrap .prw-btn-reg, .amway-theme .prw-nav .prw-nav-container .edit-button-wrap .prw-btn-edit{
+    color:#0075A4;
+}
+.amway-theme .prw-nav .prw-nav-container .edit-button-wrap .prw-btn-reg:hover, .amway-theme .prw-nav .prw-nav-container .edit-button-wrap .prw-btn-edit:hover{
+    color:#002f5f;
+}
+.prw-accordion .panel-default .accordion-collapse-wrapper .create-prw-content-wrapper .cta-component-option-2 .title-container h2{
+    margin:0;
+}
+.amway-theme .prw-nav .prw-nav-container .jump-to-button-wrap button.prw-jump-to-button:hover{
+    color:#002f5f;
+    border:2px solid #002f5f;
+    background-color: #fff;
+}
+.prw-button-link button{
+    border:2px solid #002f5f;
+}
+.PRW-account-section .buttons-block .prw-btn:hover{
+    color:#002f5f;
+    border:2px solid #002f5f;
+    background-color: #fff;
+}
+.PRW-account-section .buttons-block button.link-btn{
+    color:#0075A4;
+    background-color: transparent;
+    font-size: 1.125em;
+}
+.PRW-account-section .buttons-block button.link-btn:hover{
+    color:#002f5f;
+}
+#delete-prw .cart-popup__item-info{
+    padding:40px;
+    height:auto;
+}
+#delete-prw .cart-popup__item-link{
+    text-align: center;
+}
+#delete-prw .cart-popup__item-link .btn-blue-white{
+    width:45%;
+    display:inline-block;
+}
+#delete-prw .cart-popup__item-link .btn-blue-white:first-child{
+    margin-right:3%;
+}
+#delete-prw .cart-popup__item-link .btn-blue-white:last-child{
+    margin-left:3%;
+}
+.prw-accordion .panel-default .accordion-collapse-wrapper .prw-description-field .field-value, .prw-accordion .panel-default .accordion-collapse-wrapper .prw-description-field a {
+    vertical-align: initial;
+}
+@media(max-width: 767px){
+    .amway-theme .prw-nav .prw-nav-container .buttons-wrap{
+        float: left;
+    }
+}
+@media(max-width: 768px){
+    .amway-theme .prw-nav{
+        padding:15px;
+        height:auto;
+    }
+    .amway-theme .prw-nav .prw-nav-container .jump-dropdown-container .select2-selection{
+        min-width:150px;
+    }
+    .amway-theme .prw-nav .prw-nav-container .jump-dropdown-container .select2-container{
+        max-width: 180px;
+    }
+}

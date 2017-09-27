@@ -24,11 +24,21 @@
 	</title>
 	
 	<%-- Meta Content --%>
+	<!-- 
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-
+	-->
+	
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords">
+    <meta name="description" content="NY Fee Bundle">
+    <meta name="robots" content="index,follow">
+    
 	<%-- Additional meta tags --%>
 	<htmlmeta:meta items="${metatags}"/>
 

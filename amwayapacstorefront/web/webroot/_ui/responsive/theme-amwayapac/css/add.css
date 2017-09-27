@@ -1,0 +1,66 @@
+/*bug fix*/
+.overlay-menu-mobile__panel > .active + .collapse{
+    display: block;
+}
+
+.topbar__flag{
+    width: 23px;
+}
+
+.dropdown-menu .content-item .topbar__flag{
+    margin-top: -7px;
+}
+header.main-header .amway-theme .header-container .country-language-container .dropdown.open {
+    background-color: transparent;
+}
+.current-country{
+    position: relative;
+}
+
+.current-country:after{
+    content: '';
+    background: url(../images/current.png) no-repeat right center;
+    width: 20px;
+    height: 20px;
+    display: block;
+    position: absolute;
+    right: 9px;
+    top: 10px;
+}
+
+header.main-header .amway-theme .header-container .nav-links-container ul.nav-list li.nav-item a.img-nav-link .user-name {
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 24px;
+    text-transform: capitalize;
+    max-width: 70px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+    position: relative;
+    top: 7px;
+}
+
+.site-logo + .open .dropdown-menu:before{
+    content: '';
+    background: url(../images/arrow_u_w.png) no-repeat transparent;
+    width: 25px;
+    height: 16px;
+    display: block;
+    position: absolute;
+    top: -9px;
+    right: 38px;
+}
+@media (max-width: 768px) {
+    .icon-shopping-cart {
+        background: url(../images/vector-smart-object@2x_mobile.png) no-repeat !important;
+        background-size: 25px !important;
+        width: 25px;
+        height: 25px;
+        display: inline-block;
+        margin-left: -8px;
+        margin-top: 5px;
+    }
+}

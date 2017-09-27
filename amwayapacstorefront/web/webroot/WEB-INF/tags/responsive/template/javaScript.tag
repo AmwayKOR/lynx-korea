@@ -16,6 +16,10 @@
 	  	<script type="text/javascript" src="${contextPath}/wro/addons_responsive.js"></script>
 	</c:when>
 	<c:otherwise>
+	
+		<%-- Less --%>
+		<script type="text/javascript" src="${commonResourcePath}/js/less.min.js"></script>
+		
 		<%-- jquery --%>
 		<script type="text/javascript" src="${commonResourcePath}/js/jquery-2.1.1.min.js"></script>
 		
@@ -42,6 +46,9 @@
 		
 		<%-- Custom ACC JS --%>
 		
+		<script type="text/javascript" src="${commonResourcePath}/js/acc.header.js"></script>
+		<script type="text/javascript" src="${commonResourcePath}/js/acc.footer.js"></script>
+		<script type="text/javascript" src="${commonResourcePath}/js/acc.homepage.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.address.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.autocomplete.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.carousel.js"></script>
@@ -81,10 +88,15 @@
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.multidgrid.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.quickorder.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.quote.js"></script>
-
+		
+		
+		
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.csv-import.js"></script>
 
 		<script type="text/javascript" src="${commonResourcePath}/js/_autoload.js"></script>
+		
+		<script src="${commonResourcePath}/js/owl.carousel.js"></script> 
+        <script src="${commonResourcePath}/js/new.js"></script>
 		
 		<%-- Cms Action JavaScript files --%>
 		<c:forEach items="${cmsActionsJsFiles}" var="actionJsFile">

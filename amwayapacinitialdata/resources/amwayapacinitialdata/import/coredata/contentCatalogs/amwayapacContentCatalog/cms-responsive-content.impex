@@ -815,3 +815,57 @@ INSERT_UPDATE CategoryPage;$contentCV[unique=true];uid[unique=true];name;masterT
 ;;productList;Product List;ProductListPageTemplate;true;
 ;;productGrid;Product Grid;ProductGridPageTemplate;false;
 ;;category;Default Category Page;CategoryPageTemplate;false;
+
+
+
+
+INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;frontendTemplateName;restrictedPageTypes(code);active[default=true]
+;;HomePageMainTemplate;Home Main Page Template;layout/homePageLayout;CategoryPage,ContentPage
+
+UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];velocityTemplate[translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+;;HomePageMainTemplate      ;$jarResourceCms/structure-view/structure_homePageMainTemplate.vm
+
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='HomePageMainTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;SearchBox;;;searchbox
+;MiniCart;;;minicart
+;NavigationBar;;;navigation
+;Section1;;;wide
+;Section2;;;wide
+;Section3A;;;narrow
+;Section3B;;;narrow
+;Section4;;;wide
+;Section5;;;wide
+;Section6A;;;narrow
+;Section6B;;;narrow
+;Section6C;;;narrow
+;Section7;;;wide
+;Section8;;;wide
+;Section9A;;;narrow
+;Section9B;;;narrow
+;Section9C;;;narrow
+;Section10;;;wide
+;Section11;;;wide
+;Section12;;;wide
+;Section13;;;wide
+;Footer;;;footer
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active
+;;SiteLogoSlot;Default Site Logo Slot;true
+;;MiniCartSlot;Mini Cart;true
+;;FooterSlot;Footer;true
+;;SearchBoxSlot;Search Box;true
+;;NavigationBarSlot;Navigation Bar;true
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='HomePageMainTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-HomePageMain;SiteLogo;;SiteLogoSlot;true
+;;MiniCart-HomePageMain;MiniCart;;MiniCartSlot;true
+;;Footer-HomePageMain;Footer;;FooterSlot;true
+;;SearchBox-HomePageMain;SearchBox;;SearchBoxSlot;true
+;;NavigationBar-HomePageMain;NavigationBar;;NavigationBarSlot;true
+
+# Site-wide Aaron Homepage
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='true']
+;;homepage;Homepage;HomePageMainTemplate;homepage
+

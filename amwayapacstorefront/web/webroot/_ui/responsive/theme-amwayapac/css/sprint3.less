@@ -1,0 +1,1783 @@
+.my-count {
+	width:100%;
+	max-width: @w100;
+}
+.go-block {
+	display: inline-block;
+	position: relative;
+	font-size: 1em;
+	padding-top: 1em;
+	.jump-to-wrapper {
+		display: inline-block;
+		padding-left: 20px;
+	}
+	.jump-to {
+		display: inline-block;
+		border-left: 1px solid white;
+		vertical-align: middle;
+		padding: 0.3em 0 0.3em 1.2em;
+		color: @white;
+		text-transform: uppercase;
+		background: transparent;
+		margin: 0;
+		position: relative;
+	}
+	input[type="button"] {
+		position: relative;
+		top: 1px;
+		margin-left: 8px;
+		border:2px solid @blue_1;
+		width: 52px;
+		&:hover{
+			color:@blue_1;
+			background-color: @white;
+			border:2px solid @blue_1;
+		}
+	}
+}
+.user-id {
+	color: @white;
+}
+.select2-container--default {
+	.select2-search--dropdown {
+		.select2-search__field {
+			display: none;
+		}
+	}
+	
+}
+
+.select2-container {
+	.selection {
+		.select2-selection {
+			.select2-selection__rendered {
+				float: left;
+			}
+            .select2-selection__arrow {
+				padding-right: 8px;
+                &::after {
+                    .a_link;
+                }
+            }
+            .select2-selection__rendered {
+                color: @blue_1;
+            }
+		}
+	}
+	.select2-dropdown--below {
+		.select2-results {
+			.select2-results__options {
+				.select2-results__option {
+					line-height: 1;
+					min-height: 32px;
+					height: auto;
+				}
+			}
+		}
+	}
+    
+    
+	display: inline-block !important;
+	position: relative;
+	top: -1px;
+	box-sizing: border-box;
+	display: inline-block;
+	margin: 0;
+	position: relative;
+	vertical-align: middle;
+}
+.user-account-header {
+	.user-block {
+		display: none;
+	}
+	background-image: url(../images/order-history-banner-pic.png);
+	background-size: cover;
+}
+.account-section {
+	max-width: @w100;
+}
+.order-history-box {
+	width: @w100;
+	max-width: @w1400;
+	display: table;
+	margin: 0 auto;
+}
+.amway-theme {
+	.order-history-account-section-header {
+		.history-header-icon {
+			color: @blue_2;
+		}
+		border-top: none;
+		padding: 20px 12px;
+	}
+	.order-history-container {
+		table.orderhistory-list-table {
+            thead {
+                tr {
+                    display: table-row;
+                    width: @w100;
+                }
+            }
+			tbody {
+				tr {
+                    display: table-row;
+                    width:@w100;
+                    clear:both;
+					&:nth-of-type(even) {
+						background-color: inherit;
+					}
+					&:nth-of-type(4n+4) {
+							background-color: @gray_9;
+						
+					}
+                    &.order-details-block {
+                        display: none;
+                    }
+                    &.expanded {
+                        display:  table-row;
+                    }
+				}
+			}
+		}
+	}
+	.tabs-toggles {
+		.tab-toggle-wrap {
+			.tab-toggle {
+				color: @mainColor;
+			}
+		}
+		.tab-toggle-wrap.active {
+			.tab-toggle {
+				color: @blue_1;
+				text-transform: uppercase;
+			}
+		}
+	}
+	.tabs-toggles.option2 {
+		.tab-toggle-wrap {
+			.tab-toggle {
+				padding: 0.5625em 1.875em;
+			}
+		}
+	}
+}
+.order-history-search-wrapper {
+	.primary.small.js-automation-order-history-sort-apply {
+		padding: 0 25px;
+	}
+	.primary.small.js-automation-order-history-search-btn {
+		padding: 0 25px;
+	}
+}
+.order-history-container {
+	.order-history-search-wrapper {
+		.form-wrapper {
+			form {
+				.select2 {
+					&:not(:last-child) {
+						margin-right: 8px;
+					}
+				}
+				.select2-container {
+					.selection {
+						.select2-selection {
+							.select2-selection__rendered {
+								color: @blue_1;
+								margin-right: 20px;
+							}
+						}
+					}
+				}
+			}
+			input {
+				font-weight: @weight100;
+				color: @gray_3;
+			}
+			button {
+				display: inline-block;
+				text-transform: uppercase;
+				border: 2px solid @blue_1;
+				vertical-align: bottom;
+				&:hover {
+					background: @white;
+					color: @blue_1;
+				}
+			}
+			padding: 10px 0;
+		}
+		.order-history-view-orders-from {
+			padding-left: 0;
+			padding-bottom: 10px;
+		}
+		.toggle-buttons-container {
+			button {
+				border-bottom: 1px solid @gray_8;
+				padding-left: 0;
+				padding-right: 0;
+				color: @blue_1;
+				background-color: @white;
+				text-transform: uppercase;
+				&:not(:last-child) {
+					border-right: 1px solid @gray_8;
+					border-right: 1px solid #e3e3e3;
+				}
+				.icon-Humburger_list::before {
+					font-size: 12px;
+					margin-right: 5px;
+					color: @blue_2;
+				}
+				.icon-search::before {
+					color: @blue_2;
+				}
+			}
+		}
+	}
+	.order-details-block {
+		td {
+			.order-details-content {
+				.order-products-container {
+					ul {
+						.item-list-item {
+							width: auto;
+							border-top: 1px solid @gray_8;
+							margin: 0;
+							.order-history-tracking-info {
+								.tracking-info-item {
+									&:first-of-type {
+										padding: 10px 0 0 ;
+										border-top: 1px solid @gray_8;
+									}
+								}
+								.Backoder-tracking-info-item {
+									&:first-of-type {
+										padding: 10px 0;
+										border: 1px solid @gray_8;
+										border-width: 1px 0;
+									}
+								}
+								padding: 20px 20px 10px 107px;
+							}
+						}
+						.order-product-header {
+							margin: 0;
+						}
+						.item-list-first-item {
+							border-top: none;
+						}
+					}
+				}
+				.order-history-tabs-wrapper {
+					.order-history-short-description {
+						display: block;
+					}
+				}
+				.orders-header {
+					.order-detail-title {
+						float: left;
+						position: relative;
+						padding-top: 32px;
+						padding-bottom: 32px;
+						text-transform: uppercase;
+						color: @blue_1;
+						font-size: 20px;
+						line-height: 24px;
+						font-weight: 600;
+						top: 0;
+						.order-details-status {
+							.value {
+								text-transform: none;
+								font-weight: 400;
+								color: @mainColor;
+							}
+						}
+					}
+					.edit-order-button-container {
+						margin-top: 22px;
+					}
+				}
+			}
+			.order-details-content.future-shipments-content {
+				.orders-header {
+					margin-bottom: 0 !important;
+					border-bottom: 0;
+				}
+			}
+		}
+		display: none;
+	}
+	.form-wrapper {
+		padding-left: 0;
+	}
+	.amway-theme {
+		.navigation-tabs-container {
+			padding: 0 12px 0;
+			.tabs-toggles {
+				margin-top: 30px;
+			}
+		}
+	}
+	.order-history-tabs-wrapper {
+		.view-title {
+			padding: 32px 20px;
+			.package-name {
+				span {
+					&:first-child {
+						color: @blue_1;
+					}
+					&:last-child {
+						color: @green;
+					}
+				}
+			}
+		}
+	}
+	.tracking-info-item {
+		span {
+			display: block;
+		}
+	}
+	.product-card {
+		>div {
+			border: none;
+		}
+	}
+	.product-card__image {
+		img {
+			border: 1px solid @gray_8;
+			width: 68px;
+			height: 68px;
+		}
+	}
+	.product-card__id {
+		.UPS-tracking-num {
+			color: @blue_2;
+		}
+	}
+	.col-xs-9.product-card__info-wrapper {
+		>div {
+			margin-bottom: 0;
+			margin-top: 0;
+		}
+		.product-card__details {
+			>div {
+				line-height: 1.5em;
+			}
+		}
+		.product-card__title {
+			.name {
+				color: @mainColor;
+			}
+		}
+	}
+	.product__list--thumb {
+		position: absolute;
+		top: 10px;
+	}
+	.accordion-title-wrapper {
+		.accordion-header-icon {
+			margin-right: -12px;
+		}
+	}
+	.table-content-rows.order-history-summary {
+		width: 50%;
+		float: right;
+		border: 1px solid @gray_8;
+		border-top: none;
+		margin: 20px 0;
+		.header-row {
+			margin-bottom: 16px;
+		}
+		.table-header {
+			height: auto;
+			.header-element {
+				&:first-of-type {
+					padding-left: 24px;
+					text-align: left;
+				}
+				text-align: center;
+				&:last-of-type {
+					padding-right: 24px;
+					text-align: right;
+				}
+			}
+		}
+		.table-row {
+			.table-row-wrapper {
+				margin: 0 24px;
+			}
+			.row-element {
+				.row-text {
+					.order-details-wrapper {
+						.order-details-btn {
+							color: @blue_2;
+							font-size: 14px;
+							line-height: 24px;
+							cursor: pointer;
+							&:hover {
+								color: @blue_1;
+							}
+						}
+					}
+				}
+				padding-top: 0.25em;
+				padding-bottom: 0.25em;
+				text-align: center;
+				&:first-of-type {
+					text-align: left;
+					font-weight: 600;
+				}
+				&:last-of-type {
+					text-align: right;
+					font-weight: 600;
+				}
+			}
+			&:last-of-type {
+				padding-bottom: 20px;
+			}
+		}
+		.table-row.sub-total-row {
+			.table-row-wrapper {
+				border-top: 1px solid @gray_8;
+				padding: 12px 0 0;
+				margin-top: 12px;
+			}
+		}
+		.table-row.total-row {
+			.table-row-wrapper {
+				border-top: 1px solid @gray_8;
+				padding: 12px 0 0;
+				margin-top: 12px;
+			}
+			.row-element {
+				font-size: 20px;
+				line-height: 24px;
+				font-weight: 700;
+				color: @blue_1;
+				text-transform: uppercase;
+			}
+		}
+	}
+	.table-content-rows {
+		.table-row {
+			&:nth-of-type(odd) {
+				.table-row-wrapper {
+					background: transparent;
+				}
+			}
+			&:first-child {
+				border-top: none;
+			}
+		}
+		.total-row {
+			color: @blue_1;
+			font-weight: 600;
+		}
+	}
+	.orderhistory-list-table {
+		.responsive-table-item {
+			&:nth-child(4n + 3) {
+				background-color: @gray_9;
+				
+			}
+		}
+		margin-top: 20px;
+		border-top: 1px solid @gray_8;
+		.responsive-table-item.order-history-table-item {
+			cursor: pointer;
+		}
+	}
+}
+.edit-order-button-container {
+	a {
+		color: @blue_2 !important;
+		&:hover {
+			color: @blue_1 !important;
+		}
+	}
+}
+.order-history-short-description {
+	span {
+		color: @blue_1;
+	}
+}
+.order-history-promotion-detail {
+	.bracket {
+		color: @mainColor;
+	}
+	.bracket-detail {
+		color: @blue_2;
+	}
+}
+.order-history-promotion-detail.col-md-12 {
+	padding-left: 115px;
+	padding-top: 10px;
+}
+.service-fee.col-md-12 {
+	padding-left: 115px;
+	padding-top: 10px;
+}
+.order-history-bundle {
+	padding-left: 115px;
+}
+.accordion-header-icon {
+	display: inline-block;
+	color: @blue_1;
+	top: 1px;
+	margin-right: 5px;
+	max-width: 30px;
+	width: 30px;
+}
+.order-products-container-divider {
+	width: @w100;
+	padding-left: 0;
+	padding-right: 0;
+	border-top: 1px solid @gray_8;
+}
+.future-shipments-content {
+	border-top: none !important;
+	.product-Backorder {
+		.backorder {
+			font-size: 16px;
+			color: @red;
+			text-transform: uppercase;
+		}
+	}
+}
+.Backoder-tracking-info-item {
+	span {
+		display: inline-block !important;
+	}
+}
+.backoder-details {
+	font-weight: 600;
+}
+.backoder-details-divider {
+	padding: 0 10px;
+}
+.backorder-production {
+	color: @blue_2;
+	cursor: pointer;
+	&:hover {
+		color: @blue_1;
+	}
+}
+.backorder-note {
+	font-style: italic;
+	padding-top: 10px;
+}
+.order-details-content-wrapper {
+	.table-content-rows.order-history-summary {
+		width: 50%;
+		float: right;
+		border: 1px solid @gray_8;
+		border-top: none;
+		margin: 20px 0;
+		.header-row {
+			margin-bottom: 16px;
+		}
+		.table-header {
+			height: auto;
+			.header-element {
+				&:first-of-type {
+					padding-left: 24px;
+					text-align: left;
+				}
+				text-align: center;
+				&:last-of-type {
+					padding-right: 24px;
+					text-align: right;
+				}
+			}
+		}
+		.table-row {
+			.table-row-wrapper {
+				margin: 0 24px;
+			}
+			.row-element {
+				.row-text {
+					.order-details-wrapper {
+						.order-details-btn {
+							color: @blue_2;
+							font-size: 14px;
+							line-height: 24px;
+						}
+					}
+				}
+				padding-top: 0.25em;
+				padding-bottom: 0.25em;
+				text-align: center;
+				&:first-of-type {
+					text-align: left;
+					font-weight: 600;
+				}
+				&:last-of-type {
+					text-align: right;
+					font-weight: 600;
+				}
+			}
+			&:last-of-type {
+				padding-bottom: 20px;
+			}
+		}
+		.table-row.sub-total-row {
+			.table-row-wrapper {
+				border-top: 1px solid @gray_8;
+				padding: 12px 0 0;
+				margin-top: 12px;
+			}
+		}
+		.table-row.total-row {
+			.table-row-wrapper {
+				border-top: 1px solid @gray_8;
+				padding: 12px 0 0;
+				margin-top: 12px;
+			}
+			.row-element {
+				font-size: 20px;
+				line-height: 24px;
+				font-weight: 700;
+				color: @blue_1;
+				text-transform: uppercase;
+			}
+		}
+	}
+}
+.order-history-tabs-wrapper {
+	.table-row-wrapper {
+		div {
+			&:nth-child(2) {
+				text-align: right;
+			}
+		}
+	}
+}
+.responsive-table-item.open {
+	.icon-chevron-right {
+		&:before {
+			content: '\e95b';
+			color: @blue_2;
+		}
+	}
+}
+.responsive-table-item {
+	.icon-chevron-right {
+		&:before {
+			color: @blue_2;
+		}
+	}
+}
+.order-history-account-section-content {
+	border-bottom: 0;
+}
+.icon-arrow-dropdown {
+	&:before {
+		content: "\e959";
+	}
+}
+header.main-header .icon-arrow-dropdown {
+	&:before {
+		content: " ";
+	}
+}
+.account-section-content {
+    margin-bottom: 0;
+}
+#customerOrdersContent {
+	.account-section-content.content-empty {
+		margin: 45px 0;
+		font-weight: bold;
+		font-size: 18px;
+		text-align: center;
+		padding-left: 30px;
+		padding-right: 30px;
+	}
+}
+.orderhistory-list-table {
+	.account-orderhistory-table-head {
+		.icon.icon-arrow-dropdown {
+			font-size: 10px;
+			margin-left: 3px;
+		}
+	}
+	.amway-theme {
+		.order-history-tabs-wrapper {
+			.tabs-toggles {
+				.tab-toggle-wrap {
+					display: inline-flex;
+                    vertical-align: middle;
+				}
+			}
+		}
+	}
+}
+.advanceorder {
+	padding-left: 5px;
+}
+.account-section {
+	.container-lg {
+		.account-section-content {
+			.pd12;
+		}
+	}
+	.account-overview-table {
+		margin: 0;
+	}
+}
+
+.account-orderhistory {
+	.amway-theme {
+		.tabs-toggles {
+			.tab-toggle-wrap {
+				display: inline-flex;
+                vertical-align: middle;
+				margin-bottom: -1px;
+				letter-spacing: normal;
+				.tab-toggle {
+					display: inline-block;
+					float: left;
+				}
+			}
+			letter-spacing: -4px;
+		}
+	}
+}
+.js-automation-order-details-number-title {
+	min-width: 116px;
+	text-align: left;
+}
+.js-automation-order-details-status-title {
+	min-width: 116px;
+	text-align: left;
+}
+.js-automation-order-details-date-title {
+	min-width: 116px;
+	text-align: left;
+}
+.js-automation-order-original-title {
+	min-width: 116px;
+	text-align: left;
+}
+.js-automation-order-details-number-value {
+	text-align: right;
+	min-width: 114px;
+}
+.js-automation-order-details-status-value {
+	text-align: right;
+	min-width: 114px;
+}
+.js-automation-order-details-date-value {
+	text-align: right;
+	min-width: 114px;
+}
+.js-automation-order-original-link {
+	text-align: right;
+	min-width: 114px;
+}
+.order-number.js-automation-order-details-number-title {
+	position: relative;
+	left: 0;
+}
+
+.billing-shipping {
+	.accordion-billing-shipping {
+		padding:20px 0;
+		.panel {
+            .panel-body {
+                .container-fluid {
+                    padding: 0 12px;
+                }
+                .payment-new-wrapper {
+                    display: none;
+                }
+            }
+			.card-image {
+				width: 52px;
+				img {
+					width: @w100;
+				}
+			}
+			#paymentInformationBody {
+				.account-list {
+					.account-cards {
+                        border-bottom: 0;
+						.payment-info-container {
+							>div {
+								.button-block {
+									button {
+										padding: 5px 20px;
+										text-transform: uppercase;
+										line-height: 1.375;
+										padding: 0.5em 1.92em;
+									}
+								}
+								width: auto;
+								display: block;
+								padding: 15px 0;
+							}
+						}
+					}
+					padding: 0;
+				}
+				.create-payment-container {
+					#newCreditCardPostForm {
+						.address-block {
+							.address-buttons {
+								button.cancel-button {
+									color: @blue_2;
+									&:hover {
+										color: @blue_1;
+									}
+								}
+								button {
+									width: @w100;
+								}
+							}
+						}
+					}
+				}
+				.add-new-payment-info {
+                    border-top: 1px solid @gray_8;
+                    cursor: pointer;
+                    display: block;
+                    padding-top: 20px;
+                    margin: 0;
+                    .a_link;
+					
+				}
+			}
+			
+		}
+		.main {
+			.form-container {
+				button {
+					border: 2px solid  @blue_1;
+				}
+			}
+		}
+	}
+	.billing-and-shipping-section {
+		.add-new-alternate-address {
+			.icon {
+				bottom: 0;
+				color: @blue_2;
+			}
+			width: @w100;
+			a {
+				color: @blue_2;
+				&:hover {
+					color: @blue_1;
+				}
+			}
+		}
+		.main {
+			.form-container {
+				.mailing-address {
+					.action-links {
+						display: inline-block;
+						margin-top: 20px;
+						vertical-align: middle;
+						.a_link;
+					}
+				}
+				button {
+					&:hover {
+						border:2px solid @blue_1;
+					} 
+				}
+			}
+		}
+	}
+}
+#business-page-accordion {
+	padding: 20px 12px;
+	max-width: @w1400;
+	margin: 0 auto;
+	.panel {
+		.panel-collapse {
+			@media (max-width: @w768) {
+				padding: 0 12px 20px 28px;
+			}
+		}
+		.panel-collapse {
+			.row {
+				.row-description.business-photo {
+					img {
+						top: 0;
+					}
+				}
+			}
+		}
+	}
+}
+.btn {
+	line-height: 1.375 !important;
+}
+.panel-collapse {
+	.create-payment-container {
+		label {
+			text-transform: uppercase;
+		}
+	}
+}
+.card-form {
+	label.control-label {
+		width: 125px;
+	}
+}
+.width-auto {
+	width: auto !important;
+}
+.payment-info-container {
+	.block {
+		padding-bottom: 0;
+	}
+	.btn {
+		text-transform: uppercase;
+	}
+}
+.create-payment-container {
+	.address-buttons {
+		text-align: right;
+	}
+	button {
+		text-transform: uppercase;
+		padding: 5px 19px !important;
+	}
+}
+.creat-new-wrapper {
+	border: 1px solid @gray_8;
+	border-bottom: 0;
+	@media (max-width:768px) {
+		margin: 0 -5px;
+	}
+}
+.card-info-block {
+	padding-top: 15px;
+}
+.card-image-block {
+	padding: 9px 0 0 !important;
+}
+.address-block {
+	.button-block {
+		float: right;
+	}
+}
+.block-right {
+	display: table;
+	>div {
+		display: table-cell;
+		vertical-align: top;
+	}
+}
+select.form-control#mailingAddressRegionIso {
+	width: auto;
+}
+
+.account-landing-page {
+	.user-account-options {
+		.option-item-container {
+			.option-item {
+				cursor: pointer;
+                .icon {
+                    color: @blue_2;
+                    border-color: @blue_2;
+                    &:hover {
+                        color: @blue_1;
+                        border-color: @blue_1;
+                    }
+                }
+                .option-title {
+                    font-size:18px;
+                }
+                .option-description {
+                    font-size:14px;
+                }
+                .option-item-footer {
+                    line-height: 1;
+                    font-size:14px;
+                }
+			}
+		}
+	}
+}
+.option-item-containe {
+	a {
+		border: 0;
+	}
+}
+.business-info{
+	#mission-statement-textarea{
+		display: none;
+		min-height:100px;
+	}
+}
+.business-photo{
+	.photo-edit{
+		display: @none;
+		position: absolute;
+		width:  @w100;
+		height: 40%;
+		background-color: @blue_1;
+		color: #fff;
+		text-align: center;
+		z-index: 999;
+		padding-bottom: 40px;
+		bottom: 0;
+		opacity: 0.8;
+		border:none;
+		span{
+			position: relative;
+			top: 8px;
+			&:before{
+				font-family: "AmwayIcons";
+				content: "\e9aa";
+			}
+		}
+	}
+}
+.businees-action-btn {
+	&:hover{
+		border:2px solid  @blue_1!important;
+	}
+}
+.bonus-payment-method-form__acceptance-checkbox {
+	display: inline-block;
+}
+
+@media (min-width: 769px) {
+	.user-account-header {
+		
+		.go-block {
+			text-align: right;
+			float: right;
+			top: 18px;
+            padding-right: 12px;
+			padding-top: 1.5em;
+		}
+		.user-block {
+			display: block;
+			text-align: left;
+            padding-left: 12px;
+			
+		}
+	}
+	.order-history-container {
+		.order-history-search-wrapper {
+			.form-wrapper {
+				form {
+					select#date {
+						&+.select2 {
+							width: 185px !important;
+						}
+					}
+					select#type {
+						&+.select2 {
+							width: 200px !important;
+						}
+					}
+					padding-left:0;
+					padding-right: 0;
+					display: inline-block;
+				}
+			}
+		}
+	}
+}
+@media (max-width: 1024px) {
+	.account-section {
+		.container-lg {
+			.account-section-content {
+				.pd12;
+			}
+		}
+	}
+}
+@media (max-width: 768px) {
+	.my-count {
+		padding: 12px 0 0;
+		.account-landing-page {
+			.user-account-header {
+				.go-block {
+					width: @w100;
+					display: table;
+					top: 0;
+					.amway-theme {
+						width: @w100;
+						display: table;
+						.jump-to {
+							display: table-cell;
+							min-width: 62px;
+						}
+						.jump-to-wrapper {
+							display: table-cell;
+							padding-right: 10px;
+							.select2 {
+								display: table-cell;
+								max-width: auto;
+							}
+							.js-jump-to-selection-btn {
+								display: table-cell;
+							}
+						}
+					}
+				}
+				
+				.container {
+					padding: 0;
+				}
+			}
+			.user-account-options {
+				margin: 0 -12px;
+				padding: 12px 0;
+				.option-item-container {
+					padding: 10px 10px; 
+				}
+			}
+		} 
+	}
+
+	.order-history-container {
+		.amway-theme {
+			.tabs-toggles {
+				.tab-toggle-wrap.active {
+					.tab-toggle {
+						width: @w100;
+					}
+				}
+				width: @w100;
+			}
+		}
+		
+		.order-details-block {
+			td {
+				.order-details-content {
+					.orders-header {
+						.edit-order-button-container {
+							margin: 0;
+							.modify-order {
+								padding: 10px 0;
+							}
+						}
+						padding: 0 0 0 10px;
+						text-align: left;
+						.order-detail-title {
+							float: none;
+							padding-bottom: 0;
+						}
+						.order-detail-title.future-shipments {
+							float: left;
+							padding-bottom: 32px;
+						}
+					}
+					.order-products-container {
+						ul {
+							.item-list-item {
+								.item-quantity.order-item-element {
+									padding-top: 20px;
+								}
+								.order-item-element {
+									display: block;
+									width: @w100;
+									margin: 0 !important;
+									padding: 0 0 0 108px;
+									float: none;
+									&:first-of-type {
+										padding-left: 10px;
+									}
+									.item-label {
+										font-size: 14px;
+										display: inline-block !important;
+										font-weight: 600;
+										color: @blue_1;
+										text-transform: uppercase;
+										text-align: left;
+										* {
+											font-size: 14px;
+										}
+									}
+									.item-value {
+										font-size: 14px;
+										display: inline-block !important;
+										text-align: right;
+										* {
+											font-size: 14px;
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+				padding: 0 15px;
+			}
+		}
+		.item-list-item {
+			.retail-price-new {
+				display: inline-block;
+			}
+		}
+		.table-content-rows.order-history-summary {
+			width: @w100;
+			border: none;
+			margin: 0;
+			.table-row {
+				.row-element {
+					.header-text {
+						display: inline-block !important;
+						line-height: 20px;
+					}
+					width: @w100;
+					padding: 0;
+					text-align: left;
+					&:not(:first-of-type) {
+						padding-left: 5px;
+					}
+					.row-text {
+						&:not(:first-of-type) {
+							float: right;
+							line-height: 20px;
+						}
+					}
+					&:last-of-type {
+						text-align: left;
+					}
+				}
+				.table-row-wrapper {
+					padding: 10px 0;
+					margin: 0 20px;
+					border-bottom: 1px solid @gray_8;
+				}
+			}
+			.table-row.total-row {
+				.table-row-wrapper {
+					margin-top: 0;
+					padding: 10px 0;
+					border-top: none;
+				}
+			}
+			.table-row.sub-total-row {
+				.table-row-wrapper {
+					margin-top: 0;
+					padding: 10px 0;
+					border-top: none;
+				}
+			}
+		}
+		.order-history-tabs-wrapper {
+			.view-title {
+				padding: 16px 10px;
+			}
+		}
+		.responsive-table-item {
+			td.responsive-table-cell-bold {
+				font-weight: initial;
+			}
+		}
+		.orderhistory-list-table {
+			.responsive-table-item {
+				.date-cell {
+					.date {
+						margin-left: 0;
+					}
+				}
+			}
+		}
+		.order-history-search-wrapper {
+			.form-wrapper.search-form-wrapper {
+				input[type="text"] {
+					width: @w100;
+					font-weight: @weight100;
+					margin-bottom: 10px;
+				}
+			}
+		}
+	}
+	.orderhistory-list-table {
+		.order-detail-title {
+			span {
+				float: none;
+			}
+		}
+		.future-shipments.order-detail-title {
+			span {
+				float: left;
+			}
+		}
+	}
+	.order-history-bundle {
+		padding-left: 0;
+		.product-card {
+			padding-left: 0;
+			padding-right: 0;
+			>div {
+				padding-left: 0;
+				padding-right: 0;
+			}
+		}
+	}
+	.order-details-content-wrapper {
+		.table-content-rows.order-history-summary {
+			width: @w100;
+			.table-row {
+				.row-element {
+					.header-text {
+						display: inline-block !important;
+						line-height: 20px;
+					}
+					width: @w100;
+					padding: 0;
+					text-align: left;
+					&:not(:first-of-type) {
+						padding-left: 5px;
+					}
+					.row-text {
+						&:not(:first-of-type) {
+							float: right;
+							line-height: 20px;
+						}
+					}
+					&:last-of-type {
+						text-align: left;
+					}
+				}
+				.table-row-wrapper {
+					padding: 10px 0;
+					margin: 0 20px;
+					border-bottom: 1px solid @gray_8;
+				}
+			}
+			.table-row.total-row {
+				.table-row-wrapper {
+					margin-top: 0;
+					padding: 10px 0;
+					border-top: none;
+				}
+			}
+			.table-row.sub-total-row {
+				.table-row-wrapper {
+					margin-top: 0;
+					padding: 10px 0;
+					border-top: none;
+				}
+			}
+		}
+	}
+	.user-account-header {
+		.go-block {
+			.select2 {
+				min-width: 68%;
+				max-width: 68%;
+				overflow: hidden;
+				.select2-selection {
+					.select2-selection__arrow {
+						right:0;
+						background: #fff;
+					}
+				}
+			}
+		}
+		.user-block.col-sm-4 {
+			width: 33.33333333%;
+		}
+		@media (max-width: 640px) {
+			.col-sm-8 {
+				width:100%;
+			}
+		}
+	}
+	#customerOrdersContent {
+		.container-lg {
+			.account-section-content {
+				padding: 0;
+			}
+		}
+	}
+	.address-form {
+		.form-group {
+			label.control-label {
+				vertical-align: top;
+			}
+		}
+	}
+	.card-info-block {
+		padding-top: 0;
+	}
+	.card-image-block {
+		margin-bottom: 10px;
+	}
+	.billing-shipping {
+		.accordion-billing-shipping {
+			.panel-title {
+				div {
+					span.indicator {
+						&:after {
+							margin-right: 0;
+						}
+					}
+					span {
+						font-size: 1em;
+						line-height: 1.5em;
+					}
+				}
+			}
+			.panel {
+				#paymentInformationBody {
+					.create-payment-container {
+						#newCreditCardPostForm {
+							.card-block {
+								.card-form {
+									padding-left: 0;
+									label {
+										top: 0;
+									}
+								}
+							}
+							.address-block {
+								.address-buttons {
+									button {
+										width: auto;
+										float: left;
+										padding: 0.5em 2em !important;
+									}
+									button.cancel-button {
+										position: relative;
+										top: 4px;
+									}
+								}
+							}
+						}
+					}
+					.account-list {
+						.account-cards {
+							.payment-info-container {
+								>div {
+									.card-info-block {
+										.card-info {
+											display: block;
+											.expires-message-warpper {
+												padding-left: 0;
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			padding: 0;
+		}
+	}
+	.card-form {
+		label.control-label {
+			display: block;
+			margin-bottom: 10px;
+		}
+	}
+	.payment-new-wrapper {
+		padding: 0 5px !important;
+	}
+	.new-payment-info {
+		.btn {
+			width: @w100;
+		}
+	}
+	.pull-right {
+		display: block !important;
+	}
+	select.form-control#mailingAddressRegionIso {
+		margin-bottom: 0;
+		padding: 0 2px;
+		line-height: 1.42857143;
+		width: auto;
+	}
+	.order-history-container {
+		.order-history-search-wrapper {
+			.form-wrapper {
+				form {
+					select#date {
+						&+.select2 {
+							width: 185px !important;
+							min-width: @w100;
+						}
+					}
+					select#type {
+						&+.select2 {
+							width: 200px !important;
+							min-width: @w100;
+						}
+					}
+					padding-left: 15px;
+					padding-right: 15px;
+					width: @w100;
+					display: inline-block;
+				}
+			}
+		}
+	}
+	#colorbox.bonus-payment-method {
+		#bonusPaymentMethodHistory {
+			.table-body {
+				.table-row {
+					padding: 15px;
+				}
+			}
+		}
+	}
+}
+
+	
+
+.mb60 {
+    display: table;
+    margin-bottom: -60px;
+}
+@media (max-width: 480px) {
+	.card-info-block {
+		width: @w100;
+		float: none;
+	}
+	.block-right {
+		width: @w100;
+		float: none;
+	}
+}
+@media (max-width: 560px) {
+	.account-landing-page {
+		.user-account-options {
+			margin:0 -12px;
+			.option-item-container {
+				width: @w100;
+			}
+		}
+	}
+}
+.page-bonus-payment {
+	.bonus-payment {
+		.bonus-payment-content {
+			font-family: @font_sans;
+			padding: 30px 0;
+			background: #fff;
+		}
+		.bonus-payment-wrapper {
+			margin: 20px 0;
+			border-top: 1px solid #f2f2f2;
+			border-bottom: 1px solid #f2f2f2;
+			padding: 0 45px;
+		}
+		.bonus-payment__title {
+			padding: 30px 0;
+			font-size: 20px;
+			font-weight: 600;
+			color: @blue_1;
+			position: relative;
+			text-transform: uppercase;
+		}
+		.bonus-payment__title-icon {
+			position: absolute;
+			left: -30px;
+			top: 34px;
+			color: @blue_2;
+		}
+		.bonus-payment__description {
+			padding: 15px 0;
+			font-size: 16px;
+		}
+		.bonus-payment__items {
+			display: flex;
+			flex-direction: column;
+			padding: 20px 0;
+			>.row {
+				display: flex;
+				>[class*='col-'] {
+					display: flex;
+					flex-direction: column;
+				}
+			}
+		}
+		.bonus-payment__item {
+			padding: 50px 40px 40px;
+			border: 1px solid #f2f2f2;
+			position: relative;
+			display: flex;
+			flex-direction: column;
+			flex: 1 0 auto;
+		}
+		.bonus-payment__item-title {
+			text-transform: uppercase;
+			padding-bottom: 10px;
+			font-size: 20px;
+			font-weight: 600;
+			color: @blue_1;
+			text-align: center;
+		}
+		.bonus-payment__item-description {
+			padding-bottom: 105px;
+			font-size: 16px;
+			text-align: center;
+		}
+		.bonus-payment__item-button {
+			position: absolute;
+			bottom: 60px;
+			font-weight: 400;
+			padding: 10px 15px;
+			left: 50%;
+			-webkit-transform: translateX(-50%);
+			transform: translateX(-50%);
+			color: @white;
+			background-color: @blue_1;
+			height: auto;
+		}
+		.bonus-payment__item-button--activated {
+			display: block;
+			color: @green;
+			background-color: @white;
+			font-size: 16px;
+			font-weight: 700;
+			text-transform: uppercase;
+			bottom: 45px;
+		}
+		.bonus-payment__item-button--activated-icon {
+			font-size: 35px;
+			position: absolute;
+			bottom: 55px;
+			left: 35px;
+		}
+		.bonus-payment__history {
+			color: @blue_2;
+			padding: 15px 0 25px;
+			font-size: 16px;
+			font-weight: 600;
+			display: inline-block;
+		}
+	}
+}
+#colorbox.bonus-payment-method {
+	 #cboxClose {
+		.a_link;
+		.modal-close-icon {
+			color: @blue_2;
+		}
+		&:hover {
+			.modal-close-icon {
+				color: @blue_1;
+			}
+		}
+	 }
+}
+
+.bonus-payment-method {
+	#bonus-payment-form.bonus-payment-method-form {
+		.select2-container {
+			left: -2px;
+			min-width: 55%;
+			@media (max-width: @w768) {
+				min-width: @w100;
+			}
+		}
+		.bonus-payment-method-form__agreement {
+			width: @w100;
+		}
+		.bonus-payment-method-form__cancel {
+			.a_link;
+		}
+		input[type="checkbox"] {
+			position: relative;
+			left:auto;
+			margin-right: 5px;
+			margin-bottom: 10px;
+		}
+	} 
+}
+
+
+@media (max-width: 768px) {
+	.page-bonus-payment {
+		.bonus-payment {
+			.bonus-payment-content {
+				padding: 30px 0;
+				padding: 0;
+			}
+			.bonus-payment-wrapper {
+				padding: 0 25px;
+				padding: 0 25px;
+				margin: 40px 0 50px;
+			}
+			.bonus-payment__title {
+				padding: 20px 0;
+			}
+			.bonus-payment__title-icon {
+				left: -25px;
+				top: 24px;
+			}
+			.bonus-payment__description {
+				padding: 10px 0 15px;
+			}
+			.bonus-payment__items {
+				padding: 10px 0;
+				>.row {
+					display: block;
+				}
+			}
+			.bonus-payment__item {
+				padding: 50px 30px 40px;
+				margin-bottom: 25px;
+				padding: 35px 30px 30px;
+			}
+			.bonus-payment__item-description {
+				padding-bottom: 85px;
+			}
+			.bonus-payment__item-button {
+				bottom: 50px;
+
+			}
+			
+			.bonus-payment__item-button--activated {
+				bottom: 30px;
+			}
+			.bonus-payment__item-button--activated-icon {
+				bottom: 30px;
+				left: 38px;
+			}
+			.bonus-payment__history {
+				padding: 0 0 35px;
+			}
+		}
+		
+	}
+	#colorbox.bonus-payment-method {
+		#cboxTitle {
+			.headline {
+				padding:20px 10px;
+			}
+		}
+	}
+}
+#cboxOverlay {
+	.overBox;
+	opacity: 0.7;
+	display: @none;
+}
+#cboxWrapper {
+	.overBox;
+}
+#cboxWrapper {
+	max-width: none;
+}
+#cboxOverlay {
+	width: 100%;
+	height: 100vh;
+	position: fixed;
+}
+
+#cboxContent {
+	display: table;
+	width: @w100;
+}
+#cboxLoadedContent {
+	max-height:calc(~"90vh - 160px");
+	.step_02 {
+		display: @none;
+	}
+		
+}
