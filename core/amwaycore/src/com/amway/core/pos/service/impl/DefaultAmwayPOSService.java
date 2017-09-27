@@ -13,7 +13,8 @@ import de.hybris.platform.storelocator.pos.PointOfServiceService;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
+
+import org.apache.commons.collections.CollectionUtils;
 
 import com.amway.core.constants.AmwaycoreConstants;
 import com.amway.core.model.AmwayBatchModel;
@@ -104,14 +105,12 @@ public class DefaultAmwayPOSService implements AmwayPOSService
 		ServicesUtil.validateIfAnyResult(batchList, "No open Batch found for this terminal: " + terminal);
 		ServicesUtil.validateIfSingleResult(batchList, "More than one open Batch found for terminal: " + terminal, terminal);
 
-		final AmwayBatchModel resolvedBatch = null;
-		//		= CollectionUtils.isEmpty(openBatches) ? null : openBatches.get(0);
+		final AmwayBatchModel resolvedBatch = CollectionUtils.isEmpty(batchList) ? null : batchList.get(0);
 
-		if (Objects.nonNull(resolvedBatch))
-		{
-			resolvedBatch.setEndingBalance(getAccuredCashBalanceByBatchAndTxnType(resolvedBatch,
-					AmwaycoreConstants.POS.BATCH_ENDING_BALANCE_CALCULATION_PAYMENT_MODES));
-		}
+		// if (Objects.nonNull(resolvedBatch)) {
+		// resolvedBatch.setEndingBalance(getAccuredCashBalanceByBatchAndTxnType(resolvedBatch,
+		// AmwaycoreConstants.POS.BATCH_ENDING_BALANCE_CALCULATION_PAYMENT_MODES));
+		// }
 		return resolvedBatch;
 
 	}
@@ -179,8 +178,8 @@ public class DefaultAmwayPOSService implements AmwayPOSService
 		ServicesUtil.validateIfSingleResult(batchList, "More than one Batch found for this batchNo:" + batch_id, batch_id);
 
 		final AmwayBatchModel resolvedBatch = batchList.get(0);
-		resolvedBatch.setEndingBalance(getAccuredCashBalanceByBatchAndTxnType(resolvedBatch,
-				AmwaycoreConstants.POS.BATCH_ENDING_BALANCE_CALCULATION_PAYMENT_MODES));
+//		resolvedBatch.setEndingBalance(getAccuredCashBalanceByBatchAndTxnType(resolvedBatch,
+//				AmwaycoreConstants.POS.BATCH_ENDING_BALANCE_CALCULATION_PAYMENT_MODES));
 		return resolvedBatch;
 	}
 
