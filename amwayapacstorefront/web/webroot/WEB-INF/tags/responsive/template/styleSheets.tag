@@ -5,16 +5,6 @@
 <%@ taglib prefix="cms" tagdir="/WEB-INF/tags/responsive/template/cms" %>
 
 <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic" />
-
- <!-- Aaron add -->
-        
-        <link rel="stylesheet" type="text/css" href="${themeResourcePath}/css/style.css">
-        
-        
-        <link rel="stylesheet" href="${themeResourcePath}/css/owl.carousel.css">
-        <link rel="stylesheet" href="${themeResourcePath}/css/owl.theme.css">
-        <link rel="stylesheet/less" type="text/css" href="${themeResourcePath}/css/base.less">
-        
 <c:choose>
 	<c:when test="${wro4jEnabled}">
 		<link rel="stylesheet" type="text/css" media="all" href="${contextPath}/wro/all_responsive.css" />
@@ -22,22 +12,8 @@
 		<link rel="stylesheet" type="text/css" media="all" href="${contextPath}/wro/addons_responsive.css" />
 	</c:when>
 	<c:otherwise>
-		<!-- 
 		<%-- Theme CSS files --%>
 		<link rel="stylesheet" type="text/css" media="all" href="${themeResourcePath}/css/style.css"/>
-		
-		<link rel="stylesheet" type="text/css" href="${themeResourcePath}/css/style.css" />
-        <%-- <link rel="stylesheet" type="text/css" media="all" href="${themeResourcePath}/css/new.css" /> --%>
-        <link rel="stylesheet" href="${themeResourcePath}/css/slick.css" />
-        <link rel="stylesheet" type="text/css" href="${themeResourcePath}/css/base.less" />
-        <link href="${themeResourcePath}/css/bootstrap.css" media="screen, projection" rel="stylesheet" type="text/css">
-    		<link href="${themeResourcePath}/css/bootstrap-responsive.css" media="screen, projection" rel="stylesheet" type="text/css">
-    		<link href="${themeResourcePath}/css/appSSO.css" media="screen, projection" rel="stylesheet" type="text/css">
-         -->
-         
-        
-         
-		
 		<%--  AddOn Common CSS files --%>
 		<c:forEach items="${addOnCommonCssPaths}" var="addOnCommonCss">
 			<link rel="stylesheet" type="text/css" media="all" href="${addOnCommonCss}"/>

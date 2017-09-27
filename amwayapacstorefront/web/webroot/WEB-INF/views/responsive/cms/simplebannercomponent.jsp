@@ -4,6 +4,7 @@
 
 <c:url value="${fn:escapeXml(urlLink)}" var="encodedUrl" />
 
+<div class="banner__component banner">
 	<c:choose>
 		<c:when test="${empty encodedUrl || encodedUrl eq '#'}">
 			<img title="${fn:escapeXml(media.altText)}" alt="${fn:escapeXml(media.altText)}"
@@ -14,3 +15,4 @@
 				alt="${fn:escapeXml(media.altText)}" src="${media.url}"></a>
 		</c:otherwise>
 	</c:choose>
+</div>

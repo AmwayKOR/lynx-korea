@@ -19,14 +19,6 @@
 
 	<group qualifier="editorial" visible="true" initially-opened="false">
 		<label key="config.general.editorial" />
-		<property qualifier="FooterComponent.title1"/>
-		<property qualifier="FooterComponent.title2"/>
-		<property qualifier="FooterComponent.amwayLogoBanner"/>
-		<property qualifier="FooterComponent.connectionsBanner"/>
-		<property qualifier="FooterComponent.downloadAppStoreBanner"/>
-		<property qualifier="FooterComponent.copyRightTitle"/>
-		<property qualifier="FooterComponent.footerBanner"/>
-		
 		<property qualifier="FooterComponent.navigationNodes">
 			<parameter>
 				<name>predefinedValuesStrategy</name>
