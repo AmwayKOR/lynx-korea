@@ -13,10 +13,14 @@
 	</c:when>
 	<c:otherwise>
 		<%-- Theme CSS files --%>
-		<link rel="stylesheet" type="text/css" media="all" href="${themeResourcePath}/css/style.css"/>
+		<link rel="stylesheet" type="text/css" href="${themeResourcePath}/css/style.css"/>
+		<link rel="stylesheet" href="${themeResourcePath}/css/slick.css">
+		<link rel="stylesheet/less" type="text/css" href="${themeResourcePath}/less/base.less">
 		<%--  AddOn Common CSS files --%>
 		<c:forEach items="${addOnCommonCssPaths}" var="addOnCommonCss">
 			<link rel="stylesheet" type="text/css" media="all" href="${addOnCommonCss}"/>
+			
+			
 		</c:forEach>
 	</c:otherwise>
 </c:choose>
