@@ -39,18 +39,10 @@
 		<property name="cartService" ref="cartService"/>
 	</bean>
 
-	<bean id="amwayApacProductPricePopulator" class="com.amway.apac.facades.populators.AmwayApacProductPricePopulator">
-		<property name="commercePriceService" ref="commercePriceService"/>
-		<property name="modelService" ref="modelService"/>
-		<property name="sessionService" ref="sessionService"/>
-		<property name="userService" ref="userService"/>
+	<bean id="amwayApacProductPricePopulator" class="com.amway.apac.facades.populators.AmwayApacProductPricePopulator" parent="amwayProductPricePopulator">
 		<property name="amwayApacPriceDataFactory" ref="amwayApacPriceDataFactory"/>
 	</bean>
 
 	<alias name="defaultAmwayApacPriceDataFactory" alias="amwayApacPriceDataFactory"/>
-	<bean id="defaultAmwayApacPriceDataFactory" class="com.amway.apac.facades.product.impl.DefaultAmwayApacPriceDataFactory">
-		<property name="commonI18NService" ref="commonI18NService"/>
-		<property name="i18NService" ref="i18NService"/>
-		<property name="commerceCommonI18NService" ref="commerceCommonI18NService"/>
-	</bean>
+	<bean id="defaultAmwayApacPriceDataFactory" class="com.amway.apac.facades.product.impl.DefaultAmwayApacPriceDataFactory" parent="priceDataFactory" />
 </beans>

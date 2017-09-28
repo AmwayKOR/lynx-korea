@@ -2,6 +2,7 @@ package com.amway.apac.facades.product.impl;
 
 import com.amway.apac.facades.product.AmwayApacPriceDataFactory;
 import com.amway.facades.order.data.AmwayValueData;
+import com.amway.facades.product.impl.AmwayPriceDataFactory;
 import de.hybris.platform.commercefacades.product.data.PriceData;
 import de.hybris.platform.commercefacades.product.impl.DefaultPriceDataFactory;
 import de.hybris.platform.europe1.model.PriceRowModel;
@@ -12,7 +13,7 @@ import java.math.BigDecimal;
 /**
  * Created by MY020221 on 9/28/2017.
  */
-public class DefaultAmwayApacPriceDataFactory extends DefaultPriceDataFactory implements AmwayApacPriceDataFactory {
+public class DefaultAmwayApacPriceDataFactory extends AmwayPriceDataFactory implements AmwayApacPriceDataFactory {
     @Override
     public PriceData create(PriceRowModel priceRowModel) {
         Assert.notNull(priceRowModel, "Parameter priceRowModel cannot be null.");
