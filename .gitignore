@@ -38,6 +38,7 @@ amwayapacstorefront/web/addonsrc
 amwayapacstorefront/web/commonwebsrc
 amwayapacstorefront/web/testclasses
 amwayapacstorefront/web/webroot/_ui/addons
+amwayapacstorefront/web/webroot/_ui/responsive
 amwayapacstorefront/web/webroot/WEB-INF/messages/addons
 amwayapacstorefront/web/webroot/WEB-INF/views/addons
 amwayapacstorefront/web/webroot/WEB-INF/tags/addons
