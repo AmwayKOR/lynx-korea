@@ -21,3 +21,4 @@ $lang=en
 
 # Update allProducts with localisations
 UPDATE Product;code[unique=true];$catalogVersion;name[lang=$lang];summary[lang=$lang];description[lang=$lang]
+;101390M;;NUTRILITE BILBERRY PLUS;NUTRILITE Bilberry Plus provides you with a unique combination of natural concentrates that aids natural vision improvement. Bilberry Plus helps support normal eyesight and maintains healthy eye tissues. It has a combination of natural concentrates to help you achieve dietary balance and optimal nutrition.;;

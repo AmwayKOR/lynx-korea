@@ -2556,3 +2556,8 @@ INSERT_UPDATE PriceRow;productId[unique=true];pointValue;businessVolume;currency
 ;WTI0706Z;0;0;USD;105.28;20160415;21001201;;AmwayDefaultABOPriceGroup;pieces;true
 ;WTI0780Z;0;0;USD;5;20150401;21001201;;AmwayDefaultABOPriceGroup;pieces;true
 ;WTI0901T;0;0;USD;155;20150401;21001201;;AmwayDefaultABOPriceGroup;pieces;true
+
+
+INSERT_UPDATE PriceRow;productId[unique=true];pointValue;businessVolume;currency(isocode)[unique=true];price[unique=true];startTime[dateformat=yyyyMMdd];endTime[dateformat=yyyyMMdd];pg(code)[unique=true];ug(code)[unique=true];unit(code[unique=true]);net
+;101390M;142;142;USD;141.98;20160215;21001201;;AmwayDefaultABOPriceGroup;pieces;true
+;101390M;142;142;USD;177.55;20160215;21001201;;AmwayDefaultRetailPriceGroup;pieces;true
