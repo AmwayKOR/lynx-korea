@@ -21,7 +21,7 @@ import java.util.List;
 public interface AmwayBatchDao
 {
 	public AmwayBatchModel createBatch(AmwayTerminalModel terminalModel, String batchNo, UserModel employeeModel, Double balance);
-   public AmwayBatchModel updateBatch(AmwayBatchModel batchModel, Double balance);
+	public AmwayBatchModel updateBatch(AmwayBatchModel batchModel, Double balance);
 	public AmwayBatchModel updateBatch(AmwayBatchModel batchModel, Double balance, UserModel closedBy);
 	public List<AmwayBatchModel> getBatches(UserModel employeeModel, Date startDate, Date endDate);
 	public List<AmwayBatchModel> getBatches(AmwayTerminalModel terminal, Date startDate, Date endDate);
@@ -32,5 +32,4 @@ public interface AmwayBatchDao
 	public SearchPageData<OrderModel> getOrders(PageableData pageableData, AmwayBatchModel batchModel);
 	public SearchPageData<OrderModel> getOrders(PageableData pageableData, List<AmwayBatchModel> batchList, Date startDate, Date endDate);
 	public Double getAccuredBalanceByBatchAndTxnType(String batchId, List<String> paymentModes);
-	
 }

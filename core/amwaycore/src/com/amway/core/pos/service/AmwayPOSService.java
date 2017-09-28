@@ -31,5 +31,4 @@ public interface AmwayPOSService
 	public SearchPageData<OrderModel> getOrders(PageableData pageableData, String batch_id);
 	public SearchPageData<OrderModel> getOrders(PageableData pageableData, String pickupStore, Date startDate, Date endDate);
 	public Double getAccuredBalanceByBatchAndTxnType(String batchId, List<String> paymentModes);
-
 }

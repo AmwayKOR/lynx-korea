@@ -19,12 +19,7 @@ import de.hybris.platform.servicelayer.search.SearchResult;
 import de.hybris.platform.store.BaseStoreModel;
 import de.hybris.platform.storelocator.model.PointOfServiceModel;
 
-import java.util.Arrays;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import java.util.*;
 import org.apache.log4j.Logger;
 
 import com.amway.core.model.AmwayBatchModel;

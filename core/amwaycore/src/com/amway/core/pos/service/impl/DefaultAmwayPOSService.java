@@ -24,7 +24,6 @@ import com.amway.core.pos.dao.AmwayTerminalDao;
 import com.amway.core.pos.service.AmwayPOSService;
 import com.google.common.base.Preconditions;
 
-
 /**
  */
 public class DefaultAmwayPOSService implements AmwayPOSService
@@ -114,7 +113,6 @@ public class DefaultAmwayPOSService implements AmwayPOSService
 		return resolvedBatch;
 
 	}
-
 
 	@Override
 	public List<AmwayBatchModel> getOpenBatches(final BaseStoreModel baseStore)
@@ -257,6 +255,5 @@ public class DefaultAmwayPOSService implements AmwayPOSService
 	{
 		this.pointOfServiceService = pointOfServiceService;
 	}
-
 
 }
