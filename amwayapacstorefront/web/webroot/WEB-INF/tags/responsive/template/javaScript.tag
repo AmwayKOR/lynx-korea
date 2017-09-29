@@ -17,10 +17,10 @@
 	</c:when>
 	<c:otherwise>
 		<%-- jquery --%>
-		<script type="text/javascript" src="${commonResourcePath}/js/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="${commonResourcePath}/scripts/jquery.min.js"></script>
 		
 		<%-- bootstrap --%>
-		<script type="text/javascript" src="${commonResourcePath}/bootstrap/dist/js/bootstrap.min.js"></script>
+		<script src="scripts/bootstrap.min.js"></script>
 		
 		<%-- plugins --%>
 		<script type="text/javascript" src="${commonResourcePath}/js/enquire.min.js"></script>
@@ -85,7 +85,7 @@
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.csv-import.js"></script>
 
 		<script type="text/javascript" src="${commonResourcePath}/js/_autoload.js"></script>
-		<script type="text/javascript" src="${commonResourcePath}/js/less.min.js"></script>
+		<script src="${commonResourcePath}/js/owl.carousel.js"></script> 
 		
 		<%-- Cms Action JavaScript files --%>
 		<c:forEach items="${cmsActionsJsFiles}" var="actionJsFile">
