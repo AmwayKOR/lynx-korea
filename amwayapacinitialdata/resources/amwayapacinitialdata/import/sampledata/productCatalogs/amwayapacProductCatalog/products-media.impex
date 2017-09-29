@@ -24,13 +24,21 @@ $others=others(code, $catalogVersion)
 $data_sheet=data_sheet(code, $catalogVersion)
 $medias=medias(code, $catalogVersion)
 $galleryImages=galleryImages(qualifier, $catalogVersion)
-$siteResource=jar:com.amway.apac.initialdata.setup.InitialDataSystemSetup&/amwayapacinitialdata/import/productCatalogs/$productCatalog
+$siteResource=jar:com.amway.apac.initialdata.setup.AmwayAPACInitialDataSystemSetup&/amwayapacinitialdata/import/sampledata/productCatalogs/$productCatalog
 
 # Create Media
 INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];$media;mime[default='image/jpeg'];$catalogVersion;folder(qualifier)
+;300Wx300H;/300Wx300H/101390M_1.jpg;$siteResource/images/300Wx300H/101390M_1.jpg;;;images
+;300Wx300H;/300Wx300H/101390M_2.jpg;$siteResource/images/300Wx300H/101390M_2.jpg;;;images
+;96Wx96H;/96Wx96H/101390M_1.jpg;$siteResource/images/96Wx96H/101390M_1.jpg;;;images
+;96Wx96H;/96Wx96H/101390M_2.jpg;$siteResource/images/96Wx96H/101390M_2.jpg;;;images
+
 
 # Create Media Containers
 INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$catalogVersion
+;101390M_1;/300Wx300H/101390M_1.jpg,/96Wx96H/101390M_1.jpg;;
+;101390M_2;/300Wx300H/101390M_2.jpg,/96Wx96H/101390M_2.jpg;;
 
 # Update Products with Media and Media Containers
 UPDATE Product;code[unique=true];$picture;$thumbnail;$detail;$others;$normal;$thumbnails;$galleryImages;$catalogVersion
+;101390M;/300Wx300H/101390M_1.jpg;/96Wx96H/101390M_1.jpg;;;/300Wx300H/101390M_1.jpg,/300Wx300H/101390M_2.jpg;/96Wx96H/101390M_1.jpg,/96Wx96H/101390M_2.jpg;101390M_1,101390M_2;

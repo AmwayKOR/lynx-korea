@@ -33,23 +33,7 @@
             </div>
         </div>
         <div class="mg-product">
-            <div class="col-sm-12 col-md-6 product-image-gallery js-product-image-gallery" style="opacity: 1;">
-                <div class="image-gallery js-gallery">
-                    <div class="image-tab-content">
-                        <div id="lips-1" class="tab-pane fade">
-                            <img class="product-description__img-main" alt="lips-1" src="images/lip-gloss-swatches.png"></div>
-                        <div id="lips-2" class="tab-pane fade">
-                            <img class="product-description__img-main" alt="lips-2" src="images/lip-gloss-swatches-pink.png"></div>
-                        <div id="lips-3" class="tab-pane fade in active">
-                            <img class="product-description__img-main" alt="lips-3" src="images/lip-gloss-swatches.png"></div>
-                    </div>
-                </div>
-                <div class="buttons zoom-center js-zoom-center">
-                    <button class="enlarge2 btn btn-link" data-zoom-popup-title="" data-toggle="modal" data-target="#product-zoom-image-panel">
-                        <span class="glyphicon glyphicon-zoom-in"></span>
-                        <span>Enlarge</span></button>
-                </div>
-            </div>
+            <product:productImagePanel galleryImages="${galleryImages}" />
             <div class="clearfix hidden-sm hidden-md hidden-lg print-hide"></div>
             <div class="col-sm-12 col-md-6 pdp-info">
                 <div class="product-main-info">
