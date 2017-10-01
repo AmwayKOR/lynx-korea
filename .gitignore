@@ -50,9 +50,5 @@ log/*
 *.index
 documents/
 sampleconfigurations/
-amwayapaccore/src/com/lynx/core/jalo/
-amwayapaccockpits/src/com/lynx/cockpits/jalo/
-amwayapaccockpits/testsrc/com/lynx/cockpits/jalo/
-amwayapacfulfilmentprocess/src/com/lynx/fulfilmentprocess/jalo/
 amwayapacstorefront/web/webroot/WEB-INF/_ui-src/addons/
 **/jalo/**
