@@ -39,10 +39,10 @@ import com.amway.apac.initialdata.constants.AmwayapacInitialDataConstants;
  * This class provides hooks into the system's initialization and update processes.
  */
 @SystemSetup(extension = AmwayapacInitialDataConstants.EXTENSIONNAME)
-public class AmwayAPACInitialDataSystemSetup extends AbstractSystemSetup
+public class AmwayApacInitialDataSystemSetup extends AbstractSystemSetup
 {
 	@SuppressWarnings("unused")
-	private static final Logger LOG = Logger.getLogger(AmwayAPACInitialDataSystemSetup.class);
+	private static final Logger LOG = Logger.getLogger(AmwayApacInitialDataSystemSetup.class);
 
 	private static final String IMPORT_CORE_DATA = "importCoreData";
 	private static final String IMPORT_SAMPLE_DATA = "importSampleData";

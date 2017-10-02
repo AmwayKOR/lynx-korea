@@ -21,7 +21,7 @@
 
      <context:annotation-config/>
 
-	<bean id="amwayAPACCoreSystemSetup" class="com.amway.apac.core.setup.AmwayAPACCoreSystemSetup" parent="abstractCoreSystemSetup"/>
+	<bean id="amwayApacCoreSystemSetup" class="com.amway.apac.core.setup.AmwayApacCoreSystemSetup" parent="abstractCoreSystemSetup"/>
 
     <bean id="volumePriceComparator" class="com.amway.apac.core.comparators.VolumeAwarePriceInformationComparator" scope="singleton"/>
 

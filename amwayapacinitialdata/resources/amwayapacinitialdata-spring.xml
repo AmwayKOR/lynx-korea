@@ -23,7 +23,7 @@
 	<!-- System Setup -->
 
 	<bean id="amwayAPACInitialDataSystemSetup"
-	      class="com.amway.apac.initialdata.setup.AmwayAPACInitialDataSystemSetup"
+	      class="com.amway.apac.initialdata.setup.AmwayApacInitialDataSystemSetup"
 	      parent="abstractCoreSystemSetup">
 		<property name="coreDataImportService" ref="coreDataImportService"/>
 		<property name="sampleDataImportService" ref="sampleDataImportService"/>

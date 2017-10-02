@@ -17,7 +17,7 @@ import java.util.List;
  *
  * @author Parvesh Goyal
  */
-public class AmwayAPACCoreSystemSetup extends AbstractSystemSetup
+public class AmwayApacCoreSystemSetup extends AbstractSystemSetup
 {
 	/**
 	 * This method will be called by system creator during initialization and system update. Be sure that this method can
