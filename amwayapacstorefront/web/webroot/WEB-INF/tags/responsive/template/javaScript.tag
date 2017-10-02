@@ -17,10 +17,10 @@
 	</c:when>
 	<c:otherwise>
 		<%-- jquery --%>
-		<script type="text/javascript" src="${commonResourcePath}/scripts/jquery.min.js"></script>
+		<script type="text/javascript" src="${commonResourcePath}/js/jquery.min.js"></script>
 		
 		<%-- bootstrap --%>
-		<script src="scripts/bootstrap.min.js"></script>
+		<script src="${commonResourcePath}/js/bootstrap.min.js"></script>
 		
 		<%-- plugins --%>
 		<script type="text/javascript" src="${commonResourcePath}/js/enquire.min.js"></script>

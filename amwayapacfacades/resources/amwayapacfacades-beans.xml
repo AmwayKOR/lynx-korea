@@ -11,5 +11,8 @@
 -->
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
 
+    <bean class="com.amway.facades.product.data.WishlistData">
+        <property name="user" type="de.hybris.platform.commercefacades.user.data.CustomerData" />
+    </bean>
 
 </beans>

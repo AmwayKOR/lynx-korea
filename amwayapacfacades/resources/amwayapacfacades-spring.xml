@@ -45,4 +45,34 @@
 
 	<alias name="defaultAmwayApacPriceDataFactory" alias="amwayApacPriceDataFactory"/>
 	<bean id="defaultAmwayApacPriceDataFactory" class="com.amway.apac.facades.product.impl.DefaultAmwayApacPriceDataFactory" parent="priceDataFactory" />
+	
+	<bean id="amwayApacUserBasicConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.user.data.CustomerData"/>
+		<property name="populators">
+			<list>
+				<ref bean="amwayApacUserBasicPopulator"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="amwayApacUserBasicPopulator" class="com.amway.apac.facades.user.populators.AmwayApacUserBasicPopulator" />
+
+	<bean id="amwayApacWishlistBasicConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.amway.facades.product.data.WishlistData"/>
+		<property name="populators">
+			<list>
+				<ref bean="amwayApacWishlistBasicPopulator"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="amwayApacWishlistBasicPopulator" class="com.amway.apac.facades.wishlist.populators.AmwayApacWishlistBasicPopulator">
+		<property name="amwayApacUserBasicConverter" ref="amwayApacUserBasicConverter" />
+	</bean>
+
+    <alias name="defaultAmwayApacWishlistFacade" alias="wishlistFacade"/>
+    <bean id="defaultAmwayApacWishlistFacade" class="com.amway.apac.facades.wishlist.impl.DefaultAmwayApacWishlistFacade" parent="defaultAmwayWishlistFacade">
+        <property name="amwayApacWishlistBasicConverter" ref="amwayApacWishlistBasicConverter"/>
+    </bean>
+	
 </beans>

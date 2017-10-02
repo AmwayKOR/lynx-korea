@@ -206,4 +206,30 @@ public interface ControllerConstants
 			}
 		}
 	}
+
+	interface ModelParameters
+	{
+		/**
+		 * Shopping lists model attribute
+		 */
+		String SHOPPING_LISTS_STRING = "shoppingLists";
+	}
+
+	interface GeneralConstants
+	{
+		/**
+		 * Shopping lists cms page id
+		 */
+		String SHOPPING_LISTS_CMS_PAGE = "shopping-lists";
+
+		/**
+		 * Breadcrumbs Model attribute
+		 */
+		String BREADCRUMBS_ATTR = "breadcrumbs";
+
+		/**
+		 * Shopping lists breabcrumb keys
+		 */
+		String SHOPPING_LISTS_PAGE_BREADCRUMB_KEY = "shopping.lists.page.breadcrumb";
+	}
 }
