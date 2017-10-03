@@ -41,7 +41,9 @@
 		<script type="text/javascript" src="${commonResourcePath}/js/jquery.slideviewer.custom.1.2.js"></script>
 		
 		<%-- Custom ACC JS --%>
-		
+		<script type="text/javascript" src="${commonResourcePath}/js/acc.header.js"></script>
+		<script type="text/javascript" src="${commonResourcePath}/js/acc.footer.js"></script>
+		<script type="text/javascript" src="${commonResourcePath}/js/acc.homepage.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.address.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.autocomplete.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.carousel.js"></script>

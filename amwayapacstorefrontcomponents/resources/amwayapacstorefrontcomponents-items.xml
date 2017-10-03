@@ -12,12 +12,12 @@
 <!--
 	ATTENTION: This is just an example file. You have to edit it according to your needs.
 -->
-
+<!--
 <items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 			xsi:noNamespaceSchemaLocation="items.xsd">
 
 	<itemtypes>
-<!--
+
 		<itemtype generate="true"
 		   code="MyProduct"
 		   jaloclass="com.amway.apac.storefront.components.jalo.MyProduct"
@@ -42,6 +42,228 @@
 
 			</attributes>
 		</itemtype>
--->
+
 	</itemtypes>
+</items>
+-->
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<relations>
+		<relation code="FooterBannerRelation" localized="false" generate="true" autocreate="true">
+				<sourceElement qualifier="footerComponent" type="FooterComponent" cardinality="one" >
+					<modifiers read="true" write="true" initial="false" optional="true" search="true"/>
+				</sourceElement>
+				<targetElement qualifier="simpleBannerComponents" type="SimpleBannerComponent" cardinality="many" collectiontype="collection">
+					<modifiers read="true" write="true" optional="true" partof="true"/>
+				</targetElement>
+		</relation>
+		<relation code="FooterLinksRelation" localized="false" generate="true" autocreate="true">
+				<sourceElement qualifier="footerComponent" type="FooterComponent" cardinality="one" >
+					<modifiers read="true" write="true" initial="false" optional="true" search="true"/>
+				</sourceElement>
+				<targetElement qualifier="links" type="CMSLinkComponent" cardinality="many" collectiontype="collection">
+					<modifiers read="true" write="true" optional="true" partof="true"/>
+				</targetElement>
+		</relation>
+		<relation code="NavigationNodeSimpleBannerRelation" localized="false" generate="true" autocreate="true">
+				<sourceElement qualifier="navigationNodeComponent" type="CMSNavigationNode" cardinality="one" >
+					<modifiers read="true" write="true" initial="false" optional="true" search="true"/>
+				</sourceElement>
+				<targetElement qualifier="simpleBannerComponents" type="SimpleBannerComponent" cardinality="many" collectiontype="collection">
+					<modifiers read="true" write="true" optional="true" partof="true"/>
+				</targetElement>
+		</relation>
+	</relations>
+		
+    <itemtypes>
+		
+		
+		<itemtype code="AmwayAPACArtistryDealCarouselComponent" generate="true" extends="BannerComponent" autocreate="true" 
+			jaloclass="com.amway.apac.core.jalo.components.AmwayAPACArtistryDealCarouselComponent">
+			<attributes>
+				<attribute qualifier="image2" generate="true" autocreate="true" type="localized:Media">
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="shopnow" generate="true" autocreate="true" type="CMSLinkComponent">
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="secondary" generate="true" autocreate="true" type="CMSLinkComponent">
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="AmwayAPACLatestNewsComponent" generate="true" extends="SimpleCMSComponent" autocreate="true" 
+			jaloclass="com.amway.apac.core.jalo.components.AmwayAPACLatestNewsComponent">
+			<attributes>
+				<attribute qualifier="title" generate="true" autocreate="true" type="localized:java.lang.String">
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="news" generate="true" autocreate="true" type="localized:java.lang.String">
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="link" generate="true" autocreate="true" type="CMSLinkComponent">
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="AmwayAPACPathToSuccessPitchPerfectComponent" generate="true" extends="SimpleCMSComponent" autocreate="true" 
+			jaloclass="com.amway.apac.core.jalo.components.AmwayAPACPathToSuccessPitchPerfectComponent">
+			<attributes>
+				<attribute qualifier="title" generate="true" autocreate="true" type="localized:java.lang.String">
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="title2" generate="true" autocreate="true" type="localized:java.lang.String">
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="banner" generate="true" autocreate="true" type="SimpleBannerComponent">
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="description" generate="true" autocreate="true" type="CMSParagraphComponent">
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="link" generate="true" autocreate="true" type="CMSLinkComponent">
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="AmwayAPACOurNewProductComponent" generate="true" extends="SimpleCMSComponent" autocreate="true" 
+			jaloclass="com.amway.apac.core.jalo.components.AmwayAPACOurNewProductComponent">
+			<attributes>
+				<attribute qualifier="title" generate="true" autocreate="true" type="localized:java.lang.String">
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="title2" generate="true" autocreate="true" type="localized:java.lang.String">
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="AmwayAPACArtistryNewLuxuryCarouselComponent" generate="true" extends="BannerComponent" autocreate="true" 
+			jaloclass="com.amway.apac.core.jalo.components.AmwayAPACArtistryNewLuxuryCarouselComponent">
+			<attributes>
+				<attribute qualifier="shopnow" generate="true" autocreate="true" type="CMSLinkComponent">
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="title" generate="true" autocreate="true" type="localized:java.lang.String">
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="description" generate="true" autocreate="true" type="CMSParagraphComponent">
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		<itemtype code="AmwayAPACArtistryNewLuxuryRotatingComponent" generate="true" extends="RotatingImagesComponent" autocreate="true" 
+			jaloclass="com.amway.apac.core.jalo.components.AmwayAPACArtistryNewLuxuryRotatingComponent">
+			<attributes>
+				<attribute qualifier="image" generate="true" autocreate="true" type="localized:Media">
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="AmwayAPACNewProductComponent" generate="true" extends="SimpleCMSComponent" autocreate="true" 
+			jaloclass="com.amway.apac.core.jalo.components.AmwayAPACNewProductComponent">
+			<attributes>
+				<attribute qualifier="title" generate="true" autocreate="true" type="localized:java.lang.String">
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="description" generate="true" autocreate="true" type="CMSParagraphComponent">
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="link" generate="true" autocreate="true" type="CMSLinkComponent">
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="banner" generate="true" autocreate="true" type="SimpleBannerComponent">
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="AmwayAPACPlatinumABOComponent" generate="true" extends="AmwayAPACNewProductComponent" autocreate="true" 
+			jaloclass="com.amway.apac.core.jalo.components.AmwayAPACPlatinumABOComponent">
+			
+		</itemtype>
+		
+		<itemtype code="AmwayAPACSupplementsComponent" generate="true" extends="AmwayAPACNewProductComponent" autocreate="true" 
+			jaloclass="com.amway.apac.core.jalo.components.AmwayAPACSupplementsComponent">
+			
+		</itemtype>
+		
+		<itemtype code="AmwayAPACYourOpportunityComponent" generate="true" extends="SimpleCMSComponent" autocreate="true" 
+			jaloclass="com.amway.apac.core.jalo.components.AmwayAPACYourOpportunityComponent">
+			<attributes>
+				<attribute qualifier="title" generate="true" autocreate="true" type="localized:java.lang.String">
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="description" generate="true" autocreate="true" type="CMSParagraphComponent">
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="bannerGif1" generate="true" autocreate="true" type="SimpleBannerComponent">
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="bannerGif2" generate="true" autocreate="true" type="SimpleBannerComponent">
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="playbutton" generate="true" autocreate="true" type="localized:Media">
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="AmwayAPACFeaturedBrandsCarouselComponent" generate="true" extends="RotatingImagesComponent" autocreate="true" 
+			jaloclass="com.amway.apac.core.jalo.components.AmwayAPACFeaturedBrandsCarouselComponent">
+			<attributes>
+				<attribute qualifier="loopCount" generate="true" autocreate="true" type="localized:java.lang.Integer">
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="FooterComponent" generate="false" autocreate="false">
+			<attributes>
+				<attribute qualifier="title1" generate="true" autocreate="true" type="localized:java.lang.String">
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="title2" generate="true" autocreate="true" type="localized:java.lang.String">
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="amwayLogoBanner" generate="true" autocreate="true" type="SimpleBannerComponent">
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="connectionsBanner" generate="true" autocreate="true" type="SimpleBannerComponent">
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="downloadAppStoreBanner" generate="true" autocreate="true" type="SimpleBannerComponent">
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="copyRightTitle" generate="true" autocreate="true" type="localized:java.lang.String">
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="footerBanner" generate="true" autocreate="true" type="SimpleBannerComponent">
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="CMSNavigationNode" generate="false" autocreate="false">
+			<attributes>
+				<attribute qualifier="nodeLink" generate="true" autocreate="true" type="CMSLinkComponent">
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="nodeTitle" generate="true" autocreate="true" type="localized:java.lang.String">
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="nodeImg" generate="true" autocreate="true" type="localized:Media">
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="nodeToolAdviceLink" generate="true" autocreate="true" type="CMSLinkComponent">
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+    </itemtypes>
 </items>

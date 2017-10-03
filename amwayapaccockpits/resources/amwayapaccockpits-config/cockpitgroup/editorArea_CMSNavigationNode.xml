@@ -22,14 +22,31 @@
 		<label key="config.general.hierachy" />
 		<property qualifier="cmsnavigationnode.parent">
 			<parameter>
-				<name>predefinedValuesStrategy</name>
-				<value>cmsItemPredefinedValuesStrategy</value>
+				<name>editable</name>
+			    <value>true</value>
 			</parameter>
+			<parameter>
+			    <name>showEditButton</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>allowCreate</name>
+			    <value>true</value>
+			</parameter>
+
 		</property>
 		<property qualifier="cmsnavigationnode.children">
 			<parameter>
-				<name>predefinedValuesStrategy</name>
-				<value>cmsItemPredefinedValuesStrategy</value>
+				<name>editable</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>showEditButton</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>allowCreate</name>
+			    <value>true</value>
 			</parameter>
 		</property>
 		<property qualifier="cmsnavigationnode.links">
@@ -39,6 +56,30 @@
 			</parameter>
 		</property>
 		<property qualifier="cmsnavigationnode.pages">
+			<parameter>
+				<name>predefinedValuesStrategy</name>
+				<value>cmsItemPredefinedValuesStrategy</value>
+			</parameter>
+		</property>
+		<property qualifier="cmsnavigationnode.nodeLink">
+			<parameter>
+				<name>predefinedValuesStrategy</name>
+				<value>cmsItemPredefinedValuesStrategy</value>
+			</parameter>
+		</property>
+		<property qualifier="cmsnavigationnode.nodeTitle">
+			<parameter>
+				<name>predefinedValuesStrategy</name>
+				<value>cmsItemPredefinedValuesStrategy</value>
+			</parameter>
+		</property>
+		<property qualifier="cmsnavigationnode.nodeImg">
+			<parameter>
+				<name>predefinedValuesStrategy</name>
+				<value>cmsItemPredefinedValuesStrategy</value>
+			</parameter>
+		</property>
+		<property qualifier="cmsnavigationnode.nodeToolAdviceLink">
 			<parameter>
 				<name>predefinedValuesStrategy</name>
 				<value>cmsItemPredefinedValuesStrategy</value>
