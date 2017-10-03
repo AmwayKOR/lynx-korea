@@ -18,7 +18,7 @@
                             </div>
                             <div class="banner-button-wrap">
                             		<div class="banner-button-link">
-                            			 <button class=" btn-text btn-blue-white">
+                            			 <button class="btn-blue-white">
                             				<cms:component component="${link}"  />
                             			</button>
                             		</div>

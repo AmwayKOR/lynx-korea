@@ -16,7 +16,7 @@
 			                        		<h5 class="quick-links-header">${childnode.nodeTitle}</h5>
 			                        		<ul id="quick-links-collapse1" class="panel-collapse collapse">
 			                        				<c:forEach items="${childnode.links}" varStatus="i" var="childlink">
-													<cms:component component="${childlink}" evaluateRestriction="true" element="li" class="panel-collapse collapse"/>
+													<cms:component component="${childlink}" evaluateRestriction="true" element="li"/>
 					                            
 					                            <c:if test="${loop.last == true && i.last == true}">
 					                            		<li>
