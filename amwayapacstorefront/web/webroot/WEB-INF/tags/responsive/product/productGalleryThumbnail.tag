@@ -3,8 +3,10 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ attribute name="galleryImages" required="true" type="java.util.List" %>
 
-<div class="carousel gallery-carousel js-gallery-carousel hidden-xs hidden-sm">
+<div class="product-description__imageslist" id="productListTab">
     <c:forEach items="${galleryImages}" var="container" varStatus="varStatus">
-        <a href="#" class="item"> <img class="lazyOwl" data-src="${container.thumbnail.url}" alt="${fn:escapeXml(container.thumbnail.altText)}"></a>
+        <div>
+            <img class="product-description__image" src="${container.thumbnail.url}" alt="protein-powder"></div>
+        <div>
     </c:forEach>
 </div>
