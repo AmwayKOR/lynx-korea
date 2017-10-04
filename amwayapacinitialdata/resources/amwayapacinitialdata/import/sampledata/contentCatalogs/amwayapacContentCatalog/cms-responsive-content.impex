@@ -363,7 +363,7 @@ INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];nam
 #NavigationBars
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
 ;;NavigationBarSlot;NavigationBarSlot-Homepage;true;refNavigation1,refNavigation2,refNavigation3,refNavigation4
-
+;;MobileNavigationBarSlot;MobileNavigationBarSlot-Homepage;true;refMobileNavigation1,refMobileNavigation2,refMobileNavigation3,refMobileNavigation4
 
 # Navigation Bar Component
 INSERT_UPDATE NavigationBarComponent;$contentCV[unique=true];uid[unique=true];name;wrapAfter;link(uid, $contentCV);styleClass;navigationNode(&nodeRef);&componentRef
@@ -371,6 +371,13 @@ INSERT_UPDATE NavigationBarComponent;$contentCV[unique=true];uid[unique=true];na
 ;;BusinessCenterNavBarComponent;Business Center Nav Bar Component;10;Nav_BusinessCenterLink;;BusinessCenterNavNode;refNavigation2
 ;;AboutAmwayNavBarComponent;About Amway Nav Bar Component;10;Nav_AboutAmwayLink;;AboutNavNode;refNavigation3
 ;;EducationNavBarComponent;Education Nav Bar Component;10;Nav_EducationLink;;EducationNavNode;refNavigation4
+
+INSERT_UPDATE AmwayAPACMobileNavigationComponent;$contentCV[unique=true];uid[unique=true];name;wrapAfter;link(uid, $contentCV);styleClass;navigationNode(&nodeRef);&componentRef
+;;MobileShopNavBarComponent;Mobile Shops Nav Bar Component;10;Nav_ShopLink;;ShopNavNode;refMobileNavigation1
+;;MobileBusinessCenterNavBarComponent;Mobile Business Center Nav Bar Component;10;Nav_BusinessCenterLink;;BusinessCenterNavNode;refMobileNavigation2
+;;MobileAboutAmwayNavBarComponent;Mobile About Amway Nav Bar Component;10;Nav_AboutAmwayLink;;AboutNavNode;refMobileNavigation3
+;;MobileEducationNavBarComponent;Mobile Education Nav Bar Component;10;Nav_EducationLink;;EducationNavNode;refMobileNavigation4
+
 
 INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);&nodeRef;links(&linkRef);visible;nodeLink(&componentRef)
 #;NavigationNode;;NavigationNode;root;NavigationNode;;true;;

@@ -3770,7 +3770,7 @@ h1.sponsorship__title {
 	margin: 0!important;
 }
 .btn-blue-white {
-	a{
+	
 		.public;
 		.font16;
 		border-radius: 1px;
@@ -3793,7 +3793,7 @@ h1.sponsorship__title {
 				font-weight: @weight600;
 			}
 		}
-	}
+	
 }
 .btn-ink{
 	.public;
@@ -9050,9 +9050,16 @@ select.form-control {
 		.video-preview__img {
 			display: @none;
 		}
-		.video-preview__img-mob {
+		.video-preview__img-mob
+		{
 			display: @block;
 			width: @w100;
+			a{
+				img{
+					display: @block;
+					width: @w100;
+				}
+			}
 		}
 		.video-preview__play {
 			height: 82px;

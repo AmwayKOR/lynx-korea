@@ -2,10 +2,10 @@
 	<table width="100%" cellspacing="0" style="margin:0;padding:0;table-layout:auto;border:1px solid #1E4EBF;">
 		<tbody>
 			<tr>
-				<td height="55px" width="50%" class="structureViewSection">
+				<td height="55px"  class="structureViewSection">
 					<cockpit code="SiteLogo" />
 				</td>
-				<td colspan="2" width="50%"  class="structureViewSection">
+				<td colspan="3"   class="structureViewSection">
 					<cockpit code="MiniCart" />
 				</td>
 			</tr>
@@ -13,35 +13,38 @@
 				<td  class="structureViewSection">
 					<cockpit code="NavigationBar" />
 				</td>
-				<td colspan="2" class="structureViewSection">
+				<td  colspan="2" class="structureViewSection">
+					<cockpit code="MobileNavigationBar" />
+				</td>
+				<td  class="structureViewSection">
 					<cockpit code="SearchBox" />
 				</td>
 			</tr>
 			<tr>
-				<th colspan="3" style="vertical-align:top;" class="structureViewSection">
+				<th colspan="4" style="vertical-align:top;" class="structureViewSection">
 					<cockpit code="Section1" />
 				</th>
 			</tr>
 			<tr>
-				<th colspan="3" style="vertical-align:top;" class="structureViewSection">
+				<th colspan="4" style="vertical-align:top;" class="structureViewSection">
 					<cockpit code="Section2" />
 				</th>
 			</tr>
 			<tr>
-				<td width="50%" style="vertical-align:top;" class="structureViewSection">
+				<td  style="vertical-align:top;" class="structureViewSection">
 					<cockpit code="Section3A" />
 				</td>
-				<td width="50%" colspan="2" style="vertical-align:top;" class="structureViewSection">
+				<td  colspan="3" style="vertical-align:top;" class="structureViewSection">
 					<cockpit code="Section3B" />
 				</td>
 			</tr>
 			<tr>
-				<th colspan="3" style="vertical-align:top;" class="structureViewSection">
+				<th colspan="4" style="vertical-align:top;" class="structureViewSection">
 					<cockpit code="Section4" />
 				</th>
 			</tr>
 			<tr>
-				<th colspan="3" style="vertical-align:top;" class="structureViewSection">
+				<th colspan="4" style="vertical-align:top;" class="structureViewSection">
 					<cockpit code="Section5" />
 				</th>
 			</tr>
@@ -52,17 +55,17 @@
 				<td style="vertical-align:top;" class="structureViewSection">
 					<cockpit code="Section6B" />
 				</td>
-				<td style="vertical-align:top;" class="structureViewSection">
+				<td colspan="2" style="vertical-align:top;" class="structureViewSection">
 					<cockpit code="Section6C" />
 				</td>
 			</tr>
 			<tr>
-				<th colspan="3" style="vertical-align:top;" class="structureViewSection">
+				<th colspan="4" style="vertical-align:top;" class="structureViewSection">
 					<cockpit code="Section7" />
 				</th>
 			</tr>
 			<tr>
-				<th colspan="3" style="vertical-align:top;" class="structureViewSection">
+				<th colspan="4" style="vertical-align:top;" class="structureViewSection">
 					<cockpit code="Section8" />
 				</th>
 			</tr>
@@ -73,27 +76,27 @@
 				<td style="vertical-align:top;" class="structureViewSection">
 					<cockpit code="Section9B" />
 				</td>
-				<td style="vertical-align:top;" class="structureViewSection">
+				<td colspan="2" style="vertical-align:top;" class="structureViewSection">
 					<cockpit code="Section9C" />
 				</td>
 			</tr>
 			<tr>
-				<th colspan="3" style="vertical-align:top;" class="structureViewSection">
+				<th colspan="4" style="vertical-align:top;" class="structureViewSection">
 					<cockpit code="Section10" />
 				</th>
 			</tr>
 			<tr>
-				<th colspan="3" style="vertical-align:top;" class="structureViewSection">
+				<th colspan="4" style="vertical-align:top;" class="structureViewSection">
 					<cockpit code="Section11" />
 				</th>
 			</tr>
 			<tr>
-				<th colspan="3" style="vertical-align:top;" class="structureViewSection">
+				<th colspan="4" style="vertical-align:top;" class="structureViewSection">
 					<cockpit code="Section12" />
 				</th>
 			</tr>
 			<tr>
-				<td height="270px" colspan="3" class="structureViewSection">
+				<td height="270px" colspan="4" class="structureViewSection">
 					<cockpit code="Footer" />
 				</td>
 			</tr>
