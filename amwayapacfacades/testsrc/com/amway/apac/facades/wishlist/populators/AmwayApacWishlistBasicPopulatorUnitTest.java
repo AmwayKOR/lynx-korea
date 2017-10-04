@@ -94,11 +94,12 @@ public class AmwayApacWishlistBasicPopulatorUnitTest
 		userModel = Mockito.mock(UserModel.class);
 
 		wishlistModel = Mockito.mock(Wishlist2Model.class);
-		wishlistModel.setUid(WISHLIST_UID);
-		wishlistModel.setName(WISHLIST_NAME);
-		wishlistModel.setDescription(WISHLIST_DESCRIPTION);
-		wishlistModel.setDefault(Boolean.TRUE);
-		wishlistModel.setUser(userModel);
+		BDDMockito.when(wishlistModel.getUid()).thenReturn(WISHLIST_UID);
+		BDDMockito.when(wishlistModel.getName()).thenReturn(WISHLIST_NAME);
+		BDDMockito.when(wishlistModel.getDescription()).thenReturn(WISHLIST_DESCRIPTION);
+		BDDMockito.when(wishlistModel.getDefault()).thenReturn(Boolean.TRUE);
+		BDDMockito.when(wishlistModel.getFavorite()).thenReturn(Boolean.TRUE);
+		BDDMockito.when(wishlistModel.getUser()).thenReturn(userModel);
 
 		customerData = new CustomerData();
 		customerData.setUid(CUSTOMER_UID);

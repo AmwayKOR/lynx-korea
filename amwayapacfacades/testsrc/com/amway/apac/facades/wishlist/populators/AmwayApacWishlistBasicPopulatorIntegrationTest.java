@@ -52,7 +52,7 @@ public class AmwayApacWishlistBasicPopulatorIntegrationTest extends Servicelayer
 	 * The populator for test cases
 	 */
 	@Resource(name = "amwayApacWishlistBasicPopulator")
-	private final AmwayApacWishlistBasicPopulator amwayApacWishlistBasicPopulator = new AmwayApacWishlistBasicPopulator();
+	private AmwayApacWishlistBasicPopulator amwayApacWishlistBasicPopulator;
 
 	@Resource(name = "modelService")
 	private ModelService modelService;
@@ -82,6 +82,7 @@ public class AmwayApacWishlistBasicPopulatorIntegrationTest extends Servicelayer
 		wishlistModel.setName(WISHLIST_NAME);
 		wishlistModel.setDescription(WISHLIST_DESCRIPTION);
 		wishlistModel.setDefault(Boolean.TRUE);
+		wishlistModel.setFavorite(Boolean.TRUE);
 		wishlistModel.setUser(userModel);
 
 		wishlistData = new WishlistData();
@@ -128,7 +129,7 @@ public class AmwayApacWishlistBasicPopulatorIntegrationTest extends Servicelayer
 		Assert.assertEquals(wishlistData.getDescription(), WISHLIST_DESCRIPTION);
 
 		Assert.assertNotNull(wishlistData.getIsDefault());
-		Assert.assertEquals(wishlistData.getIsDefault(), Boolean.TRUE.toString());
+		Assert.assertEquals(wishlistData.getIsDefault().toLowerCase(), Boolean.TRUE.toString().toLowerCase());
 
 		Assert.assertTrue(wishlistData.isIsFavorite());
 
