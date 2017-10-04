@@ -32,4 +32,14 @@ public final class AmwayapacCoreConstants extends GeneratedAmwayapacCoreConstant
 	public static final String QUOTE_EXPIRED_EMAIL_PROCESS = "quote-expired-email-process";
 	public static final String QUOTE_POST_CANCELLATION_PROCESS = "quote-post-cancellation-process";
 
+	/**
+	 * String constant source
+	 */
+	public static final String SOURCE_STRING = "source";
+
+	/**
+	 * String constant target
+	 */
+	public static final String TARGET_STRING = "target";
+
 }
