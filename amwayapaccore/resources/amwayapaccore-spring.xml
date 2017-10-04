@@ -204,6 +204,18 @@
 		<property name="eventService" ref="eventService" />
 		<property name="timeService" ref="timeService" />
 	</bean>
+	
+	
+	<bean id="amwayBrandCategorySource" parent="abstractCategorySource">
+		<property name="rootCategory" value="brands" />
+	</bean>
+	<bean id="amwayCategorySource" parent="abstractCategorySource">
+		<property name="rootCategory" value="root" />
+	</bean>
+
+	<bean id="productModifiedTimeValueResolver" class="com.amway.apac.core.resolvers.ProductModifiedTimeValueResolver"
+		parent="abstractValueResolver">
+	</bean>
 
 	<import resource="/amwayapaccore/processes/quote/quote-buyer-process-spring.xml"/>
 	<import resource="/amwayapaccore/processes/quote/quote-salesrep-process-spring.xml"/>

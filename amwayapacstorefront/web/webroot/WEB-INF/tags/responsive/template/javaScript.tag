@@ -44,6 +44,7 @@
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.header.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.footer.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.homepage.js"></script>
+		<script type="text/javascript" src="${commonResourcePath}/js/acc.categorypage.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.product-detail.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.address.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.autocomplete.js"></script>

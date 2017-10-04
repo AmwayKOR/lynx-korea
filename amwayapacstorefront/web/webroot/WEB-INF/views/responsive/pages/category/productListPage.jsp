@@ -25,108 +25,67 @@
             </div>
             <div class="container-fluid main-container new-plp">
                 <div class="row">
-                    <h1 class="col-sm-12 product-list-page-title">Vitamins & Supplements</h1>
+                    <h1 class="col-sm-12 product-list-page-title">${categoryName}</h1>
                     <div class="col-xs-3 print-hide">
                         <div class="product-list-left-refinements-slot">
                             <div class="product-list-left-refinements-component">
                                 <div id="product-facet" class="pc-product-facet product__facet js-product-facet hidden-xs hidden-sm">
                                 <div class="filters-header">
                                     <span>Filters</span>
-                                    <button form="clearAllForm" type="submit">Clear All</button>
+                                    <form hidden="hidden" action="" method="get" id="clearAllForm">
+                                    	<input type="hidden" name="q"/>
+                                    </form>
+                                    <button form="clearAllForm" type="submit">Clear All Desktop</button>
                                 </div>
                                 <div class="panel-group accordion-custom" id="facetAccordion" role="tablist" aria-multiselectable="true">
-                                    <div class="panel">
-                                        <div class="panel-heading" role="tab" id="retailPriceFacet">
+                                <c:forEach items="${searchPageData.facets}" var="facet">
+                                	<div class="panel">
+                                        <div class="panel-heading" role="tab" id="${facet.code}Facet">
                                             <h4 class="panel-title">
-                                                <div role="button" class="collapse-button collapsed" data-toggle="collapse" data-parent="#facetAccordion" href="#retailPriceFacetBodypc" aria-controls="retailPriceFacetBody">
-                                                    <span class="text-uppercase">Price<span class="">(1)</span>
+                                                <div role="button" class="collapse-button collapsed" data-toggle="collapse" data-parent="#facetAccordion" href="#${facet.code}FacetBodypc" aria-controls="${facet.code}FacetBody">
+                                                    <span class="text-uppercase">${facet.name}<span class=""></span>
                                                     </span>
                                                     <span class="pull-right icon-minus"></span>
                                                 </div>
                                             </h4>
                                         </div>
-                                        <div id="retailPriceFacetBodypc" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                                        <div id="${facet.code}FacetBodypc" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
                                             <div class="panel-body">
-                                                <div id="tabContent_retailPriceFacet" class="facet js-facet">
+                                                <div id="tabContent_${facet.code}Facet" class="facet js-facet">
                                                     <div class="facet__name js-facet-name">
                                                         <span class="glyphicon facet__arrow"></span>
-                                                        Shop by Price</div>
+                                                        Shop by ${facet.name}</div>
                                                     <div class="facet__values js-facet-values js-facet-form">
                                                         <ul class="facet__list js-facet-list js-facet-top-values">
-                                                            <li class="js-facet-value js-facet-init-value js-facet-top-value">
-                                                                <form action="" method="get" class="non-js-desctop">
-                                                                    <label class="hidden-xs hidden-sm">
-                                                                        <input class="facet__list__checkbox js-facet-checkbox  js-facet-item-checkbox sr-only" type="checkbox" checked="checked">
-                                                                        <span class="facet__list__label">
-                                                                            <span class="facet__list__mark"></span>
-                                                                            <span class="facet__list__text">
-                                                                                $0-$49.99<span class="facet__value__count">
-                                                                                        (3)</span>
-                                                                                </span>
-                                                                        </span>
-                                                                    </label>
-                                                                    <label class="hidden-md hidden-lg">
-                                                                        <input class="facet__list__checkbox js-facet-mobile-checkbox js-facet-item-checkbox sr-only" type="checkbox" checked="checked">
-                                                                    <span class="facet__list__label">
-                                                                        <span class="facet__list__mark"></span>
-                                                                        <span class="facet__list__text">
-                                                                            $0-$49.99<span class="facet__value__count">
-                                                                                    (3)</span>
-                                                                            </span>
-                                                                    </span>
-                                                                    </label>
-                                                                </form>
-                                                            </li>
-                                                            <li class="js-facet-value js-facet-init-value">
-                                                                <form action="" method="get" class="non-js-desctop">
-                                                                    <label class="hidden-xs hidden-sm">
-                                                                        <input class="facet__list__checkbox js-facet-checkbox  js-facet-item-checkbox sr-only" type="checkbox">
-                                                                        <span class="facet__list__label">
-                                                                        <span class="facet__list__mark"></span>
-                                                                        <span class="facet__list__text">
-                                                                            $50-$199.99<span class="facet__value__count">
-                                                                                    (3)</span>
-                                                                            </span>
-                                                                    </span>
-                                                                    </label>
-                                                                    <label class="hidden-md hidden-lg">
-                                                                        <input class="facet__list__checkbox js-facet-mobile-checkbox js-facet-item-checkbox sr-only" type="checkbox">
-                                                                    <span class="facet__list__label">
-                                                                        <span class="facet__list__mark"></span>
-                                                                        <span class="facet__list__text">
-                                                                            $50-$199.99<span class="facet__value__count">
-                                                                                    (3)</span>
-                                                                            </span>
-                                                                    </span>
-                                                                    </label>
-                                                                </form>
-                                                            </li>
-                                                            <li class="js-facet-value js-facet-init-value">
-                                                                <input class="js-facet-item-value" type="hidden" name="facetValue" value="retailPriceFacet:$500-$999.99">
-                                                                <input class="js-facet-item-query" type="hidden" name="facetQuery" value=":name-asc-c">
-                                                                <form action="" method="get" class="non-js-desctop">
-                                                                    <label class="hidden-xs hidden-sm">
-                                                                        <input class="facet__list__checkbox js-facet-checkbox  js-facet-item-checkbox sr-only" type="checkbox">
-                                                                                                                        <span class="facet__list__label">
-                                                                        <span class="facet__list__mark"></span>
-                                                                        <span class="facet__list__text">
-                                                                            $500-$999.99<span class="facet__value__count">
-                                                                                    (1)</span>
-                                                                            </span>
-                                                                    </span>
-                                                                    </label>
-                                                                    <label class="hidden-md hidden-lg">
-                                                                        <input class="facet__list__checkbox js-facet-mobile-checkbox js-facet-item-checkbox sr-only" type="checkbox">
-                                                                        <span class="facet__list__label">
-                                                                        <span class="facet__list__mark"></span>
-                                                                        <span class="facet__list__text">
-                                                                            $500-$999.99<span class="facet__value__count">
-                                                                                    (1)</span>
-                                                                            </span>
-                                                                    </span>
-                                                                    </label>
-                                                                </form>
-                                                            </li>
+                                                       		<c:forEach items="${facet.values}" var="facetValue">
+                                                        		<li class="js-facet-value js-facet-init-value js-facet-top-value">
+                                                                   <input class="js-facet-item-value" type="hidden" name="facetValue" value="retailPriceFacet:$0-$49.99">
+                                                                   <input class="js-facet-item-query" type="hidden" name="facetQuery" value=":name-asc-c">
+                                                                   <form action="" method="get" class="non-js-desctop">
+                                                                   <input type="hidden" name="q" value="${facetValue.query.query.value}"></input>
+                                                                       <label class="hidden-xs hidden-sm">
+                                                                           <input class="facet__list__checkbox js-facet-checkbox  js-facet-item-checkbox sr-only" type="checkbox" <c:if test="${facetValue.selected}">checked="checked"</c:if>>
+                                                                           <span class="facet__list__label">
+                                                                           <span class="facet__list__mark"></span>
+                                                                           <span class="facet__list__text">
+                                                                               ${facetValue.code}<span class="facet__value__count">
+                                                                                       (${facetValue.count})</span>
+                                                                               </span>
+                                                                       </span>
+                                                                       </label>
+                                                                       <label class="hidden-md hidden-lg">
+                                                                           <input class="facet__list__checkbox js-facet-mobile-checkbox js-facet-item-checkbox sr-only" type="checkbox">
+                                                                           <span class="facet__list__label">
+                                                                           <span class="facet__list__mark"></span>
+                                                                           <span class="facet__list__text">
+                                                                               ${facetValue.code}<span class="facet__value__count">
+                                                                                       (${facetValue.count})</span>
+                                                                               </span>
+                                                                       </span>
+                                                                       </label>
+                                                                   </form>
+                                                               </li>
+                                                       		</c:forEach>
                                                           </ul>
                                                         <div class="facet-button-wrapper hidden-md hidden-lg">
                                                             <button type="button" class="js-facet-group-button-apply facet-button-apply">
@@ -137,82 +96,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="panel">
-                                        <div class="panel-heading" role="tab" id="availabilityInfo">
-                                            <h4 class="panel-title">
-                                                <div role="button" class="collapse-button collapsed" data-toggle="collapse" data-parent="#facetAccordion" href="#availabilityInfoBodypc" aria-controls="availabilityInfoBody">
-                                                    <span class="text-uppercase">Product Availability<span class=""></span>
-                                                    </span>
-                                                    <span class="pull-right icon-minus"></span>
-                                                </div>
-                                            </h4>
-                                        </div>
-                                        <div id="availabilityInfoBodypc" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-                                            <div class="panel-body">
-                                                <div id="tabContent_availabilityInfo" class="facet js-facet">
-                                                    <div class="facet__name js-facet-name">
-                                                        <span class="glyphicon facet__arrow"></span>
-                                                        Shop by Product Availability</div>
-                                                    <div class="facet__values js-facet-values js-facet-form">
-                                                        <ul class="facet__list js-facet-list js-facet-top-values">
-                                                            <li class="js-facet-value js-facet-init-value">
-                                                                <form action="" method="get" class="non-js-desctop">
-                                                                    <label class="hidden-xs hidden-sm">
-                                                                        <input class="facet__list__checkbox js-facet-checkbox  js-facet-item-checkbox sr-only" type="checkbox">
-                                                                    <span class="facet__list__label">
-                                                                        <span class="facet__list__mark"></span>
-                                                                        <span class="facet__list__text">
-                                                                            In Stock<span class="facet__value__count">
-                                                                                    (2)</span>
-                                                                            </span>
-                                                                    </span>
-                                                                    </label>
-                                                                    <label class="hidden-md hidden-lg">
-                                                                        <input class="facet__list__checkbox js-facet-mobile-checkbox js-facet-item-checkbox sr-only" type="checkbox">
-                                                                            <span class="facet__list__label">
-                                                                        <span class="facet__list__mark"></span>
-                                                                        <span class="facet__list__text">
-                                                                            In Stock<span class="facet__value__count">
-                                                                                    (2)</span>
-                                                                            </span>
-                                                                    </span>
-                                                                    </label>
-                                                                </form>
-                                                            </li>
-                                                            <li class="js-facet-value js-facet-init-value">
-                                                                <form action="" method="get" class="non-js-desctop">
-                                                                    <label class="hidden-xs hidden-sm">
-                                                                        <input class="facet__list__checkbox js-facet-checkbox  js-facet-item-checkbox sr-only" type="checkbox">
-                                                                        <span class="facet__list__label">
-                                                                        <span class="facet__list__mark"></span>
-                                                                        <span class="facet__list__text">
-                                                                            Temporarily Not Available<span class="facet__value__count">
-                                                                                    (1)</span>
-                                                                            </span>
-                                                                    </span>
-                                                                    </label>
-                                                                    <label class="hidden-md hidden-lg">
-                                                                        <input class="facet__list__checkbox js-facet-mobile-checkbox js-facet-item-checkbox sr-only" type="checkbox">
-                                                                        <span class="facet__list__label">
-                                                                            <span class="facet__list__mark"></span>
-                                                                            <span class="facet__list__text">
-                                                                                Temporarily Not Available<span class="facet__value__count">
-                                                                                        (1)</span>
-                                                                                </span>
-                                                                        </span>
-                                                                    </label>
-                                                                </form>
-                                                            </li>
-                                                     </ul>
-                                                        <div class="facet-button-wrapper hidden-md hidden-lg">
-                                                            <button type="button" class="js-facet-group-button-apply facet-button-apply">
-                                                                Apply</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                </c:forEach>
                                 </div>
                             </div></div></div></div>
                     <div class="col-sm-12 col-md-9">
@@ -226,7 +110,7 @@
                                                 <div class="pull-left">
                                                     <div class="pagination-bar-results">
                                                         <div class="total-wrapper">
-                                                            <span>7 Results</span></div>
+                                                            <span>${searchPageData.pagination.totalNumberOfResults} Results</span></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -246,217 +130,81 @@
                                                             <form id="sortForm1" name="sortForm1" method="get" action="">
                                                                 <select id="sortOptions1" name="sort" class="form-control">
                                                                     <option disabled="">Sort by</option>
-                                                                    <option value="name-asc-c" selected="selected">
-                                                                        Name (A-Z)</option>
-                                                                    <option value="name-desc-c">
-                                                                        Name (Z-A)</option>
-                                                                    <option value="retail-price-asc-c">
-                                                                        Price (Lowest To Highest)</option>
-                                                                    <option value="retail-price-desc-c">
-                                                                        Price (Highest To Lowest)</option>
-                                                                    <option value="newest-asc-c">
-                                                                        Newest First</option>
-                                                                    <option value="newest-desc-c">
-                                                                        Oldest First</option>
-                                                                    <option value="category-asc-c">
-                                                                        Category (A-Z)</option>
-                                                                    <option value="category-desc-c">
-                                                                        Category (Z-A)</option>
+                                                                    <c:forEach items="${searchPageData.sorts}" var="sort">
+                                                                    	<option value="${sort.code}" <c:if test="${sort.selected}">selected="selected"</c:if>>${sort.name}</option>
+                                                                    </c:forEach>
                                                                 </select>
+                                                                <input type="hidden" name="q" value="${searchPageData.currentQuery.query.value}"/>
                                                             </form>
                                                         </div>
                                                         <div id="product-facet" class="mob-product-facet product__facet js-product-facet">
                                                             <div class="filters-header">
                                                                 <span>Filters</span>
-                                                                <button form="clearAllForm" type="submit">Clear All</button>
+                                                                <button form="clearAllForm" type="submit">Clear All Mobile</button>
                                                             </div>
                                                             <div class="panel-group accordion-custom" id="facetAccordion" role="tablist" aria-multiselectable="true">
+                                                            <c:forEach items="${searchPageData.facets}" var="facet">
                                                                 <div class="panel">
-                                                                    <div class="panel-heading" role="tab" id="retailPriceFacet">
+                                                                    <div class="panel-heading" role="tab" id="${facet.code}Facet">
                                                                         <h4 class="panel-title">
-                                                                            <div role="button" class="collapse-button collapsed" data-toggle="collapse" data-parent="#facetAccordion" href="#retailPriceFacetBodymob" aria-controls="retailPriceFacetBody">
-                                                                                <span class="text-uppercase">Price<span class="">(1)</span>
+                                                                            <div role="button" class="collapse-button collapsed" data-toggle="collapse" data-parent="#facetAccordion" href="#${facet.code}FacetBodymob" aria-controls="${facet.code}FacetBody">
+                                                                                <span class="text-uppercase">${facet.name}<span class=""></span>
                                                                                 </span>
                                                                                 <span class="pull-right icon-minus"></span>
                                                                             </div>
                                                                         </h4>
                                                                     </div>
-                                                                    <div id="retailPriceFacetBodymob" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne" style="height: 0px;">
+                                                                    <div id="${facet.code}FacetBodymob" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne" style="height: 0px;">
                                                                         <div class="panel-body">
-                                                                            <div id="tabContent_retailPriceFacet" class="facet js-facet">
+                                                                            <div id="tabContent_${facet.code}Facet" class="facet js-facet">
                                                                                 <div class="facet__name js-facet-name">
                                                                                     <span class="glyphicon facet__arrow"></span>
-                                                                                    Shop by Price</div>
+                                                                                    Shop by ${facet.name}</div>
                                                                                 <div class="facet__values js-facet-values js-facet-form">
-                                                                                    <ul class="facet__list js-facet-list js-facet-top-values">
-                                                                                        <li class="js-facet-value js-facet-init-value js-facet-top-value">
-                                                                                            <input class="js-facet-item-value" type="hidden" name="facetValue" value="retailPriceFacet:$0-$49.99">
-                                                                                            <input class="js-facet-item-query" type="hidden" name="facetQuery" value=":name-asc-c">
-                                                                                            <form action="" method="get" class="non-js-desctop">
-                                                                                                <label class="hidden-xs hidden-sm">
-                                                                                                    <input class="facet__list__checkbox js-facet-checkbox  js-facet-item-checkbox sr-only" type="checkbox" checked="checked">
-                                                                                                    <span class="facet__list__label">
-                                                                                                    <span class="facet__list__mark"></span>
-                                                                                                    <span class="facet__list__text">
-                                                                                                        $0-$49.99<span class="facet__value__count">
-                                                                                                                (3)</span>
-                                                                                                        </span>
-                                                                                                </span>
-                                                                                                </label>
-                                                                                                <label class="hidden-md hidden-lg">
-                                                                                                    <input class="facet__list__checkbox js-facet-mobile-checkbox js-facet-item-checkbox sr-only" type="checkbox" checked="checked">
-                                                                                                    <span class="facet__list__label">
-                                                                                                    <span class="facet__list__mark"></span>
-                                                                                                    <span class="facet__list__text">
-                                                                                                        $0-$49.99<span class="facet__value__count">
-                                                                                                                (3)</span>
-                                                                                                        </span>
-                                                                                                </span>
-                                                                                                </label>
-                                                                                            </form>
-                                                                                        </li>
-                                                                                        <li class="js-facet-value js-facet-init-value">
-                                                                                            <form action="" method="get" class="non-js-desctop">
-                                                                                                <label class="hidden-xs hidden-sm">
-                                                                                                    <input class="facet__list__checkbox js-facet-checkbox  js-facet-item-checkbox sr-only" type="checkbox">
-                                                                                                    <span class="facet__list__label">
-                                                                                                    <span class="facet__list__mark"></span>
-                                                                                                    <span class="facet__list__text">
-                                                                                                        $50-$199.99<span class="facet__value__count">
-                                                                                                                (3)</span>
-                                                                                                        </span>
-                                                                                                </span>
-                                                                                                </label>
-                                                                                                <label class="hidden-md hidden-lg">
-                                                                                                    <input class="facet__list__checkbox js-facet-mobile-checkbox js-facet-item-checkbox sr-only" type="checkbox">
-                                                                                                    <span class="facet__list__label">
-                                                                                                    <span class="facet__list__mark"></span>
-                                                                                                    <span class="facet__list__text">
-                                                                                                        $50-$199.99<span class="facet__value__count">
-                                                                                                                (3)</span>
-                                                                                                        </span>
-                                                                                                </span>
-                                                                                                </label>
-                                                                                            </form>
-                                                                                        </li>
-                                                                                        <li class="js-facet-value js-facet-init-value">
-                                                                                            <input class="js-facet-item-value" type="hidden" name="facetValue" value="retailPriceFacet:$500-$999.99">
-                                                                                            <input class="js-facet-item-query" type="hidden" name="facetQuery" value=":name-asc-c">
-                                                                                            <form action="" method="get" class="non-js-desctop">
-                                                                                                <label class="hidden-xs hidden-sm">
-                                                                                                    <input class="facet__list__checkbox js-facet-checkbox  js-facet-item-checkbox sr-only" type="checkbox">
-                                                                                                    <span class="facet__list__label">
-                                                                                                    <span class="facet__list__mark"></span>
-                                                                                                    <span class="facet__list__text">
-                                                                                                        $500-$999.99<span class="facet__value__count">
-                                                                                                                (1)</span>
-                                                                                                        </span>
-                                                                                                </span>
-                                                                                                </label>
-                                                                                                <label class="hidden-md hidden-lg">
-                                                                                                    <input class="facet__list__checkbox js-facet-mobile-checkbox js-facet-item-checkbox sr-only" type="checkbox">
-                                                                                                    <span class="facet__list__label">
-                                                                                                    <span class="facet__list__mark"></span>
-                                                                                                    <span class="facet__list__text">
-                                                                                                        $500-$999.99<span class="facet__value__count">
-                                                                                                                (1)</span>
-                                                                                                        </span>
-                                                                                                </span>
-                                                                                                </label>
-                                                                                            </form>
-                                                                                        </li>
-                                                                                  </ul>
-                                                                                    <div class="facet-button-wrapper hidden-md hidden-lg">
-                                                                                        <button type="button" class="js-facet-group-button-apply facet-button-apply">
-                                                                                            Apply</button>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
+                                                                                <ul class="facet__list js-facet-list js-facet-top-values">
+                                                                               		<c:forEach items="${facet.values}" var="facetValue">
+                                                                                		<li class="js-facet-value js-facet-init-value js-facet-top-value">
+                                                                                           <input class="js-facet-item-value" type="hidden" name="facetValue" value="retailPriceFacet:$0-$49.99">
+                                                                                           <input class="js-facet-item-query" type="hidden" name="facetQuery" value=":name-asc-c">
+                                                                                           <form action="" method="get" class="non-js-desctop">
+                                                                                           <input type="hidden" name="q" value="${facetValue.query.query.value}"></input>
+                                                                                               <label class="hidden-xs hidden-sm">
+                                                                                                   <input class="facet__list__checkbox js-facet-checkbox  js-facet-item-checkbox sr-only" type="checkbox">
+                                                                                                   <span class="facet__list__label">
+                                                                                                   <span class="facet__list__mark"></span>
+                                                                                                   <span class="facet__list__text">
+                                                                                                       ${facetValue.code}<span class="facet__value__count">
+                                                                                                               (${facetValue.count})</span>
+                                                                                                       </span>
+                                                                                               </span>
+                                                                                               </label>
+                                                                                               <label class="hidden-md hidden-lg">
+                                                                                                   <input class="facet__list__checkbox js-facet-checkbox js-facet-item-checkbox sr-only" type="checkbox" <c:if test="${facetValue.selected}">checked="checked"</c:if>>
+                                                                                                   <span class="facet__list__label">
+                                                                                                   <span class="facet__list__mark"></span>
+                                                                                                   <span class="facet__list__text">
+                                                                                                       ${facetValue.code}<span class="facet__value__count">
+                                                                                                               (${facetValue.count})</span>
+                                                                                                       </span>
+                                                                                               </span>
+                                                                                               </label>
+                                                                                           </form>
+                                                                                       </li>
+                                                                               		</c:forEach>
+                                                                                 </ul>
+                                                                                 <div class="facet-button-wrapper hidden-md hidden-lg">
+                                                                                     <button type="button" class="js-facet-group-button-apply facet-button-apply">
+                                                                                         Apply</button>
+                                                                                 </div>
+                                                                             </div>
+                                                                         </div>
+                                                                     </div>
+                                                                  </div>
                                                                 </div>
-                                                                <div class="panel">
-                                                                    <div class="panel-heading" role="tab" id="availabilityInfo">
-                                                                        <h4 class="panel-title">
-                                                                            <div role="button" class="collapse-button collapsed" data-toggle="collapse" data-parent="#facetAccordion" href="#availabilityInfoBodymob" aria-controls="availabilityInfoBody">
-                                                                                <span class="text-uppercase">Product Availability<span class=""></span>
-                                                                                </span>
-                                                                                <span class="pull-right icon-minus"></span>
-                                                                            </div>
-                                                                        </h4>
-                                                                    </div>
-                                                                    <div id="availabilityInfoBodymob" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-                                                                        <div class="panel-body">
-                                                                            <div id="tabContent_availabilityInfo" class="facet js-facet">
-                                                                                <div class="facet__name js-facet-name">
-                                                                                    <span class="glyphicon facet__arrow"></span>
-                                                                                    Shop by Product Availability</div>
-                                                                                <div class="facet__values js-facet-values js-facet-form">
-                                                                                    <ul class="facet__list js-facet-list js-facet-top-values">
-                                                                                        <li class="js-facet-value js-facet-init-value">
-                                                                                            <input class="js-facet-item-value" type="hidden" name="facetValue" value="availabilityInfo:warehouse_n,SHIP">
-                                                                                            <input class="js-facet-item-query" type="hidden" name="facetQuery" value=":name-asc-c:retailPriceFacet:$0-$49.99">
-                                                                                            <form action="" method="get" class="non-js-desctop">
-                                                                                                <label class="hidden-xs hidden-sm">
-                                                                                                    <input class="facet__list__checkbox js-facet-checkbox  js-facet-item-checkbox sr-only" type="checkbox">
-                                                                                                    <span class="facet__list__label">
-                                                                                                        <span class="facet__list__mark"></span>
-                                                                                                        <span class="facet__list__text">
-                                                                                                            In Stock<span class="facet__value__count">
-                                                                                                                    (2)</span>
-                                                                                                            </span>
-                                                                                                    </span>
-                                                                                                </label>
-                                                                                                <label class="hidden-md hidden-lg">
-                                                                                                    <input class="facet__list__checkbox js-facet-mobile-checkbox js-facet-item-checkbox sr-only" type="checkbox">
-                                                                                                <span class="facet__list__label">
-                                                                                                    <span class="facet__list__mark"></span>
-                                                                                                    <span class="facet__list__text">
-                                                                                                        In Stock<span class="facet__value__count">
-                                                                                                                (2)</span>
-                                                                                                        </span>
-                                                                                                </span>
-                                                                                                </label>
-                                                                                            </form>
-                                                                                        </li>
-                                                                                        <li class="js-facet-value js-facet-init-value">
-                                                                                            <input class="js-facet-item-value" type="hidden" name="facetValue" value="availabilityInfo:warehouse_n,TNA">
-                                                                                            <input class="js-facet-item-query" type="hidden" name="facetQuery" value=":name-asc-c:retailPriceFacet:$0-$49.99">
-                                                                                            <form action="" method="get" class="non-js-desctop">
-                                                                                                <label class="hidden-xs hidden-sm">
-                                                                                                    <input class="facet__list__checkbox js-facet-checkbox  js-facet-item-checkbox sr-only" type="checkbox">
-                                                                                                    <span class="facet__list__label">
-                                                                                                        <span class="facet__list__mark"></span>
-                                                                                                        <span class="facet__list__text">
-                                                                                                            Temporarily Not Available<span class="facet__value__count">
-                                                                                                                    (1)</span>
-                                                                                                            </span>
-                                                                                                    </span>
-                                                                                                </label>
-                                                                                                <label class="hidden-md hidden-lg">
-                                                                                                    <input class="facet__list__checkbox js-facet-mobile-checkbox js-facet-item-checkbox sr-only" type="checkbox">
-                                                                                                    <span class="facet__list__label">
-                                                                                                    <span class="facet__list__mark"></span>
-                                                                                                    <span class="facet__list__text">
-                                                                                                        Temporarily Not Available<span class="facet__value__count">
-                                                                                                                (1)</span>
-                                                                                                        </span>
-                                                                                                </span>
-                                                                                                </label>
-                                                                                            </form>
-                                                                                        </li>
-                                                                                       </ul>
-                                                                                    <div class="facet-button-wrapper hidden-md hidden-lg">
-                                                                                        <button type="button" class="js-facet-group-button-apply facet-button-apply">
-                                                                                            Apply</button>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
+                                                             </c:forEach>
                                                             </div>
-                                                        </div></div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -480,7 +228,7 @@
 	                                                    </a>
 	                                                    <div class="product-list__item-detail">
 	                                                        <p class="product-list__item-title">
-	                                                            <a class="product-list__item-title" target="_self" href="${product.url}">${product.description}</a></p>
+	                                                            <a class="product-list__item-title" target="_self" href="${product.url}">${product.name}</a></p>
 	                                                        <p class="product-list__item-count">30 Count</p>
 	                                                        <p class="product-list__item-number">Item #: ${product.code}</p>
 	                                                        <div class="product-list__item-title product-list__item-aboprice">
@@ -505,17 +253,20 @@
 	                                        </div>
 	                                    </div>
                                 	</c:forEach>
-                                
-                                
-                                
-                                    
                                 </div>
-                                <p class="text-center show-more-products-wrapper">
-                                    <button type="button" id="show-more" class="btn btn-link">
-                                        <span class="text-wrap">Show more</span>
-                                        <span class="icon icon-arrow-dropdown"></span>
-                                    </button>
-                                </p>
+                               	<c:if test="${searchPageData.pagination.currentPage < (searchPageData.pagination.numberOfPages - 1)}">
+	                                <div class="text-center show-more-products-wrapper">
+	                                	<form action="${plainUrl}" method="get">
+	                                		<input type="hidden" name="q" value="${searchPageData.currentQuery.query.value}"/>
+	                                		<input type="hidden" name="sort" value="${currentSort}"/>
+	                                		<input type="hidden" name="page" value="${searchPageData.pagination.currentPage + 1}"/>
+		                                    <button type="button" id="show-more" class="btn btn-link">
+		                                        <span class="text-wrap">Show more</span>
+		                                        <span class="icon icon-arrow-dropdown"></span>
+		                                    </button>
+	                                	</form>
+	                                </div>
+                               	</c:if>
                             </div>
                         </div>
                     </div>

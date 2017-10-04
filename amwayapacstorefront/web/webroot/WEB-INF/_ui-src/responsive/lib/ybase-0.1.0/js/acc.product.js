@@ -3,36 +3,8 @@ ACC.product = {
     _autoload: [
         "bindToAddToCartForm",
         "enableStorePickupButton",
-        "enableVariantSelectors",
-        "bindFacets"
+        "enableVariantSelectors"
     ],
-
-
-    bindFacets: function () {
-        $(document).on("click", ".js-show-facets", function (e) {
-            e.preventDefault();
-            var selectRefinementsTitle = $(this).data("selectRefinementsTitle");
-            ACC.colorbox.open(selectRefinementsTitle, {
-                href: ".js-product-facet",
-                inline: true,
-                width: "480px",
-                onComplete: function () {
-                    $(document).on("click", ".js-product-facet .js-facet-name", function (e) {
-                        e.preventDefault();
-                        $(".js-product-facet  .js-facet").removeClass("active");
-                        $(this).parents(".js-facet").addClass("active");
-                        $.colorbox.resize()
-                    })
-                },
-                onClosed: function () {
-                    $(document).off("click", ".js-product-facet .js-facet-name");
-                }
-            });
-        });
-        enquire.register("screen and (min-width:" + screenSmMax + ")", function () {
-            $("#cboxClose").click();
-        });
-    },
 
 
     enableAddToCartButton: function () {
