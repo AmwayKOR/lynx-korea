@@ -1,14 +1,17 @@
 ACC.categorypage = {
 
     _autoload: [
-        "bindShowMoreButton"
+        "bindShowMoreButton",
+        "bindFacetExpansion",
+        "bindFilterFacetButton",
+        "bindQuickViewPopup"
         ],
 
     
     bindShowMoreButton : function(){
     	$(document).on("click", "#show-more", function(){
-    		var listingDiv = $(this).closest(".product__listing").find(".product-list-container.pageBlank");
-    		var seeMoreDiv = $(this).closest(".product__listing").find(".show-more-products-wrapper");
+    		var listingDiv = $(this).closest(".product-list-right-component").find(".product__list--item").last();
+    		var seeMoreDiv = $(this).closest(".show-more-products-wrapper");
     		$form = $(this).closest(".show-more-products-wrapper").find("form");
     		$.ajax({ 
   			  url:$form.attr("action")+"/results-display",
@@ -16,13 +19,91 @@ ACC.categorypage = {
   			  type: "GET",
   			  success: function(data) {
   				var listingReplacementDiv = $(data).find(".product-listing-section").html();
-  				listingDiv.removeClass("pageBlank");
-  				listingDiv.html(listingReplacementDiv);
+  				$(listingReplacementDiv).insertAfter($(listingDiv));
   				seeMoreDiv.html($(data).find(".see-more-section").html());
   			  },
-  				error: function() 
-  				{}
+			  error: function(){
+				  
+			  }
   		  });
     	});
+    },
+    
+    bindFacetExpansion : function(){
+    	$(".js-facet-checkbox").each(function(){
+    		if($(this).prop("checked")){
+    			if($(this).closest(".panel").find(".collapse-button").hasClass("collapsed")){
+    				$(this).closest(".panel").find(".collapse-button").trigger("click");
+    			}
+    		}
+    	});
+    },
+    
+    bindFilterFacetButton : function(){
+    	$(document).on("click", ".filter-facet-button", function(e){
+    		e.preventDefault();
+            if(!$(".new-plp .pagination-wrapper .product__facet").hasClass("active")){
+                $(".new-plp .filter-facet-button").addClass("active");
+                $(".new-plp .pagination-wrapper .product__facet").addClass("active");
+            }else{
+                $(".new-plp .pagination-wrapper .product__facet").removeClass("active");
+                $(".new-plp .filter-facet-button").removeClass("active");
+            }
+    	});
+    },
+    
+    bindQuickViewPopup : function(){
+    	$(window).resize(function() {
+    		ACC.categorypage.dialogPos();
+    		ACC.categorypage.dialogPos3();
+        });
+        $(".cart-popup__close.quick-view-close").click(function() {
+            $(".view-box,.overlay").hide();
+        });
+
+        $('.quick-view-btn').click(function(event) {
+            event.preventDefault();
+            $(".view-box,.overlay").show();
+            ACC.categorypage.dialogPos();
+        });
+        //search box click event
+        $(".icon-search").click(function(e) {
+            e.preventDefault();
+            var value = $(".form-control.js-site-search-input.ui-autocomplete-input[placeholder]").val();
+            console.log(value);
+            if (value == 'did you mean') {
+                window.location.href = "Did-you-mean.html";
+            } else if (value == 'artistry') {
+                window.location.href = "search-result-page.html";
+            } else {
+                window.location.href = "search-no-result.html";
+            }
+        });
+
+	    //  add to shopping cart
+	    $('.product-list__item-link .btn-blue-white').click(function(event) {
+	        event.preventDefault();
+	        $("#add-to-cart-box.cbox,.overlay").show();
+	        $("#colorbox").hide();
+	        ACC.categorypage.dialogPos3();
+	    });
+	
+	    $(".cart-popup__close").click(function() {
+	        $("#add-to-cart-box.cbox,.overlay").hide();
+	    });
+    },
+    
+    dialogPos : function(){
+        var W = $(window).width();
+        var cW = $(".view-box").width();
+        $(".view-box").css("left", (W - cW) / 2);
+    },
+    
+    dialogPos3 : function(){
+        var W = $(window).width();
+        var cW = $("#add-to-cart-box.cbox").width();
+        $("#add-to-cart-box.cbox").css("left", (W - cW) / 2);
     }
+    
+    
 };
