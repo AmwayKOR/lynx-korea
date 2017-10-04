@@ -827,6 +827,7 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 ;SiteLogo;;;logo
 ;SearchBox;;;searchbox
 ;MiniCart;;;minicart
+;MobileNavigationBar;;;navigation
 ;NavigationBar;;;navigation
 ;Section1;;;wide
 ;Section2;;;wide
@@ -854,6 +855,7 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active
 ;;FooterSlot;Footer;true
 ;;SearchBoxSlot;Search Box;true
 ;;NavigationBarSlot;Navigation Bar;true
+;;MobileNavigationBarSlot;Mobile Navigation Bar;true
 
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='HomePageMainTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
 ;;SiteLogo-HomePageMain;SiteLogo;;SiteLogoSlot;true
@@ -861,6 +863,7 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 ;;Footer-HomePageMain;Footer;;FooterSlot;true
 ;;SearchBox-HomePageMain;SearchBox;;SearchBoxSlot;true
 ;;NavigationBar-HomePageMain;NavigationBar;;NavigationBarSlot;true
+;;Mobile-NavigationBar-HomePageMain;MobileNavigationBar;;MobileNavigationBarSlot;true
 
 # Site-wide Aaron Homepage
 INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='true']

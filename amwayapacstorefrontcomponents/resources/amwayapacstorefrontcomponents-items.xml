@@ -265,5 +265,10 @@
 			</attributes>
 		</itemtype>
 		
+		<itemtype code="AmwayAPACMobileNavigationComponent" generate="true" extends="NavigationBarComponent" autocreate="true" 
+			jaloclass="com.amway.apac.core.jalo.components.AmwayAPACMobileNavigationComponent">
+			
+		</itemtype>
+		
     </itemtypes>
 </items>
