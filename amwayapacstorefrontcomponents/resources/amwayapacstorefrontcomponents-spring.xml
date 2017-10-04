@@ -77,17 +77,5 @@
 	      	            !execution(* getPK(..))" />  	            
 	       <aop:pointcut id="profiledMethods" expression="execution(* *(..))" />	
 	  -->
-	
-    <bean id="amwayapacstorefrontcomponentsSystemSetup" class="com.amway.apac.storefront.components.setup.AmwayapacstorefrontcomponentsSystemSetup">
-        <!-- constructor arg injection example -->
-        <constructor-arg ref="amwayapacstorefrontcomponentsService"/>
-    </bean>
-
-    <bean id="amwayapacstorefrontcomponentsService" class="com.amway.apac.storefront.components.service.impl.DefaultAmwayapacstorefrontcomponentsService">
-        <!-- setter injection example -->
-        <property name="modelService" ref="modelService"/>
-        <property name="mediaService" ref="mediaService"/>
-        <property name="flexibleSearchService" ref="flexibleSearchService"/>
-    </bean>
 			
 </beans>
