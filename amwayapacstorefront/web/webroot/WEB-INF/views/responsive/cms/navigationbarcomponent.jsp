@@ -12,11 +12,14 @@
 		<c:when test="${fn:length(component.navigationNode.children) > 1}">
 			
 			<div class="overlay-menu-component-desktop-wrapper">
-					<div data-toggle="collapse" href="#overlay-menu-wrapper" aria-expanded="false" aria-controls="overlay-menu-wrapper" class="overlay-menu-toggle-desktop js-overlay-menu-toggle-desktop collapsed">
-						<cms:component component="${component.navigationNode.nodeLink}"  />
-						<i class="main-menu__arrow-down glyphicon glyphicon-menu-down"></i>
-					</div>
 					
+					<a role="button" data-toggle="collapse" href="#overlay-menu-wrapper"
+                                           aria-expanded="false" aria-controls="overlay-menu-wrapper"
+                                           class="overlay-menu-toggle-desktop js-overlay-menu-toggle-desktop collapsed">
+                                            <span class="hamburger-icon icon-Icon-Hamburger-01"></span>
+                                            <span class="button-text">${component.navigationNode.nodeLink.linkName}
+                                                <i class="main-menu__arrow-down glyphicon glyphicon-menu-down"></i></span>
+                    </a>
 					<div id="overlay-menu-wrapper" class="collapse hidden-sm overlay-menu-container">
                                             <div class="overlay-menu row">
                                                 <div class="col-sm-3 overlay-menu-headers">
@@ -30,13 +33,14 @@
 																	        <li role="presentation" class="tab-header-item <c:if test="${loop.index==0}">active</c:if> ">
 																		        <div class="arrow"></div>
 	                                                            					
-				                                                                    <a href="#navMenuTab${loop.index}" aria-controls="navMenuTab0" role="tab" data-toggle="tab" class="tab-toggle">
+				                                                                    <a href="#navMenuTab${loop.index}" aria-controls="navMenuTab${loop.index}" role="tab" data-toggle="tab" class="tab-toggle">
 				                                                                        <div class="wrapper">
 				                                                                            <span class="tab-image">
 				                                                                            
 				                                                                                <img src="${childrenNode.nodeImg.url}" />
 				                                                                            </span>
-				                                                                            <span class="tab-title">${childrenNode.nodeLink.linkName}</span></div>
+				                                                                            <span class="tab-title">${childrenNode.nodeLink.linkName}</span>
+				                                                                        </div>
 				                                                                    </a>
                                                             				
                                                             					</li>
@@ -70,7 +74,10 @@
 	                                                                        	
 	                                                                        		<div class="col-sm-3 tab__category">
 	                                                                        			
-	                                                                        		  	<cms:component component="${grandChildrenNode.nodeLink}" element="span" class="category-top-link"/>
+	                                                                        			<div class="category-top-link">
+		                                                                                    <h6>${grandChildrenNode.nodeLink.linkName}</h6>
+		                                                                              </div>
+	                                                                        		  	<!-- <cms:component component="${grandChildrenNode.nodeLink}" element="span" class="category-top-link"/> -->
 	                                                                                
 		                                                                                <ul class="category-links">
 		                                                                                	<c:forEach items="${grandChildrenNode.links}" var="grandChildrenLinks">
@@ -111,7 +118,10 @@
 	                                                                        <h6>Tools &amp; Advice</h6>
 	                                                                        <ul class="tools-list">
 	                                                                            <li class=" tools-item">
-	                                                                            	<cms:component component="${childrenNode.nodeToolAdviceLink}" element="div"/>
+	                                                                            	<c:forEach items="${childrenNode.toolAdviceLinks}" var="tooladviceLink" varStatus="linkLoop">
+	                                                                            		<cms:component component="${tooladviceLink}"/>
+	                                                                            	</c:forEach>
+	                                                                            	
 	                                                                            </li>
 	                                                                        </ul>
 	                                                                    </div>

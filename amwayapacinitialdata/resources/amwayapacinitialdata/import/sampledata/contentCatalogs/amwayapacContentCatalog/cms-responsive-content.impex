@@ -471,7 +471,9 @@ INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url
 ;;Nav_Nutrition_Energy_LowCarbLink;Navigation Bar- Energy- Low Carb Link;/;Nav_Nutrition_Energy_LowCarbLink;Nav_Nutrition_Energy_LowCarbLink;;;;
 ;;Nav_Nutrition_Energy_ViewAllLink;Navigation Bar- Energy- View All Link;/;Nav_Nutrition_Energy_ViewAllLink;Nav_Nutrition_Energy_ViewAllLink;;;;
 
-;;Nav_Nutrition_ToolsAdviceLink;Navigation Bar- Nutrition- Tools and Advice Link;/;Nav_Nutrition_ToolsAdviceLink;Nav_Nutrition_ToolsAdviceLink;;;;
+;;Nav_Nutrition_ToolsAdvice_SkincareLink;Navigation Bar- Nutrition- Tools and Advice Skincare Recommender Link;/;Nav_Nutrition_ToolsAdvice_SkincareLink;Nav_Nutrition_ToolsAdvice_SkincareLink;;;;
+;;Nav_Nutrition_ToolsAdvice_DittoLink;Navigation Bar- Nutrition- Tools and Advice Ditto Scheduled Link;/ditto;Nav_Nutrition_ToolsAdvice_DittoLink;Nav_Nutrition_ToolsAdvice_DittoLink;;;;
+
 
 ;;Nav_Beauty_SkinCareLink;Navigation Bar- Beauty- Skin Care Link;/;Nav_Beauty_SkinCareLink;Nav_Beauty_SkinCareLink;;;;
 ;;Nav_Beauty_ColourLink;Navigation Bar- Beauty- Colour Link;/;Nav_Beauty_ColourLink;Nav_Beauty_ColourLink;;;;
@@ -498,7 +500,8 @@ INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url
 ;;Nav_Beauty_BeautyAccessories_PowderCompactLink;Navigation Bar- Beauty- Beauty Accessories- Powder Compact Link;/;Nav_Beauty_BeautyAccessories_PowderCompactLink;Nav_Beauty_BeautyAccessories_PowderCompactLink;;;;
 ;;Nav_Beauty_BeautyAccessories_ViewAllLink;Navigation Bar- Beauty- Beauty Accessories- View All Link;/;Nav_Beauty_BeautyAccessories_ViewAllLink;Nav_Beauty_BeautyAccessories_ViewAllLink;;;;
 
-;;Nav_Beauty_ToolsAdviceLink;Navigation Bar- Beauty- Tools and Advice Link;/;Nav_Beauty_ToolsAdviceLink;Nav_Beauty_ToolsAdviceLink;;;;
+;;Nav_Beauty_ToolsAdvice_SkincareLink;Navigation Bar- Beauty- Tools and Advice Skincare Recommender Link;/;Nav_Beauty_ToolsAdvice_SkincareLink;Nav_Beauty_ToolsAdvice_SkincareLink;;;;
+;;Nav_Beauty_ToolsAdvice_DittoLink;Navigation Bar- Beauty- Tools and Advice Ditto Scheduled Link;/;Nav_Beauty_ToolsAdvice_DittoLink;Nav_Beauty_ToolsAdvice_DittoLink;;;;
 
 ;;Nav_BathAndBody_HairCareLink;Navigation Bar- Bath and Body- Hair Care Link;/;Nav_BathAndBody_HairCareLink;Nav_BathAndBody_HairCareLink;;;;
 ;;Nav_BathAndBody_BodyCareLink;Navigation Bar- Bath and Body- Body Care Link;/;Nav_BathAndBody_BodyCareLink;Nav_BathAndBody_BodyCareLink;;;;
@@ -524,7 +527,8 @@ INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url
 ;;Nav_BathAndBody_SunAndTanning_SelfTanMousseLink;Navigation Bar- Bath and Body- Sun and Tanning- Self Tan Mousse Link;/;Nav_BathAndBody_SunAndTanning_SelfTanMousseLink;Nav_BathAndBody_SunAndTanning_SelfTanMousseLink;;;;
 ;;Nav_BathAndBody_SunAndTanning_ViewAllLink;Navigation Bar- Bath and Body- Sun and Tanning- View All Link;/;Nav_BathAndBody_SunAndTanning_ViewAllLink;Nav_BathAndBody_SunAndTanning_ViewAllLink;;;;
 
-;;Nav_BathAndBody_ToolsAdviceLink;Navigation Bar- BathAndBody- Tools and Advice Link;/;Nav_BathAndBody_ToolsAdviceLink;Nav_BathAndBody_ToolsAdviceLink;;;;
+;;Nav_BathAndBody_ToolsAdvice_QuickProductLink;Navigation Bar- BathAndBody- Tools and Advice Quick Product Link;/;Nav_BathAndBody_ToolsAdvice_QuickProductLink;Nav_BathAndBody_ToolsAdvice_QuickProductLink;;;;
+;;Nav_BathAndBody_ToolsAdvice_DittoScheduledLink;Navigation Bar- BathAndBody- Tools and Advice Ditto Scheduled Link;/;Nav_BathAndBody_ToolsAdvice_DittoScheduledLink;Nav_BathAndBody_ToolsAdvice_DittoScheduledLink;;;;
 
 ;;Nav_Home_HouseHoldLink;Navigation Bar- Home- Household Hygiene Link;/;Nav_Home_HouseHoldLink;Nav_Home_HouseHoldLink;;;;
 ;;Nav_Home_LaundryLink;Navigation Bar- Home- Laundry Hygiene Link;/;Nav_Home_LaundryLink;Nav_Home_LaundryLink;;;;
@@ -550,5 +554,6 @@ INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url
 ;;Nav_Home_Cookware_ReplacementPartsLink;Navigation Bar- Home- Cookware- Replacement Parts Link;/;Nav_Home_Cookware_ReplacementPartsLink;Nav_Home_Cookware_ReplacementPartsLink;;;;
 ;;Nav_Home_Cookware_ViewAllLink;Navigation Bar- Home- Cookware- Replacement Parts Link;/;Nav_Home_Cookware_ViewAllLink;Nav_Home_Cookware_ViewAllLink;;;;
 
-;;Nav_Home_ToolsAdviceLink;Navigation Bar- Home- Tools and Advice Link;/;Nav_Home_ToolsAdviceLink;Nav_Home_ToolsAdviceLink;;;;
+;;Nav_Home_ToolsAdvice_QuickProductLink;Navigation Bar- Home- Tools and Advice Quick Product Link;/;Nav_Home_ToolsAdvice_QuickProductLink;Nav_Home_ToolsAdvice_QuickProductLink;;;;
+;;Nav_Home_ToolsAdvice_DittoScheduledLink;Navigation Bar- Home- Tools and Advice Ditto Scheduled Link;/;Nav_Home_ToolsAdvice_DittoScheduledLink;Nav_Home_ToolsAdvice_DittoScheduledLink;;;;
 

@@ -8,9 +8,9 @@
 
   <main>
   			
-		            <cms:pageSlot position="Section1" var="component">
-								        <cms:component component="${component}"/>
-					</cms:pageSlot>
+            <cms:pageSlot position="Section1" var="component">
+						        <cms:component component="${component}"/>
+			</cms:pageSlot>
             
             <div class="container-fluid main-container">
             		<cms:pageSlot position="Section2" var="component">

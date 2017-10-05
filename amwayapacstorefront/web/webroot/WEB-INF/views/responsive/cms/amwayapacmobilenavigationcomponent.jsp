@@ -109,7 +109,9 @@
                                                                 id="navMenuMobToolsCollapse${nodelinkname}">
                                                                 <div class="list-wrapper">
                                                                     <li>
-                                                                    		<cms:component component="${childrenNode.nodeToolAdviceLink}" element="div"/>
+                                                                    		<c:forEach items="${childrenNode.toolAdviceLinks}" var="tooladviceLink" varStatus="linkLoop">
+	                                                                            		<cms:component component="${tooladviceLink}" element="div"/>
+	                                                                      </c:forEach>
                                                                     </li>
                                                                 </div>
                                                             </ul>

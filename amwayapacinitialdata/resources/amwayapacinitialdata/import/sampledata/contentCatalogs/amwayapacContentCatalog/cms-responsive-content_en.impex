@@ -370,7 +370,8 @@ UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$
 ;;Nav_Nutrition_Energy_SugarFreeLink;"Sugar-Free";Nav_Nutrition_Energy_SugarFreeLink
 ;;Nav_Nutrition_Energy_LowCarbLink;"Low-Carb";Nav_Nutrition_Energy_LowCarbLink
 ;;Nav_Nutrition_Energy_ViewAllLink;"View All";Nav_Nutrition_Energy_ViewAllLink
-;;Nav_Nutrition_ToolsAdviceLink;"Skincare Recommender Ditto Scheduled Ordering";Nav_Nutrition_ToolsAdviceLink
+;;Nav_Nutrition_ToolsAdvice_SkincareLink;"Skincare Recommender";Nav_Nutrition_ToolsAdvice_SkincareLink
+;;Nav_Nutrition_ToolsAdvice_DittoLink;"Ditto Scheduled Ordering";Nav_Nutrition_ToolsAdvice_DittoLink
 
 ;;Nav_Beauty_SkinCareLink;"SKIN CARE";Nav_Beauty_SkinCareLink
 ;;Nav_Beauty_ColourLink;"COLOUR";Nav_Beauty_ColourLink
@@ -392,7 +393,8 @@ UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$
 ;;Nav_Beauty_BeautyAccessories_BrushSetLink;"Brush Set";Nav_Beauty_BeautyAccessories_BrushSetLink
 ;;Nav_Beauty_BeautyAccessories_PowderCompactLink;"Powder Compact";Nav_Beauty_BeautyAccessories_PowderCompactLink
 ;;Nav_Beauty_BeautyAccessories_ViewAllLink;"View All";Nav_Beauty_BeautyAccessories_ViewAllLink
-;;Nav_Beauty_ToolsAdviceLink;"Skincare Recommender Ditto Scheduled Ordering";Nav_Beauty_ToolsAdviceLink
+;;Nav_Beauty_ToolsAdvice_SkincareLink;"Skincare Recommender";Nav_Beauty_ToolsAdvice_SkincareLink
+;;Nav_Beauty_ToolsAdvice_DittoLink;"Ditto Scheduled Ordering";Nav_Beauty_ToolsAdvice_DittoLink
 
 ;;Nav_BathAndBody_HairCareLink;"HAIR CARE";Nav_BathAndBody_HairCareLink;
 ;;Nav_BathAndBody_BodyCareLink;"BODY CARE";Nav_BathAndBody_BodyCareLink;
@@ -413,7 +415,8 @@ UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$
 ;;Nav_BathAndBody_SunAndTanning_SunscreenLotionLink;"Sunscreen Lotion";Nav_BathAndBody_SunAndTanning_SunscreenLotionLink;
 ;;Nav_BathAndBody_SunAndTanning_SelfTanMousseLink;"Self Tan mousse";Nav_BathAndBody_SunAndTanning_SelfTanMousseLink;
 ;;Nav_BathAndBody_SunAndTanning_ViewAllLink;"View All";Nav_BathAndBody_SunAndTanning_ViewAllLink;
-;;Nav_BathAndBody_ToolsAdviceLink;"Quck Product Checklists Ditto Scheduled Ordering";Nav_BathAndBody_ToolsAdviceLink
+;;Nav_BathAndBody_ToolsAdvice_QuickProductLink;"Quick Product Checklists";Nav_BathAndBody_ToolsAdvice_QuickProductLink
+;;Nav_BathAndBody_ToolsAdvice_DittoScheduledLink;"Ditto Scheduled Ordering";Nav_BathAndBody_ToolsAdvice_DittoScheduledLink
 
 ;;Nav_Home_HouseHoldLink;"HOUSEHOLD HYGIENE";Nav_Home_HouseHoldLink
 ;;Nav_Home_LaundryLink;"LAUNDRY";Nav_Home_LaundryLink
@@ -434,38 +437,39 @@ UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$
 ;;Nav_Home_Cookware_PansLink;"Pans";Nav_Home_Cookware_PansLink
 ;;Nav_Home_Cookware_ReplacementPartsLink;"Replacement Parts";Nav_Home_Cookware_ReplacementPartsLink
 ;;Nav_Home_Cookware_ViewAllLink;"View All";Nav_Home_Cookware_ViewAllLink
-;;Nav_Home_ToolsAdviceLink;"Quck Product Checklists Ditto Scheduled Ordering";Nav_Home_ToolsAdviceLink
+;;Nav_Home_ToolsAdvice_QuickProductLink;"Quick Product Checklists";Nav_Home_ToolsAdvice_QuickProductLink
+;;Nav_Home_ToolsAdvice_DittoScheduledLink;"Ditto Scheduled Ordering";Nav_Home_ToolsAdvice_DittoScheduledLink
 
 
-UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];simpleBannerComponents(&componentRef);nodeLink(&componentRef);nodeTitle(&componentRef);nodeImg(code, $contentCV)[lang=$lang];nodeToolAdviceLink(&componentRef)
-;;ShopNavNode;;Nav_ShopLink;;;;
-;;BusinessCenterNavNode;;Nav_BusinessCenterLink;;;;
-;;AboutNavNode;;Nav_AboutAmwayLink;;;;
-;;EducationNavNode;;Nav_EducationLink;;;;
+UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];simpleBannerComponents(&componentRef);nodeLink(&componentRef);nodeTitle(&componentRef);nodeImg(code, $contentCV)[lang=$lang];toolAdviceLinks(&componentRef)
+;;ShopNavNode;;Nav_ShopLink;;;
+;;BusinessCenterNavNode;;Nav_BusinessCenterLink;;;
+;;AboutNavNode;;Nav_AboutAmwayLink;;;
+;;EducationNavNode;;Nav_EducationLink;;;
 
-;;NutritionNavNode;NavBarNutrition1SBComponent,NavBarNutrition2SBComponent,NavBarNutrition3SBComponent,NavBarNutrition4SBComponent;Nav_Shop_NutritionLink;;navBarNutritionImg;Nav_Nutrition_ToolsAdviceLink;
-;;VitaminNutritionNavNode;;Nav_Nutrition_VitaminsLink;;;;
-;;WeightNutritionNavNode;;Nav_Nutrition_WeightLink;;;;
-;;SportsNutritionNavNode;;Nav_Nutrition_SportsLink;;;;
-;;EnergyNutritionNavNode;;Nav_Nutrition_EnergyLink;;;;
+;;NutritionNavNode;NavBarNutrition1SBComponent,NavBarNutrition2SBComponent,NavBarNutrition3SBComponent,NavBarNutrition4SBComponent;Nav_Shop_NutritionLink;;navBarNutritionImg;Nav_Nutrition_ToolsAdvice_SkincareLink,Nav_Nutrition_ToolsAdvice_DittoLink
+;;VitaminNutritionNavNode;;Nav_Nutrition_VitaminsLink;;;
+;;WeightNutritionNavNode;;Nav_Nutrition_WeightLink;;;
+;;SportsNutritionNavNode;;Nav_Nutrition_SportsLink;;;
+;;EnergyNutritionNavNode;;Nav_Nutrition_EnergyLink;;;
 
-;;BeautyNavNode;NavBarBeautySBComponent;Nav_Shop_BeautyLink;;navBarBeautyImg;Nav_Beauty_ToolsAdviceLink;
-;;SkinCareBeautyNavNode;;Nav_Beauty_SkinCareLink;;;;
-;;ColourBeautyNavNode;;Nav_Beauty_ColourLink;;;;
-;;MakeUpBeautyNavNode;;Nav_Beauty_MakeUpLink;;;;
-;;BeautyAccessoriesBeautyNavNode;;Nav_Beauty_BeautyAccessoriesLink;;;;
+;;BeautyNavNode;NavBarBeautySBComponent;Nav_Shop_BeautyLink;;navBarBeautyImg;Nav_Beauty_ToolsAdvice_SkincareLink,Nav_Beauty_ToolsAdvice_DittoLink
+;;SkinCareBeautyNavNode;;Nav_Beauty_SkinCareLink;;;
+;;ColourBeautyNavNode;;Nav_Beauty_ColourLink;;;
+;;MakeUpBeautyNavNode;;Nav_Beauty_MakeUpLink;;;
+;;BeautyAccessoriesBeautyNavNode;;Nav_Beauty_BeautyAccessoriesLink;;;
 
-;;BathAndBodyNavNode;NavBarBathAndBodySB1Component,NavBarBathAndBodySB2Component,NavBarBathAndBodySB3Component,NavBarBathAndBodySB4Component;Nav_Shop_BathBodyLink;;navBarBathAndBodyImg;Nav_BathAndBody_ToolsAdviceLink;
-;;HairCareBathAndBodyNavNode;;Nav_BathAndBody_HairCareLink;;;;
-;;BodyCareBathAndBodyNavNode;;Nav_BathAndBody_BodyCareLink;;;;
-;;OralCareBathAndBodyNavNode;;Nav_BathAndBody_OralCareLink;;;;
-;;SunAndTanningBathAndBodyNavNode;;Nav_BathAndBody_SunAndTanningLink;;;;
+;;BathAndBodyNavNode;NavBarBathAndBodySB1Component,NavBarBathAndBodySB2Component,NavBarBathAndBodySB3Component,NavBarBathAndBodySB4Component;Nav_Shop_BathBodyLink;;navBarBathAndBodyImg;Nav_BathAndBody_ToolsAdvice_QuickProductLink,Nav_BathAndBody_ToolsAdvice_DittoScheduledLink
+;;HairCareBathAndBodyNavNode;;Nav_BathAndBody_HairCareLink;;;
+;;BodyCareBathAndBodyNavNode;;Nav_BathAndBody_BodyCareLink;;;
+;;OralCareBathAndBodyNavNode;;Nav_BathAndBody_OralCareLink;;;
+;;SunAndTanningBathAndBodyNavNode;;Nav_BathAndBody_SunAndTanningLink;;;
 
-;;HomeNavNode;NavBarHomeSB1Component,NavBarHomeSB2Component,NavBarHomeSB3Component,NavBarHomeSB4Component;Nav_Shop_HomeLink;;navBarHomeImg;Nav_Home_ToolsAdviceLink;
-;;HouseHoldHomeNavNode;;Nav_Home_HouseHoldLink;;;;
-;;LaundryHomeNavNode;;Nav_Home_LaundryLink;;;;
-;;WaterTreatmentHomeNavNode;;Nav_Home_WaterTreatmentLink;;;;
-;;CookwareHomeNavNode;;Nav_Home_CookwareLink;;;;
+;;HomeNavNode;NavBarHomeSB1Component,NavBarHomeSB2Component,NavBarHomeSB3Component,NavBarHomeSB4Component;Nav_Shop_HomeLink;;navBarHomeImg;Nav_Home_ToolsAdvice_QuickProductLink,Nav_Home_ToolsAdvice_DittoScheduledLink
+;;HouseHoldHomeNavNode;;Nav_Home_HouseHoldLink;;;
+;;LaundryHomeNavNode;;Nav_Home_LaundryLink;;;
+;;WaterTreatmentHomeNavNode;;Nav_Home_WaterTreatmentLink;;;
+;;CookwareHomeNavNode;;Nav_Home_CookwareLink;;;
 
 
 

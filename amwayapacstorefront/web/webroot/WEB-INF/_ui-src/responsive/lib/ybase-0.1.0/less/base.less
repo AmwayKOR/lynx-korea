@@ -282,8 +282,8 @@ header.main-header {
 							.menu-nav-list {
 								.nav-list-item {
 									.overlay-menu-component-desktop-wrapper {
-										div.overlay-menu-toggle-desktop {
-											a {
+										a.overlay-menu-toggle-desktop {
+											
 												line-height: 22.5px;
 												margin: 0;
 												font-size: 20px;
@@ -291,31 +291,21 @@ header.main-header {
 												.button-text {
 													font-weight: bold;
 												}
-											}
+											
 										}
 									}
-									div, a {
-											font-size: 18px;
-											font-weight: @weight600;
-											color: @blue_1;
-											&:hover {
-												color: @blue_2;
-											}
-											@media (max-width:880px) {
-												padding: 20px 7px;
-											}
-											a {
-												font-size: 18px;
-												font-weight: @weight600;
-												color: @blue_1;
-												&:hover {
-													color: @blue_2;
-												}
-												@media (max-width:880px) {
-													padding: 20px 7px;
-												}
-											}
+									a {
+										font-size: 18px;
+										font-weight: @weight600;
+										color: @blue_1;
+										&:hover {
+											color: @blue_2;
+										}
+										@media (max-width:880px) {
+											padding: 20px 7px;
+										}
 									}
+									
 								}
 							}
 							left: 0;

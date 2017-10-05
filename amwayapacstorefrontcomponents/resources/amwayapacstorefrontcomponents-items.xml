@@ -73,6 +73,14 @@
 					<modifiers read="true" write="true" optional="true" partof="true"/>
 				</targetElement>
 		</relation>
+		<relation code="NavigationNodeToolAdviceCMSLinkRelation" localized="false" generate="true" autocreate="true">
+				<sourceElement qualifier="navigationNodeComponent" type="CMSNavigationNode" cardinality="one" >
+					<modifiers read="true" write="true" initial="false" optional="true" search="true"/>
+				</sourceElement>
+				<targetElement qualifier="toolAdviceLinks" type="CMSLinkComponent" cardinality="many" collectiontype="collection">
+					<modifiers read="true" write="true" optional="true" partof="true"/>
+				</targetElement>
+		</relation>
 	</relations>
 		
     <itemtypes>
@@ -257,9 +265,6 @@
 					<persistence type="property" />
 				</attribute>
 				<attribute qualifier="nodeImg" generate="true" autocreate="true" type="localized:Media">
-					<persistence type="property" />
-				</attribute>
-				<attribute qualifier="nodeToolAdviceLink" generate="true" autocreate="true" type="CMSLinkComponent">
 					<persistence type="property" />
 				</attribute>
 			</attributes>
