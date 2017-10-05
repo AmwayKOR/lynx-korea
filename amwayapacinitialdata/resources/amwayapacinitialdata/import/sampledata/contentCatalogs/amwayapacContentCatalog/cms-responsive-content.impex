@@ -562,13 +562,17 @@ INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url
 ################## category page shop by category component
 
 INSERT_UPDATE AmwayApacShopByCategoryCollectionComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;shopByCategoryComponents(&componentRef)
-;;shopByCategoryCollectionComponent;shop by category collection component;shopByCategoryCollectionComponent;vitaminsAndSupplementsComponent,weightManagementComponent,sportsNutritionComponent,enerygyDrinksComponent,vitaminsAndSupplementsComponent,weightManagementComponent,sportsNutritionComponent
+;;shopByCategoryCollectionComponent;shop by category collection component;shopByCategoryCollectionComponent;vitaminsAndSupplementsComponent,weightManagementComponent,sportsNutritionComponent,enerygyDrinksComponent,vitaminsAndSupplementsComponent1,weightManagementComponent1,sportsNutritionComponent1
 
 INSERT_UPDATE AmwayApacShopByCategoryComponent;$contentCV[unique=true];uid[unique=true];name;link(&componentRef);banner(&componentRef);&componentRef
 ;;vitaminsAndSupplementsComponent;vitamins and supplements component;vitaminsAndSupplementsLinkComponent;vitaminsAndSupplementsBannerComponent;vitaminsAndSupplementsComponent
 ;;weightManagementComponent;weight management component;weightManagementLinkComponent;weightManagementBannerComponent;weightManagementComponent
 ;;sportsNutritionComponent;sports nutrition component;sportsNutritionLinkComponent;sportsNutritionBannerComponent;sportsNutritionComponent
 ;;enerygyDrinksComponent;energy drinks component;energyDrinksLinkComponent;energyDrinksBannerComponent;enerygyDrinksComponent
+;;vitaminsAndSupplementsComponent1;vitamins and supplements component copy;vitaminsAndSupplementsLinkComponent;vitaminsAndSupplementsBannerComponent;vitaminsAndSupplementsComponent1
+;;weightManagementComponent1;weight management component copy;weightManagementLinkComponent;weightManagementBannerComponent;weightManagementComponent1
+;;sportsNutritionComponent1;sports nutrition component copy;sportsNutritionLinkComponent;sportsNutritionBannerComponent;sportsNutritionComponent1
+
 
 INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;target(code)[default='sameWindow'];category(code, $productCV)
 ;;vitaminsAndSupplementsLinkComponent;vitamins and supplements category link;vitaminsAndSupplementsLinkComponent;;vitaminsAndSupplements
@@ -639,3 +643,24 @@ INSERT_UPDATE AmwayAPACPathToSuccessPitchPerfectComponent;$contentCV[unique=true
 ;;xsSportsSuccessStoryComponent;Amway Pitch Perfect;xsSportsSuccessStoryComponent;xsSportsSuccessStoryBannerComponent;xsSportsSuccessStoryLink;xsSportsSuccessStoryParagraphComponent
 	
 
+
+
+################## category page brand background image and banner component
+
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;ExperienceBrandsContentSlot;ExperienceBrandsTitleComponent
+;;BrandBackgroundImageBannerContentSlot;ExperienceBrandBackgroundImageAndBannerComponent
+
+INSERT_UPDATE AmwayAPACOurNewProductComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;
+;;ExperienceBrandsTitleComponent;experience brands title component;ExperienceBrandsTitleComponent;		
+
+
+INSERT_UPDATE AmwayApacBackgroupImageBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink;shopnow(&componentRef);description(&componentRef)
+;;ExperienceBrandsBackgroundImageAndBannerComponent;experience brand background image and banner component;ExperienceBrandBackgroundImageAndBannerComponent;"/";ExperienceBrandsShopNowLinkComponents;ExperienceBrandsDescriptionParagraphComponent	
+
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&componentRef;target(code)[default='sameWindow'];
+;;ExperienceBrandsShopNowLinkComponent;experience brands show now link component;"/";ExperienceBrandsShopNowLinkComponents;;;;
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
+;;ExperienceBrandsDescriptionParagraphComponent;ExperienceBrandsDescriptionParagraphComponent

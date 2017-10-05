@@ -467,6 +467,7 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 ;TopBannerContentSlot;;;
 ;ShopByCategoryContentSlot;;;
 ;ExperienceBrandsContentSlot;;;
+;BrandBackgroundImageBannerContentSlot;;;
 ;SuccessStoryContentSlot1;;;
 ;SuccessStoryContentSlot2;;;
 ;ToolsAndAdviceContentSlot;;;
@@ -526,6 +527,7 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active
 ;;TopBannerContentSlot;Top banner content slot;true
 ;;ShopByCategoryContentSlot;Shop By category component content slot;true
 ;;ExperienceBrandsContentSlot;Experience brands content slot;true
+;;BrandBackgroundImageBannerContentSlot;Brands background image banner component content slot;true
 ;;SuccessStoryContentSlot1;Success story content slot 1;true
 ;;SuccessStoryContentSlot2;Success story content slot 2;true
 ;;ToolsAndAdviceContentSlot;Tools and advice content slot;true
@@ -825,6 +827,7 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 ;;TopBannerContentSlot-CategoryLandingPage;TopBannerContentSlot;;TopBannerContentSlot;true
 ;;ShopByCategoryContentSlot-CategoryLandingPage;ShopByCategoryContentSlot;;ShopByCategoryContentSlot;true
 ;;ExperienceBrandsContentSlot-CategoryLandingPage;ExperienceBrandsContentSlot;;ExperienceBrandsContentSlot;true
+;;BrandBackgroundImageBannerContentSlot-CategoryLandingPage;BrandBackgroundImageBannerContentSlot;;BrandBackgroundImageBannerContentSlot;true
 ;;SuccessStoryContentSlot1-CategoryLandingPage;SuccessStoryContentSlot1;;SuccessStoryContentSlot1;true
 ;;SuccessStoryContentSlot2-CategoryLandingPage;SuccessStoryContentSlot2;;SuccessStoryContentSlot2;true
 ;;ToolsAndAdviceContentSlot-CategoryLandingPage;ToolsAndAdviceContentSlot;;ToolsAndAdviceContentSlot;true

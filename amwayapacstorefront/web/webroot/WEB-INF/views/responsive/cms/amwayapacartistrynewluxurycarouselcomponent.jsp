@@ -17,6 +17,6 @@
                                 		<cms:component component="${shopnow}"  />
                                 </div>
                                 </div>
-                            <img class="banner__image-sub" src="${media.url}" alt="artistry" />
+                            <img class="banner__image-sub" src="${media.url}" alt="${media.altText}" />
                           </div>
 </div>

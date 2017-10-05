@@ -542,3 +542,29 @@ INSERT_UPDATE AmwayAPACPathToSuccessPitchPerfectComponent;$contentCV[unique=true
 ;;bodyKeySuccessStoryComponent;"New body key";"Try One, Share a Few"
 ;;xsSportsSuccessStoryComponent;"xs sports";"Fuel Your Adventure"
 
+
+
+
+
+################## category page brand background image and banner component
+
+UPDATE AmwayAPACOurNewProductComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang];title2[lang=$lang]
+;;ExperienceBrandsTitleComponent;"Experience our brands";"Lorem ipsum dolor sit amet adipiscing elit sed diam nonummy"
+
+
+UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang]
+;;ExperienceBrandsShopNowLinkComponent;"Shop Now"
+
+UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true]  ;content[lang=$lang]
+								   ;                       ;ExperienceBrandsDescriptionParagraphComponent;"<span class=""banner-sub-title""><span>Duis autem vel eum iriure dolor in hendrerit<br>in vulputate velit esse molestie consequat</span></span>"
+
+
+INSERT_UPDATE AmwayAPACOurNewProductComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;
+;;ExperienceBrandsTitleComponent;experience brands title component;ExperienceBrandsTitleComponent;		
+
+INSERT_UPDATE AmwayApacBackgroupImageBannerComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang];$picture[lang=$lang];backgroudImage(code, $contentCV)
+;;ExperienceBrandsBackgroundImageAndBannerComponent;"Nutrilite headline<br>goes here";ExperienceBrandsBannerMedia;ExperienceBrandsBackgroundImage
+
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;folder(qualifier)[default='images'];altText
+;;ExperienceBrandsBannerMedia;$siteResource/experience-brands-images.png;;ExperienceBrandsBannerMedia;;"Experience our brands"
+;;ExperienceBrandsBackgroundImage;$siteResource/experience-brands-bg.jpg;;ExperienceBrandsBackgroundImage;;"Nutrilite headline"

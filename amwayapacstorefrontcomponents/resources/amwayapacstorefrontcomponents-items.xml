@@ -252,5 +252,14 @@
 			jaloclass="com.amway.apac.core.jalo.components.AmwayApacToolsAndAdviceComponent">
 		</itemtype>
 		
+		<itemtype code="AmwayApacBackgroupImageBannerComponent" generate="true" extends="AmwayAPACArtistryNewLuxuryCarouselComponent" autocreate="true" 
+			jaloclass="com.amway.apac.core.jalo.components.AmwayApacBackgroupImageBannerComponent">
+			<attributes>
+				<attribute qualifier="backgroudImage" generate="true" autocreate="true" type="localized:Media">
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		
     </itemtypes>
 </items>
