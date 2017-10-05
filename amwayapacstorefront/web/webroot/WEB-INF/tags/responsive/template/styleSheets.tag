@@ -18,8 +18,7 @@
 		<link rel="stylesheet" href="${themeResourcePath}/css/owl.carousel.css">
 		<link rel="stylesheet" href="${themeResourcePath}/css/owl.theme.css">
 		<link rel="stylesheet" type="text/css" href="${themeResourcePath}/css/style.css"/>
-		
-		
+		<link rel="stylesheet" type="text/css" href="${themeResourcePath}/css/changes.css"/>
 		
 		<%--  AddOn Common CSS files --%>
 		<c:forEach items="${addOnCommonCssPaths}" var="addOnCommonCss">

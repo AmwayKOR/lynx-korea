@@ -247,6 +247,7 @@
 				<!-- Give the input bundle of less files-->
 				<fileset dir="${ext.amwayapacstorefront.path}/web/webroot/WEB-INF/_ui-src/responsive/themes/">
 					<include name="**/style.less"/>
+					<include name="**/changes.less"/>
 				</fileset>
 				<arg value="-jar"/>
 				<arg path="${tool.rhino}"/>
