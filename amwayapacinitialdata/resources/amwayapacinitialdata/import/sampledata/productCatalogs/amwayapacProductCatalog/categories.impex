@@ -136,9 +136,15 @@ INSERT_UPDATE Category;code[unique=true];allowedPrincipals(uid)[default='custome
 ;businessForms
 ;multimedia
 ;awards&pins
+;vitaminsAndSupplements
+;sportsNutrition
+;energyDrinks
 
 # Insert Category Structure
 INSERT_UPDATE CategoryCategoryRelation;$categories;$supercategories
+										 ;energyDrinks						;root
+										 ;sportsNutrition					;root
+										 ;vitaminsAndSupplements			;root
 						                 ;nutrition                         ;root    
 						                 ;beauty                            ;root    
 						                 ;personalcare                      ;root    

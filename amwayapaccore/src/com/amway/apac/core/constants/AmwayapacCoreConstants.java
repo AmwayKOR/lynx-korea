@@ -42,4 +42,9 @@ public final class AmwayapacCoreConstants extends GeneratedAmwayapacCoreConstant
 	 */
 	public static final String TARGET_STRING = "target";
 
+	/**
+	 * int constant - 100
+	 */
+	public static final int HUNDRED_INT = 100;
+
 }

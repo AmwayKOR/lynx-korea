@@ -244,3 +244,6 @@ UPDATE Category;code[unique=true];name[lang=$lang];$catalogVersion
 ;artistrysignaturecolor;ARTISTRY SIGNATURE COLOR 
 ;personalshopperscatalogue;Personal Shoppers Catalogue
 ;amwaylifestylecatalogue;Amway Lifestyle Catalogue
+;vitaminsAndSupplements;Vitamins & Supplements
+;sportsNutrition;Sports Nutrition
+;energyDrinks;Energy Drinks

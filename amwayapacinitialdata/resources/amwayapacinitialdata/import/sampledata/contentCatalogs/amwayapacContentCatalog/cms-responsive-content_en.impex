@@ -472,5 +472,48 @@ UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];simpleBannerCo
 ;;CookwareHomeNavNode;;Nav_Home_CookwareLink;;;
 
 
+################## category page shop by category component
+
+UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang]
+;;vitaminsAndSupplementsLinkComponent;"Vitamins & Supplements"
+;;weightManagementLinkComponent;"Weight Management"
+;;sportsNutritionLinkComponent;"Sports Nutrition"
+;;energyDrinksLinkComponent;"Energy Drinks"
 
 
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;folder(qualifier)[default='images'];altText
+;;vitaminsAndSupplementsMedia;$siteResource/layer-127.png;;vitaminsAndSupplementsMedia;;"Vitamins & Supplements"
+;;weightManagementMedia;$siteResource/layer-123.png;;weightManagementMedia;;"Weight Management"
+;;sportsNutritionMedia;$siteResource/layer-126.png;;sportsNutritionMedia;;"Sports Nutrition"
+;;energyDrinksMedia;$siteResource/layer-131.png;;energyDrinksMedia;;"Energy Drinks"
+
+UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
+;;vitaminsAndSupplementsBannerComponent;vitaminsAndSupplementsMedia	
+;;weightManagementBannerComponent;weightManagementMedia	
+;;sportsNutritionBannerComponent;sportsNutritionMedia	
+;;energyDrinksBannerComponent;energyDrinksMedia	
+
+
+UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true]  ;content[lang=$lang]
+								   ;                       ;ShopByCategoryTitleParagraphComponent;"<div class=""row simpleimagecomponent""><div class=""amway-theme""><div class=""full-width-title-component""><h2 class=""full-width-title-component__title"">SHOP BY CATEGORY</h2><h4 class=""full-width-title-component__sub-title"">Lorem ipsum dolor sit amet consectetuer adipiscing elit sed diam</h4></div></div></div>"
+
+								   
+################## category page tools and advice component
+
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;folder(qualifier)[default='images'];altText
+;;nutriliteGuideMedia;$siteResource/swatches-tools-beads.png;;nutriliteGuideMedia;;"Your Guide to Nutrilite Kids Supplements"
+;;bodyKeyChoicesMedia;$siteResource/swatches-tools-imagination.png;;bodyKeyChoicesMedia;;"The BodyKey™4 Plan: Better Choices Everyday"
+;;nutriliteFindSupplementsMedia;$siteResource/swatches-tools-liquid.png;;nutriliteFindSupplementsMedia;;"Nutrilite: Find the Right Supplements"
+
+UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
+;;nutriliteGuideBannerComponent;nutriliteGuideMedia	
+;;bodyKeyChoicesBannerComponent;bodyKeyChoicesMedia	
+;;nutriliteFindSupplementsBannerComponent;nutriliteFindSupplementsMedia	
+
+
+UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true]  ;content[lang=$lang]
+								   ;                       ;toolsAndAdviceTitleTextComponent;"<div class=""carousel-title-container""><h2 class=""carousel-title"">Tools &amp; Advice</h2></div>"
+								   ;                       ;nutriliteGuideTextComponent;"<span>Your Guide to Nutrilite Kids Supplements</span>"
+								   ;                       ;bodyKeyChoicesTextComponent;"<span>The BodyKey™4 Plan: Better Choices Everyday</span>"
+								   ;                       ;nutriliteFindSupplementsTextComponent;"<span>Nutrilite: Find the Right Supplements</span>"
+								   

@@ -27,7 +27,7 @@
                                                 <span>Duis autem vel eum iriure dolor in hendrerit in diam vulputate lorem velit esse molestie consequat</span></span>
                                         </div>
                                     </div>
-                                    <div class="banner-button-wrap" z <a href="#" class="banner-button-link">
+                                    <div class="banner-button-wrap"> <a href="#" class="banner-button-link">
                                         <button class="btn-blue-white">
                                             <span class="btn-text">view products</span></button>
                                         </a>
@@ -41,50 +41,9 @@
             <div class="container-fluid main-container">
                 <div class="row ">
                     <div class="col-md-12 ">
-                        <div class="row simpleimagecomponent">
-                            <div class="amway-theme">
-                                <div class="full-width-title-component">
-                                    <h2 class="full-width-title-component__title">SHOP BY CATEGORY</h2>
-                                    <h4 class="full-width-title-component__sub-title">Lorem ipsum dolor sit amet consectetuer adipiscing elit sed diam</h4></div>
-                            </div>
-                        </div>
-                        <div class="simpleimagecomponent pcp-prod row">
-                            <a class="primary-link category-item col-sm-6 col-md-3" href="">
-                                <img src="${themeResourcePath}/images/layer-127.png" />
-                                <label>
-                                    <span class="category-name">Vitamins &amp; Supplements</span></label>
-                            </a>
-                            <a class="primary-link category-item col-sm-6 col-md-3" href="">
-                                <img src="${themeResourcePath}/images/layer-123.png" />
-                                <label>
-                                    <span class="category-name">WEIGHT MANAGEMENT</span></label>
-                            </a>
-                            <a class="primary-link category-item col-sm-6 col-md-3" href="">
-                                <img src="${themeResourcePath}/images/layer-126.png" />
-                                <label>
-                                    <span class="category-name">SPORTS NUTRITION</span></label>
-                            </a>
-                            <a class="primary-link category-item col-sm-6 col-md-3" href="">
-                                <img src="${themeResourcePath}/images/layer-131.png" />
-                                <label>
-                                    <span class="category-name">ENERGY DRINKS</span></label>
-                            </a>
-                            <a class="primary-link category-item col-sm-6 col-md-3" href="">
-                                <img src="${themeResourcePath}/images/layer-127.png" />
-                                <label>
-                                    <span class="category-name">Vitamins &amp; Supplements</span></label>
-                            </a>
-                            <a class="primary-link category-item col-sm-6 col-md-3" href="">
-                                <img src="${themeResourcePath}/images/layer-123.png" />
-                                <label>
-                                    <span class="category-name">WEIGHT MANAGEMENT</span></label>
-                            </a>
-                            <a class="primary-link category-item col-sm-6 col-md-3" href="">
-                                <img src="${themeResourcePath}/images/layer-126.png" />
-                                <label>
-                                    <span class="category-name">SPORTS NUTRITION</span></label>
-                            </a>
-                        </div>
+                    	<cms:pageSlot position="ShopByCategoryContentSlot" var="component">
+                    		<cms:component component="${component}" />
+                    	</cms:pageSlot>
                     </div>
                 </div>
             </div>
@@ -161,50 +120,24 @@
                 <div class="row simpleimagecomponent pcp-banner new-advice block">
                     <div class="amway-theme col-xs-12">
                         <div class="three-tile-component">
-                            <div class="carousel-title-container">
-                                <h2 class="carousel-title">Tools &amp; Advice</h2></div>
+                                <cms:pageSlot position="ToolsAndAdviceContentSlot" var="component">
+                    				<cms:component component="${component}" />
+                    			</cms:pageSlot>
                             <div class="row">
                                 <div class="item col-xs-12 col-md-4">
-                                    <div class="full-width-item second-option">
-                                        <div class="item-image-wrap">
-                                            <a href="#" class="primary-link ">
-                                                <img class="desktop-image" src="${themeResourcePath}/images/swatches-tools-beads.png" alt="three tile"></a>
-                                        </div>
-                                        <div class="item-content-wrap">
-                                            <div class="carousel-link-wrap">
-                                                <a href="#" class="primary-link ">
-                                                    <span>Your Guide to Nutrilite Kids Supplements</span></a>
-                                            </div>
-                                        </div>
-                                    </div>
+                                	<cms:pageSlot position="ToolsAndAdviceBannerContentSlot1" var="component">
+                    					<cms:component component="${component}" />
+                    				</cms:pageSlot>
                                 </div>
                                 <div class="item col-xs-12 col-md-4">
-                                    <div class="full-width-item second-option">
-                                        <div class="item-image-wrap">
-                                            <a href="#" class="primary-link ">
-                                                <img class="desktop-image" src="${themeResourcePath}/images/swatches-tools-imagination.png" alt="three tile"></a>
-                                        </div>
-                                        <div class="item-content-wrap">
-                                            <div class="carousel-link-wrap">
-                                                <a href="#" class="primary-link ">
-                                                    <span>The BodyKey&trade;4 Plan: Better Choices Everyday</span></a>
-                                            </div>
-                                        </div>
-                                    </div>
+                                	<cms:pageSlot position="ToolsAndAdviceBannerContentSlot2" var="component">
+                    					<cms:component component="${component}" />
+                    				</cms:pageSlot>
                                 </div>
                                 <div class="item col-xs-12 col-md-4">
-                                    <div class="full-width-item second-option">
-                                        <div class="item-image-wrap">
-                                            <a href="#" class="primary-link ">
-                                                <img class="desktop-image" src="${themeResourcePath}/images/swatches-tools-liquid.png" alt="three tile"></a>
-                                        </div>
-                                        <div class="item-content-wrap">
-                                            <div class="carousel-link-wrap">
-                                                <a href="#" class="primary-link ">
-                                                    <span>Nutrilite: Find the Right Supplements</span></a>
-                                            </div>
-                                        </div>
-                                    </div>
+                                	<cms:pageSlot position="ToolsAndAdviceBannerContentSlot3" var="component">
+                    					<cms:component component="${component}" />
+                    				</cms:pageSlot>
                                 </div>
                             </div>
                         </div>

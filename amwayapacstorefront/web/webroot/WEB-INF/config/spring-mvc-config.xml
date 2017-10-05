@@ -351,4 +351,11 @@
 		<property name="cmsSiteService" ref="cmsSiteService"/>
 		<property name="defaultTheme" value="blue"/>
 	</bean>
+	
+	<alias name="defaultAmwayApacCmsLinkComponentUrlResolver" alias="amwayApacCmsLinkComponentUrlResolver"/>
+	<bean id="defaultAmwayApacCmsLinkComponentUrlResolver" class="com.amway.apac.storefront.url.DefaultAmwayApacCmsLinkComponentUrlResolver">
+		<property name="productUrlConverter" ref="productUrlConverter"/>
+		<property name="categoryUrlConverter" ref="categoryUrlConverter"/>
+	</bean>
+	
 </beans>

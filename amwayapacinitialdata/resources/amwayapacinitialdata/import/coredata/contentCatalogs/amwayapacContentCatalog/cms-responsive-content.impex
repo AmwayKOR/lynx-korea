@@ -469,6 +469,9 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 ;ExperienceBrandsContentSlot;;;
 ;SuccessStoryContentSlot;;;
 ;ToolsAndAdviceContentSlot;;;
+;ToolsAndAdviceBannerContentSlot1;;;
+;ToolsAndAdviceBannerContentSlot2;;;
+;ToolsAndAdviceBannerContentSlot3;;;
 
 # Store Finder/Locator Page Template
 INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='StoreFinderPageTemplate'];validComponentTypes(code);compTypeGroup(code)
@@ -524,6 +527,9 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active
 ;;ExperienceBrandsContentSlot;Experience brands content slot;true
 ;;SuccessStoryContentSlot;Success story content slot;true
 ;;ToolsAndAdviceContentSlot;Tools and advice content slot;true
+;;ToolsAndAdviceBannerContentSlot1;Tools and advice banner content slot 1;true
+;;ToolsAndAdviceBannerContentSlot2;Tools and advice banner content slot 2;true
+;;ToolsAndAdviceBannerContentSlot3;Tools and advice banner content slot 3;true
 
 
 # Bind Content Slots to Page Templates
@@ -819,6 +825,10 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 ;;ExperienceBrandsContentSlot-CategoryLandingPage;ExperienceBrandsContentSlot;;ExperienceBrandsContentSlot;true
 ;;SuccessStoryContentSlot-CategoryLandingPage;SuccessStoryContentSlot;;SuccessStoryContentSlot;true
 ;;ToolsAndAdviceContentSlot-CategoryLandingPage;ToolsAndAdviceContentSlot;;ToolsAndAdviceContentSlot;true
+;;ToolsAndAdviceBannerContentSlot1-CategoryLandingPage;ToolsAndAdviceBannerContentSlot1;;ToolsAndAdviceBannerContentSlot1;true
+;;ToolsAndAdviceBannerContentSlot2-CategoryLandingPage;ToolsAndAdviceBannerContentSlot2;;ToolsAndAdviceBannerContentSlot2;true
+;;ToolsAndAdviceBannerContentSlot3-CategoryLandingPage;ToolsAndAdviceBannerContentSlot3;;ToolsAndAdviceBannerContentSlot3;true
+
 
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='StoreFinderPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
 ;;SiteLogo-StoreFinderPage;SiteLogo;;SiteLogoSlot;true

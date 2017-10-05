@@ -24,6 +24,8 @@ import de.hybris.platform.acceleratorcms.model.components.SubCategoryListCompone
 import de.hybris.platform.cms2.model.contents.components.CMSLinkComponentModel;
 import de.hybris.platform.cms2lib.model.components.ProductCarouselComponentModel;
 
+import com.amway.apac.core.model.components.AmwayApacShopByCategoryComponentModel;
+
 
 /**
  */
@@ -61,6 +63,7 @@ public interface ControllerConstants
 			String DynamicBannerComponent = _Prefix + DynamicBannerComponentModel._TYPECODE + _Suffix; // NOSONAR
 			String SubCategoryListComponent = _Prefix + SubCategoryListComponentModel._TYPECODE + _Suffix; // NOSONAR
 			String SimpleResponsiveBannerComponent = _Prefix + SimpleResponsiveBannerComponentModel._TYPECODE + _Suffix; // NOSONAR
+			String AmwayApacShopByCategoryComponent = _Prefix + AmwayApacShopByCategoryComponentModel._TYPECODE + _Suffix; // NOSONAR
 			String CMSTabParagraphContainer = _Prefix + CMSTabParagraphContainerModel._TYPECODE + _Suffix; // NOSONAR
 		}
 	}
@@ -231,5 +234,10 @@ public interface ControllerConstants
 		 * Shopping lists breabcrumb keys
 		 */
 		String SHOPPING_LISTS_PAGE_BREADCRUMB_KEY = "shopping.lists.page.breadcrumb";
+
+		/**
+		 * String constant linkUrl
+		 */
+		String LINK_URL_STRING = "linkUrl";
 	}
 }

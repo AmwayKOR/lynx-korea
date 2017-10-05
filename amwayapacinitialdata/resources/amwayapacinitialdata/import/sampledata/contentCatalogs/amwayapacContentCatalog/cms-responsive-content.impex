@@ -557,3 +557,60 @@ INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url
 ;;Nav_Home_ToolsAdvice_QuickProductLink;Navigation Bar- Home- Tools and Advice Quick Product Link;/;Nav_Home_ToolsAdvice_QuickProductLink;Nav_Home_ToolsAdvice_QuickProductLink;;;;
 ;;Nav_Home_ToolsAdvice_DittoScheduledLink;Navigation Bar- Home- Tools and Advice Ditto Scheduled Link;/;Nav_Home_ToolsAdvice_DittoScheduledLink;Nav_Home_ToolsAdvice_DittoScheduledLink;;;;
 
+
+
+################## category page shop by category component
+
+INSERT_UPDATE AmwayApacShopByCategoryCollectionComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;shopByCategoryComponents(&componentRef)
+;;shopByCategoryCollectionComponent;shop by category collection component;shopByCategoryCollectionComponent;vitaminsAndSupplementsComponent,weightManagementComponent,sportsNutritionComponent,enerygyDrinksComponent,vitaminsAndSupplementsComponent,weightManagementComponent,sportsNutritionComponent
+
+INSERT_UPDATE AmwayApacShopByCategoryComponent;$contentCV[unique=true];uid[unique=true];name;link(&componentRef);banner(&componentRef);&componentRef
+;;vitaminsAndSupplementsComponent;vitamins and supplements component;vitaminsAndSupplementsLinkComponent;vitaminsAndSupplementsBannerComponent;vitaminsAndSupplementsComponent
+;;weightManagementComponent;weight management component;weightManagementLinkComponent;weightManagementBannerComponent;weightManagementComponent
+;;sportsNutritionComponent;sports nutrition component;sportsNutritionLinkComponent;sportsNutritionBannerComponent;sportsNutritionComponent
+;;enerygyDrinksComponent;energy drinks component;energyDrinksLinkComponent;energyDrinksBannerComponent;enerygyDrinksComponent
+
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;target(code)[default='sameWindow'];category(code, $productCV)
+;;vitaminsAndSupplementsLinkComponent;vitamins and supplements category link;vitaminsAndSupplementsLinkComponent;;vitaminsAndSupplements
+;;weightManagementLinkComponent;weight management category link;weightManagementLinkComponent;;weightmanagement
+;;sportsNutritionLinkComponent;sports nutrition category link;sportsNutritionLinkComponent;;sportsNutrition
+;;energyDrinksLinkComponent;energy drinks category link;energyDrinksLinkComponent;;energyDrinks
+
+INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;vitaminsAndSupplementsBannerComponent;vitamins and supplements banner component;vitaminsAndSupplementsBannerComponent
+;;weightManagementBannerComponent;weight management banner component;weightManagementBannerComponent
+;;sportsNutritionBannerComponent;sports nutrition banner component;sportsNutritionBannerComponent
+;;energyDrinksBannerComponent;energy drinks banner component;energyDrinksBannerComponent
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
+;                       ;ShopByCategoryTitleParagraphComponent;ShopByCategoryTitleParagraphComponent
+
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;ShopByCategoryContentSlot;ShopByCategoryTitleParagraphComponent,shopByCategoryCollectionComponent
+
+
+################## category page tools and advice component
+
+INSERT_UPDATE AmwayApacToolsAndAdviceComponent;$contentCV[unique=true];uid[unique=true];name;text(&componentRef);banner(&componentRef);&componentRef
+;;nutriliteGuideComponent;nutrilite guide component;nutriliteGuideTextComponent;nutriliteGuideBannerComponent;nutriliteGuideComponent
+;;bodyKeyChoicesComponent;weight management component;bodyKeyChoicesTextComponent;bodyKeyChoicesBannerComponent;bodyKeyChoicesComponent
+;;nutriliteFindSupplementsComponent;sports nutrition component;nutriliteFindSupplementsTextComponent;nutriliteFindSupplementsBannerComponent;nutriliteFindSupplementsComponent
+
+INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink
+;;nutriliteGuideBannerComponent;nutrilite guide banner component;nutriliteGuideBannerComponent;"/"
+;;bodyKeyChoicesBannerComponent;bodyKey choices banner component;bodyKeyChoicesBannerComponent;"/"
+;;nutriliteFindSupplementsBannerComponent;nutrilite find supplements banner component;nutriliteFindSupplementsBannerComponent;"/"
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
+;                       ;nutriliteGuideTextComponent;nutriliteGuideTextComponent
+;                       ;bodyKeyChoicesTextComponent;bodyKeyChoicesTextComponent
+;                       ;nutriliteFindSupplementsTextComponent;nutriliteFindSupplementsTextComponent
+;						;toolsAndAdviceTitleTextComponent;toolsAndAdviceTitleTextComponent
+
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;ToolsAndAdviceContentSlot;toolsAndAdviceTitleTextComponent
+;;ToolsAndAdviceBannerContentSlot1;nutriliteGuideComponent
+;;ToolsAndAdviceBannerContentSlot2;bodyKeyChoicesComponent
+;;ToolsAndAdviceBannerContentSlot3;nutriliteFindSupplementsComponent
