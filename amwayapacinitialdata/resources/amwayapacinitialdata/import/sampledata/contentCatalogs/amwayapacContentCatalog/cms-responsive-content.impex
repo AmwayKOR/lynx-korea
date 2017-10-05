@@ -614,3 +614,28 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents
 ;;ToolsAndAdviceBannerContentSlot1;nutriliteGuideComponent
 ;;ToolsAndAdviceBannerContentSlot2;bodyKeyChoicesComponent
 ;;ToolsAndAdviceBannerContentSlot3;nutriliteFindSupplementsComponent
+
+
+############### category page success stories components
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;SuccessStoryContentSlot1;bodyKeySuccessStoryComponent
+;;SuccessStoryContentSlot2;xsSportsSuccessStoryComponent
+
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&componentRef;target(code)[default='sameWindow'];
+;;bodyKeySuccessStoryLink;body key success story link component;/;bodyKeySuccessStoryLink;;;;
+;;xsSportsSuccessStoryLink;xs sports success story component;/;xsSportsSuccessStoryLink;;;;
+
+INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink
+;;bodyKeySuccessStoryBannerComponent;body key success story banner component;bodyKeySuccessStoryBannerComponent;"/"
+;;xsSportsSuccessStoryBannerComponent;xs sports success story banner component;xsSportsSuccessStoryBannerComponent;"/"
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true]  ;&componentRef
+;                       ;bodyKeySuccessStoryParagraphComponent;bodyKeySuccessStoryParagraphComponent
+;                       ;xsSportsSuccessStoryParagraphComponent;xsSportsSuccessStoryParagraphComponent
+
+INSERT_UPDATE AmwayAPACPathToSuccessPitchPerfectComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;banner(&componentRef);link(&componentRef);description(&componentRef)
+;;bodyKeySuccessStoryComponent;Amway Path to success;bodyKeySuccessStoryComponent;bodyKeySuccessStoryBannerComponent;bodyKeySuccessStoryLink;bodyKeySuccessStoryParagraphComponent
+;;xsSportsSuccessStoryComponent;Amway Pitch Perfect;xsSportsSuccessStoryComponent;xsSportsSuccessStoryBannerComponent;xsSportsSuccessStoryLink;xsSportsSuccessStoryParagraphComponent
+	
+

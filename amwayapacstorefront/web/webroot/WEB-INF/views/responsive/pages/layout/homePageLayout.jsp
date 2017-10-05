@@ -18,12 +18,16 @@
 				</cms:pageSlot>
                 
                 <div class="category-success-story row">
-                    <cms:pageSlot position="Section3A" var="component">
-						        <cms:component component="${component}"/>
-					</cms:pageSlot>
-                    <cms:pageSlot position="Section3B" var="component">
-						        <cms:component component="${component}"/>
-					</cms:pageSlot>
+                	<div class="success-story__item col-sm-12 col-md-6">
+	                    <cms:pageSlot position="Section3A" var="component">
+							        <cms:component component="${component}"/>
+						</cms:pageSlot>
+					</div>
+					<div class="success-story__item col-sm-12 col-md-6">
+	                    <cms:pageSlot position="Section3B" var="component">
+							        <cms:component component="${component}"/>
+						</cms:pageSlot>
+					</div>
                 </div>
             </div>
             <div class="new-hot-brand">

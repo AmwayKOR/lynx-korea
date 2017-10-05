@@ -81,40 +81,14 @@
             <div class="container-fluid main-container">
                 <div class="category-success-story row">
                     <div class="success-story__item col-sm-12 col-md-6">
-                        <div class="item-image-wrap">
-                            <img alt="image" class="desktop-image" src="${themeResourcePath}/images/category_success_story_01.png" /></div>
-                        <div class="item-content-wrap">
-                            <h2 class="banner-title">
-                                <span>New body key</span></h2>
-                            <h4 class="banner-sub-title">Try One, Share a Few</h4>
-                            <div class="sub-title-wrap">
-                                <span class="banner-sub-title">Lorem ipsum dolor sit amet
-                                    <br />consectetur adipiscing elit.</span></div>
-                            <div class="banner-button-wrap">
-                                <a href="#" class="banner-button-link ">
-                                    <button class="btn-blue-white">
-                                        <span class="btn-text">learn more</span></button>
-                                </a>
-                            </div>
-                        </div>
+                        <cms:pageSlot position="SuccessStoryContentSlot1" var="component">
+             				<cms:component component="${component}" />
+             			</cms:pageSlot>
                     </div>
                     <div class="success-story__item col-sm-12 col-md-6">
-                        <div class="item-image-wrap">
-                            <img alt="image" class="desktop-image" src="${themeResourcePath}/images/category_success_story_02.png" /></div>
-                        <div class="item-content-wrap">
-                            <h2 class="banner-title">
-                                <span>xs sports</span></h2>
-                            <h4 class="banner-sub-title">Fuel Your Adventure</h4>
-                            <div class="sub-title-wrap">
-                                <span class="banner-sub-title">Lorem ipsum dolor sit amet
-                                    <br />consectetur adipiscing elit.</span></div>
-                            <div class="banner-button-wrap">
-                                <a href="#" class="banner-button-link ">
-                                    <button class="btn-blue-white">
-                                        <span class="btn-text">learn more</span></button>
-                                </a>
-                            </div>
-                        </div>
+                        <cms:pageSlot position="SuccessStoryContentSlot2" var="component">
+             				<cms:component component="${component}" />
+             			</cms:pageSlot>
                     </div>
                 </div>
                 <div class="row simpleimagecomponent pcp-banner new-advice block">

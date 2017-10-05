@@ -517,3 +517,28 @@ UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true]  ;content[
 								   ;                       ;bodyKeyChoicesTextComponent;"<span>The BodyKey™4 Plan: Better Choices Everyday</span>"
 								   ;                       ;nutriliteFindSupplementsTextComponent;"<span>Nutrilite: Find the Right Supplements</span>"
 								   
+############### category page success stories components
+
+UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang]
+;;bodyKeySuccessStoryLink;"Learn More"
+;;xsSportsSuccessStoryLink;"Learn More"
+
+
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;folder(qualifier)[default='images'];altText
+;;bodyKeySuccessStoryMedia;$siteResource/category_success_story_01.png;;bodyKeySuccessStoryMedia;;"NEW BODY KEY"
+;;xsSportsSuccessStoryMedia;$siteResource/category_success_story_02.png;;xsSportsSuccessStoryMedia;;"XS SPORTS"
+
+UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
+;;bodyKeySuccessStoryBannerComponent;bodyKeySuccessStoryMedia	
+;;xsSportsSuccessStoryBannerComponent;xsSportsSuccessStoryMedia	
+
+
+UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true]  ;content[lang=$lang]
+								   ;                       ;bodyKeySuccessStoryParagraphComponent;"Lorem ipsum dolor sit amet<br>consectetur adipiscing elit."
+								   ;                       ;xsSportsSuccessStoryParagraphComponent;"Lorem ipsum dolor sit amet<br>consectetur adipiscing elit."
+
+
+INSERT_UPDATE AmwayAPACPathToSuccessPitchPerfectComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang];title2[lang=$lang]
+;;bodyKeySuccessStoryComponent;"New body key";"Try One, Share a Few"
+;;xsSportsSuccessStoryComponent;"xs sports";"Fuel Your Adventure"
+

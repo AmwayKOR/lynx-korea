@@ -467,7 +467,8 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 ;TopBannerContentSlot;;;
 ;ShopByCategoryContentSlot;;;
 ;ExperienceBrandsContentSlot;;;
-;SuccessStoryContentSlot;;;
+;SuccessStoryContentSlot1;;;
+;SuccessStoryContentSlot2;;;
 ;ToolsAndAdviceContentSlot;;;
 ;ToolsAndAdviceBannerContentSlot1;;;
 ;ToolsAndAdviceBannerContentSlot2;;;
@@ -525,7 +526,8 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active
 ;;TopBannerContentSlot;Top banner content slot;true
 ;;ShopByCategoryContentSlot;Shop By category component content slot;true
 ;;ExperienceBrandsContentSlot;Experience brands content slot;true
-;;SuccessStoryContentSlot;Success story content slot;true
+;;SuccessStoryContentSlot1;Success story content slot 1;true
+;;SuccessStoryContentSlot2;Success story content slot 2;true
 ;;ToolsAndAdviceContentSlot;Tools and advice content slot;true
 ;;ToolsAndAdviceBannerContentSlot1;Tools and advice banner content slot 1;true
 ;;ToolsAndAdviceBannerContentSlot2;Tools and advice banner content slot 2;true
@@ -823,7 +825,8 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 ;;TopBannerContentSlot-CategoryLandingPage;TopBannerContentSlot;;TopBannerContentSlot;true
 ;;ShopByCategoryContentSlot-CategoryLandingPage;ShopByCategoryContentSlot;;ShopByCategoryContentSlot;true
 ;;ExperienceBrandsContentSlot-CategoryLandingPage;ExperienceBrandsContentSlot;;ExperienceBrandsContentSlot;true
-;;SuccessStoryContentSlot-CategoryLandingPage;SuccessStoryContentSlot;;SuccessStoryContentSlot;true
+;;SuccessStoryContentSlot1-CategoryLandingPage;SuccessStoryContentSlot1;;SuccessStoryContentSlot1;true
+;;SuccessStoryContentSlot2-CategoryLandingPage;SuccessStoryContentSlot2;;SuccessStoryContentSlot2;true
 ;;ToolsAndAdviceContentSlot-CategoryLandingPage;ToolsAndAdviceContentSlot;;ToolsAndAdviceContentSlot;true
 ;;ToolsAndAdviceBannerContentSlot1-CategoryLandingPage;ToolsAndAdviceBannerContentSlot1;;ToolsAndAdviceBannerContentSlot1;true
 ;;ToolsAndAdviceBannerContentSlot2-CategoryLandingPage;ToolsAndAdviceBannerContentSlot2;;ToolsAndAdviceBannerContentSlot2;true
