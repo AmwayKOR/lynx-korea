@@ -30,15 +30,29 @@ $siteResource=jar:com.amway.apac.initialdata.setup.AmwayApacInitialDataSystemSet
 INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];$media;mime[default='image/jpeg'];$catalogVersion;folder(qualifier)
 ;300Wx300H;/300Wx300H/101390M_1.jpg;$siteResource/images/300Wx300H/101390M_1.jpg;;;images
 ;300Wx300H;/300Wx300H/101390M_2.jpg;$siteResource/images/300Wx300H/101390M_2.jpg;;;images
+;300Wx300H;/300Wx300H/A4271M_1.jpg;$siteResource/images/300Wx300H/A4271M_1.jpg;;;images
+;300Wx300H;/300Wx300H/A4271M_2.jpg;$siteResource/images/300Wx300H/A4271M_2.jpg;;;images
+;300Wx300H;/300Wx300H/A4272M_1.jpg;$siteResource/images/300Wx300H/A4272M_1.jpg;;;images
+;300Wx300H;/300Wx300H/A4272M_2.jpg;$siteResource/images/300Wx300H/A4272M_2.jpg;;;images
 ;96Wx96H;/96Wx96H/101390M_1.jpg;$siteResource/images/96Wx96H/101390M_1.jpg;;;images
 ;96Wx96H;/96Wx96H/101390M_2.jpg;$siteResource/images/96Wx96H/101390M_2.jpg;;;images
-
+;96Wx96H;/96Wx96H/A4271M_1.jpg;$siteResource/images/96Wx96H/A4271M_1.jpg;;;images
+;96Wx96H;/96Wx96H/A4271M_2.jpg;$siteResource/images/96Wx96H/A4271M_2.jpg;;;images
+;96Wx96H;/96Wx96H/A4272M_1.jpg;$siteResource/images/96Wx96H/A4272M_1.jpg;;;images
+;96Wx96H;/96Wx96H/A4272M_2.jpg;$siteResource/images/96Wx96H/A4272M_2.jpg;;;images
 
 # Create Media Containers
 INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$catalogVersion
 ;101390M_1;/300Wx300H/101390M_1.jpg,/96Wx96H/101390M_1.jpg;;
 ;101390M_2;/300Wx300H/101390M_2.jpg,/96Wx96H/101390M_2.jpg;;
+;A4271M_1;/300Wx300H/A4271M_1.jpg,/96Wx96H/A4271M_1.jpg;;
+;A4271M_2;/300Wx300H/A4271M_2.jpg,/96Wx96H/A4271M_2.jpg;;
+;A4272M_1;/300Wx300H/A4272M_1.jpg,/96Wx96H/A4272M_1.jpg;;
+;A4272M_2;/300Wx300H/A4272M_2.jpg,/96Wx96H/A4272M_2.jpg;;
+
 
 # Update Products with Media and Media Containers
 UPDATE Product;code[unique=true];$picture;$thumbnail;$detail;$others;$normal;$thumbnails;$galleryImages;$catalogVersion
 ;101390M;/300Wx300H/101390M_1.jpg;/96Wx96H/101390M_1.jpg;;;/300Wx300H/101390M_1.jpg,/300Wx300H/101390M_2.jpg;/96Wx96H/101390M_1.jpg,/96Wx96H/101390M_2.jpg;101390M_1,101390M_2;
+;A4271M;/300Wx300H/A4271M_1.jpg;/96Wx96H/A4271M_1.jpg;;;/300Wx300H/A4271M_1.jpg,/300Wx300H/A4271M_2.jpg;/96Wx96H/A4271M_1.jpg,/96Wx96H/A4271M_2.jpg;A4271M_1,A4271M_2;
+;A4272M;/300Wx300H/A4272M_1.jpg;/96Wx96H/A4272M_1.jpg;;;/300Wx300H/A4272M_1.jpg,/300Wx300H/A4272M_2.jpg;/96Wx96H/A4272M_1.jpg,/96Wx96H/A4272M_2.jpg;A4272M_1,A4272M_2;

@@ -79,14 +79,9 @@
                                 <div class="page-details-add-to-cart-component">
                                     <div class="addtocart-component">
                                         <div class="amway-theme qty-selector js-qty-selector control-group">
-                                            <div class="row">
-                                                <div class="size-selector-container">
-                                                    <label class="control-label" for="pdpAddtoCartInput">Size</label>
-                                                    <select class="size-select text-center js-qty-selector-input form-control" value="60 Packets">
-                                                        <option>60 Packets</option>
-                                                        <option>30 Packets</option></select>
-                                                </div>
-                                            </div>
+                                            <cms:pageSlot position="VariantSelector" var="component" element="div" class="page-details-variants-select">
+                                                <cms:component component="${component}" element="div" class="yComponentWrapper page-details-variants-select-component"/>
+                                            </cms:pageSlot>
                                             <div class="row">
                                                 <div class="pull-left qty-selector-container">
                                                     <label class="control-label" for="pdpAddtoCartInput">Qty</label>

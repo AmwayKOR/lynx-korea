@@ -14,11 +14,52 @@
 
     <itemtypes>
 
-        <!-- Add your item definitions here -->
+        <typegroup name="AmwayApac">
+            <itemtype code="AmwayApacColorVariantProduct" extends="VariantProduct"
+                      autocreate="true" generate="true"
+                      jaloclass="com.amway.apac.core.jalo.AmwayApacColorVariantProduct">
+                <description>Amway Apac color variant type that contains additional attribute describing variant color.
+                </description>
+                <attributes>
+                    <attribute qualifier="color" type="localized:java.lang.String"
+                               metatype="VariantAttributeDescriptor">
+                        <description>Color of the product.</description>
+                        <modifiers/>
+                        <persistence type="property"/>
+                    </attribute>
+                </attributes>
+            </itemtype>
 
+            <itemtype code="AmwayApacSizeVariantProduct" extends="VariantProduct"
+                      autocreate="true" generate="true"
+                      jaloclass="com.amway.apac.core.jalo.AmwayApacSizeVariantProduct">
+                <description>Amway Apac size variant type that contains additional attribute describing variant size.
+                </description>
+                <attributes>
+                    <attribute qualifier="size" type="localized:java.lang.String"
+                               metatype="VariantAttributeDescriptor">
+                        <description>Size of the product.</description>
+                        <modifiers/>
+                        <persistence type="property"/>
+                    </attribute>
+                </attributes>
+            </itemtype>
 
-        <!-- TypeGroups are for structure of this file only -->
-
+            <itemtype code="AmwayApacFlavourVariantProduct" extends="VariantProduct"
+                      autocreate="true" generate="true"
+                      jaloclass="com.amway.apac.core.jalo.AmwayApacFlavourVariantProduct">
+                <description>Amway Apac variant flavour type that contains additional attribute describing variant flavour.
+                </description>
+                <attributes>
+                    <attribute qualifier="flavour" type="localized:java.lang.String"
+                               metatype="VariantAttributeDescriptor">
+                        <description>flavour of the product.</description>
+                        <modifiers/>
+                        <persistence type="property"/>
+                    </attribute>
+                </attributes>
+            </itemtype>
+        </typegroup>
 
     </itemtypes>
 </items>

@@ -540,3 +540,11 @@ INSERT_UPDATE Product;code[unique=true];name;variantType(code);maxOrderQuantity;
 ;WTI0706Z;;;99;ESPRING-LID/PULL UP RING;FALSE;;
 ;WTI0780Z;;;99;ESPRING-TUB REM TOOL-SVC;FALSE;;
 ;WTI0901T;;;99;DIVERTER-H/K/WTS2(WSA1417;FALSE;;
+
+INSERT_UPDATE Product;code[unique=true];name;variantType(code);maxOrderQuantity;Description[lang=$lang];bvcode;$catalogVersion;$approved
+;157;;AmwayApacSizeVariantProduct;99;NUTRILITE Daily;TRUE;
+
+
+INSERT_UPDATE AmwayApacSizeVariantProduct;code[unique=true];name;maxOrderQuantity;Description[lang=$lang];bvcode;$baseProduct;$catalogVersion
+;A4271M;;99;DAILY 60 MAL910381X;true;157;
+;A4272M;;99;DAILY 180 MAL910381X;true;157;
