@@ -272,7 +272,33 @@
 		
 		<itemtype code="AmwayAPACMobileNavigationComponent" generate="true" extends="NavigationBarComponent" autocreate="true" 
 			jaloclass="com.amway.apac.core.jalo.components.AmwayAPACMobileNavigationComponent">
-			
+		</itemtype>
+		
+				<itemtype code="AmwayApacAbstractTextLinkImageComponent" generate="true" extends="SimpleCMSComponent" autocreate="true" abstract="true"
+			jaloclass="com.amway.apac.core.jalo.components.AmwayApacAbstractTextLinkImageComponent">
+			<attributes>
+				<attribute qualifier="text" type="CMSParagraphComponent">
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="link" type="CMSLinkComponent">
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="banner" type="SimpleBannerComponent">
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="AmwayApacShopByCategoryComponent" generate="true" extends="AmwayApacAbstractTextLinkImageComponent" autocreate="true" 
+			jaloclass="com.amway.apac.core.jalo.components.AmwayApacShopByCategoryComponent">
+		</itemtype>
+		
+		<itemtype code="AmwayApacShopByCategoryCollectionComponent" generate="true" extends="SimpleCMSComponent" autocreate="true" 
+			jaloclass="com.amway.apac.core.jalo.components.AmwayApacShopByCategoryCollectionComponent">
+		</itemtype>
+		
+		<itemtype code="AmwayApacToolsAndAdviceComponent" generate="true" extends="AmwayApacAbstractTextLinkImageComponent" autocreate="true" 
+			jaloclass="com.amway.apac.core.jalo.components.AmwayApacToolsAndAdviceComponent">
 		</itemtype>
 		
     </itemtypes>

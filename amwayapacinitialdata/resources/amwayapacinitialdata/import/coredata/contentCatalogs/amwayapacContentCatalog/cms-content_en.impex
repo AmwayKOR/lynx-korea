@@ -39,4 +39,3 @@ UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
  ;;storefinderPage;"StoreFinder"
  ;;termsAndConditions;"Terms and Conditions"
  ;;updatePassword;"Update Forgotten Password"
- ;;shopping-lists;"Shopping Lists"

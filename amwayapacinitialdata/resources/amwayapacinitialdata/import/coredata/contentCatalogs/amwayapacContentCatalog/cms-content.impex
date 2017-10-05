@@ -39,7 +39,6 @@ INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;fronten
 ;;ContentPage1Template;Content Page 1 Template;layout/contentLayout1Page;ContentPage
 ;;AccountPageTemplate;Account Page Template;account/accountLayoutPage;ContentPage;false;
 ;;StoreFinderPageTemplate;Store Finder Page Template;storeFinder/storeFinderSearchPage;ContentPage;false;
-;;ShoppingListsPageTemplate;Shopping Lists Page Template;shoppingList/shoppingListsLayoutPage;ContentPage
 
 # Templates without a frontendTemplateName
 ;;CartPageTemplate;Cart Page Template;;ContentPage;false;
@@ -74,7 +73,6 @@ UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];velocityTemplate[tr
 ;;OrderConfirmationPageTemplate;$jarResourceCms/structure-view/structure_orderConfirmationPageTemplate.vm
 ;;LoginPageTemplate         ;$jarResourceCms/structure-view/structure_loginPageTemplate.vm
 ;;CheckoutLoginPageTemplate ;$jarResourceCms/structure-view/structure_checkoutLoginPageTemplate.vm
-;;ShoppingListsPageTemplate 		;$jarResourceCms/structure-view/structure_shoppingListsPageTemplate.vm
 
 # Create ContentSlotNames
 # Each PageTemplate has a number of ContentSlotNames, with a list of valid components for the slot.
@@ -428,23 +426,6 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 ;BottomHeaderSlot;;;wide
 ;PlaceholderContentSlot;;;
 
-# Shopping Lists Page Template
-# Template used for shopping lists page
-INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='ShoppingListsPageTemplate'];validComponentTypes(code);compTypeGroup(code)
-;SiteLogo;;;logo
-;HeaderLinks;;;headerlinks
-;SearchBox;;;searchbox
-;MiniCart;;;minicart
-;NavigationBar;;;navigation
-;TopContent;;;wide
-;SideContent;;;narrow
-;BodyContent;;;wide
-;BottomContent;;;wide
-;Footer;;;footer
-;TopHeaderSlot;;;wide
-;BottomHeaderSlot;;;wide
-;PlaceholderContentSlot;;;
-
 # Store Finder/Locator Page Template
 INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='StoreFinderPageTemplate'];validComponentTypes(code);compTypeGroup(code)
 ;SiteLogo;;;logo
@@ -758,18 +739,6 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 ;;BottomHeaderSlot-AccountPage;BottomHeaderSlot;;BottomHeaderSlot;true
 ;;PlaceholderContentSlot-AccountPage;PlaceholderContentSlot;;PlaceholderContentSlot;true
 
-INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ShoppingListsPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
-;;SiteLogo-AccountPage;SiteLogo;;SiteLogoSlot;true
-;;HomepageLink-AccountPage;HomepageNavLink;;HomepageNavLinkSlot;true
-;;NavigationBar-AccountPage;NavigationBar;;NavigationBarSlot;true
-;;MiniCart-AccountPage;MiniCart;;MiniCartSlot;true
-;;Footer-AccountPage;Footer;;FooterSlot;true
-;;HeaderLinks-AccountPage;HeaderLinks;;HeaderLinksSlot;true
-;;SearchBox-AccountPage;SearchBox;;SearchBoxSlot;true
-;;TopHeaderSlot-AccountPage;TopHeaderSlot;;TopHeaderSlot;true
-;;BottomHeaderSlot-AccountPage;BottomHeaderSlot;;BottomHeaderSlot;true
-;;PlaceholderContentSlot-AccountPage;PlaceholderContentSlot;;PlaceholderContentSlot;true
-
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='StoreFinderPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
 ;;SiteLogo-StoreFinderPage;SiteLogo;;SiteLogoSlot;true
 ;;HomepageLink-StoreFinderPage;HomepageNavLink;;HomepageNavLinkSlot;true
@@ -826,7 +795,6 @@ INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTe
 ;;updatePassword;Update Forgotten Password Page;AccountPageTemplate;updatePassword
 ;;update-profile;Update Profile Page;AccountPageTemplate;update-profile
 ;;update-email;Update Email Page;AccountPageTemplate;update-email
-;;shopping-lists;Shopping Lists Page;ShoppingListsPageTemplate;shopping-lists
 
 # Simple Content Pages
 INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
