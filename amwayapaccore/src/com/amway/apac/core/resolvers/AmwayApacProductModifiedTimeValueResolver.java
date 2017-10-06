@@ -17,7 +17,7 @@ import java.util.Date;
  * @author shubhamgoyal
  *
  */
-public class ProductModifiedTimeValueResolver extends AbstractValueResolver<ProductModel, Object, Date>
+public class AmwayApacProductModifiedTimeValueResolver extends AbstractValueResolver<ProductModel, Object, Date>
 {
 
 

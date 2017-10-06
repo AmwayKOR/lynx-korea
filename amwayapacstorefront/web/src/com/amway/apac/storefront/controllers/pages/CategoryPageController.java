@@ -28,7 +28,6 @@ import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,6 +35,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.amway.apac.storefront.controllers.ControllerConstants;
 
 
 /**
@@ -54,8 +55,6 @@ public class CategoryPageController extends AbstractCategoryPageController
 			@RequestParam(value = "sort", required = false) final String sortCode, final Model model,
 			final HttpServletRequest request, final HttpServletResponse response) throws UnsupportedEncodingException
 	{
-		model.addAttribute("currentSort", StringUtils.isBlank(sortCode) ? StringUtils.EMPTY : sortCode);
-		model.addAttribute("plainUrl", getUrlWithoutParameters(request.getRequestURI()));
 		return performSearchAndGetResultsPage(categoryCode, searchQuery, page, showMode, sortCode, model, request, response);
 	}
 
@@ -87,12 +86,9 @@ public class CategoryPageController extends AbstractCategoryPageController
 			@RequestParam(value = "q", required = false) final String searchQuery,
 			@RequestParam(value = "page", defaultValue = "0") final int page,
 			@RequestParam(value = "show", defaultValue = "Page") final ShowMode showMode,
-			@RequestParam(value = "sort", required = false) final String sortCode, final Model model,
-			final HttpServletRequest request) throws UnsupportedEncodingException
+			@RequestParam(value = "sort", required = false) final String sortCode, final Model model)
+					throws UnsupportedEncodingException
 	{
-		model.addAttribute("currentSort", StringUtils.isBlank(sortCode) ? StringUtils.EMPTY : sortCode);
-		model.addAttribute("plainUrl",
-				getUrlWithoutParameters(request.getRequestURI().replace("/results-display", StringUtils.EMPTY)));
 		return performSearchAndGetResultsDataDisplay(categoryCode, searchQuery, page, showMode, sortCode, model);
 	}
 
@@ -128,19 +124,8 @@ public class CategoryPageController extends AbstractCategoryPageController
 		model.addAttribute("pageType", PageType.CATEGORY.name());
 		model.addAttribute("userLocation", getCustomerLocationService().getUserLocation());
 
-		return "fragments/category/productListingFragment";
+		return ControllerConstants.Views.Fragments.Category.ProductListingFragment;
 
-	}
-
-	private String getUrlWithoutParameters(final String url)
-	{
-		String newUrl = url;
-		final int index = url.indexOf("?");
-		if (index != -1)
-		{
-			newUrl = url.substring(0, url.indexOf("?"));
-		}
-		return newUrl;
 	}
 
 }

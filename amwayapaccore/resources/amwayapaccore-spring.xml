@@ -213,10 +213,10 @@
 		<property name="rootCategory" value="root" />
 	</bean>
 
-	<bean id="productModifiedTimeValueResolver" class="com.amway.apac.core.resolvers.ProductModifiedTimeValueResolver"
+	<bean id="amwayApacProductModifiedTimeValueResolver" class="com.amway.apac.core.resolvers.AmwayApacProductModifiedTimeValueResolver"
 		parent="abstractValueResolver">
 	</bean>
-
+	
 	<import resource="/amwayapaccore/processes/quote/quote-buyer-process-spring.xml"/>
 	<import resource="/amwayapaccore/processes/quote/quote-salesrep-process-spring.xml"/>
 	<import resource="/amwayapaccore/processes/quote/quote-seller-approval-process-spring.xml"/>

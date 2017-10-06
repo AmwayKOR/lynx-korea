@@ -29,14 +29,14 @@
 		                        <p class="product-list__item-count">30 Count</p>
 		                        <p class="product-list__item-number">Item #: ${product.code}</p>
 		                        <div class="product-list__item-title product-list__item-aboprice">
-		                            <span class="product-list__item-abolabel">ABO Cost:</span>
-		                            <span class="product-list__item-abovalue">$16.62</span></div>
-		                        <div class="product-list__item-retailprice">
-		                            <span class="product-list__item-abolabel">Retail Price:</span>
-		                            <span class="product-list__item-abovalue">$25.55</span></div>
-		                        <div class="product-list__item-retailprice">
-		                            <span class="product-list__item-abolabel">PV / BV:</span>
-		                            <span class="product-list__item-abovalue">4.50 / 14.21</span></div>
+                                    <span class="product-list__item-abolabel">ABO Cost:</span>
+                                    <span class="product-list__item-abovalue">${product.price.formattedValue}</span></div>
+                                <div class="product-list__item-retailprice">
+                                    <span class="product-list__item-abolabel">Retail Price:</span>
+                                    <span class="product-list__item-abovalue">${product.retailPrice.formattedValue}</span></div>
+                                <div class="product-list__item-retailprice">
+                                    <span class="product-list__item-abolabel">PV / BV:</span>
+                                    <span class="product-list__item-abovalue">4.50 / 14.21</span></div>
 		                    </div>
 		                </div>
 		                <div class="product-list__item-link col-md-12">
@@ -53,9 +53,9 @@
 	</div>
 	<div class="see-more-section">
 		<c:if test="${searchPageData.pagination.currentPage < (searchPageData.pagination.numberOfPages - 1)}">
-			<form action="${plainUrl}" method="get">
+			<form action="${ requestScope['javax.servlet.forward.servlet_path']}" method="get">
 	       		<input type="hidden" name="q" value="${searchPageData.currentQuery.query.value}"/>
-	       		<input type="hidden" name="sort" value="${currentSort}"/>
+	       		<input type="hidden" name="sort" value=""/>
 	       		<input type="hidden" name="page" value="${searchPageData.pagination.currentPage + 1}"/>
 	            <button type="button" id="show-more" class="btn btn-link">
 	                <span class="text-wrap">Show more</span>

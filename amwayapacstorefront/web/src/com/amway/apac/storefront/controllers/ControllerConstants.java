@@ -207,6 +207,11 @@ public interface ControllerConstants
 				String ReviewsTab = "fragments/product/reviewsTab"; // NOSONAR
 				String StorePickupSearchResults = "fragments/product/storePickupSearchResults"; // NOSONAR
 			}
+
+			interface Category
+			{
+				String ProductListingFragment = "fragments/category/productListingFragment"; //NOSONAR
+			}
 		}
 	}
 

@@ -1,119 +1,55 @@
-<%@ page trimDirectiveWhitespaces="true"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="format" tagdir="/WEB-INF/tags/shared/format"%>
-<%@ taglib prefix="product" tagdir="/WEB-INF/tags/responsive/product"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="storepickup" tagdir="/WEB-INF/tags/responsive/storepickup" %>
-<%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
-
-<spring:htmlEscape defaultHtmlEscape="true" />
-
-<c:set var="qtyMinus" value="1" />
-<c:url value="${product.url}" var="productUrl" />
-
-<div class="quick-view-popup">
-
-	<div class="product-image">
-		<a  href="${productUrl}"> 
-			<product:productPrimaryImage product="${product}" format="product" />
-		</a>
-	</div>
-	<div class="product-details">
-
-		<div class="name">
-			<a href="${productUrl}"><c:out value="${product.name}" /></a>
-		</div>
-
-		<product:productReviewSummary product="${product}" showLinks="false" starsClass="quick-view-stars"/>
-
-		<div class="summary">${ycommerce:sanitizeHTML(product.summary)}</div>
-
-		<c:if test="${not empty product.potentialPromotions}">
-			<div class="bundle">
-				<c:choose>
-					<c:when
-						test="${not empty product.potentialPromotions[0].couldFireMessages}">
-						<p>${ycommerce:sanitizeHTML(product.potentialPromotions[0].couldFireMessages[0])}</p>
-					</c:when>
-					<c:otherwise>
-						<p>${ycommerce:sanitizeHTML(product.potentialPromotions[0].description)}</p>
-					</c:otherwise>
-				</c:choose>
-			</div>
-		</c:if>
-
-		<div class="price">
-			<format:fromPrice priceData="${product.price}" />
-		</div>
-		
-	</div>
-
-	<div class="addtocart-component">
-		<product:quickViewProductVariantSelector />	
-
-		<c:url value="/cart/add" var="addToCartUrl"/>
-		<form:form method="post" class="add_to_cart_form" action="${addToCartUrl}">
-		<input type="hidden" name="productCodePost" value="${fn:escapeXml(product.code)}"/>
-			
-		<c:if test="${empty quickViewShowAddToCart ? true : quickViewShowAddToCart}">
-
-				<div class="qty-selector input-group js-qty-selector">
-					<span class="input-group-btn">
-						<button class="btn btn-primary js-qty-selector-minus" type="button" <c:if test="${qtyMinus <= 1}"><c:out value="disabled='disabled'"/></c:if> ><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
-					</span>
-					<input type="text" maxlength="3" class="form-control js-qty-selector-input" size="1" value="${qtyMinus}" data-max="${product.stock.stockLevel}" data-min="1" id="qty" name="qty"  />
-					<span class="input-group-btn">
-						<button class="btn btn-primary js-qty-selector-plus" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-					</span>
-				</div>
-				
-				<c:if test="${product.stock.stockLevel gt 0}">
-					<c:set var="productStockLevel">${product.stock.stockLevel}&nbsp;
-						<spring:theme code="product.variants.in.stock"/>
-					</c:set>
-				</c:if>
-				<c:if test="${product.stock.stockLevelStatus.code eq 'lowStock'}">
-					<c:set var="productStockLevel">
-						<spring:theme code="product.variants.only.left" arguments="${product.stock.stockLevel}"/>
-					</c:set>
-				</c:if>
-				<c:if test="${product.stock.stockLevelStatus.code eq 'inStock' and empty product.stock.stockLevel}">
-					<c:set var="productStockLevel">
-						<spring:theme code="product.variants.available"/>
-					</c:set>
-				</c:if>
-				<div class="stock-status">
-					${productStockLevel}
-				</div>
-
-
-			<c:set var="buttonType">button</c:set>
-			<c:if test="${product.purchasable and product.stock.stockLevelStatus.code ne 'outOfStock' }">
-				<c:set var="buttonType">submit</c:set>
-			</c:if>
-			<c:choose>
-				<c:when test="${fn:contains(buttonType, 'button')}">
-					<button type="${buttonType}" class="btn btn-primary btn-block js-add-to-cart btn-icon glyphicon-shopping-cart outOfStock" disabled="disabled">
-						<spring:theme code="product.variants.out.of.stock"/>
-					</button>
-				</c:when>
-				<c:otherwise>
-					<button id="addToCartButton" type="${buttonType}" class="btn btn-primary btn-block js-add-to-cart js-enable-btn btn-icon glyphicon-shopping-cart" disabled="disabled">
-						<spring:theme code="basket.add.to.basket"/>
-					</button>
-				</c:otherwise>
-			</c:choose>
-		</c:if>
-		</form:form>
-
-		<c:if test="${empty quickViewShowAddToCart ? true : quickViewShowAddToCart and product.availableForPickup}">
-			<c:set var="actionUrl" value="${fn:replace(url,'{productCode}', ycommerce:encodeUrl(product.code))}" scope="request"/>
-			<storepickup:clickPickupInStore product="${product}" cartPage="false"/>
-			<c:remove var="actionUrl"/>
-		</c:if>
-
-	</div>	
-</div>
-	
+ <div class="cart-popup__dialog">
+     <div class="cart-popup__header">
+         <span class="cart-popup__header-text">QUICK VIEW
+             <img class="cart-popup__close quick-view-close" src="${themeResourcePath}/images/close.png" alt="close" data-dismiss="modal" aria-label="Close" aria-hidden="true"></span></div>
+     <div class="cart-popup__content">
+         <div class="cart-popup__item-info amwahover">
+             <img src="${themeResourcePath}/images/product_list_item2.png" class="cart-popup__thumbnail" alt="product">
+             <div class="cart-popup__item-detail">
+                 <p class="cart-popup__item-title">${product.name}</p>
+                 <span class="cart-popup__item-number">Item #: ${product.code}</span>
+                 <div class="cart-popup__item-title cart-popup__item-aboprice">
+                     <span class="product-list__item-abovalue new-product-list__item-abovalue">${product.price.formattedValue}</span>
+                     <span>ABO Price:</span></div>
+                 <div class="cart-popup__item-retailprice">
+                     <span>Retail Price:</span>
+                     <span class="product-list__item-abovalue Retail-product-list__item-abovalue">${product.retailPrice.formattedValue}</span>
+                     <span class="view-box-divider">|</span>
+                     <span>PV / BV:</span>
+                     <span class="product-list__item-abovalue PV-product-list__item-abovalue">${product.price.amwayValue.pointValue} / ${product.price.amwayValue.businessVolume}</span></div>
+                 <div class="cart-popup__quantity cart-popup__item-retailprice">
+                     <div class="amway-theme qty-selector js-qty-selector control-group">
+                         <div class="row">
+                             <div class="size-selector-container">
+                                 <label class="control-label" for="pdpAddtoCartInput">Size</label>
+                                 <select class="size-select text-center js-qty-selector-input form-control" value="60 Packets">
+                                     <option>60 Packets</option>
+                                     <option>30 Packets</option></select>
+                             </div>
+                             <div class="qty-selector-container">
+                                 <label class="control-label" for="pdpAddtoCartInput">Qty</label>
+                                 <input type="text" maxlength="3" class="text-center js-qty-selector-input" size="1" value="1" data-max="FORCE_IN_STOCK" data-min="1" name="pdpAddtoCartInput" id="pdpAddtoCartInput">
+                                 <div class="product-stock">
+                                     <span class="stock">
+                                         <span class="product-availability">
+                                             <span class="green">
+                                                 <span class="icon icon-check-bold"></span>
+                                                 <span class="text text-uppercase">In Stock</span></span>
+                                         </span>
+                                     </span>
+                                 </div>
+                             </div>
+                             <a href="#">
+                                 <div class="view-more-details">View More Details</div></a>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+         <div class="cart-popup__item-link">
+             <div class="cart-popup__item-link-content">
+                 <button id="addToCartButton" class="btn btn-primary btn-block js-add-to-cart js-enable-btn col-md-6" onclick="openDialog();">Add to cart</button>
+                 <button id="BuyNow" class="btn btn-primary btn-block js-add-to-cart js-enable-btn col-md-6" onclick="openDialog();">BUY NOW</button></div>
+         </div>
+     </div>
+ </div>
