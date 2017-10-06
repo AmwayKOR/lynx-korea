@@ -261,5 +261,31 @@
 			</attributes>
 		</itemtype>
 		
+		<itemtype code="TextImageComponent" extends="SimpleCMSComponent"
+			autocreate="true" generate="true"
+			jaloclass="com.amway.apac.storefront.components.jalo.TextImageComponent">
+			<description>Used to display text within Image</description>
+			<attributes>
+				<attribute qualifier="backgroundImage" type="SimpleBannerComponent">
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="headerText" type="java.lang.String">
+					<description>Header Text</description>
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="logoImage" type="SimpleBannerComponent">
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="details" type="CMSParagraphComponent">
+					<description>Header Details</description>
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="offerImageLink" type="CMSLinkComponent">
+					<persistence type="property" />
+					<description> Button for viewing Product details</description>
+				</attribute>
+			</attributes>
+		</itemtype>
+		
     </itemtypes>
 </items>
