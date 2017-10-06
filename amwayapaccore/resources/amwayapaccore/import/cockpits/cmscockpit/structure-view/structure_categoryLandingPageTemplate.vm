@@ -10,8 +10,8 @@
 			<td height="125px" width="25%" rowspan="2" class="structureViewSection">
 				<cockpit code="SiteLogo"/>
 			</td>
-			<td class="structureViewSection">
-				<cockpit code="HeaderLinks"/>
+			<td class="structureViewSection ">
+				<cockpit code="HeaderLinks"/>HeaderLinks
 				<cockpit code="SearchBox"/>
 			</td>
 			<td width="15%" rowspan="2" class="structureViewSection">
@@ -28,26 +28,58 @@
 				<cockpit code="BottomHeaderSlot"/>
 			</td>
 		</tr>
-		<tr>
-			<td width="25%"  rowspan="4" style="vertical-align:top;" class="structureViewSection">
-				<cockpit code="SideContent"/>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2" style="vertical-align:top;" class="structureViewSection">
-				<cockpit code="TopContent"/>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2" height="400px" style="vertical-align:top;" class="structureViewSection">
-				<cockpit code="BodyContent"/>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2" style="vertical-align:bottom;" class="structureViewSection">
-				<cockpit code="BottomContent"/>
-			</td>
-		</tr>
+		
+
+                <tr>
+                        <td colspan="3" class="structureViewSection" height="40px">
+                                <cockpit code="TopBannerContentSlot"/>
+                        </td>
+                </tr>
+
+                <tr>
+                        <td colspan="3" class="structureViewSection" height="40px">
+                                <cockpit code="ShopByCategoryContentSlot"/>
+                        </td>
+                </tr>
+
+                <tr>
+                        <td colspan="3" class="structureViewSection" height="40px">
+                                <cockpit code="ExperienceBrandsContentSlot"/>
+                        </td>
+                </tr>
+
+                <tr>
+                        <td colspan="3" class="structureViewSection" height="40px">
+                                <cockpit code="BrandBackgroundImageBannerContentSlot"/>
+                        </td>
+                </tr>
+
+                <tr>
+                        <td width="50%" class="structureViewSection" height="40px">
+                                <cockpit code="SuccessStoryContentSlot1"/>
+                        </td>
+                        <td width="50%" class="structureViewSection" height="40px">
+                                <cockpit code="SuccessStoryContentSlot2"/>
+                        </td>
+                </tr>
+                
+                <tr>
+                        <td colspan="3" class="structureViewSection" height="40px">
+                                <cockpit code="ToolsAndAdviceContentSlot"/>
+                        </td>
+                </tr>
+                
+                <tr>
+                        <td width="34%" class="structureViewSection" height="40px">
+                                <cockpit code="ToolsAndAdviceBannerContentSlot1"/>
+                        </td>
+                        <td width="33%" class="structureViewSection" height="40px">
+                                <cockpit code="ToolsAndAdviceBannerContentSlot2"/>
+                        </td>
+                        <td width="33%" class="structureViewSection" height="40px">
+                                <cockpit code="ToolsAndAdviceBannerContentSlot3"/>
+                        </td>
+                </tr>
 		<tr>
 			<td height="270px" colspan="3" class="structureViewSection">
 				<cockpit code="Footer"/>
@@ -55,7 +87,8 @@
 		</tr>
 		</tbody>
 	</table>
+
 	<div style="width:100%; border-top: 2px solid #bbb" class="cmsContentEditor">
 		<cockpit code="editor"/>
 	</div>
-</div>
+	</div>
