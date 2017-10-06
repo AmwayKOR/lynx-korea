@@ -1,0 +1,133 @@
+@mainColor: #55565a;
+@blue_1: #002F5F;
+@blue_2: #0075a4;
+
+@blue_3: #337ab7;
+@blue_4: #23527c;
+@blue_5: #00305e;
+@blue_6: #428cb2;
+@green: #20883e;
+@white: #fff;
+@gray_1: #8a9fb8;
+@gray_2: #ccc;
+@gray_3: #555555;
+@gray_4: #88888b;
+@gray_5: #818181;
+@gray_6: #bbbbbb;
+@gray_7: #e3e3e3;
+@gray_8: #dadada;
+@gray_9: #F4F4F4;
+@gray_10: #999999;
+@gray_11: #747477;
+@black: #000;
+@red_2: #c53131;
+@red: #e11e45;
+@font_sans: SourceSansPro;
+@font_roboto: Roboto;
+@font_icon_1: 'AmwayIcons';
+@font_icon_2: 'Glyphicons Halflings';
+
+@bg80: rgba(255, 255, 255, 0.8);
+@bg70: rgba(0, 0, 0, 0.7);
+@bg25: rgba(0, 0, 0, 0.25);
+
+@trans: transparent;
+@weight100: 100;
+@weight600: 600;
+@weight700: 700;
+@block: block;
+@inlineBlock: inline-block;
+@none: none;
+@w100: 100%;
+@w768: 768px;
+@w1400: 1400px;
+@borderGray: 1px solid #dadada;
+@images: "../images";
+
+.font16() {
+	font-size: 16px;
+}
+.btn_shop-now() {
+	margin: 26px 0;
+	display: @inlineBlock;
+	background-color: @blue_1;
+	border: 2px solid @blue_1;
+	padding: 19px 50px;
+	font-size: 18px;
+	font-weight: @weight600;
+	color: @white;
+	line-height: 1.11;
+	letter-spacing: 0;
+	text-transform: uppercase;
+}
+
+
+.banner__shop-now {
+	margin: unset;
+	display: unset;
+	background-color: unset;
+	border: unset;
+	padding: unset;
+	font-size: unset;
+	font-weight: unset;
+	color: unset;
+	line-height: unset;
+	letter-spacing: unset;
+	text-transform: unset;
+}
+.banner__shop-now:hover {
+	background: unset;
+	color: unset;
+}
+.banner__shop-now {
+	a{
+		.btn_shop-now;
+	}
+}
+.banner__shop-now{
+	a:hover {
+		background: @white;
+		color: @blue_1;
+	}
+}
+.sub_banner {
+	
+	.banner__shop-now {
+		a{
+			margin-bottom: 0;
+		}
+		
+	}
+	
+}
+.video-preview__img {
+	>a {
+		>img{
+			width: @w100;
+		}
+	}
+	
+}
+
+@media (max-width: @w768) {
+		.banner__shop-now {
+					a{
+						margin: 18px auto;
+						padding: 10px 20px;
+						.font16;
+					}
+					
+		}
+		.video-preview__img-mob
+		{
+			display: @block;
+			width: @w100;
+			a{
+				img{
+					display: @block;
+					width: @w100;
+				}
+			}
+		}
+}
+

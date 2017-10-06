@@ -197,7 +197,38 @@
                                     <a href="shopping-cart.html" class="btn btn-primary btn-block mini-cart-checkout-button view-cart-button">VIEW CART</a></div>
                             </div>
                         </div>
-                        <div id="dittoPopupContentPC" class="tab-pane fade"></div>
+                        <div id="dittoPopupContentPC" class="tab-pane fade">
+                        <div class="ditto-content">
+                                <p class="tip-gray">Your DITTO schedules are sorted by Drop Date,which is the date your
+                                    order will arrive.</p>
+                                <ul>
+                                    <li>
+                                        <h5><a href="">Jennifer Jones'First DITTO(20)</a><label class="label-date">11/15/16</label>
+                                        </h5>
+                                        <span>180.22PV/570.00BV</span>
+                                        <span>Subtotal:$500.00</span>
+                                    </li>
+                                    <li>
+                                        <h5><a href="">Second DITTO List Name(54)</a><label
+                                                class="label-date">12/15/15</label></h5>
+                                        <span>180.22PV/570.00BV</span>
+                                        <span>Subtotal:$500.00</span>
+                                    </li>
+                                    <li>
+                                        <h5><a href="">My Other DITTO List Has a Long Name(999)</a><label
+                                                class="label-date">05/12/10</label></h5>
+                                        <span>180.22PV/570.00BV</span>
+                                        <span>Subtotal:$500.00</span>
+                                    </li>
+                                </ul>
+                                <div class="bottom-total">
+                                    <a href="">You have <b>5</b> DITTO schedules.</a>
+                                </div>
+                                <div class="bottom-button">
+                                    <button class="btn-blue-white">VIEW ALL DITTO SCHEDULES</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="country-language-container header-content">
@@ -286,7 +317,7 @@
                         <div class="nav-links-container pos-relative">
                             <ul class="nav-list clearfix">
                                 <li class=" nav-item">
-                                    <a href="#" data-toggle="collapse" data-target="#login-drop-content" class="pos-relative img-nav-link js-my-account-menu opened collapsed">
+                                    <a href="javascript:void(0);" data-toggle="collapse" data-target="#login-drop-content" class="pos-relative img-nav-link js-my-account-menu opened collapsed">
                                         <img src="${themeResourcePath}/images/yui.png" alt="" width="34px" />
                                         <span class="message-num-1">24</span>
                                         <span class="user-name">Yui Mori</span>
@@ -296,7 +327,7 @@
                                 <li class="componentContainer liOffcanvas nav-item nav-mini-cart">
                                     <span class="">
                                         <div class="nav-cart nav-cart-wrapper js-nav-cart-wrapper print-hide">
-                                            <a href="#" class="pos-relative mini-cart-link js-mini-cart-link clearfix " data-toggle="collapse" data-target="#shoppingcar-drop-content">
+                                            <a href="javascript:void(0);" class="pos-relative mini-cart-link js-mini-cart-link clearfix " data-toggle="collapse" data-target="#shoppingcar-drop-content">
                                                 <div class="mini-cart-icon">
                                                     <span class="icon-shopping-cart"></span>
                                                 </div>

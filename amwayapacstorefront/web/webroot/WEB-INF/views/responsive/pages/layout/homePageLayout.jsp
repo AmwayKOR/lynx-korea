@@ -4,7 +4,7 @@
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
 
 <template:page pageTitle="${pageTitle}">
-<body>
+
 
   <main>
   			
@@ -103,5 +103,5 @@
             </div>
             
         </main>
-</body>
+
 </template:page>

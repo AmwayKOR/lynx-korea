@@ -63,7 +63,7 @@
                                                 <div class="col-sm-9 tab-content">
                                                 
                                                 		<c:forEach items="${component.navigationNode.children}" var="childrenNode" varStatus="loop">
-	                                                		<div role="tabpanel" class="tab-pane active" id="navMenuTab${loop.index}">
+	                                                		<div role="tabpanel" class="tab-pane <c:if test="${loop.index==0}">active</c:if>" id="navMenuTab${loop.index}">
 	                                                        <div class="overlay-menu-tab">
 	                                                            <div class="overlay-menu-tab-first-col">
 	                                                                <div class="overlay-menu__tab-wrapper">
