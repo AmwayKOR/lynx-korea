@@ -7,7 +7,7 @@
 	<script type="text/javascript">
 		/*<![CDATA[*/
 		<%-- Define a javascript variable to hold the content path --%>
-		var ACC = { config: {} };
+		var ACC = { config: {} , messages:{}, globalMessageTypes:{}};
 			ACC.config.contextPath = "${contextPath}";
 			ACC.config.encodedContextPath = "${encodedContextPath}";
 			ACC.config.commonResourcePath = "${commonResourcePath}";
@@ -43,6 +43,13 @@
 					ACC.${jsVar.qualifier} = '${jsVar.value}';
 				</c:if>
 			</c:forEach>
+			
+			ACC.globalMessageTypes.CONF_MESSAGES_HOLDER = "CONF_MESSAGES_HOLDER";
+			ACC.globalMessageTypes.WARNING_MESSAGES_HOLDER = "WARNING_MESSAGES_HOLDER";
+			ACC.globalMessageTypes.ERROR_MESSAGES_HOLDER = "ERROR_MESSAGES_HOLDER";
+
+			ACC.messages.shoppingListNameEmptyErrorMessage= '<spring:theme code="shopping.list.create.error.empty.name"/>';
+			ACC.messages.shoppingListCreationError='<spring:theme code="shopping.list.create.error"/>';
 		/*]]>*/
 	</script>
 	<template:javaScriptAddOnsVariables/>

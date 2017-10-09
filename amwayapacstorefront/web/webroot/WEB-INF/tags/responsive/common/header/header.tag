@@ -9,9 +9,6 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="nav" tagdir="/WEB-INF/tags/responsive/nav"%>
 
-<cms:pageSlot position="TopHeaderSlot" var="component" element="div" class="container">
-	<cms:component component="${component}" />
-</cms:pageSlot>
 <header class="js-mainHeader main-header general-header">
     <div class="amway-theme">
         <nav class="header-container">
@@ -47,6 +44,9 @@
                                 <a href="MyAccount.html" title="My Account">My Account</a></li>
                             <li class="account-popover__element">
                                 <a href="AddNewPaymentMethod.html" title="Billing Shipping">Billing Shipping</a></li>
+							<li class="account-popover__element">
+								<c:url var="allShoppingListsUrl" value="/shopping-lists/all" />
+                                <a href="${allShoppingListsUrl}" title="My Shopping Lists">My Shopping Lists</a></li>
                             <li class="account-popover__element">
                                 <a href="#" title="Ditto">Ditto</a></li>
                             <li class="account-popover__element">
@@ -632,8 +632,3 @@
     <!--search end-->
 
 </header>
-
-
-<cms:pageSlot position="BottomHeaderSlot" var="component" element="div"	class="container-fluid">
-	<cms:component component="${component}" />
-</cms:pageSlot>

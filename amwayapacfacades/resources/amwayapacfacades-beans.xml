@@ -13,6 +13,7 @@
 
     <bean class="com.amway.facades.product.data.WishlistData">
         <property name="user" type="de.hybris.platform.commercefacades.user.data.CustomerData" />
+		<property name="lastUpdated" type="java.util.Date" />
     </bean>
 
 </beans>

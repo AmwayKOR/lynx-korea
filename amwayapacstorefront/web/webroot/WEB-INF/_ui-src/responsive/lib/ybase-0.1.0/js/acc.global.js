@@ -8,6 +8,10 @@ ACC.global = {
         "initImager",
         "backToHome"
     ],
+    
+    isNullOrWhiteSpace: function(str) {
+    	  return (!str || str.length === 0 || /^\s*$/.test(str))
+    },
 
     passwordStrength: function () {
         $('.password-strength').pstrength({

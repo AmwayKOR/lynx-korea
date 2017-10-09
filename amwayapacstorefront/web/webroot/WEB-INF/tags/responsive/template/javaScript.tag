@@ -89,6 +89,8 @@
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.csv-import.js"></script>
 
 		<script type="text/javascript" src="${commonResourcePath}/js/_autoload.js"></script>
+		<script type="text/javascript" src="${commonResourcePath}/js/acc.js-global-messages.js"></script>
+		<script type="text/javascript" src="${commonResourcePath}/js/acc.shoppinglists.js"></script>
 		<script src="${commonResourcePath}/js/owl.carousel.js"></script> 
 		
 		<%-- Cms Action JavaScript files --%>

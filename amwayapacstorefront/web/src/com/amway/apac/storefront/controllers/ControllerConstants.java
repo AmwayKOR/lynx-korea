@@ -212,17 +212,53 @@ public interface ControllerConstants
 			{
 				String ProductListingFragment = "fragments/category/productListingFragment"; //NOSONAR
 			}
+
+			/**
+			 * Interface for Shopping List related fragments
+			 *
+			 * @author Parvesh Goyal
+			 *
+			 */
+			interface ShoppingList
+			{
+				/**
+				 * Complete shopping lists page view
+				 */
+				String ShoppingListsPageFragment = "fragments/shoppingList/shoppingListsPage"; //NOSONAR
+			}
 		}
 	}
 
+	/**
+	 * Interface to group together the controller model parameters
+	 *
+	 * @author Parvesh goyal
+	 *
+	 */
 	interface ModelParameters
 	{
 		/**
 		 * Shopping lists model attribute
 		 */
 		String SHOPPING_LISTS_STRING = "shoppingLists";
+
+		/**
+		 * Model parameter for error message
+		 */
+		String ERROR_MESSAGE = "errorMessage";
+
+		/**
+		 * Model parameter for success message
+		 */
+		String SUCCESS_MESSAGE = "successMessage";
 	}
 
+	/**
+	 * Interface to group together generic constants for the controllers.
+	 *
+	 * @author Parvesh goyal
+	 *
+	 */
 	interface GeneralConstants
 	{
 		/**
@@ -244,5 +280,62 @@ public interface ControllerConstants
 		 * String constant linkUrl
 		 */
 		String LINK_URL_STRING = "linkUrl";
+
 	}
+
+	/**
+	 * Interface to group together the error message keys.
+	 *
+	 * @author Parvesh goyal
+	 *
+	 */
+	interface ErrorMessageKeys
+	{
+
+		/**
+		 * Interface to group Shopping list related error messages together
+		 *
+		 * @author Parvesh Goyal
+		 */
+		interface ShoppingList
+		{
+			/**
+			 * Error message to be displayed when the name is empty.
+			 */
+			String SHOPPING_LIST_CREATE_NAME_EMPTY = "shopping.list.create.error.empty.name";
+
+			/**
+			 * Error message to be displayed when the name exceeds the max length for shopping list name.
+			 */
+			String SHOPPING_LIST_CREATE_NAME_MAX_LENGTH = "shopping.list.create.error.maxlength.exceeeded";
+
+			/**
+			 * Error message to be displayed when the shopping list name already exists.
+			 */
+			String SHOPPING_LIST_NAME_ALREADY_EXISTS = "shopping.list.create.error.already.exists";
+		}
+	}
+
+	/**
+	 * Interface to group together success message keys.
+	 *
+	 * @author Parvesh Goyal
+	 */
+	interface SuccessMessageKeys
+	{
+		/**
+		 * Interface to group Shopping list related success messages together
+		 *
+		 * @author Parvesh Goyal
+		 *
+		 */
+		interface ShoppingList
+		{
+			/**
+			 * Success message to be displayed when shopping list is sucessfully created.
+			 */
+			String SHOPPING_LIST_CREATED_SUCESS_MESSAGE = "shopping.list.create.success";
+		}
+	}
+
 }

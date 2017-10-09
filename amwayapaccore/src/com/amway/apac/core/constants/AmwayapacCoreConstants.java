@@ -47,4 +47,9 @@ public final class AmwayapacCoreConstants extends GeneratedAmwayapacCoreConstant
 	 */
 	public static final int HUNDRED_INT = 100;
 
+	/**
+	 * Maximum length of the shopping lists names
+	 */
+	public static final int SHOPPING_LIST_DEFAULT_MAX_LENGTH = 100;
+
 }

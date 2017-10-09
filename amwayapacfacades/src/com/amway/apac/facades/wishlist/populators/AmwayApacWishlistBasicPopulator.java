@@ -23,7 +23,6 @@ import com.amway.facades.product.data.WishlistData;
  */
 public class AmwayApacWishlistBasicPopulator implements Populator<Wishlist2Model, WishlistData>
 {
-
 	private Converter<UserModel, CustomerData> amwayApacUserBasicConverter;
 
 	/**
@@ -40,6 +39,7 @@ public class AmwayApacWishlistBasicPopulator implements Populator<Wishlist2Model
 		target.setIsDefault(BooleanUtils.toStringTrueFalse(source.getDefault()));
 		target.setName(source.getName());
 		target.setIsFavorite(BooleanUtils.isTrue(source.getFavorite()));
+		target.setLastUpdated(source.getModifiedtime());
 
 		if (source.getUser() != null)
 		{
