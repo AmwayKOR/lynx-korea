@@ -261,7 +261,7 @@
 			</attributes>
 		</itemtype>
 		
-		<itemtype code="TextImageComponent" extends="SimpleCMSComponent"
+		<itemtype code="AmwayApacTextImageComponent" extends="SimpleCMSComponent"
 			autocreate="true" generate="true"
 			jaloclass="com.amway.apac.storefront.components.jalo.TextImageComponent">
 			<description>Used to display text within Image</description>
