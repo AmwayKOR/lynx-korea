@@ -20,7 +20,7 @@ $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[defa
 $lang=en
 
 # Create Categories
-UPDATE Category;code[unique=true];;name[lang=$lang];$catalogVersion
+UPDATE Category;code[unique=true];name[lang=$lang];$catalogVersion
 ;root								;Categories
 ;nutritionaccessories       		;Accessories(nutrition)
 ;airtreatmentaccessories    		;Accessories(airtreatment)

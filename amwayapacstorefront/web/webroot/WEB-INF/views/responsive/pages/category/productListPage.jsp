@@ -218,10 +218,6 @@
 	                                                <!--<img src="${themeResourcePath}/images/limited_stock.png" class="product-list__flag" alt="limited stock" />-->
 	                                                <div class="plp-item-label limit-stock">Limited Stock<span class="right-white"></span></div>
 	                                                <div class="product-list__item-content amwahover">
-	                                                    <label class="checkbox-element-wrapper">
-	                                                        <input class="shopping-cart-entry-checkbox _checkbox-element-global-class" value="" data-product-code="" type="checkbox">
-	                                                        <span class="_checkbox-element-global-span"></span>
-	                                                    </label>
 	                                                    <button class="quick-view-btn" data-product-code="${product.code}">QUICK VIEW</button>
 	                                                    <a class="product-list__thum" target="_self" href="${product.url}">
 	                                                        <img src="${themeResourcePath}/images/product_list_item1.png" class="product-list__thumbnail" alt="product"></img>
