@@ -115,6 +115,7 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 ;Section2;;;wide
 ;Section3;;;wide
 ;Section4;;;wide
+;ColorVariantSelector;;ProductVariantSelectorComponent;narrow
 ;VariantSelector;;ProductVariantSelectorComponent;narrow
 ;AddToCart;;ProductAddToCartComponent;narrow
 ;CrossSelling;;ProductReferencesComponent;narrow
@@ -599,6 +600,7 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 ;;Footer-ProductDetails;Footer;;FooterSlot;true
 ;;HeaderLinks-ProductDetails;HeaderLinks;;HeaderLinksSlot;true
 ;;SearchBox-ProductDetails;SearchBox;;SearchBoxSlot;true
+;;ColorVariantSelector-ProductDetails;ColorVariantSelector;;ColorVariantSelectorSlot;true
 ;;VariantSelector-ProductDetails;VariantSelector;;VariantSelectorSlot;true
 ;;AddToCart-ProductDetails;AddToCart;;AddToCartSlot;true
 ;;UpSelling-ProductDetails;UpSelling;;UpSellingSlot;true

@@ -74,5 +74,19 @@
     <bean id="defaultAmwayApacWishlistFacade" class="com.amway.apac.facades.wishlist.impl.DefaultAmwayApacWishlistFacade" parent="defaultAmwayWishlistFacade">
         <property name="amwayApacWishlistBasicConverter" ref="amwayApacWishlistBasicConverter"/>
     </bean>
-	
+
+	<alias name="amwayApacVariantOptionDataConverter" alias="variantOptionDataConverter"/>
+	<bean id="amwayApacVariantOptionDataConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.product.data.VariantOptionData"/>
+		<property name="populators">
+			<list>
+				<ref bean="amwayApacVariantOptionDataPopulator"/>
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultAmwayApacVariantOptionDataPopulator" alias="amwayApacVariantOptionDataPopulator"/>
+	<bean id="defaultAmwayApacVariantOptionDataPopulator"  class="com.amway.apac.facades.populators.AmwayApacVariantOptionDataPopulator"
+		  parent="acceleratorVariantOptionDataPopulator" >
+	</bean>
 </beans>

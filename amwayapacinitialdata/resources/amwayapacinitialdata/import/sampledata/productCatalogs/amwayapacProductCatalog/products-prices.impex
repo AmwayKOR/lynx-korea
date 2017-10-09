@@ -2561,3 +2561,15 @@ INSERT_UPDATE PriceRow;productId[unique=true];pointValue;businessVolume;currency
 INSERT_UPDATE PriceRow;productId[unique=true];pointValue;businessVolume;currency(isocode)[unique=true];price[unique=true];startTime[dateformat=yyyyMMdd];endTime[dateformat=yyyyMMdd];pg(code)[unique=true];ug(code)[unique=true];unit(code[unique=true]);net
 ;101390M;142;142;USD;141.98;20160215;21001201;;AmwayDefaultABOPriceGroup;pieces;true
 ;101390M;142;142;USD;177.55;20160215;21001201;;AmwayDefaultRetailPriceGroup;pieces;true
+;120237A;85;85;USD;106.13;20160318;21001201;;AmwayDefaultRetailPriceGroup;pieces;true
+;120237A;85;85;USD;85;20160318;21001201;;AmwayDefaultABOPriceGroup;pieces;true
+;120237A1;85;85;USD;106.13;20160318;21001201;;AmwayDefaultRetailPriceGroup;pieces;true
+;120237A1;85;85;USD;85;20160318;21001201;;AmwayDefaultABOPriceGroup;pieces;true
+;120237A2;85;85;USD;106.13;20160318;21001201;;AmwayDefaultRetailPriceGroup;pieces;true
+;120237A2;85;85;USD;85;20160318;21001201;;AmwayDefaultABOPriceGroup;pieces;true
+;120237A3;85;85;USD;106.13;20160318;21001201;;AmwayDefaultRetailPriceGroup;pieces;true
+;120237A3;85;85;USD;85;20160318;21001201;;AmwayDefaultABOPriceGroup;pieces;true
+;120238A1;85;85;USD;106.13;20160318;21001201;;AmwayDefaultRetailPriceGroup;pieces;true
+;120238A1;85;85;USD;85;20160318;21001201;;AmwayDefaultABOPriceGroup;pieces;true
+;120238A2;85;85;USD;106.13;20160318;21001201;;AmwayDefaultRetailPriceGroup;pieces;true
+;120238A2;85;85;USD;85;20160318;21001201;;AmwayDefaultABOPriceGroup;pieces;true

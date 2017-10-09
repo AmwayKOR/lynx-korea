@@ -34,12 +34,19 @@ INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];$media;mime[default
 ;300Wx300H;/300Wx300H/A4271M_2.jpg;$siteResource/images/300Wx300H/A4271M_2.jpg;;;images
 ;300Wx300H;/300Wx300H/A4272M_1.jpg;$siteResource/images/300Wx300H/A4272M_1.jpg;;;images
 ;300Wx300H;/300Wx300H/A4272M_2.jpg;$siteResource/images/300Wx300H/A4272M_2.jpg;;;images
+;300Wx300H;/300Wx300H/120237A_1.jpg;$siteResource/images/300Wx300H/120237A_1.jpg;;;images
+;300Wx300H;/300Wx300H/120237A_2.png;$siteResource/images/300Wx300H/120237A_2.png;;;images
+;300Wx300H;/300Wx300H/120238A_1.jpg;$siteResource/images/300Wx300H/120238A_1.jpg;;;images
+;300Wx300H;/300Wx300H/120238A_2.png;$siteResource/images/300Wx300H/120238A_2.png;;;images
 ;96Wx96H;/96Wx96H/101390M_1.jpg;$siteResource/images/96Wx96H/101390M_1.jpg;;;images
 ;96Wx96H;/96Wx96H/101390M_2.jpg;$siteResource/images/96Wx96H/101390M_2.jpg;;;images
 ;96Wx96H;/96Wx96H/A4271M_1.jpg;$siteResource/images/96Wx96H/A4271M_1.jpg;;;images
 ;96Wx96H;/96Wx96H/A4271M_2.jpg;$siteResource/images/96Wx96H/A4271M_2.jpg;;;images
 ;96Wx96H;/96Wx96H/A4272M_1.jpg;$siteResource/images/96Wx96H/A4272M_1.jpg;;;images
 ;96Wx96H;/96Wx96H/A4272M_2.jpg;$siteResource/images/96Wx96H/A4272M_2.jpg;;;images
+;96Wx96H;/96Wx96H/A4272M_2.jpg;$siteResource/images/96Wx96H/A4272M_2.jpg;;;images
+;96Wx96H;/96Wx96H/120237A_1.jpg;$siteResource/images/96Wx96H/120237A_1.jpg;;;images
+;96Wx96H;/96Wx96H/120238A_1.jpg;$siteResource/images/96Wx96H/120238A_1.jpg;;;images
 
 # Create Media Containers
 INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$catalogVersion
@@ -49,6 +56,9 @@ INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$catalogVersion
 ;A4271M_2;/300Wx300H/A4271M_2.jpg,/96Wx96H/A4271M_2.jpg;;
 ;A4272M_1;/300Wx300H/A4272M_1.jpg,/96Wx96H/A4272M_1.jpg;;
 ;A4272M_2;/300Wx300H/A4272M_2.jpg,/96Wx96H/A4272M_2.jpg;;
+;120237A_1;/300Wx300H/120237A_1.jpg,/96Wx96H/120237A_1.jpg;;
+;120238A_1;/300Wx300H/120238A_1.jpg,/96Wx96H/120238A_1.jpg;;
+
 
 
 # Update Products with Media and Media Containers
@@ -56,3 +66,16 @@ UPDATE Product;code[unique=true];$picture;$thumbnail;$detail;$others;$normal;$th
 ;101390M;/300Wx300H/101390M_1.jpg;/96Wx96H/101390M_1.jpg;;;/300Wx300H/101390M_1.jpg,/300Wx300H/101390M_2.jpg;/96Wx96H/101390M_1.jpg,/96Wx96H/101390M_2.jpg;101390M_1,101390M_2;
 ;A4271M;/300Wx300H/A4271M_1.jpg;/96Wx96H/A4271M_1.jpg;;;/300Wx300H/A4271M_1.jpg,/300Wx300H/A4271M_2.jpg;/96Wx96H/A4271M_1.jpg,/96Wx96H/A4271M_2.jpg;A4271M_1,A4271M_2;
 ;A4272M;/300Wx300H/A4272M_1.jpg;/96Wx96H/A4272M_1.jpg;;;/300Wx300H/A4272M_1.jpg,/300Wx300H/A4272M_2.jpg;/96Wx96H/A4272M_1.jpg,/96Wx96H/A4272M_2.jpg;A4272M_1,A4272M_2;
+;890;/300Wx300H/120237A_2.png;/96Wx96H/120237A_1.jpg;;;/300Wx300H/120237A_1.jpg;/96Wx96H/120237A_1.jpg;120237A_1;
+
+INSERT_UPDATE AmwayApacFirstVariantProduct;code[unique=true];$picture;$thumbnail;$others;$normal;$thumbnails;$galleryImages;$catalogVersion
+;120237A;/300Wx300H/120237A_2.png;/96Wx96H/120237A_1.jpg;/300Wx300H/120237A_1.jpg,/96Wx96H/120237A_1.jpg;/300Wx300H/120237A_1.jpg;/96Wx96H/120237A_1.jpg;120237A_1;
+;120238A;/300Wx300H/120238A_2.png;/96Wx96H/120238A_1.jpg;/300Wx300H/120238A_1.jpg,/96Wx96H/120238A_1.jpg;/300Wx300H/120238A_1.jpg;/96Wx96H/120238A_1.jpg;120238A_1;
+
+
+INSERT_UPDATE AmwayApacSecondVariantProduct;code[unique=true];$picture;$thumbnail;$others;$normal;$thumbnails;$galleryImages;$catalogVersion
+;120237A1;/300Wx300H/120237A_2.png;/96Wx96H/120237A_1.jpg;/300Wx300H/120237A_1.jpg,/96Wx96H/120237A_1.jpg;/300Wx300H/120237A_1.jpg;/96Wx96H/120237A_1.jpg;120237A_1;
+;120238A1;/300Wx300H/120238A_2.png;/96Wx96H/120238A_1.jpg;/300Wx300H/120238A_1.jpg,/96Wx96H/120238A_1.jpg;/300Wx300H/120238A_1.jpg;/96Wx96H/120238A_1.jpg;120238A_1;
+;120237A2;/300Wx300H/120237A_2.png;/96Wx96H/120237A_1.jpg;/300Wx300H/120237A_1.jpg,/96Wx96H/120237A_1.jpg;/300Wx300H/120237A_1.jpg;/96Wx96H/120237A_1.jpg;120237A_1;
+;120238A2;/300Wx300H/120238A_2.png;/96Wx96H/120238A_1.jpg;/300Wx300H/120238A_1.jpg,/96Wx96H/120238A_1.jpg;/300Wx300H/120238A_1.jpg;/96Wx96H/120238A_1.jpg;120238A_1;
+;120237A3;/300Wx300H/120237A_2.png;/96Wx96H/120237A_1.jpg;/300Wx300H/120237A_1.jpg,/96Wx96H/120237A_1.jpg;/300Wx300H/120237A_1.jpg;/96Wx96H/120237A_1.jpg;120237A_1;

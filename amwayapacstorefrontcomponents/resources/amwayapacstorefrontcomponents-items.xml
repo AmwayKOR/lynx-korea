@@ -286,6 +286,12 @@
 				</attribute>
 			</attributes>
 		</itemtype>
-		
+
+		<itemtype code="ProductColorVariantSelectorComponent" autocreate="true"
+				  generate="true" extends="ProductVariantSelectorComponent"
+				  jaloclass="de.hybris.platform.acceleratorcms.jalo.components.ProductColorVariantSelectorComponent">
+			<description>Represents product color variant selector component that gives the ability to select different types of the product.</description>
+		</itemtype>
+
     </itemtypes>
 </items>

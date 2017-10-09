@@ -73,6 +73,10 @@ INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];nam
 INSERT_UPDATE ProductVariantSelectorComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
 ;;VariantSelector;Product Variant Selector;VariantSelector
 
+# CMS VariantSelector Components
+INSERT_UPDATE ProductColorVariantSelectorComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;ColorVariantSelector;Product Color Variant Selector;ColorVariantSelector
+
 # CMS ProductAddToCart Components
 INSERT_UPDATE ProductAddToCartComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
 
@@ -109,6 +113,7 @@ INSERT_UPDATE SearchResultsListComponent;$contentCV[unique=true];uid[unique=true
 # ContentSlot
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(uid,$contentCV)
 ;;VariantSelectorSlot;VariantSelector
+;;ColorVariantSelectorSlot;ColorVariantSelector
 
 INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];mime;realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];folder(qualifier)[default='images']
 

@@ -15,6 +15,7 @@ $productCatalog=amwayapacProductCatalog
 $productCatalogName=Amway Apac Product Catalog
 
 $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$image=image(code, $catalogVersion)
 
 # Language
 $lang=en
@@ -24,7 +25,27 @@ UPDATE Product;code[unique=true];$catalogVersion;name[lang=$lang];summary[lang=$
 ;101390M;;NUTRILITE BILBERRY PLUS;NUTRILITE Bilberry Plus provides you with a unique combination of natural concentrates that aids natural vision improvement. Bilberry Plus helps support normal eyesight and maintains healthy eye tissues. It has a combination of natural concentrates to help you achieve dietary balance and optimal nutrition.;;
 ;A4271M;;DAILY 60 MAL910381X;Give yourself the necessary nutrients you need with NUTRILITE Daily. With its 11 vitamins and 7 essential minerals, this supplement can ensure an optimal level of body performance. The NUTRILITE Daily multivitamin is your natural path towards a better health!
 ;A4272M;;DAILY 180 MAL910381X;Give yourself the necessary nutrients you need with NUTRILITE Daily. With its 11 vitamins and 7 essential minerals, this supplement can ensure an optimal level of body performance. The NUTRILITE Daily multivitamin is your natural path towards a better health!
+;120237A;;ARTISTRY Signature Color Light Up Lip Gloss - Rose Petal (6ml);Formulated with Jojoba and Avocado oils, ARTISTRY SIGNATURE COLOR Light Up Lip Gloss complements every skin tone and enhances any look. This luscious gloss features an ingenious built-in mirror and flattering LED light to make your touch-ups easy and convenient, anytime and anywhere.
+;120238A;;ARTISTRY Signature Color Light Up Lip Gloss - Juicy Peach (6ml);Formulated with Jojoba and Avocado oils, ARTISTRY SIGNATURE COLOR Light Up Lip Gloss complements every skin tone and enhances any look. This luscious gloss features an ingenious built-in mirror and flattering LED light to make your touch-ups easy and convenient, anytime and anywhere.
 
-UPDATE Product;code[unique=true];$catalogVersion;AmwayApacSizeVariantProduct.size[lang=$lang];
-;A4271M;;60 tab;
-;A4272M;;180 tab;
+INSERT_UPDATE Variant;code[unique=true];name[lang=$lang];value[lang=$lang];$image
+;1;Size;60 Tab;;
+;2;Size;180 Tab;;
+;3;Color;Rose Petal;/300Wx300H/120237A_2.png;
+;4;Color;Juicy Peach;/300Wx300H/120238A_2.png;
+;5;Size;6ml;;
+;6;Size;12ml;;
+;7;Size;18ml;;
+
+UPDATE Product;code[unique=true];$catalogVersion;firstVariant(code);
+;A4271M;;1;
+;A4272M;;2;
+;120237A;;3;
+;120238A;;4;
+
+INSERT_UPDATE Product;code[unique=true];$catalogVersion;secondVariant(code);
+;120237A1;;5;
+;120237A2;;6;
+;120237A3;;7;
+;120238A1;;5;
+;120238A2;;6;

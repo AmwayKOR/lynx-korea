@@ -3,6 +3,7 @@
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div class="container-fluid main-container">
     <div class="print-hide breadcrumb-section">
@@ -41,29 +42,10 @@
                         <div class="col-md-12">
                             <div class="description">${product.summary}
                                 <a href="#">Read More</a></div>
-                            <div class="lip-color-choose">
-                                <p class="lip-color-choose-message">Color: Glitz (Cool, Shimmer)</p>
-                                <ul class="lip-color-choose__nav">
-                                    <li>
-                                        <img data-toggle="tab" href="#lips-1" src="images/glitz-1.png" alt="color-1"></li>
-                                    <li>
-                                        <img data-toggle="tab" href="#lips-2" src="images/glitz-2.png" alt="color-2"></li>
-                                    <li class="active">
-                                        <img data-toggle="tab" href="#lips-3" src="images/glitz-3.png" alt="color-3"></li>
-                                    <li>
-                                        <img data-toggle="tab" href="#lips-4" src="images/glitz-4.png" alt="color-4"></li>
-                                    <li>
-                                        <img data-toggle="tab" href="#lips-5" src="images/glitz-5.png" alt="color-5"></li>
-                                    <li>
-                                        <img data-toggle="tab" href="#lips-6" src="images/glitz-6.png" alt="color-6"></li>
-                                    <li>
-                                        <img data-toggle="tab" href="#lips-7" src="images/glitz-7.png" alt="color-7"></li>
-                                    <li>
-                                        <img data-toggle="tab" href="#lips-8" src="images/glitz-8.png" alt="color-8"></li>
-                                    <li>
-                                        <img data-toggle="tab" href="#lips-9" src="images/glitz-9.png" alt="color-9"></li>
-                                </ul>
-                            </div>
+
+                                <cms:pageSlot position="ColorVariantSelector" var="component">
+                                    <cms:component component="${component}" />
+                                </cms:pageSlot>
                             <hr class="description__line">
                             <div class="description-vote">
                                 <img src="images/five_star.png" alt="star">
@@ -79,8 +61,8 @@
                                 <div class="page-details-add-to-cart-component">
                                     <div class="addtocart-component">
                                         <div class="amway-theme qty-selector js-qty-selector control-group">
-                                            <cms:pageSlot position="VariantSelector" var="component" element="div" class="page-details-variants-select">
-                                                <cms:component component="${component}" element="div" class="yComponentWrapper page-details-variants-select-component"/>
+                                            <cms:pageSlot position="VariantSelector" var="component">
+                                                <cms:component component="${component}" />
                                             </cms:pageSlot>
                                             <div class="row">
                                                 <div class="pull-left qty-selector-container">
