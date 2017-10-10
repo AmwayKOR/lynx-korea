@@ -251,7 +251,7 @@
 	                                                            <span class="product-list__item-abovalue">${product.retailPrice.formattedValue}</span></div>
 	                                                        <div class="product-list__item-retailprice">
 	                                                            <span class="product-list__item-abolabel">PV / BV:</span>
-	                                                            <span class="product-list__item-abovalue">4.50 / 14.21</span></div>
+	                                                            <span class="product-list__item-abovalue">${product.price.amwayValue.pointValue} / ${product.price.amwayValue.businessVolume}</span></div>
 	                                                    </div>
 	                                                </div>
 	                                                <div class="product-list__item-link col-md-12">
