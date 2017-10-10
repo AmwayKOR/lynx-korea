@@ -217,6 +217,11 @@
 		parent="abstractValueResolver">
 	</bean>
 	
+	
+	<bean id="amwayApacStockFacetDisplayNameProvider" class="com.amway.apac.core.search.solrfacetsearch.providers.AmwayApacStockFacetDisplayNameProvider">
+		<property name="enumerationService" ref="enumerationService" />
+	</bean>
+	
 	<import resource="/amwayapaccore/processes/quote/quote-buyer-process-spring.xml"/>
 	<import resource="/amwayapaccore/processes/quote/quote-salesrep-process-spring.xml"/>
 	<import resource="/amwayapaccore/processes/quote/quote-seller-approval-process-spring.xml"/>

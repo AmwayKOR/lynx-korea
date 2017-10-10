@@ -27,6 +27,13 @@
 			<groupId>ro.isdc.wro4j</groupId>
 			<artifactId>wro4j-core</artifactId>
 			<version>1.7.9</version>
-		</dependency>	
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-taglibs -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>3.2.3.RELEASE</version>
+		</dependency>
 	</dependencies>
 </project>
