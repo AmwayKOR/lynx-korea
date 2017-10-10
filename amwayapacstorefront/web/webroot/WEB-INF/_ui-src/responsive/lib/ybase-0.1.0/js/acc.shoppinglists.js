@@ -1,17 +1,8 @@
 ACC.shoppinglists = {
 
     _autoload: [
-    	"bindCreateShoppingList",
-    	"bindShoppingListFormSubmit"
+    	"bindCreateShoppingList"
     ],
-    
-    bindShoppingListFormSubmit: function() {
-    	if ($(".page-content-wrapper.page-shopping-lists").length > 0) {
-    		$(".page-content-wrapper.page-shopping-lists").on("click", "button#createShoppingList", function() {
-    			$(this).closest("form#createShoppingListForm").submit();
-    		});
-    	}
-    },
     
     refreshAllShoppingListsPage: function(data) {
     	// data contains the shopping list page content
