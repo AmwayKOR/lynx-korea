@@ -225,15 +225,6 @@ ACC.productdetail = {
                 };
             });
 
-            $("#createShoppingList").click(function(event){
-                event.preventDefault();
-                $("#add-to-shopping-list,.overlay").css("display","block");
-                $("#add-to-shopping-list").css("visibility","visible")
-                $("#colorbox.add-to-shopping-list-box").css("display","none");
-                $("#colorbox.add-to-shopping-list-box").css("visibility","hidden")
-                dialogPos2();
-
-            });
             $("#add-to-shopping-list .cart-popup__close").click(function() {
                 $("#add-to-shopping-list,.overlay").hide();
             });

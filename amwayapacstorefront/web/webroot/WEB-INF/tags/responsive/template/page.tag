@@ -27,9 +27,9 @@
 	<jsp:body>
 		<main data-currency-iso-code="${fn:escapeXml(currentCurrency.isocode)}">
 			<header:header hideHeaderLinks="${hideHeaderLinks}" />
-			<div class="page-content-wrapper ${pageBodyCssClasses}">
 				<common:globalMessages />
 				<cart:cartRestoration />
+			<div class="page-content-wrapper ${pageBodyCssClasses}">
 				<jsp:doBody />
 			</div>
 
