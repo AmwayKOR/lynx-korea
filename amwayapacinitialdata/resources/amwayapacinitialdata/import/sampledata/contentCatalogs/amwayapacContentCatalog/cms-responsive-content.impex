@@ -51,8 +51,8 @@ INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];positi
 ;;Section1CarouselSlot-Homepage;Section1;;Section1CarouselSlot-Homepage
 
 
-INSERT_UPDATE AmwayAPACArtistryDealCarouselComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink;
-;;AmwayAPACArtistryDealCarouselComponent;Girl Thumbnail Detail;AmwayAPACArtistryDealCarouselComponent;/		
+INSERT_UPDATE AmwayApacArtistryDealCarouselComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink;
+;;AmwayApacArtistryDealCarouselComponent;Girl Thumbnail Detail;AmwayApacArtistryDealCarouselComponent;/		
 
 
 INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow'];
@@ -61,7 +61,7 @@ INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url
 
 
 INSERT_UPDATE RotatingImagesComponent;$contentCV[unique=true];uid[unique=true];name;banners(&componentRef);&componentRef
-;;HomepageSection1CarouselComponent;Homepage Carousel 1;AmwayAPACArtistryDealCarouselComponent;refSection1
+;;HomepageSection1CarouselComponent;Homepage Carousel 1;AmwayApacArtistryDealCarouselComponent;refSection1
 
 
 
@@ -73,8 +73,8 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;c
 INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='homepage'];contentSlot(uid,$contentCV)[unique=true]
 ;;Section2ContentSlot-Homepage;Section2;;Section2ContentSlot-Homepage
 
-INSERT_UPDATE AmwayAPACLatestNewsComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;
-;;AmwayAPACLatestNewsComponent;Amway Latest News Detail;refSection2;		
+INSERT_UPDATE AmwayApacLatestNewsComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;
+;;AmwayApacLatestNewsComponent;Amway Latest News Detail;refSection2;		
 
 INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow'];
 ;;HomepageSection2ReadMoreNavLink;Read More Nav Link;/;HomepageSection2ReadMoreNavLink;HomepageSection2ReadMoreNavLink;;;;
@@ -101,7 +101,7 @@ INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true]  ;&
 ;                       ;Section3AParacomponent;;Section3AParacomponent
 ;                       ;Section3BParacomponent;;Section3BParacomponent
 
-INSERT_UPDATE AmwayAPACPathToSuccessPitchPerfectComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;
+INSERT_UPDATE AmwayApacPathToSuccessPitchPerfectComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;
 ;;HomePageSection3ACustomComponent;Amway Path to success;refSection3A;	
 ;;HomePageSection3BCustomComponent;Amway Pitch Perfect;refSection3B;	
 
@@ -115,8 +115,8 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;c
 INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='homepage'];contentSlot(uid,$contentCV)[unique=true]
 ;;Section4ContentSlot-Homepage;Section4;;Section4ContentSlot-Homepage
 
-INSERT_UPDATE AmwayAPACOurNewProductComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;
-;;AmwayAPACOurNewProductComponent;Section 4 details;refSection4;		
+INSERT_UPDATE AmwayApacOurNewProductComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;
+;;AmwayApacOurNewProductComponent;Section 4 details;refSection4;		
 
 
 
@@ -129,8 +129,8 @@ INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];positi
 ;;Section5CarouselSlot-Homepage;Section5;;Section5CarouselSlot-Homepage
 
 
-INSERT_UPDATE AmwayAPACArtistryNewLuxuryCarouselComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink;
-;;AmwayAPACArtistryNewLuxuryCarouselComponent;Artistry Section 5 Thumbnail Detail;AmwayAPACArtistryNewLuxuryCarouselComponent;/		
+INSERT_UPDATE AmwayApacArtistryNewLuxuryCarouselComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink;
+;;AmwayApacArtistryNewLuxuryCarouselComponent;Artistry Section 5 Thumbnail Detail;AmwayApacArtistryNewLuxuryCarouselComponent;/		
 
 INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow'];
 ;;HomepageSection5CarouselShopNowNavLink;Shop Now Nav Link;/;HomepageSection5CarouselShopNowNavLink;HomepageSection5CarouselShopNowNavLink;;;;
@@ -138,8 +138,8 @@ INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url
 INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true]  ;&componentRef
 ;;Section5ParaTitleComponent;;Section5ParaTitleComponent
 
-INSERT_UPDATE AmwayAPACArtistryNewLuxuryRotatingComponent;$contentCV[unique=true];uid[unique=true];name;banners(&componentRef);&componentRef
-;;AmwayAPACArtistryNewLuxuryRotatingComponent;Homepage Carousel Section 5;AmwayAPACArtistryNewLuxuryCarouselComponent;refSection5
+INSERT_UPDATE AmwayApacArtistryNewLuxuryRotatingComponent;$contentCV[unique=true];uid[unique=true];name;banners(&componentRef);&componentRef
+;;AmwayApacArtistryNewLuxuryRotatingComponent;Homepage Carousel Section 5;AmwayApacArtistryNewLuxuryCarouselComponent;refSection5
 
 
 #Section 6
@@ -153,7 +153,7 @@ INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];positi
 ;;Section6BSlot-Homepage;Section6B;;Section6BSlot-Homepage
 ;;Section6CSlot-Homepage;Section6C;;Section6CSlot-Homepage
 
-INSERT_UPDATE AmwayAPACNewProductComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;
+INSERT_UPDATE AmwayApacNewProductComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;
 ;;HomePageSection6ACustomComponent;Section 6A Detail;refSection6A;
 ;;HomePageSection6BCustomComponent;Section 6B Detail;refSection6B;
 ;;HomePageSection6CCustomComponent;Section 6C Detail;refSection6C;	
@@ -182,8 +182,8 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;c
 INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='homepage'];contentSlot(uid,$contentCV)[unique=true]
 ;;Section7Slot-Homepage;Section7;;Section7Slot-Homepage
 
-INSERT_UPDATE AmwayAPACPlatinumABOComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;
-;;AmwayAPACPlatinumABOComponent;Section 7 Detail;refSection7;
+INSERT_UPDATE AmwayApacPlatinumABOComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;
+;;AmwayApacPlatinumABOComponent;Section 7 Detail;refSection7;
 
 INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink
 ;;Section7SBComponent;Section 7 SB Component;Section7SBComponent;"/"
@@ -219,7 +219,7 @@ INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];positi
 ;;Section9BSlot-Homepage;Section9B;;Section9BSlot-Homepage
 ;;Section9CSlot-Homepage;Section9C;;Section9CSlot-Homepage
 
-INSERT_UPDATE AmwayAPACSupplementsComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;
+INSERT_UPDATE AmwayApacSupplementsComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;
 ;;HomePageSection9ACustomComponent;Section 9A Detail;refSection9A;
 ;;HomePageSection9BCustomComponent;Section 9B Detail;refSection9B;
 ;;HomePageSection9CCustomComponent;Section 9C Detail;refSection9C;	
@@ -254,8 +254,8 @@ INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];nam
 ;;Section10SB1Component;Section 10 SB Component GIF 1;Section10SB1Component;"/"
 ;;Section10SB2Component;Section 10 SB Component GIF 2;Section10SB2Component;"/"
 
-INSERT_UPDATE AmwayAPACYourOpportunityComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;
-;;AmwayAPACYourOpportunityComponent;Section 10 Detail;refSection10;
+INSERT_UPDATE AmwayApacYourOpportunityComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;
+;;AmwayApacYourOpportunityComponent;Section 10 Detail;refSection10;
 
 
 #Section 11
@@ -284,8 +284,8 @@ INSERT_UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];name;&com
 ;;HomePageSection12icookBannerComponent;Section 12 icook Banner Detail;HomePageSection12icookBannerComponent;/		
 ;;HomePageSection12Nutrilite2BannerComponent;Section 12 Nutrilite2 Banner Detail;HomePageSection12Nutrilite2BannerComponent;/		
 
-INSERT_UPDATE AmwayAPACFeaturedBrandsCarouselComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
-;;AmwayAPACFeaturedBrandsCarouselComponent;Homepage Carousel Section 12;refSection12
+INSERT_UPDATE AmwayApacFeaturedBrandsCarouselComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;AmwayApacFeaturedBrandsCarouselComponent;Homepage Carousel Section 12;refSection12
 
 
 
@@ -372,7 +372,7 @@ INSERT_UPDATE NavigationBarComponent;$contentCV[unique=true];uid[unique=true];na
 ;;AboutAmwayNavBarComponent;About Amway Nav Bar Component;10;Nav_AboutAmwayLink;;AboutNavNode;refNavigation3
 ;;EducationNavBarComponent;Education Nav Bar Component;10;Nav_EducationLink;;EducationNavNode;refNavigation4
 
-INSERT_UPDATE AmwayAPACMobileNavigationComponent;$contentCV[unique=true];uid[unique=true];name;wrapAfter;link(uid, $contentCV);styleClass;navigationNode(&nodeRef);&componentRef
+INSERT_UPDATE AmwayApacMobileNavigationComponent;$contentCV[unique=true];uid[unique=true];name;wrapAfter;link(uid, $contentCV);styleClass;navigationNode(&nodeRef);&componentRef
 ;;MobileShopNavBarComponent;Mobile Shops Nav Bar Component;10;Nav_ShopLink;;ShopNavNode;refMobileNavigation1
 ;;MobileBusinessCenterNavBarComponent;Mobile Business Center Nav Bar Component;10;Nav_BusinessCenterLink;;BusinessCenterNavNode;refMobileNavigation2
 ;;MobileAboutAmwayNavBarComponent;Mobile About Amway Nav Bar Component;10;Nav_AboutAmwayLink;;AboutNavNode;refMobileNavigation3
@@ -638,7 +638,7 @@ INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true]  ;&
 ;                       ;bodyKeySuccessStoryParagraphComponent;bodyKeySuccessStoryParagraphComponent
 ;                       ;xsSportsSuccessStoryParagraphComponent;xsSportsSuccessStoryParagraphComponent
 
-INSERT_UPDATE AmwayAPACPathToSuccessPitchPerfectComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;banner(&componentRef);link(&componentRef);description(&componentRef)
+INSERT_UPDATE AmwayApacPathToSuccessPitchPerfectComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;banner(&componentRef);link(&componentRef);description(&componentRef)
 ;;bodyKeySuccessStoryComponent;Amway Path to success;bodyKeySuccessStoryComponent;bodyKeySuccessStoryBannerComponent;bodyKeySuccessStoryLink;bodyKeySuccessStoryParagraphComponent
 ;;xsSportsSuccessStoryComponent;Amway Pitch Perfect;xsSportsSuccessStoryComponent;xsSportsSuccessStoryBannerComponent;xsSportsSuccessStoryLink;xsSportsSuccessStoryParagraphComponent
 	
@@ -652,7 +652,7 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents
 ;;ExperienceBrandsContentSlot;ExperienceBrandsTitleComponent
 ;;BrandBackgroundImageBannerContentSlot;ExperienceBrandBackgroundImageAndBannerComponent
 
-INSERT_UPDATE AmwayAPACOurNewProductComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;
+INSERT_UPDATE AmwayApacOurNewProductComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;
 ;;ExperienceBrandsTitleComponent;experience brands title component;ExperienceBrandsTitleComponent;		
 
 
@@ -687,4 +687,5 @@ INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$pi
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
 ;;TopBannerContentSlot;Text Image Slot;true;amwayapactextImageComponent;
+
 	

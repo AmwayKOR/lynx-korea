@@ -88,11 +88,10 @@
                     <div class=" col-sm-12">
                         <div class="amway-theme">
                             <div class="full-width-title-component">
-                                <h2 class="full-width-title-component__title">
-                                		<cms:pageSlot position="Section11" var="component" element="div">
-								        <cms:component component="${component}"/>
-									</cms:pageSlot>
-                                </h2>
+                                
+                                <cms:pageSlot position="Section11" var="component" >
+                                		<h2 class="full-width-title-component__title">${component.content}</h2>
+								</cms:pageSlot>
                             </div>
                         </div>
                         <cms:pageSlot position="Section12" var="component" element="div">

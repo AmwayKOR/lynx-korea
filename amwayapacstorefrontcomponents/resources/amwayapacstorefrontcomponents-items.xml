@@ -37,8 +37,8 @@
 	</relations>
     <itemtypes>
 		
-		<itemtype code="AmwayAPACArtistryDealCarouselComponent" generate="true" extends="BannerComponent" autocreate="true" 
-			jaloclass="com.amway.apac.core.jalo.components.AmwayAPACArtistryDealCarouselComponent">
+		<itemtype code="AmwayApacArtistryDealCarouselComponent" generate="true" extends="BannerComponent" autocreate="true" 
+			jaloclass="com.amway.apac.core.jalo.components.AmwayApacArtistryDealCarouselComponent">
 			<attributes>
 				<attribute qualifier="image2" generate="true" autocreate="true" type="localized:Media">
 					<persistence type="property" />
@@ -52,8 +52,8 @@
 			</attributes>
 		</itemtype>
 		
-		<itemtype code="AmwayAPACLatestNewsComponent" generate="true" extends="SimpleCMSComponent" autocreate="true" 
-			jaloclass="com.amway.apac.core.jalo.components.AmwayAPACLatestNewsComponent">
+		<itemtype code="AmwayApacLatestNewsComponent" generate="true" extends="SimpleCMSComponent" autocreate="true" 
+			jaloclass="com.amway.apac.core.jalo.components.AmwayApacLatestNewsComponent">
 			<attributes>
 				<attribute qualifier="title" generate="true" autocreate="true" type="localized:java.lang.String">
 					<persistence type="property" />
@@ -67,8 +67,8 @@
 			</attributes>
 		</itemtype>
 		
-		<itemtype code="AmwayAPACPathToSuccessPitchPerfectComponent" generate="true" extends="SimpleCMSComponent" autocreate="true" 
-			jaloclass="com.amway.apac.core.jalo.components.AmwayAPACPathToSuccessPitchPerfectComponent">
+		<itemtype code="AmwayApacPathToSuccessPitchPerfectComponent" generate="true" extends="SimpleCMSComponent" autocreate="true" 
+			jaloclass="com.amway.apac.core.jalo.components.AmwayApacPathToSuccessPitchPerfectComponent">
 			<attributes>
 				<attribute qualifier="title" generate="true" autocreate="true" type="localized:java.lang.String">
 					<persistence type="property" />
@@ -88,8 +88,8 @@
 			</attributes>
 		</itemtype>
 		
-		<itemtype code="AmwayAPACOurNewProductComponent" generate="true" extends="SimpleCMSComponent" autocreate="true" 
-			jaloclass="com.amway.apac.core.jalo.components.AmwayAPACOurNewProductComponent">
+		<itemtype code="AmwayApacOurNewProductComponent" generate="true" extends="SimpleCMSComponent" autocreate="true" 
+			jaloclass="com.amway.apac.core.jalo.components.AmwayApacOurNewProductComponent">
 			<attributes>
 				<attribute qualifier="title" generate="true" autocreate="true" type="localized:java.lang.String">
 					<persistence type="property" />
@@ -100,8 +100,8 @@
 			</attributes>
 		</itemtype>
 		
-		<itemtype code="AmwayAPACArtistryNewLuxuryCarouselComponent" generate="true" extends="BannerComponent" autocreate="true" 
-			jaloclass="com.amway.apac.core.jalo.components.AmwayAPACArtistryNewLuxuryCarouselComponent">
+		<itemtype code="AmwayApacArtistryNewLuxuryCarouselComponent" generate="true" extends="BannerComponent" autocreate="true" 
+			jaloclass="com.amway.apac.core.jalo.components.AmwayApacArtistryNewLuxuryCarouselComponent">
 			<attributes>
 				<attribute qualifier="shopnow" generate="true" autocreate="true" type="CMSLinkComponent">
 					<persistence type="property" />
@@ -114,8 +114,8 @@
 				</attribute>
 			</attributes>
 		</itemtype>
-		<itemtype code="AmwayAPACArtistryNewLuxuryRotatingComponent" generate="true" extends="RotatingImagesComponent" autocreate="true" 
-			jaloclass="com.amway.apac.core.jalo.components.AmwayAPACArtistryNewLuxuryRotatingComponent">
+		<itemtype code="AmwayApacArtistryNewLuxuryRotatingComponent" generate="true" extends="RotatingImagesComponent" autocreate="true" 
+			jaloclass="com.amway.apac.core.jalo.components.AmwayApacArtistryNewLuxuryRotatingComponent">
 			<attributes>
 				<attribute qualifier="image" generate="true" autocreate="true" type="localized:Media">
 					<persistence type="property" />
@@ -123,8 +123,8 @@
 			</attributes>
 		</itemtype>
 		
-		<itemtype code="AmwayAPACNewProductComponent" generate="true" extends="SimpleCMSComponent" autocreate="true" 
-			jaloclass="com.amway.apac.core.jalo.components.AmwayAPACNewProductComponent">
+		<itemtype code="AmwayApacNewProductComponent" generate="true" extends="SimpleCMSComponent" autocreate="true" 
+			jaloclass="com.amway.apac.core.jalo.components.AmwayApacNewProductComponent">
 			<attributes>
 				<attribute qualifier="title" generate="true" autocreate="true" type="localized:java.lang.String">
 					<persistence type="property" />
@@ -141,18 +141,18 @@
 			</attributes>
 		</itemtype>
 		
-		<itemtype code="AmwayAPACPlatinumABOComponent" generate="true" extends="AmwayAPACNewProductComponent" autocreate="true" 
-			jaloclass="com.amway.apac.core.jalo.components.AmwayAPACPlatinumABOComponent">
+		<itemtype code="AmwayApacPlatinumABOComponent" generate="true" extends="AmwayApacNewProductComponent" autocreate="true" 
+			jaloclass="com.amway.apac.core.jalo.components.AmwayApacPlatinumABOComponent">
 			
 		</itemtype>
 		
-		<itemtype code="AmwayAPACSupplementsComponent" generate="true" extends="AmwayAPACNewProductComponent" autocreate="true" 
-			jaloclass="com.amway.apac.core.jalo.components.AmwayAPACSupplementsComponent">
+		<itemtype code="AmwayApacSupplementsComponent" generate="true" extends="AmwayApacNewProductComponent" autocreate="true" 
+			jaloclass="com.amway.apac.core.jalo.components.AmwayApacSupplementsComponent">
 			
 		</itemtype>
 		
-		<itemtype code="AmwayAPACYourOpportunityComponent" generate="true" extends="SimpleCMSComponent" autocreate="true" 
-			jaloclass="com.amway.apac.core.jalo.components.AmwayAPACYourOpportunityComponent">
+		<itemtype code="AmwayApacYourOpportunityComponent" generate="true" extends="SimpleCMSComponent" autocreate="true" 
+			jaloclass="com.amway.apac.core.jalo.components.AmwayApacYourOpportunityComponent">
 			<attributes>
 				<attribute qualifier="title" generate="true" autocreate="true" type="localized:java.lang.String">
 					<persistence type="property" />
@@ -172,8 +172,8 @@
 			</attributes>
 		</itemtype>
 		
-		<itemtype code="AmwayAPACFeaturedBrandsCarouselComponent" generate="true" extends="RotatingImagesComponent" autocreate="true" 
-			jaloclass="com.amway.apac.core.jalo.components.AmwayAPACFeaturedBrandsCarouselComponent">
+		<itemtype code="AmwayApacFeaturedBrandsCarouselComponent" generate="true" extends="RotatingImagesComponent" autocreate="true" 
+			jaloclass="com.amway.apac.core.jalo.components.AmwayApacFeaturedBrandsCarouselComponent">
 			<attributes>
 				<attribute qualifier="loopCount" generate="true" autocreate="true" type="localized:java.lang.Integer">
 					<persistence type="property" />
@@ -221,8 +221,8 @@
 			</attributes>
 		</itemtype>
 		
-		<itemtype code="AmwayAPACMobileNavigationComponent" generate="true" extends="NavigationBarComponent" autocreate="true" 
-			jaloclass="com.amway.apac.core.jalo.components.AmwayAPACMobileNavigationComponent">
+		<itemtype code="AmwayApacMobileNavigationComponent" generate="true" extends="NavigationBarComponent" autocreate="true" 
+			jaloclass="com.amway.apac.core.jalo.components.AmwayApacMobileNavigationComponent">
 		</itemtype>
 		
 				<itemtype code="AmwayApacAbstractTextLinkImageComponent" generate="true" extends="SimpleCMSComponent" autocreate="true" abstract="true"
@@ -252,7 +252,7 @@
 			jaloclass="com.amway.apac.core.jalo.components.AmwayApacToolsAndAdviceComponent">
 		</itemtype>
 		
-		<itemtype code="AmwayApacBackgroupImageBannerComponent" generate="true" extends="AmwayAPACArtistryNewLuxuryCarouselComponent" autocreate="true" 
+		<itemtype code="AmwayApacBackgroupImageBannerComponent" generate="true" extends="AmwayApacArtistryNewLuxuryCarouselComponent" autocreate="true" 
 			jaloclass="com.amway.apac.core.jalo.components.AmwayApacBackgroupImageBannerComponent">
 			<attributes>
 				<attribute qualifier="backgroudImage" generate="true" autocreate="true" type="localized:Media">
@@ -286,7 +286,8 @@
 				</attribute>
 			</attributes>
 		</itemtype>
-
+		
+		
 		<itemtype code="ProductColorVariantSelectorComponent" autocreate="true"
 				  generate="true" extends="ProductVariantSelectorComponent"
 				  jaloclass="de.hybris.platform.acceleratorcms.jalo.components.ProductColorVariantSelectorComponent">

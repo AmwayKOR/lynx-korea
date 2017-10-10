@@ -19,11 +19,10 @@
 
 	<group qualifier="editorial" visible="true" initially-opened="false">
 		<label key="config.general.editorial" />
-		<property qualifier="AmwayAPACPathToSuccessPitchPerfectComponent.title"/>
-		<property qualifier="AmwayAPACPathToSuccessPitchPerfectComponent.title2"/>
-		<property qualifier="AmwayAPACPathToSuccessPitchPerfectComponent.banner"/>
-		<property qualifier="AmwayAPACPathToSuccessPitchPerfectComponent.description"/>
-		<property qualifier="AmwayAPACPathToSuccessPitchPerfectComponent.link"/>
+		<property qualifier="AmwayApacNewProductComponent.title"/>
+		<property qualifier="AmwayApacNewProductComponent.description"/>
+		<property qualifier="AmwayApacNewProductComponent.link"/>
+		<property qualifier="AmwayApacNewProductComponent.banner"/>
 	</group>
 
 	<group qualifier="visibility" visible="true" initially-opened="false">

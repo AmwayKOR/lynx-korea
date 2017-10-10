@@ -15,7 +15,7 @@
 			                                    <span class="banner__message--main">${headline}</span>
 			                                    <br />
 			                                    <span class="banner__message--sub">${content}</span>
-			                                    <div class="banner__shop-now"><cms:component component="${shopnow}"  /></div>
+			                                    <div class="banner__shop-now"><cms:component component="${shopnow}" class="banner__shop-now" /></div>
 			                                    <div class="banner__action"><cms:component component="${secondary}"  /><i class="glyphicon glyphicon-menu-right"></i></div>
 			                                   
 			                                </div>

@@ -19,9 +19,11 @@
 
 	<group qualifier="editorial" visible="true" initially-opened="false">
 		<label key="config.general.editorial" />
-		<property qualifier="AmwayAPACLatestNewsComponent.title"/>
-		<property qualifier="AmwayAPACLatestNewsComponent.news"/>
-		<property qualifier="AmwayAPACLatestNewsComponent.link"/>
+		<property qualifier="AmwayApacPathToSuccessPitchPerfectComponent.title"/>
+		<property qualifier="AmwayApacPathToSuccessPitchPerfectComponent.title2"/>
+		<property qualifier="AmwayApacPathToSuccessPitchPerfectComponent.banner"/>
+		<property qualifier="AmwayApacPathToSuccessPitchPerfectComponent.description"/>
+		<property qualifier="AmwayApacPathToSuccessPitchPerfectComponent.link"/>
 	</group>
 
 	<group qualifier="visibility" visible="true" initially-opened="false">

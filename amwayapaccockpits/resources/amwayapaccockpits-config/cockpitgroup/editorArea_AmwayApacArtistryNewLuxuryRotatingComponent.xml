@@ -19,9 +19,7 @@
 
 	<group qualifier="editorial" visible="true" initially-opened="false">
 		<label key="config.general.editorial" />
-		<property qualifier="AmwayAPACArtistryNewLuxuryCarouselComponent.shopnow"/>
-		<property qualifier="AmwayAPACArtistryNewLuxuryCarouselComponent.title"/>
-		<property qualifier="AmwayAPACArtistryNewLuxuryCarouselComponent.description"/>
+		<property qualifier="AmwayApacArtistryNewLuxuryRotatingComponent.image"/>
 	</group>
 
 	<group qualifier="visibility" visible="true" initially-opened="false">

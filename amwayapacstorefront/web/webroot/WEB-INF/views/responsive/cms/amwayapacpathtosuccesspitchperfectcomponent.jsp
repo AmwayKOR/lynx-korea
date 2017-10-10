@@ -18,9 +18,9 @@
 	</div>
 	<div class="banner-button-wrap">
 		<div class="banner-button-link">
-			<button class="btn-blue-white">
-				<cms:component component="${link}" />
-			</button>
+			<div class="banner__shop-now banner__try-now">
+				<cms:component component="${link}" class="btn-blue-white"/>
+			</div>
 		</div>
 	</div>
 </div>

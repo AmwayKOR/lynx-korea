@@ -47,16 +47,16 @@ UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$
 ;;HomepageSection1CarouselShopNowNavLink;"SHOP NOW";HomepageSection1CarouselShopNowNavLink
 ;;HomepageSection1CarouselSecNavLink;"SECONDARY ACTION";HomepageSection1CarouselSecNavLink
 
-INSERT_UPDATE AmwayAPACArtistryDealCarouselComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang];content[lang=$lang];headline[lang=$lang];image2(code, $contentCV)[lang=$lang];shopnow(&componentRef);secondary(&componentRef);&componentRef
-;													;AmwayAPACArtistryDealCarouselComponent;girl1;			"This highly advanced, yet gentle skin care system helps to visibly reduce the appearance of dark spots and discolouration.";"Artistry Ideal Radiance";artistry1;HomepageSection1CarouselShopNowNavLink;HomepageSection1CarouselSecNavLink;AmwayAPACArtistryDealCarouselComponent
+INSERT_UPDATE AmwayApacArtistryDealCarouselComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang];content[lang=$lang];headline[lang=$lang];image2(code, $contentCV)[lang=$lang];shopnow(&componentRef);secondary(&componentRef);&componentRef
+;													;AmwayApacArtistryDealCarouselComponent;girl1;			"This highly advanced, yet gentle skin care system helps to visibly reduce the appearance of dark spots and discolouration.";"Artistry Ideal Radiance";artistry1;HomepageSection1CarouselShopNowNavLink;HomepageSection1CarouselSecNavLink;AmwayApacArtistryDealCarouselComponent
 	 
 
 #Section 2
 UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang];&componentRef
 ;;HomepageSection2ReadMoreNavLink;"READ MORE";HomepageSection2ReadMoreNavLink
 
-INSERT_UPDATE AmwayAPACLatestNewsComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang];news[lang=$lang];link(&componentRef);&componentRef;
-;;AmwayAPACLatestNewsComponent;"Amway Latest news";"Amway Korea launches new product 'XS Red Blast' in the summer..";HomepageSection2ReadMoreNavLink;AmwayAPACLatestNewsComponent
+INSERT_UPDATE AmwayApacLatestNewsComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang];news[lang=$lang];link(&componentRef);&componentRef;
+;;AmwayApacLatestNewsComponent;"Amway Latest news";"Amway Korea launches new product 'XS Red Blast' in the summer..";HomepageSection2ReadMoreNavLink;AmwayApacLatestNewsComponent
 
 
 
@@ -77,15 +77,15 @@ UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true]  ;content[
 								   ;                       ;Section3AParacomponent;Make 2017 your most <br /> amazing year yet;Section3AParacomponent
 								   ;                       ;Section3BParacomponent;Ready to take your sales to the next level? <br /> 3 keys to help you get there;Section3BParacomponent
 
-UPDATE AmwayAPACPathToSuccessPitchPerfectComponent;$contentCV[unique=true];uid[unique=true];banner(&componentRef);link(&componentRef);description(&componentRef);title[lang=$lang];title2[lang=$lang]
+UPDATE AmwayApacPathToSuccessPitchPerfectComponent;$contentCV[unique=true];uid[unique=true];banner(&componentRef);link(&componentRef);description(&componentRef);title[lang=$lang];title2[lang=$lang]
 ;;HomePageSection3ACustomComponent;Section3ASBComponent;HomepageSection3ATryNowNavLink;Section3AParacomponent;"PATH TO SUCCESS:";"Your Steps to Success Map"
 ;;HomePageSection3BCustomComponent;Section3BSBComponent;HomepageSection3BLearnMoreNavLink;Section3BParacomponent;"PITCH PERFECT:";"3 Selling Tips"
 
 
 
 #Section 4
-UPDATE AmwayAPACOurNewProductComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang];title2[lang=$lang]
-;;AmwayAPACOurNewProductComponent;"OUR NEW PRODUCT";"Lorem ipsum dolor sit amet adipiscing elit sed diam nonummy"
+UPDATE AmwayApacOurNewProductComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang];title2[lang=$lang]
+;;AmwayApacOurNewProductComponent;"OUR NEW PRODUCT";"Lorem ipsum dolor sit amet adipiscing elit sed diam nonummy"
 
 
 #Section 5
@@ -99,11 +99,11 @@ UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$
 UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true]  ;content[lang=$lang];&componentRef
 								   ;                       ;Section5ParaTitleComponent;Artistry™ is constantly pushing the boundaries of beauty with the world's most scientifically advanced range of beauty solutions.;Section5ParaTitleComponent
 
-UPDATE AmwayAPACArtistryNewLuxuryCarouselComponent;$contentCV[unique=true];uid[unique=true];&componentRef;urlLink;title[lang=$lang];shopnow(&componentRef);description(&componentRef);$picture[lang=$lang]
-;;AmwayAPACArtistryNewLuxuryCarouselComponent;AmwayAPACArtistryNewLuxuryCarouselComponent;/;"ARTISTRY NEW LUXURY <br/> BEAUTY PRODUCTS";HomepageSection5CarouselShopNowNavLink;Section5ParaTitleComponent;newProduct	
+UPDATE AmwayApacArtistryNewLuxuryCarouselComponent;$contentCV[unique=true];uid[unique=true];&componentRef;urlLink;title[lang=$lang];shopnow(&componentRef);description(&componentRef);$picture[lang=$lang]
+;;AmwayApacArtistryNewLuxuryCarouselComponent;AmwayApacArtistryNewLuxuryCarouselComponent;/;"ARTISTRY NEW LUXURY <br/> BEAUTY PRODUCTS";HomepageSection5CarouselShopNowNavLink;Section5ParaTitleComponent;newProduct	
 
-UPDATE AmwayAPACArtistryNewLuxuryRotatingComponent;$contentCV[unique=true];uid[unique=true];name;banners(&componentRef);image(code, $contentCV)[lang=$lang];
-;;AmwayAPACArtistryNewLuxuryRotatingComponent;Homepage Carousel Section 5;AmwayAPACArtistryNewLuxuryCarouselComponent;productBanner
+UPDATE AmwayApacArtistryNewLuxuryRotatingComponent;$contentCV[unique=true];uid[unique=true];name;banners(&componentRef);image(code, $contentCV)[lang=$lang];
+;;AmwayApacArtistryNewLuxuryRotatingComponent;Homepage Carousel Section 5;AmwayApacArtistryNewLuxuryCarouselComponent;productBanner
 
 
 
@@ -128,7 +128,7 @@ UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[l
 ;;Section6BSBComponent;6BProduct;Section6BSBComponent	
 ;;Section6CSBComponent;6CProduct;Section6CSBComponent	
 
-UPDATE AmwayAPACNewProductComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang];description(&componentRef);link(&componentRef);banner(&componentRef)
+UPDATE AmwayApacNewProductComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang];description(&componentRef);link(&componentRef);banner(&componentRef)
 ;;HomePageSection6ACustomComponent;"FOUNDATIONAL SUPPLEMENTS";Section6AParaComponent;HomepageSection6AShopNowNavLink;Section6ASBComponent
 ;;HomePageSection6BCustomComponent;"TARGETED SUPPLEMENTS";Section6BParaComponent;HomepageSection6BShopNowNavLink;Section6BSBComponent
 ;;HomePageSection6CCustomComponent;"CONVENIENCE PRODUCTS";Section6CParaComponent;HomepageSection6CShopNowNavLink;Section6CSBComponent
@@ -148,8 +148,8 @@ UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true]  ;content[
 UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang];&componentRef
 ;;Section7SBComponent;7Product;Section7SBComponent	
 
-UPDATE AmwayAPACPlatinumABOComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang];description(&componentRef);link(&componentRef);banner(&componentRef)
-;;AmwayAPACPlatinumABOComponent;"Platinum ABO: Karen Martin";Section7ParaComponent;HomepageSection7LearnMoreNavLink;Section7SBComponent
+UPDATE AmwayApacPlatinumABOComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang];description(&componentRef);link(&componentRef);banner(&componentRef)
+;;AmwayApacPlatinumABOComponent;"Platinum ABO: Karen Martin";Section7ParaComponent;HomepageSection7LearnMoreNavLink;Section7SBComponent
 
 
 #Section 8
@@ -179,7 +179,7 @@ UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[l
 ;;Section9BSBComponent;9BProduct;Section9BSBComponent	
 ;;Section9CSBComponent;9CProduct;Section9CSBComponent	
 
-UPDATE AmwayAPACSupplementsComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang];description(&componentRef);link(&componentRef);banner(&componentRef)
+UPDATE AmwayApacSupplementsComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang];description(&componentRef);link(&componentRef);banner(&componentRef)
 ;;HomePageSection9ACustomComponent;"FOUNDATIONAL SUPPLEMENTS";Section9AParaComponent;HomepageSection9AShopNowNavLink;Section9ASBComponent
 ;;HomePageSection9BCustomComponent;"TARGETED SUPPLEMENTS";Section9BParaComponent;HomepageSection9BShopNowNavLink;Section9BSBComponent
 ;;HomePageSection9CCustomComponent;"CONVENIENCE PRODUCTS";Section9CParaComponent;HomepageSection9CShopNowNavLink;Section9CSBComponent
@@ -198,8 +198,8 @@ UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[l
 ;;Section10SB1Component;10Gif1Product;Section10SB1Component	
 ;;Section10SB2Component;10Gif2Product;Section10SB2Component	
 
-UPDATE AmwayAPACYourOpportunityComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang];description(&componentRef);bannerGif1(&componentRef);bannerGif2(&componentRef);playbutton(code, $contentCV)[lang=$lang]
-;;AmwayAPACYourOpportunityComponent;"Your OPPORTUNITY KEEPS GROWING";Section10ParaComponent;Section10SB1Component;Section10SB2Component;10ButtonProduct
+UPDATE AmwayApacYourOpportunityComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang];description(&componentRef);bannerGif1(&componentRef);bannerGif2(&componentRef);playbutton(code, $contentCV)[lang=$lang]
+;;AmwayApacYourOpportunityComponent;"Your OPPORTUNITY KEEPS GROWING";Section10ParaComponent;Section10SB1Component;Section10SB2Component;10ButtonProduct
 
 
 
@@ -225,8 +225,8 @@ UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$l
 ;;HomePageSection12icookBannerComponent;icookImg;HomePageSection12icookBannerComponent;
 ;;HomePageSection12Nutrilite2BannerComponent;nutrilite2Img;HomePageSection12Nutrilite2BannerComponent;		
 
-UPDATE AmwayAPACFeaturedBrandsCarouselComponent;$contentCV[unique=true];uid[unique=true];name;banners(&componentRef);loopCount[lang=$lang]
-;;AmwayAPACFeaturedBrandsCarouselComponent;Homepage Carousel Section 12;HomePageSection12NutriliteBannerComponent,HomePageSection12XSBannerComponent,HomePageSection12ArtistryBannerComponent,HomePageSection12GlisterBannerComponent,HomePageSection12icookBannerComponent,HomePageSection12Nutrilite2BannerComponent;999
+UPDATE AmwayApacFeaturedBrandsCarouselComponent;$contentCV[unique=true];uid[unique=true];name;banners(&componentRef);loopCount[lang=$lang]
+;;AmwayApacFeaturedBrandsCarouselComponent;Homepage Carousel Section 12;HomePageSection12NutriliteBannerComponent,HomePageSection12XSBannerComponent,HomePageSection12ArtistryBannerComponent,HomePageSection12GlisterBannerComponent,HomePageSection12icookBannerComponent,HomePageSection12Nutrilite2BannerComponent;999
 
 
 #Section Footer
@@ -538,7 +538,7 @@ UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true]  ;content[
 								   ;                       ;xsSportsSuccessStoryParagraphComponent;"Lorem ipsum dolor sit amet<br>consectetur adipiscing elit."
 
 
-INSERT_UPDATE AmwayAPACPathToSuccessPitchPerfectComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang];title2[lang=$lang]
+INSERT_UPDATE AmwayApacPathToSuccessPitchPerfectComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang];title2[lang=$lang]
 ;;bodyKeySuccessStoryComponent;"New body key";"Try One, Share a Few"
 ;;xsSportsSuccessStoryComponent;"xs sports";"Fuel Your Adventure"
 
@@ -548,7 +548,7 @@ INSERT_UPDATE AmwayAPACPathToSuccessPitchPerfectComponent;$contentCV[unique=true
 
 ################## category page brand background image and banner component
 
-UPDATE AmwayAPACOurNewProductComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang];title2[lang=$lang]
+UPDATE AmwayApacOurNewProductComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang];title2[lang=$lang]
 ;;ExperienceBrandsTitleComponent;"Experience our brands";"Lorem ipsum dolor sit amet adipiscing elit sed diam nonummy"
 
 
@@ -559,7 +559,7 @@ UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true]  ;content[
 								   ;                       ;ExperienceBrandsDescriptionParagraphComponent;"<span class=""banner-sub-title""><span>Duis autem vel eum iriure dolor in hendrerit<br>in vulputate velit esse molestie consequat</span></span>"
 
 
-INSERT_UPDATE AmwayAPACOurNewProductComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;
+INSERT_UPDATE AmwayApacOurNewProductComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;
 ;;ExperienceBrandsTitleComponent;experience brands title component;ExperienceBrandsTitleComponent;		
 
 INSERT_UPDATE AmwayApacBackgroupImageBannerComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang];$picture[lang=$lang];backgroudImage(code, $contentCV)

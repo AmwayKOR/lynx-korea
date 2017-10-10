@@ -19,8 +19,9 @@
 
 	<group qualifier="editorial" visible="true" initially-opened="false">
 		<label key="config.general.editorial" />
-		<property qualifier="AmwayAPACOurNewProductComponent.title"/>
-		<property qualifier="AmwayAPACOurNewProductComponent.title2"/>
+		<property qualifier="AmwayApacLatestNewsComponent.title"/>
+		<property qualifier="AmwayApacLatestNewsComponent.news"/>
+		<property qualifier="AmwayApacLatestNewsComponent.link"/>
 	</group>
 
 	<group qualifier="visibility" visible="true" initially-opened="false">

@@ -19,7 +19,11 @@
 
 	<group qualifier="editorial" visible="true" initially-opened="false">
 		<label key="config.general.editorial" />
-		<property qualifier="AmwayAPACFeaturedBrandsCarouselComponent.loopCount"/>
+		<property qualifier="AmwayApacYourOpportunityComponent.title"/>
+		<property qualifier="AmwayApacYourOpportunityComponent.description"/>
+		<property qualifier="AmwayApacYourOpportunityComponent.bannerGif1"/>
+		<property qualifier="AmwayApacYourOpportunityComponent.bannerGif2"/>
+		<property qualifier="AmwayApacYourOpportunityComponent.playbutton"/>
 	</group>
 
 	<group qualifier="visibility" visible="true" initially-opened="false">

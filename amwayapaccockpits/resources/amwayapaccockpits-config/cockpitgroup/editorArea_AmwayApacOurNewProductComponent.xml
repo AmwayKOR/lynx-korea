@@ -19,7 +19,8 @@
 
 	<group qualifier="editorial" visible="true" initially-opened="false">
 		<label key="config.general.editorial" />
-		<property qualifier="AmwayAPACArtistryNewLuxuryRotatingComponent.image"/>
+		<property qualifier="AmwayApacOurNewProductComponent.title"/>
+		<property qualifier="AmwayApacOurNewProductComponent.title2"/>
 	</group>
 
 	<group qualifier="visibility" visible="true" initially-opened="false">
