@@ -6,7 +6,7 @@
 <div class="product-description__imageslist" id="productListTab">
     <c:forEach items="${galleryImages}" var="container" varStatus="varStatus">
         <div>
-            <img class="product-description__image" src="${container.thumbnail.url}" alt="protein-powder"></div>
-        <div>
+            <img class="product-description__image" src="${container.thumbnail.url}" alt="protein-powder">
+        </div>
     </c:forEach>
 </div>

@@ -32,13 +32,13 @@
                         <c:set var="count" value="1" />
                         <c:forEach items="${galleryImages}" var="container" varStatus="varStatus">
                             <c:if test="${count eq 1}">
-                                <div id="item-${count}" class="tab-pane fade in active">
+                                <div id="item-${count}" class="tab-pane fade in active"></div>
                             </c:if>
                             <c:if test="${count ne 1}">
-                                <div id="item-${count}" class="tab-pane fade">
+                                <div id="item-${count}" class="tab-pane fade"></div>
                             </c:if>
                                 <img class="product-description__img-main" src="${container.product.url}">
-                            </div>
+                            
                              <c:set var="count" value="${count + 1}" />
                         </c:forEach>
                     </div>
