@@ -6,8 +6,17 @@ ACC.global = {
         "bindToggleXsSearch",
         "bindHoverIntentMainNavigation",
         "initImager",
-        "backToHome"
+        "backToHome",
+        "ajaxBlockUI"
     ],
+    
+    ajaxBlockUI: function() {
+    	$(document).ajaxStart(function() {
+    		$.blockUI({ message: ACC.common.processingMessage, css: ACC.common.processingImageCSS, overlayCSS:ACC.common.processingImageOverlayCSS });
+    	}).ajaxStop(function() {
+    		$.unblockUI();
+    	});
+    },
     
     isNullOrWhiteSpace: function(str) {
     	  return (!str || str.length === 0 || /^\s*$/.test(str))
