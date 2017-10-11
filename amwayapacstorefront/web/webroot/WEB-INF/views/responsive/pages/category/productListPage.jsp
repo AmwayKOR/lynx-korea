@@ -166,12 +166,25 @@
                                                             </form>
                                                         </div>
                                                         <div id="product-facet" class="mob-product-facet product__facet js-product-facet">
+                                                        	<form action="" method="get" id="mobile-facet-apply-form">
+                                                        		<input hidden="hidden" name="q">
+                                                        	</form>
                                                             <div class="filters-header">
                                                                 <span>Filters</span>
                                                                 <button form="clearAllForm" type="submit">Clear All Mobile</button>
                                                             </div>
                                                             <div class="panel-group accordion-custom" id="facetAccordion" role="tablist" aria-multiselectable="true">
                                                             <c:forEach items="${searchPageData.facets}" var="facet">
+                                                            <c:set var="showFacet" value="true"/>
+																<c:choose>
+																	<c:when test="${(aboUser == false) && (facet.code eq 'aboPriceRange')}">
+																		<c:set var="showFacet" value="false"/>
+																	</c:when>
+																	<c:when test="${(aboUser == true) && (facet.code eq 'retailPriceRange')}">
+																		<c:set var="showFacet" value="false"/>
+																	</c:when>
+																</c:choose>                                	
+							                                	<c:if test="${showFacet}">
                                                                 <div class="panel">
                                                                     <div class="panel-heading" role="tab" id="${facet.code}Facet">
                                                                         <h4 class="panel-title">
@@ -184,7 +197,7 @@
                                                                     </div>
                                                                     <div id="${facet.code}FacetBodymob" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne" style="height: 0px;">
                                                                         <div class="panel-body">
-                                                                            <div id="tabContent_${facet.code}Facet" class="facet js-facet">
+                                                                            <div id="tabContent_${facet.code}Facet" class="facet js-facet" data-current-query="${searchPageData.currentQuery.query.value}">
                                                                                 <div class="facet__name js-facet-name">
                                                                                     <span class="glyphicon facet__arrow"></span>
                                                                                     Shop by ${facet.name}</div>
@@ -207,7 +220,7 @@
                                                                                                </span>
                                                                                                </label>
                                                                                                <label class="hidden-md hidden-lg">
-                                                                                                   <input class="facet__list__checkbox js-facet-checkbox js-facet-item-checkbox sr-only" type="checkbox" <c:if test="${facetValue.selected}">checked="checked"</c:if>>
+                                                                                                   <input class="facet__list__checkbox js-facet-mobile-checkbox js-facet-item-checkbox sr-only" type="checkbox" data-facet-code="${facet.code}" data-facet-value-code="${facetValue.code}" <c:if test="${facetValue.selected}">checked="checked"</c:if>>
                                                                                                    <span class="facet__list__label">
                                                                                                    <span class="facet__list__mark"></span>
                                                                                                    <span class="facet__list__text">
@@ -229,6 +242,7 @@
                                                                      </div>
                                                                   </div>
                                                                 </div>
+                                                             </c:if>
                                                              </c:forEach>
                                                             </div>
                                                         </div>

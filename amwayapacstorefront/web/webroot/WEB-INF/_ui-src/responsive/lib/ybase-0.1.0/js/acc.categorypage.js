@@ -6,6 +6,7 @@ ACC.categorypage = {
         "bindFilterFacetButton",
         "bindQuickViewPopup",
         "bindPopupCloseButton",
+        "bindFacetApplyButton",
         "bindOthers"
         ],
 
@@ -88,6 +89,31 @@ ACC.categorypage = {
     bindPopupCloseButton : function(){
     	$(".cart-popup__close").click(function() {
     		$("#add-to-cart-box.cbox,.overlay").hide();
+    	});
+    },
+    
+    
+    bindFacetApplyButton : function(){
+    	$(document).on("click", ".facet-button-apply", function(){
+    		var facetQuery = $(this).closest(".js-facet").data("currentQuery");
+    		
+    		$(this).closest(".panel-body").find(".js-facet-mobile-checkbox:checked").each(function(){
+    			var enodedQuery = ":" + $(this).data("facetCode") + ":" + encodeURIComponent($(this).data("facetValueCode"));
+    			if(!facetQuery.includes(enodedQuery)){
+    				facetQuery = facetQuery + enodedQuery;
+    			}
+        	});
+    		
+    		$(this).closest(".panel-body").find(".js-facet-mobile-checkbox:not(:checked)").each(function(){
+    			var enodedQuery = ":" + $(this).data("facetCode") + ":" + encodeURIComponent($(this).data("facetValueCode"));
+    			if(!facetQuery.includes(enodedQuery)){
+    			facetQuery = facetQuery.replace(enodedQuery,"");
+    			}
+        	});
+    		
+    		$form = $(this).closest(".mob-product-facet").find("#mobile-facet-apply-form");
+    		$form.find("input").val(facetQuery);
+    		$form.submit();
     	});
     },
     
