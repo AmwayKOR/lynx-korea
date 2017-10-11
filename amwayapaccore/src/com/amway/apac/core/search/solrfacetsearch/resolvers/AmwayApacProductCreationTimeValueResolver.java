@@ -17,7 +17,7 @@ import java.util.Date;
  * @author shubhamgoyal
  *
  */
-public class AmwayApacProductModifiedTimeValueResolver extends AbstractValueResolver<ProductModel, Object, Date>
+public class AmwayApacProductCreationTimeValueResolver extends AbstractValueResolver<ProductModel, Object, Date>
 {
 
 
@@ -26,8 +26,7 @@ public class AmwayApacProductModifiedTimeValueResolver extends AbstractValueReso
 			final IndexedProperty indexedProperty, final ProductModel model,
 			final ValueResolverContext<Object, Date> resolverContext) throws FieldValueProviderException
 	{
-		final Date timeValue = model.getModifiedtime();
-		document.addField(indexedProperty, timeValue, resolverContext.getFieldQualifier());
+		document.addField(indexedProperty, model.getCreationtime(), resolverContext.getFieldQualifier());
 	}
 
 }

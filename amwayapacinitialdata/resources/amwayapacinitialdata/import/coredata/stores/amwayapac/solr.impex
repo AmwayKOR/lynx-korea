@@ -34,7 +34,7 @@ UPDATE GenericItem[processor=de.hybris.platform.commerceservices.impex.impl.Conf
 
 # Declare the indexed type Product
 INSERT_UPDATE SolrIndexedType;identifier[unique=true];type(code);variant;sorts(&sortRefID)
-;$solrIndexedType;Product;false;sortRef1,sortRef2,sortRef3,sortRef4,sortRef5,sortRef6,sortRef7,sortRef8
+;$solrIndexedType;Product;false;sortRef1,sortRef2,sortRef3,sortRef4,sortRef5,sortRef6,sortRef7,sortRef8,sortRef9,sortRef10
 
 INSERT_UPDATE SolrFacetSearchConfig;name[unique=true];description;indexNamePrefix;languages(isocode);currencies(isocode);solrServerConfig(name);solrSearchConfig(description);solrIndexConfig(name);solrIndexedTypes(identifier);enabledLanguageFallbackMechanism;$catalogVersions
 ;$facetSearchConfigName;$facetSearchConfigDescription;$searchIndexNamePrefix;$indexLanguages;$indexCurrencies;Default;Default;Default;$solrIndexedType;true;$productCatalog:Online,$productCatalog:Staged
@@ -78,8 +78,8 @@ INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[
 #;$solrIndexedType; inStockFlag                                                             ;boolean   ;                  ;                       ;                        ;                         ;                                  ;                                 ;productInStockFlagValueProvider          ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
 #;$solrIndexedType; pickupAvailableFlag                                                     ;boolean   ;                  ;                       ;                        ;                         ;                                  ;                                 ;productPickupAvailabilityValueProvider   ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
 ;$solrIndexedType; configurable                                                             ;boolean   ;                  ;                       ;                        ;                         ;                                  ;                                 ;productConfigurableProvider              ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
-;$solrIndexedType; multidimensional                                                        ;boolean   ;                  ;                       ;                        ;                         ;                                  ;                                 ;multidimentionalProductFlagValueProvider ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
-;$solrIndexedType; modifiedtime                                                             ;date      ;date              ;                       ;                        ;                         ;                                  ;                                 ;amwayApacProductModifiedTimeValueResolver;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
+;$solrIndexedType; multidimensional                                                         ;boolean   ;                  ;                       ;                        ;                         ;                                  ;                                 ;multidimentionalProductFlagValueProvider ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
+;$solrIndexedType; creationtime                                                             ;date      ;date              ;                       ;                        ;                         ;                                  ;                                 ;amwayApacProductCreationTimeValueResolver;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
 ;$solrIndexedType; priceValue                                                               ;double    ;double            ;true                   ;                        ;                         ;                                  ;                                 ;productPricesValueResolver               ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
 ;$solrIndexedType; pointValue                                                               ;double    ;double            ;true                   ;                        ;                         ;                                  ;                                 ;pointValueValueProvider                  ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
 ;$solrIndexedType; businessVolume                                                           ;double    ;double            ;true                   ;                        ;                         ;                                  ;                                 ;businessVolumeValueProvider              ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
@@ -140,25 +140,29 @@ SELECT DISTINCT tbl.pk, tbl.code FROM (
 
 # Define the available sorts
 INSERT_UPDATE SolrSort;&sortRefID;indexedType(identifier)[unique=true];code[unique=true];name;useBoost
-;sortRef1;$solrIndexedType;name-asc-c;Name (A-Z);true
-;sortRef2;$solrIndexedType;name-desc-c;Name (Z-A);false
-;sortRef3;$solrIndexedType;retail-price-asc-c;Price (Lowest To Highest);false
-;sortRef4;$solrIndexedType;retail-price-desc-c;Price (Highest To Lowest);false
-;sortRef5;$solrIndexedType;newest-desc-c;Newest First;false
-;sortRef6;$solrIndexedType;newest-asc-c;Oldest First;false
-;sortRef7;$solrIndexedType;category-asc-c;Category (A-Z);false
-;sortRef8;$solrIndexedType;category-desc-c;Category (Z-A);false
+;sortRef1;$solrIndexedType;newest-desc-c;Latest items first;false
+;sortRef2;$solrIndexedType;newest-asc-c;Oldest items first;false
+;sortRef3;$solrIndexedType;retail-price-desc-c;Price (highest first);false
+;sortRef4;$solrIndexedType;retail-price-asc-c;Price (lowest first);false
+;sortRef5;$solrIndexedType;abo-price-desc-c;Price (highest first);false
+;sortRef6;$solrIndexedType;abo-price-asc-c;Price (lowest first);false
+;sortRef7;$solrIndexedType;pvbv-desc-c;PV/BV (highest first);false
+;sortRef8;$solrIndexedType;pvbv-asc-c;PV/BV (lowest first);false
+;sortRef9;$solrIndexedType;name-asc-c;Name (A-Z);true
+;sortRef10;$solrIndexedType;name-desc-c;Name (Z-A);false
 
 # Define the sort fields
 INSERT_UPDATE SolrSortField;sort(indexedType(identifier),code)[unique=true];fieldName[unique=true];ascending[unique=true]
+;$solrIndexedType:newest-desc-c;creationtime;false
+;$solrIndexedType:newest-asc-c;creationtime;true
+;$solrIndexedType:retail-price-desc-c;priceValue;false
+;$solrIndexedType:retail-price-asc-c;priceValue;true
+;$solrIndexedType:abo-price-desc-c;aboPriceValue;false
+;$solrIndexedType:abo-price-asc-c;aboPriceValue;true
+;$solrIndexedType:pvbv-desc-c;pointValue;false
+;$solrIndexedType:pvbv-asc-c;pointValue;true
 ;$solrIndexedType:name-asc-c;name;true
 ;$solrIndexedType:name-desc-c;name;false
-;$solrIndexedType:retail-price-asc-c;priceValue;true
-;$solrIndexedType:retail-price-desc-c;priceValue;false
-;$solrIndexedType:newest-asc-c;modifiedtime;true
-;$solrIndexedType:newest-desc-c;modifiedtime;false
-;$solrIndexedType:category-asc-c;categoryName;true
-;$solrIndexedType:category-desc-c;categoryName;false
 
 # Search query template
 INSERT_UPDATE SolrSearchQueryTemplate;name[unique=true];indexedType(identifier)[unique=true];ftsQueryBuilder
@@ -187,7 +191,7 @@ INSERT_UPDATE SolrSearchQueryProperty;indexedProperty(name, solrIndexedType(iden
 #;pickupAvailableFlag:$solrIndexedType    ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
 ;configurable:$solrIndexedType           ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
 ;multidimensional:$solrIndexedType		 ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
-;modifiedtime:$solrIndexedType           ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;creationtime:$solrIndexedType           ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
 ;priceValue:$solrIndexedType		     ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
 
 # Category search query fields

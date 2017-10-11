@@ -213,10 +213,9 @@
 		<property name="rootCategory" value="root" />
 	</bean>
 
-	<bean id="amwayApacProductModifiedTimeValueResolver" class="com.amway.apac.core.search.solrfacetsearch.resolvers.AmwayApacProductModifiedTimeValueResolver"
+	<bean id="amwayApacProductCreationTimeValueResolver" class="com.amway.apac.core.search.solrfacetsearch.resolvers.AmwayApacProductCreationTimeValueResolver"
 		parent="abstractValueResolver">
 	</bean>
-	
 	
 	<bean id="amwayApacStockFacetDisplayNameProvider" class="com.amway.apac.core.search.solrfacetsearch.providers.AmwayApacStockFacetDisplayNameProvider">
 		<property name="enumerationService" ref="enumerationService" />

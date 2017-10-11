@@ -12,6 +12,10 @@
 <template:page pageTitle="${pageTitle}">
         <main>
             <div id="header"></div>
+            <c:set var="aboUser" value="false"/>
+            <sec:authorize ifNotGranted="ROLE_ANONYMOUS">
+       			<c:set var="aboUser" value="true"/>
+       		</sec:authorize>
             <div class="container-fluid main-container">
                 <div class="print-hide breadcrumb-section">
                     <ol class="breadcrumb">
@@ -41,17 +45,14 @@
                                 <div class="panel-group accordion-custom" id="facetAccordion" role="tablist" aria-multiselectable="true">
                                 <c:forEach items="${searchPageData.facets}" var="facet">
                                 	<c:set var="showFacet" value="true"/>
-                                	<c:if test="${facet.code eq 'aboPriceRange'}">
-                                		<c:set var="showFacet" value="false"/>
-                                		<sec:authorize ifNotGranted="ROLE_ANONYMOUS">
-                                			<c:set var="showFacet" value="true"/>
-                                		</sec:authorize>
-                                	</c:if>
-                                	<c:if test="${facet.code eq 'retailPriceRange'}">
-                                		<sec:authorize ifNotGranted="ROLE_ANONYMOUS">
-                                			<c:set var="showFacet" value="false"/>
-                                		</sec:authorize>
-                                	</c:if>
+									<c:choose>
+										<c:when test="${(aboUser == false) && (facet.code eq 'aboPriceRange')}">
+											<c:set var="showFacet" value="false"/>
+										</c:when>
+										<c:when test="${(aboUser == true) && (facet.code eq 'retailPriceRange')}">
+											<c:set var="showFacet" value="false"/>
+										</c:when>
+									</c:choose>                                	
                                 	<c:if test="${showFacet}">
 	                                	<div class="panel">
 	                                        <div class="panel-heading" role="tab" id="${facet.code}Facet">
@@ -147,7 +148,18 @@
                                                                 <select id="sortOptions1" name="sort" class="form-control">
                                                                     <option disabled="">Sort by</option>
                                                                     <c:forEach items="${searchPageData.sorts}" var="sort">
-                                                                    	<option value="${sort.code}" <c:if test="${sort.selected}">selected="selected"</c:if>>${sort.name}</option>
+                                                                    	<c:set var="showSort" value="true"/>
+                                                                    	<c:choose>
+																			<c:when test="${(aboUser == false) && ((sort.code eq 'pvbv-desc-c') || (sort.code eq 'pvbv-asc-c') || (sort.code eq 'abo-price-desc-c') || (sort.code eq 'abo-price-asc-c'))}">
+																				<c:set var="showSort" value="false"/>
+																			</c:when>
+																			<c:when test="${(aboUser == true) && ((sort.code eq 'retail-price-desc-c') || (sort.code eq 'retail-price-asc-c'))}">
+																				<c:set var="showSort" value="false"/>
+																			</c:when>
+																		</c:choose>
+																		<c:if test="${showSort}">
+                                                                    		<option value="${sort.code}" <c:if test="${sort.selected}">selected="selected"</c:if>>${sort.name}</option>
+                                                                    	</c:if>
                                                                     </c:forEach>
                                                                 </select>
                                                                 <input type="hidden" name="q" value="${searchPageData.currentQuery.query.value}"/>
