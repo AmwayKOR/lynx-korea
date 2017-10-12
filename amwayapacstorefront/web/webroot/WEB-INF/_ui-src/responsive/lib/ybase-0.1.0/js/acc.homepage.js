@@ -39,18 +39,6 @@ ACC.homepage = {
                 }
             }
         });
-          $(".icon-search").click(function(e) {
-              e.preventDefault();
-              var value = $(".form-control.js-site-search-input.ui-autocomplete-input[placeholder]").val();
-              //console.log(value);
-              if (value == 'did you mean') {
-                  window.location.href = "Did-you-mean.html";
-              } else if (value == 'artistry') {
-                  window.location.href = "search-result-page.html";
-              } else {
-                  window.location.href = "search-no-result.html";
-              }
-          });
 	}
 
 };

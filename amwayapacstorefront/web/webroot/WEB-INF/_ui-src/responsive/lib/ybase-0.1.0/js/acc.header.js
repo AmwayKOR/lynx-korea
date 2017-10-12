@@ -36,43 +36,7 @@ ACC.header = {
         mobileEvent();
     },
 	bindHeader2 : function () {
-        //search box click event
-        $(window).resize(searchClick);
-        function searchClick() {
-            //console.log("function");
-        // PC search click event
-        if (window.innerWidth > 768) {
-            $(".icon-search").click(function (e) {
-                e.preventDefault();
-                var value = $(".form-control.js-site-search-input.ui-autocomplete-input[placeholder]").val();
-                if (value == 'did you mean') {
-                    window.location.href = "Did-you-mean.html";
-                } else if (value == 'artistry') {
-                    window.location.href = "search-result-page.html";
-                } else if(value != '') {
-                    window.location.href = "search-no-result.html";
-                }
-            });
-        } else {
-            //mob search click event
-            $(".icon-search").click(function (e) {
-                e.preventDefault();
-                var value = $(".form-control.js-site-search-input.ui-autocomplete-input[placeholder]").val();
-                if ($('.top-search').hasClass('search-open')) {
-                    if (value == 'did you mean') {
-                        window.location.href = "Did-you-mean.html";
-                    } else if (value == 'artistry') {
-                        window.location.href = "search-result-page.html";
-                    }else if(value != ''){
-                        window.location.href = "search-no-result.html";
-                    }
-                }
-            });
-        }
-    }
-
-        searchClick();
-
+        
         $(window).resize(navToggling);
 
         function navToggling() {
