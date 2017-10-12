@@ -688,4 +688,56 @@ INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$pi
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
 ;;TopBannerContentSlot;Text Image Slot;true;amwayapactextImageComponent;
 
-	
+
+############# My Account Page
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
+;;BusinessInformationContentSlot;Business Information Slot for myaccount page;true;refMyAccountSection1A
+;;OrderHistoryContentSlot;Order History Slot for myaccount page;true;refMyAccountSection1B
+;;BillingShippingContentSlot;Billing Shipping Slot for myaccount page;true;refMyAccountSection1C
+;;BonusPaymentContentSlot;Bonus Payment Slot for myaccount page;true;refMyAccountSection2A
+;;AutoRenewalContentSlot;Auto Renewal Slot for myaccount page;true;refMyAccountSection2B
+;;ContractsContentSlot;Bonus Payment Slot for myaccount page;true;refMyAccountSection2C
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='myaccount'];contentSlot(uid,$contentCV)[unique=true]
+;;BusinessInformationContentSlot;Section1A;;BusinessInformationContentSlot
+;;OrderHistoryContentSlot;Section1B;;OrderHistoryContentSlot
+;;BillingShippingContentSlot;Section1C;;BillingShippingContentSlot
+;;BonusPaymentContentSlot;Section2A;;BonusPaymentContentSlot
+;;AutoRenewalContentSlot;Section2B;;AutoRenewalContentSlot
+;;ContractsContentSlot;Section2C;;ContractsContentSlot
+
+
+INSERT_UPDATE AmwayApacMyAccountComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;
+;;amwayApacMyAccountBusinessInformationComponent;Business Information & Upline;refMyAccountSection1A;	
+;;amwayApacMyAccountOrderHistoryComponent;Oder History;refMyAccountSection1B;
+;;amwayApacMyAccountBillingShippingComponent;Billing Shipping;refMyAccountSection1C;
+;;amwayApacMyAccountBonusPaymentComponent;Bonus Payment;refMyAccountSection2A;
+;;amwayApacMyAccountAutoRenewalComponent;Auto Renewal;refMyAccountSection2B;
+;;amwayApacMyAccountContractsComponent;Contracts;refMyAccountSection2C;
+
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow'];
+;;businessInformationMyAccountLinkComponent;Business Information - Link;/businessinformation;businessInformationMyAccountLinkComponent;businessInformationMyAccountLinkComponent;;;;
+;;orderHistoryMyAccountLinkComponent;Order History - Link;/orderhistory;orderHistoryMyAccountLinkComponent;orderHistoryMyAccountLinkComponent;;;;
+;;billingShippingMyAccountLinkComponent;Billing Shipping - Link;/billingshipping;billingShippingMyAccountLinkComponent;billingShippingMyAccountLinkComponent;;;;
+;;bonusPaymentMyAccountLinkComponent;Bonus Payment - Link;/bonuspayment;bonusPaymentMyAccountLinkComponent;bonusPaymentMyAccountLinkComponent;;;;
+;;autoRenewalMyAccountLinkComponent;Auto Renewal - Link;/autorenewal;autoRenewalMyAccountLinkComponent;autoRenewalMyAccountLinkComponent;;;;
+;;contractsMyAccountLinkComponent;Contracts - Link;/contracts;contractsMyAccountLinkComponent;contractsMyAccountLinkComponent;;;;
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true]  ;&componentRef
+;;businessInformationParagraphComponent;businessInformationParagraphComponent
+;;orderHistoryParagraphComponent;orderHistoryParagraphComponent
+;;billingShippingParagraphComponent;billingShippingParagraphComponent
+;;bonusPaymentParagraphComponent;bonusPaymentParagraphComponent
+;;autoRenewalParagraphComponent;autoRenewalParagraphComponent
+;;contractsParagraphComponent;contractsParagraphComponent
+
+
+
+
+
+
+
+
+
+

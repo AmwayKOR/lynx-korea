@@ -293,6 +293,11 @@
 				  jaloclass="de.hybris.platform.acceleratorcms.jalo.components.ProductColorVariantSelectorComponent">
 			<description>Represents product color variant selector component that gives the ability to select different types of the product.</description>
 		</itemtype>
-
+		
+		<itemtype code="AmwayApacMyAccountComponent" generate="true" extends="AmwayApacPathToSuccessPitchPerfectComponent" autocreate="true" 
+			jaloclass="com.amway.apac.core.jalo.components.AmwayApacMyAccountComponent">
+		</itemtype>
+		
+		
     </itemtypes>
 </items>

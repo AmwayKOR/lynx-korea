@@ -41,6 +41,7 @@
 		<script type="text/javascript" src="${commonResourcePath}/js/jquery.slideviewer.custom.1.2.js"></script>
 		
 		<%-- Custom ACC JS --%>
+		<script type="text/javascript" src="${commonResourcePath}/js/acc.myaccount.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.header.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.footer.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.homepage.js"></script>
@@ -91,7 +92,8 @@
 		<script type="text/javascript" src="${commonResourcePath}/js/_autoload.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.js-global-messages.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.shoppinglists.js"></script>
-		<script src="${commonResourcePath}/js/owl.carousel.js"></script> 
+		<script src="${commonResourcePath}/js/owl.carousel.js"></script>
+		<script src="${commonResourcePath}/js/select2.js"></script>  
 		
 		<%-- Cms Action JavaScript files --%>
 		<c:forEach items="${cmsActionsJsFiles}" var="actionJsFile">

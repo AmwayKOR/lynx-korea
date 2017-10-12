@@ -41,6 +41,9 @@ INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;fronten
 ;;StoreFinderPageTemplate;Store Finder Page Template;storeFinder/storeFinderSearchPage;ContentPage;false;
 ;;ShoppingListsPageTemplate;Shopping Lists Page Template;shoppingList/shoppingListsLayoutPage;ContentPage
 ;;CategoryLandingPageTemplate;Category Landing Page Template;category/categoryLandingLayoutPage;ContentPage
+;;HomePageMainTemplate;Home Main Page Template;layout/homePageLayout;CategoryPage,ContentPage
+;;MyAccountPageTemplate;My Account Page Template;layout/myAccountPageLayout;CategoryPage,ContentPage
+
 
 # Templates without a frontendTemplateName
 ;;CartPageTemplate;Cart Page Template;;ContentPage;false;
@@ -49,7 +52,7 @@ INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;fronten
 ;;MultiStepCheckoutSummaryPageTemplate;Multi Step Checkout Summary Page Template;;ContentPage;false;
 ;;OrderConfirmationPageTemplate;Order Confirmation Page Template;;ContentPage;false;
 ;;ErrorPageTemplate;Error Page Template;;ContentPage;false;
-;;HomePageMainTemplate;Home Main Page Template;layout/homePageLayout;CategoryPage,ContentPage
+;
 
 # Add Velocity templates that are in the CMS Cockpit. These give a better layout for editing pages
 # The FileLoaderValueTranslator loads a File into a String property. The templates could also be inserted in-line in this file.
@@ -79,7 +82,7 @@ UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];velocityTemplate[tr
 ;;ShoppingListsPageTemplate 		;$jarResourceCms/structure-view/structure_shoppingListsPageTemplate.vm
 ;;CategoryLandingPageTemplate		;$jarResourceCms/structure-view/structure_categoryLandingPageTemplate.vm
 ;;HomePageMainTemplate      ;$jarResourceCms/structure-view/structure_homePageMainTemplate.vm
-
+;;MyAccountPageTemplate      ;$jarResourceCms/structure-view/structure_myAccountPageTemplate.vm
 
 # Create ContentSlotNames
 # Each PageTemplate has a number of ContentSlotNames, with a list of valid components for the slot.
@@ -524,24 +527,39 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 ;MiniCart;;;minicart
 ;MobileNavigationBar;;;navigation
 ;NavigationBar;;;navigation
-;Section1;;;wide
-;Section2;;;wide
-;Section3A;;;narrow
-;Section3B;;;narrow
-;Section4;;;wide
-;Section5;;;wide
-;Section6A;;;narrow
-;Section6B;;;narrow
-;Section6C;;;narrow
-;Section7;;;wide
-;Section8;;;wide
-;Section9A;;;narrow
-;Section9B;;;narrow
-;Section9C;;;narrow
-;Section10;;;wide
-;Section11;;;wide
-;Section12;;;wide
-;Section13;;;wide
+;Section1;;;
+;Section2;;;
+;Section3A;;;
+;Section3B;;;
+;Section4;;;
+;Section5;;;
+;Section6A;;;
+;Section6B;;;
+;Section6C;;;
+;Section7;;;
+;Section8;;;
+;Section9A;;;
+;Section9B;;;
+;Section9C;;;
+;Section10;;;
+;Section11;;;
+;Section12;;;
+;Section13;;;
+;Footer;;;footer
+
+# My Account Page Template
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='MyAccountPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;SearchBox;;;searchbox
+;MiniCart;;;minicart
+;MobileNavigationBar;;;navigation
+;NavigationBar;;;navigation
+;Section1A;;;
+;Section1B;;;
+;Section1C;;;
+;Section2A;;;
+;Section2B;;;
+;Section2C;;;
 ;Footer;;;footer
 
 # Create Content Slots
@@ -948,6 +966,13 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 ;;NavigationBar-HomePageMain;NavigationBar;;NavigationBarSlot;true
 ;;Mobile-NavigationBar-HomePageMain;MobileNavigationBar;;MobileNavigationBarSlot;true
 
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='MyAccountPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-MyAccountPage;SiteLogo;;SiteLogoSlot;true
+;;MiniCart-MyAccountPage;MiniCart;;MiniCartSlot;true
+;;Footer-MyAccountPage;Footer;;FooterSlot;true
+;;SearchBox-MyAccountPage;SearchBox;;SearchBoxSlot;true
+;;NavigationBar-MyAccountPage;NavigationBar;;NavigationBarSlot;true
+;;Mobile-NavigationBar-MyAccountPage;MobileNavigationBar;;MobileNavigationBarSlot;true
 
 # Create Content Pages
 
@@ -982,7 +1007,7 @@ INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTe
 ;;update-email;Update Email Page;AccountPageTemplate;update-email
 ;;shopping-lists;Shopping Lists Page;ShoppingListsPageTemplate;shopping-lists
 ;;category-landing-page;Category Landing Page;CategoryLandingPageTemplate;/category-landing-page
-
+;;myaccount;My Account Page;MyAccountPageTemplate;/myaccount
 
 # Simple Content Pages
 INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
@@ -1003,13 +1028,6 @@ INSERT_UPDATE CategoryPage;$contentCV[unique=true];uid[unique=true];name;masterT
 ;;productList;Product List;ProductListPageTemplate;true;
 ;;productGrid;Product Grid;ProductGridPageTemplate;false;
 ;;category;Default Category Page;CategoryPageTemplate;false;
-
-
-
-
-
-
-
 
 # Site-wide Aaron Homepage
 INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='true']
