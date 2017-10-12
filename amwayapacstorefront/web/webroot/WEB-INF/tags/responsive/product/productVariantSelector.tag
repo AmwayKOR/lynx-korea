@@ -19,46 +19,50 @@
     <c:set var="firstVariantName" value="${product.baseOptions[0].options[0].variantOptionQualifiers[0].name}"/>
     <c:set var="secondVariantName" value="${product.baseOptions[1].options[0].variantOptionQualifiers[0].name}"/>
 </c:if>
+<div class="col-sm-12 col-md-12">
+    <div class="page-details-variants-select">
+        <div class="page-details-add-to-cart-component">
+            <div class="addtocart-component">
+                <div class="amway-theme qty-selector js-qty-selector control-group">
+                    <c:if test="${not empty secondVariantOptions}">
+                        <c:if test="${secondVariantName ne 'Color'}">
+                            <div class="row">
+                                <div class="size-selector-container">
+                                    <label class="control-label" for="pdpAddtoCartInput">${firstVariantName}</label>
+                                    <select id="Size" class="size-select text-center js-qty-selector-input form-control">
+                                        <c:forEach items="${secondVariantOptions}" var="variantOption">
+                                            <c:forEach items="${variantOption.variantOptionQualifiers}" var="variantOptionQualifier">
+                                                <c:url value="${variantOption.url}" var="variantOptionUrl"/>
 
-<c:if test="${not empty secondVariantOptions}">
-    <c:if test="${secondVariantName ne 'Color'}">
-        <div class="row">
-            <div class="size-selector-container">
-                <label class="control-label" for="pdpAddtoCartInput">${firstVariantName}</label>
-                <select id="Size" class="size-select text-center js-qty-selector-input form-control">
-                    <c:forEach items="${secondVariantOptions}" var="variantOption">
-                        <c:forEach items="${variantOption.variantOptionQualifiers}" var="variantOptionQualifier">
-                            <c:url value="${variantOption.url}" var="variantOptionUrl"/>
+                                                <option value="${variantOptionUrl}" ${(variantOption.url eq product.url) ? 'selected="selected"' : ''}>
+                                                       ${variantOptionQualifier.value}
+                                                </option>
+                                            </c:forEach>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                            </div>
+                        </c:if>
+                    </c:if>
+                    <c:if test="${not empty firstVariantOptions}">
+                        <c:if test="${firstVariantName ne 'Color'}">
+                            <div class="row">
+                                <div class="size-selector-container">
+                                    <label class="control-label" for="pdpAddtoCartInput">${firstVariantName}</label>
+                                    <select id="Size" class="size-select text-center js-qty-selector-input form-control">
+                                        <c:forEach items="${firstVariantOptions}" var="variantOption">
+                                            <c:set var="variantOptionQualifierValue" value=""/>
+                                            <c:forEach items="${variantOption.variantOptionQualifiers}" var="variantOptionQualifier">
+                                                <c:set var="variantOptionQualifierValue">${variantOptionQualifier.value}</c:set>
+                                            </c:forEach>
+                                            <c:url value="${variantOption.url}" var="variantOptionUrl"/>
 
-                            <option value="${variantOptionUrl}" ${(variantOption.url eq product.url) ? 'selected="selected"' : ''}>
-                                   ${variantOptionQualifier.value}
-                            </option>
-                        </c:forEach>
-                    </c:forEach>
-                </select>
-            </div>
-        </div>
-    </c:if>
-</c:if>
-<c:if test="${not empty firstVariantOptions}">
-    <c:if test="${firstVariantName ne 'Color'}">
-        <div class="row">
-            <div class="size-selector-container">
-                <label class="control-label" for="pdpAddtoCartInput">${firstVariantName}</label>
-                <select id="Size" class="size-select text-center js-qty-selector-input form-control">
-                    <c:forEach items="${firstVariantOptions}" var="variantOption">
-                        <c:set var="variantOptionQualifierValue" value=""/>
-                        <c:forEach items="${variantOption.variantOptionQualifiers}" var="variantOptionQualifier">
-                            <c:set var="variantOptionQualifierValue">${variantOptionQualifier.value}</c:set>
-                        </c:forEach>
-                        <c:url value="${variantOption.url}" var="variantOptionUrl"/>
-
-                        <option value="${variantOptionUrl}" ${(variantOption.url eq product.url) ? 'selected="selected"' : ''}>
-                               ${variantOptionQualifierValue}
-                        </option>
-                    </c:forEach>
-                </select>
-            </div>
-        </div>
-    </c:if>
-</c:if>
+                                            <option value="${variantOptionUrl}" ${(variantOption.url eq product.url) ? 'selected="selected"' : ''}>
+                                                   ${variantOptionQualifierValue}
+                                            </option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                            </div>
+                        </c:if>
+                    </c:if>
