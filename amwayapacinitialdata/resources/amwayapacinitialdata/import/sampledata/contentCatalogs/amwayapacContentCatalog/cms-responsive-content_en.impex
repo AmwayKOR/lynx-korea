@@ -570,6 +570,77 @@ INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=
 ;;ExperienceBrandsBackgroundImage;$siteResource/experience-brands-bg.jpg;;ExperienceBrandsBackgroundImage;;"Nutrilite headline"
 
 
+INSERT_UPDATE AmwayApacTextImageComponent;$contentCV[unique=true];uid[unique=true];headerText
+;;amwayapactextImageComponent;"NUTRILITE";
+
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/png'];&imageRef;folder(qualifier)[default='images'];altText
+;;backgroundImageMedia;$siteResource/Amway/images/category_banner_image.png;;category_banner_image.png;;
+;;logoImageMedia;$siteResource/Amway/images/nutrition-icon.png;;nutrition-icon.png;;
+
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName
+;;ProductCategory;View Products;
+
+INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture
+;;BackgroundSBComponent;backgroundImageMedia
+;;LogoSBComponent;logoImageMedia
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content;
+;;productDesc;"Duis autem vel eum iriure dolor in hendrerit in diam vulputate lorem velit esse molestie consequat";
+
+
+############### Content Article Page success stories component
+
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang]
+;;articleBodyKeySuccessStoryLink;"Learn More"
+;;articleXsSportsSuccessStoryLink;"Learn More"
+
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;folder(qualifier)[default='images'];altText
+;;articleBodyKeySuccessStoryMedia;$siteResource/category_success_story_01.png;;articleBodyKeySuccessStoryMedia;;"NEW BODY KEY"
+;;articleXsSportsSuccessStoryMedia;$siteResource/category_success_story_02.png;;articleXsSportsSuccessStoryMedia;;"XS SPORTS"
+
+UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
+;;articleBodyKeySuccessStoryBannerComponent;articleBodyKeySuccessStoryMedia	
+;;articleXsSportsSuccessStoryBannerComponent;articleXsSportsSuccessStoryMedia	
+
+UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true]  ;content[lang=$lang]
+								   ;                       ;articleBodyKeySuccessStoryParagraphComponent;"Lorem ipsum dolor sit amet<br>consectetur adipiscing elit."
+								   ;                       ;articleXsSportsSuccessStoryParagraphComponent;"Lorem ipsum dolor sit amet<br>consectetur adipiscing elit."
+
+INSERT_UPDATE AmwayAPACPathToSuccessPitchPerfectComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang];title2[lang=$lang]
+;;articleBodyKeySuccessStoryComponent;"New body key";"Try One, Share a Few"
+;;articleXsSportsSuccessStoryComponent;"xs sports";"Fuel Your Adventure"
+
+############### content article page
+
+INSERT_UPDATE AmwayApacPathwayToSuccessComponent;$contentCV[unique=true];uid[unique=true];headerText
+;;amwayapacpathwayToSuccessComponent;"YOUR PATHWAY <br> TO SUCCESS"
+
+INSERT_UPDATE AmwayApacBuildYourBusinessComponent;$contentCV[unique=true];uid[unique=true];headerText
+;;amwayapacbuildYourBusinessComponent;"SWITCH,SHARE,DUPLICATE: <br> BUILD YOUR BUSINESS"
+
+INSERT_UPDATE AmwayApacExperienceTheStarterKitComponent;$contentCV[unique=true];uid[unique=true];headerText
+;;amwayapacexperienceTheStarterKitComponent;"EXPERIENCE THE STARTER KIT"
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content;
+;;brandDesc;"A great way to grow your business is to follow this <br> simple""SSD"" principle:Switch,Share,Duplicate.";
+;;magazineDesc;"Check out the brand new Starter kit! <br> in vulputate velit esse molestie consequat";
+;;bannerDesc;"Welcome new IBOs!Get started right away <br> with your brand-new digital starter kit.";
+
+
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;folder(qualifier)[default='images'];altText
+;;articleImageMedia;$siteResource/Amway/images/article_baner.png;;article_baner.png;;articleImageMedia;;
+;;brandImageMedia;$siteResource/Amway/images/iphone.png;;iphone.png;;brandImageMedia;;
+;;magazineImageMedia;$siteResource/Amway/images/magazine.png;;magazine.png;;magazineImageMedia;;
+
+INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture
+;;BannerSBComponent;articleImageMedia;
+;;BrandSBComponent;brandImageMedia;
+;;MagazineSBComponent;magazineImageMedia;
+
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName
+;;SuccessContent;LET'S GET STARTED;
+;;BusinessContent;GET YOUR APP NOW;
+;;ExperienceContent;WATCH THE VIDEO;
 
 ################## My Account Page
 UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang];&componentRef

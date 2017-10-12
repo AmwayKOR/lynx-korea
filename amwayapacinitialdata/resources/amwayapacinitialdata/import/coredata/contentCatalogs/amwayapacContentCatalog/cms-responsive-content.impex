@@ -43,7 +43,7 @@ INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;fronten
 ;;CategoryLandingPageTemplate;Category Landing Page Template;category/categoryLandingLayoutPage;ContentPage
 ;;HomePageMainTemplate;Home Main Page Template;layout/homePageLayout;CategoryPage,ContentPage
 ;;MyAccountPageTemplate;My Account Page Template;layout/myAccountPageLayout;CategoryPage,ContentPage
-
+;;ContentArticlePagesTemplate;Content Article Pages Template;business/contentArticlePagesLayout;ContentPage
 
 # Templates without a frontendTemplateName
 ;;CartPageTemplate;Cart Page Template;;ContentPage;false;
@@ -83,6 +83,8 @@ UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];velocityTemplate[tr
 ;;CategoryLandingPageTemplate		;$jarResourceCms/structure-view/structure_categoryLandingPageTemplate.vm
 ;;HomePageMainTemplate      ;$jarResourceCms/structure-view/structure_homePageMainTemplate.vm
 ;;MyAccountPageTemplate      ;$jarResourceCms/structure-view/structure_myAccountPageTemplate.vm
+;;ContentArticlePagesTemplate		;$jarResourceCms/structure-view/structure_contentArticlePagesTemplate.vm
+
 
 # Create ContentSlotNames
 # Each PageTemplate has a number of ContentSlotNames, with a list of valid components for the slot.
@@ -504,6 +506,29 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 ;ToolsAndAdviceBannerContentSlot1;;;
 ;ToolsAndAdviceBannerContentSlot2;;;
 ;ToolsAndAdviceBannerContentSlot3;;;
+
+# Content Article Page Template
+# Template used for content article landing page contentArticlePagesLayout
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='ContentArticlePagesTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;HeaderLinks;;;headerlinks
+;SearchBox;;;searchbox
+;MiniCart;;;minicart
+;NavigationBar;;;navigation
+;TopContent;;;wide
+;SideContent;;;narrow
+;BodyContent;;;wide
+;BottomContent;;;wide
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;PlaceholderContentSlot;;;
+
+;PathwayToSuccessContentSlot;;;
+;BuildYourBusinessContentSlot;;;
+;ExperienceTheStarterKitContentSlot;;;
+;ArticleSuccessStoryContentSlot1;;;
+;ArticleSuccessStoryContentSlot2;;;
 
 # Store Finder/Locator Page Template
 INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='StoreFinderPageTemplate'];validComponentTypes(code);compTypeGroup(code)
@@ -930,6 +955,28 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 ;;ToolsAndAdviceBannerContentSlot3-CategoryLandingPage;ToolsAndAdviceBannerContentSlot3;;ToolsAndAdviceBannerContentSlot3;true
 ;;Mobile-NavigationBar-CategoryLandingPage;MobileNavigationBar;;MobileNavigationBarSlot;true
 
+# Content Article Page Template
+# Template used for content article landing page contentArticlePagesLayout
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ContentArticlePagesTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-ContentArticlePages;SiteLogo;;SiteLogoSlot;true
+;;HomepageLink-ContentArticlePages;HomepageNavLink;;HomepageNavLinkSlot;true
+;;NavigationBar-ContentArticlePages;NavigationBar;;NavigationBarSlot;true
+;;MiniCart-ContentArticlePages;MiniCart;;MiniCartSlot;true
+;;Footer-ContentArticlePages;Footer;;FooterSlot;true
+;;HeaderLinks-ContentArticlePages;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-ContentArticlePages;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-ContentArticlePages;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-ContentArticlePages;BottomHeaderSlot;;BottomHeaderSlot;true
+;;PlaceholderContentSlot-ContentArticlePages;PlaceholderContentSlot;;PlaceholderContentSlot;true
+;;Mobile-NavigationBar-ContentArticlePages;MobileNavigationBar;;MobileNavigationBarSlot;true
+
+;;PathwayToSuccessContentSlot-ContentArticlePages;PathwayToSuccessContentSlot;;PathwayToSuccessContentSlot;true
+;;BuildYourBusinessContentSlot-ContentArticlePages;BuildYourBusinessContentSlot;;BuildYourBusinessContentSlot;true
+;;ExperienceTheStarterKitContentSlot-ContentArticlePages;ExperienceTheStarterKitContentSlot;;ExperienceTheStarterKitContentSlot;true
+;;SuccessStoryContentSlot1-ContentArticlePages;ArticleSuccessStoryContentSlot1;;ArticleSuccessStoryContentSlot1;true
+;;SuccessStoryContentSlot2-ContentArticlePages;ArticleSuccessStoryContentSlot2;;ArticleSuccessStoryContentSlot2;true
+
+
 
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='StoreFinderPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
 ;;SiteLogo-StoreFinderPage;SiteLogo;;SiteLogoSlot;true
@@ -1008,6 +1055,8 @@ INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTe
 ;;shopping-lists;Shopping Lists Page;ShoppingListsPageTemplate;shopping-lists
 ;;category-landing-page;Category Landing Page;CategoryLandingPageTemplate;/category-landing-page
 ;;myaccount;My Account Page;MyAccountPageTemplate;/myaccount
+;;content-article-pages;Content Article Pages;ContentArticlePagesTemplate;/content-article-pages
+
 
 # Simple Content Pages
 INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']

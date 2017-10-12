@@ -41,4 +41,4 @@ UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
  ;;updatePassword;"Update Forgotten Password"
  ;;shopping-lists;"Shopping Lists"
  ;;category-landing-page;"Nutrilite Category Page"
- 
+ ;;content-article-pages;"ContentArticlePages"

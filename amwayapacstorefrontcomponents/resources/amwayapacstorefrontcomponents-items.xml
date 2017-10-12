@@ -298,6 +298,23 @@
 			jaloclass="com.amway.apac.core.jalo.components.AmwayApacMyAccountComponent">
 		</itemtype>
 		
+		<itemtype code="AmwayApacPathwayToSuccessComponent" extends="AmwayApacTextImageComponent"
+			autocreate="true" generate="true"
+			jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacPathwayToSuccessComponent">
+			<description>Pathway To Success Component</description>
+		</itemtype>
+
+		<itemtype code="AmwayApacBuildYourBusinessComponent" extends="AmwayApacTextImageComponent"
+			autocreate="true" generate="true"
+			jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacBuildYourBusinessComponent">
+			<description>Build Your Business Component</description>
+		</itemtype>
+
+		<itemtype code="AmwayApacExperienceTheStarterKitComponent"
+			extends="AmwayApacTextImageComponent" autocreate="true" generate="true"
+			jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacExperienceTheStarterKitComponent">
+			<description>Experience The Starter Kit Component</description>	
+		</itemtype>
 		
     </itemtypes>
 </items>

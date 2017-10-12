@@ -665,29 +665,72 @@ INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url
 INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
 ;;ExperienceBrandsDescriptionParagraphComponent;ExperienceBrandsDescriptionParagraphComponent
 
-
 ############# category page top banner component
 
-INSERT_UPDATE AmwayApacTextImageComponent;$contentCV[unique=true];uid[unique=true];name;backgroundImage(uid, $contentCV);headerText;logoImage(uid, $contentCV);details(uid, $contentCV);&componentRef;offerImageLink(&linkRef);
-;;amwayapactextImageComponent;Text Image Component;BackgroundSBComponent;"NUTRILITE";LogoSBComponent;productDesc;amwayapactextImageComponent;ProductCategory;
+INSERT_UPDATE AmwayApacTextImageComponent;$contentCV[unique=true];uid[unique=true];name;backgroundImage(uid, $contentCV);logoImage(uid, $contentCV);details(uid, $contentCV);offerImageLink(&linkRef);;&componentRef
+;;amwayapactextImageComponent;Text Image Component;BackgroundSBComponent;LogoSBComponent;productDesc;ProductCategory;;amwayapactextImageComponent
 
-INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow']
-;amwayapacContentCatalog:Staged;ProductCategory;View Products;/;ProductCategory;ProductCategory;;
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;target(code)[default='sameWindow'];&componentRef
+;amwayapacContentCatalog:Staged;ProductCategory;View Products;/;ProductCategory;;ProductCategory;
 
-INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/png'];&imageRef;folder(qualifier)[default='images'];altText
-;;backgroundImageMedia;$siteResource/Amway/images/category_banner_image.png;;category_banner_image.png;;
-;;logoImageMedia;$siteResource/Amway/images/nutrition-icon.png;;nutrition-icon.png;;
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
+;;productDesc;productDesc;
 
-INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content;
-;;productDesc;"Duis autem vel eum iriure dolor in hendrerit in diam vulputate lorem velit esse molestie consequat";
-
-INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture	
-;;BackgroundSBComponent;backgroundImageMedia
-;;LogoSBComponent;logoImageMedia
+INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;urlLink;&componentRef
+;;BackgroundSBComponent;Background SB Component;"/";BackgroundSBComponent
+;;LogoSBComponent;Logo SB Component;"/";LogoSBComponent
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
 ;;TopBannerContentSlot;Text Image Slot;true;amwayapactextImageComponent;
 
+
+############################### content article page 
+
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;target(code)[default='sameWindow'];&componentRef
+;;SuccessContent;LET'S GET STARTED;/;SuccessContent;;SuccessContent;
+;;BusinessContent;GET YOUR APP NOW;/;BusinessContent;;BusinessContent;
+;;ExperienceContent;WATCH THE VIDEO;/;ExperienceContent;;ExperienceContent;
+;;articleBodyKeySuccessStoryLink;body key success story link component;/;articleBodyKeySuccessStoryLink;;articleBodyKeySuccessStoryLink;
+;;articleXsSportsSuccessStoryLink;xs sports success story component;/;articleXsSportsSuccessStoryLink;;articleXsSportsSuccessStoryLink;
+
+INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;urlLink;&componentRef
+;;BannerSBComponent;Banner SB Component;"/";BannerSBComponent
+;;BrandSBComponent;Brand SB Component;"/";BrandSBComponent
+;;MagazineSBComponent;Magazine SB Component;"/";MagazineSBComponent
+;;articleBodyKeySuccessStoryBannerComponent;body key success story banner component;"/";articleBodyKeySuccessStoryBannerComponent
+;;articleXsSportsSuccessStoryBannerComponent;xs sports success story banner component;"/";articleXsSportsSuccessStoryBannerComponent
+
+INSERT_UPDATE AmwayApacPathwayToSuccessComponent;$contentCV[unique=true];uid[unique=true];name;backgroundImage(uid, $contentCV);details(uid, $contentCV);offerImageLink(&linkRef);&componentRef
+;;amwayapacpathwayToSuccessComponent;Pathway To Success Component;BannerSBComponent; bannerDesc;SuccessContent;amwayapacpathwayToSuccessComponent
+
+INSERT_UPDATE AmwayApacBuildYourBusinessComponent;$contentCV[unique=true];uid[unique=true];name;backgroundImage(uid, $contentCV);details(uid, $contentCV);offerImageLink(&linkRef);&componentRef
+;;amwayapacbuildYourBusinessComponent;Build Your Business Component;BrandSBComponent;brandDesc;BusinessContent;amwayapacbuildYourBusinessComponent
+
+INSERT_UPDATE AmwayApacExperienceTheStarterKitComponent;$contentCV[unique=true];uid[unique=true];name;backgroundImage(uid, $contentCV);details(uid, $contentCV);offerImageLink(&linkRef);&componentRef
+;;amwayapacexperienceTheStarterKitComponent;Experience The Starter Kit Component;MagazineSBComponent;magazineDesc;ExperienceContent;amwayapacexperienceTheStarterKitComponent
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
+;;brandDesc;brandDesc;
+;;magazineDesc;magazineDesc;
+;;bannerDesc;bannerDesc;
+;;articleBodyKeySuccessStoryParagraphComponent;articleBodyKeySuccessStoryParagraphComponent
+;;articleXsSportsSuccessStoryParagraphComponent;articleXsSportsSuccessStoryParagraphComponent
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
+;;PathwayToSuccessContentSlot;Pathway To Success Slot;true;amwayapacpathwayToSuccessComponent
+;;BuildYourBusinessContentSlot;Build Your Business Slot;true;amwayapacbuildYourBusinessComponent
+;;ExperienceTheStarterKitContentSlot;Experience The Starter Kit Slot;true;amwayapacexperienceTheStarterKitComponent
+;;ArticleSuccessStoryContentSlot1;Success Story Slot1;true;articleBodyKeySuccessStoryComponent
+;;ArticleSuccessStoryContentSlot2;Success Story Slot2;true;articleXsSportsSuccessStoryComponent
+	
+#INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;target(code)[default='sameWindow'];&componentRef
+#INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;urlLink;&componentRef
+#INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
+
+INSERT_UPDATE AmwayAPACPathToSuccessPitchPerfectComponent;$contentCV[unique=true];uid[unique=true];name;banner(&componentRef);link(&componentRef);description(&componentRef);&componentRef
+;;articleBodyKeySuccessStoryComponent;Amway Path to Success;articleBodyKeySuccessStoryBannerComponent;articleBodyKeySuccessStoryLink;articleBodyKeySuccessStoryParagraphComponent;articleBodyKeySuccessStoryComponent
+;;articleXsSportsSuccessStoryComponent;Amway Pitch Perfect;articleXsSportsSuccessStoryBannerComponent;articleXsSportsSuccessStoryLink;articleXsSportsSuccessStoryParagraphComponent;articleXsSportsSuccessStoryComponent
+	
 
 ############# My Account Page
 
@@ -731,13 +774,4 @@ INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true]  ;&
 ;;bonusPaymentParagraphComponent;bonusPaymentParagraphComponent
 ;;autoRenewalParagraphComponent;autoRenewalParagraphComponent
 ;;contractsParagraphComponent;contractsParagraphComponent
-
-
-
-
-
-
-
-
-
 
