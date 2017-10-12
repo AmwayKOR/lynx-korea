@@ -33,23 +33,48 @@ public final class AmwayapacCoreConstants extends GeneratedAmwayapacCoreConstant
 	public static final String QUOTE_POST_CANCELLATION_PROCESS = "quote-post-cancellation-process";
 
 	/**
-	 * String constant source
+	 * String constant source.
 	 */
 	public static final String SOURCE_STRING = "source";
 
 	/**
-	 * String constant target
+	 * String constant target.
 	 */
 	public static final String TARGET_STRING = "target";
 
 	/**
-	 * int constant - 100
+	 * int constant - 100.
 	 */
 	public static final int HUNDRED_INT = 100;
 
 	/**
-	 * Maximum length of the shopping lists names
+	 * int constant - 200.
+	 */
+	public static final int TWO_HUNDRED_INT = 200;
+
+	/**
+	 * Maximum length of the shopping lists names.
 	 */
 	public static final int SHOPPING_LIST_DEFAULT_MAX_LENGTH = 100;
+
+	/**
+	 * String constant for ascending to be used in queries.
+	 */
+	public static final String ASC_STRING = "ASC";
+
+	/**
+	 * String constant for descending to be used in queries.
+	 */
+	public static final String DESC_STRING = "DESC";
+
+	/**
+	 * Sort field string constant
+	 */
+	public static final String SORT_FIELD_STRING = "sortField";
+
+	/**
+	 * Sort order string constant
+	 */
+	public static final String SORT_ORDER_STRING = "sortOrder";
 
 }

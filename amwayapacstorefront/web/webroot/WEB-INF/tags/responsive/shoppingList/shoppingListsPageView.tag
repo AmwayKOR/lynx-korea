@@ -64,44 +64,59 @@
                                     <div id="myShoppingLists" class="tab-pane content-block active">
                                         <div class="ditto-schedule-table-content">
                                             <div id="table-block-wrapper" class="table-block-wrapper new-table-block-wrapper">
-                                                <table class="ditto-schedule-table js-ditto-schedule-table">
-                                                    <thead>
-                                                    <tr>
-                                                        <th class="ditto-field-name js-ditto-sorting-option">
-                                                            <form class="ditto-sorting-form js-ditto-sorting-form">
-                                                                <button class="ditto-header-button" type="submit"><spring:theme code="shopping.lists.page.lists.table.name.label" />
-                                                                    <span class="header-icon icon-arrow-dropdown"></span></button>
-                                                            </form>
-                                                        </th>
-                                                        <th class="js-ditto-sorting-option">
-                                                            <form class="ditto-sorting-form js-ditto-sorting-form">
-                                                                <button class="ditto-header-button" type="submit"><spring:theme code="shopping.lists.page.lists.table.createdby.label" />
-                                                                    <span class="header-icon icon-arrow-dropdown"></span></button>
-                                                            </form>
-                                                        </th>
-                                                        <th class="">
-                                                            <form class="ditto-sorting-form">
-                                                                <button class="ditto-header-button" type="submit"><spring:theme code="shopping.lists.page.lists.table.addedfor.label" />
-                                                                    <span class="header-icon icon-arrow-dropdown"></span></button></form>
-                                                        </th>
-                                                        <th class="">
-                                                            <form class="ditto-sorting-form">
-                                                                <button class="ditto-header-button" type="submit"><spring:theme code="shopping.lists.page.lists.table.lastupdated.label" />
-                                                                    <span class="header-icon icon-arrow-dropdown"></span></button></form>
-                                                        </th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-	                                                    <c:forEach items="${shoppingLists}" var="shoppingList" varStatus="loop">
-		                                                    <tr id="row-${loop.index} }">
-		                                                        <td class="ditto-field-name"><span class="link-wrapper"> <a class="responsive-table-link js-saved-cart-name" href="shopping-list-detail.html">${shoppingList.name}</a> </span> </td>
-		                                                        <td class=""> ${shoppingList.user.name}</td>
-		                                                        <td class="">Holly Smith</td>
-		                                                        <td class=""><fmt:formatDate value="${shoppingList.lastUpdated}" type="both"/></td>
+                                                <c:choose>
+                                                	<c:when test="${(shoppingLists ne null) and (fn:length(shoppingLists) > 0)}">
+		                                                <table class="ditto-schedule-table js-ditto-schedule-table">
+		                                                    <thead>
+		                                                    <tr>
+		                                                        <th class="ditto-field-name js-ditto-sorting-option">
+		                                                            <form class="ditto-sorting-form js-ditto-sorting-form" method="get">
+		                                                            	<input type="hidden" name="sortField" value="byName" class="sortFieldInput" id="nameSortFieldInput">
+		                                                            	<input type="hidden" name="sortOrder" value="desc" class="sortOrderInput" id="nameSortOrderInput">
+		                                                                <button class="ditto-header-button" type="submit"><spring:theme code="shopping.lists.page.lists.table.name.label" />
+		                                                                    <span class="header-icon icon-arrow-dropdown"></span></button>
+		                                                            </form>
+		                                                        </th>
+		                                                        <th class="js-ditto-sorting-option">
+		                                                            <form class="ditto-sorting-form js-ditto-sorting-form" method="get">
+		                                                            	<input type="hidden" name="sortField" value="byUser" class="sortFieldInput" id="usernameSortFieldInput">
+		                                                            	<input type="hidden" name="sortOrder" value="desc" class="sortOrderInput" id="usernameSortOrderInput">
+		                                                                <button class="ditto-header-button" type="submit"><spring:theme code="shopping.lists.page.lists.table.createdby.label" />
+		                                                                    <span class="header-icon icon-arrow-dropdown"></span></button>
+		                                                            </form>
+		                                                        </th>
+		                                                        <th class="">
+		                                                            <form class="ditto-sorting-form" method="get">
+		                                                            	<input type="hidden" name="sortField" value="byAddedFor" class="sortFieldInput" id="addedforSortFieldInput">
+		                                                            	<input type="hidden" name="sortOrder" value="desc" class="sortOrderInput" id="addedforSortOrderInput">
+		                                                                <button class="ditto-header-button" type="submit"><spring:theme code="shopping.lists.page.lists.table.addedfor.label" />
+		                                                                    <span class="header-icon icon-arrow-dropdown"></span></button></form>
+		                                                        </th>
+		                                                        <th class="">
+		                                                            <form class="ditto-sorting-form" method="get">
+		                                                            	<input type="hidden" name="sortField" value="byLastUpdated" class="sortFieldInput" id="lastupdatedSortFieldInput">
+		                                                            	<input type="hidden" name="sortOrder" value="desc" class="sortOrderInput" id="lastupdatedSortOrderInput">
+		                                                                <button class="ditto-header-button" type="submit"><spring:theme code="shopping.lists.page.lists.table.lastupdated.label" />
+		                                                                    <span class="header-icon icon-arrow-dropdown"></span></button></form>
+		                                                        </th>
 		                                                    </tr>
-	                                                    </c:forEach>
-                                                    </tbody>
-                                                </table>
+		                                                    </thead>
+		                                                    <tbody>
+			                                                    <c:forEach items="${shoppingLists}" var="shoppingList" varStatus="loop">
+				                                                    <tr id="row-${loop.index} }">
+				                                                        <td class="ditto-field-name"><span class="link-wrapper"> <a class="responsive-table-link js-saved-cart-name" href="shopping-list-detail.html">${shoppingList.name}</a> </span> </td>
+				                                                        <td class=""> ${shoppingList.user.name}</td>
+				                                                        <td class="">${shoppingList.user.name}</td> <!-- downline functinality is not done yet, so just using the user name here -->
+				                                                        <td class=""><fmt:formatDate value="${shoppingList.lastUpdated}" type="both"/></td>
+				                                                    </tr>
+			                                                    </c:forEach>
+		                                                    </tbody>
+		                                                </table>
+                                                	</c:when>
+                                                	<c:otherwise>
+                                               			<spring:theme code="shopping.lists.page.lists.tab.downlines.noresults" />                                                	
+                                                	</c:otherwise>
+                                                </c:choose>
                                             </div>
                                         </div>
                                     </div>

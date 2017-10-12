@@ -73,6 +73,7 @@
     <alias name="defaultAmwayApacWishlistFacade" alias="wishlistFacade"/>
     <bean id="defaultAmwayApacWishlistFacade" class="com.amway.apac.facades.wishlist.impl.DefaultAmwayApacWishlistFacade" parent="defaultAmwayWishlistFacade">
         <property name="amwayApacWishlistBasicConverter" ref="amwayApacWishlistBasicConverter"/>
+        <property name="amwayApacWishlistService" ref="wishlistService"/>
     </bean>
 
 	<alias name="amwayApacVariantOptionDataConverter" alias="variantOptionDataConverter"/>
@@ -89,4 +90,5 @@
 	<bean id="defaultAmwayApacVariantOptionDataPopulator"  class="com.amway.apac.facades.populators.AmwayApacVariantOptionDataPopulator"
 		  parent="acceleratorVariantOptionDataPopulator" >
 	</bean>
+	
 </beans>

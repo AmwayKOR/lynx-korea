@@ -1,18 +1,19 @@
-package com.amway.apac.facades.wishlist;
+package com.amway.apac.core.wishlist.services;
+
+import de.hybris.platform.wishlist2.model.Wishlist2Model;
 
 import java.util.List;
 
-import com.amway.facades.product.data.WishlistData;
-import com.amway.facades.wishlist.AmwayWishlistFacade;
+import com.amway.core.wishlist.services.AmwayWishlistService;
 
 
 /**
- * Overriding {@link AmwayWishlistFacade} to add apac specific functionalities.
+ * Extending {@link AmwayWishlistService} to add more wishlist functionalities
  *
  * @author Parvesh Goyal
  *
  */
-public interface AmwayApacWishlistFacade extends AmwayWishlistFacade
+public interface AmwayApacWishllistService extends AmwayWishlistService
 {
 
 	/**
@@ -27,6 +28,6 @@ public interface AmwayApacWishlistFacade extends AmwayWishlistFacade
 	 *
 	 * @return wish lists found.
 	 */
-	List<WishlistData> getAllWishlistsWithBasicData(final String sortField, final String sortOrder);
+	List<Wishlist2Model> getWishlists(final String sortField, final String sortOrder);
 
 }

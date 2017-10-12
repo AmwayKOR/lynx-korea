@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Required;
 
+import com.amway.apac.core.wishlist.services.AmwayApacWishllistService;
 import com.amway.apac.facades.wishlist.AmwayApacWishlistFacade;
 import com.amway.facades.product.data.WishlistData;
 import com.amway.facades.wishlist.impl.DefaultAmwayWishlistFacade;
@@ -22,26 +23,18 @@ import com.amway.facades.wishlist.impl.DefaultAmwayWishlistFacade;
 public class DefaultAmwayApacWishlistFacade extends DefaultAmwayWishlistFacade implements AmwayApacWishlistFacade
 {
 
+	private AmwayApacWishllistService amwayApacWishlistService;
 	private Converter<Wishlist2Model, WishlistData> amwayApacWishlistBasicConverter;
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<WishlistData> getAllWishlistsWithBasicData()
+	public List<WishlistData> getAllWishlistsWithBasicData(final String sortField, final String sortOrder)
 	{
-		return Converters.convertAll(getWishlistService().getWishlists(), getAmwayApacWishlistBasicConverter());
+		return Converters.convertAll(getAmwayApacWishlistService().getWishlists(sortField, sortOrder),
+				getAmwayApacWishlistBasicConverter());
 	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void createFavoriteWishlistIfNeeded()
-	{
-		getWishlistService().getOrCreateFavoriteWishlist();
-	}
-
 
 	/**
 	 * @return the amwayApacWishlistBasicConverter
@@ -59,6 +52,24 @@ public class DefaultAmwayApacWishlistFacade extends DefaultAmwayWishlistFacade i
 	public void setAmwayApacWishlistBasicConverter(final Converter<Wishlist2Model, WishlistData> amwayApacWishlistBasicConverter)
 	{
 		this.amwayApacWishlistBasicConverter = amwayApacWishlistBasicConverter;
+	}
+
+	/**
+	 * @return the amwayApacWishlistService
+	 */
+	public AmwayApacWishllistService getAmwayApacWishlistService()
+	{
+		return amwayApacWishlistService;
+	}
+
+	/**
+	 * @param amwayApacWishlistService
+	 *           the amwayApacWishlistService to set
+	 */
+	@Required
+	public void setAmwayApacWishlistService(final AmwayApacWishllistService amwayApacWishlistService)
+	{
+		this.amwayApacWishlistService = amwayApacWishlistService;
 	}
 
 }

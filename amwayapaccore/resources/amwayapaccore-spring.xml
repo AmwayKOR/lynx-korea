@@ -229,5 +229,13 @@
 	<import resource="/amwayapaccore/processes/quote/quote-expired-email-process-spring.xml"/>
 
 	<import resource="/amwayapaccore/processes/quote/quote-post-cancellation-process-spring.xml"/>
+
+    <alias alias="wishlistService" name="defaultAmwayApacWishlistService" />
+    <bean id="defaultAmwayApacWishlistService" class="com.amway.apac.core.wishlist.services.impl.DefaultAmwayApacWishlistService" parent="amwayWishlistService">
+        <property name="amwayApacWishlistDao" ref="wishlistDao" />
+    </bean>
+
+    <alias alias="wishlistDao" name="defaultAmwayApacWishlistDao" />
+    <bean id="defaultAmwayApacWishlistDao" class="com.amway.apac.core.wishlist.daos.impl.DefaultAmwayApacWishlistDao" parent="amwayWishlistDao" />
 	
 </beans>

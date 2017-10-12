@@ -281,6 +281,26 @@ public interface ControllerConstants
 		 */
 		String LINK_URL_STRING = "linkUrl";
 
+		/**
+		 * Wishlist sorting parameter to sort by wishllist name
+		 */
+		String WISHLIST_SORT_BY_NAME = "byName";
+
+		/**
+		 * Wishlist sorting parameter to sort by addedFor user.
+		 */
+		String WISHLIST_SORT_BY_ADDED_FOR = "byAddedFor";
+
+		/**
+		 * Wishlist sorting parameter to sort by lastUpdated.
+		 */
+		String WISHLIST_SORT_BY_LAST_UPDATED = "byLastUpdated";
+
+		/**
+		 * Wishlist sorting parameter to sort by lastUpdated.
+		 */
+		String WISHLIST_SORT_BY_USER = "byUser";
+
 	}
 
 	/**
