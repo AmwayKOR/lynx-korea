@@ -106,7 +106,7 @@ ACC.categorypage = {
     		
     		$(this).closest(".panel-body").find(".js-facet-mobile-checkbox:not(:checked)").each(function(){
     			var enodedQuery = ":" + $(this).data("facetCode") + ":" + encodeURIComponent($(this).data("facetValueCode"));
-    			if(!facetQuery.includes(enodedQuery)){
+    			if(facetQuery.includes(enodedQuery)){
     			facetQuery = facetQuery.replace(enodedQuery,"");
     			}
         	});

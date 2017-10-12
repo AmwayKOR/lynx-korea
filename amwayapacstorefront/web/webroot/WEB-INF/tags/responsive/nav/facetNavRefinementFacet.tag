@@ -1,104 +1,71 @@
 <%@ tag body-content="empty" trimDirectiveWhitespaces="true" %>
-<%@ attribute name="facetData" required="true" type="de.hybris.platform.commerceservices.search.facetdata.FacetData" %>
-
+<%@ attribute name="facet" required="true" type="de.hybris.platform.commerceservices.search.facetdata.FacetData" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ attribute name="isMobile" type="java.lang.Boolean" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
-<spring:htmlEscape defaultHtmlEscape="true" />
-
-<c:if test="${not empty facetData.values}">
-<ycommerce:testId code="facetNav_title_${facetData.name}">
-	<div class="facet js-facet">
-		<div class="facet__name js-facet-name">
-			<span class="glyphicon facet__arrow"></span>
-			<spring:theme code="search.nav.facetTitle" arguments="${facetData.name}"/>
-		</div>
-
-
-		<div class="facet__values js-facet-values js-facet-form">
-
-			<c:if test="${not empty facetData.topValues}">
-				<ul class="facet__list js-facet-list js-facet-top-values">
-					<c:forEach items="${facetData.topValues}" var="facetValue">
-						<li>
-							<c:if test="${facetData.multiSelect}">
-								<form action="#" method="get">
-									<input type="hidden" name="q" value="${facetValue.query.query.value}"/>
-									<input type="hidden" name="text" value="${searchPageData.freeTextSearch}"/>
-									<label>
-										<input class="facet__list__checkbox" type="checkbox" ${facetValue.selected ? 'checked="checked"' : ''} class="facet-checkbox" />
-										<span class="facet__list__label">
-											<span class="facet__list__mark"></span>
-											<span class="facet__list__text">
-												${fn:escapeXml(facetValue.name)}
-												<ycommerce:testId code="facetNav_count">
-													<span class="facet__value__count"><spring:theme code="search.nav.facetValueCount" arguments="${facetValue.count}"/></span>
-												</ycommerce:testId>
-											</span>
-										</span>
-									</label>
-								</form>
-							</c:if>
-							<c:if test="${not facetData.multiSelect}">
-								<c:url value="${facetValue.query.url}" var="facetValueQueryUrl"/>
-								<span class="facet__text">
-									<a href="${facetValueQueryUrl}&amp;text=${fn:escapeXml(searchPageData.freeTextSearch)}">${fn:escapeXml(facetValue.name)}</a>&nbsp;
-									<ycommerce:testId code="facetNav_count">
-										<span class="facet__value__count"><spring:theme code="search.nav.facetValueCount" arguments="${facetValue.count}"/></span>
-									</ycommerce:testId>
-								</span>
-							</c:if>
-						</li>
-					</c:forEach>
-				</ul>
-			</c:if>
-			<ul class="facet__list js-facet-list <c:if test="${not empty facetData.topValues}">facet__list--hidden js-facet-list-hidden</c:if>">
-				<c:forEach items="${facetData.values}" var="facetValue">
-					<li>
-						<c:if test="${facetData.multiSelect}">
-							<ycommerce:testId code="facetNav_selectForm">
-							<form action="#" method="get">
-								<input type="hidden" name="q" value="${facetValue.query.query.value}"/>
-								<input type="hidden" name="text" value="${searchPageData.freeTextSearch}"/>
-								<label>
-									<input type="checkbox" ${facetValue.selected ? 'checked="checked"' : ''}  class="facet__list__checkbox js-facet-checkbox sr-only" />
-									<span class="facet__list__label">
-										<span class="facet__list__mark"></span>
-										<span class="facet__list__text">
-											${fn:escapeXml(facetValue.name)}&nbsp;
-											<ycommerce:testId code="facetNav_count">
-												<span class="facet__value__count"><spring:theme code="search.nav.facetValueCount" arguments="${facetValue.count}"/></span>
-											</ycommerce:testId>
-										</span>
-									</span>
-								</label>
-							</form>
-							</ycommerce:testId>
-						</c:if>
-						<c:if test="${not facetData.multiSelect}">
-							<c:url value="${facetValue.query.url}" var="facetValueQueryUrl"/>
-							<span class="facet__text">
-								<a href="${facetValueQueryUrl}">${fn:escapeXml(facetValue.name)}</a>
-								<ycommerce:testId code="facetNav_count">
-									<span class="facet__value__count"><spring:theme code="search.nav.facetValueCount" arguments="${facetValue.count}"/></span>
-								</ycommerce:testId>
-							</span>
-						</c:if>
-					</li>
-				</c:forEach>
-			</ul>
-
-			<c:if test="${not empty facetData.topValues}">
-				<span class="facet__values__more js-more-facet-values">
-					<a href="#" class="js-more-facet-values-link" ><spring:theme code="search.nav.facetShowMore_${facetData.code}" /></a>
-				</span>
-				<span class="facet__values__less js-less-facet-values">
-					<a href="#" class="js-less-facet-values-link"><spring:theme code="search.nav.facetShowLess_${facetData.code}" /></a>
-				</span>
-			</c:if>
-		</div>
-	</div>
-</ycommerce:testId>
+<c:set var="mobileOrPc" value="pc"/>
+<c:if test="${isMobile}">
+	<c:set var="mobileOrPc" value="mob"/>
 </c:if>
+
+                             	
+<div class="panel">
+    <div class="panel-heading" role="tab" id="${facet.code}Facet">
+        <h4 class="panel-title">
+            <div role="button" class="collapse-button collapsed" data-toggle="collapse" data-parent="#facetAccordion" href="#${facet.code}FacetBody${mobileOrPc}" aria-controls="${facet.code}FacetBody">
+                <span class="text-uppercase">${facet.name}<span class=""></span>
+                </span>
+                <span class="pull-right icon-minus"></span>
+            </div>
+        </h4>
+    </div>
+    <div id="${facet.code}FacetBody${mobileOrPc}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne" style="height: 0px;">
+        <div class="panel-body">
+            <div id="tabContent_${facet.code}Facet" class="facet js-facet" data-current-query="${searchPageData.currentQuery.query.value}">
+                <div class="facet__name js-facet-name">
+                    <span class="glyphicon facet__arrow"></span>
+                    Shop by ${facet.name}</div>
+                <div class="facet__values js-facet-values js-facet-form">
+                <ul class="facet__list js-facet-list js-facet-top-values">
+               		<c:forEach items="${facet.values}" var="facetValue">
+                		<li class="js-facet-value js-facet-init-value js-facet-top-value">
+                           <input class="js-facet-item-value" type="hidden" name="facetValue" value="retailPriceFacet:$0-$49.99">
+                           <input class="js-facet-item-query" type="hidden" name="facetQuery" value=":name-asc-c">
+                           <form action="" method="get" class="non-js-desctop">
+                           <input type="hidden" name="q" value="${facetValue.query.query.value}"></input>
+                               <label class="hidden-xs hidden-sm">
+                                   <input class="facet__list__checkbox js-facet-checkbox  js-facet-item-checkbox sr-only" type="checkbox" <c:if test="${facetValue.selected}">checked="checked"</c:if>>
+                                   <span class="facet__list__label">
+                                   <span class="facet__list__mark"></span>
+                                   <span class="facet__list__text">
+                                       ${facetValue.name}<span class="facet__value__count">
+                                               (${facetValue.count})</span>
+                                       </span>
+                               </span>
+                               </label>
+                               <label class="hidden-md hidden-lg">
+                                   <input class="facet__list__checkbox js-facet-mobile-checkbox js-facet-item-checkbox sr-only" type="checkbox" data-facet-code="${facet.code}" data-facet-value-code="${facetValue.code}" <c:if test="${facetValue.selected}">checked="checked"</c:if>>
+                                   <span class="facet__list__label">
+                                   <span class="facet__list__mark"></span>
+                                   <span class="facet__list__text">
+                                       ${facetValue.name}<span class="facet__value__count">
+                                               (${facetValue.count})</span>
+                                       </span>
+                               </span>
+                               </label>
+                           </form>
+                       </li>
+               		</c:forEach>
+                 </ul>
+                 <div class="facet-button-wrapper hidden-md hidden-lg">
+                     <button type="button" class="js-facet-group-button-apply facet-button-apply">Apply</button>
+                 </div>
+             </div>
+         </div>
+     </div>
+  </div>
+</div>
