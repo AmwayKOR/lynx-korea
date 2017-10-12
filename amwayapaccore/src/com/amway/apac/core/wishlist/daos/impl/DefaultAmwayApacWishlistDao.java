@@ -42,8 +42,8 @@ public class DefaultAmwayApacWishlistDao extends AmwayWishlistDaoImpl implements
 			.append("SELECT {w.").append(Wishlist2Model.PK).append("} FROM {").append(Wishlist2Model._TYPECODE).append(" as w JOIN ")
 			.append(UserModel._TYPECODE).append(" as u on {w.").append(Wishlist2Model.USER).append("}={u.").append(UserModel.PK)
 			.append("}} WHERE {u.").append(UserModel.PK).append("} = ?").append(Wishlist2Model.USER).append(" AND {")
-			.append(Wishlist2Model.SITE).append("} =?").append(Wishlist2Model.SITE).append(" ORDER BY {u.").append(UserModel.NAME)
-			.append("}").toString();
+			.append(Wishlist2Model.SITE).append("} =?").append(Wishlist2Model.SITE).append(" ORDER BY LOWER({u.")
+			.append(UserModel.NAME).append("})").toString();
 
 	/**
 	 * {@inheritDoc}
@@ -85,8 +85,8 @@ public class DefaultAmwayApacWishlistDao extends AmwayWishlistDaoImpl implements
 		}
 		else
 		{
-			query = new StringBuilder(200).append(FIND_WISHLISTS_FOR_SITE_AND_CUSTOMER_QUERY).append(" ORDER BY {")
-					.append((StringUtils.isNotBlank(sortField)) ? sortField : Wishlist2Model.MODIFIEDTIME).append("} ")
+			query = new StringBuilder(200).append(FIND_WISHLISTS_FOR_SITE_AND_CUSTOMER_QUERY).append(" ORDER BY LOWER({")
+					.append((StringUtils.isNotBlank(sortField)) ? sortField : Wishlist2Model.MODIFIEDTIME).append("}) ")
 					.append((StringUtils.isNotBlank(sortOrder)) ? sortOrder : DESC_STRING).toString();
 		}
 		return query;
