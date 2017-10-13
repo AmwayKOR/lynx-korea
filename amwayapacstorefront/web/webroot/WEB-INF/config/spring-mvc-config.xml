@@ -357,5 +357,11 @@
 		<property name="productUrlConverter" ref="productUrlConverter"/>
 		<property name="categoryUrlConverter" ref="categoryUrlConverter"/>
 	</bean>
-	
+
+	<bean id="shoppingListDetailsBreadcrumbBuilder" class="de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.impl.DefaultResourceBreadcrumbBuilder" >
+		<property name="i18nService" ref="i18nService" />
+		<property name="parentBreadcrumbLinkPath" value="/shopping-lists/all"/>
+		<property name="parentBreadcrumbResourceKey" value="#{'shopping.lists.page.breadcrumb'}"/>
+	</bean>
+
 </beans>

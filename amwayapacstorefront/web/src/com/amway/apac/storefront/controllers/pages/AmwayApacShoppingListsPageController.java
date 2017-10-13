@@ -8,14 +8,20 @@ import static com.amway.apac.storefront.controllers.ControllerConstants.ModelPar
 
 import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
+import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
+import de.hybris.platform.servicelayer.exceptions.AmbiguousIdentifierException;
+import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import de.hybris.platform.wishlist2.model.Wishlist2Model;
 
 import javax.annotation.Resource;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,12 +39,21 @@ import com.amway.facades.product.data.WishlistData;
 @RequestMapping("/shopping-lists")
 public class AmwayApacShoppingListsPageController extends AbstractPageController
 {
+	/**
+	 * Logger instance to record events at class level
+	 */
+	private static final Logger LOGGER = LoggerFactory.getLogger(AmwayApacShoppingListsPageController.class);
+
+	/**
+	 * Path parameter for shopping list uid
+	 */
+	private static final String SHOPPING_LIST_UID_PATH_VARIABLE_PATTERN = "{shoppingListUid:.*}";
 
 	@Resource(name = "wishlistFacade")
 	private AmwayApacWishlistFacade amwayApacWishlistFacade;
 
-	@Resource(name = "simpleBreadcrumbBuilder")
-	private ResourceBreadcrumbBuilder simpleBreadcrumbBuilder;
+	@Resource(name = "shoppingListDetailsBreadcrumbBuilder")
+	private ResourceBreadcrumbBuilder shoppingListDetailsBreadcrumbBuilder;
 
 	/**
 	 * Controller method for the page displaying all the shopping lists of the user.
@@ -50,7 +65,7 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 	 *            if shopping lists CMS page is not found
 	 */
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
-	public String wishlist(final Model model,
+	public String allShoppingLists(final Model model,
 			@RequestParam(name = SORT_FIELD_STRING, required = false, defaultValue = WISHLIST_SORT_BY_LAST_UPDATED) final String sorfField,
 			@RequestParam(name = SORT_ORDER_STRING, required = false, defaultValue = AmwayapacCoreConstants.DESC_STRING) final String sortOrder)
 			throws CMSItemNotFoundException
@@ -84,7 +99,7 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 		setUpMetaDataForContentPage(model,
 				getContentPageForLabelOrId((ControllerConstants.GeneralConstants.SHOPPING_LISTS_CMS_PAGE)));
 		model.addAttribute(ControllerConstants.GeneralConstants.BREADCRUMBS_ATTR,
-				simpleBreadcrumbBuilder.getBreadcrumbs((ControllerConstants.GeneralConstants.SHOPPING_LISTS_PAGE_BREADCRUMB_KEY)));
+				shoppingListDetailsBreadcrumbBuilder.getBreadcrumbs(null));
 	}
 
 	/**
@@ -183,6 +198,64 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 					ControllerConstants.ErrorMessageKeys.ShoppingList.SHOPPING_LIST_CREATE_NAME_MAX_LENGTH);
 		}
 		return isShoppingListNameValid;
+	}
+
+	/**
+	 * Controller method for the page displaying shopping list details
+	 *
+	 * @param model
+	 *           model
+	 * @return view
+	 * @throws CMSItemNotFoundException
+	 *            if shopping lists CMS page is not found
+	 */
+	@RequestMapping(value = "/detail/" + SHOPPING_LIST_UID_PATH_VARIABLE_PATTERN, method = RequestMethod.GET)
+	public String shoppingListDetails(final Model model, @PathVariable("shoppingListUid") final String shoppingListUid)
+			throws CMSItemNotFoundException
+	{
+		populateShoppingListDetailsPageView(model, shoppingListUid);
+		return getViewForPage(model);
+	}
+
+	/**
+	 * Populates the shopping list details data in the model.
+	 *
+	 * @param model
+	 *           model
+	 * @param shoppingListUid
+	 *           uid of the shopping list to be displayed
+	 * @throws CMSItemNotFoundException
+	 *            if the shopping lists cms page is not found.
+	 */
+	private void populateShoppingListDetailsPageView(final Model model, final String shoppingListUid)
+			throws CMSItemNotFoundException
+	{
+		if (StringUtils.isBlank(shoppingListUid))
+		{
+			GlobalMessages.addErrorMessage(model,
+					ControllerConstants.ErrorMessageKeys.ShoppingList.SHOPPING_LIST_DETAILS_PAGE_NOT_FOUND);
+		}
+		else
+		{
+			try
+			{
+				model.addAttribute(ControllerConstants.ModelParameters.SHOPPING_LIST_DATA,
+						amwayApacWishlistFacade.getWishlistByUid(shoppingListUid));
+			}
+			catch (AmbiguousIdentifierException | UnknownIdentifierException exception)
+			{
+				GlobalMessages.addErrorMessage(model,
+						ControllerConstants.ErrorMessageKeys.ShoppingList.SHOPPING_LIST_DETAILS_PAGE_NOT_FOUND);
+				LOGGER.error(new StringBuilder(100).append("No shopping list found with uid [").append(shoppingListUid).append("].")
+						.toString(), exception);
+			}
+		}
+
+		storeCmsPageInModel(model, getContentPageForLabelOrId(ControllerConstants.GeneralConstants.SHOPPING_LIST_DETAILS_CMS_PAGE));
+		setUpMetaDataForContentPage(model,
+				getContentPageForLabelOrId((ControllerConstants.GeneralConstants.SHOPPING_LIST_DETAILS_CMS_PAGE)));
+		model.addAttribute(ControllerConstants.GeneralConstants.BREADCRUMBS_ATTR, shoppingListDetailsBreadcrumbBuilder
+				.getBreadcrumbs((ControllerConstants.GeneralConstants.SHOPPING_LIST_DETAILS_PAGE_BREADCRUMB_KEY)));
 	}
 
 }

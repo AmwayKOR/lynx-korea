@@ -243,6 +243,11 @@ public interface ControllerConstants
 		String SHOPPING_LISTS_STRING = "shoppingLists";
 
 		/**
+		 * Shopping list data model attribute
+		 */
+		String SHOPPING_LIST_DATA = "shoppingListData";
+
+		/**
 		 * Model parameter for error message
 		 */
 		String ERROR_MESSAGE = "errorMessage";
@@ -267,14 +272,19 @@ public interface ControllerConstants
 		String SHOPPING_LISTS_CMS_PAGE = "shopping-lists";
 
 		/**
+		 * Shopping list details page id
+		 */
+		String SHOPPING_LIST_DETAILS_CMS_PAGE = "shopping-list-details";
+
+		/**
 		 * Breadcrumbs Model attribute
 		 */
 		String BREADCRUMBS_ATTR = "breadcrumbs";
 
 		/**
-		 * Shopping lists breabcrumb keys
+		 * Shopping list details breadcrumb key
 		 */
-		String SHOPPING_LISTS_PAGE_BREADCRUMB_KEY = "shopping.lists.page.breadcrumb";
+		String SHOPPING_LIST_DETAILS_PAGE_BREADCRUMB_KEY = "shopping.list.details.page.breadcrumb";
 
 		/**
 		 * String constant linkUrl
@@ -333,6 +343,11 @@ public interface ControllerConstants
 			 * Error message to be displayed when the shopping list name already exists.
 			 */
 			String SHOPPING_LIST_NAME_ALREADY_EXISTS = "shopping.list.create.error.already.exists";
+
+			/**
+			 * Error message on shopping list details page when no shopping list with uid is found.
+			 */
+			String SHOPPING_LIST_DETAILS_PAGE_NOT_FOUND = "shopping.list.details.page.error.not.found";
 		}
 	}
 
