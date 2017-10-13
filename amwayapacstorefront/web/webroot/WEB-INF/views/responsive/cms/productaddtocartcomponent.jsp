@@ -4,6 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
+<c:url value="/cart" var="cartUrl"/>
                     <div class="row">
                         <div class="pull-left qty-selector-container">
                             <label class="control-label" for="pdpAddtoCartInput">Qty</label>
@@ -33,7 +34,7 @@
                             <div id="addToCartTitle" class="display-none">Added to Your Shopping Cart</div>
 
                             <action:actions element="div"  parentComponent="${component}"/>
-                            <button id="BuyNow" class="btn btn-primary btn-block js-add-to-cart js-enable-btn col-md-6" onclick="openDialog();">BUY NOW</button>
+                            <a href="${cartUrl}" class="btn btn-primary btn-block js-add-to-cart js-enable-btn col-md-6">CHECK OUT</a>
 
                             <div class="row add-to-cart-extra-actions col-xs-12 col-sm-12 col-md-12 js-add-to-actions-wrapper">
                                 <div class="add-button-wrap add-to-shopping-list-container new-add-to-shopping-list-container">
