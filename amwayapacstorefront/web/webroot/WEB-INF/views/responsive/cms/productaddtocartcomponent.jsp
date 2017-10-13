@@ -7,11 +7,11 @@
 <c:url value="/cart" var="cartUrl"/>
                     <div class="row">
                         <div class="pull-left qty-selector-container">
-                            <label class="control-label" for="pdpAddtoCartInput">Qty</label>
+                            <label class="control-label" for="pdpAddtoCartInput"><sprint:theme code="product.product.details.future.qty"/></label>
                             <input type="text" maxlength="3" class="text-center js-qty-selector-input" size="1" value="1" data-max="FORCE_IN_STOCK" data-min="1" name="pdpAddtoCartInput" id="pdpAddtoCartInput" /></div>
                         <div class="pull-left usage-calc-pdp">
                             <a class="usageCalculatorLink" href="javascript:void(0);" title="How Much Do I Need?">
-                                <span class="icon icon-calculator"></span>How Much Do I Need?</a>
+                                <span class="icon icon-calculator"></span><spring:theme code="product.volumePrices.column.howMuch"/></a>
                         </div>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                             <div id="addToCartTitle" class="display-none">Added to Your Shopping Cart</div>
 
                             <action:actions element="div"  parentComponent="${component}"/>
-                            <a href="${cartUrl}" class="btn btn-primary btn-block js-add-to-cart js-enable-btn col-md-6">CHECK OUT</a>
+                            <a href="${cartUrl}" class="btn btn-primary btn-block js-add-to-cart js-enable-btn col-md-6"><spring:theme code="checkout.checkout"/></a>
 
                             <div class="row add-to-cart-extra-actions col-xs-12 col-sm-12 col-md-12 js-add-to-actions-wrapper">
                                 <div class="add-button-wrap add-to-shopping-list-container new-add-to-shopping-list-container">

@@ -26,11 +26,11 @@
         			</c:when>
         			<c:otherwise>
                         <format:fromPrice priceData="${product.price}"/>
-                        <span class="description-cost">ABO Cost</span>
+                        <span class="description-cost"><spring:theme code="product.volumePrices.column.aboCost"/></span>
                         <span class="additional-price">
                             <ul>
-                                <li>Retail Price:
-                                    <span class="retail-price-strike-out"><format:fromPrice priceData="${product.retailPrice}"/> | PV / BV: ${product.price.amwayValue.pointValue} / ${product.price.amwayValue.businessVolume}</span></li>
+                                <li><spring:theme code="product.volumePrices.column.retailPrice"/>
+                                    <span class="retail-price-strike-out"><format:fromPrice priceData="${product.retailPrice}"/> | <spring:theme code="product.volumePrices.column.pvBV"/> ${product.price.amwayValue.pointValue} / ${product.price.amwayValue.businessVolume}</span></li>
                             </ul>
                         </span>
         			</c:otherwise>
