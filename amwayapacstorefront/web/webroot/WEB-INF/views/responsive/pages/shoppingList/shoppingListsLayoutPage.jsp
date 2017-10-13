@@ -5,5 +5,5 @@
 <%@ taglib prefix="shoppingList" tagdir="/WEB-INF/tags/responsive/shoppingList"%>
 
 <template:page pageTitle="${pageTitle}">
-	<shoppingList:shoppingListsPageView />
+	<shoppingList:shoppingListsPageView shoppingLists="${shoppingLists}" sortField="${sortField}"/>
 </template:page>

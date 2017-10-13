@@ -1,8 +1,9 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="shoppingList" tagdir="/WEB-INF/tags/responsive/shoppingList"%>
-<%@ attribute name="shoppingListsData" required="true" type="java.util.List" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ attribute name="shoppingListsData" required="true" type="java.util.List" %>
+<%@ attribute name="sortField" required="false" type="java.lang.String" %>
 
  <div class="amway-theme">
      <!--tabs component-->
@@ -24,7 +25,7 @@
                          <div id="table-block-wrapper" class="table-block-wrapper new-table-block-wrapper">
                              <c:choose>
                              	<c:when test="${(shoppingListsData ne null) and (fn:length(shoppingListsData) > 0)}">
-                             		<shoppingList:shoppingListsDisplayTable shoppingListsData="${shoppingListsData}"/>
+                             		<shoppingList:shoppingListsDisplayTable shoppingListsData="${shoppingListsData}" sortField="${sortField}"/>
                              	</c:when>
                              	<c:otherwise>
                             			<spring:theme code="shopping.lists.page.lists.tab.downlines.noresults" />                                                	

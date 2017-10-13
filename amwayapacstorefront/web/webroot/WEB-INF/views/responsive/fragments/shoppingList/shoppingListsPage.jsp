@@ -10,6 +10,6 @@
 </c:if>
 <c:if test="${not empty successMessage}">
 	<div class="success-message"><spring:theme code="${successMessage}" /></div>
-	<div class="page-content" ><shoppingList:shoppingListsPageView /></div>
+	<div class="page-content" ><shoppingList:shoppingListsPageView  shoppingLists="${shoppingLists}" sortField="${sortField}"/></div>
 </c:if>	
 
