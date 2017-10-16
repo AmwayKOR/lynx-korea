@@ -1,5 +1,7 @@
 package com.amway.apac.core.wishlist.services.impl;
 
+import static de.hybris.platform.servicelayer.util.ServicesUtil.validateIfSingleResult;
+
 import de.hybris.platform.basecommerce.model.site.BaseSiteModel;
 import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.wishlist2.model.Wishlist2Model;
@@ -10,6 +12,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Required;
+import org.springframework.util.Assert;
 
 import com.amway.apac.core.wishlist.daos.AmwayApacWishlistDao;
 import com.amway.apac.core.wishlist.services.AmwayApacWishllistService;
@@ -60,6 +63,39 @@ public class DefaultAmwayApacWishlistService extends AmwayWishlistServiceImpl im
 	}
 
 	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Wishlist2Model getWishlistByUidForCurrentUser(final String uid)
+	{
+		Assert.hasLength(uid, "Uid can not be null or empty.");
+
+		final UserModel currentUser = getCurrentUser();
+		if (LOGGER.isInfoEnabled())
+		{
+			LOGGER.info(new StringBuilder(200).append("Fetching wishlists for user [").append(currentUser.getUid())
+					.append("] and uid [").append(uid).append("].").toString());
+		}
+
+		final List<Wishlist2Model> results = getAmwayApacWishlistDao().findWishlistsForUIDAndUser(uid, currentUser);
+
+		if (LOGGER.isInfoEnabled())
+		{
+			LOGGER.info(new StringBuilder(200).append("Found ").append(CollectionUtils.size(results)).append(" wishlists for user [")
+					.append(currentUser.getUid()).append("] and uid [").append(uid).append("].").toString());
+		}
+
+		// validating that there is only one result.
+		validateIfSingleResult(results,
+				new StringBuilder(100).append("No wishlists found with uid [").append(uid).append("] and user [")
+						.append(currentUser.getUid()).append("].").toString(),
+				new StringBuilder(100).append("More than one wishlists found with uid [").append(uid).append("] and user [")
+						.append(currentUser.getUid()).append("].").toString());
+
+		return results.iterator().next();
+	}
+
+	/**
 	 * @return the amwayApacWishlistDao
 	 */
 	public AmwayApacWishlistDao getAmwayApacWishlistDao()
@@ -76,4 +112,5 @@ public class DefaultAmwayApacWishlistService extends AmwayWishlistServiceImpl im
 	{
 		this.amwayApacWishlistDao = amwayApacWishlistDao;
 	}
+
 }

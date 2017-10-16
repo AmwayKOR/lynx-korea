@@ -214,7 +214,7 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 			throws CMSItemNotFoundException
 	{
 		populateShoppingListDetailsPageView(model, shoppingListUid);
-		return getViewForPage(model);
+		return ControllerConstants.Views.Pages.ShoppingList.ShoppingListDetailsPage;
 	}
 
 	/**
@@ -233,21 +233,29 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 		if (StringUtils.isBlank(shoppingListUid))
 		{
 			GlobalMessages.addErrorMessage(model,
-					ControllerConstants.ErrorMessageKeys.ShoppingList.SHOPPING_LIST_DETAILS_PAGE_NOT_FOUND);
+					ControllerConstants.ErrorMessageKeys.ShoppingList.SHOPPING_LIST_DETAILS_WISHLIST_NOT_FOUND);
 		}
 		else
 		{
 			try
 			{
 				model.addAttribute(ControllerConstants.ModelParameters.SHOPPING_LIST_DATA,
-						amwayApacWishlistFacade.getWishlistByUid(shoppingListUid));
+						amwayApacWishlistFacade.getWishlistByUidForCurrentUser(shoppingListUid));
 			}
-			catch (AmbiguousIdentifierException | UnknownIdentifierException exception)
+			catch (final AmbiguousIdentifierException aIE)
 			{
 				GlobalMessages.addErrorMessage(model,
-						ControllerConstants.ErrorMessageKeys.ShoppingList.SHOPPING_LIST_DETAILS_PAGE_NOT_FOUND);
+						ControllerConstants.ErrorMessageKeys.ShoppingList.SHOPPING_LIST_DETAILS_AMBIGUOUS_UID);
+				LOGGER.error(new StringBuilder(100).append("More than one shopping list found with uid [").append(shoppingListUid)
+						.append("].").toString(), aIE);
+			}
+			catch (final UnknownIdentifierException uIE)
+			{
+				GlobalMessages.addErrorMessage(model,
+						ControllerConstants.ErrorMessageKeys.ShoppingList.SHOPPING_LIST_DETAILS_WISHLIST_NOT_FOUND);
 				LOGGER.error(new StringBuilder(100).append("No shopping list found with uid [").append(shoppingListUid).append("].")
-						.toString(), exception);
+						.toString(), uIE);
+
 			}
 		}
 

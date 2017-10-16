@@ -3,6 +3,7 @@ package com.amway.apac.core.wishlist.daos.impl;
 import static com.amway.apac.core.constants.AmwayapacCoreConstants.DESC_STRING;
 import static com.amway.apac.core.constants.AmwayapacCoreConstants.TWO_HUNDRED_INT;
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNull;
+import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
 
 import de.hybris.platform.basecommerce.model.site.BaseSiteModel;
 import de.hybris.platform.core.model.user.UserModel;
@@ -13,7 +14,9 @@ import de.hybris.platform.wishlist2.model.Wishlist2Model;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.util.Assert;
 
+import com.amway.apac.core.constants.AmwayapacCoreConstants;
 import com.amway.apac.core.wishlist.daos.AmwayApacWishlistDao;
 import com.amway.core.wishlist.daos.impl.AmwayWishlistDaoImpl;
 
@@ -44,6 +47,15 @@ public class DefaultAmwayApacWishlistDao extends AmwayWishlistDaoImpl implements
 			.append("}} WHERE {u.").append(UserModel.PK).append("} = ?").append(Wishlist2Model.USER).append(" AND {")
 			.append(Wishlist2Model.SITE).append("} =?").append(Wishlist2Model.SITE).append(" ORDER BY LOWER({u.")
 			.append(UserModel.NAME).append("})").toString();
+
+	/**
+	 * Query to search for wishlist based on UID and user.
+	 */
+	private static final String FIND_WISHLISTS_FOR_UID_USER_QUERY = new StringBuilder(100).append("SELECT {")
+			.append(Wishlist2Model.PK).append("} FROM {").append(Wishlist2Model._TYPECODE).append("} WHERE {")
+			.append(Wishlist2Model.UID).append("} =?").append(Wishlist2Model.UID).append(" AND {").append(Wishlist2Model.USER)
+			.append("} =?").append(Wishlist2Model.USER).toString();
+
 
 	/**
 	 * {@inheritDoc}
@@ -90,6 +102,23 @@ public class DefaultAmwayApacWishlistDao extends AmwayWishlistDaoImpl implements
 					.append((StringUtils.isNotBlank(sortOrder)) ? sortOrder : DESC_STRING).toString();
 		}
 		return query;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<Wishlist2Model> findWishlistsForUIDAndUser(final String uid, final UserModel user)
+	{
+		Assert.hasLength(uid, "UID must not be null!");
+		validateParameterNotNullStandardMessage(AmwayapacCoreConstants.USER_STRING, user);
+
+		final FlexibleSearchQuery fQuery = new FlexibleSearchQuery(FIND_WISHLISTS_FOR_UID_USER_QUERY);
+		fQuery.addQueryParameter(Wishlist2Model.UID, uid);
+		fQuery.addQueryParameter(Wishlist2Model.USER, user);
+
+		final SearchResult<Wishlist2Model> result = search(fQuery);
+		return result.getResult();
 	}
 
 }

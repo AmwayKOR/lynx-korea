@@ -77,4 +77,9 @@ public final class AmwayapacCoreConstants extends GeneratedAmwayapacCoreConstant
 	 */
 	public static final String SORT_ORDER_STRING = "sortOrder";
 
+	/**
+	 * user string constant
+	 */
+	public static final String USER_STRING = "user";
+
 }

@@ -90,5 +90,10 @@
 	<bean id="defaultAmwayApacVariantOptionDataPopulator"  class="com.amway.apac.facades.populators.AmwayApacVariantOptionDataPopulator"
 		  parent="acceleratorVariantOptionDataPopulator" >
 	</bean>
+
+    <alias name="amwayApacWishlistPopulator" alias="wishlistPopulator"/>
+    <bean id="amwayApacWishlistPopulator" class="com.amway.apac.facades.wishlist.populators.AmwayApacWishlistPopulator" parent="amwayWishlistPopulator">
+    	<property name="amwayApacUserBasicConverter" ref="amwayApacUserBasicConverter" />
+    </bean>
 	
 </beans>

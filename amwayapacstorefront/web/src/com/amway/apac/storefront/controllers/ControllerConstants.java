@@ -167,6 +167,11 @@ public interface ControllerConstants
 			{
 				String ImportCSVSavedCartPage = "pages/csv/importCSVSavedCartPage"; // NOSONAR
 			}
+
+			interface ShoppingList //NOSONAR
+			{
+				String ShoppingListDetailsPage = "pages/shoppingList/shoppingListDetailsPage"; //NOSONAR
+			}
 		}
 
 		interface Fragments
@@ -347,7 +352,12 @@ public interface ControllerConstants
 			/**
 			 * Error message on shopping list details page when no shopping list with uid is found.
 			 */
-			String SHOPPING_LIST_DETAILS_PAGE_NOT_FOUND = "shopping.list.details.page.error.not.found";
+			String SHOPPING_LIST_DETAILS_WISHLIST_NOT_FOUND = "shopping.list.details.error.not.found";
+
+			/**
+			 * Error message on shopping list details page when more than one shopping lists exist for the same uid.
+			 */
+			String SHOPPING_LIST_DETAILS_AMBIGUOUS_UID = "shopping.list.details.error.ambiguous.uid";
 		}
 	}
 

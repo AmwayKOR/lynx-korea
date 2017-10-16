@@ -1,5 +1,7 @@
 package com.amway.apac.core.wishlist.services;
 
+import de.hybris.platform.servicelayer.exceptions.AmbiguousIdentifierException;
+import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import de.hybris.platform.wishlist2.model.Wishlist2Model;
 
 import java.util.List;
@@ -29,5 +31,21 @@ public interface AmwayApacWishllistService extends AmwayWishlistService
 	 * @return wish lists found.
 	 */
 	List<Wishlist2Model> getWishlists(final String sortField, final String sortOrder);
+
+	/**
+	 * Gets the wish list according to uid
+	 *
+	 * @param uid
+	 *           to identify the wish list
+	 *
+	 * @return wish list model
+	 * @throws IllegalArgumentException
+	 *            if the uid is null or empty
+	 * @throws UnknownIdentifierException
+	 *            if no wishist is found
+	 * @throws AmbiguousIdentifierException
+	 *            if more than one wishlists found with the uid
+	 */
+	Wishlist2Model getWishlistByUidForCurrentUser(final String uid);
 
 }

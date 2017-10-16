@@ -40,6 +40,7 @@ public class AmwayApacWishlistBasicPopulator implements Populator<Wishlist2Model
 		target.setName(source.getName());
 		target.setIsFavorite(BooleanUtils.isTrue(source.getFavorite()));
 		target.setLastUpdated(source.getModifiedtime());
+		target.setCreationTime(source.getCreationtime());
 
 		if (source.getUser() != null)
 		{

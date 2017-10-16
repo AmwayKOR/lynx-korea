@@ -42,7 +42,8 @@
      <tbody>
       <c:forEach items="${shoppingListsData}" var="shoppingList" varStatus="loop">
        <tr id="row-${loop.index}">
-           <td class="ditto-field-name"><span class="link-wrapper"> <a class="responsive-table-link js-saved-cart-name" href="shopping-list-detail.html">${shoppingList.name}</a> </span> </td>
+       	   <c:url value="/shopping-lists/detail/${shoppingList.uid}" var="shoppingListDetailsUrl" />
+           <td class="ditto-field-name"><span class="link-wrapper"> <a class="responsive-table-link js-saved-cart-name" href="${shoppingListDetailsUrl}">${shoppingList.name}</a> </span> </td>
            <td class=""> ${shoppingList.user.name}</td>
            <td class="">${shoppingList.user.name}</td> <!-- downline functinality is not done yet, so just using the user name here -->
            <td class=""><fmt:formatDate value="${shoppingList.lastUpdated}" type="both"/></td>
