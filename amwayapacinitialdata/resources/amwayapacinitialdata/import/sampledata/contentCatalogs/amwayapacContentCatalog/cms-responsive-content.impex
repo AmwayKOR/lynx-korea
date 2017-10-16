@@ -742,7 +742,7 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;c
 ;;AutoRenewalContentSlot;Auto Renewal Slot for myaccount page;true;refMyAccountSection2B
 ;;ContractsContentSlot;Bonus Payment Slot for myaccount page;true;refMyAccountSection2C
 
-INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='myaccount'];contentSlot(uid,$contentCV)[unique=true]
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='account'];contentSlot(uid,$contentCV)[unique=true]
 ;;BusinessInformationContentSlot;Section1A;;BusinessInformationContentSlot
 ;;OrderHistoryContentSlot;Section1B;;OrderHistoryContentSlot
 ;;BillingShippingContentSlot;Section1C;;BillingShippingContentSlot

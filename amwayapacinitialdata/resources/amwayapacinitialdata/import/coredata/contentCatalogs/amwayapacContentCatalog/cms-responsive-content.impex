@@ -42,7 +42,6 @@ INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;fronten
 ;;ShoppingListsPageTemplate;Shopping Lists Page Template;shoppingList/shoppingListsLayoutPage;ContentPage
 ;;CategoryLandingPageTemplate;Category Landing Page Template;category/categoryLandingLayoutPage;ContentPage
 ;;HomePageMainTemplate;Home Main Page Template;layout/homePageLayout;CategoryPage,ContentPage
-;;MyAccountPageTemplate;My Account Page Template;layout/myAccountPageLayout;CategoryPage,ContentPage
 ;;ContentArticlePagesTemplate;Content Article Pages Template;business/contentArticlePagesLayout;ContentPage
 
 # Templates without a frontendTemplateName
@@ -82,7 +81,6 @@ UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];velocityTemplate[tr
 ;;ShoppingListsPageTemplate 		;$jarResourceCms/structure-view/structure_shoppingListsPageTemplate.vm
 ;;CategoryLandingPageTemplate		;$jarResourceCms/structure-view/structure_categoryLandingPageTemplate.vm
 ;;HomePageMainTemplate      ;$jarResourceCms/structure-view/structure_homePageMainTemplate.vm
-;;MyAccountPageTemplate      ;$jarResourceCms/structure-view/structure_myAccountPageTemplate.vm
 ;;ContentArticlePagesTemplate		;$jarResourceCms/structure-view/structure_contentArticlePagesTemplate.vm
 
 
@@ -446,19 +444,17 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 # Template used for all of the Account pages
 INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='AccountPageTemplate'];validComponentTypes(code);compTypeGroup(code)
 ;SiteLogo;;;logo
-;HeaderLinks;;;headerlinks
 ;SearchBox;;;searchbox
 ;MiniCart;;;minicart
 ;NavigationBar;;;navigation
 ;MobileNavigationBar;;;navigation
-;TopContent;;;wide
-;SideContent;;;narrow
-;BodyContent;;;wide
-;BottomContent;;;wide
+;Section1A;;;
+;Section1B;;;
+;Section1C;;;
+;Section2A;;;
+;Section2B;;;
+;Section2C;;;
 ;Footer;;;footer
-;TopHeaderSlot;;;wide
-;BottomHeaderSlot;;;wide
-;PlaceholderContentSlot;;;
 
 # Shopping Lists Page Template
 # Template used for shopping lists page
@@ -570,21 +566,6 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 ;Section11;;;
 ;Section12;;;
 ;Section13;;;
-;Footer;;;footer
-
-# My Account Page Template
-INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='MyAccountPageTemplate'];validComponentTypes(code);compTypeGroup(code)
-;SiteLogo;;;logo
-;SearchBox;;;searchbox
-;MiniCart;;;minicart
-;MobileNavigationBar;;;navigation
-;NavigationBar;;;navigation
-;Section1A;;;
-;Section1B;;;
-;Section1C;;;
-;Section2A;;;
-;Section2B;;;
-;Section2C;;;
 ;Footer;;;footer
 
 # Create Content Slots
@@ -907,15 +888,11 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='AccountPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
 ;;SiteLogo-AccountPage;SiteLogo;;SiteLogoSlot;true
-;;HomepageLink-AccountPage;HomepageNavLink;;HomepageNavLinkSlot;true
 ;;NavigationBar-AccountPage;NavigationBar;;NavigationBarSlot;true
 ;;MiniCart-AccountPage;MiniCart;;MiniCartSlot;true
 ;;Footer-AccountPage;Footer;;FooterSlot;true
 ;;HeaderLinks-AccountPage;HeaderLinks;;HeaderLinksSlot;true
 ;;SearchBox-AccountPage;SearchBox;;SearchBoxSlot;true
-;;TopHeaderSlot-AccountPage;TopHeaderSlot;;TopHeaderSlot;true
-;;BottomHeaderSlot-AccountPage;BottomHeaderSlot;;BottomHeaderSlot;true
-;;PlaceholderContentSlot-AccountPage;PlaceholderContentSlot;;PlaceholderContentSlot;true
 ;;Mobile-NavigationBar-AccountPage;MobileNavigationBar;;MobileNavigationBarSlot;true
 
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ShoppingListsPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
@@ -1013,14 +990,6 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 ;;NavigationBar-HomePageMain;NavigationBar;;NavigationBarSlot;true
 ;;Mobile-NavigationBar-HomePageMain;MobileNavigationBar;;MobileNavigationBarSlot;true
 
-INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='MyAccountPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
-;;SiteLogo-MyAccountPage;SiteLogo;;SiteLogoSlot;true
-;;MiniCart-MyAccountPage;MiniCart;;MiniCartSlot;true
-;;Footer-MyAccountPage;Footer;;FooterSlot;true
-;;SearchBox-MyAccountPage;SearchBox;;SearchBoxSlot;true
-;;NavigationBar-MyAccountPage;NavigationBar;;NavigationBarSlot;true
-;;Mobile-NavigationBar-MyAccountPage;MobileNavigationBar;;MobileNavigationBarSlot;true
-
 # Create Content Pages
 
 # Site-wide Homepage
@@ -1055,7 +1024,6 @@ INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTe
 ;;shopping-lists;Shopping Lists Page;ShoppingListsPageTemplate;shopping-lists
 ;;shopping-list-details;Shopping List Details Page;ShoppingListsPageTemplate;shopping-list-details
 ;;category-landing-page;Category Landing Page;CategoryLandingPageTemplate;/category-landing-page
-;;myaccount;My Account Page;MyAccountPageTemplate;/myaccount
 ;;content-article-pages;Content Article Pages;ContentArticlePagesTemplate;/content-article-pages
 
 
