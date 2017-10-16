@@ -775,3 +775,29 @@ INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true]  ;&
 ;;autoRenewalParagraphComponent;autoRenewalParagraphComponent
 ;;contractsParagraphComponent;contractsParagraphComponent
 
+# CMS VariantSelector Components
+INSERT_UPDATE ProductVariantSelectorComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;VariantSelector;Product Variant Selector;VariantSelector
+
+# CMS VariantSelector Components
+INSERT_UPDATE ProductColorVariantSelectorComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;ColorVariantSelector;Product Color Variant Selector;ColorVariantSelector
+
+# CMS ProductAddToCart Components
+INSERT_UPDATE ProductAddToCartComponent;$contentCV[unique=true];uid[unique=true];name;actions(&actionRef);&componentRef
+;;AddToCart;Product Add To Cart;AddToCartAction;AddToCart
+
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(uid,$contentCV)
+;;VariantSelectorSlot;VariantSelector
+;;ColorVariantSelectorSlot;ColorVariantSelector
+;;AddToCartSlot;AddToCart
+
+####  CMS ACTIONS ######
+# CMS Action Restrictions
+INSERT_UPDATE CMSActionRestriction;$contentCV[unique=true];uid[unique=true];name;
+;;ActionRestriction;A CMSAction restriction;
+
+# CMS AddToCart Action
+INSERT_UPDATE AddToCartAction;$contentCV[unique=true];uid[unique=true];url;name;restrictions(uid,$contentCV);&actionRef
+;;AddToCartAction;/cart/add;Product Add To Cart Action;ActionRestriction;AddToCartAction
