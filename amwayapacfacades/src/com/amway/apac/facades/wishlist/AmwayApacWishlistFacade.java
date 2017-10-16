@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.amway.facades.product.data.WishlistData;
 import com.amway.facades.wishlist.AmwayWishlistFacade;
+import com.amway.facades.wishlist.modification.status.AmwayApacWishlistModificationStatus;
 
 
 /**
@@ -47,5 +48,19 @@ public interface AmwayApacWishlistFacade extends AmwayWishlistFacade
 	 *            if more than one wishlists found with the uid
 	 */
 	WishlistData getWishlistByUidForCurrentUser(final String uid);
+
+	/**
+	 * Adds the product whose code is given to the shopping list whose uid is given.
+	 *
+	 * @param productCode
+	 *           code of the product to add.
+	 * @param wishlistUid
+	 *           uid of the wishlist to which product is to be added.
+	 *
+	 * @throws IllegalArgumentException
+	 *            if product code is null or empty, or if wishlistUid is null or empty
+	 * @return {@link AmwayApacWishlistModificationStatus} based on whether add to shopping list was successfull or not.
+	 */
+	AmwayApacWishlistModificationStatus addProductToWishlist(final String productCode, final String wishlistUid);
 
 }

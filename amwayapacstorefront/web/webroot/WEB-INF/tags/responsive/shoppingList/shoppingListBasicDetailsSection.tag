@@ -22,10 +22,10 @@
                             <div class="detail-content col-xs-12 col-md-6 col-lg-6">
                                 <div class="col-md-12 col-lg-12">
                                     <span class="col-xs-6 col-md-6 col-lg-6 left-content"><spring:theme code="shopping.list.page.basic.section.created.time.label" /></span>
-                                    <span class="col-xs-6 col-md-6 col-lg-6"><fmt:formatDate value="${shoppingListData.lastUpdated}"/></span></div>
+                                    <span class="col-xs-6 col-md-6 col-lg-6"><fmt:formatDate value="${shoppingListData.lastUpdated}" type="both"/></span></div>
                                 <div class="col-md-12 col-lg-12">
                                     <span class="col-xs-6 col-md-6 col-lg-6 left-content"><spring:theme code="shopping.list.page.basic.section.updated.time.label" /></span>
-                                    <span class="col-xs-6 col-md-6 col-lg-6"><fmt:formatDate value="${shoppingListData.creationTime}"/></span></div>
+                                    <span class="col-xs-6 col-md-6 col-lg-6"><fmt:formatDate value="${shoppingListData.creationTime}" type="both"/></span></div>
                                 <div class="col-md-12 col-lg-12">
                                     <span class="col-xs-6 col-md-6 col-lg-6 left-content"><spring:theme code="shopping.list.page.basic.section.items.label" /></span>
                                     <span class="col-xs-6 col-md-6 col-lg-6">${fn:length(shoppingListData.entries)}</span></div>

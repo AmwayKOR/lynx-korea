@@ -230,6 +230,11 @@ public interface ControllerConstants
 				 * Complete shopping lists page view
 				 */
 				String ShoppingListsPageFragment = "fragments/shoppingList/shoppingListsPage"; //NOSONAR
+
+				/**
+				 * Response UI when add product to shopping list is called.
+				 */
+				String AddProductToShoppingListResponse = "fragments/shoppingList/addProductToShoppingListResponse"; //NOSONAR
 			}
 		}
 	}
@@ -316,6 +321,11 @@ public interface ControllerConstants
 		 */
 		String WISHLIST_SORT_BY_USER = "byUser";
 
+		/**
+		 * Prefix appended to status for add product to shopping list messages.
+		 */
+		String WISHLIST_ADD_PRODUCT_MESSAGES_PREFIX = "shopping.list.add.product.status.";
+
 	}
 
 	/**
@@ -358,6 +368,17 @@ public interface ControllerConstants
 			 * Error message on shopping list details page when more than one shopping lists exist for the same uid.
 			 */
 			String SHOPPING_LIST_DETAILS_AMBIGUOUS_UID = "shopping.list.details.error.ambiguous.uid";
+
+			/**
+			 * Error message to be displayed on add to wishlist when product code is empty.
+			 */
+			String SHOPPING_LIST_ADD_PRODUCT_CODE_EMPTY = "shopping.list.add.product.error.empty.name";
+
+			/**
+			 * Error message to be displayed on add to wishlist when product code is empty.
+			 */
+			String SHOPPING_LIST_ADD_PRODUCT_WISHLIST_UID_EMPTY = "shopping.list.add.product.error.empty.listuid";
+
 		}
 	}
 

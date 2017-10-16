@@ -42,6 +42,12 @@ public final class AmwayapacCoreConstants extends GeneratedAmwayapacCoreConstant
 	 */
 	public static final String TARGET_STRING = "target";
 
+
+	/**
+	 * int constant - 50.
+	 */
+	public static final int FIFTY_INT = 50;
+
 	/**
 	 * int constant - 100.
 	 */
@@ -56,6 +62,11 @@ public final class AmwayapacCoreConstants extends GeneratedAmwayapacCoreConstant
 	 * Maximum length of the shopping lists names.
 	 */
 	public static final int SHOPPING_LIST_DEFAULT_MAX_LENGTH = 100;
+
+	/**
+	 * Default quantity to add in the wishlist for a product.
+	 */
+	public static final Integer SHOPPING_LIST_ENTRY_DEFAULT_QUANTITY = Integer.valueOf(1);
 
 	/**
 	 * String constant for ascending to be used in queries.

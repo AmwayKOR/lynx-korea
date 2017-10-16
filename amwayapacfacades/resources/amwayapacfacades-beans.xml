@@ -11,6 +11,14 @@
 -->
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
 
+	<!-- Enumeration representing the response status for wishlist update operations-->
+	<enum class="com.amway.facades.wishlist.modification.status.AmwayApacWishlistModificationStatus">
+		<value>SUCCESS</value>
+		<value>WISHLIST_NOT_FOUND</value>
+		<value>PRODUCT_NOT_FONUD</value>
+		<value>PRODUCT_ALREADY_EXISTS</value>
+	</enum>
+
     <bean class="com.amway.facades.product.data.WishlistData">
         <property name="user" type="de.hybris.platform.commercefacades.user.data.CustomerData" />
 		<property name="lastUpdated" type="java.util.Date" />

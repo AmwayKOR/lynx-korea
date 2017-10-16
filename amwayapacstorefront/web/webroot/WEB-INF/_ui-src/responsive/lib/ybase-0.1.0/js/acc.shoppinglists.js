@@ -1,29 +1,35 @@
 ACC.shoppinglists = {
 
     _autoload: [
-    	"bindCreateShoppingList"
+    	"bindCreateShoppingList",
+    	"bindAddProductToShoppingListForm"
     ],
     
-    refreshAllShoppingListsPage: function(data) {
-    	// data contains the shopping list page content
+    displayGlobalMessagesBasedOnAjaxResponse: function(data) {
     	if ($(data).filter("div.error-message").length > 0) {
-    		var globalErrorMessage = {};
-			globalErrorMessage.globalMessageType = ACC.globalMessageTypes.ERROR_MESSAGES_HOLDER; 
-			globalErrorMessage.message = $(data).filter("div.error-message").html(); 
-			$(".global-alerts").appendGlobalMessages([globalErrorMessage]);
-			$('body, html').animate({scrollTop:0}, 'slow');	
+    		ACC.global.appendGlobalMessage(ACC.globalMessageTypes.ERROR_MESSAGES_HOLDER, $(data).filter("div.error-message").html());
     	}
     	if ($(data).filter("div.success-message").length > 0) {
-    		var globalErrorMessage = {};
-			globalErrorMessage.globalMessageType = ACC.globalMessageTypes.CONF_MESSAGES_HOLDER; 
-			globalErrorMessage.message = $(data).filter("div.success-message").html(); 
-			$(".global-alerts").appendGlobalMessages([globalErrorMessage]);
-			$('body, html').animate({scrollTop:0}, 'slow');	
+    		ACC.global.appendGlobalMessage(ACC.globalMessageTypes.CONF_MESSAGES_HOLDER, $(data).filter("div.success-message").html());
     	}
+    },
+    
+    refreshAllShoppingListsPage: function(data) {
+    	
+    	ACC.shoppinglists.displayGlobalMessagesBasedOnAjaxResponse(data);
+    	// data contains the shopping list page content
     	if ($(data).filter("div.page-content").length > 0) {
     		$(".page-content-wrapper.page-shopping-lists").html($(data).filter("div.page-content").html());
     	}
+    },
+    
+    refreshShoppingListDetailsPage: function(data) {
+    	ACC.shoppinglists.displayGlobalMessagesBasedOnAjaxResponse(data);
 
+    	// data contains the shopping list details page content as well
+    	if ($(data).filter("div.page-content").length > 0) {
+    		$(".page-content-wrapper.page-shopping-list-details").html($(data).filter("div.page-content").html());
+    	}
     },
     
     bindCreateShoppingList : function() {
@@ -47,21 +53,48 @@ ACC.shoppinglists = {
 						},
 						error: function() 
 						{
-							var globalErrorMessage = {};
-			    			globalErrorMessage.globalMessageType = ACC.globalMessageTypes.ERROR_MESSAGES_HOLDER; 
-			    			globalErrorMessage.message = ACC.messages.shoppingListCreationError; 
-			    			$(".global-alerts").appendGlobalMessages([globalErrorMessage]);
-			    			$('body, html').animate({scrollTop:0}, 'slow');		
+				    		ACC.global.appendGlobalMessage(ACC.globalMessageTypes.ERROR_MESSAGES_HOLDER, ACC.messages.shoppingListCreationError);
 						}
 					});
     			} else {
-					var globalErrorMessage = {};
-	    			globalErrorMessage.globalMessageType = ACC.globalMessageTypes.ERROR_MESSAGES_HOLDER; 
-	    			globalErrorMessage.message = ACC.messages.shoppingListNameEmptyErrorMessage; 
-	    			$(".global-alerts").appendGlobalMessages([globalErrorMessage]);
-	    			$('body, html').animate({scrollTop:0}, 'slow');		
+		    		ACC.global.appendGlobalMessage(ACC.globalMessageTypes.ERROR_MESSAGES_HOLDER, ACC.messages.shoppingListNameEmptyErrorMessage);
     			}
     			
+    			return false;
+    		});
+    	}
+    },
+    
+    bindAddProductToShoppingListForm: function() {
+
+    	// only bind if the current page is shopping lists page
+    	if ($(".page-content-wrapper.page-shopping-list-details").length > 0) {
+    		$(".page-content-wrapper.page-shopping-list-details").on("submit", "form#addProductToShoppingListForm", function() {
+    			
+    			var $form = $(this);
+    			var method = $form.attr("method") ? $form.attr("method").toUpperCase() : "POST";
+    			var shoppingListUid = $form.find("input[name=shoppingListUid]").val();
+    			var productCode = $form.find("input[name=productCode]").val();
+    			
+    			if (ACC.global.isNullOrWhiteSpace(productCode)) {
+		    		ACC.global.appendGlobalMessage(ACC.globalMessageTypes.ERROR_MESSAGES_HOLDER, ACC.messages.productCodeEmptyErrorMessage);
+    			} else if (ACC.global.isNullOrWhiteSpace(shoppingListUid)) {
+		    		ACC.global.appendGlobalMessage(ACC.globalMessageTypes.ERROR_MESSAGES_HOLDER, ACC.messages.shoppingListUidEmptyErrorMessage);
+    			} else {
+					$.ajax({
+						url: $form.attr("action"),
+						data: {"shoppingListUid" : shoppingListUid, "productCode" : productCode},
+						type: method,
+						success: function(data) 
+						{
+							ACC.shoppinglists.refreshShoppingListDetailsPage(data);
+					    },
+						error: function() 
+						{
+				    		ACC.global.appendGlobalMessage(ACC.globalMessageTypes.ERROR_MESSAGES_HOLDER, ACC.messages.shoppingListAddProductError);
+						}
+					});
+    			}    			
     			return false;
     		});
     	}

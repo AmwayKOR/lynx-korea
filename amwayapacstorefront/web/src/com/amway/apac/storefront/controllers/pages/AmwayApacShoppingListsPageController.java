@@ -1,5 +1,7 @@
 package com.amway.apac.storefront.controllers.pages;
 
+import static com.amway.apac.core.constants.AmwayapacCoreConstants.FIFTY_INT;
+import static com.amway.apac.core.constants.AmwayapacCoreConstants.HUNDRED_INT;
 import static com.amway.apac.core.constants.AmwayapacCoreConstants.SORT_FIELD_STRING;
 import static com.amway.apac.core.constants.AmwayapacCoreConstants.SORT_ORDER_STRING;
 import static com.amway.apac.storefront.controllers.ControllerConstants.GeneralConstants.WISHLIST_SORT_BY_LAST_UPDATED;
@@ -30,6 +32,7 @@ import com.amway.apac.core.constants.AmwayapacCoreConstants;
 import com.amway.apac.facades.wishlist.AmwayApacWishlistFacade;
 import com.amway.apac.storefront.controllers.ControllerConstants;
 import com.amway.facades.product.data.WishlistData;
+import com.amway.facades.wishlist.modification.status.AmwayApacWishlistModificationStatus;
 
 
 /**
@@ -48,6 +51,11 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 	 * Path parameter for shopping list uid
 	 */
 	private static final String SHOPPING_LIST_UID_PATH_VARIABLE_PATTERN = "{shoppingListUid:.*}";
+
+	/**
+	 * Url for the shopping list details page
+	 */
+	private static final String SHOPPING_LIST_DETAILS_PAGE_URL = "/detail/" + SHOPPING_LIST_UID_PATH_VARIABLE_PATTERN;
 
 	@Resource(name = "wishlistFacade")
 	private AmwayApacWishlistFacade amwayApacWishlistFacade;
@@ -209,7 +217,7 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 	 * @throws CMSItemNotFoundException
 	 *            if shopping lists CMS page is not found
 	 */
-	@RequestMapping(value = "/detail/" + SHOPPING_LIST_UID_PATH_VARIABLE_PATTERN, method = RequestMethod.GET)
+	@RequestMapping(value = SHOPPING_LIST_DETAILS_PAGE_URL, method = RequestMethod.GET)
 	public String shoppingListDetails(final Model model, @PathVariable("shoppingListUid") final String shoppingListUid)
 			throws CMSItemNotFoundException
 	{
@@ -246,15 +254,15 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 			{
 				GlobalMessages.addErrorMessage(model,
 						ControllerConstants.ErrorMessageKeys.ShoppingList.SHOPPING_LIST_DETAILS_AMBIGUOUS_UID);
-				LOGGER.error(new StringBuilder(100).append("More than one shopping list found with uid [").append(shoppingListUid)
-						.append("].").toString(), aIE);
+				LOGGER.error(new StringBuilder(HUNDRED_INT).append("More than one shopping list found with uid [")
+						.append(shoppingListUid).append("].").toString(), aIE);
 			}
 			catch (final UnknownIdentifierException uIE)
 			{
 				GlobalMessages.addErrorMessage(model,
 						ControllerConstants.ErrorMessageKeys.ShoppingList.SHOPPING_LIST_DETAILS_WISHLIST_NOT_FOUND);
-				LOGGER.error(new StringBuilder(100).append("No shopping list found with uid [").append(shoppingListUid).append("].")
-						.toString(), uIE);
+				LOGGER.error(new StringBuilder(HUNDRED_INT).append("No shopping list found with uid [").append(shoppingListUid)
+						.append("].").toString(), uIE);
 
 			}
 		}
@@ -266,4 +274,69 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 				.getBreadcrumbs((ControllerConstants.GeneralConstants.SHOPPING_LIST_DETAILS_PAGE_BREADCRUMB_KEY)));
 	}
 
+	/**
+	 * Controller method to add product to shopping list
+	 *
+	 * @param productCode
+	 *           code of the product
+	 * @param shoppingListUid
+	 *           uid of the shopping list
+	 * @param model
+	 *           view model
+	 * @return the view
+	 * @throws CMSItemNotFoundException
+	 */
+	@RequestMapping(value = "/add-product", method = RequestMethod.POST)
+	public String addProductToFavoriteList(@RequestParam(value = "productCode") final String productCode,
+			@RequestParam(name = "shoppingListUid") final String shoppingListUid, final Model model) throws CMSItemNotFoundException
+	{
+		if (StringUtils.isBlank(productCode))
+		{
+			model.addAttribute(ERROR_MESSAGE,
+					ControllerConstants.ErrorMessageKeys.ShoppingList.SHOPPING_LIST_ADD_PRODUCT_CODE_EMPTY);
+		}
+		else if (StringUtils.isBlank(shoppingListUid))
+		{
+			model.addAttribute(ERROR_MESSAGE,
+					ControllerConstants.ErrorMessageKeys.ShoppingList.SHOPPING_LIST_ADD_PRODUCT_WISHLIST_UID_EMPTY);
+		}
+		else
+		{
+			final AmwayApacWishlistModificationStatus modificationStatus = amwayApacWishlistFacade.addProductToWishlist(productCode,
+					shoppingListUid);
+			populateMessageForModificationStatus(modificationStatus, model,
+					ControllerConstants.GeneralConstants.WISHLIST_ADD_PRODUCT_MESSAGES_PREFIX);
+			if (AmwayApacWishlistModificationStatus.SUCCESS.equals(modificationStatus))
+			{
+				populateShoppingListDetailsPageView(model, shoppingListUid);
+			}
+		}
+		return ControllerConstants.Views.Fragments.ShoppingList.AddProductToShoppingListResponse;
+	}
+
+	/**
+	 * Populates the success or error message in the model based on the status by appending the prefix for the message
+	 * key.
+	 *
+	 * @param modificationStatus
+	 *           modification status
+	 * @param model
+	 *           view model
+	 * @param prefix
+	 *           prefix to create message key.
+	 */
+	private void populateMessageForModificationStatus(final AmwayApacWishlistModificationStatus modificationStatus,
+			final Model model, final String prefix)
+	{
+		if (AmwayApacWishlistModificationStatus.SUCCESS.equals(modificationStatus))
+		{
+			model.addAttribute(SUCCESS_MESSAGE,
+					new StringBuilder(FIFTY_INT).append(prefix).append(modificationStatus.toString().toLowerCase()).toString());
+		}
+		else
+		{
+			model.addAttribute(ERROR_MESSAGE,
+					new StringBuilder(FIFTY_INT).append(prefix).append(modificationStatus.toString().toLowerCase()).toString());
+		}
+	}
 }

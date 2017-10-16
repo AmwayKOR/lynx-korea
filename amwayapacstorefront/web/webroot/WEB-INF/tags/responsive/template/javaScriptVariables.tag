@@ -50,6 +50,9 @@
 
 			ACC.messages.shoppingListNameEmptyErrorMessage= '<spring:theme code="shopping.list.create.error.empty.name"/>';
 			ACC.messages.shoppingListCreationError='<spring:theme code="shopping.list.create.error"/>';
+			ACC.messages.shoppingListAddProductError='<spring:theme code="shopping.list.add.product.error"/>';
+			ACC.messages.shoppingListUidEmptyErrorMessage= '<spring:theme code="shopping.list.add.product.error.empty.listuid"/>';
+			ACC.messages.productCodeEmptyErrorMessage= '<spring:theme code="shopping.list.add.product.error.empty.name"/>';
 		/*]]>*/
 	</script>
 	<template:javaScriptAddOnsVariables/>

@@ -1,5 +1,6 @@
 package com.amway.apac.core.wishlist.services.impl;
 
+import static com.amway.apac.core.constants.AmwayapacCoreConstants.TWO_HUNDRED_INT;
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateIfSingleResult;
 
 import de.hybris.platform.basecommerce.model.site.BaseSiteModel;
@@ -45,7 +46,7 @@ public class DefaultAmwayApacWishlistService extends AmwayWishlistServiceImpl im
 
 		if (LOGGER.isInfoEnabled())
 		{
-			LOGGER.info(new StringBuilder(200).append("Fetching wishlists for user [").append(currentUser.getUid())
+			LOGGER.info(new StringBuilder(TWO_HUNDRED_INT).append("Fetching wishlists for user [").append(currentUser.getUid())
 					.append("] for site [").append(currentSite.getUid()).append("].").toString());
 		}
 
@@ -54,7 +55,7 @@ public class DefaultAmwayApacWishlistService extends AmwayWishlistServiceImpl im
 
 		if (LOGGER.isInfoEnabled())
 		{
-			LOGGER.info(new StringBuilder(200).append("Found ").append(CollectionUtils.size(wishlistsFound))
+			LOGGER.info(new StringBuilder(TWO_HUNDRED_INT).append("Found ").append(CollectionUtils.size(wishlistsFound))
 					.append(" wishlists for user [").append(currentUser.getUid()).append("] for site [").append(currentSite.getUid())
 					.append("].").toString());
 		}
@@ -73,7 +74,7 @@ public class DefaultAmwayApacWishlistService extends AmwayWishlistServiceImpl im
 		final UserModel currentUser = getCurrentUser();
 		if (LOGGER.isInfoEnabled())
 		{
-			LOGGER.info(new StringBuilder(200).append("Fetching wishlists for user [").append(currentUser.getUid())
+			LOGGER.info(new StringBuilder(TWO_HUNDRED_INT).append("Fetching wishlists for user [").append(currentUser.getUid())
 					.append("] and uid [").append(uid).append("].").toString());
 		}
 
@@ -81,8 +82,9 @@ public class DefaultAmwayApacWishlistService extends AmwayWishlistServiceImpl im
 
 		if (LOGGER.isInfoEnabled())
 		{
-			LOGGER.info(new StringBuilder(200).append("Found ").append(CollectionUtils.size(results)).append(" wishlists for user [")
-					.append(currentUser.getUid()).append("] and uid [").append(uid).append("].").toString());
+			LOGGER.info(new StringBuilder(TWO_HUNDRED_INT).append("Found ").append(CollectionUtils.size(results))
+					.append(" wishlists for user [").append(currentUser.getUid()).append("] and uid [").append(uid).append("].")
+					.toString());
 		}
 
 		// validating that there is only one result.

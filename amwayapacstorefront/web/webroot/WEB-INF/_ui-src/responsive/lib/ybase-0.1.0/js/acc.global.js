@@ -10,6 +10,14 @@ ACC.global = {
         "ajaxBlockUI"
     ],
     
+    appendGlobalMessage : function(globalMessageType, message) {
+		var globalErrorMessage = {};
+		globalErrorMessage.globalMessageType = globalMessageType; 
+		globalErrorMessage.message = message; 
+		$(".global-alerts").appendGlobalMessages([globalErrorMessage]);
+		$('body, html').animate({scrollTop:0}, 'slow');	
+    },
+    
     ajaxBlockUI: function() {
     	$(document).ajaxStart(function() {
     		$.blockUI({ message: ACC.common.processingMessage, css: ACC.common.processingImageCSS, overlayCSS:ACC.common.processingImageOverlayCSS });
