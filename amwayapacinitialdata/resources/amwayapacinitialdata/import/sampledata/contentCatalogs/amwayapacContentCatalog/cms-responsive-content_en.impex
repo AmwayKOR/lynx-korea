@@ -69,17 +69,17 @@ UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[l
 ;;Section3ASBComponent;successStory1;Section3ASBComponent	
 ;;Section3BSBComponent;successStory2;Section3BSBComponent	
 
-UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang];&componentRef
-;;HomepageSection3ATryNowNavLink;"TRY NOW";HomepageSection3ATryNowNavLink
-;;HomepageSection3BLearnMoreNavLink;"LEARN MORE";HomepageSection3BLearnMoreNavLink
+INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang];buttonStyleAttributes;styleAttributes;&componentRef
+;;amwayApacHomepageSection3ATryNowNavLink;"TRY NOW";btn-blue-white;banner-button-link;amwayApacHomepageSection3ATryNowNavLink
+;;amwayApacHomepageSection3BLearnMoreNavLink;"LEARN MORE";btn-blue-white;banner-button-link;amwayApacHomepageSection3BLearnMoreNavLink
 
 UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true]  ;content[lang=$lang];&componentRef
 								   ;                       ;Section3AParacomponent;Make 2017 your most <br /> amazing year yet;Section3AParacomponent
 								   ;                       ;Section3BParacomponent;Ready to take your sales to the next level? <br /> 3 keys to help you get there;Section3BParacomponent
 
-UPDATE AmwayApacPathToSuccessPitchPerfectComponent;$contentCV[unique=true];uid[unique=true];banner(&componentRef);link(&componentRef);description(&componentRef);title[lang=$lang];title2[lang=$lang]
-;;HomePageSection3ACustomComponent;Section3ASBComponent;HomepageSection3ATryNowNavLink;Section3AParacomponent;"PATH TO SUCCESS:";"Your Steps to Success Map"
-;;HomePageSection3BCustomComponent;Section3BSBComponent;HomepageSection3BLearnMoreNavLink;Section3BParacomponent;"PITCH PERFECT:";"3 Selling Tips"
+INSERT_UPDATE AmwayApacPathToSuccessPitchPerfectComponent;$contentCV[unique=true];uid[unique=true];banner(&componentRef);link(&componentRef);description(&componentRef);title[lang=$lang];title2[lang=$lang]
+;;HomePageSection3ACustomComponent;Section3ASBComponent;amwayApacHomepageSection3ATryNowNavLink;Section3AParacomponent;"PATH TO SUCCESS:";"Your Steps to Success Map"
+;;HomePageSection3BCustomComponent;Section3BSBComponent;amwayApacHomepageSection3BLearnMoreNavLink;Section3BParacomponent;"PITCH PERFECT:";"3 Selling Tips"
 
 
 
@@ -519,9 +519,9 @@ UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true]  ;content[
 								   
 ############### category page success stories components
 
-UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang]
-;;bodyKeySuccessStoryLink;"Learn More"
-;;xsSportsSuccessStoryLink;"Learn More"
+INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang];buttonStyleAttributes;styleAttributes
+;;amwayApacBodyKeySuccessStoryLink;"Learn More";btn-blue-white;banner-button-link
+;;amwayApacXsSportsSuccessStoryLink;"Learn More";btn-blue-white;banner-button-link
 
 
 INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;folder(qualifier)[default='images'];altText
@@ -577,8 +577,8 @@ INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=
 ;;backgroundImageMedia;$siteResource/Amway/images/category_banner_image.png;;category_banner_image.png;;
 ;;logoImageMedia;$siteResource/Amway/images/nutrition-icon.png;;nutrition-icon.png;;
 
-INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName
-;;ProductCategory;View Products;
+INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=true];linkName;buttonStyleAttributes;styleAttributes
+;;amwayApacButtonLinkProductCategory;View Products;btn-blue-white;banner-button-link
 
 INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture
 ;;BackgroundSBComponent;backgroundImageMedia
@@ -590,9 +590,9 @@ INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];con
 
 ############### Content Article Page success stories component
 
-INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang]
-;;articleBodyKeySuccessStoryLink;"Learn More"
-;;articleXsSportsSuccessStoryLink;"Learn More"
+INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang];buttonStyleAttributes;styleAttributes
+;;amwayApacButtonlinkArticleBodyKeySuccessStoryLink;"Learn More";btn-blue-white;banner-button-link
+;;amwayApacButtonlinkArticleXsSportsSuccessStoryLink;"Learn More";btn-blue-white;banner-button-link
 
 INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;folder(qualifier)[default='images'];altText
 ;;articleBodyKeySuccessStoryMedia;$siteResource/category_success_story_01.png;;articleBodyKeySuccessStoryMedia;;"NEW BODY KEY"
@@ -637,10 +637,13 @@ INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$pi
 ;;BrandSBComponent;brandImageMedia;
 ;;MagazineSBComponent;magazineImageMedia;
 
-INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName
-;;SuccessContent;LET'S GET STARTED;
-;;BusinessContent;GET YOUR APP NOW;
-;;ExperienceContent;WATCH THE VIDEO;
+INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=true];linkName;buttonStyleAttributes;styleAttributes
+;;amwayApacButtonlinkSuccessContent;LET'S GET STARTED;btn-ink;banner-button-link
+;;amwayApacButtonlinkBusinessContent;GET YOUR APP NOW;btn-blue-white;banner-button-link
+
+
+INSERT_UPDATE AmwayApacIconLinkComponent;$contentCV[unique=true];uid[unique=true];linkName;iconStyleAttributes;styleAttributes
+;;amwayApacIconlinkExperienceContent;WATCH THE VIDEO;icon-arrow-right-red;blue-link;
 
 ################## My Account Page
 UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang];&componentRef

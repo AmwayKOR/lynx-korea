@@ -17,10 +17,6 @@
 		<cms:component component="${description}" />
 	</div>
 	<div class="banner-button-wrap">
-		<div class="banner-button-link">
-			<div class="banner__shop-now banner__try-now">
-				<cms:component component="${link}" class="btn-blue-white"/>
-			</div>
-		</div>
+		<cms:component component="${link}"/>
 	</div>
 </div>

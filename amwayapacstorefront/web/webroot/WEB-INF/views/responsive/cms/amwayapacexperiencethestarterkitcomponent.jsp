@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
 
 <div class="experience-brands clearfix clear-border">
@@ -17,18 +18,14 @@
 							</div>
 						</div>
 						<div class="banner-button-wrap">
-							<a href="#" class="blue-link"> <cms:component
-									component="${offerImageLink}" /><i
-								class="icon-arrow-right-red"></i>
-							</a>
+							<cms:component component="${offerImageLink}" />
 						</div>
 					</div>
-					<img
-						class="experience-brands__image experience-brands__image_magazine"
+					<img class="experience-brands__image experience-brands__image_magazine"
 						src="${backgroundImage.media.url}" alt="new-hot-brand" />
 				</div>
 			</div>
 		</div>
-		n
+
 	</div>
 </div>

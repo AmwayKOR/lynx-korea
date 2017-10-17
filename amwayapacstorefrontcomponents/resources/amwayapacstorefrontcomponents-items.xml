@@ -316,5 +316,28 @@
 			<description>Experience The Starter Kit Component</description>	
 		</itemtype>
 		
+		<itemtype code="AmwayApacButtonLinkComponent" extends="CMSLinkComponent"
+			autocreate="true" generate="true"
+			jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacButtonLinkComponent">
+			<description>Link component with button UI.</description>
+			<attributes>
+				<attribute qualifier="buttonStyleAttributes" type="java.lang.String">
+					<description>button style definitions and classes</description>
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="AmwayApacIconLinkComponent" extends="CMSLinkComponent"
+			autocreate="true" generate="true"
+			jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacIconLinkComponent">
+			<description>Link component with icon UI.</description>
+			<attributes>
+				<attribute qualifier="iconStyleAttributes" type="java.lang.String">
+					<description>icon style definitions and classes</description>
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
     </itemtypes>
 </items>

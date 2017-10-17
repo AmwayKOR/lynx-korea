@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
 
 <div class="product-category-page amway-theme">
@@ -23,13 +24,7 @@
 								</div>
 							</div>
 							<div class="banner-button-wrap">
-
-								<a href="#" class="banner-button-link ">
-									<button class="btn-ink">
-										<span class="btn-text"><cms:component
-												component="${offerImageLink}" /></span>
-									</button>
-								</a>
+								<cms:component component="${offerImageLink}" />
 							</div>
 						</div>
 					</div>

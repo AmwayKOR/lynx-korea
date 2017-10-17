@@ -25,11 +25,6 @@
 						</div>
 						<div class="banner-button-wrap">
 							<cms:component component="${offerImageLink}" />
-							<a href="#" class="banner-button-link">
-								<button class="btn-blue-white">
-									<span class="btn-text"> ${offerImageLink.name}</span>
-								</button>
-							</a>
 						</div>
 					</div>
 				</div>

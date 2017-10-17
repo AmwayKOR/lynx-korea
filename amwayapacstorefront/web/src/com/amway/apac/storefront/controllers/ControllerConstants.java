@@ -25,6 +25,8 @@ import de.hybris.platform.cms2.model.contents.components.CMSLinkComponentModel;
 import de.hybris.platform.cms2lib.model.components.ProductCarouselComponentModel;
 
 import com.amway.apac.core.model.components.AmwayApacShopByCategoryComponentModel;
+import com.amway.apac.storefront.components.model.AmwayApacButtonLinkComponentModel;
+import com.amway.apac.storefront.components.model.AmwayApacIconLinkComponentModel;
 
 
 /**
@@ -65,6 +67,8 @@ public interface ControllerConstants
 			String SimpleResponsiveBannerComponent = _Prefix + SimpleResponsiveBannerComponentModel._TYPECODE + _Suffix; // NOSONAR
 			String AmwayApacShopByCategoryComponent = _Prefix + AmwayApacShopByCategoryComponentModel._TYPECODE + _Suffix; // NOSONAR
 			String CMSTabParagraphContainer = _Prefix + CMSTabParagraphContainerModel._TYPECODE + _Suffix; // NOSONAR
+			String AmwayApacButtonLinkComponent = _Prefix + AmwayApacButtonLinkComponentModel._TYPECODE + _Suffix; // NOSONAR
+			String AmwayApacIconLinkComponent = _Prefix + AmwayApacIconLinkComponentModel._TYPECODE + _Suffix; // NOSONAR
 		}
 	}
 
