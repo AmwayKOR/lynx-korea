@@ -3,6 +3,7 @@ package com.amway.apac.facades.wishlist.impl;
 import static com.amway.apac.core.constants.AmwayapacCoreConstants.HUNDRED_INT;
 import static com.amway.apac.core.constants.AmwayapacCoreConstants.SHOPPING_LIST_ENTRY_DEFAULT_QUANTITY;
 import static com.amway.apac.core.constants.AmwayapacCoreConstants.TWO_HUNDRED_INT;
+import static org.springframework.util.Assert.hasLength;
 
 import de.hybris.platform.converters.Converters;
 import de.hybris.platform.core.model.product.ProductModel;
@@ -167,6 +168,47 @@ public class DefaultAmwayApacWishlistFacade extends DefaultAmwayWishlistFacade i
 					.toString(), uIE);
 		}
 		return wishlist;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public AmwayApacWishlistModificationStatus updateWishlistNameAndReturnStatus(final String uid, final String newName)
+	{
+		hasLength(uid, "Parameter uid can not be null or empty.");
+		hasLength(newName, "Parameter newName can not be null or empty.");
+
+		AmwayApacWishlistModificationStatus modificationstatus = AmwayApacWishlistModificationStatus.SUCCESS;
+		if (null == getWishlistService().getWishlistByName(newName))
+		{
+			final Wishlist2Model wishlistModel = getWishlistService().getWishlistByUid(uid);
+
+			if (LOGGER.isInfoEnabled())
+			{
+				LOGGER.info(new StringBuilder(HUNDRED_INT).append("Updating name for wishlist with uid [").append(uid)
+						.append("], original name is [").append(wishlistModel.getName()).append("].").toString());
+			}
+
+			getWishlistService().updateWishlistName(wishlistModel, newName);
+
+			if (LOGGER.isInfoEnabled())
+			{
+				LOGGER.info(new StringBuilder(HUNDRED_INT).append("Name is updated for Wishlist with uid [").append(uid)
+						.append("], new name is [").append(newName).append("].").toString());
+			}
+		}
+		else
+		{
+			modificationstatus = AmwayApacWishlistModificationStatus.WISHLIST_NAME_ALREADY_EXISTS;
+			if (LOGGER.isInfoEnabled())
+			{
+				LOGGER.info(new StringBuilder(HUNDRED_INT).append("Name could not be updated for wishlist with uid [").append(uid)
+						.append("] as a wishlist already exists with the name [").append(newName).append("].").toString());
+			}
+
+		}
+		return modificationstatus;
 	}
 
 	/**

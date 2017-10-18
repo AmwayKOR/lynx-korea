@@ -22,14 +22,30 @@
 		<property qualifier="NavigationBarComponent.dropDownLayout"/>
 		<property qualifier="NavigationBarComponent.link">
 			<parameter>
-				<name>predefinedValuesStrategy</name>
-				<value>cmsItemPredefinedValuesStrategy</value>
+				<name>editable</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>showEditButton</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>allowCreate</name>
+			    <value>true</value>
 			</parameter>
 		</property>
 		<property qualifier="NavigationBarComponent.navigationNode">
 			<parameter>
-				<name>predefinedValuesStrategy</name>
-				<value>cmsItemPredefinedValuesStrategy</value>
+				<name>editable</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>showEditButton</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>allowCreate</name>
+			    <value>true</value>
 			</parameter>
 		</property>
 		<property qualifier="NavigationBarComponent.styleClass"/>

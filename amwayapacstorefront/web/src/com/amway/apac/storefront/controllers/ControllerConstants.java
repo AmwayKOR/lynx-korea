@@ -239,6 +239,11 @@ public interface ControllerConstants
 				 * Response UI when add product to shopping list is called.
 				 */
 				String AddProductToShoppingListResponse = "fragments/shoppingList/addProductToShoppingListResponse"; //NOSONAR
+
+				/**
+				 * Response UI when shopping list name is updated.
+				 */
+				String UpdateShoppingListNameResponse = "fragments/shoppingList/updateShoppingListNameResponse"; //NOSONAR
 			}
 		}
 	}
@@ -270,6 +275,11 @@ public interface ControllerConstants
 		 * Model parameter for success message
 		 */
 		String SUCCESS_MESSAGE = "successMessage";
+
+		/**
+		 * Model parameter for shopping list name.
+		 */
+		String SHOPPING_LIST_NAME = "shoppingListName";
 	}
 
 	/**
@@ -329,6 +339,11 @@ public interface ControllerConstants
 		 * Prefix appended to status for add product to shopping list messages.
 		 */
 		String WISHLIST_ADD_PRODUCT_MESSAGES_PREFIX = "shopping.list.add.product.status.";
+
+		/**
+		 * Prefix appended to status for add product to shopping list messages.
+		 */
+		String WISHLIST_UPDATE_NAME_MESSGAES_PREFIX = "shoppinglist.update.name.status.";
 
 	}
 

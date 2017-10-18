@@ -2,7 +2,6 @@
 <%@ taglib prefix="shoppingList" tagdir="/WEB-INF/tags/responsive/shoppingList"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ attribute name="shoppingListData" required="true" type="com.amway.facades.product.data.WishlistData" %>
-<%@ attribute name="sortField" required="false" type="java.lang.String" %>
 
 <div class="container-fluid main-container">
     <div class="print-hide breadcrumb-section">
@@ -17,19 +16,7 @@
 </div>
 <div class="container-fluid main-container">
     <div class="row cartTitile new-shopping-list-detail no-border">
-        <div>
-            <h1 class="product-list-page-title mb25">${shoppingListData.name}
-                <a href="">
-                    <span class="edit-name"><spring:theme code="shopping.list.page.actions.section.edit.name" /></span></a>
-            </h1>
-            <span class="list-product">
-                <a href="">
-                    <span class="share-list"><spring:theme code="shopping.list.page.actions.section.share.list" /></span></a>
-                <span class="divider">|</span>
-                <a href="">
-                    <span class="Delete-list"><spring:theme code="shopping.list.page.actions.section.delete.list" /></span></a>
-            </span>
-        </div>
+        <shoppingList:shoppingListDetailsPageNameSection shoppingListData="${shoppingListData}" />
         <div class="row cart-content-wrapper">
             <div class="account-section-content shoppingListDetail-content">
             	<shoppingList:shoppingListBasicDetailsSection shoppingListData="${shoppingListData}" />

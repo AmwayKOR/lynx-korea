@@ -17,6 +17,7 @@
 		<value>WISHLIST_NOT_FOUND</value>
 		<value>PRODUCT_NOT_FONUD</value>
 		<value>PRODUCT_ALREADY_EXISTS</value>
+		<value>WISHLIST_NAME_ALREADY_EXISTS</value>
 	</enum>
 
     <bean class="com.amway.facades.product.data.WishlistData">

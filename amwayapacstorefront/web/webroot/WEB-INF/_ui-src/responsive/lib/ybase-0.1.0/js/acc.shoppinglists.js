@@ -2,8 +2,108 @@ ACC.shoppinglists = {
 
     _autoload: [
     	"bindCreateShoppingList",
-    	"bindAddProductToShoppingListForm"
+    	"bindAddProductToShoppingListForm",
+    	"bindEditShoppingListNameLink",
+    	"bindCancelEditShoppingListNameLink",
+    	"bindSubmitShoppingListNameFormLink",
+    	"bindUpdateShoppingListNameForm",
+    	"bindUpdateShoppingListNameInputEscape"
     ],
+    
+    bindUpdateShoppingListNameInputEscape: function() {
+
+    	// only bind if the current page is shopping lists page
+    	if ($(".page-content-wrapper.page-shopping-list-details").length > 0) {
+    		$(".page-content-wrapper.page-shopping-list-details").on("keydown", "form#updateShoppingListNameForm input[name=shoppingListName]", function(event) {
+    			if (event.keyCode == 27) { 
+    				$(this).closest("form#updateShoppingListNameForm").find("a.cancel-name-update-form").trigger("click");
+    		    }
+    		});
+    	}
+    },
+    
+    bindSubmitShoppingListNameFormLink: function() {
+
+    	// only bind if the current page is shopping lists page
+    	if ($(".page-content-wrapper.page-shopping-list-details").length > 0) {
+    		$(".page-content-wrapper.page-shopping-list-details").on("click", "#name-update-form a.submit-name-update-form", function(event) {
+    			event.preventDefault();
+    			$(this).closest("form#updateShoppingListNameForm").submit();
+    		});
+    	}
+    },
+    
+    bindUpdateShoppingListNameForm: function() {
+
+    	// only bind if the current page is shopping lists page
+    	if ($(".page-content-wrapper.page-shopping-list-details").length > 0) {
+    		$(".page-content-wrapper.page-shopping-list-details").on("submit", "form#updateShoppingListNameForm", function() {
+    			
+    			var $form = $(this);
+    			var method = $form.attr("method") ? $form.attr("method").toUpperCase() : "POST";
+    			var shoppingListUid = $form.find("input[name=shoppingListUid]").val();
+    			var shoppingListName = $form.find("input[name=shoppingListName]").val();
+    			
+    			if (ACC.global.isNullOrWhiteSpace(shoppingListName)) {
+		    		ACC.global.appendGlobalMessage(ACC.globalMessageTypes.ERROR_MESSAGES_HOLDER, ACC.messages.shoppingListNameEmptyErrorMessage);
+    			} else if (ACC.global.isNullOrWhiteSpace(shoppingListUid)) {
+		    		ACC.global.appendGlobalMessage(ACC.globalMessageTypes.ERROR_MESSAGES_HOLDER, ACC.messages.shoppingListUidEmptyErrorMessage);
+    			} else if ($form.find("input[name=shoppingListName]").val() == $form.find("input[name=shoppingListName]").data("originalName")) {
+        			$(this).closest("div#name-update-form").hide();
+        			$(this).closest("div#name-update-form").find("form#updateShoppingListNameForm input.shopping-list-name").val($(this).closest("div#name-update-form").find("form#updateShoppingListNameForm input.shopping-list-name").data("originalName"));
+        			$(this).closest("div#shopping-list-name-section").find("div#name-display-section").show();
+    			} else {
+					$.ajax({
+						url: $form.attr("action"),
+						data: {"shoppingListUid" : shoppingListUid, "shoppingListName" : shoppingListName},
+						type: method,
+						success: function(data) 
+						{
+							ACC.shoppinglists.displayGlobalMessagesBasedOnAjaxResponse(data);
+							if ($(data).filter("div.shopping-list-name-display-section").length > 0) {
+								var shoppingListNameInput = $form.find("input[name=shoppingListName]");
+								shoppingListNameInput.data("originalName", shoppingListName);
+								shoppingListNameInput.closest("div#shopping-list-name-section").find("div#name-display-section").html($(data).filter("div.shopping-list-name-display-section").html());
+				    			shoppingListNameInput.closest("div#name-update-form").hide();
+				    			shoppingListNameInput.closest("div#shopping-list-name-section").find("div#name-display-section").show();
+					    	}
+					    },
+						error: function() 
+						{
+				    		ACC.global.appendGlobalMessage(ACC.globalMessageTypes.ERROR_MESSAGES_HOLDER, ACC.messages.shoppingListNameUpdateError);
+						}
+					});
+    			}    			
+    			return false;
+    		});
+    	}
+    },
+    
+    bindCancelEditShoppingListNameLink: function() {
+
+    	// only bind if the current page is shopping lists page
+    	if ($(".page-content-wrapper.page-shopping-list-details").length > 0) {
+    		$(".page-content-wrapper.page-shopping-list-details").on("click", "#name-update-form a.cancel-name-update-form", function(event) {
+    			event.preventDefault();
+    			$(this).closest("div#name-update-form").hide();
+    			$(this).closest("div#name-update-form").find("form#updateShoppingListNameForm input.shopping-list-name").val($(this).closest("div#name-update-form").find("form#updateShoppingListNameForm input.shopping-list-name").data("originalName"));
+    			$(this).closest("div#shopping-list-name-section").find("div#name-display-section").show();
+    		});
+    	}
+    },
+    
+    bindEditShoppingListNameLink: function() {
+
+    	// only bind if the current page is shopping lists page
+    	if ($(".page-content-wrapper.page-shopping-list-details").length > 0) {
+    		$(".page-content-wrapper.page-shopping-list-details").on("click", "#name-display-section a.name-edit-link", function(event) {
+    			event.preventDefault();
+    			$(this).closest("div#name-display-section").hide();
+    			$(this).closest("div#shopping-list-name-section").find("div#name-update-form").show();
+    			$(this).closest("div#shopping-list-name-section").find("form#updateShoppingListNameForm input[name=shoppingListName]").focus();
+    		});
+    	}
+    },
     
     displayGlobalMessagesBasedOnAjaxResponse: function(data) {
     	if ($(data).filter("div.error-message").length > 0) {

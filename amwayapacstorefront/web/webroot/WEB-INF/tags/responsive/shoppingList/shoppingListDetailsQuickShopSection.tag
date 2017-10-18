@@ -2,7 +2,6 @@
 <%@ taglib prefix="shoppingList" tagdir="/WEB-INF/tags/responsive/shoppingList"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ attribute name="shoppingListData" required="true" type="com.amway.facades.product.data.WishlistData" %>
-<%@ attribute name="sortField" required="false" type="java.lang.String" %>
 
 <c:url var="addProductToShoppingListUrl" value="/shopping-lists/add-product" />
 <div class="account-section-content">

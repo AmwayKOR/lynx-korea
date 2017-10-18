@@ -63,4 +63,18 @@ public interface AmwayApacWishlistFacade extends AmwayWishlistFacade
 	 */
 	AmwayApacWishlistModificationStatus addProductToWishlist(final String productCode, final String wishlistUid);
 
+	/**
+	 * Edits the name of the wishlist and returns the modification status.
+	 *
+	 * @param uid
+	 *           to identify the wishlist whose name is going to be edited
+	 * @param newName
+	 *           the new name that will be assigned to the wishlist
+	 * @return update name modification status
+	 *
+	 * @throws IllegalArgumentException
+	 *            if uid or name is null or empty.
+	 */
+	AmwayApacWishlistModificationStatus updateWishlistNameAndReturnStatus(final String uid, final String newName);
+
 }
