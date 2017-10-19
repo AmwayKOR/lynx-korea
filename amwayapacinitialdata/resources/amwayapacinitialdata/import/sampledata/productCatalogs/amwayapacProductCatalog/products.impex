@@ -546,15 +546,15 @@ INSERT_UPDATE Product;code[unique=true];name;variantType(code);maxOrderQuantity;
 ;890;;AmwayApacFirstVariantProduct;99;Light Up Lip Gloss;TRUE;
 
 
-INSERT_UPDATE AmwayApacFirstVariantProduct;code[unique=true];name;maxOrderQuantity;Description[lang=$lang];bvcode;$baseProduct;$catalogVersion
+INSERT_UPDATE AmwayApacFirstVariantProduct;code[unique=true];name;maxOrderQuantity;Description[lang=$lang];bvcode;$baseProduct;$catalogVersion;$approved
 ;A4271M;;99;DAILY 60 MAL910381X;true;157;
 ;A4272M;;99;DAILY 180 MAL910381X;true;157;
 
-INSERT_UPDATE AmwayApacFirstVariantProduct;code[unique=true];name;variantType(code);maxOrderQuantity;Description[lang=$lang];bvcode;$baseProduct;$catalogVersion
+INSERT_UPDATE AmwayApacFirstVariantProduct;code[unique=true];name;variantType(code);maxOrderQuantity;Description[lang=$lang];bvcode;$baseProduct;$catalogVersion;$approved
 ;120237A;;AmwayApacSecondVariantProduct;99;ARTISTRY Signature Color Light Up Lip Gloss - Rose Petal;true;890;
 ;120238A;;AmwayApacSecondVariantProduct;99;ARTISTRY Signature Color Light Up Lip Gloss - Juicy Peach;true;890;
 
-INSERT_UPDATE AmwayApacSecondVariantProduct;code[unique=true];name;maxOrderQuantity;Description[lang=$lang];bvcode;$baseProduct;$catalogVersion
+INSERT_UPDATE AmwayApacSecondVariantProduct;code[unique=true];name;maxOrderQuantity;Description[lang=$lang];bvcode;$baseProduct;$catalogVersion;$approved
 ;120237A1;;99;ARTISTRY Signature Color Light Up Lip Gloss - Rose Petal (6ml);true;120237A;
 ;120237A2;;99;ARTISTRY Signature Color Light Up Lip Gloss - Rose Petal (12ml);true;120237A;
 ;120237A3;;99;ARTISTRY Signature Color Light Up Lip Gloss - Rose Petal (18ml);true;120237A;
