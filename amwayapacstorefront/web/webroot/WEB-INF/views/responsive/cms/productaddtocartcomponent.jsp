@@ -5,7 +5,8 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 <c:url value="/cart" var="cartUrl"/>
-                    <div class="row">
+                   
+        <div class="row">
                         <div class="pull-left qty-selector-container">
                             <label class="control-label" for="pdpAddtoCartInput"><sprint:theme code="product.product.details.future.qty"/></label>
                             <input type="text" maxlength="3" class="text-center js-qty-selector-input" size="1" value="1" data-max="FORCE_IN_STOCK" data-min="1" name="pdpAddtoCartInput" id="pdpAddtoCartInput" /></div>
@@ -14,28 +15,27 @@
                                 <span class="icon icon-calculator"></span><spring:theme code="product.volumePrices.column.howMuch"/></a>
                         </div>
                     </div>
-                </div>
-                <div class="stock-wrapper clearfix">
-                    <div class="product-stock">
-                        <div>
-                            <span class="stock">
-                                <span class="product-availability">
-                                    <span class="green">
-                                        <span class="icon icon-check-bold"></span>
-                                        <span class="text text-uppercase">In Stock</span></span>
-                                </span>
-                            </span>
-                        </div>
-                    </div>
-                </div>
+                    <div class="stock-wrapper clearfix">
+	                    <div class="product-stock">
+	                        <div>
+	                            <span class="stock">
+	                                <span class="product-availability">
+	                                    <span class="green">
+	                                        <span class="icon icon-check-bold"></span>
+	                                        <span class="text text-uppercase">In Stock</span></span>
+	                                </span>
+	                            </span>
+	                        </div>
+	                    </div>
+	                </div>        
+                
                 <div class="actions-wrapper">
                     <div class="actions">
                         <div class="AddToCart-AddToCartAction" data-index="1">
                             <div id="addToCartTitle" class="display-none">Added to Your Shopping Cart</div>
 
                             <action:actions element="div"  parentComponent="${component}"/>
-                            <a href="${cartUrl}" class="btn btn-primary btn-block js-add-to-cart js-enable-btn col-md-6"><spring:theme code="checkout.checkout"/></a>
-
+                            
                             <div class="row add-to-cart-extra-actions col-xs-12 col-sm-12 col-md-12 js-add-to-actions-wrapper">
                                 <div class="add-button-wrap add-to-shopping-list-container new-add-to-shopping-list-container">
                                     <button type="button" class="btn btn-link btn-block js-add-list-shopping-button" data-toggle="dropdown" id="">
@@ -172,24 +172,20 @@
                             <div class="row add-to-cart-extra-actions col-xs-12 col-sm-12 col-md-12 js-add-to-actions-wrapper link-line">
                                 <div>
                                     <a href="">
-                                    <img href="#" src="images/new-twitter2.png" alt="twitter"></a></div>
+                                    <img href="#" src="${themeResourcePath}/images/new-twitter2.png" alt="twitter"></a></div>
                                 <div>
                                     <a href="">
-                                    <img href="#" src="images/new-f.png" alt="facebook"></a></div>
+                                    <img href="#" src="${themeResourcePath}/images/new-f.png" alt="facebook"></a></div>
                                 <div>
                                     <a href="">
-                                    <img href="#" src="images/new-line.png" alt="line"></a></div>
+                                    <img href="#" src="${themeResourcePath}/images/new-line.png" alt="line"></a></div>
                                 <div>
                                     <a href="">
-                                    <img href="#" src="images/new-tel.png" alt="tel"></a></div>
+                                    <img href="#" src="${themeResourcePath}/images/new-tel.png" alt="tel"></a></div>
                                 <div>
                                     <a href="">
-                                    <img href="#" src="images/new-talk.png" alt="talk"></a></div>
+                                    <img href="#" src="${themeResourcePath}/images/new-talk.png" alt="talk"></a></div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>

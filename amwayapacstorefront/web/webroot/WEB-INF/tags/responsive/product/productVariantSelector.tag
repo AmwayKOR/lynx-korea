@@ -19,10 +19,7 @@
     <c:set var="firstVariantName" value="${product.baseOptions[0].options[0].variantOptionQualifiers[0].name}"/>
     <c:set var="secondVariantName" value="${product.baseOptions[1].options[0].variantOptionQualifiers[0].name}"/>
 </c:if>
-<div class="col-sm-12 col-md-12">
-    <div class="page-details-variants-select">
-        <div class="page-details-add-to-cart-component">
-            <div class="addtocart-component">
+
                 <div class="amway-theme qty-selector js-qty-selector control-group">
                     <c:if test="${not empty secondVariantOptions}">
                         <c:if test="${secondVariantName ne 'Color'}">
@@ -66,3 +63,5 @@
                             </div>
                         </c:if>
                     </c:if>
+                     
+                </div>

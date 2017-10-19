@@ -6,9 +6,8 @@
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
 
 
-<div class="option-item">
+
     <div class="icon ${title}">
     </div>
     <span class="option-title">${title2}</span>
     <span class="option-description">${description.content}</span>
-</div>

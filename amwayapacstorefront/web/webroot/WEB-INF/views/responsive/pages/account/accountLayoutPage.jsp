@@ -74,93 +74,71 @@
                             <div class="row">
                             		<div class="option-item-container col-xs-6 col-md-4">
                                     <a href="BusinessInformation.html">
-                                    		<cms:pageSlot position="Section1A" var="component">
-											<cms:component component="${component}"/>
-										</cms:pageSlot>
+                                    		<div class="option-item">
+                                    			<cms:pageSlot position="Section1A" var="component">
+												<cms:component component="${component}"/>
+											</cms:pageSlot>
+                                    		</div>
                                     </a>
                                  </div>
                                  <div class="option-item-container col-xs-6 col-md-4">
                                     <a href="Order-History-Personal-Orders-expanded.html">
-                                    		<cms:pageSlot position="Section1B" var="component">
-											<cms:component component="${component}"/>
-										</cms:pageSlot>
+                                    		<div class="option-item">
+                                    			<cms:pageSlot position="Section1B" var="component">
+												<cms:component component="${component}"/>
+											</cms:pageSlot>
+											<div class="option-item-footer">
+	                                             <span>You have <span class="option-item-footer-digit">${ordersAmount}</span> recent orders</span>
+	                                         </div>
+                                    		</div>
                                     </a>
                                  </div>
                                  <div class="option-item-container col-xs-6 col-md-4">
                                     <a href="AddNewPaymentMethod.html">
-                                    		<cms:pageSlot position="Section1C" var="component">
-											<cms:component component="${component}"/>
-										</cms:pageSlot>
+                                    		<div class="option-item">
+                                    			<cms:pageSlot position="Section1C" var="component">
+												<cms:component component="${component}"/>
+											</cms:pageSlot>
+                                    		</div>
                                     </a>
                                  </div>
                                  <div class="option-item-container col-xs-6 col-md-4">
                                     <a href="Bonus-Payment-Preference.html">
-                                    		<cms:pageSlot position="Section2A" var="component">
-											<cms:component component="${component}"/>
-										</cms:pageSlot>
+                                    		<div class="option-item">
+                                    			<cms:pageSlot position="Section2A" var="component">
+												<cms:component component="${component}"/>
+											</cms:pageSlot>
+											<div class="option-item-footer">
+	                                            <span>PAPER CHECK<c:choose><c:when test="${bonusPaperCheck == true}"><span class="icon-check-bold"></span><span class="active-green">active</span></c:when><c:otherwise><span class="icon-check-bold"></span><span class="active-green">Inactive</span></c:otherwise></c:choose></span>
+	                                        </div>
+                                    		</div>
                                     </a>
                                  </div>
                                  <div class="option-item-container col-xs-6 col-md-4">
                                     <a href="Auto-Renewal.html">
-                                    		<cms:pageSlot position="Section2B" var="component">
-											<cms:component component="${component}"/>
-										</cms:pageSlot>
+                                    		<div class="option-item">
+                                    			<cms:pageSlot position="Section2B" var="component">
+												<cms:component component="${component}"/>
+											</cms:pageSlot>
+											<div class="option-item-footer">
+	                                            <span>Status<c:choose><c:when test="${autoRenewal == true}"><span class="icon-check-bold"></span><span class="active-green">active</span></c:when><c:otherwise><span class="icon-check-bold"></span><span class="active-green">Inactive</span></c:otherwise></c:choose></span>
+	                                        </div>
+                                    		</div>
                                     </a>
                                  </div>
                                  <div class="option-item-container col-xs-6 col-md-4">
                                     <a href="BusinessInformation.html">
-                                    		<cms:pageSlot position="Section2C" var="component">
-											<cms:component component="${component}"/>
-										</cms:pageSlot>
+                                    		<div class="option-item">
+                                    			<cms:pageSlot position="Section2C" var="component">
+												<cms:component component="${component}"/>
+											</cms:pageSlot>
+											<div class="option-item-footer">
+	                                            <span>You have <span class="option-item-footer-digit">${contractsAmount}</span> contracts to complete</span>
+	                                        </div>
+                                    		</div>
                                     </a>
                                  </div>
                             		
-                                 
-								
-								
-								
-								
-                                
-                                
-                                <!-- 
-                                <div class="option-item-container col-xs-6 col-md-4">
-                                    <a href="Bonus-Payment-Preference.html">
-                                    <div class="option-item">
-                                        <div class="icon icon-credit">
-                                        </div>
-                                        <span class="option-title">Bonus Payment Preferences</span>
-                                        <span class="option-description">Select how you'd like to receive your bonuses</span>
-                                        <div class="option-item-footer">
-                                            <span>PAPER CHECK<span class="icon-check-bold"></span><span class="active-green">active</span></span>
-                                        </div>
-                                    </div>
-                                    </a>
-                                </div>
-                                <div class="option-item-container col-xs-6 col-md-4">
-                                    <a href="Auto-Renewal.html">
-                                    <div class="option-item">
-                                        <div class="icon icon-cycle">
-                                        </div>
-                                        <span class="option-title">Auto renewal</span>
-                                        <span class="option-description">Manage your renewal preferences here</span>
-                                        <div class="option-item-footer">
-                                            <span>Status<span class="icon-check-bold"></span><span class="active-green">active</span></span>
-                                        </div>
-                                    </div>
-                                    </a>
-                                </div>
-                                <div class="option-item-container col-xs-6 col-md-4">
-                                    <div class="option-item">
-                                        <div class="icon icon-contract">
-                                        </div>
-                                        <span class="option-title">Contracts</span>
-                                        <span class="option-description">View contracts and other documents here</span>
-                                        <div class="option-item-footer">
-                                            <span>You have <span class="option-item-footer-digit">4</span> contracts to complete</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                 -->
                             </div>
                         </div>
                     </div>
