@@ -221,6 +221,11 @@
 		<property name="enumerationService" ref="enumerationService" />
 	</bean>
 	
+	<bean id="image175ValueProvider" parent="abstractImageValueProvider" >
+        <property name="mediaFormat" value="175Wx245H"/>
+    </bean>
+	
+	
 	<import resource="/amwayapaccore/processes/quote/quote-buyer-process-spring.xml"/>
 	<import resource="/amwayapaccore/processes/quote/quote-salesrep-process-spring.xml"/>
 	<import resource="/amwayapaccore/processes/quote/quote-seller-approval-process-spring.xml"/>

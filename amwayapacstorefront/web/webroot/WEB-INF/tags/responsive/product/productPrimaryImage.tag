@@ -13,10 +13,10 @@
 		<c:url value="${primaryImage.url}" var="primaryImageUrl" context="${originalContextPath}"/>
 		<c:choose>
 			<c:when test="${not empty primaryImage.altText}">
-                <img src="${primaryImageUrl}" alt="${fn:escapeXml(primaryImage.altText)}" title="${fn:escapeXml(primaryImage.altText)}"/>
+                <img src="${primaryImageUrl}" alt="${fn:escapeXml(primaryImage.altText)}" title="${fn:escapeXml(primaryImage.altText)}" class="product-list__thumbnail"/>
 			</c:when>
 			<c:otherwise>
-                <img src="${primaryImageUrl}" alt="${fn:escapeXml(product.name)}" title="${fn:escapeXml(product.name)}"/>
+                <img src="${primaryImageUrl}" alt="${fn:escapeXml(product.name)}" title="${fn:escapeXml(product.name)}" class="product-list__thumbnail"/>
 			</c:otherwise>
 		</c:choose>
 	</c:when>

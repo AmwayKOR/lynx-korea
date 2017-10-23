@@ -81,6 +81,18 @@ public class CategoryPageController extends AbstractCategoryPageController
 	}
 
 
+	/**
+	 * Controller that fetches result through for "Show More" functionality.
+	 *
+	 * @param categoryCode
+	 * @param searchQuery
+	 * @param page
+	 * @param showMode
+	 * @param sortCode
+	 * @param model
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 */
 	@RequestMapping(value = CATEGORY_CODE_PATH_VARIABLE_PATTERN + "/results-display", method = RequestMethod.GET)
 	public String getResultsDisplay(@PathVariable("categoryCode") final String categoryCode,
 			@RequestParam(value = "q", required = false) final String searchQuery,

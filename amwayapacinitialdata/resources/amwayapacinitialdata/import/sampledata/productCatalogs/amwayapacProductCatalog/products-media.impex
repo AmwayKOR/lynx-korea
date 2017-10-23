@@ -48,6 +48,17 @@ INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];$media;mime[default
 ;96Wx96H;/96Wx96H/120237A_1.jpg;$siteResource/images/96Wx96H/120237A_1.jpg;;;images
 ;96Wx96H;/96Wx96H/120238A_1.jpg;$siteResource/images/96Wx96H/120238A_1.jpg;;;images
 
+;175Wx245H;/175Wx245H/pli1.png;$siteResource/images/175Wx245H/product_list_item1.png;;;images
+;175Wx245H;/175Wx245H/pli2.png;$siteResource/images/175Wx245H/product_list_item2.png;;;images
+;175Wx245H;/175Wx245H/pli3.png;$siteResource/images/175Wx245H/product_list_item3.png;;;images
+;175Wx245H;/175Wx245H/pli4.png;$siteResource/images/175Wx245H/product_list_item4.png;;;images
+;175Wx245H;/175Wx245H/pli5.png;$siteResource/images/175Wx245H/product_list_item5.png;;;images
+;175Wx245H;/175Wx245H/pli6.png;$siteResource/images/175Wx245H/product_list_item6.png;;;images
+;175Wx245H;/175Wx245H/pli7.png;$siteResource/images/175Wx245H/product_list_item7.png;;;images
+;175Wx245H;/175Wx245H/pli8.png;$siteResource/images/175Wx245H/product_list_item8.png;;;images
+;175Wx245H;/175Wx245H/pli9.png;$siteResource/images/175Wx245H/product_list_item9.png;;;images
+
+
 # Create Media Containers
 INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$catalogVersion
 ;101390M_1;/300Wx300H/101390M_1.jpg,/96Wx96H/101390M_1.jpg;;
@@ -60,6 +71,17 @@ INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$catalogVersion
 ;120238A_1;/300Wx300H/120238A_1.jpg,/96Wx96H/120238A_1.jpg;;
 
 
+;pli_container1;/175Wx245H/pli1.png;;
+;pli_container2;/175Wx245H/pli2.png;;
+;pli_container3;/175Wx245H/pli3.png;;
+;pli_container4;/175Wx245H/pli4.png;;
+;pli_container5;/175Wx245H/pli5.png;;
+;pli_container6;/175Wx245H/pli6.png;;
+;pli_container7;/175Wx245H/pli7.png;;
+;pli_container8;/175Wx245H/pli8.png;;
+;pli_container9;/175Wx245H/pli9.png;;
+
+
 
 # Update Products with Media and Media Containers
 UPDATE Product;code[unique=true];$galleryImages;$catalogVersion
@@ -67,6 +89,27 @@ UPDATE Product;code[unique=true];$galleryImages;$catalogVersion
 ;A4271M;A4271M_1,A4271M_2;
 ;A4272M;A4272M_1,A4272M_2;
 ;890;120237A_1;
+;E9974M ;pli_container1
+;A5985M ;pli_container2
+;A8058M ;pli_container3
+;AA0114M;pli_container4
+;A5924M ;pli_container5
+;A5923M ;pli_container6
+;254460 ;pli_container7
+;216492 ;pli_container8
+;205488 ;pli_container9
+;205489 ;pli_container1
+;203189 ;pli_container2
+;111106M;pli_container3
+;110606M;pli_container4
+;104402M;pli_container5
+;103050M;pli_container6
+;102992M;pli_container7
+;102735M;pli_container8
+;101841M;pli_container9
+;101156M;pli_container1
+;101831M;pli_container2
+
 
 INSERT_UPDATE AmwayApacFirstVariantProduct;code[unique=true];$galleryImages;$catalogVersion
 ;120237A;120237A_1;

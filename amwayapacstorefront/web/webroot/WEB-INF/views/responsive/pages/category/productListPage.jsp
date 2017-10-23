@@ -38,6 +38,7 @@
                     </div>
                 </div>
             </div>
+		<div class="overlay"></div>
 		<!--quick view section -->
         <div class="view-box"></div>
         

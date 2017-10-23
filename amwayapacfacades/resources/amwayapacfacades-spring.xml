@@ -32,6 +32,17 @@
 		<property name="list" ref="defaultProductPricePopulatorList"/>
 		<property name="add" ref="amwayApacProductPricePopulator"/>
 	</bean>
+	
+	<alias name="amwayApacImageFormatMapping" alias="imageFormatMapping"/>
+	<bean id="amwayApacImageFormatMapping" parent="defaultImageFormatMapping">
+		<property name="mapping">
+			<map>
+				<entry key="listingPage" value="175Wx245H"/>
+				<entry key="product" value="300Wx300H"/>
+				<entry key="thumbnail" value="96Wx96H"/>
+			</map>
+		</property>
+	</bean>
 
 	<alias alias="simpleSuggestionFacade" name="defaultAmwaySimpleSuggestionFacade"/>
 	<bean id="defaultAmwaySimpleSuggestionFacade" class="com.amway.apac.facades.suggestion.impl.DefaultAmwaySimpleSuggestionFacade" 
@@ -95,5 +106,10 @@
     <bean id="amwayApacWishlistPopulator" class="com.amway.apac.facades.wishlist.populators.AmwayApacWishlistPopulator" parent="amwayWishlistPopulator">
     	<property name="amwayApacUserBasicConverter" ref="amwayApacUserBasicConverter" />
     </bean>
+    
+    <alias name="amwayApacCommerceSearchResultProductPopulator" alias="commerceSearchResultProductPopulator"/>
+	<bean id="amwayApacCommerceSearchResultProductPopulator"
+		  class="com.amway.apac.facades.populators.AmwayApacSearchResultProductPopulator" parent="amwayCommerceSearchResultProductPopulator">
+	</bean>
 	
 </beans>

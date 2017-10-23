@@ -7,17 +7,18 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
+<c:url value="${product.url}" var="productPDPurl"/>
 <div class="product-list__item">
     <!--<img src="${themeResourcePath}/images/limited_stock.png" class="product-list__flag" alt="limited stock" />-->
     <product:productTileBadge stockLevel="${product.stock.stockLevelStatus.code}"/>
     <div class="product-list__item-content amwahover">
         <button class="quick-view-btn" data-product-code="${product.code}">QUICK VIEW</button>
-        <a class="product-list__thum" target="_self" href="${product.url}">
-            <img src="${themeResourcePath}/images/product_list_item1.png" class="product-list__thumbnail" alt="product"></img>
+        <a class="product-list__thum" target="_self" href="${productPDPurl}">
+        	<product:productPrimaryImage product="${product}" format="listingPage"/>
         </a>
         <div class="product-list__item-detail">
             <p class="product-list__item-title">
-                <a class="product-list__item-title" target="_self" href="${product.url}">${product.name}</a></p>
+                <a class="product-list__item-title" target="_self" href="${productPDPurl}">${product.name}</a></p>
             <p class="product-list__item-count">30 Count</p>
             <p class="product-list__item-number">Item #: ${product.code}</p>
             <div class="product-list__item-title product-list__item-aboprice">
