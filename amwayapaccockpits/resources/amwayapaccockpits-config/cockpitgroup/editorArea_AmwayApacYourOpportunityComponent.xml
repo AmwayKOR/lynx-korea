@@ -19,11 +19,76 @@
 
 	<group qualifier="editorial" visible="true" initially-opened="false">
 		<label key="config.general.editorial" />
-		<property qualifier="AmwayApacYourOpportunityComponent.title"/>
-		<property qualifier="AmwayApacYourOpportunityComponent.description"/>
-		<property qualifier="AmwayApacYourOpportunityComponent.bannerGif1"/>
-		<property qualifier="AmwayApacYourOpportunityComponent.bannerGif2"/>
-		<property qualifier="AmwayApacYourOpportunityComponent.playbutton"/>
+		<property qualifier="AmwayApacYourOpportunityComponent.title">
+			<parameter>
+				<name>editable</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>showEditButton</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>allowCreate</name>
+			    <value>true</value>
+			</parameter>
+		</property>
+		<property qualifier="AmwayApacYourOpportunityComponent.description">
+			<parameter>
+				<name>editable</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>showEditButton</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>allowCreate</name>
+			    <value>true</value>
+			</parameter>
+		</property>
+		<property qualifier="AmwayApacYourOpportunityComponent.bannerGif1">
+			<parameter>
+				<name>editable</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>showEditButton</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>allowCreate</name>
+			    <value>true</value>
+			</parameter>
+		</property>
+		<property qualifier="AmwayApacYourOpportunityComponent.bannerGif2">
+			<parameter>
+				<name>editable</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>showEditButton</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>allowCreate</name>
+			    <value>true</value>
+			</parameter>
+		</property>
+		<property qualifier="AmwayApacYourOpportunityComponent.playbutton">
+			<parameter>
+				<name>editable</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>showEditButton</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>allowCreate</name>
+			    <value>true</value>
+			</parameter>
+		</property>
 	</group>
 
 	<group qualifier="visibility" visible="true" initially-opened="false">

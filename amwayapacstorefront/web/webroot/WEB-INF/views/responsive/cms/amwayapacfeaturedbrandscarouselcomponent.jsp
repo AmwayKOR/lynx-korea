@@ -8,11 +8,9 @@
 
 <div class="product-recentlyviewed__imagelist featured_brandsList" id="featured_brandsList">
 	<c:forEach items="${banners}" var="banner" varStatus="status">
-		<c:if test="${status.count <= loopCount }">
-			<div>
-			       <img class="product-recentlyviewed__img" src="${banner.media.url}" />
-			</div>
-		</c:if>
+		<div>
+		       <img class="product-recentlyviewed__img" src="${banner.media.url}" />
+		</div>
                 			
 	</c:forEach>
 

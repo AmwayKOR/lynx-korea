@@ -19,10 +19,62 @@
 
 	<group qualifier="editorial" visible="true" initially-opened="false">
 		<label key="config.general.editorial" />
-		<property qualifier="AmwayApacNewProductComponent.title"/>
-		<property qualifier="AmwayApacNewProductComponent.description"/>
-		<property qualifier="AmwayApacNewProductComponent.link"/>
-		<property qualifier="AmwayApacNewProductComponent.banner"/>
+		<property qualifier="AmwayApacNewProductComponent.title">
+			<parameter>
+				<name>editable</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>showEditButton</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>allowCreate</name>
+			    <value>true</value>
+			</parameter>
+		</property>
+		<property qualifier="AmwayApacNewProductComponent.description">
+			<parameter>
+				<name>editable</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>showEditButton</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>allowCreate</name>
+			    <value>true</value>
+			</parameter>
+		</property>
+		<property qualifier="AmwayApacNewProductComponent.link">
+			<parameter>
+				<name>editable</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>showEditButton</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>allowCreate</name>
+			    <value>true</value>
+			</parameter>
+		</property>
+		<property qualifier="AmwayApacNewProductComponent.banner">
+			<parameter>
+				<name>editable</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>showEditButton</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>allowCreate</name>
+			    <value>true</value>
+			</parameter>
+		</property>
 	</group>
 
 	<group qualifier="visibility" visible="true" initially-opened="false">

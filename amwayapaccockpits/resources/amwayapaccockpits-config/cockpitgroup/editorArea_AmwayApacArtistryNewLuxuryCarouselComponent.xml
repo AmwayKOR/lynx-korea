@@ -19,9 +19,48 @@
 
 	<group qualifier="editorial" visible="true" initially-opened="false">
 		<label key="config.general.editorial" />
-		<property qualifier="AmwayApacArtistryNewLuxuryCarouselComponent.shopnow"/>
-		<property qualifier="AmwayApacArtistryNewLuxuryCarouselComponent.title"/>
-		<property qualifier="AmwayApacArtistryNewLuxuryCarouselComponent.description"/>
+		<property qualifier="AmwayApacArtistryNewLuxuryCarouselComponent.shopnow">
+			<parameter>
+				<name>editable</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>showEditButton</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>allowCreate</name>
+			    <value>true</value>
+			</parameter>
+		</property>
+		<property qualifier="AmwayApacArtistryNewLuxuryCarouselComponent.title">
+			<parameter>
+				<name>editable</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>showEditButton</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>allowCreate</name>
+			    <value>true</value>
+			</parameter>
+		</property>
+		<property qualifier="AmwayApacArtistryNewLuxuryCarouselComponent.description">
+			<parameter>
+				<name>editable</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>showEditButton</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>allowCreate</name>
+			    <value>true</value>
+			</parameter>
+		</property>
 	</group>
 
 	<group qualifier="visibility" visible="true" initially-opened="false">

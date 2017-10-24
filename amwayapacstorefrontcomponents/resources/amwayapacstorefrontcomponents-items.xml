@@ -174,11 +174,7 @@
 		
 		<itemtype code="AmwayApacFeaturedBrandsCarouselComponent" generate="true" extends="RotatingImagesComponent" autocreate="true" 
 			jaloclass="com.amway.apac.core.jalo.components.AmwayApacFeaturedBrandsCarouselComponent">
-			<attributes>
-				<attribute qualifier="loopCount" generate="true" autocreate="true" type="localized:java.lang.Integer">
-					<persistence type="property" />
-				</attribute>
-			</attributes>
+			
 		</itemtype>
 		
 		<itemtype code="FooterComponent" generate="false" autocreate="false">

@@ -225,8 +225,8 @@ UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$l
 ;;HomePageSection12icookBannerComponent;icookImg;HomePageSection12icookBannerComponent;
 ;;HomePageSection12Nutrilite2BannerComponent;nutrilite2Img;HomePageSection12Nutrilite2BannerComponent;		
 
-UPDATE AmwayApacFeaturedBrandsCarouselComponent;$contentCV[unique=true];uid[unique=true];name;banners(&componentRef);loopCount[lang=$lang]
-;;AmwayApacFeaturedBrandsCarouselComponent;Homepage Carousel Section 12;HomePageSection12NutriliteBannerComponent,HomePageSection12XSBannerComponent,HomePageSection12ArtistryBannerComponent,HomePageSection12GlisterBannerComponent,HomePageSection12icookBannerComponent,HomePageSection12Nutrilite2BannerComponent;999
+UPDATE AmwayApacFeaturedBrandsCarouselComponent;$contentCV[unique=true];uid[unique=true];name;banners(&componentRef);
+;;AmwayApacFeaturedBrandsCarouselComponent;Homepage Carousel Section 12;HomePageSection12NutriliteBannerComponent,HomePageSection12XSBannerComponent,HomePageSection12ArtistryBannerComponent,HomePageSection12GlisterBannerComponent,HomePageSection12icookBannerComponent,HomePageSection12Nutrilite2BannerComponent;
 
 
 #Section Footer

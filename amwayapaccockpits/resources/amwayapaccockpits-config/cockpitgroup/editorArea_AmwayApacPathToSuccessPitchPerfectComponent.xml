@@ -19,11 +19,77 @@
 
 	<group qualifier="editorial" visible="true" initially-opened="false">
 		<label key="config.general.editorial" />
-		<property qualifier="AmwayApacPathToSuccessPitchPerfectComponent.title"/>
-		<property qualifier="AmwayApacPathToSuccessPitchPerfectComponent.title2"/>
-		<property qualifier="AmwayApacPathToSuccessPitchPerfectComponent.banner"/>
-		<property qualifier="AmwayApacPathToSuccessPitchPerfectComponent.description"/>
-		<property qualifier="AmwayApacPathToSuccessPitchPerfectComponent.link"/>
+		<property qualifier="AmwayApacPathToSuccessPitchPerfectComponent.title">
+			<parameter>
+				<name>editable</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>showEditButton</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>allowCreate</name>
+			    <value>true</value>
+			</parameter>
+
+		</property>
+		<property qualifier="AmwayApacPathToSuccessPitchPerfectComponent.title2">
+			<parameter>
+				<name>editable</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>showEditButton</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>allowCreate</name>
+			    <value>true</value>
+			</parameter>
+		</property>
+		<property qualifier="AmwayApacPathToSuccessPitchPerfectComponent.banner">
+			<parameter>
+				<name>editable</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>showEditButton</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>allowCreate</name>
+			    <value>true</value>
+			</parameter>
+		</property>
+		<property qualifier="AmwayApacPathToSuccessPitchPerfectComponent.description">
+			<parameter>
+				<name>editable</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>showEditButton</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>allowCreate</name>
+			    <value>true</value>
+			</parameter>
+		</property>
+		<property qualifier="AmwayApacPathToSuccessPitchPerfectComponent.link">
+			<parameter>
+				<name>editable</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>showEditButton</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>allowCreate</name>
+			    <value>true</value>
+			</parameter>
+		</property>
 	</group>
 
 	<group qualifier="visibility" visible="true" initially-opened="false">

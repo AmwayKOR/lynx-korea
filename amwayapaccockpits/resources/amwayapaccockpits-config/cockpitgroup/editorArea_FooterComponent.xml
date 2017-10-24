@@ -19,18 +19,145 @@
 
 	<group qualifier="editorial" visible="true" initially-opened="false">
 		<label key="config.general.editorial" />
-		<property qualifier="FooterComponent.title1"/>
-		<property qualifier="FooterComponent.title2"/>
-		<property qualifier="FooterComponent.amwayLogoBanner"/>
-		<property qualifier="FooterComponent.connectionsBanner"/>
-		<property qualifier="FooterComponent.downloadAppStoreBanner"/>
-		<property qualifier="FooterComponent.copyRightTitle"/>
-		<property qualifier="FooterComponent.footerBanner"/>
+		<property qualifier="FooterComponent.title1">
+			<parameter>
+				<name>editable</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>showEditButton</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>allowCreate</name>
+			    <value>true</value>
+			</parameter>
+		</property>
+		<property qualifier="FooterComponent.title2">
+			<parameter>
+				<name>editable</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>showEditButton</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>allowCreate</name>
+			    <value>true</value>
+			</parameter>
+		</property>
+		<property qualifier="FooterComponent.amwayLogoBanner">
+			<parameter>
+				<name>editable</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>showEditButton</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>allowCreate</name>
+			    <value>true</value>
+			</parameter>
+		</property>
+		<property qualifier="FooterComponent.connectionsBanner">
+			<parameter>
+				<name>editable</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>showEditButton</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>allowCreate</name>
+			    <value>true</value>
+			</parameter>
+		</property>
+		<property qualifier="FooterComponent.downloadAppStoreBanner">
+			<parameter>
+				<name>editable</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>showEditButton</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>allowCreate</name>
+			    <value>true</value>
+			</parameter>
+		</property>
+		<property qualifier="FooterComponent.copyRightTitle">
+			<parameter>
+				<name>editable</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>showEditButton</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>allowCreate</name>
+			    <value>true</value>
+			</parameter>
+		</property>
+		<property qualifier="FooterComponent.footerBanner">
+			<parameter>
+				<name>editable</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>showEditButton</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>allowCreate</name>
+			    <value>true</value>
+			</parameter>
+		</property>
 		
 		<property qualifier="FooterComponent.navigationNodes">
 			<parameter>
-				<name>predefinedValuesStrategy</name>
-				<value>cmsItemPredefinedValuesStrategy</value>
+				<name>editable</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>showEditButton</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>allowCreate</name>
+			    <value>true</value>
+			</parameter>
+		</property>
+		<property qualifier="FooterComponent.simpleBannerComponents">
+			<parameter>
+				<name>editable</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>showEditButton</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>allowCreate</name>
+			    <value>true</value>
+			</parameter>
+		</property>
+		<property qualifier="FooterComponent.links">
+			<parameter>
+				<name>editable</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>showEditButton</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>allowCreate</name>
+			    <value>true</value>
 			</parameter>
 		</property>
 		<property qualifier="FooterComponent.notice"/>

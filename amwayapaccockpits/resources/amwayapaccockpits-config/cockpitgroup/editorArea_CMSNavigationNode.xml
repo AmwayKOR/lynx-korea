@@ -33,7 +33,6 @@
 			    <name>allowCreate</name>
 			    <value>true</value>
 			</parameter>
-
 		</property>
 		<property qualifier="cmsnavigationnode.children">
 			<parameter>
@@ -51,8 +50,16 @@
 		</property>
 		<property qualifier="cmsnavigationnode.links">
 			<parameter>
-				<name>predefinedValuesStrategy</name>
-				<value>cmsItemPredefinedValuesStrategy</value>
+				<name>editable</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>showEditButton</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>allowCreate</name>
+			    <value>true</value>
 			</parameter>
 		</property>
 		<property qualifier="cmsnavigationnode.pages">
@@ -63,26 +70,86 @@
 		</property>
 		<property qualifier="cmsnavigationnode.nodeLink">
 			<parameter>
-				<name>predefinedValuesStrategy</name>
-				<value>cmsItemPredefinedValuesStrategy</value>
+				<name>editable</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>showEditButton</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>allowCreate</name>
+			    <value>true</value>
 			</parameter>
 		</property>
 		<property qualifier="cmsnavigationnode.nodeTitle">
 			<parameter>
-				<name>predefinedValuesStrategy</name>
-				<value>cmsItemPredefinedValuesStrategy</value>
+				<name>editable</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>showEditButton</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>allowCreate</name>
+			    <value>true</value>
 			</parameter>
 		</property>
 		<property qualifier="cmsnavigationnode.nodeImg">
 			<parameter>
-				<name>predefinedValuesStrategy</name>
-				<value>cmsItemPredefinedValuesStrategy</value>
+				<name>editable</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>showEditButton</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>allowCreate</name>
+			    <value>true</value>
 			</parameter>
 		</property>
 		<property qualifier="cmsnavigationnode.nodeToolAdviceLink">
 			<parameter>
-				<name>predefinedValuesStrategy</name>
-				<value>cmsItemPredefinedValuesStrategy</value>
+				<name>editable</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>showEditButton</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>allowCreate</name>
+			    <value>true</value>
+			</parameter>
+		</property>
+		<property qualifier="cmsnavigationnode.simpleBannerComponents">
+			<parameter>
+				<name>editable</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>showEditButton</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>allowCreate</name>
+			    <value>true</value>
+			</parameter>
+		</property>
+		<property qualifier="cmsnavigationnode.toolAdviceLinks">
+			<parameter>
+				<name>editable</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>showEditButton</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>allowCreate</name>
+			    <value>true</value>
 			</parameter>
 		</property>
 	</group>
