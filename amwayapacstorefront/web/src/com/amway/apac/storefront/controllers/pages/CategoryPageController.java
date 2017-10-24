@@ -85,12 +85,17 @@ public class CategoryPageController extends AbstractCategoryPageController
 	 * Controller that fetches result through for "Show More" functionality.
 	 *
 	 * @param categoryCode
+	 *           code of category whose categoryPage is being visited.
 	 * @param searchQuery
+	 *           combination of facet and sort required.
 	 * @param page
+	 *           pageNumber for which paginated data is being fetched
 	 * @param showMode
+	 *           mode in which data is being processed
 	 * @param sortCode
+	 *           code for sort in which products are supposed to be displayed
 	 * @param model
-	 * @return
+	 * @return view for the listing page.
 	 * @throws UnsupportedEncodingException
 	 */
 	@RequestMapping(value = CATEGORY_CODE_PATH_VARIABLE_PATTERN + "/results-display", method = RequestMethod.GET)

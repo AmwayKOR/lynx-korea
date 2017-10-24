@@ -14,7 +14,7 @@
     <div class="product-list__item-content amwahover">
         <button class="quick-view-btn" data-product-code="${product.code}">QUICK VIEW</button>
         <a class="product-list__thum" target="_self" href="${productPDPurl}">
-        	<product:productPrimaryImage product="${product}" format="listingPage"/>
+        	<product:productPrimaryImage product="${product}" format="listingPage" cssClass="product-list__thumbnail"/>
         </a>
         <div class="product-list__item-detail">
             <p class="product-list__item-title">

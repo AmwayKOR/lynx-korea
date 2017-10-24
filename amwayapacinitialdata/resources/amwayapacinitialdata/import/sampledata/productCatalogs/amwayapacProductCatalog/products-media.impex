@@ -47,16 +47,15 @@ INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];$media;mime[default
 ;96Wx96H;/96Wx96H/A4272M_2.jpg;$siteResource/images/96Wx96H/A4272M_2.jpg;;;images
 ;96Wx96H;/96Wx96H/120237A_1.jpg;$siteResource/images/96Wx96H/120237A_1.jpg;;;images
 ;96Wx96H;/96Wx96H/120238A_1.jpg;$siteResource/images/96Wx96H/120238A_1.jpg;;;images
-
-;175Wx245H;/175Wx245H/pli1.png;$siteResource/images/175Wx245H/product_list_item1.png;;;images
-;175Wx245H;/175Wx245H/pli2.png;$siteResource/images/175Wx245H/product_list_item2.png;;;images
-;175Wx245H;/175Wx245H/pli3.png;$siteResource/images/175Wx245H/product_list_item3.png;;;images
-;175Wx245H;/175Wx245H/pli4.png;$siteResource/images/175Wx245H/product_list_item4.png;;;images
-;175Wx245H;/175Wx245H/pli5.png;$siteResource/images/175Wx245H/product_list_item5.png;;;images
-;175Wx245H;/175Wx245H/pli6.png;$siteResource/images/175Wx245H/product_list_item6.png;;;images
-;175Wx245H;/175Wx245H/pli7.png;$siteResource/images/175Wx245H/product_list_item7.png;;;images
-;175Wx245H;/175Wx245H/pli8.png;$siteResource/images/175Wx245H/product_list_item8.png;;;images
-;175Wx245H;/175Wx245H/pli9.png;$siteResource/images/175Wx245H/product_list_item9.png;;;images
+;Product_176Wx245H;/176Wx245H/pli1.png;$siteResource/images/176Wx245H/product_list_item1.png;;;images
+;Product_176Wx245H;/176Wx245H/pli2.png;$siteResource/images/176Wx245H/product_list_item2.png;;;images
+;Product_176Wx245H;/176Wx245H/pli3.png;$siteResource/images/176Wx245H/product_list_item3.png;;;images
+;Product_176Wx245H;/176Wx245H/pli4.png;$siteResource/images/176Wx245H/product_list_item4.png;;;images
+;Product_176Wx245H;/176Wx245H/pli5.png;$siteResource/images/176Wx245H/product_list_item5.png;;;images
+;Product_176Wx245H;/176Wx245H/pli6.png;$siteResource/images/176Wx245H/product_list_item6.png;;;images
+;Product_176Wx245H;/176Wx245H/pli7.png;$siteResource/images/176Wx245H/product_list_item7.png;;;images
+;Product_176Wx245H;/176Wx245H/pli8.png;$siteResource/images/176Wx245H/product_list_item8.png;;;images
+;Product_176Wx245H;/176Wx245H/pli9.png;$siteResource/images/176Wx245H/product_list_item9.png;;;images
 
 
 # Create Media Containers
@@ -71,15 +70,15 @@ INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$catalogVersion
 ;120238A_1;/300Wx300H/120238A_1.jpg,/96Wx96H/120238A_1.jpg;;
 
 
-;pli_container1;/175Wx245H/pli1.png;;
-;pli_container2;/175Wx245H/pli2.png;;
-;pli_container3;/175Wx245H/pli3.png;;
-;pli_container4;/175Wx245H/pli4.png;;
-;pli_container5;/175Wx245H/pli5.png;;
-;pli_container6;/175Wx245H/pli6.png;;
-;pli_container7;/175Wx245H/pli7.png;;
-;pli_container8;/175Wx245H/pli8.png;;
-;pli_container9;/175Wx245H/pli9.png;;
+;pli_container1;/176Wx245H/pli1.png;;
+;pli_container2;/176Wx245H/pli2.png;;
+;pli_container3;/176Wx245H/pli3.png;;
+;pli_container4;/176Wx245H/pli4.png;;
+;pli_container5;/176Wx245H/pli5.png;;
+;pli_container6;/176Wx245H/pli6.png;;
+;pli_container7;/176Wx245H/pli7.png;;
+;pli_container8;/176Wx245H/pli8.png;;
+;pli_container9;/176Wx245H/pli9.png;;
 
 
 

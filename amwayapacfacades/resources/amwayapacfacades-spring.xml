@@ -32,9 +32,9 @@
 	<bean id="amwayApacImageFormatMapping" parent="defaultImageFormatMapping">
 		<property name="mapping">
 			<map>
-				<entry key="listingPage" value="175Wx245H"/>
 				<entry key="product" value="300Wx300H"/>
 				<entry key="thumbnail" value="96Wx96H"/>
+				<entry key="listingPage" value="Product_176Wx245H"/>
 			</map>
 		</property>
 	</bean>

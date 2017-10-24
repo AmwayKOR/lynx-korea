@@ -221,8 +221,8 @@
 		<property name="enumerationService" ref="enumerationService" />
 	</bean>
 	
-	<bean id="image175ValueProvider" parent="abstractImageValueProvider" >
-        <property name="mediaFormat" value="175Wx245H"/>
+	<bean id="image176ValueProvider" parent="abstractImageValueProvider" >
+        <property name="mediaFormat" value="Product_176Wx245H"/>
     </bean>
 	
 	
