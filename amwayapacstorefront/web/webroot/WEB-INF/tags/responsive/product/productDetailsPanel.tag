@@ -4,6 +4,8 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="format" tagdir="/WEB-INF/tags/shared/format" %>
+
 
 <div class="container-fluid main-container">
     <div class="print-hide breadcrumb-section">
@@ -86,18 +88,17 @@
                     <div class="cart-popup__item-info amwahover">
                         <img src="${themeResourcePath}/images/heart-health180.png" class="cart-popup__thumbnail" alt="product">
                         <div class="cart-popup__item-detail">
-                            <p class="cart-popup__item-title">Nutrilite® Heart Health Pack Has a Long Name – Wraps to Two Lines</p>
-                            <p class="cart-popup__item-count">60 Count</p>
-                            <span class="cart-popup__item-number">Item #: 116991</span>
+                            <p class="cart-popup__item-title">${fn:escapeXml(product.name)}</p>
+                            <span class="cart-popup__item-number">Item #: ${fn:escapeXml(product.code)}</span>
                             <div class="cart-popup__item-title cart-popup__item-aboprice">
                                 <span>ABO Price:</span>
-                                <span class="product-list__item-abovalue">$16.62</span></div>
+                                <span class="product-list__item-abovalue"><format:fromPrice priceData="${product.price}"/></span></div>
                             <div class="cart-popup__item-retailprice">
                                 <span>Retail Price:</span>
-                                <span class="product-list__item-abovalue">$25.55</span></div>
+                                <span class="product-list__item-abovalue"><format:fromPrice priceData="${product.retailPrice}"/></span></div>
                             <div class="cart-popup__item-retailprice">
                                 <span>PV / BV:</span>
-                                <span class="product-list__item-abovalue">4.50 / 14.21</span></div>
+                                <span class="product-list__item-abovalue">${product.price.amwayValue.pointValue} / ${product.price.amwayValue.businessVolume}</span></div>
                             <div class="cart-popup__quantity cart-popup__item-retailprice">
                                 <span class="cart-popup__qty">Qty: 1</span>
                                 <a>Edit</a>

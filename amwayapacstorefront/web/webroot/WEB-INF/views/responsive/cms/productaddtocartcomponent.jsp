@@ -4,15 +4,26 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
+<c:set var="isForceInStock" value="${product.stock.stockLevelStatus.code eq 'inStock' and empty product.stock.stockLevel}"/>
+<c:choose>
+  <c:when test="${isForceInStock}">
+    <c:set var="maxQty" value="FORCE_IN_STOCK"/>
+  </c:when>
+  <c:otherwise>
+    <c:set var="maxQty" value="${product.stock.stockLevel}"/>
+  </c:otherwise>
+</c:choose>
+
+<c:set var="qtyMinus" value="1" />
 <c:url value="/cart" var="cartUrl"/>
-                   
-        <div class="row">
-                        <div class="pull-left qty-selector-container">
-                            <label class="control-label" for="pdpAddtoCartInput"><sprint:theme code="product.product.details.future.qty"/></label>
-                            <input type="text" maxlength="3" class="text-center js-qty-selector-input" size="1" value="1" data-max="FORCE_IN_STOCK" data-min="1" name="pdpAddtoCartInput" id="pdpAddtoCartInput" /></div>
-                        <div class="pull-left usage-calc-pdp">
-                            <a class="usageCalculatorLink" href="javascript:void(0);" title="How Much Do I Need?">
-                                <span class="icon icon-calculator"></span><spring:theme code="product.volumePrices.column.howMuch"/></a>
+                    <div class="row">
+                            <div class="pull-left qty-selector-container">
+                                <label class="control-label" for="pdpAddtoCartInput"><spring:theme code="product.product.details.future.qty"/></label>
+                                <input type="text" maxlength="3" class="text-center js-qty-selector-input" size="1" value="${qtyMinus}" data-max="${maxQty}" data-min="1" name="pdpAddtoCartInput"  id="pdpAddtoCartInput" /></div>
+                            <div class="pull-left usage-calc-pdp">
+                                <a class="usageCalculatorLink" href="javascript:void(0);" title="How Much Do I Need?">
+                                    <span class="icon icon-calculator"></span><spring:theme code="product.volumePrices.column.howMuch"/></a>
+                            </div>
                         </div>
                     </div>
                     <div class="stock-wrapper clearfix">
