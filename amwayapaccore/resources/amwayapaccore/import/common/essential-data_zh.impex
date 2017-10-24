@@ -53,16 +53,6 @@ UPDATE DistanceUnit;code[unique=true];name[lang=$lang]
  ;km;"公里"
  ;miles;"英里"
 
-# MediaFormats
-UPDATE MediaFormat;qualifier[unique=true];name[lang=$lang];
- ;1200Wx1200H;"1200Wx1200H"
- ;300Wx300H;"300Wx300H"
- ;30Wx30H;"30Wx30H"
- ;365Wx246H;"365Wx246H"
- ;515Wx515H;"515Wx515H"
- ;65Wx65H;"65Wx65H"
- ;96Wx96H;"96Wx96H"
-
 # Product Tax Groups
 UPDATE ProductTaxGroup;code[unique=true];name[lang=$lang]
  ;ca-sales-tax-full;"加拿大增值税"

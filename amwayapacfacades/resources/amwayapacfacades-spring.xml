@@ -32,9 +32,14 @@
 	<bean id="amwayApacImageFormatMapping" parent="defaultImageFormatMapping">
 		<property name="mapping">
 			<map>
-				<entry key="product" value="300Wx300H"/>
-				<entry key="thumbnail" value="96Wx96H"/>
-				<entry key="listingPage" value="Product_176Wx245H"/>
+				<entry key="cartIcon" value="Product_67Wx67H"/>
+				<entry key="thumbnail" value="Product_78Wx78H"/>
+				<entry key="recentlyViewed" value="Product_133Wx133H"/>
+				<entry key="kitEntryProduct" value="Product_145Wx145H"/>
+				<entry key="registration" value="Product_165Wx128H"/>
+				<entry key="productGrid" value="Product_176Wx245H"/>
+				<entry key="quickView" value="Product_180Wx180H"/>
+				<entry key="product" value="Product_588Wx588H"/>
 			</map>
 		</property>
 	</bean>
@@ -122,6 +127,9 @@
                 <value>product</value>
                 <value>thumbnail</value>
                 <value>cartIcon</value>
+                <value>registration</value>
+                <value>recentlyViewed</value>
+                <value>kitEntryProduct</value>
             </list>
         </property>
     </bean>
