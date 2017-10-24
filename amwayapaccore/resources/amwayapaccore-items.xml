@@ -18,6 +18,19 @@
 
 
         <!-- TypeGroups are for structure of this file only -->
+        
+        <typegroup name="product">
+	        <itemtype code="AmwayKitEntryProduct" generate="false" autocreate="false" jaloclass="com.amway.core.jalo.AmwayKitEntryProduct">
+					<attributes>
+						<attribute qualifier="isMajor" type="java.lang.Boolean">
+							<description>Indicates whether bundle child is major or minor.</description>
+							<modifiers read="true" write="true" search="true" optional="false" />
+							<defaultvalue>java.lang.Boolean.TRUE</defaultvalue>
+							<persistence type="property" />
+						</attribute>
+					</attributes>
+			</itemtype>
+		</typegroup>
 
 
     </itemtypes>
