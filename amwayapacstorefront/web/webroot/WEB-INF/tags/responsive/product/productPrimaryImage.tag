@@ -7,10 +7,9 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
 
 <c:set value="${ycommerce:productImage(product, format)}" var="primaryImage"/>
-
 <c:choose>
 	<c:when test="${not empty primaryImage}">
-		<c:url value="${primaryImage.url}" var="primaryImageUrl" context="${originalContextPath}"/>
+		<c:url value="${primaryImage.url}" var="primaryImageUrl"/>
 		<c:choose>
 			<c:when test="${not empty primaryImage.altText}">
                 <img src="${primaryImageUrl}" alt="${fn:escapeXml(primaryImage.altText)}" title="${fn:escapeXml(primaryImage.altText)}" class="product-list__thumbnail"/>

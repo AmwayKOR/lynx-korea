@@ -28,11 +28,6 @@
 		</property>
 	</bean>
 
-	<bean parent="modifyPopulatorList">
-		<property name="list" ref="defaultProductPricePopulatorList"/>
-		<property name="add" ref="amwayApacProductPricePopulator"/>
-	</bean>
-	
 	<alias name="amwayApacImageFormatMapping" alias="imageFormatMapping"/>
 	<bean id="amwayApacImageFormatMapping" parent="defaultImageFormatMapping">
 		<property name="mapping">
@@ -50,12 +45,18 @@
 		<property name="cartService" ref="cartService"/>
 	</bean>
 
-	<bean id="amwayApacProductPricePopulator" class="com.amway.apac.facades.populators.AmwayApacProductPricePopulator" parent="amwayProductPricePopulator">
-		<property name="amwayApacPriceDataFactory" ref="amwayApacPriceDataFactory"/>
+	<!-- dependencies have to be manually injected as there is no alias defined in the amwayfacades-spring.xml for amwayProductPricePopulator -->
+	<bean id="amwayProductPricePopulator"
+		class="com.amway.apac.facades.populators.AmwayApacProductPricePopulator">
+		<property name="amwayApacPriceDataFactory" ref="priceDataFactory" />
+		<property name="commercePriceService" ref="commercePriceService"/>
+        <property name="modelService" ref="modelService"/>
+        <property name="sessionService" ref="sessionService"/>
+        <property name="userService" ref="userService"/>
 	</bean>
 
-	<alias name="defaultAmwayApacPriceDataFactory" alias="amwayApacPriceDataFactory"/>
-	<bean id="defaultAmwayApacPriceDataFactory" class="com.amway.apac.facades.product.impl.DefaultAmwayApacPriceDataFactory" parent="priceDataFactory" />
+	<alias name="defaultAmwayApacPriceDataFactory" alias="priceDataFactory"/>
+	<bean id="defaultAmwayApacPriceDataFactory" class="com.amway.apac.facades.product.impl.DefaultAmwayApacPriceDataFactory" parent="amwayPriceDataFactory" />
 	
 	<bean id="amwayApacUserBasicConverter" parent="abstractPopulatingConverter">
 		<property name="targetClass" value="de.hybris.platform.commercefacades.user.data.CustomerData"/>
@@ -105,11 +106,34 @@
     <alias name="amwayApacWishlistPopulator" alias="wishlistPopulator"/>
     <bean id="amwayApacWishlistPopulator" class="com.amway.apac.facades.wishlist.populators.AmwayApacWishlistPopulator" parent="amwayWishlistPopulator">
     	<property name="amwayApacUserBasicConverter" ref="amwayApacUserBasicConverter" />
+    	<property name="productConverter" ref="amwayApacWishlistProductConverter"/>
     </bean>
     
     <alias name="amwayApacCommerceSearchResultProductPopulator" alias="commerceSearchResultProductPopulator"/>
 	<bean id="amwayApacCommerceSearchResultProductPopulator"
 		  class="com.amway.apac.facades.populators.AmwayApacSearchResultProductPopulator" parent="amwayCommerceSearchResultProductPopulator">
+	</bean>
+
+    <alias name="defaultAmwayApacProductPrimaryImagePopulator" alias="productPrimaryImagePopulator" />
+    <bean id="defaultAmwayApacProductPrimaryImagePopulator" parent="defaultProductPrimaryImagePopulator"
+        class="com.amway.apac.facades.populators.AmwayApacProductPrimaryImagePopulator">
+        <property name="imageFormats">
+            <list>
+                <value>product</value>
+                <value>thumbnail</value>
+                <value>cartIcon</value>
+            </list>
+        </property>
+    </bean>
+    
+	<alias name="defaultAmwayApacWishlistProductConverter" alias="amwayApacWishlistProductConverter"/>
+	<bean id="defaultAmwayApacWishlistProductConverter" parent="defaultProductConverter">
+		<property name="populators">
+			<list merge="true">
+				<ref bean="productCategoriesPopulator"/>
+				<ref bean="productPricePopulatorList"/>
+			</list>
+		</property>
 	</bean>
 	
 </beans>

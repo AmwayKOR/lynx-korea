@@ -1,5 +1,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="shoppingList" tagdir="/WEB-INF/tags/responsive/shoppingList"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ attribute name="shoppingListData" required="true" type="com.amway.facades.product.data.WishlistData" %>
 
@@ -8,7 +9,7 @@
 	<div id="name-update-form" class="display-none">
 		<form method="POST" action="${updateShoppingListNameUrl}" class="update-shopping-list-name-form" id="updateShoppingListNameForm">
 			<h1 class="product-list-page-title mb25">
-	    		<input class="js-quick-shop-name quick-shop-name js-name-input shopping-list-name" type="text" name="shoppingListName" data-original-name="${shoppingListData.name}" value="${shoppingListData.name} ">
+	    		<input class="js-quick-shop-name quick-shop-name js-name-input shopping-list-name" type="text" name="shoppingListName" data-original-name="${fn:escapeXml(shoppingListData.name)}" value="${fn:escapeXml(shoppingListData.name)}">
 	    		<input type="hidden" name="shoppingListUid" value="${shoppingListData.uid} ">
 	    		<a href="#" class="submit-name-update-form">
 	            	 <span class="edit-name"><spring:theme code="shopping.list.page.actions.section.save.name" /></span></a>
@@ -20,7 +21,7 @@
     </div>
     <div id="name-display-section">
 	     <h1 class="product-list-page-title mb25">
-	     	${shoppingListData.name} 
+	     	${fn:escapeXml(shoppingListData.name)}
 	         <a href="#" class="name-edit-link">
 	             <span class="edit-name"><spring:theme code="shopping.list.page.actions.section.edit.name" /></span></a>
 	     </h1>
