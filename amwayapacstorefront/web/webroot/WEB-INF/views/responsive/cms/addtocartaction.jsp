@@ -53,7 +53,9 @@
 	<button type="${buttonType}" class="btn btn-primary btn-block js-add-to-cart js-enable-btn col-md-6" disabled="disabled"><spring:theme code="basket.add.to.basket"/></button>
      -->
     <button id="addToCartButton" class="btn btn-primary btn-block js-add-to-cart js-enable-btn col-md-6"><spring:theme code="basket.add.to.basket"/></button>
+    <!--
     <button id="BuyNow" class="btn btn-primary btn-block js-add-to-cart js-enable-btn col-md-6"><spring:theme code="checkout.checkout"/></button>
-							
+    -->
+    <a href="${addToCartUrl}" class="btn btn-primary btn-block js-add-to-cart js-enable-btn col-md-6"><spring:theme code="checkout.checkout"/></a>
 </form:form>
 
