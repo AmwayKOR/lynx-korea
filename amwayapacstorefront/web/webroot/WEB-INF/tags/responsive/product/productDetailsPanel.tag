@@ -78,36 +78,3 @@
         </div>
     </div>
 </div>
-<div class="overlay"></div>
-<div class="cbox addToYourShoppingCart">
-            <div class="cart-popup__dialog">
-                <div class="cart-popup__header">
-                    <span class="cart-popup__header-text">added to your shopping cart
-                        <img class="cart-popup__close" src="${themeResourcePath}/images/close.png" alt="close" data-dismiss="modal" aria-label="Close" aria-hidden="true"></span></div>
-                <div class="cart-popup__content">
-                    <div class="cart-popup__item-info amwahover">
-                        <img src="${themeResourcePath}/images/heart-health180.png" class="cart-popup__thumbnail" alt="product">
-                        <div class="cart-popup__item-detail">
-                            <p class="cart-popup__item-title">${fn:escapeXml(product.name)}</p>
-                            <span class="cart-popup__item-number">Item #: ${fn:escapeXml(product.code)}</span>
-                            <div class="cart-popup__item-title cart-popup__item-aboprice">
-                                <span>ABO Price:</span>
-                                <span class="product-list__item-abovalue"><format:fromPrice priceData="${product.price}"/></span></div>
-                            <div class="cart-popup__item-retailprice">
-                                <span>Retail Price:</span>
-                                <span class="product-list__item-abovalue"><format:fromPrice priceData="${product.retailPrice}"/></span></div>
-                            <div class="cart-popup__item-retailprice">
-                                <span>PV / BV:</span>
-                                <span class="product-list__item-abovalue">${product.price.amwayValue.pointValue} / ${product.price.amwayValue.businessVolume}</span></div>
-                            <div class="cart-popup__quantity cart-popup__item-retailprice">
-                                <span class="cart-popup__qty">Qty: 1</span>
-                                <a>Edit</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="cart-popup__item-link">
-                        <a href="Checkout-1-shippingAndDelivery.html" class="btn-blue-white">check out</a>
-                        <a class="cart-popup__item-link-text " href="javascript:void(0);">Continue Shopping</a></div>
-                </div>
-            </div>
-        </div>

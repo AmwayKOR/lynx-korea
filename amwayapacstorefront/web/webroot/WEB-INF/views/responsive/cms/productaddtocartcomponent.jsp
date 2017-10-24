@@ -43,8 +43,6 @@
                 <div class="actions-wrapper">
                     <div class="actions">
                         <div class="AddToCart-AddToCartAction" data-index="1">
-                            <div id="addToCartTitle" class="display-none">Added to Your Shopping Cart</div>
-
                             <action:actions element="div"  parentComponent="${component}"/>
                             
                             <div class="row add-to-cart-extra-actions col-xs-12 col-sm-12 col-md-12 js-add-to-actions-wrapper">

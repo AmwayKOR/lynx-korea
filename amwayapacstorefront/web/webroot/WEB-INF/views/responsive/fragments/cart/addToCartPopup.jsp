@@ -4,6 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="cart" tagdir="/WEB-INF/tags/responsive/cart" %>
+<%@ taglib prefix="format" tagdir="/WEB-INF/tags/shared/format" %>
 
 {"cartData": {
 "total": "${cartData.totalPrice.value}",
@@ -39,61 +40,13 @@
 	<spring:htmlEscape defaultHtmlEscape="true">
 	<spring:theme code="text.addToCart" var="addToCartText"/>
 	<c:url value="/cart" var="cartUrl"/>
-	<ycommerce:testId code="addToCartPopup">
-		<div id="addToCartLayer" class="add-to-cart">
-            <div class="cart_popup_error_msg">
-                <c:choose>
-	                <c:when test="${quickOrderErrorData ne null and not empty quickOrderErrorData}">
-	                	<spring:theme code="${quickOrderErrorMsg}" arguments="${fn:length(quickOrderErrorData)}" />
-                    </c:when>
-                    <c:when test="${multidErrorMsgs ne null and not empty multidErrorMsgs}">
-                        <c:forEach items="${multidErrorMsgs}" var="multidErrorMsg">
-                            <spring:theme code="${multidErrorMsg}" />
-                        </c:forEach>
-                    </c:when>
-                    <c:otherwise>
-                        <spring:theme code="${errorMsg}" />
-                    </c:otherwise>
-                </c:choose>
-            </div>
-
-            <c:choose>
-                <c:when test="${modifications ne null}">
-                    <c:forEach items="${modifications}" var="modification">
-                        <c:set var="product" value="${modification.entry.product}" />
-                        <c:set var="entry" value="${modification.entry}" />
-                        <c:set var="quantity" value="${modification.quantityAdded}" />
-                        <cart:popupCartItems entry="${entry}" product="${product}" quantity="${quantity}"/>
-                    </c:forEach>
-                </c:when>
-                <c:otherwise>
-
-                    <cart:popupCartItems entry="${entry}" product="${product}" quantity="${quantity}"/>
-                </c:otherwise>
-            </c:choose>
-
-            <ycommerce:testId code="checkoutLinkInPopup">
-                <a href="${cartUrl}" class="btn btn-primary btn-block add-to-cart-button">
-	                <c:choose>
-		                <c:when test="${isQuote}">
-		                	<spring:theme code="quote.view" />
-	                    </c:when>
-	                    <c:otherwise>
-	                        <spring:theme code="checkout.checkout" />
-	                    </c:otherwise>
-                	</c:choose>
-                </a>
-            </ycommerce:testId>
-
-
-            <a href="" class="btn btn-default btn-block js-mini-cart-close-button">
-                <spring:theme code="cart.page.continue"/>
-            </a>
-		</div>
-	</ycommerce:testId>
+	<div class="cart-popup__content">
+         <cart:popupCartItems entry="${entry}" product="${product}" quantity="${quantity}"/>
+         <div class="cart-popup__item-link">
+             <a href="${cartUrl}" class="btn-blue-white"><spring:theme code="checkout.checkout" /></a>
+             <a class="cart-popup__item-link-text js-mini-cart-close-button" href=""><spring:theme code="cart.page.continue" /></a></div>
+         </div>
+    </div>
 	</spring:htmlEscape>
 </spring:escapeBody>"
 }
-
-
-
