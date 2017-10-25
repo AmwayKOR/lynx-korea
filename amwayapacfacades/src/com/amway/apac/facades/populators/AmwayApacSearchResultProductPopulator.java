@@ -25,7 +25,7 @@ public class AmwayApacSearchResultProductPopulator extends AmwaySearchResultProd
 	protected List<ImageData> createImageData(final SearchResultValueData source)
 	{
 		final List<ImageData> result = new ArrayList<ImageData>();
-		addImageData(source, "listingPage", result);
+		addImageData(source, "productGrid", result);
 		return result;
 	}
 

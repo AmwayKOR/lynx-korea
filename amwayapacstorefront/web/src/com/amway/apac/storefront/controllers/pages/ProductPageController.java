@@ -204,7 +204,7 @@ public class ProductPageController extends AbstractPageController
 		final ProductData productData = productFacade.getProductForCodeAndOptions(productCode,
 				Arrays.asList(ProductOption.BASIC, ProductOption.PRICE, ProductOption.SUMMARY, ProductOption.DESCRIPTION,
 						ProductOption.CATEGORIES, ProductOption.PROMOTIONS, ProductOption.STOCK, ProductOption.REVIEW,
-						ProductOption.VARIANT_FULL, ProductOption.DELIVERY_MODE_AVAILABILITY));
+						ProductOption.VARIANT_FULL, ProductOption.DELIVERY_MODE_AVAILABILITY, ProductOption.IMAGES));
 
 		sortVariantOptionData(productData);
 		populateProductData(productData, model);
