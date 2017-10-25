@@ -27,7 +27,7 @@
 		            <div class="product-item-element list-item-image">
 		                <div>
 		                    <a href="${productUrl}">
-		                    	<product:productPrimaryImage product="${shoppingListEntry.product}" format="thumbnail"/>
+		                    	<product:productPrimaryImage product="${shoppingListEntry.product}" format="cartIcon"/>
 		                     </a>
 		                </div>
 		                <div class="list-item-remove">

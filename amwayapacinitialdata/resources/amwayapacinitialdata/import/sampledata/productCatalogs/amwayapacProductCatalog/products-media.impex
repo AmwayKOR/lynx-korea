@@ -28,25 +28,25 @@ $siteResource=jar:com.amway.apac.initialdata.setup.AmwayApacInitialDataSystemSet
 
 # Create Media
 INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];$media;mime[default='image/jpeg'];$catalogVersion;folder(qualifier)
-;300Wx300H;/300Wx300H/101390M_1.jpg;$siteResource/images/300Wx300H/101390M_1.jpg;;;images
-;300Wx300H;/300Wx300H/101390M_2.jpg;$siteResource/images/300Wx300H/101390M_2.jpg;;;images
-;300Wx300H;/300Wx300H/A4271M_1.jpg;$siteResource/images/300Wx300H/A4271M_1.jpg;;;images
-;300Wx300H;/300Wx300H/A4271M_2.jpg;$siteResource/images/300Wx300H/A4271M_2.jpg;;;images
-;300Wx300H;/300Wx300H/A4272M_1.jpg;$siteResource/images/300Wx300H/A4272M_1.jpg;;;images
-;300Wx300H;/300Wx300H/A4272M_2.jpg;$siteResource/images/300Wx300H/A4272M_2.jpg;;;images
-;300Wx300H;/300Wx300H/120237A_1.jpg;$siteResource/images/300Wx300H/120237A_1.jpg;;;images
-;300Wx300H;/300Wx300H/120237A_2.png;$siteResource/images/300Wx300H/120237A_2.png;;;images
-;300Wx300H;/300Wx300H/120238A_1.jpg;$siteResource/images/300Wx300H/120238A_1.jpg;;;images
-;300Wx300H;/300Wx300H/120238A_2.png;$siteResource/images/300Wx300H/120238A_2.png;;;images
-;96Wx96H;/96Wx96H/101390M_1.jpg;$siteResource/images/96Wx96H/101390M_1.jpg;;;images
-;96Wx96H;/96Wx96H/101390M_2.jpg;$siteResource/images/96Wx96H/101390M_2.jpg;;;images
-;96Wx96H;/96Wx96H/A4271M_1.jpg;$siteResource/images/96Wx96H/A4271M_1.jpg;;;images
-;96Wx96H;/96Wx96H/A4271M_2.jpg;$siteResource/images/96Wx96H/A4271M_2.jpg;;;images
-;96Wx96H;/96Wx96H/A4272M_1.jpg;$siteResource/images/96Wx96H/A4272M_1.jpg;;;images
-;96Wx96H;/96Wx96H/A4272M_2.jpg;$siteResource/images/96Wx96H/A4272M_2.jpg;;;images
-;96Wx96H;/96Wx96H/A4272M_2.jpg;$siteResource/images/96Wx96H/A4272M_2.jpg;;;images
-;96Wx96H;/96Wx96H/120237A_1.jpg;$siteResource/images/96Wx96H/120237A_1.jpg;;;images
-;96Wx96H;/96Wx96H/120238A_1.jpg;$siteResource/images/96Wx96H/120238A_1.jpg;;;images
+;Product_588Wx588H;/588WX588H/101390M_1.jpg;$siteResource/images/588WX588H/lo-c-bundle.png;;;images
+;Product_588Wx588H;/588WX588H/101390M_2.jpg;$siteResource/images/588WX588H/lo-c-bundle.png;;;images
+;Product_588Wx588H;/588WX588H/A4271M_1.jpg ;$siteResource/images/588WX588H/lo-c-bundle.png;;;images
+;Product_588Wx588H;/588WX588H/A4271M_2.jpg ;$siteResource/images/588WX588H/lo-c-bundle.png;;;images
+;Product_588Wx588H;/588WX588H/A4272M_1.jpg ;$siteResource/images/588WX588H/lo-c-bundle.png;;;images
+;Product_588Wx588H;/588WX588H/A4272M_2.jpg ;$siteResource/images/588WX588H/lo-c-bundle.png;;;images
+;Product_588Wx588H;/588WX588H/120237A_1.jpg;$siteResource/images/588WX588H/lo-c-bundle.png;;;images
+;Product_588Wx588H;/588WX588H/120237A_2.png;$siteResource/images/588WX588H/lo-c-bundle.png;;;images
+;Product_588Wx588H;/588WX588H/120238A_1.jpg;$siteResource/images/588WX588H/lo-c-bundle.png;;;images
+;Product_588Wx588H;/588WX588H/120238A_2.png;$siteResource/images/588WX588H/lo-c-bundle.png;;;images
+;Product_78Wx78H;/78WX78H/101390M_1.jpg;$siteResource/images/78WX78H/protein-powder.png;;;images
+;Product_78Wx78H;/78WX78H/101390M_2.jpg;$siteResource/images/78WX78H/protein-powder.png;;;images
+;Product_78Wx78H;/78WX78H/A4271M_1.jpg;$siteResource/images/78WX78H/protein-powder.png;;;images
+;Product_78Wx78H;/78WX78H/A4271M_2.jpg;$siteResource/images/78WX78H/protein-powder.png;;;images
+;Product_78Wx78H;/78WX78H/A4272M_1.jpg;$siteResource/images/78WX78H/protein-powder.png;;;images
+;Product_78Wx78H;/78WX78H/A4272M_2.jpg;$siteResource/images/78WX78H/protein-powder.png;;;images
+;Product_78Wx78H;/78WX78H/A4272M_2.jpg;$siteResource/images/78WX78H/protein-powder.png;;;images
+;Product_78Wx78H;/78WX78H/120237A_1.jpg;$siteResource/images/78WX78H/protein-powder.png;;;images
+;Product_78Wx78H;/78WX78H/120238A_1.jpg;$siteResource/images/78WX78H/protein-powder.png;;;images
 ;Product_176Wx245H;/176Wx245H/pli1.png;$siteResource/images/176Wx245H/product_list_item1.png;;;images
 ;Product_176Wx245H;/176Wx245H/pli2.png;$siteResource/images/176Wx245H/product_list_item2.png;;;images
 ;Product_176Wx245H;/176Wx245H/pli3.png;$siteResource/images/176Wx245H/product_list_item3.png;;;images
@@ -60,14 +60,14 @@ INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];$media;mime[default
 
 # Create Media Containers
 INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$catalogVersion
-;101390M_1;/300Wx300H/101390M_1.jpg,/96Wx96H/101390M_1.jpg;;
-;101390M_2;/300Wx300H/101390M_2.jpg,/96Wx96H/101390M_2.jpg;;
-;A4271M_1;/300Wx300H/A4271M_1.jpg,/96Wx96H/A4271M_1.jpg;;
-;A4271M_2;/300Wx300H/A4271M_2.jpg,/96Wx96H/A4271M_2.jpg;;
-;A4272M_1;/300Wx300H/A4272M_1.jpg,/96Wx96H/A4272M_1.jpg;;
-;A4272M_2;/300Wx300H/A4272M_2.jpg,/96Wx96H/A4272M_2.jpg;;
-;120237A_1;/300Wx300H/120237A_1.jpg,/96Wx96H/120237A_1.jpg;;
-;120238A_1;/300Wx300H/120238A_1.jpg,/96Wx96H/120238A_1.jpg;;
+;101390M_1;/588WX588H/101390M_1.jpg,/78WX78H/101390M_1.jpg;;
+;101390M_2;/588WX588H/101390M_2.jpg,/78WX78H/101390M_2.jpg;;
+;A4271M_1;/588WX588H/A4271M_1.jpg,/78WX78H/A4271M_1.jpg;;
+;A4271M_2;/588WX588H/A4271M_2.jpg,/78WX78H/A4271M_2.jpg;;
+;A4272M_1;/588WX588H/A4272M_1.jpg,/78WX78H/A4272M_1.jpg;;
+;A4272M_2;/588WX588H/A4272M_2.jpg,/78WX78H/A4272M_2.jpg;;
+;120237A_1;/588WX588H/120237A_1.jpg,/78WX78H/120237A_1.jpg;;
+;120238A_1;/588WX588H/120238A_1.jpg,/78WX78H/120238A_1.jpg;;
 
 
 ;pli_container1;/176Wx245H/pli1.png;;
