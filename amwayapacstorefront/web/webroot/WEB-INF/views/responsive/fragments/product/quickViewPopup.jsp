@@ -10,7 +10,7 @@
     </div>
     <div class="cart-popup__content">
         <div class="cart-popup__item-info amwahover">
-        	<product:productPrimaryImage product="${product}" format="product" cssClass="cart-popup__thumbnail"/>
+        	<product:productPrimaryImage product="${product}" format="quickView" cssClass="cart-popup__thumbnail"/>
           	<product:quickViewPopupDetailsSection product="${product}"/>
         </div>
         <div class="cart-popup__item-link">

@@ -129,6 +129,7 @@
                 <value>cartIcon</value>
                 <value>registration</value>
                 <value>recentlyViewed</value>
+                <value>quickView</value>
                 <value>kitEntryProduct</value>
             </list>
         </property>
