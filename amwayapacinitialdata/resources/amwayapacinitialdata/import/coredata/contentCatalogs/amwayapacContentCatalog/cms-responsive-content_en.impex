@@ -43,3 +43,10 @@ UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
  ;;shopping-list-details;"Shopping List Detail"
  ;;category-landing-page;"Nutrilite Category Page"
  ;;content-article-pages;"ContentArticlePages"
+
+# CMS ProductReferences Components
+UPDATE ProductReferencesComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+;;CrossSelling;"WE ALSO SUGGEST"
+;;Others;"Accessories"
+;;Similar;"WE ALSO SUGGEST"
+;;accessories;"Accessories"

@@ -785,11 +785,19 @@ INSERT_UPDATE ProductColorVariantSelectorComponent;$contentCV[unique=true];uid[u
 INSERT_UPDATE ProductAddToCartComponent;$contentCV[unique=true];uid[unique=true];name;actions(&actionRef);&componentRef
 ;;AddToCart;Product Add To Cart;AddToCartAction;AddToCart
 
+# CMS ProductReferences Components
+INSERT_UPDATE ProductReferencesComponent;$contentCV[unique=true];uid[unique=true];name;productReferenceTypes(code);maximumNumberProducts;&componentRef;;
+;;CrossSelling;Cross Selling;CROSSELLING;5;CrossSelling;;
+;;Others;Others;OTHERS;5;Others;;
+;;Similar;Similar;SIMILAR;5;Similar;;
+;;accessories;Accessories;ACCESSORIES;5;accessories;;
+
 # ContentSlot
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(uid,$contentCV)
 ;;VariantSelectorSlot;VariantSelector
 ;;ColorVariantSelectorSlot;ColorVariantSelector
 ;;AddToCartSlot;AddToCart
+;;UpSellingSlot;Similar,Others
 
 ####  CMS ACTIONS ######
 # CMS Action Restrictions
@@ -799,3 +807,4 @@ INSERT_UPDATE CMSActionRestriction;$contentCV[unique=true];uid[unique=true];name
 # CMS AddToCart Action
 INSERT_UPDATE AddToCartAction;$contentCV[unique=true];uid[unique=true];url;name;restrictions(uid,$contentCV);&actionRef
 ;;AddToCartAction;/cart/add;Product Add To Cart Action;ActionRestriction;AddToCartAction
+

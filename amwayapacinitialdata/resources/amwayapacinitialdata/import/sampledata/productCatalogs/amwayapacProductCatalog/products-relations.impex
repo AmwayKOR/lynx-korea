@@ -18,3 +18,5 @@ $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[defa
 
 # Insert Product References
 INSERT_UPDATE ProductReference;source(code,$catalogVersion)[unique=true];target(code,$catalogVersion)[unique=true];referenceType(code);active[default=true];preselected[default=false]
+;101390M;A4271M;SIMILAR;true;false
+;101390M;A4272M;SIMILAR;true;false
