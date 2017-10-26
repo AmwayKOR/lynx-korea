@@ -10,15 +10,13 @@
 <%@ taglib prefix="breadcrumb" tagdir="/WEB-INF/tags/desktop/nav/breadcrumb" %>
 
 <template:page pageTitle="${pageTitle}">
+	
 	<div class="container-fluid main-container ">
 		<div class="print-hide breadcrumb-section">
-			<ol class="breadcrumb">
-				<li><a href="homepage.html">Home</a></li>
-				<li><a href="dashboard.html">My Business Center</a></li>
-				<li class="active">New IBO Info</li>
-			</ol>
-		</div>
-	</div>
+		
+		<cms:pageSlot position="BreadCrumb" var="component">
+					<cms:component component="${component}" />
+				</cms:pageSlot></div></div>
 
 	<div class="product-category-page amway-theme">
 		<div class="product-categories">

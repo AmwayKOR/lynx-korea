@@ -730,6 +730,40 @@ INSERT_UPDATE AmwayAPACPathToSuccessPitchPerfectComponent;$contentCV[unique=true
 ;;articleBodyKeySuccessStoryComponent;Amway Path to Success;articleBodyKeySuccessStoryBannerComponent;amwayApacButtonlinkArticleBodyKeySuccessStoryLink;articleBodyKeySuccessStoryParagraphComponent;articleBodyKeySuccessStoryComponent
 ;;articleXsSportsSuccessStoryComponent;Amway Pitch Perfect;articleXsSportsSuccessStoryBannerComponent;amwayApacButtonlinkArticleXsSportsSuccessStoryLink;articleXsSportsSuccessStoryParagraphComponent;articleXsSportsSuccessStoryComponent
 	
+	
+############# Register Landing Page
+
+INSERT_UPDATE AmwayApacJoinAmwayComponent;$contentCV[unique=true];uid[unique=true];name;backgroundImage(uid, $contentCV);details(uid, $contentCV);&componentRef
+;;amwayApacJoinAmwayComponent;Join Amway Component;HeaderSBComponent;headerDesc;amwayApacJoinAmwayComponent
+
+INSERT_UPDATE AmwayApacWeAreAmwayComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;amwayApacWeAreAmwayComponent;We Are Amway Component;amwayApacWeAreAmwayComponent
+
+INSERT_UPDATE AmwayApacParagraghButtonComponent;$contentCV[unique=true];uid[unique=true];name;paraDesc(uid, $contentCV);linkButton(&linkRef);&componentRef
+;;amwayapacbecomeAnABOComponent;Become An ABO Component;becomeABODesc;amwayApacBecomeAnABOContent;amwayapacbecomeAnABOComponent
+;;amwayapacbecomeACustomerComponent; Become A Customer Componet;becomeCustomerDesc;amwayApacBecomeACustomerContent;amwayapacbecomeACustomerComponent
+
+INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;urlLink;&componentRef
+;;HeaderSBComponent;Header SB Component;"/";HeaderSBComponent
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
+;;headerDesc;headerDesc
+;;becomeABODesc;becomeABODesc
+;;becomeCustomerDesc;becomeCustomerDesc
+;;footerNoticeDesc;footerNoticeDesc
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
+;;JoinAmwayContentSlot;Join Amway Slot;true;amwayApacJoinAmwayComponent
+;;WeAreAmwayContentSlot;We Are Amway Slot;true;amwayApacWeAreAmwayComponent
+;;BecomeAnABOContentSlot;Become An ABO Slot;true;amwayapacbecomeAnABOComponent
+;;BecomeACustomerContentSlot;Become A Customer;true;amwayapacbecomeACustomerComponent
+;;FooterNoticeParagraphContentSlot; Footer Notice;true;footerNoticeDesc
+
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;target(code)[default='sameWindow'];&componentRef
+;;amwayApacBecomeAnABOContent;BECOME AN ABO;/;amwayApacBecomeAnABOContent;;amwayApacBecomeAnABOContent;
+;;amwayApacBecomeACustomerContent;BECOME A MEMBER;/;amwayApacBecomeACustomerContent;;amwayApacBecomeACustomerContent;
+
+	
 ############# My Account Page
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)

@@ -8,7 +8,7 @@
 
 <ol class="breadcrumb">
 	<li>
-		<a href="${homeUrl}"><spring:theme code="breadcrumb.home" /></a>
+		<a href="${homeUrl}"><spring:theme code="Home" /></a>
 	</li>
 
 	<c:forEach items="${breadcrumbs}" var="breadcrumb" varStatus="status">

@@ -335,5 +335,32 @@
 				</attribute>
 			</attributes>
 		</itemtype>
+		
+		<itemtype code="AmwayApacJoinAmwayComponent" extends="AmwayApacTextImageComponent"
+			autocreate="true" generate="true"
+			jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacJoinAmwayComponent">
+			<description>Join Amway Component</description>
+		</itemtype>
+
+		<itemtype code="AmwayApacWeAreAmwayComponent" extends="AmwayApacOurNewProductComponent"
+			autocreate="true" generate="true"
+			jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacWeAreAmwayComponent">
+			<description>We Are Amway Component</description>
+		</itemtype>
+
+		<itemtype code="AmwayApacParagraghButtonComponent" extends="SimpleCMSComponent"
+			autocreate="true" generate="true"
+			jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacParagraghButtonComponent">
+			<description>Become An ABO or A Customers Component</description>
+			<attributes>
+				<attribute qualifier="paraDesc" type="CMSParagraphComponent">
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="linkButton" type="CMSLinkComponent">
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		
     </itemtypes>
 </items>

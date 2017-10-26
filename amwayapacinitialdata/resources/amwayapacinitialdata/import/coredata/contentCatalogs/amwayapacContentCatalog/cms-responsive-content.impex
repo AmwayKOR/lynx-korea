@@ -43,6 +43,7 @@ INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;fronten
 ;;CategoryLandingPageTemplate;Category Landing Page Template;category/categoryLandingLayoutPage;ContentPage
 ;;HomePageMainTemplate;Home Main Page Template;layout/homePageLayout;CategoryPage,ContentPage
 ;;ContentArticlePagesTemplate;Content Article Pages Template;business/contentArticlePagesLayout;ContentPage
+;;RegisterLandingPageTemplate;Register Landing Page Template;account/registerLandingLayoutPage;ContentPage
 
 # Templates without a frontendTemplateName
 ;;CartPageTemplate;Cart Page Template;;ContentPage;false;
@@ -82,6 +83,7 @@ UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];velocityTemplate[tr
 ;;CategoryLandingPageTemplate		;$jarResourceCms/structure-view/structure_categoryLandingPageTemplate.vm
 ;;HomePageMainTemplate      ;$jarResourceCms/structure-view/structure_homePageMainTemplate.vm
 ;;ContentArticlePagesTemplate		;$jarResourceCms/structure-view/structure_contentArticlePagesTemplate.vm
+;;RegisterLandingPageTemplate       ;$jarResourceCms/structure-view/structure_registerLandingPageTemplate.vm
 
 
 # Create ContentSlotNames
@@ -93,6 +95,7 @@ UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];velocityTemplate[tr
 INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='ErrorPageTemplate'];validComponentTypes(code);compTypeGroup(code)
 ;SiteLogo;;;logo
 ;HeaderLinks;;;headerlinks
+;BreadCrumb;;;
 ;SearchBox;;;searchbox
 ;MiniCart;;;minicart
 ;NavigationBar;;;navigation
@@ -110,6 +113,7 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='ProductDetailsPageTemplate'];validComponentTypes(code);compTypeGroup(code)
 ;SiteLogo;;;logo
 ;HeaderLinks;;;headerlinks
+;BreadCrumb;;;
 ;SearchBox;;;searchbox
 ;MiniCart;;;minicart
 ;NavigationBar;;;navigation
@@ -135,6 +139,7 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='ProductListPageTemplate'];validComponentTypes(code);compTypeGroup(code)
 ;SiteLogo;;;logo
 ;HeaderLinks;;;headerlinks
+;BreadCrumb;;;
 ;SearchBox;;;searchbox
 ;MiniCart;;;minicart
 ;NavigationBar;;;navigation
@@ -151,6 +156,7 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='ProductGridPageTemplate'];validComponentTypes(code);compTypeGroup(code)
 ;SiteLogo;;;logo
 ;HeaderLinks;;;headerlinks
+;BreadCrumb;;;
 ;SearchBox;;;searchbox
 ;MiniCart;;;minicart
 ;NavigationBar;;;navigation
@@ -170,6 +176,7 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='SearchResultsListPageTemplate'];validComponentTypes(code);compTypeGroup(code)
 ;SiteLogo;;;logo
 ;HeaderLinks;;;headerlinks
+;BreadCrumb;;;
 ;SearchBox;;;searchbox
 ;MiniCart;;;minicart
 ;NavigationBar;;;navigation
@@ -185,6 +192,7 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='SearchResultsGridPageTemplate'];validComponentTypes(code);compTypeGroup(code)
 ;SiteLogo;;;logo
 ;HeaderLinks;;;headerlinks
+;BreadCrumb;;;
 ;SearchBox;;;searchbox
 ;MiniCart;;;minicart
 ;NavigationBar;;;navigation
@@ -200,6 +208,7 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='SearchResultsEmptyPageTemplate'];validComponentTypes(code);compTypeGroup(code)
 ;SiteLogo;;;logo
 ;HeaderLinks;;;headerlinks
+;BreadCrumb;;;
 ;SearchBox;;;searchbox
 ;MiniCart;;;minicart
 ;NavigationBar;;;navigation
@@ -219,6 +228,7 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='CategoryPageTemplate'];validComponentTypes(code);compTypeGroup(code)
 ;SiteLogo;;;logo
 ;HeaderLinks;;;headerlinks
+;BreadCrumb;;;
 ;SearchBox;;;searchbox
 ;MiniCart;;;minicart
 ;NavigationBar;;;navigation
@@ -236,6 +246,7 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='LandingPage1Template'];validComponentTypes(code);compTypeGroup(code)
 ;SiteLogo;;;logo
 ;HeaderLinks;;;headerlinks
+;BreadCrumb;;;
 ;SearchBox;;;searchbox
 ;MiniCart;;;minicart
 ;NavigationBar;;;navigation
@@ -255,6 +266,7 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='LandingPage2Template'];validComponentTypes(code);compTypeGroup(code)
 ;SiteLogo;;;logo
 ;HeaderLinks;;;headerlinks
+;BreadCrumb;;;
 ;SearchBox;;;searchbox
 ;MiniCart;;;minicart
 ;NavigationBar;;;navigation
@@ -274,6 +286,7 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='LandingPage3Template'];validComponentTypes(code);compTypeGroup(code)
 ;SiteLogo;;;logo
 ;HeaderLinks;;;headerlinks
+;BreadCrumb;;;
 ;SearchBox;;;searchbox
 ;MiniCart;;;minicart
 ;NavigationBar;;;navigation
@@ -293,6 +306,7 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='LandingPage4Template'];validComponentTypes(code);compTypeGroup(code)
 ;SiteLogo;;;logo
 ;HeaderLinks;;;headerlinks
+;BreadCrumb;;;
 ;SearchBox;;;searchbox
 ;MiniCart;;;minicart
 ;NavigationBar;;;navigation
@@ -312,6 +326,7 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='LandingPage5Template'];validComponentTypes(code);compTypeGroup(code)
 ;SiteLogo;;;logo
 ;HeaderLinks;;;headerlinks
+;BreadCrumb;;;
 ;SearchBox;;;searchbox
 ;MiniCart;;;minicart
 ;NavigationBar;;;navigation
@@ -329,6 +344,7 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='LandingPage6Template'];validComponentTypes(code);compTypeGroup(code)
 ;SiteLogo;;;logo
 ;HeaderLinks;;;headerlinks
+;BreadCrumb;;;
 ;SearchBox;;;searchbox
 ;MiniCart;;;minicart
 ;NavigationBar;;;navigation
@@ -347,6 +363,7 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='ContentPage1Template'];validComponentTypes(code);compTypeGroup(code)
 ;SiteLogo;;;logo
 ;HeaderLinks;;;headerlinks
+;BreadCrumb;;;
 ;SearchBox;;;searchbox
 ;MiniCart;;;minicart
 ;NavigationBar;;;navigation
@@ -364,6 +381,7 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='CartPageTemplate'];validComponentTypes(code);compTypeGroup(code)
 ;SiteLogo;;;logo
 ;HeaderLinks;;;headerlinks
+;BreadCrumb;;;
 ;SearchBox;;;searchbox
 ;MiniCart;;;minicart
 ;NavigationBar;;;navigation
@@ -382,6 +400,7 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='LoginPageTemplate'];validComponentTypes(code);compTypeGroup(code)
 ;SiteLogo;;;logo
 ;HeaderLinks;;;headerlinks
+;BreadCrumb;;;
 ;SearchBox;;;searchbox
 ;MiniCart;;;minicart
 ;NavigationBar;;;navigation
@@ -397,6 +416,7 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='CheckoutLoginPageTemplate'];validComponentTypes(code);compTypeGroup(code)
 ;SiteLogo;;;logo
 ;HeaderLinks;;;headerlinks
+;BreadCrumb;;;
 ;SearchBox;;;searchbox
 ;MiniCart;;;minicart
 ;NavigationBar;;;navigation
@@ -415,6 +435,7 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='MultiStepCheckoutSummaryPageTemplate'];validComponentTypes(code);compTypeGroup(code)
 ;SiteLogo;;;logo
 ;HeaderLinks;;;headerlinks
+;BreadCrumb;;;
 ;SearchBox;;;searchbox
 ;MiniCart;;;minicart
 ;NavigationBar;;;navigation
@@ -429,6 +450,7 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='OrderConfirmationPageTemplate'];validComponentTypes(code);compTypeGroup(code)
 ;SiteLogo;;;logo
 ;HeaderLinks;;;headerlinks
+;BreadCrumb;;;
 ;SearchBox;;;searchbox
 ;MiniCart;;;minicart
 ;NavigationBar;;;navigation
@@ -444,6 +466,7 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 # Template used for all of the Account pages
 INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='AccountPageTemplate'];validComponentTypes(code);compTypeGroup(code)
 ;SiteLogo;;;logo
+;BreadCrumb;;;
 ;SearchBox;;;searchbox
 ;MiniCart;;;minicart
 ;NavigationBar;;;navigation
@@ -461,6 +484,7 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='ShoppingListsPageTemplate'];validComponentTypes(code);compTypeGroup(code)
 ;SiteLogo;;;logo
 ;HeaderLinks;;;headerlinks
+;BreadCrumb;;;
 ;SearchBox;;;searchbox
 ;MiniCart;;;minicart
 ;NavigationBar;;;navigation
@@ -479,6 +503,7 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='CategoryLandingPageTemplate'];validComponentTypes(code);compTypeGroup(code)
 ;SiteLogo;;;logo
 ;HeaderLinks;;;headerlinks
+;BreadCrumb;;;
 ;SearchBox;;;searchbox
 ;MiniCart;;;minicart
 ;NavigationBar;;;navigation
@@ -508,6 +533,7 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='ContentArticlePagesTemplate'];validComponentTypes(code);compTypeGroup(code)
 ;SiteLogo;;;logo
 ;HeaderLinks;;;headerlinks
+;BreadCrumb;;;
 ;SearchBox;;;searchbox
 ;MiniCart;;;minicart
 ;NavigationBar;;;navigation
@@ -526,10 +552,34 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 ;ArticleSuccessStoryContentSlot1;;;
 ;ArticleSuccessStoryContentSlot2;;;
 
+# Template used for register landing page RegisterLandingPageLayout
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='RegisterLandingPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;HeaderLinks;;;headerlinks
+;BreadCrumb;;;
+;SearchBox;;;searchbox
+;MiniCart;;;minicart
+;NavigationBar;;;navigation
+;TopContent;;;wide
+;SideContent;;;narrow
+;BodyContent;;;wide
+;BottomContent;;;wide
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;PlaceholderContentSlot;;;
+
+;JoinAmwayContentSlot;;;
+;WeAreAmwayContentSlot;;;
+;BecomeAnABOContentSlot;;;
+;BecomeACustomerContentSlot;;;
+;FooterNoticeParagraphContentSlot;;;
+
 # Store Finder/Locator Page Template
 INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='StoreFinderPageTemplate'];validComponentTypes(code);compTypeGroup(code)
 ;SiteLogo;;;logo
 ;HeaderLinks;;;headerlinks
+;BreadCrumb;;;
 ;SearchBox;;;searchbox
 ;MiniCart;;;minicart
 ;NavigationBar;;;navigation
@@ -572,6 +622,7 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active
 ;;SiteLogoSlot;Default Site Logo Slot;true
 ;;HomepageNavLinkSlot;Default Homepage Link;true
+;;BreadCrumbSlot;Default Breadcrumb slot;true
 ;;MiniCartSlot;Mini Cart;true
 ;;NavigationBarSlot;Navigation Bar;true
 ;;TabsSlot;Tabs;true
@@ -618,6 +669,7 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ProductDetailsPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
 ;;SiteLogo-ProductDetails;SiteLogo;;SiteLogoSlot;true
 ;;HomepageLink-ProductDetails;HomepageNavLink;;HomepageNavLinkSlot;true
+;;BreadCrumb-ProductDetails;BreadCrumb;;BreadCrumbSlot;true
 ;;MiniCart-ProductDetails;MiniCart;;MiniCartSlot;true
 ;;NavigationBar-ProductDetails;NavigationBar;;NavigationBarSlot;true
 ;;Tabs-ProductDetails;Tabs;;TabsSlot;true
@@ -637,6 +689,7 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='SearchResultsListPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
 ;;SiteLogo-SearchResultsList;SiteLogo;;SiteLogoSlot;true
 ;;HomepageLink-SearchResultsList;HomepageNavLink;;HomepageNavLinkSlot;true
+;;BreadCrumb-SearchResultsList;BreadCrumb;;BreadCrumbSlot;true
 ;;MiniCart-SearchResultsList;MiniCart;;MiniCartSlot;true
 ;;NavigationBar-SearchResultsList;NavigationBar;;NavigationBarSlot;true
 ;;Footer-SearchResultsList;Footer;;FooterSlot;true
@@ -652,6 +705,7 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='SearchResultsGridPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
 ;;SiteLogo-SearchResultsGrid;SiteLogo;;SiteLogoSlot;true
 ;;HomepageLink-SearchResultsGrid;HomepageNavLink;;HomepageNavLinkSlot;true
+;;BreadCrumb-SearchResultsGrid;BreadCrumb;;BreadCrumbSlot;true
 ;;MiniCart-SearchResultsGrid;MiniCart;;MiniCartSlot;true
 ;;NavigationBar-SearchResultsGrid;NavigationBar;;NavigationBarSlot;true
 ;;Footer-SearchResultsGrid;Footer;;FooterSlot;true
@@ -667,6 +721,7 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='SearchResultsEmptyPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
 ;;SiteLogo-SearchResultsEmpty;SiteLogo;;SiteLogoSlot;true
 ;;HomepageLink-SearchResultsEmpty;HomepageNavLink;;HomepageNavLinkSlot;true
+;;BreadCrumb-SearchResultsEmpty;BreadCrumb;;BreadCrumbSlot;true
 ;;NavigationBar-SearchResultsEmpty;NavigationBar;;NavigationBarSlot;true
 ;;MiniCart-SearchResultsEmpty;MiniCart;;MiniCartSlot;true
 ;;Footer-SearchResultsEmpty;Footer;;FooterSlot;true
@@ -680,6 +735,7 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='CategoryPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
 ;;SiteLogo-CategoryPage;SiteLogo;;SiteLogoSlot;true
 ;;HomepageLink-CategoryPage;HomepageNavLink;;HomepageNavLinkSlot;true
+;;BreadCrumb-CategoryPage;BreadCrumb;;BreadCrumbSlot;true
 ;;MiniCart-CategoryPage;MiniCart;;MiniCartSlot;true
 ;;NavigationBar-CategoryPage;NavigationBar;;NavigationBarSlot;true
 ;;Footer-CategoryPage;Footer;;FooterSlot;true
@@ -693,6 +749,7 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='LandingPage1Template'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
 ;;SiteLogo-LandingPage1;SiteLogo;;SiteLogoSlot;true
 ;;HomepageLink-LandingPage1;HomepageNavLink;;HomepageNavLinkSlot;true
+;;BreadCrumb-LandingPage1;BreadCrumb;;BreadCrumbSlot;true
 ;;MiniCart-LandingPage1;MiniCart;;MiniCartSlot;true
 ;;NavigationBar-LandingPage1;NavigationBar;;NavigationBarSlot;true
 ;;Footer-LandingPage1;Footer;;FooterSlot;true
@@ -706,6 +763,7 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='LandingPage2Template'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
 ;;SiteLogo-LandingPage2;SiteLogo;;SiteLogoSlot;true
 ;;HomepageLink-LandingPage2;HomepageNavLink;;HomepageNavLinkSlot;true
+;;BreadCrumb-LandingPage2;BreadCrumb;;BreadCrumbSlot;true
 ;;NavigationBar-LandingPage2;NavigationBar;;NavigationBarSlot;true
 ;;MiniCart-LandingPage2;MiniCart;;MiniCartSlot;true
 ;;Footer-LandingPage2;Footer;;FooterSlot;true
@@ -719,6 +777,7 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='LandingPage3Template'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
 ;;SiteLogo-LandingPage3;SiteLogo;;SiteLogoSlot;true
 ;;HomepageLink-LandingPage3;HomepageNavLink;;HomepageNavLinkSlot;true
+;;BreadCrumb-LandingPage3;BreadCrumb;;BreadCrumbSlot;true
 ;;NavigationBar-LandingPage3;NavigationBar;;NavigationBarSlot;true
 ;;MiniCart-LandingPage3;MiniCart;;MiniCartSlot;true
 ;;Footer-LandingPage3;Footer;;FooterSlot;true
@@ -732,6 +791,7 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='LandingPage4Template'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
 ;;SiteLogo-LandingPage4;SiteLogo;;SiteLogoSlot;true
 ;;HomepageLink-LandingPage4;HomepageNavLink;;HomepageNavLinkSlot;true
+;;BreadCrumb-LandingPage4;BreadCrumb;;BreadCrumbSlot;true
 ;;NavigationBar-LandingPage4;NavigationBar;;NavigationBarSlot;true
 ;;MiniCart-LandingPage4;MiniCart;;MiniCartSlot;true
 ;;Footer-LandingPage4;Footer;;FooterSlot;true
@@ -745,6 +805,7 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='LandingPage5Template'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
 ;;SiteLogo-LandingPage5;SiteLogo;;SiteLogoSlot;true
 ;;HomepageLink-LandingPage5;HomepageNavLink;;HomepageNavLinkSlot;true 
+;;BreadCrumb-LandingPage5;BreadCrumb;;BreadCrumbSlot;true
 ;;NavigationBar-LandingPage5;NavigationBar;;NavigationBarSlot;true
 ;;MiniCart-LandingPage5;MiniCart;;MiniCartSlot;true
 ;;Footer-LandingPage5;Footer;;FooterSlot;true
@@ -758,6 +819,7 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='LandingPage6Template'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
 ;;SiteLogo-LandingPage6;SiteLogo;;SiteLogoSlot;true
 ;;HomepageLink-LandingPage6;HomepageNavLink;;HomepageNavLinkSlot;true
+;;BreadCrumb-LandingPage6;BreadCrumb;;BreadCrumbSlot;true
 ;;NavigationBar-LandingPage6;NavigationBar;;NavigationBarSlot;true
 ;;MiniCart-LandingPage6;MiniCart;;MiniCartSlot;true
 ;;Footer-LandingPage6;Footer;;FooterSlot;true
@@ -771,6 +833,7 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ContentPage1Template'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
 ;;SiteLogo-ContentPage1;SiteLogo;;SiteLogoSlot;true
 ;;HomepageLink-ContentPage1;HomepageNavLink;;HomepageNavLinkSlot;true
+;;BreadCrumb-ContentPage1;BreadCrumb;;BreadCrumbSlot;true
 ;;NavigationBar-ContentPage1;NavigationBar;;NavigationBarSlot;true
 ;;MiniCart-ContentPage1;MiniCart;;MiniCartSlot;true
 ;;Footer-ContentPage1;Footer;;FooterSlot;true
@@ -784,6 +847,7 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ProductGridPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
 ;;SiteLogo-ProductGridPage;SiteLogo;;SiteLogoSlot;true
 ;;HomepageLink-ProductGridPage;HomepageNavLink;;HomepageNavLinkSlot;true
+;;BreadCrumb-ProductGridPage;BreadCrumb;;BreadCrumbSlot;true
 ;;MiniCart-ProductGridPage;MiniCart;;MiniCartSlot;true
 ;;NavigationBar-ProductGridPage;NavigationBar;;NavigationBarSlot;true
 ;;Footer-ProductGridPage;Footer;;FooterSlot;true
@@ -799,6 +863,7 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ProductListPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
 ;;SiteLogo-ProductListPage;SiteLogo;ProductListPageTemplate;SiteLogoSlot;true
 ;;HomepageLink-ProductListPage;HomepageNavLink;ProductListPageTemplate;HomepageNavLinkSlot;true
+;;BreadCrumb-ProductListPage;BreadCrumb;ProductListPageTemplate;BreadCrumbSlot;true
 ;;MiniCart-ProductListPage;MiniCart;ProductListPageTemplate;MiniCartSlot;true
 ;;NavigationBar-ProductListPage;NavigationBar;ProductListPageTemplate;NavigationBarSlot;true
 ;;Footer-ProductListPage;Footer;ProductListPageTemplate;FooterSlot;true
@@ -814,6 +879,7 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='CartPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
 ;;SiteLogo-CartPage;SiteLogo;;SiteLogoSlot;true
 ;;HomepageLink-CartPage;HomepageNavLink;;HomepageNavLinkSlot;true
+;;BreadCrumb-CartPage;BreadCrumb;;BreadCrumbSlot;true
 ;;NavigationBar-CartPage;NavigationBar;;NavigationBarSlot;true
 ;;MiniCart-CartPage;MiniCart;;MiniCartSlot;true
 ;;Footer-CartPage;Footer;;FooterSlot;true
@@ -831,6 +897,7 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='LoginPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
 ;;SiteLogo-LoginPage;SiteLogo;;SiteLogoSlot;true
 ;;HomepageLink-LoginPage;HomepageNavLink;;HomepageNavLinkSlot;true
+;;BreadCrumb-LoginPage;BreadCrumb;;BreadCrumbSlot;true
 ;;NavigationBar-LoginPage;NavigationBar;;NavigationBarSlot;true
 ;;MiniCart-LoginPage;MiniCart;;MiniCartSlot;true
 ;;Footer-LoginPage;Footer;;FooterSlot;true
@@ -846,6 +913,7 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='CheckoutLoginPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
 ;;SiteLogo-CheckoutLoginPage;SiteLogo;;SiteLogoSlot;true
 ;;HomepageLink-CheckoutLoginPage;HomepageNavLink;;HomepageNavLinkSlot;true
+;;BreadCrumb-CheckoutLoginPage;BreadCrumb;;BreadCrumbSlot;true
 ;;NavigationBar-CheckoutLoginPage;NavigationBar;;NavigationBarSlot;true
 ;;MiniCart-CheckoutLoginPage;MiniCart;;MiniCartSlot;true
 ;;Footer-CheckoutLoginPage;Footer;;FooterSlot;true
@@ -863,6 +931,7 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='MultiStepCheckoutSummaryPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
 ;;SiteLogo-MultiStepCheckoutSummaryPage;SiteLogo;;SiteLogoSlot;true
 ;;HomepageLink-MultiStepCheckoutSummaryPage;HomepageNavLink;;HomepageNavLinkSlot;true
+;;BreadCrumb-MultiStepCheckoutSummaryPage;BreadCrumb;;BreadCrumbSlot;true
 ;;NavigationBar-MultiStepCheckoutSummaryPage;NavigationBar;;NavigationBarSlot;true
 ;;MiniCart-MultiStepCheckoutSummaryPage;MiniCart;;MiniCartSlot;true
 ;;Footer-MultiStepCheckoutSummaryPage;Footer;;FooterSlot;true
@@ -876,6 +945,7 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='OrderConfirmationPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
 ;;SiteLogo-OrderConfirmationPage;SiteLogo;;SiteLogoSlot;true
 ;;HomepageLink-OrderConfirmationPage;HomepageNavLink;;HomepageNavLinkSlot;true
+;;BreadCrumb-OrderConfirmationPage;BreadCrumb;;BreadCrumbSlot;true
 ;;NavigationBar-OrderConfirmationPage;NavigationBar;;NavigationBarSlot;true
 ;;MiniCart-OrderConfirmationPage;MiniCart;;MiniCartSlot;true
 ;;Footer-OrderConfirmationPage;Footer;;FooterSlot;true
@@ -888,6 +958,7 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='AccountPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
 ;;SiteLogo-AccountPage;SiteLogo;;SiteLogoSlot;true
+;;BreadCrumb-AccountPage;BreadCrumb;;BreadCrumbSlot;true
 ;;NavigationBar-AccountPage;NavigationBar;;NavigationBarSlot;true
 ;;MiniCart-AccountPage;MiniCart;;MiniCartSlot;true
 ;;Footer-AccountPage;Footer;;FooterSlot;true
@@ -898,6 +969,7 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ShoppingListsPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
 ;;SiteLogo-ShoppingListsPage;SiteLogo;;SiteLogoSlot;true
 ;;HomepageLink-ShoppingListsPage;HomepageNavLink;;HomepageNavLinkSlot;true
+;;BreadCrumb-ShoppingListsPage;BreadCrumb;;BreadCrumbSlot;true
 ;;NavigationBar-ShoppingListsPage;NavigationBar;;NavigationBarSlot;true
 ;;MiniCart-ShoppingListsPage;MiniCart;;MiniCartSlot;true
 ;;Footer-ShoppingListsPage;Footer;;FooterSlot;true
@@ -911,6 +983,7 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='CategoryLandingPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
 ;;SiteLogo-CategoryLandingPage;SiteLogo;;SiteLogoSlot;true
 ;;HomepageLink-CategoryLandingPage;HomepageNavLink;;HomepageNavLinkSlot;true
+;;BreadCrumb-CategoryLandingPage;BreadCrumb;;BreadCrumbSlot;true
 ;;NavigationBar-CategoryLandingPage;NavigationBar;;NavigationBarSlot;true
 ;;MiniCart-CategoryLandingPage;MiniCart;;MiniCartSlot;true
 ;;Footer-CategoryLandingPage;Footer;;FooterSlot;true
@@ -937,6 +1010,7 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ContentArticlePagesTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
 ;;SiteLogo-ContentArticlePages;SiteLogo;;SiteLogoSlot;true
 ;;HomepageLink-ContentArticlePages;HomepageNavLink;;HomepageNavLinkSlot;true
+;;BreadCrumb-ContentArticlePages;BreadCrumb;;BreadCrumbSlot;true
 ;;NavigationBar-ContentArticlePages;NavigationBar;;NavigationBarSlot;true
 ;;MiniCart-ContentArticlePages;MiniCart;;MiniCartSlot;true
 ;;Footer-ContentArticlePages;Footer;;FooterSlot;true
@@ -953,11 +1027,32 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 ;;SuccessStoryContentSlot1-ContentArticlePages;ArticleSuccessStoryContentSlot1;;ArticleSuccessStoryContentSlot1;true
 ;;SuccessStoryContentSlot2-ContentArticlePages;ArticleSuccessStoryContentSlot2;;ArticleSuccessStoryContentSlot2;true
 
+# Register Landing Page Template
+# Template used for register landing page registerLandingPageLayout
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='RegisterLandingPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-RegisterLandingPage;SiteLogo;;SiteLogoSlot;true
+;;HomepageLink-RegisterLandingPage;HomepageNavLink;;HomepageNavLinkSlot;true
+;;BreadCrumb-RegisterLandingPage;BreadCrumb;;BreadCrumbSlot;true
+;;NavigationBar-RegisterLandingPage;NavigationBar;;NavigationBarSlot;true
+;;MiniCart-RegisterLandingPage;MiniCart;;MiniCartSlot;true
+;;Footer-RegisterLandingPage;Footer;;FooterSlot;true
+;;HeaderLinks-RegisterLandingPage;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-RegisterLandingPage;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-RegisterLandingPage;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-RegisterLandingPage;BottomHeaderSlot;;BottomHeaderSlot;true
+;;PlaceholderContentSlot-RegisterLandingPage;PlaceholderContentSlot;;PlaceholderContentSlot;true
+;;Mobile-NavigationBar-RegisterLandingPage;MobileNavigationBar;;MobileNavigationBarSlot;true
 
+;;JoinAmwayContentSlot-RegisterLandingPage;JoinAmwayContentSlot;;JoinAmwayContentSlot;true
+;;WeAreAmwayContentSlot-RegisterLandingPage;WeAreAmwayContentSlot;;WeAreAmwayContentSlot;true
+;;BecomeAnABOContentSlot-RegisterLandingPage;BecomeAnABOContentSlot;;BecomeAnABOContentSlot;true
+;;BecomeACustomerContentSlot-RegisterLandingPage;BecomeACustomerContentSlot;;BecomeACustomerContentSlot;true
+;;FooterNoticeParagraphContentSlot-RegisterLandingPage;FooterNoticeParagraphContentSlot;;FooterNoticeParagraphContentSlot;true
 
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='StoreFinderPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
 ;;SiteLogo-StoreFinderPage;SiteLogo;;SiteLogoSlot;true
 ;;HomepageLink-StoreFinderPage;HomepageNavLink;;HomepageNavLinkSlot;true
+;;BreadCrumb-StoreFinderPage;BreadCrumb;;BreadCrumbSlot;true
 ;;NavigationBar-StoreFinderPage;NavigationBar;;NavigationBarSlot;true
 ;;MiniCart-StoreFinderPage;MiniCart;;MiniCartSlot;true
 ;;Footer-StoreFinderPage;Footer;;FooterSlot;true
@@ -972,6 +1067,7 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ErrorPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
 ;;SiteLogo-ErrorPage;SiteLogo;;SiteLogoSlot;true
 ;;HomepageLink-ErrorPage;HomepageNavLink;;HomepageNavLinkSlot;true
+;;BreadCrumb-ErrorPage;BreadCrumb;;BreadCrumbSlot;true
 ;;NavigationBar-ErrorPage;NavigationBar;;NavigationBarSlot;true
 ;;MiniCart-ErrorPage;MiniCart;;MiniCartSlot;true
 ;;Footer-ErrorPage;Footer;;FooterSlot;true
@@ -1025,6 +1121,7 @@ INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTe
 ;;shopping-list-details;Shopping List Details Page;ShoppingListsPageTemplate;shopping-list-details
 ;;category-landing-page;Category Landing Page;CategoryLandingPageTemplate;/category-landing-page
 ;;content-article-pages;Content Article Pages;ContentArticlePagesTemplate;/content-article-pages
+;;register-landing-page;Register;RegisterLandingPageTemplate;/register-landing-page
 
 
 # Simple Content Pages

@@ -41,8 +41,9 @@ UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
  ;;updatePassword;"Update Forgotten Password"
  ;;shopping-lists;"Shopping Lists"
  ;;shopping-list-details;"Shopping List Detail"
- ;;category-landing-page;"Nutrilite Category Page"
- ;;content-article-pages;"ContentArticlePages"
+ ;;category-landing-page;"Nutrilite"
+ ;;content-article-pages;"New IBO Info"
+ ;;register-landing-page;"Register"
 
 # CMS ProductReferences Components
 UPDATE ProductReferencesComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang]

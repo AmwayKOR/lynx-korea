@@ -55,7 +55,7 @@
 	<generatedVariables:generatedVariables/>
 </head>
 
-<body class="${pageBodyCssClasses} ${cmsPageRequestContextData.liveEdit ? ' yCmsLiveEdit' : ''} language-${fn:escapeXml(currentLanguage.isocode)}" data-gr-c-s-loaded="true">
+<body class="page ${pageBodyCssClasses} ${cmsPageRequestContextData.liveEdit ? ' yCmsLiveEdit' : ''} language-${fn:escapeXml(currentLanguage.isocode)}" data-gr-c-s-loaded="true">
 
 	<%-- Inject the page body here --%>
 	<jsp:doBody/>

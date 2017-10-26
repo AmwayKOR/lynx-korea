@@ -1,3 +1,4 @@
+
 <%@ tag body-content="empty" trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -19,6 +20,8 @@
 		<link rel="stylesheet" href="${themeResourcePath}/css/owl.theme.css">
 		<link rel="stylesheet" type="text/css" href="${themeResourcePath}/css/style.css"/>
 		<link rel="stylesheet" type="text/css" href="${themeResourcePath}/css/changes.css"/>
+		<link rel="stylesheet" type="text/css" href="${themeResourcePath}/css/register.css"/>
+		<link rel="stylesheet" type="text/css" href="${themeResourcePath}/css/allen.css"/>
 		
 		<%--  AddOn Common CSS files --%>
 		<c:forEach items="${addOnCommonCssPaths}" var="addOnCommonCss">
