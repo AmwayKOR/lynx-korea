@@ -14,12 +14,11 @@
     <div class="product-list__item-content amwahover">
         <button class="quick-view-btn" data-product-code="${product.code}">QUICK VIEW</button>
         <a class="product-list__thum" target="_self" href="${productPDPurl}">
-        	<product:productPrimaryImage product="${product}" format="listingPage" cssClass="product-list__thumbnail"/>
+        	<product:productPrimaryImage product="${product}" format="productGrid" cssClass="product-list__thumbnail"/>
         </a>
         <div class="product-list__item-detail">
             <p class="product-list__item-title">
                 <a class="product-list__item-title" target="_self" href="${productPDPurl}">${product.name}</a></p>
-            <p class="product-list__item-count">30 Count</p>
             <p class="product-list__item-number">Item #: ${product.code}</p>
             <div class="product-list__item-title product-list__item-aboprice">
                 <span class="product-list__item-abolabel">ABO Cost:</span>
