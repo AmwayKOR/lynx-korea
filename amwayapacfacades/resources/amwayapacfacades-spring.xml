@@ -107,6 +107,7 @@
 	<alias name="defaultAmwayApacVariantOptionDataPopulator" alias="amwayApacVariantOptionDataPopulator"/>
 	<bean id="defaultAmwayApacVariantOptionDataPopulator"  class="com.amway.apac.facades.product.populators.AmwayApacVariantOptionDataPopulator"
 		  parent="acceleratorVariantOptionDataPopulator" >
+		  <property name="imageConverter" ref="imageConverter"/>
 	</bean>
 
     <alias name="amwayApacWishlistPopulator" alias="wishlistPopulator"/>
@@ -144,6 +145,13 @@
 				<ref bean="productPricePopulatorList"/>
 			</list>
 		</property>
+	</bean>
+	
+	<alias name="amwayApacVariantFullPopulator" alias="variantFullPopulator"/>
+	<bean id="amwayApacVariantFullPopulator"
+			class="com.amway.apac.facades.populators.AmwayApacVariantFullPopulator">
+		<property name="variantOptionDataConverter" ref="variantOptionDataConverter"/>
+		<property name="baseOptionDataConverter" ref="baseOptionDataConverter"/>
 	</bean>
 	
 </beans>

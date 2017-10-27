@@ -16,64 +16,12 @@
 
         <typegroup name="AmwayApac">
 
-            <itemtype code="Variant"
-                autocreate="true" generate="true"
-                jaloclass="com.amway.apac.core.jalo.Variant">
-                <description>Variant that contains name, value and image variant</description>
-                <deployment table="Variant" typecode="10001" />
-                <attributes>
-                    <attribute autocreate="true" qualifier="code" type="java.lang.String" generate="true">
-                        <persistence type="property"/>
-                        <modifiers read="true" write="true" search="true" optional="false" initial="true" unique="true"/>
-                        <description>Code of Variant</description>
-                    </attribute>
-                    <attribute qualifier="name" type="localized:java.lang.String">
-                        <description>Name of the variant</description>
-                        <modifiers />
-                        <persistence type="property" />
-                    </attribute>
-                    <attribute qualifier="value" type="localized:java.lang.String">
-                        <description>Value of the variant</description>
-                        <modifiers />
-                        <persistence type="property" />
-                    </attribute>
-                    <attribute qualifier="image" type="Media">
-                        <description>Image of the variant</description>
-                        <modifiers />
-                        <persistence type="property" />
-                    </attribute>
-                </attributes>
+            <itemtype code="AmwayApacVariantProduct" extends="VariantProduct"
+                      autocreate="true" generate="true"
+                      jaloclass="com.amway.apac.core.jalo.AmwayApacVariantProduct">
+                <description>Amway Apac Variant Model</description>
             </itemtype>
 
-            <itemtype code="AmwayApacFirstVariantProduct" extends="VariantProduct"
-                      autocreate="true" generate="true"
-                      jaloclass="com.amway.apac.core.jalo.AmwayApacFirstVariantProduct">
-                <description>Amway Apac color variant type that contains additional attribute describing variant color.
-                </description>
-                <attributes>
-                    <attribute qualifier="firstVariant" type="Variant"
-                               metatype="VariantAttributeDescriptor" >
-                        <description>First variant of the product.</description>
-                        <modifiers/>
-                        <persistence type="property"/>
-                    </attribute>
-                </attributes>
-            </itemtype>
-
-            <itemtype code="AmwayApacSecondVariantProduct" extends="AmwayApacFirstVariantProduct"
-                      autocreate="true" generate="true"
-                      jaloclass="com.amway.apac.core.jalo.AmwayApacSecondVariantProduct">
-                <description>Amway Apac color variant type that contains additional attribute describing variant color.
-                </description>
-                <attributes>
-                    <attribute qualifier="secondVariant" type="Variant"
-                               metatype="VariantAttributeDescriptor" >
-                        <description>Second variant of the product.</description>
-                        <modifiers/>
-                        <persistence type="property"/>
-                    </attribute>
-                </attributes>
-            </itemtype>
         </typegroup>
 
     </itemtypes>

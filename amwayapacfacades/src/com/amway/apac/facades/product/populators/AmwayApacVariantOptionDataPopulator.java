@@ -1,40 +1,132 @@
 package com.amway.apac.facades.product.populators;
 
-import com.amway.apac.core.jalo.AmwayApacSecondVariantProduct;
-import com.amway.apac.core.model.AmwayApacFirstVariantProductModel;
-import com.amway.apac.core.model.AmwayApacSecondVariantProductModel;
-import com.amway.apac.core.model.VariantModel;
-import com.amway.facades.populators.AcceleratorVariantOptionDataPopulator;
+import de.hybris.platform.commercefacades.product.data.ImageData;
+import de.hybris.platform.commercefacades.product.data.PriceData;
+import de.hybris.platform.commercefacades.product.data.PriceDataType;
 import de.hybris.platform.commercefacades.product.data.VariantOptionData;
 import de.hybris.platform.commercefacades.product.data.VariantOptionQualifierData;
+import de.hybris.platform.core.model.media.MediaModel;
+import de.hybris.platform.jalo.order.price.PriceInformation;
+import de.hybris.platform.servicelayer.dto.converter.Converter;
 import de.hybris.platform.variants.model.VariantProductModel;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 
-/**
- * Created by MY020221 on 10/6/2017.
- */
-public class AmwayApacVariantOptionDataPopulator extends AcceleratorVariantOptionDataPopulator{
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Required;
+import org.springframework.util.Assert;
 
-    @Override
-    public void populate(final VariantProductModel source, final VariantOptionData target){
-        super.populate(source, target);
-        final Collection<VariantOptionQualifierData> variantOptionQualifiers = new ArrayList<VariantOptionQualifierData>();
-        VariantModel variant = null;
-        if(source instanceof AmwayApacSecondVariantProductModel){
-            variant = ((AmwayApacSecondVariantProductModel)source).getSecondVariant();
-        } else if(source instanceof  AmwayApacFirstVariantProductModel){
-            variant = ((AmwayApacFirstVariantProductModel)source).getFirstVariant();
-        }
-        for (final VariantOptionQualifierData variantOptionQualifier : target.getVariantOptionQualifiers())
-        {
-            //Add Variant Name and Value
-            variantOptionQualifier.setName(variant.getName());
-            variantOptionQualifier.setValue(variant.getValue());
-            if(variant.getImage() != null){
-                variantOptionQualifier.setImage(getImageConverter().convert(variant.getImage()));
-            }
-        }
-    }
+import com.amway.facades.populators.AcceleratorVariantOptionDataPopulator;
+
+
+/**
+ * Overriding {@link AcceleratorVariantOptionDataPopulator} to update variant option qualifiers population.
+ *
+ * @author shubhamgoyal
+ *
+ */
+public class AmwayApacVariantOptionDataPopulator extends AcceleratorVariantOptionDataPopulator
+{
+
+	private Converter<MediaModel, ImageData> imageConverter;
+
+	/**
+	 * Overriding OOTB implementation to update variant option qualifiers population.
+	 */
+	@Override
+	public void populate(final VariantProductModel source, final VariantOptionData target)
+	{
+		Assert.notNull(source, "Parameter source cannot be null.");
+		Assert.notNull(target, "Parameter target cannot be null.");
+
+		if (source.getBaseProduct() != null)
+		{
+			final Collection<VariantOptionQualifierData> variantOptionQualifiers = new ArrayList<VariantOptionQualifierData>();
+
+			populateVariantOptionQualifierData(source, variantOptionQualifiers);
+			target.setVariantOptionQualifiers(variantOptionQualifiers);
+
+			target.setCode(source.getCode());
+			target.setUrl(getProductModelUrlResolver().resolve(source));
+			target.setStock(getStockConverter().convert(source));
+
+			final PriceDataType priceType;
+			final PriceInformation info;
+			if (CollectionUtils.isEmpty(source.getVariants()))
+			{
+				priceType = PriceDataType.BUY;
+				info = getCommercePriceService().getWebPriceForProduct(source);
+			}
+			else
+			{
+				priceType = PriceDataType.FROM;
+				info = getCommercePriceService().getFromPriceForProduct(source);
+			}
+
+			if (info != null)
+			{
+				final PriceData priceData = getPriceDataFactory().create(priceType,
+						BigDecimal.valueOf(info.getPriceValue().getValue()), info.getPriceValue().getCurrencyIso());
+				target.setPriceData(priceData);
+			}
+		}
+	}
+
+	/**
+	 * Method to populate variant option qualifier data.
+	 *
+	 * @param source
+	 * @param variantOptionQualifiers
+	 */
+	private void populateVariantOptionQualifierData(final VariantProductModel source,
+			final Collection<VariantOptionQualifierData> variantOptionQualifiers)
+	{
+		if ((StringUtils.isNotBlank(source.getVariantAttributeName1())) && (StringUtils.isNotBlank(source.getVariantAttribute1())))
+		{
+			final VariantOptionQualifierData variantOptionQualifier = new VariantOptionQualifierData();
+			variantOptionQualifier.setQualifier(source.getVariantAttributeName1());
+			variantOptionQualifier.setName(source.getVariantAttributeName1());
+			variantOptionQualifier.setValue(source.getVariantAttribute1());
+			variantOptionQualifiers.add(variantOptionQualifier);
+			final MediaModel swatchImage = source.getOthers().iterator().next();
+			if (null != swatchImage)
+			{
+				variantOptionQualifier.setImage(getImageConverter().convert(swatchImage));
+			}
+			if ((StringUtils.isNotBlank(source.getVariantAttributeName2()))
+					&& (StringUtils.isNotBlank(source.getVariantAttribute2())))
+			{
+				final VariantOptionQualifierData variantOptionQualifier2 = new VariantOptionQualifierData();
+				variantOptionQualifier2.setQualifier(source.getVariantAttributeName2());
+				variantOptionQualifier2.setName(source.getVariantAttributeName2());
+				variantOptionQualifier2.setValue(source.getVariantAttribute2());
+				variantOptionQualifiers.add(variantOptionQualifier2);
+			}
+		}
+	}
+
+
+	/**
+	 * @return the imageConverter
+	 */
+	@Override
+	public Converter<MediaModel, ImageData> getImageConverter()
+	{
+		return imageConverter;
+	}
+
+
+	/**
+	 * @param imageConverter
+	 *           the imageConverter to set
+	 */
+	@Override
+	@Required
+	public void setImageConverter(final Converter<MediaModel, ImageData> imageConverter)
+	{
+		this.imageConverter = imageConverter;
+	}
 }
