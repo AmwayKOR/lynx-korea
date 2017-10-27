@@ -1,4 +1,4 @@
-package com.amway.apac.facades.populators;
+package com.amway.apac.facades.product.populators;
 
 import com.amway.apac.core.jalo.AmwayApacSecondVariantProduct;
 import com.amway.apac.core.model.AmwayApacFirstVariantProductModel;

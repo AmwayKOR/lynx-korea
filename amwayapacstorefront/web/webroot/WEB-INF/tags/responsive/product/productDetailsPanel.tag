@@ -5,6 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="format" tagdir="/WEB-INF/tags/shared/format" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 
 <div class="container-fluid main-container">
@@ -29,7 +30,7 @@
                 <div class="product-details page-title">
                     <div class="name">${fn:escapeXml(product.name)}</div>
                     <div class="item-code">
-                        <span>Item #</span>
+                        <span><spring:theme code="product.item.number.label" /></span>
                         <span class="code">${fn:escapeXml(product.code)}</span>
                     </div>
                 </div>
@@ -42,9 +43,7 @@
                 <div class="product-main-info">
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="description">${product.summary}
-                                <a href="#">Read More</a></div>
-
+                            <div class="description">${product.summary}</div>
                                 <cms:pageSlot position="ColorVariantSelector" var="component">
                                     <cms:component component="${component}" />
                                 </cms:pageSlot>

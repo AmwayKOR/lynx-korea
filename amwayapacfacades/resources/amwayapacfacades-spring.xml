@@ -51,8 +51,9 @@
 	</bean>
 
 	<!-- dependencies have to be manually injected as there is no alias defined in the amwayfacades-spring.xml for amwayProductPricePopulator -->
-	<bean id="amwayProductPricePopulator"
-		class="com.amway.apac.facades.populators.AmwayApacProductPricePopulator">
+	<alias name="defaultAmwayProductPricePopulator" alias="productPricePopulator"/>
+	<bean id="defaultAmwayProductPricePopulator"
+		class="com.amway.apac.facades.product.populators.AmwayApacProductPricePopulator">
 		<property name="amwayApacPriceDataFactory" ref="priceDataFactory" />
 		<property name="commercePriceService" ref="commercePriceService"/>
         <property name="modelService" ref="modelService"/>
@@ -104,7 +105,7 @@
 	</bean>
 
 	<alias name="defaultAmwayApacVariantOptionDataPopulator" alias="amwayApacVariantOptionDataPopulator"/>
-	<bean id="defaultAmwayApacVariantOptionDataPopulator"  class="com.amway.apac.facades.populators.AmwayApacVariantOptionDataPopulator"
+	<bean id="defaultAmwayApacVariantOptionDataPopulator"  class="com.amway.apac.facades.product.populators.AmwayApacVariantOptionDataPopulator"
 		  parent="acceleratorVariantOptionDataPopulator" >
 	</bean>
 
