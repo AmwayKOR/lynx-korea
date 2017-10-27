@@ -114,7 +114,10 @@ UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=
 # Create the queries that will be used to extract data for Solr
 INSERT_UPDATE SolrIndexerQuery;solrIndexedType(identifier)[unique=true];identifier[unique=true];type(code);injectCurrentDate[default=true];injectCurrentTime[default=true];injectLastIndexTime[default=true];query;user(uid)
 ;$solrIndexedType;$searchIndexNamePrefix-fullQuery;full;;;false;"
-SELECT {PK} FROM {Product}";anonymous
+SELECT DISTINCT {p:PK} AS pk
+FROM { Product! AS p join ArticleApprovalStatus as ap on {p.approvalstatus}={ap.pk}
+} WHERE {ap.code} = 'approved'
+";anonymous
 
 ;$solrIndexedType;$searchIndexNamePrefix-updateQuery;update;;;;"
 SELECT DISTINCT tbl.pk, tbl.code FROM (
