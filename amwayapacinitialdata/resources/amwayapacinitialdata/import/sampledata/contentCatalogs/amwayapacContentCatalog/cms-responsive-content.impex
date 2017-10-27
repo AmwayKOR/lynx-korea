@@ -739,10 +739,6 @@ INSERT_UPDATE AmwayApacJoinAmwayComponent;$contentCV[unique=true];uid[unique=tru
 INSERT_UPDATE AmwayApacWeAreAmwayComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
 ;;amwayApacWeAreAmwayComponent;We Are Amway Component;amwayApacWeAreAmwayComponent
 
-INSERT_UPDATE AmwayApacParagraghButtonComponent;$contentCV[unique=true];uid[unique=true];name;paraDesc(uid, $contentCV);linkButton(&linkRef);&componentRef
-;;amwayapacbecomeAnABOComponent;Become An ABO Component;becomeABODesc;amwayApacBecomeAnABOContent;amwayapacbecomeAnABOComponent
-;;amwayapacbecomeACustomerComponent; Become A Customer Componet;becomeCustomerDesc;amwayApacBecomeACustomerContent;amwayapacbecomeACustomerComponent
-
 INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;urlLink;&componentRef
 ;;HeaderSBComponent;Header SB Component;"/";HeaderSBComponent
 
@@ -755,13 +751,13 @@ INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&co
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
 ;;JoinAmwayContentSlot;Join Amway Slot;true;amwayApacJoinAmwayComponent
 ;;WeAreAmwayContentSlot;We Are Amway Slot;true;amwayApacWeAreAmwayComponent
-;;BecomeAnABOContentSlot;Become An ABO Slot;true;amwayapacbecomeAnABOComponent
-;;BecomeACustomerContentSlot;Become A Customer;true;amwayapacbecomeACustomerComponent
+;;BecomeAnABOContentSlot;Become An ABO Slot;true;becomeABODesc,amwayApacBecomeAnABOLinkContent
+;;BecomeACustomerContentSlot;Become A Customer;true;becomeCustomerDesc,amwayApacBecomeACustomerLinkContent
 ;;FooterNoticeParagraphContentSlot; Footer Notice;true;footerNoticeDesc
 
-INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;target(code)[default='sameWindow'];&componentRef
-;;amwayApacBecomeAnABOContent;BECOME AN ABO;/;amwayApacBecomeAnABOContent;;amwayApacBecomeAnABOContent;
-;;amwayApacBecomeACustomerContent;BECOME A MEMBER;/;amwayApacBecomeACustomerContent;;amwayApacBecomeACustomerContent;
+INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;target(code)[default='sameWindow'];&componentRef
+;;amwayApacBecomeAnABOLinkContent;BECOME AN ABO;/;amwayApacBecomeAnABOLinkContent;;amwayApacBecomeAnABOLinkContent;
+;;amwayApacBecomeACustomerLinkContent;BECOME A MEMBER;/;amwayApacBecomeACustomerLinkContent;;amwayApacBecomeACustomerLinkContent;
 
 	
 ############# My Account Page
