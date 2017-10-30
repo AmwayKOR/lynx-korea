@@ -4,7 +4,7 @@ import static com.amway.apac.core.constants.AmwayapacCoreConstants.FIFTY_INT;
 import static com.amway.apac.core.constants.AmwayapacCoreConstants.HUNDRED_INT;
 import static com.amway.apac.core.constants.AmwayapacCoreConstants.SORT_FIELD_STRING;
 import static com.amway.apac.core.constants.AmwayapacCoreConstants.SORT_ORDER_STRING;
-import static com.amway.apac.storefront.controllers.ControllerConstants.GeneralConstants.WISHLIST_SORT_BY_LAST_UPDATED;
+import static com.amway.apac.storefront.controllers.ControllerConstants.GeneralConstants.SHOPPING_LIST_SORT_BY_LAST_UPDATED;
 import static com.amway.apac.storefront.controllers.ControllerConstants.ModelParameters.ERROR_MESSAGE;
 import static com.amway.apac.storefront.controllers.ControllerConstants.ModelParameters.SUCCESS_MESSAGE;
 
@@ -54,7 +54,7 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 	private static final String SHOPPING_LIST_UID_PATH_VARIABLE_PATTERN = "{shoppingListUid:.*}";
 
 	/**
-	 * Url for the shopping list details page
+	 * URL for the shopping list details page
 	 */
 	private static final String SHOPPING_LIST_DETAILS_PAGE_URL = "/detail/" + SHOPPING_LIST_UID_PATH_VARIABLE_PATTERN;
 
@@ -75,7 +75,7 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 	 */
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public String allShoppingLists(final Model model,
-			@RequestParam(name = SORT_FIELD_STRING, required = false, defaultValue = WISHLIST_SORT_BY_LAST_UPDATED) final String sorfField,
+			@RequestParam(name = SORT_FIELD_STRING, required = false, defaultValue = SHOPPING_LIST_SORT_BY_LAST_UPDATED) final String sorfField,
 			@RequestParam(name = SORT_ORDER_STRING, required = false, defaultValue = AmwayapacCoreConstants.DESC_STRING) final String sortOrder)
 			throws CMSItemNotFoundException
 	{
@@ -125,16 +125,16 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 		{
 			switch (sorfField)
 			{
-				case ControllerConstants.GeneralConstants.WISHLIST_SORT_BY_NAME:
+				case ControllerConstants.GeneralConstants.SHOPPING_LIST_SORT_BY_NAME:
 					resolvedSortField = Wishlist2Model.NAME;
 					break;
-				case ControllerConstants.GeneralConstants.WISHLIST_SORT_BY_ADDED_FOR: // down line functionality is not done yet, so sorting is done by user
+				case ControllerConstants.GeneralConstants.SHOPPING_LIST_SORT_BY_ADDED_FOR: // down line functionality is not done yet, so sorting is done by user
 					resolvedSortField = Wishlist2Model.USER;
 					break;
-				case ControllerConstants.GeneralConstants.WISHLIST_SORT_BY_LAST_UPDATED:
+				case ControllerConstants.GeneralConstants.SHOPPING_LIST_SORT_BY_LAST_UPDATED:
 					resolvedSortField = Wishlist2Model.MODIFIEDTIME;
 					break;
-				case ControllerConstants.GeneralConstants.WISHLIST_SORT_BY_USER:
+				case ControllerConstants.GeneralConstants.SHOPPING_LIST_SORT_BY_USER:
 					resolvedSortField = Wishlist2Model.USER;
 					break;
 				default:
@@ -165,8 +165,8 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 	{
 		if (validateShoppingListName(shoppingListName, model))
 		{
-			final WishlistData wishlist = amwayApacWishlistFacade.createWishlist(shoppingListName);
-			if (wishlist == null) // happens when there is already existing wishlist with same name
+			final WishlistData shoppingList = amwayApacWishlistFacade.createWishlist(shoppingListName);
+			if (shoppingList == null) // happens when there is already existing Shopping list with same name
 			{
 				model.addAttribute(ERROR_MESSAGE,
 						ControllerConstants.ErrorMessageKeys.ShoppingList.SHOPPING_LIST_NAME_ALREADY_EXISTS);
@@ -244,7 +244,7 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 		if (StringUtils.isBlank(shoppingListUid))
 		{
 			populateGlobalOrErrorMessage(model, isAjax,
-					ControllerConstants.ErrorMessageKeys.ShoppingList.SHOPPING_LIST_DETAILS_WISHLIST_NOT_FOUND);
+					ControllerConstants.ErrorMessageKeys.ShoppingList.SHOPPING_LIST_DETAILS_NOT_FOUND);
 		}
 		else
 		{
@@ -263,13 +263,26 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 			catch (final UnknownIdentifierException uIE)
 			{
 				populateGlobalOrErrorMessage(model, isAjax,
-						ControllerConstants.ErrorMessageKeys.ShoppingList.SHOPPING_LIST_DETAILS_WISHLIST_NOT_FOUND);
+						ControllerConstants.ErrorMessageKeys.ShoppingList.SHOPPING_LIST_DETAILS_NOT_FOUND);
 				LOGGER.error(new StringBuilder(HUNDRED_INT).append("No shopping list found with uid [").append(shoppingListUid)
 						.append("].").toString(), uIE);
 
 			}
 		}
 
+		populateShoppingListDetailsCMSPage(model);
+	}
+
+	/**
+	 * Populates the shopping list details cms page, title and breadcrums in the model
+	 *
+	 * @param model
+	 *           view model
+	 * @throws CMSItemNotFoundException
+	 *            if the cms page is not found
+	 */
+	private void populateShoppingListDetailsCMSPage(final Model model) throws CMSItemNotFoundException
+	{
 		storeCmsPageInModel(model, getContentPageForLabelOrId(ControllerConstants.GeneralConstants.SHOPPING_LIST_DETAILS_CMS_PAGE));
 		setUpMetaDataForContentPage(model,
 				getContentPageForLabelOrId((ControllerConstants.GeneralConstants.SHOPPING_LIST_DETAILS_CMS_PAGE)));
@@ -321,20 +334,20 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 		else if (StringUtils.isBlank(shoppingListUid))
 		{
 			model.addAttribute(ERROR_MESSAGE,
-					ControllerConstants.ErrorMessageKeys.ShoppingList.SHOPPING_LIST_ADD_PRODUCT_WISHLIST_UID_EMPTY);
+					ControllerConstants.ErrorMessageKeys.ShoppingList.SHOPPING_LIST_ADD_PRODUCT_LIST_UID_EMPTY);
 		}
 		else
 		{
 			final AmwayApacWishlistModificationStatus modificationStatus = amwayApacWishlistFacade.addProductToWishlist(productCode,
 					shoppingListUid);
 			populateMessageForModificationStatus(modificationStatus, model,
-					ControllerConstants.GeneralConstants.WISHLIST_ADD_PRODUCT_MESSAGES_PREFIX);
+					ControllerConstants.GeneralConstants.SHOPPING_LIST_ADD_PRODUCT_MESSAGES_PREFIX);
 			if (AmwayApacWishlistModificationStatus.SUCCESS.equals(modificationStatus))
 			{
 				populateShoppingListDetailsPageView(model, shoppingListUid, Boolean.TRUE);
 			}
 		}
-		return ControllerConstants.Views.Fragments.ShoppingList.AddProductToShoppingListResponse;
+		return ControllerConstants.Views.Fragments.ShoppingList.UpdateProductInShoppingListResponse;
 	}
 
 	/**
@@ -380,8 +393,7 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 	{
 		if (StringUtils.isBlank(shoppingListUid))
 		{
-			model.addAttribute(ERROR_MESSAGE,
-					ControllerConstants.ErrorMessageKeys.ShoppingList.SHOPPING_LIST_DETAILS_WISHLIST_NOT_FOUND);
+			model.addAttribute(ERROR_MESSAGE, ControllerConstants.ErrorMessageKeys.ShoppingList.SHOPPING_LIST_DETAILS_NOT_FOUND);
 		}
 		else if (validateShoppingListName(shoppingListName, model))
 		{
@@ -389,9 +401,62 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 					.updateWishlistNameAndReturnStatus(shoppingListUid, shoppingListName);
 			model.addAttribute(ControllerConstants.ModelParameters.SHOPPING_LIST_NAME, shoppingListName);
 			populateMessageForModificationStatus(modificationStatus, model,
-					ControllerConstants.GeneralConstants.WISHLIST_UPDATE_NAME_MESSGAES_PREFIX);
+					ControllerConstants.GeneralConstants.SHOPPING_LIST_UPDATE_NAME_MESSGAES_PREFIX);
 		}
 		return ControllerConstants.Views.Fragments.ShoppingList.UpdateShoppingListNameResponse;
+	}
+
+	/**
+	 * Controller method to remove product from shopping list
+	 *
+	 * @param productCode
+	 *           code of the product
+	 * @param shoppingListUid
+	 *           uid of the shopping list
+	 * @param model
+	 *           view model
+	 * @return the view
+	 * @throws CMSItemNotFoundException
+	 */
+	@RequestMapping(value = "/remove-product", method = RequestMethod.POST)
+	public String removeProductFromFavoriteList(@RequestParam(value = "productCode") final String productCode,
+			@RequestParam(name = "shoppingListUid") final String shoppingListUid, final Model model) throws CMSItemNotFoundException
+	{
+		if (StringUtils.isBlank(productCode))
+		{
+			model.addAttribute(ERROR_MESSAGE,
+					ControllerConstants.ErrorMessageKeys.ShoppingList.SHOPPING_LIST_ADD_PRODUCT_CODE_EMPTY);
+		}
+		else if (StringUtils.isBlank(shoppingListUid))
+		{
+			model.addAttribute(ERROR_MESSAGE,
+					ControllerConstants.ErrorMessageKeys.ShoppingList.SHOPPING_LIST_ADD_PRODUCT_LIST_UID_EMPTY);
+		}
+		else
+		{
+			try
+			{
+				final WishlistData shoppingListData = amwayApacWishlistFacade.removeFromWishList(shoppingListUid, productCode);
+				model.addAttribute(ControllerConstants.ModelParameters.SHOPPING_LIST_DATA, shoppingListData);
+				model.addAttribute(SUCCESS_MESSAGE,
+						ControllerConstants.SuccessMessageKeys.ShoppingList.SHOPPING_LIST_REMOVE_PRODUCT_SUCCESS_MESSAGE);
+				populateShoppingListDetailsCMSPage(model);
+			}
+			catch (final UnknownIdentifierException uIE)
+			{
+				LOGGER.error(new StringBuilder(HUNDRED_INT).append("No shopping list found with uid [").append(shoppingListUid)
+						.append("].").toString(), uIE);
+				model.addAttribute(ERROR_MESSAGE, ControllerConstants.ErrorMessageKeys.ShoppingList.SHOPPING_LIST_DETAILS_NOT_FOUND);
+			}
+			catch (final AmbiguousIdentifierException aIE)
+			{
+				LOGGER.error(new StringBuilder(HUNDRED_INT).append("More than one shopping list found with uid [")
+						.append(shoppingListUid).append("].").toString(), aIE);
+				model.addAttribute(ERROR_MESSAGE,
+						ControllerConstants.ErrorMessageKeys.ShoppingList.SHOPPING_LIST_DETAILS_AMBIGUOUS_UID);
+			}
+		}
+		return ControllerConstants.Views.Fragments.ShoppingList.UpdateProductInShoppingListResponse;
 	}
 
 }

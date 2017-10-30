@@ -7,21 +7,6 @@
 <%@ taglib prefix="format" tagdir="/WEB-INF/tags/shared/format" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
-
-<div class="container-fluid main-container">
-    <div class="print-hide breadcrumb-section">
-        <ol class="breadcrumb">
-            <li>
-                <a href="homepage.html">Home</a></li>
-            <!--<li>-->
-                <!--<a href="categoryPage.html">Amway Catalog</a></li>-->
-            <li>
-                <a href="Vitamins_and_Supplements_Product_listing_page.html">Beauty</a></li>
-            <li>
-                <a href="Vitamins_and_Supplements_Product_listing_page.html">Makeup</a></li>
-            <li>Lips</li></ol>
-    </div>
-</div>
 <div class="header-margin hidden-sm hidden-xs"></div>
 <div class="container-fluid main-container">
     <div class="row">

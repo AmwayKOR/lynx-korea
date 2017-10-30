@@ -6,9 +6,8 @@
 <%@ taglib prefix="product" tagdir="/WEB-INF/tags/responsive/product" %>
 <%@ taglib prefix="format" tagdir="/WEB-INF/tags/shared/format" %>
 
+<c:url var="removeProductUrl" value="/shopping-lists/remove-product" />
 <ul class="shopping-cart-item-list js-shopping-cart-item-list">
-	<c:forEach items="${shoppingListData.entries}" var="shoppingListEntry">
-			<c:url var="productUrl" value="${shoppingListEntry.product.url}" />
 		    <li class="visible-md visible-lg">
 		        <div class="col-xs-12 list-header">
 		            <div class="col-xs-6 list-item-info"><spring:theme code="shoppinglist.items.section.table.item.label" /></div>
@@ -17,6 +16,8 @@
 		            <div class="col-xs-2 list-item-total"><spring:theme code="shoppinglist.items.section.table.totalpvbv.label" /></div>
 				</div>
 		    </li>
+	<c:forEach items="${shoppingListData.entries}" var="shoppingListEntry" varStatus="loop">
+			<c:url var="productUrl" value="${shoppingListEntry.product.url}" />
 		    <li class="product-list-item js-shopping-cart-list-item">
 		        <div class="col-xs-12 col-md-6 product-details print-col-6">
 		            <div class="product-item-element list-item-toggle">
@@ -31,8 +32,8 @@
 		                     </a>
 		                </div>
 		                <div class="list-item-remove">
-		                    <div class="remove-item-btn js-remove-entry-button" id="removeEntry_1">
-		                        <span class=""><spring:theme code="shoppinglist.items.section.table.item.remove.label" /></span></div>
+		                    <div class="remove-item-btn js-remove-entry-button" id="removeEntry_${loop.index}">
+		                        <span class="remove-product-from-shopping-list" data-shopping-list-uid="${shoppingListData.uid}" data-product-code="${shoppingListEntry.product.code}" data-remove-url="${removeProductUrl}"><spring:theme code="shoppinglist.items.section.table.item.remove.label" /></span></div>
 		                </div>
 		            </div>
 		            <div class="product-item-element list-item-info">

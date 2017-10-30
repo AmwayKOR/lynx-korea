@@ -6,9 +6,7 @@
 <div class="container-fluid main-container ">
 	<c:if test="${fn:length(breadcrumbs) > 0}">
 		<div class="print-hide breadcrumb-section">
-			<div class="breadcrumb-section">
-				<breadcrumb:breadcrumb breadcrumbs="${breadcrumbs}" />
-			</div>
+			<breadcrumb:breadcrumb breadcrumbs="${breadcrumbs}" />
 		</div>
 	</c:if>
 </div>

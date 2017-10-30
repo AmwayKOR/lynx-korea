@@ -632,8 +632,7 @@
     <!--search end-->
 
 </header>
-
-	<cms:pageSlot position="BreadCrumb" var="component">
-			<cms:component component="${component}" />
-	</cms:pageSlot>
+<cms:pageSlot position="BreadCrumb" var="component">
+		<cms:component component="${component}" />
+</cms:pageSlot>
 		

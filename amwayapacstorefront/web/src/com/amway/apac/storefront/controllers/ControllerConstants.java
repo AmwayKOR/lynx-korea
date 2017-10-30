@@ -236,9 +236,9 @@ public interface ControllerConstants
 				String ShoppingListsPageFragment = "fragments/shoppingList/shoppingListsPage"; //NOSONAR
 
 				/**
-				 * Response UI when add product to shopping list is called.
+				 * Response UI when product is updated in the shopping list.
 				 */
-				String AddProductToShoppingListResponse = "fragments/shoppingList/addProductToShoppingListResponse"; //NOSONAR
+				String UpdateProductInShoppingListResponse = "fragments/shoppingList/updateProductInShoppingListResponse"; //NOSONAR
 
 				/**
 				 * Response UI when shopping list name is updated.
@@ -316,34 +316,34 @@ public interface ControllerConstants
 		String LINK_URL_STRING = "linkUrl";
 
 		/**
-		 * Wishlist sorting parameter to sort by wishllist name
+		 * Shopping list sorting parameter to sort by name
 		 */
-		String WISHLIST_SORT_BY_NAME = "byName";
+		String SHOPPING_LIST_SORT_BY_NAME = "byName";
 
 		/**
-		 * Wishlist sorting parameter to sort by addedFor user.
+		 * Shopping list sorting parameter to sort by addedFor user.
 		 */
-		String WISHLIST_SORT_BY_ADDED_FOR = "byAddedFor";
+		String SHOPPING_LIST_SORT_BY_ADDED_FOR = "byAddedFor";
 
 		/**
-		 * Wishlist sorting parameter to sort by lastUpdated.
+		 * Shopping list sorting parameter to sort by lastUpdated.
 		 */
-		String WISHLIST_SORT_BY_LAST_UPDATED = "byLastUpdated";
+		String SHOPPING_LIST_SORT_BY_LAST_UPDATED = "byLastUpdated";
 
 		/**
-		 * Wishlist sorting parameter to sort by lastUpdated.
+		 * Shopping list sorting parameter to sort by lastUpdated.
 		 */
-		String WISHLIST_SORT_BY_USER = "byUser";
-
-		/**
-		 * Prefix appended to status for add product to shopping list messages.
-		 */
-		String WISHLIST_ADD_PRODUCT_MESSAGES_PREFIX = "shopping.list.add.product.status.";
+		String SHOPPING_LIST_SORT_BY_USER = "byUser";
 
 		/**
 		 * Prefix appended to status for add product to shopping list messages.
 		 */
-		String WISHLIST_UPDATE_NAME_MESSGAES_PREFIX = "shoppinglist.update.name.status.";
+		String SHOPPING_LIST_ADD_PRODUCT_MESSAGES_PREFIX = "shopping.list.add.product.status.";
+
+		/**
+		 * Prefix appended to status for add product to shopping list messages.
+		 */
+		String SHOPPING_LIST_UPDATE_NAME_MESSGAES_PREFIX = "shoppinglist.update.name.status.";
 
 	}
 
@@ -381,7 +381,7 @@ public interface ControllerConstants
 			/**
 			 * Error message on shopping list details page when no shopping list with uid is found.
 			 */
-			String SHOPPING_LIST_DETAILS_WISHLIST_NOT_FOUND = "shopping.list.details.error.not.found";
+			String SHOPPING_LIST_DETAILS_NOT_FOUND = "shopping.list.details.error.not.found";
 
 			/**
 			 * Error message on shopping list details page when more than one shopping lists exist for the same uid.
@@ -389,14 +389,14 @@ public interface ControllerConstants
 			String SHOPPING_LIST_DETAILS_AMBIGUOUS_UID = "shopping.list.details.error.ambiguous.uid";
 
 			/**
-			 * Error message to be displayed on add to wishlist when product code is empty.
+			 * Error message to be displayed on add to Shopping list when product code is empty.
 			 */
 			String SHOPPING_LIST_ADD_PRODUCT_CODE_EMPTY = "shopping.list.add.product.error.empty.name";
 
 			/**
-			 * Error message to be displayed on add to wishlist when product code is empty.
+			 * Error message to be displayed on add to Shopping list when product code is empty.
 			 */
-			String SHOPPING_LIST_ADD_PRODUCT_WISHLIST_UID_EMPTY = "shopping.list.add.product.error.empty.listuid";
+			String SHOPPING_LIST_ADD_PRODUCT_LIST_UID_EMPTY = "shopping.list.add.product.error.empty.listuid";
 
 		}
 	}
@@ -420,6 +420,11 @@ public interface ControllerConstants
 			 * Success message to be displayed when shopping list is sucessfully created.
 			 */
 			String SHOPPING_LIST_CREATED_SUCESS_MESSAGE = "shopping.list.create.success";
+
+			/**
+			 * Success message to be displayed when a product is removed from the shopping list.
+			 */
+			String SHOPPING_LIST_REMOVE_PRODUCT_SUCCESS_MESSAGE = "shopping.list.remove.product.success";
 		}
 	}
 

@@ -8,9 +8,8 @@
 
 <ol class="breadcrumb">
 	<li>
-		<a href="${homeUrl}"><spring:theme code="Home" /></a>
+		<a href="${homeUrl}"><spring:theme code="breadcrumb.home" /></a>
 	</li>
-
 	<c:forEach items="${breadcrumbs}" var="breadcrumb" varStatus="status">
 		<c:url value="${breadcrumb.url}" var="breadcrumbUrl" />
 		<c:choose>

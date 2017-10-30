@@ -7,8 +7,45 @@ ACC.shoppinglists = {
     	"bindCancelEditShoppingListNameLink",
     	"bindSubmitShoppingListNameFormLink",
     	"bindUpdateShoppingListNameForm",
-    	"bindUpdateShoppingListNameInputEscape"
+    	"bindUpdateShoppingListNameInputEscape",
+    	"bindRemoveProductFromShoppingListLink"
     ],
+    
+    bindRemoveProductFromShoppingListLink: function() {
+
+    	// only bind if the current page is shopping lists page
+    	if ($(".page-content-wrapper.page-shopping-list-details").length > 0) {
+    		$(".page-content-wrapper.page-shopping-list-details").on("click", "ul.shopping-cart-item-list div.list-item-remove span.remove-product-from-shopping-list", function() {
+
+    			var method = "POST";
+    			var shoppingListUid = $(this).data("shoppingListUid");
+    			var productCode = $(this).data("productCode");
+    			var url = $(this).data("removeUrl");
+    			
+    			if (ACC.global.isNullOrWhiteSpace(productCode)) {
+		    		ACC.global.appendGlobalMessage(ACC.globalMessageTypes.ERROR_MESSAGES_HOLDER, ACC.messages.productCodeEmptyErrorMessage);
+    			} else if (ACC.global.isNullOrWhiteSpace(shoppingListUid)) {
+		    		ACC.global.appendGlobalMessage(ACC.globalMessageTypes.ERROR_MESSAGES_HOLDER, ACC.messages.shoppingListUidEmptyErrorMessage);
+    			} else {
+					$.ajax({
+						url: url,
+						data: {"shoppingListUid" : shoppingListUid, "productCode" : productCode},
+						type: method,
+						success: function(data) 
+						{
+							ACC.shoppinglists.refreshShoppingListDetailsPage(data);
+					    },
+						error: function() 
+						{
+				    		ACC.global.appendGlobalMessage(ACC.globalMessageTypes.ERROR_MESSAGES_HOLDER, ACC.messages.shoppingListRemoveProductError);
+						}
+					});
+    			}    			
+    			return false;
+    		});
+    	}
+    
+    },
     
     bindUpdateShoppingListNameInputEscape: function() {
 
