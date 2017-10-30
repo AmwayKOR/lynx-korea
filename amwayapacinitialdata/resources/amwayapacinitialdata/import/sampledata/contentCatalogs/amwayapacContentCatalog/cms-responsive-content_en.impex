@@ -296,6 +296,23 @@ UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];nodeTitle[lang
 ;ResourcesNode;;RESOURCES
 ;SupportNode;;SUPPORT
 
+############## Header Account Navigation
+
+UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];title[lang=$lang];links(uid, $contentCV)
+;;MyAccountNode;MY ACCOUNT;MyAccountNodeLink
+;;BillingShippingNode;BILLING SHIPPING;BillingShippingNodeLink
+;;ShoppingListsNode;MY SHOPPING LISTS;ShoppingListsNodeLink
+;;DittoNode;DITTO;DittoNodeLink
+;;PersonalDetailsNode;PERSONAL DETAILS;PersonalDetailsNodeLink
+;;OrderHistoryNode;ORDER HISTORY;OrderHistoryNodeLink
+
+UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang];url;&componentRef
+;;MyAccountNodeLink;MY ACCOUNT;"MyAccount.html";MyAccountNodeLink
+;;BillingShippingNodeLink;BILLING SHIPPING;"AddNewPaymentMethod.html";BillingShippingNodeLink;
+;;ShoppingListsNodeLink;MY SHOPPING LISTS;"/shopping-lists/all";ShoppingListsNodeLink;
+;;DittoNodeLink;DITTO;"#";DittoNodeLink;
+;;PersonalDetailsNodeLink;PERSONAL DETAILS;"#";PersonalDetailsNodeLink;
+;;OrderHistoryNodeLink;ORDER HISTORY;"#";OrderHistoryNodeLink;
 
 #NavigationBar
 INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;folder(qualifier)[default='images'];altText
@@ -686,7 +703,6 @@ UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true]  ;content[
 ;;autoRenewalParagraphComponent;Manage your renewal preferences here;autoRenewalParagraphComponent
 ;;contractsParagraphComponent;View contracts and other documents here;contractsParagraphComponent
 
-
 UPDATE AmwayApacMyAccountComponent;$contentCV[unique=true];uid[unique=true];link(&componentRef);description(&componentRef);title[lang=$lang];title2[lang=$lang]
 ;;amwayApacMyAccountBusinessInformationComponent;businessInformationMyAccountLinkComponent;businessInformationParagraphComponent;"icon-shop";"BUSINESS INFORMATION & UPLINE"
 ;;amwayApacMyAccountOrderHistoryComponent;orderHistoryMyAccountLinkComponent;orderHistoryParagraphComponent;"icon-back-in-time-new";"ORDER HISTORY"
@@ -694,11 +710,3 @@ UPDATE AmwayApacMyAccountComponent;$contentCV[unique=true];uid[unique=true];link
 ;;amwayApacMyAccountBonusPaymentComponent;bonusPaymentMyAccountLinkComponent;bonusPaymentParagraphComponent;"icon-credit";"BONUS PAYMENT PREFERENCES"
 ;;amwayApacMyAccountAutoRenewalComponent;autoRenewalMyAccountLinkComponent;autoRenewalParagraphComponent;"icon-cycle";"AUTO RENEWAL"
 ;;amwayApacMyAccountContractsComponent;contractsMyAccountLinkComponent;contractsParagraphComponent;"icon-contract";"CONTRACTS"
-
-
-
-
-
-
-
-

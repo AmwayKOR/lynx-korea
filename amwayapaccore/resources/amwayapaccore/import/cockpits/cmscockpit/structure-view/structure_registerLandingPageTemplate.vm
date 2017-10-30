@@ -31,6 +31,12 @@
 			</td>
 		</tr>
 
+                <tr>
+                        <td colspan="3" class="structureViewSection" height="40px">
+                                <cockpit code="BreadCrumb"/>
+                        </td>
+                </tr>
+
 	      <tr>
                         <td colspan="3" class="structureViewSection" height="40px">
                                 <cockpit code="JoinAmwayContentSlot"/>

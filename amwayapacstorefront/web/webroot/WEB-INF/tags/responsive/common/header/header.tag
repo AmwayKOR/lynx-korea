@@ -40,19 +40,10 @@
                             </li>
                             <li class="account-popover__pv-display" onclick="javascript:location.href='dashboard-MVP.html'">
                                 <img src="${themeResourcePath}/images/performance-chart-arch-mobile.png" alt="" /></li>
-                            <li class="account-popover__element">
-                                <a href="MyAccount.html" title="My Account">My Account</a></li>
-                            <li class="account-popover__element">
-                                <a href="AddNewPaymentMethod.html" title="Billing Shipping">Billing Shipping</a></li>
-							<li class="account-popover__element">
-								<c:url var="allShoppingListsUrl" value="/shopping-lists/all" />
-                                <a href="${allShoppingListsUrl}" title="My Shopping Lists">My Shopping Lists</a></li>
-                            <li class="account-popover__element">
-                                <a href="#" title="Ditto">Ditto</a></li>
-                            <li class="account-popover__element">
-                                <a href="#" title="Personal Details">Personal Details</a></li>
-                            <li class="account-popover__element">
-                                <a href="Order-History-Personal-Orders-expanded.html" title="Order History">Order History</a></li>
+                         
+                                <cms:pageSlot position="HeaderAccountNavigation" var="component">
+		                         	<cms:component component="${component}" />
+                            	</cms:pageSlot>
                             <li class="account-popover__element sign-out">
                                 <a href="homepage-not-login.html" title="Sign Out">
                                     <i class="glyphicon glyphicon-log-out"></i>Sign Out</a>

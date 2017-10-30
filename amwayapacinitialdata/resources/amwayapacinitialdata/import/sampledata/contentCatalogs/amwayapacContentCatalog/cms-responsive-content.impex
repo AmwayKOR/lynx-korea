@@ -357,8 +357,41 @@ INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];nam
 ;;FooterSBComponent;Footer SB Component;FooterSBComponent;"/"
 
 
+######## Header Account Navigation
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid,$contentCV)
+;;HeaderAccountNavigationSlot; Header Account Navigation Slot;true;accountNavigationCollectionComponent
+
+# CMS Navigation Nodes
+INSERT_UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];name;parent(uid, $contentCV);&nodeRef;links(&linkRef);visible;nodeLink(&componentRef)
+
+######## Account Navigation Section
+;;AccountNavNode;AccountNavNode;root;AccountNavNode;;true;;
+;;MyAccountNode;MyAccountNode;AccountNavNode;MyAccountNode;;true;;
+;;BillingShippingNode;BillingShippingNode;AccountNavNode;BillingShippingNode;;true;;
+;;ShoppingListsNode;ShoppingListsNode;AccountNavNode;ShoppingListsNode;;true;;
+;;DittoNode;DittoNode;AccountNavNode;DittoNode;;true;;
+;;PersonalDetailsNode;PersonalDetailsNode;AccountNavNode;PersonalDetailsNode;;true;;
+;;OrderHistoryNode;OrderHistoryNode;AccountNavNode;OrderHistoryNode;;true;;
+
+INSERT_UPDATE AccountNavigationComponent;$contentCV[unique=true];uid[unique=true];navigationNode(&nodeRef);&componentRef
+;;myAccountNavigationComponent;MyAccountNode;myAccountNavigationComponent
+;;billingShippingNavigationcomponent;BillingShippingNode;billingShippingNavigationComponent
+;;shoppingListsNavigationComponent;ShoppingListsNode;shoppingListsNavigationComponent
+;;dittoNavigationComponent;DittoNode;dittoNavigationComponent
+;;personalDetailsNavigationComponent;PersonalDetailsNode;personalDetailsNavigationComponent
+;;orderHistoryNavigationComponent;OrderHistoryNode;orderHistoryNavigationComponent
+
+INSERT_UPDATE AccountNavigationCollectionComponent;$contentCV[unique=true];uid[unique=true];components(uid,$contentCV)
+;;accountNavigationCollectionComponent;myAccountNavigationComponent,billingShippingNavigationcomponent,shoppingListsNavigationComponent,dittoNavigationComponent,personalDetailsNavigationComponent,orderHistoryNavigationComponent;
 
 
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;target(code)[default='sameWindow'];&componentRef
+;;MyAccountNodeLink; My Account Navigation Link;/;MyAccountNodeLink;;MyAccountNodeLink;
+;;BillingShippingNodeLink; Billing Shipping Navigation Link;/;BillingShippingNodeLink;;BillingShippingNodeLink;
+;;ShoppingListsNodeLink; Shopping Lists Navigation Link;/shopping-lists/all;ShoppingListsNodeLink;;ShoppingListsNodeLink;
+;;DittoNodeLink; Ditto Navigation Link;/;DittoNodeLink;;DittoNodeLink;
+;;PersonalDetailsNodeLink; Personal Details Link;/;PersonalDetailsNodeLink;;PersonalDetailsNodeLink;
+;;OrderHistoryNodeLink; Order History Link;/;OrderHistoryNodeLink;;OrderHistoryNodeLink;
 
 #NavigationBars
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)

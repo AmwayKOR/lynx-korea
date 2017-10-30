@@ -8,15 +8,7 @@
 <%@ taglib prefix="product" tagdir="/WEB-INF/tags/responsive/product"%>
 <%@ taglib prefix="category" tagdir="/WEB-INF/tags/responsive/category"%>
 
-<template:page pageTitle="${pageTitle}">
-
-	<div class="container-fluid main-container ">
-		<div class="print-hide breadcrumb-section">
-		
-		<cms:pageSlot position="BreadCrumb" var="component">
-					<cms:component component="${component}" />
-				</cms:pageSlot></div></div>
-				
+<template:page pageTitle="${pageTitle}">				
 
 	<cms:pageSlot position="TopBannerContentSlot" var="feature">
 		<cms:component component="${feature}" />
