@@ -5,14 +5,6 @@
 <%@ attribute name="sortField" required="false" type="java.lang.String" %>
 
 <div class="container-fluid main-container">
-	<div class="print-hide breadcrumb-section">
-		<ol class="breadcrumb">
-			<li><a href="homepage.html">Home</a></li>
-			<li class="active">Shopping List</li>
-		</ol>
-	</div>
-</div>
-<div class="container-fluid main-container">
 	<div class="row cartTitile">
 		<h1 class="product-list-page-title mb25">
 			<spring:theme code="shopping.lists.page.heading.label" />
