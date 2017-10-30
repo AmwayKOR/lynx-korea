@@ -243,4 +243,13 @@
     <alias alias="wishlistDao" name="defaultAmwayApacWishlistDao" />
     <bean id="defaultAmwayApacWishlistDao" class="com.amway.apac.core.wishlist.daos.impl.DefaultAmwayApacWishlistDao" parent="amwayWishlistDao" />
 	
+	<alias alias="customeraccountService" name="defaultAmwayApacCustomerAccountService" />
+    <bean id="defaultAmwayApacCustomerAccountService" class="com.amway.apac.core.customer.services.impl.DefaultAmwayApacCustomerAccountService" parent="defaultAmwayCustomerAccountService">
+        <property name="amwayApacCustomerAccountDao" ref="customeraccountDao" />
+    </bean>
+    
+	<alias alias="customeraccountDao" name="defaultAmwayApacCustomerAccountDao" />
+    <bean id="defaultAmwayApacCustomerAccountDao" class="com.amway.apac.core.customer.daos.impl.DefaultAmwayApacCustomerAccountDao" parent="amwayCustomerAccountDao" />
+	
+	
 </beans>

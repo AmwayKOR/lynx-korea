@@ -5,12 +5,8 @@ package com.amway.apac.core.customer.services.impl;
 
 import static com.amway.apac.core.constants.AmwayapacCoreConstants.TWO_HUNDRED_INT;
 
-import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.core.model.user.UserModel;
 
-import java.util.List;
-
-import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -57,7 +53,7 @@ public class DefaultAmwayApacCustomerAccountService extends DefaultAmwayCustomer
 	 * @see com.amway.apac.core.customer.services.AmwayApacCustomerAccountService#getOrdersCount()
 	 */
 	@Override
-	public CustomerModel getOrdersCount()
+	public Integer getOrdersCount()
 	{
 		// YTODO Auto-generated method stub
 
@@ -68,15 +64,15 @@ public class DefaultAmwayApacCustomerAccountService extends DefaultAmwayCustomer
 					.toString());
 		}
 
-		final List<CustomerModel> results = getAmwayApacCustomerAccountDao().findOrderCountsForUser(currentUser);
+		final Integer result = getAmwayApacCustomerAccountDao().findOrderCountsForUser(currentUser);
 
 		if (LOGGER.isInfoEnabled())
 		{
-			LOGGER.info(new StringBuilder(TWO_HUNDRED_INT).append("Found ").append(CollectionUtils.size(results))
-					.append(" order counts for user [").append(currentUser.getUid()).toString());
+			LOGGER.info(new StringBuilder(TWO_HUNDRED_INT).append("Found ").append(result).append(" order counts for user [")
+					.append(currentUser.getUid()).toString());
 		}
 
-		return results.iterator().next();
+		return result;
 	}
 
 }

@@ -3,8 +3,6 @@
  */
 package com.amway.apac.core.customer.services;
 
-import de.hybris.platform.core.model.user.CustomerModel;
-
 import com.amway.core.customer.service.AmwayCustomerAccountService;
 
 
@@ -14,5 +12,5 @@ import com.amway.core.customer.service.AmwayCustomerAccountService;
  */
 public interface AmwayApacCustomerAccountService extends AmwayCustomerAccountService
 {
-	CustomerModel getOrdersCount();
+	Integer getOrdersCount();
 }
