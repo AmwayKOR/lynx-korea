@@ -20,9 +20,8 @@
 	<input type="hidden" maxlength="3" size="1" id="qty" name="qty" class="qty js-qty-selector-input" value="1">
     <input type="hidden" name="productCodePost" value="${fn:escapeXml(product.code)}"/>
 
-
 	<button type="submit" class="btn btn-primary btn-block js-add-to-cart js-enable-btn col-md-6" disabled="disabled"><spring:theme code="basket.add.to.basket"/></button>
-
-    <a href="${addToCartUrl}" class="btn btn-primary btn-block js-add-to-cart js-enable-btn col-md-6"><spring:theme code="checkout.checkout"/></a>
+	<button onclick="location.href='${addToCartUrl}'" id="BuyNow" class="btn btn-primary btn-block js-add-to-cart js-enable-btn col-md-6" ><spring:theme code="checkout.checkout"/></button>
+	
 </form:form>
 
