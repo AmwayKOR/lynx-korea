@@ -50,20 +50,6 @@
 		<property name="cartService" ref="cartService"/>
 	</bean>
 
-	<!-- dependencies have to be manually injected as there is no alias defined in the amwayfacades-spring.xml for amwayProductPricePopulator -->
-	<alias name="defaultAmwayProductPricePopulator" alias="productPricePopulator"/>
-	<bean id="defaultAmwayProductPricePopulator"
-		class="com.amway.apac.facades.product.populators.AmwayApacProductPricePopulator">
-		<property name="amwayApacPriceDataFactory" ref="priceDataFactory" />
-		<property name="commercePriceService" ref="commercePriceService"/>
-        <property name="modelService" ref="modelService"/>
-        <property name="sessionService" ref="sessionService"/>
-        <property name="userService" ref="userService"/>
-	</bean>
-
-	<alias name="defaultAmwayApacPriceDataFactory" alias="priceDataFactory"/>
-	<bean id="defaultAmwayApacPriceDataFactory" class="com.amway.apac.facades.product.impl.DefaultAmwayApacPriceDataFactory" parent="amwayPriceDataFactory" />
-	
 	<bean id="amwayApacUserBasicConverter" parent="abstractPopulatingConverter">
 		<property name="targetClass" value="de.hybris.platform.commercefacades.user.data.CustomerData"/>
 		<property name="populators">

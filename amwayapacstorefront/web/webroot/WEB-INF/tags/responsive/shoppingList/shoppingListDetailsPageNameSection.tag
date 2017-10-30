@@ -12,27 +12,29 @@
 	    		<input class="js-quick-shop-name quick-shop-name js-name-input shopping-list-name" type="text" name="shoppingListName" data-original-name="${fn:escapeXml(shoppingListData.name)}" value="${fn:escapeXml(shoppingListData.name)}">
 	    		<input type="hidden" name="shoppingListUid" value="${shoppingListData.uid} ">
 	    		<a href="#" class="submit-name-update-form">
-	            	 <span class="edit-name"><spring:theme code="shopping.list.page.actions.section.save.name" /></span></a>
-	            <span class="divider">|</span>
+	            	 <span class="edit-name name-section-tiny-span"><spring:theme code="shopping.list.page.actions.section.save.name" /></span></a>
+	            <span class="divider name-section-tiny-span">|</span>
 	        	<a href="#" class="cancel-name-update-form">
-	            	<span class="edit-name"><spring:theme code="shopping.list.page.actions.section.cancel.name" /></span></a>
+	            	<span class="edit-name name-section-tiny-span"><spring:theme code="shopping.list.page.actions.section.cancel.name" /></span></a>
 	    	</h1>
 	    </form>
     </div>
     <div id="name-display-section">
 	     <h1 class="product-list-page-title mb25">
-	     	${fn:escapeXml(shoppingListData.name)}
+	     	<span class="shopping-list-name-display">
+	     			${fn:escapeXml(shoppingListData.name)}
+	     	</span>
 	         <a href="#" class="name-edit-link">
-	             <span class="edit-name"><spring:theme code="shopping.list.page.actions.section.edit.name" /></span></a>
+	             <span class="edit-name name-section-tiny-span"><spring:theme code="shopping.list.page.actions.section.edit.name" /></span></a>
 	     </h1>
     </div>
     <div>
 	    <span class="list-product">
 	        <a href="">
-	            <span class="share-list"><spring:theme code="shopping.list.page.actions.section.share.list" /></span></a>
+	            <span class="share-list name-section-tiny-span"><spring:theme code="shopping.list.page.actions.section.share.list" /></span></a>
 	        <span class="divider">|</span>
 	        <a href="">
-	            <span class="Delete-list"><spring:theme code="shopping.list.page.actions.section.delete.list" /></span></a>
+	            <span class="Delete-list name-section-tiny-span"><spring:theme code="shopping.list.page.actions.section.delete.list" /></span></a>
 	    </span>
     </div>
 </div>

@@ -8,7 +8,7 @@
 
 <ul class="shopping-cart-item-list js-shopping-cart-item-list">
 	<c:forEach items="${shoppingListData.entries}" var="shoppingListEntry">
-			<<c:url var="productUrl" value="${shoppingListEntry.product.url}" />
+			<c:url var="productUrl" value="${shoppingListEntry.product.url}" />
 		    <li class="visible-md visible-lg">
 		        <div class="col-xs-12 list-header">
 		            <div class="col-xs-6 list-item-info"><spring:theme code="shoppinglist.items.section.table.item.label" /></div>
@@ -67,10 +67,12 @@
 		        </div>
 		        <div class="col-xs-9 product-item-element list-item-ibo-price col-md-2 list-item-price print-col-6">
 		            <span class="price-label"><spring:theme code="shoppinglist.items.section.table.item.price.label" /></span>
-		            <span class="value-wrapper"><format:price priceData="${product.priceRange.minPrice}"/></span></div>
+		            <span class="value-wrapper"><format:price priceData="${shoppingListEntry.product.price}"/></span></div>
+		            
+		        
 		        <div class="col-xs-9 col-md-2 product-item-element list-item-total js-item-total  print-col-6">
 		            <span class="total-price-label"><spring:theme code="shoppinglist.items.section.table.item.pvbv.label" /></span>
-		            <span class="value-wrapper">91.10/286.55</span></div>
+		            <span class="value-wrapper">${shoppingListEntry.product.price.amwayValue.pointValue}/${shoppingListEntry.product.price.amwayValue.businessVolume}</span></div>
 		    </li>
     </c:forEach>
 </ul>
