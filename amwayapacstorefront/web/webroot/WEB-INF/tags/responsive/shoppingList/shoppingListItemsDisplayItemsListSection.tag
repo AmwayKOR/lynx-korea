@@ -18,7 +18,7 @@
 		    </li>
 	<c:forEach items="${shoppingListData.entries}" var="shoppingListEntry" varStatus="loop">
 			<c:url var="productUrl" value="${shoppingListEntry.product.url}" />
-		    <li class="product-list-item js-shopping-cart-list-item">
+		    <li class="product-list-item js-shopping-cart-list-item shopping-list-entry">
 		        <div class="col-xs-12 col-md-6 product-details print-col-6">
 		            <div class="product-item-element list-item-toggle">
 		                <label class="checkbox-element-wrapper">
@@ -48,18 +48,27 @@
 		            </div>
 		        </div>
 		        <div class="col-xs-9 col-md-2 product-item-element list-item-quantity print-col-6">
-		            <form id="updateCartForm0" class="js-qty-form0" data-cart="" action="#" method="post">
-		                <input id="quantity_0" class="form-control js-update-entry-quantity-input quantity-value " name="quantity" value="1" size="1" type="text"></form>
+	                <input id="quantity_0" class="form-control js-update-shopping-list-entry-quantity-input quantity-value " name="quantity" value="1" type="text" />
 		            <span class="usage-cal"><spring:theme code="shoppinglist.items.section.table.item.usagecalculator.label" /></span>
 		        </div>
 		        <div class="col-xs-9 product-item-element list-item-ibo-price col-md-2 list-item-price print-col-6">
 		            <span class="price-label"><spring:theme code="shoppinglist.items.section.table.item.price.label" /></span>
-		            <span class="value-wrapper"><format:price priceData="${shoppingListEntry.product.price}"/></span></div>
-		            
+		            <span class="value-wrapper price-value-wrapper" 
+		            	  data-price="${shoppingListEntry.product.price.value}" 
+		            	  data-total-price="${shoppingListEntry.product.price.value}">
+		            	  	<format:price priceData="${shoppingListEntry.product.price}"/>
+		            </span>
+				</div>
 		        
 		        <div class="col-xs-9 col-md-2 product-item-element list-item-total js-item-total  print-col-6">
 		            <span class="total-price-label"><spring:theme code="shoppinglist.items.section.table.item.pvbv.label" /></span>
-		            <span class="value-wrapper">${shoppingListEntry.product.price.amwayValue.pointValue}/${shoppingListEntry.product.price.amwayValue.businessVolume}</span></div>
+		            <span class="value-wrapper pv-bv-value-wrapper" 
+		            	data-pv="${shoppingListEntry.product.price.amwayValue.pointValue}" 
+		            	data-bv="${shoppingListEntry.product.price.amwayValue.businessVolume}"
+		            	data-total-pv="${shoppingListEntry.product.price.amwayValue.pointValue}"
+		            	data-total-bv="${shoppingListEntry.product.price.amwayValue.businessVolume}">
+		            		${shoppingListEntry.product.price.amwayValue.pointValue}/${shoppingListEntry.product.price.amwayValue.businessVolume}
+		            </span></div>
 		    </li>
     </c:forEach>
 </ul>

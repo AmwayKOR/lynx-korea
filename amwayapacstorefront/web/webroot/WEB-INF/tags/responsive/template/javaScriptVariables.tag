@@ -15,6 +15,7 @@
 			ACC.config.siteResourcePath = "${siteResourcePath}";
 			ACC.config.rootPath = "${siteRootUrl}";	
 			ACC.config.CSRFToken = "${CSRFToken.token}";
+			ACC.config.currentCurrecySymbol = "${currentCurrency.symbol}";	
 			ACC.pwdStrengthVeryWeak = '<spring:theme code="password.strength.veryweak" />';
 			ACC.pwdStrengthWeak = '<spring:theme code="password.strength.weak" />';
 			ACC.pwdStrengthMedium = '<spring:theme code="password.strength.medium" />';

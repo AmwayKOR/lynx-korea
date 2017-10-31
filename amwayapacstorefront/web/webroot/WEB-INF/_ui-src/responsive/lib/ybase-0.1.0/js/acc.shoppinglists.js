@@ -166,6 +166,7 @@ ACC.shoppinglists = {
     	// data contains the shopping list details page content as well
     	if ($(data).filter("div.page-content").length > 0) {
     		$(".page-content-wrapper.page-shopping-list-details").html($(data).filter("div.page-content").html());
+    		ACC.shoppinglisttotals.refreshShoppingListAllTotals();
     	}
     },
     

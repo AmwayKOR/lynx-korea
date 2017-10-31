@@ -7,8 +7,34 @@ ACC.global = {
         "bindHoverIntentMainNavigation",
         "initImager",
         "backToHome",
-        "ajaxBlockUI"
+        "ajaxBlockUI",
+        "formatPrice",
+        "isNatural"
     ],
+    
+    isNatural: function(value) {
+    	var number = Number(value);
+    	return (value) && (Math.floor(number) == number) && (number >= 0.0) && (number !== Infinity);
+    },
+    
+    formatPrice: function(value, currency){
+    	  var formattedValue = "0.00"
+		  if (value) {
+		        var parts = value.toString().split(".");
+		        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		        if (!parts[1]) {
+		            parts[1] = "00";
+		        }
+		        if (parts[1].length == 1) {
+		            parts[1] = parts[1] + '0';
+		        }
+		        formattedValue = parts.join(".");
+		  }
+    	  if (currency) {
+    		  formattedValue = currency + formattedValue;
+    	  }
+    	  return formattedValue;
+    },
     
     appendGlobalMessage : function(globalMessageType, message) {
 		var globalErrorMessage = {};
