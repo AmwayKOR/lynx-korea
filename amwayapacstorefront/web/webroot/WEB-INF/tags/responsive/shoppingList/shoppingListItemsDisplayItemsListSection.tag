@@ -43,22 +43,8 @@
 		                <c:if test="${(not empty shoppingListEntry.product.categories) and (fn:length(shoppingListEntry.product.categories) > 0)}">
 		                	<div class="product-category">${shoppingListEntry.product.categories[0].name}</div>
 		                </c:if>
-						<c:if test="${not empty shoppingListEntry.product.stock.stockLevelStatus.code}">
-			                <div class="product-stock">
-			                    <div>
-			                        <span class="stock">
-			                            <span class="product-availability">
-			                                <span class="green">
-				                                    <span class="icon icon-check-bold"></span>
-				                                    <span class="text text-uppercase">In Stock</span>
-											</span>
-			                            </span>
-			                        </span>
-			                        <br>
-			                        <span class="pick-up product-availability"></span>
-			                    </div>
-			                </div>
-						</c:if>
+						
+						<product:productStockStatusDisplay product="${shoppingListEntry.product}" />
 		            </div>
 		        </div>
 		        <div class="col-xs-9 col-md-2 product-item-element list-item-quantity print-col-6">

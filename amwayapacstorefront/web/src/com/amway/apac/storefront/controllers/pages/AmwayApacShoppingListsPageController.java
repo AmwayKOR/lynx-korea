@@ -274,7 +274,7 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 	}
 
 	/**
-	 * Populates the shopping list details cms page, title and breadcrums in the model
+	 * Populates the shopping list details CMS page, title and bread-crumbs in the model
 	 *
 	 * @param model
 	 *           view model

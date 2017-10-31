@@ -26,4 +26,8 @@
 		<property name="creationTime" type="java.util.Date" />
     </bean>
 
+	<bean class="de.hybris.platform.commercefacades.product.data.StockData">
+		<property name="stockLevelStatusName" type="String"/>
+	</bean>
+
 </beans>

@@ -2,6 +2,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="action" tagdir="/WEB-INF/tags/responsive/action" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="product" tagdir="/WEB-INF/tags/responsive/product" %>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 <c:set var="isForceInStock" value="${product.stock.stockLevelStatus.code eq 'inStock' and empty product.stock.stockLevel}"/>
@@ -27,17 +28,7 @@
                         </div>
                     </div>
                     <div class="stock-wrapper clearfix">
-	                    <div class="product-stock">
-	                        <div>
-	                            <span class="stock">
-	                                <span class="product-availability">
-	                                    <span class="green">
-	                                        <span class="icon icon-check-bold"></span>
-	                                        <span class="text text-uppercase">In Stock</span></span>
-	                                </span>
-	                            </span>
-	                        </div>
-	                    </div>
+                    	<product:productStockStatusDisplay product="${product}" />
 	                </div>        
                 
                 <div class="actions-wrapper">

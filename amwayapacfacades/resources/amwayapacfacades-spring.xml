@@ -144,4 +144,11 @@
     <bean id="defaultAmwayApacCustomerAccountFacade" class="com.amway.apac.facades.customeraccount.impl.DefaultAmwayApacCustomerAccountFacade" parent="defaultAmwayOrderFacade">
         <property name="amwayApacCustomerAccountService" ref="customeraccountService"/>
     </bean>
+    
+    <alias name="defaultAmwayApacStockPopulator" alias="stockPopulator"/>
+	<bean id="defaultAmwayApacStockPopulator" parent="defaultStockPopulator"
+			class="com.amway.apac.facades.product.populators.AmwayApacStockPopulator">
+			<property name="enumerationService" ref="enumerationService" />
+	</bean>
+    
 </beans>
