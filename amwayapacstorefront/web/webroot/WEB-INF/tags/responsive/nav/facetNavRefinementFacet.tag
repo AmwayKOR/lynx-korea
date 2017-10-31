@@ -62,7 +62,7 @@
                		</c:forEach>
                  </ul>
                  <div class="facet-button-wrapper hidden-md hidden-lg">
-                     <button type="button" class="js-facet-group-button-apply facet-button-apply">Apply</button>
+                     <button type="button" class="js-facet-group-button-apply facet-button-apply"><spring:theme code="plp.mobile.facet.applybutton"/></button>
                  </div>
              </div>
          </div>

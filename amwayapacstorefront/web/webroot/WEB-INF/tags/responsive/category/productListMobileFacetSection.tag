@@ -2,6 +2,7 @@
 <%@ attribute name="searchPageData" type="de.hybris.platform.commerceservices.search.facetdata.ProductCategorySearchPageData" %>
 <%@ taglib prefix="nav" tagdir="/WEB-INF/tags/responsive/nav" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <c:set var="aboUser" value="false"/>
 <sec:authorize ifNotGranted="ROLE_ANONYMOUS">
@@ -13,8 +14,8 @@
 		<input hidden="hidden" name="q">
 	</form>
     <div class="filters-header">
-        <span>Filters</span>
-        <button form="clearAllForm" type="submit">Clear All Mobile</button>
+        <span><spring:theme code="plp.facet.section.label"/></span>
+        <button form="clearAllForm" type="submit"><spring:theme code="plp.facet.clear.all"/></button>
     </div>
     <div class="panel-group accordion-custom" id="facetAccordion" role="tablist" aria-multiselectable="true">
 	    <c:forEach items="${searchPageData.facets}" var="facet">

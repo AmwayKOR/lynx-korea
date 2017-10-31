@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="category" tagdir="/WEB-INF/tags/responsive/category" %>
 <%@ attribute name="searchPageData" type="de.hybris.platform.commerceservices.search.facetdata.ProductCategorySearchPageData" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <div class="print-hide pagination-bar top">
     <div class="pagination-toolbar">
@@ -9,7 +10,7 @@
                 <div class="pull-left">
                     <div class="pagination-bar-results">
                         <div class="total-wrapper">
-                            <span>${searchPageData.pagination.totalNumberOfResults} Results</span>
+                            <span>${searchPageData.pagination.totalNumberOfResults} <spring:theme code="plp.total.search.results"/></span>
                         </div>
                     </div>
                 </div>

@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ attribute name="searchPageData" type="de.hybris.platform.commerceservices.search.facetdata.ProductCategorySearchPageData" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 
 <c:set var="aboUser" value="false"/>
@@ -9,10 +10,10 @@
 </sec:authorize>
 
 <div class="form-group sort-group">
- <label class="control-label " for="sortForm1">Sort by</label>
+ <label class="control-label " for="sortForm1"><spring:theme code="plp.sort.section.label"/></label>
  	<form id="sortForm1" name="sortForm1" method="get" action="">
      	<select id="sortOptions1" name="sort" class="form-control">
-         	<option disabled="disabled">Sort by</option>
+         	<option disabled="disabled"><spring:theme code="plp.sort.section.label"/></option>
          	<c:forEach items="${searchPageData.sorts}" var="sort">
          	<c:set var="showSort" value="true"/>
          	<c:choose>
