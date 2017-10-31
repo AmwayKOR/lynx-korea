@@ -11,57 +11,24 @@
 <c:url value="${product.url}/reviewhtml/all" var="getAllReviewsUrl"/>
 <c:url value="${product.url}/review" var="productReviewActionUrl"/>
 
-<div class="tab-review">
-	<div class="review-pagination-bar">
-		<button class="btn btn-default js-review-write-toggle "><spring:theme code="review.write.title"/></button>
-
-		<div class="right">
-			<button class="btn btn-default all-reviews-btn"><spring:theme code="review.show.all" /></button>
-			<button class="btn btn-default less-reviews-btn"><spring:theme code="review.show.less" /></button>
-		</div>
-	</div>
-
-	<div class="write-review js-review-write">
-		<form:form method="post" action="${productReviewActionUrl}" commandName="reviewForm">
-			<div class="form-group">
-				<formElement:formInputBox idKey="review.headline" labelKey="review.headline" path="headline" inputCSS="form-control" mandatory="true"/>
-			</div>
-			<div class="form-group">
-				<formElement:formTextArea idKey="review.comment" labelKey="review.comment" path="comment" areaCSS="form-control" mandatory="true"/>
-			</div>
-			
-			<div class="form-group">
-			
-				<label><spring:theme code="review.rating"/></label>
-
-
-				<div class="rating rating-set js-ratingCalcSet">
-					<div class="rating-stars js-writeReviewStars">
-                        <c:forEach  begin="1" end="10" varStatus="loop">
-                            <span class="js-ratingIcon glyphicon glyphicon-star ${loop.index % 2 == 0 ? 'lh' : 'fh'}"></span>
-                        </c:forEach>
-
-
-					</div>
-				</div>
-
-				<formElement:formInputBox idKey="review.rating" labelKey="review.rating" path="rating" inputCSS="sr-only js-ratingSetInput" labelCSS="sr-only" mandatory="true"/>
-	
-				<formElement:formInputBox idKey="alias" labelKey="review.alias" path="alias" inputCSS="form-control" mandatory="false"/>
-			</div>
-
-			<button type="submit" class="btn btn-primary" value="<spring:theme code="review.submit"/>"><spring:theme code="review.submit"/></button>
-		</form:form>
-
-	</div>
-
-	<ul id="reviews" class="review-list" data-reviews="${getPageOfReviewsUrl}"  data-allreviews="${getAllReviewsUrl}"></ul>
-
-	<div class="review-pagination-bar">
-
-		<div class="right">
-			<button class="btn btn-default all-reviews-btn"><spring:theme code="review.show.all" /></button>
-			<button class="btn btn-default less-reviews-btn"><spring:theme code="review.show.less" /></button>
-		</div>
-	</div>
+<div class="accordion-panel-heading" role="tab" id="reviews">
+    <div class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#productPageAccordion" href="#reviewsbody" aria-controls="bundleBody">
+        <h5 class="accordion-panel-title">
+            <span class="accordion-title-wrapper">
+                <span class="title-element accordion-header-icon"></span>
+                <span class="title-element title-text">reviews</span>
+                <span class="title-element accordion-icon-wrapper"></span>
+            </span>
+        </h5>
+    </div>
+</div>
+<div id="reviewsbody" class="accordion-panel-collapse collapse">
+    <div class="product-collapse__rating">
+        <p class="product-collapse__review">
+            <a href="#" class="product-description__readmore">
+                <img class="product-collapse__review-icon" src="${themeResourcePath}/images/review.png">Review This Item
+            </a>
+        </p>
+    </div>
+    <ul id="reviews" class="review-list" data-reviews="${getPageOfReviewsUrl}"  data-allreviews="${getAllReviewsUrl}"></ul>
 </div>
