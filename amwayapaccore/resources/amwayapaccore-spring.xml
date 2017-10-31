@@ -250,6 +250,31 @@
     
 	<alias alias="customeraccountDao" name="defaultAmwayApacCustomerAccountDao" />
     <bean id="defaultAmwayApacCustomerAccountDao" class="com.amway.apac.core.customer.daos.impl.DefaultAmwayApacCustomerAccountDao" parent="amwayCustomerAccountDao" />
+    
+    
+	<alias name="amwayApacLowestPriceVariantSelectionStrategy" alias="amwayApacPrimaryVariantSelectionStrategy"/>
+	<bean id="amwayApacLowestPriceVariantSelectionStrategy" class="com.amway.apac.core.product.strategies.impl.AmwayApacLowestPriceVariantSelectionStrategy">
+        <property name="netPriceService" ref="netPriceService" />
+    </bean>
+    
+    <bean id="amwayApacBusinessVolumeValueProvider"
+		  class="com.amway.apac.core.search.solrfacetsearch.providers.AmwayApacBusinessVolumeValueProvider" parent="businessVolumeValueProvider">
+		<property name="amwayApacPrimaryVariantSelectionStrategy" ref="amwayApacPrimaryVariantSelectionStrategy" />
+	</bean>
 	
+	<bean id="amwayApacPointValueValueProvider"
+		  class="com.amway.apac.core.search.solrfacetsearch.providers.AmwayApacPointValueValueProvider" parent="pointValueValueProvider">
+		<property name="amwayApacPrimaryVariantSelectionStrategy" ref="amwayApacPrimaryVariantSelectionStrategy"/>
+	</bean>
+	
+	<bean id="amwayApacABOPriceValueProvider"
+		  class="com.amway.apac.core.search.solrfacetsearch.providers.AmwayApacABOPriceValueProvider" parent="aboPriceValueProvider">
+		<property name="amwayApacPrimaryVariantSelectionStrategy" ref="amwayApacPrimaryVariantSelectionStrategy"/>
+	</bean>
+	
+	<bean id="amwayApacProductPricesValueResolver" class="com.amway.apac.core.search.solrfacetsearch.resolvers.AmwayApacProductPricesValueResolver"
+		parent="productPricesValueResolver">
+		<property name="amwayApacPrimaryVariantSelectionStrategy" ref="amwayApacPrimaryVariantSelectionStrategy"/>
+	</bean>
 	
 </beans>
