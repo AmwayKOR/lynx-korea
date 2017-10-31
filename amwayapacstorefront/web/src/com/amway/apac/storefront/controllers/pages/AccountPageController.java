@@ -279,7 +279,8 @@ public class AccountPageController extends AbstractSearchPageController
 		//		}
 
 		//aaron
-		model.addAttribute("ordersAmount", amwayApacCustomerAccountFacade.getCustomerOrderCounts());
+		model.addAttribute("ordersAmount", (amwayApacCustomerAccountFacade.getCustomerOrderCounts() == null) ? 0
+				: amwayApacCustomerAccountFacade.getCustomerOrderCounts());
 		model.addAttribute("bonusPaperCheck", true);
 		model.addAttribute("autoRenewal", true);
 		model.addAttribute("contractsAmount", 4);
