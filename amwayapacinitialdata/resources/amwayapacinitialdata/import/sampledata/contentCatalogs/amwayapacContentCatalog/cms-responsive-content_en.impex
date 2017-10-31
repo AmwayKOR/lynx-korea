@@ -687,6 +687,16 @@ INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=tr
 ;;amwayApacBecomeACustomerLinkContent;"BECOME A MEMBER";btn-blue-white show-terms;
 
 ################## My Account Page
+UPDATE AmwayApacMyAccountProfileBarURLComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang];&componentRef
+;;myaccountPBMyAccountLinkComponent;"My Account";myaccountPBMyAccountLinkComponent
+;;businessInformationPBMyAccountLinkComponent;"Business Information & Upline";businessInformationPBMyAccountLinkComponent
+;;orderHistoryPBMyAccountLinkComponent;"Order History";orderHistoryPBMyAccountLinkComponent
+;;bonusPaymentPBMyAccountLinkComponent;"Bonus Payment Preferences";bonusPaymentPBMyAccountLinkComponent
+;;autoRenewalPBMyAccountLinkComponent;"Auto Renewal";autoRenewalPBMyAccountLinkComponent
+;;contractsPBMyAccountLinkComponent;"Contracts";contractsPBMyAccountLinkComponent
+;;editProfilePBMyAccountLinkComponent;"Edit Profile";editProfilePBMyAccountLinkComponent
+;;billingShippingPBMyAccountLinkComponent;"Billing & Shipping";billingShippingPBMyAccountLinkComponent
+
 UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang];&componentRef
 ;;businessInformationMyAccountLinkComponent;"Business Information";businessInformationMyAccountLinkComponent
 ;;orderHistoryMyAccountLinkComponent;"Order History";orderHistoryMyAccountLinkComponent

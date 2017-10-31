@@ -15,13 +15,11 @@
             <div class="amway-suggest col-md-12">
                 <h1 class="amway-suggest__title">${fn:escapeXml(component.title)}</h1>
                 <div id="productSuggestListTabs" class="amway-suggest__list">
-                    <div class="amway-suggest__item-container">
-                        <div class="amway-suggest__item">
+                    
                             <c:forEach end="${component.maximumNumberProducts}" items="${productReferences}" var="productReference">
                                 <product:productListerItem product="${productReference.target}"/>
                             </c:forEach>
-                        </div>
-                    </div>
+                        
                 </div>
             </div>
         </div>

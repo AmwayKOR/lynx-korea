@@ -492,6 +492,7 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 ;MiniCart;;;minicart
 ;NavigationBar;;;navigation
 ;MobileNavigationBar;;;navigation
+;ProfileBarJumpTo;;;
 ;Section1A;;;
 ;Section1B;;;
 ;Section1C;;;
@@ -692,6 +693,7 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active
 ;;ToolsAndAdviceBannerContentSlot2;Tools and advice banner content slot 2;true
 ;;ToolsAndAdviceBannerContentSlot3;Tools and advice banner content slot 3;true
 ;;MobileNavigationBarSlot;Mobile Navigation Bar;true
+;;ProfileBarJumpToSlot;Profile Bar;true
 
 # Bind Content Slots to Page Templates
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ProductDetailsPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
@@ -1013,6 +1015,7 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 ;;HeaderLinks-AccountPage;HeaderLinks;;HeaderLinksSlot;true
 ;;SearchBox-AccountPage;SearchBox;;SearchBoxSlot;true
 ;;Mobile-NavigationBar-AccountPage;MobileNavigationBar;;MobileNavigationBarSlot;true
+;;ProfileBarJumpTo-AccountPage;ProfileBarJumpTo;;ProfileBarJumpToSlot;true
 
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ShoppingListsPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
 ;;SiteLogo-ShoppingListsPage;SiteLogo;;SiteLogoSlot;true

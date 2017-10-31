@@ -802,6 +802,7 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;c
 ;;BonusPaymentContentSlot;Bonus Payment Slot for myaccount page;true;refMyAccountSection2A
 ;;AutoRenewalContentSlot;Auto Renewal Slot for myaccount page;true;refMyAccountSection2B
 ;;ContractsContentSlot;Bonus Payment Slot for myaccount page;true;refMyAccountSection2C
+;;ProfileBarJumpToSlot;ProfileBarJumpTo-AccountPage;true;refJumpTo
 
 INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='account'];contentSlot(uid,$contentCV)[unique=true]
 ;;BusinessInformationContentSlot;Section1A;;BusinessInformationContentSlot
@@ -810,6 +811,19 @@ INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];positi
 ;;BonusPaymentContentSlot;Section2A;;BonusPaymentContentSlot
 ;;AutoRenewalContentSlot;Section2B;;AutoRenewalContentSlot
 ;;ContractsContentSlot;Section2C;;ContractsContentSlot
+
+INSERT_UPDATE AmwayApacMyAccountProfileBarComponent;$contentCV[unique=true];uid[unique=true];name;profileBarURLComponents(&componentRef);&componentRef;
+;;amwayApacMyAccountProfileBarComponent;Account Page Profile Bar;myaccountPBMyAccountLinkComponent,businessInformationPBMyAccountLinkComponent,orderHistoryPBMyAccountLinkComponent,billingShippingPBMyAccountLinkComponent,bonusPaymentPBMyAccountLinkComponent,autoRenewalPBMyAccountLinkComponent,contractsPBMyAccountLinkComponent,editProfilePBMyAccountLinkComponent;refJumpTo;	
+
+INSERT_UPDATE AmwayApacMyAccountProfileBarURLComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow'];
+;;myaccountPBMyAccountLinkComponent;My Account - Profile Bar- Jump to Link;/aaron;myaccountPBMyAccountLinkComponent;myaccountPBMyAccountLinkComponent;;;;
+;;businessInformationPBMyAccountLinkComponent;Business Information - Profile Bar- Jump to Link;/aaron;businessInformationPBMyAccountLinkComponent;businessInformationPBMyAccountLinkComponent;;;;
+;;orderHistoryPBMyAccountLinkComponent;Order History - Profile Bar- Jump to Link;/aaron;orderHistoryPBMyAccountLinkComponent;orderHistoryPBMyAccountLinkComponent;;;;
+;;bonusPaymentPBMyAccountLinkComponent;Bonus Payment - Profile Bar- Jump to Link;/aaron;bonusPaymentPBMyAccountLinkComponent;bonusPaymentPBMyAccountLinkComponent;;;;
+;;autoRenewalPBMyAccountLinkComponent;Auto Renewal - Profile Bar- Jump to Link;/aaron;autoRenewalPBMyAccountLinkComponent;autoRenewalPBMyAccountLinkComponent;;;;
+;;contractsPBMyAccountLinkComponent;Contracts - Profile Bar- Jump to Link;/aaron;contractsPBMyAccountLinkComponent;contractsPBMyAccountLinkComponent;;;;
+;;editProfilePBMyAccountLinkComponent;Edit Profile - Profile Bar- Jump to Link;/aaron;editProfilePBMyAccountLinkComponent;editProfilePBMyAccountLinkComponent;;;;
+;;billingShippingPBMyAccountLinkComponent;Billing Shipping - Profile Bar- Jump to Link;/aaron;billingShippingPBMyAccountLinkComponent;billingShippingPBMyAccountLinkComponent;;;;
 
 
 INSERT_UPDATE AmwayApacMyAccountComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;

@@ -40,26 +40,9 @@
                                         <span class="user-id">IBO # 1234567</span>
                                     </div>
                                 </div>
-                                <div class="go-block col-sm-8">
-                                    <div class="amway-theme">
-                                        <div class="jump-to">
-                                            <span>Jump to</span>
-                                        </div>
-                                        <div class="jump-to-wrapper">
-                                            <select class="js-jump-to-selection hide select2-hidden-accessible" tabindex="-1" aria-hidden="true">
-                                                <option value="/my-account" class="js-account-option-link text-capitalize" selected>My Account</option>
-                                                <option value="/my-account/business-information" class="js-account-option-link text-capitalize">Business Information &amp; Upline</option>
-                                                <option value="/my-account/orders" class="js-account-option-link text-capitalize">Order History</option>
-                                                <option value="/my-account/billing-shipping" class="js-account-option-link text-capitalize">Billing &amp; Shipping</option>
-                                                <option value="/my-account/bonus-payment" class="js-account-option-link text-capitalize">Bonus Payment Preferences</option>
-                                                <option value="/my-account/auto-renewal" class="js-account-option-link text-capitalize">Auto Renewal</option>
-                                                <option value="/my-account/contracts" class="js-account-option-link text-capitalize">Contracts</option>
-                                                <option value="/my-account/update-profile" class="js-account-option-link text-capitalize">Edit Profile</option>
-                                            </select>
-                                            <input type="button" class="js-jump-to-selection-btn" value="GO">
-                                        </div>
-                                    </div>
-                                </div>
+                                <cms:pageSlot position="ProfileBarJumpTo" var="component">
+									<cms:component component="${component}"/>
+								</cms:pageSlot>
                             </div>
                         </div>
                     </div>
