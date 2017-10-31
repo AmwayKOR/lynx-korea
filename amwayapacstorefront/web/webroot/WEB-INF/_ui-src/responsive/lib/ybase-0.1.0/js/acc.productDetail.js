@@ -109,7 +109,7 @@ ACC.productDetail = {
         })
 
         $(".page-productDetails #Size").change(function () {
-            changeOnVariantOptionSelection($("#Size option:selected"));
+            changeOnVariantOptionSelection($(this).find("option:selected"));
         });
 
         $("#variant").change(function () {

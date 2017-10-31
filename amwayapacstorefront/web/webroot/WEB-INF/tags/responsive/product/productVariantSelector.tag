@@ -14,6 +14,8 @@
 <c:set var="secondVariantOptions" value="${product.baseOptions[1].options}"/>
 <c:set var="firstVariantName" value="${product.baseOptions[0].options[0].variantOptionQualifiers[0].name}"/>
 <c:set var="secondVariantName" value="${product.baseOptions[0].options[0].variantOptionQualifiers[1].name}"/>
+<c:set var="selectedFirstVariantAttributeValue" value="${product.baseOptions[0].selected.variantOptionQualifiers[0].value}"/>
+<c:set var="selectedSecondVariantAttributeValue" value="${product.baseOptions[0].selected.variantOptionQualifiers[1].value}"/>
 
 <c:if test="${not empty firstVariantOptions}">
     <c:if test="${firstVariantName ne 'Color'}">
@@ -24,7 +26,7 @@
                     <c:forEach items="${firstVariantOptions}" var="variantOption">
                         <c:set var="variantOptionQualifierValue" value="${variantOption.variantOptionQualifiers[0].value}"/>
                         <c:url value="${variantOption.url}" var="variantOptionUrl"/>
-                        <option data-product-code="${variantOption.code}" value="${variantOptionUrl}" ${(variantOption.url eq product.url) ? 'selected="selected"' : ''}>
+                        <option data-product-code="${variantOption.code}" value="${variantOptionUrl}" ${(variantOption.variantOptionQualifiers[0].value eq selectedFirstVariantAttributeValue) ? 'selected="selected"' : ''}>
                               ${variantOptionQualifierValue}
                         </option>
                     </c:forEach>
@@ -41,7 +43,7 @@
                <c:forEach items="${secondVariantOptions}" var="variantOption">
                    <c:set var="variantOptionQualifierValue" value="${variantOption.variantOptionQualifiers[1].value}"/>
                    <c:url value="${variantOption.url}" var="variantOptionUrl"/>
-                   <option data-product-code="${variantOption.code}" value="${variantOptionUrl}" ${(variantOption.url eq product.url) ? 'selected="selected"' : ''}>
+                   <option data-product-code="${variantOption.code}" value="${variantOptionUrl}" ${(variantOption.variantOptionQualifiers[1].value eq selectedSecondVariantAttributeValue) ? 'selected="selected"' : ''}>
                          ${variantOptionQualifierValue}
                    </option>
                </c:forEach>
