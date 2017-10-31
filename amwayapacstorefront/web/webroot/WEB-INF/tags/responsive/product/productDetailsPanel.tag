@@ -40,6 +40,7 @@
 						    <div class="page-details-variants-select">
 						        <div class="page-details-add-to-cart-component">
 						            <div class="addtocart-component">
+						            	<div class="amway-theme qty-selector js-qty-selector control-group">
 				                        <cms:pageSlot position="VariantSelector" var="component">
 				                            <cms:component component="${component}" />
 				                        </cms:pageSlot>
@@ -47,6 +48,7 @@
 				                            <cms:component component="${component}" element="div" class="yComponentWrapper page-details-add-to-cart-component"/>
 				                        </cms:pageSlot>
 				                        </div>
+				                    </div>
 		                        </div>
 	                        </div>
                         </div>

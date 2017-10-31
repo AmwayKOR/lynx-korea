@@ -5,7 +5,7 @@
 <div class="cart-popup__dialog">
     <div class="cart-popup__header">
         <span class="cart-popup__header-text">QUICK VIEW
-        	<img class="cart-popup__close quick-view-close" src="${themeResourcePath}/images/close.png" alt="close" data-dismiss="modal" aria-label="Close" aria-hidden="true">
+        	<img class="cart-popup__close quick-view-close" src="${themeResourcePath}/images/close.png" alt="close" aria-label="Close" aria-hidden="true">
         </span>
     </div>
     <div class="cart-popup__content">

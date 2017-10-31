@@ -15,7 +15,6 @@
 <c:set var="firstVariantName" value="${product.baseOptions[0].options[0].variantOptionQualifiers[0].name}"/>
 <c:set var="secondVariantName" value="${product.baseOptions[0].options[0].variantOptionQualifiers[1].name}"/>
 
-<div class="amway-theme qty-selector js-qty-selector control-group">
 <c:if test="${not empty firstVariantOptions}">
     <c:if test="${firstVariantName ne 'Color'}">
         <div class="row">
@@ -25,7 +24,7 @@
                     <c:forEach items="${firstVariantOptions}" var="variantOption">
                         <c:set var="variantOptionQualifierValue" value="${variantOption.variantOptionQualifiers[0].value}"/>
                         <c:url value="${variantOption.url}" var="variantOptionUrl"/>
-                        <option value="${variantOptionUrl}" ${(variantOption.url eq product.url) ? 'selected="selected"' : ''}>
+                        <option data-product-code="${variantOption.code}" value="${variantOptionUrl}" ${(variantOption.url eq product.url) ? 'selected="selected"' : ''}>
                               ${variantOptionQualifierValue}
                         </option>
                     </c:forEach>
@@ -42,7 +41,7 @@
                <c:forEach items="${secondVariantOptions}" var="variantOption">
                    <c:set var="variantOptionQualifierValue" value="${variantOption.variantOptionQualifiers[1].value}"/>
                    <c:url value="${variantOption.url}" var="variantOptionUrl"/>
-                   <option value="${variantOptionUrl}" ${(variantOption.url eq product.url) ? 'selected="selected"' : ''}>
+                   <option data-product-code="${variantOption.code}" value="${variantOptionUrl}" ${(variantOption.url eq product.url) ? 'selected="selected"' : ''}>
                          ${variantOptionQualifierValue}
                    </option>
                </c:forEach>

@@ -22,7 +22,7 @@
                 <c:forEach items="${firstVariantOptions}" var="variantOption">
                    <c:url value="${variantOption.url}" var="variantOptionUrl"/>
                    <c:set var="imageData" value="${variantOption.variantOptionQualifiers[0].image}"/>
-                   <li <c:if test="${(selectedColorVariant.variantOptionQualifiers[0].value) eq (variantOption.variantOptionQualifiers[0].value)}">class="active"</c:if>>
+                   <li data-product-code="${variantOption.code}" <c:if test="${(selectedColorVariant.variantOptionQualifiers[0].value) eq (variantOption.variantOptionQualifiers[0].value)}">class="active"</c:if>>
                       <a href="${variantOptionUrl}"><img src="${imageData.url}" alt="${variantOption.variantOptionQualifiers[0].value}" title="${variantOption.variantOptionQualifiers[0].value}"></a>
                    </li>
                 </c:forEach>

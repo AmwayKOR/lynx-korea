@@ -7,6 +7,8 @@ ACC.categorypage = {
         "bindQuickViewPopup",
         "bindPopupCloseButton",
         "bindFacetApplyButton",
+        "bindColorVariantSelection",
+        "bindVariantAttribute2Selection",
         "bindOthers"
         ],
 
@@ -115,6 +117,31 @@ ACC.categorypage = {
     		$form.find("input").val(facetQuery);
     		$form.submit();
     	});
+    },
+    
+    bindColorVariantSelection : function(){
+    	$(document).on("click", ".lip-color-choose__nav a", function(event){
+    		event.preventDefault();
+    		var productCode = $(this).closest("li").data("productCode");
+    		ACC.categorypage.replaceQuickViewDisplayContent(productCode);
+    	});
+    },
+    
+    bindVariantAttribute2Selection : function(){
+    	$(document).on("change", ".size-selector-container select", function(event){
+    		var productCode = $(this).find(":selected").data("productCode");
+    		ACC.categorypage.replaceQuickViewDisplayContent(productCode);
+    	});
+    },
+    
+    replaceQuickViewDisplayContent : function(productCode){
+    	$.ajax({
+			  url:ACC.config.contextPath + "/p/" + productCode + "/quickView",
+			  type: "GET",
+			  success: function(data) {
+				  $(".view-box").html(data);
+			  }
+		  });
     },
     
     bindOthers : function(){

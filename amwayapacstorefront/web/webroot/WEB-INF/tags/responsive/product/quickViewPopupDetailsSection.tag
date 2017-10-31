@@ -17,20 +17,15 @@
 	    <span>PV / BV:</span>
 	    <span class="product-list__item-abovalue PV-product-list__item-abovalue">${product.price.amwayValue.pointValue} / ${product.price.amwayValue.businessVolume}</span>
 	</div>
+	<product:productColorVariantSelector product="${product}"/>
 	<div class="cart-popup__quantity cart-popup__item-retailprice">
 	    <div class="amway-theme qty-selector js-qty-selector control-group">
+	        <product:productVariantSelector product="${product}"/>
 	        <div class="row">
-	            <div class="size-selector-container">
-	                <label class="control-label" for="pdpAddtoCartInput">Size</label>
-	                <select class="size-select text-center js-qty-selector-input form-control">
-	                    <option>60 Packets</option>
-	                    <option>30 Packets</option>
-	                </select>
-	            </div>
 	            <div class="qty-selector-container">
 	                <label class="control-label" for="pdpAddtoCartInput">Qty</label>
 	                <input type="text" maxlength="3" class="text-center js-qty-selector-input" size="1" value="1" data-max="FORCE_IN_STOCK" data-min="1" name="pdpAddtoCartInput" id="pdpAddtoCartInput">
-	                <product:quickViewStockStatusSection stockLevelStatus="${product.stock.stockLevelStatus}"/>
+	                <product:productStockStatusDisplay product="${product}"/>
 	            </div>
 	            <c:url value="${product.url}" var="productUrl"/>
 	            <a href="${productUrl}"><div class="view-more-details">View More Details</div></a>

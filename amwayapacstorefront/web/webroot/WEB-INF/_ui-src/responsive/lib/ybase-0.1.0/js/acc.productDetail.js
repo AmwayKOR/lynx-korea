@@ -108,7 +108,7 @@ ACC.productDetail = {
             ACC.productDetail.updateQtyValue(this, $(this).val());
         })
 
-        $("#Size").change(function () {
+        $(".page-productDetails #Size").change(function () {
             changeOnVariantOptionSelection($("#Size option:selected"));
         });
 
