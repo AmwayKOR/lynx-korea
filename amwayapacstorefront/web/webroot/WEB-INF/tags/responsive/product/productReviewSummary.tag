@@ -11,35 +11,17 @@
 <%@ attribute name="product" required="true"
 	type="de.hybris.platform.commercefacades.product.data.ProductData"%>
 
-<div class="rating">
-	<div class="rating-stars pull-left js-ratingCalc ${starsClass}" data-rating='{"rating":"${product.averageRating}","total":5}' >
-		<div class="greyStars">
-			<c:forEach  begin="1" end="5">
-				<span class="glyphicon glyphicon-star"></span>
-			</c:forEach>
-		</div>
-		<div class="greenStars js-greenStars">
-			<c:forEach  begin="1" end="5">
-				<span class="glyphicon glyphicon-star active"></span>
-			</c:forEach>
-		</div>
-	</div>
-
-	<c:if test="${not empty product.reviews}">
-		<spring:theme code="review.based.on"
-			arguments="${fn:length(product.reviews)}" />
-	</c:if>
-
-	<c:choose>
-		<c:when test="${showLinks}" >
-			<c:if test="${not empty product.reviews}">
-				<a href="#tabreview" class="js-openTab"><spring:theme code="review.see.reviews" /></a>
-			</c:if>
-			<a href="#tabreview" class="js-writeReviewTab"><spring:theme code="review.write.title" /></a>
-		</c:when>
-		<c:otherwise>
-			<spring:theme code="review.reviews" />
-		</c:otherwise>
-	</c:choose>
-	
+<div class="description-vote">
+    <c:forEach  begin="1" end="5">
+        <img src="${themeResourcePath}/images/star-empty.png" alt="star">
+    </c:forEach>
+    <a href="#tabreview">
+        <span class="description-number">${product.averageRating}</span>
+        <span class="description-reviews">
+            <c:if test="${not empty product.reviews}">
+                <spring:theme code="review.based.on"
+                    arguments="${fn:length(product.reviews)}" />
+            </c:if>
+        </span>
+    </a>
 </div>

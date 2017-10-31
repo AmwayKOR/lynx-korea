@@ -33,13 +33,7 @@
                                     <cms:component component="${component}" />
                                 </cms:pageSlot>
                             <hr class="description__line">
-                            <div class="description-vote">
-                                <img src="images/five_star.png" alt="star">
-                                <a href="#reviewsbody">
-                                <span class="description-number">4.0</span>
-                                <span class="description-reviews">(32 Reviews)</span>
-                                </a>
-                            </div>
+                            <product:productReviewSummary product="${product}" showLinks="true"/>
                             <product:productPricePanel product="${product}" />
                         </div>
 						<div class="col-sm-12 col-md-12">
