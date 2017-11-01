@@ -357,6 +357,24 @@ INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];nam
 ;;FooterSBComponent;Footer SB Component;FooterSBComponent;"/"
 
 
+########### Country Selector
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid,$contentCV)
+;;CountrySelectorSlot; Country Selector Links;true;amwayapacCountrySelectionCollectionComponent
+
+INSERT_UPDATE AmwayApacImageLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&componentRef;
+;;amwayapacChinaComponent;China;/;amwayapacChinaComponent
+;;amwayapacMalaysiaComponent;Malaysia;/;amwayapacMalaysiaComponent
+;;amwayapacPhilippinesComponent;Philippines;/;amwayapacPhilippinesComponent
+;;amwayapacKoreaComponent;Korea;/;amwayapacKoreaComponent
+;;amwayapacThailandComponent;Thailand;/;amwayapacThailandComponent
+;;amwayapacSingaporeComponent;Singapore;/;amwayapacSingaporeComponent
+;;amwayapacJapanComponent;Japan;/;amwayapacJapanComponent
+
+INSERT_UPDATE AmwayApacCountrySelectionCollectionComponent;$contentCV[unique=true];uid[unique=true];name;currentCountry(uid,$contentCV);countryLinks(uid,$contentCV)
+;;amwayapacCountrySelectionCollectionComponent; Country Selector Collection Component;amwayapacJapanComponent;amwayapacChinaComponent,amwayapacMalaysiaComponent,amwayapacPhilippinesComponent,amwayapacKoreaComponent,amwayapacThailandComponent,amwayapacSingaporeComponent,amwayapacJapanComponent;
+
+
 ######## Header Account Navigation
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid,$contentCV)
 ;;HeaderAccountNavigationSlot; Header Account Navigation Slot;true;accountNavigationCollectionComponent

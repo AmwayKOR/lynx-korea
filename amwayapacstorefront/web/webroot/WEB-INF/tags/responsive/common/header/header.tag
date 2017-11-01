@@ -45,7 +45,8 @@
 		                         	<cms:component component="${component}" />
                             	</cms:pageSlot>
                             <li class="account-popover__element sign-out">
-                                <a href="homepage-not-login.html" title="Sign Out">
+                               <c:url value="/logout" var="logoutUrl"/>
+                                <a href="${logoutUrl}" title="Sign Out">
                                     <i class="glyphicon glyphicon-log-out"></i>Sign Out</a>
                             </li>
                         </ul>
@@ -229,61 +230,11 @@
                               <cms:component component="${component}"/>
                           </cms:pageSlot>
                         </div>
+                        
                         <span class="dropdown">
-                            <button id="countrySelectorDropdown" class="btn small dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                <div class="wrapper">
-                                    <span class="flag-icon flag-icon-US">
-                                        <img class="topbar__flag" src="${themeResourcePath}/images/jp.jpg" alt="flag" /></span>
-                                    <span class="current-country-code">Japan</span>
-                                    <span class="icon icon-arrow-dropdown">
-                                        <i class="location-arrow-down glyphicon glyphicon-menu-down"></i>
-                                    </span>
-                                </div>
-                            </button>
-                            <ul class="dropdown-menu countryBox" aria-labelledby="countrySelectorDropdown">
-                                <li class="content-item">
-                                    <a class="country-item-link" href="">
-                                        <span class="flag-icon">
-                                            <img class="topbar__flag" src="${themeResourcePath}/images/cn.jpg" alt="flag" /></span>
-                                        <span class="country-item-text">China</span></a>
-                                </li>
-                                <li class="content-item">
-                                    <a class="country-item-link" href="">
-                                        <span class="flag-icon">
-                                            <img class="topbar__flag" src="${themeResourcePath}/images/my.jpg" alt="flag" /></span>
-                                        <span class="country-item-text">Malaysia</span></a>
-                                </li>
-                                <li class="content-item">
-                                    <a class="country-item-link" href="">
-                                        <span class="flag-icon">
-                                            <img class="topbar__flag" src="${themeResourcePath}/images/ph.jpg" alt="flag" /></span>
-                                        <span class="country-item-text">Philippines</span></a>
-                                </li>
-                                <li class="content-item">
-                                    <a class="country-item-link" href="">
-                                        <span class="flag-icon">
-                                            <img class="topbar__flag" src="${themeResourcePath}/images/kr.jpg" alt="flag" /></span>
-                                        <span class="country-item-text">Korea</span></a>
-                                </li>
-                                <li class="content-item">
-                                    <a class="country-item-link" href="">
-                                        <span class="flag-icon">
-                                            <img class="topbar__flag" src="${themeResourcePath}/images/th.jpg" alt="flag" /></span>
-                                        <span class="country-item-text">Thailand</span></a>
-                                </li>
-                                <li class="content-item">
-                                    <a class="country-item-link" href="">
-                                        <span class="flag-icon">
-                                            <img class="topbar__flag" src="${themeResourcePath}/images/sg.jpg" alt="flag" /></span>
-                                        <span class="country-item-text">Singapore</span></a>
-                                </li>
-                                <li class="content-item current-country">
-                                    <a class="country-item-link" href="">
-                                        <span class="flag-icon">
-                                            <img class="topbar__flag" src="${themeResourcePath}/images/jp.jpg" alt="flag" /></span>
-                                        <span class="country-item-text">Japan</span></a>
-                                </li>
-                            </ul>
+                              <cms:pageSlot position="CountrySelector" var="component">
+		                         	<cms:component component="${component}" />
+                            	</cms:pageSlot>
                         </span>
                         <form id="lang-form" class="hidden" action="#" method="post">
                             <div class="form-group">

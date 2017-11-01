@@ -296,6 +296,26 @@ UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];nodeTitle[lang
 ;ResourcesNode;;RESOURCES
 ;SupportNode;;SUPPORT
 
+################ Country Selector
+
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;folder(qualifier)[default='images'];altText
+;;chinaFlag;$siteResource/cn.jpg;;chinaFlag;;"China flag"
+;;malaysiaFlag;$siteResource/my.jpg;;malaysiaFlag;;"Malaysia flag"
+;;philippinesFlag;$siteResource/ph.jpg;;philippinesFlag;;"Philippines flag"
+;;koreaFlag;$siteResource/kr.jpg;;koreaFlag;;"Korea flag"
+;;thailandFlag;$siteResource/th.jpg;;thailandFlag;;"Thailand flag"
+;;singaporeFlag;$siteResource/sg.jpg;;singaporeFlag;;"Singapore flag"
+;;japanFlag;$siteResource/flag.jpg;;japanFlag;;"Japan flag"
+
+INSERT_UPDATE AmwayApacImageLinkComponent;$contentCV[unique=true];uid[unique=true];linkName;imageAttribute(code, $contentCV);&componentRef
+;;amwayapacChinaComponent;CHINA;chinaFlag;amwayapacChinaComponent
+;;amwayapacMalaysiaComponent;MALAYSIA;malaysiaFlag;amwayapacMalaysiaComponent
+;;amwayapacPhilippinesComponent;PHILIPPINES;philippinesFlag;amwayapacPhilippinesComponent
+;;amwayapacKoreaComponent;KOREA;koreaFlag;amwayapacKoreaComponent
+;;amwayapacThailandComponent;THAILAND;thailandFlag;amwayapacThailandComponent
+;;amwayapacSingaporeComponent;SINGAPORE;singaporeFlag;amwayapacSingaporeComponent
+;;amwayapacJapanComponent;JAPAN;japanFlag;amwayapacJapanComponent
+
 ############## Header Account Navigation
 
 UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];title[lang=$lang];links(uid, $contentCV)
@@ -591,8 +611,8 @@ INSERT_UPDATE AmwayApacTextImageComponent;$contentCV[unique=true];uid[unique=tru
 ;;amwayapactextImageComponent;"NUTRILITE";
 
 INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/png'];&imageRef;folder(qualifier)[default='images'];altText
-;;backgroundImageMedia;$siteResource/Amway/images/category_banner_image.png;;category_banner_image.png;;
-;;logoImageMedia;$siteResource/Amway/images/nutrition-icon.png;;nutrition-icon.png;;
+;;backgroundImageMedia;$siteResource/category_banner_image.png;;category_banner_image.png;;
+;;logoImageMedia;$siteResource/nutrition-icon.png;;nutrition-icon.png;;
 
 INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=true];linkName;buttonStyleAttributes;styleAttributes
 ;;amwayApacButtonLinkProductCategory;View Products;btn-blue-white;banner-button-link
@@ -645,9 +665,9 @@ INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];con
 
 
 INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;folder(qualifier)[default='images'];altText
-;;articleImageMedia;$siteResource/Amway/images/article_baner.png;;article_baner.png;;articleImageMedia;;
-;;brandImageMedia;$siteResource/Amway/images/iphone.png;;iphone.png;;brandImageMedia;;
-;;magazineImageMedia;$siteResource/Amway/images/magazine.png;;magazine.png;;magazineImageMedia;;
+;;articleImageMedia;$siteResource/article_baner.png;;article_baner.png;;articleImageMedia;;
+;;brandImageMedia;$siteResource/iphone.png;;iphone.png;;brandImageMedia;;
+;;magazineImageMedia;$siteResource/magazine.png;;magazine.png;;magazineImageMedia;;
 
 INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture
 ;;BannerSBComponent;articleImageMedia;
@@ -677,7 +697,7 @@ INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];con
 ;;footerNoticeDesc;"<div class=""tips""><div class=""toolTips""><div id=""triangle-down""></div>ABO/Member need a sponsor information for registration. Contact to a call center or an ABO to get the info...</div><a href=""javascript:void(0)"" class=""upTips""><i class=""icon icon-infos""></i></a></div>ABO/Member need a sponsor information for registration. Contact to a call center or an ABO to get the info before starting this process";
 
 INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;folder(qualifier)[default='images'];altText
-;;registerImageMedia;$siteResource/Amway/images/image-1.jpg;;image-1.jpg;;image-1.jpg;;
+;;registerImageMedia;$siteResource/image-1.jpg;;image-1.jpg;;image-1.jpg;;
 
 INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture
 ;;HeaderSBComponent;registerImageMedia;
