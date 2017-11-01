@@ -21,6 +21,11 @@
 				</td>
 			</tr>
 			<tr>
+				<td colspan="4"   class="structureViewSection">
+					<cockpit code="ProfileBarJumpTo" />
+				</td>
+			</tr>
+			<tr>
 				<td style="vertical-align:top;" class="structureViewSection">
 					<cockpit code="Section1A" />
 				</td>

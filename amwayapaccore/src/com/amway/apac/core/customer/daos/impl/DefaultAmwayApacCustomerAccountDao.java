@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.amway.apac.core.customer.daos.impl;
 
 import static com.amway.apac.core.constants.AmwayapacCoreConstants.TWO_HUNDRED_INT;
@@ -16,13 +13,13 @@ import com.amway.core.customer.dao.impl.DefaultAmwayCustomerAccountDao;
 
 
 /**
+ * Default implementation of {@link AmwayApacCustomerAccountDao}
+ *
  * @author Aaron Yong
  *
  */
 public class DefaultAmwayApacCustomerAccountDao extends DefaultAmwayCustomerAccountDao implements AmwayApacCustomerAccountDao
 {
-
-
 	/**
 	 * Query to search for order count based on user.
 	 */
@@ -30,6 +27,9 @@ public class DefaultAmwayApacCustomerAccountDao extends DefaultAmwayCustomerAcco
 			.append(OrderModel.PK).append("}) FROM {").append(OrderModel._TYPECODE).append(" as o} WHERE {o.")
 			.append(OrderModel.USER).append("} = ?").append(OrderModel.USER).toString();
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Integer findOrderCountsForUser(final UserModel user)
 	{
@@ -40,7 +40,6 @@ public class DefaultAmwayApacCustomerAccountDao extends DefaultAmwayCustomerAcco
 
 		final SearchResult result = search(fQuery);
 		return (result.getResult().get(0) != null && !result.getResult().isEmpty()) ? (Integer) result.getResult().get(0) : 0;
-
 	}
 
 }

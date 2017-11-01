@@ -140,8 +140,8 @@
 		<property name="baseOptionDataConverter" ref="baseOptionDataConverter"/>
 	</bean>
 	
-	<alias name="defaultAmwayApacCustomerAccountFacade" alias="customerAccountFacade"/>
-    <bean id="defaultAmwayApacCustomerAccountFacade" class="com.amway.apac.facades.customeraccount.impl.DefaultAmwayApacCustomerAccountFacade" parent="defaultAmwayOrderFacade">
+	<alias name="defaultAmwayApacOrderFacade" alias="amwayOrderFacade"/>
+    <bean id="defaultAmwayApacOrderFacade" class="com.amway.apac.facades.customeraccount.impl.DefaultAmwayApacOrderFacade" parent="defaultAmwayOrderFacade">
         <property name="amwayApacCustomerAccountService" ref="customeraccountService"/>
     </bean>
     
