@@ -248,7 +248,8 @@
 	<bean id="accountBreadcrumbBuilder" class="de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.impl.DefaultResourceBreadcrumbBuilder" >
 		<property name="i18nService" ref="i18nService" />
 		<property name="parentBreadcrumbLinkPath" value="/my-account"/>
-		<property name="parentBreadcrumbResourceKey" value="#{'responsive' == '${commerceservices.default.desktop.ui.experience}' ? '' : 'header.link.account'}"/>
+		<property name="parentBreadcrumbResourceKey" value="account.header.link"/>
+
 	</bean>
 
 	<bean id="multiStepCheckoutBreadcrumbBuilder" class="de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.impl.DefaultResourceBreadcrumbBuilder" >

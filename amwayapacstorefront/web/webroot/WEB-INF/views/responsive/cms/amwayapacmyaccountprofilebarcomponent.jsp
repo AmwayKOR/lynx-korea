@@ -8,7 +8,7 @@
 <div class="go-block col-sm-8">
     <div class="amway-theme">
         <div class="jump-to">
-            <span>Jump to</span>
+            <span><spring:theme code="account.jumpTo.label"/></span>
         </div>
         <div class="jump-to-wrapper">
             <select class="js-jump-to-selection hide select2-hidden-accessible" tabindex="-1" aria-hidden="true">

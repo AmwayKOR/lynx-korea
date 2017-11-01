@@ -6,5 +6,4 @@
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
 
 
-
-<option value="${component.url}" class="js-account-option-link text-capitalize" >${component.linkName}</option>
+<option value="${linkUrl}" class="js-account-option-link text-capitalize" >${component.linkName}</option>

@@ -14,14 +14,8 @@
 
 
 <template:page pageTitle="${pageTitle}">    
-    <div class="container-fluid main-container">
-        <div class="print-hide breadcrumb-section">
-            <ol class="breadcrumb">
-                <li>
-                    <a href="homepage.html">Home</a></li>
-                <li>My Account</li></ol>
-        </div>
-    </div>
+    
+    
     <div class="container-fluid my-count">
         <div class="row">
             <div class="container-lg">
@@ -130,24 +124,3 @@
         </div>
     </div>
 </template:page>
-
-<!-- 
-<template:page pageTitle="${pageTitle}">
-		<cms:pageSlot position="SideContent" var="feature" class="accountPageSideContent">
-			<cms:component component="${feature}" />
-		</cms:pageSlot>
-        <cms:pageSlot position="TopContent" var="feature" element="div" class="accountPageTopContent">
-            <cms:component component="${feature}" />
-        </cms:pageSlot>
-
-        <div class="account-section">
-            <cms:pageSlot position="BodyContent" var="feature" element="div" class="account-section-content">
-                <cms:component component="${feature}" />
-            </cms:pageSlot>
-        </div>
-
-        <cms:pageSlot position="BottomContent" var="feature" element="div" class="accountPageBottomContent">
-            <cms:component component="${feature}" />
-        </cms:pageSlot>
-</template:page>
--->

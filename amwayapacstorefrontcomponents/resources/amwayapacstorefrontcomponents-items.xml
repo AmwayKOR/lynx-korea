@@ -352,7 +352,7 @@
 			<description>We Are Amway Component</description>
 		</itemtype>
 
-		<itemtype code="AmwayApacMyAccountProfileBarComponent" generate="true" extends="CMSLinkComponent" autocreate="true" 
+		<itemtype code="AmwayApacMyAccountProfileBarComponent" generate="true" extends="SimpleCMSComponent" autocreate="true" 
 			jaloclass="com.amway.apac.core.jalo.components.AmwayApacMyAccountProfileBarComponent">
 			<description>My account profile bar</description>
 		</itemtype>

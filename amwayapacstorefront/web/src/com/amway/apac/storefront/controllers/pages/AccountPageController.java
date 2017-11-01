@@ -50,6 +50,7 @@ import de.hybris.platform.commerceservices.address.AddressVerificationDecision;
 import de.hybris.platform.commerceservices.customer.DuplicateUidException;
 import de.hybris.platform.commerceservices.search.pagedata.PageableData;
 import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
+import de.hybris.platform.commerceservices.util.ResponsiveUtils;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import de.hybris.platform.util.Config;
 
@@ -86,7 +87,7 @@ import com.amway.apac.storefront.controllers.ControllerConstants;
  * Controller for home page
  */
 @Controller
-@RequestMapping("/aaron")
+@RequestMapping("/account")
 public class AccountPageController extends AbstractSearchPageController
 {
 	private static final String TEXT_ACCOUNT_ADDRESS_BOOK = "text.account.addressBook";
@@ -272,18 +273,14 @@ public class AccountPageController extends AbstractSearchPageController
 	@RequestMapping(method = RequestMethod.GET)
 	public String account(final Model model, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
-		//		if (ResponsiveUtils.isResponsive())
-		//		{
-		//			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER, "system.error.page.not.found", null);
-		//			return REDIRECT_PREFIX + "/";
-		//		}
+		if (ResponsiveUtils.isResponsive())
+		{
+			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER, "system.error.page.not.found", null);
+			return REDIRECT_PREFIX + "/";
+		}
 
-		//aaron
 		model.addAttribute("ordersAmount", (amwayApacCustomerAccountFacade.getCustomerOrderCounts() == null) ? 0
 				: amwayApacCustomerAccountFacade.getCustomerOrderCounts());
-		model.addAttribute("bonusPaperCheck", true);
-		model.addAttribute("autoRenewal", true);
-		model.addAttribute("contractsAmount", 4);
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(ACCOUNT_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ACCOUNT_CMS_PAGE));

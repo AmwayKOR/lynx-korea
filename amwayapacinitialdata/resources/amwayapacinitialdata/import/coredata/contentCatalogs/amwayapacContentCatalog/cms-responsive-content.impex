@@ -1016,6 +1016,7 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 ;;SearchBox-AccountPage;SearchBox;;SearchBoxSlot;true
 ;;Mobile-NavigationBar-AccountPage;MobileNavigationBar;;MobileNavigationBarSlot;true
 ;;ProfileBarJumpTo-AccountPage;ProfileBarJumpTo;;ProfileBarJumpToSlot;true
+;;BreadCrumb-AccountPage;BreadCrumb;;BreadCrumbSlot;true
 
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ShoppingListsPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
 ;;SiteLogo-ShoppingListsPage;SiteLogo;;SiteLogoSlot;true
