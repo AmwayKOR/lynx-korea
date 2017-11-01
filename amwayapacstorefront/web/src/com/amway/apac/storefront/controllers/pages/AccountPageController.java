@@ -79,7 +79,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.amway.apac.facades.customeraccount.AmwayApacCustomerAccountFacade;
+import com.amway.apac.facades.customeraccount.AmwayApacOrderFacade;
 import com.amway.apac.storefront.controllers.ControllerConstants;
 
 
@@ -180,8 +180,8 @@ public class AccountPageController extends AbstractSearchPageController
 	@Resource(name = "addressDataUtil")
 	private AddressDataUtil addressDataUtil;
 
-	@Resource(name = "customerAccountFacade")
-	private AmwayApacCustomerAccountFacade amwayApacCustomerAccountFacade;
+	@Resource(name = "amwayOrderFacade")
+	private AmwayApacOrderFacade amwayApacOrderFacade;
 
 	protected PasswordValidator getPasswordValidator()
 	{
@@ -279,8 +279,8 @@ public class AccountPageController extends AbstractSearchPageController
 			return REDIRECT_PREFIX + "/";
 		}
 
-		model.addAttribute("ordersAmount", (amwayApacCustomerAccountFacade.getCustomerOrderCounts() == null) ? 0
-				: amwayApacCustomerAccountFacade.getCustomerOrderCounts());
+		model.addAttribute("ordersAmount",
+				(amwayApacOrderFacade.getCustomerOrderCounts() == null) ? 0 : amwayApacOrderFacade.getCustomerOrderCounts());
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(ACCOUNT_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ACCOUNT_CMS_PAGE));
