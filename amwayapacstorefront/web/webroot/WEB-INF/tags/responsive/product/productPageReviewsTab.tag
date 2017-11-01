@@ -11,24 +11,15 @@
 <c:url value="${product.url}/reviewhtml/all" var="getAllReviewsUrl"/>
 <c:url value="${product.url}/review" var="productReviewActionUrl"/>
 
-<div class="accordion-panel-heading" role="tab" id="reviews">
-    <div class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#productPageAccordion" href="#reviewsbody" aria-controls="bundleBody">
-        <h5 class="accordion-panel-title">
-            <span class="accordion-title-wrapper">
-                <span class="title-element accordion-header-icon"></span>
-                <span class="title-element title-text">reviews</span>
-                <span class="title-element accordion-icon-wrapper"></span>
-            </span>
-        </h5>
-    </div>
-</div>
-<div id="reviewsbody" class="accordion-panel-collapse collapse">
-    <div class="product-collapse__rating">
-        <p class="product-collapse__review">
-            <a href="#" class="product-description__readmore">
-                <img class="product-collapse__review-icon" src="${themeResourcePath}/images/review.png">Review This Item
-            </a>
-        </p>
-    </div>
+<div class="product-collapse__rating">
+    <img src="${themeResourcePath}/images/review.png" alt="reviews">
+    <p class="product-collapse__review">
+        <a href="#" class="product-description__readmore">
+            <img class="product-collapse__review-icon" src="images/review.png"><spring:theme code="review.reviews.add" />
+        </a>
+    </p>
     <ul id="reviews" class="review-list" data-reviews="${getPageOfReviewsUrl}"  data-allreviews="${getAllReviewsUrl}"></ul>
+    <p class="more">
+        <a href="#" class="all-reviews-btn"><spring:theme code="review.show.all" /></a>
+    </p>
 </div>

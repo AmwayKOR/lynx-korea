@@ -4,8 +4,10 @@
 
 <div class="amway-theme">
     <div class="accordion-element" id="productPageAccordion" role="tablist" aria-multiselectable="true">
-        <c:forEach var="component" items="${components}">
-            <cms:component component="${component}" />
-        </c:forEach>
+        <div class="js-tabs accordion-panel">
+            <c:forEach var="component" items="${components}">
+                <cms:component component="${component}" />
+            </c:forEach>
+        </div>
     </div>
 </div>
