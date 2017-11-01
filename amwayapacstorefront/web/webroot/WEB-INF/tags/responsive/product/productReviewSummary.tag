@@ -11,12 +11,13 @@
 <%@ attribute name="product" required="true"
 	type="de.hybris.platform.commercefacades.product.data.ProductData"%>
 
+<fmt:parseNumber var="averageRating" type="number" integerOnly="true" value="${product.averageRating}" />
 <div class="description-vote">
     <c:forEach  begin="1" end="5">
         <img src="${themeResourcePath}/images/star-empty.png" alt="star">
     </c:forEach>
     <a href="#tabreview" class="js-openTab">
-        <span class="description-number">${product.averageRating}</span>
+        <span class="description-number">${averageRating}</span>
         <span class="description-reviews">
             <c:if test="${not empty product.reviews}">
                 <spring:theme code="review.based.on"
