@@ -6,6 +6,7 @@
 <%@ taglib prefix="product" tagdir="/WEB-INF/tags/responsive/product"%>
 <%@ taglib prefix="component" tagdir="/WEB-INF/tags/shared/component"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 <c:url value="${url}" var="addToCartUrl"/>
@@ -25,15 +26,25 @@
                                         <p class="amway-suggest__item-title">${productReference.target.name}</p>
                                         <p class="amway-suggest__item-count">30 Count</p>
                                         <p class="amway-suggest__item-number"><spring:theme code="product.item.number.label" />: ${fn:escapeXml(productReference.target.code)}</p>
+
                                         <div class="amway-suggest__item-title amway-suggest__item-aboprice">
-                                            <span class="amway-suggest__item-abolabel"><spring:theme code="product.volumePrices.column.aboCost" />:</span>
+                                            <span class="amway-suggest__item-abolabel">
+                                                <sec:authorize access="!hasAnyRole('ROLE_ANONYMOUS')">
+                                                    <spring:theme code="product.volumePrices.column.aboCost" />:
+                                                </sec:authorize>
+                                                <sec:authorize access="hasAnyRole('ROLE_ANONYMOUS')">
+                                                    <spring:theme code="product.volumePrices.column.price" />:
+                                                </sec:authorize>
+                                            </span>
                                             <span class="amway-suggest__item-abovalue"><format:fromPrice priceData="${productReference.target.price}" /></span></div>
-                                        <div class="amway-suggest__item-retailprice">
-                                            <span class="amway-suggest__item-abolabel"><spring:theme code="product.volumePrices.column.retailPrice" /></span>
-                                            <span class="amway-suggest__item-abovalue"><format:fromPrice priceData="${productReference.target.price}" /></span></div>
-                                        <div class="amway-suggest__item-retailprice">
-                                            <span class="amway-suggest__item-abolabel"><spring:theme code="product.volumePrices.column.pvBV" /></span>
-                                            <span class="amway-suggest__item-abovalue">${product.price.amwayValue.pointValue} / ${product.price.amwayValue.businessVolume}</span></div>
+                                        <sec:authorize access="!hasAnyRole('ROLE_ANONYMOUS')">
+                                            <div class="amway-suggest__item-retailprice">
+                                                <span class="amway-suggest__item-abolabel"><spring:theme code="product.volumePrices.column.retailPrice" /></span>
+                                                <span class="amway-suggest__item-abovalue"><format:fromPrice priceData="${productReference.target.price}" /></span></div>
+                                            <div class="amway-suggest__item-retailprice">
+                                                <span class="amway-suggest__item-abolabel"><spring:theme code="product.volumePrices.column.pvBV" /></span>
+                                                <span class="amway-suggest__item-abovalue">${product.price.amwayValue.pointValue} / ${product.price.amwayValue.businessVolume}</span></div>
+                                        </sec:authorize>
                                     </div>
                                 </div>
                                 <div class="amway-suggest__item-link">
