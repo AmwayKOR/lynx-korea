@@ -40,6 +40,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.amway.apac.storefront.controllers.ControllerConstants;
+
 
 /**
  * Controller for a category page
@@ -85,12 +87,40 @@ public class CategoryPageController extends AbstractCategoryPageController
 			@RequestParam(value = "q", required = false) final String searchQuery,
 			@RequestParam(value = "page", defaultValue = "0") final int page,
 			@RequestParam(value = "show", defaultValue = "Page") final ShowMode showMode,
+			@RequestParam(value = "sort", required = false) final String sortCode) throws UnsupportedEncodingException
+	{
+		return performSearchAndGetResultsData(categoryCode, searchQuery, page, showMode, sortCode);
+	}
+
+	/**
+	 * Controller that fetches result through for "Show More" functionality.
+	 *
+	 * @param categoryCode
+	 *           code of category whose categoryPage is being visited.
+	 * @param searchQuery
+	 *           combination of facet and sort required.
+	 * @param page
+	 *           pageNumber for which paginated data is being fetched
+	 * @param showMode
+	 *           mode in which data is being processed
+	 * @param sortCode
+	 *           code for sort in which products are supposed to be displayed
+	 * @param model
+	 * @return view for the listing page.
+	 * @throws UnsupportedEncodingException
+	 */
+	@RequestMapping(value = CATEGORY_CODE_PATH_VARIABLE_PATTERN + "/results-display", method = RequestMethod.GET)
+	public String getResultsDisplay(@PathVariable("categoryCode") final String categoryCode,
+			@RequestParam(value = "q", required = false) final String searchQuery,
+			@RequestParam(value = "page", defaultValue = "0") final int page,
+			@RequestParam(value = "show", defaultValue = "Page") final ShowMode showMode,
 			@RequestParam(value = "sort", required = false) final String sortCode, final Model model,
 			final HttpServletRequest request, final HttpServletResponse response) throws UnsupportedEncodingException
 	{
 		performSearchAndGetResultsPage(categoryCode, searchQuery, page, showMode, sortCode, model, request, response);
-		return performSearchAndGetResultsData(categoryCode, searchQuery, page, showMode, sortCode);
+		return ControllerConstants.Views.Fragments.Category.ProductListingFragment;
 	}
+
 
 
 	/**

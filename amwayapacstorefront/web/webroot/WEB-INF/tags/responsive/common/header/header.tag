@@ -467,7 +467,8 @@
                     <div class="col-sm-12 col-md-4 top-search print-hide">
                         <div class="site-search">
                             <div class="ui-front">
-                                <form name="search_form_SearchBox" method="get" action="">
+                            	<c:url var="searchPageUrl" value="/search"/>
+                                <form name="search_form_SearchBox" method="get" action="${searchPageUrl}">
                                     <div class="input-group">
                                         <input type="text" class="form-control js-site-search-input ui-autocomplete-input" name="text" value="" maxlength="100" placeholder="Search" data-options="{&quot;autocompleteUrl&quot; : &quot;/lynxstorefront/lynx/en/search/autocomplete/SearchBox&quot;,&quot;minCharactersBeforeRequest&quot; : &quot;2&quot;,&quot;waitTimeBeforeRequest&quot; : &quot;500&quot;,&quot;displayProductImages&quot; : true}" autocomplete="off" />
                                         <span class="input-group-btn">

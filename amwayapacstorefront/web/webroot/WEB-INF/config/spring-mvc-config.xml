@@ -224,9 +224,11 @@
 		<property name="productService" ref="productService"/>
 	</bean>
 
-	<bean id="searchBreadcrumbBuilder" class="de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.impl.SearchBreadcrumbBuilder" >
+	<bean id="searchBreadcrumbBuilder" class="com.amway.apac.storefront.breadcrumb.impl.AmwayApacSearchBreadcrumbBuilder" >
 		<property name="commerceCategoryService" ref="commerceCategoryService"/>
 		<property name="categoryModelUrlResolver" ref="categoryModelUrlResolver"/>
+		<property name="searchBreadcrumbPrefix" value="search.breadcrumb.prefix"/>
+		<property name="i18nService" ref="i18nService" />
 	</bean>
 
 	<bean id="contentPageBreadcrumbBuilder" class="de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.impl.ContentPageBreadcrumbBuilder" />

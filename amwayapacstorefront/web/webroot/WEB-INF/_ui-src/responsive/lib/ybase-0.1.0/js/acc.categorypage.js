@@ -9,7 +9,8 @@ ACC.categorypage = {
         "bindFacetApplyButton",
         "bindColorVariantSelection",
         "bindVariantAttribute2Selection",
-        "bindOthers"
+        "bindOtherCategoryPageJs",
+        "bindOtherSearchPageJs"
         ],
 
     
@@ -144,7 +145,7 @@ ACC.categorypage = {
 		  });
     },
     
-    bindOthers : function(){
+    bindOtherCategoryPageJs : function(){
     	//search box click event
     	$(".icon-search").click(function(e) {
     		e.preventDefault();
@@ -178,6 +179,54 @@ ACC.categorypage = {
         var W = $(window).width();
         var cW = $("#add-to-cart-box.cbox").width();
         $("#add-to-cart-box.cbox").css("left", (W - cW) / 2);
+    },
+    
+    bindOtherSearchPageJs : function(){
+    	$('.content-button').click(function(e) {
+            e.preventDefault();
+            $('.content-button').add('active');
+            $('.product-button').remove('active');
+            $('.product-search').hide();
+            $('.content-search').show();
+        });
+        $('.product-button').click(function(e) {
+            e.preventDefault();
+            $('.product-button').add('active');
+            $('.content-button').remove('active');
+            $('.content-search').hide();
+            $('.product-search').show();
+        });
+        /*//fillters checkbox
+        $(".facet__list__label").click(function(e) {
+            e.preventDefault();
+            if ($(this).prev().prop("checked") == false) {
+                $(this).prev().prop("checked", true);
+            } else {
+                $(this).prev().prop("checked", false);
+            }
+        });
+        //search box click event
+        $(".icon-search").click(function(e) {
+            e.preventDefault();
+            var value = $(".form-control.js-site-search-input.ui-autocomplete-input[placeholder]").val();
+            console.log(value);
+            if (value == 'did you mean') {
+                window.location.href = "Did-you-mean.html";
+            } else if (value == 'artistry') {
+                window.location.href = "search-result-page.html";
+            } else {
+                window.location.href = "search-no-result.html";
+            }
+        });
+        //right part list item check event
+        $(".checkbox-element-wrapper").click(function(e){
+            e.preventDefault();
+            if ($(this).children('input').prop("checked") == false) {
+                $(this).children('input').prop("checked", true);
+            } else {
+                $(this).children('input').prop("checked", false);
+            }
+        });*/
     }
     
     

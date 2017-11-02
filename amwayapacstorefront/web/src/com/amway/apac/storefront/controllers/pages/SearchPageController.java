@@ -51,6 +51,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.amway.apac.storefront.controllers.ControllerConstants;
 import com.sap.security.core.server.csi.XSSEncoder;
 
 
@@ -162,6 +163,48 @@ public class SearchPageController extends AbstractSearchPageController
 			@RequestParam(value = "text", required = false) final String searchText, final HttpServletRequest request,
 			final Model model) throws CMSItemNotFoundException
 	{
+		getSearchResults(searchQuery, page, showMode, sortCode, searchText, request, model);
+		return getViewForPage(model);
+	}
+
+
+	@RequestMapping(value = "/results-display", method = RequestMethod.GET)
+	public String getResultsDisplay(@RequestParam("q") final String searchQuery,
+			@RequestParam(value = "page", defaultValue = "0") final int page,
+			@RequestParam(value = "show", defaultValue = "Page") final ShowMode showMode,
+			@RequestParam(value = "sort", required = false) final String sortCode,
+			@RequestParam(value = "text", required = false) final String searchText, final HttpServletRequest request,
+			final Model model) throws CMSItemNotFoundException
+	{
+		getSearchResults(searchQuery, page, showMode, sortCode, searchText, request, model);
+		return ControllerConstants.Views.Fragments.Category.ProductListingFragment;
+	}
+
+	/**
+	 * Method to fetch results based or searched text.
+	 *
+	 * @param searchQuery
+	 *           combination of facet and sort required.
+	 * @param page
+	 *           pageNumber for which paginated data is being fetched
+	 * @param showMode
+	 *           mode in which data is being processed
+	 * @param sortCode
+	 *           code for sort in which products are supposed to be displayed
+	 * @param searchText
+	 *           search text for which search results to be displayed.
+	 * @param request
+	 *           HTTP request
+	 * @param model
+	 *           View Model
+	 *
+	 * @throws CMSItemNotFoundException
+	 *
+	 */
+	private void getSearchResults(final String searchQuery, final int page, final ShowMode showMode, final String sortCode,
+			final String searchText, final HttpServletRequest request, final Model model) throws CMSItemNotFoundException
+	{
+
 		final ProductSearchPageData<SearchStateData, ProductData> searchPageData = performSearch(searchQuery, page, showMode,
 				sortCode, getSearchPageSize());
 
@@ -192,7 +235,6 @@ public class SearchPageController extends AbstractSearchPageController
 		final String metaKeywords = MetaSanitizerUtil.sanitizeKeywords(searchText);
 		setUpMetaData(model, metaKeywords, metaDescription);
 
-		return getViewForPage(model);
 	}
 
 	protected ProductSearchPageData<SearchStateData, ProductData> performSearch(final String searchQuery, final int page,

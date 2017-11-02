@@ -8,18 +8,6 @@
 <%@ taglib prefix="category" tagdir="/WEB-INF/tags/responsive/category" %>
 
 <template:page pageTitle="${pageTitle}">
-            <div class="container-fluid main-container">
-                <div class="print-hide breadcrumb-section">
-                    <ol class="breadcrumb">
-                        <li>
-                            <a href="homepage.html">Home</a></li>
-                        <!--<li>-->
-                            <!--<a href="#">Amway Catalog</a></li>-->
-                        <li>
-                            <a href="categoryPage.html">Nutrition</a></li>
-                        <li class="active">Vitamins & Supplements</li></ol>
-                </div>
-            </div>
             <div class="container-fluid main-container new-plp">
                 <div class="row">
                     <h1 class="col-sm-12 product-list-page-title">${categoryName}</h1>
