@@ -12,6 +12,7 @@
 
 <c:if test="${not empty reviews}">
 	<c:forEach items="${reviews}" var="review" varStatus="status">
+
 		<p class="product-collapse__review">
 		    <c:forEach  begin="1" end="5">
                 <img src="${themeResourcePath}/images/star-empty.png" alt="star">

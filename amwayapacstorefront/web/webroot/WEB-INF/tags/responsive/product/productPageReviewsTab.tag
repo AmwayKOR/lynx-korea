@@ -11,15 +11,14 @@
 <c:url value="${product.url}/reviewhtml/all" var="getAllReviewsUrl"/>
 <c:url value="${product.url}/review" var="productReviewActionUrl"/>
 
+
 <div class="product-collapse__rating">
-    <img src="${themeResourcePath}/images/review.png" alt="reviews">
     <p class="product-collapse__review">
         <a href="#" class="product-description__readmore">
-            <img class="product-collapse__review-icon" src="images/review.png"><spring:theme code="review.reviews.add" />
-        </a>
-    </p>
-    <ul id="reviews" class="review-list" data-reviews="${getPageOfReviewsUrl}"  data-allreviews="${getAllReviewsUrl}"></ul>
+            <img class="product-collapse__review-icon" src="${themeResourcePath}/images/review.png"><spring:theme code="review.reviews.add" /></a></p>
+<div>
+<ul id="reviews" class="review-list" data-reviews="${getPageOfReviewsUrl}"  data-allreviews="${getAllReviewsUrl}"></ul>
+<div class="product-collapse__rating">
     <p class="more">
-        <a href="#" class="all-reviews-btn"><spring:theme code="review.show.all" /></a>
-    </p>
+        <a href="#" class="all-reviews-btn"><spring:theme code="review.show.all" /></a></p>
 </div>

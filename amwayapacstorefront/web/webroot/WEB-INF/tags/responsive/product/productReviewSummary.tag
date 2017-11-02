@@ -16,7 +16,7 @@
     <c:forEach  begin="1" end="5">
         <img src="${themeResourcePath}/images/star-empty.png" alt="star">
     </c:forEach>
-    <a href="#tabreview" class="js-openTab">
+    <a href="#tabreview" class="js-openTab" id="tabreview">
         <span class="description-number">${averageRating}</span>
         <span class="description-reviews">
             <c:if test="${not empty product.reviews}">
