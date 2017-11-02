@@ -279,8 +279,7 @@ public class AccountPageController extends AbstractSearchPageController
 			return REDIRECT_PREFIX + "/";
 		}
 
-		model.addAttribute("ordersAmount",
-				(amwayApacOrderFacade.getCustomerOrderCounts() == null) ? 0 : amwayApacOrderFacade.getCustomerOrderCounts());
+		model.addAttribute("ordersAmount", amwayApacOrderFacade.getCustomerOrderCounts());
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(ACCOUNT_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ACCOUNT_CMS_PAGE));

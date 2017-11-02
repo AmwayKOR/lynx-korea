@@ -8,6 +8,9 @@ import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 import de.hybris.platform.servicelayer.search.SearchResult;
 
+import org.apache.commons.collections.CollectionUtils;
+
+import com.amway.apac.core.constants.AmwayapacCoreConstants;
 import com.amway.apac.core.customer.daos.AmwayApacCustomerAccountDao;
 import com.amway.core.customer.dao.impl.DefaultAmwayCustomerAccountDao;
 
@@ -39,7 +42,8 @@ public class DefaultAmwayApacCustomerAccountDao extends DefaultAmwayCustomerAcco
 		fQuery.addQueryParameter(OrderModel.USER, user);
 
 		final SearchResult result = search(fQuery);
-		return (result.getResult().get(0) != null && !result.getResult().isEmpty()) ? (Integer) result.getResult().get(0) : 0;
+		return (CollectionUtils.isNotEmpty(result.getResult())) ? (Integer) result.getResult().iterator().next()
+				: AmwayapacCoreConstants.ZERO_INT;
 	}
 
 }

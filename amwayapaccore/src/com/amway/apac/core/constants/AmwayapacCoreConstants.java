@@ -42,6 +42,10 @@ public final class AmwayapacCoreConstants extends GeneratedAmwayapacCoreConstant
 	 */
 	public static final String TARGET_STRING = "target";
 
+	/**
+	 * int constant - 0.
+	 */
+	public static final Integer ZERO_INT = Integer.valueOf(0);
 
 	/**
 	 * int constant - 50.
