@@ -1,5 +1,7 @@
 package com.amway.apac.facades.populators;
 
+import static com.amway.apac.core.constants.AmwayapacCoreConstants.PRODUCT_LIST_GRID_FORMAT;
+
 import de.hybris.platform.commercefacades.product.data.ImageData;
 import de.hybris.platform.commerceservices.search.resultdata.SearchResultValueData;
 
@@ -24,8 +26,8 @@ public class AmwayApacSearchResultProductPopulator extends AmwaySearchResultProd
 	@Override
 	protected List<ImageData> createImageData(final SearchResultValueData source)
 	{
-		final List<ImageData> result = new ArrayList<ImageData>();
-		addImageData(source, "productGrid", result);
+		final List<ImageData> result = new ArrayList<>();
+		addImageData(source, PRODUCT_LIST_GRID_FORMAT, result);
 		return result;
 	}
 

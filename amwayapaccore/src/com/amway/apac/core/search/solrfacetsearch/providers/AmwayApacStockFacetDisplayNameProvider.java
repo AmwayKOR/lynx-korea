@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Required;
 
 
 /**
- * @author shubhamgoyal
+ * Stock facet display name provider for UI display of facet.
+ *
+ * @author Shubham Goyal
  */
 
 public class AmwayApacStockFacetDisplayNameProvider extends AbstractFacetValueDisplayNameProvider
@@ -26,7 +28,7 @@ public class AmwayApacStockFacetDisplayNameProvider extends AbstractFacetValueDi
 			return getEnumerationService().getEnumerationName(StockLevelStatus.valueOf(facetValue));
 		}
 
-		return null;
+		return facetValue;
 	}
 
 

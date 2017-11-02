@@ -1,7 +1,6 @@
-/**
- *
- */
 package com.amway.apac.core.search.solrfacetsearch.providers;
+
+import static com.amway.apac.core.constants.AmwayapacCoreConstants.HUNDRED_INT;
 
 import de.hybris.platform.catalog.model.CatalogVersionModel;
 import de.hybris.platform.core.model.c2l.CurrencyModel;
@@ -24,18 +23,22 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Required;
 
-import com.amway.apac.core.constants.AmwayapacCoreConstants;
 import com.amway.apac.core.product.strategies.AmwayApacPrimaryVariantSelectionStrategy;
 import com.amway.core.constants.AmwaycoreConstants;
 import com.amway.core.search.solrfacetsearch.provider.impl.ABOPriceValueProvider;
 
 
 /**
+ * Overriding the AmwayCore Implementation to get primary variant values for base variant product indexing.
  *
+ * @author Shubham Goyal
  */
 public class AmwayApacABOPriceValueProvider extends ABOPriceValueProvider
 {
-	private static final Logger LOG = LoggerFactory.getLogger(AmwayApacABOPriceValueProvider.class);
+	/**
+	 * Logger instance to record events at class level
+	 */
+	private static final Logger LOGGER = LoggerFactory.getLogger(AmwayApacABOPriceValueProvider.class);
 
 	private AmwayApacPrimaryVariantSelectionStrategy amwayApacPrimaryVariantSelectionStrategy;
 
@@ -61,10 +64,9 @@ public class AmwayApacABOPriceValueProvider extends ABOPriceValueProvider
 				ProductModel productToIndex = productModel;
 				if (CollectionUtils.isNotEmpty(productToIndex.getVariants()))
 				{
-					if (LOG.isInfoEnabled())
+					if (LOGGER.isInfoEnabled())
 					{
-						LOG.info(new StringBuilder(AmwayapacCoreConstants.HUNDRED_INT).append("The product with code [")
-								.append(productModel.getCode())
+						LOGGER.info(new StringBuilder(HUNDRED_INT).append("The product with code [").append(productModel.getCode())
 								.append("] is a base product, fetching primary variant to display the ABO Price.").toString());
 					}
 					productToIndex = amwayApacPrimaryVariantSelectionStrategy.getPrimaryVariant(productToIndex);

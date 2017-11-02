@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.amway.apac.core.search.solrfacetsearch.resolvers;
 
 import de.hybris.platform.core.model.product.ProductModel;
@@ -14,13 +11,12 @@ import java.util.Date;
 
 
 /**
- * @author shubhamgoyal
+ * Resolver to index Creation Time for products.
  *
+ * @author Shubham Goyal
  */
 public class AmwayApacProductCreationTimeValueResolver extends AbstractValueResolver<ProductModel, Object, Date>
 {
-
-
 	@Override
 	protected void addFieldValues(final InputDocument document, final IndexerBatchContext batchContext,
 			final IndexedProperty indexedProperty, final ProductModel model,
@@ -28,5 +24,4 @@ public class AmwayApacProductCreationTimeValueResolver extends AbstractValueReso
 	{
 		document.addField(indexedProperty, model.getCreationtime(), resolverContext.getFieldQualifier());
 	}
-
 }

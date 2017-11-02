@@ -1,7 +1,6 @@
-/**
- *
- */
 package com.amway.apac.core.search.solrfacetsearch.resolvers;
+
+import static com.amway.apac.core.constants.AmwayapacCoreConstants.HUNDRED_INT;
 
 import de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.ProductPricesValueResolver;
 import de.hybris.platform.core.model.product.ProductModel;
@@ -16,17 +15,20 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Required;
 
-import com.amway.apac.core.constants.AmwayapacCoreConstants;
 import com.amway.apac.core.product.strategies.AmwayApacPrimaryVariantSelectionStrategy;
 
 
 /**
+ * Overriding the AmwayCore Implementation to get primary variant values for base variant product indexing.
  *
+ * @author Shubham Goyal
  */
 public class AmwayApacProductPricesValueResolver extends ProductPricesValueResolver
 {
-
-	private final Logger LOG = LoggerFactory.getLogger(AmwayApacProductPricesValueResolver.class);
+	/**
+	 * Logger instance to record events at class level
+	 */
+	private final Logger LOGGER = LoggerFactory.getLogger(AmwayApacProductPricesValueResolver.class);
 
 	private AmwayApacPrimaryVariantSelectionStrategy amwayApacPrimaryVariantSelectionStrategy;
 
@@ -34,19 +36,23 @@ public class AmwayApacProductPricesValueResolver extends ProductPricesValueResol
 	protected List<PriceInformation> loadPriceInformations(final Collection<IndexedProperty> indexedProperties,
 			final ProductModel product)
 	{
-		ProductModel productToIndex = product;
-		if (CollectionUtils.isNotEmpty(productToIndex.getVariants()))
-		{
-			if (LOG.isInfoEnabled())
-			{
-				LOG.info(new StringBuilder(AmwayapacCoreConstants.HUNDRED_INT).append("The product with code [")
-						.append(product.getCode()).append("] is a base product, fetching primary variant to display the price.")
-						.toString());
-			}
-			productToIndex = getAmwayApacPrimaryVariantSelectionStrategy().getPrimaryVariant(productToIndex);
-		}
+		return getPriceService().getPriceInformationsForProduct(getResolvedProduct(product));
+	}
 
-		return getPriceService().getPriceInformationsForProduct(productToIndex);
+
+	private ProductModel getResolvedProduct(final ProductModel product)
+	{
+		ProductModel resolvedProduct = product;
+		if (CollectionUtils.isNotEmpty(product.getVariants()))
+		{
+			if (LOGGER.isInfoEnabled())
+			{
+				LOGGER.info(new StringBuilder(HUNDRED_INT).append("The product with code [").append(product.getCode())
+						.append("] is a base product, fetching primary variant to display the price.").toString());
+			}
+			resolvedProduct = getAmwayApacPrimaryVariantSelectionStrategy().getPrimaryVariant(product);
+		}
+		return resolvedProduct;
 	}
 
 	/**

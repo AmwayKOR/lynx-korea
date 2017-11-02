@@ -12,8 +12,11 @@ package com.amway.apac.storefront.controllers.pages;
 
 
 import de.hybris.platform.acceleratorservices.controllers.page.PageType;
+import de.hybris.platform.acceleratorservices.data.RequestContextData;
 import de.hybris.platform.acceleratorstorefrontcommons.constants.WebConstants;
+import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractCategoryPageController;
+import de.hybris.platform.acceleratorstorefrontcommons.util.MetaSanitizerUtil;
 import de.hybris.platform.category.model.CategoryModel;
 import de.hybris.platform.cms2.model.pages.CategoryPageModel;
 import de.hybris.platform.commercefacades.product.data.CategoryData;
@@ -28,6 +31,7 @@ import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,8 +39,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.amway.apac.storefront.controllers.ControllerConstants;
 
 
 /**
@@ -55,6 +57,14 @@ public class CategoryPageController extends AbstractCategoryPageController
 			@RequestParam(value = "sort", required = false) final String sortCode, final Model model,
 			final HttpServletRequest request, final HttpServletResponse response) throws UnsupportedEncodingException
 	{
+		final CategoryModel category = getCommerceCategoryService().getCategoryForCode(categoryCode);
+
+		final String redirection = checkRequestUrl(request, response, getCategoryModelUrlResolver().resolve(category));
+		if (StringUtils.isNotEmpty(redirection))
+		{
+			return redirection;
+		}
+
 		return performSearchAndGetResultsPage(categoryCode, searchQuery, page, showMode, sortCode, model, request, response);
 	}
 
@@ -75,44 +85,21 @@ public class CategoryPageController extends AbstractCategoryPageController
 			@RequestParam(value = "q", required = false) final String searchQuery,
 			@RequestParam(value = "page", defaultValue = "0") final int page,
 			@RequestParam(value = "show", defaultValue = "Page") final ShowMode showMode,
-			@RequestParam(value = "sort", required = false) final String sortCode) throws UnsupportedEncodingException
+			@RequestParam(value = "sort", required = false) final String sortCode, final Model model,
+			final HttpServletRequest request, final HttpServletResponse response) throws UnsupportedEncodingException
 	{
+		performSearchAndGetResultsPage(categoryCode, searchQuery, page, showMode, sortCode, model, request, response);
 		return performSearchAndGetResultsData(categoryCode, searchQuery, page, showMode, sortCode);
 	}
 
 
 	/**
-	 * Controller that fetches result through for "Show More" functionality.
-	 *
-	 * @param categoryCode
-	 *           code of category whose categoryPage is being visited.
-	 * @param searchQuery
-	 *           combination of facet and sort required.
-	 * @param page
-	 *           pageNumber for which paginated data is being fetched
-	 * @param showMode
-	 *           mode in which data is being processed
-	 * @param sortCode
-	 *           code for sort in which products are supposed to be displayed
-	 * @param model
-	 * @return view for the listing page.
-	 * @throws UnsupportedEncodingException
+	 * Overriding OOTB method to remove URL redirection.
 	 */
-	@RequestMapping(value = CATEGORY_CODE_PATH_VARIABLE_PATTERN + "/results-display", method = RequestMethod.GET)
-	public String getResultsDisplay(@PathVariable("categoryCode") final String categoryCode,
-			@RequestParam(value = "q", required = false) final String searchQuery,
-			@RequestParam(value = "page", defaultValue = "0") final int page,
-			@RequestParam(value = "show", defaultValue = "Page") final ShowMode showMode,
-			@RequestParam(value = "sort", required = false) final String sortCode, final Model model)
-					throws UnsupportedEncodingException
-	{
-		return performSearchAndGetResultsDataDisplay(categoryCode, searchQuery, page, showMode, sortCode, model);
-	}
-
-
-
-	private String performSearchAndGetResultsDataDisplay(final String categoryCode, final String searchQuery, final int page, // NOSONAR
-			final ShowMode showMode, final String sortCode, final Model model) throws UnsupportedEncodingException
+	@Override
+	protected String performSearchAndGetResultsPage(final String categoryCode, final String searchQuery, final int page, // NOSONAR
+			final ShowMode showMode, final String sortCode, final Model model, final HttpServletRequest request,
+			final HttpServletResponse response) throws UnsupportedEncodingException
 	{
 		final CategoryModel category = getCommerceCategoryService().getCategoryForCode(categoryCode);
 
@@ -134,6 +121,9 @@ public class CategoryPageController extends AbstractCategoryPageController
 
 		final boolean showCategoriesOnly = categorySearch.isShowCategoriesOnly();
 
+		storeCmsPageInModel(model, categorySearch.getCategoryPage());
+		storeContinueUrl(request);
+
 		populateModel(model, searchPageData, showMode);
 		model.addAttribute(WebConstants.BREADCRUMBS_KEY, getSearchBreadcrumbBuilder().getBreadcrumbs(categoryCode, searchPageData));
 		model.addAttribute("showCategoriesOnly", Boolean.valueOf(showCategoriesOnly));
@@ -141,7 +131,22 @@ public class CategoryPageController extends AbstractCategoryPageController
 		model.addAttribute("pageType", PageType.CATEGORY.name());
 		model.addAttribute("userLocation", getCustomerLocationService().getUserLocation());
 
-		return ControllerConstants.Views.Fragments.Category.ProductListingFragment;
+		updatePageTitle(category, model);
+
+		final RequestContextData requestContextData = getRequestContextData(request);
+		requestContextData.setCategory(category);
+		requestContextData.setSearch(searchPageData);
+
+		if (searchQuery != null)
+		{
+			model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_FOLLOW);
+		}
+
+		final String metaKeywords = MetaSanitizerUtil.sanitizeKeywords(category.getKeywords());
+		final String metaDescription = MetaSanitizerUtil.sanitizeDescription(category.getDescription());
+		setUpMetaData(model, metaKeywords, metaDescription);
+
+		return getViewPage(categorySearch.getCategoryPage());
 
 	}
 

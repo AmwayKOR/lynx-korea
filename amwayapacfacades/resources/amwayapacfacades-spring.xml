@@ -80,30 +80,19 @@
         <property name="amwayApacWishlistService" ref="wishlistService"/>
     </bean>
 
-	<alias name="amwayApacVariantOptionDataConverter" alias="variantOptionDataConverter"/>
-	<bean id="amwayApacVariantOptionDataConverter" parent="abstractPopulatingConverter">
-		<property name="targetClass" value="de.hybris.platform.commercefacades.product.data.VariantOptionData"/>
-		<property name="populators">
-			<list>
-				<ref bean="amwayApacVariantOptionDataPopulator"/>
-			</list>
-		</property>
-	</bean>
-
-	<alias name="defaultAmwayApacVariantOptionDataPopulator" alias="amwayApacVariantOptionDataPopulator"/>
+	<alias name="defaultAmwayApacVariantOptionDataPopulator" alias="acceleratorVariantOptionDataPopulator"/>
 	<bean id="defaultAmwayApacVariantOptionDataPopulator"  class="com.amway.apac.facades.product.populators.AmwayApacVariantOptionDataPopulator"
-		  parent="acceleratorVariantOptionDataPopulator" >
-		  <property name="imageConverter" ref="imageConverter"/>
+		  parent="defaultAcceleratorVariantOptionDataPopulator" >
 	</bean>
 
-    <alias name="amwayApacWishlistPopulator" alias="wishlistPopulator"/>
-    <bean id="amwayApacWishlistPopulator" class="com.amway.apac.facades.wishlist.populators.AmwayApacWishlistPopulator" parent="amwayWishlistPopulator">
+    <alias name="defaultAmwayApacWishlistPopulator" alias="wishlistPopulator"/>
+    <bean id="defaultAmwayApacWishlistPopulator" class="com.amway.apac.facades.wishlist.populators.AmwayApacWishlistPopulator" parent="amwayWishlistPopulator">
     	<property name="amwayApacUserBasicConverter" ref="amwayApacUserBasicConverter" />
     	<property name="productConverter" ref="amwayApacWishlistProductConverter"/>
     </bean>
     
-    <alias name="amwayApacCommerceSearchResultProductPopulator" alias="commerceSearchResultProductPopulator"/>
-	<bean id="amwayApacCommerceSearchResultProductPopulator"
+    <alias name="defaultAmwayApacSearchResultProductPopulator" alias="commerceSearchResultProductPopulator"/>
+	<bean id="defaultAmwayApacSearchResultProductPopulator"
 		  class="com.amway.apac.facades.populators.AmwayApacSearchResultProductPopulator" parent="amwayCommerceSearchResultProductPopulator">
 	</bean>
 
@@ -133,11 +122,9 @@
 		</property>
 	</bean>
 	
-	<alias name="amwayApacVariantFullPopulator" alias="variantFullPopulator"/>
-	<bean id="amwayApacVariantFullPopulator"
-			class="com.amway.apac.facades.populators.AmwayApacVariantFullPopulator">
-		<property name="variantOptionDataConverter" ref="variantOptionDataConverter"/>
-		<property name="baseOptionDataConverter" ref="baseOptionDataConverter"/>
+	<alias name="defaultAmwayApacVariantFullPopulator" alias="variantFullPopulator"/>
+	<bean id="defaultAmwayApacVariantFullPopulator"
+			class="com.amway.apac.facades.populators.AmwayApacVariantFullPopulator" parent="defaultVariantFullPopulator">
 	</bean>
 	
 	<alias name="defaultAmwayApacOrderFacade" alias="amwayOrderFacade"/>

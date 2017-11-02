@@ -93,4 +93,9 @@ public final class AmwayapacCoreConstants extends GeneratedAmwayapacCoreConstant
 	 */
 	public static final String USER_STRING = "user";
 
+	/**
+	 * Product Listing Page grid image format
+	 */
+	public static final String PRODUCT_LIST_GRID_FORMAT = "productGrid";
+
 }

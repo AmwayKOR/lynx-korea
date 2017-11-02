@@ -1,13 +1,13 @@
 package com.amway.apac.facades.product.populators;
 
-import de.hybris.platform.commercefacades.product.data.ImageData;
+import static org.springframework.util.Assert.notNull;
+
 import de.hybris.platform.commercefacades.product.data.PriceData;
 import de.hybris.platform.commercefacades.product.data.PriceDataType;
 import de.hybris.platform.commercefacades.product.data.VariantOptionData;
 import de.hybris.platform.commercefacades.product.data.VariantOptionQualifierData;
 import de.hybris.platform.core.model.media.MediaModel;
 import de.hybris.platform.jalo.order.price.PriceInformation;
-import de.hybris.platform.servicelayer.dto.converter.Converter;
 import de.hybris.platform.variants.model.VariantProductModel;
 
 import java.math.BigDecimal;
@@ -16,8 +16,6 @@ import java.util.Collection;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.factory.annotation.Required;
-import org.springframework.util.Assert;
 
 import com.amway.facades.populators.AcceleratorVariantOptionDataPopulator;
 
@@ -31,16 +29,14 @@ import com.amway.facades.populators.AcceleratorVariantOptionDataPopulator;
 public class AmwayApacVariantOptionDataPopulator extends AcceleratorVariantOptionDataPopulator
 {
 
-	private Converter<MediaModel, ImageData> imageConverter;
-
 	/**
 	 * Overriding OOTB implementation to update variant option qualifiers population.
 	 */
 	@Override
 	public void populate(final VariantProductModel source, final VariantOptionData target)
 	{
-		Assert.notNull(source, "Parameter source cannot be null.");
-		Assert.notNull(target, "Parameter target cannot be null.");
+		notNull(source, "Parameter source cannot be null.");
+		notNull(target, "Parameter target cannot be null.");
 
 		if (source.getBaseProduct() != null)
 		{
@@ -108,25 +104,4 @@ public class AmwayApacVariantOptionDataPopulator extends AcceleratorVariantOptio
 		}
 	}
 
-
-	/**
-	 * @return the imageConverter
-	 */
-	@Override
-	public Converter<MediaModel, ImageData> getImageConverter()
-	{
-		return imageConverter;
-	}
-
-
-	/**
-	 * @param imageConverter
-	 *           the imageConverter to set
-	 */
-	@Override
-	@Required
-	public void setImageConverter(final Converter<MediaModel, ImageData> imageConverter)
-	{
-		this.imageConverter = imageConverter;
-	}
 }

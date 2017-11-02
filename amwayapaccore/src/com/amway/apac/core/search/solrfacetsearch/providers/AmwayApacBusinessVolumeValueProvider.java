@@ -1,7 +1,6 @@
-/**
- *
- */
 package com.amway.apac.core.search.solrfacetsearch.providers;
+
+import static com.amway.apac.core.constants.AmwayapacCoreConstants.HUNDRED_INT;
 
 import de.hybris.platform.catalog.model.CatalogVersionModel;
 import de.hybris.platform.core.model.c2l.CurrencyModel;
@@ -24,18 +23,22 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Required;
 
-import com.amway.apac.core.constants.AmwayapacCoreConstants;
 import com.amway.apac.core.product.strategies.AmwayApacPrimaryVariantSelectionStrategy;
 import com.amway.core.constants.AmwaycoreConstants;
 import com.amway.core.search.solrfacetsearch.provider.impl.BusinessVolumeValueProvider;
 
 
 /**
+ * Overriding the AmwayCore Implementation to get primary variant values for base variant product indexing.
  *
+ * @author Shubham Goyal
  */
 public class AmwayApacBusinessVolumeValueProvider extends BusinessVolumeValueProvider
 {
-	private static final Logger LOG = LoggerFactory.getLogger(AmwayApacBusinessVolumeValueProvider.class);
+	/**
+	 * Logger instance to record events at class level
+	 */
+	private static final Logger LOGGER = LoggerFactory.getLogger(AmwayApacBusinessVolumeValueProvider.class);
 
 	private AmwayApacPrimaryVariantSelectionStrategy amwayApacPrimaryVariantSelectionStrategy;
 
@@ -61,10 +64,9 @@ public class AmwayApacBusinessVolumeValueProvider extends BusinessVolumeValuePro
 				ProductModel productToIndex = productModel;
 				if (CollectionUtils.isNotEmpty(productToIndex.getVariants()))
 				{
-					if (LOG.isInfoEnabled())
+					if (LOGGER.isInfoEnabled())
 					{
-						LOG.info(new StringBuilder(AmwayapacCoreConstants.HUNDRED_INT).append("The product with code [")
-								.append(productModel.getCode())
+						LOGGER.info(new StringBuilder(HUNDRED_INT).append("The product with code [").append(productModel.getCode())
 								.append("] is a base product, fetching primary variant to display the Business Volume.").toString());
 					}
 					productToIndex = amwayApacPrimaryVariantSelectionStrategy.getPrimaryVariant(productToIndex);
@@ -83,7 +85,7 @@ public class AmwayApacBusinessVolumeValueProvider extends BusinessVolumeValuePro
 				{
 					final Double value = (Double) priceInformation.getQualifierValue("businessVolume");
 					addFieldValues(fieldValues, indexedProperty, currency, value);
-					LOG.info("Extracted BV: " + value);
+					LOGGER.info("Extracted BV: " + value);
 				}
 			}
 		}
