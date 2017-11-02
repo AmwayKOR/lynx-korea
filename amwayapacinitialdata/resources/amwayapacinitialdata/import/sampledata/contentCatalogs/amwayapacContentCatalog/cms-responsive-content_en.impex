@@ -706,6 +706,15 @@ INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=tr
 ;;amwayApacBecomeAnABOLinkContent;"BECOME AN ABO";btn-blue-white show-terms;
 ;;amwayApacBecomeACustomerLinkContent;"BECOME A MEMBER";btn-blue-white show-terms;
 
+################ Search No Result Page
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content;
+;;searchDesc;"<span>WE'RE SORRY! WE COULDN'T FIND ANY RESULTS FOR YOUR SEARCH.</span>But don't give up! Check the spelling or try search again with a less specific keyword."
+
+INSERT_UPDATE SearchBoxComponent;$contentCV[unique=true];uid[unique=true];placeholder;
+;;sideSearchBoxPlaceHolder;"Search"
+;;middleSearchBoxPlaceHolder;"Search by name,SKU,or brand"
+	
 ################## My Account Page
 UPDATE AmwayApacMyAccountProfileBarURLComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang];&componentRef
 ;;myaccountPBMyAccountLinkComponent;"My Account";myaccountPBMyAccountLinkComponent

@@ -45,6 +45,7 @@ INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;fronten
 ;;ContentArticlePagesTemplate;Content Article Pages Template;business/contentArticlePagesLayout;ContentPage
 ;;RegisterLandingPageTemplate;Register Landing Page Template;account/registerLandingLayoutPage;ContentPage
 
+
 # Templates without a frontendTemplateName
 ;;CartPageTemplate;Cart Page Template;;ContentPage;false;
 ;;LoginPageTemplate;Login Page Template;;ContentPage;false;
@@ -234,6 +235,7 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 ;TopHeaderSlot;;;wide
 ;BottomHeaderSlot;;;wide
 ;PlaceholderContentSlot;;;
+
 
 # Category and Landing Pages are various layouts for a Category Landing page
 # Landing Pages are also good layouts for Homepages or general Content Pages
@@ -723,6 +725,7 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active
 ;;MobileNavigationBarSlot;Mobile Navigation Bar;true
 ;;ProfileBarJumpToSlot;Profile Bar;true
 
+
 # Bind Content Slots to Page Templates
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ProductDetailsPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
 ;;SiteLogo-ProductDetails;SiteLogo;;SiteLogoSlot;true
@@ -797,6 +800,9 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 ;;BottomHeaderSlot-SearchResultsEmpty;BottomHeaderSlot;;BottomHeaderSlot;true
 ;;PlaceholderContentSlot-SearchResultsEmpty;PlaceholderContentSlot;;PlaceholderContentSlot;true
 ;;Mobile-NavigationBar-SearchResultsEmpty;MobileNavigationBar;;MobileNavigationBarSlot;true
+;;MiddleContent-SearchResultsEmpty;MiddleContent;;MiddleContentSlot;true
+;;BottomContent-SearchResultsEmpty;BottomContent;;BottomContentSlot;true
+;;SideContent-SearchResultsEmpty;SideContent;;SideContentSlot;true
 
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='CategoryPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
 ;;SiteLogo-CategoryPage;SiteLogo;;SiteLogoSlot;true
@@ -1227,7 +1233,7 @@ INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTe
 ;;checkout-login;Checkout-Login Page;CheckoutLoginPageTemplate;checkout-login
 ;;login;Login Page;LoginPageTemplate;login
 ;;notFound;Not Found Page;ErrorPageTemplate;notFound
-;;searchEmpty;Search Results Empty Page;SearchResultsEmptyPageTemplate;searchEmpty
+;;searchEmpty;Search Results Empty Page;SearchResultsEmptyPageTemplate;/searchEmpty
 ;;updatePassword;Update Forgotten Password Page;AccountPageTemplate;updatePassword
 ;;update-profile;Update Profile Page;AccountPageTemplate;update-profile
 ;;update-email;Update Email Page;AccountPageTemplate;update-email

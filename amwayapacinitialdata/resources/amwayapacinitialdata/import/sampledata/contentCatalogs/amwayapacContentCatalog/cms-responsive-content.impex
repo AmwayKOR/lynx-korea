@@ -382,6 +382,12 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;c
 # CMS Navigation Nodes
 INSERT_UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];name;parent(uid, $contentCV);&nodeRef;links(&linkRef);visible;nodeLink(&componentRef)
 
+################ Search No Result Page
+
+
+
+
+
 ######## Account Navigation Section
 ;;AccountNavNode;AccountNavNode;root;AccountNavNode;;true;;
 ;;MyAccountNode;MyAccountNode;AccountNavNode;MyAccountNode;;true;;
@@ -810,6 +816,19 @@ INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=tr
 ;;amwayApacBecomeAnABOLinkContent;BECOME AN ABO;/;amwayApacBecomeAnABOLinkContent;;amwayApacBecomeAnABOLinkContent;
 ;;amwayApacBecomeACustomerLinkContent;BECOME A MEMBER;/;amwayApacBecomeACustomerLinkContent;;amwayApacBecomeACustomerLinkContent;
 
+############ Search No Result Page
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
+;;searchDesc;searchDesc
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
+;;MiddleContentSlot; Search Middle Content Slot;true;searchDesc,middleSearchBoxPlaceHolder;
+;;BottomContentSlot; Search Bottom Content Slot;true;
+;;SideContentSlot; Search Side Content Slot;true;topSearchBoxPlaceHolder
+
+INSERT_UPDATE SearchBoxComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;sideSearchBoxPlaceHolder; Top Search Box PlaceHolder;topSearchBoxPlaceHolder
+;;middleSearchBoxPlaceHolder; Middle Search Box PlaceHolder;middleSearchBoxPlaceHolder
 	
 ############# My Account Page
 
