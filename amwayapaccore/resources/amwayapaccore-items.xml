@@ -15,13 +15,11 @@
     <itemtypes>
 
         <typegroup name="AmwayApac">
-
             <itemtype code="AmwayApacVariantProduct" extends="VariantProduct"
                       autocreate="true" generate="true"
                       jaloclass="com.amway.apac.core.jalo.AmwayApacVariantProduct">
                 <description>Amway Apac Variant Model</description>
             </itemtype>
-
         </typegroup>
 
     </itemtypes>

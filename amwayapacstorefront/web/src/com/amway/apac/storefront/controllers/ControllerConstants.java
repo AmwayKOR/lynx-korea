@@ -431,6 +431,11 @@ public interface ControllerConstants
 			 * Success message to be displayed when a product is removed from the shopping list.
 			 */
 			String SHOPPING_LIST_REMOVE_PRODUCT_SUCCESS_MESSAGE = "shopping.list.remove.product.success";
+
+			/**
+			 * Success message to be displayed when a shopping list is deleted.
+			 */
+			String DELETE_SHOPPING_LIST_SUCCESS_MESSAGE = "shopping.list.remove.success";
 		}
 	}
 

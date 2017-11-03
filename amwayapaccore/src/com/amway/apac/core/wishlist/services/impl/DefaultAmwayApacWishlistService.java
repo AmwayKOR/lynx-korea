@@ -98,6 +98,22 @@ public class DefaultAmwayApacWishlistService extends AmwayWishlistServiceImpl im
 	}
 
 	/**
+	 * Overriding {@link AmwayWishlistServiceImpl} implementation to bypass the default shopping list check.
+	 */
+	@Override
+	public boolean deleteWishlist(final String uid)
+	{
+		boolean isDeleted = false;
+		final Wishlist2Model wishlist = getWishlistByUid(uid);
+		if (null != wishlist)
+		{
+			getModelService().remove(wishlist);
+			isDeleted = true;
+		}
+		return isDeleted;
+	}
+
+	/**
 	 * @return the amwayApacWishlistDao
 	 */
 	public AmwayApacWishlistDao getAmwayApacWishlistDao()

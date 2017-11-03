@@ -16,7 +16,7 @@
             			<cms:component component="${pageUrl}"/>
 				</c:forEach>
             </select>
-            <input type="button" class="js-jump-to-selection-btn" value="GO">
+            <input type="button" class="js-jump-to-selection-btn" value="<spring:theme code="account.jumpTo.go.label" />">
         </div>
     </div>
 </div>

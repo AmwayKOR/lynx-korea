@@ -8,9 +8,20 @@ ACC.shoppinglists = {
     	"bindSubmitShoppingListNameFormLink",
     	"bindUpdateShoppingListNameForm",
     	"bindUpdateShoppingListNameInputEscape",
-    	"bindRemoveProductFromShoppingListLink"
+    	"bindRemoveProductFromShoppingListLink",
+    	"bindRemoveShoppingListLink"
     ],
     
+    bindRemoveShoppingListLink: function() {
+        
+        // only bind if the current page is shopping lists page
+        if ($(".page-content-wrapper.page-shopping-list-details").length > 0) {
+            $(".page-content-wrapper.page-shopping-list-details").on("click", "div#shopping-list-name-section span.delete-shopping-list-link", function() {
+                $(this).closest("form#removeShoppingListForm").submit();
+            });
+        }
+    },
+
     bindRemoveProductFromShoppingListLink: function() {
 
     	// only bind if the current page is shopping lists page

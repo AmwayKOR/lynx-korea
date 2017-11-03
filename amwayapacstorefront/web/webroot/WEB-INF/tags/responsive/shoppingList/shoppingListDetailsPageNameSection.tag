@@ -5,6 +5,8 @@
 <%@ attribute name="shoppingListData" required="true" type="com.amway.facades.product.data.WishlistData" %>
 
 <c:url var="updateShoppingListNameUrl" value="/shopping-lists/update-shopping-list-name" />
+<c:url var="removeShoppingListUrl" value="/shopping-lists/remove-shopping-list" />
+
 <div id="shopping-list-name-section">
 	<div id="name-update-form" class="display-none">
 		<form method="POST" action="${updateShoppingListNameUrl}" class="update-shopping-list-name-form" id="updateShoppingListNameForm">
@@ -33,8 +35,13 @@
 	        <a href="">
 	            <span class="share-list name-section-tiny-span"><spring:theme code="shopping.list.page.actions.section.share.list" /></span></a>
 	        <span class="divider">|</span>
-	        <a href="">
-	            <span class="Delete-list name-section-tiny-span"><spring:theme code="shopping.list.page.actions.section.delete.list" /></span></a>
+		    <form method="POST" action="${removeShoppingListUrl}" class="remove-shopping-list-url" id="removeShoppingListForm">
+                <input type="hidden" name="shoppingListUid" value="${shoppingListData.uid} ">
+                <input type="hidden" name="CSRFToken" value="${CSRFToken.token}">
+                <a href="#">
+                    <span class="Delete-list name-section-tiny-span delete-shopping-list-link"><spring:theme code="shopping.list.page.actions.section.delete.list" /></span>
+                </a>
+            </form>
 	    </span>
     </div>
 </div>

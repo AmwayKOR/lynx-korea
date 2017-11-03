@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.amway.apac.core.constants.AmwayapacCoreConstants;
 import com.amway.apac.facades.wishlist.AmwayApacWishlistFacade;
@@ -47,6 +48,16 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 	 * Logger instance to record events at class level
 	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(AmwayApacShoppingListsPageController.class);
+
+	/**
+	 * All shopping lists page URL.
+	 */
+	private static final String SHOPPING_LISTS_PAGE_URL = "/all";
+
+	/**
+	 * Redirect to all shopping lists page.
+	 */
+	private static final String SHOPPING_LISTS_PAGE_REDIRECT = REDIRECT_PREFIX + "/shopping-lists" + SHOPPING_LISTS_PAGE_URL;
 
 	/**
 	 * Path parameter for shopping list uid
@@ -73,7 +84,7 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 	 * @throws CMSItemNotFoundException
 	 *            if shopping lists CMS page is not found
 	 */
-	@RequestMapping(value = "/all", method = RequestMethod.GET)
+	@RequestMapping(value = SHOPPING_LISTS_PAGE_URL, method = RequestMethod.GET)
 	public String allShoppingLists(final Model model,
 			@RequestParam(name = SORT_FIELD_STRING, required = false, defaultValue = SHOPPING_LIST_SORT_BY_LAST_UPDATED) final String sorfField,
 			@RequestParam(name = SORT_ORDER_STRING, required = false, defaultValue = AmwayapacCoreConstants.DESC_STRING) final String sortOrder)
@@ -457,6 +468,54 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 			}
 		}
 		return ControllerConstants.Views.Fragments.ShoppingList.UpdateProductInShoppingListResponse;
+	}
+
+	/**
+	 * Controller method to remove product from shopping list
+	 *
+	 * @param productCode
+	 *           code of the product
+	 * @param shoppingListUid
+	 *           uid of the shopping list
+	 * @param model
+	 *           view model
+	 * @return the view
+	 * @throws CMSItemNotFoundException
+	 */
+	@RequestMapping(value = "/remove-shopping-list", method = RequestMethod.POST)
+	public String removeShoppingList(@RequestParam(name = "shoppingListUid") final String shoppingListUid, final Model model,
+			final RedirectAttributes redirectModel) throws CMSItemNotFoundException
+	{
+		if (StringUtils.isBlank(shoppingListUid))
+		{
+			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER,
+					ControllerConstants.ErrorMessageKeys.ShoppingList.SHOPPING_LIST_ADD_PRODUCT_LIST_UID_EMPTY);
+		}
+		else
+		{
+			try
+			{
+				amwayApacWishlistFacade.deleteWishlist(shoppingListUid);
+				GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.CONF_MESSAGES_HOLDER,
+						ControllerConstants.SuccessMessageKeys.ShoppingList.DELETE_SHOPPING_LIST_SUCCESS_MESSAGE);
+			}
+			catch (final UnknownIdentifierException uIE)
+			{
+				LOGGER.error(new StringBuilder(HUNDRED_INT).append("No shopping list found with uid [").append(shoppingListUid)
+						.append("].").toString(), uIE);
+
+				GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER,
+						ControllerConstants.ErrorMessageKeys.ShoppingList.SHOPPING_LIST_DETAILS_NOT_FOUND);
+			}
+			catch (final AmbiguousIdentifierException aIE)
+			{
+				LOGGER.error(new StringBuilder(HUNDRED_INT).append("More than one shopping list found with uid [")
+						.append(shoppingListUid).append("].").toString(), aIE);
+				GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER,
+						ControllerConstants.ErrorMessageKeys.ShoppingList.SHOPPING_LIST_DETAILS_AMBIGUOUS_UID);
+			}
+		}
+		return SHOPPING_LISTS_PAGE_REDIRECT;
 	}
 
 }
