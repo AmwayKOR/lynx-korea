@@ -83,52 +83,6 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="add-button-wrap add-to-wish-list-conatiner">
-                                                        <div>
-                                                            <button type="button" class="btn btn-link btn-block add-to-ditto js-add-to-ditto-button" id="119889">
-                                                                <span class="icon-add-wish-list"></span>Add to Wish List</button>
-                                                            <div class="display-none add-to-ditto-component-container js-add-to-ditto-component-container">
-                                                                <div class="panel-content">
-                                                                    <div class="js-add-to-component">
-                                                                        <ul class="panel-list add-to-list js-existing-ditto-list"></ul>
-                                                                        <div class="panel-action-wrapper">
-                                                                            <div class="panel-action-btn js-add-to-ditto-component-link">Add to List</div>
-                                                                            <div class="panel-action-text-btn pull-right js-add-new-ditto-schedule-link-component">Create new list</div></div>
-                                                                        <input type="hidden" class="js-add-to-component-code-input" value="119889" />
-                                                                        <input type="hidden" class="js-add-to-component-quantity-input" value="1" />
-                                                                        <div class="hidden">
-                                                                            <div id="createNewDittoModal" class="amway-theme create-new-ditto-modal js-create-new-ditto-modal js-create-new-modal">
-                                                                                <form id="saveDittoScheduleForm" class="create-ditto-schedule-form" action="https://uat-160829146.us-east-1.elb.amazonaws.com/lynxstorefront/lynx/en/my-account/ditto/save" method="post" autocomplete="off">
-                                                                                    <div class="row new-ditto-row">
-                                                                                        <div class="col-sm-12 col-md-4 col-lg-3 create-ditto-schedule-form-element-lebel">
-                                                                                            <label for="saveDittoName">
-                                                                                                <h6>Ditto Name</h6></label>
-                                                                                        </div>
-                                                                                        <div class="col-sm-12 col-md-6 col-lg-5">
-                                                                                            <input id="saveDittoName" name="name" class="create-ditto-input js-create-new-ditto-input" type="text" value="" maxlength="255" /></div>
-                                                                                    </div>
-                                                                                    <div class="row new-ditto-row">
-                                                                                        <div class="col-xs-12 col-md-12">
-                                                                                            <div class="new-ditto-button-wrapper">
-                                                                                                <button type="submit" class="btn primary small js-create-new-ditto-btn" id="saveDittoButton" disabled="">Create Ditto</button></div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div>
-                                                                                        <input type="hidden" name="CSRFToken" value="1bcd7a5f-3229-4b1e-8f3f-1cbfa88e4768" /></div>
-                                                                                </form>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="hidden">
-                                                                            <div id="dittoMultiAddingSuccessModal" class="ditto-multi-adding-success-modal js-ditto-multi-adding-success-modal add-to-cart-multi-success-modal"></div>
-                                                                        </div>
-                                                                        <div class="hidden">
-                                                                            <div id="dittoAddingSuccessModal" class="ditto-adding-success-modal js-ditto-adding-success-modal"></div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
                                                     <div class="add-button-wrap add-to-ditto-container">
                                                         <button type="button" class="btn btn-link btn-block add-to-ditto js-add-to-ditto-button" data-toggle="dropdown">
                                                             <span class="icon-add-to-ditto"></span>Add to DITTO
