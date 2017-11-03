@@ -10,73 +10,32 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-<div class="js-cart-totals row">
-    <div class="col-xs-6 cart-totals-left"><spring:theme code="basket.page.totals.subtotal"/></div>
-    <div class="col-xs-6 cart-totals-right text-right"><ycommerce:testId code="Order_Totals_Subtotal"><format:price priceData="${cartData.subTotal}"/></ycommerce:testId></div>
-
-
-    <c:if test="${not empty cartData.deliveryCost}">
-        <div class="col-xs-6 cart-totals-left"><spring:theme code="basket.page.totals.delivery"/></div>
-        <div class="col-xs-6 cart-totals-right text-right"><format:price priceData="${cartData.deliveryCost}" displayFreeForZero="TRUE"/></div>
-     </c:if>
-
-
-    <c:if test="${cartData.net && cartData.totalTax.value > 0 && showTax}">
-        <div class="col-xs-6 cart-totals-left"><spring:theme code="basket.page.totals.netTax"/></div>
-        <div class="col-xs-6 cart-totals-right text-right"><format:price priceData="${cartData.totalTax}"/></div>
-    </c:if>
-    
-	<c:if test="${not empty cartData.quoteData}">
-		<quote:quoteDiscounts cartData="${cartData}"/>
-	</c:if>
-	
-	<c:if test="${cartData.quoteDiscounts.value > 0}">
-		<div class="col-xs-6 cart-totals-left discount">
-			<spring:theme code="basket.page.quote.discounts" />
-		</div>
-		<div class="col-xs-6 cart-totals-right text-right discount">
-			<ycommerce:testId code="Quote_Totals_Savings">
-				<format:price priceData="${cartData.quoteDiscounts}" displayNegationForDiscount="true" />
-			</ycommerce:testId>
-		</div>
-	</c:if>
-
-	<c:if test="${cartData.totalDiscounts.value > 0}">
-		<div class="col-xs-6 cart-totals-left discount">
-			<spring:theme code="basket.page.totals.discounts"/>
-		</div>
-		<div class="col-xs-6 cart-totals-right text-right discount">
-			<ycommerce:testId code="Order_Totals_Savings">
-				<format:price priceData="${cartData.totalDiscounts}" displayNegationForDiscount="true" />
-			</ycommerce:testId>
-		</div>
-	</c:if>
-
-    <div class="col-xs-6 cart-totals-left grand-total"><spring:theme code="basket.page.totals.total"/></div>
-    <div class="col-xs-6 cart-totals-right text-right grand-total">
-        <ycommerce:testId code="cart_totalPrice_label">
-            <c:choose>
-                <c:when test="${showTax}">
-                    <format:price priceData="${cartData.totalPriceWithTax}"/>
-                </c:when>
-                <c:otherwise>
-                    <format:price priceData="${cartData.totalPrice}"/>
-                </c:otherwise>
-            </c:choose>
-        </ycommerce:testId>
-    </div>
-
-
-    <c:if test="${not cartData.net}">
-        <div class="cart-totals-taxes text-right">
-            <ycommerce:testId code="cart_taxes_label"><spring:theme code="basket.page.totals.grossTax" arguments="${cartData.totalTax.formattedValue}" argumentSeparator="!!!!"/></ycommerce:testId>
-         </div>
-    </c:if>
-
-
-    <c:if test="${cartData.net && not showTax }">
-        <div class="cart-totals-taxes text-right">
-            <ycommerce:testId code="cart_taxes_label"><spring:theme code="basket.page.totals.noNetTax"/></ycommerce:testId>
-        </div>
-    </c:if>
+<div class="js-cart-totals js-cart-totals-order-summary">
+    <div class="wrapper row auto-subtotal">
+        <div class="col-xs-6 cart-totals-left">Item(s) Subtotal</div>
+        <div class="col-xs-6 cart-totals-right text-right">$58.20</div></div>
+    <div class="wrapper row auto-promotions">
+        <div class="col-xs-8 cart-totals-left">
+            <span>Promotions</span>
+            <span class="cart-order-symmary-button-wrapper">(
+                <span class="details-button js-checkout-promotions-details-btn" data-content="orderSummaryPromotionsModal">Details</span>)</span></div>
+        <div class="col-xs-4 cart-totals-right text-right red">- $12.00</div></div>
+    <div class="wrapper row auto-delivery">
+        <div class="col-xs-6 cart-totals-left">Shipping</div>
+        <div class="col-xs-6 cart-totals-right text-right">$0.00</div></div>
+    <div class="wrapper row auto-delivery">
+        <div class="col-xs-6 cart-totals-left">Tax One</div>
+        <div class="col-xs-6 cart-totals-right text-right">$0.00</div></div>
+    <div class="wrapper row auto-delivery">
+        <div class="col-xs-6 cart-totals-left">Tax Two</div>
+        <div class="col-xs-6 cart-totals-right text-right">$0.00</div></div>
+    <div class="wrapper row auto-delivery">
+        <div class="col-xs-6 cart-totals-left">Service Fee(s)</div>
+        <div class="col-xs-6 cart-totals-right text-right">$0.00</div></div>
+    <div class="wrapper wrapper-borders row auto-total">
+        <div class="col-xs-6 cart-totals-left">Total</div>
+        <div class="col-xs-6 cart-totals-right text-right">$46.20</div></div>
+    <div class="wrapper row auto-total noTop">
+        <div class="col-xs-6 cart-totals-left">TOTAL PV/ BV</div>
+        <div class="col-xs-6 cart-totals-right text-right">222.45 / 699.63</div></div>
 </div>

@@ -25,386 +25,71 @@
     <c:set property="index" value="${entryNumber}"/>
 </c:if>
 
-<c:if test="${not empty entry}">
-
-        <c:if test="${not empty entry.statusSummaryMap}" >
-            <c:set var="errorCount" value="${entry.statusSummaryMap.get(errorStatus)}"/>
-            <c:if test="${not empty errorCount && errorCount > 0}" >
-                <div class="notification has-error">
-                    <spring:theme code="basket.error.invalid.configuration" arguments="${errorCount}"/>
-                    <a href="<c:url value="/cart/${entry.entryNumber}/configuration/${ycommerce:encodeUrl(entry.configurationInfos[0].configuratorType)}" />" >
-                        <spring:theme code="basket.error.invalid.configuration.edit"/>
-                    </a>
+<li class="product-list-item  js-shopping-cart-list-item">
+    <div class="col-xs-12 col-md-5 product-details print-col-6">
+        <div class="product-item-element list-item-toggle">
+            <label class="checkbox-element-wrapper">
+                <input class="shopping-cart-entry-checkbox _checkbox-element-global-class" value="" data-product-code="" type="checkbox">
+                <span class="_checkbox-element-global-span"></span>
+            </label>
+        </div>
+        <div class="product-item-element list-item-image">
+            <div>
+                <a href="#">
+                    <product:productPrimaryImage product="${entry.product}" format="thumbnail"/>
+                </a>
+            </div>
+            <div class="list-item-remove">
+                <div class="remove-item-btn js-remove-entry-button" id="removeEntry_1">
+                    <span class="">Remove</span></div>
+            </div>
+        </div>
+        <div class="product-item-element list-item-info">
+            <span class="product-name">Nutrilite Men's Pack</span>
+            <div class="product-code">Item #
+                <span class="product-item-number">105480</span></div>
+            <div class="product-category">Vitamins &amp; Supplements</div>
+            <div class="product-stock">
+                <div>
+                    <span class="stock">
+                        <span class="product-availability">
+                            <span class="green">
+                                <span class="icon icon-check-bold"></span>
+                                <span class="text text-uppercase">In Stock</span></span>
+                        </span>
+                    </span>
+                    <br>
+                    <span class="pick-up product-availability"></span>
                 </div>
-            </c:if>
-        </c:if>
-        <c:set var="showEditableGridClass" value=""/>
-        <c:url value="${entry.product.url}" var="productUrl"/>
-
-        <li class="item__list--item">
-            <%-- chevron for multi-d products --%>
-            <div class="hidden-xs hidden-sm item__toggle">
-                <c:if test="${entry.product.multidimensional}" >
-                    <div class="js-show-editable-grid" data-index="${index}" data-read-only-multid-grid="${not entry.updateable}">
-                        <ycommerce:testId code="cart_product_updateQuantity">
-                            <span class="glyphicon glyphicon-chevron-down"></span>
-                        </ycommerce:testId>
-                    </div>
-                </c:if>
             </div>
-
-            <%-- product image --%>
-            <div class="item__image">
-                <a href="${productUrl}"><product:productPrimaryImage product="${entry.product}" format="thumbnail"/></a>
-            </div>
-
-            <%-- product name, code, promotions --%>
-            <div class="item__info">
-                <ycommerce:testId code="cart_product_name">
-                    <a href="${productUrl}"><span class="item__name">${fn:escapeXml(entry.product.name)}</span></a>
-                </ycommerce:testId>
-
-                <div class="item__code">${fn:escapeXml(entry.product.code)}</div>
-
-                <%-- availability --%>
-                <div class="item__stock">
-                    <c:set var="entryStock" value="${entry.product.stock.stockLevelStatus.code}"/>
-                    <c:forEach items="${entry.product.baseOptions}" var="option">
-                        <c:if test="${not empty option.selected and option.selected.url eq entry.product.url}">
-                            <c:forEach items="${option.selected.variantOptionQualifiers}" var="selectedOption">
-                                <div>
-                                    <strong>${fn:escapeXml(selectedOption.name)}:</strong>
-                                    <span>${fn:escapeXml(selectedOption.value)}</span>
-                                </div>
-                                <c:set var="entryStock" value="${option.selected.stock.stockLevelStatus.code}"/>
-                            </c:forEach>
-                        </c:if>
-                    </c:forEach>
-
-                    <div>
-                        <c:choose>
-                            <c:when test="${not empty entryStock and entryStock ne 'outOfStock' or entry.product.multidimensional}">
-                                <span class="stock"><spring:theme code="product.variants.in.stock"/></span>
-                            </c:when>
-                            <c:otherwise>
-                                <span class="out-of-stock"><spring:theme code="product.variants.out.of.stock"/></span>
-                            </c:otherwise>
-                        </c:choose>
-                    </div>
-                </div>
-
-                <c:if test="${ycommerce:doesPotentialPromotionExistForOrderEntryOrOrderEntryGroup(cartData, entry)}">
-                    <c:forEach items="${cartData.potentialProductPromotions}" var="promotion">
-                        <c:set var="displayed" value="false"/>
-                        <c:forEach items="${promotion.consumedEntries}" var="consumedEntry">
-                            <c:if test="${not displayed && ycommerce:isConsumedByEntry(consumedEntry,entry) && not empty promotion.description}">
-                                <c:set var="displayed" value="true"/>
-
-                                    <div class="promo">
-                                         <ycommerce:testId code="cart_potentialPromotion_label">
-                                             ${ycommerce:sanitizeHTML(promotion.description)}
-                                         </ycommerce:testId>
-                                    </div>
-                            </c:if>
-                        </c:forEach>
-                    </c:forEach>
-                </c:if>
-                <c:if test="${ycommerce:doesAppliedPromotionExistForOrderEntryOrOrderEntryGroup(cartData, entry)}">
-                    <c:forEach items="${cartData.appliedProductPromotions}" var="promotion">
-                        <c:set var="displayed" value="false"/>
-                        <c:forEach items="${promotion.consumedEntries}" var="consumedEntry">
-                            <c:if test="${not displayed && ycommerce:isConsumedByEntry(consumedEntry,entry) }">
-                                <c:set var="displayed" value="true"/>
-                                <div class="promo">
-                                    <ycommerce:testId code="cart_appliedPromotion_label">
-                                        ${ycommerce:sanitizeHTML(promotion.description)}
-                                    </ycommerce:testId>
-                                </div>
-                            </c:if>
-                        </c:forEach>
-                    </c:forEach>
-                </c:if>
-
-                <c:if test="${entry.product.configurable}">
-                    <div class="hidden-xs hidden-sm">
-                        <spring:url value="/cart/{/entryNumber}/configuration/{/configuratorType}" var="entryConfigUrl" htmlEscape="false">
-                            <spring:param name="entryNumber"  value="${entry.entryNumber}"/>
-                            <spring:param name="configuratorType"  value="${entry.configurationInfos[0].configuratorType}" />
-                        </spring:url>
-                        <div class="item__configurations">
-                            <c:forEach var="config" items="${entry.configurationInfos}">
-                                <c:set var="style" value=""/>
-                                <c:if test="${config.status eq errorStatus}">
-                                    <c:set var="style" value="color:red"/>
-                                </c:if>
-                                <div class="item__configuration--entry" style="${style}">
-                                    <div class="row">
-                                        <div class="item__configuration--name col-sm-4">
-                                                ${fn:escapeXml(config.configurationLabel)}
-                                                <c:if test="${not empty config.configurationLabel}">:</c:if>
-
-                                        </div>
-                                        <div class="item__configuration--value col-sm-8">
-                                                ${fn:escapeXml(config.configurationValue)}
-                                        </div>
-                                    </div>
-                                </div>
-                            </c:forEach>
-                        </div>
-                        <c:if test="${not empty entry.configurationInfos}">
-                            <div class="item__configurations--edit">
-                                <a class="btn" href="${entryConfigUrl}"><spring:theme code="basket.page.change.configuration"/></a>
-                            </div>
-                        </c:if>
-                    </div>
-                </c:if>
-            </div>
-
-            <%-- price --%>
-            <div class="item__price">
-                <span class="visible-xs visible-sm"><spring:theme code="basket.page.itemPrice"/>: </span>
-                <format:price priceData="${entry.basePrice}" displayFreeForZero="true"/>
-            </div>
-
-            <%-- quantity --%>
-            <div class="item__quantity hidden-xs hidden-sm">
-                <c:choose>
-                    <c:when test="${not entry.product.multidimensional}" >
-                        <c:url value="/cart/update" var="cartUpdateFormAction" />
-                        <form:form id="updateCartForm${entryNumber}" action="${cartUpdateFormAction}" method="post" commandName="updateQuantityForm${entry.entryNumber}"
-                                   class="js-qty-form${entryNumber}"
-                                    data-cart='{"cartCode" : "${fn:escapeXml(cartData.code)}","productPostPrice":"${entry.basePrice.value}","productName":"${fn:escapeXml(entry.product.name)}"}'>
-                            <input type="hidden" name="entryNumber" value="${entry.entryNumber}"/>
-                            <input type="hidden" name="productCode" value="${fn:escapeXml(entry.product.code)}"/>
-                            <input type="hidden" name="initialQuantity" value="${entry.quantity}"/>
-                            <ycommerce:testId code="cart_product_quantity">
-                                <form:label cssClass="visible-xs visible-sm" path="quantity" for="quantity${entry.entryNumber}"></form:label>
-                                <form:input cssClass="form-control js-update-entry-quantity-input" disabled="${not entry.updateable}" type="text" size="1" id="quantity_${entryNumber}" path="quantity" />
-                            </ycommerce:testId>
-                        </form:form>
-                    </c:when>
-                    <c:otherwise>
-                        <c:url value="/cart/updateMultiD" var="cartUpdateMultiDFormAction" />
-                        <form:form id="updateCartForm${entryNumber}" action="${cartUpdateMultiDFormAction}" method="post" class="js-qty-form${entryNumber}" commandName="updateQuantityForm${entryNumber}">
-                            <input type="hidden" name="entryNumber" value="${entry.entryNumber}"/>
-                            <input type="hidden" name="productCode" value="${fn:escapeXml(entry.product.code)}"/>
-                            <input type="hidden" name="initialQuantity" value="${entry.quantity}"/>
-                            <label class="visible-xs visible-sm"><spring:theme code="basket.page.qty"/>:</label>
-                            <span class="qtyValue"><c:out value="${entry.quantity}" /></span>
-                            <input type="hidden" name="quantity" value="0"/>
-                            <ycommerce:testId code="cart_product_updateQuantity">
-                                <div id="QuantityProduct${entryNumber}" class="updateQuantityProduct"></div>
-                            </ycommerce:testId>
-                        </form:form>
-                    </c:otherwise>
-                </c:choose>
-            </div>
-
-            <%-- delivery --%>
-            <div class="item__delivery">
-                <c:if test="${entry.product.purchasable}">
-                    <c:if test="${not empty entryStock and entryStock ne 'outOfStock'}">
-                        <c:if test="${entry.deliveryPointOfService eq null or not entry.product.availableForPickup}">
-                            <span class="item__delivery--label"><spring:theme code="basket.page.shipping.ship"/></span>
-                        </c:if>
-                    </c:if>
-                    <c:if test="${not empty entry.deliveryPointOfService.name}">
-                        <span class="item__delivery--label"><spring:theme code="basket.page.shipping.pickup"/></span>
-                    </c:if>
-
-                    <c:if test="${entry.product.availableForPickup and not empty entry.deliveryPointOfService.name}">
-                        <div class="item__delivery--store">${fn:escapeXml(entry.deliveryPointOfService.name)}</div>
-                    </c:if>
-                </c:if>
-            </div>
-
-            <%-- total --%>
-            <ycommerce:testId code="cart_totalProductPrice_label">
-                <div class="item__total js-item-total hidden-xs hidden-sm">
-                    <format:price priceData="${entry.totalPrice}" displayFreeForZero="true"/>
-                </div>
-            </ycommerce:testId>
-
-            <%-- menu icon --%>
-            <div class="item__menu">
-                <c:if test="${entry.updateable}" >
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="editEntry_${entryNumber}">
-                            <span class="glyphicon glyphicon-option-vertical"></span>
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-right">
-                            <c:if test="${not empty cartData.quoteData}">
-                                <c:choose>
-                                    <c:when test="${not entry.product.multidimensional}">
-                                        <li>
-                                            <a href="#entryCommentDiv_${entry.entryNumber}" data-toggle="collapse" >
-                                                <spring:theme code="basket.page.comment.menu"/>
-                                            </a>
-                                        </li>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <li>
-                                            <a href="#entryCommentDiv_${entry.entries.get(0).entryNumber}" data-toggle="collapse" >
-                                                <spring:theme code="basket.page.comment.menu"/>
-                                            </a>
-                                        </li>
-                                    </c:otherwise>
-                                </c:choose>
-                            </c:if>
-                            <form:form id="cartEntryActionForm" action="" method="post" />
-                             <%-- Build entry numbers string for execute action -- Start --%>
-                            <c:choose>
-					            <c:when test="${entry.entryNumber eq -1}"> <%-- for multid entry --%>
-					                <c:forEach items="${entry.entries}" var="subEntry" varStatus="stat">
-						    			<c:set var="actionFormEntryNumbers" value="${stat.first ? '' : actionFormEntryNumbers.concat(';')}${subEntry.entryNumber}" />
-						    		</c:forEach>
-					            </c:when>
-					            <c:otherwise>
-					                <c:set var="actionFormEntryNumbers" value="${entry.entryNumber}" />
-					            </c:otherwise>
-					        </c:choose>
-					        <%-- Build entry numbers string for execute action -- End --%>
-                            <c:forEach var="entryAction" items="${entry.supportedActions}">
-                                <c:url value="/cart/entry/execute/${entryAction}" var="entryActionUrl"/>
-                                <li class="js-execute-entry-action-button" id="actionEntry_${fn:escapeXml(entryNumber)}"
-                                    data-entry-action-url="${entryActionUrl}"
-                                    data-entry-action="${fn:escapeXml(entryAction)}"
-                                    data-entry-product-code="${fn:escapeXml(entry.product.code)}"
-                                    data-entry-initial-quantity="${entry.quantity}"
-                                    data-action-entry-numbers="${actionFormEntryNumbers}">
-                                    <a href="#"><spring:theme code="basket.page.entry.action.${entryAction}"/></a>
-                                </li>
-                            </c:forEach>
-                        </ul>
-                    </div>
-                </c:if>
-            </div>
-
-            <div class="item__quantity__total visible-xs visible-sm">
-                <c:if test="${entry.product.multidimensional}" >
-                    <ycommerce:testId code="cart_product_updateQuantity">
-                        <c:set var="showEditableGridClass" value="js-show-editable-grid"/>
-                    </ycommerce:testId>
-                </c:if>
-                <div class="details ${showEditableGridClass}" data-index="${entryNumber}" data-read-only-multid-grid="${not entry.updateable}">
-                    <div class="qty">
-                        <c:choose>
-                            <c:when test="${not entry.product.multidimensional}" >
-                                <c:url value="/cart/update" var="cartUpdateFormAction" />
-                                <form:form id="updateCartForm${entryNumber}" action="${cartUpdateFormAction}" method="post" commandName="updateQuantityForm${entry.entryNumber}"
-                                           class="js-qty-form${entryNumber}"
-                                           data-cart='{"cartCode" : "${fn:escapeXml(cartData.code)}","productPostPrice":"${entry.basePrice.value}","productName":"${fn:escapeXml(entry.product.name)}"}'>
-                                    <input type="hidden" name="entryNumber" value="${entry.entryNumber}"/>
-                                    <input type="hidden" name="productCode" value="${fn:escapeXml(entry.product.code)}"/>
-                                    <input type="hidden" name="initialQuantity" value="${entry.quantity}"/>
-                                    <ycommerce:testId code="cart_product_quantity">
-                                        <form:label cssClass="" path="quantity" for="quantity${entry.entryNumber}"><spring:theme code="basket.page.qty"/>:</form:label>
-                                        <form:input cssClass="form-control js-update-entry-quantity-input" disabled="${not entry.updateable}" type="text" size="1" id="quantity_${entryNumber}" path="quantity" />
-                                    </ycommerce:testId>
-                                </form:form>
-                            </c:when>
-                            <c:otherwise>
-                                <c:url value="/cart/updateMultiD" var="cartUpdateMultiDFormAction" />
-                                <form:form id="updateCartForm${entryNumber}" action="${cartUpdateMultiDFormAction}" method="post" class="js-qty-form${entryNumber}" commandName="updateQuantityForm${entryNumber}">
-                                    <input type="hidden" name="entryNumber" value="${entry.entryNumber}"/>
-                                    <input type="hidden" name="productCode" value="${fn:escapeXml(entry.product.code)}"/>
-                                    <input type="hidden" name="initialQuantity" value="${entry.quantity}"/>
-                                    <label><spring:theme code="basket.page.qty"/>:</label>
-                                    <span class="qtyValue"><c:out value="${entry.quantity}" /></span>
-                                    <input type="hidden" name="quantity" value="0"/>
-                                    <ycommerce:testId code="cart_product_updateQuantity">
-                                        <div id="QuantityProduct${entryNumber}" class="updateQuantityProduct"></div>
-                                    </ycommerce:testId>
-                                </form:form>
-                            </c:otherwise>
-                        </c:choose>
-                        <c:if test="${entry.product.multidimensional}" >
-                            <ycommerce:testId code="cart_product_updateQuantity">
-                                <span class="glyphicon glyphicon-chevron-right"></span>
-                            </ycommerce:testId>
-                        </c:if>
-                        <ycommerce:testId code="cart_totalProductPrice_label">
-                            <div class="item__total js-item-total">
-                                <format:price priceData="${entry.totalPrice}" displayFreeForZero="true"/>
-                            </div>
-                        </ycommerce:testId>
-                    </div>
-                </div>
-
-                <c:if test="${entry.product.configurable}">
-                    <div class="hidden-md hidden-lg">
-                        <spring:url value="/cart/{/entryNumber}/configuration/{/configuratorType}" var="entryConfigUrl" htmlEscape="false">
-                            <spring:param name="entryNumber"  value="${entry.entryNumber}"/>
-                            <spring:param name="configuratorType"  value="${entry.configurationInfos[0].configuratorType}" />
-                        </spring:url>
-                        <div class="item__configurations">
-                            <c:forEach var="config" items="${entry.configurationInfos}">
-                                <c:set var="style" value=""/>
-                                <c:if test="${config.status eq errorStatus}">
-                                    <c:set var="style" value="color:red"/>
-                                </c:if>
-                                <div class="item__configuration--entry" style="${style}">
-                                    <div class="row">
-                                        <div class="item__configuration--name col-sm-4">
-                                                ${fn:escapeXml(config.configurationLabel)}
-                                                <c:if test="${not empty config.configurationLabel}">:</c:if>
-                                        </div>
-                                        <div class="item__configuration--value col-sm-8">
-                                                ${fn:escapeXml(config.configurationValue)}
-                                        </div>
-                                    </div>
-                                </div>
-                            </c:forEach>
-                        </div>
-                        <c:if test="${not empty entry.configurationInfos}">
-                            <div class="item__configurations--edit">
-                                <a class="btn" href="${entryConfigUrl}"><spring:theme code="basket.page.change.configuration"/></a>
-                            </div>
-                        </c:if>
-                    </div>
-                </c:if>
-            </div>
-        </li>
-
-        <li class="item__list--comment">
-            <div class="item__comment quote__comments">
-                <c:if test="${not empty cartData.quoteData}">
-                    <c:choose>
-                        <c:when test="${not entry.product.multidimensional}">
-                            <c:set var="entryNumber" value="${entry.entryNumber}"/>
-                            <c:set var="entryComments" value="${entry.comments}"/>
-                        </c:when>
-                        <c:otherwise>
-                            <c:set var="entryNumber" value="${entry.entries.get(0).entryNumber}"/>
-                            <c:set var="entryComments" value="${entry.entries.get(0).comments}"/>
-                        </c:otherwise>
-                    </c:choose>
-                    <c:choose>
-                        <c:when test="${not empty entryComments}">
-                            <order:orderEntryComments entryComments="${entryComments}" entryNumber="${entryNumber}"/>
-                        </c:when>
-                        <c:otherwise>
-                            <div id="entryCommentListDiv_${fn:escapeXml(entryNumber)}" data-show-all-entry-comments="false"></div>
-                        </c:otherwise>
-                    </c:choose>
-                    <c:if test="${entry.updateable}">
-                        <div class="row">
-                            <div class="col-sm-7 col-sm-offset-5">
-                                <div id="entryCommentDiv_${fn:escapeXml(entryNumber)}" class="${not empty entryComments ?'collapse in':'collapse'}">
-                                    <textarea class="form-control js-quote-entry-comments" id="entryComment_${fn:escapeXml(entryNumber)}"
-                                              placeholder="<spring:theme code="quote.enter.comment"/>"
-                                              data-entry-number="${fn:escapeXml(entryNumber)}" rows="3" maxlength="255"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                    </c:if>
-                </c:if>
-            </div>
-        </li>
-
-        <li>
-            <spring:url value="/cart/getProductVariantMatrix" var="targetUrl"/>
-            <grid:gridWrapper entry="${entry}" index="${index}" styleClass="add-to-cart-order-form-wrap display-none"
-                targetUrl="${targetUrl}"/>
-        </li>
- </c:if>
+        </div>
+    </div>
+    <div class="col-xs-9 col-md-2 product-item-element list-item-quantity print-col-6">
+        <form id="updateCartForm0" class="js-qty-form0" data-cart="" action="#" method="post">
+            <input id="quantity_0" class="form-control js-update-entry-quantity-input quantity-value " name="quantity" value="1" size="1" type="text"></form>
+    </div>
+    <div class="col-xs-9 product-item-element list-item-ibo-price col-md-3 list-item-price print-col-6">
+        <form id="sortForm1" name="sortForm1" method="get" action="#">
+            <select id="sortOptions1" name="sort" class="form-control">
+                <option disabled="">Sort by</option>
+                <option value="name-asc-c" selected="selected">A Price | Choose</option>
+                <option value="name-desc-c">Name (Z-A)</option>
+                <option value="retail-price-asc-c">Price (Lowest To Highest)</option>
+                <option value="retail-price-desc-c">Price (Highest To Lowest)</option>
+                <option value="newest-asc-c">Newest First</option>
+                <option value="newest-desc-c">Oldest First</option>
+                <option value="category-asc-c">Category (A-Z)</option>
+                <option value="category-desc-c">Category (Z-A)</option></select>
+            <input name="q" value=":name-asc-c" type="hidden">
+            <input name="pageType" value="CATEGORY" type="hidden">
+            <input name="text" value="" type="hidden">
+            <br>
+            <input id="quantity_0" class="form-control js-update-entry-quantity-input quantity-value " name="quantity" value="$22.10" size="1" type="text"></form>
+    </div>
+    <div class="col-xs-9 product-item-element list-item-ibo-price col-md-1 list-item-price print-col-6">
+        <span class="price-label">Price</span>
+        <span class="value-wrapper">$34.10</span></div>
+    <div class="col-xs-9 col-md-1 product-item-element list-item-total js-item-total  print-col-6">
+        <span class="total-price-label">Total Price</span>
+        <span class="value-wrapper">$26.39</span></div>
+</li>

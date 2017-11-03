@@ -935,3 +935,28 @@ INSERT_UPDATE BreadcrumbComponent;$contentCV[unique=true];uid[unique=true];name;
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
 ;;BreadCrumbSlot;Bread crumb Content Slot;true;breadcrumbComponent;;;
+
+
+# CMS Cart Page components
+INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;actions(uid,$contentCV);&componentRef
+;;ProductReviewsTabComponent;Product Reviews Tab;productReviewsTab.jsp;;ProductReviewsTabComponent
+;;CartComponent;Cart Display Component;cartDisplay.jsp;;CartComponent
+;;CartTotalsComponent;Cart Totals Display Component;cartTotalsDisplay.jsp;;CartTotalsComponent
+;;CheckoutComponent;Checkout Display Component;checkoutDisplay.jsp;;CheckoutComponent
+
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
+;;CartContentSlot-cartPage;Top Content Slot for Cart Page;true;CartComponent
+;;CartTotalContentSlot-cartPage;Center Right Content Slot for Cart Page;true;CartTotalsComponent
+;;CheckoutContentSlot-cartPage;Bottom Content Slot for Cart Page;true;CheckoutComponent
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='CartPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;CartContentSlot;;;narrow
+;CartTotalContentSlot;;;narrow
+;CheckoutContentSlot;;;narrow
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='cartPage'];contentSlot(uid,$contentCV)[unique=true]
+;;CartContentSlotForCartPage;CartContentSlot;;CartContentSlot-cartPage
+;;CartTotalContentSlotForCartPage;CartTotalContentSlot;;CartTotalContentSlot-cartPage
+;;CheckoutContentSlotForCartPage;CheckoutContentSlot;;CheckoutContentSlot-cartPage
