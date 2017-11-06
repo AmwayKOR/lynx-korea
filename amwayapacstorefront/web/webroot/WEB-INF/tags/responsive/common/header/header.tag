@@ -8,50 +8,26 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="nav" tagdir="/WEB-INF/tags/responsive/nav"%>
+<%@ taglib prefix="header" tagdir="/WEB-INF/tags/responsive/common/header"%>
+
+<c:set var="aboUser" value="false"/>
+<sec:authorize ifNotGranted="ROLE_ANONYMOUS">
+	<c:set var="aboUser" value="true"/>
+</sec:authorize>
 
 <header class="js-mainHeader main-header general-header">
     <div class="amway-theme">
         <nav class="header-container">
             <div class="header-wrapper pos-relative">
-                <div class="collapse popover fade bottom" role="tooltip" id="login-drop-content">
-                    <i class="mobile-popover-close"></i>
-                    <div class="arrow" style=""></div>
-                    <h3 class="popover-title" style="display: none;"></h3>
-                    <div class="popover-content">
-                        <ul class="nav__links account-popover js-my-account-popover">
-                            <li class="account-popover__congratulation">
-                                <div class="account">
-                                    <div class="sys-message">
-                                        <div class="ico-wraper">
-                                            <i class="icon-caution"></i>
-                                        </div>
-                                        <span>A new ABO has signed a contract!</span></div>
-                                    <div class="sys-message">
-                                        <div class="ico-wraper">
-                                            <span class="message-num">99</span></div>
-                                        <span>You have new messages!</span></div>
-                                </div>
-                            </li>
-                            <li class="account-popover__scores">
-                                <ul>
-                                    <li>PV: 300.0</li>
-                                    <li>CVR: No</li></ul>
-                                <p>Last Update: 8/17/2016 - 4:07pm</p>
-                            </li>
-                            <li class="account-popover__pv-display" onclick="javascript:location.href='dashboard-MVP.html'">
-                                <img src="${themeResourcePath}/images/performance-chart-arch-mobile.png" alt="" /></li>
-                         
-                                <cms:pageSlot position="HeaderAccountNavigation" var="component">
-		                         	<cms:component component="${component}" />
-                            	</cms:pageSlot>
-                            <li class="account-popover__element sign-out">
-                               <c:url value="/logout" var="logoutUrl"/>
-                                <a href="${logoutUrl}" title="Sign Out">
-                                    <i class="glyphicon glyphicon-log-out"></i>Sign Out</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+            	<c:choose>
+            		<c:when test="${aboUser}">
+            			<header:headerLoggedInAccountSection/>
+            		</c:when>
+            		<c:otherwise>
+            			<header:headerNonLoggedInSection/>
+            		</c:otherwise>
+            	</c:choose>
+                
                 <div class="collapse mini-cart-items-container js-mini-cart-items-container mini-cart-wrapper" id="shoppingcar-drop-content">
                     <div class="arrow" style=""></div>
                     <ul class="nav nav-tabs">
@@ -258,14 +234,25 @@
                         </form>
                         <div class="nav-links-container pos-relative">
                             <ul class="nav-list clearfix">
-                                <li class=" nav-item">
-                                    <a href="javascript:void(0);" data-toggle="collapse" data-target="#login-drop-content" class="pos-relative img-nav-link js-my-account-menu opened collapsed">
-                                        <img src="${themeResourcePath}/images/yui.png" alt="" width="34px" />
-                                        <span class="message-num-1">24</span>
-                                        <span class="user-name">Yui Mori</span>
-                                        <span class="icon icon-arrow-dropdown"></span>
-                                    </a>
-                                </li>
+                              	<c:choose>
+					          		<c:when test="${aboUser}">
+					          			<li class=" nav-item">
+		                                    <a href="javascript:void(0);" data-toggle="collapse" data-target="#login-drop-content" class="pos-relative img-nav-link js-my-account-menu opened">
+		                                        <img src="${themeResourcePath}/images/yui.png" alt="" width="34px">
+		                                        <span class="message-num-1">24</span>
+		                                        <span class="user-name">Yui Mori</span>
+		                                        <span class="icon icon-arrow-dropdown"></span>
+		                                    </a>
+		                                </li>
+					          		</c:when>
+					          		<c:otherwise>
+					          			<li class="yCmsComponent nav-item">
+	                                              <a href="#" data-toggle="collapse" data-target="#login-drop-content" class="pos-relative img-nav-link js-my-account-menu opened">
+	                                                  <img src="${themeResourcePath}/images/user_avatar_pre_login.png" alt="" width="34px">
+	                                              </a>
+	                                          </li>
+					          		</c:otherwise>
+					          	</c:choose>
                                 <li class="componentContainer liOffcanvas nav-item nav-mini-cart">
                                     <span class="">
                                         <div class="nav-cart nav-cart-wrapper js-nav-cart-wrapper print-hide">

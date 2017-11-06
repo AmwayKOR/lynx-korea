@@ -286,6 +286,11 @@ public interface ControllerConstants
 		 * Model parameter for shopping list name.
 		 */
 		String SHOPPING_LIST_NAME = "shoppingListName";
+
+		/**
+		 * Model parameter for login error.
+		 */
+		String LOGIN_ERROR = "loginError";
 	}
 
 	/**

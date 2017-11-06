@@ -102,8 +102,7 @@
 				authentication-success-handler-ref="loginGuidAuthenticationSuccessHandler"
 				username-parameter="j_username" 
 				password-parameter="j_password" 
-				login-processing-url="/j_spring_security_check"
-				  />
+				login-processing-url="/j_spring_security_check" />
 
 		<security:port-mappings>
 			<security:port-mapping http="#{configurationService.configuration.getProperty('tomcat.http.port')}"
@@ -249,7 +248,7 @@
 
 	<bean id="loginAuthenticationFailureHandler" class="com.amway.apac.storefront.security.LoginAuthenticationFailureHandler" >
         <property name="bruteForceAttackCounter" ref="bruteForceAttackCounter" />
-		<property name="defaultFailureUrl" value="/login?error=true"/>
+		<property name="defaultFailureUrl" value="/?error=true"/>
 	</bean>
 
 	<bean id="loginCheckoutAuthenticationFailureHandler" class="com.amway.apac.storefront.security.LoginAuthenticationFailureHandler" >

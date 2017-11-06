@@ -132,6 +132,12 @@
         <property name="amwayApacCustomerAccountService" ref="customeraccountService"/>
     </bean>
     
+    
+    
+    <alias name="defaultAmwayApacCustomerFacade" alias="customerFacade"/>
+    <bean id="defaultAmwayApacCustomerFacade" class="com.amway.apac.facades.customer.impl.AmwayApacCustomerFacade" parent="defaultAmwayCustomerFacade">
+    </bean>
+    
     <alias name="defaultAmwayApacStockPopulator" alias="stockPopulator"/>
 	<bean id="defaultAmwayApacStockPopulator" parent="defaultStockPopulator"
 			class="com.amway.apac.facades.product.populators.AmwayApacStockPopulator">
