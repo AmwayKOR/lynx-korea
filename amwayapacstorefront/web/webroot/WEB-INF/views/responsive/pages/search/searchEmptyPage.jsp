@@ -15,14 +15,12 @@
 					<div class="content">
 						<cms:pageSlot position="SideContent" var="comp">
 							<div class="new-search-icon">
-								<img src="images/new-search-icon.png" />
+								<img src="${themeResourcePath}/images/new-search-icon.png" />
 							</div>
 							<cms:component component="${comp}" />
 						</cms:pageSlot>
 					</div>
 				</div>
-
-
 
 				<div class="searchEmptyPageMiddle-component">
 					<cms:pageSlot position="MiddleContent" var="comp1">
@@ -31,20 +29,18 @@
 				</div>
 			</div>
 		</div>
-	
-
 
 	<div class="amway-suggest col-md-12">
 		<h1 class="amway-suggest__title">BEST SELLERS</h1>
 		<div id="productSuggestListTabs" class="amway-suggest__list">
 			<div class="amway-suggest__item-container">
 				<div class="amway-suggest__item">
-					<!--<img src="images/limited_stock.png" class="amway-suggest__flag" alt="limited stock">-->
+					<!--<img src="${themeResourcePath}/images/limited_stock.png" class="amway-suggest__flag" alt="limited stock">-->
 					<div class="plp-item-label limit-stock">
 						Limited Stock<span class="right-white"></span>
 					</div>
 					<div class="amway-suggest__item-content amwahover">
-						<img src="images/product_list_item1.png"
+						<img src="${themeResourcePath}/images/product_list_item1.png"
 							class="amway-suggest__thumbnail" alt="product">
 						<div class="amway-suggest__item-detail">
 							<p class="amway-suggest__item-title">Nutrilite® Twist Tubes
@@ -75,7 +71,7 @@
 			<div class="amway-suggest__item-container">
 				<div class="amway-suggest__item">
 					<div class="amway-suggest__item-content amwahover">
-						<img src="images/product_list_item2.png"
+						<img src="${themeResourcePath}/images/product_list_item2.png"
 							class="amway-suggest__thumbnail" alt="product">
 						<div class="amway-suggest__item-detail">
 							<p class="amway-suggest__item-title">Nutrilite® Heart Health
@@ -104,12 +100,12 @@
 			</div>
 			<div class="amway-suggest__item-container">
 				<div class="amway-suggest__item">
-					<!--<img src="images/bundle_save.png" class="amway-suggest__flag" alt="bundle save">-->
+					<!--<img src="${themeResourcePath}/images/bundle_save.png" class="amway-suggest__flag" alt="bundle save">-->
 					<div class="plp-item-label bundle-save">
 						Bundle & Save<span class="right-white"></span>
 					</div>
 					<div class="amway-suggest__item-content amwahover">
-						<img src="images/product_list_item3.png"
+						<img src="${themeResourcePath}/images/product_list_item3.png"
 							class="amway-suggest__thumbnail" alt="product">
 						<div class="amway-suggest__item-detail">
 							<p class="amway-suggest__item-title">Nutrilite® Phyto2GO™
@@ -140,7 +136,7 @@
 			<div class="amway-suggest__item-container">
 				<div class="amway-suggest__item">
 					<div class="amway-suggest__item-content amwahover">
-						<img src="images/product_list_item4.png"
+						<img src="${themeResourcePath}/images/product_list_item4.png"
 							class="amway-suggest__thumbnail" alt="product">
 						<div class="amway-suggest__item-detail">
 							<p class="amway-suggest__item-title">Nutrilite® Twist Tubes
@@ -170,7 +166,7 @@
 			<div class="amway-suggest__item-container">
 				<div class="amway-suggest__item">
 					<div class="amway-suggest__item-content amwahover">
-						<img src="images/product_list_item4.png"
+						<img src="${themeResourcePath}/images/product_list_item4.png"
 							class="amway-suggest__thumbnail" alt="product">
 						<div class="amway-suggest__item-detail">
 							<p class="amway-suggest__item-title">Nutrilite® Twist Tubes
