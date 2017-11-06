@@ -382,12 +382,14 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;c
 # CMS Navigation Nodes
 INSERT_UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];name;parent(uid, $contentCV);&nodeRef;links(&linkRef);visible;nodeLink(&componentRef)
 
-################ Search No Result Page
+################ Search Slot
 
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
+;;SearchBoxSlot; Search Box Slot;true;topSearchBoxPlaceHolder
 
-
-
-
+INSERT_UPDATE SearchBoxComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;sideSearchBoxPlaceHolder; Top Search Box PlaceHolder;topSearchBoxPlaceHolder
+	
 ######## Account Navigation Section
 ;;AccountNavNode;AccountNavNode;root;AccountNavNode;;true;;
 ;;MyAccountNode;MyAccountNode;AccountNavNode;MyAccountNode;;true;;
@@ -822,12 +824,11 @@ INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&co
 ;;searchDesc;searchDesc
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
-;;MiddleContentSlot; Search Middle Content Slot;true;searchDesc,middleSearchBoxPlaceHolder;
+;;SideContentSlot; Search Side Content Slot;true;searchDesc;
+;;MiddleContentSlot; Search Middle Content Slot;true;middleSearchBoxPlaceHolder;
 ;;BottomContentSlot; Search Bottom Content Slot;true;
-;;SideContentSlot; Search Side Content Slot;true;topSearchBoxPlaceHolder
 
 INSERT_UPDATE SearchBoxComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
-;;sideSearchBoxPlaceHolder; Top Search Box PlaceHolder;topSearchBoxPlaceHolder
 ;;middleSearchBoxPlaceHolder; Middle Search Box PlaceHolder;middleSearchBoxPlaceHolder
 	
 ############# My Account Page

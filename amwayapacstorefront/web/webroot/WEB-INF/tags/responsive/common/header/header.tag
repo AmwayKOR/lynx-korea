@@ -451,28 +451,19 @@
                         		
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-4 top-search print-hide">
-                        <div class="site-search">
-                            <div class="ui-front">
-                            	<c:url var="searchPageUrl" value="/search"/>
-                                <form name="search_form_SearchBox" method="get" action="${searchPageUrl}">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control js-site-search-input ui-autocomplete-input" name="text" value="" maxlength="100" placeholder="Search" data-options="{&quot;autocompleteUrl&quot; : &quot;/lynxstorefront/lynx/en/search/autocomplete/SearchBox&quot;,&quot;minCharactersBeforeRequest&quot; : &quot;2&quot;,&quot;waitTimeBeforeRequest&quot; : &quot;500&quot;,&quot;displayProductImages&quot; : true}" autocomplete="off" />
-                                        <span class="input-group-btn">
-                                            <a class="btn btn-link" type="submit">
-                                                <span class="icon-search"></span>
-                                            </a>
-                                        </span>
-                                    </div>
-                                </form>
-                                <ul class="ui-autocomplete ui-front ui-menu ui-widget ui-widget-content" id="ui-id-1" tabindex="0" style="display: none;"></ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+					<div class="col-sm-12 col-md-4 top-search print-hide">
+						<div class="site-search">
+							<cms:pageSlot position="SearchBox" var="comp1">
+								<cms:component component="${comp1}" />
+							</cms:pageSlot>
+						</div>
+					</div>
+				</div>
+				</div>
             </div>
         </nav>
     </div>
+    
     <!--search suggest-->
     <div class="popover auto-suggestion-popover fade bottom in" role="tooltip" id="">
         <div class="popover-arrow arrow" style="left: 71.9353%;"></div>

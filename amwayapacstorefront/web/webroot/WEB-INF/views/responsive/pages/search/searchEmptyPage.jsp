@@ -10,49 +10,29 @@
 	<div class="container-fluid main-container">
 		<div class="row">
 			<div class="searchEmptyPageMiddle">
-               <div class=" searchEmptyPageMiddle-component">
+				<div class=" searchEmptyPageMiddle-component">
 
-                           
-               <div class="content">
-				<cms:pageSlot position="MiddleContent" var="comp">
-						<div class="new-search-icon">
-							<img src="images/new-search-icon.png" />
-						</div>
-						<cms:component component="${comp}" />
+					<div class="content">
+						<cms:pageSlot position="SideContent" var="comp">
+							<div class="new-search-icon">
+								<img src="images/new-search-icon.png" />
+							</div>
+							<cms:component component="${comp}" />
+						</cms:pageSlot>
+					</div>
+				</div>
+
+
+
+				<div class="searchEmptyPageMiddle-component">
+					<cms:pageSlot position="MiddleContent" var="comp1">
+						<cms:component component="${comp1}" />
 					</cms:pageSlot>
 				</div>
-			</div></div>
+			</div>
 		</div>
-	</div>
+	
 
-
-
-	<div class="searchEmptyPageMiddle-component">
-		<div class="ui-front">
-			<form name="search_form_SearchBox" method="get">
-				<!-- <div class="input-group">
-					<input type="text" class="form-control js-site-search-input"
-						name="text" value="" maxlength="100"
-						placeholder="Search by name,SKU,or brand" /> <span
-						class="input-group-btn">
-						<button class="btn btn-link" type="submit">
-							<span class="icon-search"></span>
-						</button>
-					</span>
-				</div> -->
-				<div class="input-group">
-					<input type="text"
-						class="form-control js-site-search-input ui-autocomplete-input"
-						name="text" value="" maxlength="100" placeholder="Search"
-						data-options="{&quot;autocompleteUrl&quot; : &quot;/lynxstorefront/lynx/en/search/autocomplete/SearchBox&quot;,&quot;minCharactersBeforeRequest&quot; : &quot;2&quot;,&quot;waitTimeBeforeRequest&quot; : &quot;500&quot;,&quot;displayProductImages&quot; : true}"
-						autocomplete="off" /> <span class="input-group-btn"> <a
-						class="btn btn-link" type="submit"> <span class="icon-search"></span>
-					</a>
-					</span>
-				</div>
-			</form>
-		</div>
-	</div>
 
 	<div class="amway-suggest col-md-12">
 		<h1 class="amway-suggest__title">BEST SELLERS</h1>
@@ -218,6 +198,7 @@
 				</div>
 			</div>
 		</div>
+	</div>
 	</div>
 	
 	<%-- <c:url value="/" var="homePageUrl" />
