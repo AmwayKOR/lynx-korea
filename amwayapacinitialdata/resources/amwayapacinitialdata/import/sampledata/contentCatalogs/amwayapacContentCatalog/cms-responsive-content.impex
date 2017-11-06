@@ -840,6 +840,7 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;c
 ;;AutoRenewalContentSlot;Auto Renewal Slot for myaccount page;true;refMyAccountSection2B
 ;;ContractsContentSlot;Bonus Payment Slot for myaccount page;true;refMyAccountSection2C
 ;;ProfileBarJumpToSlot;ProfileBarJumpTo-AccountPage;true;ProfileBarJumpToSlot
+;;BodyContentAccountSlot;Body Content-AccountPage;true;AccountBodyComponent
 
 INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='account'];contentSlot(uid,$contentCV)[unique=true]
 ;;BusinessInformationContentSlot;Section1A;;BusinessInformationContentSlot
@@ -848,6 +849,10 @@ INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];positi
 ;;BonusPaymentContentSlot;Section2A;;BonusPaymentContentSlot
 ;;AutoRenewalContentSlot;Section2B;;AutoRenewalContentSlot
 ;;ContractsContentSlot;Section2C;;ContractsContentSlot
+;;BodyContent-account;BodyContent;;BodyContentAccountSlot
+
+INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;actions(uid,$contentCV);&componentRef
+;;AccountBodyComponent;Account Body Component;accountBodyPage.jsp;;AccountBodyComponent
 
 INSERT_UPDATE AmwayApacMyAccountProfileBarComponent;$contentCV[unique=true];uid[unique=true];name;profileBarURLComponents(&componentRef);&componentRef;
 ;;amwayApacMyAccountProfileBarComponent;Account Page Profile Bar;myaccountPBMyAccountLinkComponent,businessInformationPBMyAccountLinkComponent,orderHistoryPBMyAccountLinkComponent,billingShippingPBMyAccountLinkComponent,bonusPaymentPBMyAccountLinkComponent,autoRenewalPBMyAccountLinkComponent,contractsPBMyAccountLinkComponent,editProfilePBMyAccountLinkComponent;ProfileBarJumpToSlot;	
@@ -886,6 +891,16 @@ INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true]  ;&
 ;;bonusPaymentParagraphComponent;bonusPaymentParagraphComponent
 ;;autoRenewalParagraphComponent;autoRenewalParagraphComponent
 ;;contractsParagraphComponent;contractsParagraphComponent
+
+###### Account Billing & Shipping Page ######
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;BodyContentBillingShippingSlot;Body Content Slot for Account Billing & Shipping;true;AccountBillingShippingComponent;;;
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='billingshipping'];contentSlot(uid,$contentCV)[unique=true];;;
+;;BodyContent-billingShipping;BodyContent;;BodyContentBillingShippingSlot;;;
+
+INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;actions(uid,$contentCV);&componentRef
+;;AccountBillingShippingComponent;Account Billing & Shipping Component;accountBillingShippingPage.jsp;;AccountBillingShippingComponent
 
 # CMS VariantSelector Components
 INSERT_UPDATE ProductVariantSelectorComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
