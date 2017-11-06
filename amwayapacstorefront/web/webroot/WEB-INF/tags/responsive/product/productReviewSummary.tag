@@ -13,9 +13,12 @@
 
 <fmt:parseNumber var="averageRating" type="number" integerOnly="true" value="${product.averageRating}" />
 <div class="description-vote">
-    <c:forEach  begin="1" end="5">
-        <img src="${themeResourcePath}/images/star-empty.png" alt="star">
+    <c:forEach  begin="1" end="${averageRating}">
+        <img src="${themeResourcePath}/images/star-filled.png" alt="star">
     </c:forEach>
+    <c:forEach  begin="${averageRating + 1}" end="5">
+            <img src="${themeResourcePath}/images/star-empty.png" alt="star">
+        </c:forEach>
     <a href="#tabreview" class="js-openTab" id="tabreview">
         <span class="description-number">${averageRating}</span>
         <span class="description-reviews">
