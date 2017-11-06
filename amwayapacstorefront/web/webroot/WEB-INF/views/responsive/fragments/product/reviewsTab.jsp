@@ -14,7 +14,10 @@
 	<c:forEach items="${reviews}" var="review" varStatus="status">
 
 		<p class="product-collapse__review">
-		    <c:forEach  begin="1" end="5">
+		    <c:forEach  begin="1" end="${review.rating}">
+                <img src="${themeResourcePath}/images/star-filled.png" alt="star">
+            </c:forEach>
+            <c:forEach  begin="${review.rating + 1}" end="5">
                 <img src="${themeResourcePath}/images/star-empty.png" alt="star">
             </c:forEach>
             ${fn:escapeXml(review.headline)}</p>
