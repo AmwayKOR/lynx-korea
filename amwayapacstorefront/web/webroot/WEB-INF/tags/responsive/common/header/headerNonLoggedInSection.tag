@@ -8,24 +8,7 @@
     <div class="popover-content">
         <i class="mobile-popover-close"></i>
         <c:url value="/j_spring_security_check" var="login_auth_url"/>
-        <%-- <form:form method="post" action="${login_auth_url}" cssClass="topbar__popover login-form authentication-js" commandName="loginForm">
-        	<h1 class="login-form__title">welcome to amway!</h1>
-            <p class="login-form__sub-text">Log into your account or sign up to create one.</p>
-            <c:if test="${loginError}"><p class="red">Your username or password was incorrect.</p></c:if>
-            <formElement:formInputBox labelKey="j_username" idKey="j_username" path="j_username" placeholder="Username or ABO ID" inputCSS="login-form__username"/>
-            <formElement:formInputBox labelKey="j_password" idKey="j_password" path="j_password" placeholder="Password" inputCSS="login-form__password"/>
-            <input class="login-form__remember" id="remember" name="remember" type="checkbox">
-            <label for="remember" class="remember-me">Remember me</label>
-            <button class="btn-primary button login-form__submit" type="submit" value="submit">submit</button>
-            <a class="login-form__link" href="#">Forgot your password?</a>
-            <a class="login-form__link" href="#">First time loging in?</a>
-            <hr>
-            <p class="login-form__owner">Become an Amway Business Owner</p>
-            <a href="register-landing.html">
-            	<input class="button login-form__register" type="button" value="register here">
-            </a>
-        </form:form> --%>
-        
+        <c:url value="/register-landing-page" var="register_page_url"/>
         <form class="topbar__popover login-form authentication-js" action="${login_auth_url}" method="post" >
             <h1 class="login-form__title">welcome to amway!</h1>
             <p class="login-form__sub-text">Log into your account or sign up to create one.</p>
@@ -40,7 +23,7 @@
             <a class="login-form__link" href="#">First time loging in?</a>
             <hr>
             <p class="login-form__owner">Become an Amway Business Owner</p>
-            <a href="register-landing.html">
+            <a href="${register_page_url}">
             	<input class="button login-form__register" type="button" value="register here">
             </a>
         </form>

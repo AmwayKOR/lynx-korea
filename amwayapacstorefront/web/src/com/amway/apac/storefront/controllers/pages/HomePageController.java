@@ -12,7 +12,6 @@ package com.amway.apac.storefront.controllers.pages;
 
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
-import de.hybris.platform.acceleratorstorefrontcommons.forms.LoginForm;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
 
@@ -45,7 +44,6 @@ public class HomePageController extends AbstractPageController
 			return REDIRECT_PREFIX + ROOT;
 		}
 
-		model.addAttribute(new LoginForm());
 		model.addAttribute(ControllerConstants.ModelParameters.LOGIN_ERROR, BooleanUtils.isTrue(loginError));
 		storeCmsPageInModel(model, getContentPageForLabelOrId(null));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(null));
