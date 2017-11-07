@@ -20,8 +20,8 @@
     </div>
     <div class="container-fluid main-container">
         <div class="row border cartTitile">
-            <h1 class="product-list-page-title shopping-list-page-title mb25">SHOPPING CART</h1>
-            <h4 class="product-list-page-sub-title">Welcome to your shopping cart! You can manage and complete your orders below.</h4></div>
+            <h1 class="product-list-page-title shopping-list-page-title mb25"><spring:theme code="basket.page.heading" /></h1>
+            <h4 class="product-list-page-sub-title"><spring:theme code="basket.page.welcomeMessage" /></h4></div>
         <div class="row cart-content-wrapper">
             <div class="account-section-content new-account-section-content">
                 <div id="quickOrder" class="account-section shopping-cart-quick-shop-wrapper" data-grid-confirm-message="">
@@ -64,7 +64,7 @@
                     </div>
                 </div>
             </div>
-            <div class="cart-top-totals">your cart (26 items)</div>
+            <div class="cart-top-totals"><spring:theme code="basket.page.totals.total.items" arguments="${fn:length(cartData.entries)}"/></div>
             <div class="row">
                 <cms:pageSlot position="CartContentSlot" var="feature">
                     <cms:component component="${feature}" />

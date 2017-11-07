@@ -13,11 +13,10 @@
 <ul class="shopping-cart-item-list js-shopping-cart-item-list shopping-cart-product-item-list">
     <li class="visible-md visible-lg">
         <div class="col-xs-12 list-header">
-            <div class="col-xs-5 list-item-info">Item (style number)</div>
-            <div class="col-xs-2 list-item-quantity">Qty</div>
-            <div class="col-xs-3 list-item-set-price">set price</div>
-            <div class="col-xs-1 list-item-price">Price</div>
-            <div class="col-xs-1 list-item-total">Total</div></div>
+            <div class="col-xs-6 list-item-info"><spring:theme code="basket.page.item"/></div>
+            <div class="col-xs-2 list-item-quantity"><spring:theme code="basket.page.qty"/></div>
+            <div class="col-xs-2 list-item-price"><spring:theme code="basket.page.price"/></div>
+            <div class="col-xs-2 list-item-total"><spring:theme code="basket.page.total"/></div></div>
     </li>
     <c:forEach items="${cartData.rootGroups}" var="group" varStatus="loop">
         <cart:rootEntryGroup cartData="${cartData}" entryGroup="${group}"/>

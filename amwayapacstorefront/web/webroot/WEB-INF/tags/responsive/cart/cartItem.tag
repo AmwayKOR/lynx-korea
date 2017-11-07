@@ -39,23 +39,33 @@
                     <product:productPrimaryImage product="${entry.product}" format="thumbnail"/>
                 </a>
             </div>
-            <div class="list-item-remove">
-                <div class="remove-item-btn js-remove-entry-button" id="removeEntry_1">
-                    <span class="">Remove</span></div>
-            </div>
+            <c:if test="${index != null}">
+            	<c:url value="/cart/entrygroups/${index}" var="removeGroupAction"/>
+            	<form:form id="removeGroup${index}"
+            			   action="${removeGroupAction}" method="post">
+            		<a class=item__remove" onclick="$(this).closest('form').submit()"
+            		   style="cursor: pointer"><spring:theme code="cart.groups.remove"/></a>
+            	</form:form>
+            </c:if>
         </div>
         <div class="product-item-element list-item-info">
-            <span class="product-name">Nutrilite Men's Pack</span>
-            <div class="product-code">Item #
-                <span class="product-item-number">105480</span></div>
-            <div class="product-category">Vitamins &amp; Supplements</div>
+            <span class="product-name">${entry.product.name}</span>
+            <div class="product-code"><spring:theme code="basket.page.itemNumber" />
+                <span class="product-item-number">${entry.product.code}</span></div>
+            <div class="product-category">${entry.product.categories[0].name}</div>
+            <c:set var="entryStock" value="${entry.product.stock.stockLevelStatus.code}"/>
             <div class="product-stock">
                 <div>
                     <span class="stock">
                         <span class="product-availability">
-                            <span class="green">
-                                <span class="icon icon-check-bold"></span>
-                                <span class="text text-uppercase">In Stock</span></span>
+                            <c:choose>
+                                <c:when test="${not empty entryStock and entryStock ne 'outOfStock'}">
+                                    <span class="green">
+                                        <span class="icon icon-check-bold"></span>
+                                        <span class="text text-uppercase"><spring:theme code="product.variants.in.stock" /></span></span>
+                                </c:when>
+                            </c:choose>
+
                         </span>
                     </span>
                     <br>
@@ -65,31 +75,21 @@
         </div>
     </div>
     <div class="col-xs-9 col-md-2 product-item-element list-item-quantity print-col-6">
-        <form id="updateCartForm0" class="js-qty-form0" data-cart="" action="#" method="post">
-            <input id="quantity_0" class="form-control js-update-entry-quantity-input quantity-value " name="quantity" value="1" size="1" type="text"></form>
-    </div>
-    <div class="col-xs-9 product-item-element list-item-ibo-price col-md-3 list-item-price print-col-6">
-        <form id="sortForm1" name="sortForm1" method="get" action="#">
-            <select id="sortOptions1" name="sort" class="form-control">
-                <option disabled="">Sort by</option>
-                <option value="name-asc-c" selected="selected">A Price | Choose</option>
-                <option value="name-desc-c">Name (Z-A)</option>
-                <option value="retail-price-asc-c">Price (Lowest To Highest)</option>
-                <option value="retail-price-desc-c">Price (Highest To Lowest)</option>
-                <option value="newest-asc-c">Newest First</option>
-                <option value="newest-desc-c">Oldest First</option>
-                <option value="category-asc-c">Category (A-Z)</option>
-                <option value="category-desc-c">Category (Z-A)</option></select>
-            <input name="q" value=":name-asc-c" type="hidden">
-            <input name="pageType" value="CATEGORY" type="hidden">
-            <input name="text" value="" type="hidden">
-            <br>
-            <input id="quantity_0" class="form-control js-update-entry-quantity-input quantity-value " name="quantity" value="$22.10" size="1" type="text"></form>
+        <c:url value="/cart/update" var="cartUpdateFormAction" />
+        <form:form id="updateCartForm${entryNumber}" action="${cartUpdateFormAction}" method="post" commandName="updateQuantityForm${entry.entryNumber}"
+                   class="js-qty-form${entryNumber}"
+                    data-cart='{"cartCode" : "${fn:escapeXml(cartData.code)}","productPostPrice":"${entry.basePrice.value}","productName":"${fn:escapeXml(entry.product.name)}"}'>
+            <input type="hidden" name="entryNumber" value="${entry.entryNumber}"/>
+            <input type="hidden" name="productCode" value="${fn:escapeXml(entry.product.code)}"/>
+            <input type="hidden" name="initialQuantity" value="${entry.quantity}"/>
+            <ycommerce:testId code="cart_product_quantity">
+                <form:label cssClass="visible-xs visible-sm" path="quantity" for="quantity${entry.entryNumber}"></form:label>
+                <form:input cssClass="form-control js-update-entry-quantity-input quantity-value" disabled="${not entry.updateable}" type="text" size="1" id="quantity_${entryNumber}" path="quantity" />
+            </ycommerce:testId>
+        </form:form>
     </div>
     <div class="col-xs-9 product-item-element list-item-ibo-price col-md-1 list-item-price print-col-6">
-        <span class="price-label">Price</span>
-        <span class="value-wrapper">$34.10</span></div>
+        <span class="value-wrapper"><format:price priceData="${entry.basePrice}" /></span></div>
     <div class="col-xs-9 col-md-1 product-item-element list-item-total js-item-total  print-col-6">
-        <span class="total-price-label">Total Price</span>
-        <span class="value-wrapper">$26.39</span></div>
+        <span class="value-wrapper"><format:price priceData="${entry.totalPrice}" /></span></div>
 </li>
