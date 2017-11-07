@@ -6,35 +6,12 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
+<ul class="checkout-steps">
+	<c:forEach items="${checkoutSteps}" var="checkoutStep" varStatus="loopStatus">
+		<li class="checkout-step col-xs-6 col-md-4 <c:if test="${progressBarId eq checkoutStep.progressBarId}">checkout-steps-active</c:if>">
+			<span class="checkout-steps-circle<c:if test="${progressBarId eq checkoutStep.progressBarId}">active</c:if>">${loopStatus.count}</span>
+			<span class="checkout-steps-text"><spring:theme code="checkout.multi.${checkoutStep.progressBarId}"/></span>
+		</li>
+	</c:forEach>
+</ul>
 
-<spring:htmlEscape defaultHtmlEscape="true" />
-
-<ycommerce:testId code="checkoutSteps">
-    <div class="checkout-steps ${cssClass}">
-        <c:forEach items="${checkoutSteps}" var="checkoutStep" varStatus="status">
-            <c:url value="${checkoutStep.url}" var="stepUrl"/>
-            <c:choose>
-                <c:when test="${progressBarId eq checkoutStep.progressBarId}">
-                    <c:set scope="page"  var="activeCheckoutStepNumber"  value="${checkoutStep.stepNumber}"/>
-                    <a href="${stepUrl}" class="step-head js-checkout-step active">
-                        <div class="title"><spring:theme code="checkout.multi.${checkoutStep.progressBarId}"/></div>
-                    </a>
-                    <div class="step-body"><jsp:doBody/></div>
-                </c:when>
-                <c:when test="${checkoutStep.stepNumber > activeCheckoutStepNumber}">
-                    <a href="${stepUrl}" class="step-head js-checkout-step ">
-                        <div class="title"><spring:theme code="checkout.multi.${checkoutStep.progressBarId}"/></div>
-                    </a>
-                </c:when>
-                <c:otherwise>
-                    <a href="${stepUrl}" class="step-head js-checkout-step ">
-                        <div class="title"><spring:theme code="checkout.multi.${checkoutStep.progressBarId}"/></div>
-                        <div class="edit">
-                            <span class="glyphicon glyphicon-pencil"></span>
-                        </div>
-                    </a>
-                </c:otherwise>
-            </c:choose>
-        </c:forEach>
-    </div>
-</ycommerce:testId>

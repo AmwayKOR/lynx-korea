@@ -1,145 +1,129 @@
-<%@ tag body-content="empty" trimDirectiveWhitespaces="true" %>
-<%@ attribute name="cartData" required="true" type="de.hybris.platform.commercefacades.order.data.CartData" %>
-<%@ attribute name="showDeliveryAddress" required="true" type="java.lang.Boolean" %>
-<%@ attribute name="showPotentialPromotions" required="false" type="java.lang.Boolean" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="format" tagdir="/WEB-INF/tags/shared/format" %>
-<%@ taglib prefix="product" tagdir="/WEB-INF/tags/responsive/product" %>
-<%@ taglib prefix="grid" tagdir="/WEB-INF/tags/responsive/grid" %>
-<%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
-<%@ taglib prefix="common" tagdir="/WEB-INF/tags/responsive/common" %>
-
-<spring:htmlEscape defaultHtmlEscape="true" />
-
-<c:set var="hasShippedItems" value="${cartData.deliveryItemsQuantity > 0}" />
-<c:set var="deliveryAddress" value="${cartData.deliveryAddress}"/>
-
-<c:if test="${not hasShippedItems}">
-	<spring:theme code="checkout.pickup.no.delivery.required"/>
-</c:if>
-
-<ul class="checkout-order-summary-list">
-<c:if test="${hasShippedItems}">
-	<li class="checkout-order-summary-list-heading">
-		<c:choose>
-			<c:when test="${showDeliveryAddress and not empty deliveryAddress}">
-				<div class="title"><spring:theme code="checkout.pickup.items.to.be.shipped"/></div>
-				<div class="address">
-					${fn:escapeXml(deliveryAddress.title)}&nbsp;${fn:escapeXml(deliveryAddress.firstName)}&nbsp;${fn:escapeXml(deliveryAddress.lastName)}
-					<br>
-					<c:if test="${ not empty deliveryAddress.line1 }">
-						${fn:escapeXml(deliveryAddress.line1)},&nbsp;
-					</c:if>
-					<c:if test="${ not empty deliveryAddress.line2 }">
-						${fn:escapeXml(deliveryAddress.line2)},&nbsp;
-					</c:if>
-					<c:if test="${not empty deliveryAddress.town }">
-						${fn:escapeXml(deliveryAddress.town)},&nbsp;
-					</c:if>
-					<c:if test="${ not empty deliveryAddress.region.name }">
-						${fn:escapeXml(deliveryAddress.region.name)},&nbsp;
-					</c:if>
-					<c:if test="${ not empty deliveryAddress.postalCode }">
-						${fn:escapeXml(deliveryAddress.postalCode)},&nbsp;
-					</c:if>
-					<c:if test="${ not empty deliveryAddress.country.name }">
-						${fn:escapeXml(deliveryAddress.country.name)}
-					</c:if>
-                    <br/>
-					<c:if test="${ not empty deliveryAddress.phone }">
-						${fn:escapeXml(deliveryAddress.phone)}
-					</c:if>
-				</div>
-			</c:when>
-			<c:otherwise>
-				<spring:theme code="checkout.pickup.items.to.be.delivered" />
-			</c:otherwise>
-		</c:choose>
-
-	</li>
-</c:if>
-
-<c:forEach items="${cartData.entries}" var="entry" varStatus="loop">
-	<c:if test="${entry.deliveryPointOfService == null}">
-		<c:url value="${entry.product.url}" var="productUrl"/>
-		<li class="checkout-order-summary-list-items">
-			<div class="thumb">
-				<a href="${productUrl}">
-					<product:productPrimaryImage product="${entry.product}" format="thumbnail"/>
-				</a>
-			</div>
-			<div class="price"><format:price priceData="${entry.totalPrice}" displayFreeForZero="true"/></div>
-			<div class="details">
-				<div class="name"><a href="${productUrl}">${fn:escapeXml(entry.product.name)}</a></div>
-				<div>
-                    <span class="label-spacing"><spring:theme code="order.itemPrice" />:</span>
-					<c:if test="${entry.product.multidimensional}">
-						<%-- if product is multidimensional with different prices, show range, else, show unique price --%>
-						<c:choose>
-							<c:when test="${entry.product.priceRange.minPrice.value ne entry.product.priceRange.maxPrice.value}">
-								<format:price priceData="${entry.product.priceRange.minPrice}" /> - <format:price priceData="${entry.product.priceRange.maxPrice}" />
-							</c:when>
-                            <c:when test="${entry.product.priceRange.minPrice.value eq entry.product.priceRange.maxPrice.value}">
-                                <format:price priceData="${entry.product.priceRange.minPrice}" />
-                            </c:when>
-							<c:otherwise>
-								<format:price priceData="${entry.product.price}" />
-							</c:otherwise>
-						</c:choose>
-					</c:if>
-					<c:if test="${! entry.product.multidimensional}">
-						<format:price priceData="${entry.basePrice}" displayFreeForZero="true" />
-					</c:if>
-				</div>
-				<div class="qty"><span><spring:theme code="basket.page.qty"/>:</span>${entry.quantity}</div>
-				<div>
-					<c:forEach items="${entry.product.baseOptions}" var="option">
-						<c:if test="${not empty option.selected and option.selected.url eq entry.product.url}">
-							<c:forEach items="${option.selected.variantOptionQualifiers}" var="selectedOption">
-								<div>${fn:escapeXml(selectedOption.name)}: ${fn:escapeXml(selectedOption.value)}</div>
-							</c:forEach>
-						</c:if>
-					</c:forEach>
-
-					<c:if test="${ycommerce:doesPotentialPromotionExistForOrderEntryOrOrderEntryGroup(cartData, entry) && showPotentialPromotions}">
-                        <c:forEach items="${cartData.potentialProductPromotions}" var="promotion">
-                            <c:set var="displayed" value="false"/>
-                            <c:forEach items="${promotion.consumedEntries}" var="consumedEntry">
-                                <c:if test="${not displayed && ycommerce:isConsumedByEntry(consumedEntry,entry)}">
-                                    <c:set var="displayed" value="true"/>
-                                    <span class="promotion">${ycommerce:sanitizeHTML(promotion.description)}</span>
-                                </c:if>
-                            </c:forEach>
-                        </c:forEach>
-					</c:if>
-
-					<c:if test="${ycommerce:doesAppliedPromotionExistForOrderEntryOrOrderEntryGroup(cartData, entry)}">
-                        <c:forEach items="${cartData.appliedProductPromotions}" var="promotion">
-                            <c:set var="displayed" value="false"/>
-                            <c:forEach items="${promotion.consumedEntries}" var="consumedEntry">
-                                <c:if test="${not displayed && ycommerce:isConsumedByEntry(consumedEntry,entry)}">
-                                    <c:set var="displayed" value="true"/>
-                                    <span class="promotion">${ycommerce:sanitizeHTML(promotion.description)}</span>
-                                </c:if>
-                            </c:forEach>
-                        </c:forEach>
-					</c:if>
-					<common:configurationInfos entry="${entry}"/>
-				</div>
-				<c:if test="${entry.product.multidimensional}" >
-					<a href="#" id="QuantityProductToggle" data-index="${loop.index}" class="showQuantityProductOverlay updateQuantityProduct-toggle">
-						<span><spring:theme code="order.product.seeDetails"/></span>
-					</a>
-				</c:if>
-
-				<spring:url value="/checkout/multi/getReadOnlyProductVariantMatrix" var="targetUrl" htmlEscape="false"/>
-				<grid:gridWrapper entry="${entry}" index="${loop.index}" styleClass="display-none"
-					targetUrl="${targetUrl}"/>
-			</div>
-		</li>
-	</c:if>
-</c:forEach>
-
-</ul>
+<div class="cartlist">
+    <span class="cartlist-header cartlist-detail-mob " data-toggle="collapse" href="#cartlistContent" data-parent="#accordion"> ORDER DETAILS </span>
+    <div id="cartlistContent" class="cartlist-content panel-collapse collapse in">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="cartlist-th cartlist-detail-desktop">
+                        <div>
+                            <div class="col-xs-6">
+                                PRODUCT DETAILS
+                            </div>
+                            <div class="cartlist-detail-desktop col-xs-1">
+                                QTY
+                            </div>
+                            <div class="cartlist-detail-desktop col-xs-1">
+                                SET PRICE
+                            </div>
+                            <div class="cartlist-detail-desktop col-xs-1">
+                                SERVICE FEE
+                            </div>
+                            <div class="cartlist-detail-desktop col-xs-1">
+                                TOTAL PRICE
+                            </div>
+                            <div class="cartlist-detail-desktop col-xs-2">
+                                TOTAL PB/BV
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cartlist-tbody container-fluid">
+                        <div class="row">
+                            <div class="col-xs-6 extraclass-mobile-width">
+                                <div class="cartlist-image">
+                                    <img src="images/heart-health_checkout.png" width="67px" height="67px" />
+                                </div>
+                                <div class="cartlist-text">
+     <span calss="cartlist-big"> Nutrilite&reg; Heart Health Pack 60-count Has a Long Name Can Wrap to Three Lines <span> <br /> <span class="cartlist-small1">60 Count </span> <br /> <span class="cartlist-small2">Item # 116991 </span> <br /> <span class="cartlist-small3">18.22 PV / 57.31 BV </span> <br /> <span class="cartlist-instock"><img src="images/check.png" alt="check" /> IN STOCK </span>
+       <div class="cartlist-detail-mob">
+        <div class="cartlist-mbweight">
+         <span class="cartlist-mbleft">QTY</span>
+         <span class="cartlist-mbright">5</span>
+        </div>
+        <div class="cartlist-mbweight">
+         <span class="cartlist-mbleft">SET PRICE</span>
+         <span class="cartlist-mbright">$22.80</span>
+        </div>
+        <div class="cartlist-mbweight">
+         <span class="cartlist-mbleft">SERVICE FEE</span>
+         <span class="cartlist-mbright">$0.00</span>
+        </div>
+        <div class="cartlist-mbweight">
+         <span class="cartlist-mbleft">TOTAL PRICE</span>
+         <span class="cartlist-mbright">$114.00</span>
+        </div>
+        <div class="cartlist-mbweight">
+         <span class="cartlist-mbleft">TOTAL PV/BV</span>
+         <span class="cartlist-mbright">91.10 / 285.55</span>
+        </div>
+       </div> </span></span>
+                                </div>
+                            </div>
+                            <div class="cartlist-detail-desktop col-xs-1">
+                                <p class="cartlist-td">5</p>
+                            </div>
+                            <div class="cartlist-detail-desktop col-xs-1">
+                                <p class="cartlist-td"> $22.80</p>
+                            </div>
+                            <div class="cartlist-detail-desktop col-xs-1">
+                                <p class="cartlist-td"> $0.00</p>
+                            </div>
+                            <div class="cartlist-detail-desktop col-xs-1">
+                                <p class="cartlist-td"> $114.00 </p>
+                            </div>
+                            <div class="cartlist-detail-desktop col-xs-2">
+                                <p class="cartlist-td"> 91.10 / 285.55</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6 extraclass-mobile-width">
+                                <div class="cartlist-image">
+                                    <img src="images/heart-health_checkout.png" width="67px" height="67px" />
+                                </div>
+                                <div class="cartlist-text">
+     <span calss="cartlist-big"> Nutrilite&reg; Heart Health Pack 60-count Has a Long Name Can Wrap to Three Lines <span> <br /> <span class="cartlist-small1">60 Count </span> <br /> <span class="cartlist-small2">Item # 116991 </span> <br /> <span class="cartlist-small3">18.22 PV / 57.31 BV </span> <br /> <span class="cartlist-instock"><img src="images/check.png" alt="check" /> IN STOCK </span>
+       <div class="cartlist-detail-mob">
+        <div class="cartlist-mbweight">
+         <span class="cartlist-mbleft">QTY</span>
+         <span class="cartlist-mbright">5</span>
+        </div>
+        <div class="cartlist-mbweight">
+         <span class="cartlist-mbleft">SET PRICE</span>
+         <span class="cartlist-mbright">$22.80</span>
+        </div>
+        <div class="cartlist-mbweight">
+         <span class="cartlist-mbleft">SERVICE FEE</span>
+         <span class="cartlist-mbright">$0.00</span>
+        </div>
+        <div class="cartlist-mbweight">
+         <span class="cartlist-mbleft">TOTAL PRICE</span>
+         <span class="cartlist-mbright">$114.00</span>
+        </div>
+        <div class="cartlist-mbweight">
+         <span class="cartlist-mbleft">TOTAL PV/BV</span>
+         <span class="cartlist-mbright">91.10 / 285.55</span>
+        </div>
+       </div> </span></span>
+                                </div>
+                            </div>
+                            <div class="cartlist-detail-desktop col-xs-1">
+                                <p class="cartlist-td">5</p>
+                            </div>
+                            <div class="cartlist-detail-desktop col-xs-1">
+                                <p class="cartlist-td"> $22.80</p>
+                            </div>
+                            <div class="cartlist-detail-desktop col-xs-1">
+                                <p class="cartlist-td"> $0.00</p>
+                            </div>
+                            <div class="cartlist-detail-desktop col-xs-1">
+                                <p class="cartlist-td"> $114.00 </p>
+                            </div>
+                            <div class="cartlist-detail-desktop col-xs-2">
+                                <p class="cartlist-td"> 91.10 / 285.55</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

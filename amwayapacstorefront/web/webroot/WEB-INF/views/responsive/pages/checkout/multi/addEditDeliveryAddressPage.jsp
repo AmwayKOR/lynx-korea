@@ -10,84 +10,33 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
+<template:checkoutPage>
 
-<template:page pageTitle="${pageTitle}" hideHeaderLinks="true">
-
-<div class="row">
-    <div class="col-sm-6">
-	    <div class="checkout-headline">
-            <span class="glyphicon glyphicon-lock"></span>
-            <spring:theme code="checkout.multi.secure.checkout" />
+<div class="container-fluid main-container">
+    <div class="shipping-delivery">
+        <div class="container-fluid">
+          <div class="row cartTitile">
+              <div class="product-list-page-title mb25">
+                  CHECKOUT
+              </div>
+          </div>
         </div>
-        <multi-checkout:checkoutSteps checkoutSteps="${checkoutSteps}" progressBarId="${progressBarId}">
-            <jsp:body>
-                <ycommerce:testId code="checkoutStepOne">
-                    <div class="checkout-shipping">
-                            <multi-checkout:shipmentItems cartData="${cartData}" showDeliveryAddress="false" />
-
-                            <div class="checkout-indent">
-                                <div class="headline"><spring:theme code="checkout.summary.shippingAddress" /></div>
-
-
-                                    <address:addressFormSelector supportedCountries="${countries}"
-                                        regions="${regions}" cancelUrl="${currentStepUrl}"
-                                        country="${country}" />
-
-                                        <div id="addressbook">
-
-                                            <c:forEach items="${deliveryAddresses}" var="deliveryAddress" varStatus="status">
-                                                <div class="addressEntry">
-                                                    <form action="${request.contextPath}/checkout/multi/delivery-address/select" method="GET">
-                                                        <input type="hidden" name="selectedAddressCode" value="${fn:escapeXml(deliveryAddress.id)}" />
-                                                        <ul>
-                                                            <li>
-                                                                <strong>${fn:escapeXml(deliveryAddress.title)}&nbsp;
-                                                                ${fn:escapeXml(deliveryAddress.firstName)}&nbsp;
-                                                                ${fn:escapeXml(deliveryAddress.lastName)}</strong>
-                                                                <br>
-                                                                ${fn:escapeXml(deliveryAddress.line1)}&nbsp;
-                                                                ${fn:escapeXml(deliveryAddress.line2)}
-                                                                <br>
-                                                                ${fn:escapeXml(deliveryAddress.town)}
-                                                                <c:if test="${not empty deliveryAddress.region.name}">
-                                                                    &nbsp;${fn:escapeXml(deliveryAddress.region.name)}
-                                                                </c:if>
-                                                                <br>
-                                                                ${fn:escapeXml(deliveryAddress.country.name)}&nbsp;
-                                                                ${fn:escapeXml(deliveryAddress.postalCode)}
-                                                            </li>
-                                                        </ul>
-                                                        <button type="submit" class="btn btn-primary btn-block">
-                                                            <spring:theme code="checkout.multi.deliveryAddress.useThisAddress" />
-                                                        </button>
-                                                    </form>
-                                                </div>
-                                            </c:forEach>
-                                        </div>
-
-                                        <address:suggestedAddresses selectedAddressUrl="/checkout/multi/delivery-address/select" />
-                            </div>
-
-                                <multi-checkout:pickupGroups cartData="${cartData}" />
-                    </div>
-
-
-                    <button id="addressSubmit" type="button"
-                        class="btn btn-primary btn-block checkout-next"><spring:theme code="checkout.multi.deliveryAddress.continue"/></button>
-                </ycommerce:testId>
-            </jsp:body>
-        </multi-checkout:checkoutSteps>
+       	<multi-checkout:checkoutSteps checkoutSteps="${checkoutSteps}" progressBarId="${progressBarId}"/>
+        <div class="container-fluid">
+        	<div class="row">
+          		<div class="col-xs-12 col-md-9 cart-items-wrapper">
+		        	<multi-checkout:deliveryAddressSection/>
+		        	<multi-checkout:deliveryModeSection/>
+		        	<multi-checkout:orderSetupSection/>
+    			</div>
+    			<multi-checkout:checkoutOrderDetails/>
+    		</div>
+   		</div>
     </div>
-
-    <div class="col-sm-6 hidden-xs">
-		<multi-checkout:checkoutOrderDetails cartData="${cartData}" showDeliveryAddress="false" showPaymentInfo="false" showTaxEstimate="false" showTax="true" />
-    </div>
-
-    <div class="col-sm-12 col-lg-12">
-        <cms:pageSlot position="SideContent" var="feature" element="div" class="checkout-help">
-            <cms:component component="${feature}"/>
-        </cms:pageSlot>
+    <multi-checkout:deliveryCartItems/>
+    <div class="amwa-btnbar">
+        <a href="Checkout-2-payment.html" class="btn-blue-white" onclick="">continue to payment</a>
+        <a class="cartlist-cancelorder">Cancel Order</a>
     </div>
 </div>
-
-</template:page>
+</template:checkoutPage>
