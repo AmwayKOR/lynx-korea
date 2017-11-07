@@ -26,7 +26,7 @@
 </c:if>
 
 <li class="product-list-item  js-shopping-cart-list-item">
-    <div class="col-xs-12 col-md-5 product-details print-col-6">
+    <div class="col-xs-12 col-md-6 product-details print-col-6">
         <div class="product-item-element list-item-toggle">
             <label class="checkbox-element-wrapper">
                 <input class="shopping-cart-entry-checkbox _checkbox-element-global-class" value="" data-product-code="" type="checkbox">
@@ -88,8 +88,8 @@
             </ycommerce:testId>
         </form:form>
     </div>
-    <div class="col-xs-9 product-item-element list-item-ibo-price col-md-1 list-item-price print-col-6">
+    <div class="col-xs-9 product-item-element list-item-ibo-price col-md-2 list-item-price print-col-6">
         <span class="value-wrapper"><format:price priceData="${entry.basePrice}" /></span></div>
-    <div class="col-xs-9 col-md-1 product-item-element list-item-total js-item-total  print-col-6">
+    <div class="col-xs-9 col-md-2 product-item-element list-item-total js-item-total  print-col-6">
         <span class="value-wrapper"><format:price priceData="${entry.totalPrice}" /></span></div>
 </li>
