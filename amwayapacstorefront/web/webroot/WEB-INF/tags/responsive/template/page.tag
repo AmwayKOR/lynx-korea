@@ -32,7 +32,8 @@
 			<div class="page-content-wrapper ${pageBodyCssClasses}">
 				<jsp:doBody />
 			</div>
-
+			<div class="overlay"></div>
+			<div id="modal-popup-container"></div>
 			<footer:footer />
 		</main>
 

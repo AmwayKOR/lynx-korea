@@ -26,10 +26,6 @@
                     </div>
                 </div>
             </div>
-		<div class="overlay"></div>
-		<!--quick view section -->
-        <div class="view-box"></div>
-        
         <!-- add to cart popup section -->
         <div id="add-to-cart-box"class="cbox">
             <div class="cart-popup__dialog">
