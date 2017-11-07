@@ -31,5 +31,4 @@
 <div class="actions-wrapper">
 	<div class="actions">
 		<div class="AddToCart-AddToCartAction" data-index="1">
-			<div id="addToCartTitle" class="display-none">Added to Your Shopping Cart</div>
 			<action:actions element="div"  parentComponent="${component}"/>

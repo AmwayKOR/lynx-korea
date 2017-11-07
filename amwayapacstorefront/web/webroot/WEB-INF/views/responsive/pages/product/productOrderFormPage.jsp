@@ -16,7 +16,6 @@
 
     <jsp:body>
         <%--Feed the addtocart popup color box--%>
-        <product:addToCartTitle/>
 
         <c:if test="${not empty message}">
             <spring:theme code="${message}"/>

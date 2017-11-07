@@ -15,7 +15,6 @@
     <spring:param name="configuratorType"  value="${configuratorType}"/>
 </spring:url>
 
-<product:addToCartTitle/>
 
 <form:form method="post" id="addToCartForm" class="add_to_cart_form" action="${addToCartUrl}">
 	<input type="hidden" maxlength="3" size="1" id="qty" name="qty" class="qty js-qty-selector-input" value="1">

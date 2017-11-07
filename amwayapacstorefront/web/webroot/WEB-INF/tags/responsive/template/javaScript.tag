@@ -26,7 +26,6 @@
 		<script type="text/javascript" src="${commonResourcePath}/js/enquire.min.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/Imager.min.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/jquery.blockUI-2.66.js"></script>
-		<script type="text/javascript" src="${commonResourcePath}/js/jquery.colorbox-min.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/jquery.form.min.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/jquery.hoverIntent.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/jquery.pstrength.custom-1.2.0.js"></script>
@@ -55,7 +54,6 @@
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.checkoutaddress.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.checkoutsteps.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.cms.js"></script>
-		<script type="text/javascript" src="${commonResourcePath}/js/acc.colorbox.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.common.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.forgottenpassword.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.global.js"></script>

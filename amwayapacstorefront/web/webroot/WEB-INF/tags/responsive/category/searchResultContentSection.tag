@@ -249,12 +249,6 @@
                         <span class="icon icon-arrow-dropdown"></span>
                     </button>
                 </p>
-                <div id="addToCartTitle" class="display-none">
-                    <div class="add-to-cart-header">
-                        <div class="headline">
-                            <span class="headline-text">Added to Your Shopping Cart</span></div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
