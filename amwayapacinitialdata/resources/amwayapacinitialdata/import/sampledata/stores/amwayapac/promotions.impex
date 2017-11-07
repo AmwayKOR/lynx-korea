@@ -14,6 +14,11 @@
 $productCatalog=amwayapacProductCatalog
 $defaultPromoGrp=amwayapacPromotionGroup
 
+#Attach Catalog to Rule Engine Context
+INSERT_UPDATE CatalogVersionToRuleEngineContextMapping;context(name)[unique=true];catalogVersion(catalog(id),version)[unique=true]
+;promotions-context;$productCatalog:Online
+;promotions-preview-context;$productCatalog:Staged
+
 $favCustomers=favoriteCustomers
 $bigSpenders=bigSpenders
 $catalogVersion=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$productCatalog]),CatalogVersion.version[default=Online])[default=$productCatalog:Online]
