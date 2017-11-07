@@ -10,7 +10,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <div class="cart-popup__item-info amwahover">
-    <product:productPrimaryImage product="${entry.product}" format="cartIcon" cssClass="cart-popup__thumbnail"/>
+    <product:productPrimaryImage product="${entry.product}" format="quickView" cssClass="cart-popup__thumbnail"/>
     <div class="cart-popup__item-detail">
         <p class="cart-popup__item-title">${fn:escapeXml(product.name)}</p>
         <span class="cart-popup__item-number">
