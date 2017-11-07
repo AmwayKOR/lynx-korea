@@ -13,12 +13,20 @@
 
 
 <div class="product-collapse__rating">
-    <p class="product-collapse__review">
-        <a href="#" class="product-description__readmore">
-            <img class="product-collapse__review-icon" src="${themeResourcePath}/images/review.png"><spring:theme code="review.reviews.add" /></a></p>
-<div>
-<ul id="reviews" class="review-list" data-reviews="${getPageOfReviewsUrl}"  data-allreviews="${getAllReviewsUrl}"></ul>
-<div class="product-collapse__rating">
-    <p class="more">
-        <a href="#" class="all-reviews-btn"><spring:theme code="review.show.all" /></a></p>
+	<p class="product-collapse__review">
+		<a href="#" class="product-description__readmore">
+			<img class="product-collapse__review-icon" src="${themeResourcePath}/images/review.png">
+			<spring:theme code="review.reviews.add" />
+		</a>
+	</p>
+	<div>
+		<ul id="reviews" class="review-list" data-reviews="${getPageOfReviewsUrl}" data-allreviews="${getAllReviewsUrl}"></ul>
+		<div class="product-collapse__rating">
+			<p class="more">
+				<a href="#" class="all-reviews-btn">
+					<spring:theme code="review.show.all" />
+				</a>
+			</p>
+		</div>
+	</div>
 </div>

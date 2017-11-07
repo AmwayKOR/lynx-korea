@@ -5,25 +5,11 @@
 <%@ taglib prefix="product" tagdir="/WEB-INF/tags/responsive/product"%>
 
 <template:page pageTitle="${pageTitle}">
-	<div id="header"></div>
-        <div class="container-fluid main-container">
-            <div class="print-hide breadcrumb-section">
-                <ol class="breadcrumb">
-                    <li>
-                        <a href="homepage.html">Home</a></li>
-                    <li>
-                        <a href="Vitamins_and_Supplements_Product_listing_page.html">Beauty</a></li>
-                    <li>
-                        <a href="Vitamins_and_Supplements_Product_listing_page.html">Makeup</a></li>
-                    <li>Lips</li></ol>
-            </div>
-        </div>
-        <div class="header-margin hidden-sm hidden-xs"></div>
         <div class="container-fluid main-container">
             <product:productDetailsPanel />
             <product:productPageTabs />
             <div class="recommendation swatches-description__margin-minus">
-                <img class="recommendation__image" src="images/b_spot_swatch.png">
+                <img class="recommendation__image" src="${themeResourcePath}/images/b_spot_swatch.png">
                 <div class="recommendation__message">
                     <blockquote class="recommendation__message-main">Selling Artistry's top-of-the-
                         <br>line bundles helped drive my
@@ -148,35 +134,31 @@
                         <span class="mH">Items</span></h2>
                     <div class="product-recentlyviewed__imagelist" id="recentlyViewedListTab">
                         <div>
-                            <img class="product-recentlyviewed__img" src="images/vitamin-c.png" alt="vitamin-c"></div>
+                            <img class="product-recentlyviewed__img" src="${themeResourcePath}/images/vitamin-c.png" alt="vitamin-c"></div>
                         <div>
-                            <img class="product-recentlyviewed__img" src="images/lip-gloss.png" alt="lip-gloss"></div>
+                            <img class="product-recentlyviewed__img" src="${themeResourcePath}/images/lip-gloss.png" alt="lip-gloss"></div>
                         <div>
-                            <img class="product-recentlyviewed__img" src="images/protein-powder-sm.png" alt="protein-powder-sm"></div>
+                            <img class="product-recentlyviewed__img" src="${themeResourcePath}/images/protein-powder-sm.png" alt="protein-powder-sm"></div>
                         <div>
-                            <img class="product-recentlyviewed__img" src="images/truvivity.png" alt="truvivity"></div>
+                            <img class="product-recentlyviewed__img" src="${themeResourcePath}/images/truvivity.png" alt="truvivity"></div>
                         <div>
-                            <img class="product-recentlyviewed__img" src="images/perfect-pack.png" alt="perfect-pack"></div>
+                            <img class="product-recentlyviewed__img" src="${themeResourcePath}/images/perfect-pack.png" alt="perfect-pack"></div>
                         <div>
-                            <img class="product-recentlyviewed__img" src="images/cleanser.png" alt="cleanser"></div>
+                            <img class="product-recentlyviewed__img" src="${themeResourcePath}/images/cleanser.png" alt="cleanser"></div>
                         <div>
-                            <img class="product-recentlyviewed__img" src="images/blush.png" alt="blush"></div>
+                            <img class="product-recentlyviewed__img" src="${themeResourcePath}/images/blush.png" alt="blush"></div>
                         <div>
-                            <img class="product-recentlyviewed__img" src="images/blush.png" alt="blush"></div>
+                            <img class="product-recentlyviewed__img" src="${themeResourcePath}/images/blush.png" alt="blush"></div>
                         <div>
-                            <img class="product-recentlyviewed__img" src="images/perfect-pack.png" alt="perfect-pack"></div>
+                            <img class="product-recentlyviewed__img" src="${themeResourcePath}/images/perfect-pack.png" alt="perfect-pack"></div>
                         <div>
-                            <img class="product-recentlyviewed__img" src="images/lip-gloss.png" alt="lip-gloss"></div>
+                            <img class="product-recentlyviewed__img" src="${themeResourcePath}/images/lip-gloss.png" alt="lip-gloss"></div>
                     </div>
                 </div>
             </div>
 
 
         </div>
-        <div id="quick"></div>
-        <div id="footer"></div>
-    </main>
-    <div class="overlay"></div>
     <div id="add-to-cart-box"class="cbox">
         <div class="cart-popup__dialog">
             <div class="cart-popup__header">
@@ -345,7 +327,7 @@
                     </p>
                 </div>
                 <div class="cart-popup__item-info amwahover">
-                    <img src="images/heart-health180.png" class="cart-popup__thumbnail" alt="product">
+                    <img src="${themeResourcePath}/images/heart-health180.png" class="cart-popup__thumbnail" alt="product">
                     <div class="cart-popup__item-detail">
                         <p class="cart-popup__item-title">Nutrilite® Heart Health Pack Has a Long Name</p>
                         <hr>
