@@ -375,13 +375,6 @@ INSERT_UPDATE AmwayApacCountrySelectionCollectionComponent;$contentCV[unique=tru
 ;;amwayapacCountrySelectionCollectionComponent; Country Selector Collection Component;amwayapacJapanComponent;amwayapacChinaComponent,amwayapacMalaysiaComponent,amwayapacPhilippinesComponent,amwayapacKoreaComponent,amwayapacThailandComponent,amwayapacSingaporeComponent,amwayapacJapanComponent;
 
 
-######## Header Account Navigation
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid,$contentCV)
-;;HeaderAccountNavigationSlot; Header Account Navigation Slot;true;accountNavigationCollectionComponent
-
-# CMS Navigation Nodes
-INSERT_UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];name;parent(uid, $contentCV);&nodeRef;links(&linkRef);visible;nodeLink(&componentRef)
-
 ################ Search Slot
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
@@ -390,6 +383,13 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;c
 INSERT_UPDATE SearchBoxComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
 ;;sideSearchBoxPlaceHolder; Top Search Box PlaceHolder;topSearchBoxPlaceHolder
 	
+######## Header Account Navigation
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid,$contentCV)
+;;HeaderAccountNavigationSlot; Header Account Navigation Slot;true;accountNavigationCollectionComponent
+
+# CMS Navigation Nodes
+INSERT_UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];name;parent(uid, $contentCV);&nodeRef;links(&linkRef);visible;nodeLink(&componentRef)
+
 ######## Account Navigation Section
 ;;AccountNavNode;AccountNavNode;root;AccountNavNode;;true;;
 ;;MyAccountNode;MyAccountNode;AccountNavNode;MyAccountNode;;true;;
@@ -830,7 +830,56 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;c
 
 INSERT_UPDATE SearchBoxComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
 ;;middleSearchBoxPlaceHolder; Middle Search Box PlaceHolder;middleSearchBoxPlaceHolder
-	
+
+
+
+######################## Product Details Page Tools And Advice
+INSERT_UPDATE AmwayApacToolsAndAdviceComponent;$contentCV[unique=true];uid[unique=true];name;text(&componentRef);banner(&componentRef);&componentRef
+;;nutriliteGuideProductDetailComponent;nutrilite guide Product Detail component;nutriliteGuideTextProductDetailComponent;nutriliteGuideBannerProductDetailComponent;nutriliteGuideProductDetailComponent
+;;bodyKeyChoicesProductDetailComponent;weight management Product Detail component;bodyKeyChoicesTextProductDetailComponent;bodyKeyChoicesBannerProductDetailComponent;bodyKeyChoicesProductDetailComponent
+;;nutriliteFindSupplementsProductDetailComponent;sports nutrition Product Detail component;nutriliteFindSupplementsTextProductDetailComponent;nutriliteFindSupplementsBannerProductDetailComponent;nutriliteFindSupplementsProductDetailComponent
+
+INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink
+;;nutriliteGuideBannerProductDetailComponent;nutrilite guide banner Product Detail component;nutriliteGuideBannerProductDetailComponent;"/"
+;;bodyKeyChoicesBannerProductDetailComponent;bodyKey choices banner Product Detail component;bodyKeyChoicesBannerProductDetailComponent;"/"
+;;nutriliteFindSupplementsBannerProductDetailComponent;nutrilite find supplements ProductDetail banner component;nutriliteFindSupplementsBannerProductDetailComponent;"/"
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
+;                       ;nutriliteGuideTextProductDetailComponent;nutriliteGuideTextProductDetailComponent
+;                       ;bodyKeyChoicesTextProductDetailComponent;bodyKeyChoicesTextProductDetailComponent
+;                       ;nutriliteFindSupplementsTextProductDetailComponent;nutriliteFindSupplementsTextProductDetailComponent
+;						;toolsAndAdviceTitleTextProductDetailComponent;toolsAndAdviceTitleTextProductDetailComponent
+
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;ToolsAndAdviceProductDetailContentSlot;toolsAndAdviceTitleTextProductDetailComponent
+;;ToolsAndAdviceBannerProductDetailContentSlot1;nutriliteGuideProductDetailComponent
+;;ToolsAndAdviceBannerProductDetailContentSlot2;bodyKeyChoicesProductDetailComponent
+;;ToolsAndAdviceBannerProductDetailContentSlot3;nutriliteFindSupplementsProductDetailComponent
+
+
+######################## Product Details Page Learning Opportunities
+INSERT_UPDATE AmwayApacTextImageComponent;$contentCV[unique=true];uid[unique=true];name;backgroundImage(&componentRef);&componentRef
+;;nutriliteGuideLearningOpportunitiesCarouselComponent;nutrilite guide Learning Opportunities Carousel component;nutriliteGuideBannerLearningOpportunitiesComponent;nutriliteGuideLearningOpportunitiesCarouselComponent
+;;bodyKeyChoicesLearningOpportunitiesCarouselComponent;weight management Learning Opportunities Carousel component;bodyKeyChoicesBannerLearningOpportunitiesComponent;bodyKeyChoicesLearningOpportunitiesCarouselComponent
+;;nutriliteFindSupplementsLearningOpportunitiesCarouselComponent;sports nutrition Learning Opportunities Carousel component;nutriliteFindSupplementsBannerLearningOpportunitiesComponent;nutriliteFindSupplementsLearningOpportunitiesCarouselComponent
+
+INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink
+;;nutriliteGuideBannerLearningOpportunitiesComponent;nutrilite guide banner Learning Opportunities component;nutriliteGuideBannerLearningOpportunitiesComponent;"/"
+;;bodyKeyChoicesBannerLearningOpportunitiesComponent;bodyKey choices banner Learning Opportunities component;bodyKeyChoicesBannerLearningOpportunitiesComponent;"/"
+;;nutriliteFindSupplementsBannerLearningOpportunitiesComponent;nutrilite find supplements Learning Opportunities banner component;nutriliteFindSupplementsBannerLearningOpportunitiesComponent;"/"
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
+;;productTitleTextLearningOpportunitiesComponent;productTitleTextLearningOpportunitiesComponent
+
+INSERT_UPDATE AmwayApacTextImageCarouselComponent;$contentCV[unique=true];uid[unique=true];name;textImageComponent(uid,$contentCV);&componentRef
+;;amwayapacTextImageCarouselComponent;Text Image Collection Component;nutriliteGuideLearningOpportunitiesCarouselComponent,bodyKeyChoicesLearningOpportunitiesCarouselComponent,nutriliteFindSupplementsLearningOpportunitiesCarouselComponent;amwayapacTextImageCarouselComponent
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;LearningOpportunitiesProductDetailContentSlot;productTitleTextLearningOpportunitiesComponent
+;;LearningOpportunitiesBannerProductDetailContentSlot1;amwayapacTextImageCarouselComponent;
+
+
 ############# My Account Page
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)

@@ -9,7 +9,7 @@
             <product:productDetailsPanel />
             <product:productPageTabs />
             <div class="recommendation swatches-description__margin-minus">
-                <img class="recommendation__image" src="${themeResourcePath}/images/b_spot_swatch.png">
+                <img class="recommendation__image" src="images/b_spot_swatch.png">
                 <div class="recommendation__message">
                     <blockquote class="recommendation__message-main">Selling Artistry's top-of-the-
                         <br>line bundles helped drive my
@@ -20,143 +20,90 @@
                         <span class="recommendation__message-icon glyphicon glyphicon-menu-right"></span></a>
                 </div>
             </div>
-            <div class="row simpleimagecomponent pcp-banner new-advice block">
-                <div class="amway-theme col-xs-12">
-                    <div class="three-tile-component">
-                        <div class="carousel-title-container">
-                            <h2 class="carousel-title">Tools &amp; Advice</h2></div>
-                        <div class="row">
-                            <div class="item col-xs-12 col-md-4">
-                                <div class="full-width-item second-option">
-                                    <div class="item-image-wrap">
-                                        <a href="#" class="primary-link ">
-                                            <img class="desktop-image" src="images/swatches-tools-beads.png" alt="three tile"></a>
-                                    </div>
-                                    <div class="item-content-wrap">
-                                        <div class="carousel-link-wrap">
-                                            <a href="#" class="primary-link ">
-                                                <span>Your Guide to Nutrilite Kids Supplements</span></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item col-xs-12 col-md-4">
-                                <div class="full-width-item second-option">
-                                    <div class="item-image-wrap">
-                                        <a href="#" class="primary-link ">
-                                            <img class="desktop-image" src="images/swatches-tools-imagination.png" alt="three tile"></a>
-                                    </div>
-                                    <div class="item-content-wrap">
-                                        <div class="carousel-link-wrap">
-                                            <a href="#" class="primary-link ">
-                                                <span>The BodyKey&trade;4 Plan: Better Choices Everyday</span></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item col-xs-12 col-md-4">
-                                <div class="full-width-item second-option">
-                                    <div class="item-image-wrap">
-                                        <a href="#" class="primary-link ">
-                                            <img class="desktop-image" src="images/swatches-tools-liquid.png" alt="three tile"></a>
-                                    </div>
-                                    <div class="item-content-wrap">
-                                        <div class="carousel-link-wrap">
-                                            <a href="#" class="primary-link ">
-                                                <span>Nutrilite: Find the Right Supplements</span></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <cms:pageSlot position="UpSelling" var="comp">
-                <cms:component component="${comp}" />
-            </cms:pageSlot>
-            <div class="row simpleimagecomponent pcp-banner">
-                <div class="amway-theme col-xs-12">
-                    <div class="three-tile-component">
-                        <div class="carousel-title-container">
-                            <h2 class="carousel-title">Learning opportunities</h2></div>
-                        <div id="productLearningListTabs" class="owl-carousel">
-                            <div class="item">
-                                <div class="full-width-item second-option">
-                                    <div class="item-image-wrap">
-                                        <a href="#" class="primary-link ">
-                                            <img class="desktop-image" src="images/product-learning1.png" alt="three tile"></a>
-                                    </div>
-                                    <div class="item-content-wrap">
-                                        <div class="carousel-link-wrap">
-                                            <a href="#" class="primary-link ">
-                                                <span>Your Guide to Nutrilite Kids Supplements</span></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="full-width-item second-option">
-                                    <div class="item-image-wrap">
-                                        <a href="#" class="primary-link ">
-                                            <img class="desktop-image" src="images/product-learning2.png" alt="three tile"></a>
-                                    </div>
-                                    <div class="item-content-wrap">
-                                        <div class="carousel-link-wrap">
-                                            <a href="#" class="primary-link ">
-                                                <span>The BodyKey™4 Plan: Better Choices Everyday</span></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="full-width-item second-option">
-                                    <div class="item-image-wrap">
-                                        <a href="#" class="primary-link ">
-                                            <img class="desktop-image" src="images/product-learning3.png" alt="three tile"></a>
-                                    </div>
-                                    <div class="item-content-wrap">
-                                        <div class="carousel-link-wrap">
-                                            <a href="#" class="primary-link ">
-                                                <span>Nutrilite: Find the Right Supplements</span></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
+		<div class="row simpleimagecomponent pcp-banner new-advice block">
+			<div class="amway-theme col-xs-12">
+				<div class="three-tile-component">
+					<cms:pageSlot position="ToolsAndAdviceProductDetailSlot"
+						var="component">
+						<cms:component component="${component}" />
+					</cms:pageSlot>
+					<div class="row">
+						<div class="item col-xs-12 col-md-4">
+							<cms:pageSlot position="ToolsAndAdviceBannerProductDetailSlot1"
+								var="component1">
+								<cms:component component="${component1}" />
+							</cms:pageSlot>
+						</div>
+						<div class="item col-xs-12 col-md-4">
+							<cms:pageSlot position="ToolsAndAdviceBannerProductDetailSlot2"
+								var="component2">
+								<cms:component component="${component2}" />
+							</cms:pageSlot>
+						</div>
+						<div class="item col-xs-12 col-md-4">
+							<cms:pageSlot position="ToolsAndAdviceBannerProductDetailSlot3"
+								var="component3">
+								<cms:component component="${component3}" />
+							</cms:pageSlot>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<cms:pageSlot position="UpSelling" var="comp">
+			<cms:component component="${comp}" />
+		</cms:pageSlot>
+		
+		<div class="row simpleimagecomponent pcp-banner">
+			<div class="amway-theme col-xs-12">
+				<div class="three-tile-component">
+					<cms:pageSlot position="LearningOpportunitiesProductDetailSlot"
+						var="component4">
+						<cms:component component="${component4}" />
+					</cms:pageSlot>
+					
+
+							<cms:pageSlot
+								position="LearningOpportunitiesBannerProductDetailSlot1"
+								var="component5">
+								<cms:component component="${component5}" />
+							</cms:pageSlot>
+				</div>
+			</div>
+		</div>
+
+
+
+		<div class="row">
                 <div class="amway-recentlyviewed col-md-12">
                     <h2 class="amway-learning__title">
                         <span class="mH">Your</span>Recently Viewed
                         <span class="mH">Items</span></h2>
                     <div class="product-recentlyviewed__imagelist" id="recentlyViewedListTab">
                         <div>
-                            <img class="product-recentlyviewed__img" src="${themeResourcePath}/images/vitamin-c.png" alt="vitamin-c"></div>
+                            <img class="product-recentlyviewed__img" src="images/vitamin-c.png" alt="vitamin-c"></div>
                         <div>
-                            <img class="product-recentlyviewed__img" src="${themeResourcePath}/images/lip-gloss.png" alt="lip-gloss"></div>
+                            <img class="product-recentlyviewed__img" src="images/lip-gloss.png" alt="lip-gloss"></div>
                         <div>
-                            <img class="product-recentlyviewed__img" src="${themeResourcePath}/images/protein-powder-sm.png" alt="protein-powder-sm"></div>
+                            <img class="product-recentlyviewed__img" src="images/protein-powder-sm.png" alt="protein-powder-sm"></div>
                         <div>
-                            <img class="product-recentlyviewed__img" src="${themeResourcePath}/images/truvivity.png" alt="truvivity"></div>
+                            <img class="product-recentlyviewed__img" src="images/truvivity.png" alt="truvivity"></div>
                         <div>
-                            <img class="product-recentlyviewed__img" src="${themeResourcePath}/images/perfect-pack.png" alt="perfect-pack"></div>
+                            <img class="product-recentlyviewed__img" src="images/perfect-pack.png" alt="perfect-pack"></div>
                         <div>
-                            <img class="product-recentlyviewed__img" src="${themeResourcePath}/images/cleanser.png" alt="cleanser"></div>
+                            <img class="product-recentlyviewed__img" src="images/cleanser.png" alt="cleanser"></div>
                         <div>
-                            <img class="product-recentlyviewed__img" src="${themeResourcePath}/images/blush.png" alt="blush"></div>
+                            <img class="product-recentlyviewed__img" src="images/blush.png" alt="blush"></div>
                         <div>
-                            <img class="product-recentlyviewed__img" src="${themeResourcePath}/images/blush.png" alt="blush"></div>
+                            <img class="product-recentlyviewed__img" src="images/blush.png" alt="blush"></div>
                         <div>
-                            <img class="product-recentlyviewed__img" src="${themeResourcePath}/images/perfect-pack.png" alt="perfect-pack"></div>
+                            <img class="product-recentlyviewed__img" src="images/perfect-pack.png" alt="perfect-pack"></div>
                         <div>
-                            <img class="product-recentlyviewed__img" src="${themeResourcePath}/images/lip-gloss.png" alt="lip-gloss"></div>
+                            <img class="product-recentlyviewed__img" src="images/lip-gloss.png" alt="lip-gloss"></div>
                     </div>
                 </div>
             </div>
-
 
         </div>
     <div id="add-to-cart-box"class="cbox">
@@ -446,7 +393,7 @@
 
                 <div class="cart-popup__item-info amwahover height-auto">
                     <div class="dialog-form-module">
-                        <a href="#" id="backPrevious">< Go Back to Previous Screen</a>
+                        <a href="#" id="backPrevious"> Go Back to Previous Screen</a>
                         <h6>QUICKFIND:<label>Enter the Name or ID Number of the IBO/Customer</label></h6>
                         <div class="search-wrap">
                             <input class="form-control" id="contacts-search">

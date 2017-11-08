@@ -41,6 +41,10 @@
 			<sourceElement qualifier="countrySelectorComponent" type="AmwayApacCountrySelectionCollectionComponent" cardinality="one" />
 			<targetElement qualifier="countryLinks" type="AmwayApacImageLinkComponent" cardinality="many" collectiontype="list" />
 		</relation>
+		    <relation code="AmwayApacTextImageRelation" localized="false" generate="true" autocreate="true">
+			<sourceElement qualifier="textImageCarouselComponent" type="AmwayApacTextImageCarouselComponent" cardinality="one" />
+			<targetElement qualifier="textImageComponent" type="AmwayApacTextImageComponent" cardinality="many" collectiontype="list" />
+		</relation>
 	</relations>
     <itemtypes>
 		
@@ -398,5 +402,10 @@
 			</attribute>
 		</attributes>
 	   </itemtype>
+	   
+	   <itemtype code="AmwayApacTextImageCarouselComponent" generate="true" extends="SimpleCMSComponent" autocreate="true" 
+			jaloclass="com.amway.apac.core.jalo.components.AmwayApacTextImageCarouselComponent">
+			<description> Carousel Component for Text Image</description>
+			</itemtype>
     </itemtypes>
 </items>

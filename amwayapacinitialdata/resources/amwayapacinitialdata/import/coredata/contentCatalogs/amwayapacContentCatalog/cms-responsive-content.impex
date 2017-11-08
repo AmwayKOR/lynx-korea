@@ -137,6 +137,12 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 ;TopHeaderSlot;;;wide
 ;BottomHeaderSlot;;;wide
 ;PlaceholderContentSlot;;;
+;ToolsAndAdviceProductDetailSlot;;;
+;ToolsAndAdviceBannerProductDetailSlot1;;;
+;ToolsAndAdviceBannerProductDetailSlot2;;;
+;ToolsAndAdviceBannerProductDetailSlot3;;;
+;LearningOpportunitiesProductDetailSlot;;;
+;LearningOpportunitiesBannerProductDetailSlot1;;;
 
 # Product List / Grid are two layouts for Category Browsing pages
 
@@ -725,7 +731,12 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active
 ;;ToolsAndAdviceBannerContentSlot3;Tools and advice banner content slot 3;true
 ;;MobileNavigationBarSlot;Mobile Navigation Bar;true
 ;;ProfileBarJumpToSlot;Profile Bar;true
-
+;;ToolsAndAdviceProductDetailContentSlot;Tools and advice Product Detail content slot;true
+;;ToolsAndAdviceBannerProductDetailContentSlot1;Tools and advice banner Product Detail content slot 1;true
+;;ToolsAndAdviceBannerProductDetailContentSlot2;Tools and advice banner Product Detail content slot 2;true
+;;ToolsAndAdviceBannerProductDetailContentSlot3;Tools and advice banner ProductDetail  content slot 3;true
+;;LearningOpportunitiesProductDetailContentSlot;Learning Opportunities Product Detail content slot;true
+;;LearningOpportunitiesBannerProductDetailContentSlot1;Learning Opportunities banner Product Detail content slot 1;true
 
 # Bind Content Slots to Page Templates
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ProductDetailsPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
@@ -749,6 +760,14 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 ;;BottomHeaderSlot-ProductDetails;BottomHeaderSlot;;BottomHeaderSlot;true
 ;;PlaceholderContentSlot-ProductDetails;PlaceholderContentSlot;;PlaceholderContentSlot;true
 ;;Mobile-NavigationBar-ProductDetails;MobileNavigationBar;;MobileNavigationBarSlot;true
+
+;;ToolsAndAdviceProductDetailSlot-ProductDetails;ToolsAndAdviceProductDetailSlot;;ToolsAndAdviceProductDetailContentSlot;true
+;;ToolsAndAdviceBannerProductDetailSlot1-ProductDetails;ToolsAndAdviceBannerProductDetailSlot1;;ToolsAndAdviceBannerProductDetailContentSlot1;true
+;;ToolsAndAdviceBannerProductDetailSlot2-ProductDetails;ToolsAndAdviceBannerProductDetailSlot2;;ToolsAndAdviceBannerProductDetailContentSlot2;true
+;;ToolsAndAdviceBannerProductDetailSlot3-ProductDetails;ToolsAndAdviceBannerProductDetailSlot3;;ToolsAndAdviceBannerProductDetailContentSlot3;true
+;;LearningOpportunitiesProductDetailSlot-ProductDetails;LearningOpportunitiesProductDetailSlot;;LearningOpportunitiesProductDetailContentSlot;true
+;;LearningOpportunitiesBannerProductDetailSlot1-ProductDetails;LearningOpportunitiesBannerProductDetailSlot1;;LearningOpportunitiesBannerProductDetailContentSlot1;true
+
 
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='SearchResultsListPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
 ;;SiteLogo-SearchResultsList;SiteLogo;;SiteLogoSlot;true
