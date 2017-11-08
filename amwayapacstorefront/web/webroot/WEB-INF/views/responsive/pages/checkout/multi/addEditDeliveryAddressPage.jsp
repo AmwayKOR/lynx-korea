@@ -26,7 +26,7 @@
         	<div class="row">
           		<div class="col-xs-12 col-md-9 cart-items-wrapper">
 		        	<multi-checkout:deliveryAddressSection/>
-		        	<multi-checkout:deliveryModeSection/>
+		        	<multi-checkout:deliveryMethodSelector/>
 		        	<multi-checkout:orderSetupSection/>
     			</div>
     			<multi-checkout:checkoutOrderDetails/>

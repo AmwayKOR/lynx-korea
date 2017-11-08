@@ -13,6 +13,8 @@
 #
 #% impex.setLocale(Locale.GERMAN)
 
+$storeUid=amwayapac
+
 # Currencies
 $ukCurrency=GBP
 $jpCurrency=JPY
@@ -29,12 +31,12 @@ INSERT_UPDATE Zone                  ; code[unique=true]               ; countrie
                                     ; china                           ; CN
 
 # Zone Delivery Modes
-INSERT_UPDATE ZoneDeliveryMode      ; code[unique=true]               ; net                                                                                                                                             ; active[default=true]
-                                    ; premium-net                     ; true
-                                    ; standard-net                    ; true
-                                    ; premium-gross                   ; false
-                                    ; standard-gross                  ; false
-                                    ; free-standard-shipping          ; true                                                                                                                                            ; false                          ;
+INSERT_UPDATE ZoneDeliveryMode      ; code[unique=true]               ; net     ;name              ;Description                         ;stores(uid)[default=$storeUid]                                                                                                    ; active[default=true]
+                                    ; premium-net                     ; true    ;Premium Net       ;Delivered on or before [DATE] -     ;
+                                    ; standard-net                    ; true    ;Standard Net      ;Delivered on or before [DATE] -     ;
+                                    ; premium-gross                   ; false   ;Premium Gross     ;Delivered on or before [DATE] -     ;
+                                    ; standard-gross                  ; false   ;Standard Gross    ;Delivered on or before [DATE] -     ;
+                                    ; free-standard-shipping          ; true    ;Free Shipping     ;Delivered on or before [DATE] -     ;                                                                                                                                ; false                          ;
 
 
 # UK

@@ -3,7 +3,9 @@ ACC.checkout = {
 	_autoload: [
 		"bindCheckO",
 		"bindForms",
-		"bindSavedPayments"
+		"bindSavedPayments",
+		"bindDeliverModeSelection",
+		"bindDeliveryAddressRadioControl"
 	],
 
 
@@ -130,6 +132,26 @@ ACC.checkout = {
 			return false;
 		});
 
+	},
+	
+	bindDeliverModeSelection : function(){
+		$(document).on("change", "input[type=radio][name=delivery_method]", function(){
+			$(this).closest("form#delivery-mode-selection-form").submit();
+		});
+	},
+	
+	bindDeliveryAddressRadioControl : function(){
+		$("#shippingdiv .panel").on("show.bs.collapse", function(event){
+			if(!$(this).hasClass("expanded")){
+				$(this).siblings(".panel").removeClass("expanded");
+				$(this).addClass("expanded");
+			}
+		});
+		$("#shippingdiv .panel").on("hide.bs.collapse", function(event){
+			if($(this).hasClass("expanded")){
+				event.preventDefault();
+			}
+		});
 	}
 
 };

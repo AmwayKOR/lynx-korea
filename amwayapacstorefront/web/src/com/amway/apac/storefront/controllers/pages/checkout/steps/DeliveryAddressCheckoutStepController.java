@@ -18,7 +18,6 @@ import de.hybris.platform.acceleratorstorefrontcommons.checkout.steps.validation
 import de.hybris.platform.acceleratorstorefrontcommons.constants.WebConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.checkout.steps.AbstractCheckoutStepController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
-import de.hybris.platform.acceleratorstorefrontcommons.forms.AddressForm;
 import de.hybris.platform.acceleratorstorefrontcommons.util.AddressDataUtil;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.address.data.AddressVerificationResult;
@@ -27,7 +26,6 @@ import de.hybris.platform.commercefacades.user.data.AddressData;
 import de.hybris.platform.commercefacades.user.data.CountryData;
 import de.hybris.platform.commerceservices.address.AddressVerificationDecision;
 import de.hybris.platform.util.Config;
-import com.amway.apac.storefront.controllers.ControllerConstants;
 
 import java.util.Set;
 
@@ -41,6 +39,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.amway.apac.storefront.controllers.ControllerConstants;
+import com.amway.apac.storefront.forms.AmwayApacAddressForm;
 
 
 @Controller
@@ -61,20 +62,23 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 	public String enterStep(final Model model, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		getCheckoutFacade().setDeliveryAddressIfAvailable();
+		getCheckoutFacade().setDeliveryModeIfAvailable();
 		final CartData cartData = getCheckoutFacade().getCheckoutCart();
 
-		populateCommonModelAttributes(model, cartData, new AddressForm());
+		populateCommonModelAttributes(model, cartData, new AmwayApacAddressForm());
 
 		return ControllerConstants.Views.Pages.MultiStepCheckout.AddEditDeliveryAddressPage;
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	@RequireHardLogIn
-	public String add(final AddressForm addressForm, final BindingResult bindingResult, final Model model,
+	public String add(final AmwayApacAddressForm addressForm, final BindingResult bindingResult, final Model model,
 			final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
 		final CartData cartData = getCheckoutFacade().getCheckoutCart();
-
+		addressForm.setCountryIso("US");
+		addressForm.setRegionIso("TX");
+		//TODO
 		getAddressValidator().validate(addressForm, bindingResult);
 		populateCommonModelAttributes(model, cartData, addressForm);
 
@@ -113,10 +117,10 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 		// Set the new address as the selected checkout delivery address
 		getCheckoutFacade().setDeliveryAddress(newAddress);
 
-		return getCheckoutStep().nextStep();
+		return getCheckoutStep().currentStep();
 	}
 
-	protected void processAddressVisibilityAndDefault(final AddressForm addressForm, final AddressData newAddress)
+	protected void processAddressVisibilityAndDefault(final AmwayApacAddressForm addressForm, final AddressData newAddress)
 	{
 		if (addressForm.getSaveInAddressBook() != null)
 		{
@@ -150,7 +154,7 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 			addressData = getCheckoutFacade().getDeliveryAddressForCode(editAddressCode);
 		}
 
-		final AddressForm addressForm = new AddressForm();
+		final AmwayApacAddressForm addressForm = new AmwayApacAddressForm();
 		final boolean hasAddressData = addressData != null;
 		if (hasAddressData)
 		{
@@ -170,7 +174,7 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
 	@RequireHardLogIn
-	public String edit(final AddressForm addressForm, final BindingResult bindingResult, final Model model,
+	public String edit(final AmwayApacAddressForm addressForm, final BindingResult bindingResult, final Model model,
 			final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
 		getAddressValidator().validate(addressForm, bindingResult);
@@ -220,7 +224,7 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 		return getCheckoutStep().nextStep();
 	}
 
-	protected void processAddressVisibility(final AddressForm addressForm, final AddressData newAddress)
+	protected void processAddressVisibility(final AmwayApacAddressForm addressForm, final AddressData newAddress)
 	{
 
 		if (addressForm.getSaveInAddressBook() == null)
@@ -249,14 +253,14 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 		}
 		storeCmsPageInModel(model, getContentPageForLabelOrId(MULTI_CHECKOUT_SUMMARY_CMS_PAGE_LABEL));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(MULTI_CHECKOUT_SUMMARY_CMS_PAGE_LABEL));
-		model.addAttribute("addressForm", new AddressForm());
+		model.addAttribute("addressForm", new AmwayApacAddressForm());
 
 		return getCheckoutStep().currentStep();
 	}
 
 	@RequestMapping(value = "/select", method = RequestMethod.POST)
 	@RequireHardLogIn
-	public String doSelectSuggestedAddress(final AddressForm addressForm, final RedirectAttributes redirectModel)
+	public String doSelectSuggestedAddress(final AmwayApacAddressForm addressForm, final RedirectAttributes redirectModel)
 	{
 		final Set<String> resolveCountryRegions = org.springframework.util.StringUtils
 				.commaDelimitedListToSet(Config.getParameter("resolve.country.regions"));
@@ -325,7 +329,27 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 				setDeliveryAddress(selectedAddressData);
 			}
 		}
-		return getCheckoutStep().nextStep();
+		return getCheckoutStep().currentStep();
+	}
+
+	/**
+	 * This method gets called when the "Use Selected Delivery Method" button is clicked. It sets the selected delivery
+	 * mode on the checkout facade and reloads the page highlighting the selected delivery Mode.
+	 *
+	 * @param selectedDeliveryMethod
+	 *           - the id of the delivery mode.
+	 * @return - a URL to the page to load.
+	 */
+	@RequestMapping(value = "/delivery-mode-select", method = RequestMethod.GET)
+	@RequireHardLogIn
+	public String doSelectDeliveryMode(@RequestParam("delivery_method") final String selectedDeliveryMethod)
+	{
+		if (StringUtils.isNotEmpty(selectedDeliveryMethod))
+		{
+			getCheckoutFacade().setDeliveryMode(selectedDeliveryMethod);
+		}
+
+		return getCheckoutStep().currentStep();
 	}
 
 	protected void setDeliveryAddress(final AddressData selectedAddressData)
@@ -367,8 +391,8 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 		return getCheckoutStep(DELIVERY_ADDRESS);
 	}
 
-	protected void populateCommonModelAttributes(final Model model, final CartData cartData, final AddressForm addressForm)
-			throws CMSItemNotFoundException
+	protected void populateCommonModelAttributes(final Model model, final CartData cartData,
+			final AmwayApacAddressForm addressForm) throws CMSItemNotFoundException
 	{
 		model.addAttribute("cartData", cartData);
 		model.addAttribute("addressForm", addressForm);
@@ -379,6 +403,8 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 		model.addAttribute(SHOW_SAVE_TO_ADDRESS_BOOK_ATTR, Boolean.TRUE);
 		model.addAttribute(WebConstants.BREADCRUMBS_KEY, getResourceBreadcrumbBuilder().getBreadcrumbs(getBreadcrumbKey()));
 		model.addAttribute("metaRobots", "noindex,nofollow");
+		model.addAttribute("deliveryMethods", getCheckoutFacade().getSupportedDeliveryModes());
+
 		if (StringUtils.isNotBlank(addressForm.getCountryIso()))
 		{
 			model.addAttribute("regions", getI18NFacade().getRegionsForCountryIso(addressForm.getCountryIso()));
