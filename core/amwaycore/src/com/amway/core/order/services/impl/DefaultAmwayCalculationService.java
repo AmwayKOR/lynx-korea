@@ -274,6 +274,22 @@ public class DefaultAmwayCalculationService extends DefaultCalculationService im
 			super.calculateTotals(entry, recalculate);
 		}
 	}
+	
+	/**
+	 * Check for kit entries
+	 *
+	 * @param entry
+	 * @return boolean
+	 */
+	protected boolean checkKitEntry(final AbstractOrderEntryModel entry)
+	{
+		if (entry.getKitOrderEntry() != null)
+		{
+			return true;
+		}
+		return false;
+
+	}
 
 	protected void setCalculatedStatus(final AbstractOrderEntryModel entry)
 	{
