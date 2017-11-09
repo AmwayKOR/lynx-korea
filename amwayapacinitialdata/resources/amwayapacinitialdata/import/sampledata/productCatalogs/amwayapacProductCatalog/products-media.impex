@@ -65,18 +65,27 @@ INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];$media;mime[default
 ;Product_176Wx245H;/176Wx245H/pli7.png;$siteResource/images/176Wx245H/product_list_item7.png;;;images
 ;Product_176Wx245H;/176Wx245H/pli8.png;$siteResource/images/176Wx245H/product_list_item8.png;;;images
 ;Product_176Wx245H;/176Wx245H/pli9.png;$siteResource/images/176Wx245H/product_list_item9.png;;;images
-
+;Product_800Wx1112H;/800WX1112H/101390M_1.jpg;$siteResource/images/800WX1112H/heart-health-full.jpg;;;images
+;Product_800Wx1112H;/800WX1112H/101390M_2.jpg;$siteResource/images/800WX1112H/heart-health-full.jpg;;;images
+;Product_800Wx1112H;/800WX1112H/A4271M_1.jpg ;$siteResource/images/800WX1112H/heart-health-full.jpg;;;images
+;Product_800Wx1112H;/800WX1112H/A4271M_2.jpg ;$siteResource/images/800WX1112H/heart-health-full.jpg;;;images
+;Product_800Wx1112H;/800WX1112H/A4272M_1.jpg ;$siteResource/images/800WX1112H/heart-health-full.jpg;;;images
+;Product_800Wx1112H;/800WX1112H/A4272M_2.jpg ;$siteResource/images/800WX1112H/heart-health-full.jpg;;;images
+;Product_800Wx1112H;/800WX1112H/120237A_1.jpg;$siteResource/images/800WX1112H/heart-health-full.jpg;;;images
+;Product_800Wx1112H;/800WX1112H/120237A_2.png;$siteResource/images/800WX1112H/heart-health-full.jpg;;;images
+;Product_800Wx1112H;/800WX1112H/120238A_1.jpg;$siteResource/images/800WX1112H/heart-health-full.jpg;;;images
+;Product_800Wx1112H;/800WX1112H/120238A_2.png;$siteResource/images/800WX1112H/heart-health-full.jpg;;;images
 
 # Create Media Containers
 INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$catalogVersion
-;101390M_1;/588WX588H/101390M_1.jpg,/78WX78H/101390M_1.jpg,/67WX67H/101390M_1.jpg;;
-;101390M_2;/588WX588H/101390M_2.jpg,/78WX78H/101390M_2.jpg,/67WX67H/101390M_2.jpg;;
-;A4271M_1;/588WX588H/A4271M_1.jpg,/78WX78H/A4271M_1.jpg,/67WX67H/A4271M_1.jpg;;
-;A4271M_2;/588WX588H/A4271M_2.jpg,/78WX78H/A4271M_2.jpg,/67WX67H/A4271M_2.jpg;;
-;A4272M_1;/588WX588H/A4272M_1.jpg,/78WX78H/A4272M_1.jpg,/67WX67H/A4272M_1.jpg;;
-;A4272M_2;/588WX588H/A4272M_2.jpg,/78WX78H/A4272M_2.jpg,/67WX67H/A4272M_2.jpg;;
-;120237A_1;/588WX588H/120237A_1.jpg,/78WX78H/120237A_1.jpg,/67WX67H/120237A_1.jpg;;
-;120238A_1;/588WX588H/120238A_1.jpg,/78WX78H/120238A_1.jpg,/67WX67H/120238A_1.jpg;;
+;101390M_1;/800WX1112H/101390M_1.jpg,/588WX588H/101390M_1.jpg,/78WX78H/101390M_1.jpg,/67WX67H/101390M_1.jpg;;
+;101390M_2;/800WX1112H/101390M_2.jpg,/588WX588H/101390M_2.jpg,/78WX78H/101390M_2.jpg,/67WX67H/101390M_2.jpg;;
+;A4271M_1 ;/800WX1112H/A4271M_1.jpg ,/588WX588H/A4271M_1.jpg ,/78WX78H/A4271M_1.jpg ,/67WX67H/A4271M_1.jpg ;;
+;A4271M_2 ;/800WX1112H/A4271M_2.jpg ,/588WX588H/A4271M_2.jpg ,/78WX78H/A4271M_2.jpg ,/67WX67H/A4271M_2.jpg ;;
+;A4272M_1 ;/800WX1112H/A4272M_1.jpg ,/588WX588H/A4272M_1.jpg ,/78WX78H/A4272M_1.jpg ,/67WX67H/A4272M_1.jpg ;;
+;A4272M_2 ;/800WX1112H/A4272M_2.jpg ,/588WX588H/A4272M_2.jpg ,/78WX78H/A4272M_2.jpg ,/67WX67H/A4272M_2.jpg ;;
+;120237A_1;/800WX1112H/120237A_1.jpg,/588WX588H/120237A_1.jpg,/78WX78H/120237A_1.jpg,/67WX67H/120237A_1.jpg;;
+;120238A_1;/800WX1112H/120238A_1.jpg,/588WX588H/120238A_1.jpg,/78WX78H/120238A_1.jpg,/67WX67H/120238A_1.jpg;;
 
 
 ;pli_container1;/176Wx245H/pli1.png;;

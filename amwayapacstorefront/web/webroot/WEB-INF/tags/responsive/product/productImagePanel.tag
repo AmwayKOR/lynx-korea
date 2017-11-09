@@ -36,7 +36,7 @@
 	    		<div class="product-description__super-zoom">
 					<img id="top-image" class="product-description__super-image"
 						alt="full screen image"
-						src="${themeResourcePath}/images/heart-health-full.jpg"
+						src="${galleryImages[0].zoom.url}"
 						data-dismiss="modal" aria-label="Close" aria-hidden="true">
 				</div>
 		    </div>
