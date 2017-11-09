@@ -3,13 +3,27 @@
 <%@ taglib prefix="formElement" tagdir="/WEB-INF/tags/responsive/formElement"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
+
 <c:set var="cartAddress" value="${cartData.deliveryAddress}"/>
+<c:choose>
+	<c:when test="${(openCreateAddressForm) || (empty deliveryAddresses)}">
+		<c:set var="divToOpen" value="addressFormDiv"/>
+	</c:when>
+	<c:when test="${(null eq cartAddress) && (not empty deliveryAddresses)}">
+		<c:set var="divToOpen" value="alternateAddressDiv"/>
+	</c:when>
+	<c:otherwise>
+		<c:set var="divToOpen" value="fileAddressDiv"/>
+	</c:otherwise>
+</c:choose>
+
 <div id="shippingdiv" class="shipping-delivery-ship">
+	<div class="display-none" id="divToOpen" data-open="${divToOpen}"></div>
     <p class="shipping-delivery-shipping-header">this order will ship to</p>
     <div class="panel">
         <input class="amwa-radio" type="radio" name="optradio" id="radio1" value="radio1" />
-        <label for="radio1" data-toggle="collapse" href="#collapseOne" data-parent="#shippingdiv">Address on File</label>
-        <div id="collapseOne" class="shipping-delivery-radio-body panel-collapse collapse in">
+        <label for="radio1" data-toggle="collapse" href="#collapseOne" data-parent="#shippingdiv" id="fileAddressDiv">Address on File</label>
+        <div id="collapseOne" class="shipping-delivery-radio-body panel-collapse collapse">
            <p class="shipping-delivery-address-name">${cartAddress.firstName} ${cartAddress.lastName}</p>
            <p class="shipping-delivery-address-detail"> ${cartAddress.postalCode}
            <br/>${cartAddress.region.name}-${cartAddress.region.isocode}
@@ -23,7 +37,7 @@
     </div>
     <div class="panel">
         <input class="amwa-radio" type="radio" name="optradio" id="radio2" />
-        <label for="radio2" class="collapsed" data-toggle="collapse" href="#collapseTwo" data-parent="#shippingdiv">Enter New Address</label>
+        <label for="radio2" class="collapsed" data-toggle="collapse" href="#collapseTwo" data-parent="#shippingdiv" id="addressFormDiv">Enter New Address</label>
         <div id="collapseTwo" class="shipping-delivery-radio-body panel-collapse collapse">
         	<c:url value="/checkout/multi/delivery-address/add" var="deliveryAddressCreationUrl"/>
         	<form:form id="delivery-address-form" action="${deliveryAddressCreationUrl}" commandName="addressForm" method="post">
@@ -48,7 +62,7 @@
     </div>
     <div class="panel">
         <input class="amwa-radio" type="radio" name="optradio" id="radio3" />
-        <label for="radio3" class="collapsed" data-toggle="collapse" href="#collapseThree" data-parent="#shippingdiv">Use Alternate Address on File</label>
+        <label for="radio3" class="collapsed" data-toggle="collapse" href="#collapseThree" data-parent="#shippingdiv" id="alternateAddressDiv">Use Alternate Address on File</label>
         <div id="collapseThree" class="shipping-delivery-radio-body panel-collapse collapse">
             <div class="panel-body">
                 <c:forEach var="deliveryAddress" items="${deliveryAddresses}">
