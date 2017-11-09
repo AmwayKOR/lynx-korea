@@ -39,14 +39,34 @@
                     <product:productPrimaryImage product="${entry.product}" format="thumbnail"/>
                 </a>
             </div>
-            <c:if test="${index != null}">
-            	<c:url value="/cart/entrygroups/${index}" var="removeGroupAction"/>
-            	<form:form id="removeGroup${index}"
-            			   action="${removeGroupAction}" method="post">
-            		<a class=item__remove" onclick="$(this).closest('form').submit()"
-            		   style="cursor: pointer"><spring:theme code="cart.groups.remove"/></a>
-            	</form:form>
-            </c:if>
+            <form:form id="cartEntryActionForm" action="" method="post" />
+             <%-- Build entry numbers string for execute action -- Start --%>
+            <c:choose>
+                <c:when test="${entry.entryNumber eq -1}"> <%-- for multid entry --%>
+                    <c:forEach items="${entry.entries}" var="subEntry" varStatus="stat">
+                        <c:set var="actionFormEntryNumbers" value="${stat.first ? '' : actionFormEntryNumbers.concat(';')}${subEntry.entryNumber}" />
+                    </c:forEach>
+                </c:when>
+                <c:otherwise>
+                    <c:set var="actionFormEntryNumbers" value="${entry.entryNumber}" />
+                </c:otherwise>
+            </c:choose>
+            <%-- Build entry numbers string for execute action -- End --%>
+            <div class="list-item-remove">
+                <div class="remove-item-btn js-remove-entry-button" id="removeEntry_1">
+                     <c:forEach var="entryAction" items="${entry.supportedActions}">
+                        <c:url value="/cart/entry/execute/${entryAction}" var="entryActionUrl"/>
+                        <span class="js-execute-entry-action-button" id="actionEntry_${fn:escapeXml(entryNumber)}"
+                              data-entry-action-url="${entryActionUrl}"
+                              data-entry-action="${fn:escapeXml(entryAction)}"
+                              data-entry-product-code="${fn:escapeXml(entry.product.code)}"
+                              data-entry-initial-quantity="${entry.quantity}"
+                              data-action-entry-numbers="${actionFormEntryNumbers}">
+                              <a href="#"><spring:theme code="cart.groups.remove"/></a>
+                        </span>
+                    </c:forEach>
+                </div>
+            </div>
         </div>
         <div class="product-item-element list-item-info">
             <span class="product-name">${entry.product.name}</span>

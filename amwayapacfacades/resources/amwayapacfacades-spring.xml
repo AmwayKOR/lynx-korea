@@ -143,5 +143,9 @@
 			class="com.amway.apac.facades.product.populators.AmwayApacStockPopulator">
 			<property name="enumerationService" ref="enumerationService" />
 	</bean>
-    
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="cartConverter"/>
+		<property name="add" ref="amwayCartPopulator"/>
+	</bean>
 </beans>
