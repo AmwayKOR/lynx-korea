@@ -307,7 +307,7 @@ INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=
 ;;singaporeFlag;$siteResource/sg.jpg;;singaporeFlag;;"Singapore flag"
 ;;japanFlag;$siteResource/flag.jpg;;japanFlag;;"Japan flag"
 
-INSERT_UPDATE AmwayApacImageLinkComponent;$contentCV[unique=true];uid[unique=true];linkName;imageAttribute(code, $contentCV);&componentRef
+INSERT_UPDATE AmwayApacImageLinkComponent;$contentCV[unique=true];uid[unique=true];linkName;image(code, $contentCV);&componentRef
 ;;amwayapacChinaComponent;CHINA;chinaFlag;amwayapacChinaComponent
 ;;amwayapacMalaysiaComponent;MALAYSIA;malaysiaFlag;amwayapacMalaysiaComponent
 ;;amwayapacPhilippinesComponent;PHILIPPINES;philippinesFlag;amwayapacPhilippinesComponent

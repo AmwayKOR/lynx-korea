@@ -263,6 +263,11 @@ public interface ControllerConstants
 	interface ModelParameters
 	{
 		/**
+		 * String constant linkUrl
+		 */
+		String LINK_URL = "linkUrl";
+
+		/**
 		 * Shopping lists model attribute
 		 */
 		String SHOPPING_LISTS_STRING = "shoppingLists";
@@ -320,11 +325,6 @@ public interface ControllerConstants
 		 * Shopping list details breadcrumb key
 		 */
 		String SHOPPING_LIST_DETAILS_PAGE_BREADCRUMB_KEY = "shopping.list.details.page.breadcrumb";
-
-		/**
-		 * String constant linkUrl
-		 */
-		String LINK_URL_STRING = "linkUrl";
 
 		/**
 		 * Shopping list sorting parameter to sort by name

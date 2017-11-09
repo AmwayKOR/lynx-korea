@@ -16,6 +16,8 @@ import com.amway.apac.storefront.controllers.ControllerConstants;
 
 /**
  * Controller for CMS {@link AmwayApacShopByCategoryComponentModel}
+ *
+ * @author Parvesh Goyal
  */
 @Controller("AmwayApacShopByCategoryComponentController")
 @RequestMapping(value = ControllerConstants.Actions.Cms.AmwayApacShopByCategoryComponent)
@@ -26,13 +28,23 @@ public class AmwayApacShopByCategoryComponentController
 	@Resource(name = "amwayApacCmsLinkComponentUrlResolver")
 	private UrlResolver<CMSLinkComponentModel> amwayApacCmsLinkComponentUrlResolver;
 
+	/**
+	 * Populating the link url and other attributes in shop by category component.
+	 *
+	 * @param request
+	 *           http request
+	 * @param model
+	 *           view model
+	 * @param component
+	 *           component
+	 */
 	@Override
 	protected void fillModel(final HttpServletRequest request, final Model model,
 			final AmwayApacShopByCategoryComponentModel component)
 	{
 		if (null != component.getLink())
 		{
-			model.addAttribute(ControllerConstants.GeneralConstants.LINK_URL_STRING,
+			model.addAttribute(ControllerConstants.ModelParameters.LINK_URL,
 					amwayApacCmsLinkComponentUrlResolver.resolve(component.getLink()));
 		}
 

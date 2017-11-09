@@ -1,9 +1,4 @@
-/**
- *
- */
 package com.amway.apac.storefront.controllers.cms;
-
-import de.hybris.platform.cms2.model.contents.components.CMSLinkComponentModel;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,13 +11,25 @@ import com.amway.apac.storefront.controllers.ControllerConstants;
 
 
 /**
- * Controller for CMS {@link CMSLinkComponentModel}
+ * Controller for CMS {@link AmwayApacIconLinkComponentModel}
+ *
+ * @author Avnish Alaugh
  */
 @Controller("AmwayApacIconLinkComponentController")
 @RequestMapping(value = ControllerConstants.Actions.Cms.AmwayApacIconLinkComponent)
 public class AmwayApacIconLinkComponentController
 		extends AmwayApacAbstractCMSLinkComponentController<AmwayApacIconLinkComponentModel>
 {
+	/**
+	 * Populates the url for the link in the view model.
+	 *
+	 * @param request
+	 *           http request
+	 * @param model
+	 *           view model
+	 * @param component
+	 *           component
+	 */
 	@Override
 	protected void fillModel(final HttpServletRequest request, final Model model, final AmwayApacIconLinkComponentModel component)
 	{

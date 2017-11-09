@@ -1,7 +1,5 @@
 package com.amway.apac.storefront.controllers.cms;
 
-import de.hybris.platform.cms2.model.contents.components.CMSLinkComponentModel;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
@@ -13,7 +11,9 @@ import com.amway.apac.storefront.controllers.ControllerConstants;
 
 
 /**
- * Controller for CMS {@link CMSLinkComponentModel}
+ * Controller for CMS {@link AmwayApacMyAccountProfileBarURLComponentModel}
+ *
+ * @author Aaron Yong
  */
 @Controller("AmwayApacMyAccountProfileBarURLComponentController")
 @RequestMapping(value = ControllerConstants.Actions.Cms.AmwayApacMyAccountProfileBarURLComponent)
@@ -21,6 +21,16 @@ public class AmwayApacMyAccountProfileBarURLComponentController
 		extends AmwayApacAbstractCMSLinkComponentController<AmwayApacMyAccountProfileBarURLComponentModel>
 {
 
+	/**
+	 * Populates the url for the link in the view model.
+	 *
+	 * @param request
+	 *           http request
+	 * @param model
+	 *           view model
+	 * @param component
+	 *           component
+	 */
 	@Override
 	protected void fillModel(final HttpServletRequest request, final Model model,
 			final AmwayApacMyAccountProfileBarURLComponentModel component)

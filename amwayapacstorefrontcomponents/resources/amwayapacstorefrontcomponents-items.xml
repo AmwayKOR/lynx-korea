@@ -37,7 +37,8 @@
 			<sourceElement qualifier="accountProfileBarComponent" type="AmwayApacMyAccountProfileBarComponent" cardinality="one" />
 			<targetElement qualifier="profileBarURLComponents" type="AmwayApacMyAccountProfileBarURLComponent" cardinality="many" collectiontype="list" />
 		</relation>
-			<relation code="AmwayApacCountrySelectorRelation" localized="false" generate="true" autocreate="true">
+		<relation code="AmwayApacCountrySelectorRelation" localized="false" generate="true" autocreate="true">
+			<description>One to many relation between the country selector components and collection</description>
 			<sourceElement qualifier="countrySelectorComponent" type="AmwayApacCountrySelectionCollectionComponent" cardinality="one" />
 			<targetElement qualifier="countryLinks" type="AmwayApacImageLinkComponent" cardinality="many" collectiontype="list" />
 		</relation>
@@ -381,7 +382,7 @@
 		<itemtype code="AmwayApacCountrySelectionCollectionComponent"
 		generate="true" extends="SimpleCMSComponent" autocreate="true"
 		jaloclass="com.amway.apac.core.jalo.components.AmwayApacCountrySelectionCollectionComponent">
-		<description>Country Collection component with icon UI.</description>
+		<description>Country selector Collection component with icon UI.</description>
 		  <attributes>
 			<attribute qualifier="currentCountry" type="AmwayApacImageLinkComponent">
 				<persistence type="property" />
@@ -392,9 +393,9 @@
 	<itemtype code="AmwayApacImageLinkComponent" extends="CMSLinkComponent"
 		autocreate="true" generate="true"
 		jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacImageLinkComponent">
-		<description>Country component with icon UI.</description>
+		<description>Country selector component with icon UI.</description>
 		<attributes>
-			<attribute qualifier="imageAttribute" type="localized:Media">
+			<attribute qualifier="image" type="localized:Media">
 				<description> Image Icon definitions and classes</description>
 				<persistence type="property" />
 			</attribute>
