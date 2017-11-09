@@ -18,10 +18,10 @@
 	<c:otherwise>
 		<%-- jquery --%>
 		<script type="text/javascript" src="${commonResourcePath}/js/jquery.min.js"></script>
-		
+
 		<%-- bootstrap --%>
 		<script src="${commonResourcePath}/js/bootstrap.min.js"></script>
-		
+
 		<%-- plugins --%>
 		<script type="text/javascript" src="${commonResourcePath}/js/enquire.min.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/Imager.min.js"></script>
@@ -37,7 +37,7 @@
 		<script type="text/javascript" src="${commonResourcePath}/js/jquery.currencies.min.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/jquery.waitforimages.min.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/jquery.slideviewer.custom.1.2.js"></script>
-		
+
 		<%-- Custom ACC JS --%>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.myaccount.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.header.js"></script>
@@ -81,7 +81,7 @@
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.multidgrid.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.quickorder.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.quote.js"></script>
-
+		<script type="text/javascript" src="${commonResourcePath}/js/acc.registerterms.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.csv-import.js"></script>
 
 		<script type="text/javascript" src="${commonResourcePath}/js/_autoload.js"></script>
@@ -89,20 +89,20 @@
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.shoppinglists.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.shoppinglisttotals.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.popup.js"></script>
-		
+
 		<script src="${commonResourcePath}/js/owl.carousel.js"></script>
-		<script src="${commonResourcePath}/js/select2.js"></script>  
-		
+		<script src="${commonResourcePath}/js/select2.js"></script>
+
 		<%-- Cms Action JavaScript files --%>
 		<c:forEach items="${cmsActionsJsFiles}" var="actionJsFile">
 		    <script type="text/javascript" src="${commonResourcePath}/js/cms/${actionJsFile}"></script>
 		</c:forEach>
-		
+
 		<%-- AddOn JavaScript files --%>
 		<c:forEach items="${addOnJavaScriptPaths}" var="addOnJavaScript">
 		    <script type="text/javascript" src="${addOnJavaScript}"></script>
 		</c:forEach>
-		
+
 	</c:otherwise>
 </c:choose>
 
