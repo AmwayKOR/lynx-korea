@@ -73,25 +73,7 @@
             <div class="product-code"><spring:theme code="basket.page.itemNumber" />
                 <span class="product-item-number">${entry.product.code}</span></div>
             <div class="product-category">${entry.product.categories[0].name}</div>
-            <c:set var="entryStock" value="${entry.product.stock.stockLevelStatus.code}"/>
-            <div class="product-stock">
-                <div>
-                    <span class="stock">
-                        <span class="product-availability">
-                            <c:choose>
-                                <c:when test="${not empty entryStock and entryStock ne 'outOfStock'}">
-                                    <span class="green">
-                                        <span class="icon icon-check-bold"></span>
-                                        <span class="text text-uppercase"><spring:theme code="product.variants.in.stock" /></span></span>
-                                </c:when>
-                            </c:choose>
-
-                        </span>
-                    </span>
-                    <br>
-                    <span class="pick-up product-availability"></span>
-                </div>
-            </div>
+            <product:productStockStatusDisplay product="${entry.product}" />
         </div>
     </div>
     <div class="col-xs-9 col-md-2 product-item-element list-item-quantity print-col-6">
