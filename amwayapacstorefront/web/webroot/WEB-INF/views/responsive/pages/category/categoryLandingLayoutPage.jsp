@@ -10,10 +10,10 @@
 
 <template:page pageTitle="${pageTitle}">				
 
+c nasmnc
 	<cms:pageSlot position="TopBannerContentSlot" var="feature">
 		<cms:component component="${feature}" />
 	</cms:pageSlot>
-
 
 	<div class="container-fluid main-container">
 		<div class="row ">
@@ -24,6 +24,7 @@
 			</div>
 		</div>
 	</div>
+	
 	<div class="experience-brands clearfix">
 		<div class="new-hot-brand">
 			<cms:pageSlot position="ExperienceBrandsContentSlot" var="component">

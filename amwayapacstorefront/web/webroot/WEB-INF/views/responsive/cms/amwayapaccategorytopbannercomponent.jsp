@@ -1,15 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
-
+ sxb m,S
 <div class="product-category-page amway-theme">
 	<div class="product-categories">
 		<div class="amway-theme">
 			<div class="full-width-banner-component banner-left-align">
 				<div class="banner-image-wrap full-width-banner">
-					<img class="desktop-image" src="${backgroundImage.media.url}"
+					<img class="desktop-image" src="${media.url}"
 						alt="Nutrilite Brand Image" /> <img class="desktop-image-mob"
-						src="${backgroundImage.media.url}" alt="banner" />
+						src="${media.url}" alt="banner" />
 				</div>
 				<div class="banner-content-wrap">
 					<div class="banner-content">
@@ -20,11 +20,11 @@
 							</h2>
 							<div class="sub-title-wrap">
 								<span class="banner-sub-title"> <span> <cms:component
-											component="${details}" /></span></span>
+											component="${text}" /></span></span>
 							</div>
 						</div>
 						<div class="banner-button-wrap">
-							<cms:component component="${offerImageLink}" />
+							<cms:component component="${link}" />
 						</div>
 					</div>
 				</div>
