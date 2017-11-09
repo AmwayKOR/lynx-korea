@@ -1,4 +1,5 @@
 <%@ taglib prefix="cart" tagdir="/WEB-INF/tags/responsive/cart" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <div class="col-md-3">
     <div class="row shopping-cart-total-wrapper">
@@ -11,7 +12,7 @@
                     <div class="cart-voucher new-cart-voucher">
                         <cart:cartVoucher cartData="${cartData}"/>
                         <div class="proceed-to-checkout-container">
-                            <button class="btn btn-primary btn-block btn--continue-checkout js-continue-checkout-button" data-checkout-url="#" onclick="javascript:location.href='Checkout-1-shippingAndDelivery.html'">Proceed to Checkout</button></div>
+                            <button class="btn btn-primary btn-block btn--continue-checkout js-continue-checkout-button" data-checkout-url="${checkoutUrl}"><spring:theme code="cart.page.checkout"/></button></div>
                     </div>
                 </div>
             </div>

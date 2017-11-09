@@ -8,6 +8,8 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
+<c:url value="${continueUrl}" var="continueShoppingUrl" scope="session"/>
+
 <template:page pageTitle="${pageTitle}">
     <div id="header"></div>
     <div class="container-fluid main-container">
