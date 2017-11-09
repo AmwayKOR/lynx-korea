@@ -18,7 +18,7 @@ public interface AmwayApacPrimaryVariantSelectionStrategy
 	 *
 	 * @param baseProduct
 	 *           base product
-	 * @return primary variant
+	 * @return primary variant, null if there are no variants
 	 *
 	 * @throws IllegalArgumentException
 	 *            if the baseProduct parameter is null

@@ -257,7 +257,7 @@
         <property name="priceService" ref="netPriceService" />
     </bean>
 
-	<bean id="amwayApacVariantResolvingValueProvider" class="com.amway.apac.core.search.solrfacetsearch.providers.AmwayApacVariantResolvingValueProvider"
+	<bean id="amwayApacPrimaryVariantResolvingValueProvider" class="com.amway.apac.core.search.solrfacetsearch.providers.AmwayApacPrimaryVariantResolvingValueProvider"
 		abstract="true">
 		<property name="amwayApacPrimaryVariantSelectionStrategy" ref="amwayApacPrimaryVariantSelectionStrategy" />
 		<property name="sessionService" ref="sessionService" />
@@ -265,25 +265,29 @@
 		<property name="catalogVersionService" ref="catalogVersionService" />
 	</bean>
 	
-	<bean id="amwayApacBusinessVolumeValueProvider" parent="amwayApacVariantResolvingValueProvider">
+	<bean id="amwayApacBusinessVolumeValueProvider" parent="amwayApacPrimaryVariantResolvingValueProvider">
 		<property name="actualProvider" ref="businessVolumeValueProvider" />
 	</bean>
 
-	<bean id="amwayApacPointValueValueProvider" parent="amwayApacVariantResolvingValueProvider">
+	<bean id="amwayApacPointValueValueProvider" parent="amwayApacPrimaryVariantResolvingValueProvider">
 		<property name="actualProvider" ref="pointValueValueProvider" />
 	</bean>
 
-	<bean id="amwayApacABOPriceValueProvider" parent="amwayApacVariantResolvingValueProvider">
+	<bean id="amwayApacABOPriceValueProvider" parent="amwayApacPrimaryVariantResolvingValueProvider">
 		<property name="actualProvider" ref="aboPriceValueProvider" />
+	</bean>
+	
+	<bean id="amwayApacProductUrlValueProvider" parent="amwayApacPrimaryVariantResolvingValueProvider">
+		<property name="actualProvider" ref="productUrlValueProvider" />
 	</bean>
 	
 	<bean id="amwayApacProductPricesValueResolver" class="com.amway.apac.core.search.solrfacetsearch.resolvers.AmwayApacProductPricesValueResolver"
 		parent="productPricesValueResolver">
 		<property name="amwayApacPrimaryVariantSelectionStrategy" ref="amwayApacPrimaryVariantSelectionStrategy"/>
 	</bean>
-
+	
 	<alias name="defaultAmwayApacMockProfileService" alias="amwayProfileService"/>
 	<bean id="defaultAmwayApacMockProfileService" class="com.amway.apac.core.account.service.impl.AmwayApacMockProfileService" autowire-candidate="false">
     </bean>
-	
+		
 </beans>

@@ -39,13 +39,13 @@ import com.amway.core.search.solrfacetsearch.provider.impl.ABOPriceValueProvider
  *
  * @author Shubham Goyal
  */
-public class AmwayApacVariantResolvingValueProvider implements FieldValueProvider
+public class AmwayApacPrimaryVariantResolvingValueProvider implements FieldValueProvider
 {
 
 	/**
 	 * Logger instance to record events at class level
 	 */
-	private static final Logger LOGGER = LoggerFactory.getLogger(AmwayApacVariantResolvingValueProvider.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(AmwayApacPrimaryVariantResolvingValueProvider.class);
 
 	private FieldValueProvider actualProvider;
 	private CatalogVersionService catalogVersionService;
@@ -66,16 +66,16 @@ public class AmwayApacVariantResolvingValueProvider implements FieldValueProvide
 
 		if ((null != productModel) && (productModel instanceof ProductModel))
 		{
-			ProductModel product = null;
+			ProductModel primaryVariant = null;
 
 			// if the product has variants, then resolve the variant
 			if ((CollectionUtils.isNotEmpty(((ProductModel) productModel).getVariants())) && (indexedProperty.isCurrency()))
 			{
-				product = resolveVariantProduct(indexConfig.getCurrencies().iterator().next(), productModel);
+				primaryVariant = resolveVariantProduct(indexConfig.getCurrencies().iterator().next(), (ProductModel) productModel);
 			}
 
 			fieldValues.addAll(getActualProvider().getFieldValues(indexConfig, indexedProperty,
-					(null != product) ? product : (ProductModel) productModel));
+					(null != primaryVariant) ? primaryVariant : (ProductModel) productModel));
 		}
 
 		return fieldValues;
@@ -87,9 +87,9 @@ public class AmwayApacVariantResolvingValueProvider implements FieldValueProvide
 	 * @param currency
 	 *           currency
 	 * @param productModel
-	 * @return
+	 * @return resolved primary variant, null if no variant is found
 	 */
-	private ProductModel resolveVariantProduct(final CurrencyModel currency, final Object productModel)
+	private ProductModel resolveVariantProduct(final CurrencyModel currency, final ProductModel productModel)
 	{
 		final Collection<CatalogVersionModel> filteredCatalogVersions = filterCatalogVersions(
 				getCatalogVersionService().getSessionCatalogVersions());
@@ -103,11 +103,10 @@ public class AmwayApacVariantResolvingValueProvider implements FieldValueProvide
 
 				if (LOGGER.isInfoEnabled())
 				{
-					LOGGER.info(new StringBuilder(HUNDRED_INT).append("The product with code [")
-							.append(((ProductModel) productModel).getCode())
+					LOGGER.info(new StringBuilder(HUNDRED_INT).append("The product with code [").append(productModel.getCode())
 							.append("] is a base product, fetching primary variant to display the ABO Price.").toString());
 				}
-				return getAmwayApacPrimaryVariantSelectionStrategy().getPrimaryVariant((ProductModel) productModel);
+				return getAmwayApacPrimaryVariantSelectionStrategy().getPrimaryVariant(productModel);
 			}
 		}, getUserService().getAnonymousUser());
 	}
@@ -131,6 +130,13 @@ public class AmwayApacVariantResolvingValueProvider implements FieldValueProvide
 		getCatalogVersionService().setSessionCatalogVersions(filteredCatalogVersions);
 	}
 
+	/**
+	 * Filters the product catalogs in the session
+	 *
+	 * @param sessionCatalogVersions
+	 *           catalog versions in current session
+	 * @return product catalogs found
+	 */
 	protected Collection<CatalogVersionModel> filterCatalogVersions(final Collection<CatalogVersionModel> sessionCatalogVersions)
 	{
 		final List<CatalogVersionModel> result = new ArrayList<CatalogVersionModel>(sessionCatalogVersions.size());
@@ -144,7 +150,6 @@ public class AmwayApacVariantResolvingValueProvider implements FieldValueProvide
 				result.add(catalogVersion);
 			}
 		}
-
 		return result;
 	}
 
