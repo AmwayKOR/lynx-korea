@@ -9,7 +9,7 @@
             <product:productDetailsPanel />
             <product:productPageTabs />
             <div class="recommendation swatches-description__margin-minus">
-                <img class="recommendation__image" src="images/b_spot_swatch.png">
+                <img class="recommendation__image" src="${themeResourcePath}/images/b_spot_swatch.png">
                 <div class="recommendation__message">
                     <blockquote class="recommendation__message-main">Selling Artistry's top-of-the-
                         <br>line bundles helped drive my
@@ -73,8 +73,6 @@
 			</div>
 		</div>
 
-
-
 		<div class="row">
                 <div class="amway-recentlyviewed col-md-12">
                     <h2 class="amway-learning__title">
@@ -82,25 +80,25 @@
                         <span class="mH">Items</span></h2>
                     <div class="product-recentlyviewed__imagelist" id="recentlyViewedListTab">
                         <div>
-                            <img class="product-recentlyviewed__img" src="images/vitamin-c.png" alt="vitamin-c"></div>
+                            <img class="product-recentlyviewed__img" src="${themeResourcePath}/images/vitamin-c.png" alt="vitamin-c"></div>
                         <div>
-                            <img class="product-recentlyviewed__img" src="images/lip-gloss.png" alt="lip-gloss"></div>
+                            <img class="product-recentlyviewed__img" src="${themeResourcePath}/images/lip-gloss.png" alt="lip-gloss"></div>
                         <div>
-                            <img class="product-recentlyviewed__img" src="images/protein-powder-sm.png" alt="protein-powder-sm"></div>
+                            <img class="product-recentlyviewed__img" src="${themeResourcePath}/images/protein-powder-sm.png" alt="protein-powder-sm"></div>
                         <div>
-                            <img class="product-recentlyviewed__img" src="images/truvivity.png" alt="truvivity"></div>
+                            <img class="product-recentlyviewed__img" src="${themeResourcePath}/images/truvivity.png" alt="truvivity"></div>
                         <div>
-                            <img class="product-recentlyviewed__img" src="images/perfect-pack.png" alt="perfect-pack"></div>
+                            <img class="product-recentlyviewed__img" src="${themeResourcePath}/images/perfect-pack.png" alt="perfect-pack"></div>
                         <div>
-                            <img class="product-recentlyviewed__img" src="images/cleanser.png" alt="cleanser"></div>
+                            <img class="product-recentlyviewed__img" src="${themeResourcePath}/images/cleanser.png" alt="cleanser"></div>
                         <div>
-                            <img class="product-recentlyviewed__img" src="images/blush.png" alt="blush"></div>
+                            <img class="product-recentlyviewed__img" src="${themeResourcePath}/images/blush.png" alt="blush"></div>
                         <div>
-                            <img class="product-recentlyviewed__img" src="images/blush.png" alt="blush"></div>
+                            <img class="product-recentlyviewed__img" src="${themeResourcePath}/images/blush.png" alt="blush"></div>
                         <div>
-                            <img class="product-recentlyviewed__img" src="images/perfect-pack.png" alt="perfect-pack"></div>
+                            <img class="product-recentlyviewed__img" src="${themeResourcePath}/images/perfect-pack.png" alt="perfect-pack"></div>
                         <div>
-                            <img class="product-recentlyviewed__img" src="images/lip-gloss.png" alt="lip-gloss"></div>
+                            <img class="product-recentlyviewed__img" src="${themeResourcePath}/images/lip-gloss.png" alt="lip-gloss"></div>
                     </div>
                 </div>
             </div>
@@ -109,39 +107,6 @@
           <div class="cart-popup modal fade" id="product-zoom-image-panel"
         tabindex="-1" role="dialog" aria-labelledby="cartModalLabel"
         aria-hidden="true">
-    </div>
-    <div id="add-to-cart-box"class="cbox">
-        <div class="cart-popup__dialog">
-            <div class="cart-popup__header">
-                <span class="cart-popup__header-text">added to your shopping cart
-                    <img class="cart-popup__close" src="images/close.png" alt="close" data-dismiss="modal" aria-label="Close" aria-hidden="true"></span></div>
-            <div class="cart-popup__content">
-                <div class="cart-popup__item-info amwahover">
-                    <img src="images/lo-c-bundle.png" class="cart-popup__thumbnail" alt="product">
-                    <div class="cart-popup__item-detail">
-                        <p class="cart-popup__item-title">Nutrilite® Heart Health Pack Has a Long Name – Wraps to Two Lines</p>
-                        <p class="cart-popup__item-count">60 Count</p>
-                        <span class="cart-popup__item-number">Item #: 116991</span>
-                        <div class="cart-popup__item-title cart-popup__item-aboprice">
-                            <span>ABO Price:</span>
-                            <span class="product-list__item-abovalue">$16.62</span></div>
-                        <div class="cart-popup__item-retailprice">
-                            <span>Retail Price:</span>
-                            <span class="product-list__item-abovalue">$25.55</span></div>
-                        <div class="cart-popup__item-retailprice">
-                            <span>PV / BV:</span>
-                            <span class="product-list__item-abovalue">4.50 / 14.21</span></div>
-                        <div class="cart-popup__quantity cart-popup__item-retailprice">
-                            <span class="cart-popup__qty">Qty: 1</span>
-                            <a>Edit</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="cart-popup__item-link">
-                    <a href="Checkout-1-shippingAndDelivery.html" class="btn-blue-white">check out</a>
-                    <a class="cart-popup__item-link-text" href="#">Continue Shopping</a></div>
-            </div>
-        </div>
     </div>
     <div id="colorbox" class="lynx-modal-window add-to-shopping-list-box" role="dialog" tabindex="-1">
         <div id="cboxWrapper">

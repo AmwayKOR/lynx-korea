@@ -13,7 +13,19 @@
             <span class="cart-popup__header-text"><spring:theme code="basket.added.to.basket" />
                 <img class="cart-popup__close" src="${themeResourcePath}/images/close.png" alt="close" data-dismiss="modal" aria-label="Close" aria-hidden="true"></span></div>
         <div class="cart-popup__content">
-            <cart:popupCartItems entry="${entry}" product="${product}" quantity="${quantity}"/>
+        <c:choose>
+			<c:when test="${modifications ne null}">
+				<c:forEach items="${modifications}" var="modification" end="${numberShowing - 1}">
+					<c:set var="product" value="${modification.entry.product}" />
+					<c:set var="entry" value="${modification.entry}" />
+					<c:set var="quantity" value="${modification.quantityAdded}" />
+					<cart:popupCartItems entry="${entry}" product="${product}" quantity="${quantity}"/>
+				</c:forEach>
+			</c:when>
+			<c:otherwise>
+				<cart:popupCartItems entry="${entry}" product="${product}" quantity="${quantity}"/>
+			</c:otherwise>
+		</c:choose>
             <div class="cart-popup__item-link">
                 <a href="${cartPageUrl}" class="btn-blue-white"><spring:theme code="checkout.checkout" /></a>
                 <a class="cart-popup__item-link-text closeCbox" href="#"><spring:theme code="cart.page.continue" /></a></div>

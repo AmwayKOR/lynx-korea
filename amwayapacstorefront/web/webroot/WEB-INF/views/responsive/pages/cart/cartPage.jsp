@@ -11,15 +11,6 @@
 <c:url value="${continueUrl}" var="continueShoppingUrl" scope="session"/>
 
 <template:page pageTitle="${pageTitle}">
-    <div id="header"></div>
-    <div class="container-fluid main-container">
-        <div class="print-hide breadcrumb-section">
-            <ol class="breadcrumb">
-                <li>
-                    <a href="homepage.html">Home</a></li>
-                <li class="active">Shopping Cart</li></ol>
-        </div>
-    </div>
     <div class="container-fluid main-container">
         <div class="row border cartTitile">
             <h1 class="product-list-page-title shopping-list-page-title mb25"><spring:theme code="basket.page.heading" /></h1>

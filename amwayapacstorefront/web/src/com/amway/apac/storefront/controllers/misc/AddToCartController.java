@@ -11,6 +11,7 @@
 package com.amway.apac.storefront.controllers.misc;
 
 import de.hybris.platform.acceleratorfacades.product.data.ProductWrapperData;
+import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.AbstractController;
 import de.hybris.platform.acceleratorstorefrontcommons.forms.AddToCartForm;
 import de.hybris.platform.acceleratorstorefrontcommons.forms.AddToCartOrderForm;
@@ -25,7 +26,6 @@ import de.hybris.platform.commercefacades.product.ProductOption;
 import de.hybris.platform.commercefacades.product.data.ProductData;
 import de.hybris.platform.commerceservices.order.CommerceCartModificationException;
 import de.hybris.platform.util.Config;
-import com.amway.apac.storefront.controllers.ControllerConstants;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -49,6 +49,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.amway.apac.storefront.controllers.ControllerConstants;
 
 
 /**
@@ -74,9 +76,10 @@ public class AddToCartController extends AbstractController
 	@Resource(name = "groupCartModificationListPopulator")
 	private GroupCartModificationListPopulator groupCartModificationListPopulator;
 
+	@RequireHardLogIn
 	@RequestMapping(value = "/cart/add", method = RequestMethod.POST, produces = "application/json")
-	public String addToCart(@RequestParam("productCodePost") final String code, final Model model,
-			@Valid final AddToCartForm form, final BindingResult bindingErrors)
+	public String addToCart(@RequestParam("productCodePost") final String code, final Model model, @Valid final AddToCartForm form,
+			final BindingResult bindingErrors)
 	{
 		if (bindingErrors.hasErrors())
 		{
@@ -118,7 +121,8 @@ public class AddToCartController extends AbstractController
 			}
 		}
 
-		model.addAttribute("product", productFacade.getProductForCodeAndOptions(code, Arrays.asList(ProductOption.BASIC, ProductOption.PRICE)));
+		model.addAttribute("product",
+				productFacade.getProductForCodeAndOptions(code, Arrays.asList(ProductOption.BASIC, ProductOption.PRICE)));
 
 		return ControllerConstants.Views.Fragments.Cart.AddToCartPopup;
 	}
@@ -144,6 +148,7 @@ public class AddToCartController extends AbstractController
 		return error.getCode().equals(TYPE_MISMATCH_ERROR_CODE);
 	}
 
+	@RequireHardLogIn
 	@RequestMapping(value = "/cart/addGrid", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public final String addGridToCart(@RequestBody final AddToCartOrderForm form, final Model model)
 	{
@@ -189,6 +194,7 @@ public class AddToCartController extends AbstractController
 		return ControllerConstants.Views.Fragments.Cart.AddToCartPopup;
 	}
 
+	@RequireHardLogIn
 	@RequestMapping(value = "/cart/addQuickOrder", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public final String addQuickOrderToCart(@RequestBody final AddToCartOrderForm form, final Model model)
 	{
@@ -232,6 +238,7 @@ public class AddToCartController extends AbstractController
 		return ControllerConstants.Views.Fragments.Cart.AddToCartPopup;
 	}
 
+	@RequireHardLogIn
 	@RequestMapping(value = "/entrygroups/cart/addToEntryGroup", method =
 	{ RequestMethod.POST, RequestMethod.GET })
 	public String addEntryGroupToCart(final Model model, @Valid final AddToEntryGroupForm form, final BindingResult bindingErrors)

@@ -8,6 +8,7 @@ import static com.amway.apac.storefront.controllers.ControllerConstants.GeneralC
 import static com.amway.apac.storefront.controllers.ControllerConstants.ModelParameters.ERROR_MESSAGE;
 import static com.amway.apac.storefront.controllers.ControllerConstants.ModelParameters.SUCCESS_MESSAGE;
 
+import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
 import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
@@ -84,6 +85,7 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 	 * @throws CMSItemNotFoundException
 	 *            if shopping lists CMS page is not found
 	 */
+	@RequireHardLogIn
 	@RequestMapping(value = SHOPPING_LISTS_PAGE_URL, method = RequestMethod.GET)
 	public String allShoppingLists(final Model model,
 			@RequestParam(name = SORT_FIELD_STRING, required = false, defaultValue = SHOPPING_LIST_SORT_BY_LAST_UPDATED) final String sorfField,
@@ -168,6 +170,7 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 	 * @throws CMSItemNotFoundException
 	 *            if the shopping list page is not found.
 	 */
+	@RequireHardLogIn
 	@RequestMapping(value = "/create-shopping-list", method = RequestMethod.POST)
 	public String createShoppingList(@RequestParam(value = "shoppingListName") final String shoppingListName, final Model model,
 			@RequestParam(name = SORT_FIELD_STRING, required = false, defaultValue = Wishlist2Model.MODIFIEDTIME) final String sorfField,
@@ -229,6 +232,7 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 	 * @throws CMSItemNotFoundException
 	 *            if shopping lists CMS page is not found
 	 */
+	@RequireHardLogIn
 	@RequestMapping(value = SHOPPING_LIST_DETAILS_PAGE_URL, method = RequestMethod.GET)
 	public String shoppingListDetails(final Model model, @PathVariable("shoppingListUid") final String shoppingListUid)
 			throws CMSItemNotFoundException
@@ -333,6 +337,7 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 	 * @return the view
 	 * @throws CMSItemNotFoundException
 	 */
+	@RequireHardLogIn
 	@RequestMapping(value = "/add-product", method = RequestMethod.POST)
 	public String addProductToFavoriteList(@RequestParam(value = "productCode") final String productCode,
 			@RequestParam(name = "shoppingListUid") final String shoppingListUid, final Model model) throws CMSItemNotFoundException
@@ -398,6 +403,7 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 	 *           view model
 	 * @return the view
 	 */
+	@RequireHardLogIn
 	@RequestMapping(value = "/update-shopping-list-name", method = RequestMethod.POST)
 	public String updateShoppingListName(@RequestParam(value = "shoppingListUid") final String shoppingListUid,
 			@RequestParam(value = "shoppingListName") final String shoppingListName, final Model model)
@@ -429,6 +435,7 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 	 * @return the view
 	 * @throws CMSItemNotFoundException
 	 */
+	@RequireHardLogIn
 	@RequestMapping(value = "/remove-product", method = RequestMethod.POST)
 	public String removeProductFromFavoriteList(@RequestParam(value = "productCode") final String productCode,
 			@RequestParam(name = "shoppingListUid") final String shoppingListUid, final Model model) throws CMSItemNotFoundException
@@ -482,6 +489,7 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 	 * @return the view
 	 * @throws CMSItemNotFoundException
 	 */
+	@RequireHardLogIn
 	@RequestMapping(value = "/remove-shopping-list", method = RequestMethod.POST)
 	public String removeShoppingList(@RequestParam(name = "shoppingListUid") final String shoppingListUid, final Model model,
 			final RedirectAttributes redirectModel) throws CMSItemNotFoundException
