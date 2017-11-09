@@ -1,61 +1,15 @@
-@mainColor: #55565a;
-@blue_1: #002F5F;
-@blue_2: #0075a4;
-
-@blue_3: #337ab7;
-@blue_4: #23527c;
-@blue_5: #00305e;
-@blue_6: #428cb2;
-@green: #20883e;
-@white: #fff;
-@gray_1: #8a9fb8;
-@gray_2: #ccc;
-@gray_3: #555555;
-@gray_4: #88888b;
-@gray_5: #818181;
-@gray_6: #bbbbbb;
-@gray_7: #e3e3e3;
-@gray_8: #dadada;
-@gray_9: #F4F4F4;
-@gray_10: #999999;
-@gray_11: #747477;
-@black: #000;
-@red_2: #c53131;
-@red: #e11e45;
-@font_sans: SourceSansPro;
-@font_roboto: Roboto;
-@font_icon_1: 'AmwayIcons';
-@font_icon_2: 'Glyphicons Halflings';
-
-@bg80: rgba(255, 255, 255, 0.8);
-@bg70: rgba(0, 0, 0, 0.7);
-@bg25: rgba(0, 0, 0, 0.25);
-
-@trans: transparent;
-@weight100: 100;
-@weight600: 600;
-@weight700: 700;
-@block: block;
-@inlineBlock: inline-block;
-@none: none;
-@w100: 100%;
-@w768: 768px;
-@w1400: 1400px;
-@borderGray: 1px solid #dadada;
-@images: "../images";
-
 .font16() {
 	font-size: 16px;
 }
 .btn_shop-now() {
 	margin: 26px 0;
-	display: @inlineBlock;
-	background-color: @blue_1;
-	border: 2px solid @blue_1;
+	display: inline-block;
+	background-color: #002F5F;
+	border: 2px solid #002F5F;
 	padding: 19px 50px;
 	font-size: 18px;
-	font-weight: @weight600;
-	color: @white;
+	font-weight: 600;
+	color: #fff;
 	line-height: 1.11;
 	letter-spacing: 0;
 	text-transform: uppercase;
@@ -86,8 +40,8 @@
 }
 .banner__shop-now{
 	a:hover {
-		background: @white;
-		color: @blue_1;
+		background: #fff;
+		color: #002F5F;
 	}
 }
 .sub_banner {
@@ -103,13 +57,13 @@
 .video-preview__img {
 	>a {
 		>img{
-			width: @w100;
+			width: 100%;
 		}
 	}
 	
 }
 
-@media (max-width: @w768) {
+@media (max-width: 768px) {
 		.banner__shop-now {
 					a{
 						margin: 18px auto;
@@ -120,12 +74,12 @@
 		}
 		.video-preview__img-mob
 		{
-			display: @block;
-			width: @w100;
+			display: block;
+			width: 100%;
 			a{
 				img{
-					display: @block;
-					width: @w100;
+					display: block;
+					width: 100%;
 				}
 			}
 		}
@@ -137,12 +91,12 @@
 
 .btn-blue-white{
 	&:hover {
-				color: @blue_1;
+				color: #002F5F;
 	}
 	a {
-		color: @white;
+		color: #fff;
 		&:hover {
-			color: @blue_1;
+			color: #002F5F;
 		}
 	}
 }
@@ -227,8 +181,8 @@ input.quick-shop-name.shopping-list-name {
 		span.name-section-tiny-span {
 			font-size: 14px;
 			text-transform: initial;
-			font-weight: @weight100;
-			font-family: @font_sans;
+			font-weight: 100;
+			font-family: SourceSansPro;
 			vertical-align: middle;
 		}
 	}
@@ -237,7 +191,7 @@ input.quick-shop-name.shopping-list-name {
 		position: relative;
 		top: -55px;
 	}
-	@media (max-width: @w768) {
+	@media (max-width: 768px) {
 		span.list-product {
 			float: left;
 			top: -15px;
