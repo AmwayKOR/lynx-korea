@@ -20,6 +20,9 @@ public class AmwayApacStockFacetDisplayNameProvider extends AbstractFacetValueDi
 {
 	private EnumerationService enumerationService;
 
+	/**
+	 * Stock facet display name provider - populates the name of the {@link StockLevelStatus} enum.
+	 */
 	@Override
 	public String getDisplayName(final SearchQuery query, final IndexedProperty property, final String facetValue)
 	{

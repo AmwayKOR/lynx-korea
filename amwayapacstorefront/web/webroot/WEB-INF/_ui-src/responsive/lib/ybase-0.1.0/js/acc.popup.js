@@ -30,6 +30,11 @@ ACC.popup = {
 			$("#modal-popup-container").children().first().hide();
 			$("#modal-popup-container").html("");
 		});
+	},
+	
+	refreshPopupContent: function(newContent) {
+		$("#modal-popup-container").html(popup);
+		ACC.popup.resetPopup();
 	}
 };
 

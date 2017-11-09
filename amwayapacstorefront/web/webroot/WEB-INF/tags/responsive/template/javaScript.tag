@@ -26,14 +26,12 @@
 		<script type="text/javascript" src="${commonResourcePath}/js/enquire.min.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/Imager.min.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/jquery.blockUI-2.66.js"></script>
-		<script type="text/javascript" src="${commonResourcePath}/js/jquery.colorbox-min.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/jquery.form.min.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/jquery.hoverIntent.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/jquery.pstrength.custom-1.2.0.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/jquery.syncheight.custom.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/jquery.tabs.custom.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/jquery-ui-1.11.2.min.js"></script>
-		<script type="text/javascript" src="${commonResourcePath}/js/jquery.zoom.custom.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/owl.carousel.custom.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/jquery.tmpl-1.0.0pre.min.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/jquery.currencies.min.js"></script>
@@ -48,14 +46,12 @@
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.product-detail.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.address.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.autocomplete.js"></script>
-		<script type="text/javascript" src="${commonResourcePath}/js/acc.carousel.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.cart.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.cartitem.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.checkout.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.checkoutaddress.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.checkoutsteps.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.cms.js"></script>
-		<script type="text/javascript" src="${commonResourcePath}/js/acc.colorbox.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.common.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.forgottenpassword.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.global.js"></script>

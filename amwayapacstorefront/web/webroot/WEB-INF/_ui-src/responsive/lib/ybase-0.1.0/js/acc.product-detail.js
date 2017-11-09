@@ -1,8 +1,84 @@
 ACC.productdetail = {
 
 	_autoload: [
-        "bindproduct"
+        "bindproduct",
+        "bindLearningOpportunitiesCarousel",
+        "bindProductReferencesCarousel",
+        "bindRecentlyViewedProductsCarousel"
 	],
+	
+	bindRecentlyViewedProductsCarousel: function() {
+		  $('#recentlyViewedListTab').owlCarousel({
+              loop: true,
+              nav: true,
+              dots: false,
+              margin: 0,
+              items: 1,
+              responsiveClass: true,
+              responsive: {
+                  480 : {
+                      items: 2
+                  },
+                  768 : {
+                      items: 4
+                  },
+                  960 : {
+                      items: 5
+                  },
+                  1200 : {
+                      items: 7
+                  }
+              }
+          });
+	},
+	
+	bindProductReferencesCarousel: function() {
+		 $('#productSuggestListTabs').owlCarousel({
+             loop: true,
+             nav: true,
+             dots: false,
+             margin: 0,
+             items: 1,
+             responsiveClass: true,
+             responsive: {
+                 480 : {
+                     items: 1
+                 },
+                 768 : {
+                     items: 2
+                 },
+                 960 : {
+                     items: 3
+                 },
+                 1200 : {
+                     items: 4
+                 }
+             }
+         });	
+	},
+	
+	bindLearningOpportunitiesCarousel: function() {
+		 $('#productLearningListTabs').owlCarousel({
+             loop: true,
+             nav: true,
+             dots: false,
+             margin: 0,
+             items: 1,
+             responsiveClass: true,
+             responsive: {
+                 480 : {
+                     items: 1
+                 },
+                 960 : {
+                     items: 2
+                 },
+                 1200 : {
+                     items: 3
+                 }
+             }
+         });
+	},
+	
 	bindproduct: function () {
 		function dialogPos() {
             var W = $(window).width();
@@ -99,129 +175,12 @@ ACC.productdetail = {
                 $(".cbox2,.overlay").show();
                 dialogPos();
             });
-             $('#owl-demo').owlCarousel({
-                loop: true,
-                nav: true,
-                dots: false,
-                margin: 0,
-                items: 1,
-                responsiveClass: true,
-                responsive: {
-                    480 : {
-                        items: 1
-                    },
-                    960 : {
-                        items: 2
-                    },
-                    1200 : {
-                        items: 3
-                    }
-                }
-            });
-            $('#recentlyViewedListTab').owlCarousel({
-                loop: true,
-                nav: true,
-                dots: false,
-                margin: 0,
-                items: 1,
-                responsiveClass: true,
-                responsive: {
-                    480 : {
-                        items: 2
-                    },
-                    768 : {
-                        items: 4
-                    },
-                    960 : {
-                        items: 5
-                    },
-                    1200 : {
-                        items: 7
-                    }
-                }
-            });
-            $('#productSuggestListTabs').owlCarousel({
-                loop: true,
-                nav: true,
-                dots: false,
-                margin: 0,
-                items: 1,
-                responsiveClass: true,
-                responsive: {
-                    480 : {
-                        items: 1
-                    },
-                    768 : {
-                        items: 2
-                    },
-                    960 : {
-                        items: 3
-                    },
-                    1200 : {
-                        items: 4
-                    }
-                }
-            });
-            $('#productLearningListTabs').owlCarousel({
-                loop: true,
-                nav: true,
-                dots: false,
-                margin: 0,
-                items: 1,
-                responsiveClass: true,
-                responsive: {
-                    480 : {
-                        items: 1
-                    },
-                    960 : {
-                        items: 2
-                    },
-                    1200 : {
-                        items: 3
-                    }
-                }
-            });
 
-            $('#productListTab').owlCarousel({
-                loop: true,
-                nav: true,
-                dots: false,
-                margin: 0,
-                items: 1,
-                responsiveClass: true,
-                responsive: {
-                    768 : {
-                        items: 3
-                    },
-                    1200 : {
-                        items: 5
-                    }
-                }
-
-            });
-            //enlarge picture move by mouse
-            $("#top-image").mousemove(function(e) {
-                var imageHeight = document.getElementById('top-image').height;
-                var winHeight = $(window).height();
-                var newvalueY = e.pageY * (imageHeight - winHeight) / winHeight;
-                $('#top-image').css("top", "-" + newvalueY + "px");
-            });
             //search box click event
             $(".cart-detail__dropdown-menu").on("click",function(e){
                 e.stopPropagation();
             });
-            $(".icon-search").click(function(e) {
-                e.preventDefault();
-                var value = $(".form-control.js-site-search-input.ui-autocomplete-input[placeholder]").val();
-                console.log(value);
-                if (value == 'did you mean') {
-                    window.location.href = "Did-you-mean.html";
-                } else if (value == 'artistry') {
-                    window.location.href = "search-result-page.html";
-                } else {
-                    window.location.href = "search-no-result.html";
-                }
-            });
+            
         })
 	}
 

@@ -77,7 +77,7 @@ public class AmwayApacVariantOptionDataPopulator extends AcceleratorVariantOptio
 	 * @param source
 	 * @param variantOptionQualifiers
 	 */
-	private void populateVariantOptionQualifierData(final VariantProductModel source,
+	protected void populateVariantOptionQualifierData(final VariantProductModel source,
 			final Collection<VariantOptionQualifierData> variantOptionQualifiers)
 	{
 		if ((StringUtils.isNotBlank(source.getVariantAttributeName1())) && (StringUtils.isNotBlank(source.getVariantAttribute1())))

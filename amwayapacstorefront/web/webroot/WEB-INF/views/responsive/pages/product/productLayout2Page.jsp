@@ -106,6 +106,10 @@
             </div>
 
         </div>
+          <div class="cart-popup modal fade" id="product-zoom-image-panel"
+        tabindex="-1" role="dialog" aria-labelledby="cartModalLabel"
+        aria-hidden="true">
+    </div>
     <div id="add-to-cart-box"class="cbox">
         <div class="cart-popup__dialog">
             <div class="cart-popup__header">

@@ -39,7 +39,6 @@ import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.product.ProductService;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import de.hybris.platform.util.Config;
-import com.amway.apac.storefront.controllers.ControllerConstants;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -69,6 +68,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.amway.apac.storefront.controllers.ControllerConstants;
 import com.google.common.collect.Maps;
 
 

@@ -28,10 +28,13 @@ public class AmwayApacProductPricesValueResolver extends ProductPricesValueResol
 	/**
 	 * Logger instance to record events at class level
 	 */
-	private final Logger LOGGER = LoggerFactory.getLogger(AmwayApacProductPricesValueResolver.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(AmwayApacProductPricesValueResolver.class);
 
 	private AmwayApacPrimaryVariantSelectionStrategy amwayApacPrimaryVariantSelectionStrategy;
 
+	/**
+	 * Overriding OOTB implementation to use variant selection strategy
+	 */
 	@Override
 	protected List<PriceInformation> loadPriceInformations(final Collection<IndexedProperty> indexedProperties,
 			final ProductModel product)
@@ -39,8 +42,14 @@ public class AmwayApacProductPricesValueResolver extends ProductPricesValueResol
 		return getPriceService().getPriceInformationsForProduct(getResolvedProduct(product));
 	}
 
-
-	private ProductModel getResolvedProduct(final ProductModel product)
+	/**
+	 * Uses the variant selection strategy to resolves the product to use for the price information.
+	 *
+	 * @param product
+	 *           product to index
+	 * @return resolved product to use.
+	 */
+	protected ProductModel getResolvedProduct(final ProductModel product)
 	{
 		ProductModel resolvedProduct = product;
 		if (CollectionUtils.isNotEmpty(product.getVariants()))

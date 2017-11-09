@@ -22,7 +22,7 @@
     <input type="hidden" id="cartUrl" value="${cartUrl}"/>
 
 	<button type="submit" class="btn btn-primary btn-block js-add-to-cart js-enable-btn col-md-6" disabled="disabled"><spring:theme code="basket.add.to.basket"/></button>
-	<button type="button" id="BuyNow" class="btn btn-primary btn-block js-add-to-cart js-enable-btn col-md-6"><spring:theme code="checkout.checkout"/></button>
+	<button type="button" id="BuyNow" class="btn btn-primary btn-block js-add-to-cart js-enable-btn col-md-6" onclick="window.location.href='${cartUrl}'"><spring:theme code="checkout.checkout"/></button>
 </form:form>
 
 <div

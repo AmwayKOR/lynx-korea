@@ -40,6 +40,7 @@
 				<entry key="productGrid" value="Product_176Wx245H"/>
 				<entry key="quickView" value="Product_180Wx180H"/>
 				<entry key="product" value="Product_588Wx588H"/>
+				<entry key="zoom" value="Product_800Wx1112H"/>
 			</map>
 		</property>
 	</bean>
@@ -132,8 +133,6 @@
         <property name="amwayApacCustomerAccountService" ref="customeraccountService"/>
     </bean>
     
-    
-    
     <alias name="defaultAmwayApacCustomerFacade" alias="customerFacade"/>
     <bean id="defaultAmwayApacCustomerFacade" class="com.amway.apac.facades.customer.impl.AmwayApacCustomerFacade" parent="defaultAmwayCustomerFacade">
     </bean>
@@ -148,4 +147,20 @@
 		<property name="list" ref="cartConverter"/>
 		<property name="add" ref="amwayCartPopulator"/>
 	</bean>
+	
+					
+    <!-- dependencies have to be manually injected as there is no alias defined in the amwayfacades-spring.xml for amwayProductPricePopulator -->
+    <alias name="defaultAmwayApacProductPricePopulator" alias="amwayProductPricePopulator"/>
+    <bean id="defaultAmwayApacProductPricePopulator"
+        class="com.amway.apac.facades.product.populators.AmwayApacProductPricePopulator">
+        <property name="amwayApacPriceDataFactory" ref="priceDataFactory" />
+        <property name="commercePriceService" ref="commercePriceService"/>
+        <property name="modelService" ref="modelService"/>
+        <property name="sessionService" ref="sessionService"/>
+        <property name="userService" ref="userService"/>
+    </bean>
+
+    <alias name="defaultAmwayApacPriceDataFactory" alias="priceDataFactory"/>
+    <bean id="defaultAmwayApacPriceDataFactory" class="com.amway.apac.facades.product.impl.DefaultAmwayApacPriceDataFactory" parent="amwayPriceDataFactory" />
+	
 </beans>

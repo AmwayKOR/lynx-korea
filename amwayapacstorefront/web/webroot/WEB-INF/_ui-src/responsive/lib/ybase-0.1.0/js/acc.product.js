@@ -50,17 +50,13 @@ ACC.product = {
 
     displayAddToCartPopup: function (cartResult, statusText, xhr, formElement) {
     	$ajaxCallEvent=true;
-        $('#addToCartLayer').remove();
         if (typeof ACC.minicart.updateMiniCartDisplay == 'function') {
             ACC.minicart.updateMiniCartDisplay();
         }
-        var titleHeader = $('#addToCartTitle').html();
 
-        ACC.colorbox.open(titleHeader, {
-            html: cartResult.addToCartLayer,
-            width: "460px"
-        });
+        ACC.popup.showPopup(cartResult);
 
+        /*
         var productCode = $('[name=productCodePost]', formElement).val();
         var quantityField = $('[name=qty]', formElement).val();
 
@@ -78,6 +74,7 @@ ACC.product = {
             "productName": cartAnalyticsData.productName
         };
         ACC.track.trackAddToCart(productCode, quantity, cartData);
+        */
     }
 };
 

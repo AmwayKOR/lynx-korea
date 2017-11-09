@@ -3065,6 +3065,7 @@ input[type="button"].btn-block {
   -webkit-transition: opacity 0.15s linear;
   -o-transition: opacity 0.15s linear;
   transition: opacity 0.15s linear;
+  background: #fff;
 }
 .fade.in {
   opacity: 1;
@@ -5451,7 +5452,7 @@ button.close {
   bottom: 0;
   left: 0;
   z-index: 1040;
-  background-color: #000000;
+  background-color: #fff;
 }
 .modal-backdrop.fade {
   opacity: 0;
@@ -18809,6 +18810,7 @@ body ul.ui-autocomplete {
 .amway-theme .btn.small {
   height: 40px;
   font-size: 14px;
+  padding-top:7px;
 }
 .amway-theme [role="button"] input[type="submit"].large,
 .amway-theme input[type="reset"].large,
@@ -42780,4 +42782,3 @@ label.asm {
     margin: 20px 0 0 0;
   }
 }
-

@@ -256,20 +256,25 @@
 	<bean id="amwayApacLowestPriceVariantSelectionStrategy" class="com.amway.apac.core.product.strategies.impl.AmwayApacLowestPriceVariantSelectionStrategy">
         <property name="netPriceService" ref="netPriceService" />
     </bean>
-    
-    <bean id="amwayApacBusinessVolumeValueProvider"
-		  class="com.amway.apac.core.search.solrfacetsearch.providers.AmwayApacBusinessVolumeValueProvider" parent="businessVolumeValueProvider">
+
+	<bean id="amwayApacVariantResolvingValueProvider" class="com.amway.apac.core.search.solrfacetsearch.providers.AmwayApacVariantResolvingValueProvider"
+		abstract="true">
 		<property name="amwayApacPrimaryVariantSelectionStrategy" ref="amwayApacPrimaryVariantSelectionStrategy" />
+		<property name="sessionService" ref="sessionService" />
+		<property name="userService" ref="userService" />
+		<property name="catalogVersionService" ref="catalogVersionService" />
 	</bean>
 	
-	<bean id="amwayApacPointValueValueProvider"
-		  class="com.amway.apac.core.search.solrfacetsearch.providers.AmwayApacPointValueValueProvider" parent="pointValueValueProvider">
-		<property name="amwayApacPrimaryVariantSelectionStrategy" ref="amwayApacPrimaryVariantSelectionStrategy"/>
+	<bean id="amwayApacBusinessVolumeValueProvider" parent="amwayApacVariantResolvingValueProvider">
+		<property name="actualProvider" ref="businessVolumeValueProvider" />
 	</bean>
-	
-	<bean id="amwayApacABOPriceValueProvider"
-		  class="com.amway.apac.core.search.solrfacetsearch.providers.AmwayApacABOPriceValueProvider" parent="aboPriceValueProvider">
-		<property name="amwayApacPrimaryVariantSelectionStrategy" ref="amwayApacPrimaryVariantSelectionStrategy"/>
+
+	<bean id="amwayApacPointValueValueProvider" parent="amwayApacVariantResolvingValueProvider">
+		<property name="actualProvider" ref="pointValueValueProvider" />
+	</bean>
+
+	<bean id="amwayApacABOPriceValueProvider" parent="amwayApacVariantResolvingValueProvider">
+		<property name="actualProvider" ref="aboPriceValueProvider" />
 	</bean>
 	
 	<bean id="amwayApacProductPricesValueResolver" class="com.amway.apac.core.search.solrfacetsearch.resolvers.AmwayApacProductPricesValueResolver"
