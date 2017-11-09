@@ -19,12 +19,12 @@
 	                    <c:url value="${imagePath}" var="imageUrl" />
 	                </c:otherwise>
 	            </c:choose>
-	            <img src="${imageUrl}"/>
+	            <img class="product-main-image" src="${imageUrl}"/>
             </div>
         </c:when>
         <c:otherwise>
             <div class="image-gallery js-gallery">
-	             <img src="${galleryImages[0].product.url}">
+	             <img class="product-main-image" src="${galleryImages[0].product.url}">
 		    </div>
 		    <div class="buttons zoom-center js-zoom-center">
 		        <button class="enlarge2 btn btn-link">
@@ -34,7 +34,7 @@
 		    <product:productGalleryThumbnail galleryImages="${galleryImages}" />
 		    <div class="enlarge-content-wrapper display-none">
 	    		<div class="product-description__super-zoom">
-					<img id="top-image" class="product-description__super-image"
+					<img id="top-image" class="product-description__super-image product-zoom-image"
 						alt="full screen image"
 						src="${galleryImages[0].zoom.url}"
 						data-dismiss="modal" aria-label="Close" aria-hidden="true">

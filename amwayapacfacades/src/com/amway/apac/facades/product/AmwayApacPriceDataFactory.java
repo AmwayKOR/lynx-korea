@@ -18,6 +18,8 @@ public interface AmwayApacPriceDataFactory extends PriceDataFactory
 	 * @param priceRowModel
 	 *           price row to be converted to data
 	 * @return price data
+	 * @throws IllegalArgumentException
+	 *            if priceRow parameter is null
 	 */
-	PriceData create(PriceRowModel priceRowModel);
+	PriceData create(PriceRowModel priceRow);
 }

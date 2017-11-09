@@ -252,9 +252,9 @@
     <bean id="defaultAmwayApacCustomerAccountDao" class="com.amway.apac.core.customer.daos.impl.DefaultAmwayApacCustomerAccountDao" parent="amwayCustomerAccountDao" />
     
     
-	<alias name="amwayApacLowestPriceVariantSelectionStrategy" alias="amwayApacPrimaryVariantSelectionStrategy"/>
-	<bean id="amwayApacLowestPriceVariantSelectionStrategy" class="com.amway.apac.core.product.strategies.impl.AmwayApacLowestPriceVariantSelectionStrategy">
-        <property name="netPriceService" ref="netPriceService" />
+	<alias name="defaultAmwayApacLowestPriceVariantStrategy" alias="amwayApacPrimaryVariantSelectionStrategy"/>
+	<bean id="defaultAmwayApacLowestPriceVariantStrategy" class="com.amway.apac.core.product.strategies.impl.DefaultAmwayApacLowestPriceVariantStrategy">
+        <property name="priceService" ref="netPriceService" />
     </bean>
 
 	<bean id="amwayApacVariantResolvingValueProvider" class="com.amway.apac.core.search.solrfacetsearch.providers.AmwayApacVariantResolvingValueProvider"

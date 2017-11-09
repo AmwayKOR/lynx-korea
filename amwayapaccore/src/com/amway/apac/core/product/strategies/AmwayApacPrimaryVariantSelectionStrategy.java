@@ -13,5 +13,15 @@ import com.amway.apac.core.model.AmwayApacVariantProductModel;
 public interface AmwayApacPrimaryVariantSelectionStrategy
 {
 
+	/**
+	 * Resolves the primary variant for the base variant hierarchy.
+	 *
+	 * @param baseProduct
+	 *           base product
+	 * @return primary variant
+	 *
+	 * @throws IllegalArgumentException
+	 *            if the baseProduct parameter is null
+	 */
 	AmwayApacVariantProductModel getPrimaryVariant(final ProductModel baseProduct);
 }

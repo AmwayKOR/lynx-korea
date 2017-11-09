@@ -2,8 +2,20 @@ ACC.imagegallery = {
 
 	_autoload: [
 		"bindGalleryImagesThumbnailCarousel",
-		"bindImageEnlarge"
+		"bindImageEnlarge",
+		"bindGalleryImageClickImageUpdate"
 	],
+
+	bindGalleryImageClickImageUpdate: function() {
+		$(document).on("click", "div.page-productDetails img.js-product-thumnail-image", function() {
+			var productImageUrl = $(this).data("productUrl");
+			var zoomImageUrl = $(this).data("zoomUrl");
+			if (productImageUrl) {
+				$(this).closest("div.product-image-gallery").find("img.product-main-image").attr("src", productImageUrl);
+				$(this).closest("div.product-image-gallery").find("img.product-zoom-image").attr("src", zoomImageUrl);
+			}
+		})
+	},
 	
 	bindImageEnlarge: function() {
 		$(document).on("click", "div.js-zoom-center button.enlarge2", function() {

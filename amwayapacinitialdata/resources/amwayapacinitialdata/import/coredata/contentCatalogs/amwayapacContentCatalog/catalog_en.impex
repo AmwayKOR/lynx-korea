@@ -9,11 +9,13 @@
 # license agreement you entered into with SAP.
 # -----------------------------------------------------------------------
 #
-# Import the Content Catalog
+# Import the Electronics Content Catalog
 #
 
 # Language
 $lang=en
+$contentCatalog=amwayapacContentCatalog
 
 # Create Content Catalog
 UPDATE ContentCatalog;id[unique=true];name[lang=$lang]
+;$contentCatalog;"Amway APAC Content Catalog"

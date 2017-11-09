@@ -123,8 +123,7 @@ public class ProductPageController extends AbstractPageController
 			final HttpServletRequest request, final HttpServletResponse response)
 			throws CMSItemNotFoundException, UnsupportedEncodingException
 	{
-		final List<ProductOption> extraOptions = Arrays.asList(ProductOption.VARIANT_MATRIX_BASE, ProductOption.VARIANT_MATRIX_URL,
-				ProductOption.VARIANT_MATRIX_MEDIA);
+		final List<ProductOption> extraOptions = Arrays.asList(ProductOption.VARIANT_FIRST_VARIANT);
 
 		final ProductData productData = productFacade.getProductForCodeAndOptions(productCode, extraOptions);
 
@@ -135,7 +134,6 @@ public class ProductPageController extends AbstractPageController
 		}
 
 		updatePageTitle(productCode, model);
-
 
 		populateProductDetailForDisplay(productCode, model, request, extraOptions);
 
@@ -203,11 +201,10 @@ public class ProductPageController extends AbstractPageController
 		final ProductModel productModel = productService.getProductForCode(productCode);
 		final ProductData productData = productFacade.getProductForCodeAndOptions(productCode,
 				Arrays.asList(ProductOption.BASIC, ProductOption.PRICE, ProductOption.SUMMARY, ProductOption.DESCRIPTION,
-						ProductOption.CATEGORIES, ProductOption.PROMOTIONS, ProductOption.STOCK, ProductOption.REVIEW,
-						ProductOption.VARIANT_FULL, ProductOption.DELIVERY_MODE_AVAILABILITY, ProductOption.IMAGES,
-						ProductOption.VARIANT_FIRST_VARIANT));
+						ProductOption.CATEGORIES, ProductOption.PROMOTIONS, ProductOption.STOCK, ProductOption.VARIANT_FULL,
+						ProductOption.IMAGES, ProductOption.VARIANT_FIRST_VARIANT));
 
-		sortVariantOptionData(productData);
+		//sortVariantOptionData(productData);
 		populateProductData(productData, model);
 		getRequestContextData(request).setProduct(productModel);
 
@@ -404,23 +401,16 @@ public class ProductPageController extends AbstractPageController
 		final List<ProductOption> options = new ArrayList<>(Arrays.asList(ProductOption.VARIANT_FIRST_VARIANT, ProductOption.BASIC,
 				ProductOption.URL, ProductOption.PRICE, ProductOption.SUMMARY, ProductOption.DESCRIPTION, ProductOption.GALLERY,
 				ProductOption.CATEGORIES, ProductOption.REVIEW, ProductOption.PROMOTIONS, ProductOption.CLASSIFICATION,
-				ProductOption.VARIANT_FULL, ProductOption.STOCK, ProductOption.VOLUME_PRICES, ProductOption.PRICE_RANGE,
-				ProductOption.DELIVERY_MODE_AVAILABILITY));
+				ProductOption.VARIANT_FULL, ProductOption.STOCK));
 
 		options.addAll(extraOptions);
 
 		final ProductData productData = productFacade.getProductForCodeAndOptions(productCode, options);
 
-		sortVariantOptionData(productData);
+		//sortVariantOptionData(productData);
 		storeCmsPageInModel(model, getPageForProduct(productCode));
 		populateProductData(productData, model);
 		model.addAttribute(WebConstants.BREADCRUMBS_KEY, productBreadcrumbBuilder.getBreadcrumbs(productCode));
-
-		if (CollectionUtils.isNotEmpty(productData.getVariantMatrix()))
-		{
-			model.addAttribute(WebConstants.MULTI_DIMENSIONAL_PRODUCT,
-					Boolean.valueOf(CollectionUtils.isNotEmpty(productData.getVariantMatrix())));
-		}
 	}
 
 	protected void populateProductData(final ProductData productData, final Model model)

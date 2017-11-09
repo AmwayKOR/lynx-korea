@@ -49,7 +49,6 @@
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.cart.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.cartitem.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.checkout.js"></script>
-		<script type="text/javascript" src="${commonResourcePath}/js/acc.checkoutaddress.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.checkoutsteps.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.cms.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.common.js"></script>
