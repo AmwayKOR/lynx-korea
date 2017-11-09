@@ -5,7 +5,8 @@ ACC.checkout = {
 		"bindForms",
 		"bindSavedPayments",
 		"bindDeliverModeSelection",
-		"bindDeliveryAddressRadioControl"
+		"bindDeliveryAddressRadioControl",
+		"openAddressDiv"
 	],
 
 
@@ -152,6 +153,13 @@ ACC.checkout = {
 				event.preventDefault();
 			}
 		});
+	},
+	
+	openAddressDiv : function(){
+		if($("#shippingdiv").length){
+			var divIdToOpen = $("#shippingdiv #divToOpen").data("open");
+			$("#shippingdiv #"+divIdToOpen).trigger("click");
+		}
 	}
 
 };

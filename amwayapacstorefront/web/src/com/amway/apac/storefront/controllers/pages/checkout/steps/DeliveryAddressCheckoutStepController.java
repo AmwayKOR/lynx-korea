@@ -84,6 +84,7 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 
 		if (bindingResult.hasErrors())
 		{
+			model.addAttribute("openCreateAddressForm", Boolean.TRUE);
 			GlobalMessages.addErrorMessage(model, "address.error.formentry.invalid");
 			return ControllerConstants.Views.Pages.MultiStepCheckout.AddEditDeliveryAddressPage;
 		}
