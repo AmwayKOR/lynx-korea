@@ -78,9 +78,10 @@
 				            </p>
 				            <a href="#" class="shipping-delivery-address-edit"> Edit Address </a>
 				            <br/>
-				            <c:url value="/checkout/multi/delivery-address/select" var="deliveryAddressSelectionUrl"/>
-				            <form action="${deliveryAddressSelectionUrl}" method="get">
+				            <c:url value="/checkout/multi/delivery-address/select-address" var="deliveryAddressSelectionUrl"/>
+				            <form action="${deliveryAddressSelectionUrl}" method="post">
 				            	<input type="hidden" name="selectedAddressCode" value="${deliveryAddress.id}" />
+				            	<input type="hidden" name="CSRFToken" value="${CSRFToken.token}" />
 				            	<button class="shipping-delivery-use btn-blue-white">Use This Address</button>
 				            </form>
 				            <br/><br/>

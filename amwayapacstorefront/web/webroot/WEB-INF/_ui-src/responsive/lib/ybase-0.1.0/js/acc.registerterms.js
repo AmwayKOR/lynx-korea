@@ -1,4 +1,4 @@
-ACC.checkout = {
+ACC.registerterms = {
 		
 	_autoload: [
         "bindRegisterTerms"

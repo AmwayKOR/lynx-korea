@@ -311,7 +311,7 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 	 *
 	 * @return - a URL to the page to load.
 	 */
-	@RequestMapping(value = "/select", method = RequestMethod.GET)
+	@RequestMapping(value = "/select-address", method = RequestMethod.POST)
 	@RequireHardLogIn
 	public String doSelectDeliveryAddress(@RequestParam("selectedAddressCode") final String selectedAddressCode,
 			final RedirectAttributes redirectAttributes)
@@ -341,7 +341,7 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 	 *           - the id of the delivery mode.
 	 * @return - a URL to the page to load.
 	 */
-	@RequestMapping(value = "/delivery-mode-select", method = RequestMethod.GET)
+	@RequestMapping(value = "/delivery-mode-select", method = RequestMethod.POST)
 	@RequireHardLogIn
 	public String doSelectDeliveryMode(@RequestParam("delivery_method") final String selectedDeliveryMethod)
 	{
