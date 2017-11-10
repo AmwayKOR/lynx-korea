@@ -20,6 +20,7 @@ $siteUid=amwayapac
 $themeUid=amwayapac
 $promoGrp=amwayapacPromotionGroup
 $siteMapUrlLimitPerFile=50000
+$defaultCountry=US
 
 $siteMapLangCur=enUsd
 $siteMapPage=Homepage,Product,CategoryLanding,Category,Store,Content,Custom
@@ -60,8 +61,8 @@ INSERT_UPDATE SiteTheme;code[unique=true]
 ;$themeUid
 
 # CMS Site
-INSERT_UPDATE CMSSite;uid[unique=true];theme(code);channel(code);stores(uid);contentCatalogs(id);defaultCatalog(id);defaultLanguage(isoCode);siteMapConfig(&siteMapConfigId);urlPatterns;active;previewURL;startingPage(uid,$contentCV);urlEncodingAttributes;defaultPromotionGroup(Identifier)[default=$promoGrp]
-;$siteUid;$themeUid;B2C;$storeUid;$contentCatalog;$productCatalog;$defaultLanguage;$storeUidSiteMapConfig;(?i)^https?://[^/]+(/[^?]*)?\?(.*\&)?(site=$siteUid)(|\&.*)$,(?i)^https?://$siteUid\.[^/]+(|/.*|\?.*)$,(?i)^https?://api\.hybrisdev\.com(:[\d]+)?/rest/.*$,(?i)^https?://localhost(:[\d]+)?/rest/.*$;true;$storefrontContextRoot/?site=$siteUid;homepage
+INSERT_UPDATE CMSSite;uid[unique=true];theme(code);defaultCountry(isocode);channel(code);stores(uid);contentCatalogs(id);defaultCatalog(id);defaultLanguage(isoCode);siteMapConfig(&siteMapConfigId);urlPatterns;active;previewURL;startingPage(uid,$contentCV);urlEncodingAttributes;defaultPromotionGroup(Identifier)[default=$promoGrp]
+;$siteUid;$themeUid;$defaultCountry;B2C;$storeUid;$contentCatalog;$productCatalog;$defaultLanguage;$storeUidSiteMapConfig;(?i)^https?://[^/]+(/[^?]*)?\?(.*\&)?(site=$siteUid)(|\&.*)$,(?i)^https?://$siteUid\.[^/]+(|/.*|\?.*)$,(?i)^https?://api\.hybrisdev\.com(:[\d]+)?/rest/.*$,(?i)^https?://localhost(:[\d]+)?/rest/.*$;true;$storefrontContextRoot/?site=$siteUid;homepage
 
 # Cart Cleanup CronJobs
 INSERT_UPDATE CartRemovalCronJob;code[unique=true];job(code)[default=cartRemovalJob];sites(uid)[default=$siteUid];sessionLanguage(isoCode)[default=en]
