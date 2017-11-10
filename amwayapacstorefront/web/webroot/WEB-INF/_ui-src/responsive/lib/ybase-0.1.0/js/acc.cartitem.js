@@ -9,7 +9,7 @@ ACC.cartitem = {
 	bindCartItem: function ()
 	{
 
-		$('.js-execute-entry-action-button').on("click", function ()
+		$(document).on("click", '.js-execute-entry-action-button', function ()
 		{
 			var entryAction = $(this).data("entryAction");
 			var entryActionUrl =  $(this).data("entryActionUrl");
@@ -28,10 +28,30 @@ ACC.cartitem = {
 				var entryNumbersInput = $("<input>").attr("type", "hidden").attr("name", "entryNumbers").val(entryNumber);
 				cartEntryActionForm.append($(entryNumbersInput));
 			});
-			cartEntryActionForm.attr('action', entryActionUrl).submit();
+			//cartEntryActionForm.attr('action', entryActionUrl).submit();
+
+            var entryNumbers = cartEntryActionForm.find('input[name=entryNumbers]').val();
+			$.ajax({
+                url: entryActionUrl,
+                data: {"entryNumbers" : entryNumbers},
+                type: cartEntryActionForm.attr('method'),
+                success: function(data)
+                {
+                    $('#cartContent').html($(data).filter("div#cartConotentDiv").html());
+                    ACC.global.appendGlobalMessage(ACC.globalMessageTypes.CONF_MESSAGES_HOLDER, $(data).filter("div#alert-info").html());
+                    ACC.global.appendGlobalMessage(ACC.globalMessageTypes.ERROR_MESSAGES_HOLDER, $(data).filter("div#alert-danger").html());
+                },
+                error: function(request, status, error)
+                {
+                    $('#cartContent').html(request.responseText);
+                    ACC.global.appendGlobalMessage(ACC.globalMessageTypes.CONF_MESSAGES_HOLDER, $(data).filter("div#alert-info").html());
+                    ACC.global.appendGlobalMessage(ACC.globalMessageTypes.ERROR_MESSAGES_HOLDER, $(data).filter("div#alert-danger").html());
+                }
+
+            });
 		});
 
-		$('.js-update-entry-quantity-input').on("blur", function (e)
+		$(document).on("blur", '.js-update-entry-quantity-input', function (e)
 		{
 			ACC.cartitem.handleUpdateQuantity(this, e);
 
@@ -68,23 +88,42 @@ ACC.cartitem = {
 	},
 
 	handleUpdateQuantity: function (elementRef, event)
-	{
+    {
 
-		var form = $(elementRef).closest('form');
+        var form = $(elementRef).closest('form');
 
-		var productCode = form.find('input[name=productCode]').val();
-		var initialCartQuantity = form.find('input[name=initialQuantity]').val();
-		var newCartQuantity = form.find('input[name=quantity]').val();
+        var productCode = form.find('input[name=productCode]').val();
+        var initialCartQuantity = form.find('input[name=initialQuantity]').val();
+        var newCartQuantity = form.find('input[name=quantity]').val();
+        var entryNumber = form.find('input[name=entryNumber]').val();
 
-		if(initialCartQuantity != newCartQuantity)
-		{
-			ACC.track.trackUpdateCart(productCode, initialCartQuantity, newCartQuantity);
-			form.submit();
+        if(initialCartQuantity != newCartQuantity)
+        {
+            ACC.track.trackUpdateCart(productCode, initialCartQuantity, newCartQuantity);
+            //form.submit();
 
-			return true;
-		}
+            $.ajax({
+                url: form.attr('action'),
+                data: {"entryNumber" : entryNumber, "quantity" : newCartQuantity},
+                type: form.attr('method'),
+                success: function(data)
+                {
+                    $('#cartContent').html($(data).filter("div#cartConotentDiv").html());
+                    ACC.global.appendGlobalMessage(ACC.globalMessageTypes.CONF_MESSAGES_HOLDER, $(data).filter("div#alert-info").html());
+                    ACC.global.appendGlobalMessage(ACC.globalMessageTypes.ERROR_MESSAGES_HOLDER, $(data).filter("div#alert-danger").html());
+                },
+                error: function(request, status, error)
+                {
+                    $('#cartContent').html(request.responseText);
+                    ACC.global.appendGlobalMessage(ACC.globalMessageTypes.CONF_MESSAGES_HOLDER, $(data).filter("div#alert-info").html());
+                    ACC.global.appendGlobalMessage(ACC.globalMessageTypes.ERROR_MESSAGES_HOLDER, $(data).filter("div#alert-danger").html());
+                }
 
-		return false;
-	}
+            });
+            return true;
+        }
+
+        return false;
+    }
 };
 

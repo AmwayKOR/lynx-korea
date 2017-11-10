@@ -141,6 +141,7 @@ public interface ControllerConstants
 			interface Cart // NOSONAR
 			{
 				String CartPage = "pages/cart/cartPage"; // NOSONAR
+				String CartContentPage = "pages/cart/cartContent";
 			}
 
 			interface StoreFinder // NOSONAR

@@ -286,7 +286,7 @@ public class CartPageController extends AbstractCartPageController
 	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String updateCartQuantities(@RequestParam("entryNumber") final long entryNumber, final Model model,
+	public String updateCartQuantities(@RequestParam("entryNumber") final long entryNumber, @RequestParam("quantity") final long quantity, final Model model,
 			@Valid final UpdateQuantityForm form, final BindingResult bindingResult, final HttpServletRequest request,
 			final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
@@ -310,10 +310,7 @@ public class CartPageController extends AbstractCartPageController
 			{
 				final CartModificationData cartModification = getCartFacade().updateCartEntry(entryNumber,
 						form.getQuantity().longValue());
-				addFlashMessage(form, request, redirectModel, cartModification);
-
-				// Redirect to the cart page on update success so that the browser doesn't re-post again
-				return getCartPageRedirectUrl();
+				addMessage(form, request, model, cartModification);
 			}
 			catch (final CommerceCartModificationException ex)
 			{
@@ -321,8 +318,10 @@ public class CartPageController extends AbstractCartPageController
 			}
 		}
 
-		// if could not update cart, display cart/quote page again with error
-		return prepareCartUrl(model);
+		prepareDataForPage(model);
+
+		// Return Cart Content
+		return ControllerConstants.Views.Pages.Cart.CartContentPage;
 	}
 
 	@Override
@@ -343,8 +342,8 @@ public class CartPageController extends AbstractCartPageController
 		model.addAttribute("pageType", PageType.CART.name());
 	}
 
-	protected void addFlashMessage(final UpdateQuantityForm form, final HttpServletRequest request,
-			final RedirectAttributes redirectModel, final CartModificationData cartModification)
+	protected void addMessage(final UpdateQuantityForm form, final HttpServletRequest request,
+			final Model model, final CartModificationData cartModification)
 	{
 		if (cartModification.getQuantity() == form.getQuantity().longValue())
 		{
@@ -353,25 +352,26 @@ public class CartPageController extends AbstractCartPageController
 			if (cartModification.getQuantity() == 0)
 			{
 				// Success in removing entry
-				GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.CONF_MESSAGES_HOLDER, "basket.page.message.remove");
+				GlobalMessages.addMessage(model, GlobalMessages.CONF_MESSAGES_HOLDER, "basket.page.message.remove", null);
 			}
 			else
 			{
 				// Success in update quantity
-				GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.CONF_MESSAGES_HOLDER, "basket.page.message.update");
+				GlobalMessages.addMessage(model, GlobalMessages.CONF_MESSAGES_HOLDER, "basket.page.message.update", null);
 			}
 		}
 		else if (cartModification.getQuantity() > 0)
 		{
 			// Less than successful
-			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER,
+
+			GlobalMessages.addMessage(model, GlobalMessages.ERROR_MESSAGES_HOLDER,
 					"basket.page.message.update.reducedNumberOfItemsAdded.lowStock", new Object[]
 					{ XSSFilterUtil.filter(cartModification.getEntry().getProduct().getName()), Long.valueOf(cartModification.getQuantity()), form.getQuantity(), request.getRequestURL().append(cartModification.getEntry().getProduct().getUrl()) });
 		}
 		else
 		{
 			// No more stock available
-			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER,
+			GlobalMessages.addMessage(model, GlobalMessages.ERROR_MESSAGES_HOLDER,
 					"basket.page.message.update.reducedNumberOfItemsAdded.noStock", new Object[]
 					{ XSSFilterUtil.filter(cartModification.getEntry().getProduct().getName()), request.getRequestURL().append(cartModification.getEntry().getProduct().getUrl()) });
 		}
@@ -575,7 +575,7 @@ public class CartPageController extends AbstractCartPageController
 
 	@RequestMapping(value = "/entry/execute/" + ACTION_CODE_PATH_VARIABLE_PATTERN, method = RequestMethod.POST)
 	public String executeCartEntryAction(@PathVariable(value = "actionCode", required = true) final String actionCode,
-			final RedirectAttributes redirectModel, @RequestParam("entryNumbers") final Long[] entryNumbers)
+			final Model model, @RequestParam("entryNumbers") final Long[] entryNumbers) throws CMSItemNotFoundException
 	{
 		CartEntryAction action = null;
 		try
@@ -585,17 +585,20 @@ public class CartPageController extends AbstractCartPageController
 		catch (final IllegalArgumentException e)
 		{
 			LOG.error(String.format("Unknown cart entry action %s", actionCode), e);
-			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER, "basket.page.entry.unknownAction");
-			return getCartPageRedirectUrl();
+			GlobalMessages.addMessage(model, GlobalMessages.ERROR_MESSAGES_HOLDER, "basket.page.entry.unknownAction", null);
+			return ControllerConstants.Views.Pages.Cart.CartContentPage;
 		}
 
 		try
 		{
 			final Optional<String> redirectUrl = cartEntryActionFacade.executeAction(action, Arrays.asList(entryNumbers));
 			final Optional<String> successMessageKey = cartEntryActionFacade.getSuccessMessageKey(action);
+
+			prepareDataForPage(model);
+
 			if (successMessageKey.isPresent())
 			{
-				GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.CONF_MESSAGES_HOLDER, successMessageKey.get());
+				GlobalMessages.addMessage(model, GlobalMessages.CONF_MESSAGES_HOLDER, successMessageKey.get(), null);
 			}
 			if (redirectUrl.isPresent())
 			{
@@ -603,7 +606,7 @@ public class CartPageController extends AbstractCartPageController
 			}
 			else
 			{
-				return getCartPageRedirectUrl();
+				return ControllerConstants.Views.Pages.Cart.CartContentPage;
 			}
 		}
 		catch (final CartEntryActionException e)
@@ -612,9 +615,9 @@ public class CartPageController extends AbstractCartPageController
 			final Optional<String> errorMessageKey = cartEntryActionFacade.getErrorMessageKey(action);
 			if (errorMessageKey.isPresent())
 			{
-				GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER, errorMessageKey.get());
+				GlobalMessages.addMessage(model, GlobalMessages.ERROR_MESSAGES_HOLDER, errorMessageKey.get(), null);
 			}
-			return getCartPageRedirectUrl();
+			return ControllerConstants.Views.Pages.Cart.CartContentPage;
 		}
 	}
 

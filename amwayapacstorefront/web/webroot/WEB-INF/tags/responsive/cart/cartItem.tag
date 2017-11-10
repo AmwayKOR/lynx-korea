@@ -69,7 +69,8 @@
             </div>
         </div>
         <div class="product-item-element list-item-info">
-            <span class="product-name">${entry.product.name}</span>
+            <c:url value="${entry.product.url}" var="productUrl" />
+            <span class="product-name"><a href="${productUrl}">${entry.product.name}</a></span>
             <div class="product-code"><spring:theme code="basket.page.itemNumber" />
                 <span class="product-item-number">${entry.product.code}</span></div>
             <div class="product-category">${entry.product.categories[0].name}</div>
