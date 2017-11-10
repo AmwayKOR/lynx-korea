@@ -17,12 +17,10 @@
 			<sourceElement qualifier="groupComponent" type="AmwayApacFooterSpecialComponent" cardinality="one" />
 			<targetElement qualifier="simpleBannerComponents" type="SimpleBannerComponent" cardinality="many" collectiontype="list" />
 		</relation>
-		
 		<relation code="FooterSpecialComponentRelation" localized="false" generate="true" autocreate="true">
 			<sourceElement qualifier="footerComponent" type="FooterComponent" cardinality="one" />
 			<targetElement qualifier="specialComponents" type="AmwayApacFooterSpecialComponent" cardinality="many" collectiontype="list" />
 		</relation>
-
 		<relation code="NavigationNodeSimpleBannerRelation" localized="false" generate="true" autocreate="true">
 			<sourceElement qualifier="navigationNodeComponent" type="CMSNavigationNode" cardinality="one" />
 			<targetElement qualifier="simpleBannerComponents" type="SimpleBannerComponent" cardinality="many" collectiontype="list" />
@@ -42,6 +40,10 @@
 			<relation code="AmwayApacCountrySelectorRelation" localized="false" generate="true" autocreate="true">
 			<sourceElement qualifier="countrySelectorComponent" type="AmwayApacCountrySelectionCollectionComponent" cardinality="one" />
 			<targetElement qualifier="countryLinks" type="AmwayApacImageLinkComponent" cardinality="many" collectiontype="list" />
+		</relation>
+		<relation code="AmwayApacRotatingSimpleResponsiveBannerComponentRelation" localized="false" generate="true" autocreate="true">
+			<sourceElement qualifier="rotatingComponent" type="RotatingImagesComponent" cardinality="one" />
+			<targetElement qualifier="rotatingSimpleResponsiveBannerComponents" type="SimpleResponsiveBannerComponent" cardinality="many" collectiontype="list" />
 		</relation>
 	</relations>
     <itemtypes>
@@ -236,13 +238,12 @@
 		jaloclass="com.amway.apac.core.jalo.components.AmwayApacPathToSuccessPitchPerfectComponent">
 	</itemtype>
 
-
-
 	<itemtype code="AmwayApacArtistryNewLuxuryCarouselComponent"
 		generate="true" extends="AmwayApacAbstractTextLinkImageComponent"
 		autocreate="true"
 		jaloclass="com.amway.apac.core.jalo.components.AmwayApacArtistryNewLuxuryCarouselComponent">
 	</itemtype>
+	
 	<itemtype code="AmwayApacArtistryNewLuxuryRotatingComponent"
 		generate="true" extends="RotatingImagesComponent" autocreate="true"
 		jaloclass="com.amway.apac.core.jalo.components.AmwayApacArtistryNewLuxuryRotatingComponent">
@@ -252,6 +253,11 @@
 				<persistence type="property" />
 			</attribute>
 		</attributes>
+	</itemtype>
+	
+    <itemtype code="AmwayApacNewProductComponent" generate="true"
+		extends="AmwayApacAbstractTextLinkImageComponent" autocreate="true"
+		jaloclass="com.amway.apac.core.jalo.components.AmwayApacNewProductComponent">
 	</itemtype>
 
 	<itemtype code="AmwayApacSupplementsComponent" generate="true"
@@ -282,7 +288,7 @@
 	</itemtype>
 
 	<itemtype code="AmwayApacMyAccountComponent" generate="true"
-		extends="AmwayApacPathToSuccessPitchPerfectComponent" autocreate="true"
+		extends="AmwayApacPathToPitchPerfectComponent" autocreate="true"
 		jaloclass="com.amway.apac.core.jalo.components.AmwayApacMyAccountComponent">
 	</itemtype>
 	
