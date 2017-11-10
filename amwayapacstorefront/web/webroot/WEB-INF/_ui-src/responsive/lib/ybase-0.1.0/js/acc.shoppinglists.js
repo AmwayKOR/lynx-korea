@@ -9,8 +9,31 @@ ACC.shoppinglists = {
     	"bindUpdateShoppingListNameForm",
     	"bindUpdateShoppingListNameInputEscape",
     	"bindRemoveProductFromShoppingListLink",
-    	"bindRemoveShoppingListLink"
+    	"bindRemoveShoppingListLink",
+    	"bindShoppingListAddMultiForm"
     ],
+    
+    bindShoppingListAddMultiForm: function() {
+        // only bind if the current page is shopping lists page
+        if ($(".page-content-wrapper.page-shopping-list-details").length > 0) {
+            $(".page-content-wrapper.page-shopping-list-details").on("submit", "ul#js-shopping-cart-item-list form.grid-add-to-cart-form", function(event) {
+                event.preventDefault();
+    			$.ajax({
+					url: $form.attr("action"),
+					data: $form.serialize(),
+					type: method,
+					success: function(data) 
+					{
+				        ACC.popup.showPopup(cartResult);
+				    },
+					error: function() 
+					{
+			    		ACC.global.appendGlobalMessage(ACC.globalMessageTypes.ERROR_MESSAGES_HOLDER, ACC.messages.shoppingListAddProductError);
+					}
+				});
+            });
+        }
+    },
     
     bindRemoveShoppingListLink: function() {
         

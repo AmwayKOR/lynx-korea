@@ -12,6 +12,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLo
 import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
+import de.hybris.platform.acceleratorstorefrontcommons.forms.AddToCartOrderForm;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.servicelayer.exceptions.AmbiguousIdentifierException;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
@@ -237,7 +238,8 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 	public String shoppingListDetails(final Model model, @PathVariable("shoppingListUid") final String shoppingListUid)
 			throws CMSItemNotFoundException
 	{
-		populateShoppingListDetailsPageView(model, shoppingListUid, Boolean.FALSE);
+		populateShoppingListDetailsData(model, shoppingListUid, Boolean.FALSE);
+		populateShoppingListDetailsPage(model);
 		return ControllerConstants.Views.Pages.ShoppingList.ShoppingListDetailsPage;
 	}
 
@@ -253,8 +255,7 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 	 * @throws CMSItemNotFoundException
 	 *            if the shopping lists cms page is not found.
 	 */
-	private void populateShoppingListDetailsPageView(final Model model, final String shoppingListUid, final Boolean isAjax)
-			throws CMSItemNotFoundException
+	private void populateShoppingListDetailsData(final Model model, final String shoppingListUid, final Boolean isAjax)
 	{
 		if (StringUtils.isBlank(shoppingListUid))
 		{
@@ -284,8 +285,6 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 
 			}
 		}
-
-		populateShoppingListDetailsCMSPage(model);
 	}
 
 	/**
@@ -296,8 +295,9 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 	 * @throws CMSItemNotFoundException
 	 *            if the cms page is not found
 	 */
-	private void populateShoppingListDetailsCMSPage(final Model model) throws CMSItemNotFoundException
+	private void populateShoppingListDetailsPage(final Model model) throws CMSItemNotFoundException
 	{
+		model.addAttribute(new AddToCartOrderForm());
 		storeCmsPageInModel(model, getContentPageForLabelOrId(ControllerConstants.GeneralConstants.SHOPPING_LIST_DETAILS_CMS_PAGE));
 		setUpMetaDataForContentPage(model,
 				getContentPageForLabelOrId((ControllerConstants.GeneralConstants.SHOPPING_LIST_DETAILS_CMS_PAGE)));
@@ -360,7 +360,8 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 					ControllerConstants.GeneralConstants.SHOPPING_LIST_ADD_PRODUCT_MESSAGES_PREFIX);
 			if (AmwayApacWishlistModificationStatus.SUCCESS.equals(modificationStatus))
 			{
-				populateShoppingListDetailsPageView(model, shoppingListUid, Boolean.TRUE);
+				populateShoppingListDetailsData(model, shoppingListUid, Boolean.TRUE);
+				populateShoppingListDetailsPage(model);
 			}
 		}
 		return ControllerConstants.Views.Fragments.ShoppingList.UpdateProductInShoppingListResponse;
@@ -458,7 +459,7 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 				model.addAttribute(ControllerConstants.ModelParameters.SHOPPING_LIST_DATA, shoppingListData);
 				model.addAttribute(SUCCESS_MESSAGE,
 						ControllerConstants.SuccessMessageKeys.ShoppingList.SHOPPING_LIST_REMOVE_PRODUCT_SUCCESS_MESSAGE);
-				populateShoppingListDetailsCMSPage(model);
+				populateShoppingListDetailsPage(model);
 			}
 			catch (final UnknownIdentifierException uIE)
 			{

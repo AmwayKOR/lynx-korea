@@ -3,9 +3,18 @@ ACC.header = {
 	_autoload: [
         "bindHeader",
         "bindHeader2",
-        "bindHeader3"
+        "bindHeader3",
+        "bindHeaderProfilePopup"
 	],
 	
+	bindHeaderProfilePopup: function() {
+        $(".js-my-account-menu").click(function () {
+            $('header').hasClass('userinfo-open') ? $('header').removeClass('userinfo-open') : $('header').addClass('userinfo-open');
+            $('.top-search').removeClass('search-open');
+            $('header').removeClass('mincart-open');
+        });
+	},
+
 	bindHeader: function () {
         function mobileEvent () {
             $(".mobile-user-btn").click(function () {

@@ -38,6 +38,7 @@ import javax.annotation.Resource;
 import javax.validation.Valid;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.BooleanUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.http.MediaType;
@@ -152,27 +153,35 @@ public class AddToCartController extends AbstractController
 	@RequestMapping(value = "/cart/addGrid", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public final String addGridToCart(@RequestBody final AddToCartOrderForm form, final Model model)
 	{
-		final Set<String> multidErrorMsgs = new HashSet<String>();
-		final List<CartModificationData> modificationDataList = new ArrayList<CartModificationData>();
+		final Set<String> multidErrorMsgs = new HashSet<>();
+		final List<CartModificationData> modificationDataList = new ArrayList<>();
 
-		for (final OrderEntryData cartEntry : form.getCartEntries())
+		final List<OrderEntryData> filteredEntries = filterUnselectedOrderEntries(form.getCartEntries());
+
+		if (CollectionUtils.isEmpty(filteredEntries))
 		{
-			if (!isValidProductEntry(cartEntry))
+			multidErrorMsgs.add("shopping.list.grid.addtocart.none.selected");
+		}
+		else
+		{
+			for (final OrderEntryData cartEntry : form.getCartEntries())
 			{
-				LOG.error("Error processing entry");
-			}
-			else if (!isValidQuantity(cartEntry))
-			{
-				multidErrorMsgs.add("basket.error.quantity.invalid");
-			}
-			else
-			{
-				final String errorMsg = addEntryToCart(modificationDataList, cartEntry, true);
-				if (StringUtils.isNotEmpty(errorMsg))
+				if (!isValidProductEntry(cartEntry))
 				{
-					multidErrorMsgs.add(errorMsg);
+					LOG.error("Error processing entry");
 				}
-
+				else if (!isValidQuantity(cartEntry))
+				{
+					multidErrorMsgs.add("basket.error.quantity.invalid");
+				}
+				else
+				{
+					final String errorMsg = addEntryToCart(modificationDataList, cartEntry, true);
+					if (StringUtils.isNotEmpty(errorMsg))
+					{
+						multidErrorMsgs.add(errorMsg);
+					}
+				}
 			}
 		}
 
@@ -190,8 +199,30 @@ public class AddToCartController extends AbstractController
 
 		model.addAttribute("numberShowing", Integer.valueOf(Config.getInt(SHOWN_PRODUCT_COUNT, 3)));
 
-
 		return ControllerConstants.Views.Fragments.Cart.AddToCartPopup;
+	}
+
+	/**
+	 * Filters out the entries which are not selected.
+	 *
+	 * @param cartEntries
+	 *           all entries
+	 * @return list containing only the selected entries, empty list if none is selected
+	 */
+	private List<OrderEntryData> filterUnselectedOrderEntries(final List<OrderEntryData> cartEntries)
+	{
+		final List<OrderEntryData> filteredEntries = new ArrayList<>();
+		if (CollectionUtils.isNotEmpty(cartEntries))
+		{
+			for (final OrderEntryData orderEntry : cartEntries)
+			{
+				if (BooleanUtils.isTrue(orderEntry.getSelected()))
+				{
+					filteredEntries.add(orderEntry);
+				}
+			}
+		}
+		return filteredEntries;
 	}
 
 	@RequireHardLogIn
@@ -307,7 +338,7 @@ public class AddToCartController extends AbstractController
 		try
 		{
 			final long qty = cartEntry.getQuantity().longValue();
-			final CartModificationData cartModificationData = cartFacade.addToCart(cartEntry.getProduct().getCode(), qty);
+			final CartModificationData cartModificationData = cartFacade.addToCart(cartEntry.getProductCode(), qty);
 			if (cartModificationData.getQuantityAdded() == 0L)
 			{
 				errorMsg = "basket.information.quantity.noItemsAdded." + cartModificationData.getStatusCode();

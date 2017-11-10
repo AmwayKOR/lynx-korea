@@ -134,8 +134,7 @@
     </bean>
     
     <alias name="defaultAmwayApacCustomerFacade" alias="customerFacade"/>
-    <bean id="defaultAmwayApacCustomerFacade" class="com.amway.apac.facades.customer.impl.AmwayApacCustomerFacade" parent="defaultAmwayCustomerFacade">
-    </bean>
+    <bean id="defaultAmwayApacCustomerFacade" class="com.amway.apac.facades.customer.impl.DefaultAmwayApacCustomerFacade" parent="defaultAmwayCustomerFacade" />
     
     <alias name="defaultAmwayApacStockPopulator" alias="stockPopulator"/>
 	<bean id="defaultAmwayApacStockPopulator" parent="defaultStockPopulator"
@@ -147,7 +146,6 @@
 		<property name="list" ref="cartConverter"/>
 		<property name="add" ref="amwayCartPopulator"/>
 	</bean>
-	
 					
     <!-- dependencies have to be manually injected as there is no alias defined in the amwayfacades-spring.xml for amwayProductPricePopulator -->
     <alias name="defaultAmwayApacProductPricePopulator" alias="amwayProductPricePopulator"/>
