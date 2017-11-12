@@ -58,6 +58,7 @@
 			ACC.messages.showMoreProductsError='<spring:theme code="show.more.fetch.products.error"/>';
 			ACC.messages.shoppingListUidEmptyErrorMessage= '<spring:theme code="shopping.list.add.product.error.empty.listuid"/>';
 			ACC.messages.productCodeEmptyErrorMessage= '<spring:theme code="shopping.list.add.product.error.empty.name"/>';
+			ACC.messages.productAddToCartError= '<spring:theme code="product.addtocart.error"/>';
 		/*]]>*/
 	</script>
 	<template:javaScriptAddOnsVariables/>

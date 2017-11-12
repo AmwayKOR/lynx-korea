@@ -11,17 +11,21 @@
 <c:url value="${url}" var="addToCartUrl"/>
 <c:url value="/cart" var="cartUrl"/>
 
+<c:set var="outOfStock" value="${true}" />	
+<c:if test="${product.purchasable and product.stock.stockLevelStatus.code ne 'outOfStock' }">
+	<c:set var="outOfStock" value="${false}" />
+</c:if>
+
 <spring:url value="${product.url}/configuratorPage/{/configuratorType}" var="configureProductUrl" htmlEscape="false">
     <spring:param name="configuratorType"  value="${configuratorType}"/>
 </spring:url>
-
 
 <form:form method="post" id="addToCartForm" class="add_to_cart_form" action="${addToCartUrl}">
 	<input type="hidden" maxlength="3" size="1" id="qty" name="qty" class="qty js-qty-selector-input" value="1">
     <input type="hidden" name="productCodePost" value="${fn:escapeXml(product.code)}"/>
     <input type="hidden" id="cartUrl" value="${cartUrl}"/>
 
-	<button type="submit" class="btn btn-primary btn-block js-add-to-cart js-enable-btn col-md-6" disabled="disabled"><spring:theme code="basket.add.to.basket"/></button>
+	<button type="submit" class="btn btn-primary btn-block js-add-to-cart js-enable-btn col-md-6 <c:if test="${outOfStock}">out-of-stock</c:if>" disabled="disabled"><spring:theme code="basket.add.to.basket"/></button>
 	<button type="button" id="BuyNow" class="btn btn-primary btn-block js-add-to-cart js-enable-btn col-md-6" onclick="window.location.href='${cartUrl}'"><spring:theme code="checkout.checkout"/></button>
 </form:form>
 

@@ -23,7 +23,11 @@ ACC.product = {
         var addToCartForm = $('.add_to_cart_form');
         addToCartForm.ajaxForm({
         	beforeSubmit:ACC.product.showRequest,
-        	success: ACC.product.displayAddToCartPopup
+        	success: ACC.product.displayAddToCartPopup,
+        	error: function() {
+        		ACC.global.appendGlobalMessage(ACC.globalMessageTypes.ERROR_MESSAGES_HOLDER, ACC.messages.productAddToCartError);
+        		$ajaxCallEvent=true;
+        	}
          });    
         setTimeout(function(){
         	$ajaxCallEvent  = true;

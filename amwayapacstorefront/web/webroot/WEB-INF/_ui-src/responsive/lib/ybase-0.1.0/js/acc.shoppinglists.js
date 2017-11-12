@@ -10,14 +10,28 @@ ACC.shoppinglists = {
     	"bindUpdateShoppingListNameInputEscape",
     	"bindRemoveProductFromShoppingListLink",
     	"bindRemoveShoppingListLink",
-    	"bindShoppingListAddMultiForm"
+    	"bindShoppingListAddMultiForm",
+    	"bindShoppingListUpdateCartPopup"
     ],
+    
+    bindShoppingListUpdateCartPopup: function() {
+        // only bind if the current page is shopping lists page
+        if ($(".page-content-wrapper.page-shopping-list-details").length > 0) {
+        	$(".page-content-wrapper.page-shopping-list-details").on("click", ".cart-detail__addto.dropdown-toggle", function () {
+	            if($(".cart-detail__dropdown-menu.dropdown-menu").css('display')=='none'){
+	                $(".cart-detail__dropdown-menu.dropdown-menu").show();
+	            }else{
+	                $(".cart-detail__dropdown-menu.dropdown-menu").hide();
+	            }
+	        })
+        }
+    },
     
     bindShoppingListAddMultiForm: function() {
         // only bind if the current page is shopping lists page
         if ($(".page-content-wrapper.page-shopping-list-details").length > 0) {
-            $(".page-content-wrapper.page-shopping-list-details").on("submit", "ul#js-shopping-cart-item-list form.grid-add-to-cart-form", function(event) {
-                event.preventDefault();
+            $(".page-content-wrapper.page-shopping-list-details").on("click", "div.order-entry-pagination h5.shopping-list-add-to-cart", function() {
+            	var $form = $(".page-content-wrapper.page-shopping-list-details form.grid-add-to-cart-form");
     			$.ajax({
 					url: $form.attr("action"),
 					data: $form.serialize(),
@@ -28,7 +42,7 @@ ACC.shoppinglists = {
 				    },
 					error: function() 
 					{
-			    		ACC.global.appendGlobalMessage(ACC.globalMessageTypes.ERROR_MESSAGES_HOLDER, ACC.messages.shoppingListAddProductError);
+						ACC.global.appendGlobalMessage(ACC.globalMessageTypes.ERROR_MESSAGES_HOLDER, ACC.messages.productAddToCartError);
 					}
 				});
             });

@@ -11,7 +11,6 @@
 package com.amway.apac.storefront.controllers.misc;
 
 import de.hybris.platform.acceleratorfacades.product.data.ProductWrapperData;
-import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.AbstractController;
 import de.hybris.platform.acceleratorstorefrontcommons.forms.AddToCartForm;
 import de.hybris.platform.acceleratorstorefrontcommons.forms.AddToCartOrderForm;
@@ -77,8 +76,7 @@ public class AddToCartController extends AbstractController
 	@Resource(name = "groupCartModificationListPopulator")
 	private GroupCartModificationListPopulator groupCartModificationListPopulator;
 
-	@RequireHardLogIn
-	@RequestMapping(value = "/cart/add", method = RequestMethod.POST, produces = "application/json")
+	@RequestMapping(value = "/cart/add", method = RequestMethod.POST)
 	public String addToCart(@RequestParam("productCodePost") final String code, final Model model, @Valid final AddToCartForm form,
 			final BindingResult bindingErrors)
 	{
@@ -149,8 +147,7 @@ public class AddToCartController extends AbstractController
 		return error.getCode().equals(TYPE_MISMATCH_ERROR_CODE);
 	}
 
-	@RequireHardLogIn
-	@RequestMapping(value = "/cart/addGrid", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/cart/addGrid", method = RequestMethod.POST)
 	public final String addGridToCart(@RequestBody final AddToCartOrderForm form, final Model model)
 	{
 		final Set<String> multidErrorMsgs = new HashSet<>();
@@ -225,7 +222,6 @@ public class AddToCartController extends AbstractController
 		return filteredEntries;
 	}
 
-	@RequireHardLogIn
 	@RequestMapping(value = "/cart/addQuickOrder", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public final String addQuickOrderToCart(@RequestBody final AddToCartOrderForm form, final Model model)
 	{
@@ -269,7 +265,6 @@ public class AddToCartController extends AbstractController
 		return ControllerConstants.Views.Fragments.Cart.AddToCartPopup;
 	}
 
-	@RequireHardLogIn
 	@RequestMapping(value = "/entrygroups/cart/addToEntryGroup", method =
 	{ RequestMethod.POST, RequestMethod.GET })
 	public String addEntryGroupToCart(final Model model, @Valid final AddToEntryGroupForm form, final BindingResult bindingErrors)
