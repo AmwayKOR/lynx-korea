@@ -112,4 +112,10 @@ public final class AmwayapacCoreConstants extends GeneratedAmwayapacCoreConstant
 	 */
 	public static final String PRODUCT_LIST_GRID_FORMAT = "productGrid";
 
+	/**
+	 * Multidimensional attribute from SolR.
+	 */
+	public static final String MULTIDIMENSIONAL = "multidimensional";
+
+
 }

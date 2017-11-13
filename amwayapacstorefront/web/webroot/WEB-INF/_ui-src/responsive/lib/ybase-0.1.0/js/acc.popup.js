@@ -26,15 +26,20 @@ ACC.popup = {
 	
 	bindClosePopup: function() {
 		$("#modal-popup-container").on("click", ".cart-popup__close,.closeCbox", function() {
-			$("div.overlay").hide();
-			$("#modal-popup-container").children().first().hide();
-			$("#modal-popup-container").html("");
+			ACC.popup.closePopup();
 		});
 	},
 	
 	refreshPopupContent: function(newContent) {
-		$("#modal-popup-container").html(popup);
+		$("#modal-popup-container").html(newContent);
+		$("#modal-popup-container").children().first().show();
 		ACC.popup.resetPopup();
+	},
+	
+	closePopup : function(){
+		$("div.overlay").hide();
+		$("#modal-popup-container").children().first().hide();
+		$("#modal-popup-container").html("");
 	}
 };
 

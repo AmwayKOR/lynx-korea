@@ -9,6 +9,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <c:url value="${product.url}" var="productPDPurl" />
+<c:url value="/cart/add" var="addToCartUrl" />
 <div class="amway-suggest__item-container">
 	<div class="amway-suggest__item">
 		<div class="product-list__item">
@@ -61,18 +62,27 @@
 				</div>
 			</div>
 			<div class="product-list__item-link col-md-12">
-				<a href="#" class="btn-blue-white" data-toggle="modal" data-target="#cart-modal">
-					<spring:theme code="plp.producttile.addtocart" />
-				</a>
-				<a class="product-list__item-link-text product-list__item-link-common col-xs-6 col-md-10" href="#">
-					<spring:theme code="plp.producttile.shoppinglist" />
-				</a>
-				<a class="product-list__item-link-ditto product-list__item-link-common col-xs-6 col-md-2" href="#">
-					<span class="like-shape"></span>
-					<span class="wish-list">
-						<spring:theme code="plp.producttile.wishlist" />
-					</span>
-				</a>
+				<c:choose>
+					<c:when test="${product.multidimensional}">
+						<button class="btn-blue-white add-to-cart-quick-view" type="submit" data-product-code="${product.code}"> 
+							<spring:theme code="plp.producttile.addtocart" />
+						</button>
+						<a class="product-list__item-link-text product-list__item-link-common col-xs-12 col-md-12 add-to-cart-quick-view" data-product-code="${product.code}" href="#">
+							<spring:theme code="plp.producttile.shoppinglist" />
+						</a>
+					</c:when>
+					<c:otherwise>
+						<form action="${addToCartUrl}" method="post" class="add_to_cart_form">
+							<input type="hidden" name="productCodePost" value="${product.code}"/>
+							<button class="btn-blue-white" type="submit"> 
+								<spring:theme code="plp.producttile.addtocart" />
+							</button>
+						</form>
+						<a class="product-list__item-link-text product-list__item-link-common col-xs-12 col-md-12" href="#">
+							<spring:theme code="plp.producttile.shoppinglist" />
+						</a>
+					</c:otherwise>
+				</c:choose>
 			</div>
 		</div>
 	</div>

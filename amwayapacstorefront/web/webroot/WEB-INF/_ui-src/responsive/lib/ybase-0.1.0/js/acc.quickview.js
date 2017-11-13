@@ -6,7 +6,7 @@ ACC.quickview = {
 	],
 		
 	bindQuickViewPopup : function(){
-        $(document).on('click', '.quick-view-btn', function(event) {
+        $(document).on('click', '.quick-view-btn, .add-to-cart-quick-view', function(event) {
             event.preventDefault();
             var productCode = $(this).data("productCode");
             $.ajax({
@@ -26,14 +26,14 @@ ACC.quickview = {
 		$("#modal-popup-container").on("click", ".view-box .cart-popup__dialog .lip-color-choose__nav a", function(event){
 			event.preventDefault();
 			var productCode = $(this).closest("li").data("productCode");
-			ACC.categorypage.replaceQuickViewDisplayContent(productCode);
+			ACC.quickview.replaceQuickViewDisplayContent(productCode);
 		});
 	},
 	
 	bindVariantAttribute2Selection : function(){
 		$("#modal-popup-container").on("change", ".view-box .cart-popup__dialog .size-selector-container select", function(event){
 			var productCode = $(this).find(":selected").data("productCode");
-			ACC.categorypage.replaceQuickViewDisplayContent(productCode);
+			ACC.quickview.replaceQuickViewDisplayContent(productCode);
 		});
 	},
 	

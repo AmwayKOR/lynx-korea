@@ -1,6 +1,5 @@
 package com.amway.apac.facades.customer.impl;
 
-import com.amway.core.constants.AmwaycoreConstants;
 import com.amway.core.facades.customer.impl.DefaultAmwayCustomerFacade;
 
 
@@ -19,8 +18,6 @@ public class DefaultAmwayApacCustomerFacade extends DefaultAmwayCustomerFacade
 	{
 		super.loginSuccess();
 		getAmwayAccountCommerceService().setCurrentAccount(getCurrentUser());
-		getAmwayAccountCommerceService().saveLoggedInCustomerInfo(
-				getAmwayAccountService().getAccountProfile(AmwaycoreConstants.AmwayProfileDetailLevels.FULLDETAIL), null);
 	}
 
 }

@@ -286,8 +286,4 @@
 		<property name="amwayApacPrimaryVariantSelectionStrategy" ref="amwayApacPrimaryVariantSelectionStrategy"/>
 	</bean>
 	
-	<alias name="defaultAmwayApacMockProfileService" alias="amwayProfileService"/>
-	<bean id="defaultAmwayApacMockProfileService" class="com.amway.apac.core.account.service.impl.AmwayApacMockProfileService" autowire-candidate="false">
-    </bean>
-		
 </beans>
