@@ -9,7 +9,7 @@
 
 <common:globalMessages />
 
-<div id="cartConotentDiv">
+<div id="cartContentDiv">
     <div class="cart-top-totals"><spring:theme code="basket.page.totals.total.items" arguments="${fn:length(cartData.entries)}"/></div>
     <c:if test="${fn:length(cartData.entries) ne 0}">
         <div class="row">

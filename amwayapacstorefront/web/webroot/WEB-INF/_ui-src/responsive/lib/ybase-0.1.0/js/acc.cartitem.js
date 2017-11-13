@@ -28,7 +28,6 @@ ACC.cartitem = {
 				var entryNumbersInput = $("<input>").attr("type", "hidden").attr("name", "entryNumbers").val(entryNumber);
 				cartEntryActionForm.append($(entryNumbersInput));
 			});
-			//cartEntryActionForm.attr('action', entryActionUrl).submit();
 
             var entryNumbers = cartEntryActionForm.find('input[name=entryNumbers]').val();
 			$.ajax({
@@ -37,7 +36,7 @@ ACC.cartitem = {
                 type: cartEntryActionForm.attr('method'),
                 success: function(data)
                 {
-                    $('#cartContent').html($(data).filter("div#cartConotentDiv").html());
+                    $('#cartContent').html($(data).filter("div#cartContentDiv").html());
                     ACC.global.findAndUpdateGlobalMessages(data);
                 },
                 error: function(request, status, error)
@@ -96,7 +95,7 @@ ACC.cartitem = {
 
         if(initialCartQuantity != newCartQuantity)
         {
-            ACC.track.trackUpdateCart(productCode, initialCartQuantity, newCartQuantity);
+            //ACC.track.trackUpdateCart(productCode, initialCartQuantity, newCartQuantity);
             //form.submit();
 
             $.ajax({
