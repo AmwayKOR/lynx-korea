@@ -17,7 +17,7 @@ ACC.shoppinglists = {
     bindShoppingListUpdateCartPopup: function() {
         // only bind if the current page is shopping lists page
         if ($(".page-content-wrapper.page-shopping-list-details").length > 0) {
-        	$(".page-content-wrapper.page-shopping-list-details").on("click", ".cart-detail__addto.dropdown-toggle", function () {
+        	$(".page-content-wrapper.page-shopping-list-details").on("click", "div.shopping-list-entry-pagination .cart-detail__addto.dropdown-toggle", function () {
 	            if($(".cart-detail__dropdown-menu.dropdown-menu").css('display')=='none'){
 	                $(".cart-detail__dropdown-menu.dropdown-menu").show();
 	            }else{
@@ -30,12 +30,12 @@ ACC.shoppinglists = {
     bindShoppingListAddMultiForm: function() {
         // only bind if the current page is shopping lists page
         if ($(".page-content-wrapper.page-shopping-list-details").length > 0) {
-            $(".page-content-wrapper.page-shopping-list-details").on("click", "div.order-entry-pagination h5.shopping-list-add-to-cart", function() {
+            $(".page-content-wrapper.page-shopping-list-details").on("click", "div.shopping-list-entry-pagination a.shopping-list-add-to-cart", function(event) {
             	var $form = $(".page-content-wrapper.page-shopping-list-details form.grid-add-to-cart-form");
     			$.ajax({
 					url: $form.attr("action"),
 					data: $form.serialize(),
-					type: method,
+					type: "POST",
 					success: function(data) 
 					{
 				        ACC.popup.showPopup(cartResult);

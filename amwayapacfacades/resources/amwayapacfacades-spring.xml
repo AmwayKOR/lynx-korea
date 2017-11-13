@@ -161,4 +161,9 @@
     <alias name="defaultAmwayApacPriceDataFactory" alias="priceDataFactory"/>
     <bean id="defaultAmwayApacPriceDataFactory" class="com.amway.apac.facades.product.impl.DefaultAmwayApacPriceDataFactory" parent="amwayPriceDataFactory" />
 	
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="defaultOrderEntryProductConverter"/>
+		<property name="add" ref="productPricePopulatorList"/>
+	</bean>
+
 </beans>

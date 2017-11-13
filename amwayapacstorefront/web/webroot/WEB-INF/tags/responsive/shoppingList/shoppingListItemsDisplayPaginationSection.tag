@@ -4,7 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<div class="order-entry-pagination">
+<div class="order-entry-pagination shopping-list-entry-pagination">
 	<div class="pagination-bar top new-pagination-bar">
 		<div class="print-hide pagination-toolbar">
 			<div class="helper clearfix hidden-md hidden-lg"></div>
@@ -33,55 +33,6 @@
 										<spring:theme code="shoppinglist.items.section.addto.label" />
 									</div>
 									<ul class="cart-detail__dropdown-menu dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                                                            <div class="cart-detail__div-short"></div>
-                                                                            <div id="addtoAccordion" class=" clearfix">
-                                                                                <div class="cart-detail__addto-item panel">
-                                                                                    <h5 class="product-category__item-header collapsed" href="#addtoCollapse1" data-toggle="collapse" data-parent="#addtoAccordion" aria-expanded="false">ADD TO DITTO</h5>
-                                                                                    <div class="panel-collapse collapse" id="addtoCollapse1" aria-expanded="false" style="height: 0px;">
-                                                                                        <div class="cart-detail__panel-body">
-                                                                                            <input class="" id="toDitto" name="toDitto" type="checkbox">
-                                                                                            <label class="cart-detail__addto-options" for="toDitto">Add to Ditto</label></div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <!--<div class="cart-detail__addto-item panel">-->
-                                                                                    <!--<h5 class="product-category__item-header collapsed" href="#addtoCollapse2" data-toggle="collapse" data-parent="#addtoAccordion" aria-expanded="false">ADD TO SHOPPING LIST</h5>-->
-                                                                                    <!--<div class="panel-collapse collapse" id="addtoCollapse2" aria-expanded="false" style="height: 0px;">-->
-                                                                                        <!--<div class="cart-detail__panel-body">-->
-                                                                                            <!--<input class="" id="shoplistName" name="shoplistName" type="checkbox">-->
-                                                                                            <!--<label class="cart-detail__addto-options" for="shoplistName">Shopping List Name</label>-->
-                                                                                            <!--<br>-->
-                                                                                            <!--<input class="" id="longShoplistName" name="longShoplistName" type="checkbox">-->
-                                                                                            <!--<label class="cart-detail__addto-options" for="longShoplistName">Long Shopping List Name</label>-->
-                                                                                            <!--<br>-->
-                                                                                            <!--<input class="" id="shoplistName2" name="shoplistName2" type="checkbox">-->
-                                                                                            <!--<label class="cart-detail__addto-options" for="shoplistName2">Shopping List Name</label>-->
-                                                                                            <!--<br>-->
-                                                                                            <!--<input class="" id="listName" name="listName" type="checkbox">-->
-                                                                                            <!--<label class="cart-detail__addto-options" for="listName">List Name</label></div>-->
-                                                                                        <!--<div class="cart-detail__panel-body-link">-->
-                                                                                            <!--<a href="#" class="btn-blue-white">add to list</a>-->
-                                                                                            <!--<a class="cartlist__cancelorder">Create New List</a></div>-->
-                                                                                    <!--</div>-->
-                                                                                <!--</div>-->
-                                                                                <div class="cart-detail__addto-item panel">
-                                                                                    <h5 class="product-category__item-header collapsed" href="#addtoCollapse3" data-toggle="collapse" data-parent="#addtoAccordion" aria-expanded="false">ADD TO RECEIPT</h5>
-                                                                                    <div class="panel-collapse collapse" id="addtoCollapse3" aria-expanded="false" style="height: 0px;">
-                                                                                        <div class="cart-detail__panel-body">
-                                                                                            <input class="" id="toReceipt" name="toReceipt" type="checkbox">
-                                                                                            <label class="cart-detail__addto-options" for="toReceipt">Add to Receipt</label></div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="cart-detail__addto-item panel">
-                                                                                    <h5 class="product-category__item-header collapsed" href="#addtoCollapse4" data-toggle="collapse" data-parent="#addtoAccordion" aria-expanded="false">ADD TO Cart</h5>
-                                                                                    <div class="panel-collapse collapse" id="addtoCollapse4" aria-expanded="false" style="height: 0px;">
-                                                                                        <div class="cart-detail__panel-body">
-                                                                                            <input class="" id="toCart" name="toReceipt" type="checkbox">
-                                                                                            <label class="cart-detail__addto-options" for="toCart">Add to Cart</label></div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </ul>
-									<%-- <ul class="cart-detail__dropdown-menu dropdown-menu" role="menu" aria-labelledby="dLabel">
 										<div class="cart-detail__div-short"></div>
 										<div id="addtoAccordion" class=" clearfix">
 											<div class="cart-detail__addto-item panel">
@@ -90,16 +41,15 @@
 													<spring:theme code="shopping.list.items.add.to.cart.label" />
 												</h5>
 												<div class="panel-collapse collapse" id="addtoCollapse4" aria-expanded="false" style="height: 0px;">
-													<div class="cart-detail__panel-body">
-														<input class="" id="toCart" name="toReceipt" type="checkbox">
-														<label class="cart-detail__addto-options" for="toCart">
+													<div class="cart-detail__panel-body shopping-list-add-to-cart-wrapper">
+														<a href="#" class="shopping-list-add-to-cart">
 															<spring:theme code="shopping.list.items.add.to.cart.label" />
-														</label>
+														</a>
 													</div>
 												</div>
 											</div>
 										</div>
-									</ul> --%>
+									</ul>
 								</div>
 							</div>
 						</div>

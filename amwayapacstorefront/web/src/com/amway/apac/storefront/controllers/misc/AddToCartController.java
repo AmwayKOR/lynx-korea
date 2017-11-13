@@ -120,9 +120,6 @@ public class AddToCartController extends AbstractController
 			}
 		}
 
-		model.addAttribute("product",
-				productFacade.getProductForCodeAndOptions(code, Arrays.asList(ProductOption.BASIC, ProductOption.PRICE)));
-
 		return ControllerConstants.Views.Fragments.Cart.AddToCartPopup;
 	}
 
@@ -148,7 +145,7 @@ public class AddToCartController extends AbstractController
 	}
 
 	@RequestMapping(value = "/cart/addGrid", method = RequestMethod.POST)
-	public final String addGridToCart(@RequestBody final AddToCartOrderForm form, final Model model)
+	public final String addGridToCart(final AddToCartOrderForm form, final Model model)
 	{
 		final Set<String> multidErrorMsgs = new HashSet<>();
 		final List<CartModificationData> modificationDataList = new ArrayList<>();

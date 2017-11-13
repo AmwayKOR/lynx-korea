@@ -175,13 +175,7 @@ ACC.productdetail = {
                 $(".cbox2,.overlay").show();
                 dialogPos();
             });
-
-            //search box click event
-            $(".cart-detail__dropdown-menu").on("click",function(e){
-                e.stopPropagation();
-            });
             
         })
 	}
-
 };

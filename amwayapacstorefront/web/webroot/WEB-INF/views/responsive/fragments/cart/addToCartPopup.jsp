@@ -33,14 +33,11 @@
 			<c:choose>
 				<c:when test="${modifications ne null}">
 					<c:forEach items="${modifications}" var="modification" end="${numberShowing - 1}">
-						<c:set var="product" value="${modification.entry.product}" />
-						<c:set var="entry" value="${modification.entry}" />
-						<c:set var="quantity" value="${modification.quantityAdded}" />
-						<cart:popupCartItems entry="${entry}" product="${product}" quantity="${quantity}" />
+						<cart:popupCartItems entry="${modification.entry}" quantity="${modification.quantityAdded}" />
 					</c:forEach>
 				</c:when>
 				<c:otherwise>
-					<cart:popupCartItems entry="${entry}" product="${product}" quantity="${quantity}" />
+					<cart:popupCartItems entry="${entry}" quantity="${quantity}" />
 				</c:otherwise>
 			</c:choose>
 			<div class="cart-popup__item-link">
