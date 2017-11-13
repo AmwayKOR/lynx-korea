@@ -6,7 +6,6 @@ import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.platform.servicelayer.util.ServicesUtil;
-import de.hybris.platform.store.BaseStoreModel;
 import de.hybris.platform.storelocator.model.PointOfServiceModel;
 import de.hybris.platform.storelocator.pos.PointOfServiceService;
 
@@ -16,7 +15,6 @@ import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
 
-import com.amway.core.constants.AmwaycoreConstants;
 import com.amway.core.model.AmwayBatchModel;
 import com.amway.core.model.AmwayTerminalModel;
 import com.amway.core.pos.dao.AmwayBatchDao;
@@ -40,16 +38,6 @@ public class DefaultAmwayPOSService implements AmwayPOSService
 
        return batchDao.updateBatch(batch, Double.parseDouble(balance));
    }
-
-	@Override
-	public AmwayBatchModel updateBatch(final String batchNo, final String balance, final UserModel user)
-	{
-		final AmwayBatchModel batch = getBatch(batchNo);
-
-		final UserModel closedBy = userService.getUserForUID(user.getUid());
-
-		return batchDao.updateBatch(batch, Double.parseDouble(balance), closedBy);
-	}
 
 	@Override
 	public List<AmwayBatchModel> getBatches(final String userId, final Date startDate, final Date endDate)
@@ -115,12 +103,6 @@ public class DefaultAmwayPOSService implements AmwayPOSService
 	}
 
 	@Override
-	public List<AmwayBatchModel> getOpenBatches(final BaseStoreModel baseStore)
-	{
-		return batchDao.getOpenBatches(baseStore);
-	}
-
-	@Override
 	public List<AmwayTerminalModel> getPOSTerminals(final String pickupStore)
 	{
 
@@ -179,20 +161,6 @@ public class DefaultAmwayPOSService implements AmwayPOSService
 //		resolvedBatch.setEndingBalance(getAccuredCashBalanceByBatchAndTxnType(resolvedBatch,
 //				AmwaycoreConstants.POS.BATCH_ENDING_BALANCE_CALCULATION_PAYMENT_MODES));
 		return resolvedBatch;
-	}
-
-	@Override
-	public Double getAccuredBalanceByBatchAndTxnType(final String batchId, final List<String> paymentModes)
-	{
-		return batchDao.getAccuredBalanceByBatchAndTxnType(batchId, paymentModes);
-	}
-
-	public Double getAccuredCashBalanceByBatchAndTxnType(final AmwayBatchModel batch, final List<String> paymentModes)
-	{
-
-		final Double accurredCashBalance = batchDao.getAccuredBalanceByBatchAndTxnType(batch.getBatchNo(), paymentModes);
-
-		return (accurredCashBalance + batch.getStartingBalance());
 	}
 
 	@Override

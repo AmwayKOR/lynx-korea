@@ -8,16 +8,12 @@ import de.hybris.platform.commerceservices.search.flexiblesearch.data.SortQueryD
 import de.hybris.platform.commerceservices.search.pagedata.PageableData;
 import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
 import de.hybris.platform.core.model.order.OrderModel;
-import de.hybris.platform.core.model.order.payment.PaymentModeModel;
 import de.hybris.platform.core.model.user.EmployeeModel;
 import de.hybris.platform.core.model.user.UserModel;
-import de.hybris.platform.payment.model.PaymentTransactionModel;
 import de.hybris.platform.servicelayer.internal.dao.DefaultGenericDao;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 import de.hybris.platform.servicelayer.search.SearchResult;
-import de.hybris.platform.store.BaseStoreModel;
-import de.hybris.platform.storelocator.model.PointOfServiceModel;
 
 import java.util.*;
 import org.apache.log4j.Logger;
@@ -65,18 +61,6 @@ public class DefaultAmwayBatchDao extends DefaultGenericDao<AmwayBatchModel> imp
 		batchModel.setDateOfBatchClosed(new Date());
 		batchModel.setEndingBalance(balance);
 
-		getModelService().save(batchModel);
-		return batchModel;
-	}
-
-	@Override
-	public AmwayBatchModel updateBatch(final AmwayBatchModel batchModel, final Double balance, final UserModel closedBy)
-	{
-
-		batchModel.setDateOfBatchClosed(new Date());
-		batchModel.setEndingBalance(balance);
-
-		batchModel.setClosedBy(closedBy);
 		getModelService().save(batchModel);
 		return batchModel;
 	}
@@ -194,30 +178,6 @@ public class DefaultAmwayBatchDao extends DefaultGenericDao<AmwayBatchModel> imp
 		return result.getResult();
 	}
 
-	@Override
-	public List<AmwayBatchModel> getOpenBatches(final BaseStoreModel baseStore)
-	{
-		final Map<String, Object> attributes = new HashMap();
-		attributes.put("BaseStoreModel.AFFILIATENUMBER", baseStore.getAffiliateNumber());
-
-		final StringBuilder queryString = new StringBuilder(100);
-		queryString.append("SELECT {ab:").append(AmwayBatchModel.PK).append("} FROM {").append(AmwayBatchModel._TYPECODE)
-            .append(" AS ab")
-            .append(" JOIN ").append(AmwayTerminalModel._TYPECODE).append(" AS at ON {at.").append(AmwayTerminalModel.PK).append("}={ab.").append(AmwayBatchModel.TERMINAL).append("}")
-            .append(" JOIN ").append(PointOfServiceModel._TYPECODE).append(" AS pos ON {pos.").append(PointOfServiceModel.PK).append("}={at.").append(AmwayTerminalModel.POINTOFSERVICE).append("}")
-            .append(" JOIN ").append(BaseStoreModel._TYPECODE).append(" AS bs ON {bs.").append(BaseStoreModel.PK).append("}={pos.").append(PointOfServiceModel.BASESTORE).append("} }")
-            .append(" WHERE {bs.").append(BaseStoreModel.AFFILIATENUMBER)
-				.append("}=?BaseStoreModel.AFFILIATENUMBER AND {").append(AmwayBatchModel.DATEOFBATCHCLOSED).append("} IS NULL");
-
-		LOG.debug(queryString);
-
-		final FlexibleSearchQuery query = new FlexibleSearchQuery(queryString.toString());
-		query.getQueryParameters().putAll(attributes);
-
-		final SearchResult<AmwayBatchModel> result = this.getFlexibleSearchService().search(query);
-		return result.getResult();
-	}
-
 	public SearchPageData<OrderModel> getOrders(final PageableData pageableData, final AmwayBatchModel batchModel)
 	{
 		final Map queryParams = new HashMap();
@@ -245,36 +205,6 @@ public class DefaultAmwayBatchDao extends DefaultGenericDao<AmwayBatchModel> imp
 						"SELECT {pk}, {creationtime}, {code} FROM {Order} WHERE {versionID} IS NULL AND {batch} IN (?batchList) ORDER BY {code},{creationtime} DESC, {pk}") });
 
 		return getPagedFlexibleSearchService().search(sortQueries, "byDate", queryParams, pageableData);
-	}
-
-	@Override
-	public Double getAccuredBalanceByBatchAndTxnType(final String batchId, final List<String> paymentModes)
-	{
-		final Map queryParams = new HashMap(2);
-
-		queryParams.put(AmwayBatchModel.BATCHNO, batchId);
-		queryParams.put(PaymentModeModel.CODE + "s", paymentModes);
-
-		final StringBuilder queryString = new StringBuilder(100);
-
-		queryString.append("SELECT SUM({pt.").append(PaymentTransactionModel.PLANNEDAMOUNT).append("}) AS AMOUNT FROM {")//TODO: it must be Cash received - cash disbursed
-				.append(OrderModel._TYPECODE).append(" AS o ").append(" JOIN ").append(AmwayBatchModel._TYPECODE)
-				.append(" AS ab ON {ab.").append(AmwayBatchModel.PK).append("}={o.").append(OrderModel.BATCH).append("}")
-				.append(" JOIN ").append(PaymentTransactionModel._TYPECODE).append(" AS pt ON {pt.")
-				.append(PaymentTransactionModel.ORDER).append("}={o.").append(OrderModel.PK).append("}")
-				.append(PaymentModeModel._TYPECODE).append(" AS pm ON {pm.").append(PaymentModeModel.PK).append("}={pt.")
-				.append(PaymentTransactionModel.PAYMENTMODE).append("}").append(" } ").append(" WHERE {ab.")
-				.append(AmwayBatchModel.BATCHNO).append("} = ?").append(AmwayBatchModel.BATCHNO).append(" AND {pm.")
-				.append(PaymentModeModel.CODE).append("} IN (?").append(PaymentModeModel.CODE).append("s)");
-
-		LOG.debug(queryString);
-
-		final FlexibleSearchQuery query = new FlexibleSearchQuery(queryString.toString());
-		query.getQueryParameters().putAll(queryParams);
-		query.setResultClassList(Arrays.asList(Double.class));
-		final SearchResult<Double> result = this.getFlexibleSearchService().search(query);
-		final Double totalAmount = result.getResult().get(0);
-		return ((totalAmount == null) ? Double.valueOf(0.00D) : totalAmount);
 	}
 
 	protected SortQueryData createSortQueryData(final String sortCode, final String query)
