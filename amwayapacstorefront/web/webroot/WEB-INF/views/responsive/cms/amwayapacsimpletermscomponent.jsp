@@ -22,7 +22,7 @@
         </div>
         <div class="radio-wrapper">
             <label class="amw-radio-wrap radio-label">
-                <form:radiobutton value="true" path="term[${radioCount}].termAccepted" name="radio-${radioCount}" cssClass="amw-global-radio"/>
+                <form:radiobutton value="false" path="term[${radioCount}].termAccepted" name="radio-${radioCount}" cssClass="amw-global-radio"/>
                 <span class="amw-radio-overlay"></span>
                 <span class="amw-label-radio-text">${radio2Description}</span></label>
         </div>

@@ -7,7 +7,7 @@
 
 <c:url var="registerHomeUrl" value="simple-terms" />
 <template:page pageTitle="${pageTitle}">
-	<c:set var="radioCount" scope="request" value="${1}"/>
+	<c:set var="radioCount" scope="request" value="${0}"/>
 	<cms:pageSlot position="TermsBanner" var="component">
 		<cms:component component="${component}"/>
 	</cms:pageSlot>
