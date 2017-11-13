@@ -805,6 +805,7 @@ INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&co
 ;;headerDesc;headerDesc
 ;;becomeABODesc;becomeABODesc
 ;;becomeCustomerDesc;becomeCustomerDesc
+;;footerNoticeToolTipDesc;footerNoticeToolTipDesc
 ;;footerNoticeDesc;footerNoticeDesc
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
@@ -812,6 +813,7 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;c
 ;;WeAreAmwayContentSlot;We Are Amway Slot;true;amwayApacWeAreAmwayComponent
 ;;BecomeAnABOContentSlot;Become An ABO Slot;true;becomeABODesc,amwayApacBecomeAnABOLinkContent
 ;;BecomeACustomerContentSlot;Become A Customer;true;becomeCustomerDesc,amwayApacBecomeACustomerLinkContent
+;;FooterNoticeToolTipParagraphContentSlot; Footer Notice ToolTip;true;footerNoticeToolTipDesc
 ;;FooterNoticeParagraphContentSlot; Footer Notice;true;footerNoticeDesc
 
 INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;target(code)[default='sameWindow'];&componentRef

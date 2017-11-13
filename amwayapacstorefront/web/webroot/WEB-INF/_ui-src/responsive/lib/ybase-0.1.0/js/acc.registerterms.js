@@ -1,7 +1,8 @@
 ACC.registerterms = {
 		
 	_autoload: [
-        "bindRegisterTerms"
+        "bindRegisterTerms",
+        "bindTooltipInfoDisplay"
 	],
 		
 	bindRegisterTerms:function(){
@@ -22,6 +23,20 @@ ACC.registerterms = {
 	            parent.removeClass('expand');
 	        } else {
 	            parent.addClass('expand');
+	        }
+	    });
+	},
+
+
+	bindTooltipInfoDisplay : function(){
+		$(".upTips").on("click", function(e){
+	        e.preventDefault();
+	        var flag = $(this).prev(".toolTips").is(":hidden");
+	        if(flag) {
+	            $(".toolTips").fadeOut();
+	            $(this).prev(".toolTips").fadeIn();
+	        } else {
+	            $(this).prev(".toolTips").fadeOut();
 	        }
 	    });
 	}

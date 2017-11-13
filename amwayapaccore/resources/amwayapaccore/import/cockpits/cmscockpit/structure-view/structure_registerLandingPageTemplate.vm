@@ -61,7 +61,10 @@
                         </td>
                 </tr>
                 <tr>   
-                        <td colspan="4" class="structureViewSection" height="40px">
+                		<td colspan="2" class="structureViewSection" height="40px">
+                                <cockpit code="FooterNoticeToolTipParagraphContentSlot"/>
+                        </td>
+                        <td colspan="2" class="structureViewSection" height="40px">
                                 <cockpit code="FooterNoticeParagraphContentSlot"/>
                         </td>
                 </tr>
