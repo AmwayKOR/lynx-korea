@@ -822,3 +822,10 @@ INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=
 
 UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture
 ;;termsBannerComponent;termsBannerImageMedia;
+
+# CMS ProductReferences Components
+UPDATE ProductReferencesComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+;;CrossSelling;"WE ALSO SUGGEST"
+;;Others;"Accessories"
+;;Similar;"WE ALSO SUGGEST"
+;;accessories;"Accessories"

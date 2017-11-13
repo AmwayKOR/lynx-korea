@@ -44,10 +44,3 @@ UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
  ;;category-landing-page;"Nutrilite"
  ;;content-article-pages;"New IBO Info"
  ;;register-landing-page;"Register"
-
-# CMS ProductReferences Components
-UPDATE ProductReferencesComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
-;;CrossSelling;"WE ALSO SUGGEST"
-;;Others;"Accessories"
-;;Similar;"WE ALSO SUGGEST"
-;;accessories;"Accessories"
