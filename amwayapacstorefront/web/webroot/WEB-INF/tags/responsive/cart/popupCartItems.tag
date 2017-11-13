@@ -24,8 +24,7 @@
             <span><spring:theme code="pdp.add.to.cart.popup.label.pvbv" /></span>
             <span class="product-list__item-abovalue">${entry.product.price.amwayValue.pointValue} / ${entry.product.price.amwayValue.businessVolume}</span></div>
         <div class="cart-popup__quantity cart-popup__item-retailprice">
-            <span class="cart-popup__qty"><spring:theme code="pdp.add.to.cart.popup.label.quantity" arguments="${quantity}" /></span>
-            <a><spring:theme code="pdp.add.to.cart.popup.label.edit" /></a>
+            <span class="cart-popup__qty no-right-border"><spring:theme code="pdp.add.to.cart.popup.label.quantity" arguments="${quantity}" /></span>
         </div>
     </div>
 </div>

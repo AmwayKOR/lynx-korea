@@ -34,7 +34,8 @@
 				<div class="col-xs-12 col-md-6 product-details print-col-6">
 					<div class="product-item-element list-item-toggle">
 						<label class="checkbox-element-wrapper">
-							<input class="shopping-cart-entry-checkbox _checkbox-element-global-class" name="cartEntries[${loop.index}].selected"
+							<input class="shopping-cart-entry-checkbox _checkbox-element-global-class shopping-list-entry-checkbox" 
+								name="cartEntries[${loop.index}].selected"
 								data-product-code="${shoppingListEntry.product.code}" type="checkbox">
 							<span class="_checkbox-element-global-span"></span>
 						</label>

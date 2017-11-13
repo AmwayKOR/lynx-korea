@@ -9,6 +9,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="nav" tagdir="/WEB-INF/tags/responsive/nav"%>
 <%@ taglib prefix="header" tagdir="/WEB-INF/tags/responsive/common/header"%>
+<%@ taglib prefix="common" tagdir="/WEB-INF/tags/responsive/common"%>
 
 <c:set var="aboUser" value="false"/>
 <sec:authorize ifNotGranted="ROLE_ANONYMOUS">
@@ -553,6 +554,8 @@
     <!--search end-->
 
 </header>
+<common:globalMessages />
+<common:globalMessagesTemplates />
 <cms:pageSlot position="BreadCrumb" var="component">
 		<cms:component component="${component}" />
 </cms:pageSlot>

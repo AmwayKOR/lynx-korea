@@ -5,8 +5,6 @@ import static com.amway.apac.core.constants.AmwayapacCoreConstants.HUNDRED_INT;
 import static com.amway.apac.core.constants.AmwayapacCoreConstants.SORT_FIELD_STRING;
 import static com.amway.apac.core.constants.AmwayapacCoreConstants.SORT_ORDER_STRING;
 import static com.amway.apac.storefront.controllers.ControllerConstants.GeneralConstants.SHOPPING_LIST_SORT_BY_LAST_UPDATED;
-import static com.amway.apac.storefront.controllers.ControllerConstants.ModelParameters.ERROR_MESSAGE;
-import static com.amway.apac.storefront.controllers.ControllerConstants.ModelParameters.SUCCESS_MESSAGE;
 
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
 import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
@@ -21,7 +19,6 @@ import de.hybris.platform.wishlist2.model.Wishlist2Model;
 import javax.annotation.Resource;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang3.BooleanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -183,12 +180,12 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 			final WishlistData shoppingList = amwayApacWishlistFacade.createWishlist(shoppingListName);
 			if (shoppingList == null) // happens when there is already existing Shopping list with same name
 			{
-				model.addAttribute(ERROR_MESSAGE,
+				GlobalMessages.addErrorMessage(model,
 						ControllerConstants.ErrorMessageKeys.ShoppingList.SHOPPING_LIST_NAME_ALREADY_EXISTS);
 			}
 			else // success
 			{
-				model.addAttribute(SUCCESS_MESSAGE,
+				GlobalMessages.addConfMessage(model,
 						ControllerConstants.SuccessMessageKeys.ShoppingList.SHOPPING_LIST_CREATED_SUCESS_MESSAGE);
 				populateShoppingListsPageView(model, sorfField, sortOrder);
 			}
@@ -213,12 +210,12 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 		if (StringUtils.isBlank(shoppingListName)) // check for empty shopping list name
 		{
 			isShoppingListNameValid = false;
-			model.addAttribute(ERROR_MESSAGE, ControllerConstants.ErrorMessageKeys.ShoppingList.SHOPPING_LIST_CREATE_NAME_EMPTY);
+			GlobalMessages.addErrorMessage(model, ControllerConstants.ErrorMessageKeys.ShoppingList.SHOPPING_LIST_CREATE_NAME_EMPTY);
 		}
 		else if (shoppingListName.length() > AmwayapacCoreConstants.SHOPPING_LIST_DEFAULT_MAX_LENGTH) //check if shopping list name exceeds max length
 		{
 			isShoppingListNameValid = false;
-			model.addAttribute(ERROR_MESSAGE,
+			GlobalMessages.addErrorMessage(model,
 					ControllerConstants.ErrorMessageKeys.ShoppingList.SHOPPING_LIST_CREATE_NAME_MAX_LENGTH);
 		}
 		return isShoppingListNameValid;
@@ -259,8 +256,7 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 	{
 		if (StringUtils.isBlank(shoppingListUid))
 		{
-			populateGlobalOrErrorMessage(model, isAjax,
-					ControllerConstants.ErrorMessageKeys.ShoppingList.SHOPPING_LIST_DETAILS_NOT_FOUND);
+			GlobalMessages.addErrorMessage(model, ControllerConstants.ErrorMessageKeys.ShoppingList.SHOPPING_LIST_DETAILS_NOT_FOUND);
 		}
 		else
 		{
@@ -271,14 +267,14 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 			}
 			catch (final AmbiguousIdentifierException aIE)
 			{
-				populateGlobalOrErrorMessage(model, isAjax,
+				GlobalMessages.addErrorMessage(model,
 						ControllerConstants.ErrorMessageKeys.ShoppingList.SHOPPING_LIST_DETAILS_AMBIGUOUS_UID);
 				LOGGER.error(new StringBuilder(HUNDRED_INT).append("More than one shopping list found with uid [")
 						.append(shoppingListUid).append("].").toString(), aIE);
 			}
 			catch (final UnknownIdentifierException uIE)
 			{
-				populateGlobalOrErrorMessage(model, isAjax,
+				GlobalMessages.addErrorMessage(model,
 						ControllerConstants.ErrorMessageKeys.ShoppingList.SHOPPING_LIST_DETAILS_NOT_FOUND);
 				LOGGER.error(new StringBuilder(HUNDRED_INT).append("No shopping list found with uid [").append(shoppingListUid)
 						.append("].").toString(), uIE);
@@ -306,26 +302,6 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 	}
 
 	/**
-	 * If the response is for ajax request, then error message is set in the model, else in the global error messages.
-	 *
-	 * @param model
-	 *           view model
-	 * @param isAjax
-	 *           boolean deciding if the response is for ajax response or page reload.
-	 */
-	private void populateGlobalOrErrorMessage(final Model model, final Boolean isAjax, final String errorMesageKey)
-	{
-		if (BooleanUtils.isTrue(isAjax))
-		{
-			model.addAttribute(ERROR_MESSAGE, errorMesageKey);
-		}
-		else
-		{
-			GlobalMessages.addErrorMessage(model, errorMesageKey);
-		}
-	}
-
-	/**
 	 * Controller method to add product to shopping list
 	 *
 	 * @param productCode
@@ -344,12 +320,12 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 	{
 		if (StringUtils.isBlank(productCode))
 		{
-			model.addAttribute(ERROR_MESSAGE,
+			GlobalMessages.addErrorMessage(model,
 					ControllerConstants.ErrorMessageKeys.ShoppingList.SHOPPING_LIST_ADD_PRODUCT_CODE_EMPTY);
 		}
 		else if (StringUtils.isBlank(shoppingListUid))
 		{
-			model.addAttribute(ERROR_MESSAGE,
+			GlobalMessages.addErrorMessage(model,
 					ControllerConstants.ErrorMessageKeys.ShoppingList.SHOPPING_LIST_ADD_PRODUCT_LIST_UID_EMPTY);
 		}
 		else
@@ -383,12 +359,12 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 	{
 		if (AmwayApacWishlistModificationStatus.SUCCESS.equals(modificationStatus))
 		{
-			model.addAttribute(SUCCESS_MESSAGE,
+			GlobalMessages.addConfMessage(model,
 					new StringBuilder(FIFTY_INT).append(prefix).append(modificationStatus.toString().toLowerCase()).toString());
 		}
 		else
 		{
-			model.addAttribute(ERROR_MESSAGE,
+			GlobalMessages.addErrorMessage(model,
 					new StringBuilder(FIFTY_INT).append(prefix).append(modificationStatus.toString().toLowerCase()).toString());
 		}
 	}
@@ -411,7 +387,7 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 	{
 		if (StringUtils.isBlank(shoppingListUid))
 		{
-			model.addAttribute(ERROR_MESSAGE, ControllerConstants.ErrorMessageKeys.ShoppingList.SHOPPING_LIST_DETAILS_NOT_FOUND);
+			GlobalMessages.addErrorMessage(model, ControllerConstants.ErrorMessageKeys.ShoppingList.SHOPPING_LIST_DETAILS_NOT_FOUND);
 		}
 		else if (validateShoppingListName(shoppingListName, model))
 		{
@@ -443,12 +419,12 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 	{
 		if (StringUtils.isBlank(productCode))
 		{
-			model.addAttribute(ERROR_MESSAGE,
+			GlobalMessages.addErrorMessage(model,
 					ControllerConstants.ErrorMessageKeys.ShoppingList.SHOPPING_LIST_ADD_PRODUCT_CODE_EMPTY);
 		}
 		else if (StringUtils.isBlank(shoppingListUid))
 		{
-			model.addAttribute(ERROR_MESSAGE,
+			GlobalMessages.addErrorMessage(model,
 					ControllerConstants.ErrorMessageKeys.ShoppingList.SHOPPING_LIST_ADD_PRODUCT_LIST_UID_EMPTY);
 		}
 		else
@@ -457,7 +433,7 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 			{
 				final WishlistData shoppingListData = amwayApacWishlistFacade.removeFromWishList(shoppingListUid, productCode);
 				model.addAttribute(ControllerConstants.ModelParameters.SHOPPING_LIST_DATA, shoppingListData);
-				model.addAttribute(SUCCESS_MESSAGE,
+				GlobalMessages.addConfMessage(model,
 						ControllerConstants.SuccessMessageKeys.ShoppingList.SHOPPING_LIST_REMOVE_PRODUCT_SUCCESS_MESSAGE);
 				populateShoppingListDetailsPage(model);
 			}
@@ -465,13 +441,14 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 			{
 				LOGGER.error(new StringBuilder(HUNDRED_INT).append("No shopping list found with uid [").append(shoppingListUid)
 						.append("].").toString(), uIE);
-				model.addAttribute(ERROR_MESSAGE, ControllerConstants.ErrorMessageKeys.ShoppingList.SHOPPING_LIST_DETAILS_NOT_FOUND);
+				GlobalMessages.addErrorMessage(model,
+						ControllerConstants.ErrorMessageKeys.ShoppingList.SHOPPING_LIST_DETAILS_NOT_FOUND);
 			}
 			catch (final AmbiguousIdentifierException aIE)
 			{
 				LOGGER.error(new StringBuilder(HUNDRED_INT).append("More than one shopping list found with uid [")
 						.append(shoppingListUid).append("].").toString(), aIE);
-				model.addAttribute(ERROR_MESSAGE,
+				GlobalMessages.addErrorMessage(model,
 						ControllerConstants.ErrorMessageKeys.ShoppingList.SHOPPING_LIST_DETAILS_AMBIGUOUS_UID);
 			}
 		}

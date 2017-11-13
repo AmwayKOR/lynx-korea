@@ -38,14 +38,11 @@ ACC.cartitem = {
                 success: function(data)
                 {
                     $('#cartContent').html($(data).filter("div#cartConotentDiv").html());
-                    ACC.global.appendGlobalMessage(ACC.globalMessageTypes.CONF_MESSAGES_HOLDER, $(data).filter("div#alert-info").html());
-                    ACC.global.appendGlobalMessage(ACC.globalMessageTypes.ERROR_MESSAGES_HOLDER, $(data).filter("div#alert-danger").html());
+                    ACC.global.findAndUpdateGlobalMessages(data);
                 },
                 error: function(request, status, error)
                 {
-                    $('#cartContent').html(request.responseText);
-                    ACC.global.appendGlobalMessage(ACC.globalMessageTypes.CONF_MESSAGES_HOLDER, $(data).filter("div#alert-info").html());
-                    ACC.global.appendGlobalMessage(ACC.globalMessageTypes.ERROR_MESSAGES_HOLDER, $(data).filter("div#alert-danger").html());
+                    ACC.global.appendGlobalMessage(ACC.globalMessageTypes.ERROR_MESSAGES_HOLDER, request.responseText);
                 }
 
             });
@@ -109,14 +106,11 @@ ACC.cartitem = {
                 success: function(data)
                 {
                     $('#cartContent').html($(data).filter("div#cartConotentDiv").html());
-                    ACC.global.appendGlobalMessage(ACC.globalMessageTypes.CONF_MESSAGES_HOLDER, $(data).filter("div#alert-info").html());
-                    ACC.global.appendGlobalMessage(ACC.globalMessageTypes.ERROR_MESSAGES_HOLDER, $(data).filter("div#alert-danger").html());
+                    ACC.global.findAndUpdateGlobalMessages(data);
                 },
                 error: function(request, status, error)
                 {
-                    $('#cartContent').html(request.responseText);
-                    ACC.global.appendGlobalMessage(ACC.globalMessageTypes.CONF_MESSAGES_HOLDER, $(data).filter("div#alert-info").html());
-                    ACC.global.appendGlobalMessage(ACC.globalMessageTypes.ERROR_MESSAGES_HOLDER, $(data).filter("div#alert-danger").html());
+                    ACC.global.appendGlobalMessage(ACC.globalMessageTypes.ERROR_MESSAGES_HOLDER, request.responseText);
                 }
 
             });

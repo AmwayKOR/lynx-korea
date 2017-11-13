@@ -279,16 +279,6 @@ public interface ControllerConstants
 		String SHOPPING_LIST_DATA = "shoppingListData";
 
 		/**
-		 * Model parameter for error message
-		 */
-		String ERROR_MESSAGE = "errorMessage";
-
-		/**
-		 * Model parameter for success message
-		 */
-		String SUCCESS_MESSAGE = "successMessage";
-
-		/**
 		 * Model parameter for shopping list name.
 		 */
 		String SHOPPING_LIST_NAME = "shoppingListName";
@@ -297,6 +287,12 @@ public interface ControllerConstants
 		 * Model parameter for login error.
 		 */
 		String LOGIN_ERROR = "loginError";
+
+		/**
+		 * Model parameter for quantity.
+		 */
+		String QUANTITY_ATTR = "quantity";
+
 	}
 
 	/**
@@ -367,6 +363,23 @@ public interface ControllerConstants
 	 */
 	interface ErrorMessageKeys
 	{
+		/**
+		 * Interface to group Add to cart related error messages
+		 *
+		 * @author Parvesh Goyal
+		 */
+		interface AddToCart
+		{
+			/**
+			 * Error message when a negative quantity is given for add to cart.
+			 */
+			String INVALID_QUANTITY = "basket.error.quantity.invalid";
+
+			/**
+			 * Default error message for add to cart.
+			 */
+			String BASKET_ERROR = "basket.error.occurred";
+		}
 
 		/**
 		 * Interface to group Shopping list related error messages together

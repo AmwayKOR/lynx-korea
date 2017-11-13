@@ -10,8 +10,11 @@
  */
 package com.amway.apac.storefront.controllers.misc;
 
+import static com.amway.apac.storefront.controllers.ControllerConstants.ModelParameters.QUANTITY_ATTR;
+
 import de.hybris.platform.acceleratorfacades.product.data.ProductWrapperData;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.AbstractController;
+import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.acceleratorstorefrontcommons.forms.AddToCartForm;
 import de.hybris.platform.acceleratorstorefrontcommons.forms.AddToCartOrderForm;
 import de.hybris.platform.acceleratorstorefrontcommons.forms.AddToEntryGroupForm;
@@ -31,7 +34,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
@@ -59,7 +61,6 @@ import com.amway.apac.storefront.controllers.ControllerConstants;
 @Controller
 public class AddToCartController extends AbstractController
 {
-	private static final String QUANTITY_ATTR = "quantity";
 	private static final String TYPE_MISMATCH_ERROR_CODE = "typeMismatch";
 	private static final String ERROR_MSG_TYPE = "errorMsg";
 	private static final String QUANTITY_INVALID_BINDING_MESSAGE_KEY = "basket.error.quantity.invalid.binding";
@@ -89,7 +90,7 @@ public class AddToCartController extends AbstractController
 
 		if (qty <= 0)
 		{
-			model.addAttribute(ERROR_MSG_TYPE, "basket.error.quantity.invalid");
+			GlobalMessages.addErrorMessage(model, ControllerConstants.ErrorMessageKeys.AddToCart.INVALID_QUANTITY);
 			model.addAttribute(QUANTITY_ATTR, Long.valueOf(0L));
 		}
 		else
@@ -104,18 +105,19 @@ public class AddToCartController extends AbstractController
 
 				if (cartModification.getQuantityAdded() == 0L)
 				{
-					model.addAttribute(ERROR_MSG_TYPE, "basket.information.quantity.noItemsAdded." + cartModification.getStatusCode());
+					GlobalMessages.addErrorMessage(model,
+							"basket.information.quantity.noItemsAdded." + cartModification.getStatusCode());
 				}
 				else if (cartModification.getQuantityAdded() < qty)
 				{
-					model.addAttribute(ERROR_MSG_TYPE,
+					GlobalMessages.addErrorMessage(model,
 							"basket.information.quantity.reducedNumberOfItemsAdded." + cartModification.getStatusCode());
 				}
 			}
 			catch (final CommerceCartModificationException ex)
 			{
 				logDebugException(ex);
-				model.addAttribute(ERROR_MSG_TYPE, "basket.error.occurred");
+				GlobalMessages.addErrorMessage(model, ControllerConstants.ErrorMessageKeys.AddToCart.BASKET_ERROR);
 				model.addAttribute(QUANTITY_ATTR, Long.valueOf(0L));
 			}
 		}
@@ -129,11 +131,11 @@ public class AddToCartController extends AbstractController
 		{
 			if (isTypeMismatchError(error))
 			{
-				model.addAttribute(ERROR_MSG_TYPE, QUANTITY_INVALID_BINDING_MESSAGE_KEY);
+				GlobalMessages.addErrorMessage(model, QUANTITY_INVALID_BINDING_MESSAGE_KEY);
 			}
 			else
 			{
-				model.addAttribute(ERROR_MSG_TYPE, error.getDefaultMessage());
+				GlobalMessages.addErrorMessage(model, error.getDefaultMessage());
 			}
 		}
 		return ControllerConstants.Views.Fragments.Cart.AddToCartPopup;
@@ -147,18 +149,17 @@ public class AddToCartController extends AbstractController
 	@RequestMapping(value = "/cart/addGrid", method = RequestMethod.POST)
 	public final String addGridToCart(final AddToCartOrderForm form, final Model model)
 	{
-		final Set<String> multidErrorMsgs = new HashSet<>();
 		final List<CartModificationData> modificationDataList = new ArrayList<>();
 
 		final List<OrderEntryData> filteredEntries = filterUnselectedOrderEntries(form.getCartEntries());
 
 		if (CollectionUtils.isEmpty(filteredEntries))
 		{
-			multidErrorMsgs.add("shopping.list.grid.addtocart.none.selected");
+			GlobalMessages.addErrorMessage(model, "shopping.list.grid.addtocart.none.selected");
 		}
 		else
 		{
-			for (final OrderEntryData cartEntry : form.getCartEntries())
+			for (final OrderEntryData cartEntry : filteredEntries)
 			{
 				if (!isValidProductEntry(cartEntry))
 				{
@@ -166,14 +167,14 @@ public class AddToCartController extends AbstractController
 				}
 				else if (!isValidQuantity(cartEntry))
 				{
-					multidErrorMsgs.add("basket.error.quantity.invalid");
+					GlobalMessages.addErrorMessage(model, "basket.error.quantity.invalid");
 				}
 				else
 				{
 					final String errorMsg = addEntryToCart(modificationDataList, cartEntry, true);
 					if (StringUtils.isNotEmpty(errorMsg))
 					{
-						multidErrorMsgs.add(errorMsg);
+						GlobalMessages.addErrorMessage(model, errorMsg);
 					}
 				}
 			}
@@ -184,11 +185,6 @@ public class AddToCartController extends AbstractController
 			groupCartModificationListPopulator.populate(null, modificationDataList);
 
 			model.addAttribute("modifications", modificationDataList);
-		}
-
-		if (CollectionUtils.isNotEmpty(multidErrorMsgs))
-		{
-			model.addAttribute("multidErrorMsgs", multidErrorMsgs);
 		}
 
 		model.addAttribute("numberShowing", Integer.valueOf(Config.getInt(SHOWN_PRODUCT_COUNT, 3)));
@@ -353,7 +349,7 @@ public class AddToCartController extends AbstractController
 
 	protected boolean isValidProductEntry(final OrderEntryData cartEntry)
 	{
-		return cartEntry.getProduct() != null && StringUtils.isNotBlank(cartEntry.getProduct().getCode());
+		return StringUtils.isNotBlank(cartEntry.getProductCode());
 	}
 
 	protected boolean isValidQuantity(final OrderEntryData cartEntry)

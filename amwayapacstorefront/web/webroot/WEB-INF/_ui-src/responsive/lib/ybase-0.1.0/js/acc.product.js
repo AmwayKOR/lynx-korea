@@ -58,7 +58,10 @@ ACC.product = {
             ACC.minicart.updateMiniCartDisplay();
         }
 
-        ACC.popup.showPopup(cartResult);
+        ACC.global.findAndUpdateGlobalMessages(cartResult, false);
+        if ($(cartResult).filter("div.popup-content").length > 0) {
+        	ACC.popup.showPopup($(cartResult).filter("div.popup-content").html());
+        }
 
         /*
         var productCode = $('[name=productCodePost]', formElement).val();

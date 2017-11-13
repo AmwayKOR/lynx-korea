@@ -7,23 +7,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="common" tagdir="/WEB-INF/tags/responsive/common" %>
 
-<%-- Information (confirmation) messages --%>
-<c:if test="${not empty accConfMsgs}">
-    <c:forEach items="${accConfMsgs}" var="msg">
-        <div id="alert-info">
-            <spring:theme code="${msg.code}" arguments="${msg.attributes}"/>
-        </div>
-    </c:forEach>
-</c:if>
+<common:globalMessages />
 
-<%-- Error messages (includes spring validation messages)--%>
-<c:if test="${not empty accErrorMsgs}">
-    <c:forEach items="${accErrorMsgs}" var="msg">
-        <div id="alert-danger">
-            <spring:theme code="${msg.code}" arguments="${msg.attributes}"/>
-        </div>
-    </c:forEach>
-</c:if>
 <div id="cartConotentDiv">
     <div class="cart-top-totals"><spring:theme code="basket.page.totals.total.items" arguments="${fn:length(cartData.entries)}"/></div>
     <c:if test="${fn:length(cartData.entries) ne 0}">
