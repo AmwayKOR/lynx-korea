@@ -183,6 +183,7 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 ;TopHeaderSlot;;;wide
 ;BottomHeaderSlot;;;wide
 ;PlaceholderContentSlot;;;
+;NoResultsContentSlot;;;
 
 # Search Result List / Grid are two layouts for Search Result pages
 # Search Empty is displayed when no results are found
@@ -768,7 +769,7 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active
 ;;BecomeACustomerContentSlot;        Become A Customer Content Slot;                        true
 ;;FooterNoticeToolTipParagraphContentSlot;  Footer Notice ToolTip Paragraph Content Slot;   true 
 ;;FooterNoticeParagraphContentSlot;  Footer Notice Paragraph Content Slot;                  true 
-
+;;NoResultsContentSlot;              No Results PLP content slot;                           true
 
 # Bind Content Slots to Page Templates
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ProductDetailsPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
@@ -1001,6 +1002,7 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 ;;ProductGridSlot-ProductGridPage;ProductGridSlot;;ProductGridSlot;true
 ;;PlaceholderContentSlot-ProductGridPage;PlaceholderContentSlot;;PlaceholderContentSlot;true
 ;;Mobile-NavigationBar-ProductGridPage;MobileNavigationBar;;MobileNavigationBarSlot;true
+;;NoResultsContentSlot-ProductGridPage;NoResultsContentSlot;;NoResultsContentSlot;true
 
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ProductListPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
 ;;SiteLogo-ProductListPage;SiteLogo;ProductListPageTemplate;SiteLogoSlot;true
@@ -1313,8 +1315,8 @@ INSERT_UPDATE ProductPage;$contentCV[unique=true];uid[unique=true];name;masterTe
 
 # Category Pages
 INSERT_UPDATE CategoryPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);defaultPage;approvalStatus(code)[default='approved']
-;;productList;Product List;ProductListPageTemplate;true;
-;;productGrid;Product Grid;ProductGridPageTemplate;false;
+;;productList;Product List;ProductListPageTemplate;false;
+;;productGrid;Product Grid;ProductGridPageTemplate;true;
 ;;category;Default Category Page;CategoryPageTemplate;false;
 
 # Site-wide Aaron Homepage

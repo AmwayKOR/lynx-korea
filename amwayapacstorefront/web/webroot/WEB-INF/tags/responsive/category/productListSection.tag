@@ -7,7 +7,7 @@
 	<c:forEach items="${searchPageData.results}" var="product">
 		<div class="product__list--item col-sm-12 col-md-4 js-query-result-item">
          <div class="list-item-wrapper">
-         	<product:productListerItem product="${product}"/>
+         	<product:productListerGridItem product="${product}"/>
          </div>
      </div>
 	</c:forEach>

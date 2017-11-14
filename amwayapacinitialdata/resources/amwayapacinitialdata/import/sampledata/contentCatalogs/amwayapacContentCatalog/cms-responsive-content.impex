@@ -1115,3 +1115,13 @@ INSERT_UPDATE AmwayApacTermsTabComponent;$contentCV[unique=true];uid[unique=true
 ;;AmwayApacTermsTabComponent8;Terms Tab Component;termsTabTitle7;termsTabDesc1;2;AmwayApacTermsTabComponent8
 ;;AmwayApacTermsTabComponent9;Terms Tab Component;termsTabTitle8;termsTabDesc1;1;AmwayApacTermsTabComponent9
 ;;AmwayApacTermsTabComponent10;Terms Tab Component;termsTabTitle9;termsTabDesc1;2;AmwayApacTermsTabComponent10
+
+
+######Product Grid Page Template######
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
+;;productGridNoResultContent;productGridNoResultContent
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
+;;NoResultsContentSlot;PLP No results Slot;true;productGridNoResultContent
+######Product Grid Page Template######

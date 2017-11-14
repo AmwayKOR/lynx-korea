@@ -830,3 +830,12 @@ UPDATE ProductReferencesComponent;$contentCV[unique=true];uid[unique=true];title
 ;;Others;"Accessories"
 ;;Similar;"WE ALSO SUGGEST"
 ;;accessories;"Accessories"
+
+
+######Product Grid Page Template######
+
+UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content;
+;;productGridNoResultContent;<div class="new-search-icon tb120"><span>WE'RE SORRY! WE COULDN'T FIND ANY RESULTS FOR YOUR SELECTION.</span></div>
+
+
+######Product Grid Page Template######
