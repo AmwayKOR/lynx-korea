@@ -4,8 +4,18 @@ ACC.productdetail = {
         "bindproduct",
         "bindLearningOpportunitiesCarousel",
         "bindProductReferencesCarousel",
-        "bindRecentlyViewedProductsCarousel"
+        "bindRecentlyViewedProductsCarousel",
+        "bindReviewSummaryShowReviews"
 	],
+	bindReviewSummaryShowReviews: function(){
+        $(".description-number,.description-reviews").click(function(){
+            $("#reviewsbody.accordion-panel-collapse.collapse").addClass("in");
+            $("#reviewsbody.accordion-panel-collapse.collapse").css("height","auto");
+            $("#tabreview .accordion-toggle.collapsed").removeClass("collapsed");
+			ACC.tabs.showReviewsAction("reviews");
+			ACC.tabs.showReviewBtn(".all-reviews-btn");
+        });
+	},
 	
 	bindRecentlyViewedProductsCarousel: function() {
 		  $('#recentlyViewedListTab').owlCarousel({
@@ -154,13 +164,6 @@ ACC.productdetail = {
                 }else{
                     $(".add-to-shopping-list-component-container").addClass("display-none");
                 }
-            });
-
-            //reviews event
-            $(".description-number,.description-reviews").click(function(){
-                $("#reviewsbody.accordion-panel-collapse.collapse").addClass("in");
-                $("#reviewsbody.accordion-panel-collapse.collapse").css("height","auto");
-                $("#reviews .accordion-toggle.collapsed").removeClass("collapsed");
             });
 
             $('#addToCartButton').click(function(event) {

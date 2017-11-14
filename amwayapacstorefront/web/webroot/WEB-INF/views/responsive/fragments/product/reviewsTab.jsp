@@ -34,6 +34,5 @@
                 <fmt:formatDate value="${reviewDate}" pattern="MMMM dd, yyyy" />
             </p>
             <p class="product-collapse_desc">${fn:escapeXml(review.comment)}</p>
-        </div>
 	</c:forEach>
 </c:if>
