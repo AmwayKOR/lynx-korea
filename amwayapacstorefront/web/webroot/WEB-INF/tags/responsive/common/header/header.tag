@@ -14,7 +14,7 @@
 <c:set var="aboUser" value="false"/>
 <sec:authorize ifNotGranted="ROLE_ANONYMOUS">
 	<c:set var="aboUser" value="true"/>
-</sec:authorize>
+</sec:authorize> 
 
 <header class="js-mainHeader main-header general-header">
     <div class="amway-theme">
