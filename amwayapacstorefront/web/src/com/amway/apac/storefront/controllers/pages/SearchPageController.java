@@ -328,9 +328,10 @@ public class SearchPageController extends AbstractSearchPageController
 
 	protected void updatePageTitle(final String searchText, final Model model)
 	{
+		final Object[] searchArg =
+		{ searchText };
 		storeContentPageTitleInModel(model, getPageTitleResolver().resolveContentPageTitle(
-				getMessageSource().getMessage("search.meta.title", null, "search.meta.title", getI18nService().getCurrentLocale())
-						+ " " + searchText));
+				getMessageSource().getMessage("search.meta.title", searchArg, getI18nService().getCurrentLocale())));
 	}
 
 
