@@ -16,7 +16,7 @@
 	<c:set var="aboUser" value="true"/>
 </sec:authorize>
 
-<header class="js-mainHeader main-header general-header">
+<header class="js-mainHeader main-header general-header <c:if test="${loginError}">userinfo-open</c:if>">
     <div class="amway-theme">
         <nav class="header-container">
             <div class="header-wrapper pos-relative">

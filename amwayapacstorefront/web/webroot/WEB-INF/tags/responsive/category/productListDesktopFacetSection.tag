@@ -22,7 +22,7 @@
             <div class="panel-group accordion-custom" id="facetAccordion" role="tablist" aria-multiselectable="true">
 	            <c:forEach items="${searchPageData.facets}" var="facet">
 					<c:choose>
-			    		<c:when test="${facet.code eq 'aboPriceRange'}">
+			    		<c:when test="${(facet.code eq 'aboPriceRange') || (facet.code eq 'stockLevelFacet')}">
 			    			<c:if test="${aboUser}">
 			    				<nav:facetNavRefinementFacet facet="${facet}" isMobile="false"/>
 			    			</c:if>

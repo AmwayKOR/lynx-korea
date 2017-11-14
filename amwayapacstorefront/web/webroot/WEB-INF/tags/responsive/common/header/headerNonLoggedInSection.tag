@@ -14,7 +14,7 @@
             <p class="login-form__sub-text">Log into your account or sign up to create one.</p>
             <c:if test="${loginError}"><p class="red">Your username or password was incorrect.</p></c:if>
             <input id="j_username" name="j_username" type="text" placeholder="Username or ABO ID" class="login-form__username">
-            <input id="j_password" name="j_password" type="text" placeholder="Password" class="login-form__password">
+            <input id="j_password" name="j_password" type="password" placeholder="Password" class="login-form__password">
             <input type="hidden" name="CSRFToken" value="${CSRFToken.token}" />
             <input class="login-form__remember" id="remember" name="remember" type="checkbox">
             <label for="remember" class="remember-me">Remember me</label>
@@ -27,6 +27,5 @@
             	<input class="button login-form__register" type="button" value="register here">
             </a>
         </form>
-
     </div>
 </div>

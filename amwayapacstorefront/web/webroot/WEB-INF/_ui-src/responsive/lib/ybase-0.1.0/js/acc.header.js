@@ -4,17 +4,29 @@ ACC.header = {
         "bindHeader",
         "bindHeader2",
         "bindHeader3",
-        "bindHeaderProfilePopup"
+        "bindHeaderProfilePopup",
+        "bindLoginRegisterButton"
 	],
 	
 	bindHeaderProfilePopup: function() {
         $(".js-my-account-menu").click(function () {
-            $('header').hasClass('userinfo-open') ? $('header').removeClass('userinfo-open') : $('header').addClass('userinfo-open');
-            $('.top-search').removeClass('search-open');
-            $('header').removeClass('mincart-open');
+            ACC.header.openLoginDrop();
         });
 	},
-
+	
+	openLoginDrop : function(){
+		$('header').hasClass('userinfo-open') ? $('header').removeClass('userinfo-open') : $('header').addClass('userinfo-open');
+        $('.top-search').removeClass('search-open');
+        $('header').removeClass('mincart-open');
+	},
+	
+	bindLoginRegisterButton :  function(){
+		$(document).on("click", ".sign-in-register", function(){
+			ACC.popup.closePopup();
+			ACC.header.openLoginDrop();
+		});
+	},
+	
 	bindHeader: function () {
         function mobileEvent () {
             $(".mobile-user-btn").click(function () {
