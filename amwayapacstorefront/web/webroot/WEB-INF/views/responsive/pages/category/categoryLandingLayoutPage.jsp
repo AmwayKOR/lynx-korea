@@ -10,7 +10,7 @@
 
 <template:page pageTitle="${pageTitle}">				
 
-c nasmnc
+
 	<cms:pageSlot position="TopBannerContentSlot" var="feature">
 		<cms:component component="${feature}" />
 	</cms:pageSlot>

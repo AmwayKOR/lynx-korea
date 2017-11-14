@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
- sxb m,S
+
 <div class="product-category-page amway-theme">
 	<div class="product-categories">
 		<div class="amway-theme">

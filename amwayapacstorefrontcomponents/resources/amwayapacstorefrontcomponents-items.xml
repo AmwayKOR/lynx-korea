@@ -48,25 +48,6 @@
 	</relations>
     <itemtypes>
 	
-	<itemtype code="AmwayApacArtistryDealCarouselComponent"
-		generate="true" extends="BannerComponent" autocreate="true"
-		jaloclass="com.amway.apac.core.jalo.components.AmwayApacArtistryDealCarouselComponent">
-		<attributes>
-			<attribute qualifier="image2" generate="true" autocreate="true"
-				type="localized:Media">
-				<persistence type="property" />
-			</attribute>
-			<attribute qualifier="shopnow" generate="true" autocreate="true"
-				type="CMSLinkComponent">
-				<persistence type="property" />
-			</attribute>
-			<attribute qualifier="secondary" generate="true"
-				autocreate="true" type="CMSLinkComponent">
-				<persistence type="property" />
-			</attribute>
-		</attributes>
-	</itemtype>
-
 	<itemtype code="AmwayApacAbstractTextLinkImageComponent"
 		generate="true" extends="SimpleResponsiveBannerComponent" autocreate="true" abstract="true"
 		jaloclass="com.amway.apac.core.jalo.components.AmwayApacAbstractTextLinkImageComponent">
@@ -75,6 +56,19 @@
 				<persistence type="property" />
 			</attribute>
 			<attribute qualifier="link" type="CMSLinkComponent">
+				<persistence type="property" />
+			</attribute>
+		</attributes>
+	</itemtype>
+	
+	<itemtype code="AmwayApacArtistryDealCarouselComponent"
+		generate="true" extends="AmwayApacAbstractTextLinkImageComponent" autocreate="true"
+		jaloclass="com.amway.apac.core.jalo.components.AmwayApacArtistryDealCarouselComponent">
+		<attributes>
+			<attribute qualifier="secondaryImage" type="BannerComponent">
+				<persistence type="property" />
+			</attribute>
+			<attribute qualifier="secondary" type="CMSLinkComponent">
 				<persistence type="property" />
 			</attribute>
 		</attributes>
@@ -96,8 +90,14 @@
 	</itemtype>
 
 	<itemtype code="AmwayApacYourOpportunityComponent" generate="true"
-		extends="AmwayApacCategoryTopBannerComponent" autocreate="true"
+		extends="AmwayApacAbstractTextLinkImageComponent" autocreate="true"
 		jaloclass="com.amway.apac.core.jalo.components.AmwayApacYourOpportunityComponent">
+		<description> Opportunity Component UI.</description>
+		<attributes>
+			<attribute qualifier="iconImage" type="BannerComponent">
+				<persistence type="property" />
+			</attribute>
+		</attributes>
 	</itemtype>
 
 	<itemtype code="CMSNavigationNode" generate="false"
@@ -287,6 +287,11 @@
 		<description>Represents product color variant selector component that gives the ability to select different types of the product.</description>
 	</itemtype>
 
+	<itemtype code="AmwayApacPathToPitchPerfectComponent" generate="true"
+		extends="AmwayApacAbstractTextLinkImageComponent" autocreate="true"
+		jaloclass="com.amway.apac.core.jalo.components.AmwayApacPathToPitchPerfectComponent">
+	</itemtype>
+	
 	<itemtype code="AmwayApacMyAccountComponent" generate="true"
 		extends="AmwayApacPathToPitchPerfectComponent" autocreate="true"
 		jaloclass="com.amway.apac.core.jalo.components.AmwayApacMyAccountComponent">
