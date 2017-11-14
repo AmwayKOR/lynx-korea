@@ -51,15 +51,14 @@ ACC.cartitem = {
 		{
 			ACC.cartitem.handleUpdateQuantity(this, e);
 
-		}).on("keyup", function (e)
+		}).on("keyup",'.js-update-entry-quantity-input',  function (e)
 		{
 			return ACC.cartitem.handleKeyEvent(this, e);
 		}
-		).on("keydown", function (e)
+		).on("keydown",'.js-update-entry-quantity-input',  function (e)
 		{
 			return ACC.cartitem.handleKeyEvent(this, e);
-		}
-		);
+		});
 	},
 
 	handleKeyEvent: function (elementRef, event)
@@ -104,7 +103,7 @@ ACC.cartitem = {
                 type: form.attr('method'),
                 success: function(data)
                 {
-                    $('#cartContent').html($(data).filter("div#cartConotentDiv").html());
+                    $('#cartContent').html($(data).filter("div#cartContentDiv").html());
                     ACC.global.findAndUpdateGlobalMessages(data);
                 },
                 error: function(request, status, error)
