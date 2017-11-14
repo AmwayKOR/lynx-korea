@@ -1,12 +1,65 @@
 ACC.productdetail = {
 
 	_autoload: [
-        "bindproduct",
         "bindLearningOpportunitiesCarousel",
         "bindProductReferencesCarousel",
         "bindRecentlyViewedProductsCarousel",
-        "bindReviewSummaryShowReviews"
+        "bindReviewSummaryShowReviews",
+        "bindUsageCalculator",
+        "bindCalculateUsage",
+        "bindAddToDitto",
+        "bindCreateNewDitto",
+        "bindContactsPopup",
+        "bindPreviousScreenPopup"
 	],
+	
+	bindAddToDitto: function() {
+		 $(document).on("click", '#addToDitto', function(event) {
+             event.preventDefault();
+             ACC.popup.showPopup($("#added-to-ditto-wrapper").html());
+         });
+	},
+	
+	bindCreateNewDitto: function() {
+		$(document).on("click", '#creatNewDitto', function(event) {
+            event.preventDefault();
+            ACC.popup.showPopup($("#create-new-ditto-wrapper").html());
+        });
+	},
+	
+	bindContactsPopup: function() {
+		 $(document).on("click", '#searchContacts', function(event) {
+             event.preventDefault();
+			 ACC.popup.showPopup($("#search-contacts-ditto-wrapper").html());
+         });
+	},
+	
+	bindPreviousScreenPopup: function() {
+		$(document).on("click", '#backPrevious', function(event) {
+            event.preventDefault();
+            ACC.popup.closePopup();
+            ACC.popup.showPopup($("#create-new-ditto-wrapper").html());
+        });
+	},
+	
+	bindCalculateUsage: function() {
+        $(document).on("click", ".btn-calculate", function() {
+            $(this).addClass("btn-gray");
+            $(".usage-content-hide").show();
+        });
+        $(document).on("click", ".btn-calculate-close", function() {
+            $(".btn-calculate").removeClass("btn-gray");
+            $(".usage-content-hide").hide();
+        })
+	},
+	
+	bindUsageCalculator: function() {
+		$('.usageCalculatorLink').click(function(event) {
+            event.preventDefault();
+            ACC.popup.showPopup($("#usage-calculator-poup-wrapper").html());
+        });
+	},
+	
 	bindReviewSummaryShowReviews: function(){
         $(".description-number,.description-reviews").click(function(){
             $("#reviewsbody.accordion-panel-collapse.collapse").addClass("in");
@@ -87,98 +140,5 @@ ACC.productdetail = {
                  }
              }
          });
-	},
-	
-	bindproduct: function () {
-		function dialogPos() {
-            var W = $(window).width();
-            var cW = $(".cbox").width();
-            $(".cbox").css("left", (W - cW) / 2);
-        }
-        $(function() {
-            function dialogPos() {
-                var W = $(window).width();
-                var cW = $(".cbox").width();
-                $(".cbox").css("left", (W - cW) / 2);
-            }
-            $('#addToDitto').click(function(event) {
-                event.preventDefault();
-                $(".cboxAddToYourDitto,.overlay").show();
-                dialogPos();
-            });
-            $(".cart-popup__close,.closeCbox").click(function() {
-                $(".cbox,.overlay").hide();
-            });
-            $('#creatNewDitto').click(function(event) {
-                event.preventDefault();
-                $(".cboxCreateNewDitto,.overlay").show();
-                dialogPos();
-            });
-
-            $('#searchContacts').click(function(event) {
-                event.preventDefault();
-                $(".cboxCreateNewDittoNext,.overlay").show();
-                dialogPos();
-            });
-
-            $('#backPrevious').click(function(event) {
-                event.preventDefault();
-                $(".cboxCreateNewDittoNext").hide();
-                $(".creatNewDitto").show();
-                dialogPos();
-            });
-        });
-
-        $(function() {
-            function dialogPos() {
-                var W = $(window).width();
-                var cW = $(".cbox").width();
-                $(".cbox").css("left", (W - cW) / 2);
-            }
-        $(".select2-hidden-accessible").select2();
-            $(window).resize(function() {
-                dialogPos();
-            });
-            $(".cart-popup__close,.closeCbox").click(function() {
-                $(".cbox,.overlay").hide();
-            });
-
-            $(".btn-calculate").click(function() {
-                $(this).addClass("btn-gray");
-                $(".usage-content-hide").show();
-            });
-            $(".btn-calculate-close").click(function() {
-                $(".btn-calculate").removeClass("btn-gray");
-                $(".usage-content-hide").hide();
-            })
-        });
-
-
-        $(function() {
-
-            //add to shopping list event
-            $(".js-add-list-shopping-button").click(function(){
-
-                if($(".add-to-shopping-list-component-container").hasClass("display-none")){
-                    $(".add-to-shopping-list-component-container").removeClass("display-none");
-                }else{
-                    $(".add-to-shopping-list-component-container").addClass("display-none");
-                }
-            });
-
-            $('#addToCartButton').click(function(event) {
-                event.preventDefault();
-                $(".addToYourShoppingCart,.overlay").show();
-                dialogPos();
-            });
-
-
-			$('.usageCalculatorLink').click(function(event) {
-                event.preventDefault();
-                $(".cbox2,.overlay").show();
-                dialogPos();
-            });
-            
-        })
 	}
 };

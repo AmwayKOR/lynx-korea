@@ -11,12 +11,15 @@ import de.hybris.platform.core.initialization.SystemSetupParameterMethod;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.amway.apac.core.constants.AmwayapacCoreConstants;
+
 
 /**
  * System setup class for the amwayapaccore project.
  *
  * @author Parvesh Goyal
  */
+@SystemSetup(extension = AmwayapacCoreConstants.EXTENSIONNAME)
 public class AmwayApacCoreSystemSetup extends AbstractSystemSetup
 {
 	/**
@@ -40,7 +43,7 @@ public class AmwayApacCoreSystemSetup extends AbstractSystemSetup
 	/**
 	 * Generates the Dropdown and Multi-select boxes for the project data import. No update parameter needed as of now,
 	 * so returning this as empty list.
-	 * 
+	 *
 	 * @return list of parameters needed at update/init
 	 */
 	@Override

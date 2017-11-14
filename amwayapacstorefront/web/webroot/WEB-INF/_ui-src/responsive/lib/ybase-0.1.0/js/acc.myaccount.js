@@ -6,8 +6,6 @@ ACC.myaccount = {
 	
 	bindMyAccount : function() {
 		
-		    $(".select2-hidden-accessible").select2();
-
 		    $(".js-order-history-filters").click(function(){
 		        $(".js-search-form-wrapper").addClass('hidden-sm hidden-xs');
 		        if($(".js-filter-form-wrapper").hasClass('hidden-sm hidden-xs')){

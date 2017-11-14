@@ -9,8 +9,13 @@ ACC.global = {
         "backToHome",
         "ajaxBlockUI",
         "formatPrice",
-        "isNatural"
+        "isNatural",
+        "bindSelect2"
     ],
+    
+    bindSelect2: function() {
+    	$(".select2-hidden-accessible").select2();
+    },
     
     isNatural: function(value) {
     	var number = Number(value);
