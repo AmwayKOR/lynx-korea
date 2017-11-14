@@ -11,7 +11,7 @@
 <common:globalMessages />
 
 <c:url var="cartPageUrl" value="/cart" />
-<c:if test="${(not empty modifications) or (not empty entry)}">
+<c:if test="${(not empty modifications) or (quantity gt 0)}">
 	<div class="popup-content">
 		<div id="add-to-cart-box" class="cbox">
 			<div class="cart-popup__dialog">

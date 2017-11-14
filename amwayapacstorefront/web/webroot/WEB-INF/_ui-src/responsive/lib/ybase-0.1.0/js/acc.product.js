@@ -60,11 +60,13 @@ ACC.product = {
             ACC.minicart.updateMiniCartDisplay();
         }
 
-        ACC.global.findAndUpdateGlobalMessages(cartResult, false);
         if ($(cartResult).filter("div.popup-content").length > 0) {
         	ACC.popup.showPopup($(cartResult).filter("div.popup-content").html());
+        	ACC.global.findAndUpdateGlobalMessages(cartResult, false);
+        } else {
+        	ACC.global.findAndUpdateGlobalMessages(cartResult);
         }
-
+        
         /*
         var productCode = $('[name=productCodePost]', formElement).val();
         var quantityField = $('[name=qty]', formElement).val();
