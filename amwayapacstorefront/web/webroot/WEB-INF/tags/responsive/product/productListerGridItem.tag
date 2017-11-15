@@ -13,7 +13,6 @@
 <div class="amway-suggest__item-container">
 	<div class="amway-suggest__item">
 		<div class="product-list__item">
-			<!--<img src="${themeResourcePath}/images/limited_stock.png" class="product-list__flag" alt="limited stock" />-->
 			<sec:authorize access="!hasAnyRole('ROLE_ANONYMOUS')">
 				<c:if test="${not product.multidimensional}">
 					<product:productTileBadge stockLevel="${product.stock.stockLevelStatus.code}" />

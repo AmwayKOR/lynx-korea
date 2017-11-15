@@ -10,11 +10,11 @@
 				<div class="col-xs-12">
 					<div class="cartlist-th cartlist-detail-desktop">
 						<div>
-							<div class="col-xs-6">PRODUCT DETAILS</div>
-							<div class="cartlist-detail-desktop col-xs-1">QTY</div>
-							<div class="cartlist-detail-desktop col-xs-1">SERVICE FEE</div>
-							<div class="cartlist-detail-desktop col-xs-2">TOTAL PRICE</div>
-							<div class="cartlist-detail-desktop col-xs-2">TOTAL PB/BV</div>
+							<div class="col-xs-6"><spring:theme code="checkout.product.list.product.details"/></div>
+							<div class="cartlist-detail-desktop col-xs-1"><spring:theme code="checkout.product.list.quantity"/></div>
+							<div class="cartlist-detail-desktop col-xs-1"><spring:theme code="checkout.product.list.service.fee"/></div>
+							<div class="cartlist-detail-desktop col-xs-2"><spring:theme code="checkout.product.list.total.price"/></div>
+							<div class="cartlist-detail-desktop col-xs-2"><spring:theme code="checkout.product.list.total.pvbv"/></div>
 						</div>
 					</div>
 					<div class="cartlist-tbody container-fluid">
