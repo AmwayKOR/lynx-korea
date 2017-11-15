@@ -932,41 +932,6 @@
 	                                            		</c:forEach>
 	                                            		
 	                                            		
-	                                            		
-	                                            		
-	                                            		
-	                                                <div class="address-container col-xs-12 col-md-6">
-	                                                    <div id="address-view-8796486336535" class="js-address-wrapper">
-	                                                        <div class="form-container">
-	                                                            <div class="mailing-address">
-	                                                                <span class="secondary-text mailing-address__full-name"> Roman &nbsp;Kotenko</span>
-	                                                                <span class="secondary-text mailing-address__line-one">4940 Eastern Ave</span>
-	                                                                <span class="secondary-text mailing-address__city">Baltimore</span>
-	                                                                <div>
-	                                                                    Maryland
-	                                                                </div>
-	                                                                <span class="secondary-text mailing-address__zip">21224</span>
-	                                                                <span class="secondary-text mailing-address__phone">(1) 410-5500100</span>
-	                                                                <span class="secondary-text mailing-address__email">eee@gmail.com</span>
-	                                                                <button type="button"
-	                                                                        class="btn-edit btn btn-primary"
-	                                                                        data-address-id="8796486336535"> Edit
-	                                                                </button>
-	                                                                <div href="#"
-	                                                                    class="action-links js-remove-address-with-popup-btn"
-	                                                                    data-address-id="8796486336535"
-	                                                                    data-popup-title="Delete Address">
-	                                                                    <span class="remove-button">Delete</span>
-	                                                                </div>
-	                                                            </div>
-	                                                            <div class="mailing-address-edit">
-	                                                                
-	                                                            </div>
-	                                                        </div>
-	                                                    </div>
-	                                                    
-	                                                    
-	                                                </div>
 	                                                
 	                                                
 	                                                

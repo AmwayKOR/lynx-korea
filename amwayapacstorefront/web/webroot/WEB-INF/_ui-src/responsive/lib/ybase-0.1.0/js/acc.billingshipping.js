@@ -71,7 +71,17 @@ ACC.billingshipping = {
             $(this).parents(".mailing-address-edit").prev(".mailing-address").show();
 
         });
-
+        
+        $("#editFormSubmit, #editCancel").click(function() {
+            var father = $(this).parents('#editPay');
+            if(father.prev(".account-paymentdetails").is(":visible")) {
+                father.slideDown();
+                father.prev(".account-paymentdetails").slideUp();
+            } else {
+                father.prev(".account-paymentdetails").slideDown();
+                father.slideUp();
+            }
+        })
 
          
 	}

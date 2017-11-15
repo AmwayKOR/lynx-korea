@@ -50,7 +50,6 @@ import de.hybris.platform.commerceservices.address.AddressVerificationDecision;
 import de.hybris.platform.commerceservices.customer.DuplicateUidException;
 import de.hybris.platform.commerceservices.search.pagedata.PageableData;
 import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
-import de.hybris.platform.commerceservices.util.ResponsiveUtils;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import de.hybris.platform.util.Config;
 
@@ -279,12 +278,6 @@ public class AccountPageController extends AbstractSearchPageController
 	@RequireHardLogIn
 	public String account(final Model model, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
-		if (ResponsiveUtils.isResponsive())
-		{
-			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER, "system.error.page.not.found", null);
-			return REDIRECT_PREFIX + "/";
-		}
-
 		model.addAttribute("ordersAmount", amwayApacOrderFacade.getCustomerOrderCounts());
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(ACCOUNT_CMS_PAGE));
