@@ -11,9 +11,9 @@
 <%@ taglib prefix="header" tagdir="/WEB-INF/tags/responsive/common/header"%>
 <%@ taglib prefix="common" tagdir="/WEB-INF/tags/responsive/common"%>
 
-<c:set var="aboUser" value="false"/>
+<c:set var="isUserAbo" value="false"/>
 <sec:authorize ifNotGranted="ROLE_ANONYMOUS">
-	<c:set var="aboUser" value="true"/>
+	<c:set var="isUserAbo" value="true"/>
 </sec:authorize>
 
 <header class="js-mainHeader main-header general-header <c:if test="${loginError}">userinfo-open</c:if>">
@@ -21,7 +21,7 @@
         <nav class="header-container">
             <div class="header-wrapper pos-relative">
             	<c:choose>
-            		<c:when test="${aboUser}">
+            		<c:when test="${isUserAbo}">
             			<header:headerLoggedInAccountSection/>
             		</c:when>
             		<c:otherwise>
@@ -236,7 +236,7 @@
                         <div class="nav-links-container pos-relative">
                             <ul class="nav-list clearfix">
                               	<c:choose>
-					          		<c:when test="${aboUser}">
+					          		<c:when test="${isUserAbo}">
 					          			<li class=" nav-item">
 		                                    <a href="javascript:void(0);" data-toggle="collapse" data-target="#login-drop-content" class="pos-relative img-nav-link js-my-account-menu opened">
 		                                        <img src="${themeResourcePath}/images/yui.png" alt="" width="34px">

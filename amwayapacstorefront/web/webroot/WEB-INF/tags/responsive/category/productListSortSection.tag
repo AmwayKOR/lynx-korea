@@ -4,9 +4,9 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 
-<c:set var="aboUser" value="false"/>
+<c:set var="isUserAbo" value="false"/>
 <sec:authorize ifNotGranted="ROLE_ANONYMOUS">
-	<c:set var="aboUser" value="true"/>
+	<c:set var="isUserAbo" value="true"/>
 </sec:authorize>
 
 <div class="form-group sort-group">
@@ -17,10 +17,10 @@
          	<c:forEach items="${searchPageData.sorts}" var="sort">
          	<c:set var="showSort" value="true"/>
          	<c:choose>
-				<c:when test="${(aboUser == false) && ((sort.code eq 'pvbv-desc-c') || (sort.code eq 'pvbv-asc-c') || (sort.code eq 'abo-price-desc-c') || (sort.code eq 'abo-price-asc-c'))}">
+				<c:when test="${(isUserAbo == false) && ((sort.code eq 'pvbv-desc-c') || (sort.code eq 'pvbv-asc-c') || (sort.code eq 'abo-price-desc-c') || (sort.code eq 'abo-price-asc-c'))}">
 				<c:set var="showSort" value="false"/>
 				</c:when>
-				<c:when test="${(aboUser == true) && ((sort.code eq 'retail-price-desc-c') || (sort.code eq 'retail-price-asc-c'))}">
+				<c:when test="${(isUserAbo == true) && ((sort.code eq 'retail-price-desc-c') || (sort.code eq 'retail-price-asc-c'))}">
 				<c:set var="showSort" value="false"/>
 				</c:when>
 			</c:choose>
