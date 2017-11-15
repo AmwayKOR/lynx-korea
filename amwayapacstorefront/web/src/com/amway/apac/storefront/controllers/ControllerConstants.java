@@ -199,6 +199,7 @@ public interface ControllerConstants
 			interface Account // NOSONAR
 			{
 				String CountryAddressForm = "fragments/address/countryAddressForm"; // NOSONAR
+				String ShippingAddressDetail = "fragments/address/shippingAddressDetail"; // NOSONAR
 				String SavedCartRestorePopup = "fragments/account/savedCartRestorePopup"; // NOSONAR
 			}
 

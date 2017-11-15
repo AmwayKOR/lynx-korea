@@ -97,9 +97,9 @@ INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];nam
 ;;Section3ASBComponent;Section 3A SB Component;Section3ASBComponent;"/"
 ;;Section3BSBComponent;Section 3B SB Component;Section3BSBComponent;"/"
 
-INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true]  ;&componentRef
-;                       ;Section3AParacomponent;;Section3AParacomponent
-;                       ;Section3BParacomponent;;Section3BParacomponent
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
+;;Section3AParacomponent;;Section3AParacomponent
+;;Section3BParacomponent;;Section3BParacomponent
 
 INSERT_UPDATE AmwayApacPathToSuccessPitchPerfectComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;
 ;;HomePageSection3ACustomComponent;Amway Path to success;refSection3A;
@@ -646,7 +646,7 @@ INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];nam
 ;;energyDrinksBannerComponent;energy drinks banner component;energyDrinksBannerComponent
 
 INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
-;                       ;ShopByCategoryTitleParagraphComponent;ShopByCategoryTitleParagraphComponent
+;;ShopByCategoryTitleParagraphComponent;ShopByCategoryTitleParagraphComponent
 
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
@@ -666,10 +666,10 @@ INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];nam
 ;;nutriliteFindSupplementsBannerComponent;nutrilite find supplements banner component;nutriliteFindSupplementsBannerComponent;"/"
 
 INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
-;                       ;nutriliteGuideTextComponent;nutriliteGuideTextComponent
-;                       ;bodyKeyChoicesTextComponent;bodyKeyChoicesTextComponent
-;                       ;nutriliteFindSupplementsTextComponent;nutriliteFindSupplementsTextComponent
-;						;toolsAndAdviceTitleTextComponent;toolsAndAdviceTitleTextComponent
+;;nutriliteGuideTextComponent;nutriliteGuideTextComponent
+;;bodyKeyChoicesTextComponent;bodyKeyChoicesTextComponent
+;;nutriliteFindSupplementsTextComponent;nutriliteFindSupplementsTextComponent
+;;toolsAndAdviceTitleTextComponent;toolsAndAdviceTitleTextComponent
 
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
@@ -732,8 +732,8 @@ INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];nam
 ;;xsSportsSuccessStoryBannerComponent;xs sports success story banner component;xsSportsSuccessStoryBannerComponent;"/"
 
 INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true]  ;&componentRef
-;                       ;bodyKeySuccessStoryParagraphComponent;bodyKeySuccessStoryParagraphComponent
-;                       ;xsSportsSuccessStoryParagraphComponent;xsSportsSuccessStoryParagraphComponent
+;;bodyKeySuccessStoryParagraphComponent;bodyKeySuccessStoryParagraphComponent
+;;xsSportsSuccessStoryParagraphComponent;xsSportsSuccessStoryParagraphComponent
 
 INSERT_UPDATE AmwayApacPathToSuccessPitchPerfectComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;banner(&componentRef);link(&componentRef);description(&componentRef)
 ;;bodyKeySuccessStoryComponent;Amway Path to success;bodyKeySuccessStoryComponent;bodyKeySuccessStoryBannerComponent;amwayApacBodyKeySuccessStoryLink;bodyKeySuccessStoryParagraphComponent
@@ -847,10 +847,10 @@ INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];nam
 ;;nutriliteFindSupplementsBannerProductDetailComponent;nutrilite find supplements ProductDetail banner component;nutriliteFindSupplementsBannerProductDetailComponent;"/"
 
 INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
-;                       ;nutriliteGuideTextProductDetailComponent;nutriliteGuideTextProductDetailComponent
-;                       ;bodyKeyChoicesTextProductDetailComponent;bodyKeyChoicesTextProductDetailComponent
-;                       ;nutriliteFindSupplementsTextProductDetailComponent;nutriliteFindSupplementsTextProductDetailComponent
-;						;toolsAndAdviceTitleTextProductDetailComponent;toolsAndAdviceTitleTextProductDetailComponent
+;;nutriliteGuideTextProductDetailComponent;nutriliteGuideTextProductDetailComponent
+;;bodyKeyChoicesTextProductDetailComponent;bodyKeyChoicesTextProductDetailComponent
+;;nutriliteFindSupplementsTextProductDetailComponent;nutriliteFindSupplementsTextProductDetailComponent
+;;toolsAndAdviceTitleTextProductDetailComponent;toolsAndAdviceTitleTextProductDetailComponent
 
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
