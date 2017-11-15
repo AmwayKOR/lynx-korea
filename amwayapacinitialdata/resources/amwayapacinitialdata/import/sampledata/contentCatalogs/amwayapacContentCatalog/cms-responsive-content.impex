@@ -1129,3 +1129,11 @@ INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&co
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
 ;;NoResultsContentSlot;PLP No results Slot;true;productGridNoResultContent
 ######Product Grid Page Template######
+
+###### Search Empty Page Template#########
+INSERT_UPDATE ProductCarouselComponent;$contentCV[unique=true];uid[unique=true];products(code, $productCV);name;&componentRef
+;;searchPageEmptyResultBestSellerCarousel;112161A, E9974M, A5923M, A5924M, A5985M, A8058M, AA0114M;Best Sellers;searchPageEmptyResultBestSellerCarousel
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
+;;ProductCarouselSlot;Empty Search page carousel component;true;searchPageEmptyResultBestSellerCarousel
+###### Search Empty Page Template#########

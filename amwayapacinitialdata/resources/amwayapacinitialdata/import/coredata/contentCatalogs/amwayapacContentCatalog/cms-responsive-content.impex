@@ -242,6 +242,7 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 ;TopHeaderSlot;;;wide
 ;BottomHeaderSlot;;;wide
 ;PlaceholderContentSlot;;;
+;ProductCarouselSlot;;;
 
 
 # Category and Landing Pages are various layouts for a Category Landing page
@@ -770,6 +771,7 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active
 ;;FooterNoticeToolTipParagraphContentSlot;  Footer Notice ToolTip Paragraph Content Slot;   true 
 ;;FooterNoticeParagraphContentSlot;  Footer Notice Paragraph Content Slot;                  true 
 ;;NoResultsContentSlot;              No Results PLP content slot;                           true
+;;ProductCarouselSlot;               Product Carousel Slot;                                 true
 
 # Bind Content Slots to Page Templates
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ProductDetailsPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
@@ -856,6 +858,7 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 ;;MiddleContent-SearchResultsEmpty;MiddleContent;;MiddleContentSlot;true
 ;;BottomContent-SearchResultsEmpty;BottomContent;;BottomContentSlot;true
 ;;SideContent-SearchResultsEmpty;SideContent;;SideContentSlot;true
+;;ProductCarouselSlot-ProductGridPage;ProductCarouselSlot;;ProductCarouselSlot;true
 
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='CategoryPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
 ;;SiteLogo-CategoryPage;SiteLogo;;SiteLogoSlot;true

@@ -109,6 +109,7 @@
                 <value>recentlyViewed</value>
                 <value>quickView</value>
                 <value>kitEntryProduct</value>
+                <value>productGrid</value>
             </list>
         </property>
     </bean>
@@ -166,4 +167,11 @@
 		<property name="add" ref="productPricePopulatorList"/>
 	</bean>
 
+	<alias name="defaultAmwayApacProductBasicPopulator" alias="productBasicPopulator"/>
+    <bean id="defaultAmwayApacProductBasicPopulator" class="com.amway.apac.facades.populators.AmwayApacProductBasicPopulator" parent="defaultProductBasicPopulator" />
+	
+	<alias name="defaultAmwayApacProductCarouselFacade" alias="productCarouselFacade"/>
+    <bean id="defaultAmwayApacProductCarouselFacade" class="com.amway.apac.facades.product.impl.DefaultAmwayApacProductCarouselFacade" parent="defaultProductCarouselFacade" />
+	
+	
 </beans>
