@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.amway.apac.core.model.components.AmwayApacPathToSuccessPitchPerfectComponentModel;
+import com.amway.apac.storefront.components.model.AmwayApacPathToSuccessPitchPerfectComponentModel;
 import com.amway.apac.storefront.controllers.ControllerConstants;
 
 

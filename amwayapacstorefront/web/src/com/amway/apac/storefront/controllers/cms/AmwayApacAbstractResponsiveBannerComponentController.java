@@ -12,7 +12,7 @@ import javax.annotation.Resource;
 
 import org.springframework.ui.Model;
 
-import com.amway.apac.core.model.components.AmwayApacAbstractTextLinkImageComponentModel;
+import com.amway.apac.storefront.components.model.AmwayApacAbstractTextLinkImageComponentModel;
 import com.amway.apac.storefront.controllers.ControllerConstants;
 
 
@@ -40,7 +40,7 @@ public abstract class AmwayApacAbstractResponsiveBannerComponentController<T ext
 	 * @param model
 	 *           view model
 	 * @param component
-	 * 
+	 *
 	 */
 	protected void populateData(final Model model, final T component)
 	{
