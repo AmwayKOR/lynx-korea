@@ -21,125 +21,72 @@ $lang=en
 
 # Create Categories
 UPDATE Category;code[unique=true];name[lang=$lang];$catalogVersion
-;root								;Categories
-;nutritionaccessories       		;Accessories(nutrition)
-;airtreatmentaccessories    		;Accessories(airtreatment)
-;watertreatmentaccessories  		;Accessories(watertreatment)
-
-;watertreatmentaccessoriesespring    ;Accessories (eSpring)
-;watertreatmentaccessorieswtsii      ;Accessories (WTS II)
-;airtreatmentaccessoriesatmosphere ;Accessories (ATMOSPHERE)
-;airtreatmentaccessoriesats          ;Accessories (ATS)
-;watertreatmentaccessorieswts		 ;Accessories (WTS)
-;limitededitionset					 ;Limited Edition Set
-;comforter							 ;Comforter
-;matressprotector					 ;Mattress Protector
-
-
-;beautyaccessories          ;Accessories(beauty)
-;airfresheners              ;Air Fresheners
-;airpurifiers               ;Air Purifiers
-;airtreatment               ;Air Treatment
-;amwayqueenaccessories      ;Amway Queen Accessories
-;amwayqueencookware         ;Amway Queen Cookware
-;automotive                 ;Automotive
-;babyandchildrenproducts    ;Baby & Children Products
-;bathandshower              ;Bath & Shower
-;bathroomcleaners           ;Bathroom Cleaners
-;beauty                     ;Beauty
-;beverages                  ;Beverages
-;bodycare                   ;Body Care
-;bodypowder                 ;Body Powder
-;cakesandcookies            ;Cakes & Cookies
-;carcare                    ;Car Care
-;carshine                   ;Car Shine
-;carwash                    ;Car Wash
-;childcare                  ;Child Care
-;childrenshealth            ;Children’s Health
-;cleansers                  ;Cleansers
-;colourants                 ;Colourants
-;condimentsandpremixes      ;Condiments & Premixes
-;cookware                   ;Cookware
-;deodorants                 ;Deodorants
-;desserts                   ;Desserts
-;detergents                 ;Detergents
-;dishcare                   ;Dish Care
-;dishcleaners               ;Dish Cleaners
-;electricalappliances       ;Electrical Appliances
-;essentials                 ;Essentials
-;exerciseandhealthdevices   ;Exercise & Health Devices
-;externalwaterfilter        ;External Water Filter
-;eyecare                    ;Eye Care
-;eyesmakeup                 ;Eyes
-;facemakeup                 ;Face
-;femininecare               ;Feminine Care
-;festive                    ;Festive
-;foodandbeverages           ;Food & Beverages
-;personalitemsfragrances    ;Fragrances
-;beautyfragrances           ;Fragrances
-;generalhealth              ;General Health
-;haircare                   ;Hair Care
-;handandbodylotions         ;Hand & Body Lotions
-;healthfoods                ;Health Foods
-;healthyadult               ;Healthy Adult
-;homealarm                  ;Home Alarm
-;homeliving                 ;Home Living
-;icookaccessories           ;iCook Accessories
-;immunity                   ;Immunity
-;insecticidesandgarden      ;Insecticides & Garden
-;kitchencleaners            ;Kitchen Cleaners
-;laundrycare                ;Laundry Care
-;lipsmakeup                 ;Lips
-;makeup                     ;Makeup
-;masks                      ;Masks
-;mattresses                 ;Mattresses
-;moisturisers               ;Moisturisers
-;morehomeproducts           ;More Home Products
-;multipurposecleaner        ;Multipurpose Cleaners
-;nutrition                  ;Nutrition & Wellness
-;oralcare                   ;Oral Care
-;othersurfacecleaners       ;Other Surface Cleaners
-;homelivingothers           ;Others(homeliving)
-;dishcareothers             ;Others(dishcare)
-;personalcare               ;Personal Care
-;personalcatalogue          ;Personal Shoppers Catalogue
-;personalitems              ;Personal Items
-;removersandexfoliators     ;Removers & Exfoliators
-;replacementcartridges      ;Replacement Cartridges
-;replacementfilters         ;Replacement Filters
-;salesaids                  ;Sales Aids
-;serumsandintensivecare     ;Serums & Intensive Care
-;shampoosandconditioners    ;Shampoos & Conditioners
-;skincare                   ;Skin Care
-;smallleathergoods          ;Small Leather Goods
-;softeners                  ;Softeners
-;stylingandtreatments       ;Styling & Treatments
-;suncare                    ;Suncare
-;surfacecare                ;Surface Care
-;timepieces                 ;Timepieces
-;toners                     ;Toners
-;laundarytreatments         ;Treatments
-;waterpurifiers             ;Water Purifiers
-;watertreatment             ;Water Treatment
-;weightmanagement           ;Weight Management
-;wellnesspacks              ;Wellness Packs
-;exerciseandmassage         ;Exercise & Massage Equipment
-;healthdevices              ;Health Devices
-;personalgrooming           ;Personal Grooming
-;otherpersonalitems			;Others(personalitems)
-;stationery     			;Stationery
-;systempacks				;System Packs
-;mooncakes					;Mooncakes
-;
-
-;businessSupportMaterials;Business Support Materials
-;productCatalogue;Product Brochures, Catalogues & Manuals
-;salesKits;Sales Kits & Assessments
-;collectibles&Merchandise;Collectibles & Merchandise
-;magazines;Magazines
-;businessForms;Business Forms,Kits & Guides
-;multimedia;Multimedia
-;awards&pins;Awards & Pins
+;nutrition;"Nutrition"
+;vitamins-and-supplements;"Vitamins & Supplements"
+;bone-health;"Bone Health"
+;childrens-vitamins;"Children's Vitamins"
+;heart-health;"Heart Health"
+;weight-management;"Weight Management"
+;supplements;"Supplements"
+;bar;"Bar"
+;shakes;"Shakes"
+;sports-nutrition;"Sports Nutrition"
+;energize;"Energize"
+;hydrate;"Eydrate"
+;nutrilite-sports-nutrition;"Nutrilite Sports Nutrition"
+;energy-drinks;"Energy Drinks"
+;kosher;"Kosher"
+;sugar-free;"Sugar-Free"
+;low-carb;"Low-Carb"
+;beauty;"Beauty"
+;skin-care;"Skin Care"
+;anti-ageing-solutions;"Anti Ageing Solutions"
+;artistry-special-care;"Artistry Special Care"
+;daily-skincare;"Daily Skincare"
+;colour;"Colour"
+;applicators-and-accessories;"Applicators & Accessories"
+;eye-and-brows;"Eye & Brows"
+;eye-and-cheeks;"Eye & Cheeks"
+;makeup;"Makeup"
+;cheeks;"Cheeks"
+;concealers;"Concealers"
+;foundations-and-powders;"Foundations & Powders"
+;beauty-accessories;"Beauty Accessories"
+;facial-cotton;"Facial Cotton"
+;brush-set;"Brush Set"
+;powder-compact;"Powder Compact"
+;bath-and-body;"Bath & Body"
+;hair-care;"Hair Care"
+;conditioners;"Conditioners"
+;shampoos;"Shampoos"
+;styling-and-treatments;"Styling & Treatments"
+;body-care;"Body Care"
+;body-wash;"Body Wash"
+;deodorants;"Deodorants"
+;lotions;"Lotions"
+;oral-care;"Oral Care"
+;breath-sprays;"Breath Sprays"
+;toothpastes;"Toothpastes"
+;brushes-and-floss;"Brushes & Floss"
+;sun-and-tanning;"Sun and Tanning"
+;sunscreen-lotion;"Sunscreen Lotion"
+;self-tan-mousse;"Self Tan Mousse"
+;home;"Home"
+;household-hygiene;"Household Hygiene"
+;kitchen-cleaner;"Kitchen Cleaner"
+;general-cleaning;"General Cleaning"
+;bathroom-cleaner;"Bathroom Cleaner"
+;laundry;"Laundry"
+;detergents;"Detergents"
+;treatment-and-additives;"Treatment & Additives"
+;lotions;"Lotions"
+;water-treatment;"Water Treatment"
+;purifiers;"Purifiers"
+;replacement-filters;"Replacement Filters"
+;cookware;"Cookware"
+;cutlery;"Cutlery"
+;pans;"Pans"
+;replacement-parts;"Replacement Parts"
 
 ##### brands
 UPDATE Category;code[unique=true];name[lang=$lang];$catalogVersion
@@ -160,10 +107,10 @@ UPDATE Category;code[unique=true];name[lang=$lang];$catalogVersion
 ;artistrytimedefiance;ARTISTRY TIME DEFIANCE
 ;artistryidealradiance;ARTISTRY IDEAL RADIANCE
 ;newartistryidealradiance;NEW ARTISTRY IDEAL RADIANCE
-;artistryhydrav;ARTISTRY HYDRA-V 
+;artistryhydrav;ARTISTRY HYDRA-V
 ;artistryessentials;ARTISTRY ESSENTIALS
 ;artistryspecialcare;ARTISTRY SPECIAL CARE
-;artistryintensiveskincare;ARTISTRY INTENSIVE SKINCARE 
+;artistryintensiveskincare;ARTISTRY INTENSIVE SKINCARE
 ;artistrysupremelx;ARTISTRY SUPREME LX
 ;artistrycremelx;ARTISTRY CREME LX
 ;artistrymen;ARTISTRY MEN
@@ -171,11 +118,11 @@ UPDATE Category;code[unique=true];name[lang=$lang];$catalogVersion
 ;artistryexactfit;ARTISTRY EXACT FIT
 ;artistrypurewhite;ARTISTRY PURE WHITE
 ;artistryyoutheffect;ARTISTRY YOUTH EFFECT
-;artistryexactfit;ARTISTRY EXACT FIT 
+;artistryexactfit;ARTISTRY EXACT FIT
 ;artistrysignatureeyes;ARTISTRY SIGNATURE EYES
 ;artistrysignaturecolor;ARTISTRY SIGNATURE COLOR
-;artistrypurewhite;ARTISTRY PURE WHITE 
-;artistry;ARTISTRY 
+;artistrypurewhite;ARTISTRY PURE WHITE
+;artistry;ARTISTRY
 ;sa8;SA8
 ;loc;L.O.C.
 ;amwayhome;AMWAY HOME
@@ -196,40 +143,40 @@ UPDATE Category;code[unique=true];name[lang=$lang];$catalogVersion
 ;rossmax;Rossmax
 ;sanita;Sanita
 ;femimeplus;Femime Plus
-;bum;B.U.M. 
+;bum;B.U.M.
 ;crocodile;Crocodile
 ;truespring;True Spring
-;fusionx;Fusion X 
+;fusionx;Fusion X
 ;salvatoreferragamo;Salvatore Ferragamo
 ;elizabetharden;Elizabeth Arden
-;calvinklein;Calvin Klein 
+;calvinklein;Calvin Klein
 ;orlando;Orlando
-;target;Target 
+;target;Target
 ;coolscents;Coolscents
-;elf;Elf 
+;elf;Elf
 ;lovelycloth;Lovely Cloth
 ;impact;Impact
 ;nuk;Nuk
 ;evian;Evian
 ;ridbac;Ridbac
-;samson;Samson 
+;samson;Samson
 ;countrybake;Country Bake
 ;cookielovers;Cookie Lovers
 ;vergold;Vergold
 ;progyms;Progyms
-;idamansuri;Idaman Suri 
-;caresens;CareSens 
+;idamansuri;Idaman Suri
+;caresens;CareSens
 ;loacker;Loacker
 ;sleepjoy;SleepJoy
 ;skylight;Skylight
-;vergold;Vergold 
-;lejia;Le Jia 
+;vergold;Vergold
+;lejia;Le Jia
 ;mapleton;Mapleton
-;fabercastell;Faber Castell 
+;fabercastell;Faber Castell
 ;genova;Genova
 ;louiscasa;Louis Casa
-;artistry;ARTISTRY   
-;amwaywts;Amway WTS 
+;artistry;ARTISTRY
+;amwaywts;Amway WTS
 ;inbody;INBODY
 ;underarmour;UNDER ARMOUR
 ;untold;UNTOLD
@@ -241,9 +188,6 @@ UPDATE Category;code[unique=true];name[lang=$lang];$catalogVersion
 ;premiumgold;Premium Gold
 ;samson;Samson
 ;target;Target
-;artistrysignaturecolor;ARTISTRY SIGNATURE COLOR 
+;artistrysignaturecolor;ARTISTRY SIGNATURE COLOR
 ;personalshopperscatalogue;Personal Shoppers Catalogue
 ;amwaylifestylecatalogue;Amway Lifestyle Catalogue
-;vitaminsAndSupplements;Vitamins & Supplements
-;sportsNutrition;Sports Nutrition
-;energyDrinks;Energy Drinks

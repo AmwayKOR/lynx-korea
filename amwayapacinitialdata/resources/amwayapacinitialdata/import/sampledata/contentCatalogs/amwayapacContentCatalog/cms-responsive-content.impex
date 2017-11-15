@@ -493,128 +493,128 @@ INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];nam
 
 
 
-INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow'];
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow'];category(code,$productCV)
 
-;;Nav_ShopLink;Navigation Bar- Shop Link;/;Nav_ShopLink;Nav_ShopLink;;;;
-;;Nav_BusinessCenterLink;Navigation Bar- Business Center Link;/;Nav_BusinessCenterLink;Nav_BusinessCenterLink;;;;
-;;Nav_AboutAmwayLink;Navigation Bar- About Amway Link;/;Nav_AboutAmwayLink;Nav_AboutAmwayLink;;;;
-;;Nav_EducationLink;Navigation Bar- Education Link;/;Nav_EducationLink;Nav_EducationLink;;;;
+;;Nav_ShopLink;Navigation Bar- Shop Link;/;Nav_ShopLink;Nav_ShopLink;;;
+;;Nav_BusinessCenterLink;Navigation Bar- Business Center Link;/;Nav_BusinessCenterLink;Nav_BusinessCenterLink;;;
+;;Nav_AboutAmwayLink;Navigation Bar- About Amway Link;/;Nav_AboutAmwayLink;Nav_AboutAmwayLink;;;
+;;Nav_EducationLink;Navigation Bar- Education Link;/;Nav_EducationLink;Nav_EducationLink;;;
 
-;;Nav_Shop_NutritionLink;Navigation Bar- Shop- Nutrition Link;/;Nav_Shop_NutritionLink;Nav_Shop_NutritionLink;;;;
-;;Nav_Shop_BeautyLink;Navigation Bar- Shop- Beauty Link;/;Nav_Shop_BeautyLink;Nav_Shop_BeautyLink;;;;
-;;Nav_Shop_BathBodyLink;Navigation Bar- Shop- Bath and Body Link;/;Nav_Shop_BathBodyLink;Nav_Shop_BathBodyLink;;;;
-;;Nav_Shop_HomeLink;Navigation Bar- Shop- Home Link;/;Nav_Shop_HomeLink;Nav_Shop_HomeLink;;;;
+;;Nav_Shop_NutritionLink;Navigation Bar- Shop- Nutrition Link;/;Nav_Shop_NutritionLink;Nav_Shop_NutritionLink;;;
+;;Nav_Shop_BeautyLink;Navigation Bar- Shop- Beauty Link;/;Nav_Shop_BeautyLink;Nav_Shop_BeautyLink;;;
+;;Nav_Shop_BathBodyLink;Navigation Bar- Shop- Bath and Body Link;/;Nav_Shop_BathBodyLink;Nav_Shop_BathBodyLink;;;
+;;Nav_Shop_HomeLink;Navigation Bar- Shop- Home Link;/;Nav_Shop_HomeLink;Nav_Shop_HomeLink;;;
 
-;;Nav_Nutrition_VitaminsLink;Navigation Bar- Vitamins Link;/;Nav_Nutrition_VitaminsLink;Nav_Nutrition_VitaminsLink;;;;
-;;Nav_Nutrition_WeightLink;Navigation Bar- Weight Management Link;/;Nav_Nutrition_WeightLink;Nav_Nutrition_WeightLink;;;;
-;;Nav_Nutrition_SportsLink;Navigation Bar- Sports Nutrion Link;/;Nav_Nutrition_SportsLink;Nav_Nutrition_SportsLink;;;;
-;;Nav_Nutrition_EnergyLink;Navigation Bar- Energy Link;/;Nav_Nutrition_EnergyLink;Nav_Nutrition_EnergyLink;;;;
+;;Nav_Nutrition_VitaminsLink;Navigation Bar- Vitamins Link;/category-landing-page;Nav_Nutrition_VitaminsLink;Nav_Nutrition_VitaminsLink;;;
+;;Nav_Nutrition_WeightLink;Navigation Bar- Weight Management Link;/category-landing-page;Nav_Nutrition_WeightLink;Nav_Nutrition_WeightLink;;;
+;;Nav_Nutrition_SportsLink;Navigation Bar- Sports Nutrion Link;/category-landing-page;Nav_Nutrition_SportsLink;Nav_Nutrition_SportsLink;;;
+;;Nav_Nutrition_EnergyLink;Navigation Bar- Energy Link;/category-landing-page;Nav_Nutrition_EnergyLink;Nav_Nutrition_EnergyLink;;;
 
-;;Nav_Nutrition_Vitamins_BoneHealthLink;Navigation Bar- Vitamins- Bone Health Link;/;Nav_Nutrition_Vitamins_BoneHealthLink;Nav_Nutrition_Vitamins_BoneHealthLink;;;;
-;;Nav_Nutrition_Vitamins_ChildrenLink;Navigation Bar- Vitamins- Children Link;/;Nav_Nutrition_Vitamins_ChildrenLink;Nav_Nutrition_Vitamins_ChildrenLink;;;;
-;;Nav_Nutrition_Vitamins_HeartHealthLink;Navigation Bar- Vitamins- Heart Health Link;/;Nav_Nutrition_Vitamins_HeartHealthLink;Nav_Nutrition_Vitamins_HeartHealthLink;;;;
-;;Nav_Nutrition_Vitamins_ViewAllLink;Navigation Bar- Vitamins- View All Link;/;Nav_Nutrition_Vitamins_ViewAllLink;Nav_Nutrition_Vitamins_ViewAllLink;;;;
+;;Nav_Nutrition_Vitamins_BoneHealthLink;Navigation Bar- Vitamins- Bone Health Link;;Nav_Nutrition_Vitamins_BoneHealthLink;Nav_Nutrition_Vitamins_BoneHealthLink;;bone-health
+;;Nav_Nutrition_Vitamins_ChildrenLink;Navigation Bar- Vitamins- Children Link;;Nav_Nutrition_Vitamins_ChildrenLink;Nav_Nutrition_Vitamins_ChildrenLink;;childrens-vitamins
+;;Nav_Nutrition_Vitamins_HeartHealthLink;Navigation Bar- Vitamins- Heart Health Link;;Nav_Nutrition_Vitamins_HeartHealthLink;Nav_Nutrition_Vitamins_HeartHealthLink;;heart-health
+;;Nav_Nutrition_Vitamins_ViewAllLink;Navigation Bar- Vitamins- View All Link;/;Nav_Nutrition_Vitamins_ViewAllLink;Nav_Nutrition_Vitamins_ViewAllLink;;
 
-;;Nav_Nutrition_Weight_SupplementsLink;Navigation Bar- Weight- Supplements Link;/;Nav_Nutrition_Weight_SupplementsLink;Nav_Nutrition_Weight_SupplementsLink;;;;
-;;Nav_Nutrition_Weight_BarLink;Navigation Bar- Weight- Bar Link;/;Nav_Nutrition_Weight_BarLink;Nav_Nutrition_Weight_BarLink;;;;
-;;Nav_Nutrition_Weight_ShakesLink;Navigation Bar- Weight- Shakes Link;/;Nav_Nutrition_Weight_ShakesLink;Nav_Nutrition_Weight_ShakesLink;;;;
-;;Nav_Nutrition_Weight_ViewAllLink;Navigation Bar- Weight- View All Link;/;Nav_Nutrition_Weight_ViewAllLink;Nav_Nutrition_Weight_ViewAllLink;;;;
+;;Nav_Nutrition_Weight_SupplementsLink;Navigation Bar- Weight- Supplements Link;;Nav_Nutrition_Weight_SupplementsLink;Nav_Nutrition_Weight_SupplementsLink;;supplements
+;;Nav_Nutrition_Weight_BarLink;Navigation Bar- Weight- Bar Link;;Nav_Nutrition_Weight_BarLink;Nav_Nutrition_Weight_BarLink;;bar
+;;Nav_Nutrition_Weight_ShakesLink;Navigation Bar- Weight- Shakes Link;;Nav_Nutrition_Weight_ShakesLink;Nav_Nutrition_Weight_ShakesLink;;shakes
+;;Nav_Nutrition_Weight_ViewAllLink;Navigation Bar- Weight- View All Link;/;Nav_Nutrition_Weight_ViewAllLink;Nav_Nutrition_Weight_ViewAllLink;;
 
-;;Nav_Nutrition_Sports_EnergizeLink;Navigation Bar- Sports- Energize Link;/;Nav_Nutrition_Sports_EnergizeLink;Nav_Nutrition_Sports_EnergizeLink;;;;
-;;Nav_Nutrition_Sports_HydrateLink;Navigation Bar- Sports- Hydrate Link;/;Nav_Nutrition_Sports_HydrateLink;Nav_Nutrition_Sports_HydrateLink;;;;
-;;Nav_Nutrition_Sports_NutriliteLink;Navigation Bar- Sports- Nutrilite Link;/;Nav_Nutrition_Sports_NutriliteLink;Nav_Nutrition_Sports_NutriliteLink;;;;
-;;Nav_Nutrition_Sports_ViewAllLink;Navigation Bar- Sports- View All Link;/;Nav_Nutrition_Sports_ViewAllLink;Nav_Nutrition_Sports_ViewAllLink;;;;
+;;Nav_Nutrition_Sports_EnergizeLink;Navigation Bar- Sports- Energize Link;;Nav_Nutrition_Sports_EnergizeLink;Nav_Nutrition_Sports_EnergizeLink;;energize
+;;Nav_Nutrition_Sports_HydrateLink;Navigation Bar- Sports- Hydrate Link;;Nav_Nutrition_Sports_HydrateLink;Nav_Nutrition_Sports_HydrateLink;;hydrate
+;;Nav_Nutrition_Sports_NutriliteLink;Navigation Bar- Sports- Nutrilite Link;;Nav_Nutrition_Sports_NutriliteLink;Nav_Nutrition_Sports_NutriliteLink;;nutrilite-sports-nutrition
+;;Nav_Nutrition_Sports_ViewAllLink;Navigation Bar- Sports- View All Link;/;Nav_Nutrition_Sports_ViewAllLink;Nav_Nutrition_Sports_ViewAllLink;;
 
-;;Nav_Nutrition_Energy_KosherLink;Navigation Bar- Energy- Kosher Link;/;Nav_Nutrition_Energy_KosherLink;Nav_Nutrition_Energy_KosherLink;;;;
-;;Nav_Nutrition_Energy_SugarFreeLink;Navigation Bar- Energy- Sugar Free Link;/;Nav_Nutrition_Energy_SugarFreeLink;Nav_Nutrition_Energy_SugarFreeLink;;;;
-;;Nav_Nutrition_Energy_LowCarbLink;Navigation Bar- Energy- Low Carb Link;/;Nav_Nutrition_Energy_LowCarbLink;Nav_Nutrition_Energy_LowCarbLink;;;;
-;;Nav_Nutrition_Energy_ViewAllLink;Navigation Bar- Energy- View All Link;/;Nav_Nutrition_Energy_ViewAllLink;Nav_Nutrition_Energy_ViewAllLink;;;;
+;;Nav_Nutrition_Energy_KosherLink;Navigation Bar- Energy- Kosher Link;;Nav_Nutrition_Energy_KosherLink;Nav_Nutrition_Energy_KosherLink;;kosher
+;;Nav_Nutrition_Energy_SugarFreeLink;Navigation Bar- Energy- Sugar Free Link;;Nav_Nutrition_Energy_SugarFreeLink;Nav_Nutrition_Energy_SugarFreeLink;;sugar-free
+;;Nav_Nutrition_Energy_LowCarbLink;Navigation Bar- Energy- Low Carb Link;;Nav_Nutrition_Energy_LowCarbLink;Nav_Nutrition_Energy_LowCarbLink;;low-carb
+;;Nav_Nutrition_Energy_ViewAllLink;Navigation Bar- Energy- View All Link;/;Nav_Nutrition_Energy_ViewAllLink;Nav_Nutrition_Energy_ViewAllLink;;
 
-;;Nav_Nutrition_ToolsAdvice_SkincareLink;Navigation Bar- Nutrition- Tools and Advice Skincare Recommender Link;/;Nav_Nutrition_ToolsAdvice_SkincareLink;Nav_Nutrition_ToolsAdvice_SkincareLink;;;;
-;;Nav_Nutrition_ToolsAdvice_DittoLink;Navigation Bar- Nutrition- Tools and Advice Ditto Scheduled Link;/ditto;Nav_Nutrition_ToolsAdvice_DittoLink;Nav_Nutrition_ToolsAdvice_DittoLink;;;;
+;;Nav_Nutrition_ToolsAdvice_SkincareLink;Navigation Bar- Nutrition- Tools and Advice Skincare Recommender Link;/;Nav_Nutrition_ToolsAdvice_SkincareLink;Nav_Nutrition_ToolsAdvice_SkincareLink;;
+;;Nav_Nutrition_ToolsAdvice_DittoLink;Navigation Bar- Nutrition- Tools and Advice Ditto Scheduled Link;/ditto;Nav_Nutrition_ToolsAdvice_DittoLink;Nav_Nutrition_ToolsAdvice_DittoLink;;
 
 
-;;Nav_Beauty_SkinCareLink;Navigation Bar- Beauty- Skin Care Link;/;Nav_Beauty_SkinCareLink;Nav_Beauty_SkinCareLink;;;;
-;;Nav_Beauty_ColourLink;Navigation Bar- Beauty- Colour Link;/;Nav_Beauty_ColourLink;Nav_Beauty_ColourLink;;;;
-;;Nav_Beauty_MakeUpLink;Navigation Bar- Beauty- MakeUp Link;/;Nav_Beauty_MakeUpLink;Nav_Beauty_MakeUpLink;;;;
-;;Nav_Beauty_BeautyAccessoriesLink;Navigation Bar- Beauty- Beauty Accessories Link;/;Nav_Beauty_BeautyAccessoriesLink;Nav_Beauty_BeautyAccessoriesLink;;;;
+;;Nav_Beauty_SkinCareLink;Navigation Bar- Beauty- Skin Care Link;/category-landing-page;Nav_Beauty_SkinCareLink;Nav_Beauty_SkinCareLink;;;
+;;Nav_Beauty_ColourLink;Navigation Bar- Beauty- Colour Link;/category-landing-page;Nav_Beauty_ColourLink;Nav_Beauty_ColourLink;;;
+;;Nav_Beauty_MakeUpLink;Navigation Bar- Beauty- MakeUp Link;/category-landing-page;Nav_Beauty_MakeUpLink;Nav_Beauty_MakeUpLink;;;
+;;Nav_Beauty_BeautyAccessoriesLink;Navigation Bar- Beauty- Beauty Accessories Link;/category-landing-page;Nav_Beauty_BeautyAccessoriesLink;Nav_Beauty_BeautyAccessoriesLink;;;
 
-;;Nav_Beauty_SkinCare_AntiAgeingLink;Navigation Bar- Beauty- SkinCare- Anti Ageing Link;/;Nav_Beauty_SkinCare_AntiAgeingLink;Nav_Beauty_SkinCare_AntiAgeingLink;;;;
-;;Nav_Beauty_SkinCare_ArtistryLink;Navigation Bar- Beauty- SkinCare- Artistry Link;/;Nav_Beauty_SkinCare_ArtistryLink;Nav_Beauty_SkinCare_ArtistryLink;;;;
-;;Nav_Beauty_SkinCare_DailySkinCareLink;Navigation Bar- Beauty- SkinCare- Daily Skincare Link;/;Nav_Beauty_SkinCare_DailySkinCareLink;Nav_Beauty_SkinCare_DailySkinCareLink;;;;
-;;Nav_Beauty_SkinCare_ViewAllLink;Navigation Bar- Beauty- SkinCare- View All Link;/;Nav_Beauty_SkinCare_ViewAllLink;Nav_Beauty_SkinCare_ViewAllLink;;;;
+;;Nav_Beauty_SkinCare_AntiAgeingLink;Navigation Bar- Beauty- SkinCare- Anti Ageing Link;;Nav_Beauty_SkinCare_AntiAgeingLink;Nav_Beauty_SkinCare_AntiAgeingLink;;anti-ageing-solutions
+;;Nav_Beauty_SkinCare_ArtistryLink;Navigation Bar- Beauty- SkinCare- Artistry Link;;Nav_Beauty_SkinCare_ArtistryLink;Nav_Beauty_SkinCare_ArtistryLink;;artistry-special-care
+;;Nav_Beauty_SkinCare_DailySkinCareLink;Navigation Bar- Beauty- SkinCare- Daily Skincare Link;;Nav_Beauty_SkinCare_DailySkinCareLink;Nav_Beauty_SkinCare_DailySkinCareLink;;daily-skincare
+;;Nav_Beauty_SkinCare_ViewAllLink;Navigation Bar- Beauty- SkinCare- View All Link;/;Nav_Beauty_SkinCare_ViewAllLink;Nav_Beauty_SkinCare_ViewAllLink;;
 
-;;Nav_Beauty_Colour_ApplicatorsLink;Navigation Bar- Beauty- Colour- Applicators Link;/;Nav_Beauty_Colour_ApplicatorsLink;Nav_Beauty_Colour_ApplicatorsLink;;;;
-;;Nav_Beauty_Colour_EyeBrowsLink;Navigation Bar- Beauty- Colour- Eye Brows Link;/;Nav_Beauty_Colour_EyeBrowsLink;Nav_Beauty_Colour_EyeBrowsLink;;;;
-;;Nav_Beauty_Colour_EyeCheeksLink;Navigation Bar- Beauty- Colour- Eye Cheeks Link;/;Nav_Beauty_Colour_EyeCheeksLink;Nav_Beauty_Colour_EyeCheeksLink;;;;
-;;Nav_Beauty_Colour_ViewAllLink;Navigation Bar- Beauty- Colour- View All Link;/;Nav_Beauty_Colour_ViewAllLink;Nav_Beauty_Colour_ViewAllLink;;;;
+;;Nav_Beauty_Colour_ApplicatorsLink;Navigation Bar- Beauty- Colour- Applicators Link;;Nav_Beauty_Colour_ApplicatorsLink;Nav_Beauty_Colour_ApplicatorsLink;;applicators-and-accessories
+;;Nav_Beauty_Colour_EyeBrowsLink;Navigation Bar- Beauty- Colour- Eye Brows Link;;Nav_Beauty_Colour_EyeBrowsLink;Nav_Beauty_Colour_EyeBrowsLink;;eye-and-brows
+;;Nav_Beauty_Colour_EyeCheeksLink;Navigation Bar- Beauty- Colour- Eye Cheeks Link;;Nav_Beauty_Colour_EyeCheeksLink;Nav_Beauty_Colour_EyeCheeksLink;;eye-and-cheeks
+;;Nav_Beauty_Colour_ViewAllLink;Navigation Bar- Beauty- Colour- View All Link;/;Nav_Beauty_Colour_ViewAllLink;Nav_Beauty_Colour_ViewAllLink;;
 
-;;Nav_Beauty_MakeUp_CheeksLink;Navigation Bar- Beauty- Makeup- Cheeks Link;/;Nav_Beauty_MakeUp_CheeksLink;Nav_Beauty_MakeUp_CheeksLink;;;;
-;;Nav_Beauty_MakeUp_ConcealersLink;Navigation Bar- Beauty- Makeup- Concealers Link;/;Nav_Beauty_MakeUp_ConcealersLink;Nav_Beauty_MakeUp_ConcealersLink;;;;
-;;Nav_Beauty_MakeUp_FoundationLink;Navigation Bar- Beauty- Makeup- Foundations Link;/;Nav_Beauty_MakeUp_FoundationLink;Nav_Beauty_MakeUp_FoundationLink;;;;
-;;Nav_Beauty_MakeUp_ViewAllLink;Navigation Bar- Beauty- Makeup- View All Link;/;Nav_Beauty_MakeUp_ViewAllLink;Nav_Beauty_MakeUp_ViewAllLink;;;;
+;;Nav_Beauty_MakeUp_CheeksLink;Navigation Bar- Beauty- Makeup- Cheeks Link;;Nav_Beauty_MakeUp_CheeksLink;Nav_Beauty_MakeUp_CheeksLink;;cheeks
+;;Nav_Beauty_MakeUp_ConcealersLink;Navigation Bar- Beauty- Makeup- Concealers Link;;Nav_Beauty_MakeUp_ConcealersLink;Nav_Beauty_MakeUp_ConcealersLink;;concealers
+;;Nav_Beauty_MakeUp_FoundationLink;Navigation Bar- Beauty- Makeup- Foundations Link;;Nav_Beauty_MakeUp_FoundationLink;Nav_Beauty_MakeUp_FoundationLink;;foundations-and-powders
+;;Nav_Beauty_MakeUp_ViewAllLink;Navigation Bar- Beauty- Makeup- View All Link;/;Nav_Beauty_MakeUp_ViewAllLink;Nav_Beauty_MakeUp_ViewAllLink;;
 
-;;Nav_Beauty_BeautyAccessories_FacialCottonLink;Navigation Bar- Beauty- Beauty Accessories- Facial Cotton Link;/;Nav_Beauty_BeautyAccessories_FacialCottonLink;Nav_Beauty_BeautyAccessories_FacialCottonLink;;;;
-;;Nav_Beauty_BeautyAccessories_BrushSetLink;Navigation Bar- Beauty- Beauty Accessories- Brush Set Link;/;Nav_Beauty_BeautyAccessories_BrushSetLink;Nav_Beauty_BeautyAccessories_BrushSetLink;;;;
-;;Nav_Beauty_BeautyAccessories_PowderCompactLink;Navigation Bar- Beauty- Beauty Accessories- Powder Compact Link;/;Nav_Beauty_BeautyAccessories_PowderCompactLink;Nav_Beauty_BeautyAccessories_PowderCompactLink;;;;
-;;Nav_Beauty_BeautyAccessories_ViewAllLink;Navigation Bar- Beauty- Beauty Accessories- View All Link;/;Nav_Beauty_BeautyAccessories_ViewAllLink;Nav_Beauty_BeautyAccessories_ViewAllLink;;;;
+;;Nav_Beauty_BeautyAccessories_FacialCottonLink;Navigation Bar- Beauty- Beauty Accessories- Facial Cotton Link;;Nav_Beauty_BeautyAccessories_FacialCottonLink;Nav_Beauty_BeautyAccessories_FacialCottonLink;;facial-cotton
+;;Nav_Beauty_BeautyAccessories_BrushSetLink;Navigation Bar- Beauty- Beauty Accessories- Brush Set Link;;Nav_Beauty_BeautyAccessories_BrushSetLink;Nav_Beauty_BeautyAccessories_BrushSetLink;;brush-set
+;;Nav_Beauty_BeautyAccessories_PowderCompactLink;Navigation Bar- Beauty- Beauty Accessories- Powder Compact Link;;Nav_Beauty_BeautyAccessories_PowderCompactLink;Nav_Beauty_BeautyAccessories_PowderCompactLink;;powder-compact
+;;Nav_Beauty_BeautyAccessories_ViewAllLink;Navigation Bar- Beauty- Beauty Accessories- View All Link;/;Nav_Beauty_BeautyAccessories_ViewAllLink;Nav_Beauty_BeautyAccessories_ViewAllLink;;
 
-;;Nav_Beauty_ToolsAdvice_SkincareLink;Navigation Bar- Beauty- Tools and Advice Skincare Recommender Link;/;Nav_Beauty_ToolsAdvice_SkincareLink;Nav_Beauty_ToolsAdvice_SkincareLink;;;;
-;;Nav_Beauty_ToolsAdvice_DittoLink;Navigation Bar- Beauty- Tools and Advice Ditto Scheduled Link;/;Nav_Beauty_ToolsAdvice_DittoLink;Nav_Beauty_ToolsAdvice_DittoLink;;;;
+;;Nav_Beauty_ToolsAdvice_SkincareLink;Navigation Bar- Beauty- Tools and Advice Skincare Recommender Link;/;Nav_Beauty_ToolsAdvice_SkincareLink;Nav_Beauty_ToolsAdvice_SkincareLink;;
+;;Nav_Beauty_ToolsAdvice_DittoLink;Navigation Bar- Beauty- Tools and Advice Ditto Scheduled Link;/;Nav_Beauty_ToolsAdvice_DittoLink;Nav_Beauty_ToolsAdvice_DittoLink;;
 
-;;Nav_BathAndBody_HairCareLink;Navigation Bar- Bath and Body- Hair Care Link;/;Nav_BathAndBody_HairCareLink;Nav_BathAndBody_HairCareLink;;;;
-;;Nav_BathAndBody_BodyCareLink;Navigation Bar- Bath and Body- Body Care Link;/;Nav_BathAndBody_BodyCareLink;Nav_BathAndBody_BodyCareLink;;;;
-;;Nav_BathAndBody_OralCareLink;Navigation Bar- Bath and Body- Oral Care Link;/;Nav_BathAndBody_OralCareLink;Nav_BathAndBody_OralCareLink;;;;
-;;Nav_BathAndBody_SunAndTanningLink;Navigation Bar- Bath and Body- Sun And Tanning Link;/;Nav_BathAndBody_SunAndTanningLink;Nav_BathAndBody_SunAndTanningLink;;;;
+;;Nav_BathAndBody_HairCareLink;Navigation Bar- Bath and Body- Hair Care Link;/category-landing-page;Nav_BathAndBody_HairCareLink;Nav_BathAndBody_HairCareLink;;;
+;;Nav_BathAndBody_BodyCareLink;Navigation Bar- Bath and Body- Body Care Link;/category-landing-page;Nav_BathAndBody_BodyCareLink;Nav_BathAndBody_BodyCareLink;;;
+;;Nav_BathAndBody_OralCareLink;Navigation Bar- Bath and Body- Oral Care Link;/category-landing-page;Nav_BathAndBody_OralCareLink;Nav_BathAndBody_OralCareLink;;;
+;;Nav_BathAndBody_SunAndTanningLink;Navigation Bar- Bath and Body- Sun And Tanning Link;/category-landing-page;Nav_BathAndBody_SunAndTanningLink;Nav_BathAndBody_SunAndTanningLink;;;
 
-;;Nav_BathAndBody_HairCare_ConditionersLink;Navigation Bar- Bath and Body- Hair Care- Conditioners Link;/;Nav_BathAndBody_HairCare_ConditionersLink;Nav_BathAndBody_HairCare_ConditionersLink;;;;
-;;Nav_BathAndBody_HairCare_ShampoosLink;Navigation Bar- Bath and Body- Hair Care- Shampoos Link;/;Nav_BathAndBody_HairCare_ShampoosLink;Nav_BathAndBody_HairCare_ShampoosLink;;;;
-;;Nav_BathAndBody_HairCare_StylingLink;Navigation Bar- Bath and Body- Hair Care- Styling and Treatments Link;/;Nav_BathAndBody_HairCare_StylingLink;Nav_BathAndBody_HairCare_StylingLink;;;;
-;;Nav_BathAndBody_HairCare_ViewAllLink;Navigation Bar- Bath and Body- Hair Care- View All Link;/;Nav_BathAndBody_HairCare_ViewAllLink;Nav_BathAndBody_HairCare_ViewAllLink;;;;
+;;Nav_BathAndBody_HairCare_ConditionersLink;Navigation Bar- Bath and Body- Hair Care- Conditioners Link;;Nav_BathAndBody_HairCare_ConditionersLink;Nav_BathAndBody_HairCare_ConditionersLink;;conditioners
+;;Nav_BathAndBody_HairCare_ShampoosLink;Navigation Bar- Bath and Body- Hair Care- Shampoos Link;;Nav_BathAndBody_HairCare_ShampoosLink;Nav_BathAndBody_HairCare_ShampoosLink;;shampoos
+;;Nav_BathAndBody_HairCare_StylingLink;Navigation Bar- Bath and Body- Hair Care- Styling and Treatments Link;;Nav_BathAndBody_HairCare_StylingLink;Nav_BathAndBody_HairCare_StylingLink;;styling-and-treatments
+;;Nav_BathAndBody_HairCare_ViewAllLink;Navigation Bar- Bath and Body- Hair Care- View All Link;/;Nav_BathAndBody_HairCare_ViewAllLink;Nav_BathAndBody_HairCare_ViewAllLink;;
 
-;;Nav_BathAndBody_BodyCare_BodyWashLink;Navigation Bar- Bath and Body- Body Care- Body Wash Link;/;Nav_BathAndBody_BodyCare_BodyWashLink;Nav_BathAndBody_BodyCare_BodyWashLink;;;;
-;;Nav_BathAndBody_BodyCare_DeodorantsLink;Navigation Bar- Bath and Body- Body Care- Deodorants Link;/;Nav_BathAndBody_BodyCare_DeodorantsLink;Nav_BathAndBody_BodyCare_DeodorantsLink;;;;
-;;Nav_BathAndBody_BodyCare_LotionsLink;Navigation Bar- Bath and Body- Body Care- Lotions Link;/;Nav_BathAndBody_BodyCare_LotionsLink;Nav_BathAndBody_BodyCare_LotionsLink;;;;
-;;Nav_BathAndBody_BodyCare_ViewAllLink;Navigation Bar- Bath and Body- Body Care- View All Link;/;Nav_BathAndBody_BodyCare_ViewAllLink;Nav_BathAndBody_BodyCare_ViewAllLink;;;;
+;;Nav_BathAndBody_BodyCare_BodyWashLink;Navigation Bar- Bath and Body- Body Care- Body Wash Link;;Nav_BathAndBody_BodyCare_BodyWashLink;Nav_BathAndBody_BodyCare_BodyWashLink;;body-wash
+;;Nav_BathAndBody_BodyCare_DeodorantsLink;Navigation Bar- Bath and Body- Body Care- Deodorants Link;;Nav_BathAndBody_BodyCare_DeodorantsLink;Nav_BathAndBody_BodyCare_DeodorantsLink;;deodorants
+;;Nav_BathAndBody_BodyCare_LotionsLink;Navigation Bar- Bath and Body- Body Care- Lotions Link;;Nav_BathAndBody_BodyCare_LotionsLink;Nav_BathAndBody_BodyCare_LotionsLink;;lotions
+;;Nav_BathAndBody_BodyCare_ViewAllLink;Navigation Bar- Bath and Body- Body Care- View All Link;/;Nav_BathAndBody_BodyCare_ViewAllLink;Nav_BathAndBody_BodyCare_ViewAllLink;;
 
-;;Nav_BathAndBody_OralCare_BreathSpraysLink;Navigation Bar- Bath and Body- Oral Care- Breath Sprays Link;/;Nav_BathAndBody_OralCare_BreathSpraysLink;Nav_BathAndBody_OralCare_BreathSpraysLink;;;;
-;;Nav_BathAndBody_OralCare_ToothpastesLink;Navigation Bar- Bath and Body- Oral Care- Tooth Pastes Link;/;Nav_BathAndBody_OralCare_ToothpastesLink;Nav_BathAndBody_OralCare_ToothpastesLink;;;;
-;;Nav_BathAndBody_OralCare_BrushesAndFlossLink;Navigation Bar- Bath and Body- Oral Care- Brushes & Floss Link;/;Nav_BathAndBody_OralCare_BrushesAndFlossLink;Nav_BathAndBody_OralCare_BrushesAndFlossLink;;;;
-;;Nav_BathAndBody_OralCare_ViewAllLink;Navigation Bar- Bath and Body- Oral Care- View All Link;/;Nav_BathAndBody_OralCare_ViewAllLink;Nav_BathAndBody_OralCare_ViewAllLink;;;;
+;;Nav_BathAndBody_OralCare_BreathSpraysLink;Navigation Bar- Bath and Body- Oral Care- Breath Sprays Link;;Nav_BathAndBody_OralCare_BreathSpraysLink;Nav_BathAndBody_OralCare_BreathSpraysLink;;breath-sprays
+;;Nav_BathAndBody_OralCare_ToothpastesLink;Navigation Bar- Bath and Body- Oral Care- Tooth Pastes Link;;Nav_BathAndBody_OralCare_ToothpastesLink;Nav_BathAndBody_OralCare_ToothpastesLink;;toothpastes
+;;Nav_BathAndBody_OralCare_BrushesAndFlossLink;Navigation Bar- Bath and Body- Oral Care- Brushes & Floss Link;;Nav_BathAndBody_OralCare_BrushesAndFlossLink;Nav_BathAndBody_OralCare_BrushesAndFlossLink;;brushes-and-floss
+;;Nav_BathAndBody_OralCare_ViewAllLink;Navigation Bar- Bath and Body- Oral Care- View All Link;/;Nav_BathAndBody_OralCare_ViewAllLink;Nav_BathAndBody_OralCare_ViewAllLink;;
 
-;;Nav_BathAndBody_SunAndTanning_SunscreenLotionLink;Navigation Bar- Bath and Body- Sun and Tanning- Sunscreen Lotion Link;/;Nav_BathAndBody_SunAndTanning_SunscreenLotionLink;Nav_BathAndBody_SunAndTanning_SunscreenLotionLink;;;;
-;;Nav_BathAndBody_SunAndTanning_SelfTanMousseLink;Navigation Bar- Bath and Body- Sun and Tanning- Self Tan Mousse Link;/;Nav_BathAndBody_SunAndTanning_SelfTanMousseLink;Nav_BathAndBody_SunAndTanning_SelfTanMousseLink;;;;
-;;Nav_BathAndBody_SunAndTanning_ViewAllLink;Navigation Bar- Bath and Body- Sun and Tanning- View All Link;/;Nav_BathAndBody_SunAndTanning_ViewAllLink;Nav_BathAndBody_SunAndTanning_ViewAllLink;;;;
+;;Nav_BathAndBody_SunAndTanning_SunscreenLotionLink;Navigation Bar- Bath and Body- Sun and Tanning- Sunscreen Lotion Link;;Nav_BathAndBody_SunAndTanning_SunscreenLotionLink;Nav_BathAndBody_SunAndTanning_SunscreenLotionLink;;sunscreen-lotion
+;;Nav_BathAndBody_SunAndTanning_SelfTanMousseLink;Navigation Bar- Bath and Body- Sun and Tanning- Self Tan Mousse Link;;Nav_BathAndBody_SunAndTanning_SelfTanMousseLink;Nav_BathAndBody_SunAndTanning_SelfTanMousseLink;;self-tan-mousse
+;;Nav_BathAndBody_SunAndTanning_ViewAllLink;Navigation Bar- Bath and Body- Sun and Tanning- View All Link;/;Nav_BathAndBody_SunAndTanning_ViewAllLink;Nav_BathAndBody_SunAndTanning_ViewAllLink;;
 
-;;Nav_BathAndBody_ToolsAdvice_QuickProductLink;Navigation Bar- BathAndBody- Tools and Advice Quick Product Link;/;Nav_BathAndBody_ToolsAdvice_QuickProductLink;Nav_BathAndBody_ToolsAdvice_QuickProductLink;;;;
-;;Nav_BathAndBody_ToolsAdvice_DittoScheduledLink;Navigation Bar- BathAndBody- Tools and Advice Ditto Scheduled Link;/;Nav_BathAndBody_ToolsAdvice_DittoScheduledLink;Nav_BathAndBody_ToolsAdvice_DittoScheduledLink;;;;
+;;Nav_BathAndBody_ToolsAdvice_QuickProductLink;Navigation Bar- BathAndBody- Tools and Advice Quick Product Link;/;Nav_BathAndBody_ToolsAdvice_QuickProductLink;Nav_BathAndBody_ToolsAdvice_QuickProductLink;;
+;;Nav_BathAndBody_ToolsAdvice_DittoScheduledLink;Navigation Bar- BathAndBody- Tools and Advice Ditto Scheduled Link;/;Nav_BathAndBody_ToolsAdvice_DittoScheduledLink;Nav_BathAndBody_ToolsAdvice_DittoScheduledLink;;
 
-;;Nav_Home_HouseHoldLink;Navigation Bar- Home- Household Hygiene Link;/;Nav_Home_HouseHoldLink;Nav_Home_HouseHoldLink;;;;
-;;Nav_Home_LaundryLink;Navigation Bar- Home- Laundry Hygiene Link;/;Nav_Home_LaundryLink;Nav_Home_LaundryLink;;;;
-;;Nav_Home_WaterTreatmentLink;Navigation Bar- Home- Water Treatment Hygiene Link;/;Nav_Home_WaterTreatmentLink;Nav_Home_WaterTreatmentLink;;;;
-;;Nav_Home_CookwareLink;Navigation Bar- Home- Household Cookware Link;/;Nav_Home_CookwareLink;Nav_Home_CookwareLink;;;;
+;;Nav_Home_HouseHoldLink;Navigation Bar- Home- Household Hygiene Link;/category-landing-page;Nav_Home_HouseHoldLink;Nav_Home_HouseHoldLink;;;
+;;Nav_Home_LaundryLink;Navigation Bar- Home- Laundry Hygiene Link;/category-landing-page;Nav_Home_LaundryLink;Nav_Home_LaundryLink;;;
+;;Nav_Home_WaterTreatmentLink;Navigation Bar- Home- Water Treatment Hygiene Link;/category-landing-page;Nav_Home_WaterTreatmentLink;Nav_Home_WaterTreatmentLink;;;
+;;Nav_Home_CookwareLink;Navigation Bar- Home- Household Cookware Link;/category-landing-page;Nav_Home_CookwareLink;Nav_Home_CookwareLink;;;
 
-;;Nav_Home_HouseHold_KitchenCleanerLink;Navigation Bar- Home- Household- Kitchen Cleaner Link;/;Nav_Home_HouseHold_KitchenCleanerLink;Nav_Home_HouseHold_KitchenCleanerLink;;;;
-;;Nav_Home_HouseHold_GeneralCleaningLink;Navigation Bar- Home- Household- General Cleaning Link;/;Nav_Home_HouseHold_GeneralCleaningLink;Nav_Home_HouseHold_GeneralCleaningLink;;;;
-;;Nav_Home_HouseHold_BathroomCleanerLink;Navigation Bar- Home- Household- Bathroom Cleaner Link;/;Nav_Home_HouseHold_BathroomCleanerLink;Nav_Home_HouseHold_BathroomCleanerLink;;;;
-;;Nav_Home_HouseHold_ViewAllLink;Navigation Bar- Home- Household- View All Link;/;Nav_Home_HouseHold_ViewAllLink;Nav_Home_HouseHold_ViewAllLink;;;;
+;;Nav_Home_HouseHold_KitchenCleanerLink;Navigation Bar- Home- Household- Kitchen Cleaner Link;;Nav_Home_HouseHold_KitchenCleanerLink;Nav_Home_HouseHold_KitchenCleanerLink;;kitchen-cleaner
+;;Nav_Home_HouseHold_GeneralCleaningLink;Navigation Bar- Home- Household- General Cleaning Link;;Nav_Home_HouseHold_GeneralCleaningLink;Nav_Home_HouseHold_GeneralCleaningLink;;general-cleaning
+;;Nav_Home_HouseHold_BathroomCleanerLink;Navigation Bar- Home- Household- Bathroom Cleaner Link;;Nav_Home_HouseHold_BathroomCleanerLink;Nav_Home_HouseHold_BathroomCleanerLink;;bathroom-cleaner
+;;Nav_Home_HouseHold_ViewAllLink;Navigation Bar- Home- Household- View All Link;/;Nav_Home_HouseHold_ViewAllLink;Nav_Home_HouseHold_ViewAllLink;;
 
-;;Nav_Home_Laundry_DetergentsLink;Navigation Bar- Home- Laundry- Detergents Link;/;Nav_Home_Laundry_DetergentsLink;Nav_Home_Laundry_DetergentsLink;;;;
-;;Nav_Home_Laundry_TreatmentAndAdditivesLink;Navigation Bar- Home- Laundry- Treatment and Additives Link;/;Nav_Home_Laundry_TreatmentAndAdditivesLink;Nav_Home_Laundry_TreatmentAndAdditivesLink;;;;
-;;Nav_Home_Laundry_LotionsLink;Navigation Bar- Home- Laundry- Lotions Link;/;Nav_Home_Laundry_LotionsLink;Nav_Home_Laundry_LotionsLink;;;;
-;;Nav_Home_Laundry_ViewAllLink;Navigation Bar- Home- Laundry- View All Link;/;Nav_Home_Laundry_ViewAllLink;Nav_Home_Laundry_ViewAllLink;;;;
+;;Nav_Home_Laundry_DetergentsLink;Navigation Bar- Home- Laundry- Detergents Link;;Nav_Home_Laundry_DetergentsLink;Nav_Home_Laundry_DetergentsLink;;detergents
+;;Nav_Home_Laundry_TreatmentAndAdditivesLink;Navigation Bar- Home- Laundry- Treatment and Additives Link;;Nav_Home_Laundry_TreatmentAndAdditivesLink;Nav_Home_Laundry_TreatmentAndAdditivesLink;;treatment-and-additives
+;;Nav_Home_Laundry_LotionsLink;Navigation Bar- Home- Laundry- Lotions Link;;Nav_Home_Laundry_LotionsLink;Nav_Home_Laundry_LotionsLink;;lotions
+;;Nav_Home_Laundry_ViewAllLink;Navigation Bar- Home- Laundry- View All Link;/;Nav_Home_Laundry_ViewAllLink;Nav_Home_Laundry_ViewAllLink;;
 
-;;Nav_Home_WaterTreatment_PurifiersLink;Navigation Bar- Home- Water treatment- Purifiers Link;/;Nav_Home_WaterTreatment_PurifiersLink;Nav_Home_WaterTreatment_PurifiersLink;;;;
-;;Nav_Home_WaterTreatment_ReplacementFiltersLink;Navigation Bar- Home- Water treatment- Replacement Filters Link;/;Nav_Home_WaterTreatment_ReplacementFiltersLink;Nav_Home_WaterTreatment_ReplacementFiltersLink;;;;
-;;Nav_Home_WaterTreatment_ViewAllLink;Navigation Bar- Home- Water treatment- View All Link;/;Nav_Home_WaterTreatment_ViewAllLink;Nav_Home_WaterTreatment_ViewAllLink;;;;
+;;Nav_Home_WaterTreatment_PurifiersLink;Navigation Bar- Home- Water treatment- Purifiers Link;;Nav_Home_WaterTreatment_PurifiersLink;Nav_Home_WaterTreatment_PurifiersLink;;purifiers
+;;Nav_Home_WaterTreatment_ReplacementFiltersLink;Navigation Bar- Home- Water treatment- Replacement Filters Link;;Nav_Home_WaterTreatment_ReplacementFiltersLink;Nav_Home_WaterTreatment_ReplacementFiltersLink;;replacement-filters
+;;Nav_Home_WaterTreatment_ViewAllLink;Navigation Bar- Home- Water treatment- View All Link;/;Nav_Home_WaterTreatment_ViewAllLink;Nav_Home_WaterTreatment_ViewAllLink;;
 
-;;Nav_Home_Cookware_CutleryLink;Navigation Bar- Home- Cookware- Cutlery Link;/;Nav_Home_Cookware_CutleryLink;Nav_Home_Cookware_CutleryLink;;;;
-;;Nav_Home_Cookware_PansLink;Navigation Bar- Home- Cookware- Pans Link;/;Nav_Home_Cookware_PansLink;Nav_Home_Cookware_PansLink;;;;
-;;Nav_Home_Cookware_ReplacementPartsLink;Navigation Bar- Home- Cookware- Replacement Parts Link;/;Nav_Home_Cookware_ReplacementPartsLink;Nav_Home_Cookware_ReplacementPartsLink;;;;
-;;Nav_Home_Cookware_ViewAllLink;Navigation Bar- Home- Cookware- Replacement Parts Link;/;Nav_Home_Cookware_ViewAllLink;Nav_Home_Cookware_ViewAllLink;;;;
+;;Nav_Home_Cookware_CutleryLink;Navigation Bar- Home- Cookware- Cutlery Link;;Nav_Home_Cookware_CutleryLink;Nav_Home_Cookware_CutleryLink;;cutlery
+;;Nav_Home_Cookware_PansLink;Navigation Bar- Home- Cookware- Pans Link;;Nav_Home_Cookware_PansLink;Nav_Home_Cookware_PansLink;;pans
+;;Nav_Home_Cookware_ReplacementPartsLink;Navigation Bar- Home- Cookware- Replacement Parts Link;;Nav_Home_Cookware_ReplacementPartsLink;Nav_Home_Cookware_ReplacementPartsLink;;replacement-parts
+;;Nav_Home_Cookware_ViewAllLink;Navigation Bar- Home- Cookware- Replacement Parts Link;/;Nav_Home_Cookware_ViewAllLink;Nav_Home_Cookware_ViewAllLink;;
 
-;;Nav_Home_ToolsAdvice_QuickProductLink;Navigation Bar- Home- Tools and Advice Quick Product Link;/;Nav_Home_ToolsAdvice_QuickProductLink;Nav_Home_ToolsAdvice_QuickProductLink;;;;
-;;Nav_Home_ToolsAdvice_DittoScheduledLink;Navigation Bar- Home- Tools and Advice Ditto Scheduled Link;/;Nav_Home_ToolsAdvice_DittoScheduledLink;Nav_Home_ToolsAdvice_DittoScheduledLink;;;;
+;;Nav_Home_ToolsAdvice_QuickProductLink;Navigation Bar- Home- Tools and Advice Quick Product Link;/;Nav_Home_ToolsAdvice_QuickProductLink;Nav_Home_ToolsAdvice_QuickProductLink;;
+;;Nav_Home_ToolsAdvice_DittoScheduledLink;Navigation Bar- Home- Tools and Advice Ditto Scheduled Link;/;Nav_Home_ToolsAdvice_DittoScheduledLink;Nav_Home_ToolsAdvice_DittoScheduledLink;;
 
 
 
