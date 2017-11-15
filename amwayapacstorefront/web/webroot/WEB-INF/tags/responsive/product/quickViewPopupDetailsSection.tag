@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ attribute name="product" required="true" type="de.hybris.platform.commercefacades.product.data.ProductData"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <div class="cart-popup__item-detail">
 	<p class="cart-popup__item-title">${product.name}</p>

@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="formElement" tagdir="/WEB-INF/tags/responsive/formElement"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 
 <c:set var="cartAddress" value="${cartData.deliveryAddress}"/>
@@ -19,10 +20,10 @@
 
 <div id="shippingdiv" class="shipping-delivery-ship">
 	<div class="display-none" id="divToOpen" data-open="${divToOpen}"></div>
-    <p class="shipping-delivery-shipping-header">this order will ship to</p>
+    <p class="shipping-delivery-shipping-header"><spring:theme code="checkout.step.one.delivery.address"/></p>
     <div class="panel">
         <input class="amwa-radio" type="radio" name="optradio" id="radio1" value="radio1" />
-        <label for="radio1" data-toggle="collapse" href="#collapseOne" data-parent="#shippingdiv" id="fileAddressDiv">Address on File</label>
+        <label for="radio1" data-toggle="collapse" href="#collapseOne" data-parent="#shippingdiv" id="fileAddressDiv"><spring:theme code="checkout.step.one.delivery.address.on.file"/></label>
         <div id="collapseOne" class="shipping-delivery-radio-body panel-collapse collapse">
            <p class="shipping-delivery-address-name">${cartAddress.firstName} ${cartAddress.lastName}</p>
            <p class="shipping-delivery-address-detail"> ${cartAddress.postalCode}
@@ -32,12 +33,12 @@
            <c:if test="${not empty cartAddress.phone}"><br/>${cartAddress.phone}</c:if>
            <c:if test="${not empty cartAddress.email}"><br/>${cartAddress.email}</c:if>
            </p>
-            <a href="#" class="shipping-delivery-address-edit"> Edit Address </a>
+            <a href="#" class="shipping-delivery-address-edit"><spring:theme code="checkout.step.one.delivery.address.edit"/></a>
         </div>
     </div>
     <div class="panel">
         <input class="amwa-radio" type="radio" name="optradio" id="radio2" />
-        <label for="radio2" class="collapsed" data-toggle="collapse" href="#collapseTwo" data-parent="#shippingdiv" id="addressFormDiv">Enter New Address</label>
+        <label for="radio2" class="collapsed" data-toggle="collapse" href="#collapseTwo" data-parent="#shippingdiv" id="addressFormDiv"><spring:theme code="checkout.step.one.delivery.address.enter.new"/></label>
         <div id="collapseTwo" class="shipping-delivery-radio-body panel-collapse collapse">
         	<c:url value="/checkout/multi/delivery-address/add" var="deliveryAddressCreationUrl"/>
         	<form:form id="delivery-address-form" action="${deliveryAddressCreationUrl}" commandName="addressForm" method="post">
@@ -62,7 +63,7 @@
     </div>
     <div class="panel">
         <input class="amwa-radio" type="radio" name="optradio" id="radio3" />
-        <label for="radio3" class="collapsed" data-toggle="collapse" href="#collapseThree" data-parent="#shippingdiv" id="alternateAddressDiv">Use Alternate Address on File</label>
+        <label for="radio3" class="collapsed" data-toggle="collapse" href="#collapseThree" data-parent="#shippingdiv" id="alternateAddressDiv"><spring:theme code="checkout.step.one.delivery.address.use.alternate"/></label>
         <div id="collapseThree" class="shipping-delivery-radio-body panel-collapse collapse">
             <div class="panel-body">
                 <c:forEach var="deliveryAddress" items="${deliveryAddresses}">
@@ -76,13 +77,13 @@
 				            <c:if test="${not empty deliveryAddress.phone}"><br/>${deliveryAddress.phone}</c:if>
 				            <c:if test="${not empty deliveryAddress.email}"><br/>${deliveryAddress.email}</c:if>
 				            </p>
-				            <a href="#" class="shipping-delivery-address-edit"> Edit Address </a>
+				            <a href="#" class="shipping-delivery-address-edit"><spring:theme code="checkout.step.one.delivery.address.edit"/></a>
 				            <br/>
 				            <c:url value="/checkout/multi/delivery-address/select-address" var="deliveryAddressSelectionUrl"/>
 				            <form action="${deliveryAddressSelectionUrl}" method="post">
 				            	<input type="hidden" name="selectedAddressCode" value="${deliveryAddress.id}" />
 				            	<input type="hidden" name="CSRFToken" value="${CSRFToken.token}" />
-				            	<button class="shipping-delivery-use btn-blue-white">Use This Address</button>
+				            	<button class="shipping-delivery-use btn-blue-white"><spring:theme code="checkout.step.one.delivery.address.use.this.address"/></button>
 				            </form>
 				            <br/><br/>
 				        </div>
@@ -93,7 +94,7 @@
     </div>
     <div class="panel">
         <input class="amwa-radio" type="radio" name="optradio" id="radio4" />
-        <label for="radio4" class="collapsed" data-toggle="collapse" href="#collapseFour" data-parent="#shippingdiv">Select an IBO / Customer</label>
+        <label for="radio4" class="collapsed" data-toggle="collapse" href="#collapseFour" data-parent="#shippingdiv"><spring:theme code="checkout.step.one.delivery.address.select.customer"/></label>
         <div id="collapseFour" class="shipping-delivery-radio-body panel-collapse collapse">
             <div class="panel-body">
                 IBO / Customer

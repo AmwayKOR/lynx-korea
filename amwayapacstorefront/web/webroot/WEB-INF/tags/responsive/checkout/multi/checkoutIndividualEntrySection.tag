@@ -2,6 +2,7 @@
 <%@ attribute name="entry" required="true" type="de.hybris.platform.commercefacades.order.data.OrderEntryData"%>
 <%@ taglib prefix="product" tagdir="/WEB-INF/tags/responsive/product"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <div class="row">
 	<div class="col-xs-6 extraclass-mobile-width">
@@ -25,19 +26,19 @@
 					</span>
 					<div class="cartlist-detail-mob">
 						<div class="cartlist-mbweight">
-							<span class="cartlist-mbleft">QTY</span>
+							<span class="cartlist-mbleft"><spring:theme code="checkout.product.list.quantity"/></span>
 							<span class="cartlist-mbright">${entry.quantity}</span>
 						</div>
 						<div class="cartlist-mbweight">
-							<span class="cartlist-mbleft">SERVICE FEE</span>
+							<span class="cartlist-mbleft"><spring:theme code="checkout.product.list.service.fee"/></span>
 							<span class="cartlist-mbright">$0.00</span>
 						</div>
 						<div class="cartlist-mbweight">
-							<span class="cartlist-mbleft">TOTAL PRICE</span>
+							<span class="cartlist-mbleft"><spring:theme code="checkout.product.list.total.price"/></span>
 							<span class="cartlist-mbright">${entry.totalPrice.formattedValue}</span>
 						</div>
 						<div class="cartlist-mbweight">
-							<span class="cartlist-mbleft">TOTAL PV/BV</span>
+							<span class="cartlist-mbleft"><spring:theme code="checkout.product.list.total.pvbv"/></span>
 							<span class="cartlist-mbright">${entry.value.pointValue} / ${entry.value.businessVolume}</span>
 						</div>
 					</div>

@@ -1010,20 +1010,24 @@ INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;
 ;;CartComponent;Cart Display Component;cartDisplay.jsp;;CartComponent
 ;;CartTotalsComponent;Cart Totals Display Component;cartTotalsDisplay.jsp;;CartTotalsComponent
 ;;CheckoutComponent;Checkout Display Component;checkoutDisplay.jsp;;CheckoutComponent
+;;QuickShopComponent;Quick Shop Component;quickShop.jsp;;QuickShopComponent
 
 # ContentSlot
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
+;;QuickShopSlot-cartPage;Quick Shop Slot for Cart Page;true;QuickShopComponent
 ;;CartContentSlot-cartPage;Top Content Slot for Cart Page;true;CartComponent
 ;;CartTotalContentSlot-cartPage;Center Right Content Slot for Cart Page;true;CartTotalsComponent
 ;;CheckoutContentSlot-cartPage;Bottom Content Slot for Cart Page;true;CheckoutComponent
 
 INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='CartPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;QuickShopSlot;;;narrow
 ;CartContentSlot;;;narrow
 ;CartTotalContentSlot;;;narrow
 ;CheckoutContentSlot;;;narrow
 
 # ContentSlotForPage
 INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='cartPage'];contentSlot(uid,$contentCV)[unique=true]
+;;QuickShopSlotForCartPage;QuickShopSlot;;QuickShopSlot-cartPage
 ;;CartContentSlotForCartPage;CartContentSlot;;CartContentSlot-cartPage
 ;;CartTotalContentSlotForCartPage;CartTotalContentSlot;;CartTotalContentSlot-cartPage
 ;;CheckoutContentSlotForCartPage;CheckoutContentSlot;;CheckoutContentSlot-cartPage
