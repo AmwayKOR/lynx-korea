@@ -59,6 +59,11 @@ ACC.cartitem = {
 		{
 			return ACC.cartitem.handleKeyEvent(this, e);
 		});
+
+        $(document).on("click", '.js-quick-shop-submit', function (e)
+        {
+            ACC.cartitem.handleQuickShop();
+        });
 	},
 
 	handleKeyEvent: function (elementRef, event)
@@ -70,7 +75,7 @@ ACC.cartitem = {
 			ACC.cartitem.submitTriggered = ACC.cartitem.handleUpdateQuantity(elementRef, event);
 			return false;
 		}
-		else 
+		else
 		{
 			// Ignore all key events once submit was triggered
 			if (ACC.cartitem.submitTriggered)
@@ -116,6 +121,27 @@ ACC.cartitem = {
         }
 
         return false;
+    },
+
+    handleQuickShop: function(){
+        var quickShopForm = $('#quickShopForm');
+
+        var productCode = quickShopForm.find('input[name=productCode]').val();
+        var quantity = quickShopForm.find('input[name=quantity]').val();
+        $.ajax({
+            url: quickShopForm.attr('action'),
+            data: {"productCode" : productCode, "quantity" : quantity},
+            type: quickShopForm.attr('method'),
+            success: function(data)
+            {
+                $('#cartContent').html($(data).filter("div#cartContentDiv").html());
+                ACC.global.findAndUpdateGlobalMessages(data);
+            },
+            error: function(request, status, error)
+            {
+                ACC.global.appendGlobalMessage(ACC.globalMessageTypes.ERROR_MESSAGES_HOLDER, request.responseText);
+            }
+        });
     }
 };
 

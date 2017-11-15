@@ -23,12 +23,14 @@ import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadc
 import de.hybris.platform.acceleratorstorefrontcommons.constants.WebConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractCartPageController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
+import de.hybris.platform.acceleratorstorefrontcommons.forms.AddToCartForm;
 import de.hybris.platform.acceleratorstorefrontcommons.forms.SaveCartForm;
 import de.hybris.platform.acceleratorstorefrontcommons.forms.UpdateQuantityForm;
 import de.hybris.platform.acceleratorstorefrontcommons.forms.VoucherForm;
 import de.hybris.platform.acceleratorstorefrontcommons.forms.validation.SaveCartFormValidator;
 import de.hybris.platform.acceleratorstorefrontcommons.util.XSSFilterUtil;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
+import de.hybris.platform.commercefacades.order.CartFacade;
 import de.hybris.platform.commercefacades.order.SaveCartFacade;
 import de.hybris.platform.commercefacades.order.data.CartData;
 import de.hybris.platform.commercefacades.order.data.CartModificationData;
@@ -77,6 +79,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.amway.apac.storefront.controllers.ControllerConstants;
+
+import static com.amway.apac.storefront.controllers.ControllerConstants.ModelParameters.QUANTITY_ATTR;
 
 
 /**
@@ -127,6 +131,9 @@ public class CartPageController extends AbstractCartPageController
 
 	@Resource(name = "cartEntryActionFacade")
 	private CartEntryActionFacade cartEntryActionFacade;
+
+	@Resource(name = "cartFacade")
+	private CartFacade cartFacade;
 
 	@ModelAttribute("showCheckoutStrategies")
 	public boolean isCheckoutStrategyVisible()
@@ -621,10 +628,61 @@ public class CartPageController extends AbstractCartPageController
 		}
 	}
 
+	@RequestMapping(value = "/quickShop", method = RequestMethod.POST)
+	public String addToCart(@RequestParam("productCode") final String code, @RequestParam("quantity") final long qty, final Model model, @Valid final AddToCartForm form,
+							final BindingResult bindingErrors) throws CMSItemNotFoundException
+	{
+		if (qty <= 0)
+		{
+			GlobalMessages.addErrorMessage(model, ControllerConstants.ErrorMessageKeys.AddToCart.INVALID_QUANTITY);
+			model.addAttribute(QUANTITY_ATTR, Long.valueOf(0L));
+		}
+		else
+		{
+			try
+			{
+				final CartModificationData cartModification = cartFacade.addToCart(code, qty);
+				model.addAttribute(QUANTITY_ATTR, Long.valueOf(cartModification.getQuantityAdded()));
+				model.addAttribute("entry", cartModification.getEntry());
+				model.addAttribute("cartCode", cartModification.getCartCode());
+				model.addAttribute("isQuote", cartFacade.getSessionCart().getQuoteData() != null ? Boolean.TRUE : Boolean.FALSE);
+
+				if (cartModification.getQuantityAdded() == 0L)
+				{
+					GlobalMessages.addErrorMessage(model,
+							"basket.information.quantity.noItemsAdded." + cartModification.getStatusCode());
+				}
+				else if (cartModification.getQuantityAdded() < qty)
+				{
+					GlobalMessages.addErrorMessage(model,
+							"basket.information.quantity.reducedNumberOfItemsAdded." + cartModification.getStatusCode());
+				}
+			}
+			catch (final CommerceCartModificationException ex)
+			{
+				logDebugException(ex);
+				GlobalMessages.addErrorMessage(model, ControllerConstants.ErrorMessageKeys.AddToCart.BASKET_ERROR);
+				model.addAttribute(QUANTITY_ATTR, Long.valueOf(0L));
+			}
+		}
+
+		prepareDataForPage(model);
+
+		// Return Cart Content
+		return ControllerConstants.Views.Pages.Cart.CartContentPage;
+	}
+
 	protected String getCartPageRedirectUrl()
 	{
 		final QuoteData quoteData = getCartFacade().getSessionCart().getQuoteData();
 		return quoteData != null ? String.format(REDIRECT_QUOTE_EDIT_URL, urlEncode(quoteData.getCode())) : REDIRECT_CART_URL;
 	}
 
+	protected void logDebugException(final Exception ex)
+	{
+		if (LOG.isDebugEnabled())
+		{
+			LOG.debug(ex);
+		}
+	}
 }
