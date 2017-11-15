@@ -68,7 +68,7 @@
 			<attribute qualifier="secondaryImage" type="BannerComponent">
 				<persistence type="property" />
 			</attribute>
-			<attribute qualifier="secondary" type="CMSLinkComponent">
+			<attribute qualifier="secondaryLink" type="CMSLinkComponent">
 				<persistence type="property" />
 			</attribute>
 		</attributes>
@@ -87,6 +87,17 @@
 					<persistence type="property" />
 				</attribute>
 		</attributes>
+	</itemtype>
+
+    <itemtype code="AmwayApacOurNewProductComponent" generate="true"
+		extends="AmwayApacAbstractTextLinkImageComponent" autocreate="true"
+		jaloclass="com.amway.apac.core.jalo.components.AmwayApacOurNewProductComponent">
+		<description>Experience our Brands Background Component UI.</description>
+		<attributes>
+			<attribute qualifier="sideImage" type="BannerComponent">
+				<persistence type="property" />
+			</attribute>
+			</attributes>
 	</itemtype>
 
 	<itemtype code="AmwayApacYourOpportunityComponent" generate="true"

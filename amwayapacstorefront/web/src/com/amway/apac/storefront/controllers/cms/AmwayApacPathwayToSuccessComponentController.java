@@ -10,17 +10,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.amway.apac.core.model.components.AmwayApacShopByCategoryComponentModel;
+import com.amway.apac.storefront.components.model.AmwayApacPathwayToSuccessComponentModel;
 import com.amway.apac.storefront.controllers.ControllerConstants;
 
 
 /**
- * Controller for CMS {@link AmwayApacShopByCategoryComponentModel}
+ * Controller for CMS {@link AmwayApacPathwayToSuccessComponentModel}
  */
-@Controller("AmwayApacShopByCategoryComponentController")
-@RequestMapping(value = ControllerConstants.Actions.Cms.AmwayApacShopByCategoryComponent)
-public class AmwayApacShopByCategoryComponentController
-		extends AmwayApacAbstractResponsiveBannerComponentController<AmwayApacShopByCategoryComponentModel>
+@Controller("AmwayApacPathwayToSuccessComponentController")
+@RequestMapping(value = ControllerConstants.Actions.Cms.AmwayApacPathwayToSuccessComponent)
+public class AmwayApacPathwayToSuccessComponentController
+		extends AmwayApacAbstractResponsiveBannerComponentController<AmwayApacPathwayToSuccessComponentModel>
 {
 
 	@Resource(name = "amwayApacCmsLinkComponentUrlResolver")
@@ -28,7 +28,7 @@ public class AmwayApacShopByCategoryComponentController
 
 	@Override
 	protected void fillModel(final HttpServletRequest request, final Model model,
-			final AmwayApacShopByCategoryComponentModel component)
+			final AmwayApacPathwayToSuccessComponentModel component)
 	{
 		populateData(model, component);
 	}

@@ -27,9 +27,15 @@
 	
 	<div class="experience-brands clearfix">
 		<div class="new-hot-brand">
+		 <div class="amway-theme">
 			<cms:pageSlot position="ExperienceBrandsContentSlot" var="component">
 				<cms:component component="${component}" />
 			</cms:pageSlot>
+		</div>
+			<div class="experience-brands__content">
+                        <div class="wrapper">
+                            <div class="banner-content">
+                                <div class="banner-title-wrapper">
 			<cms:pageSlot position="BrandBackgroundImageBannerContentSlot"
 				var="component">
 				<cms:component component="${component}" />

@@ -25,7 +25,7 @@ public abstract class AmwayApacAbstractCMSLinkComponentController<T extends CMSL
 
 	protected void populateLinkUrl(final Model model, final T component)
 	{
-		model.addAttribute(ControllerConstants.GeneralConstants.LINK_URL_STRING,
+		model.addAttribute(ControllerConstants.ModelParameters.LINK_URL_STRING,
 				amwayApacCmsLinkComponentUrlResolver.resolve(component));
 	}
 }

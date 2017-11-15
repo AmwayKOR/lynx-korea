@@ -14,7 +14,7 @@
 	</h2>
 	<h4 class="banner-sub-title">${title2}</h4>
 	<div class="sub-title-wrap banner-sub-title">
-		<cms:component component="${description}" />
+		<cms:component component="${text}" />
 	</div>
 	<div class="banner-button-wrap">
 		<cms:component component="${link}"/>

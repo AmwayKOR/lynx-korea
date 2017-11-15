@@ -237,15 +237,14 @@ INSERT_UPDATE AmwayApacFeaturedBrandsCarouselComponent;$contentCV[unique=true];u
 
 ################### category page top banner component
 
-INSERT_UPDATE AmwayApacCategoryTopBannerComponent;$contentCV[unique=true];uid[unique=true];name;logoImage(uid, $contentCV);text(uid, $contentCV);link(&linkRef);&componentRef
-;;amwayapacCategoryTopBannerComponent;Category Top Banner Component;LogoBComponent;productDesc;amwayApacButtonLinkProductCategory;amwayapacCategoryTopBannerComponent
+INSERT_UPDATE AmwayApacCategoryTopBannerComponent;$contentCV[unique=true];uid[unique=true];name;logoImage(uid, $contentCV);text(uid, $contentCV);link(&linkRef);&componentRef;
+;;amwayapacCategoryTopBannerComponent;Category Top Banner Component;LogoBComponent;productDesc;amwayApacButtonLinkProductCategory;amwayapacCategoryTopBannerComponent;
 
 INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;target(code)[default='sameWindow'];&componentRef
 ;;amwayApacButtonLinkProductCategory;View Products;/;amwayApacButtonLinkProductCategory;;amwayApacButtonLinkProductCategory;
 
 INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
 ;;productDesc;productDesc;
-
 
 INSERT_UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];name;urlLink;&componentRef
 ;;LogoBComponent;Logo Banner Component;"/";LogoBComponent
@@ -280,6 +279,31 @@ INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&co
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
 ;;ShopByCategoryContentSlot;Shop By category Content Slot;true;ShopByCategoryTitleParagraphComponent,shopByCategoryCollectionComponent
 
+
+##################### category Page Experience Our Brands
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
+;;amwayapacExperienceOurBrandsParagraphComponent;amwayapacExperienceOurBrandsParagraphComponent
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
+;;ExperienceBrandsContentSlot;Experience Our Brands Content Slot;true;amwayapacExperienceOurBrandsParagraphComponent
+
+#################### Category page Experience Brands Background Component
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;BrandBackgroundImageBannerContentSlot;amwayapacExperienceBrandsBackgroundImageAndBannerComponent
+
+INSERT_UPDATE AmwayApacOurNewProductComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink;link(&componentRef);text(&componentRef);logoImage(uid, $contentCV)
+;;amwayapacExperienceBrandsBackgroundImageAndBannerComponent;Experience Brand Background Image and Banner component;amwayapacExperienceBrandsBackgroundImageAndBannerComponent;"/";amwayapacExperienceBrandsShopNowLinkComponent;amwayapacExperienceBrandsDescriptionParagraphComponent;ExperienceSideBannerComponent
+
+INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=true];name;target(code)[default='sameWindow'];&componentRef;
+;;amwayapacExperienceBrandsShopNowLinkComponent;experience brands show now link component;;amwayapacExperienceBrandsShopNowLinkComponent;
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
+;;amwayapacExperienceBrandsDescriptionParagraphComponent;amwayapacExperienceBrandsDescriptionParagraphComponent
+
+INSERT_UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];name;urlLink;&componentRef
+;;ExperienceSideBannerComponent;Experience Side Banner Component;"/";ExperienceSideBannerComponent
 
 ################## category page tools and advice component
 
@@ -384,26 +408,3 @@ INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=tr
 
 
 
-
-
-
-#Section 1 Home Page carousel
-
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
-;;Section1CarouselSlot-Homepage;Artistry Ideal Carousel Slot for Homepage;true;amwayapacArtistryDealCarouselComponent1;
-
-INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='homepage'];contentSlot(uid,$contentCV)[unique=true]
-;;Section1CarouselSlot-Homepage;Section1;;Section1CarouselSlot-Homepage
-
-INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;target(code)[default='sameWindow'];&componentRef
-;;amwayApacArtistryIdealRadianceButtonLink;Shop Now Nav Link;/;amwayApacArtistryIdealRadianceButtonLink;;amwayApacArtistryIdealRadianceButtonLink;
-;;amwayApacArtistryIdealRadianceSecondaryButtonLink;Secondary Action Nav Link;/;amwayApacArtistryIdealRadianceSecondaryButtonLink;;amwayApacArtistryIdealRadianceSecondaryButtonLink;
-
-INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
-;;amwayApacArtistryIdealRadianceParagraphComponent;Artistry Ideal Radiance Paragraph Component;amwayApacArtistryIdealRadianceParagraphComponent
-
-INSERT_UPDATE AmwayApacArtistryDealCarouselComponent;$contentCV[unique=true];uid[unique=true];name;urlLink;text(&componentRef);link(&componentRef);secondary(&componentRef);&componentRef;
-;;amwayapacArtistryDealCarouselComponent1;Artistry Deal Carousel Component;/;amwayApacArtistryIdealRadianceParagraphComponent;amwayApacArtistryIdealRadianceButtonLink;amwayApacArtistryIdealRadianceSecondaryButtonLink;amwayapacArtistryDealCarouselComponent1;
-
-INSERT_UPDATE AmwayApacArtistryNewLuxuryRotatingComponent;$contentCV[unique=true];uid[unique=true];name;banners(&componentRef);&componentRef
-;;amwayapacArtistryDealRotatingComponent;Homepage Artistry Deal Rotating Component;amwayapacArtistryDealCarouselComponent1;amwayapacArtistryDealRotatingComponent

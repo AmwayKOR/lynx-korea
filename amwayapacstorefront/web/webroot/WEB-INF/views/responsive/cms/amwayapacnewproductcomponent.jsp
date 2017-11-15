@@ -4,14 +4,29 @@
 <%@ taglib prefix="storepickup" tagdir="/WEB-INF/tags/responsive/storepickup" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
+
+<c:forEach items="${medias}" var="media">
+	<c:choose>
+		<c:when test="${empty imagerData}">
+			<c:set var="imagerData">"${media.width}":"${media.url}"</c:set>
+		</c:when>
+		<c:otherwise>
+			<c:set var="imagerData">${imagerData},"${media.width}":"${media.url}"</c:set>
+		</c:otherwise>
+	</c:choose>
+	<c:if test="${empty altText}">
+		<c:set var="altText" value="${fn:escapeXml(media.altText)}" />
+	</c:if>
+</c:forEach>
 <div class="col-sm-12 col-md-4 featured-product__item">
                                 <div class="featured-product__thumnail">
 		                            <cms:component component="${banner}"  />
 		                        </div>
                                 <p class="featured-product__title">${title}</p>
                                 <div class="featured-product__subtitle">
-                                		<cms:component component="${description}"  />
+                                		<cms:component component="${text}"  />
                                 </div>
                                 <div class="featured-product__link">
                                 		<cms:component component="${link}"  />
