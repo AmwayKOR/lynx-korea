@@ -42,18 +42,6 @@
                                     </a>
                                  </div>
                                  <div class="option-item-container col-xs-6 col-md-4">
-                                    <a href="Bonus-Payment-Preference.html">
-                                    		<div class="option-item">
-                                    			<cms:pageSlot position="Section2A" var="component">
-												<cms:component component="${component}"/>
-											</cms:pageSlot>
-											<div class="option-item-footer">
-	                                            <span>PAPER CHECK<c:choose><c:when test="${bonusPaperCheck == true}"><span class="icon-check-bold"></span><span class="active-green">active</span></c:when><c:otherwise><span class="icon-check-bold"></span><span class="active-green">Inactive</span></c:otherwise></c:choose></span>
-	                                        </div>
-                                    		</div>
-                                    </a>
-                                 </div>
-                                 <div class="option-item-container col-xs-6 col-md-4">
                                     <a href="Auto-Renewal.html">
                                     		<div class="option-item">
                                     			<cms:pageSlot position="Section2B" var="component">
