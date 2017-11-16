@@ -293,8 +293,8 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;c
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
 ;;BrandBackgroundImageBannerContentSlot;amwayapacExperienceBrandsBackgroundImageAndBannerComponent
 
-INSERT_UPDATE AmwayApacOurNewProductComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink;link(&componentRef);text(&componentRef);logoImage(uid, $contentCV)
-;;amwayapacExperienceBrandsBackgroundImageAndBannerComponent;Experience Brand Background Image and Banner component;amwayapacExperienceBrandsBackgroundImageAndBannerComponent;"/";amwayapacExperienceBrandsShopNowLinkComponent;amwayapacExperienceBrandsDescriptionParagraphComponent;ExperienceSideBannerComponent
+INSERT_UPDATE AmwayApacOurNewProductComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink;link(&componentRef);text(&componentRef);sideImage(uid, $contentCV)
+;;amwayapacExperienceBrandsBackgroundImageAndBannerComponent;Experience Brand Background Image and Banner component;amwayapacExperienceBrandsBackgroundImageAndBannerComponent;"/";amwayapacExperienceBrandsShopNowLinkComponent;amwayapacExperienceBrandsDescriptionParagraphComponent;ExperienceBrandsBackgroundBannerComponent
 
 INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=true];name;target(code)[default='sameWindow'];&componentRef;
 ;;amwayapacExperienceBrandsShopNowLinkComponent;experience brands show now link component;;amwayapacExperienceBrandsShopNowLinkComponent;
@@ -303,7 +303,7 @@ INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&co
 ;;amwayapacExperienceBrandsDescriptionParagraphComponent;amwayapacExperienceBrandsDescriptionParagraphComponent
 
 INSERT_UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];name;urlLink;&componentRef
-;;ExperienceSideBannerComponent;Experience Side Banner Component;"/";ExperienceSideBannerComponent
+;;ExperienceBrandsBackgroundBannerComponent;Experience Brand Background Banner Component;"/";ExperienceBrandsBackgroundBannerComponent
 
 ################## category page tools and advice component
 

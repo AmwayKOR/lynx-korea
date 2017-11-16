@@ -19,13 +19,18 @@
 	</c:if>
 </c:forEach>
 
-<%-- <div class="experience-brands__content" style="background-image: url(${backgroudImage.url});background-color: #ffffff;background-repeat-x: no-repeat;background-repeat-y: no-repeat;">
-    --%>
+
+			
+			 <div class="banner-title-wrapper" style="background-image: url(${sideImage.url});background-color: #ffffff;background-repeat-x: no-repeat;background-repeat-y: no-repeat;">
+			
+
+   
                	<cms:component component="${text}" />
             </div>
 			<div class="banner-button-wrap">
-            	 <span class="btn-text"><cms:component component="${link.linkName}"/></span>
-            </div>
-        </div>
-        <img class="experience-brands__image" data-media='{${imagerData}}' alt="${media.altText}"/>
-</div>
+            	 <a class="banner-button-link "><cms:component component="${link}"/></a>
+           
+  </div></div>
+  
+        <img class="experience-brands__image" data-media='{${imagerData}}' />
+ </div>

@@ -10,7 +10,6 @@
 
 <template:page pageTitle="${pageTitle}">				
 
-
 	<cms:pageSlot position="TopBannerContentSlot" var="feature">
 		<cms:component component="${feature}" />
 	</cms:pageSlot>
@@ -31,17 +30,15 @@
 			<cms:pageSlot position="ExperienceBrandsContentSlot" var="component">
 				<cms:component component="${component}" />
 			</cms:pageSlot>
-		</div>
 			<div class="experience-brands__content">
-                        <div class="wrapper">
-                            <div class="banner-content">
-                                <div class="banner-title-wrapper">
+			 <div class="wrapper">
 			<cms:pageSlot position="BrandBackgroundImageBannerContentSlot"
-				var="component">
+				var="component"> 
 				<cms:component component="${component}" />
 			</cms:pageSlot>
+			</div></div></div>
 		</div>
-	</div>
+	
 	<div class="container-fluid main-container">
 		<div class="category-success-story row">
 			<div class="success-story__item col-sm-12 col-md-6">
@@ -49,12 +46,14 @@
 					<cms:component component="${component}" />
 				</cms:pageSlot>
 			</div>
+			
 			<div class="success-story__item col-sm-12 col-md-6">
 				<cms:pageSlot position="SuccessStoryContentSlot2" var="component">
 					<cms:component component="${component}" />
 				</cms:pageSlot>
 			</div>
-		</div>
+		</div></div>
+		
 		<div class="row simpleimagecomponent pcp-banner new-advice block">
 			<div class="amway-theme col-xs-12">
 				<div class="three-tile-component">

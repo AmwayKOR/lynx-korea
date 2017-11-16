@@ -321,23 +321,23 @@ INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=tr
 ;;amwayapacExperienceBrandsShopNowLinkComponent;"Shop Now";btn-blue-white;banner-button-link;
 
 INSERT_UPDATE AmwayApacOurNewProductComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer;
-;;amwayapacExperienceBrandsBackgroundImageAndBannerComponent;ExperienceBrandsBackgroundImageContainer;
+;;amwayapacExperienceBrandsBackgroundImageAndBannerComponent;ExperienceBrandsBannerMediaContainer;
 
 INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=$lang]
-;;amwayapacExperienceBrandsDescriptionParagraphComponent;"<h2 class=""banner-title""><span>Nutrilite headline<br />goes here</span></h2><div class=""sub-title-wrap""><span class=""banner-sub-title""><span>Duis autem vel eum iriure dolor in hendrerit<br />in vulputate velit esse molestie consequat</span></span></div>";
+;;amwayapacExperienceBrandsDescriptionParagraphComponent;"<h2 class=""banner-title""><span>Nutrilite headline<br />goes here</span></h2><div class=""sub-title-wrap""><span class=""banner-sub-title""><span>Duis autem vel eum iriure dolor in hendrerit<br />in vulputate velit esse molestie consequat</span></span>";
 
 INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;folder(qualifier)[default='images'];altText
 ;;ExperienceBrandsBannerMedia;$siteResource/experience-brands-images.png;;ExperienceBrandsBannerMedia;;"Experience our brands"
 ;;ExperienceBrandsBackgroundImage;$siteResource/experience-brands-bg.jpg;;ExperienceBrandsBackgroundImage;;"Nutrilite headline"
 
 INSERT_UPDATE MediaContainer;$contentCV[unique=true];qualifier[unique=true];$medias;
-;;ExperienceBrandsBackgroundImageContainer;ExperienceBrandsBackgroundImage
+;;ExperienceBrandsBannerMediaContainer;ExperienceBrandsBannerMedia
 
 INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];name;$mediaContainer;&componentRef;
-;;ExperienceBrandsBackgroundResponsiveBannerComponent;Experience Brands Background Responsive Banner Component;ExperienceBrandsBackgroundImageContainer;ExperienceBrandsBackgroundResponsiveBannerComponent;
+;;ExperienceBrandsBannerResponsiveBannerComponent;Experience Brands Responsive Banner Component;ExperienceBrandsBannerMediaContainer;ExperienceBrandsBannerResponsiveBannerComponent;
 
 INSERT_UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];$picture
-;;ExperienceSideBannerComponent;ExperienceBrandsBannerMedia
+;;ExperienceBrandsBackgroundBannerComponent;ExperienceBrandsBackgroundImage
 
 ################## category page tools and advice component
 
