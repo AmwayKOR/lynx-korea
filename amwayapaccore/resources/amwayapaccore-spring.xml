@@ -225,6 +225,9 @@
         <property name="mediaFormat" value="Product_176Wx245H"/>
     </bean>
 	
+	<bean id="image96ValueProvider" parent="abstractImageValueProvider" >
+        <property name="mediaFormat" value="Product_96Wx96H"/>
+    </bean>
 	
 	<import resource="/amwayapaccore/processes/quote/quote-buyer-process-spring.xml"/>
 	<import resource="/amwayapaccore/processes/quote/quote-salesrep-process-spring.xml"/>

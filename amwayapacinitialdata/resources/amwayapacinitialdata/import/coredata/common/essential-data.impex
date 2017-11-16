@@ -89,6 +89,7 @@ INSERT_UPDATE MediaFolder;qualifier[unique=true];path[unique=true]
 INSERT_UPDATE MediaFormat;qualifier[unique=true]
 ;Product_67Wx67H
 ;Product_78Wx78H
+;Product_96Wx96H
 ;Product_133Wx133H
 ;Product_145Wx145H
 ;Product_165Wx128H

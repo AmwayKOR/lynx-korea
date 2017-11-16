@@ -38,6 +38,7 @@
 				<entry key="kitEntryProduct" value="Product_145Wx145H"/>
 				<entry key="registration" value="Product_165Wx128H"/>
 				<entry key="productGrid" value="Product_176Wx245H"/>
+				<entry key="autoComplete" value="Product_96Wx96H"/>
 				<entry key="quickView" value="Product_180Wx180H"/>
 				<entry key="product" value="Product_588Wx588H"/>
 				<entry key="zoom" value="Product_800Wx1112H"/>
@@ -108,6 +109,7 @@
                 <value>registration</value>
                 <value>recentlyViewed</value>
                 <value>quickView</value>
+                <value>autoComplete</value>
                 <value>kitEntryProduct</value>
                 <value>productGrid</value>
             </list>
