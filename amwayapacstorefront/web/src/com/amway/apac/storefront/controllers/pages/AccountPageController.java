@@ -63,6 +63,7 @@ import java.util.Set;
 import javax.annotation.Resource;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.BooleanUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -838,17 +839,29 @@ public class AccountPageController extends AbstractSearchPageController
 		GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.CONF_MESSAGES_HOLDER, "account.confirmation.address.updated",
 				null);
 
-		//Return new address data back to page
-		for (final AddressData addressData : userFacade.getAddressBook())
+		//Check if set as primary checkbox is being ticked
+		if (BooleanUtils.isTrue(addressForm.getDefaultAddress()))
 		{
-			if (addressData.getId() != null && addressData.getId().equals(newAddress.getId()))
+			final List<AddressData> listAddressData = userFacade.getAddressBook();
+			model.addAttribute(ADDRESS_DATA_ATTR, listAddressData);
+			return ControllerConstants.Views.Fragments.Account.ShippingAddressBody;
+		}
+		else
+		{
+			//Return new address data back to page
+			for (final AddressData addressData : userFacade.getAddressBook())
 			{
-				model.addAttribute(ADDRESS_DATA_ATTR, addressData);
-				break;
+				if (addressData.getId() != null && addressData.getId().equals(newAddress.getId()))
+				{
+					model.addAttribute(ADDRESS_DATA_ATTR, addressData);
+					break;
+				}
 			}
+
+			return ControllerConstants.Views.Fragments.Account.ShippingAddressDetail;
 		}
 
-		return ControllerConstants.Views.Fragments.Account.ShippingAddressDetail;
+
 	}
 
 	@RequestMapping(value = "/select-suggested-address", method = RequestMethod.POST)

@@ -1,7 +1,9 @@
 <%@ taglib prefix="address" tagdir="/WEB-INF/tags/responsive/address"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="formElement" tagdir="/WEB-INF/tags/responsive/formElement" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <c:if test="${not empty country}">
 	<c:url value="/my-account/edit-address/edit" var="shippingAddressEditUrl"/>
@@ -12,7 +14,6 @@
 		
 			
 			<form:hidden path="countryIso"/>
-			<form:hidden path="defaultAddress"/>
 			<form:hidden path="titleCode"/>
 			<form:hidden path="addressId"/>
 			
@@ -24,11 +25,16 @@
 		    		onclick="ACC.billingshipping.submitFormForEditAddress(this);" 
 		    		form="shipping-address-form-${fn:escapeXml(addressData.id)}"
 		    		data-address-id="${fn:escapeXml(addressData.id)}">SAVE</button>
-		    <div class="button-right-check">
-		        <input class="" id="edit12" name="edit12" type="checkbox">
-		        <label class="" for="edit12">Make Primary Shipping Address
-		        </label>
-		    </div>
+		    	
+		    	<c:if test="${not addressData.defaultAddress}">
+		    		<div class="button-right-check billingShipping">
+			        <form:checkbox id="address.defaultAddress-${fn:escapeXml(addressData.id)}" path="defaultAddress" />
+                    <label for="address.defaultAddress-${fn:escapeXml(addressData.id)}"> 
+                        <spring:theme code="address.defaultAddress"/>
+                    </label>
+			    </div>
+		    	</c:if>
+		    
 		</fieldset>
    	</form:form>
 </c:if>

@@ -9,15 +9,22 @@ ACC.billingshipping = {
 		var addressEditHtml = $(e).parents(".mailing-address-edit");
 		var addressHtml = addressEditHtml.prev(".mailing-address");
 		var addressId = $(e).attr('data-address-id');
+		var setDefault = $('#shipping-address-form-'+addressId+'').find('input[id="address.defaultAddress-'+addressId+'"]').is(':checked');
+		var shippingAddressBodyHtml = $(e).parents("#billingShippingBody");
         var options = {
     			url: '/amwayapacstorefront/my-account/edit-address/edit',
     			data: $('form[id=shipping-address-form-'+addressId+']').serialize(),
     			type: 'POST',
     			success: function (data)
     			{
-    				addressEditHtml.hide();
-    				addressHtml.html(data);
-    				addressHtml.show();
+    				if(setDefault){
+    					shippingAddressBodyHtml.html(data);
+    				}else{
+    					addressEditHtml.hide();
+        				addressHtml.html(data);
+        				addressHtml.show();
+    				}
+    				
     			}
     		};
 

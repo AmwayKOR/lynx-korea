@@ -300,3 +300,82 @@ div.page-content-wrapper.page-shopping-lists div.create-list-button-wrapper{
 .amway-suggest {
 	font-size: 16px;
 }
+[type="checkbox"] {
+		&:not(:checked) {
+			left: -9999px;
+			position: absolute;
+			&+input + label {
+				color: #55565a;
+				cursor: pointer;
+				font-size: 15px;
+				font-weight: 100;
+				padding-left: 1.95em;
+				position: relative;
+				text-align: left;
+				&::before {
+					background: #fff;
+					border: 1px solid #dadada;
+					content: "";
+					height: 1.25em;
+					left: 0;
+					position: absolute;
+					top: 0;
+					width: 1.25em;
+				}
+				&::after {
+					background: url("../images/checkbox_check.png") no-repeat scroll 0 0 / contain;
+					content: "";
+					font-size: 1.3em;
+					height: 20px;
+					left: 0;
+					line-height: 0.8;
+					position: absolute;
+					top: 0;
+					transition: all 0.2s ease 0s;
+					width: 20px;
+					opacity: 0;
+					transform: scale(0);
+				}
+			}
+		}
+		&:checked {
+			left: -9999px;
+			position: absolute;
+			&+input + label {
+				color: #55565a;
+				cursor: pointer;
+				font-size: 15px;
+				font-weight: 100;
+				padding-left: 1.95em;
+				position: relative;
+				text-align: left;
+				&::before {
+					background: #fff none repeat scroll 0 0;
+					border: 1px solid #dadada;
+					content: "";
+					height: 1.25em;
+					left: 0;
+					position: absolute;
+					top: 0;
+					width: 1.25em;
+					background-color: #0075a4;
+					border-color: #0075a4;
+				}
+				&::after {
+					background: url("../images/checkbox_check.png") no-repeat scroll 0 0 / contain;
+					content: "";
+					font-size: 1.3em;
+					height: 20px;
+					left: 0;
+					line-height: 0.8;
+					position: absolute;
+					top: 0;
+					transition: all 0.2s ease 0s;
+					width: 20px;
+					opacity: 1;
+					transform: scale(1);
+				}
+			}
+		}
+}
+

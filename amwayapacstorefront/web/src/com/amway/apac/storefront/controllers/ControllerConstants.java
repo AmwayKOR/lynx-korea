@@ -200,6 +200,7 @@ public interface ControllerConstants
 			{
 				String CountryAddressForm = "fragments/address/countryAddressForm"; // NOSONAR
 				String ShippingAddressDetail = "fragments/address/shippingAddressDetail"; // NOSONAR
+				String ShippingAddressBody = "fragments/address/shippingAddressBody"; // NOSONAR
 				String SavedCartRestorePopup = "fragments/account/savedCartRestorePopup"; // NOSONAR
 			}
 

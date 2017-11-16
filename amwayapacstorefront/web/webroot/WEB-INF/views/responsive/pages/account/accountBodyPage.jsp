@@ -33,7 +33,7 @@
                                     </a>
                                  </div>
                                  <div class="option-item-container col-xs-6 col-md-4">
-                                    <a href="aaron/billingShipping">
+                                    <a href="my-account/billingshipping">
                                     		<div class="option-item">
                                     			<cms:pageSlot position="Section1C" var="component">
 												<cms:component component="${component}"/>
