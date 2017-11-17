@@ -183,6 +183,11 @@ public interface ControllerConstants
 			{
 				String ShoppingListDetailsPage = "pages/shoppingList/shoppingListDetailsPage"; //NOSONAR
 			}
+
+			interface Registration //NOSONAR
+			{
+				String RegistrationSimpleTerms = "pages/registration/registrationSimpleTerms"; //NOSONAR
+			}
 		}
 
 		interface Fragments

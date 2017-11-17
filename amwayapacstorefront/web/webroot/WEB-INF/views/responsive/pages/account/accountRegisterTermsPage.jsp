@@ -12,7 +12,7 @@
 		<cms:component component="${component}"/>
 	</cms:pageSlot>
 	<div class="container-fluid main-container">
-		<form:form method="post" modelAttribute="termForm" commandName="termForm" action="validate-terms">
+		<form:form method="post" modelAttribute="termForm" commandName="termForm" action="validate-multiple-terms">
 		<ul id="terms" class="box-sizing">
 			<cms:pageSlot position="Terms1" var="component">
 				<cms:component component="${component}"/>
@@ -46,7 +46,7 @@
 					</div>
 				    <div class="action amway-theme">
 					    <spring:bind path="verified">
-					    	<input id="verified" name="verified" type="checkbox" checked="checked" />
+					    	<input id="verified" name="verified" type="checkbox"/>
 					    </spring:bind>
 					    	<label for="verified" class="normal">Verified</label>
 				    </div>

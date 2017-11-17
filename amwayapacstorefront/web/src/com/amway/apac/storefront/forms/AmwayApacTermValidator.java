@@ -32,12 +32,6 @@ public class AmwayApacTermValidator implements Validator
 	{
 		final AmwayApacTermForm termForm = (AmwayApacTermForm) object;
 		final List<AmwayApacTerm> termList = termForm.getTerm();
-		final Boolean verified = termForm.getVerified();
-
-		if (BooleanUtils.isNotTrue(verified))
-		{
-			errors.rejectValue(null, "account.term.verified");
-		}
 
 		for (final AmwayApacTerm term : termList)
 		{

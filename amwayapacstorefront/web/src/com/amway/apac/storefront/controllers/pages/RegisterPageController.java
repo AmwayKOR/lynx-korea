@@ -20,6 +20,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.BooleanUtils;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,6 +32,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.amway.apac.storefront.controllers.ControllerConstants;
 import com.amway.apac.storefront.forms.AmwayApacTermForm;
 import com.amway.apac.storefront.forms.AmwayApacTermValidator;
+
 
 /**
  * Register Controller for mobile. Handles login and register for the account flow.
@@ -92,7 +94,7 @@ public class RegisterPageController extends AbstractRegisterPageController
 	@RequestMapping(value = "/newcustomer", method = RequestMethod.POST)
 	public String doRegister(final RegisterForm form, final BindingResult bindingResult, final Model model,
 			final HttpServletRequest request, final HttpServletResponse response, final RedirectAttributes redirectModel)
-			throws CMSItemNotFoundException
+					throws CMSItemNotFoundException
 	{
 		getRegistrationValidator().validate(form, bindingResult);
 		return processRegisterUserRequest(null, form, bindingResult, model, request, response, redirectModel);
@@ -102,7 +104,35 @@ public class RegisterPageController extends AbstractRegisterPageController
 	public String simpleTerms(final Model model) throws CMSItemNotFoundException
 	{
 		model.addAttribute("termForm", new AmwayApacTermForm());
-		return setCMSPage(model, SIMPLE_TERM_PAGE);
+		setCMSPage(model, SIMPLE_TERM_PAGE);
+		return ControllerConstants.Views.Pages.Registration.RegistrationSimpleTerms;
+	}
+
+	/**
+	 * Sample url mapping to test validation. Remove/change to function call on confirmed flow templates:
+	 * accountRegisterTermsPage.jsp
+	 *
+	 * @throws CMSItemNotFoundException
+	 */
+	@RequestMapping(value = "/validate-simple-terms", method = RequestMethod.POST)
+	public String validateSimpleTerms(final AmwayApacTermForm termForm, final BindingResult bindingResult, final Model model,
+			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+	{
+
+		getTermValidator().validate(termForm, bindingResult);
+		model.addAttribute("termForm", termForm);
+
+		if (bindingResult.hasErrors())
+		{
+			GlobalMessages.addErrorMessage(model, FORM_GLOBAL_ERROR);
+			setCMSPage(model, SIMPLE_TERM_PAGE);
+			return ControllerConstants.Views.Pages.Registration.RegistrationSimpleTerms;
+		}
+		else
+		{
+			GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.CONF_MESSAGES_HOLDER, "account.terms.success", null);
+			return setCMSPage(model, MULTIPLE_TERM_PAGE);
+		}
 	}
 
 	@RequestMapping(value = "/multiple-terms", method = RequestMethod.GET)
@@ -118,15 +148,14 @@ public class RegisterPageController extends AbstractRegisterPageController
 	 *
 	 * @throws CMSItemNotFoundException
 	 */
-	@RequestMapping(value = "/validate-terms", method = RequestMethod.POST)
-	public String validateTerms(final AmwayApacTermForm termForm, final BindingResult bindingResult, final Model model,
+	@RequestMapping(value = "/validate-multiple-terms", method = RequestMethod.POST)
+	public String validateMultipleTerms(final AmwayApacTermForm termForm, final BindingResult bindingResult, final Model model,
 			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 
 		getTermValidator().validate(termForm, bindingResult);
 		model.addAttribute("termForm", termForm);
-
-		if (bindingResult.hasErrors())
+		if ((bindingResult.hasErrors()) || (BooleanUtils.isNotTrue(termForm.getVerified())))
 		{
 			GlobalMessages.addErrorMessage(model, FORM_GLOBAL_ERROR);
 			return setCMSPage(model, MULTIPLE_TERM_PAGE);
