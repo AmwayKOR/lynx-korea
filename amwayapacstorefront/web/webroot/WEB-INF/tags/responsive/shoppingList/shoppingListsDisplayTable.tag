@@ -15,21 +15,6 @@
                      <span class="header-icon icon-arrow-dropdown <c:if test="${sortField eq 'byName'}">underline</c:if>"></span></button>
              </form>
          </th>
-         <th class="js-ditto-sorting-option">
-             <form class="ditto-sorting-form js-ditto-sorting-form" method="get">
-             	<input type="hidden" name="sortField" value="byUser" class="sortFieldInput" id="usernameSortFieldInput">
-             	<input type="hidden" name="sortOrder" value="desc" class="sortOrderInput" id="usernameSortOrderInput">
-                 <button class="ditto-header-button" type="submit"><spring:theme code="shopping.lists.page.lists.table.createdby.label" />
-                     <span class="header-icon icon-arrow-dropdown <c:if test="${sortField eq 'byUser'}">underline</c:if>"></span></button>
-             </form>
-         </th>
-         <th class="">
-             <form class="ditto-sorting-form" method="get">
-             	<input type="hidden" name="sortField" value="byAddedFor" class="sortFieldInput" id="addedforSortFieldInput">
-             	<input type="hidden" name="sortOrder" value="desc" class="sortOrderInput" id="addedforSortOrderInput">
-                 <button class="ditto-header-button" type="submit"><spring:theme code="shopping.lists.page.lists.table.addedfor.label" />
-                     <span class="header-icon icon-arrow-dropdown <c:if test="${sortField eq 'byAddedFor'}">underline</c:if>"></span></button></form>
-         </th>
          <th class="">
              <form class="ditto-sorting-form" method="get">
              	<input type="hidden" name="sortField" value="byLastUpdated" class="sortFieldInput" id="lastupdatedSortFieldInput">
@@ -44,8 +29,6 @@
        <tr id="row-${loop.index}">
        	   <c:url value="/shopping-lists/detail/${shoppingList.uid}" var="shoppingListDetailsUrl" />
            <td class="ditto-field-name"><span class="link-wrapper"> <a class="responsive-table-link js-saved-cart-name" href="${shoppingListDetailsUrl}">${shoppingList.name}</a> </span> </td>
-           <td class=""> ${shoppingList.user.name}</td>
-           <td class="">${shoppingList.user.name}</td> <!-- downline functinality is not done yet, so just using the user name here -->
            <td class=""><fmt:formatDate value="${shoppingList.lastUpdated}" type="both"/></td>
        </tr>
       </c:forEach>

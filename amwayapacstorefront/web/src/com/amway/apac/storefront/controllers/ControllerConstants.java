@@ -331,19 +331,9 @@ public interface ControllerConstants
 		String SHOPPING_LIST_SORT_BY_NAME = "byName";
 
 		/**
-		 * Shopping list sorting parameter to sort by addedFor user.
-		 */
-		String SHOPPING_LIST_SORT_BY_ADDED_FOR = "byAddedFor";
-
-		/**
 		 * Shopping list sorting parameter to sort by lastUpdated.
 		 */
 		String SHOPPING_LIST_SORT_BY_LAST_UPDATED = "byLastUpdated";
-
-		/**
-		 * Shopping list sorting parameter to sort by lastUpdated.
-		 */
-		String SHOPPING_LIST_SORT_BY_USER = "byUser";
 
 		/**
 		 * Prefix appended to status for add product to shopping list messages.

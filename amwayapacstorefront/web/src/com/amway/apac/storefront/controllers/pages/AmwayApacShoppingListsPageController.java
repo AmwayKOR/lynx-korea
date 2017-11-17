@@ -139,14 +139,8 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 				case ControllerConstants.GeneralConstants.SHOPPING_LIST_SORT_BY_NAME:
 					resolvedSortField = Wishlist2Model.NAME;
 					break;
-				case ControllerConstants.GeneralConstants.SHOPPING_LIST_SORT_BY_ADDED_FOR: // down line functionality is not done yet, so sorting is done by user
-					resolvedSortField = Wishlist2Model.USER;
-					break;
 				case ControllerConstants.GeneralConstants.SHOPPING_LIST_SORT_BY_LAST_UPDATED:
 					resolvedSortField = Wishlist2Model.MODIFIEDTIME;
-					break;
-				case ControllerConstants.GeneralConstants.SHOPPING_LIST_SORT_BY_USER:
-					resolvedSortField = Wishlist2Model.USER;
 					break;
 				default:
 					resolvedSortField = Wishlist2Model.MODIFIEDTIME; // if the value is invalid then, using the sort by modified time as default
