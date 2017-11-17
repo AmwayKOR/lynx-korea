@@ -32,6 +32,41 @@ $jarResourceCms=jar:com.amway.apac.initialdata.setup.AmwayApacInitialDataSystemS
 
 $lang=en
 
+########## Top Header Logo
+
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];realfilename;mediaFormat(qualifier)[default=desktop];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];altText;folder(qualifier)[default='images']
+;;topHeaderLogoImage;topHeaderLogoImage;;$siteResource/logo1.png;image/png;Top header logo image;
+
+UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
+;;TopHeaderLogoComponent;topHeaderLogoImage
+
+########## Top Header Logo ##########
+
+
+########## Home page section 1 carousel 
+
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];mediaFormat(qualifier)[default=desktop];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;folder(qualifier)[default='images'];altText
+;;girl1;;$siteResource/banner_image_new.png;;girl1;;"Girl Pic"
+;;artistry1;;$siteResource/layer-20.png;;artistry1;;"Artistry Pic"
+
+INSERT_UPDATE MediaContainer;$contentCV[unique=true];qualifier[unique=true];$medias;
+;;homePageTopCarouselGirlImage;girl1
+;;homePageTopCarouselArtistryImage;artistry1
+
+INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
+;;homePageTopCarouselArtistryImageComponent;homePageTopCarouselArtistryImage
+
+UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang]
+;;HomepageSection1CarouselShopNowNavLink;"SHOP NOW"
+;;HomepageSection1CarouselSecNavLink;"SECONDARY ACTION"
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=$lang];
+;;HomepageSection1CarouselImage1Text;"<span class=""banner__message--main"">Artistry IDEAL RADIANCE</span><br /><span class=""banner__message--sub"">This highly advanced, yet gentle skin care system helps to visibly reduce the appearance of dark spots and discolouration.</span>";
+
+INSERT_UPDATE AmwayApacArtistryDealCarouselComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang];&componentRef
+;;AmwayApacArtistryDealCarouselComponent;girl1;artistry1;homePageTopCarouselGirlImage;AmwayApacArtistryDealCarouselComponent
+
+########## Home page section 1 carousel ##########
 
 	
 #Section 2 Home Page Amway Latest News

@@ -29,6 +29,40 @@ $jarResourceCms=jar:com.amway.apac.initialdata.setup.AmwayApacInitialDataSystemS
 $medias=medias(code, $contentCV);
 $mediaContainer=media(qualifier, $contentCV);
 
+########## Top Header Logo
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
+;;SiteLogoSlot;Header Logo;true;TopHeaderLogoComponent
+
+INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink
+;;TopHeaderLogoComponent;Top Header Logo Component;TopHeaderLogoComponent;"/"
+
+########## Top Header Logo ##########
+
+
+########## Home page section 1 carousel
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;Section1CarouselSlot;HomepageSection1CarouselComponent
+
+INSERT_UPDATE AmwayApacArtistryDealCarouselComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink;link(&componentRef);secondaryLink(&componentRef);text(&componentRef);secondaryImage(&componentRef)
+;;AmwayApacArtistryDealCarouselComponent;Girl Thumbnail Detail;AmwayApacArtistryDealCarouselComponent;;HomepageSection1CarouselShopNowNavLink;HomepageSection1CarouselSecNavLink;HomepageSection1CarouselImage1Text;homePageTopCarouselArtistryImageComponent
+
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow'];
+;;HomepageSection1CarouselShopNowNavLink;Shop Now Nav Link;/;HomepageSection1CarouselShopNowNavLink;HomepageSection1CarouselShopNowNavLink;;;;
+;;HomepageSection1CarouselSecNavLink;Secondary Action Nav Link;/;HomepageSection1CarouselSecNavLink;HomepageSection1CarouselSecNavLink;;;;
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;
+;;HomepageSection1CarouselImage1Text; Home Page top carousel image 1;HomepageSection1CarouselImage1Text;        
+
+INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;homePageTopCarouselArtistryImageComponent;Home page top carousel artistry image component;homePageTopCarouselArtistryImageComponent
+
+INSERT_UPDATE RotatingImagesComponent;$contentCV[unique=true];uid[unique=true];name;responsiveBanners(&componentRef);&componentRef
+;;HomepageSection1CarouselComponent;Homepage section 1 Carousel;AmwayApacArtistryDealCarouselComponent;HomepageSection1CarouselComponent
+
+########## Home page section 1 carousel ##########
+
 
 #Section 2 Home Page Amway Latest News
 

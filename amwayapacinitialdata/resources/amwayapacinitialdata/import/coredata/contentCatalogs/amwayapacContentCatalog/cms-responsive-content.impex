@@ -679,7 +679,6 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 ;Section10;;;
 ;Section11;;;
 ;Section12;;;
-;Section13;;;
 ;Footer;;;footer
 
 # Create Content Slots
@@ -737,6 +736,8 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active
 ;;ToolsAndAdviceBannerProductDetailContentSlot3;Tools and advice banner ProductDetail  content slot 3;true
 ;;LearningOpportunitiesProductDetailContentSlot;Learning Opportunities Product Detail content slot;true
 ;;LearningOpportunitiesBannerProductDetailContentSlot1;Learning Opportunities banner Product Detail content slot 1;true
+
+;;Section1CarouselSlot;Home page top carousel slot;true
 
 # Bind Content Slots to Page Templates
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ProductDetailsPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
@@ -1225,6 +1226,7 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 ;;NavigationBar-HomePageMain;NavigationBar;;NavigationBarSlot;true
 ;;Mobile-NavigationBar-HomePageMain;MobileNavigationBar;;MobileNavigationBarSlot;true
 ;;HeaderAccountNavigation-HomePageMain;HeaderAccountNavigation;;HeaderAccountNavigationSlot;true
+;;Section1-HomePageMain;Section1;;Section1CarouselSlot;true
 
 # Create Content Pages
 

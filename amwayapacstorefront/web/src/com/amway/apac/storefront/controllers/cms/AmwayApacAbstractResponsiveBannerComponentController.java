@@ -45,8 +45,8 @@ public abstract class AmwayApacAbstractResponsiveBannerComponentController<T ext
 	protected void populateData(final Model model, final T component)
 	{
 
-		final List<ImageData> mediaDataList = responsiveMediaFacade
-				.getImagesFromMediaContainer(component.getMedia(commerceCommonI18NService.getCurrentLocale()));
+		final List<ImageData> mediaDataList = getResponsiveMediaFacade()
+				.getImagesFromMediaContainer(component.getMedia(getCommerceCommonI18NService().getCurrentLocale()));
 
 		if (null != component.getMedia())
 		{
@@ -55,7 +55,55 @@ public abstract class AmwayApacAbstractResponsiveBannerComponentController<T ext
 		if (null != component.getLink())
 		{
 			model.addAttribute(ControllerConstants.ModelParameters.LINK_URL_STRING,
-					amwayApacCmsLinkComponentUrlResolver.resolve(component.getLink()));
+					getAmwayApacCmsLinkComponentUrlResolver().resolve(component.getLink()));
 		}
+	}
+
+	/**
+	 * @return the responsiveMediaFacade
+	 */
+	public ResponsiveMediaFacade getResponsiveMediaFacade()
+	{
+		return responsiveMediaFacade;
+	}
+
+	/**
+	 * @param responsiveMediaFacade the responsiveMediaFacade to set
+	 */
+	public void setResponsiveMediaFacade(ResponsiveMediaFacade responsiveMediaFacade)
+	{
+		this.responsiveMediaFacade = responsiveMediaFacade;
+	}
+
+	/**
+	 * @return the commerceCommonI18NService
+	 */
+	public CommerceCommonI18NService getCommerceCommonI18NService()
+	{
+		return commerceCommonI18NService;
+	}
+
+	/**
+	 * @param commerceCommonI18NService the commerceCommonI18NService to set
+	 */
+	public void setCommerceCommonI18NService(CommerceCommonI18NService commerceCommonI18NService)
+	{
+		this.commerceCommonI18NService = commerceCommonI18NService;
+	}
+
+	/**
+	 * @return the amwayApacCmsLinkComponentUrlResolver
+	 */
+	public UrlResolver<CMSLinkComponentModel> getAmwayApacCmsLinkComponentUrlResolver()
+	{
+		return amwayApacCmsLinkComponentUrlResolver;
+	}
+
+	/**
+	 * @param amwayApacCmsLinkComponentUrlResolver the amwayApacCmsLinkComponentUrlResolver to set
+	 */
+	public void setAmwayApacCmsLinkComponentUrlResolver(UrlResolver<CMSLinkComponentModel> amwayApacCmsLinkComponentUrlResolver)
+	{
+		this.amwayApacCmsLinkComponentUrlResolver = amwayApacCmsLinkComponentUrlResolver;
 	}
 }

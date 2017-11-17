@@ -1,9 +1,5 @@
 package com.amway.apac.storefront.controllers.cms;
 
-import de.hybris.platform.cms2.model.contents.components.CMSLinkComponentModel;
-import de.hybris.platform.commerceservices.url.UrlResolver;
-
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
@@ -23,9 +19,16 @@ public class AmwayApacJoinAmwayComponentController
 		extends AmwayApacAbstractResponsiveBannerComponentController<AmwayApacJoinAmwayComponentModel>
 {
 
-	@Resource(name = "amwayApacCmsLinkComponentUrlResolver")
-	private UrlResolver<CMSLinkComponentModel> amwayApacCmsLinkComponentUrlResolver;
-
+	/**
+	 * Populates the url for the link in the view model.
+	 *
+	 * @param request
+	 *           http request
+	 * @param model
+	 *           view model
+	 * @param component
+	 *           component
+	 */
 	@Override
 	protected void fillModel(final HttpServletRequest request, final Model model, final AmwayApacJoinAmwayComponentModel component)
 	{

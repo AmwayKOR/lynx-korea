@@ -6,17 +6,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.amway.apac.storefront.components.model.AmwayApacPathToSuccessPitchPerfectComponentModel;
+import com.amway.apac.storefront.components.model.AmwayApacArtistryNewLuxuryCarouselComponentModel;
 import com.amway.apac.storefront.controllers.ControllerConstants;
 
 
 /**
- * Controller for CMS {@link AmwayApacPathToSuccessPitchPerfectComponentModel}
+ * Controller for CMS {@link AmwayApacArtistryNewLuxuryCarouselComponentModel}
  */
-@Controller("AmwayApacPathToSuccessPitchPerfectComponentController")
-@RequestMapping(value = ControllerConstants.Actions.Cms.AmwayApacPathToSuccessPitchPerfectComponent)
-public class AmwayApacPathToSuccessPitchPerfectComponentController
-		extends AmwayApacAbstractResponsiveBannerComponentController<AmwayApacPathToSuccessPitchPerfectComponentModel>
+@Controller("AmwayApacArtistryNewLuxuryCarouselComponentController")
+@RequestMapping(value = ControllerConstants.Actions.Cms.AmwayApacArtistryNewLuxuryCarouselComponent)
+public class AmwayApacArtistryNewLuxuryCarouselComponentController
+		extends AmwayApacAbstractResponsiveBannerComponentController<AmwayApacArtistryNewLuxuryCarouselComponentModel>
 {
 
 	/**
@@ -31,7 +31,7 @@ public class AmwayApacPathToSuccessPitchPerfectComponentController
 	 */
 	@Override
 	protected void fillModel(final HttpServletRequest request, final Model model,
-			final AmwayApacPathToSuccessPitchPerfectComponentModel component)
+			final AmwayApacArtistryNewLuxuryCarouselComponentModel component)
 	{
 		populateData(model, component);
 	}
