@@ -44,7 +44,7 @@ INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;fronten
 ;;HomePageMainTemplate;Home Main Page Template;layout/homePageLayout;CategoryPage,ContentPage
 ;;ContentArticlePagesTemplate;Content Article Pages Template;business/contentArticlePagesLayout;ContentPage
 ;;RegisterLandingPageTemplate;Register Landing Page Template;account/registerLandingLayoutPage;ContentPage
-
+;;RegistrationTermsTemplate;Registration Terms Pages Template;account/accountRegisterTermsPage;ContentPage
 
 # Templates without a frontendTemplateName
 ;;CartPageTemplate;Cart Page Template;;ContentPage;false;
@@ -85,12 +85,12 @@ UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];velocityTemplate[tr
 ;;HomePageMainTemplate      ;$jarResourceCms/structure-view/structure_homePageMainTemplate.vm
 ;;ContentArticlePagesTemplate		;$jarResourceCms/structure-view/structure_contentArticlePagesTemplate.vm
 ;;RegisterLandingPageTemplate       ;$jarResourceCms/structure-view/structure_registerLandingPageTemplate.vm
-
+;;RegistrationTermsTemplate      ;$jarResourceCms/structure-view/structure_accountRegistrationTermsTemplate.vm
 
 # Create ContentSlotNames
 # Each PageTemplate has a number of ContentSlotNames, with a list of valid components for the slot.
 # There are a standard set of slots and a number of specific slots for each template.
-# Standard slots are SiteLogo, HeaderLinks, MiniCart and NavigationBar (that all appear in the Header), and the Footer. 
+# Standard slots are SiteLogo, HeaderLinks, MiniCart and NavigationBar (that all appear in the Header), and the Footer.
 
 # Error Page Template
 INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='ErrorPageTemplate'];validComponentTypes(code);compTypeGroup(code)
@@ -183,6 +183,7 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 ;TopHeaderSlot;;;wide
 ;BottomHeaderSlot;;;wide
 ;PlaceholderContentSlot;;;
+;NoResultsContentSlot;;;
 
 # Search Result List / Grid are two layouts for Search Result pages
 # Search Empty is displayed when no results are found
@@ -241,6 +242,7 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 ;TopHeaderSlot;;;wide
 ;BottomHeaderSlot;;;wide
 ;PlaceholderContentSlot;;;
+;ProductCarouselSlot;;;
 
 
 # Category and Landing Pages are various layouts for a Category Landing page
@@ -527,7 +529,6 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 ;Section1C;;;
 ;Section2A;;;
 ;Section2B;;;
-;Section2C;;;
 ;BodyContent;;;wide
 ;Footer;;;footer
 
@@ -680,6 +681,23 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 ;Section10;;;
 ;Section11;;;
 ;Section12;;;
+;Footer;;;footer
+
+# Registration terms and Condition content slots
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='RegistrationTermsTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;SearchBox;;;searchbox
+;MiniCart;;;minicart
+;MobileNavigationBar;;;navigation
+;NavigationBar;;;navigation
+;TermsBanner;;;
+;Terms1;;;
+;Terms2;;;
+;Terms3;;;
+;Terms4;;;
+;Terms5;;;
+;Terms6;;;
+;Terms7;;;
 ;Footer;;;footer
 
 # Create Content Slots
@@ -841,6 +859,7 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 ;;MiddleContent-SearchResultsEmpty;MiddleContent;;MiddleContentSlot;true
 ;;BottomContent-SearchResultsEmpty;BottomContent;;BottomContentSlot;true
 ;;SideContent-SearchResultsEmpty;SideContent;;SideContentSlot;true
+;;ProductCarouselSlot-ProductGridPage;ProductCarouselSlot;;ProductCarouselSlot;true
 
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='CategoryPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
 ;;SiteLogo-CategoryPage;SiteLogo;;SiteLogoSlot;true
@@ -925,7 +944,7 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='LandingPage5Template'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
 ;;SiteLogo-LandingPage5;SiteLogo;;SiteLogoSlot;true
 ;;CountrySelector-LandingPage5;CountrySelector;;CountrySelectorSlot;true
-;;HomepageLink-LandingPage5;HomepageNavLink;;HomepageNavLinkSlot;true 
+;;HomepageLink-LandingPage5;HomepageNavLink;;HomepageNavLinkSlot;true
 ;;BreadCrumb-LandingPage5;BreadCrumb;;BreadCrumbSlot;true
 ;;HeaderAccountNavigation-LandingPage5;HeaderAccountNavigation;;HeaderAccountNavigationSlot;true
 ;;NavigationBar-LandingPage5;NavigationBar;;NavigationBarSlot;true
@@ -987,6 +1006,7 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 ;;ProductGridSlot-ProductGridPage;ProductGridSlot;;ProductGridSlot;true
 ;;PlaceholderContentSlot-ProductGridPage;PlaceholderContentSlot;;PlaceholderContentSlot;true
 ;;Mobile-NavigationBar-ProductGridPage;MobileNavigationBar;;MobileNavigationBarSlot;true
+;;NoResultsContentSlot-ProductGridPage;NoResultsContentSlot;;NoResultsContentSlot;true
 
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ProductListPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
 ;;SiteLogo-ProductListPage;SiteLogo;ProductListPageTemplate;SiteLogoSlot;true
@@ -1301,11 +1321,23 @@ INSERT_UPDATE ProductPage;$contentCV[unique=true];uid[unique=true];name;masterTe
 
 # Category Pages
 INSERT_UPDATE CategoryPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);defaultPage;approvalStatus(code)[default='approved']
-;;productList;Product List;ProductListPageTemplate;true;
-;;productGrid;Product Grid;ProductGridPageTemplate;false;
+;;productList;Product List;ProductListPageTemplate;false;
+;;productGrid;Product Grid;ProductGridPageTemplate;true;
 ;;category;Default Category Page;CategoryPageTemplate;false;
 
 # Site-wide Aaron Homepage
 INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='true']
 ;;homepage;Homepage;HomePageMainTemplate;homepage
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='RegistrationTermsTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-RegisterTerms;SiteLogo;;SiteLogoSlot;true
+;;MiniCart-RegisterTerms;MiniCart;;MiniCartSlot;true
+;;Footer-RegisterTerms;Footer;;FooterSlot;true
+;;SearchBox-RegisterTerms;SearchBox;;SearchBoxSlot;true
+;;NavigationBar-RegisterTerms;NavigationBar;;NavigationBarSlot;true
+;;Mobile-NavigationBar-RegisterTerms;MobileNavigationBar;;MobileNavigationBarSlot;true
+
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+;;registrationSimpleTerms;Registration Simple Terms Page;RegistrationTermsTemplate;simple-terms
+;;registrationMultipleTerms;Registration Multiple Terms Page;RegistrationTermsTemplate;multiple-terms
 

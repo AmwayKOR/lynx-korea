@@ -9,8 +9,54 @@ ACC.shoppinglists = {
     	"bindUpdateShoppingListNameForm",
     	"bindUpdateShoppingListNameInputEscape",
     	"bindRemoveProductFromShoppingListLink",
-    	"bindRemoveShoppingListLink"
+    	"bindRemoveShoppingListLink",
+    	"bindShoppingListAddMultiForm",
+    	"bindShoppingListUpdateCartPopup"
     ],
+    
+    bindShoppingListUpdateCartPopup: function() {
+        // only bind if the current page is shopping lists page
+        if ($(".page-content-wrapper.page-shopping-list-details").length > 0) {
+        	$(".page-content-wrapper.page-shopping-list-details").on("click", "div.shopping-list-entry-pagination .cart-detail__addto.dropdown-toggle", function () {
+	            if($(".cart-detail__dropdown-menu.dropdown-menu").css('display')=='none'){
+	                $(".cart-detail__dropdown-menu.dropdown-menu").show();
+	            }else{
+	                $(".cart-detail__dropdown-menu.dropdown-menu").hide();
+	            }
+	        })
+        }
+    },
+    
+    bindShoppingListAddMultiForm: function() {
+        // only bind if the current page is shopping lists page
+        if ($(".page-content-wrapper.page-shopping-list-details").length > 0) {
+            $(".page-content-wrapper.page-shopping-list-details").on("click", "div.shopping-list-entry-pagination a.shopping-list-add-to-cart", function(event) {
+            	var $form = $(".page-content-wrapper.page-shopping-list-details form.grid-add-to-cart-form");
+            	if ($form.find("input.shopping-list-entry-checkbox:checked").length > 0) {
+	    			$.ajax({
+						url: $form.attr("action"),
+						data: $form.serialize(),
+						type: "POST",
+						success: function(data) 
+						{
+					        if ($(data).filter("div.popup-content").length > 0) {
+					        	ACC.popup.showPopup($(data).filter("div.popup-content").html());
+					        	ACC.global.findAndUpdateGlobalMessages(data, false);
+					        } else {
+					        	ACC.global.findAndUpdateGlobalMessages(data);
+					        }
+					    },
+						error: function() 
+						{
+							ACC.global.appendGlobalMessage(ACC.globalMessageTypes.ERROR_MESSAGES_HOLDER, ACC.messages.productAddToCartError);
+						}
+					});
+            	} else {
+            		ACC.global.appendGlobalMessage(ACC.globalMessageTypes.ERROR_MESSAGES_HOLDER, ACC.messages.shoppingListProductAddToCartError);
+            	}
+            });
+        }
+    },
     
     bindRemoveShoppingListLink: function() {
         
@@ -107,7 +153,8 @@ ACC.shoppinglists = {
 						type: method,
 						success: function(data) 
 						{
-							ACC.shoppinglists.displayGlobalMessagesBasedOnAjaxResponse(data);
+							ACC.global.findAndUpdateGlobalMessages(data);
+							
 							if ($(data).filter("div.shopping-list-name-display-section").length > 0) {
 								var shoppingListNameInput = $form.find("input[name=shoppingListName]");
 								shoppingListNameInput.data("originalName", shoppingListName);
@@ -153,18 +200,10 @@ ACC.shoppinglists = {
     	}
     },
     
-    displayGlobalMessagesBasedOnAjaxResponse: function(data) {
-    	if ($(data).filter("div.error-message").length > 0) {
-    		ACC.global.appendGlobalMessage(ACC.globalMessageTypes.ERROR_MESSAGES_HOLDER, $(data).filter("div.error-message").html());
-    	}
-    	if ($(data).filter("div.success-message").length > 0) {
-    		ACC.global.appendGlobalMessage(ACC.globalMessageTypes.CONF_MESSAGES_HOLDER, $(data).filter("div.success-message").html());
-    	}
-    },
-    
     refreshAllShoppingListsPage: function(data) {
     	
-    	ACC.shoppinglists.displayGlobalMessagesBasedOnAjaxResponse(data);
+    	ACC.global.findAndUpdateGlobalMessages(data);
+    	
     	// data contains the shopping list page content
     	if ($(data).filter("div.page-content").length > 0) {
     		$(".page-content-wrapper.page-shopping-lists").html($(data).filter("div.page-content").html());
@@ -172,7 +211,8 @@ ACC.shoppinglists = {
     },
     
     refreshShoppingListDetailsPage: function(data) {
-    	ACC.shoppinglists.displayGlobalMessagesBasedOnAjaxResponse(data);
+    	
+    	ACC.global.findAndUpdateGlobalMessages(data);
 
     	// data contains the shopping list details page content as well
     	if ($(data).filter("div.page-content").length > 0) {

@@ -4,9 +4,9 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
-<c:set var="aboUser" value="false"/>
+<c:set var="isUserAbo" value="false"/>
 <sec:authorize ifNotGranted="ROLE_ANONYMOUS">
-	<c:set var="aboUser" value="true"/>
+	<c:set var="isUserAbo" value="true"/>
 </sec:authorize>
 
 <div class="product-list-left-refinements-slot">
@@ -22,13 +22,13 @@
             <div class="panel-group accordion-custom" id="facetAccordion" role="tablist" aria-multiselectable="true">
 	            <c:forEach items="${searchPageData.facets}" var="facet">
 					<c:choose>
-			    		<c:when test="${facet.code eq 'aboPriceRange'}">
-			    			<c:if test="${aboUser}">
+			    		<c:when test="${(facet.code eq 'aboPriceRange') || (facet.code eq 'stockLevelFacet')}">
+			    			<c:if test="${isUserAbo}">
 			    				<nav:facetNavRefinementFacet facet="${facet}" isMobile="false"/>
 			    			</c:if>
 			    		</c:when>
 			    		<c:when test="${facet.code eq 'retailPriceRange'}">
-			    			<c:if test="${not aboUser}">
+			    			<c:if test="${not isUserAbo}">
 			    				<nav:facetNavRefinementFacet facet="${facet}" isMobile="false"/>
 			    			</c:if>
 			    		</c:when>

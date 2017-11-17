@@ -1,41 +1,16 @@
 ACC.tabs = {
 
 	_autoload: [
-		["bindTabs", $(".js-tabs").length > 0],
-		"hideReviewBtn",
-		"determineToDisplayReviews"
+		"bindTabs",
 	],
 
 	bindTabs: function(){
 
 		$e = $(".js-tabs");
-		 var tabs = $e.accessibleTabs({
-			tabhead:'.tabhead',
-			tabbody: '.tabbody', 
-			fx:'show', 
-			fxspeed: 0,
-			currentClass: 'active', 
-			autoAnchor:true
-		});
-
-
-		$e.on("click",".tabhead",function(e){
-			e.preventDefault();
-
-			if($(this).hasClass("active")){
-				$(this).removeClass("active");
-			}else{
-				$(this).parents(".js-tabs").children(".tabs-list").find("a[href="+"#"+$(this).attr("id")+"]").click();
-
-				var offset = $(this).offset().top;
-				$("body,html").scrollTop(offset)
-			}
-			
-		});
-		
 		$e.on("click","#tabreview",function(e){
 			e.preventDefault();
 			ACC.tabs.showReviewsAction("reviews");
+			ACC.tabs.showReviewBtn(".all-reviews-btn");
 		});
 		
 		$e.on("click",".all-reviews-btn",function(e){
@@ -54,7 +29,6 @@ ACC.tabs = {
 		
 		$(document).on("click", '.js-writeReviewTab', function(e){
 			e.preventDefault();
-			tabs.showAccessibleTabSelector($(this).attr("href"));
 			$(".js-review-write").show();
 			$('#reviewForm input[name=headline]').focus();
 		});
@@ -68,11 +42,6 @@ ACC.tabs = {
 				$(".js-review-write").hide();
 			}		
 		});
-
-		$(document).on("click",".js-openTab",function(){
-            tabs.showAccessibleTabSelector($(this).attr("href")); 
-		})
-	
 	},
 	
 	showReviewsAction: function (s)
@@ -84,19 +53,14 @@ ACC.tabs = {
 				ACC.tabs.showingAllReviews();
 			}
 		});
-		
 	},
 	
 	hideReviewBtn: function (btnClass){
-
-		btnClass = (btnClass == undefined)? ".less-reviews-btn" : btnClass;
-		$(btnClass).hide();
-		
+		$(btnClass).hide();		
 	},
 	
 	showReviewBtn: function (btnClass){
 		$(btnClass).show();
-
 	},
 	
 	showingAllReviews: function()
@@ -105,13 +69,5 @@ ACC.tabs = {
 		if(isShowingAllReviews){
 			ACC.tabs.hideReviewBtn(".all-reviews-btn");
 		}
-	},
-	
-	determineToDisplayReviews: function ()
-	{
-		if(location.hash == "#tabreview"){
-			ACC.tabs.showReviewsAction('reviews');
-		}
-	},
-
+	}
 };

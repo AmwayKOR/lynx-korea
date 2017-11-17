@@ -8,6 +8,6 @@
 
 <a class="country-item-link" href="${cmsLinkUrl}">
 	<span class="flag-icon"><img class="topbar__flag"
-		src="${imageAttribute.url}" alt="flag" /></span> <span
-	class="country-item-text">${linkName}</span>
+		src="${component.image.url}" alt="altText" /></span> <span
+	class="country-item-text">${component.linkName}</span>
 </a>

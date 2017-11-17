@@ -9,8 +9,13 @@ ACC.global = {
         "backToHome",
         "ajaxBlockUI",
         "formatPrice",
-        "isNatural"
+        "isNatural",
+        "bindSelect2"
     ],
+    
+    bindSelect2: function() {
+    	$(".select2-hidden-accessible").select2();
+    },
     
     isNatural: function(value) {
     	var number = Number(value);
@@ -36,12 +41,24 @@ ACC.global = {
     	  return formattedValue;
     },
     
+    findAndUpdateGlobalMessages: function(data, hideMessage = true) {
+    	if (($(data).filter(".global-alerts").length > 0) && ($(data).filter(".global-alerts").html().trim() != "")) {
+    		$('html').animate({scrollTop:0}, 'slow', function() {
+    			$(".global-alerts").append($(data).filter(".global-alerts").html());
+    		});	
+    		if (hideMessage) {
+    			setTimeout(function(){ $(".global-alerts").html(""); }, 5000);
+    		}
+    	}
+    },
+    
     appendGlobalMessage : function(globalMessageType, message) {
 		var globalErrorMessage = {};
 		globalErrorMessage.globalMessageType = globalMessageType; 
 		globalErrorMessage.message = message; 
-		$(".global-alerts").appendGlobalMessages([globalErrorMessage]);
-		$('body, html').animate({scrollTop:0}, 'slow');	
+		$('html').animate({scrollTop:0}, 'slow', function() {
+			$(".global-alerts").appendGlobalMessages([globalErrorMessage]);
+		});	
     },
     
     ajaxBlockUI: function() {

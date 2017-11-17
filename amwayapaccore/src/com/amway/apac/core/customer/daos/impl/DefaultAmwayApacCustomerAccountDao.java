@@ -42,7 +42,8 @@ public class DefaultAmwayApacCustomerAccountDao extends DefaultAmwayCustomerAcco
 		fQuery.addQueryParameter(OrderModel.USER, user);
 
 		final SearchResult result = search(fQuery);
-		return (CollectionUtils.isNotEmpty(result.getResult())) ? (Integer) result.getResult().iterator().next()
+		return (CollectionUtils.isNotEmpty(result.getResult()) && result.getResult().iterator().next() != null)
+				? (Integer) result.getResult().iterator().next()
 				: AmwayapacCoreConstants.ZERO_INT;
 	}
 

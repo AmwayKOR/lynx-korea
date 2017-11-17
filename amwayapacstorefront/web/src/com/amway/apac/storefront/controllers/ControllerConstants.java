@@ -173,6 +173,7 @@ public interface ControllerConstants
 			interface Cart // NOSONAR
 			{
 				String CartPage = "pages/cart/cartPage"; // NOSONAR
+				String CartContentPage = "pages/cart/cartContent";
 			}
 
 			interface StoreFinder // NOSONAR
@@ -230,6 +231,8 @@ public interface ControllerConstants
 			interface Account // NOSONAR
 			{
 				String CountryAddressForm = "fragments/address/countryAddressForm"; // NOSONAR
+				String ShippingAddressDetail = "fragments/address/shippingAddressDetail"; // NOSONAR
+				String ShippingAddressBody = "fragments/address/shippingAddressBody"; // NOSONAR
 				String SavedCartRestorePopup = "fragments/account/savedCartRestorePopup"; // NOSONAR
 			}
 
@@ -295,6 +298,11 @@ public interface ControllerConstants
 	interface ModelParameters
 	{
 		/**
+		 * String constant linkUrl
+		 */
+		String LINK_URL = "linkUrl";
+
+		/**
 		 * Shopping lists model attribute
 		 */
 		String SHOPPING_LISTS_STRING = "shoppingLists";
@@ -305,16 +313,6 @@ public interface ControllerConstants
 		String SHOPPING_LIST_DATA = "shoppingListData";
 
 		/**
-		 * Model parameter for error message
-		 */
-		String ERROR_MESSAGE = "errorMessage";
-
-		/**
-		 * Model parameter for success message
-		 */
-		String SUCCESS_MESSAGE = "successMessage";
-
-		/**
 		 * Model parameter for shopping list name.
 		 */
 		String SHOPPING_LIST_NAME = "shoppingListName";
@@ -323,6 +321,11 @@ public interface ControllerConstants
 		 * Model parameter for login error.
 		 */
 		String LOGIN_ERROR = "loginError";
+
+		/**
+		 * Model parameter for quantity.
+		 */
+		String QUANTITY_ATTR = "quantity";
 
 		/**
 		 * String constant linkUrl
@@ -413,6 +416,23 @@ public interface ControllerConstants
 	 */
 	interface ErrorMessageKeys
 	{
+		/**
+		 * Interface to group Add to cart related error messages
+		 *
+		 * @author Parvesh Goyal
+		 */
+		interface AddToCart
+		{
+			/**
+			 * Error message when a negative quantity is given for add to cart.
+			 */
+			String INVALID_QUANTITY = "basket.error.quantity.invalid";
+
+			/**
+			 * Default error message for add to cart.
+			 */
+			String BASKET_ERROR = "basket.error.occurred";
+		}
 
 		/**
 		 * Interface to group Shopping list related error messages together

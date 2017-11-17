@@ -20,7 +20,7 @@
 # * User Groups
 # * DistanceUnits for Storelocator
 # * MediaFolders
-# * MediaFormats                               s
+# * MediaFormats                               
 # * Tax & Tax Groups
 # * Jobs
 #% impex.setLocale(Locale.GERMAN);

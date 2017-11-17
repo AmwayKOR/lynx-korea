@@ -14,10 +14,6 @@
                      <a data-toggle="tab" href="#myShoppingLists" class="tab-toggle">
                          <h6 class="toggle-text"><spring:theme code="shopping.lists.page.lists.tab.my.label" arguments="${fn:length(shoppingLists)}" /></h6></a>
                  </li>
-                 <li class="tab-toggle-wrap js-tab-toggle-wrap">
-                     <a data-toggle="tab" href="#downlineShoppingLists" class="tab-toggle">
-                         <h6 class="toggle-text"><spring:theme code="shopping.lists.page.lists.tab.downlines.label" /></h6></a>
-                 </li>
              </ul>
              <div class="tab-content tabs-content-blocks">
                  <div id="myShoppingLists" class="tab-pane content-block active">
@@ -31,13 +27,6 @@
                             			<spring:theme code="shopping.lists.page.lists.tab.downlines.noresults" />                                                	
                              	</c:otherwise>
                              </c:choose>
-                         </div>
-                     </div>
-                 </div>
-                 <div id="downlineShoppingLists" class="tab-pane content-block">
-                     <div class="ditto-schedule-table-content">
-                         <div id="table-block-wrapper" class="table-block-wrapper new-table-block-wrapper">
-                            	<spring:theme code="shopping.lists.page.lists.tab.downlines.noresults" />
                          </div>
                      </div>
                  </div>

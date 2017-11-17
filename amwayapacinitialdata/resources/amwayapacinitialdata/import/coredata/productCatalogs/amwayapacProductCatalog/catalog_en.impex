@@ -14,6 +14,13 @@
 
 # Language
 $lang=en
+$classificationCatalog=amwayapacClassification
+$productCatalog=amwayapacProductCatalog
 
 # Create Catalog
 UPDATE Catalog;id[unique=true];name[lang=$lang]
+;$productCatalog;"Amway APAC Product Catalog"
+
+
+UPDATE ClassificationSystem;id[unique=true]
+;$classificationCatalog;"Amway APAC Classification Catalog"

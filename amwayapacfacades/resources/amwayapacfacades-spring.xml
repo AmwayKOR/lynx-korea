@@ -38,8 +38,10 @@
 				<entry key="kitEntryProduct" value="Product_145Wx145H"/>
 				<entry key="registration" value="Product_165Wx128H"/>
 				<entry key="productGrid" value="Product_176Wx245H"/>
+				<entry key="autoComplete" value="Product_96Wx96H"/>
 				<entry key="quickView" value="Product_180Wx180H"/>
 				<entry key="product" value="Product_588Wx588H"/>
+				<entry key="zoom" value="Product_800Wx1112H"/>
 			</map>
 		</property>
 	</bean>
@@ -107,7 +109,9 @@
                 <value>registration</value>
                 <value>recentlyViewed</value>
                 <value>quickView</value>
+                <value>autoComplete</value>
                 <value>kitEntryProduct</value>
+                <value>productGrid</value>
             </list>
         </property>
     </bean>
@@ -132,11 +136,8 @@
         <property name="amwayApacCustomerAccountService" ref="customeraccountService"/>
     </bean>
     
-    
-    
     <alias name="defaultAmwayApacCustomerFacade" alias="customerFacade"/>
-    <bean id="defaultAmwayApacCustomerFacade" class="com.amway.apac.facades.customer.impl.AmwayApacCustomerFacade" parent="defaultAmwayCustomerFacade">
-    </bean>
+    <bean id="defaultAmwayApacCustomerFacade" class="com.amway.apac.facades.customer.impl.DefaultAmwayApacCustomerFacade" parent="defaultAmwayCustomerFacade" />
     
     <alias name="defaultAmwayApacStockPopulator" alias="stockPopulator"/>
 	<bean id="defaultAmwayApacStockPopulator" parent="defaultStockPopulator"
@@ -148,4 +149,31 @@
 		<property name="list" ref="cartConverter"/>
 		<property name="add" ref="amwayCartPopulator"/>
 	</bean>
+					
+    <!-- dependencies have to be manually injected as there is no alias defined in the amwayfacades-spring.xml for amwayProductPricePopulator -->
+    <alias name="defaultAmwayApacProductPricePopulator" alias="amwayProductPricePopulator"/>
+    <bean id="defaultAmwayApacProductPricePopulator"
+        class="com.amway.apac.facades.product.populators.AmwayApacProductPricePopulator">
+        <property name="amwayApacPriceDataFactory" ref="priceDataFactory" />
+        <property name="commercePriceService" ref="commercePriceService"/>
+        <property name="modelService" ref="modelService"/>
+        <property name="sessionService" ref="sessionService"/>
+        <property name="userService" ref="userService"/>
+    </bean>
+
+    <alias name="defaultAmwayApacPriceDataFactory" alias="priceDataFactory"/>
+    <bean id="defaultAmwayApacPriceDataFactory" class="com.amway.apac.facades.product.impl.DefaultAmwayApacPriceDataFactory" parent="amwayPriceDataFactory" />
+	
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="defaultOrderEntryProductConverter"/>
+		<property name="add" ref="productPricePopulatorList"/>
+	</bean>
+
+	<alias name="defaultAmwayApacProductBasicPopulator" alias="productBasicPopulator"/>
+    <bean id="defaultAmwayApacProductBasicPopulator" class="com.amway.apac.facades.populators.AmwayApacProductBasicPopulator" parent="defaultProductBasicPopulator" />
+	
+	<alias name="defaultAmwayApacProductCarouselFacade" alias="productCarouselFacade"/>
+    <bean id="defaultAmwayApacProductCarouselFacade" class="com.amway.apac.facades.product.impl.DefaultAmwayApacProductCarouselFacade" parent="defaultProductCarouselFacade" />
+	
+	
 </beans>

@@ -1,26 +1,42 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="template" tagdir="/WEB-INF/tags/responsive/template" %>
+<%@ taglib prefix="nav" tagdir="/WEB-INF/tags/responsive/nav" %>
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags" %>
 <%@ taglib prefix="common" tagdir="/WEB-INF/tags/responsive/common" %>
 <%@ taglib prefix="storepickup" tagdir="/WEB-INF/tags/responsive/storepickup" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="category" tagdir="/WEB-INF/tags/responsive/category" %>
 
 <template:page pageTitle="${pageTitle}">
-
-	<cms:pageSlot position="Section1" var="feature" element="div" class="product-grid-section1-slot">
-		<cms:component component="${feature}" element="div" class="yComponentWrapper map product-grid-section1-component"/>
-	</cms:pageSlot>
-	
-	<div class="row">
-		<div class="col-xs-3">
-			<cms:pageSlot position="ProductLeftRefinements" var="feature" element="div" class="product-grid-left-refinements-slot">
-				<cms:component component="${feature}" element="div" class="yComponentWrapper product-grid-left-refinements-component"/>
-			</cms:pageSlot>
-		</div>
-		<div class="col-sm-12 col-md-9">
-			<cms:pageSlot position="ProductGridSlot" var="feature" element="div" class="product-grid-right-result-slot">
-				<cms:component component="${feature}" element="div" class="product__list--wrapper yComponentWrapper product-grid-right-result-component"/>
-			</cms:pageSlot>
-		</div>
-	</div>
-	<storepickup:pickupStorePopup />
+            <div class="container-fluid main-container new-plp">
+                <div class="row">
+                    <h1 class="col-sm-12 product-list-page-title">${categoryName}</h1>
+                    <div class="col-xs-3 print-hide">
+                    	<category:productListDesktopFacetSection searchPageData="${searchPageData}"/>
+                    </div>
+                    <div class="col-sm-12 col-md-9">
+                        <!-- Product List -->
+                        <div class="new-product-list-right-slot product-list-right-slot product-list row">
+                            <div class="product__list--wrapper yComponentWrapper product-list-right-component">
+                                <category:productListingTopRightSection searchPageData="${searchPageData}"/>
+                                <c:choose>
+                                	<c:when test="${searchPageData.pagination.totalNumberOfResults gt 0}">
+                                		<category:productListSection searchPageData="${searchPageData}"/>
+                                		<category:productListerPaginationSection/>
+                                	</c:when>
+                                	<c:otherwise>
+                                		<div class="searchEmptyPageMiddle-component">
+				                            <div class="content">
+				                            	<cms:pageSlot position="NoResultsContentSlot" var="component">
+				                            		<cms:component component="${component}"/>
+				                            	</cms:pageSlot>
+				                            </div>
+					                    </div>
+                                	</c:otherwise>
+                                </c:choose>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 </template:page>

@@ -50,7 +50,6 @@ import de.hybris.platform.commerceservices.address.AddressVerificationDecision;
 import de.hybris.platform.commerceservices.customer.DuplicateUidException;
 import de.hybris.platform.commerceservices.search.pagedata.PageableData;
 import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
-import de.hybris.platform.commerceservices.util.ResponsiveUtils;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import de.hybris.platform.util.Config;
 
@@ -64,6 +63,7 @@ import java.util.Set;
 import javax.annotation.Resource;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.BooleanUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -81,13 +81,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.amway.apac.facades.customeraccount.AmwayApacOrderFacade;
 import com.amway.apac.storefront.controllers.ControllerConstants;
+import com.amway.apac.storefront.forms.AmwayApacAddressForm;
 
 
 /**
  * Controller for home page
  */
 @Controller
-@RequestMapping("/account")
+@RequestMapping("/my-account")
 public class AccountPageController extends AbstractSearchPageController
 {
 	private static final String TEXT_ACCOUNT_ADDRESS_BOOK = "text.account.addressBook";
@@ -104,6 +105,7 @@ public class AccountPageController extends AbstractSearchPageController
 	private static final String COUNTRY_ATTR = "country";
 	private static final String REGIONS_ATTR = "regions";
 	private static final String MY_ACCOUNT_ADDRESS_BOOK_URL = "/my-account/address-book";
+	private static final String MY_ACCOUNT_BILLING_SHIPPING_URL = "/my-account/billingshipping";
 	// Internal Redirects
 	private static final String REDIRECT_TO_ADDRESS_BOOK_PAGE = REDIRECT_PREFIX + MY_ACCOUNT_ADDRESS_BOOK_URL;
 	private static final String REDIRECT_TO_PAYMENT_INFO_PAGE = REDIRECT_PREFIX + "/my-account/payment-details";
@@ -250,7 +252,7 @@ public class AccountPageController extends AbstractSearchPageController
 		model.addAttribute("supportedCountries", getCountries());
 		populateModelRegionAndCountry(model, countryIsoCode);
 
-		final AddressForm addressForm = new AddressForm();
+		final AmwayApacAddressForm addressForm = new AmwayApacAddressForm();
 		model.addAttribute(ADDRESS_FORM_ATTR, addressForm);
 		for (final AddressData addressData : userFacade.getAddressBook())
 		{
@@ -259,6 +261,8 @@ public class AccountPageController extends AbstractSearchPageController
 			{
 				model.addAttribute(ADDRESS_DATA_ATTR, addressData);
 				addressDataUtil.convert(addressData, addressForm);
+				addressForm.setEmail(addressData.getEmail());
+				addressForm.setDefaultAddress(addressData.isDefaultAddress());
 				break;
 			}
 		}
@@ -272,14 +276,9 @@ public class AccountPageController extends AbstractSearchPageController
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
+	@RequireHardLogIn
 	public String account(final Model model, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
-		if (ResponsiveUtils.isResponsive())
-		{
-			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER, "system.error.page.not.found", null);
-			return REDIRECT_PREFIX + "/";
-		}
-
 		model.addAttribute("ordersAmount", amwayApacOrderFacade.getCustomerOrderCounts());
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(ACCOUNT_CMS_PAGE));
@@ -289,14 +288,33 @@ public class AccountPageController extends AbstractSearchPageController
 		return getViewForPage(model);
 	}
 
-	@RequestMapping(value = "/billingShipping", method = RequestMethod.GET)
+	@RequestMapping(value = "/billingshipping", method = RequestMethod.GET)
+	@RequireHardLogIn
 	public String billingShipping(final Model model, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
-		//model.addAttribute("something", "something");
+		//Get address
+		final List<AddressData> listAddressData = userFacade.getAddressBook();
+		model.addAttribute(ADDRESS_DATA_ATTR, listAddressData);
+
+		//Get customer information and credit card payment info
+		model.addAttribute(ControllerConstants.ModelParameters.CUSTOMERDATA_ATTR, customerFacade.getCurrentCustomer());
+		model.addAttribute(ControllerConstants.ModelParameters.PAYMENTINFO_ATTR, userFacade.getCCPaymentInfos(true));
+
+		//Empty form for add new alternate address
+		model.addAttribute(ADDRESS_FORM_ATTR, new AmwayApacAddressForm());
+
+		//Get supported Countries, title codes when filling up new form
+		model.addAttribute(ControllerConstants.ModelParameters.SUPPORTEDCOUNTRIES_ATTR, getCountries());
+		model.addAttribute(TITLE_DATA_ATTR, userFacade.getTitles());
+
+		//Add in region and country for new form
+		//		model.addAttribute(REGIONS_ATTR, getI18NFacade().getRegionsForCountryIso(addressData.getCountry().getIsocode()));
+		//		model.addAttribute(COUNTRY_ATTR, addressData.getCountry().getIsocode());
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(BILLING_SHIPPING_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(BILLING_SHIPPING_CMS_PAGE));
-		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs("account.billingshipping.label"));
+		model.addAttribute(BREADCRUMBS_ATTR,
+				accountBreadcrumbBuilder.getBreadcrumbs(ControllerConstants.GeneralConstants.BILLING_SHIPPING_PAGE_BREADCRUMB_KEY));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 		return getViewForPage(model);
 	}
@@ -654,15 +672,15 @@ public class AccountPageController extends AbstractSearchPageController
 
 	@RequestMapping(value = "/add-address", method = RequestMethod.POST)
 	@RequireHardLogIn
-	public String addAddress(final AddressForm addressForm, final BindingResult bindingResult, final Model model,
+	public String addAddress(final AmwayApacAddressForm addressForm, final BindingResult bindingResult, final Model model,
 			final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
 		getAddressValidator().validate(addressForm, bindingResult);
 		if (bindingResult.hasErrors())
 		{
 			GlobalMessages.addErrorMessage(model, FORM_GLOBAL_ERROR);
-			storeCmsPageInModel(model, getContentPageForLabelOrId(ADD_EDIT_ADDRESS_CMS_PAGE));
-			setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ADD_EDIT_ADDRESS_CMS_PAGE));
+			storeCmsPageInModel(model, getContentPageForLabelOrId(BILLING_SHIPPING_CMS_PAGE));
+			setUpMetaDataForContentPage(model, getContentPageForLabelOrId(BILLING_SHIPPING_CMS_PAGE));
 			setUpAddressFormAfterError(addressForm, model);
 			return getViewForPage(model);
 		}
@@ -690,8 +708,8 @@ public class AccountPageController extends AbstractSearchPageController
 
 		if (addressRequiresReview)
 		{
-			storeCmsPageInModel(model, getContentPageForLabelOrId(ADD_EDIT_ADDRESS_CMS_PAGE));
-			setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ADD_EDIT_ADDRESS_CMS_PAGE));
+			storeCmsPageInModel(model, getContentPageForLabelOrId(BILLING_SHIPPING_CMS_PAGE));
+			setUpMetaDataForContentPage(model, getContentPageForLabelOrId(BILLING_SHIPPING_CMS_PAGE));
 			return getViewForPage(model);
 		}
 
@@ -701,7 +719,12 @@ public class AccountPageController extends AbstractSearchPageController
 		GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.CONF_MESSAGES_HOLDER, "account.confirmation.address.added",
 				null);
 
-		return REDIRECT_TO_EDIT_ADDRESS_PAGE + newAddress.getId();
+		//Get address and display list of new & existing address
+		final List<AddressData> listAddressData = userFacade.getAddressBook();
+		model.addAttribute(ADDRESS_DATA_ATTR, listAddressData);
+		return ControllerConstants.Views.Fragments.Account.ShippingAddressBody;
+
+		//return REDIRECT_TO_EDIT_ADDRESS_PAGE + newAddress.getId();
 	}
 
 	protected void setUpAddressFormAfterError(final AddressForm addressForm, final Model model)
@@ -752,11 +775,11 @@ public class AccountPageController extends AbstractSearchPageController
 			}
 		}
 
-		storeCmsPageInModel(model, getContentPageForLabelOrId(ADD_EDIT_ADDRESS_CMS_PAGE));
-		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ADD_EDIT_ADDRESS_CMS_PAGE));
+		storeCmsPageInModel(model, getContentPageForLabelOrId(BILLING_SHIPPING_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(BILLING_SHIPPING_CMS_PAGE));
 
 		final List<Breadcrumb> breadcrumbs = accountBreadcrumbBuilder.getBreadcrumbs(null);
-		breadcrumbs.add(new Breadcrumb(MY_ACCOUNT_ADDRESS_BOOK_URL,
+		breadcrumbs.add(new Breadcrumb(MY_ACCOUNT_BILLING_SHIPPING_URL,
 				getMessageSource().getMessage(TEXT_ACCOUNT_ADDRESS_BOOK, null, getI18nService().getCurrentLocale()), null));
 		breadcrumbs.add(new Breadcrumb("#",
 				getMessageSource().getMessage("text.account.addressBook.addEditAddress", null, getI18nService().getCurrentLocale()),
@@ -782,15 +805,15 @@ public class AccountPageController extends AbstractSearchPageController
 
 	@RequestMapping(value = "/edit-address/" + ADDRESS_CODE_PATH_VARIABLE_PATTERN, method = RequestMethod.POST)
 	@RequireHardLogIn
-	public String editAddress(final AddressForm addressForm, final BindingResult bindingResult, final Model model,
+	public String editAddress(final AmwayApacAddressForm addressForm, final BindingResult bindingResult, final Model model,
 			final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
 		getAddressValidator().validate(addressForm, bindingResult);
 		if (bindingResult.hasErrors())
 		{
 			GlobalMessages.addErrorMessage(model, FORM_GLOBAL_ERROR);
-			storeCmsPageInModel(model, getContentPageForLabelOrId(ADD_EDIT_ADDRESS_CMS_PAGE));
-			setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ADD_EDIT_ADDRESS_CMS_PAGE));
+			storeCmsPageInModel(model, getContentPageForLabelOrId(BILLING_SHIPPING_CMS_PAGE));
+			setUpMetaDataForContentPage(model, getContentPageForLabelOrId(BILLING_SHIPPING_CMS_PAGE));
 			setUpAddressFormAfterError(addressForm, model);
 			return getViewForPage(model);
 		}
@@ -802,6 +825,12 @@ public class AccountPageController extends AbstractSearchPageController
 		if (Boolean.TRUE.equals(addressForm.getDefaultAddress()) || userFacade.getAddressBook().size() <= 1)
 		{
 			newAddress.setDefaultAddress(true);
+		}
+
+		//set address
+		if (!StringUtils.isEmpty(addressForm.getEmail()))
+		{
+			newAddress.setEmail(addressForm.getEmail());
 		}
 
 		final AddressVerificationResult<AddressVerificationDecision> verificationResult = getAddressVerificationFacade()
@@ -826,7 +855,30 @@ public class AccountPageController extends AbstractSearchPageController
 
 		GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.CONF_MESSAGES_HOLDER, "account.confirmation.address.updated",
 				null);
-		return REDIRECT_TO_EDIT_ADDRESS_PAGE + newAddress.getId();
+
+		//Check if set as primary checkbox is being ticked
+		if (BooleanUtils.isTrue(addressForm.getDefaultAddress()))
+		{
+			final List<AddressData> listAddressData = userFacade.getAddressBook();
+			model.addAttribute(ADDRESS_DATA_ATTR, listAddressData);
+			return ControllerConstants.Views.Fragments.Account.ShippingAddressBody;
+		}
+		else
+		{
+			//Return new address data back to page
+			for (final AddressData addressData : userFacade.getAddressBook())
+			{
+				if (addressData.getId() != null && addressData.getId().equals(newAddress.getId()))
+				{
+					model.addAttribute(ADDRESS_DATA_ATTR, addressData);
+					break;
+				}
+			}
+
+			return ControllerConstants.Views.Fragments.Account.ShippingAddressDetail;
+		}
+
+
 	}
 
 	@RequestMapping(value = "/select-suggested-address", method = RequestMethod.POST)
@@ -891,6 +943,7 @@ public class AccountPageController extends AbstractSearchPageController
 	{
 		model.addAttribute("customerData", customerFacade.getCurrentCustomer());
 		model.addAttribute("paymentInfoData", userFacade.getCCPaymentInfos(true));
+
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PAYMENT_DETAILS_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ADD_EDIT_ADDRESS_CMS_PAGE));
 		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs("text.account.paymentDetails"));

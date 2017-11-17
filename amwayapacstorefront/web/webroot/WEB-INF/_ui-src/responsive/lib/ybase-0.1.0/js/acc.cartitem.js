@@ -9,7 +9,7 @@ ACC.cartitem = {
 	bindCartItem: function ()
 	{
 
-		$('.js-execute-entry-action-button').on("click", function ()
+		$(document).on("click", '.js-execute-entry-action-button', function ()
 		{
 			var entryAction = $(this).data("entryAction");
 			var entryActionUrl =  $(this).data("entryActionUrl");
@@ -28,22 +28,42 @@ ACC.cartitem = {
 				var entryNumbersInput = $("<input>").attr("type", "hidden").attr("name", "entryNumbers").val(entryNumber);
 				cartEntryActionForm.append($(entryNumbersInput));
 			});
-			cartEntryActionForm.attr('action', entryActionUrl).submit();
+
+            var entryNumbers = cartEntryActionForm.find('input[name=entryNumbers]').val();
+			$.ajax({
+                url: entryActionUrl,
+                data: {"entryNumbers" : entryNumbers},
+                type: cartEntryActionForm.attr('method'),
+                success: function(data)
+                {
+                    $('#cartContent').html($(data).filter("div#cartContentDiv").html());
+                    ACC.global.findAndUpdateGlobalMessages(data);
+                },
+                error: function(request, status, error)
+                {
+                    ACC.global.appendGlobalMessage(ACC.globalMessageTypes.ERROR_MESSAGES_HOLDER, request.responseText);
+                }
+
+            });
 		});
 
-		$('.js-update-entry-quantity-input').on("blur", function (e)
+		$(document).on("blur", '.js-update-entry-quantity-input', function (e)
 		{
 			ACC.cartitem.handleUpdateQuantity(this, e);
 
-		}).on("keyup", function (e)
+		}).on("keyup",'.js-update-entry-quantity-input',  function (e)
 		{
 			return ACC.cartitem.handleKeyEvent(this, e);
 		}
-		).on("keydown", function (e)
+		).on("keydown",'.js-update-entry-quantity-input',  function (e)
 		{
 			return ACC.cartitem.handleKeyEvent(this, e);
-		}
-		);
+		});
+
+        $(document).on("click", '.js-quick-shop-submit', function (e)
+        {
+            ACC.cartitem.handleQuickShop();
+        });
 	},
 
 	handleKeyEvent: function (elementRef, event)
@@ -55,7 +75,7 @@ ACC.cartitem = {
 			ACC.cartitem.submitTriggered = ACC.cartitem.handleUpdateQuantity(elementRef, event);
 			return false;
 		}
-		else 
+		else
 		{
 			// Ignore all key events once submit was triggered
 			if (ACC.cartitem.submitTriggered)
@@ -68,23 +88,60 @@ ACC.cartitem = {
 	},
 
 	handleUpdateQuantity: function (elementRef, event)
-	{
+    {
 
-		var form = $(elementRef).closest('form');
+        var form = $(elementRef).closest('form');
 
-		var productCode = form.find('input[name=productCode]').val();
-		var initialCartQuantity = form.find('input[name=initialQuantity]').val();
-		var newCartQuantity = form.find('input[name=quantity]').val();
+        var productCode = form.find('input[name=productCode]').val();
+        var initialCartQuantity = form.find('input[name=initialQuantity]').val();
+        var newCartQuantity = form.find('input[name=quantity]').val();
+        var entryNumber = form.find('input[name=entryNumber]').val();
 
-		if(initialCartQuantity != newCartQuantity)
-		{
-			ACC.track.trackUpdateCart(productCode, initialCartQuantity, newCartQuantity);
-			form.submit();
+        if(initialCartQuantity != newCartQuantity)
+        {
+            //ACC.track.trackUpdateCart(productCode, initialCartQuantity, newCartQuantity);
+            //form.submit();
 
-			return true;
-		}
+            $.ajax({
+                url: form.attr('action'),
+                data: {"entryNumber" : entryNumber, "quantity" : newCartQuantity},
+                type: form.attr('method'),
+                success: function(data)
+                {
+                    $('#cartContent').html($(data).filter("div#cartContentDiv").html());
+                    ACC.global.findAndUpdateGlobalMessages(data);
+                },
+                error: function(request, status, error)
+                {
+                    ACC.global.appendGlobalMessage(ACC.globalMessageTypes.ERROR_MESSAGES_HOLDER, request.responseText);
+                }
 
-		return false;
-	}
+            });
+            return true;
+        }
+
+        return false;
+    },
+
+    handleQuickShop: function(){
+        var quickShopForm = $('#quickShopForm');
+
+        var productCode = quickShopForm.find('input[name=productCode]').val();
+        var quantity = quickShopForm.find('input[name=quantity]').val();
+        $.ajax({
+            url: quickShopForm.attr('action'),
+            data: {"productCode" : productCode, "quantity" : quantity},
+            type: quickShopForm.attr('method'),
+            success: function(data)
+            {
+                $('#cartContent').html($(data).filter("div#cartContentDiv").html());
+                ACC.global.findAndUpdateGlobalMessages(data);
+            },
+            error: function(request, status, error)
+            {
+                ACC.global.appendGlobalMessage(ACC.globalMessageTypes.ERROR_MESSAGES_HOLDER, request.responseText);
+            }
+        });
+    }
 };
 

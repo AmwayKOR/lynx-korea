@@ -58,7 +58,6 @@ import de.hybris.platform.commerceservices.search.pagedata.PaginationData;
 import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import de.hybris.platform.servicelayer.i18n.I18NService;
-import com.amway.apac.storefront.controllers.ControllerConstants;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -79,6 +78,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.support.BindingAwareModelMap;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.amway.apac.storefront.controllers.ControllerConstants;
+import com.amway.apac.storefront.forms.AmwayApacAddressForm;
 
 
 @UnitTest
@@ -158,7 +160,7 @@ public class AccountPageControllerTest
 	@Mock
 	private AbstractPageModel abstractPageModel;
 	@Mock
-	private AddressForm addressForm;
+	private AmwayApacAddressForm addressForm;
 	@Mock
 	private UpdateEmailForm emailForm;
 	@Mock

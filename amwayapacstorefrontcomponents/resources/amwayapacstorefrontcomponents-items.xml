@@ -89,6 +89,16 @@
 				type="SimpleResponsiveBannerComponent" cardinality="many"
 				collectiontype="list" ordered="true" />
 		</relation>
+
+		<relation code="AmwayApacTermsCollectionRelation" localized="false"
+			generate="true" autocreate="true">
+			<description>Relation between terms and conditions component and tabs.</description>
+			<sourceElement qualifier="tabbedTermsComponent"
+				type="AmwayApacTabbedTermsComponent" cardinality="one" />
+			<targetElement qualifier="termsTabComponents" type="AmwayApacTermsTabComponent"
+				cardinality="many" collectiontype="list" ordered="true" />
+		</relation>
+
 	</relations>
 
 	<itemtypes>
@@ -109,6 +119,12 @@
 						<description>Link component</description>
 					</attribute>
 				</attributes>
+			</itemtype>
+
+			<itemtype code="AmwayApacTermsBannerComponent" extends="AmwayApacTextImageComponent"
+				autocreate="true" generate="true"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacTermsBannerComponent">
+				<description>Terms Banner Component</description>
 			</itemtype>
 
 			<itemtype code="AmwayApacArtistryDealCarouselComponent"
@@ -287,7 +303,7 @@
 				autocreate="true" generate="true">
 				<description>Country component with icon UI.</description>
 				<attributes>
-					<attribute qualifier="imageAttribute" type="localized:Media">
+					<attribute qualifier="image" type="localized:Media">
 						<persistence type="property" />
 						<description> Image Icon definitions and classes</description>
 					</attribute>
@@ -415,6 +431,89 @@
 					</attribute>
 					<attribute qualifier="footerBanner" type="SimpleBannerComponent">
 						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="AbstractAmwayApacTermsComponent" extends="SimpleCMSComponent"
+				autocreate="true" generate="true"
+				jaloclass="com.amway.apac.storefront.components.jalo.AbstractAmwayApacTermsComponent">
+				<description>Abstract Terms Component</description>
+				<attributes>
+					<attribute qualifier="title" generate="true" autocreate="true"
+						type="CMSParagraphComponent">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="optional" type="boolean">
+						<persistence type="property" />
+						<modifiers optional="true" />
+						<defaultvalue>Boolean.TRUE</defaultvalue>
+					</attribute>
+					<attribute qualifier="radio1Description" generate="true"
+						autocreate="true" type="localized:java.lang.String">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="radio2Description" generate="true"
+						autocreate="true" type="localized:java.lang.String">
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="AmwayApacSimpleTermsComponent" extends="AbstractAmwayApacTermsComponent"
+				autocreate="true" generate="true"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacSimpleTermsComponent">
+				<description>Simple Terms Component</description>
+				<attributes>
+					<attribute qualifier="content" generate="true"
+						autocreate="true" type="CMSParagraphComponent">
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="AmawayApacSimpleContainerTermsComponent"
+				extends="AbstractAmwayApacTermsComponent" autocreate="true"
+				generate="true"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmawayApacSimpleContainerTermsComponent">
+				<description>Multiple Terms Component</description>
+				<attributes>
+					<attribute qualifier="content" generate="true"
+						autocreate="true" type="CMSParagraphComponent">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="maxHeight" type="boolean">
+						<persistence type="property" />
+						<modifiers optional="true" />
+						<defaultvalue>Boolean.TRUE</defaultvalue>
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="AmwayApacTabbedTermsComponent" extends="AbstractAmwayApacTermsComponent"
+				autocreate="true" generate="true"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacTabbedTermsComponent">
+				<description>Tabbed Terms Component</description>
+			</itemtype>
+
+			<itemtype code="AmwayApacTermsTabComponent" extends="SimpleCMSComponent"
+				autocreate="true" generate="true"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacTermsTabComponent">
+				<description>Terms Tab Component</description>
+				<attributes>
+					<attribute qualifier="title" generate="true" autocreate="true"
+						type="CMSParagraphComponent">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="description" generate="true"
+						autocreate="true" type="CMSParagraphComponent">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="colwidth" generate="true"
+						autocreate="true" type="java.lang.Integer">
+						<persistence type="property" />
+						<modifiers optional="true" />
+						<defaultvalue>Integer.valueOf(4)</defaultvalue>
 					</attribute>
 				</attributes>
 			</itemtype>

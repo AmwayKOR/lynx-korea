@@ -3,8 +3,30 @@ ACC.header = {
 	_autoload: [
         "bindHeader",
         "bindHeader2",
-        "bindHeader3"
+        "bindHeaderProfilePopup",
+        "bindLoginRegisterButton",
+        "bindHeaderAutoSearchEvent",
+        "bindAutoSearchMenuCloseButton"
 	],
+	
+	bindHeaderProfilePopup: function() {
+        $(".js-my-account-menu").click(function () {
+            ACC.header.openLoginDrop();
+        });
+	},
+	
+	openLoginDrop : function(){
+		$('header').hasClass('userinfo-open') ? $('header').removeClass('userinfo-open') : $('header').addClass('userinfo-open');
+        $('.top-search').removeClass('search-open');
+        $('header').removeClass('mincart-open');
+	},
+	
+	bindLoginRegisterButton :  function(){
+		$(document).on("click", ".sign-in-register", function(){
+			ACC.popup.closePopup();
+			ACC.header.openLoginDrop();
+		});
+	},
 	
 	bindHeader: function () {
         function mobileEvent () {
@@ -59,35 +81,22 @@ ACC.header = {
         navToggling();
     },
     
-	bindHeader3 : function () {
-
-        var SPEED = 'slow';
-        function showSearchResults() {
-            var $this = $(this);
-
-            var $searchResult = $('.auto-suggestion-popover');
+    bindAutoSearchMenuCloseButton : function () {
+    	$(document).on("click", ".search-results-close",function(){
+    		$('.auto-suggestion-popover').fadeOut();
+    	});
+	},
+	
+	bindHeaderAutoSearchEvent : function(){
+		$(document).on('keyup', '.ui-autocomplete-input', function(){
+			var $this = $(this);
+			var $searchResult = $('.auto-suggestion-popover');
             if ($this.val().length >= 3) {
-                $searchResult.fadeIn(SPEED);
+                $searchResult.fadeIn();
             } else {
-                $searchResult.fadeOut(SPEED);
+                $searchResult.fadeOut();
             }
-        }
-
-        function closeSearchResults() {
-            var $searchResult = $('.auto-suggestion-popover').fadeOut(SPEED);
-            $('.ui-autocomplete-input').val('');
-        }
-
-        function registerEvents() {
-            $('.ui-autocomplete-input').on('keyup', showSearchResults);
-            $('.search-results-close').on('click', closeSearchResults);
-        }
-
-        function init() {
-            registerEvents();
-        }
-        init();
-    
+		});
 	}
 
 };

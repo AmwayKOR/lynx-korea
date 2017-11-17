@@ -7,39 +7,58 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<c:url value="${product.url}" var="productPDPurl"/>
-<div class="amway-suggest__item-container">
-     <div class="amway-suggest__item">
-		<div class="product-list__item">
-		    <!--<img src="${themeResourcePath}/images/limited_stock.png" class="product-list__flag" alt="limited stock" />-->
-		    <product:productTileBadge stockLevel="${product.stock.stockLevelStatus.code}"/>
-		    <div class="product-list__item-content amwahover">
-		        <button class="quick-view-btn" data-product-code="${product.code}"><spring:theme code="plp.producttile.quick.view"/></button>
-		        <a class="product-list__thum" target="_self" href="${productPDPurl}">
-		        	<product:productPrimaryImage product="${product}" format="productGrid" cssClass="product-list__thumbnail"/>
-		        </a>
-		        <div class="product-list__item-detail">
-		            <p class="product-list__item-title">
-		                <a class="product-list__item-title" target="_self" href="${productPDPurl}">${product.name}</a></p>
-		            <p class="product-list__item-number"><spring:theme code="plp.producttile.item.no"/> ${product.code}</p>
-		            <div class="product-list__item-title product-list__item-aboprice">
-		                <span class="product-list__item-abolabel"><spring:theme code="plp.producttile.abo.price"/></span>
-		                <span class="product-list__item-abovalue">${product.price.formattedValue}</span></div>
-		            <div class="product-list__item-retailprice">
-		                <span class="product-list__item-abolabel"><spring:theme code="plp.producttile.retail.price"/></span>
-		                <span class="product-list__item-abovalue">${product.retailPrice.formattedValue}</span></div>
-		            <div class="product-list__item-retailprice">
-		                <span class="product-list__item-abolabel"><spring:theme code=""/></span>
-		                <span class="product-list__item-abovalue">${product.price.amwayValue.pointValue} / ${product.price.amwayValue.businessVolume}</span></div>
-		        </div>
-		    </div>
-		    <div class="product-list__item-link col-md-12">
-		        <a href="#" class="btn-blue-white" data-toggle="modal" data-target="#cart-modal"><spring:theme code="plp.producttile.addtocart"/></a>
-		        <a class="product-list__item-link-text product-list__item-link-common col-xs-6 col-md-10" href="#"><spring:theme code="plp.producttile.shoppinglist"/></a>
-		        <a class="product-list__item-link-ditto product-list__item-link-common col-xs-6 col-md-2" href="#">
-		            <span class="like-shape"></span>
-		            <span class="wish-list"><spring:theme code="plp.producttile.wishlist"/></span></a>
-		    </div>
+<spring:htmlEscape defaultHtmlEscape="true" />
+
+<spring:theme code="text.addToCart" var="addToCartText"/>
+<c:url value="${product.url}" var="productUrl"/>
+
+<c:set value="${not empty product.potentialPromotions}" var="hasPromotion"/>
+
+<li class="product__list--item">
+	<ycommerce:testId code="test_searchPage_wholeProduct">
+		
+		<a class="product__list--thumb" href="${productUrl}" title="${fn:escapeXml(product.name)}" >
+			<product:productPrimaryImage product="${product}" format="thumbnail"/>
+		</a>
+		<ycommerce:testId code="searchPage_productName_link_${product.code}">
+			<a class="product__list--name" href="${productUrl}">${fn:escapeXml(product.name)}</a>
+		</ycommerce:testId>
+
+		<div class="product__list--price-panel">
+			<c:if test="${not empty product.potentialPromotions}">
+				<div class="product__listing--promo">
+					<c:forEach items="${product.potentialPromotions}" var="promotion">
+						${ycommerce:sanitizeHTML(promotion.description)}
+					</c:forEach>
+				</div>
+			</c:if>
+
+			<ycommerce:testId code="searchPage_price_label_${product.code}">
+				<div class="product__listing--price"><product:productListerItemPrice product="${product}"/></div>
+			</ycommerce:testId>
 		</div>
-	</div>
-</div>
+
+		<c:if test="${not empty product.summary}">
+			<div class="product__listing--description">${ycommerce:sanitizeHTML(product.summary)}</div>
+		</c:if>
+
+
+
+		<c:set var="product" value="${product}" scope="request"/>
+		<c:set var="addToCartText" value="${addToCartText}" scope="request"/>
+		<c:set var="addToCartUrl" value="${addToCartUrl}" scope="request"/>
+		<div class="addtocart">
+			<div id="actions-container-for-${fn:escapeXml(component.uid)}" class="row">
+				<action:actions element="div" parentComponent="${component}"  />
+			</div>
+		</div>
+
+	</ycommerce:testId>
+</li>
+
+
+
+
+
+
+

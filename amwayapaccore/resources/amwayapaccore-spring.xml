@@ -225,6 +225,9 @@
         <property name="mediaFormat" value="Product_176Wx245H"/>
     </bean>
 	
+	<bean id="image96ValueProvider" parent="abstractImageValueProvider" >
+        <property name="mediaFormat" value="Product_96Wx96H"/>
+    </bean>
 	
 	<import resource="/amwayapaccore/processes/quote/quote-buyer-process-spring.xml"/>
 	<import resource="/amwayapaccore/processes/quote/quote-salesrep-process-spring.xml"/>
@@ -252,33 +255,38 @@
     <bean id="defaultAmwayApacCustomerAccountDao" class="com.amway.apac.core.customer.daos.impl.DefaultAmwayApacCustomerAccountDao" parent="amwayCustomerAccountDao" />
     
     
-	<alias name="amwayApacLowestPriceVariantSelectionStrategy" alias="amwayApacPrimaryVariantSelectionStrategy"/>
-	<bean id="amwayApacLowestPriceVariantSelectionStrategy" class="com.amway.apac.core.product.strategies.impl.AmwayApacLowestPriceVariantSelectionStrategy">
-        <property name="netPriceService" ref="netPriceService" />
+	<alias name="defaultAmwayApacLowestPriceVariantStrategy" alias="amwayApacPrimaryVariantSelectionStrategy"/>
+	<bean id="defaultAmwayApacLowestPriceVariantStrategy" class="com.amway.apac.core.product.strategies.impl.DefaultAmwayApacLowestPriceVariantStrategy">
+        <property name="priceService" ref="netPriceService" />
     </bean>
-    
-    <bean id="amwayApacBusinessVolumeValueProvider"
-		  class="com.amway.apac.core.search.solrfacetsearch.providers.AmwayApacBusinessVolumeValueProvider" parent="businessVolumeValueProvider">
+
+	<bean id="amwayApacPrimaryVariantResolvingValueProvider" class="com.amway.apac.core.search.solrfacetsearch.providers.AmwayApacPrimaryVariantResolvingValueProvider"
+		abstract="true">
 		<property name="amwayApacPrimaryVariantSelectionStrategy" ref="amwayApacPrimaryVariantSelectionStrategy" />
+		<property name="sessionService" ref="sessionService" />
+		<property name="userService" ref="userService" />
+		<property name="catalogVersionService" ref="catalogVersionService" />
 	</bean>
 	
-	<bean id="amwayApacPointValueValueProvider"
-		  class="com.amway.apac.core.search.solrfacetsearch.providers.AmwayApacPointValueValueProvider" parent="pointValueValueProvider">
-		<property name="amwayApacPrimaryVariantSelectionStrategy" ref="amwayApacPrimaryVariantSelectionStrategy"/>
+	<bean id="amwayApacBusinessVolumeValueProvider" parent="amwayApacPrimaryVariantResolvingValueProvider">
+		<property name="actualProvider" ref="businessVolumeValueProvider" />
+	</bean>
+
+	<bean id="amwayApacPointValueValueProvider" parent="amwayApacPrimaryVariantResolvingValueProvider">
+		<property name="actualProvider" ref="pointValueValueProvider" />
+	</bean>
+
+	<bean id="amwayApacABOPriceValueProvider" parent="amwayApacPrimaryVariantResolvingValueProvider">
+		<property name="actualProvider" ref="aboPriceValueProvider" />
 	</bean>
 	
-	<bean id="amwayApacABOPriceValueProvider"
-		  class="com.amway.apac.core.search.solrfacetsearch.providers.AmwayApacABOPriceValueProvider" parent="aboPriceValueProvider">
-		<property name="amwayApacPrimaryVariantSelectionStrategy" ref="amwayApacPrimaryVariantSelectionStrategy"/>
+	<bean id="amwayApacProductUrlValueProvider" parent="amwayApacPrimaryVariantResolvingValueProvider">
+		<property name="actualProvider" ref="productUrlValueProvider" />
 	</bean>
 	
 	<bean id="amwayApacProductPricesValueResolver" class="com.amway.apac.core.search.solrfacetsearch.resolvers.AmwayApacProductPricesValueResolver"
 		parent="productPricesValueResolver">
 		<property name="amwayApacPrimaryVariantSelectionStrategy" ref="amwayApacPrimaryVariantSelectionStrategy"/>
 	</bean>
-
-	<alias name="defaultAmwayApacMockProfileService" alias="amwayProfileService"/>
-	<bean id="defaultAmwayApacMockProfileService" class="com.amway.apac.core.account.service.impl.AmwayApacMockProfileService" autowire-candidate="false">
-    </bean>
 	
 </beans>

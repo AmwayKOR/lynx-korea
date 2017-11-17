@@ -33,17 +33,29 @@ ACC.autocomplete = {
                     window.location.href = ui.item.url;
                 }
 			},
+			_renderMenu: function( ul, items ) {
+				  var searchUrl = ACC.config.encodedContextPath + "/search?text=" + items[0].searchTerm;
+				  var ulUpdated = $(ul).closest("header").find(".auto-suggestion-popover ul");
+				  $(ulUpdated).find(".suggested-words-wrapper").html("");
+				  $(ulUpdated).find(".products-wrapper .header.row").siblings("li").remove();
+				  ulUpdated.find("a.js-products-view-all-results").attr("href",searchUrl);
+				  var that = this;
+				  $.each( items, function( index, item ) {
+				    that._renderItemData( ulUpdated, item );
+				  });
+				},
 			_renderItem : function (ul, item){
 				
 				if (item.type == "autoSuggestion"){
-					var renderHtml = "<a href='"+ item.url + "' ><div class='name'>" + item.value + "</div></a>";
-					return $("<li>")
+					var divForSuggestions = $(ul).find(".suggested-words-wrapper");
+					var renderHtml = "<a href='"+ item.url + "' ><div class='name'><span class='js-name'></span><span class='js-start-of-name'></span><span class='bold js-highlited-part-of-name'>" + item.searchTerm + "</span><span class='js-rest-of-name'>"+ item.addition +"</span></div></a>";
+					return $("<li class='ui-menu-item'>")
 							.data("item.autocomplete", item)
 							.append(renderHtml)
-							.appendTo(ul);
+							.appendTo(divForSuggestions);
 				}
 				else if (item.type == "productResult"){
-
+					var divForProducts = $(ul).find(".products-wrapper");
 					var renderHtml = "<a href='" + item.url + "' >";
 
 					if (item.image != null){
@@ -51,10 +63,9 @@ ACC.autocomplete = {
 					}
 
 					renderHtml += 	"<div class='name'>" + item.value +"</div>";
-					renderHtml += 	"<div class='price'>" + item.price +"</div>";
 					renderHtml += 	"</a>";
 
-					return $("<li>").data("item.autocomplete", item).append(renderHtml).appendTo(ul);
+					return $("<li class='ui-menu-item'>").data("item.autocomplete", item).append(renderHtml).appendTo(divForProducts);
 				}
 			},
 			source: function (request, response)
@@ -75,7 +86,9 @@ ACC.autocomplete = {
 							autoSearchData.push({
 								value: obj.term,
 								url: ACC.config.encodedContextPath + "/search?text=" + obj.term,
-								type: "autoSuggestion"
+								type: "autoSuggestion",
+								searchTerm: request.term,
+								addition: (obj.term).substr((request.term).length)
 							});
 						});
 					}
@@ -90,7 +103,8 @@ ACC.autocomplete = {
 								url:  ACC.config.encodedContextPath + obj.url,
 								price: obj.price.formattedValue,
 								type: "productResult",
-								image: (obj.images!=null && self.options.displayProductImages) ? obj.images[0].url : null // prevent errors if obj.images = null
+								image: (obj.images!=null && self.options.displayProductImages) ? ACC.autocomplete.getSuitableImageForAutoComplete(obj.images).url : null, // prevent errors if obj.images = null
+								searchTerm: request.term
 							});
 						});
 					}
@@ -107,6 +121,14 @@ ACC.autocomplete = {
 			$search.yautocomplete()
 		}
 
+	},
+	
+	getSuitableImageForAutoComplete: function(images){
+		for(var count = 0; count<images.length; count++){
+			if(images[count].format == "autoComplete"){
+				return images[count];
+			}
+		}
 	},
 
 	bindDisableSearch: function ()

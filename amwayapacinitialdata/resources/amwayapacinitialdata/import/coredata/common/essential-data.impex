@@ -89,12 +89,14 @@ INSERT_UPDATE MediaFolder;qualifier[unique=true];path[unique=true]
 INSERT_UPDATE MediaFormat;qualifier[unique=true]
 ;Product_67Wx67H
 ;Product_78Wx78H
+;Product_96Wx96H
 ;Product_133Wx133H
 ;Product_145Wx145H
 ;Product_165Wx128H
 ;Product_176Wx245H
 ;Product_180Wx180H
 ;Product_588Wx588H
+;Product_800Wx1112H
 
 # Tax & Tax Groups
 INSERT_UPDATE UserTaxGroup;code[unique=true]

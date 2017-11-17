@@ -45,14 +45,14 @@
 	}
 }
 .sub_banner {
-	
+
 	.banner__shop-now {
 		a{
 			margin-bottom: 0;
 		}
-		
+
 	}
-	
+
 }
 .video-preview__img {
 	>a {
@@ -60,7 +60,7 @@
 			width: 100%;
 		}
 	}
-	
+
 }
 
 @media (max-width: 768px) {
@@ -70,7 +70,7 @@
 						padding: 10px 20px;
 						.font16;
 					}
-					
+
 		}
 		.video-preview__img-mob
 		{
@@ -161,13 +161,13 @@
 }
 .underline {
 	text-decoration: underline;
-}	
+}
 .display-none{
 	display: none;
-}	
+}
 input.quick-shop-name.shopping-list-name {
 	color:inherit;
-}	
+}
 .new-shopping-list-detail {
 	.product-list-page-title {
 		span {
@@ -212,16 +212,195 @@ input.quick-shop-name.shopping-list-name {
 	.cart-popup__item-info.amwahover {
 		overflow-y: auto;
 	}
+	.cart-popup__item-link-content .btn {
+		height: 48px !important;
+	}
+	.cart-popup__content {
+		height: 458px;
+	}
+	.amway-theme .product-stock .red *{
+		color: #EB174B;
+	}
+	.size-selector-container {
+		.control-label {
+			width: 77px;
+			margin-right: 10px;
+			word-wrap: break-word;
+		}
+		padding-top: 10px;
+	}
+	.qty-selector-container .control-label{
+		width: 77px;
+		margin-right: 10px;
+		word-wrap: break-word;
+	}
+	.addtocart-component{
+		margin-top: 0px;
+	}
 }
+
+.cart-popup__content{
+	max-height: 510px;
+}
+
 
 .searchEmptyPageMiddle-component .content .content{
     font-size: inherit;
     width: 100%;
     margin: 0;
     padding: 0;
-  
+
 }
 
 div.page-shopping-list-details form#removeShoppingListForm {
     display: inline;
+}
+
+div.page-content-wrapper.page-productDetails div.product-page-tabs {
+	margin-top: 30px;
+}
+div.page-content-wrapper.page-shopping-list-details div.shopping-list-add-to-cart-wrapper {
+	padding-bottom: 10px;
+}
+div.content {
+	display: inline;
+}
+.cart-popup__qty.no-right-border {
+    border-right:none;
+}
+
+div.page-content-wrapper.page-shopping-lists div.create-list-button-wrapper{
+    margin-top: 30px;
+}
+.searchEmptyPageMiddle-component div.content {
+	display: block;
+}
+.login-form__password {
+	width: 100%;
+}
+.size-selector-container {
+	.control-label {
+		width: 77px;
+		margin-right: 10px;
+		word-wrap: break-word;
+	}
+	padding-top: 10px;
+}
+.qty-selector-container {
+	.control-label {
+		width: 77px;
+		margin-right: 10px;
+		word-wrap: break-word;
+	}
+	padding-top: 10px;
+}
+.addtocart-component .row {
+	padding-bottom: 20px;
+}
+.amway-suggest {
+	font-size: 16px;
+}
+[type="checkbox"] {
+		&:not(:checked) {
+			left: -9999px;
+			position: absolute;
+			&+input + label {
+				color: #55565a;
+				cursor: pointer;
+				font-size: 15px;
+				font-weight: 100;
+				padding-left: 1.95em;
+				position: relative;
+				text-align: left;
+				&::before {
+					background: #fff;
+					border: 1px solid #dadada;
+					content: "";
+					height: 1.25em;
+					left: 0;
+					position: absolute;
+					top: 0;
+					width: 1.25em;
+				}
+				&::after {
+					background: url("../images/checkbox_check.png") no-repeat scroll 0 0 / contain;
+					content: "";
+					font-size: 1.3em;
+					height: 20px;
+					left: 0;
+					line-height: 0.8;
+					position: absolute;
+					top: 0;
+					transition: all 0.2s ease 0s;
+					width: 20px;
+					opacity: 0;
+					transform: scale(0);
+				}
+			}
+		}
+		&:checked {
+			left: -9999px;
+			position: absolute;
+			&+input + label {
+				color: #55565a;
+				cursor: pointer;
+				font-size: 15px;
+				font-weight: 100;
+				padding-left: 1.95em;
+				position: relative;
+				text-align: left;
+				&::before {
+					background: #fff none repeat scroll 0 0;
+					border: 1px solid #dadada;
+					content: "";
+					height: 1.25em;
+					left: 0;
+					position: absolute;
+					top: 0;
+					width: 1.25em;
+					background-color: #0075a4;
+					border-color: #0075a4;
+				}
+				&::after {
+					background: url("../images/checkbox_check.png") no-repeat scroll 0 0 / contain;
+					content: "";
+					font-size: 1.3em;
+					height: 20px;
+					left: 0;
+					line-height: 0.8;
+					position: absolute;
+					top: 0;
+					transition: all 0.2s ease 0s;
+					width: 20px;
+					opacity: 1;
+					transform: scale(1);
+				}
+			}
+		}
+}
+header {
+	.site-search .ui-autocomplete {
+		display: none !important;
+	}
+	.auto-suggestion-popover .suggested-words-wrapper {
+		min-height: 55px;
+	}
+}
+
+.amway-theme .ditto-schedule-table-content .ditto-schedule-table thead .ditto-field-name {
+  padding: 0 10px 0 30px;
+  width: 65%;
+}
+.billing-shipping .billing-and-shipping-section .control {
+  display: inline-block;
+  width: 70%;
+  height: 40px;
+  font-size: 16px;
+  outline: none;
+  color: #002f5f;
+  box-shadow: none;
+}
+
+.quick-links {
+  margin-top: unset;
 }

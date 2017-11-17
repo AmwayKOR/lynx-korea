@@ -98,8 +98,29 @@ public final class AmwayapacCoreConstants extends GeneratedAmwayapacCoreConstant
 	public static final String USER_STRING = "user";
 
 	/**
+	 * baseProduct string constant.
+	 */
+	public static final String BASE_PRODUCT_STRING = "baseProduct";
+
+	/**
+	 * priceRow string constant
+	 */
+	public static final String PRICE_ROW_STRING = "priceRow";
+
+	/**
 	 * Product Listing Page grid image format
 	 */
 	public static final String PRODUCT_LIST_GRID_FORMAT = "productGrid";
+
+	/**
+	 * Search Auto Complete image format
+	 */
+	public static final String SEARCH_AUTO_COMPLETE_FORMAT = "autoComplete";
+
+	/**
+	 * Multidimensional attribute from SolR.
+	 */
+	public static final String MULTIDIMENSIONAL = "multidimensional";
+
 
 }

@@ -53,9 +53,13 @@
 			ACC.messages.shoppingListCreationError='<spring:theme code="shopping.list.create.error"/>';
 			ACC.messages.shoppingListAddProductError='<spring:theme code="shopping.list.add.product.error"/>';
 			ACC.messages.shoppingListRemoveProductError='<spring:theme code="shopping.list.remove.product.error"/>';
+			ACC.messages.quickViewFetchError='<spring:theme code="quick.view.fetch.error"/>';
 			ACC.messages.shoppingListNameUpdateError='<spring:theme code="shoppinglist.update.name.error"/>';
+			ACC.messages.showMoreProductsError='<spring:theme code="show.more.fetch.products.error"/>';
 			ACC.messages.shoppingListUidEmptyErrorMessage= '<spring:theme code="shopping.list.add.product.error.empty.listuid"/>';
 			ACC.messages.productCodeEmptyErrorMessage= '<spring:theme code="shopping.list.add.product.error.empty.name"/>';
+			ACC.messages.productAddToCartError= '<spring:theme code="product.addtocart.error"/>';
+			ACC.messages.shoppingListProductAddToCartError= '<spring:theme code="shopping.list.grid.addtocart.none.selected"/>';
 		/*]]>*/
 	</script>
 	<template:javaScriptAddOnsVariables/>

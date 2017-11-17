@@ -36,9 +36,7 @@
     <div class="wrapper wrapper-borders row auto-total">
         <div class="col-xs-6 cart-totals-left"><spring:theme code="basket.page.totals.total"/></div>
         <div class="col-xs-6 cart-totals-right text-right"><format:price priceData="${cartData.totalPrice}"/></div></div>
-    <sec:authorize access="!hasAnyRole('ROLE_ANONYMOUS')">
         <div class="wrapper row auto-total noTop">
                 <div class="col-xs-6 cart-totals-left"><spring:theme code="basket.page.totals.totalPVBV"/></div>
                 <div class="col-xs-6 cart-totals-right text-right">${cartData.totalPrice.amwayValue.pointValue}</div></div>
-    </sec:authorize>
 </div>

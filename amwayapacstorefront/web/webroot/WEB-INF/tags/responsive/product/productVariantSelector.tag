@@ -22,7 +22,7 @@
         <div class="row">
             <div class="size-selector-container">
                 <label class="control-label" for="pdpAddtoCartInput">${firstVariantName}</label>
-                <select id="Size" class="size-select text-center js-qty-selector-input form-control">
+                <select id="Size" class="size-select text-center form-control">
                     <c:forEach items="${firstVariantOptions}" var="variantOption">
                         <c:set var="variantOptionQualifierValue" value="${variantOption.variantOptionQualifiers[0].value}"/>
                         <c:url value="${variantOption.url}" var="variantOptionUrl"/>
@@ -39,7 +39,7 @@
    <div class="row">
        <div class="size-selector-container">
            <label class="control-label" for="pdpAddtoCartInput">${secondVariantName}</label>
-           <select id="Size" class="size-select text-center js-qty-selector-input form-control">
+           <select id="Size" class="size-select text-center form-control">
                <c:forEach items="${secondVariantOptions}" var="variantOption">
                    <c:set var="variantOptionQualifierValue" value="${variantOption.variantOptionQualifiers[1].value}"/>
                    <c:url value="${variantOption.url}" var="variantOptionUrl"/>

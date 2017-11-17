@@ -120,7 +120,7 @@ public class DefaultAmwayApacWishlistFacade extends DefaultAmwayWishlistFacade i
 	 *           product code to find the product
 	 * @return product found, null if no product is found.
 	 */
-	private ProductModel fetchProductByCodeInternal(final String productCode)
+	protected ProductModel fetchProductByCodeInternal(final String productCode)
 	{
 		ProductModel product = null;
 		try
@@ -149,7 +149,7 @@ public class DefaultAmwayApacWishlistFacade extends DefaultAmwayWishlistFacade i
 	 *           uid of the wishlist
 	 * @return wishlist found, null if no wishlist is found.
 	 */
-	private Wishlist2Model fetchWishlistByUidInternal(final String wishlistUid)
+	protected Wishlist2Model fetchWishlistByUidInternal(final String wishlistUid)
 	{
 		Wishlist2Model wishlist = null;
 		try

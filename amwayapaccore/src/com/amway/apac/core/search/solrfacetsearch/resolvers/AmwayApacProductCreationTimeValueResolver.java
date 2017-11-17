@@ -11,12 +11,15 @@ import java.util.Date;
 
 
 /**
- * Resolver to index Creation Time for products.
+ * Resolver to index creation time for products.
  *
  * @author Shubham Goyal
  */
 public class AmwayApacProductCreationTimeValueResolver extends AbstractValueResolver<ProductModel, Object, Date>
 {
+	/**
+	 * Implementation to resolve the creation time of the product.
+	 */
 	@Override
 	protected void addFieldValues(final InputDocument document, final IndexerBatchContext batchContext,
 			final IndexedProperty indexedProperty, final ProductModel model,

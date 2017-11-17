@@ -55,7 +55,7 @@ public class AmwayApacVariantFullPopulator extends VariantFullPopulator<ProductM
 	 * @param baseOptions
 	 * @param currentProduct
 	 */
-	private void populateBaseOptionDataForAttribute2(final ProductModel baseProduct, final List<BaseOptionData> baseOptions,
+	protected void populateBaseOptionDataForAttribute2(final ProductModel baseProduct, final List<BaseOptionData> baseOptions,
 			final ProductModel currentProduct)
 	{
 		final BaseOptionData baseOptionDataForAttribute2 = getBaseOptionDataConverter()
@@ -83,7 +83,7 @@ public class AmwayApacVariantFullPopulator extends VariantFullPopulator<ProductM
 	 * @param baseOptions
 	 * @param currentProduct
 	 */
-	private void populateBaseOptionDataForAttribute1(final ProductModel baseProduct, final List<BaseOptionData> baseOptions,
+	protected void populateBaseOptionDataForAttribute1(final ProductModel baseProduct, final List<BaseOptionData> baseOptions,
 			final ProductModel currentProduct)
 	{
 		final BaseOptionData baseOptionDataForAttribute1 = getBaseOptionDataConverter()

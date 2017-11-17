@@ -22,6 +22,10 @@ a {
 	cursor: pointer;
 	.a_link;
 }
+.tb120 {
+	display: block;
+	padding: 70px 0 120px;
+}
 .amway-theme {
 	button {
 		border: 2px solid @trans;
@@ -49,6 +53,9 @@ a {
 		* {
 			color: @blue_1;
 		}
+	}
+	.icon{
+		height:auto;
 	}
 }
 .container-fluid {
@@ -453,6 +460,9 @@ header.main-header {
 							border: 1px solid #dddddd;
 							border-bottom: 0;
 							text-transform: uppercase;
+							span{
+								line-height: 22px;
+							}
 						}
 					}
 					>li.active {
@@ -461,6 +471,7 @@ header.main-header {
 							color: @blue_1;
 							span {
 								color: @blue_1;
+
 							}
 						}
 					}
@@ -472,6 +483,7 @@ header.main-header {
 			border: 1px solid #dadada;
 			border-top: 3px solid @blue_1;
 			top: 137px;
+			z-index: 999;
 			max-width: @w1400;
 			.overlay-menu {
 				.overlay-menu-headers {
@@ -1181,6 +1193,7 @@ header.main-header {
 	position: relative;
 }
 .popover-content {
+
 	background: #fff;
 	ul.nav__links {
 		li {
@@ -1200,6 +1213,8 @@ header.main-header {
 	overflow-y: auto;
 	max-height: calc(~"100vh - 120px");
 }
+
+
 .overlay-menu-tab-brands {
 	.banner__component {
 		a {
@@ -1678,6 +1693,13 @@ footer {
 		content: "\e259";
 		color: @white;
 		font-size: 11px;
+	}
+}
+.icon-arrow-dropdown{
+	.location-arrow-down {
+		&:before {
+			content: "";
+		}
 	}
 }
 .overlay-menu-mobile__panel__heading {
@@ -3780,6 +3802,31 @@ h1.sponsorship__title {
 		}
 	}
 }
+.btn-white-blue{
+	border: 2px solid #002F5F;
+	display: inline-block;
+	font-weight: 100;
+	letter-spacing: 0.2px;
+	outline: medium none;
+	text-transform: uppercase;
+	background-color: #fff;
+	color: #002F5F;
+	font-size: 16px;
+	border-radius: 1px;
+	min-height: 40px;
+	height: auto;
+	vertical-align: middle;
+	font-weight: 600;
+	line-height: 1;
+	padding: 10px 20px;
+	text-align: center;
+	&:hover{
+		background-color: #002F5F;
+		color: #fff;
+		-webkit-transition: background-color 0.3s, color 0.3s;
+		transition: background-color 0.3s, color 0.3s;
+	}
+}
 .btn-ink{
 	.public;
 	.font16;
@@ -3836,7 +3883,7 @@ h1.sponsorship__title {
 				
 			}
 			.owl-prev {
-				left: 0;
+				left: -12px;
 				&::before {
 					text-align: left;
 					content: "\e257";
@@ -3855,7 +3902,7 @@ h1.sponsorship__title {
 				}
 			}
 			.owl-next {
-				right: 0;
+				right: -12px;
 				&::before {	
 					text-align: right;	
 					content: "\e258";
@@ -4076,6 +4123,7 @@ h1.sponsorship__title {
 
 
 .sub_ban {
+	background: @white url(../images/new_product_banner.jpg) no-repeat;
 	background-size: cover;
 	background-position: center center;
 	background-attachment: fixed;
@@ -5254,6 +5302,9 @@ p {
 		overflow-x: hidden;
 		overflow-y: auto;
 	}
+	.fade.in{
+		display: @none;
+	}
 }
 .fade.in {
 	opacity: 1;
@@ -5793,6 +5844,9 @@ header {
 	}
 .switch-buttons-wrapper {
 	margin-top: -2px;
+	.wrap.new-wrap{
+		padding-left: 0;
+	}
 }
 select.form-control {
 	-moz-appearance: @none;
@@ -6981,25 +7035,66 @@ select.form-control {
 		position: absolute;
 	}
 }
-.mini-cart-items-container.collapse {
-	.arrow {
-		&:before {
-			content: " ";
-			top: 52px;
-			margin-left: -16px;
-			border-top-width: 0;
-			border-bottom-color: @white;
-			border-width: 10px;
-			position: fixed;
-			display: @block;
-			width: 0;
-			height: 0;
-			border-top-color: @trans;
-			border-right-color: @trans;
-			border-left-color: @trans;
-			border-style: solid;
+
+.mini-cart-items-container{
+	display: none;
+}
+
+	.icon-arrow-dropdown{
+		&:before{
+			font-family: 'Glyphicons Halflings';
+			content: "\e259" !important;
 		}
 	}
+
+
+
+.mincart-open{
+
+	.mini-cart-items-container{
+		display: block;
+		.arrow{
+			&:before{
+				content: " ";
+				top: 52px;
+				margin-left: -16px;
+				border-top-width: 0;
+				border-bottom-color: #fff;
+				border-width: 10px;
+				position: fixed;
+				display: block;
+				width: 0;
+				height: 0;
+				border-top-color: transparent;
+				border-right-color: transparent;
+				border-left-color: transparent;
+				border-style: solid;
+			}
+
+		}
+
+	}
+}
+
+#login-drop-content{
+	display: none;
+}
+
+.userinfo-open{
+	.nav-links-container {
+		.icon-arrow-dropdown {
+			&:before {
+				font-family: 'Glyphicons Halflings';
+				content: "\e260" !important;
+			}
+		}
+	}
+
+	#login-drop-content{
+		display: block;
+
+	}
+
 }
 .quick-links-misc {
 	li {
@@ -7049,6 +7144,11 @@ select.form-control {
 	top: 10%;
 	position: fixed;
 	width: 50%;
+	&.create-new-list{
+		//width:auto;
+		max-width:600px;
+		top:16%;
+	}
 
 	#cboxContent {
 		float: left;
@@ -8788,6 +8888,7 @@ select.form-control {
 		header.main-header {
 			.amway-theme {
 				.overlay-menu-container {
+
 					.overlay-menu {
 						.tab-content {
 							.overlay-menu-tab {
@@ -9465,6 +9566,9 @@ select.form-control {
 							padding: 8px 0;
 							.icon-Humburger_list {
 								color: @blue_2;
+								&:before{
+									color: @blue_2;
+								}
 							}
 						}
 
@@ -10310,6 +10414,88 @@ select.form-control {
 .test{
 	background: red;
 }
+#shopping-cart{
+	.payment-forms__apply{
+		margin-top:0;
+	}
+}
+#Shopping-List-Detail{
+	.payment-forms__apply{
+		margin-top:0;
+	}
+}
+.user-account-header{
+	.go-block{
+		input[type="button"]{
+			border: 2px solid #002f5f;
+			width: auto;
+		}
+	}
+}
+//2017/10/17 angela modify
+.plp-add-to-shopping-list{
+	position: relative;
+	z-index: 1000;
+	.product-list__item-link-text{
+		cursor: pointer;
+	}
+	.dropdown-menu{
+		position: absolute;
+		top: 40px;
+		left: 0;
+		z-index: 1000!important;
+		li{
+			line-height: 50px;
+			border-bottom: 1px solid #dadada;
+			margin: 0 15px 0 20px;
+			&:last-child{}
+			border:0;
+			label{
+				top:-8px;
+			}
+		}
+		.dropdown-menu-bottom{
+			padding: 10px 0 10px 20px;
+			border-top: 1px solid #dadada;
+		}
+	}
+}
+
+#dashboard,#my-business-income{
+	.owl-theme{
+		.owl-controls{
+			.owl-nav{
+				.owl-prev{
+					left:0;
+				}
+				.owl-next{
+					right:0;
+				}
+			}
+		}
+	}
+}
+.icon-Humburger_list {
+	&:before{
+		color: @blue_2;
+	}
+}
+@media(max-width: 768px){
+	#homepage{
+		.owl-theme{
+			.owl-controls{
+				.owl-nav{
+					.owl-prev{
+						left:0;
+					}
+					.owl-next{
+						right:0;
+					}
+				}
+			}
+		}
+	}
+}
 	@media (max-width:660px) {
 		.cart-popup__content {
 			max-height: 420px;
@@ -10374,4 +10560,3 @@ select.form-control {
 	@import 'sprint3.less';
 	@import 'sprint4.less';
 	@import 'leon.less';
-

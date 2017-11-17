@@ -455,6 +455,7 @@
 	}
 	.btn-blue-white {
 		color: @white;
+		margin-right: 8px;
 		&:hover {
 			color: @blue_1;
 		}
@@ -1039,11 +1040,24 @@
 
 
 .register-option-div{
+	.panel-collapse{
+		margin-left: 12px;
+		@media (max-width: @w768){
+			margin-left: 0;
+		}
+	}
 	@media (max-width: @w768){
 		margin-left: 0;
 		margin-right:0;
 	}
 	.amwa-radio{
+		&:checked {
+			&+label {
+				&:after {
+					background: @blue_2;
+				}
+			}
+		}
 		& + label{
 			margin-left: 12px;
 			vertical-align: top;
@@ -1054,6 +1068,7 @@
 			}
 			&:after{
 				top:10px;
+
 			}
 
 			@media (max-width: @w768){
@@ -1075,7 +1090,7 @@
 			cursor: pointer;
 			position: relative;
 			z-index: 11;
-			margin-left: 12px;
+			margin-left: 10px;
 			margin-top:10px;
 			@media (max-width: @w768){
 				margin-left: 0;
@@ -1086,11 +1101,16 @@
 			}
 		}
 		label{
-			width: auto;
-			margin-left: 12px;
+			width: 16.66666667%;
 			@media (max-width: @w768){
 				margin-left: 0;
+				width: 100%;
 			}
+
+		}
+		.col-md-10{
+
+				padding-left: 0;
 
 		}
 	}
@@ -1133,4 +1153,8 @@ color: #20893d;
 .total-tip{
 color: #56565a;
 font-size: 16px;
+}
+
+.pop-box-container {
+	display: none;
 }
