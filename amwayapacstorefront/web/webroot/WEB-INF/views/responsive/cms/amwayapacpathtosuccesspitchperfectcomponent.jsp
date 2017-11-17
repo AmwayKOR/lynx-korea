@@ -24,7 +24,7 @@
 
                        
 <div class="item-image-wrap">
-	  <img alt="image" class="desktop-image"  data-media='{${imagerData}}' />
+	  <img alt="image" class="desktop-image"  data-media='{${imagerData}}' alt="success stories"/>
 </div>
 <div class="item-content-wrap">
 		<cms:component component="${text}" />

@@ -30,8 +30,7 @@
 					<div class="banner-content">
 						<div class="banner-title-wrapper">
 							<h2 class="banner-title">
-								<img class="category-banner__icon" src="${logoImage.media.url}"
-									alt="icon" /> <span>${headerText}</span>
+								<img class="category-banner__icon" src="${logoImage.media.url}"	alt="icon" /> <span>${headerText}</span>
 							</h2>
 							<div class="sub-title-wrap">
 								<span class="banner-sub-title"> <span> <cms:component

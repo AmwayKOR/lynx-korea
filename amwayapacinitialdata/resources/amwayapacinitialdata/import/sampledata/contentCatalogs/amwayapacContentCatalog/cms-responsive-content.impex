@@ -58,7 +58,7 @@ INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];nam
 INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
 ;;homePageTopCarouselArtistryImageComponent;Home page top carousel artistry image component;homePageTopCarouselArtistryImageComponent
 
-INSERT_UPDATE RotatingImagesComponent;$contentCV[unique=true];uid[unique=true];name;responsiveBanners(&componentRef);&componentRef
+INSERT_UPDATE RotatingImagesComponent;$contentCV[unique=true];uid[unique=true];name;banners(&componentRef);&componentRef
 ;;HomepageSection1CarouselComponent;Homepage section 1 Carousel;AmwayApacArtistryDealCarouselComponent;HomepageSection1CarouselComponent
 
 ########## Home page section 1 carousel ##########
@@ -286,7 +286,6 @@ INSERT_UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];name;urlL
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
 ;;TopBannerContentSlot; Category Top banner Slot;true;amwayapacCategoryTopBannerComponent;
 
-
 ################## category page shop by category component
 
 INSERT_UPDATE AmwayApacShopByCategoryCollectionComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;shopByCategoryComponents(&componentRef)
@@ -308,11 +307,10 @@ INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=tr
 ;;energyDrinksButtonLinkComponent;energy drinks category link;energyDrinksButtonLinkComponent;;energyDrinks
 
 INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
-;;ShopByCategoryTitleParagraphComponent;ShopByCategoryTitleParagraphComponent
+;;amwayapacShopByCategoryTitleParagraphComponent;amwayapacShopByCategoryTitleParagraphComponent
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
-;;ShopByCategoryContentSlot;Shop By category Content Slot;true;ShopByCategoryTitleParagraphComponent,shopByCategoryCollectionComponent
-
+;;ShopByCategoryContentSlot;Shop By category Content Slot;true;amwayapacShopByCategoryTitleParagraphComponent,shopByCategoryCollectionComponent;
 
 ##################### category Page Experience Our Brands
 
@@ -428,6 +426,7 @@ INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&co
 ;;becomeABODesc;becomeABODesc
 ;;becomeCustomerDesc;becomeCustomerDesc
 ;;footerNoticeDesc;footerNoticeDesc
+;;footerNoticeToolTipDesc;footerNoticeToolTipDesc
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
 ;;JoinAmwayContentSlot;Join Amway Slot;true;amwayApacJoinAmwayComponent
@@ -435,6 +434,7 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;c
 ;;BecomeAnABOContentSlot;Become An ABO Slot;true;becomeABODesc,amwayApacBecomeAnABOLinkContent
 ;;BecomeACustomerContentSlot;Become A Customer;true;becomeCustomerDesc,amwayApacBecomeACustomerLinkContent
 ;;FooterNoticeParagraphContentSlot; Footer Notice;true;footerNoticeDesc
+;;FooterNoticeToolTipParagraphContentSlot; Footer Notice ToolTip;true;footerNoticeToolTipDesc
 
 INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;target(code)[default='sameWindow'];&componentRef
 ;;amwayApacBecomeAnABOLinkContent;BECOME AN ABO;/;amwayApacBecomeAnABOLinkContent;;amwayApacBecomeAnABOLinkContent;

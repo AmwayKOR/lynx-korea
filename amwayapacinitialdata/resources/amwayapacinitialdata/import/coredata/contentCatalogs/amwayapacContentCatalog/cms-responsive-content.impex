@@ -633,6 +633,7 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 ;WeAreAmwayContentSlot;;;
 ;BecomeAnABOContentSlot;;;
 ;BecomeACustomerContentSlot;;;
+;FooterNoticeToolTipParagraphContentSlot;;;
 ;FooterNoticeParagraphContentSlot;;;
 
 # Store Finder/Locator Page Template
@@ -736,6 +737,21 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active
 ;;ToolsAndAdviceBannerProductDetailContentSlot3;Tools and advice banner ProductDetail  content slot 3;true
 ;;LearningOpportunitiesProductDetailContentSlot;Learning Opportunities Product Detail content slot;true
 ;;LearningOpportunitiesBannerProductDetailContentSlot1;Learning Opportunities banner Product Detail content slot 1;true
+;;RegistrationTermsContentSlot; Content Slot for ABO Registration Terms;true
+
+;;PathwayToSuccessContentSlot;       Pathway To SuccessContent Slot;                        true
+;;BuildYourBusinessContentSlot;      Build Your Business Content Slot;                      true
+;;ExperienceTheStarterKitContentSlot;Experience The Starter Kit Content Slot;               true
+;;ArticleSuccessStoryContentSlot1;   Article Success Story Content Slot 1;                  true
+;;ArticleSuccessStoryContentSlot2;   Article Success Story Content Slot 2;                  true
+;;JoinAmwayContentSlot;              Join Amway Content Slot;                               true
+;;WeAreAmwayContentSlot;             We Are Amway Content Slot;                             true
+;;BecomeAnABOContentSlot;            Become An ABO Content Slot;                            true
+;;BecomeACustomerContentSlot;        Become A Customer Content Slot;                        true
+;;FooterNoticeToolTipParagraphContentSlot;  Footer Notice ToolTip Paragraph Content Slot;   true 
+;;FooterNoticeParagraphContentSlot;  Footer Notice Paragraph Content Slot;                  true 
+;;NoResultsContentSlot;              No Results PLP content slot;                           true
+;;ProductCarouselSlot;               Product Carousel Slot;                                 true
 
 ;;Section1CarouselSlot;Home page top carousel slot;true
 
@@ -1182,6 +1198,7 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 ;;WeAreAmwayContentSlot-RegisterLandingPage;WeAreAmwayContentSlot;;WeAreAmwayContentSlot;true
 ;;BecomeAnABOContentSlot-RegisterLandingPage;BecomeAnABOContentSlot;;BecomeAnABOContentSlot;true
 ;;BecomeACustomerContentSlot-RegisterLandingPage;BecomeACustomerContentSlot;;BecomeACustomerContentSlot;true
+;;FooterNoticeToolTipParagraphContentSlot-RegisterLandingPage;FooterNoticeToolTipParagraphContentSlot;;FooterNoticeToolTipParagraphContentSlot;true
 ;;FooterNoticeParagraphContentSlot-RegisterLandingPage;FooterNoticeParagraphContentSlot;;FooterNoticeParagraphContentSlot;true
 
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='StoreFinderPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
