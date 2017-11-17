@@ -5,35 +5,34 @@ ACC.productdetail = {
         "bindProductReferencesCarousel",
         "bindRecentlyViewedProductsCarousel",
         "bindReviewSummaryShowReviews",
-        "bindUsageCalculator",
         "bindCalculateUsage",
         "bindAddToDitto",
         "bindCreateNewDitto",
         "bindContactsPopup",
         "bindPreviousScreenPopup"
 	],
-	
+
 	bindAddToDitto: function() {
 		 $(document).on("click", '#addToDitto', function(event) {
              event.preventDefault();
              ACC.popup.showPopup($("#added-to-ditto-wrapper").html());
          });
 	},
-	
+
 	bindCreateNewDitto: function() {
 		$(document).on("click", '#creatNewDitto', function(event) {
             event.preventDefault();
             ACC.popup.showPopup($("#create-new-ditto-wrapper").html());
         });
 	},
-	
+
 	bindContactsPopup: function() {
 		 $(document).on("click", '#searchContacts', function(event) {
              event.preventDefault();
 			 ACC.popup.showPopup($("#search-contacts-ditto-wrapper").html());
          });
 	},
-	
+
 	bindPreviousScreenPopup: function() {
 		$(document).on("click", '#backPrevious', function(event) {
             event.preventDefault();
@@ -41,7 +40,7 @@ ACC.productdetail = {
             ACC.popup.showPopup($("#create-new-ditto-wrapper").html());
         });
 	},
-	
+
 	bindCalculateUsage: function() {
         $(document).on("click", ".btn-calculate", function() {
             $(this).addClass("btn-gray");
@@ -52,14 +51,7 @@ ACC.productdetail = {
             $(".usage-content-hide").hide();
         })
 	},
-	
-	bindUsageCalculator: function() {
-		$('.usageCalculatorLink').click(function(event) {
-            event.preventDefault();
-            ACC.popup.showPopup($("#usage-calculator-poup-wrapper").html());
-        });
-	},
-	
+
 	bindReviewSummaryShowReviews: function(){
         $(".description-number,.description-reviews").click(function(){
             $("#reviewsbody.accordion-panel-collapse.collapse").addClass("in");
@@ -69,7 +61,7 @@ ACC.productdetail = {
 			ACC.tabs.showReviewBtn(".all-reviews-btn");
         });
 	},
-	
+
 	bindRecentlyViewedProductsCarousel: function() {
 		  $('#recentlyViewedListTab').owlCarousel({
               loop: true,
@@ -94,7 +86,7 @@ ACC.productdetail = {
               }
           });
 	},
-	
+
 	bindProductReferencesCarousel: function() {
 		 $('#productSuggestListTabs').owlCarousel({
              loop: true,
@@ -117,9 +109,9 @@ ACC.productdetail = {
                      items: 4
                  }
              }
-         });	
+         });
 	},
-	
+
 	bindLearningOpportunitiesCarousel: function() {
 		 $('#productLearningListTabs').owlCarousel({
              loop: true,

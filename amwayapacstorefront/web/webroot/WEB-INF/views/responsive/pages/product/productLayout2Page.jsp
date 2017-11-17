@@ -120,6 +120,5 @@
 	<div class="cart-popup modal fade" id="product-zoom-image-panel" tabindex="-1" role="dialog"
 		aria-labelledby="cartModalLabel" aria-hidden="true"></div>
 	<product:productShoppingListPopups />
-	<product:productHowMuchDoINeedPopup />
 	<product:productDittoPopups />
 </template:page>

@@ -34,7 +34,7 @@
 				<div class="col-xs-12 col-md-6 product-details print-col-6">
 					<div class="product-item-element list-item-toggle">
 						<label class="checkbox-element-wrapper">
-							<input class="shopping-cart-entry-checkbox _checkbox-element-global-class shopping-list-entry-checkbox" 
+							<input class="shopping-cart-entry-checkbox _checkbox-element-global-class shopping-list-entry-checkbox"
 								name="cartEntries[${loop.index}].selected"
 								data-product-code="${shoppingListEntry.product.code}" type="checkbox">
 							<span class="_checkbox-element-global-span"></span>
@@ -74,9 +74,6 @@
 				<div class="col-xs-9 col-md-2 product-item-element list-item-quantity print-col-6">
 					<input id="quantity_0" class="form-control js-update-shopping-list-entry-quantity-input quantity-value"
 					    name="cartEntries[${loop.index}].quantity" value="1" type="text" />
-					<span class="usage-cal">
-						<spring:theme code="shoppinglist.items.section.table.item.usagecalculator.label" />
-					</span>
 				</div>
 				<div class="col-xs-9 product-item-element list-item-ibo-price col-md-2 list-item-price print-col-6">
 					<span class="price-label">

@@ -53,13 +53,6 @@
 													<input type="text" maxlength="3" class="text-center js-qty-selector-input" size="1" value="1"
 														data-max="FORCE_IN_STOCK" data-min="1" name="pdpAddtoCartInput" id="pdpAddtoCartInput" />
 												</div>
-												<div class="pull-left usage-calc-pdp">
-													<a class="usageCalculatorLink" href="javascript:void(0);" title="How Much Do I Need?">
-														<span class="icon icon-calculator"></span>
-														</span>
-														<spring:theme code="product.volumePrices.column.howMuch" />
-													</a>
-												</div>
 											</div>
 									</div>
 									<sec:authorize access="!hasAnyRole('ROLE_ANONYMOUS')">
