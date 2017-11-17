@@ -34,9 +34,10 @@ ACC.autocomplete = {
                 }
 			},
 			_renderMenu: function( ul, items ) {
-				  searchUrl = ACC.config.encodedContextPath + "/search?text=" + items[0].searchTerm;
-				  var ulUpdated = $(ul).closest("header").find(".auto-suggestion-popover ul")
-				  ulUpdated.html($("header #empty-auto-complete-html").html());
+				  var searchUrl = ACC.config.encodedContextPath + "/search?text=" + items[0].searchTerm;
+				  var ulUpdated = $(ul).closest("header").find(".auto-suggestion-popover ul");
+				  $(ulUpdated).find(".suggested-words-wrapper").html("");
+				  $(ulUpdated).find(".products-wrapper .header.row").siblings("li").remove();
 				  ulUpdated.find("a.js-products-view-all-results").attr("href",searchUrl);
 				  var that = this;
 				  $.each( items, function( index, item ) {
@@ -123,7 +124,7 @@ ACC.autocomplete = {
 	},
 	
 	getSuitableImageForAutoComplete: function(images){
-		for(count = 0; count<images.length; count++){
+		for(var count = 0; count<images.length; count++){
 			if(images[count].format == "autoComplete"){
 				return images[count];
 			}
