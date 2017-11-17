@@ -332,7 +332,17 @@ public interface ControllerConstants
 		/**
 		 * String constant linkUrl
 		 */
+		String SECONDARY_LINK_URL_STRING = "secondaryLinkUrl";
+
+		/**
+		 * String constant linkUrl
+		 */
 		String MEDIAS_STRING = "medias";
+
+		/**
+		 * String constant linkUrl
+		 */
+		String SECONDARY_MEDIAS_STRING = "secondaryMedias";
 	}
 
 	/**

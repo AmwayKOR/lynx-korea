@@ -9,9 +9,13 @@
 	</cms:pageSlot>
 
 	<div class="container-fluid main-container">
-		<cms:pageSlot position="Section2" var="component">
-			<cms:component component="${component}" />
-		</cms:pageSlot>
+		<div class="amway-theme subTitle">
+			<div class="full-width-title-component">
+				<cms:pageSlot position="Section2" var="component">
+					<cms:component component="${component}" />
+				</cms:pageSlot>
+			</div>
+		</div>
 
 		<div class="category-success-story row">
 			<div class="success-story__item col-sm-12 col-md-6">

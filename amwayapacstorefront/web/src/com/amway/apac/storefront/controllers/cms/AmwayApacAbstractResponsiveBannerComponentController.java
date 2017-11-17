@@ -3,7 +3,6 @@ package com.amway.apac.storefront.controllers.cms;
 import de.hybris.platform.acceleratorfacades.device.ResponsiveMediaFacade;
 import de.hybris.platform.cms2.model.contents.components.CMSLinkComponentModel;
 import de.hybris.platform.commercefacades.product.data.ImageData;
-import de.hybris.platform.commerceservices.i18n.CommerceCommonI18NService;
 import de.hybris.platform.commerceservices.url.UrlResolver;
 
 import java.util.List;
@@ -28,9 +27,6 @@ public abstract class AmwayApacAbstractResponsiveBannerComponentController<T ext
 	@Resource(name = "responsiveMediaFacade")
 	private ResponsiveMediaFacade responsiveMediaFacade;
 
-	@Resource(name = "commerceCommonI18NService")
-	private CommerceCommonI18NService commerceCommonI18NService;
-
 	@Resource(name = "amwayApacCmsLinkComponentUrlResolver")
 	private UrlResolver<CMSLinkComponentModel> amwayApacCmsLinkComponentUrlResolver;
 
@@ -45,11 +41,9 @@ public abstract class AmwayApacAbstractResponsiveBannerComponentController<T ext
 	protected void populateData(final Model model, final T component)
 	{
 
-		final List<ImageData> mediaDataList = getResponsiveMediaFacade()
-				.getImagesFromMediaContainer(component.getMedia(getCommerceCommonI18NService().getCurrentLocale()));
-
 		if (null != component.getMedia())
 		{
+			final List<ImageData> mediaDataList = getResponsiveMediaFacade().getImagesFromMediaContainer(component.getMedia());
 			model.addAttribute(ControllerConstants.ModelParameters.MEDIAS_STRING, mediaDataList);
 		}
 		if (null != component.getLink())
@@ -68,27 +62,12 @@ public abstract class AmwayApacAbstractResponsiveBannerComponentController<T ext
 	}
 
 	/**
-	 * @param responsiveMediaFacade the responsiveMediaFacade to set
+	 * @param responsiveMediaFacade
+	 *           the responsiveMediaFacade to set
 	 */
-	public void setResponsiveMediaFacade(ResponsiveMediaFacade responsiveMediaFacade)
+	public void setResponsiveMediaFacade(final ResponsiveMediaFacade responsiveMediaFacade)
 	{
 		this.responsiveMediaFacade = responsiveMediaFacade;
-	}
-
-	/**
-	 * @return the commerceCommonI18NService
-	 */
-	public CommerceCommonI18NService getCommerceCommonI18NService()
-	{
-		return commerceCommonI18NService;
-	}
-
-	/**
-	 * @param commerceCommonI18NService the commerceCommonI18NService to set
-	 */
-	public void setCommerceCommonI18NService(CommerceCommonI18NService commerceCommonI18NService)
-	{
-		this.commerceCommonI18NService = commerceCommonI18NService;
 	}
 
 	/**
@@ -100,9 +79,11 @@ public abstract class AmwayApacAbstractResponsiveBannerComponentController<T ext
 	}
 
 	/**
-	 * @param amwayApacCmsLinkComponentUrlResolver the amwayApacCmsLinkComponentUrlResolver to set
+	 * @param amwayApacCmsLinkComponentUrlResolver
+	 *           the amwayApacCmsLinkComponentUrlResolver to set
 	 */
-	public void setAmwayApacCmsLinkComponentUrlResolver(UrlResolver<CMSLinkComponentModel> amwayApacCmsLinkComponentUrlResolver)
+	public void setAmwayApacCmsLinkComponentUrlResolver(
+			final UrlResolver<CMSLinkComponentModel> amwayApacCmsLinkComponentUrlResolver)
 	{
 		this.amwayApacCmsLinkComponentUrlResolver = amwayApacCmsLinkComponentUrlResolver;
 	}

@@ -58,25 +58,29 @@ INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique
 
 UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang]
 ;;HomepageSection1CarouselShopNowNavLink;"SHOP NOW"
-;;HomepageSection1CarouselSecNavLink;"SECONDARY ACTION"
 
-INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=$lang];
+UPDATE AmwayApacIconLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang];iconStyleAttributes
+;;HomepageSection1CarouselSecLink;"SECONDARY ACTION";"glyphicon glyphicon-menu-right"
+
+UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=$lang];
 ;;HomepageSection1CarouselImage1Text;"<span class=""banner__message--main"">Artistry IDEAL RADIANCE</span><br /><span class=""banner__message--sub"">This highly advanced, yet gentle skin care system helps to visibly reduce the appearance of dark spots and discolouration.</span>";
 
-INSERT_UPDATE AmwayApacArtistryDealCarouselComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer;&componentRef
+INSERT_UPDATE AmwayApacArtistryDealCarouselComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer[lang=$lang];&componentRef
 ;;AmwayApacArtistryDealCarouselComponent;homePageTopCarouselGirlImage;AmwayApacArtistryDealCarouselComponent
 
 ########## Home page section 1 carousel ##########
 
-	
-#Section 2 Home Page Amway Latest News
 
-INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang];buttonStyleAttributes;styleAttributes;
-;;amwayapacHomepageReadMoreNavLink;"read more";featured-product__message-icon glyphicon glyphicon-menu-right;featured-product__link;
+########## Home Page section 2 Amway Latest News
+
+INSERT_UPDATE AmwayApacIconLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang];iconStyleAttributes;styleAttributes;
+;;amwayapacHomepageReadMoreLink;"read more";featured-product__message-icon glyphicon glyphicon-menu-right;featured-product__link;
 
 INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=$lang];
-;;AmwayApacLatestNewsComponent;"<h2 class=""full-width-title-component__title"">Amway Latest news</h2><p>Amway Korea launches new product 'XS Red Blast' in the summer..</p>";
-		
+;;amwayapacLatestNewsParagraphComponent;"<h2 class=""full-width-title-component__title"">Amway Latest news</h2><p>Amway Korea launches new product 'XS Red Blast' in the summer..</p>";
+
+########## Home Page section 2 Amway Latest News ##########
+
 
 #Section 3 Home page Success Story 
 

@@ -46,11 +46,14 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents
 ;;Section1CarouselSlot;HomepageSection1CarouselComponent
 
 INSERT_UPDATE AmwayApacArtistryDealCarouselComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink;link(&componentRef);secondaryLink(&componentRef);text(&componentRef);secondaryImage(&componentRef)
-;;AmwayApacArtistryDealCarouselComponent;Girl Thumbnail Detail;AmwayApacArtistryDealCarouselComponent;;HomepageSection1CarouselShopNowNavLink;HomepageSection1CarouselSecNavLink;HomepageSection1CarouselImage1Text;homePageTopCarouselArtistryImageComponent
+;;AmwayApacArtistryDealCarouselComponent;Girl Thumbnail Detail;AmwayApacArtistryDealCarouselComponent;;HomepageSection1CarouselShopNowNavLink;HomepageSection1CarouselSecLink;HomepageSection1CarouselImage1Text;homePageTopCarouselArtistryImageComponent
+
 
 INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow'];
 ;;HomepageSection1CarouselShopNowNavLink;Shop Now Nav Link;/;HomepageSection1CarouselShopNowNavLink;HomepageSection1CarouselShopNowNavLink;;;;
-;;HomepageSection1CarouselSecNavLink;Secondary Action Nav Link;/;HomepageSection1CarouselSecNavLink;HomepageSection1CarouselSecNavLink;;;;
+
+INSERT_UPDATE AmwayApacIconLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow'];
+;;HomepageSection1CarouselSecLink;Secondary Action Nav Link;/;HomepageSection1CarouselSecLink;HomepageSection1CarouselSecLink;;;;
 
 INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;
 ;;HomepageSection1CarouselImage1Text; Home Page top carousel image 1;HomepageSection1CarouselImage1Text;        
@@ -64,19 +67,18 @@ INSERT_UPDATE RotatingImagesComponent;$contentCV[unique=true];uid[unique=true];n
 ########## Home page section 1 carousel ##########
 
 
-#Section 2 Home Page Amway Latest News
+########## Home Page section 2 Amway Latest News
 
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
-;;Section2ContentSlot-Homepage;Amway Latest News Content Slot for Homepage;true;amwayapacLatestNewsParagraphComponent,amwayapacHomepageReadMoreNavLink;
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;Section2ContentSlot;amwayapacLatestNewsParagraphComponent,amwayapacHomepageReadMoreLink;
 
-INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='homepage'];contentSlot(uid,$contentCV)[unique=true]
-;;Section2ContentSlot-Homepage;Section2;;Section2ContentSlot-Homepage
+INSERT_UPDATE AmwayApacIconLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;target(code)[default='sameWindow'];&componentRef;
+;;amwayapacHomepageReadMoreLink;Read More Nav Link;/;amwayapacHomepageReadMoreLink;;amwayapacHomepageReadMoreLink;
 
 INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;
 ;;amwayapacLatestNewsParagraphComponent; Home Page Amway Latest News;amwayapacLatestNewsParagraphComponent;		
 
-INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;target(code)[default='sameWindow'];&componentRef;
-;;amwayapacHomepageReadMoreNavLink;Read More Nav Link;/;amwayapacHomepageReadMoreNavLink;;amwayapacHomepageReadMoreNavLink;
+########## Home Page section 2 Amway Latest News ##########
 	
 	
 #Section 3 Home page Success Story 
