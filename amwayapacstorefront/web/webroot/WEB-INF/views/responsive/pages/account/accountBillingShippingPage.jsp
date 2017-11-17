@@ -7,6 +7,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="formElement" tagdir="/WEB-INF/tags/responsive/formElement"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="address" tagdir="/WEB-INF/tags/responsive/address"%>
 
 <div class="row">
             <div class="container">
@@ -594,15 +595,15 @@
                                     </h4>
                                 </div>
                                 <c:if test="${empty addressData}">
-									<div class="account-section-content content-empty">
-										<spring:theme code="text.account.addressBook.noSavedAddresses" />
-									</div>
+									
 							    </c:if>
 							    
-							    <c:if test="${not empty addressData}">
+							    
 	                                <div id="billingShippingBody" class="panel-collapse collapse billing-and-shipping-section"
 	                                    role="tabpanel" aria-labelledby="headingOne">
 	                                    <div class="panel-body">
+	                                    	<div class="primary-alternate-body">
+	                                    	<c:if test="${not empty addressData}">
 	                                        <div class="primary-address-section container-fluid">
 	                                            <div class="header">
 	                                                <span class="primary-text"> Primary addresses</span>
@@ -613,22 +614,7 @@
 	                                            					<div class="address-container col-xs-12 col-md-6">
 				                                                    <div class="form-container">
 				                                                            <div class="mailing-address">
-				                                                            	   <span class="primary-text mailing-address__title">Shipping address</span>
-					                                                                <span class="secondary-text mailing-address__line-one">${fn:escapeXml(address.line1)}&nbsp;<c:if test="${not empty fn:escapeXml(address.line2)}">${fn:escapeXml(address.line2)}</c:if></span>
-					                                                                <span class="secondary-text mailing-address__city">${fn:escapeXml(address.town)}</span>
-					                                                                <div>
-					                                                                    ${fn:escapeXml(address.region.name)}
-					                                                                </div>
-					                                                                <span class="secondary-text mailing-address__zip">${fn:escapeXml(address.postalCode)}</span>
-					                                                                <span class="secondary-text mailing-address__phone">${fn:escapeXml(address.phone)}</span>
-		                                                                			   <span class="secondary-text mailing-address__email">${fn:escapeXml(address.email)}</span>
-	                                                                			   
-				                                                                <button type="button"
-				                                                                        class="btn-edit btn btn-primary"
-				                                                                        data-address-id="${fn:escapeXml(address.id)}"
-				                                                                        data-address-countryISOCode="${fn:escapeXml(address.country.isocode)}"
-				                                                                        onclick="ACC.billingshipping.populateFormUponEditAddress(this);"> Edit
-				                                                                </button>
+				                                                            		<address:shippingAddressDetail addressData="${address}"/>
 				                                                            </div>
 				                                                            <c:set var="addressID" scope="request" value="${fn:escapeXml(address.id)}"/>
 				                                                            <c:set var="countryISO" scope="request" value="${fn:escapeXml(address.country.isocode)}"/>
@@ -658,21 +644,7 @@
 	                                            				<div class="address-container col-xs-12 col-md-6">
 	                                                    			<div class="form-container">
 	                                                        				  <div class="mailing-address">
-	                                                        				  	  <span class="primary-text mailing-address__title">Shipping address</span>
-				                                                                <span class="secondary-text mailing-address__line-one">${fn:escapeXml(address.line1)}&nbsp;<c:if test="${not empty fn:escapeXml(address.line2)}">${fn:escapeXml(address.line2)}</c:if></span>
-				                                                                <span class="secondary-text mailing-address__city">${fn:escapeXml(address.town)}</span>
-				                                                                <div>
-				                                                                    ${fn:escapeXml(address.region.name)}
-				                                                                </div>
-				                                                                <span class="secondary-text mailing-address__zip">${fn:escapeXml(address.postalCode)}</span>
-				                                                                <span class="secondary-text mailing-address__phone">${fn:escapeXml(address.phone)}</span>
-	                                                                			   <span class="secondary-text mailing-address__email">${fn:escapeXml(address.email)}</span>
-				                                                              	 <button type="button"
-					                                                                        class="btn-edit btn btn-primary"
-					                                                                        data-address-id="${fn:escapeXml(address.id)}"
-					                                                                        data-address-countryISOCode="${fn:escapeXml(address.country.isocode)}"
-					                                                                        onclick="ACC.billingshipping.populateFormUponEditAddress(this);"> Edit
-					                                                                </button>
+	                                                        				  	  <address:shippingAddressDetail addressData="${address}"/>
 				                                                            </div>
 				                                                            
 				                                                            <c:set var="addressID" scope="request" value="${fn:escapeXml(address.id)}"/>
@@ -687,21 +659,63 @@
 	                                                        	</div>
 	                                            			</c:if>
 	                                            		</c:forEach>
-	                                            		
-	                                            		
-	                                                
-	                                                
-	                                                
-	                                                
 	                                            </div>
-	                                            <div class="add-new-alternate-address js-add-new-address-btn">
-	                                                <span class="icon icon-plus"></span>
-	                                                <a title="Add New Alternative Address" href="">Add New Alternative Address</a>
+	                                            
+	                                        </div>
+	                                        </c:if>
+	                                    </div>
+	                                        
+	                                        <div class="add-alternate-address alternative-address-section container-fluid">
+	                                            
+	                                            <div class="main row">
+	                                            		<div class="address-container col-xs-12 col-md-6">
+	                                            				<div class="add-new-alternate-address js-add-new-address-btn">
+						                                                <span class="icon icon-plus"></span><a title="Add New Alternative Address" class="add-alternate">Add New Alternative Address</a>
+						                                                
+						                                      </div>
+                                                    			<div class="form-container">
+			                                                           <div class="new-alternate-address mailing-address-edit" >
+												                             <c:url value="/my-account/add-address" var="addAddressUrl"/>
+												                             <form:form id="shipping-address-form-new" action="${addAddressUrl}" commandName="addressForm" method="post">
+																				<fieldset>
+																					
+																					<formElement:formSelectBox idKey="address.title" labelKey="address.title" path="titleCode"
+									                                                   mandatory="true" skipBlank="false" selectCSSClass="form-control"
+									                                                   skipBlankMessageKey="address.title.pleaseSelect" items="${titleData}"
+									                                                   selectedValue="${addressForm.titleCode}"/>
+																					<formElement:formSelectBox idKey="address.country" labelKey="address.country" path="countryIso" mandatory="true"
+																						skipBlank="false" skipBlankMessageKey="address.country.pleaseSelect"
+																						items="${supportedCountries}" itemValue="isocode"
+																						selectedValue="${addressForm.countryIso}"
+																						selectCSSClass="form-control" />
+																					<address:addressFormElements regions="${regions}"
+																				                             country="${country}"/>
+																				
+																					
+																				    <button class="btn-save btn btn-primary" type="button" 
+																				    		onclick="ACC.billingshipping.submitFormForAddAddress(this);" 
+																				    		form="shipping-address-form-new">SAVE</button>
+																				    	
+																				    		<div class="button-right-check billingShipping">
+																					        <form:checkbox id="address.defaultAddress-new" path="defaultAddress" />
+																		                    <label for="address.defaultAddress-new"> 
+																		                        <spring:theme code="address.defaultAddress"/>
+																		                    </label>
+																					    </div>
+																				    
+																				</fieldset>
+																		   	</form:form>
+																	  </div>
+                                                        		</div>
+	                                                </div>
+	                                            
 	                                            </div>
 	                                        </div>
+	                                        
 	                                    </div>
 	                                </div>
-                                </c:if>
+	                              
+                                
                             </div>
 
                         </div>

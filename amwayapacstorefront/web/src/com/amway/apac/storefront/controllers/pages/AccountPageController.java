@@ -297,12 +297,24 @@ public class AccountPageController extends AbstractSearchPageController
 		model.addAttribute(ADDRESS_DATA_ATTR, listAddressData);
 
 		//Get customer information and credit card payment info
-		model.addAttribute("customerData", customerFacade.getCurrentCustomer());
-		model.addAttribute("paymentInfoData", userFacade.getCCPaymentInfos(true));
+		model.addAttribute(ControllerConstants.ModelParameters.CUSTOMERDATA_ATTR, customerFacade.getCurrentCustomer());
+		model.addAttribute(ControllerConstants.ModelParameters.PAYMENTINFO_ATTR, userFacade.getCCPaymentInfos(true));
+
+		//Empty form for add new alternate address
+		model.addAttribute(ADDRESS_FORM_ATTR, new AmwayApacAddressForm());
+
+		//Get supported Countries, title codes when filling up new form
+		model.addAttribute(ControllerConstants.ModelParameters.SUPPORTEDCOUNTRIES_ATTR, getCountries());
+		model.addAttribute(TITLE_DATA_ATTR, userFacade.getTitles());
+
+		//Add in region and country for new form
+		//		model.addAttribute(REGIONS_ATTR, getI18NFacade().getRegionsForCountryIso(addressData.getCountry().getIsocode()));
+		//		model.addAttribute(COUNTRY_ATTR, addressData.getCountry().getIsocode());
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(BILLING_SHIPPING_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(BILLING_SHIPPING_CMS_PAGE));
-		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs("account.billingshipping.label"));
+		model.addAttribute(BREADCRUMBS_ATTR,
+				accountBreadcrumbBuilder.getBreadcrumbs(ControllerConstants.GeneralConstants.BILLING_SHIPPING_PAGE_BREADCRUMB_KEY));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 		return getViewForPage(model);
 	}
@@ -660,15 +672,15 @@ public class AccountPageController extends AbstractSearchPageController
 
 	@RequestMapping(value = "/add-address", method = RequestMethod.POST)
 	@RequireHardLogIn
-	public String addAddress(final AddressForm addressForm, final BindingResult bindingResult, final Model model,
+	public String addAddress(final AmwayApacAddressForm addressForm, final BindingResult bindingResult, final Model model,
 			final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
 		getAddressValidator().validate(addressForm, bindingResult);
 		if (bindingResult.hasErrors())
 		{
 			GlobalMessages.addErrorMessage(model, FORM_GLOBAL_ERROR);
-			storeCmsPageInModel(model, getContentPageForLabelOrId(ADD_EDIT_ADDRESS_CMS_PAGE));
-			setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ADD_EDIT_ADDRESS_CMS_PAGE));
+			storeCmsPageInModel(model, getContentPageForLabelOrId(BILLING_SHIPPING_CMS_PAGE));
+			setUpMetaDataForContentPage(model, getContentPageForLabelOrId(BILLING_SHIPPING_CMS_PAGE));
 			setUpAddressFormAfterError(addressForm, model);
 			return getViewForPage(model);
 		}
@@ -696,8 +708,8 @@ public class AccountPageController extends AbstractSearchPageController
 
 		if (addressRequiresReview)
 		{
-			storeCmsPageInModel(model, getContentPageForLabelOrId(ADD_EDIT_ADDRESS_CMS_PAGE));
-			setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ADD_EDIT_ADDRESS_CMS_PAGE));
+			storeCmsPageInModel(model, getContentPageForLabelOrId(BILLING_SHIPPING_CMS_PAGE));
+			setUpMetaDataForContentPage(model, getContentPageForLabelOrId(BILLING_SHIPPING_CMS_PAGE));
 			return getViewForPage(model);
 		}
 
@@ -707,7 +719,12 @@ public class AccountPageController extends AbstractSearchPageController
 		GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.CONF_MESSAGES_HOLDER, "account.confirmation.address.added",
 				null);
 
-		return REDIRECT_TO_EDIT_ADDRESS_PAGE + newAddress.getId();
+		//Get address and display list of new & existing address
+		final List<AddressData> listAddressData = userFacade.getAddressBook();
+		model.addAttribute(ADDRESS_DATA_ATTR, listAddressData);
+		return ControllerConstants.Views.Fragments.Account.ShippingAddressBody;
+
+		//return REDIRECT_TO_EDIT_ADDRESS_PAGE + newAddress.getId();
 	}
 
 	protected void setUpAddressFormAfterError(final AddressForm addressForm, final Model model)

@@ -327,8 +327,8 @@ UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];title[lang=$la
 ;;OrderHistoryNode;ORDER HISTORY;OrderHistoryNodeLink
 
 UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang];url;&componentRef
-;;MyAccountNodeLink;MY ACCOUNT;"MyAccount.html";MyAccountNodeLink
-;;BillingShippingNodeLink;BILLING SHIPPING;"AddNewPaymentMethod.html";BillingShippingNodeLink;
+;;MyAccountNodeLink;MY ACCOUNT;"/my-account";MyAccountNodeLink
+;;BillingShippingNodeLink;BILLING SHIPPING;"/my-account/billingshipping";BillingShippingNodeLink;
 ;;ShoppingListsNodeLink;MY SHOPPING LISTS;"/shopping-lists/all";ShoppingListsNodeLink;
 ;;DittoNodeLink;DITTO;"#";DittoNodeLink;
 ;;PersonalDetailsNodeLink;PERSONAL DETAILS;"#";PersonalDetailsNodeLink;

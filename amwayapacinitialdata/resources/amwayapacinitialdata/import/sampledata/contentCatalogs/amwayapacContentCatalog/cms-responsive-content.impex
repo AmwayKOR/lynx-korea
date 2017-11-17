@@ -902,13 +902,13 @@ INSERT_UPDATE AmwayApacMyAccountProfileBarComponent;$contentCV[unique=true];uid[
 ;;amwayApacMyAccountProfileBarComponent;Account Page Profile Bar;myaccountPBMyAccountLinkComponent,businessInformationPBMyAccountLinkComponent,orderHistoryPBMyAccountLinkComponent,billingShippingPBMyAccountLinkComponent,autoRenewalPBMyAccountLinkComponent,contractsPBMyAccountLinkComponent,editProfilePBMyAccountLinkComponent;ProfileBarJumpToSlot;
 
 INSERT_UPDATE AmwayApacMyAccountProfileBarURLComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow'];
-;;myaccountPBMyAccountLinkComponent;My Account - Profile Bar- Jump to Link;/;myaccountPBMyAccountLinkComponent;myaccountPBMyAccountLinkComponent;;;;
+;;myaccountPBMyAccountLinkComponent;My Account - Profile Bar- Jump to Link;/amwayapacstorefront/my-account;myaccountPBMyAccountLinkComponent;myaccountPBMyAccountLinkComponent;;;;
 ;;businessInformationPBMyAccountLinkComponent;Business Information - Profile Bar- Jump to Link;/;businessInformationPBMyAccountLinkComponent;businessInformationPBMyAccountLinkComponent;;;;
 ;;orderHistoryPBMyAccountLinkComponent;Order History - Profile Bar- Jump to Link;/;orderHistoryPBMyAccountLinkComponent;orderHistoryPBMyAccountLinkComponent;;;;
 ;;autoRenewalPBMyAccountLinkComponent;Auto Renewal - Profile Bar- Jump to Link;/;autoRenewalPBMyAccountLinkComponent;autoRenewalPBMyAccountLinkComponent;;;;
 ;;contractsPBMyAccountLinkComponent;Contracts - Profile Bar- Jump to Link;/;contractsPBMyAccountLinkComponent;contractsPBMyAccountLinkComponent;;;;
 ;;editProfilePBMyAccountLinkComponent;Edit Profile - Profile Bar- Jump to Link;/;editProfilePBMyAccountLinkComponent;editProfilePBMyAccountLinkComponent;;;;
-;;billingShippingPBMyAccountLinkComponent;Billing Shipping - Profile Bar- Jump to Link;/;billingShippingPBMyAccountLinkComponent;billingShippingPBMyAccountLinkComponent;;;;
+;;billingShippingPBMyAccountLinkComponent;Billing Shipping - Profile Bar- Jump to Link;/amwayapacstorefront/my-account/billingshipping;billingShippingPBMyAccountLinkComponent;billingShippingPBMyAccountLinkComponent;;;;
 
 
 INSERT_UPDATE AmwayApacMyAccountComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;

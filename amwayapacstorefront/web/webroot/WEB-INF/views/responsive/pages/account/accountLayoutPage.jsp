@@ -44,7 +44,7 @@
             </div>
         </div>
         <div class="account-section">
-            <cms:pageSlot position="BodyContent" var="feature" element="div" class="account-section-content">
+            <cms:pageSlot position="BodyContent" var="feature" element="div">
                 <cms:component component="${feature}" />
             </cms:pageSlot>
         </div>

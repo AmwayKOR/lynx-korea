@@ -300,6 +300,21 @@ public interface ControllerConstants
 		 */
 		String QUANTITY_ATTR = "quantity";
 
+		/**
+		 * Model parameter for customer data.
+		 */
+		String CUSTOMERDATA_ATTR = "customerData";
+
+		/**
+		 * Model parameter for payment info data.
+		 */
+		String PAYMENTINFO_ATTR = "paymentInfoData";
+
+		/**
+		 * Model parameter for supported countries.
+		 */
+		String SUPPORTEDCOUNTRIES_ATTR = "supportedCountries";
+
 	}
 
 	/**
@@ -336,9 +351,19 @@ public interface ControllerConstants
 		String SHOPPING_LIST_SORT_BY_NAME = "byName";
 
 		/**
+		 * Shopping list sorting parameter to sort by addedFor user.
+		 */
+		String SHOPPING_LIST_SORT_BY_ADDED_FOR = "byAddedFor";
+
+		/**
 		 * Shopping list sorting parameter to sort by lastUpdated.
 		 */
 		String SHOPPING_LIST_SORT_BY_LAST_UPDATED = "byLastUpdated";
+
+		/**
+		 * Shopping list sorting parameter to sort by lastUpdated.
+		 */
+		String SHOPPING_LIST_SORT_BY_USER = "byUser";
 
 		/**
 		 * Prefix appended to status for add product to shopping list messages.
@@ -350,6 +375,10 @@ public interface ControllerConstants
 		 */
 		String SHOPPING_LIST_UPDATE_NAME_MESSGAES_PREFIX = "shoppinglist.update.name.status.";
 
+		/**
+		 * Billing & Shipping breadcrumb key
+		 */
+		String BILLING_SHIPPING_PAGE_BREADCRUMB_KEY = "account.billingshipping.page.breadcrumb";
 	}
 
 	/**

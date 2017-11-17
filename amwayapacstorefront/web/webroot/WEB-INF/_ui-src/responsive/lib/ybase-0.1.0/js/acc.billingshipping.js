@@ -10,9 +10,9 @@ ACC.billingshipping = {
 		var addressHtml = addressEditHtml.prev(".mailing-address");
 		var addressId = $(e).attr('data-address-id');
 		var setDefault = $('#shipping-address-form-'+addressId+'').find('input[id="address.defaultAddress-'+addressId+'"]').is(':checked');
-		var shippingAddressBodyHtml = $(e).parents("#billingShippingBody");
+		var shippingAddressBodyHtml = $(e).parents(".primary-alternate-body");
         var options = {
-    			url: '/amwayapacstorefront/my-account/edit-address/edit',
+    			url: $('#shipping-address-form-'+addressId+'').attr( "action"),
     			data: $('form[id=shipping-address-form-'+addressId+']').serialize(),
     			type: 'POST',
     			success: function (data)
@@ -25,6 +25,27 @@ ACC.billingshipping = {
         				addressHtml.show();
     				}
     				
+    			}
+    		};
+
+    		$.ajax(options);
+	},
+	submitFormForAddAddress: function (e)
+	{
+		var shippingAddressBodyHtml = $(e).parents(".add-alternate-address").prev(".primary-alternate-body");
+		var alternateAddressForm = $('#shipping-address-form-new');
+		var addNewAlternate = $(".add-new-alternate-address");
+		var newAlternateAddress = $(".new-alternate-address");
+        var options = {
+    			url: $('form[id=shipping-address-form-new]').attr( "action"),
+    			data: $('form[id=shipping-address-form-new]').serialize(),
+    			type: 'POST',
+    			success: function (data)
+    			{
+    				alternateAddressForm.trigger("reset");
+    				addNewAlternate.show();
+    				newAlternateAddress.hide();
+    				shippingAddressBodyHtml.html(data);
     			}
     		};
 
@@ -89,8 +110,13 @@ ACC.billingshipping = {
                 father.slideUp();
             }
         })
+        
+        $(".new-alternate-address").hide();
+        $(".add-alternate").click(function () {
+            $(".add-new-alternate-address").hide();
+            $(".new-alternate-address").show();
 
-         
+        }); 
 	}
 
 };

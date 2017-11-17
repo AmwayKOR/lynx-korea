@@ -3,7 +3,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<div class="panel-body">
     <div class="primary-address-section container-fluid">
         <div class="header">
             <span class="primary-text"> Primary addresses</span>
@@ -91,9 +90,5 @@
         		
             
         </div>
-        <div class="add-new-alternate-address js-add-new-address-btn">
-            <span class="icon icon-plus"></span>
-            <a title="Add New Alternative Address" href="">Add New Alternative Address</a>
-        </div>
+        
     </div>
-</div>
