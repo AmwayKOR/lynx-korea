@@ -6,7 +6,6 @@
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-
 <c:forEach items="${medias}" var="media">
 	<c:choose>
 		<c:when test="${empty imagerData}">
@@ -20,16 +19,14 @@
 		<c:set var="altText" value="${fn:escapeXml(media.altText)}" />
 	</c:if>
 </c:forEach>
-
-
                        
 <div class="item-image-wrap">
-	  <img alt="image" class="desktop-image"  data-media='{${imagerData}}' alt="success stories"/>
+	  <img alt="image" class="desktop-image js-responsive-image"  data-media='{${imagerData}}' alt='${altText}' title='${altText}'/>
 </div>
 <div class="item-content-wrap">
-		<cms:component component="${text}" />
+		<cms:component component="${component.text}" />
 
 	<div class="banner-button-wrap">
-		<cms:component component="${link}"/>
+		<cms:component component="${component.link}"/>
 	</div>
 </div>

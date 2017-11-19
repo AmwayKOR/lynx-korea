@@ -121,7 +121,7 @@
 				</attributes>
 			</itemtype>
 
-			<itemtype code="AmwayApacTermsBannerComponent" extends="AmwayApacTextImageComponent"
+			<itemtype code="AmwayApacTermsBannerComponent" extends="AmwayApacAbstractTextLinkImageComponent"
 				autocreate="true" generate="true"
 				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacTermsBannerComponent">
 				<description>Terms Banner Component</description>

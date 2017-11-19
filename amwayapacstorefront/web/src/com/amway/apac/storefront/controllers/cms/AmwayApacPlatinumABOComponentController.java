@@ -13,9 +13,9 @@ import com.amway.apac.storefront.controllers.ControllerConstants;
 /**
  * Controller for CMS {@link AmwayApacPlatinumABOComponentModel}
  */
-@Controller("AmwayApacPlatinumAboComponentController")
+@Controller("AmwayApacPlatinumABOComponentController")
 @RequestMapping(value = ControllerConstants.Actions.Cms.AmwayApacPlatinumABOComponent)
-public class AmwayApacPlatinumAboComponentController
+public class AmwayApacPlatinumABOComponentController
 		extends AmwayApacAbstractResponsiveBannerComponentController<AmwayApacPlatinumABOComponentModel>
 {
 

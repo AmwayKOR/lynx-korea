@@ -31,9 +31,15 @@
 		</div>
 	</div>
 	<div class="new-hot-brand">
-		<cms:pageSlot position="Section4" var="component">
-			<cms:component component="${component}" />
-		</cms:pageSlot>
+		<div class="amway-theme">
+			<div class="full-width-title-component">
+				<div class="full-width-title-component">
+					<cms:pageSlot position="Section4" var="component">
+						<cms:component component="${component}" />
+					</cms:pageSlot>
+				</div>
+			</div>
+		</div>
 		<cms:pageSlot position="Section5" var="component">
 			<cms:component component="${component}" />
 		</cms:pageSlot>
@@ -54,9 +60,11 @@
 
 			</div>
 		</div>
-		<cms:pageSlot position="Section7" var="component" element="div">
-			<cms:component component="${component}" />
-		</cms:pageSlot>
+		<div class="row">
+			<cms:pageSlot position="Section7" var="component" element="div">
+				<cms:component component="${component}" />
+			</cms:pageSlot>
+		</div>
 		<div class="row">
 			<!-- featured Product -->
 			<div class="featured-product no-border col-sm-12">

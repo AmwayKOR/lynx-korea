@@ -773,6 +773,18 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active
 
 ;;Section1CarouselSlot;Home page top carousel slot;true
 ;;Section2ContentSlot;Home page section 2 content slot;true
+;;Section3AContentSlot;Success Story 1 Content Slot for Homepage;true
+;;Section3BContentSlot;Success Story 2 Content Slot for Homepage;true
+;;Section4ContentSlot;Our New Product Content Slot for Homepage;true
+;;Section5CarouselSlot;Artistry New Luxury Carousel Slot for Homepage;true
+;;Section6ASlot;Foundational Supplements New Product Slot for Homepage;true
+;;Section6BSlot;Targeted Supplements New Product Slot for Homepage;true
+;;Section6CSlot;Convenience Products New Product Slot for Homepage;true
+;;Section7Slot;Platinum ABO Slot for Homepage;true
+;;Section8Slot;Choose The Right Supplement Slot for Homepage;true
+;;Section9ASlot;Foundational Supplements Supplement Product Slot for Homepage;true
+;;Section9BSlot;Targeted Supplements Supplement Product Slot for Homepage;true
+;;Section9CSlot;Convenience Products Supplement Product Slot for Homepage;true
 
 # Bind Content Slots to Page Templates
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ProductDetailsPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
@@ -1266,6 +1278,18 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 ;;HeaderAccountNavigation-HomePageMain;HeaderAccountNavigation;;HeaderAccountNavigationSlot;true
 ;;Section1-HomePageMain;Section1;;Section1CarouselSlot;true
 ;;Section2-HomePageMain;Section2;;Section2ContentSlot;true
+;;Section3A-HomePageMain;Section3A;;Section3AContentSlot;true
+;;Section3B-HomePageMain;Section3B;;Section3BContentSlot;true
+;;Section4-HomePageMain;Section4;;Section4ContentSlot;true
+;;Section5-HomePageMain;Section5;;Section5CarouselSlot;true
+;;Section6A-HomePageMain;Section6A;;Section6ASlot;true
+;;Section6B-HomePageMain;Section6B;;Section6BSlot;true
+;;Section6C-HomePageMain;Section6C;;Section6CSlot;true
+;;Section7-HomePageMain;Section7;;Section7Slot;true
+;;Section8-HomePageMain;Section8;;Section8Slot;true
+;;Section9A-HomePageMain;Section9A;;Section9ASlot;true
+;;Section9B-HomePageMain;Section9B;;Section9BSlot;true
+;;Section9C-HomePageMain;Section9C;;Section9CSlot;true
 
 # Create Content Pages
 
