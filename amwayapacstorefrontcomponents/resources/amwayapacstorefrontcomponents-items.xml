@@ -496,5 +496,17 @@
 				</attribute>
 			</attributes>
 		</itemtype>
+		
+		<itemtype code="AmwayApacShoppingListSearchBoxComponent" autocreate="true"
+			generate="true" extends="SearchBoxComponent"
+			jaloclass="de.hybris.platform.acceleratorcms.jalo.components.AmwayApacShoppingListSearchBoxComponent">
+			<description>Represents the search box component for quick shop product search on shopping list page.</description>
+		</itemtype>
+
+		<itemtype code="AmwayApacShoppingCartSearchBoxComponent" autocreate="true"
+			generate="true" extends="SearchBoxComponent"
+			jaloclass="de.hybris.platform.acceleratorcms.jalo.components.AmwayApacShoppingCartSearchBoxComponent">
+			<description>Represents the search box component for quick shop product search on shopping list page.</description>
+		</itemtype>
 		 </itemtypes>
 </items>

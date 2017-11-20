@@ -5,8 +5,6 @@ ACC.header = {
         "bindHeader2",
         "bindHeaderProfilePopup",
         "bindLoginRegisterButton",
-        "bindHeaderAutoSearchEvent",
-        "bindAutoSearchMenuCloseButton"
 	],
 	
 	bindHeaderProfilePopup: function() {
@@ -79,24 +77,6 @@ ACC.header = {
             }
         }
         navToggling();
-    },
-    
-    bindAutoSearchMenuCloseButton : function () {
-    	$(document).on("click", ".search-results-close",function(){
-    		$('.auto-suggestion-popover').fadeOut();
-    	});
-	},
-	
-	bindHeaderAutoSearchEvent : function(){
-		$(document).on('keyup', '.ui-autocomplete-input', function(){
-			var $this = $(this);
-			var $searchResult = $('.auto-suggestion-popover');
-            if ($this.val().length >= 3) {
-                $searchResult.fadeIn();
-            } else {
-                $searchResult.fadeOut();
-            }
-		});
-	}
+    }
 
 };

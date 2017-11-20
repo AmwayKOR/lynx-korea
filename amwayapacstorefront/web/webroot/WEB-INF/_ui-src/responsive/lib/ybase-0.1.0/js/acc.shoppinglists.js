@@ -277,6 +277,7 @@ ACC.shoppinglists = {
 						success: function(data) 
 						{
 							ACC.shoppinglists.refreshShoppingListDetailsPage(data);
+							ACC.autocomplete.bindShoppingListQuickShopAutoComplete();
 					    },
 						error: function() 
 						{

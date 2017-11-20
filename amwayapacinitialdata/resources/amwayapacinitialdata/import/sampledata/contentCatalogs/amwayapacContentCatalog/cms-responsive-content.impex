@@ -1125,3 +1125,21 @@ INSERT_UPDATE ProductCarouselComponent;$contentCV[unique=true];uid[unique=true];
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
 ;;ProductCarouselSlot;Empty Search page carousel component;true;searchPageEmptyResultBestSellerCarousel
 ###### Search Empty Page Template#########
+
+#######Shopping List Details Page Template######
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
+;;ShoppingListQuickShopSearchBoxSlot;Shopping List Search Box Slot;true;shoppingListQuickShopSearchComponent
+
+INSERT_UPDATE AmwayApacShoppingListSearchBoxComponent;$contentCV[unique=true];uid[unique=true];name;displaySuggestions;&componentRef
+;;shoppingListQuickShopSearchComponent; Shopping List Search Box PlaceHolder;false;shoppingListQuickShopSearchComponent
+#######Shopping List Details Page Template######
+
+#######Shopping Cart Page Template######
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
+;;ShoppingCartQuickShopSearchBoxSlot;Shopping Cart Search Box Slot;true;shoppingCartQuickShopSearchComponent
+
+INSERT_UPDATE AmwayApacShoppingCartSearchBoxComponent;$contentCV[unique=true];uid[unique=true];name;displaySuggestions;&componentRef
+;;shoppingCartQuickShopSearchComponent; Shopping Cart Search Box PlaceHolder;false;shoppingCartQuickShopSearchComponent
+#######Shopping Cart Page Template######
+
+

@@ -437,6 +437,7 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 ;CenterRightContentSlot;;;narrow
 ;BottomContentSlot;;;wide
 ;PlaceholderContentSlot;;;
+;ShoppingCartQuickShopSearchBoxSlot;;;searchbox
 
 # Login Page Template
 INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='LoginPageTemplate'];validComponentTypes(code);compTypeGroup(code)
@@ -552,6 +553,7 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 ;TopHeaderSlot;;;wide
 ;BottomHeaderSlot;;;wide
 ;PlaceholderContentSlot;;;
+;ShoppingListQuickShopSearchBoxSlot;;;searchbox
 
 # Category Landing Page Template
 # Template used for category landing page
@@ -771,6 +773,8 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active
 ;;FooterNoticeParagraphContentSlot;  Footer Notice Paragraph Content Slot;                  true 
 ;;NoResultsContentSlot;              No Results PLP content slot;                           true
 ;;ProductCarouselSlot;               Product Carousel Slot;                                 true
+;;ShoppingListQuickShopSearchBoxSlot;Shopping List Quick Shop Search Box Slot;              true
+;;ShoppingCartQuickShopSearchBoxSlot;Shopping Cart Quick Shop Search Box Slot;              true
 
 # Bind Content Slots to Page Templates
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ProductDetailsPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
@@ -1043,6 +1047,7 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 ;;EmptyCartMiddleContent-CartPage;EmptyCartMiddleContent;;EmptyCartMiddleContent;true
 ;;PlaceholderContentSlot-CartPage;PlaceholderContentSlot;;PlaceholderContentSlot;true
 ;;Mobile-NavigationBar-CartPage;MobileNavigationBar;;MobileNavigationBarSlot;true
+;;ShoppingCartQuickShopSearchBoxSlot-CartPage;ShoppingCartQuickShopSearchBoxSlot;;ShoppingCartQuickShopSearchBoxSlot;true
 
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='LoginPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
 ;;SiteLogo-LoginPage;SiteLogo;;SiteLogoSlot;true
@@ -1143,6 +1148,7 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 ;;BottomHeaderSlot-ShoppingListsPage;BottomHeaderSlot;;BottomHeaderSlot;true
 ;;PlaceholderContentSlot-ShoppingListsPage;PlaceholderContentSlot;;PlaceholderContentSlot;true
 ;;Mobile-NavigationBar-ShoppingListsPage;MobileNavigationBar;;MobileNavigationBarSlot;true
+;;ShoppingListQuickShopSearchBoxSlot-ShoppingListsPage;ShoppingListQuickShopSearchBoxSlot;;ShoppingListQuickShopSearchBoxSlot;true
 
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='CategoryLandingPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
 ;;SiteLogo-CategoryLandingPage;SiteLogo;;SiteLogoSlot;true

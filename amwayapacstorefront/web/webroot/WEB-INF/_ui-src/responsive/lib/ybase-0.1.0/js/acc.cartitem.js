@@ -60,9 +60,9 @@ ACC.cartitem = {
 			return ACC.cartitem.handleKeyEvent(this, e);
 		});
 
-        $(document).on("click", '.js-quick-shop-submit', function (e)
+        $(document).on("click", '#quickShopCartForm .js-quick-shop-submit', function (e)
         {
-            ACC.cartitem.handleQuickShop();
+            ACC.cartitem.handleQuickShop(e);
         });
 	},
 
@@ -123,7 +123,8 @@ ACC.cartitem = {
         return false;
     },
 
-    handleQuickShop: function(){
+    handleQuickShop: function(event){
+    	event.preventDefault();
         var quickShopForm = $('#quickShopForm');
 
         var productCode = quickShopForm.find('input[name=productCode]').val();

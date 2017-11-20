@@ -5,6 +5,7 @@
 <%@ taglib prefix="format" tagdir="/WEB-INF/tags/shared/format" %>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
@@ -25,19 +26,9 @@
                     <div id="quickShopBody" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne" style="height: 0px;">
                         <div class="panel-body">
                             <div id="quickShopCartForm">
-                                <c:url value="/cart/quickShop" var="quickShopFormAction" />
-                                   <form:form id="quickShopForm" action="${quickShopFormAction}" method="post">
-                                      <div class="item-name-container">
-                                          <label class="js-sku-input-field-label sku-input-field-label"><spring:theme code="basket.page.quickShop.itemNameOrNumber"/></label>
-                                          <input class="js-quick-shop-name quick-shop-name js-name-input-field name-input-field" type="text" name="productCode" />
-                                          <input class="js-hidden-sku-field" type="hidden"></div>
-                                      <div class="qty-container">
-                                          <label><spring:theme code="basket.page.quickShop.qty"/></label>
-                                          <input class="js-quick-shop-qty quick-shop-qty" type="text" name="quantity" />
-                                      </div>
-                                      <div class="add-item-container">
-                                          <button class="btn btn-primary btn-block js-quick-shop-submit"><spring:theme code="basket.page.quickShop.addItem"/></button></div>
-                                   </form:form>
+                            	<cms:pageSlot position="ShoppingCartQuickShopSearchBoxSlot" var="component">
+                                 	<cms:component component="${component}"/>
+                                 </cms:pageSlot>
                               </div>
                             <div class="row">
                                 <div class="col-sm-12">
