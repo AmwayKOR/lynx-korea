@@ -9,7 +9,7 @@
 <%@ taglib prefix="header" tagdir="/WEB-INF/tags/responsive/common/header"%>
 <%@ taglib prefix="footer" tagdir="/WEB-INF/tags/responsive/common/footer"%>
 <%@ taglib prefix="common" tagdir="/WEB-INF/tags/responsive/common"%>
-<%@ taglib prefix="cart" tagdir="/WEB-INF/tags/responsive/cart" %>
+<%@ taglib prefix="cart" tagdir="/WEB-INF/tags/responsive/cart"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <spring:htmlEscape defaultHtmlEscape="true" />

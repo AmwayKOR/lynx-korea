@@ -18,7 +18,7 @@
 </c:forEach>
 
 
-<img data-media='{${imagerData}}' alt='${altText}' class="pc">
+<img class="pc js-responsive-image" data-media='{${imagerData}}' alt='${altText}' title='${altText}' />
 <div class="text small-wrap">
-	<cms:component component="${text}" />
+	<cms:component component="${component.text}" />
 </div>
