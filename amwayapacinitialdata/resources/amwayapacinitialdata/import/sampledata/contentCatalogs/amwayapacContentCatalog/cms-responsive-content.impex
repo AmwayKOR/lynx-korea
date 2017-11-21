@@ -257,72 +257,89 @@ INSERT_UPDATE AmwayApacFeaturedBrandsCarouselComponent;$contentCV[unique=true];u
 
 ########## Section 12 Home Page Featured Brands Carousel Component ##########
 
-#Footer
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
-;;FooterSlot;FooterSlot-Homepage;true;refFooter
 
+########## Footer
 
-# CMS Navigation Nodes
-INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);&nodeRef;links(&linkRef);visible;nodeLink(&componentRef)
-;root;;root;;root;;;;
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;FooterSlot;footerComponent
 
-
-##### footer section
-;FooterNode;;FooterNode;root;FooterNode;;true;;
-;FeatureBrandsNode;;FeatureBrandsNode;FooterNode;FeatureBrandsNode;FooterFeaturedBrands_NutrilleNavLink,FooterFeaturedBrands_AtistryNavLink,FooterFeaturedBrands_LegacyNavLink,FooterFeaturedBrands_XSNavLink,FooterFeaturedBrands_SatiniqueNavLink;true;;
-;StartBusinessNode;;StartBusinessNode;FooterNode;StartBusinessNode;FooterStartYourBusiness_StartYourBusinessNavLink,FooterStartYourBusiness_ExclusiveProdNavLink,FooterStartYourBusiness_LowCostNavLink,FooterStartYourBusiness_SuccessSupportNavLink,FooterStartYourBusiness_OurLocationsNavLink,FooterStartYourBusiness_EventsNavLink;true;;
-;ResourcesNode;;ResourcesNode;FooterNode;ResourcesNode;FooterResources_CatalogsNavLink,FooterResources_RibbonGiftCardsNavLink,FooterResources_PartnerStoresNavLink,FooterResources_AchieveMagazineNavLink,FooterResources_IBOAssociationNavLink;true;;
-;SupportNode;;SupportNode;FooterNode;SupportNode;FooterSupport_ContactUsNavLink,FooterSupport_ReturnsNavLink,FooterSupport_ShippingAndDeliveryNavLink,FooterSupport_SalesTaxNavLink,FooterSupport_MagagingDittoNavLink;true;;
-
-
-INSERT_UPDATE FooterComponent;$contentCV[unique=true];uid[unique=true];navigationNodes(&nodeRef);&componentRef
-;;footerComponent;FooterNode;refFooter
-
+INSERT_UPDATE FooterComponent;$contentCV[unique=true];uid[unique=true];navigationNodes(&nodeRef);footerBanner(&componentRef);links(&componentRef);specialComponents(&componentRef);&componentRef
+;;footerComponent;FooterNode;FooterBanner;FooterPrivacyNavLink,FooterTermsNavLink,FooterSiteMapNavLink,FooteramwayGlobalNavLink;FooterSocialLinksComponent,FooterAmwayConnectionsComponent,FooterAmwayAppComponent;footerComponent
 
 INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow'];
 
-;;FooterFeaturedBrands_NutrilleNavLink;Footer Featured Brands - Nutrille Nav Link;/;FooterFeaturedBrands_NutrilleNavLink;FooterFeaturedBrands_NutrilleNavLink;;;;
-;;FooterFeaturedBrands_AtistryNavLink;Footer Featured Brands - Atistry Nav Link;/;FooterFeaturedBrands_AtistryNavLink;FooterFeaturedBrands_AtistryNavLink;;;;
-;;FooterFeaturedBrands_LegacyNavLink;Footer Featured Brands - Legacy of Clean Nav Link;/;FooterFeaturedBrands_LegacyNavLink;FooterFeaturedBrands_LegacyNavLink;;;;
-;;FooterFeaturedBrands_XSNavLink;Footer Featured Brands - XS Nav Link;/;FooterFeaturedBrands_XSNavLink;FooterFeaturedBrands_XSNavLink;;;;
-;;FooterFeaturedBrands_SatiniqueNavLink;Footer Featured Brands - Satinique Nav Link;/;FooterFeaturedBrands_SatiniqueNavLink;FooterFeaturedBrands_SatiniqueNavLink;;;;
+;;FooterFeaturedBrandsNodeLink;Footer Featured Brands - Node Link;/;FooterFeaturedBrandsNodeLink;FooterFeaturedBrandsNodeLink;;;;
 
-;;FooterStartYourBusiness_StartYourBusinessNavLink;Footer StartYourBusiness - Start your business Nav Link;/;FooterStartYourBusiness_StartYourBusinessNavLink;FooterStartYourBusiness_StartYourBusinessNavLink;;;;
-;;FooterStartYourBusiness_ExclusiveProdNavLink;Footer StartYourBusiness - Exclusive Products Nav Link;/;FooterStartYourBusiness_ExclusiveProdNavLink;FooterStartYourBusiness_ExclusiveProdNavLink;;;;
-;;FooterStartYourBusiness_LowCostNavLink;Footer StartYourBusiness - Low Cost Setup Nav Link;/;FooterStartYourBusiness_LowCostNavLink;FooterStartYourBusiness_LowCostNavLink;;;;
-;;FooterStartYourBusiness_SuccessSupportNavLink;Footer StartYourBusiness - Success & Support Nav Link;/;FooterStartYourBusiness_SuccessSupportNavLink;FooterStartYourBusiness_SuccessSupportNavLink;;;;
-;;FooterStartYourBusiness_OurLocationsNavLink;Footer StartYourBusiness - Our Locations Nav Link;/;FooterStartYourBusiness_OurLocationsNavLink;FooterStartYourBusiness_OurLocationsNavLink;;;;
-;;FooterStartYourBusiness_EventsNavLink;Footer StartYourBusiness - Events Nav Link;/;FooterStartYourBusiness_EventsNavLink;FooterStartYourBusiness_EventsNavLink;;;;
+;;FooterFeaturedBrandsNutrilleNavLink;Footer Featured Brands - Nutrille Nav Link;/;FooterFeaturedBrandsNutrilleNavLink;FooterFeaturedBrandsNutrilleNavLink;;;;
+;;FooterFeaturedBrandsAtistryNavLink;Footer Featured Brands - Atistry Nav Link;/;FooterFeaturedBrandsAtistryNavLink;FooterFeaturedBrandsAtistryNavLink;;;;
+;;FooterFeaturedBrandsLegacyNavLink;Footer Featured Brands - Legacy of Clean Nav Link;/;FooterFeaturedBrandsLegacyNavLink;FooterFeaturedBrandsLegacyNavLink;;;;
+;;FooterFeaturedBrandsXSNavLink;Footer Featured Brands - XS Nav Link;/;FooterFeaturedBrandsXSNavLink;FooterFeaturedBrandsXSNavLink;;;;
+;;FooterFeaturedBrandsSatiniqueNavLink;Footer Featured Brands - Satinique Nav Link;/;FooterFeaturedBrandsSatiniqueNavLink;FooterFeaturedBrandsSatiniqueNavLink;;;;
 
-;;FooterResources_CatalogsNavLink;Footer Resources - Catalogs Nav Link;/;FooterResources_CatalogsNavLink;FooterResources_CatalogsNavLink;;;;
-;;FooterResources_RibbonGiftCardsNavLink;Footer Resources - Ribbon Gift Cards Nav Link;/;FooterResources_RibbonGiftCardsNavLink;FooterResources_RibbonGiftCardsNavLink;;;;
-;;FooterResources_PartnerStoresNavLink;Footer Resources - Partner Stores Nav Link;/;FooterResources_PartnerStoresNavLink;FooterResources_PartnerStoresNavLink;;;;
-;;FooterResources_AchieveMagazineNavLink;Footer Resources - Achieve Magazine Nav Link;/;FooterResources_AchieveMagazineNavLink;FooterResources_AchieveMagazineNavLink;;;;
-;;FooterResources_IBOAssociationNavLink;Footer Resources - IBO Association Nav Link;/;FooterResources_IBOAssociationNavLink;FooterResources_IBOAssociationNavLink;;;;
+;;FooterStartYourBusinessNodeLink;Footer StartYourBusiness - Node Link;/;FooterStartYourBusinessNodeLink;FooterStartYourBusinessNodeLink;;;;
 
-;;FooterSupport_ContactUsNavLink;Footer Support - Contact Us Nav Link;/;FooterSupport_ContactUsNavLink;FooterSupport_ContactUsNavLink;;;;
-;;FooterSupport_ReturnsNavLink;Footer Support - Returns Nav Link;/;FooterSupport_ReturnsNavLink;FooterSupport_ReturnsNavLink;;;;
-;;FooterSupport_ShippingAndDeliveryNavLink;Footer Support - Shipping and Delivery Nav Link;/;FooterSupport_ShippingAndDeliveryNavLink;FooterSupport_ShippingAndDeliveryNavLink;;;;
-;;FooterSupport_SalesTaxNavLink;Footer Support - Sales Tax Nav Link;/;FooterSupport_SalesTaxNavLink;FooterSupport_SalesTaxNavLink;;;;
-;;FooterSupport_MagagingDittoNavLink;Footer Support - Magaging Ditto Nav Link;/;FooterSupport_MagagingDittoNavLink;FooterSupport_MagagingDittoNavLink;;;;
+;;FooterStartYourBusinessStartYourBusinessNavLink;Footer StartYourBusiness - Start your business Nav Link;/;FooterStartYourBusinessStartYourBusinessNavLink;FooterStartYourBusinessStartYourBusinessNavLink;;;;
+;;FooterStartYourBusinessExclusiveProdNavLink;Footer StartYourBusiness - Exclusive Products Nav Link;/;FooterStartYourBusinessExclusiveProdNavLink;FooterStartYourBusinessExclusiveProdNavLink;;;;
+;;FooterStartYourBusinessLowCostNavLink;Footer StartYourBusiness - Low Cost Setup Nav Link;/;FooterStartYourBusinessLowCostNavLink;FooterStartYourBusinessLowCostNavLink;;;;
+;;FooterStartYourBusinessSuccessSupportNavLink;Footer StartYourBusiness - Success & Support Nav Link;/;FooterStartYourBusinessSuccessSupportNavLink;FooterStartYourBusinessSuccessSupportNavLink;;;;
+;;FooterStartYourBusinessOurLocationsNavLink;Footer StartYourBusiness - Our Locations Nav Link;/;FooterStartYourBusinessOurLocationsNavLink;FooterStartYourBusinessOurLocationsNavLink;;;;
+;;FooterStartYourBusinessEventsNavLink;Footer StartYourBusiness - Events Nav Link;/;FooterStartYourBusinessEventsNavLink;FooterStartYourBusinessEventsNavLink;;;;
+
+;;FooterResourcesNodeLink;Footer Resources node Link;/;FooterResourcesNodeLink;FooterResourcesNodeLink;;;;
+
+;;FooterResourcesCatalogsNavLink;Footer Resources - Catalogs Nav Link;/;FooterResourcesCatalogsNavLink;FooterResourcesCatalogsNavLink;;;;
+;;FooterResourcesRibbonGiftCardsNavLink;Footer Resources - Ribbon Gift Cards Nav Link;/;FooterResourcesRibbonGiftCardsNavLink;FooterResourcesRibbonGiftCardsNavLink;;;;
+;;FooterResourcesPartnerStoresNavLink;Footer Resources - Partner Stores Nav Link;/;FooterResourcesPartnerStoresNavLink;FooterResourcesPartnerStoresNavLink;;;;
+;;FooterResourcesAchieveMagazineNavLink;Footer Resources - Achieve Magazine Nav Link;/;FooterResourcesAchieveMagazineNavLink;FooterResourcesAchieveMagazineNavLink;;;;
+;;FooterResourcesIBOAssociationNavLink;Footer Resources - IBO Association Nav Link;/;FooterResourcesIBOAssociationNavLink;FooterResourcesIBOAssociationNavLink;;;;
+
+;;FooterSupportNodeLink;Footer Support - node Link;/;FooterSupportNodeLink;FooterSupportNodeLink;;;;
+
+;;FooterSupportContactUsNavLink;Footer Support - Contact Us Nav Link;/;FooterSupportContactUsNavLink;FooterSupportContactUsNavLink;;;;
+;;FooterSupportReturnsNavLink;Footer Support - Returns Nav Link;/;FooterSupportReturnsNavLink;FooterSupportReturnsNavLink;;;;
+;;FooterSupportShippingAndDeliveryNavLink;Footer Support - Shipping and Delivery Nav Link;/;FooterSupportShippingAndDeliveryNavLink;FooterSupportShippingAndDeliveryNavLink;;;;
+;;FooterSupportSalesTaxNavLink;Footer Support - Sales Tax Nav Link;/;FooterSupportSalesTaxNavLink;FooterSupportSalesTaxNavLink;;;;
+;;FooterSupportMagagingDittoNavLink;Footer Support - Magaging Ditto Nav Link;/;FooterSupportMagagingDittoNavLink;FooterSupportMagagingDittoNavLink;;;;
 
 ;;FooterPrivacyNavLink;Footer Privacy and Security Nav Link;/;FooterPrivacyNavLink;FooterPrivacyNavLink;;;;
 ;;FooterTermsNavLink;Footer Terms of Use Nav Link;/;FooterTermsNavLink;FooterTermsNavLink;;;;
 ;;FooterSiteMapNavLink;Footer Site Map Nav Link;/;FooterSiteMapNavLink;FooterSiteMapNavLink;;;;
 ;;FooteramwayGlobalNavLink;Footer amwayglobal Nav Link;www.amwayglobal.com;FooteramwayGlobalNavLink;FooteramwayGlobalNavLink;;;;
 
+INSERT_UPDATE AmwayApacFooterSpecialComponent;$contentCV[unique=true];uid[unique=true];name;simpleBanners(&componentRef);&componentRef
+;;FooterSocialLinksComponent;Footer Social links component;FooterFacebookBanner,FooterTwitterBanner,FooterGooglePlusBanner,FooterInstagramBanner,FooterYoutubeBanner,FooterLineBanner,FooterTalkBanner;FooterSocialLinksComponent
+;;FooterAmwayConnectionsComponent;Footer Amway connections component;FooterAmwayLogoBanner,FooterConnectionsBanner;FooterAmwayConnectionsComponent
+;;FooterAmwayAppComponent;Footer Amway app component;FooterAppleStoreBanner;FooterAmwayAppComponent
+
 INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink
-;;FooterFacebookSBComponent;Footer Facebook SB Component;FooterFacebookSBComponent;"/"
-;;FooterTwitterSBComponent;Footer Twitter SB Component;FooterTwitterSBComponent;"/"
-;;FooterGooglePlusSBComponent;Footer Google Plus SB Component;FooterGooglePlusSBComponent;"/"
-;;FooterInstagramSBComponent;Footer Instagram SB Component;FooterInstagramSBComponent;"/"
-;;FooterYoutubeSBComponent;Footer Youtube SB Component;FooterYoutubeSBComponent;"/"
-;;FooterLineSBComponent;Footer Line SB Component;FooterLineSBComponent;"/"
-;;FooterTalkSBComponent;Footer Talk SB Component;FooterTalkSBComponent;"/"
-;;FooterAmwayLogoSBComponent;Footer Amway Logo SB Component;FooterAmwayLogoSBComponent;"/"
-;;FooterConnectionsSBComponent;Footer Connections SB Component;FooterConnectionsSBComponent;"/"
-;;FooterAppleStoreSBComponent;Footer AppleStore SB Component;FooterAppleStoreSBComponent;"/"
-;;FooterSBComponent;Footer SB Component;FooterSBComponent;"/"
+;;FooterFacebookBanner;Footer Facebook Banner;FooterFacebookBanner;"/"
+;;FooterTwitterBanner;Footer Twitter Banner;FooterTwitterBanner;"/"
+;;FooterGooglePlusBanner;Footer Google Plus Banner;FooterGooglePlusBanner;"/"
+;;FooterInstagramBanner;Footer Instagram Banner;FooterInstagramBanner;"/"
+;;FooterYoutubeBanner;Footer Youtube Banner;FooterYoutubeBanner;"/"
+;;FooterLineBanner;Footer Line Banner;FooterLineBanner;"/"
+;;FooterTalkBanner;Footer Talk Banner;FooterTalkBanner;"/"
+;;FooterAmwayLogoBanner;Footer Amway Logo Banner;FooterAmwayLogoBanner;"/"
+;;FooterConnectionsBanner;Footer Connections Banner;FooterConnectionsBanner;"/"
+;;FooterAppleStoreBanner;Footer AppleStore Banner;FooterAppleStoreBanner;"/"
+;;FooterBanner;Footer Banner;FooterBanner;"/"
+
+########## Footer ##########
+
+
+########## CMS Navigation Nodes
+
+INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);&nodeRef;links(&linkRef);visible;nodeLink(&componentRef)
+;root;;root;;root;;;;
+
+##### footer section
+;FooterNode;;FooterNode;root;FooterNode;;true;;
+;FeatureBrandsNode;;FeatureBrandsNode;FooterNode;FeatureBrandsNode;FooterFeaturedBrandsNutrilleNavLink,FooterFeaturedBrandsAtistryNavLink,FooterFeaturedBrandsLegacyNavLink,FooterFeaturedBrandsXSNavLink,FooterFeaturedBrandsSatiniqueNavLink;true;FooterFeaturedBrandsNodeLink;
+;StartBusinessNode;;StartBusinessNode;FooterNode;StartBusinessNode;FooterStartYourBusinessStartYourBusinessNavLink,FooterStartYourBusinessExclusiveProdNavLink,FooterStartYourBusinessLowCostNavLink,FooterStartYourBusinessSuccessSupportNavLink,FooterStartYourBusinessOurLocationsNavLink,FooterStartYourBusinessEventsNavLink;true;FooterStartYourBusinessNodeLink;
+;ResourcesNode;;ResourcesNode;FooterNode;ResourcesNode;FooterResourcesCatalogsNavLink,FooterResourcesRibbonGiftCardsNavLink,FooterResourcesPartnerStoresNavLink,FooterResourcesAchieveMagazineNavLink,FooterResourcesIBOAssociationNavLink;true;FooterResourcesNodeLink;
+;SupportNode;;SupportNode;FooterNode;SupportNode;FooterSupportContactUsNavLink,FooterSupportReturnsNavLink,FooterSupportShippingAndDeliveryNavLink,FooterSupportSalesTaxNavLink,FooterSupportMagagingDittoNavLink;true;FooterSupportNodeLink;
+
+########## CMS Navigation Nodes ##########
 
 
 ########### Country Selector

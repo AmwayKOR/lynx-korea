@@ -14,6 +14,14 @@
 	xsi:noNamespaceSchemaLocation="items.xsd">
 
 	<relations>
+		<relation code="FooterLinksRelation" localized="false"
+			generate="true" autocreate="true">
+			<description>Relation between footer and the links at the bottom.</description>
+			<sourceElement qualifier="footerComponent" type="FooterComponent"
+				cardinality="one" />
+			<targetElement qualifier="links" type="CMSLinkComponent"
+				cardinality="many" collectiontype="list" ordered="true" />
+		</relation>
 		<relation code="FooterSpecialComponentBannerRelation"
 			localized="false" generate="true" autocreate="true">
 			<description>Relation between footer simple banner images and their collection component.</description>
@@ -420,6 +428,12 @@
 				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacFooterSpecialComponent"
 				autocreate="true" generate="true">
 				<description>Footer component with a list of banners.</description>
+				<attributes>
+					<attribute qualifier="sectionTitle" type="localized:java.lang.String">
+						<persistence type="property" />
+						<description>The title to be displayed above the special component banners group.</description>
+					</attribute>
+				</attributes>
 			</itemtype>
 
 			<itemtype code="FooterComponent" generate="false"

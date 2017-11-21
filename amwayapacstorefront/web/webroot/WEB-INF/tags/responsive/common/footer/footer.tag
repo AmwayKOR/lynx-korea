@@ -5,4 +5,3 @@
 <cms:pageSlot position="Footer" var="feature">
 	<cms:component component="${feature}" />
 </cms:pageSlot>
-

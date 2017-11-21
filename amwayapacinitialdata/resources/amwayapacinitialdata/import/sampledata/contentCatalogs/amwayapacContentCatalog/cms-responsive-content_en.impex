@@ -257,13 +257,13 @@ INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];con
 
 ########## Section 12 Home Page Featured Brands Carousel Component
 
-INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;folder(qualifier)[default='images'];altText
-;;nutriliteImg;$siteResource/nutrilite.jpg;;Nutrilite Image;;"Nutrilite Image"
-;;xsImg;$siteResource/Xs.jpg;;XS Image;;"XS Image"
-;;artistryImg;$siteResource/artistry.jpg;;Artistry Image;;"Artistry Image"
-;;glisterImg;$siteResource/glister.jpg;;Glister Image;;"Glister Image"
-;;icookImg;$siteResource/icook.jpg;;icook Image;;"icook Image"
-;;nutrilite2Img;$siteResource/nutrilite.jpg;;Nutrilite 2 Image;;"Nutrilite 2 Image"
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];mediaFormat(qualifier)[default=desktop];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;folder(qualifier)[default='images'];altText
+;;nutriliteImg;;$siteResource/nutrilite.jpg;;Nutrilite Image;;"Nutrilite Image"
+;;xsImg;;$siteResource/Xs.jpg;;XS Image;;"XS Image"
+;;artistryImg;;$siteResource/artistry.jpg;;Artistry Image;;"Artistry Image"
+;;glisterImg;;$siteResource/glister.jpg;;Glister Image;;"Glister Image"
+;;icookImg;;$siteResource/icook.jpg;;icook Image;;"icook Image"
+;;nutrilite2Img;;$siteResource/nutrilite.jpg;;Nutrilite 2 Image;;"Nutrilite 2 Image"
 
 INSERT_UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang];&componentRef
 ;;amwayapacNutriliteCarouselBannerComponent;nutriliteImg;amwayapacNutriliteCarouselBannerComponent	
@@ -278,72 +278,95 @@ INSERT_UPDATE AmwayApacFeaturedBrandsCarouselComponent;$contentCV[unique=true];u
 
 ########## Section 12 Home Page Featured Brands Carousel Component ##########
 
-#Section Footer
-INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;folder(qualifier)[default='images'];altText
-;;footerFacebookImg;$siteResource/facebook2.png;;Footer Facebook Image;;"Footer Facebook Image"
-;;footerTwitterImg;$siteResource/twitter.png;;Footer Twitter Image;;"Footer Twitter Image"
-;;footerGooglePlusImg;$siteResource/Google.png;;Footer Google Plus Image;;"Footer Google Plus Image"
-;;footerInstagramImg;$siteResource/instgram.png;;Footer Instagram Image;;"Footer Instagram Image"
-;;footerYoutubeImg;$siteResource/youtube.png;;Footer Youtube Image;;"Footer Youtube Image"
-;;footerLineImg;$siteResource/line.png;;Footer Line Image;;"Footer Line Image"
-;;footerTalkImg;$siteResource/kakao.png;;Footer Talk Image;;"Footer Talk Image"
-;;footerAmwayLogoImg;$siteResource/logo2.png;;Footer Amway Logo Image;;"Footer Amway Logo Image"
-;;footerConnectionsImg;$siteResource/new-connections.png;;Footer Connections Image;;"Footer Connections Image"
-;;footerAppleStoreImg;$siteResource/footer_appstore.png;;Footer Apple Store Image;;"Footer Apple Store Image"
-;;footerImg;$siteResource/logos.png;;Footer Image;;"Footer Image"
+
+########## Footer
+
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];mediaFormat(qualifier)[default=desktop];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;folder(qualifier)[default='images'];altText
+;;footerFacebookImg;;$siteResource/facebook2.png;;Footer Facebook Image;;"Footer Facebook Image"
+;;footerTwitterImg;;$siteResource/twitter.png;;Footer Twitter Image;;"Footer Twitter Image"
+;;footerGooglePlusImg;;$siteResource/Google.png;;Footer Google Plus Image;;"Footer Google Plus Image"
+;;footerInstagramImg;;$siteResource/instgram.png;;Footer Instagram Image;;"Footer Instagram Image"
+;;footerYoutubeImg;;$siteResource/youtube.png;;Footer Youtube Image;;"Footer Youtube Image"
+;;footerLineImg;;$siteResource/line.png;;Footer Line Image;;"Footer Line Image"
+;;footerTalkImg;;$siteResource/kakao.png;;Footer Talk Image;;"Footer Talk Image"
+;;footerAmwayLogoImg;;$siteResource/logo2.png;;Footer Amway Logo Image;;"Footer Amway Logo Image"
+;;footerConnectionsImg;;$siteResource/new-connections.png;;Footer Connections Image;;"Footer Connections Image"
+;;footerAppleStoreImg;;$siteResource/footer_appstore.png;;Footer Apple Store Image;;"Footer Apple Store Image"
+;;footerImg;;$siteResource/logos.png;;Footer Image;;"Footer Image"
 
 UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang];&componentRef
-;;FooterFeaturedBrands_NutrilleNavLink;"Nutrille";FooterFeaturedBrands_NutrilleNavLink
-;;FooterFeaturedBrands_AtistryNavLink;"Artistry";FooterFeaturedBrands_AtistryNavLink
-;;FooterFeaturedBrands_LegacyNavLink;"Legacy of Clean";FooterFeaturedBrands_LegacyNavLink
-;;FooterFeaturedBrands_XSNavLink;"XS";FooterFeaturedBrands_XSNavLink
-;;FooterFeaturedBrands_SatiniqueNavLink;"Satinique";FooterFeaturedBrands_SatiniqueNavLink
 
-;;FooterStartYourBusiness_StartYourBusinessNavLink;"Start your business";FooterStartYourBusiness_StartYourBusinessNavLink
-;;FooterStartYourBusiness_ExclusiveProdNavLink;"Exclusive Products";FooterStartYourBusiness_ExclusiveProdNavLink
-;;FooterStartYourBusiness_LowCostNavLink;"Low Cost Setup";FooterStartYourBusiness_LowCostNavLink
-;;FooterStartYourBusiness_SuccessSupportNavLink;"Success & Support";FooterStartYourBusiness_SuccessSupportNavLink
-;;FooterStartYourBusiness_OurLocationsNavLink;"Our Locations";FooterStartYourBusiness_OurLocationsNavLink
-;;FooterStartYourBusiness_EventsNavLink;"Events";FooterStartYourBusiness_EventsNavLink
+;;FooterFeaturedBrandsNodeLink;"featured brands";FooterFeaturedBrandsNodeLink
 
-;;FooterResources_CatalogsNavLink;"Catalogs";FooterResources_CatalogsNavLink
-;;FooterResources_RibbonGiftCardsNavLink;"Ribbon Gift Cards";FooterResources_RibbonGiftCardsNavLink
-;;FooterResources_PartnerStoresNavLink;"Partner Stores";FooterResources_PartnerStoresNavLink
-;;FooterResources_AchieveMagazineNavLink;"Achieve Magazine";FooterResources_AchieveMagazineNavLink
-;;FooterResources_IBOAssociationNavLink;"IBO Association";FooterResources_IBOAssociationNavLink
+;;FooterFeaturedBrandsNutrilleNavLink;"Nutrille";FooterFeaturedBrandsNutrilleNavLink
+;;FooterFeaturedBrandsAtistryNavLink;"Artistry";FooterFeaturedBrandsAtistryNavLink
+;;FooterFeaturedBrandsLegacyNavLink;"Legacy of Clean";FooterFeaturedBrandsLegacyNavLink
+;;FooterFeaturedBrandsXSNavLink;"XS";FooterFeaturedBrandsXSNavLink
+;;FooterFeaturedBrandsSatiniqueNavLink;"Satinique";FooterFeaturedBrandsSatiniqueNavLink
 
-;;FooterSupport_ContactUsNavLink;"Contact Us";FooterSupport_ContactUsNavLink
-;;FooterSupport_ReturnsNavLink;"Returns";FooterSupport_ReturnsNavLink
-;;FooterSupport_ShippingAndDeliveryNavLink;"Shipping & Delivery";FooterSupport_ShippingAndDeliveryNavLink
-;;FooterSupport_SalesTaxNavLink;"Sales Tax";FooterSupport_SalesTaxNavLink
-;;FooterSupport_MagagingDittoNavLink;"Magaging Ditto";FooterSupport_MagagingDittoNavLink
+;;FooterStartYourBusinessNodeLink;"Start your business";FooterStartYourBusinessNodeLink
+
+;;FooterStartYourBusinessStartYourBusinessNavLink;"Start your business";FooterStartYourBusinessStartYourBusinessNavLink
+;;FooterStartYourBusinessExclusiveProdNavLink;"Exclusive Products";FooterStartYourBusinessExclusiveProdNavLink
+;;FooterStartYourBusinessLowCostNavLink;"Low Cost Setup";FooterStartYourBusinessLowCostNavLink
+;;FooterStartYourBusinessSuccessSupportNavLink;"Success & Support";FooterStartYourBusinessSuccessSupportNavLink
+;;FooterStartYourBusinessOurLocationsNavLink;"Our Locations";FooterStartYourBusinessOurLocationsNavLink
+;;FooterStartYourBusinessEventsNavLink;"Events";FooterStartYourBusinessEventsNavLink
+
+;;FooterResourcesNodeLink;"resources";FooterResourcesNodeLink
+
+;;FooterResourcesCatalogsNavLink;"Catalogs";FooterResourcesCatalogsNavLink
+;;FooterResourcesRibbonGiftCardsNavLink;"Ribbon Gift Cards";FooterResourcesRibbonGiftCardsNavLink
+;;FooterResourcesPartnerStoresNavLink;"Partner Stores";FooterResourcesPartnerStoresNavLink
+;;FooterResourcesAchieveMagazineNavLink;"Achieve Magazine";FooterResourcesAchieveMagazineNavLink
+;;FooterResourcesIBOAssociationNavLink;"IBO Association";FooterResourcesIBOAssociationNavLink
+
+;;FooterSupportNodeLink;"support";FooterSupportNodeLink
+
+;;FooterSupportContactUsNavLink;"Contact Us";FooterSupportContactUsNavLink
+;;FooterSupportReturnsNavLink;"Returns";FooterSupportReturnsNavLink
+;;FooterSupportShippingAndDeliveryNavLink;"Shipping & Delivery";FooterSupportShippingAndDeliveryNavLink
+;;FooterSupportSalesTaxNavLink;"Sales Tax";FooterSupportSalesTaxNavLink
+;;FooterSupportMagagingDittoNavLink;"Magaging Ditto";FooterSupportMagagingDittoNavLink
 
 ;;FooterPrivacyNavLink;"Privacy and Security";FooterPrivacyNavLink
 ;;FooterTermsNavLink;"Terms of Use";FooterTermsNavLink
 ;;FooterSiteMapNavLink;"Site Map";FooterSiteMapNavLink
 ;;FooteramwayGlobalNavLink;"www.amwayglobal.com";FooteramwayGlobalNavLink
 
+UPDATE AmwayApacFooterSpecialComponent;$contentCV[unique=true];uid[unique=true];sectionTitle[lang=$lang]
+;;FooterSocialLinksComponent;"CONNECT WITH AMWAY"
+;;FooterAmwayConnectionsComponent;""
+;;FooterAmwayAppComponent;"GET THE AMWAY APP"
+
 UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang];&componentRef
-;;FooterFacebookSBComponent;footerFacebookImg;FooterFacebookSBComponent
-;;FooterTwitterSBComponent;footerTwitterImg;FooterTwitterSBComponent
-;;FooterGooglePlusSBComponent;footerGooglePlusImg;FooterGooglePlusSBComponent
-;;FooterInstagramSBComponent;footerInstagramImg;FooterInstagramSBComponent
-;;FooterYoutubeSBComponent;footerYoutubeImg;FooterYoutubeSBComponent
-;;FooterLineSBComponent;footerLineImg;FooterLineSBComponent
-;;FooterTalkSBComponent;footerTalkImg;FooterTalkSBComponent
-;;FooterAmwayLogoSBComponent;footerAmwayLogoImg;FooterAmwayLogoSBComponent
-;;FooterConnectionsSBComponent;footerConnectionsImg;FooterConnectionsSBComponent
-;;FooterAppleStoreSBComponent;footerAppleStoreImg;FooterAppleStoreSBComponent
-;;FooterSBComponent;footerImg;FooterSBComponent
+;;FooterFacebookBanner;footerFacebookImg;FooterFacebookBanner
+;;FooterTwitterBanner;footerTwitterImg;FooterTwitterBanner
+;;FooterGooglePlusBanner;footerGooglePlusImg;FooterGooglePlusBanner
+;;FooterInstagramBanner;footerInstagramImg;FooterInstagramBanner
+;;FooterYoutubeBanner;footerYoutubeImg;FooterYoutubeBanner
+;;FooterLineBanner;footerLineImg;FooterLineBanner
+;;FooterTalkBanner;footerTalkImg;FooterTalkBanner
+;;FooterAmwayLogoBanner;footerAmwayLogoImg;FooterAmwayLogoBanner
+;;FooterConnectionsBanner;footerConnectionsImg;FooterConnectionsBanner
+;;FooterAppleStoreBanner;footerAppleStoreImg;FooterAppleStoreBanner
+;;FooterBanner;footerImg;FooterBanner
 
-UPDATE FooterComponent;$contentCV[unique=true];uid[unique=true];title1[lang=$lang];title2[lang=$lang];amwayLogoBanner(&componentRef);connectionsBanner(&componentRef);downloadAppStoreBanner(&componentRef);simpleBannerComponents(&componentRef);copyRightTitle[lang=$lang];footerBanner(&componentRef);links(&componentRef)
-;;footerComponent;CONNECT WITH AMWAY;GET THE AMWAY APP;FooterAmwayLogoSBComponent;FooterConnectionsSBComponent;FooterAppleStoreSBComponent;FooterFacebookSBComponent,FooterTwitterSBComponent,FooterGooglePlusSBComponent,FooterInstagramSBComponent,FooterYoutubeSBComponent,FooterLineSBComponent,FooterTalkSBComponent;"©2016 Amway US.All Rights Reserved.";FooterSBComponent;FooterPrivacyNavLink,FooterTermsNavLink,FooterSiteMapNavLink,FooteramwayGlobalNavLink
+UPDATE FooterComponent;$contentCV[unique=true];uid[unique=true];copyRightTitle[lang=$lang]
+;;footerComponent;"©2016 Amway US.All Rights Reserved."
 
-UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];nodeTitle[lang=$lang]
+########## Footer ##########
+
+
+########## CMS Navigation Nodes
+
+UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];title[lang=$lang]
 ;FeatureBrandsNode;;FEATURED BRANDS
 ;StartBusinessNode;;START YOUR BUSINESS
 ;ResourcesNode;;RESOURCES
 ;SupportNode;;SUPPORT
+
+########## CMS Navigation Nodes ##########
 
 ################ Country Selector
 
