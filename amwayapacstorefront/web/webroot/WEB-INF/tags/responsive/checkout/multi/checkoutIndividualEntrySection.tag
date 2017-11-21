@@ -7,7 +7,7 @@
 <div class="row">
 	<div class="col-xs-6 extraclass-mobile-width">
 		<div class="cartlist-image">
-			<img src="${themeResourcePath}/images/heart-health_checkout.png" width="67px" height="67px" />
+			<product:productPrimaryImage format="cartIcon" product="${entry.product}"/>
 		</div>
 		<div class="cartlist-text">
 			<span calss="cartlist-big">${entry.product.name}

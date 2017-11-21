@@ -34,7 +34,8 @@
 		<div class="amwa-btnbar">
 			<c:url var="checkoutPaymentStepUrl" value="/checkout/multi/payment-method/add" />
 			<a href="${checkoutPaymentStepUrl}" class="btn-blue-white" onclick=""><spring:theme code="checkout.step.one.continue"/></a>
-			<a class="cartlist-cancelorder"><spring:theme code="checkout.step.one.cancel.order"/></a>
+			<c:url var="cartUrl" value="/cart" />
+			<a class="cartlist-cancelorder" href="${cartUrl}"><spring:theme code="checkout.step.one.cancel.order"/></a>
 		</div>
 	</div>
 </template:checkoutPage>
