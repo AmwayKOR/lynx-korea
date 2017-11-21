@@ -18,8 +18,8 @@
 </c:forEach>
 
 <a class="primary-link category-item col-sm-6 col-md-3" href="${linkUrl}">
-	<img class="js-responsive-image" data-media='{${imagerData}}' alt='${altText}' title='${altText}' style="">
+	<img class="js-responsive-image" data-media='{${imagerData}}' alt='${altText}' title='${altText}'>
 	<label>
-		<span class="category-name">${link}</span>
+		<span class="category-name">${component.link.linkName}</span>
 	</label>
 </a>

@@ -17,32 +17,24 @@
 	</c:if>
 </c:forEach>
 
-
-<div class="product-category-page amway-theme">
-	<div class="product-categories">
-		<div class="amway-theme">
-			<div class="full-width-banner-component banner-left-align">
-				<div class="banner-image-wrap full-width-banner">
-					<img class="desktop-image js-responsive-image" data-media='{${imagerData}}'	alt="Nutrilite Brand Image" /> 
-					<img class="desktop-image-mob" data-media='{${imagerData}}' alt="banner" />
-				</div>
-				<div class="banner-content-wrap">
-					<div class="banner-content">
-						<div class="banner-title-wrapper">
-							<h2 class="banner-title">
-								<img class="category-banner__icon" src="${logoImage.media.url}"	alt="icon" /> <span>${headerText}</span>
-							</h2>
-							<div class="sub-title-wrap">
-								<span class="banner-sub-title"> <span> <cms:component
-											component="${text}" /></span></span>
-							</div>
-						</div>
-						<div class="banner-button-wrap">
-							<cms:component component="${link}" />
-						</div>
-					</div>
-				</div>
+<div class="banner-image-wrap full-width-banner">
+	<img class="desktop-image js-responsive-image" data-media='{${imagerData}}' alt='${altText}' title='${altText}' />
+</div>
+<div class="banner-content-wrap">
+	<div class="banner-content">
+		<div class="banner-title-wrapper">
+			<h2 class="banner-title">
+				<img class="category-banner__icon" src="${component.logoImage.media.url}" alt="icon" />
+				<span>${component.headerText}</span>
+			</h2>
+			<div class="sub-title-wrap">
+				<span class="banner-sub-title">
+					<cms:component component="${component.text}" />
+				</span>
 			</div>
+		</div>
+		<div class="banner-button-wrap">
+			<cms:component component="${component.link}" />
 		</div>
 	</div>
 </div>

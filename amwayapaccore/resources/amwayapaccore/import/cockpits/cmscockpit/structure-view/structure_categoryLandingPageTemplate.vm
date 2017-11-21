@@ -46,6 +46,12 @@
 
                 <tr>
                         <td colspan="4" class="structureViewSection" height="40px">
+                                <cockpit code="ShopByCategoryTitleSlot"/>
+                        </td>
+                </tr>
+
+                <tr>
+                        <td colspan="4" class="structureViewSection" height="40px">
                                 <cockpit code="ShopByCategoryContentSlot"/>
                         </td>
                 </tr>

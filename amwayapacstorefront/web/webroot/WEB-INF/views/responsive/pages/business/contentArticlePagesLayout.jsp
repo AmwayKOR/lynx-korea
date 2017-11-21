@@ -7,16 +7,18 @@
 <%@ taglib prefix="nav" tagdir="/WEB-INF/tags/responsive/nav"%>
 <%@ taglib prefix="product" tagdir="/WEB-INF/tags/responsive/product"%>
 <%@ taglib prefix="category" tagdir="/WEB-INF/tags/responsive/business"%>
-<%@ taglib prefix="breadcrumb" tagdir="/WEB-INF/tags/desktop/nav/breadcrumb" %>
+<%@ taglib prefix="breadcrumb" tagdir="/WEB-INF/tags/desktop/nav/breadcrumb"%>
 
 <template:page pageTitle="${pageTitle}">
 
 	<div class="product-category-page amway-theme">
 		<div class="product-categories">
 			<div class="amway-theme">
-				<cms:pageSlot position="PathwayToSuccessContentSlot" var="component">
-					<cms:component component="${component}" />
-				</cms:pageSlot>
+				<div class="full-width-banner-component banner-left-align ">
+					<cms:pageSlot position="PathwayToSuccessContentSlot" var="component">
+						<cms:component component="${component}" />
+					</cms:pageSlot>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -24,8 +26,7 @@
 	<div class="experience-brands clearfix clear-border">
 		<div class="new-hot-brand">
 			<div class="experience-brands__content clear-bg bg-gray">
-				<cms:pageSlot position="BuildYourBusinessContentSlot"
-					var="component">
+				<cms:pageSlot position="BuildYourBusinessContentSlot" var="component">
 					<cms:component component="${component}" />
 				</cms:pageSlot>
 			</div>
@@ -35,8 +36,7 @@
 	<div class="experience-brands clearfix clear-border">
 		<div class="new-hot-brand">
 			<div class="experience-brands__content bg-white clear-bg">
-				<cms:pageSlot position="ExperienceTheStarterKitContentSlot"
-					var="component">
+				<cms:pageSlot position="ExperienceTheStarterKitContentSlot" var="component">
 					<cms:component component="${component}" />
 				</cms:pageSlot>
 			</div>
@@ -46,15 +46,13 @@
 	<div class="container-fluid main-container">
 		<div class="category-success-story row">
 			<div class="success-story__item col-sm-12 col-md-6">
-				<cms:pageSlot position="ArticleSuccessStoryContentSlot1"
-					var="component">
+				<cms:pageSlot position="ArticleSuccessStoryContentSlot1" var="component">
 					<cms:component component="${component}" />
 				</cms:pageSlot>
 			</div>
 			<div class="success-story__item col-sm-12 col-md-6">
 
-				<cms:pageSlot position="ArticleSuccessStoryContentSlot2"
-					var="component">
+				<cms:pageSlot position="ArticleSuccessStoryContentSlot2" var="component">
 					<cms:component component="${component}" />
 				</cms:pageSlot>
 			</div>

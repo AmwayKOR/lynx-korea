@@ -4,21 +4,28 @@
 <%@ taglib prefix="storepickup" tagdir="/WEB-INF/tags/responsive/storepickup" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
+<c:forEach items="${medias}" var="media">
+	<c:choose>
+		<c:when test="${empty imagerData}">
+			<c:set var="imagerData">"${media.width}":"${media.url}"</c:set>
+		</c:when>
+		<c:otherwise>
+			<c:set var="imagerData">${imagerData},"${media.width}":"${media.url}"</c:set>
+		</c:otherwise>
+	</c:choose>
+	<c:if test="${empty altText}">
+		<c:set var="altText" value="${fn:escapeXml(media.altText)}" />
+	</c:if>
+</c:forEach>
 
 <div class="video-preview col-sm-12">
 	<div class="video-preview__img">
-		<cms:component component="${bannerGif1}"  />
-	</div>
-	<div class="video-preview__img-mob">
-		<cms:component component="${bannerGif2}"  />
+		<img class="video-preview__img js-responsive-image" data-media='{${imagerData}}' alt='${altText}' title='${altText}' />
 	</div>
 	<div class="video-preview__content">
-        <img class="video-preview__play" src="${playbutton.url}" alt="icon" />
-        <p class="video-preview__title">${title}</p>
-        <div class="video-preview__subtitle">
-			<cms:component component="${description}"  />
-		</div>
+        <img class="video-preview__play" src="${component.iconImage.media.url}" alt="icon" />
+        <cms:component component="${component.text}" />
     </div>
-       
 </div>

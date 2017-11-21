@@ -139,7 +139,6 @@ INSERT_UPDATE AmwayApacArtistryNewLuxuryRotatingComponent;$contentCV[unique=true
 ########## Section 5 Home Page Artistry New Luxury Carousel ##########
 
 		
-
 ########## Section 6 Home Page New Product Component
 
 INSERT_UPDATE Media;mediaFormat(qualifier)[default=desktop];$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;folder(qualifier)[default='images'];altText
@@ -226,11 +225,11 @@ INSERT_UPDATE AmwayApacNewProductComponent;$contentCV[unique=true];uid[unique=tr
 ;;amwayapacConvenienceProductsProductComponent;convenienceProductsProductMediaContainer
 ########## Section 9 Home Page New Product Component ##########
 
-#Section 10 Home page Opportunity Component
+
+########## Section 10 Home page Opportunity Component
 
 INSERT_UPDATE Media;mediaFormat(qualifier)[default=desktop];$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;folder(qualifier)[default='images'];altText
 ;;;opportunityMedia;$siteResource/videoBackground.gif;;10Gif1Product;;"Product 10 gif 1"
-;;;opportunityMobileMedia;$siteResource/videoBackground-Mobile.gif;;10Gif2Product;;"Product 10 gif 2"
 ;;;playButtonMedia;$siteResource/play_button.png;;10ButtonProduct;;"Product 10 image"
 
 INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content;
@@ -238,26 +237,25 @@ INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];con
 
 INSERT_UPDATE MediaContainer;$contentCV[unique=true];qualifier[unique=true];$medias;
 ;;opportunityMediaContainer;opportunityMedia;
-;;opportunityMobileMediaContainer;opportunityMobileMedia;
 
 INSERT_UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang];&componentRef;
 ;;amwayapacOpportunityBannerComponent;playButtonMedia;amwayapacOpportunityBannerComponent
 
-INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];name;$mediaContainer;
-;;opportunityResponsiveBannerComponent;Opportunity Responsive Banner Component;opportunityMediaContainer;
-;;opportunityMobileResponsiveBannerComponent;Opportunity Mobile Responsive Banner Component;opportunityMobileMediaContainer;
+INSERT_UPDATE AmwayApacYourOpportunityComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
+;;amwayapacYourOpportunityComponent;opportunityMediaContainer
 
-INSERT_UPDATE AmwayApacYourOpportunityComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer;iconImage(&componentRef)
-;;amwayapacYourOpportunityComponent;opportunityMediaContainer;amwayapacOpportunityBannerComponent;
+########## Section 10 Home page Opportunity Component ##########
 
 
-#Section 11 Home Page Featured Brands Component
+########## Section 11 Home Page Featured Brands Component
 
 INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=$lang]
-;;amwayapacFeaturedBrandsParagraphComponent;"<div class=""full-width-title-component""><h2 class=""full-width-title-component__title"">featured brands</h2></div>";
+;;amwayapacFeaturedBrandsParagraphComponent;"<h2 class=""full-width-title-component__title"">featured brands</h2>";
+
+########## Section 11 Home Page Featured Brands Component ##########
 
 
-#Section 12 Home Page Featured Brands Carousel Component
+########## Section 12 Home Page Featured Brands Carousel Component
 
 INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;folder(qualifier)[default='images'];altText
 ;;nutriliteImg;$siteResource/nutrilite.jpg;;Nutrilite Image;;"Nutrilite Image"
@@ -278,8 +276,10 @@ INSERT_UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];$picture[
 INSERT_UPDATE AmwayApacFeaturedBrandsCarouselComponent;$contentCV[unique=true];uid[unique=true];banners(&componentRef);
 ;;amwayapacFeaturedBrandsCarouselComponent;amwayapacNutriliteCarouselBannerComponent,amwayapacXSCarouselBannerComponent,amwayapacArtistryCarouselBannerComponent,amwayapacGlisterCarouselBannerComponent,amwayapacicookCarouselBannerComponent,amwayapacNutriliteCarousel2BannerComponent;
 
+########## Section 12 Home Page Featured Brands Carousel Component ##########
 
-################### category page top banner component
+
+########## category page top banner component
 
 INSERT_UPDATE AmwayApacCategoryTopBannerComponent;$contentCV[unique=true];uid[unique=true];headerText;$mediaContainer
 ;;amwayapacCategoryTopBannerComponent;"NUTRILITE";backgroundImageMediaContainer
@@ -297,14 +297,13 @@ INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=tr
 INSERT_UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];$picture
 ;;LogoBComponent;logoImageMedia
 
-INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];name;$mediaContainer;&componentRef
-;;BackgroundSRBComponent; Background simple responsive banner;backgroundImageMediaContainer;BackgroundSRBComponent
-
 INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content;
-;;productDesc;"Duis autem vel eum iriure dolor in hendrerit in diam vulputate lorem velit esse molestie consequat";
+;;productDesc;"<span>Duis autem vel eum iriure dolor in hendrerit in diam vulputate lorem velit esse molestie consequat</span>";
+
+########## category page top banner component ##########
 
 
-################## category page shop by category component
+########## category page shop by category component
 
 INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang];buttonStyleAttributes;styleAttributes
 ;;vitaminsAndSupplementsButtonLinkComponent;"Vitamins & Supplements";primary-link category-item col-sm-6 col-md-3
@@ -324,14 +323,8 @@ INSERT_UPDATE MediaContainer;$contentCV[unique=true];qualifier[unique=true];$med
 ;;sportsNutritionMediaContainer;sportsNutritionMedia
 ;;energyDrinksMediaContainer;energyDrinksMedia
 
-INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];name;$mediaContainer;
-;;vitaminsAndSupplementsResponsiveBannerComponent Vitamins And Supplements Responsive Banner Component;vitaminsAndSupplementsMediaContainer;
-;;weightManagementBannerComponent; Weight Management Responsive Banner Component;weightManagementMediaContainer;
-;;sportsNutritionResponsiveBannerComponent; Sports Nutrition Responsive Banner Component;sportsNutritionMediaContainer;
-;;energyDrinksResponsiveBannerComponent; Energy Drinks Responsive Banner Component;energyDrinksMediaContainer;
-
 INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=$lang]
-;;amwayapacShopByCategoryTitleParagraphComponent;"<div class=""row simpleimagecomponent""><div class=""amway-theme""><div class=""full-width-title-component""><h2 class=""full-width-title-component__title"">SHOP BY CATEGORY</h2><h4 class=""full-width-title-component__sub-title"">Lorem ipsum dolor sit amet consectetuer adipiscing elit sed diam</h4></div></div></div>"
+;;amwayapacShopByCategoryTitleParagraphComponent;"<h2 class=""full-width-title-component__title"">SHOP BY CATEGORY</h2><h4 class=""full-width-title-component__sub-title"">Lorem ipsum dolor sit amet consectetuer adipiscing elit sed diam</h4>"
 
 INSERT_UPDATE AmwayApacShopByCategoryComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
 ;;vitaminsAndSupplementsComponent;vitaminsAndSupplementsMediaContainer
@@ -342,13 +335,18 @@ INSERT_UPDATE AmwayApacShopByCategoryComponent;$contentCV[unique=true];uid[uniqu
 ;;weightManagementComponent1;weightManagementMediaContainer
 ;;sportsNutritionComponent1;sportsNutritionMediaContainer
 
+########## category page shop by category component ##########
 
-################# category Page Experience Our Brands
+
+########## category Page Experience Our Brands
 
 INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=$lang]
-;;amwayapacExperienceOurBrandsParagraphComponent;"<div class=""full-width-title-component""><h2 class=""full-width-title-component__title"">Experience our brands</h2><h4 class=""full-width-title-component__sub-title"">Lorem ipsum dolor sit amet adipiscing elit sed diam nonummy</h4></div>"
+;;amwayapacExperienceOurBrandsParagraphComponent;"<h2 class=""full-width-title-component__title"">Experience our brands</h2><h4 class=""full-width-title-component__sub-title"">Lorem ipsum dolor sit amet adipiscing elit sed diam nonummy</h4>"
 
-################ category page Experience Brands Background Component
+########## category Page Experience Our Brands ##########
+
+
+########## Category page Experience Brands Background Component
 
 INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang];buttonStyleAttributes;styleAttributes
 ;;amwayapacExperienceBrandsShopNowLinkComponent;"Shop Now";btn-blue-white;banner-button-link;
@@ -357,22 +355,22 @@ INSERT_UPDATE AmwayApacOurNewProductComponent;$contentCV[unique=true];uid[unique
 ;;amwayapacExperienceBrandsBackgroundImageAndBannerComponent;ExperienceBrandsBannerMediaContainer;
 
 INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=$lang]
-;;amwayapacExperienceBrandsDescriptionParagraphComponent;"<h2 class=""banner-title""><span>Nutrilite headline<br />goes here</span></h2><div class=""sub-title-wrap""><span class=""banner-sub-title""><span>Duis autem vel eum iriure dolor in hendrerit<br />in vulputate velit esse molestie consequat</span></span>";
+;;amwayapacExperienceBrandsDescriptionParagraphComponent;"<h2 class=""banner-title""><span>Nutrilite headline<br />goes here</span></h2><div class=""sub-title-wrap""><span class=""banner-sub-title""><span>Duis autem vel eum iriure dolor in hendrerit<br />in vulputate velit esse molestie consequat</span></span></div>";
 
-INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;folder(qualifier)[default='images'];altText
-;;ExperienceBrandsBannerMedia;$siteResource/experience-brands-images.png;;ExperienceBrandsBannerMedia;;"Experience our brands"
-;;ExperienceBrandsBackgroundImage;$siteResource/experience-brands-bg.jpg;;ExperienceBrandsBackgroundImage;;"Nutrilite headline"
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];mediaFormat(qualifier)[default=desktop];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;folder(qualifier)[default='images'];altText
+;;ExperienceBrandsBannerMedia;;$siteResource/experience-brands-images.png;;ExperienceBrandsBannerMedia;;"Experience our brands"
+;;ExperienceBrandsBackgroundImage;;$siteResource/experience-brands-bg.jpg;;ExperienceBrandsBackgroundImage;;"Nutrilite headline"
 
 INSERT_UPDATE MediaContainer;$contentCV[unique=true];qualifier[unique=true];$medias;
 ;;ExperienceBrandsBannerMediaContainer;ExperienceBrandsBannerMedia
 
-INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];name;$mediaContainer;&componentRef;
-;;ExperienceBrandsBannerResponsiveBannerComponent;Experience Brands Responsive Banner Component;ExperienceBrandsBannerMediaContainer;ExperienceBrandsBannerResponsiveBannerComponent;
-
 INSERT_UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];$picture
 ;;ExperienceBrandsBackgroundBannerComponent;ExperienceBrandsBackgroundImage
 
-################## category page tools and advice component
+########## Category page Experience Brands Background Component ##########
+
+
+########## category page tools and advice component
 
 INSERT_UPDATE AmwayApacToolsAndAdviceComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
 ;;nutriliteGuideComponent;nutriliteGuideMediaContainer
@@ -389,19 +387,16 @@ INSERT_UPDATE MediaContainer;$contentCV[unique=true];qualifier[unique=true];$med
 ;;bodyKeyChoicesMediaContainer;bodyKeyChoicesMedia
 ;;nutriliteFindSupplementsMediaContainer;nutriliteFindSupplementsMedia
 
-INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];name;$mediaContainer;&componentRef
-;;nutriliteGuideResponsiveBannerComponent; Nutrilite Guide Responsive Banner Component;nutriliteGuideMediaContainer;nutriliteGuideResponsiveBannerComponent
-;;bodyKeyChoicesResponsiveBannerComponent; Body Key Choices Responsive Banner Component;bodyKeyChoicesMediaContainer;bodyKeyChoicesResponsiveBannerComponent
-;;nutriliteFindSupplementsResponsiveBannerComponent; nutrilite Find Supplements Responsive Banner Component;nutriliteFindSupplementsMediaContainer;nutriliteFindSupplementsResponsiveBannerComponent
-
 INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true]  ;content[lang=$lang]
-;;toolsAndAdviceTitleTextComponent;"<div class=""carousel-title-container""><h2 class=""carousel-title"">Tools &amp; Advice</h2></div>"
+;;toolsAndAdviceTitleTextComponent;"<h2 class=""carousel-title"">Tools &amp; Advice</h2>"
 ;;nutriliteGuideTextComponent;"<span>Your Guide to Nutrilite Kids Supplements</span>"
 ;;bodyKeyChoicesTextComponent;"<span>The BodyKey™4 Plan: Better Choices Everyday</span>"
 ;;nutriliteFindSupplementsTextComponent;"<span>Nutrilite: Find the Right Supplements</span>"
+
+########## category page tools and advice component ##########
+
 		
-		
-############### category page success stories components
+########## category page success stories components
 
 INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang];buttonStyleAttributes;styleAttributes
 ;;amwayApacBodyKeySuccessStoryLink;"Learn More";btn-blue-white;banner-button-link
@@ -415,10 +410,6 @@ INSERT_UPDATE MediaContainer;$contentCV[unique=true];qualifier[unique=true];$med
 ;;bodyKeySuccessStoryMediaContainer;bodyKeySuccessStoryMedia
 ;;xsSportsSuccessStoryMediaContainer;xsSportsSuccessStoryMedia
 
-INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];name;$mediaContainer;&componentRef
-;;bodyKeySuccessStoryResponsiveBannerComponent; Body Key Success Story Responsive Banner Component;bodyKeySuccessStoryMediaContainer;bodyKeySuccessStoryResponsiveBannerComponent
-;;xsSportsSuccessStoryResponsiveBannerComponent;XS Sports Success Story Responsive Banner Component;xsSportsSuccessStoryMediaContainer;xsSportsSuccessStoryResponsiveBannerComponent
-
 INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true]  ;content[lang=$lang]
 ;;bodyKeySuccessStoryParagraphComponent;"<h2 class=""banner-title""><span>New body key</span></h2><h4 class=""banner-sub-title"">Try One, Share a Few</h4><div class=""sub-title-wrap""><span class=""banner-sub-title"">Lorem ipsum dolor sit amet<br />consectetur adipiscing elit.</span></div>"
 ;;xsSportsSuccessStoryParagraphComponent;"<h2 class=""banner-title""><span>xs sports</span></h2><h4 class=""banner-sub-title"">Fuel Your Adventure</h4><div class=""sub-title-wrap""><span class=""banner-sub-title"">Lorem ipsum dolor sit amet<br />consectetur adipiscing elit.</span></div>"
@@ -426,9 +417,11 @@ INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true]  ;c
 INSERT_UPDATE AmwayApacPathToSuccessPitchPerfectComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
 ;;bodyKeySuccessStoryComponent;bodyKeySuccessStoryMediaContainer
 ;;xsSportsSuccessStoryComponent;xsSportsSuccessStoryMediaContainer
+
+########## category page success stories components ##########
 		
 		
-###################### Content Article Page
+########## content article page
 
 INSERT_UPDATE AmwayApacPathwayToSuccessComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
 ;;amwayapacpathwayToSuccessComponent;articleImageMediaContainer
@@ -454,20 +447,12 @@ INSERT_UPDATE MediaContainer;$contentCV[unique=true];qualifier[unique=true];$med
 ;;brandImageMediaContainer;brandImageMedia
 ;;magazineImageMediaContainer;magazineImageMedia
 
-INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];name;$mediaContainer;&componentRef
-;;articleImageResponsiveBannerComponent; Article Image  Responsive Banner Component;articleImageMediaContainer;articleImageResponsiveBannerComponent
-;;brandImageResponsiveBannerComponent; Brand Image Responsive Banner Component;brandImageMediaContainer;brandImageResponsiveBannerComponent
-;;magazineImageResponsiveBannerComponent;Magazine Image Responsive Banner Component;magazineImageMediaContainer;magazineImageResponsiveBannerComponent
-
 INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=true];linkName;buttonStyleAttributes;styleAttributes
 ;;amwayApacButtonlinkSuccessContent;LET'S GET STARTED;btn-ink;banner-button-link
 ;;amwayApacButtonlinkBusinessContent;GET YOUR APP NOW;btn-blue-white;banner-button-link
 
 INSERT_UPDATE AmwayApacIconLinkComponent;$contentCV[unique=true];uid[unique=true];linkName;iconStyleAttributes;styleAttributes
 ;;amwayApacIconlinkExperienceContent;WATCH THE VIDEO;icon-arrow-right-red;blue-link;
-
-
-############### Content Article Page success stories component
 
 INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang];buttonStyleAttributes;styleAttributes
 ;;amwayApacButtonlinkArticleBodyKeySuccessStoryLink;"Learn More";btn-blue-white;banner-button-link
@@ -481,10 +466,6 @@ INSERT_UPDATE MediaContainer;$contentCV[unique=true];qualifier[unique=true];$med
 ;;articleBodyKeySuccessStoryMediaContainer;articleBodyKeySuccessStoryMedia
 ;;articleXsSportsSuccessStoryMediaContainer;articleXsSportsSuccessStoryMedia
 
-INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];name;$mediaContainer;&componentRef
-;;articleBodyKeySuccessStoryResponsiveBannerComponent;Article Body Key Success Story Responsive Banner Component;articleBodyKeySuccessStoryMediaContainer;articleBodyKeySuccessStoryBannerComponent
-;;articleXsSportsSuccessStoryResponsiveBannerComponent;Article Xs Sports Success Story Responsive Banner Component;articleXsSportsSuccessStoryMediaContainer;articleXsSportsSuccessStoryResponsiveBannerComponent
-
 INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=$lang]
 ;;articleBodyKeySuccessStoryParagraphComponent;"<h2 class=""banner-title""><span>New body key</span></h2><h4 class=""banner-sub-title"">Try One, Share a Few</h4><div class=""sub-title-wrap""><span class=""banner-sub-title"">Lorem ipsum dolor sit amet<br />consectetur adipiscing elit.</span></div>"
 ;;articleXsSportsSuccessStoryParagraphComponent;"<h2 class=""banner-title""><span>xs sports</span></h2><h4 class=""banner-sub-title"">Fuel Your Adventure</h4><div class=""sub-title-wrap""><span class=""banner-sub-title"">Lorem ipsum dolor sit amet<br />consectetur adipiscing elit.</span></div>"
@@ -493,8 +474,10 @@ INSERT_UPDATE AmwayApacPathToSuccessPitchPerfectComponent;$contentCV[unique=true
 ;;articleBodyKeySuccessStoryComponent;articleBodyKeySuccessStoryMediaContainer
 ;;articleXsSportsSuccessStoryComponent;articleXsSportsSuccessStoryMediaContainer
 
+########## content article page ##########
 
-################## Register Landing Page
+
+########## Register Landing Page
 
 INSERT_UPDATE AmwayApacJoinAmwayComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
 ;;amwayApacJoinAmwayComponent;registerImageMediaContainer
@@ -519,5 +502,4 @@ INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=tr
 ;;amwayApacBecomeAnABOLinkContent;"BECOME AN ABO";btn-blue-white show-terms;
 ;;amwayApacBecomeACustomerLinkContent;"BECOME A MEMBER";btn-blue-white show-terms;
 
-
-
+########## Register Landing Page ##########

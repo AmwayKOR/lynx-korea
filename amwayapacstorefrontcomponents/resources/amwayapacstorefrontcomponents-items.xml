@@ -409,9 +409,9 @@
 				<description>Learning opportunity carousel component.</description>
 			</itemtype>
 
-			<itemtype code="ProductColorVariantSelectorComponent"
+			<itemtype code="AmwayApacProductColorVariantSelectorComponent"
 				extends="ProductVariantSelectorComponent"
-				jaloclass="de.hybris.platform.acceleratorcms.jalo.components.ProductColorVariantSelectorComponent"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacProductColorVariantSelectorComponent"
 				autocreate="true" generate="true">
 				<description>Represents product color variant selector component that gives the ability to select different types of the product.</description>
 			</itemtype>

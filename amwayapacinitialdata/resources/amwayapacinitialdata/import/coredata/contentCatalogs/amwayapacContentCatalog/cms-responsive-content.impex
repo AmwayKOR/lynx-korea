@@ -576,6 +576,7 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 
 ;TopBannerContentSlot;;;
 ;ShopByCategoryContentSlot;;;
+;ShopByCategoryTitleSlot;;;
 ;ExperienceBrandsContentSlot;;;
 ;BrandBackgroundImageBannerContentSlot;;;
 ;SuccessStoryContentSlot1;;;
@@ -739,6 +740,7 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active
 
 ;;TopBannerContentSlot;Top banner content slot;true
 ;;ShopByCategoryContentSlot;Shop By category component content slot;true
+;;ShopByCategoryTitleSlot;Shop By category component title slot;true
 ;;ExperienceBrandsContentSlot;Experience brands content slot;true
 ;;BrandBackgroundImageBannerContentSlot;Brands background image banner component content slot;true
 ;;SuccessStoryContentSlot1;Success story content slot 1;true
@@ -785,6 +787,10 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active
 ;;Section9ASlot;Foundational Supplements Supplement Product Slot for Homepage;true
 ;;Section9BSlot;Targeted Supplements Supplement Product Slot for Homepage;true
 ;;Section9CSlot;Convenience Products Supplement Product Slot for Homepage;true
+;;Section10Slot;Opportunity Component Slot for Homepage;true
+;;Section11Slot;Featured Brands Slot for Homepage;true
+;;Section12Slot;Featured Brands Carousel Slot for Homepage;true
+
 
 # Bind Content Slots to Page Templates
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ProductDetailsPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
@@ -1175,6 +1181,7 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 
 ;;TopBannerContentSlot-CategoryLandingPage;TopBannerContentSlot;;TopBannerContentSlot;true
 ;;ShopByCategoryContentSlot-CategoryLandingPage;ShopByCategoryContentSlot;;ShopByCategoryContentSlot;true
+;;ShopByCategoryTitleSlot-CategoryLandingPage;ShopByCategoryTitleSlot;;ShopByCategoryTitleSlot;true
 ;;ExperienceBrandsContentSlot-CategoryLandingPage;ExperienceBrandsContentSlot;;ExperienceBrandsContentSlot;true
 ;;BrandBackgroundImageBannerContentSlot-CategoryLandingPage;BrandBackgroundImageBannerContentSlot;;BrandBackgroundImageBannerContentSlot;true
 ;;SuccessStoryContentSlot1-CategoryLandingPage;SuccessStoryContentSlot1;;SuccessStoryContentSlot1;true
@@ -1290,6 +1297,9 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 ;;Section9A-HomePageMain;Section9A;;Section9ASlot;true
 ;;Section9B-HomePageMain;Section9B;;Section9BSlot;true
 ;;Section9C-HomePageMain;Section9C;;Section9CSlot;true
+;;Section10-HomePageMain;Section10;;Section10Slot;true
+;;Section11-HomePageMain;Section11;;Section11Slot;true
+;;Section12-HomePageMain;Section12;;Section12Slot;true
 
 # Create Content Pages
 

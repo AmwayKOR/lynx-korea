@@ -17,27 +17,16 @@
 	</c:if>
 </c:forEach>
 
-<div class="experience-brands clearfix clear-border">
-	<div class="new-hot-brand">
-		<div class="experience-brands__content clear-bg bg-gray">
-			<div class="wrapper-limit">
-				<div class="wrapper">
-					<div class="banner-content banner-right">
-						<div class="banner-title-wrapper">
-							
-							<cms:component component="${text}" />
-							
-						</div>
-						<div class="banner-button-wrap">
-							<cms:component component="${link}" />
-						</div>
-
-					</div>
-					<img class="experience-brands__image experience-brands__image_iphone"
-						data-media='{${imagerData}}' alt="new-hot-brand" />
-				</div>
-
+<div class="wrapper-limit">
+	<div class="wrapper">
+		<div class="banner-content banner-right">
+			<div class="banner-title-wrapper">
+				<cms:component component="${component.text}" />
+			</div>
+			<div class="banner-button-wrap">
+				<cms:component component="${component.link}" />
 			</div>
 		</div>
+		<img class="experience-brands__image experience-brands__image_iphone js-responsive-image" data-media='{${imagerData}}' title='${altText}' alt='${altText}' />
 	</div>
 </div>

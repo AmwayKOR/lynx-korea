@@ -189,9 +189,9 @@ INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&co
 ########## Section 9 Home Page New Product Component 
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
-;;Section9ASlot;true;amwayapacFoundationalSupplementsProductComponent
-;;Section9BSlot;true;amwayapacTargetedSupplementsProductComponent
-;;Section9CSlot;true;amwayapacConvenienceProductsProductComponent
+;;Section9ASlot;amwayapacFoundationalSupplementsProductComponent
+;;Section9BSlot;amwayapacTargetedSupplementsProductComponent
+;;Section9CSlot;amwayapacConvenienceProductsProductComponent
 
 INSERT_UPDATE AmwayApacNewProductComponent;$contentCV[unique=true];uid[unique=true];name;text(uid, $contentCV);link(&linkRef);&componentRef
 ;;amwayapacFoundationalSupplementsProductComponent;Foundational Supplements Supplement Product Component;amwayapacFoundationalSupplementsProductParagraphComponent;amwayapacFoundationalSupplementsProductNavLink;amwayapacFoundationalSupplementsProductComponent
@@ -210,42 +210,39 @@ INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&co
 
 ########## Section 9 Home Page New Product Component ##########
 
-#Section 10 Home page Opportunity Component
 
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
-;;Section10Slot-Homepage;Opportunity Component Slot for Homepage;true;amwayapacYourOpportunityComponent
+########## Section 10 Home page Opportunity Component
 
-INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='homepage'];contentSlot(uid,$contentCV)[unique=true]
-;;Section10Slot-Homepage;Section10;;Section10Slot-Homepage
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;Section10Slot;amwayapacYourOpportunityComponent
 
 INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
 ;;amwayapacOpportunityParagraphComponent;amwayapacOpportunityParagraphComponent
 
-INSERT_UPDATE AmwayApacYourOpportunityComponent;$contentCV[unique=true];uid[unique=true];name;text(&componentRef);&componentRef;
-;;amwayapacYourOpportunityComponent;Home Page Opportunity Component;amwayapacOpportunityParagraphComponent;amwayapacYourOpportunityComponent;
+INSERT_UPDATE AmwayApacYourOpportunityComponent;$contentCV[unique=true];uid[unique=true];name;text(&componentRef);iconImage(&componentRef);&componentRef;
+;;amwayapacYourOpportunityComponent;Home Page Opportunity Component;amwayapacOpportunityParagraphComponent;amwayapacOpportunityBannerComponent;amwayapacYourOpportunityComponent;
 
 INSERT_UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];name;urlLink;&componentRef;
 ;;amwayapacOpportunityBannerComponent; Opportuinty Banner component;/;amwayapacOpportunityBannerComponent;
 
-#Section 11 Home Page Featured Brands Component
+########## Section 10 Home page Opportunity Component ##########
 
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
-;;Section11Slot-Homepage;Featured Brands Slot for Homepage;true;amwayapacFeaturedBrandsParagraphComponent
 
-INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='homepage'];contentSlot(uid,$contentCV)[unique=true]
-;;Section11Slot-Homepage;Section11;;Section11Slot-Homepage
+########## Section 11 Home Page Featured Brands Component
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;Section11Slot;amwayapacFeaturedBrandsParagraphComponent
 
 INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
 ;;amwayapacFeaturedBrandsParagraphComponent;amwayapacFeaturedBrandsParagraphComponent
 
+########## Section 11 Home Page Featured Brands Component ##########
 
-#Section 12 Home Page Featured Brands Carousel Component
 
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
-;;Section12Slot-Homepage;Featured Brands Carousel Slot for Homepage;true;amwayapacFeaturedBrandsCarouselComponent
+########## Section 12 Home Page Featured Brands Carousel Component
 
-INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='homepage'];contentSlot(uid,$contentCV)[unique=true]
-;;Section12Slot-Homepage;Section12;;Section12Slot-Homepage
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;Section12Slot;amwayapacFeaturedBrandsCarouselComponent
 
 INSERT_UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];name;urlLink;&componentRef;
 ;;amwayapacNutriliteCarouselBannerComponent; Featured Brands Carousel Nutrilite Banner Detail;/;amwayapacNutriliteCarouselBannerComponent;	
@@ -258,8 +255,10 @@ INSERT_UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];name;urlL
 INSERT_UPDATE AmwayApacFeaturedBrandsCarouselComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
 ;;amwayapacFeaturedBrandsCarouselComponent;Homepage Featured Brands Carousel ;amwayapacFeaturedBrandsCarouselComponent
 
+########## Section 12 Home Page Featured Brands Carousel Component ##########
 
-################### category page top banner component
+
+########## category page top banner component
 
 INSERT_UPDATE AmwayApacCategoryTopBannerComponent;$contentCV[unique=true];uid[unique=true];name;logoImage(uid, $contentCV);text(uid, $contentCV);link(&linkRef);&componentRef;
 ;;amwayapacCategoryTopBannerComponent;Category Top Banner Component;LogoBComponent;productDesc;amwayApacButtonLinkProductCategory;amwayapacCategoryTopBannerComponent;
@@ -273,10 +272,13 @@ INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&co
 INSERT_UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];name;urlLink;&componentRef
 ;;LogoBComponent;Logo Banner Component;"/";LogoBComponent
 
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
-;;TopBannerContentSlot; Category Top banner Slot;true;amwayapacCategoryTopBannerComponent;
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;TopBannerContentSlot;amwayapacCategoryTopBannerComponent;
 
-################## category page shop by category component
+########## category page top banner component ##########
+
+
+########## category page shop by category component
 
 INSERT_UPDATE AmwayApacShopByCategoryCollectionComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;shopByCategoryComponents(&componentRef)
 ;;shopByCategoryCollectionComponent;shop by category collection component;shopByCategoryCollectionComponent;vitaminsAndSupplementsComponent,weightManagementComponent,sportsNutritionComponent,enerygyDrinksComponent,vitaminsAndSupplementsComponent1,weightManagementComponent1,sportsNutritionComponent1
@@ -299,10 +301,14 @@ INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=tr
 INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
 ;;amwayapacShopByCategoryTitleParagraphComponent;amwayapacShopByCategoryTitleParagraphComponent
 
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
-;;ShopByCategoryContentSlot;Shop By category Content Slot;true;amwayapacShopByCategoryTitleParagraphComponent,shopByCategoryCollectionComponent;
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;ShopByCategoryTitleSlot;amwayapacShopByCategoryTitleParagraphComponent;
+;;ShopByCategoryContentSlot;shopByCategoryCollectionComponent;
 
-##################### category Page Experience Our Brands
+########## category page shop by category component ##########
+
+
+########## category Page Experience Our Brands
 
 INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
 ;;amwayapacExperienceOurBrandsParagraphComponent;amwayapacExperienceOurBrandsParagraphComponent
@@ -310,7 +316,10 @@ INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&co
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
 ;;ExperienceBrandsContentSlot;Experience Our Brands Content Slot;true;amwayapacExperienceOurBrandsParagraphComponent
 
-#################### Category page Experience Brands Background Component
+########## category Page Experience Our Brands ##########
+
+
+########## Category page Experience Brands Background Component
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
 ;;BrandBackgroundImageBannerContentSlot;amwayapacExperienceBrandsBackgroundImageAndBannerComponent
@@ -327,7 +336,10 @@ INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&co
 INSERT_UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];name;urlLink;&componentRef
 ;;ExperienceBrandsBackgroundBannerComponent;Experience Brand Background Banner Component;"/";ExperienceBrandsBackgroundBannerComponent
 
-################## category page tools and advice component
+########## Category page Experience Brands Background Component ##########
+
+
+########## category page tools and advice component
 
 INSERT_UPDATE AmwayApacToolsAndAdviceComponent;$contentCV[unique=true];uid[unique=true];name;text(&componentRef);&componentRef
 ;;nutriliteGuideComponent;nutrilite guide component;nutriliteGuideTextComponent;nutriliteGuideComponent
@@ -346,8 +358,10 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents
 ;;ToolsAndAdviceBannerContentSlot2;bodyKeyChoicesComponent
 ;;ToolsAndAdviceBannerContentSlot3;nutriliteFindSupplementsComponent
 
+########## category page tools and advice component ##########
 
-############### category page success stories components
+
+########## category page success stories components
 
 INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;target(code)[default='sameWindow'];&componentRef
 ;;amwayApacBodyKeySuccessStoryLink;body key success story link component;/;amwayApacBodyKeySuccessStoryLink;;amwayApacBodyKeySuccessStoryLink
@@ -365,8 +379,10 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents
 ;;SuccessStoryContentSlot1;bodyKeySuccessStoryComponent
 ;;SuccessStoryContentSlot2;xsSportsSuccessStoryComponent
 
+########## category page success stories components ##########
 
-############################### content article page 
+
+########## content article page
 
 INSERT_UPDATE AmwayApacPathwayToSuccessComponent;$contentCV[unique=true];uid[unique=true];name;text(uid, $contentCV);link(&linkRef);&componentRef
 ;;amwayapacpathwayToSuccessComponent;Pathway To Success Component; bannerDesc;amwayApacButtonlinkSuccessContent;amwayapacpathwayToSuccessComponent
@@ -384,12 +400,12 @@ INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&co
 ;;articleBodyKeySuccessStoryParagraphComponent;articleBodyKeySuccessStoryParagraphComponent
 ;;articleXsSportsSuccessStoryParagraphComponent;articleXsSportsSuccessStoryParagraphComponent
 
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
-;;PathwayToSuccessContentSlot;Pathway To Success Slot;true;amwayapacpathwayToSuccessComponent
-;;BuildYourBusinessContentSlot;Build Your Business Slot;true;amwayapacbuildYourBusinessComponent
-;;ExperienceTheStarterKitContentSlot;Experience The Starter Kit Slot;true;amwayapacexperienceTheStarterKitComponent
-;;ArticleSuccessStoryContentSlot1;Success Story Slot1;true;articleBodyKeySuccessStoryComponent
-;;ArticleSuccessStoryContentSlot2;Success Story Slot2;true;articleXsSportsSuccessStoryComponent
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;PathwayToSuccessContentSlot;amwayapacpathwayToSuccessComponent
+;;BuildYourBusinessContentSlot;amwayapacbuildYourBusinessComponent
+;;ExperienceTheStarterKitContentSlot;amwayapacexperienceTheStarterKitComponent
+;;ArticleSuccessStoryContentSlot1;articleBodyKeySuccessStoryComponent
+;;ArticleSuccessStoryContentSlot2;articleXsSportsSuccessStoryComponent
 
 INSERT_UPDATE AmwayApacPathToSuccessPitchPerfectComponent;$contentCV[unique=true];uid[unique=true];name;link(&componentRef);text(&componentRef);&componentRef
 ;;articleBodyKeySuccessStoryComponent;Amway Path to Success;amwayApacButtonlinkArticleBodyKeySuccessStoryLink;articleBodyKeySuccessStoryParagraphComponent;articleBodyKeySuccessStoryComponent
@@ -404,8 +420,10 @@ INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=tr
 INSERT_UPDATE AmwayApacIconLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;target(code)[default='sameWindow'];&componentRef
 ;;amwayApacIconlinkExperienceContent;WATCH THE VIDEO;/;amwayApacIconlinkExperienceContent;;amwayApacIconlinkExperienceContent;
 
-	
-############# Register Landing Page
+########## content article page ##########
+
+
+########## Register Landing Page	
 
 INSERT_UPDATE AmwayApacJoinAmwayComponent;$contentCV[unique=true];uid[unique=true];name;text(uid, $contentCV);&componentRef
 ;;amwayApacJoinAmwayComponent;Join Amway Component;headerDesc;amwayApacJoinAmwayComponent
@@ -430,5 +448,4 @@ INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=tr
 ;;amwayApacBecomeAnABOLinkContent;BECOME AN ABO;/;amwayApacBecomeAnABOLinkContent;;amwayApacBecomeAnABOLinkContent;
 ;;amwayApacBecomeACustomerLinkContent;BECOME A MEMBER;/;amwayApacBecomeACustomerLinkContent;;amwayApacBecomeACustomerLinkContent;
 
-
-
+########## Register Landing Page ##########
