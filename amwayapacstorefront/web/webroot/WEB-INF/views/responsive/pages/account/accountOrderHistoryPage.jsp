@@ -86,7 +86,8 @@
                                                     </div>
                                                     
                                                     <div id="personalOrdersContent" class="tab-pane fade active in">
-                                                    		<account:accountOrderHistoryOrdersSection orders="${personalOrders}" category="personal"/>
+                                                    
+                                                    		<account:accountOrderHistoryOrdersSection orders="${personalOrder}" category="personal" />
                                                         
                                                         
                                                     </div>

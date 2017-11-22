@@ -25,3 +25,39 @@
         </ycommerce:testId>
     </div>
 </c:if>
+<c:if test="${not empty orders.results}">
+    <div class="account-overview-table">
+        <table class="orderhistory-list-table responsive-table">
+            <thead>
+                <tr class="account-orderhistory-table-head responsive-table-head hidden-xs">
+                    <th class="order-history-sort js-sort-orders-${category} js-sort-byDate">
+                        <spring:theme code="text.account.orderHistory.orderDate"/>
+                        <span class="icon icon-arrow-dropdown"></span>
+                    </th>
+                    <th class="order-history-sort js-sort-orders-${category} js-sort-byOrderTotal">
+                        <spring:theme code="text.account.orderHistory.total"/>
+                        <span class="icon icon-arrow-dropdown"></span>
+                    </th>
+                    <th class="order-history-sort js-sort-orders-${category} js-sort-byStatus">
+                        <spring:theme code="text.account.orderHistory.status"/>
+                        <span class="icon icon-arrow-dropdown"></span>
+                    </th>
+                    <th class="order-history-sort js-sort-orders-${category} js-sort-byOrderType">
+                        <spring:theme code="text.account.orderHistory.orderType"/>
+                        <span class="icon icon-arrow-dropdown"></span>
+                    </th>
+                    <th><spring:theme code="text.account.orderHistory.orderNumber"/></th>
+                </tr>
+            </thead>
+            <tbody class="js-search-result-${category}">
+                <c:forEach items="${orders.results}" var="order">
+                    <account:accountOrderHistoryListItem order="${order}"/>
+                    
+                </c:forEach>
+            </tbody>
+        </table>
+    </div>
+    <div class="account-orderhistory-pagination">
+        
+    </div>
+</c:if>
