@@ -9,13 +9,17 @@
 <%@ taglib prefix="multi-checkout" tagdir="/WEB-INF/tags/responsive/checkout/multi"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 
+<c:url var="checkoutPaymentStepUrl" value="/checkout/multi/payment-method/add" />
+<c:url var="cartUrl" value="/cart" />
 <spring:htmlEscape defaultHtmlEscape="true" />
 <template:checkoutPage>
 	<div class="container-fluid main-container">
 		<div class="shipping-delivery">
 			<div class="container-fluid">
 				<div class="row cartTitile">
-					<div class="product-list-page-title mb25"><spring:theme code="checkout.step.one.checkout"/></div>
+					<div class="product-list-page-title mb25">
+						<spring:theme code="checkout.step.one.checkout" />
+					</div>
 				</div>
 			</div>
 			<multi-checkout:checkoutSteps checkoutSteps="${checkoutSteps}" progressBarId="${progressBarId}" />
@@ -26,16 +30,27 @@
 						<multi-checkout:deliveryMethodSelector />
 						<multi-checkout:orderSetupSection />
 					</div>
-					<multi-checkout:checkoutOrderDetails />
+					<div class="col-xs-12 col-md-3 shipping-delivery-summary">
+						<div class="shipping-delivery-side">
+							<multi-checkout:checkoutOrderDetails />
+							<div class="shipping-delivery-summary-link">
+								<a href="${checkoutPaymentStepUrl}" class="shipping-delivery-summary-continue btn-blue-white">
+									<spring:theme code="checkout.step.one.continue" />
+								</a>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 		<multi-checkout:deliveryCartItems />
 		<div class="amwa-btnbar">
-			<c:url var="checkoutPaymentStepUrl" value="/checkout/multi/payment-method/add" />
-			<a href="${checkoutPaymentStepUrl}" class="btn-blue-white" onclick=""><spring:theme code="checkout.step.one.continue"/></a>
-			<c:url var="cartUrl" value="/cart" />
-			<a class="cartlist-cancelorder" href="${cartUrl}"><spring:theme code="checkout.step.one.cancel.order"/></a>
+			<a href="${checkoutPaymentStepUrl}" class="btn-blue-white" onclick="">
+				<spring:theme code="checkout.step.one.continue" />
+			</a>
+			<a class="cartlist-cancelorder" href="${cartUrl}">
+				<spring:theme code="checkout.step.one.cancel.order" />
+			</a>
 		</div>
 	</div>
 </template:checkoutPage>
