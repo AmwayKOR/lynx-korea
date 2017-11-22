@@ -437,6 +437,7 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 ;CenterRightContentSlot;;;narrow
 ;BottomContentSlot;;;wide
 ;PlaceholderContentSlot;;;
+;ShoppingCartQuickShopSearchBoxSlot;;;searchbox
 
 # Login Page Template
 INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='LoginPageTemplate'];validComponentTypes(code);compTypeGroup(code)
@@ -552,6 +553,7 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 ;TopHeaderSlot;;;wide
 ;BottomHeaderSlot;;;wide
 ;PlaceholderContentSlot;;;
+;ShoppingListQuickShopSearchBoxSlot;;;searchbox
 
 # Category Landing Page Template
 # Template used for category landing page
@@ -791,6 +793,8 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active
 ;;Section11Slot;Featured Brands Slot for Homepage;true
 ;;Section12Slot;Featured Brands Carousel Slot for Homepage;true
 
+;;ShoppingListQuickShopSearchBoxSlot;Shopping List Quick Shop Search Box Slot;              true
+;;ShoppingCartQuickShopSearchBoxSlot;Shopping Cart Quick Shop Search Box Slot;              true
 
 # Bind Content Slots to Page Templates
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ProductDetailsPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
@@ -1063,6 +1067,7 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 ;;EmptyCartMiddleContent-CartPage;EmptyCartMiddleContent;;EmptyCartMiddleContent;true
 ;;PlaceholderContentSlot-CartPage;PlaceholderContentSlot;;PlaceholderContentSlot;true
 ;;Mobile-NavigationBar-CartPage;MobileNavigationBar;;MobileNavigationBarSlot;true
+;;ShoppingCartQuickShopSearchBoxSlot-CartPage;ShoppingCartQuickShopSearchBoxSlot;;ShoppingCartQuickShopSearchBoxSlot;true
 
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='LoginPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
 ;;SiteLogo-LoginPage;SiteLogo;;SiteLogoSlot;true
@@ -1163,6 +1168,7 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 ;;BottomHeaderSlot-ShoppingListsPage;BottomHeaderSlot;;BottomHeaderSlot;true
 ;;PlaceholderContentSlot-ShoppingListsPage;PlaceholderContentSlot;;PlaceholderContentSlot;true
 ;;Mobile-NavigationBar-ShoppingListsPage;MobileNavigationBar;;MobileNavigationBarSlot;true
+;;ShoppingListQuickShopSearchBoxSlot-ShoppingListsPage;ShoppingListQuickShopSearchBoxSlot;;ShoppingListQuickShopSearchBoxSlot;true
 
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='CategoryLandingPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
 ;;SiteLogo-CategoryLandingPage;SiteLogo;;SiteLogoSlot;true
@@ -1338,6 +1344,7 @@ INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTe
 ;;content-article-pages;Content Article Pages;ContentArticlePagesTemplate;/content-article-pages
 ;;register-landing-page;Register;RegisterLandingPageTemplate;/register-landing-page
 ;;billingshipping;Billing Shipping Page;AccountPageTemplate;billingshipping
+;;business-information;Business Information Page;AccountPageTemplate;/business-information
 
 # Simple Content Pages
 INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']

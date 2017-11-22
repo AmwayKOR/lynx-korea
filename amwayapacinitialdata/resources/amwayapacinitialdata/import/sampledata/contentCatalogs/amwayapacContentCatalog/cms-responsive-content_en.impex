@@ -901,3 +901,21 @@ UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content;
 ;;productGridNoResultContent;<div class="new-search-icon tb120"><span>WE'RE SORRY! WE COULDN'T FIND ANY RESULTS FOR YOUR SELECTION.</span></div>
 
 ######Product Grid Page Template######
+
+#######Shopping List Details Page Template######
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
+;;ShoppingListQuickShopSearchBoxSlot;Shopping List Search Box Slot;true;shoppingListQuickShopSearchComponent
+
+INSERT_UPDATE AmwayApacShoppingListSearchBoxComponent;$contentCV[unique=true];uid[unique=true];name;displaySuggestions;&componentRef
+;;shoppingListQuickShopSearchComponent; Shopping List Search Box PlaceHolder;false;shoppingListQuickShopSearchComponent
+#######Shopping List Details Page Template######
+
+#######Shopping Cart Page Template######
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
+;;ShoppingCartQuickShopSearchBoxSlot;Shopping Cart Search Box Slot;true;shoppingCartQuickShopSearchComponent
+
+INSERT_UPDATE AmwayApacShoppingCartSearchBoxComponent;$contentCV[unique=true];uid[unique=true];name;displaySuggestions;&componentRef
+;;shoppingCartQuickShopSearchComponent; Shopping Cart Search Box PlaceHolder;false;shoppingCartQuickShopSearchComponent
+#######Shopping Cart Page Template######
+
+

@@ -362,13 +362,12 @@ div.page-content-wrapper.page-shopping-lists div.create-list-button-wrapper{
 			}
 		}
 }
-header {
-	.site-search .ui-autocomplete {
-		display: none !important;
-	}
-	.auto-suggestion-popover .suggested-words-wrapper {
-		min-height: 55px;
-	}
+
+.ui-widget-content.ui-autocomplete {
+    display: none !important;
+}
+.auto-suggestion-popover .suggested-words-wrapper {
+    min-height: 55px;
 }
 
 .amway-theme .ditto-schedule-table-content .ditto-schedule-table thead .ditto-field-name {
@@ -387,6 +386,9 @@ header {
 
 .quick-links {
   margin-top: unset;
+}
+#quickShopForm .auto-suggestion-popover {
+    position: inherit;
 }
 .quick-links .quick-links-header a {
 	.font16;
