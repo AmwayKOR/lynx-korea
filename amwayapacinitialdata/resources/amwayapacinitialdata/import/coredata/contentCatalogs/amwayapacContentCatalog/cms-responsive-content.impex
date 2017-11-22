@@ -704,7 +704,7 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 # Create Content Slots
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active
 ;;SiteLogoSlot;Default Site Logo Slot;true
-;;CountrySelectorSlot;Country Icon Slot;true;
+;;CountrySelectorSlot;Country Selector Links;true;
 ;;HomepageNavLinkSlot;Default Homepage Link;true
 ;;HeaderAccountNavigationSlot;Default Header Account Navigation Slot;true;
 ;;BreadCrumbSlot;Breadcrumb slot;true

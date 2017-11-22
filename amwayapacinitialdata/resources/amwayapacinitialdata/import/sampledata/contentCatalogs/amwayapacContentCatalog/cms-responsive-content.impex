@@ -40,6 +40,273 @@ INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];nam
 ########## Top Header Logo ##########
 
 
+########## Country Selector
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(uid,$contentCV)
+;;CountrySelectorSlot;amwayapacCountrySelectionCollectionComponent
+
+INSERT_UPDATE AmwayApacImageLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&componentRef;
+;;amwayapacChinaComponent;China;/;amwayapacChinaComponent
+;;amwayapacMalaysiaComponent;Malaysia;/;amwayapacMalaysiaComponent
+;;amwayapacPhilippinesComponent;Philippines;/;amwayapacPhilippinesComponent
+;;amwayapacKoreaComponent;Korea;/;amwayapacKoreaComponent
+;;amwayapacThailandComponent;Thailand;/;amwayapacThailandComponent
+;;amwayapacSingaporeComponent;Singapore;/;amwayapacSingaporeComponent
+;;amwayapacJapanComponent;Japan;/;amwayapacJapanComponent
+
+INSERT_UPDATE AmwayApacCountrySelectorComponent;$contentCV[unique=true];uid[unique=true];name;currentCountry(uid,$contentCV);links(uid,$contentCV);&componentRef
+;;amwayapacCountrySelectionCollectionComponent; Country Selector Collection Component;amwayapacJapanComponent;amwayapacChinaComponent,amwayapacMalaysiaComponent,amwayapacPhilippinesComponent,amwayapacKoreaComponent,amwayapacThailandComponent,amwayapacSingaporeComponent,amwayapacJapanComponent;amwayapacCountrySelectionCollectionComponent
+
+########## Country Selector ##########
+
+
+########## Header Account Navigation
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(uid,$contentCV)
+;;HeaderAccountNavigationSlot;accountNavigationCollectionComponent
+
+INSERT_UPDATE AccountNavigationComponent;$contentCV[unique=true];uid[unique=true];navigationNode(&nodeRef);&componentRef
+;;myAccountNavigationComponent;MyAccountNode;myAccountNavigationComponent
+;;billingShippingNavigationcomponent;BillingShippingNode;billingShippingNavigationComponent
+;;shoppingListsNavigationComponent;ShoppingListsNode;shoppingListsNavigationComponent
+;;dittoNavigationComponent;DittoNode;dittoNavigationComponent
+;;personalDetailsNavigationComponent;PersonalDetailsNode;personalDetailsNavigationComponent
+;;orderHistoryNavigationComponent;OrderHistoryNode;orderHistoryNavigationComponent
+
+INSERT_UPDATE AccountNavigationCollectionComponent;$contentCV[unique=true];uid[unique=true];components(uid,$contentCV)
+;;accountNavigationCollectionComponent;myAccountNavigationComponent,billingShippingNavigationcomponent,shoppingListsNavigationComponent,dittoNavigationComponent,personalDetailsNavigationComponent,orderHistoryNavigationComponent;
+
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;target(code)[default='sameWindow'];&componentRef
+;;MyAccountNodeLink; My Account Navigation Link;/;MyAccountNodeLink;;MyAccountNodeLink;
+;;BillingShippingNodeLink; Billing Shipping Navigation Link;/;BillingShippingNodeLink;;BillingShippingNodeLink;
+;;ShoppingListsNodeLink; Shopping Lists Navigation Link;/shopping-lists/all;ShoppingListsNodeLink;;ShoppingListsNodeLink;
+;;DittoNodeLink; Ditto Navigation Link;/;DittoNodeLink;;DittoNodeLink;
+;;PersonalDetailsNodeLink; Personal Details Link;/;PersonalDetailsNodeLink;;PersonalDetailsNodeLink;
+;;OrderHistoryNodeLink; Order History Link;/;OrderHistoryNodeLink;;OrderHistoryNodeLink;
+
+########## Header Account Navigation ##########
+
+
+########## Navigation Bar
+
+#NavigationBars
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;NavigationBarSlot;ShopNavBarComponent,BusinessCenterNavBarComponent,AboutAmwayNavBarComponent,EducationNavBarComponent
+;;MobileNavigationBarSlot;MobileShopNavBarComponent,MobileBusinessCenterNavBarComponent,MobileAboutAmwayNavBarComponent,MobileEducationNavBarComponent
+
+# Navigation Bar Component
+INSERT_UPDATE NavigationBarComponent;$contentCV[unique=true];uid[unique=true];name;wrapAfter;link(&componentRef);styleClass;navigationNode(&nodeRef);&componentRef
+;;ShopNavBarComponent;Shops Nav Bar Component;10;NavShopLink;;ShopNavNode;ShopNavBarComponent
+;;BusinessCenterNavBarComponent;Business Center Nav Bar Component;10;NavBusinessCenterLink;;BusinessCenterNavNode;BusinessCenterNavBarComponent
+;;AboutAmwayNavBarComponent;About Amway Nav Bar Component;10;NavAboutAmwayLink;;AboutNavNode;AboutAmwayNavBarComponent
+;;EducationNavBarComponent;Education Nav Bar Component;10;NavEducationLink;;EducationNavNode;EducationNavBarComponent
+
+INSERT_UPDATE AmwayApacMobileNavigationComponent;$contentCV[unique=true];uid[unique=true];name;wrapAfter;link(&componentRef);styleClass;navigationNode(&nodeRef);&componentRef
+;;MobileShopNavBarComponent;Mobile Shops Nav Bar Component;10;NavShopLink;;ShopNavNode;MobileShopNavBarComponent
+;;MobileBusinessCenterNavBarComponent;Mobile Business Center Nav Bar Component;10;NavBusinessCenterLink;;BusinessCenterNavNode;MobileBusinessCenterNavBarComponent
+;;MobileAboutAmwayNavBarComponent;Mobile About Amway Nav Bar Component;10;NavAboutAmwayLink;;AboutNavNode;MobileAboutAmwayNavBarComponent
+;;MobileEducationNavBarComponent;Mobile Education Nav Bar Component;10;NavEducationLink;;EducationNavNode;MobileEducationNavBarComponent
+
+INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink
+;;NavBarNutrition1SBComponent;Navigation Bar Nutrition SB 1 Component;NavBarNutrition1SBComponent;"/"
+;;NavBarNutrition2SBComponent;Navigation Bar Nutrition SB 2 Component;NavBarNutrition2SBComponent;"/"
+;;NavBarNutrition3SBComponent;Navigation Bar Nutrition SB 3 Component;NavBarNutrition3SBComponent;"/"
+;;NavBarNutrition4SBComponent;Navigation Bar Nutrition SB 4 Component;NavBarNutrition4SBComponent;"/"
+
+;;NavBarBeautySBComponent;Navigation Bar Beauty SB Component;NavBarBeautySBComponent;"/"
+
+;;NavBarBathAndBodySB1Component;Navigation Bar Bath and Body SB 1 Component;NavBarBathAndBodySB1Component;"/"
+;;NavBarBathAndBodySB2Component;Navigation Bar Bath and Body SB 2 Component;NavBarBathAndBodySB2Component;"/"
+;;NavBarBathAndBodySB3Component;Navigation Bar Bath and Body SB 3 Component;NavBarBathAndBodySB3Component;"/"
+;;NavBarBathAndBodySB4Component;Navigation Bar Bath and Body SB 4 Component;NavBarBathAndBodySB4Component;"/"
+
+;;NavBarHomeSB1Component;Navigation Bar Home SB 1 Component;NavBarHomeSB1Component;"/"
+;;NavBarHomeSB2Component;Navigation Bar Home SB 2 Component;NavBarHomeSB2Component;"/"
+;;NavBarHomeSB3Component;Navigation Bar Home SB 3 Component;NavBarHomeSB3Component;"/"
+;;NavBarHomeSB4Component;Navigation Bar Home SB 4 Component;NavBarHomeSB4Component;"/"
+
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow'];category(code,$productCV)
+
+;;NavShopLink;Navigation Bar- Shop Link;/;NavShopLink;NavShopLink;;;
+;;NavBusinessCenterLink;Navigation Bar- Business Center Link;/;NavBusinessCenterLink;NavBusinessCenterLink;;;
+;;NavAboutAmwayLink;Navigation Bar- About Amway Link;/;NavAboutAmwayLink;NavAboutAmwayLink;;;
+;;NavEducationLink;Navigation Bar- Education Link;/;NavEducationLink;NavEducationLink;;;
+
+;;NavShopNutritionLink;Navigation Bar- Shop- Nutrition Link;/;NavShopNutritionLink;NavShopNutritionLink;;;
+;;NavShopBeautyLink;Navigation Bar- Shop- Beauty Link;/;NavShopBeautyLink;NavShopBeautyLink;;;
+;;NavShopBathBodyLink;Navigation Bar- Shop- Bath and Body Link;/;NavShopBathBodyLink;NavShopBathBodyLink;;;
+;;NavhopHomeLink;Navigation Bar- Shop- Home Link;/;NavShopHomeLink;NavShopHomeLink;;;
+
+;;NavNutritionVitaminsLink;Navigation Bar- Vitamins Link;/category-landing-page;NavNutritionVitaminsLink;NavNutritionVitaminsLink;;;
+;;NavNutritionWeightLink;Navigation Bar- Weight Management Link;/category-landing-page;NavNutritionWeightLink;NavNutritionWeightLink;;;
+;;NavNutritionSportsLink;Navigation Bar- Sports Nutrion Link;/category-landing-page;NavNutritionSportsLink;NavNutritionSportsLink;;;
+;;NavNutritionEnergyLink;Navigation Bar- Energy Link;/category-landing-page;NavNutritionEnergyLink;NavNutritionEnergyLink;;;
+
+;;NavNutritionVitaminsBoneHealthLink;Navigation Bar- Vitamins- Bone Health Link;;NavNutritionVitaminsBoneHealthLink;NavNutritionVitaminsBoneHealthLink;;bone-health
+;;NavNutritionVitaminsChildrenLink;Navigation Bar- Vitamins- Children Link;;NavNutritionVitaminsChildrenLink;NavNutritionVitaminsChildrenLink;;childrens-vitamins
+;;NavNutritionVitaminsHeartHealthLink;Navigation Bar- Vitamins- Heart Health Link;;NavNutritionVitaminsHeartHealthLink;NavNutritionVitaminsHeartHealthLink;;heart-health
+;;NavNutritionVitaminsViewAllLink;Navigation Bar- Vitamins- View All Link;/;NavNutritionVitaminsViewAllLink;NavNutritionVitaminsViewAllLink;;
+
+;;NavNutritionWeightSupplementsLink;Navigation Bar- Weight- Supplements Link;;NavNutritionWeightSupplementsLink;NavNutritionWeightSupplementsLink;;supplements
+;;NavNutritionWeightBarLink;Navigation Bar- Weight- Bar Link;;NavNutritionWeightBarLink;NavNutritionWeightBarLink;;bar
+;;NavNutritionWeightShakesLink;Navigation Bar- Weight- Shakes Link;;NavNutritionWeightShakesLink;NavNutritionWeightShakesLink;;shakes
+;;NavNutritionWeightViewAllLink;Navigation Bar- Weight- View All Link;/;NavNutritionWeightViewAllLink;NavNutritionWeightViewAllLink;;
+
+;;NavNutritionSportsEnergizeLink;Navigation Bar- Sports- Energize Link;;NavNutritionSportsEnergizeLink;NavNutritionSportsEnergizeLink;;energize
+;;NavNutritionSportsHydrateLink;Navigation Bar- Sports- Hydrate Link;;NavNutritionSportsHydrateLink;NavNutritionSportsHydrateLink;;hydrate
+;;NavNutritionSportsNutriliteLink;Navigation Bar- Sports- Nutrilite Link;;NavNutritionSportsNutriliteLink;NavNutritionSportsNutriliteLink;;nutrilite-sports-nutrition
+;;NavNutritionSportsViewAllLink;Navigation Bar- Sports- View All Link;/;NavNutritionSportsViewAllLink;NavNutritionSportsViewAllLink;;
+
+;;NavNutritionEnergyKosherLink;Navigation Bar- Energy- Kosher Link;;NavNutritionEnergyKosherLink;NavNutritionEnergyKosherLink;;kosher
+;;NavNutritionEnergySugarFreeLink;Navigation Bar- Energy- Sugar Free Link;;NavNutritionEnergySugarFreeLink;NavNutritionEnergySugarFreeLink;;sugar-free
+;;NavNutritionEnergyLowCarbLink;Navigation Bar- Energy- Low Carb Link;;NavNutritionEnergyLowCarbLink;NavNutritionEnergyLowCarbLink;;low-carb
+;;NavNutritionEnergyViewAllLink;Navigation Bar- Energy- View All Link;/;NavNutritionEnergyViewAllLink;NavNutritionEnergyViewAllLink;;
+
+;;NavNutritionToolsAdviceSkincareLink;Navigation Bar- Nutrition- Tools and Advice Skincare Recommender Link;/;NavNutritionToolsAdviceSkincareLink;NavNutritionToolsAdviceSkincareLink;;
+;;NavNutritionToolsAdviceDittoLink;Navigation Bar- Nutrition- Tools and Advice Ditto Scheduled Link;/ditto;NavNutritionToolsAdviceDittoLink;NavNutritionToolsAdviceDittoLink;;
+
+
+;;NavBeautySkinCareLink;Navigation Bar- Beauty- Skin Care Link;/category-landing-page;NavBeautySkinCareLink;NavBeautySkinCareLink;;;
+;;NavBeautyColourLink;Navigation Bar- Beauty- Colour Link;/category-landing-page;NavBeautyColourLink;NavBeautyColourLink;;;
+;;NavBeautyMakeUpLink;Navigation Bar- Beauty- MakeUp Link;/category-landing-page;NavBeautyMakeUpLink;NavBeautyMakeUpLink;;;
+;;NavBeautyBeautyAccessoriesLink;Navigation Bar- Beauty- Beauty Accessories Link;/category-landing-page;NavBeautyBeautyAccessoriesLink;NavBeautyBeautyAccessoriesLink;;;
+
+;;NavBeautySkinCareAntiAgeingLink;Navigation Bar- Beauty- SkinCare- Anti Ageing Link;;NavBeautySkinCareAntiAgeingLink;NavBeautySkinCareAntiAgeingLink;;anti-ageing-solutions
+;;NavBeautySkinCareArtistryLink;Navigation Bar- Beauty- SkinCare- Artistry Link;;NavBeautySkinCareArtistryLink;NavBeautySkinCareArtistryLink;;artistry-special-care
+;;NavBeautySkinCareDailySkinCareLink;Navigation Bar- Beauty- SkinCare- Daily Skincare Link;;NavBeautySkinCareDailySkinCareLink;NavBeautySkinCareDailySkinCareLink;;daily-skincare
+;;NavBeautySkinCareViewAllLink;Navigation Bar- Beauty- SkinCare- View All Link;/;NavBeautySkinCareViewAllLink;NavBeautySkinCareViewAllLink;;
+
+;;NavBeautyColourApplicatorsLink;Navigation Bar- Beauty- Colour- Applicators Link;;NavBeautyColourApplicatorsLink;NavBeautyColourApplicatorsLink;;applicators-and-accessories
+;;NavBeautyColourEyeBrowsLink;Navigation Bar- Beauty- Colour- Eye Brows Link;;NavBeautyColourEyeBrowsLink;NavBeautyColourEyeBrowsLink;;eye-and-brows
+;;NavBeautyColourEyeCheeksLink;Navigation Bar- Beauty- Colour- Eye Cheeks Link;;NavBeautyColourEyeCheeksLink;NavBeautyColourEyeCheeksLink;;eye-and-cheeks
+;;NavBeautyColourViewAllLink;Navigation Bar- Beauty- Colour- View All Link;/;NavBeautyColourViewAllLink;NavBeautyColourViewAllLink;;
+
+;;NavBeautyMakeUpCheeksLink;Navigation Bar- Beauty- Makeup- Cheeks Link;;NavBeautyMakeUpCheeksLink;NavBeautyMakeUpCheeksLink;;cheeks
+;;NavBeautyMakeUpConcealersLink;Navigation Bar- Beauty- Makeup- Concealers Link;;NavBeautyMakeUpConcealersLink;NavBeautyMakeUpConcealersLink;;concealers
+;;NavBeautyMakeUpFoundationLink;Navigation Bar- Beauty- Makeup- Foundations Link;;NavBeautyMakeUpFoundationLink;NavBeautyMakeUpFoundationLink;;foundations-and-powders
+;;NavBeautyMakeUpViewAllLink;Navigation Bar- Beauty- Makeup- View All Link;/;NavBeautyMakeUpViewAllLink;NavBeautyMakeUpViewAllLink;;
+
+;;NavBeautyBeautyAccessoriesFacialCottonLink;Navigation Bar- Beauty- Beauty Accessories- Facial Cotton Link;;NavBeautyBeautyAccessoriesFacialCottonLink;NavBeautyBeautyAccessoriesFacialCottonLink;;facial-cotton
+;;NavBeautyBeautyAccessoriesBrushSetLink;Navigation Bar- Beauty- Beauty Accessories- Brush Set Link;;NavBeautyBeautyAccessoriesBrushSetLink;NavBeautyBeautyAccessoriesBrushSetLink;;brush-set
+;;NavBeautyBeautyAccessoriesPowderCompactLink;Navigation Bar- Beauty- Beauty Accessories- Powder Compact Link;;NavBeautyBeautyAccessoriesPowderCompactLink;NavBeautyBeautyAccessoriesPowderCompactLink;;powder-compact
+;;NavBeautyBeautyAccessoriesViewAllLink;Navigation Bar- Beauty- Beauty Accessories- View All Link;/;NavBeautyBeautyAccessoriesViewAllLink;NavBeautyBeautyAccessoriesViewAllLink;;
+
+;;NavBeautyToolsAdviceSkincareLink;Navigation Bar- Beauty- Tools and Advice Skincare Recommender Link;/;NavBeautyToolsAdviceSkincareLink;NavBeautyToolsAdviceSkincareLink;;
+;;NavBeautyToolsAdviceDittoLink;Navigation Bar- Beauty- Tools and Advice Ditto Scheduled Link;/;NavBeautyToolsAdviceDittoLink;NavBeautyToolsAdviceDittoLink;;
+
+;;NavBathAndBodyHairCareLink;Navigation Bar- Bath and Body- Hair Care Link;/category-landing-page;NavBathAndBodyHairCareLink;NavBathAndBodyHairCareLink;;;
+;;NavBathAndBodyBodyCareLink;Navigation Bar- Bath and Body- Body Care Link;/category-landing-page;NavBathAndBodyBodyCareLink;NavBathAndBodyBodyCareLink;;;
+;;NavBathAndBodyOralCareLink;Navigation Bar- Bath and Body- Oral Care Link;/category-landing-page;NavBathAndBodyOralCareLink;NavBathAndBodyOralCareLink;;;
+;;NavBathAndBodySunAndTanningLink;Navigation Bar- Bath and Body- Sun And Tanning Link;/category-landing-page;NavBathAndBodySunAndTanningLink;NavBathAndBodySunAndTanningLink;;;
+
+;;NavBathAndBodyHairCareConditionersLink;Navigation Bar- Bath and Body- Hair Care- Conditioners Link;;NavBathAndBodyHairCareConditionersLink;NavBathAndBodyHairCareConditionersLink;;conditioners
+;;NavBathAndBodyHairCareShampoosLink;Navigation Bar- Bath and Body- Hair Care- Shampoos Link;;NavBathAndBodyHairCareShampoosLink;NavBathAndBodyHairCareShampoosLink;;shampoos
+;;NavBathAndBodyHairCareStylingLink;Navigation Bar- Bath and Body- Hair Care- Styling and Treatments Link;;NavBathAndBodyHairCareStylingLink;NavBathAndBodyHairCareStylingLink;;styling-and-treatments
+;;NavBathAndBodyHairCareViewAllLink;Navigation Bar- Bath and Body- Hair Care- View All Link;/;NavBathAndBodyHairCareViewAllLink;NavBathAndBodyHairCareViewAllLink;;
+
+;;NavBathAndBodyBodyCareBodyWashLink;Navigation Bar- Bath and Body- Body Care- Body Wash Link;;NavBathAndBodyBodyCareBodyWashLink;NavBathAndBodyBodyCareBodyWashLink;;body-wash
+;;NavBathAndBodyBodyCareDeodorantsLink;Navigation Bar- Bath and Body- Body Care- Deodorants Link;;NavBathAndBodyBodyCareDeodorantsLink;NavBathAndBodyBodyCareDeodorantsLink;;deodorants
+;;NavBathAndBodyBodyCareLotionsLink;Navigation Bar- Bath and Body- Body Care- Lotions Link;;NavBathAndBodyBodyCareLotionsLink;NavBathAndBodyBodyCareLotionsLink;;lotions
+;;NavBathAndBodyBodyCareViewAllLink;Navigation Bar- Bath and Body- Body Care- View All Link;/;NavBathAndBodyBodyCareViewAllLink;NavBathAndBodyBodyCareViewAllLink;;
+
+;;NavBathAndBodyOralCareBreathSpraysLink;Navigation Bar- Bath and Body- Oral Care- Breath Sprays Link;;NavBathAndBodyOralCareBreathSpraysLink;NavBathAndBodyOralCareBreathSpraysLink;;breath-sprays
+;;NavBathAndBodyOralCareToothpastesLink;Navigation Bar- Bath and Body- Oral Care- Tooth Pastes Link;;NavBathAndBodyOralCareToothpastesLink;NavBathAndBodyOralCareToothpastesLink;;toothpastes
+;;NavBathAndBodyOralCareBrushesAndFlossLink;Navigation Bar- Bath and Body- Oral Care- Brushes & Floss Link;;NavBathAndBodyOralCareBrushesAndFlossLink;NavBathAndBodyOralCareBrushesAndFlossLink;;brushes-and-floss
+;;NavBathAndBodyOralCareViewAllLink;Navigation Bar- Bath and Body- Oral Care- View All Link;/;NavBathAndBodyOralCareViewAllLink;NavBathAndBodyOralCareViewAllLink;;
+
+;;NavBathAndBodySunAndTanningSunscreenLotionLink;Navigation Bar- Bath and Body- Sun and Tanning- Sunscreen Lotion Link;;NavBathAndBodySunAndTanningSunscreenLotionLink;NavBathAndBodySunAndTanningSunscreenLotionLink;;sunscreen-lotion
+;;NavBathAndBodySunAndTanningSelfTanMousseLink;Navigation Bar- Bath and Body- Sun and Tanning- Self Tan Mousse Link;;NavBathAndBodySunAndTanningSelfTanMousseLink;NavBathAndBodySunAndTanningSelfTanMousseLink;;self-tan-mousse
+;;NavBathAndBodySunAndTanningViewAllLink;Navigation Bar- Bath and Body- Sun and Tanning- View All Link;/;NavBathAndBodySunAndTanningViewAllLink;NavBathAndBodySunAndTanningViewAllLink;;
+
+;;NavBathAndBodyToolsAdviceQuickProductLink;Navigation Bar- BathAndBody- Tools and Advice Quick Product Link;/;NavBathAndBodyToolsAdviceQuickProductLink;NavBathAndBodyToolsAdviceQuickProductLink;;
+;;NavBathAndBodyToolsAdviceDittoScheduledLink;Navigation Bar- BathAndBody- Tools and Advice Ditto Scheduled Link;/;NavBathAndBodyToolsAdviceDittoScheduledLink;NavBathAndBodyToolsAdviceDittoScheduledLink;;
+
+;;NavHomeHouseHoldLink;Navigation Bar- Home- Household Hygiene Link;/category-landing-page;NavHomeHouseHoldLink;NavHomeHouseHoldLink;;;
+;;NavHomeLaundryLink;Navigation Bar- Home- Laundry Hygiene Link;/category-landing-page;NavHomeLaundryLink;NavHomeLaundryLink;;;
+;;NavHomeWaterTreatmentLink;Navigation Bar- Home- Water Treatment Hygiene Link;/category-landing-page;NavHomeWaterTreatmentLink;NavHomeWaterTreatmentLink;;;
+;;NavHomeCookwareLink;Navigation Bar- Home- Household Cookware Link;/category-landing-page;NavHomeCookwareLink;NavHomeCookwareLink;;;
+
+;;NavHomeHouseHoldKitchenCleanerLink;Navigation Bar- Home- Household- Kitchen Cleaner Link;;NavHomeHouseHoldKitchenCleanerLink;NavHomeHouseHoldKitchenCleanerLink;;kitchen-cleaner
+;;NavHomeHouseHoldGeneralCleaningLink;Navigation Bar- Home- Household- General Cleaning Link;;NavHomeHouseHoldGeneralCleaningLink;NavHomeHouseHoldGeneralCleaningLink;;general-cleaning
+;;NavHomeHouseHoldBathroomCleanerLink;Navigation Bar- Home- Household- Bathroom Cleaner Link;;NavHomeHouseHoldBathroomCleanerLink;NavHomeHouseHoldBathroomCleanerLink;;bathroom-cleaner
+;;NavHomeHouseHoldViewAllLink;Navigation Bar- Home- Household- View All Link;/;NavHomeHouseHoldViewAllLink;NavHomeHouseHoldViewAllLink;;
+
+;;NavHomeLaundryDetergentsLink;Navigation Bar- Home- Laundry- Detergents Link;;NavHomeLaundryDetergentsLink;NavHomeLaundryDetergentsLink;;detergents
+;;NavHomeLaundryTreatmentAndAdditivesLink;Navigation Bar- Home- Laundry- Treatment and Additives Link;;NavHomeLaundryTreatmentAndAdditivesLink;NavHomeLaundryTreatmentAndAdditivesLink;;treatment-and-additives
+;;NavHomeLaundryLotionsLink;Navigation Bar- Home- Laundry- Lotions Link;;NavHomeLaundryLotionsLink;NavHomeLaundryLotionsLink;;lotions
+;;NavHomeLaundryViewAllLink;Navigation Bar- Home- Laundry- View All Link;/;NavHomeLaundryViewAllLink;NavHomeLaundryViewAllLink;;
+
+;;NavHomeWaterTreatmentPurifiersLink;Navigation Bar- Home- Water treatment- Purifiers Link;;NavHomeWaterTreatmentPurifiersLink;NavHomeWaterTreatmentPurifiersLink;;purifiers
+;;NavHomeWaterTreatmentReplacementFiltersLink;Navigation Bar- Home- Water treatment- Replacement Filters Link;;NavHomeWaterTreatmentReplacementFiltersLink;NavHomeWaterTreatmentReplacementFiltersLink;;replacement-filters
+;;NavHomeWaterTreatmentViewAllLink;Navigation Bar- Home- Water treatment- View All Link;/;NavHomeWaterTreatmentViewAllLink;NavHomeWaterTreatmentViewAllLink;;
+
+;;NavHomeCookwareCutleryLink;Navigation Bar- Home- Cookware- Cutlery Link;;NavHomeCookwareCutleryLink;NavHomeCookwareCutleryLink;;cutlery
+;;NavHomeCookwarePansLink;Navigation Bar- Home- Cookware- Pans Link;;NavHomeCookwarePansLink;NavHomeCookwarePansLink;;pans
+;;NavHomeCookwareReplacementPartsLink;Navigation Bar- Home- Cookware- Replacement Parts Link;;NavHomeCookwareReplacementPartsLink;NavHomeCookwareReplacementPartsLink;;replacement-parts
+;;NavHomeCookwareViewAllLink;Navigation Bar- Home- Cookware- Replacement Parts Link;/;NavHomeCookwareViewAllLink;NavHomeCookwareViewAllLink;;
+
+;;NavHomeToolsAdviceQuickProductLink;Navigation Bar- Home- Tools and Advice Quick Product Link;/;NavHomeToolsAdviceQuickProductLink;NavHomeToolsAdviceQuickProductLink;;
+;;NavHomeToolsAdviceDittoScheduledLink;Navigation Bar- Home- Tools and Advice Ditto Scheduled Link;/;NavHomeToolsAdviceDittoScheduledLink;NavHomeToolsAdviceDittoScheduledLink;;
+
+########## Navigation Bar ##########
+
+
+########## CMS Navigation Nodes
+
+INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);&nodeRef;links(&linkRef);visible;nodeLink(&componentRef)
+;root;;root;;root;;;;
+
+##### footer section
+;FooterNode;;FooterNode;root;FooterNode;;true;;
+;FeatureBrandsNode;;FeatureBrandsNode;FooterNode;FeatureBrandsNode;FooterFeaturedBrandsNutrilleNavLink,FooterFeaturedBrandsAtistryNavLink,FooterFeaturedBrandsLegacyNavLink,FooterFeaturedBrandsXSNavLink,FooterFeaturedBrandsSatiniqueNavLink;true;FooterFeaturedBrandsNodeLink;
+;StartBusinessNode;;StartBusinessNode;FooterNode;StartBusinessNode;FooterStartYourBusinessStartYourBusinessNavLink,FooterStartYourBusinessExclusiveProdNavLink,FooterStartYourBusinessLowCostNavLink,FooterStartYourBusinessSuccessSupportNavLink,FooterStartYourBusinessOurLocationsNavLink,FooterStartYourBusinessEventsNavLink;true;FooterStartYourBusinessNodeLink;
+;ResourcesNode;;ResourcesNode;FooterNode;ResourcesNode;FooterResourcesCatalogsNavLink,FooterResourcesRibbonGiftCardsNavLink,FooterResourcesPartnerStoresNavLink,FooterResourcesAchieveMagazineNavLink,FooterResourcesIBOAssociationNavLink;true;FooterResourcesNodeLink;
+;SupportNode;;SupportNode;FooterNode;SupportNode;FooterSupportContactUsNavLink,FooterSupportReturnsNavLink,FooterSupportShippingAndDeliveryNavLink,FooterSupportSalesTaxNavLink,FooterSupportMagagingDittoNavLink;true;FooterSupportNodeLink;
+
+##### Account Navigation Section
+INSERT_UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];name;parent(uid, $contentCV);&nodeRef;links(&linkRef);visible;nodeLink(&componentRef)
+;;AccountNavNode;AccountNavNode;root;AccountNavNode;;true;;
+;;MyAccountNode;MyAccountNode;AccountNavNode;MyAccountNode;MyAccountNodeLink;true;;
+;;BillingShippingNode;BillingShippingNode;AccountNavNode;BillingShippingNode;BillingShippingNodeLink;true;;
+;;ShoppingListsNode;ShoppingListsNode;AccountNavNode;ShoppingListsNode;ShoppingListsNodeLink;true;;
+;;DittoNode;DittoNode;AccountNavNode;DittoNode;DittoNodeLink;true;;
+;;PersonalDetailsNode;PersonalDetailsNode;AccountNavNode;PersonalDetailsNode;PersonalDetailsNodeLink;true;;
+;;OrderHistoryNode;OrderHistoryNode;AccountNavNode;OrderHistoryNode;OrderHistoryNodeLink;true;;
+
+INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;children(uid, $contentCV);&nodeRef;links(&linkRef);visible;nodeLink(&componentRef);brandBanners(&componentRef);toolAdviceLinks(&componentRef)
+;ShopNavNode;;ShopNavNode;NutritionNavNode,BeautyNavNode,BathAndBodyNavNode,HomeNavNode;ShopNavNode;;true;NavShopLink;
+;BusinessCenterNavNode;;BusinessCenterNavNode;;BusinessCenterNavNode;;true;NavBusinessCenterLink;
+;AboutNavNode;;AboutNavNode;;AboutNavNode;;true;NavAboutAmwayLink;
+;EducationNavNode;;EducationNavNode;;EducationNavNode;;true;NavEducationLink;
+
+;NutritionNavNode;;NutritionNavNode;VitaminNutritionNavNode,WeightNutritionNavNode,SportsNutritionNavNode,EnergyNutritionNavNode;NutritionNavNode;;true;NavShopNutritionLink;NavBarNutrition1SBComponent,NavBarNutrition2SBComponent,NavBarNutrition3SBComponent,NavBarNutrition4SBComponent;NavNutritionToolsAdviceSkincareLink,NavNutritionToolsAdviceDittoLink
+;BeautyNavNode;;BeautyNavNode;SkinCareBeautyNavNode,ColourBeautyNavNode,MakeUpBeautyNavNode,BeautyAccessoriesBeautyNavNode;BeautyNavNode;;true;NavShopBeautyLink;NavBarBeautySBComponent;NavBeautyToolsAdviceSkincareLink,NavBeautyToolsAdviceDittoLink
+;BathAndBodyNavNode;;BathAndBodyNavNode;HairCareBathAndBodyNavNode,BodyCareBathAndBodyNavNode,OralCareBathAndBodyNavNode,SunAndTanningBathAndBodyNavNode;BathAndBodyNavNode;;true;NavShopBathBodyLink;NavBarBathAndBodySB1Component,NavBarBathAndBodySB2Component,NavBarBathAndBodySB3Component,NavBarBathAndBodySB4Component;NavBathAndBodyToolsAdviceQuickProductLink,NavBathAndBodyToolsAdviceDittoScheduledLink
+;HomeNavNode;;HomeNavNode;HouseHoldHomeNavNode,LaundryHomeNavNode,WaterTreatmentHomeNavNode,CookwareHomeNavNode;HomeNavNode;  ;true;NavShopHomeLink;NavBarHomeSB1Component,NavBarHomeSB2Component,NavBarHomeSB3Component,NavBarHomeSB4Component;NavHomeToolsAdviceQuickProductLink,NavHomeToolsAdviceDittoScheduledLink
+
+;VitaminNutritionNavNode;;VitaminNutritionNavNode;;VitaminNutritionNavNode; NavNutritionVitaminsBoneHealthLink,NavNutritionVitaminsChildrenLink,NavNutritionVitaminsHeartHealthLink,NavNutritionVitaminsViewAllLink ;true;NavNutritionVitaminsLink;
+;WeightNutritionNavNode;;WeightNutritionNavNode;;WeightNutritionNavNode; NavNutritionWeightSupplementsLink,NavNutritionWeightBarLink,NavNutritionWeightShakesLink,NavNutritionWeightViewAllLink ;true;NavNutritionWeightLink;
+;SportsNutritionNavNode;;SportsNutritionNavNode;;SportsNutritionNavNode; NavNutritionSportsEnergizeLink,NavNutritionSportsHydrateLink,NavNutritionSportsNutriliteLink,NavNutritionSportsViewAllLink ;true;NavNutritionSportsLink;
+;EnergyNutritionNavNode;;EnergyNutritionNavNode;;EnergyNutritionNavNode; NavNutritionEnergyKosherLink,NavNutritionEnergySugarFreeLink,NavNutritionEnergyLowCarbLink,NavNutritionEnergyViewAllLink ;true;NavNutritionEnergyLink;
+
+;SkinCareBeautyNavNode;;SkinCareBeautyNavNode;;SkinCareBeautyNavNode;NavBeautySkinCareAntiAgeingLink,NavBeautySkinCareArtistryLink,NavBeautySkinCareDailySkinCareLink,NavBeautySkinCareViewAllLink;true;NavBeautySkinCareLink;
+;ColourBeautyNavNode;;ColourBeautyNavNode;;ColourBeautyNavNode; NavBeautyColourApplicatorsLink,NavBeautyColourEyeBrowsLink,NavBeautyColourEyeCheeksLink,NavBeautyColourViewAllLink;true;NavBeautyColourLink;
+;MakeUpBeautyNavNode;;MakeUpBeautyNavNode;;MakeUpBeautyNavNode; NavBeautyMakeUpCheeksLink,NavBeautyMakeUpConcealersLink,NavBeautyMakeUpFoundationLink,NavBeautyMakeUpViewAllLink;true;NavBeautyMakeUpLink;
+;BeautyAccessoriesBeautyNavNode;;BeautyAccessoriesBeautyNavNode;;BeautyAccessoriesBeautyNavNode; NavBeautyBeautyAccessoriesFacialCottonLink,NavBeautyBeautyAccessoriesBrushSetLink,NavBeautyBeautyAccessoriesPowderCompactLink,NavBeautyBeautyAccessoriesViewAllLink;true;NavBeautyBeautyAccessoriesLink;
+
+;HairCareBathAndBodyNavNode;;HairCareBathAndBodyNavNode;;HairCareBathAndBodyNavNode;NavBathAndBodyHairCareConditionersLink,NavBathAndBodyHairCareShampoosLink,NavBathAndBodyHairCareStylingLink,NavBathAndBodyHairCareViewAllLink ;true;NavBathAndBodyHairCareLink;
+;BodyCareBathAndBodyNavNode;;BodyCareBathAndBodyNavNode;;BodyCareBathAndBodyNavNode;NavBathAndBodyBodyCareBodyWashLink,NavBathAndBodyBodyCareDeodorantsLink,NavBathAndBodyBodyCareLotionsLink,NavBathAndBodyBodyCareViewAllLink ;true;NavBathAndBodyBodyCareLink;
+;OralCareBathAndBodyNavNode;;OralCareBathAndBodyNavNode;;OralCareBathAndBodyNavNode; NavBathAndBodyOralCareBreathSpraysLink,NavBathAndBodyOralCareToothpastesLink,NavBathAndBodyOralCareBrushesAndFlossLink,NavBathAndBodyOralCareViewAllLink;true;NavBathAndBodyOralCareLink;
+;SunAndTanningBathAndBodyNavNode;;SunAndTanningBathAndBodyNavNode;;SunAndTanningBathAndBodyNavNode; NavBathAndBodySunAndTanningSunscreenLotionLink,NavBathAndBodySunAndTanningSelfTanMousseLink,NavBathAndBodySunAndTanningViewAllLink;true;NavBathAndBodySunAndTanningLink;
+
+;HouseHoldHomeNavNode;;HouseHoldHomeNavNode;;HouseHoldHomeNavNode;NavHomeHouseHoldKitchenCleanerLink,NavHomeHouseHoldGeneralCleaningLink,NavHomeHouseHoldBathroomCleanerLink,NavHomeHouseHoldViewAllLink ;true;NavHomeHouseHoldLink;
+;LaundryHomeNavNode;;LaundryHomeNavNode;;LaundryHomeNavNode; NavHomeLaundryDetergentsLink,NavHomeLaundryTreatmentAndAdditivesLink,NavHomeLaundryLotionsLink,NavHomeLaundryViewAllLink;true;NavHomeLaundryLink;
+;WaterTreatmentHomeNavNode;;WaterTreatmentHomeNavNode;;WaterTreatmentHomeNavNode;NavHomeWaterTreatmentPurifiersLink,NavHomeWaterTreatmentReplacementFiltersLink,NavHomeWaterTreatmentViewAllLink ;true;NavHomeWaterTreatmentLink;
+;CookwareHomeNavNode;;CookwareHomeNavNode;;CookwareHomeNavNode;NavHomeCookwareCutleryLink,NavHomeCookwarePansLink,NavHomeCookwareReplacementPartsLink,NavHomeCookwareViewAllLink ;true;NavHomeCookwareLink;
+
+########## CMS Navigation Nodes ##########
+
+
 ########## Home page section 1 carousel
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
@@ -327,274 +594,6 @@ INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];nam
 ########## Footer ##########
 
 
-########## CMS Navigation Nodes
-
-INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);&nodeRef;links(&linkRef);visible;nodeLink(&componentRef)
-;root;;root;;root;;;;
-
-##### footer section
-;FooterNode;;FooterNode;root;FooterNode;;true;;
-;FeatureBrandsNode;;FeatureBrandsNode;FooterNode;FeatureBrandsNode;FooterFeaturedBrandsNutrilleNavLink,FooterFeaturedBrandsAtistryNavLink,FooterFeaturedBrandsLegacyNavLink,FooterFeaturedBrandsXSNavLink,FooterFeaturedBrandsSatiniqueNavLink;true;FooterFeaturedBrandsNodeLink;
-;StartBusinessNode;;StartBusinessNode;FooterNode;StartBusinessNode;FooterStartYourBusinessStartYourBusinessNavLink,FooterStartYourBusinessExclusiveProdNavLink,FooterStartYourBusinessLowCostNavLink,FooterStartYourBusinessSuccessSupportNavLink,FooterStartYourBusinessOurLocationsNavLink,FooterStartYourBusinessEventsNavLink;true;FooterStartYourBusinessNodeLink;
-;ResourcesNode;;ResourcesNode;FooterNode;ResourcesNode;FooterResourcesCatalogsNavLink,FooterResourcesRibbonGiftCardsNavLink,FooterResourcesPartnerStoresNavLink,FooterResourcesAchieveMagazineNavLink,FooterResourcesIBOAssociationNavLink;true;FooterResourcesNodeLink;
-;SupportNode;;SupportNode;FooterNode;SupportNode;FooterSupportContactUsNavLink,FooterSupportReturnsNavLink,FooterSupportShippingAndDeliveryNavLink,FooterSupportSalesTaxNavLink,FooterSupportMagagingDittoNavLink;true;FooterSupportNodeLink;
-
-########## CMS Navigation Nodes ##########
-
-
-########### Country Selector
-
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid,$contentCV)
-;;CountrySelectorSlot; Country Selector Links;true;amwayapacCountrySelectionCollectionComponent
-
-INSERT_UPDATE AmwayApacImageLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&componentRef;
-;;amwayapacChinaComponent;China;/;amwayapacChinaComponent
-;;amwayapacMalaysiaComponent;Malaysia;/;amwayapacMalaysiaComponent
-;;amwayapacPhilippinesComponent;Philippines;/;amwayapacPhilippinesComponent
-;;amwayapacKoreaComponent;Korea;/;amwayapacKoreaComponent
-;;amwayapacThailandComponent;Thailand;/;amwayapacThailandComponent
-;;amwayapacSingaporeComponent;Singapore;/;amwayapacSingaporeComponent
-;;amwayapacJapanComponent;Japan;/;amwayapacJapanComponent
-
-INSERT_UPDATE AmwayApacCountrySelectionCollectionComponent;$contentCV[unique=true];uid[unique=true];name;currentCountry(uid,$contentCV);countryLinks(uid,$contentCV)
-;;amwayapacCountrySelectionCollectionComponent; Country Selector Collection Component;amwayapacJapanComponent;amwayapacChinaComponent,amwayapacMalaysiaComponent,amwayapacPhilippinesComponent,amwayapacKoreaComponent,amwayapacThailandComponent,amwayapacSingaporeComponent,amwayapacJapanComponent;
-
-
-################ Search Slot
-
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
-;;SearchBoxSlot; Search Box Slot;true;topSearchBoxPlaceHolder
-
-INSERT_UPDATE SearchBoxComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
-;;sideSearchBoxPlaceHolder; Top Search Box PlaceHolder;topSearchBoxPlaceHolder
-
-######## Header Account Navigation
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid,$contentCV)
-;;HeaderAccountNavigationSlot; Header Account Navigation Slot;true;accountNavigationCollectionComponent
-
-# CMS Navigation Nodes
-INSERT_UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];name;parent(uid, $contentCV);&nodeRef;links(&linkRef);visible;nodeLink(&componentRef)
-
-######## Account Navigation Section
-;;AccountNavNode;AccountNavNode;root;AccountNavNode;;true;;
-;;MyAccountNode;MyAccountNode;AccountNavNode;MyAccountNode;;true;;
-;;BillingShippingNode;BillingShippingNode;AccountNavNode;BillingShippingNode;;true;;
-;;ShoppingListsNode;ShoppingListsNode;AccountNavNode;ShoppingListsNode;;true;;
-;;DittoNode;DittoNode;AccountNavNode;DittoNode;;true;;
-;;PersonalDetailsNode;PersonalDetailsNode;AccountNavNode;PersonalDetailsNode;;true;;
-;;OrderHistoryNode;OrderHistoryNode;AccountNavNode;OrderHistoryNode;;true;;
-
-INSERT_UPDATE AccountNavigationComponent;$contentCV[unique=true];uid[unique=true];navigationNode(&nodeRef);&componentRef
-;;myAccountNavigationComponent;MyAccountNode;myAccountNavigationComponent
-;;billingShippingNavigationcomponent;BillingShippingNode;billingShippingNavigationComponent
-;;shoppingListsNavigationComponent;ShoppingListsNode;shoppingListsNavigationComponent
-;;dittoNavigationComponent;DittoNode;dittoNavigationComponent
-;;personalDetailsNavigationComponent;PersonalDetailsNode;personalDetailsNavigationComponent
-;;orderHistoryNavigationComponent;OrderHistoryNode;orderHistoryNavigationComponent
-
-INSERT_UPDATE AccountNavigationCollectionComponent;$contentCV[unique=true];uid[unique=true];components(uid,$contentCV)
-;;accountNavigationCollectionComponent;myAccountNavigationComponent,billingShippingNavigationcomponent,shoppingListsNavigationComponent,dittoNavigationComponent,personalDetailsNavigationComponent,orderHistoryNavigationComponent;
-
-
-INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;target(code)[default='sameWindow'];&componentRef
-;;MyAccountNodeLink; My Account Navigation Link;/;MyAccountNodeLink;;MyAccountNodeLink;
-;;BillingShippingNodeLink; Billing Shipping Navigation Link;/;BillingShippingNodeLink;;BillingShippingNodeLink;
-;;ShoppingListsNodeLink; Shopping Lists Navigation Link;/shopping-lists/all;ShoppingListsNodeLink;;ShoppingListsNodeLink;
-;;DittoNodeLink; Ditto Navigation Link;/;DittoNodeLink;;DittoNodeLink;
-;;PersonalDetailsNodeLink; Personal Details Link;/;PersonalDetailsNodeLink;;PersonalDetailsNodeLink;
-;;OrderHistoryNodeLink; Order History Link;/;OrderHistoryNodeLink;;OrderHistoryNodeLink;
-
-#NavigationBars
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
-;;NavigationBarSlot;NavigationBarSlot-Homepage;true;refNavigation1,refNavigation2,refNavigation3,refNavigation4
-;;MobileNavigationBarSlot;MobileNavigationBarSlot-Homepage;true;refMobileNavigation1,refMobileNavigation2,refMobileNavigation3,refMobileNavigation4
-
-# Navigation Bar Component
-INSERT_UPDATE NavigationBarComponent;$contentCV[unique=true];uid[unique=true];name;wrapAfter;link(uid, $contentCV);styleClass;navigationNode(&nodeRef);&componentRef
-;;ShopNavBarComponent;Shops Nav Bar Component;10;Nav_ShopLink;;ShopNavNode;refNavigation1
-;;BusinessCenterNavBarComponent;Business Center Nav Bar Component;10;Nav_BusinessCenterLink;;BusinessCenterNavNode;refNavigation2
-;;AboutAmwayNavBarComponent;About Amway Nav Bar Component;10;Nav_AboutAmwayLink;;AboutNavNode;refNavigation3
-;;EducationNavBarComponent;Education Nav Bar Component;10;Nav_EducationLink;;EducationNavNode;refNavigation4
-
-INSERT_UPDATE AmwayApacMobileNavigationComponent;$contentCV[unique=true];uid[unique=true];name;wrapAfter;link(uid, $contentCV);styleClass;navigationNode(&nodeRef);&componentRef
-;;MobileShopNavBarComponent;Mobile Shops Nav Bar Component;10;Nav_ShopLink;;ShopNavNode;refMobileNavigation1
-;;MobileBusinessCenterNavBarComponent;Mobile Business Center Nav Bar Component;10;Nav_BusinessCenterLink;;BusinessCenterNavNode;refMobileNavigation2
-;;MobileAboutAmwayNavBarComponent;Mobile About Amway Nav Bar Component;10;Nav_AboutAmwayLink;;AboutNavNode;refMobileNavigation3
-;;MobileEducationNavBarComponent;Mobile Education Nav Bar Component;10;Nav_EducationLink;;EducationNavNode;refMobileNavigation4
-
-
-INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;children(uid, $contentCV);&nodeRef;links(&linkRef);visible;nodeLink(&componentRef)
-;ShopNavNode;;ShopNavNode;NutritionNavNode,BeautyNavNode,BathAndBodyNavNode,HomeNavNode;ShopNavNode;;true;;
-;BusinessCenterNavNode;;BusinessCenterNavNode;;BusinessCenterNavNode;;true;;
-;AboutNavNode;;AboutNavNode;;AboutNavNode;;true;;
-;EducationNavNode;;EducationNavNode;;EducationNavNode;;true;;
-
-;NutritionNavNode;;NutritionNavNode;VitaminNutritionNavNode,WeightNutritionNavNode,SportsNutritionNavNode,EnergyNutritionNavNode;NutritionNavNode;;true;;
-;BeautyNavNode;;BeautyNavNode;SkinCareBeautyNavNode,ColourBeautyNavNode,MakeUpBeautyNavNode,BeautyAccessoriesBeautyNavNode;BeautyNavNode;;true;;
-;BathAndBodyNavNode;;BathAndBodyNavNode;HairCareBathAndBodyNavNode,BodyCareBathAndBodyNavNode,OralCareBathAndBodyNavNode,SunAndTanningBathAndBodyNavNode;BathAndBodyNavNode;;true;;
-;HomeNavNode;;HomeNavNode;HouseHoldHomeNavNode,LaundryHomeNavNode,WaterTreatmentHomeNavNode,CookwareHomeNavNode;HomeNavNode;  ;true;;
-
-;VitaminNutritionNavNode;;VitaminNutritionNavNode;;VitaminNutritionNavNode; Nav_Nutrition_Vitamins_BoneHealthLink,Nav_Nutrition_Vitamins_ChildrenLink,Nav_Nutrition_Vitamins_HeartHealthLink,Nav_Nutrition_Vitamins_ViewAllLink ;true;;
-;WeightNutritionNavNode;;WeightNutritionNavNode;;WeightNutritionNavNode; Nav_Nutrition_Weight_SupplementsLink,Nav_Nutrition_Weight_BarLink,Nav_Nutrition_Weight_ShakesLink,Nav_Nutrition_Weight_ViewAllLink ;true;;
-;SportsNutritionNavNode;;SportsNutritionNavNode;;SportsNutritionNavNode; Nav_Nutrition_Sports_EnergizeLink,Nav_Nutrition_Sports_HydrateLink,Nav_Nutrition_Sports_NutriliteLink,Nav_Nutrition_Sports_ViewAllLink ;true;;
-;EnergyNutritionNavNode;;EnergyNutritionNavNode;;EnergyNutritionNavNode; Nav_Nutrition_Energy_KosherLink,Nav_Nutrition_Energy_SugarFreeLink,Nav_Nutrition_Energy_LowCarbLink,Nav_Nutrition_Energy_ViewAllLink ;true;;
-
-;SkinCareBeautyNavNode;;SkinCareBeautyNavNode;;SkinCareBeautyNavNode;Nav_Beauty_SkinCare_AntiAgeingLink,Nav_Beauty_SkinCare_ArtistryLink,Nav_Beauty_SkinCare_DailySkinCareLink,Nav_Beauty_SkinCare_ViewAllLink;true;;
-;ColourBeautyNavNode;;ColourBeautyNavNode;;ColourBeautyNavNode; Nav_Beauty_Colour_ApplicatorsLink,Nav_Beauty_Colour_EyeBrowsLink,Nav_Beauty_Colour_EyeCheeksLink,Nav_Beauty_Colour_ViewAllLink;true;;
-;MakeUpBeautyNavNode;;MakeUpBeautyNavNode;;MakeUpBeautyNavNode; Nav_Beauty_MakeUp_CheeksLink,Nav_Beauty_MakeUp_ConcealersLink,Nav_Beauty_MakeUp_FoundationLink,Nav_Beauty_MakeUp_ViewAllLink;true;;
-;BeautyAccessoriesBeautyNavNode;;BeautyAccessoriesBeautyNavNode;;BeautyAccessoriesBeautyNavNode; Nav_Beauty_BeautyAccessories_FacialCottonLink,Nav_Beauty_BeautyAccessories_BrushSetLink,Nav_Beauty_BeautyAccessories_PowderCompactLink,Nav_Beauty_BeautyAccessories_ViewAllLink;true;;
-
-;HairCareBathAndBodyNavNode;;HairCareBathAndBodyNavNode;;HairCareBathAndBodyNavNode;Nav_BathAndBody_HairCare_ConditionersLink,Nav_BathAndBody_HairCare_ShampoosLink,Nav_BathAndBody_HairCare_StylingLink,Nav_BathAndBody_HairCare_ViewAllLink ;true;;
-;BodyCareBathAndBodyNavNode;;BodyCareBathAndBodyNavNode;;BodyCareBathAndBodyNavNode;Nav_BathAndBody_BodyCare_BodyWashLink,Nav_BathAndBody_BodyCare_DeodorantsLink,Nav_BathAndBody_BodyCare_LotionsLink,Nav_BathAndBody_BodyCare_ViewAllLink ;true;;
-;OralCareBathAndBodyNavNode;;OralCareBathAndBodyNavNode;;OralCareBathAndBodyNavNode; Nav_BathAndBody_OralCare_BreathSpraysLink,Nav_BathAndBody_OralCare_ToothpastesLink,Nav_BathAndBody_OralCare_BrushesAndFlossLink,Nav_BathAndBody_OralCare_ViewAllLink;true;;
-;SunAndTanningBathAndBodyNavNode;;SunAndTanningBathAndBodyNavNode;;SunAndTanningBathAndBodyNavNode; Nav_BathAndBody_SunAndTanning_SunscreenLotionLink,Nav_BathAndBody_SunAndTanning_SelfTanMousseLink,Nav_BathAndBody_SunAndTanning_ViewAllLink;true;;
-
-;HouseHoldHomeNavNode;;HouseHoldHomeNavNode;;HouseHoldHomeNavNode;Nav_Home_HouseHold_KitchenCleanerLink,Nav_Home_HouseHold_GeneralCleaningLink,Nav_Home_HouseHold_BathroomCleanerLink,Nav_Home_HouseHold_ViewAllLink ;true;;
-;LaundryHomeNavNode;;LaundryHomeNavNode;;LaundryHomeNavNode; Nav_Home_Laundry_DetergentsLink,Nav_Home_Laundry_TreatmentAndAdditivesLink,Nav_Home_Laundry_LotionsLink,Nav_Home_Laundry_ViewAllLink;true;;
-;WaterTreatmentHomeNavNode;;WaterTreatmentHomeNavNode;;WaterTreatmentHomeNavNode;Nav_Home_WaterTreatment_PurifiersLink,Nav_Home_WaterTreatment_ReplacementFiltersLink,Nav_Home_WaterTreatment_ViewAllLink ;true;;
-;CookwareHomeNavNode;;CookwareHomeNavNode;;CookwareHomeNavNode;Nav_Home_Cookware_CutleryLink,Nav_Home_Cookware_PansLink,Nav_Home_Cookware_ReplacementPartsLink,Nav_Home_Cookware_ViewAllLink ;true;;
-
-INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink
-;;NavBarNutrition1SBComponent;Navigation Bar Nutrition SB 1 Component;NavBarNutrition1SBComponent;"/"
-;;NavBarNutrition2SBComponent;Navigation Bar Nutrition SB 2 Component;NavBarNutrition2SBComponent;"/"
-;;NavBarNutrition3SBComponent;Navigation Bar Nutrition SB 3 Component;NavBarNutrition3SBComponent;"/"
-;;NavBarNutrition4SBComponent;Navigation Bar Nutrition SB 4 Component;NavBarNutrition4SBComponent;"/"
-
-;;NavBarBeautySBComponent;Navigation Bar Beauty SB Component;NavBarBeautySBComponent;"/"
-
-;;NavBarBathAndBodySB1Component;Navigation Bar Bath and Body SB 1 Component;NavBarBathAndBodySB1Component;"/"
-;;NavBarBathAndBodySB2Component;Navigation Bar Bath and Body SB 2 Component;NavBarBathAndBodySB2Component;"/"
-;;NavBarBathAndBodySB3Component;Navigation Bar Bath and Body SB 3 Component;NavBarBathAndBodySB3Component;"/"
-;;NavBarBathAndBodySB4Component;Navigation Bar Bath and Body SB 4 Component;NavBarBathAndBodySB4Component;"/"
-
-;;NavBarHomeSB1Component;Navigation Bar Home SB 1 Component;NavBarHomeSB1Component;"/"
-;;NavBarHomeSB2Component;Navigation Bar Home SB 2 Component;NavBarHomeSB2Component;"/"
-;;NavBarHomeSB3Component;Navigation Bar Home SB 3 Component;NavBarHomeSB3Component;"/"
-;;NavBarHomeSB4Component;Navigation Bar Home SB 4 Component;NavBarHomeSB4Component;"/"
-
-INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow'];category(code,$productCV)
-
-;;Nav_ShopLink;Navigation Bar- Shop Link;/;Nav_ShopLink;Nav_ShopLink;;;
-;;Nav_BusinessCenterLink;Navigation Bar- Business Center Link;/;Nav_BusinessCenterLink;Nav_BusinessCenterLink;;;
-;;Nav_AboutAmwayLink;Navigation Bar- About Amway Link;/;Nav_AboutAmwayLink;Nav_AboutAmwayLink;;;
-;;Nav_EducationLink;Navigation Bar- Education Link;/;Nav_EducationLink;Nav_EducationLink;;;
-
-;;Nav_Shop_NutritionLink;Navigation Bar- Shop- Nutrition Link;/;Nav_Shop_NutritionLink;Nav_Shop_NutritionLink;;;
-;;Nav_Shop_BeautyLink;Navigation Bar- Shop- Beauty Link;/;Nav_Shop_BeautyLink;Nav_Shop_BeautyLink;;;
-;;Nav_Shop_BathBodyLink;Navigation Bar- Shop- Bath and Body Link;/;Nav_Shop_BathBodyLink;Nav_Shop_BathBodyLink;;;
-;;Nav_Shop_HomeLink;Navigation Bar- Shop- Home Link;/;Nav_Shop_HomeLink;Nav_Shop_HomeLink;;;
-
-;;Nav_Nutrition_VitaminsLink;Navigation Bar- Vitamins Link;/category-landing-page;Nav_Nutrition_VitaminsLink;Nav_Nutrition_VitaminsLink;;;
-;;Nav_Nutrition_WeightLink;Navigation Bar- Weight Management Link;/category-landing-page;Nav_Nutrition_WeightLink;Nav_Nutrition_WeightLink;;;
-;;Nav_Nutrition_SportsLink;Navigation Bar- Sports Nutrion Link;/category-landing-page;Nav_Nutrition_SportsLink;Nav_Nutrition_SportsLink;;;
-;;Nav_Nutrition_EnergyLink;Navigation Bar- Energy Link;/category-landing-page;Nav_Nutrition_EnergyLink;Nav_Nutrition_EnergyLink;;;
-
-;;Nav_Nutrition_Vitamins_BoneHealthLink;Navigation Bar- Vitamins- Bone Health Link;;Nav_Nutrition_Vitamins_BoneHealthLink;Nav_Nutrition_Vitamins_BoneHealthLink;;bone-health
-;;Nav_Nutrition_Vitamins_ChildrenLink;Navigation Bar- Vitamins- Children Link;;Nav_Nutrition_Vitamins_ChildrenLink;Nav_Nutrition_Vitamins_ChildrenLink;;childrens-vitamins
-;;Nav_Nutrition_Vitamins_HeartHealthLink;Navigation Bar- Vitamins- Heart Health Link;;Nav_Nutrition_Vitamins_HeartHealthLink;Nav_Nutrition_Vitamins_HeartHealthLink;;heart-health
-;;Nav_Nutrition_Vitamins_ViewAllLink;Navigation Bar- Vitamins- View All Link;/;Nav_Nutrition_Vitamins_ViewAllLink;Nav_Nutrition_Vitamins_ViewAllLink;;
-
-;;Nav_Nutrition_Weight_SupplementsLink;Navigation Bar- Weight- Supplements Link;;Nav_Nutrition_Weight_SupplementsLink;Nav_Nutrition_Weight_SupplementsLink;;supplements
-;;Nav_Nutrition_Weight_BarLink;Navigation Bar- Weight- Bar Link;;Nav_Nutrition_Weight_BarLink;Nav_Nutrition_Weight_BarLink;;bar
-;;Nav_Nutrition_Weight_ShakesLink;Navigation Bar- Weight- Shakes Link;;Nav_Nutrition_Weight_ShakesLink;Nav_Nutrition_Weight_ShakesLink;;shakes
-;;Nav_Nutrition_Weight_ViewAllLink;Navigation Bar- Weight- View All Link;/;Nav_Nutrition_Weight_ViewAllLink;Nav_Nutrition_Weight_ViewAllLink;;
-
-;;Nav_Nutrition_Sports_EnergizeLink;Navigation Bar- Sports- Energize Link;;Nav_Nutrition_Sports_EnergizeLink;Nav_Nutrition_Sports_EnergizeLink;;energize
-;;Nav_Nutrition_Sports_HydrateLink;Navigation Bar- Sports- Hydrate Link;;Nav_Nutrition_Sports_HydrateLink;Nav_Nutrition_Sports_HydrateLink;;hydrate
-;;Nav_Nutrition_Sports_NutriliteLink;Navigation Bar- Sports- Nutrilite Link;;Nav_Nutrition_Sports_NutriliteLink;Nav_Nutrition_Sports_NutriliteLink;;nutrilite-sports-nutrition
-;;Nav_Nutrition_Sports_ViewAllLink;Navigation Bar- Sports- View All Link;/;Nav_Nutrition_Sports_ViewAllLink;Nav_Nutrition_Sports_ViewAllLink;;
-
-;;Nav_Nutrition_Energy_KosherLink;Navigation Bar- Energy- Kosher Link;;Nav_Nutrition_Energy_KosherLink;Nav_Nutrition_Energy_KosherLink;;kosher
-;;Nav_Nutrition_Energy_SugarFreeLink;Navigation Bar- Energy- Sugar Free Link;;Nav_Nutrition_Energy_SugarFreeLink;Nav_Nutrition_Energy_SugarFreeLink;;sugar-free
-;;Nav_Nutrition_Energy_LowCarbLink;Navigation Bar- Energy- Low Carb Link;;Nav_Nutrition_Energy_LowCarbLink;Nav_Nutrition_Energy_LowCarbLink;;low-carb
-;;Nav_Nutrition_Energy_ViewAllLink;Navigation Bar- Energy- View All Link;/;Nav_Nutrition_Energy_ViewAllLink;Nav_Nutrition_Energy_ViewAllLink;;
-
-;;Nav_Nutrition_ToolsAdvice_SkincareLink;Navigation Bar- Nutrition- Tools and Advice Skincare Recommender Link;/;Nav_Nutrition_ToolsAdvice_SkincareLink;Nav_Nutrition_ToolsAdvice_SkincareLink;;
-;;Nav_Nutrition_ToolsAdvice_DittoLink;Navigation Bar- Nutrition- Tools and Advice Ditto Scheduled Link;/ditto;Nav_Nutrition_ToolsAdvice_DittoLink;Nav_Nutrition_ToolsAdvice_DittoLink;;
-
-
-;;Nav_Beauty_SkinCareLink;Navigation Bar- Beauty- Skin Care Link;/category-landing-page;Nav_Beauty_SkinCareLink;Nav_Beauty_SkinCareLink;;;
-;;Nav_Beauty_ColourLink;Navigation Bar- Beauty- Colour Link;/category-landing-page;Nav_Beauty_ColourLink;Nav_Beauty_ColourLink;;;
-;;Nav_Beauty_MakeUpLink;Navigation Bar- Beauty- MakeUp Link;/category-landing-page;Nav_Beauty_MakeUpLink;Nav_Beauty_MakeUpLink;;;
-;;Nav_Beauty_BeautyAccessoriesLink;Navigation Bar- Beauty- Beauty Accessories Link;/category-landing-page;Nav_Beauty_BeautyAccessoriesLink;Nav_Beauty_BeautyAccessoriesLink;;;
-
-;;Nav_Beauty_SkinCare_AntiAgeingLink;Navigation Bar- Beauty- SkinCare- Anti Ageing Link;;Nav_Beauty_SkinCare_AntiAgeingLink;Nav_Beauty_SkinCare_AntiAgeingLink;;anti-ageing-solutions
-;;Nav_Beauty_SkinCare_ArtistryLink;Navigation Bar- Beauty- SkinCare- Artistry Link;;Nav_Beauty_SkinCare_ArtistryLink;Nav_Beauty_SkinCare_ArtistryLink;;artistry-special-care
-;;Nav_Beauty_SkinCare_DailySkinCareLink;Navigation Bar- Beauty- SkinCare- Daily Skincare Link;;Nav_Beauty_SkinCare_DailySkinCareLink;Nav_Beauty_SkinCare_DailySkinCareLink;;daily-skincare
-;;Nav_Beauty_SkinCare_ViewAllLink;Navigation Bar- Beauty- SkinCare- View All Link;/;Nav_Beauty_SkinCare_ViewAllLink;Nav_Beauty_SkinCare_ViewAllLink;;
-
-;;Nav_Beauty_Colour_ApplicatorsLink;Navigation Bar- Beauty- Colour- Applicators Link;;Nav_Beauty_Colour_ApplicatorsLink;Nav_Beauty_Colour_ApplicatorsLink;;applicators-and-accessories
-;;Nav_Beauty_Colour_EyeBrowsLink;Navigation Bar- Beauty- Colour- Eye Brows Link;;Nav_Beauty_Colour_EyeBrowsLink;Nav_Beauty_Colour_EyeBrowsLink;;eye-and-brows
-;;Nav_Beauty_Colour_EyeCheeksLink;Navigation Bar- Beauty- Colour- Eye Cheeks Link;;Nav_Beauty_Colour_EyeCheeksLink;Nav_Beauty_Colour_EyeCheeksLink;;eye-and-cheeks
-;;Nav_Beauty_Colour_ViewAllLink;Navigation Bar- Beauty- Colour- View All Link;/;Nav_Beauty_Colour_ViewAllLink;Nav_Beauty_Colour_ViewAllLink;;
-
-;;Nav_Beauty_MakeUp_CheeksLink;Navigation Bar- Beauty- Makeup- Cheeks Link;;Nav_Beauty_MakeUp_CheeksLink;Nav_Beauty_MakeUp_CheeksLink;;cheeks
-;;Nav_Beauty_MakeUp_ConcealersLink;Navigation Bar- Beauty- Makeup- Concealers Link;;Nav_Beauty_MakeUp_ConcealersLink;Nav_Beauty_MakeUp_ConcealersLink;;concealers
-;;Nav_Beauty_MakeUp_FoundationLink;Navigation Bar- Beauty- Makeup- Foundations Link;;Nav_Beauty_MakeUp_FoundationLink;Nav_Beauty_MakeUp_FoundationLink;;foundations-and-powders
-;;Nav_Beauty_MakeUp_ViewAllLink;Navigation Bar- Beauty- Makeup- View All Link;/;Nav_Beauty_MakeUp_ViewAllLink;Nav_Beauty_MakeUp_ViewAllLink;;
-
-;;Nav_Beauty_BeautyAccessories_FacialCottonLink;Navigation Bar- Beauty- Beauty Accessories- Facial Cotton Link;;Nav_Beauty_BeautyAccessories_FacialCottonLink;Nav_Beauty_BeautyAccessories_FacialCottonLink;;facial-cotton
-;;Nav_Beauty_BeautyAccessories_BrushSetLink;Navigation Bar- Beauty- Beauty Accessories- Brush Set Link;;Nav_Beauty_BeautyAccessories_BrushSetLink;Nav_Beauty_BeautyAccessories_BrushSetLink;;brush-set
-;;Nav_Beauty_BeautyAccessories_PowderCompactLink;Navigation Bar- Beauty- Beauty Accessories- Powder Compact Link;;Nav_Beauty_BeautyAccessories_PowderCompactLink;Nav_Beauty_BeautyAccessories_PowderCompactLink;;powder-compact
-;;Nav_Beauty_BeautyAccessories_ViewAllLink;Navigation Bar- Beauty- Beauty Accessories- View All Link;/;Nav_Beauty_BeautyAccessories_ViewAllLink;Nav_Beauty_BeautyAccessories_ViewAllLink;;
-
-;;Nav_Beauty_ToolsAdvice_SkincareLink;Navigation Bar- Beauty- Tools and Advice Skincare Recommender Link;/;Nav_Beauty_ToolsAdvice_SkincareLink;Nav_Beauty_ToolsAdvice_SkincareLink;;
-;;Nav_Beauty_ToolsAdvice_DittoLink;Navigation Bar- Beauty- Tools and Advice Ditto Scheduled Link;/;Nav_Beauty_ToolsAdvice_DittoLink;Nav_Beauty_ToolsAdvice_DittoLink;;
-
-;;Nav_BathAndBody_HairCareLink;Navigation Bar- Bath and Body- Hair Care Link;/category-landing-page;Nav_BathAndBody_HairCareLink;Nav_BathAndBody_HairCareLink;;;
-;;Nav_BathAndBody_BodyCareLink;Navigation Bar- Bath and Body- Body Care Link;/category-landing-page;Nav_BathAndBody_BodyCareLink;Nav_BathAndBody_BodyCareLink;;;
-;;Nav_BathAndBody_OralCareLink;Navigation Bar- Bath and Body- Oral Care Link;/category-landing-page;Nav_BathAndBody_OralCareLink;Nav_BathAndBody_OralCareLink;;;
-;;Nav_BathAndBody_SunAndTanningLink;Navigation Bar- Bath and Body- Sun And Tanning Link;/category-landing-page;Nav_BathAndBody_SunAndTanningLink;Nav_BathAndBody_SunAndTanningLink;;;
-
-;;Nav_BathAndBody_HairCare_ConditionersLink;Navigation Bar- Bath and Body- Hair Care- Conditioners Link;;Nav_BathAndBody_HairCare_ConditionersLink;Nav_BathAndBody_HairCare_ConditionersLink;;conditioners
-;;Nav_BathAndBody_HairCare_ShampoosLink;Navigation Bar- Bath and Body- Hair Care- Shampoos Link;;Nav_BathAndBody_HairCare_ShampoosLink;Nav_BathAndBody_HairCare_ShampoosLink;;shampoos
-;;Nav_BathAndBody_HairCare_StylingLink;Navigation Bar- Bath and Body- Hair Care- Styling and Treatments Link;;Nav_BathAndBody_HairCare_StylingLink;Nav_BathAndBody_HairCare_StylingLink;;styling-and-treatments
-;;Nav_BathAndBody_HairCare_ViewAllLink;Navigation Bar- Bath and Body- Hair Care- View All Link;/;Nav_BathAndBody_HairCare_ViewAllLink;Nav_BathAndBody_HairCare_ViewAllLink;;
-
-;;Nav_BathAndBody_BodyCare_BodyWashLink;Navigation Bar- Bath and Body- Body Care- Body Wash Link;;Nav_BathAndBody_BodyCare_BodyWashLink;Nav_BathAndBody_BodyCare_BodyWashLink;;body-wash
-;;Nav_BathAndBody_BodyCare_DeodorantsLink;Navigation Bar- Bath and Body- Body Care- Deodorants Link;;Nav_BathAndBody_BodyCare_DeodorantsLink;Nav_BathAndBody_BodyCare_DeodorantsLink;;deodorants
-;;Nav_BathAndBody_BodyCare_LotionsLink;Navigation Bar- Bath and Body- Body Care- Lotions Link;;Nav_BathAndBody_BodyCare_LotionsLink;Nav_BathAndBody_BodyCare_LotionsLink;;lotions
-;;Nav_BathAndBody_BodyCare_ViewAllLink;Navigation Bar- Bath and Body- Body Care- View All Link;/;Nav_BathAndBody_BodyCare_ViewAllLink;Nav_BathAndBody_BodyCare_ViewAllLink;;
-
-;;Nav_BathAndBody_OralCare_BreathSpraysLink;Navigation Bar- Bath and Body- Oral Care- Breath Sprays Link;;Nav_BathAndBody_OralCare_BreathSpraysLink;Nav_BathAndBody_OralCare_BreathSpraysLink;;breath-sprays
-;;Nav_BathAndBody_OralCare_ToothpastesLink;Navigation Bar- Bath and Body- Oral Care- Tooth Pastes Link;;Nav_BathAndBody_OralCare_ToothpastesLink;Nav_BathAndBody_OralCare_ToothpastesLink;;toothpastes
-;;Nav_BathAndBody_OralCare_BrushesAndFlossLink;Navigation Bar- Bath and Body- Oral Care- Brushes & Floss Link;;Nav_BathAndBody_OralCare_BrushesAndFlossLink;Nav_BathAndBody_OralCare_BrushesAndFlossLink;;brushes-and-floss
-;;Nav_BathAndBody_OralCare_ViewAllLink;Navigation Bar- Bath and Body- Oral Care- View All Link;/;Nav_BathAndBody_OralCare_ViewAllLink;Nav_BathAndBody_OralCare_ViewAllLink;;
-
-;;Nav_BathAndBody_SunAndTanning_SunscreenLotionLink;Navigation Bar- Bath and Body- Sun and Tanning- Sunscreen Lotion Link;;Nav_BathAndBody_SunAndTanning_SunscreenLotionLink;Nav_BathAndBody_SunAndTanning_SunscreenLotionLink;;sunscreen-lotion
-;;Nav_BathAndBody_SunAndTanning_SelfTanMousseLink;Navigation Bar- Bath and Body- Sun and Tanning- Self Tan Mousse Link;;Nav_BathAndBody_SunAndTanning_SelfTanMousseLink;Nav_BathAndBody_SunAndTanning_SelfTanMousseLink;;self-tan-mousse
-;;Nav_BathAndBody_SunAndTanning_ViewAllLink;Navigation Bar- Bath and Body- Sun and Tanning- View All Link;/;Nav_BathAndBody_SunAndTanning_ViewAllLink;Nav_BathAndBody_SunAndTanning_ViewAllLink;;
-
-;;Nav_BathAndBody_ToolsAdvice_QuickProductLink;Navigation Bar- BathAndBody- Tools and Advice Quick Product Link;/;Nav_BathAndBody_ToolsAdvice_QuickProductLink;Nav_BathAndBody_ToolsAdvice_QuickProductLink;;
-;;Nav_BathAndBody_ToolsAdvice_DittoScheduledLink;Navigation Bar- BathAndBody- Tools and Advice Ditto Scheduled Link;/;Nav_BathAndBody_ToolsAdvice_DittoScheduledLink;Nav_BathAndBody_ToolsAdvice_DittoScheduledLink;;
-
-;;Nav_Home_HouseHoldLink;Navigation Bar- Home- Household Hygiene Link;/category-landing-page;Nav_Home_HouseHoldLink;Nav_Home_HouseHoldLink;;;
-;;Nav_Home_LaundryLink;Navigation Bar- Home- Laundry Hygiene Link;/category-landing-page;Nav_Home_LaundryLink;Nav_Home_LaundryLink;;;
-;;Nav_Home_WaterTreatmentLink;Navigation Bar- Home- Water Treatment Hygiene Link;/category-landing-page;Nav_Home_WaterTreatmentLink;Nav_Home_WaterTreatmentLink;;;
-;;Nav_Home_CookwareLink;Navigation Bar- Home- Household Cookware Link;/category-landing-page;Nav_Home_CookwareLink;Nav_Home_CookwareLink;;;
-
-;;Nav_Home_HouseHold_KitchenCleanerLink;Navigation Bar- Home- Household- Kitchen Cleaner Link;;Nav_Home_HouseHold_KitchenCleanerLink;Nav_Home_HouseHold_KitchenCleanerLink;;kitchen-cleaner
-;;Nav_Home_HouseHold_GeneralCleaningLink;Navigation Bar- Home- Household- General Cleaning Link;;Nav_Home_HouseHold_GeneralCleaningLink;Nav_Home_HouseHold_GeneralCleaningLink;;general-cleaning
-;;Nav_Home_HouseHold_BathroomCleanerLink;Navigation Bar- Home- Household- Bathroom Cleaner Link;;Nav_Home_HouseHold_BathroomCleanerLink;Nav_Home_HouseHold_BathroomCleanerLink;;bathroom-cleaner
-;;Nav_Home_HouseHold_ViewAllLink;Navigation Bar- Home- Household- View All Link;/;Nav_Home_HouseHold_ViewAllLink;Nav_Home_HouseHold_ViewAllLink;;
-
-;;Nav_Home_Laundry_DetergentsLink;Navigation Bar- Home- Laundry- Detergents Link;;Nav_Home_Laundry_DetergentsLink;Nav_Home_Laundry_DetergentsLink;;detergents
-;;Nav_Home_Laundry_TreatmentAndAdditivesLink;Navigation Bar- Home- Laundry- Treatment and Additives Link;;Nav_Home_Laundry_TreatmentAndAdditivesLink;Nav_Home_Laundry_TreatmentAndAdditivesLink;;treatment-and-additives
-;;Nav_Home_Laundry_LotionsLink;Navigation Bar- Home- Laundry- Lotions Link;;Nav_Home_Laundry_LotionsLink;Nav_Home_Laundry_LotionsLink;;lotions
-;;Nav_Home_Laundry_ViewAllLink;Navigation Bar- Home- Laundry- View All Link;/;Nav_Home_Laundry_ViewAllLink;Nav_Home_Laundry_ViewAllLink;;
-
-;;Nav_Home_WaterTreatment_PurifiersLink;Navigation Bar- Home- Water treatment- Purifiers Link;;Nav_Home_WaterTreatment_PurifiersLink;Nav_Home_WaterTreatment_PurifiersLink;;purifiers
-;;Nav_Home_WaterTreatment_ReplacementFiltersLink;Navigation Bar- Home- Water treatment- Replacement Filters Link;;Nav_Home_WaterTreatment_ReplacementFiltersLink;Nav_Home_WaterTreatment_ReplacementFiltersLink;;replacement-filters
-;;Nav_Home_WaterTreatment_ViewAllLink;Navigation Bar- Home- Water treatment- View All Link;/;Nav_Home_WaterTreatment_ViewAllLink;Nav_Home_WaterTreatment_ViewAllLink;;
-
-;;Nav_Home_Cookware_CutleryLink;Navigation Bar- Home- Cookware- Cutlery Link;;Nav_Home_Cookware_CutleryLink;Nav_Home_Cookware_CutleryLink;;cutlery
-;;Nav_Home_Cookware_PansLink;Navigation Bar- Home- Cookware- Pans Link;;Nav_Home_Cookware_PansLink;Nav_Home_Cookware_PansLink;;pans
-;;Nav_Home_Cookware_ReplacementPartsLink;Navigation Bar- Home- Cookware- Replacement Parts Link;;Nav_Home_Cookware_ReplacementPartsLink;Nav_Home_Cookware_ReplacementPartsLink;;replacement-parts
-;;Nav_Home_Cookware_ViewAllLink;Navigation Bar- Home- Cookware- Replacement Parts Link;/;Nav_Home_Cookware_ViewAllLink;Nav_Home_Cookware_ViewAllLink;;
-
-;;Nav_Home_ToolsAdvice_QuickProductLink;Navigation Bar- Home- Tools and Advice Quick Product Link;/;Nav_Home_ToolsAdvice_QuickProductLink;Nav_Home_ToolsAdvice_QuickProductLink;;
-;;Nav_Home_ToolsAdvice_DittoScheduledLink;Navigation Bar- Home- Tools and Advice Ditto Scheduled Link;/;Nav_Home_ToolsAdvice_DittoScheduledLink;Nav_Home_ToolsAdvice_DittoScheduledLink;;
-
 ########## category page top banner component
 
 INSERT_UPDATE AmwayApacCategoryTopBannerComponent;$contentCV[unique=true];uid[unique=true];name;logoImage(uid, $contentCV);text(uid, $contentCV);link(&linkRef);&componentRef;
@@ -630,10 +629,10 @@ INSERT_UPDATE AmwayApacShopByCategoryComponent;$contentCV[unique=true];uid[uniqu
 ;;sportsNutritionComponent1;sports nutrition component copy;sportsNutritionButtonLinkComponent;sportsNutritionComponent1
 
 INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;target(code)[default='sameWindow'];category(code, $productCV)
-;;vitaminsAndSupplementsButtonLinkComponent;vitamins and supplements category link;vitaminsAndSupplementsButtonLinkComponent;;vitaminsAndSupplements
-;;weightManagementButtonLinkComponent;weight management category link;weightManagementButtonLinkComponent;;weightmanagement
-;;sportsNutritionButtonLinkComponent;sports nutrition category link;sportsNutritionButtonLinkComponent;;sportsNutrition
-;;energyDrinksButtonLinkComponent;energy drinks category link;energyDrinksButtonLinkComponent;;energyDrinks
+;;vitaminsAndSupplementsButtonLinkComponent;vitamins and supplements category link;vitaminsAndSupplementsButtonLinkComponent;;vitamins-and-supplements
+;;weightManagementButtonLinkComponent;weight management category link;weightManagementButtonLinkComponent;;weight-management
+;;sportsNutritionButtonLinkComponent;sports nutrition category link;sportsNutritionButtonLinkComponent;;sports-nutrition
+;;energyDrinksButtonLinkComponent;energy drinks category link;energyDrinksButtonLinkComponent;;energy-drinks
 
 INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
 ;;amwayapacShopByCategoryTitleParagraphComponent;amwayapacShopByCategoryTitleParagraphComponent
@@ -786,6 +785,14 @@ INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=tr
 ;;amwayApacBecomeACustomerLinkContent;BECOME A MEMBER;/;amwayApacBecomeACustomerLinkContent;;amwayApacBecomeACustomerLinkContent;
 
 ########## Register Landing Page ##########
+
+################ Search Slot
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
+;;SearchBoxSlot; Search Box Slot;true;topSearchBoxPlaceHolder
+
+INSERT_UPDATE SearchBoxComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;sideSearchBoxPlaceHolder; Top Search Box PlaceHolder;topSearchBoxPlaceHolder
 
 
 ############ Search No Result Page

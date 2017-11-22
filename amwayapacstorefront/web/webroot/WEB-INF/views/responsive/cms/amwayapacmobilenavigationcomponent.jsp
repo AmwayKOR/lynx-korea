@@ -81,7 +81,7 @@
                                                             <ul class="subcategory-list collapse"
                                                                 id="navMenuMobBrandsCollapse${nodelinkname}">
                                                                 <div class="list-wrapper">
-                                                                		<c:forEach items="${childrenNode.simpleBannerComponents}" var="banner" varStatus="loop">
+                                                                		<c:forEach items="${childrenNode.brandBanners}" var="banner" varStatus="loop">
                                                                 		<c:url value="${fn:escapeXml(banner.urlLink)}" var="encodedUrlLink" />
                                                                 		<c:url value="${fn:escapeXml(banner.media.altText)}" var="encodedUrlText" />
                                                                 		

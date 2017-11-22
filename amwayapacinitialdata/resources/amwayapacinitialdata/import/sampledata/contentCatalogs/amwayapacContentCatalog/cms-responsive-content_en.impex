@@ -43,6 +43,199 @@ UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[l
 ########## Top Header Logo ##########
 
 
+########## Country Selector 
+
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;folder(qualifier)[default='images'];altText
+;;chinaFlag;$siteResource/cn.jpg;;chinaFlag;;"China flag"
+;;malaysiaFlag;$siteResource/my.jpg;;malaysiaFlag;;"Malaysia flag"
+;;philippinesFlag;$siteResource/ph.jpg;;philippinesFlag;;"Philippines flag"
+;;koreaFlag;$siteResource/kr.jpg;;koreaFlag;;"Korea flag"
+;;thailandFlag;$siteResource/th.jpg;;thailandFlag;;"Thailand flag"
+;;singaporeFlag;$siteResource/sg.jpg;;singaporeFlag;;"Singapore flag"
+;;japanFlag;$siteResource/flag.jpg;;japanFlag;;"Japan flag"
+
+INSERT_UPDATE AmwayApacImageLinkComponent;$contentCV[unique=true];uid[unique=true];linkName;image(code, $contentCV);&componentRef
+;;amwayapacChinaComponent;CHINA;chinaFlag;amwayapacChinaComponent
+;;amwayapacMalaysiaComponent;MALAYSIA;malaysiaFlag;amwayapacMalaysiaComponent
+;;amwayapacPhilippinesComponent;PHILIPPINES;philippinesFlag;amwayapacPhilippinesComponent
+;;amwayapacKoreaComponent;KOREA;koreaFlag;amwayapacKoreaComponent
+;;amwayapacThailandComponent;THAILAND;thailandFlag;amwayapacThailandComponent
+;;amwayapacSingaporeComponent;SINGAPORE;singaporeFlag;amwayapacSingaporeComponent
+;;amwayapacJapanComponent;JAPAN;japanFlag;amwayapacJapanComponent
+
+########## Country Selector ##########
+
+
+########## Header Account Navigation
+
+UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang];url;&componentRef
+;;MyAccountNodeLink;MY ACCOUNT;"/my-account";MyAccountNodeLink
+;;BillingShippingNodeLink;BILLING SHIPPING;"/my-account/billingshipping";BillingShippingNodeLink;
+;;ShoppingListsNodeLink;MY SHOPPING LISTS;"/shopping-lists/all";ShoppingListsNodeLink;
+;;DittoNodeLink;DITTO;"#";DittoNodeLink;
+;;PersonalDetailsNodeLink;PERSONAL DETAILS;"#";PersonalDetailsNodeLink;
+;;OrderHistoryNodeLink;ORDER HISTORY;"#";OrderHistoryNodeLink;
+
+########## Header Account Navigation ##########
+
+
+########## Navigation Bar
+
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;folder(qualifier)[default='images'];altText
+;;navBarNutritionImg;$siteResource/nutrition.png;;Navigation Bar Nutrition Image;;"Navigation Bar Nutrition Image"
+;;navBarNutrition_NutriliteImg;$siteResource/nutrilite@2x.png;;Navigation Bar Nutrition- Nutrilite Image;;"Navigation Bar Nutrition- Nutrilite Image"
+;;navBarNutrition_bodyKeyImg;$siteResource/bodu-key@2x.png;;Navigation Bar Nutrition- bodyKey Image;;"Navigation Bar Nutrition- bodyKey Image"
+;;navBarNutrition_TruvivityImg;$siteResource/truvivity@2x.png;;Navigation Bar Nutrition- Truvivity Image;;"Navigation Bar Nutrition- Truvivity Image"
+;;navBarNutrition_EnergyDrinkImg;$siteResource/layer-712@2x.png;;Navigation Bar Nutrition- Energy Drink Image;;"Navigation Bar Nutrition- Energy Drink Image"
+
+;;navBarBeautyImg;$siteResource/beauty.png;;Navigation Bar Beauty Image;;"Navigation Bar Beauty Image"
+;;navBarBeauty_ArtistryImg;$siteResource/artistry@2x.png;;Navigation Bar Beauty- Artistry Image;;"Navigation Bar Beauty- Artistry Image"
+
+;;navBarBathAndBodyImg;$siteResource/bath.png;;Navigation Bar Bath and Body Image;;"Navigation Bar Bath and Body Image"
+;;navBarBathAndBody_SatiniqueImg;$siteResource/satinique@2x.png;;Navigation Bar Bath and Body- Satinique Image;;"Navigation Bar Bath and Body- Satinique Image"
+;;navBarBathAndBody_SunTimeImg;$siteResource/suntime@2x.png;;Navigation Bar Bath and Body- SunTime Image;;"Navigation Bar Bath and Body- SunTime Image"
+;;navBarBathAndBody_GHImg;$siteResource/g-h@2x.png;;Navigation Bar Bath and Body- G & H Image;;"Navigation Bar Bath and Body- G & H Image"
+;;navBarBathAndBody_GlisterImg;$siteResource/glister@2x.png;;Navigation Bar Bath and Body- Glister Image;;"Navigation Bar Bath and Body- Glister Image"
+
+;;navBarHomeImg;$siteResource/home.png;;Navigation Bar Home Image;;"Navigation Bar Home Image"
+;;navBarHome_AmwayHomeImg;$siteResource/amway-home@2x.png;;Navigation Bar Home- Amway Home Image;;"Navigation Bar Home- Amway Home Image"
+;;navBarHome_LegacyOfCleanImg;$siteResource/legacy-of-clean@2x.png;;Navigation Bar Home- Legacy Of Clean Image;;"Navigation Bar Home- Legacy Of Clean Image"
+;;navBarHome_eSpringImg;$siteResource/e-spring@2x.png;;Navigation Bar Home- eSpring Image;;"Navigation Bar Home- eSpring Image"
+;;navBarHome_iCookImg;$siteResource/i-cook@2x.png;;Navigation Bar Home- iCook Image;;"Navigation Bar Home- iCook Image"
+
+UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
+;;NavBarNutrition1SBComponent;navBarNutrition_NutriliteImg
+;;NavBarNutrition2SBComponent;navBarNutrition_bodyKeyImg
+;;NavBarNutrition3SBComponent;navBarNutrition_TruvivityImg
+;;NavBarNutrition4SBComponent;navBarNutrition_EnergyDrinkImg
+
+;;NavBarBeautySBComponent;navBarBeauty_ArtistryImg
+
+;;NavBarBathAndBodySB1Component;navBarBathAndBody_SatiniqueImg
+;;NavBarBathAndBodySB2Component;navBarBathAndBody_SunTimeImg
+;;NavBarBathAndBodySB3Component;navBarBathAndBody_GHImg
+;;NavBarBathAndBodySB4Component;navBarBathAndBody_GlisterImg
+
+;;NavBarHomeSB1Component;navBarHome_AmwayHomeImg
+;;NavBarHomeSB2Component;navBarHome_LegacyOfCleanImg
+;;NavBarHomeSB3Component;navBarHome_eSpringImg
+;;NavBarHomeSB4Component;navBarHome_iCookImg
+
+UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang]
+;;NavShopLink;"SHOP"
+;;NavBusinessCenterLink;"BUSINESS CENTER"
+;;NavAboutAmwayLink;"ABOUT AMWAY"
+;;NavEducationLink;"EDUCATION"
+
+;;NavShopNutritionLink;"NUTRITION"
+;;NavShopBeautyLink;"BEAUTY"
+;;NavShopBathBodyLink;"BATH & BODY"
+;;NavShopHomeLink;"HOME"
+
+;;NavNutritionVitaminsLink;"VITAMINS & SUPPLEMENTS"
+;;NavNutritionWeightLink;"WEIGHT MANAGEMENT"
+;;NavNutritionSportsLink;"SPORTS NUTRION"
+;;NavNutritionEnergyLink;"ENERGY DRINKS"
+;;NavNutritionVitaminsBoneHealthLink;"Bone Health"
+;;NavNutritionVitaminsChildrenLink;"Children's Vitamins"
+;;NavNutritionVitaminsHeartHealthLink;"Heart health"
+;;NavNutritionVitaminsViewAllLink;"View All"
+;;NavNutritionWeightSupplementsLink;"Suplements"
+;;NavNutritionWeightBarLink;"Bar"
+;;NavNutritionWeightShakesLink;"Shakes"
+;;NavNutritionWeightViewAllLink;"View All"
+;;NavNutritionSportsEnergizeLink;"Energize"
+;;NavNutritionSportsHydrateLink;"Hydrate"
+;;NavNutritionSportsNutriliteLink;"Nutrilite Sports Nutrition"
+;;NavNutritionSportsViewAllLink;"View All"
+;;NavNutritionEnergyKosherLink;"Kosher"
+;;NavNutritionEnergySugarFreeLink;"Sugar-Free"
+;;NavNutritionEnergyLowCarbLink;"Low-Carb"
+;;NavNutritionEnergyViewAllLink;"View All"
+;;NavNutritionToolsAdviceSkincareLink;"Skincare Recommender"
+;;NavNutritionToolsAdviceDittoLink;"Ditto Scheduled Ordering"
+
+;;NavBeautySkinCareLink;"SKIN CARE"
+;;NavBeautyColourLink;"COLOUR"
+;;NavBeautyMakeUpLink;"MAKEUP"
+;;NavBeautyBeautyAccessoriesLink;"BEAUTY ACCESSORIES"
+;;NavBeautySkinCareAntiAgeingLink;"Anti Ageing Solutions"
+;;NavBeautySkinCareArtistryLink;"ARTISTRY™ Special Care"
+;;NavBeautySkinCareDailySkinCareLink;"Daily Skincare"
+;;NavBeautySkinCareViewAllLink;"View All"
+;;NavBeautyColourApplicatorsLink;"Applicators & Accessories"
+;;NavBeautyColourEyeBrowsLink;"Eye & Brows"
+;;NavBeautyColourEyeCheeksLink;"Eye & Cheeks"
+;;NavBeautyColourViewAllLink;"View All"
+;;NavBeautyMakeUpCheeksLink;"Cheeks"
+;;NavBeautyMakeUpConcealersLink;"Concealers"
+;;NavBeautyMakeUpFoundationLink;"Foundations & Powders"
+;;NavBeautyMakeUpViewAllLink;"View All"
+;;NavBeautyBeautyAccessoriesFacialCottonLink;"Facial Cotton"
+;;NavBeautyBeautyAccessoriesBrushSetLink;"Brush Set"
+;;NavBeautyBeautyAccessoriesPowderCompactLink;"Powder Compact"
+;;NavBeautyBeautyAccessoriesViewAllLink;"View All"
+;;NavBeautyToolsAdviceSkincareLink;"Skincare Recommender"
+;;NavBeautyToolsAdviceDittoLink;"Ditto Scheduled Ordering"
+
+;;NavBathAndBodyHairCareLink;"HAIR CARE"
+;;NavBathAndBodyBodyCareLink;"BODY CARE"
+;;NavBathAndBodyOralCareLink;"ORAL CARE"
+;;NavBathAndBodySunAndTanningLink;"SUN AND TANNING"
+;;NavBathAndBodyHairCareConditionersLink;"Conditioners"
+;;NavBathAndBodyHairCareShampoosLink;"Shampoos"
+;;NavBathAndBodyHairCareStylingLink;"Styling & Treatments"
+;;NavBathAndBodyHairCareViewAllLink;"View All"
+;;NavBathAndBodyBodyCareBodyWashLink;"Body Wash"
+;;NavBathAndBodyBodyCareDeodorantsLink;"Deodorants"
+;;NavBathAndBodyBodyCareLotionsLink;"Lotions"
+;;NavBathAndBodyBodyCareViewAllLink;"View All"
+;;NavBathAndBodyOralCareBreathSpraysLink;"Breath Sprays"
+;;NavBathAndBodyOralCareToothpastesLink;"Toothpastes"
+;;NavBathAndBodyOralCareBrushesAndFlossLink;"Brushes & Floss"
+;;NavBathAndBodyOralCareViewAllLink;"View All"
+;;NavBathAndBodySunAndTanningSunscreenLotionLink;"Sunscreen Lotion"
+;;NavBathAndBodySunAndTanningSelfTanMousseLink;"Self Tan mousse"
+;;NavBathAndBodySunAndTanningViewAllLink;"View All"
+;;NavBathAndBodyToolsAdviceQuickProductLink;"Quick Product Checklists"
+;;NavBathAndBodyToolsAdviceDittoScheduledLink;"Ditto Scheduled Ordering"
+
+;;NavHomeHouseHoldLink;"HOUSEHOLD HYGIENE"
+;;NavHomeLaundryLink;"LAUNDRY"
+;;NavHomeWaterTreatmentLink;"WATER TREATMENT"
+;;NavHomeCookwareLink;"COOKWARE"
+;;NavHomeHouseHoldKitchenCleanerLink;"Kitchen Cleaner"
+;;NavHomeHouseHoldGeneralCleaningLink;"General Cleaning"
+;;NavHomeHouseHoldBathroomCleanerLink;"Bathroom Cleaner"
+;;NavHomeHouseHoldViewAllLink;"View All"
+;;NavHomeLaundryDetergentsLink;"Detergents"
+;;NavHomeLaundryTreatmentAndAdditivesLink;"Treatment & Additives"
+;;NavHomeLaundryLotionsLink;"Lotions"
+;;NavHomeLaundryViewAllLink;"View All"
+;;NavHomeWaterTreatmentPurifiersLink;"Purifiers"
+;;NavHomeWaterTreatmentReplacementFiltersLink;"Replacement Filters"
+;;NavHomeWaterTreatmentViewAllLink;"View All"
+;;NavHomeCookwareCutleryLink;"Cutlery"
+;;NavHomeCookwarePansLink;"Pans"
+;;NavHomeCookwareReplacementPartsLink;"Replacement Parts"
+;;NavHomeCookwareViewAllLink;"View All"
+;;NavHomeToolsAdviceQuickProductLink;"Quick Product Checklists"
+;;NavHomeToolsAdviceDittoScheduledLink;"Ditto Scheduled Ordering"
+
+########## Navigation Bar ##########
+
+
+########## CMS Navigation Nodes
+
+UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];nodeImg(code, $contentCV)[lang=$lang]
+;;NutritionNavNode;navBarNutritionImg
+;;BeautyNavNode;navBarBeautyImg
+;;BathAndBodyNavNode;navBarBathAndBodyImg
+;;HomeNavNode;navBarHomeImg
+
+########## CMS Navigation Nodes ##########
+
+
 ########## Home page section 1 carousel 
 
 INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];mediaFormat(qualifier)[default=desktop];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;folder(qualifier)[default='images'];altText
@@ -356,230 +549,6 @@ UPDATE FooterComponent;$contentCV[unique=true];uid[unique=true];copyRightTitle[l
 ;;footerComponent;"©2016 Amway US.All Rights Reserved."
 
 ########## Footer ##########
-
-
-########## CMS Navigation Nodes
-
-UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];title[lang=$lang]
-;FeatureBrandsNode;;FEATURED BRANDS
-;StartBusinessNode;;START YOUR BUSINESS
-;ResourcesNode;;RESOURCES
-;SupportNode;;SUPPORT
-
-########## CMS Navigation Nodes ##########
-
-################ Country Selector
-
-INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;folder(qualifier)[default='images'];altText
-;;chinaFlag;$siteResource/cn.jpg;;chinaFlag;;"China flag"
-;;malaysiaFlag;$siteResource/my.jpg;;malaysiaFlag;;"Malaysia flag"
-;;philippinesFlag;$siteResource/ph.jpg;;philippinesFlag;;"Philippines flag"
-;;koreaFlag;$siteResource/kr.jpg;;koreaFlag;;"Korea flag"
-;;thailandFlag;$siteResource/th.jpg;;thailandFlag;;"Thailand flag"
-;;singaporeFlag;$siteResource/sg.jpg;;singaporeFlag;;"Singapore flag"
-;;japanFlag;$siteResource/flag.jpg;;japanFlag;;"Japan flag"
-
-INSERT_UPDATE AmwayApacImageLinkComponent;$contentCV[unique=true];uid[unique=true];linkName;image(code, $contentCV);&componentRef
-;;amwayapacChinaComponent;CHINA;chinaFlag;amwayapacChinaComponent
-;;amwayapacMalaysiaComponent;MALAYSIA;malaysiaFlag;amwayapacMalaysiaComponent
-;;amwayapacPhilippinesComponent;PHILIPPINES;philippinesFlag;amwayapacPhilippinesComponent
-;;amwayapacKoreaComponent;KOREA;koreaFlag;amwayapacKoreaComponent
-;;amwayapacThailandComponent;THAILAND;thailandFlag;amwayapacThailandComponent
-;;amwayapacSingaporeComponent;SINGAPORE;singaporeFlag;amwayapacSingaporeComponent
-;;amwayapacJapanComponent;JAPAN;japanFlag;amwayapacJapanComponent
-
-############## Header Account Navigation
-
-UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];title[lang=$lang];links(uid, $contentCV)
-;;MyAccountNode;MY ACCOUNT;MyAccountNodeLink
-;;BillingShippingNode;BILLING SHIPPING;BillingShippingNodeLink
-;;ShoppingListsNode;MY SHOPPING LISTS;ShoppingListsNodeLink
-;;DittoNode;DITTO;DittoNodeLink
-;;PersonalDetailsNode;PERSONAL DETAILS;PersonalDetailsNodeLink
-;;OrderHistoryNode;ORDER HISTORY;OrderHistoryNodeLink
-
-UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang];url;&componentRef
-;;MyAccountNodeLink;MY ACCOUNT;"/my-account";MyAccountNodeLink
-;;BillingShippingNodeLink;BILLING SHIPPING;"/my-account/billingshipping";BillingShippingNodeLink;
-;;ShoppingListsNodeLink;MY SHOPPING LISTS;"/shopping-lists/all";ShoppingListsNodeLink;
-;;DittoNodeLink;DITTO;"#";DittoNodeLink;
-;;PersonalDetailsNodeLink;PERSONAL DETAILS;"#";PersonalDetailsNodeLink;
-;;OrderHistoryNodeLink;ORDER HISTORY;"#";OrderHistoryNodeLink;
-
-#NavigationBar
-INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;folder(qualifier)[default='images'];altText
-;;navBarNutritionImg;$siteResource/nutrition.png;;Navigation Bar Nutrition Image;;"Navigation Bar Nutrition Image"
-;;navBarNutrition_NutriliteImg;$siteResource/nutrilite@2x.png;;Navigation Bar Nutrition- Nutrilite Image;;"Navigation Bar Nutrition- Nutrilite Image"
-;;navBarNutrition_bodyKeyImg;$siteResource/bodu-key@2x.png;;Navigation Bar Nutrition- bodyKey Image;;"Navigation Bar Nutrition- bodyKey Image"
-;;navBarNutrition_TruvivityImg;$siteResource/truvivity@2x.png;;Navigation Bar Nutrition- Truvivity Image;;"Navigation Bar Nutrition- Truvivity Image"
-;;navBarNutrition_EnergyDrinkImg;$siteResource/layer-712@2x.png;;Navigation Bar Nutrition- Energy Drink Image;;"Navigation Bar Nutrition- Energy Drink Image"
-
-;;navBarBeautyImg;$siteResource/beauty.png;;Navigation Bar Beauty Image;;"Navigation Bar Beauty Image"
-;;navBarBeauty_ArtistryImg;$siteResource/artistry@2x.png;;Navigation Bar Beauty- Artistry Image;;"Navigation Bar Beauty- Artistry Image"
-
-;;navBarBathAndBodyImg;$siteResource/bath.png;;Navigation Bar Bath and Body Image;;"Navigation Bar Bath and Body Image"
-;;navBarBathAndBody_SatiniqueImg;$siteResource/satinique@2x.png;;Navigation Bar Bath and Body- Satinique Image;;"Navigation Bar Bath and Body- Satinique Image"
-;;navBarBathAndBody_SunTimeImg;$siteResource/suntime@2x.png;;Navigation Bar Bath and Body- SunTime Image;;"Navigation Bar Bath and Body- SunTime Image"
-;;navBarBathAndBody_GHImg;$siteResource/g-h@2x.png;;Navigation Bar Bath and Body- G & H Image;;"Navigation Bar Bath and Body- G & H Image"
-;;navBarBathAndBody_GlisterImg;$siteResource/glister@2x.png;;Navigation Bar Bath and Body- Glister Image;;"Navigation Bar Bath and Body- Glister Image"
-
-;;navBarHomeImg;$siteResource/home.png;;Navigation Bar Home Image;;"Navigation Bar Home Image"
-;;navBarHome_AmwayHomeImg;$siteResource/amway-home@2x.png;;Navigation Bar Home- Amway Home Image;;"Navigation Bar Home- Amway Home Image"
-;;navBarHome_LegacyOfCleanImg;$siteResource/legacy-of-clean@2x.png;;Navigation Bar Home- Legacy Of Clean Image;;"Navigation Bar Home- Legacy Of Clean Image"
-;;navBarHome_eSpringImg;$siteResource/e-spring@2x.png;;Navigation Bar Home- eSpring Image;;"Navigation Bar Home- eSpring Image"
-;;navBarHome_iCookImg;$siteResource/i-cook@2x.png;;Navigation Bar Home- iCook Image;;"Navigation Bar Home- iCook Image"
-
-UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang];&componentRef
-;;NavBarNutrition1SBComponent;navBarNutrition_NutriliteImg;NavBarNutrition1SBComponent
-;;NavBarNutrition2SBComponent;navBarNutrition_bodyKeyImg;NavBarNutrition2SBComponent
-;;NavBarNutrition3SBComponent;navBarNutrition_TruvivityImg;NavBarNutrition3SBComponent
-;;NavBarNutrition4SBComponent;navBarNutrition_EnergyDrinkImg;NavBarNutrition4SBComponent
-
-;;NavBarBeautySBComponent;navBarBeauty_ArtistryImg;NavBarBeautySBComponent
-
-;;NavBarBathAndBodySB1Component;navBarBathAndBody_SatiniqueImg;NavBarBathAndBodySB1Component
-;;NavBarBathAndBodySB2Component;navBarBathAndBody_SunTimeImg;NavBarBathAndBodySB2Component
-;;NavBarBathAndBodySB3Component;navBarBathAndBody_GHImg;NavBarBathAndBodySB3Component
-;;NavBarBathAndBodySB4Component;navBarBathAndBody_GlisterImg;NavBarBathAndBodySB4Component
-
-;;NavBarHomeSB1Component;navBarHome_AmwayHomeImg;NavBarHomeSB1Component
-;;NavBarHomeSB2Component;navBarHome_LegacyOfCleanImg;NavBarHomeSB2Component
-;;NavBarHomeSB3Component;navBarHome_eSpringImg;NavBarHomeSB3Component
-;;NavBarHomeSB4Component;navBarHome_iCookImg;NavBarHomeSB4Component
-
-
-UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang];&componentRef
-;;Nav_ShopLink;"SHOP";Nav_ShopLink
-;;Nav_BusinessCenterLink;"BUSINESS CENTER";Nav_BusinessCenterLink
-;;Nav_AboutAmwayLink;"ABOUT AMWAY";Nav_AboutAmwayLink
-;;Nav_EducationLink;"EDUCATION";Nav_EducationLink
-
-;;Nav_Shop_NutritionLink;"NUTRITION";Nav_Shop_NutritionLink
-;;Nav_Shop_BeautyLink;"BEAUTY";Nav_Shop_BeautyLink
-;;Nav_Shop_BathBodyLink;"BATH & BODY";Nav_Shop_BathBodyLink
-;;Nav_Shop_HomeLink;"HOME";Nav_Shop_HomeLink
-
-;;Nav_Nutrition_VitaminsLink;"VITAMINS & SUPPLEMENTS";Nav_Nutrition_VitaminsLink
-;;Nav_Nutrition_WeightLink;"WEIGHT MANAGEMENT";Nav_Nutrition_WeightLink
-;;Nav_Nutrition_SportsLink;"SPORTS NUTRION";Nav_Nutrition_SportsLink
-;;Nav_Nutrition_EnergyLink;"ENERGY DRINKS";Nav_Nutrition_EnergyLink
-;;Nav_Nutrition_Vitamins_BoneHealthLink;"Bone Health";Nav_Nutrition_Vitamins_BoneHealthLink
-;;Nav_Nutrition_Vitamins_ChildrenLink;"Children's Vitamins";Nav_Nutrition_Vitamins_ChildrenLink
-;;Nav_Nutrition_Vitamins_HeartHealthLink;"Heart health";Nav_Nutrition_Vitamins_HeartHealthLink
-;;Nav_Nutrition_Vitamins_ViewAllLink;"View All";Nav_Nutrition_Vitamins_ViewAllLink
-;;Nav_Nutrition_Weight_SupplementsLink;"Suplements";Nav_Nutrition_Weight_SupplementsLink
-;;Nav_Nutrition_Weight_BarLink;"Bar";Nav_Nutrition_Weight_BarLink
-;;Nav_Nutrition_Weight_ShakesLink;"Shakes";Nav_Nutrition_Weight_ShakesLink
-;;Nav_Nutrition_Weight_ViewAllLink;"View All";Nav_Nutrition_Weight_ViewAllLink
-;;Nav_Nutrition_Sports_EnergizeLink;"Energize";Nav_Nutrition_Sports_EnergizeLink
-;;Nav_Nutrition_Sports_HydrateLink;"Hydrate";Nav_Nutrition_Sports_HydrateLink
-;;Nav_Nutrition_Sports_NutriliteLink;"Nutrilite Sports Nutrition";Nav_Nutrition_Sports_NutriliteLink
-;;Nav_Nutrition_Sports_ViewAllLink;"View All";Nav_Nutrition_Sports_ViewAllLink
-;;Nav_Nutrition_Energy_KosherLink;"Kosher";Nav_Nutrition_Energy_KosherLink
-;;Nav_Nutrition_Energy_SugarFreeLink;"Sugar-Free";Nav_Nutrition_Energy_SugarFreeLink
-;;Nav_Nutrition_Energy_LowCarbLink;"Low-Carb";Nav_Nutrition_Energy_LowCarbLink
-;;Nav_Nutrition_Energy_ViewAllLink;"View All";Nav_Nutrition_Energy_ViewAllLink
-;;Nav_Nutrition_ToolsAdvice_SkincareLink;"Skincare Recommender";Nav_Nutrition_ToolsAdvice_SkincareLink
-;;Nav_Nutrition_ToolsAdvice_DittoLink;"Ditto Scheduled Ordering";Nav_Nutrition_ToolsAdvice_DittoLink
-
-;;Nav_Beauty_SkinCareLink;"SKIN CARE";Nav_Beauty_SkinCareLink
-;;Nav_Beauty_ColourLink;"COLOUR";Nav_Beauty_ColourLink
-;;Nav_Beauty_MakeUpLink;"MAKEUP";Nav_Beauty_MakeUpLink
-;;Nav_Beauty_BeautyAccessoriesLink;"BEAUTY ACCESSORIES";Nav_Beauty_BeautyAccessoriesLink
-;;Nav_Beauty_SkinCare_AntiAgeingLink;"Anti Ageing Solutions";Nav_Beauty_SkinCare_AntiAgeingLink
-;;Nav_Beauty_SkinCare_ArtistryLink;"ARTISTRY™ Special Care";Nav_Beauty_SkinCare_ArtistryLink
-;;Nav_Beauty_SkinCare_DailySkinCareLink;"Daily Skincare";Nav_Beauty_SkinCare_DailySkinCareLink
-;;Nav_Beauty_SkinCare_ViewAllLink;"View All";Nav_Beauty_SkinCare_ViewAllLink
-;;Nav_Beauty_Colour_ApplicatorsLink;"Applicators & Accessories";Nav_Beauty_Colour_ApplicatorsLink
-;;Nav_Beauty_Colour_EyeBrowsLink;"Eye & Brows";Nav_Beauty_Colour_EyeBrowsLink
-;;Nav_Beauty_Colour_EyeCheeksLink;"Eye & Cheeks";Nav_Beauty_Colour_EyeCheeksLink
-;;Nav_Beauty_Colour_ViewAllLink;"View All";Nav_Beauty_Colour_ViewAllLink
-;;Nav_Beauty_MakeUp_CheeksLink;"Cheeks";Nav_Beauty_MakeUp_CheeksLink
-;;Nav_Beauty_MakeUp_ConcealersLink;"Concealers";Nav_Beauty_MakeUp_ConcealersLink
-;;Nav_Beauty_MakeUp_FoundationLink;"Foundations & Powders";Nav_Beauty_MakeUp_FoundationLink
-;;Nav_Beauty_MakeUp_ViewAllLink;"View All";Nav_Beauty_MakeUp_ViewAllLink
-;;Nav_Beauty_BeautyAccessories_FacialCottonLink;"Facial Cotton";Nav_Beauty_BeautyAccessories_FacialCottonLink
-;;Nav_Beauty_BeautyAccessories_BrushSetLink;"Brush Set";Nav_Beauty_BeautyAccessories_BrushSetLink
-;;Nav_Beauty_BeautyAccessories_PowderCompactLink;"Powder Compact";Nav_Beauty_BeautyAccessories_PowderCompactLink
-;;Nav_Beauty_BeautyAccessories_ViewAllLink;"View All";Nav_Beauty_BeautyAccessories_ViewAllLink
-;;Nav_Beauty_ToolsAdvice_SkincareLink;"Skincare Recommender";Nav_Beauty_ToolsAdvice_SkincareLink
-;;Nav_Beauty_ToolsAdvice_DittoLink;"Ditto Scheduled Ordering";Nav_Beauty_ToolsAdvice_DittoLink
-
-;;Nav_BathAndBody_HairCareLink;"HAIR CARE";Nav_BathAndBody_HairCareLink;
-;;Nav_BathAndBody_BodyCareLink;"BODY CARE";Nav_BathAndBody_BodyCareLink;
-;;Nav_BathAndBody_OralCareLink;"ORAL CARE";Nav_BathAndBody_OralCareLink;
-;;Nav_BathAndBody_SunAndTanningLink;"SUN AND TANNING";Nav_BathAndBody_SunAndTanningLink;
-;;Nav_BathAndBody_HairCare_ConditionersLink;"Conditioners";Nav_BathAndBody_HairCare_ConditionersLink;
-;;Nav_BathAndBody_HairCare_ShampoosLink;"Shampoos";Nav_BathAndBody_HairCare_ShampoosLink;
-;;Nav_BathAndBody_HairCare_StylingLink;"Styling & Treatments";Nav_BathAndBody_HairCare_StylingLink;
-;;Nav_BathAndBody_HairCare_ViewAllLink;"View All";Nav_BathAndBody_HairCare_ViewAllLink;
-;;Nav_BathAndBody_BodyCare_BodyWashLink;"Body Wash";Nav_BathAndBody_BodyCare_BodyWashLink;
-;;Nav_BathAndBody_BodyCare_DeodorantsLink;"Deodorants";Nav_BathAndBody_BodyCare_DeodorantsLink;
-;;Nav_BathAndBody_BodyCare_LotionsLink;"Lotions";Nav_BathAndBody_BodyCare_LotionsLink;
-;;Nav_BathAndBody_BodyCare_ViewAllLink;"View All";Nav_BathAndBody_BodyCare_ViewAllLink;
-;;Nav_BathAndBody_OralCare_BreathSpraysLink;"Breath Sprays";Nav_BathAndBody_OralCare_BreathSpraysLink;
-;;Nav_BathAndBody_OralCare_ToothpastesLink;"Toothpastes";Nav_BathAndBody_OralCare_ToothpastesLink;
-;;Nav_BathAndBody_OralCare_BrushesAndFlossLink;"Brushes & Floss";Nav_BathAndBody_OralCare_BrushesAndFlossLink;
-;;Nav_BathAndBody_OralCare_ViewAllLink;"View All";Nav_BathAndBody_OralCare_ViewAllLink;
-;;Nav_BathAndBody_SunAndTanning_SunscreenLotionLink;"Sunscreen Lotion";Nav_BathAndBody_SunAndTanning_SunscreenLotionLink;
-;;Nav_BathAndBody_SunAndTanning_SelfTanMousseLink;"Self Tan mousse";Nav_BathAndBody_SunAndTanning_SelfTanMousseLink;
-;;Nav_BathAndBody_SunAndTanning_ViewAllLink;"View All";Nav_BathAndBody_SunAndTanning_ViewAllLink;
-;;Nav_BathAndBody_ToolsAdvice_QuickProductLink;"Quick Product Checklists";Nav_BathAndBody_ToolsAdvice_QuickProductLink
-;;Nav_BathAndBody_ToolsAdvice_DittoScheduledLink;"Ditto Scheduled Ordering";Nav_BathAndBody_ToolsAdvice_DittoScheduledLink
-
-;;Nav_Home_HouseHoldLink;"HOUSEHOLD HYGIENE";Nav_Home_HouseHoldLink
-;;Nav_Home_LaundryLink;"LAUNDRY";Nav_Home_LaundryLink
-;;Nav_Home_WaterTreatmentLink;"WATER TREATMENT";Nav_Home_WaterTreatmentLink
-;;Nav_Home_CookwareLink;"COOKWARE";Nav_Home_CookwareLink
-;;Nav_Home_HouseHold_KitchenCleanerLink;"Kitchen Cleaner";Nav_Home_HouseHold_KitchenCleanerLink
-;;Nav_Home_HouseHold_GeneralCleaningLink;"General Cleaning";Nav_Home_HouseHold_GeneralCleaningLink
-;;Nav_Home_HouseHold_BathroomCleanerLink;"Bathroom Cleaner";Nav_Home_HouseHold_BathroomCleanerLink
-;;Nav_Home_HouseHold_ViewAllLink;"View All";Nav_Home_HouseHold_ViewAllLink
-;;Nav_Home_Laundry_DetergentsLink;"Detergents";Nav_Home_Laundry_DetergentsLink
-;;Nav_Home_Laundry_TreatmentAndAdditivesLink;"Treatment & Additives";Nav_Home_Laundry_TreatmentAndAdditivesLink
-;;Nav_Home_Laundry_LotionsLink;"Lotions";Nav_Home_Laundry_LotionsLink
-;;Nav_Home_Laundry_ViewAllLink;"View All";Nav_Home_Laundry_ViewAllLink
-;;Nav_Home_WaterTreatment_PurifiersLink;"Purifiers";Nav_Home_WaterTreatment_PurifiersLink
-;;Nav_Home_WaterTreatment_ReplacementFiltersLink;"Replacement Filters";Nav_Home_WaterTreatment_ReplacementFiltersLink
-;;Nav_Home_WaterTreatment_ViewAllLink;"View All";Nav_Home_WaterTreatment_ViewAllLink
-;;Nav_Home_Cookware_CutleryLink;"Cutlery";Nav_Home_Cookware_CutleryLink
-;;Nav_Home_Cookware_PansLink;"Pans";Nav_Home_Cookware_PansLink
-;;Nav_Home_Cookware_ReplacementPartsLink;"Replacement Parts";Nav_Home_Cookware_ReplacementPartsLink
-;;Nav_Home_Cookware_ViewAllLink;"View All";Nav_Home_Cookware_ViewAllLink
-;;Nav_Home_ToolsAdvice_QuickProductLink;"Quick Product Checklists";Nav_Home_ToolsAdvice_QuickProductLink
-;;Nav_Home_ToolsAdvice_DittoScheduledLink;"Ditto Scheduled Ordering";Nav_Home_ToolsAdvice_DittoScheduledLink
-
-
-UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];simpleBannerComponents(&componentRef);nodeLink(&componentRef);nodeTitle(&componentRef);nodeImg(code, $contentCV)[lang=$lang];toolAdviceLinks(&componentRef)
-;;ShopNavNode;;Nav_ShopLink;;;
-;;BusinessCenterNavNode;;Nav_BusinessCenterLink;;;
-;;AboutNavNode;;Nav_AboutAmwayLink;;;
-;;EducationNavNode;;Nav_EducationLink;;;
-
-;;NutritionNavNode;NavBarNutrition1SBComponent,NavBarNutrition2SBComponent,NavBarNutrition3SBComponent,NavBarNutrition4SBComponent;Nav_Shop_NutritionLink;;navBarNutritionImg;Nav_Nutrition_ToolsAdvice_SkincareLink,Nav_Nutrition_ToolsAdvice_DittoLink
-;;VitaminNutritionNavNode;;Nav_Nutrition_VitaminsLink;;;
-;;WeightNutritionNavNode;;Nav_Nutrition_WeightLink;;;
-;;SportsNutritionNavNode;;Nav_Nutrition_SportsLink;;;
-;;EnergyNutritionNavNode;;Nav_Nutrition_EnergyLink;;;
-
-;;BeautyNavNode;NavBarBeautySBComponent;Nav_Shop_BeautyLink;;navBarBeautyImg;Nav_Beauty_ToolsAdvice_SkincareLink,Nav_Beauty_ToolsAdvice_DittoLink
-;;SkinCareBeautyNavNode;;Nav_Beauty_SkinCareLink;;;
-;;ColourBeautyNavNode;;Nav_Beauty_ColourLink;;;
-;;MakeUpBeautyNavNode;;Nav_Beauty_MakeUpLink;;;
-;;BeautyAccessoriesBeautyNavNode;;Nav_Beauty_BeautyAccessoriesLink;;;
-
-;;BathAndBodyNavNode;NavBarBathAndBodySB1Component,NavBarBathAndBodySB2Component,NavBarBathAndBodySB3Component,NavBarBathAndBodySB4Component;Nav_Shop_BathBodyLink;;navBarBathAndBodyImg;Nav_BathAndBody_ToolsAdvice_QuickProductLink,Nav_BathAndBody_ToolsAdvice_DittoScheduledLink
-;;HairCareBathAndBodyNavNode;;Nav_BathAndBody_HairCareLink;;;
-;;BodyCareBathAndBodyNavNode;;Nav_BathAndBody_BodyCareLink;;;
-;;OralCareBathAndBodyNavNode;;Nav_BathAndBody_OralCareLink;;;
-;;SunAndTanningBathAndBodyNavNode;;Nav_BathAndBody_SunAndTanningLink;;;
-
-;;HomeNavNode;NavBarHomeSB1Component,NavBarHomeSB2Component,NavBarHomeSB3Component,NavBarHomeSB4Component;Nav_Shop_HomeLink;;navBarHomeImg;Nav_Home_ToolsAdvice_QuickProductLink,Nav_Home_ToolsAdvice_DittoScheduledLink
-;;HouseHoldHomeNavNode;;Nav_Home_HouseHoldLink;;;
-;;LaundryHomeNavNode;;Nav_Home_LaundryLink;;;
-;;WaterTreatmentHomeNavNode;;Nav_Home_WaterTreatmentLink;;;
-;;CookwareHomeNavNode;;Nav_Home_CookwareLink;;;
-
 
 
 ########## category page top banner component
@@ -930,6 +899,5 @@ UPDATE ProductReferencesComponent;$contentCV[unique=true];uid[unique=true];title
 
 UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content;
 ;;productGridNoResultContent;<div class="new-search-icon tb120"><span>WE'RE SORRY! WE COULDN'T FIND ANY RESULTS FOR YOUR SELECTION.</span></div>
-
 
 ######Product Grid Page Template######
