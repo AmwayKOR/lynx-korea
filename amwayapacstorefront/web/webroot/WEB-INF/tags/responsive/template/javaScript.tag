@@ -41,8 +41,10 @@
 		<%-- Custom ACC JS --%>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.myaccount.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.billingshipping.js"></script>
+		<script type="text/javascript" src="${commonResourcePath}/js/acc.businessinformation.js"></script>
+		<script type="text/javascript" src="${commonResourcePath}/js/acc.orderhistory.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.header.js"></script>
-		<script type="text/javascript" src="${commonResourcePath}/js/acc.searchbox.js"></script>
+		<script type="text/javascript" src="${commonResourcePath}/js/acc.searchbox.js"></script>	
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.homepage.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.categorypage.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.product-detail.js"></script>

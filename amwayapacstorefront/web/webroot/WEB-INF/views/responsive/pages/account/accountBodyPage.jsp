@@ -12,7 +12,7 @@
                         <div class="container">
                             <div class="row">
                             		<div class="option-item-container col-xs-6 col-md-4">
-                                    <a href="BusinessInformation.html">
+                                    <a href="my-account/business-information">
                                     		<div class="option-item">
                                     			<cms:pageSlot position="Section1A" var="component">
 												<cms:component component="${component}"/>
@@ -21,7 +21,7 @@
                                     </a>
                                  </div>
                                  <div class="option-item-container col-xs-6 col-md-4">
-                                    <a href="Order-History-Personal-Orders-expanded.html">
+                                    <a href="my-account/orders">
                                     		<div class="option-item">
                                     			<cms:pageSlot position="Section1B" var="component">
 												<cms:component component="${component}"/>

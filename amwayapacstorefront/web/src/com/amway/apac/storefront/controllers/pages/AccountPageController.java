@@ -115,6 +115,7 @@ public class AccountPageController extends AbstractSearchPageController
 	private static final String REDIRECT_TO_PASSWORD_UPDATE_PAGE = REDIRECT_PREFIX + "/my-account/update-password";
 	private static final String REDIRECT_TO_ORDER_HISTORY_PAGE = REDIRECT_PREFIX + "/my-account/orders";
 
+
 	/**
 	 * We use this suffix pattern because of an issue with Spring 3.1 where a Uri value is incorrectly extracted if it
 	 * contains on or more '.' characters. Please see https://jira.springsource.org/browse/SPR-6164 for a discussion on the
@@ -135,6 +136,7 @@ public class AccountPageController extends AbstractSearchPageController
 	private static final String ORDER_HISTORY_CMS_PAGE = "orders";
 	private static final String ORDER_DETAIL_CMS_PAGE = "order";
 	private static final String BILLING_SHIPPING_CMS_PAGE = "billingshipping";
+	private static final String BUSINESS_INFORMATION_CMS_PAGE = "business-information";
 
 	private static final Logger LOG = Logger.getLogger(AccountPageController.class);
 
@@ -319,6 +321,18 @@ public class AccountPageController extends AbstractSearchPageController
 		return getViewForPage(model);
 	}
 
+	@RequestMapping(value = "/business-information", method = RequestMethod.GET)
+	@RequireHardLogIn
+	public String businessInformation(final Model model, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
+	{
+		storeCmsPageInModel(model, getContentPageForLabelOrId(BUSINESS_INFORMATION_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(BUSINESS_INFORMATION_CMS_PAGE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder
+				.getBreadcrumbs(ControllerConstants.GeneralConstants.BUSINESS_INFORMATION_PAGE_BREADCRUMB_KEY));
+		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+		return getViewForPage(model);
+	}
+
 	@RequestMapping(value = "/orders", method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String orders(@RequestParam(value = "page", defaultValue = "0") final int page,
@@ -329,6 +343,10 @@ public class AccountPageController extends AbstractSearchPageController
 		final PageableData pageableData = createPageableData(page, 5, sortCode, showMode);
 		final SearchPageData<OrderHistoryData> searchPageData = orderFacade.getPagedOrderHistoryForStatuses(pageableData);
 		populateModel(model, searchPageData, showMode);
+
+		model.addAttribute("personalOrder", searchPageData);
+		model.addAttribute("customerOrder", searchPageData);
+
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(ORDER_HISTORY_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ORDER_HISTORY_CMS_PAGE));

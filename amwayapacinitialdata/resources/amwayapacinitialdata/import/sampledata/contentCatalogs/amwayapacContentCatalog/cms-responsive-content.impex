@@ -903,8 +903,8 @@ INSERT_UPDATE AmwayApacMyAccountProfileBarComponent;$contentCV[unique=true];uid[
 
 INSERT_UPDATE AmwayApacMyAccountProfileBarURLComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow'];
 ;;myaccountPBMyAccountLinkComponent;My Account - Profile Bar- Jump to Link;/amwayapacstorefront/my-account;myaccountPBMyAccountLinkComponent;myaccountPBMyAccountLinkComponent;;;;
-;;businessInformationPBMyAccountLinkComponent;Business Information - Profile Bar- Jump to Link;/;businessInformationPBMyAccountLinkComponent;businessInformationPBMyAccountLinkComponent;;;;
-;;orderHistoryPBMyAccountLinkComponent;Order History - Profile Bar- Jump to Link;/;orderHistoryPBMyAccountLinkComponent;orderHistoryPBMyAccountLinkComponent;;;;
+;;businessInformationPBMyAccountLinkComponent;Business Information - Profile Bar- Jump to Link;/amwayapacstorefront/my-account/business-information;businessInformationPBMyAccountLinkComponent;businessInformationPBMyAccountLinkComponent;;;;
+;;orderHistoryPBMyAccountLinkComponent;Order History - Profile Bar- Jump to Link;/amwayapacstorefront/my-account/orders;orderHistoryPBMyAccountLinkComponent;orderHistoryPBMyAccountLinkComponent;;;;
 ;;autoRenewalPBMyAccountLinkComponent;Auto Renewal - Profile Bar- Jump to Link;/;autoRenewalPBMyAccountLinkComponent;autoRenewalPBMyAccountLinkComponent;;;;
 ;;contractsPBMyAccountLinkComponent;Contracts - Profile Bar- Jump to Link;/;contractsPBMyAccountLinkComponent;contractsPBMyAccountLinkComponent;;;;
 ;;editProfilePBMyAccountLinkComponent;Edit Profile - Profile Bar- Jump to Link;/;editProfilePBMyAccountLinkComponent;editProfilePBMyAccountLinkComponent;;;;
@@ -920,7 +920,7 @@ INSERT_UPDATE AmwayApacMyAccountComponent;$contentCV[unique=true];uid[unique=tru
 
 INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow'];
 ;;businessInformationMyAccountLinkComponent;Business Information - Link;/businessinformation;businessInformationMyAccountLinkComponent;businessInformationMyAccountLinkComponent;;;;
-;;orderHistoryMyAccountLinkComponent;Order History - Link;/orderhistory;orderHistoryMyAccountLinkComponent;orderHistoryMyAccountLinkComponent;;;;
+;;orderHistoryMyAccountLinkComponent;Order History - Link;/orders;orderHistoryMyAccountLinkComponent;orderHistoryMyAccountLinkComponent;;;;
 ;;billingShippingMyAccountLinkComponent;Billing Shipping - Link;/billingshipping;billingShippingMyAccountLinkComponent;billingShippingMyAccountLinkComponent;;;;
 ;;autoRenewalMyAccountLinkComponent;Auto Renewal - Link;/autorenewal;autoRenewalMyAccountLinkComponent;autoRenewalMyAccountLinkComponent;;;;
 ;;contractsMyAccountLinkComponent;Contracts - Link;/contracts;contractsMyAccountLinkComponent;contractsMyAccountLinkComponent;;;;
@@ -941,6 +941,26 @@ INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];positi
 
 INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;actions(uid,$contentCV);&componentRef
 ;;AccountBillingShippingComponent;Account Billing & Shipping Component;accountBillingShippingPage.jsp;;AccountBillingShippingComponent
+
+###### Account Business Information Page ######
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;BodyContentBusinessInformationSlot;Body Content Slot for Account Business Information;true;AccountBusinessInformationComponent;;;
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='business-information'];contentSlot(uid,$contentCV)[unique=true];;;
+;;BodyContent-businessinformation;BodyContent;;BodyContentBusinessInformationSlot;;;
+
+INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;actions(uid,$contentCV);&componentRef
+;;AccountBusinessInformationComponent;Account Business Information Component;accountBusinessInformationPage.jsp;;AccountBusinessInformationComponent
+
+###### Account Order History Page ######
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;OrderHistoryInformationSlot;Body Content Slot for Account Order History;true;AccountOrderHistoryComponent;;;
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='orders'];contentSlot(uid,$contentCV)[unique=true];;;
+;;BodyContent-orderhistory;BodyContent;;OrderHistoryInformationSlot;;;
+
+INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;actions(uid,$contentCV);&componentRef
+;;AccountOrderHistoryComponent;Account Order History Component;accountOrderHistoryPage.jsp;;AccountOrderHistoryComponent
 
 # CMS VariantSelector Components
 INSERT_UPDATE ProductVariantSelectorComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef

@@ -379,6 +379,11 @@ public interface ControllerConstants
 		 * Billing & Shipping breadcrumb key
 		 */
 		String BILLING_SHIPPING_PAGE_BREADCRUMB_KEY = "account.billingshipping.page.breadcrumb";
+
+		/**
+		 * Business & Information breadcrumb key
+		 */
+		String BUSINESS_INFORMATION_PAGE_BREADCRUMB_KEY = "account.businessinformation.page.breadcrumb";
 	}
 
 	/**
@@ -483,5 +488,6 @@ public interface ControllerConstants
 			String DELETE_SHOPPING_LIST_SUCCESS_MESSAGE = "shopping.list.remove.success";
 		}
 	}
+
 
 }

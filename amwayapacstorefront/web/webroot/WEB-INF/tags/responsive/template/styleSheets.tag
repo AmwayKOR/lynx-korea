@@ -16,6 +16,7 @@
 	<c:otherwise>
 		<%-- Theme CSS files --%>
 		<link rel="stylesheet" type="text/css" href="${themeResourcePath}/css/style2.css"/>
+		<link rel="stylesheet" type="text/css" href="${themeResourcePath}/css/select2.css"/>
 		<link rel="stylesheet" type="text/css" href="${themeResourcePath}/css/owl.carousel.css">
 		<link rel="stylesheet" type="text/css" href="${themeResourcePath}/css/owl.theme.css">
 		<link rel="stylesheet" type="text/css" href="${themeResourcePath}/css/style.css"/>
