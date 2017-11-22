@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.amway.apac.storefront.components.model.AmwayApacMyAccountProfileBarURLComponentModel;
+import com.amway.apac.storefront.components.model.AmwayApacAccountProfileBarLinkComponentModel;
 import com.amway.apac.storefront.controllers.ControllerConstants;
 
 
@@ -15,10 +15,10 @@ import com.amway.apac.storefront.controllers.ControllerConstants;
  *
  * @author Aaron Yong
  */
-@Controller("AmwayApacMyAccountProfileBarURLComponentController")
-@RequestMapping(value = ControllerConstants.Actions.Cms.AmwayApacMyAccountProfileBarURLComponent)
-public class AmwayApacMyAccountProfileBarURLComponentController
-		extends AmwayApacAbstractCMSLinkComponentController<AmwayApacMyAccountProfileBarURLComponentModel>
+@Controller("AmwayApacAccountProfileBarLinkComponentController")
+@RequestMapping(value = ControllerConstants.Actions.Cms.AmwayApacAccountProfileBarLinkComponent)
+public class AmwayApacAccountProfileBarLinkComponentController
+		extends AmwayApacAbstractCMSLinkComponentController<AmwayApacAccountProfileBarLinkComponentModel>
 {
 
 	/**
@@ -33,7 +33,7 @@ public class AmwayApacMyAccountProfileBarURLComponentController
 	 */
 	@Override
 	protected void fillModel(final HttpServletRequest request, final Model model,
-			final AmwayApacMyAccountProfileBarURLComponentModel component)
+			final AmwayApacAccountProfileBarLinkComponentModel component)
 	{
 		populateLinkUrl(model, component);
 	}

@@ -26,7 +26,7 @@
 </button>
 <ul class="dropdown-menu countryBox"
 	aria-labelledby="countrySelectorDropdown">
-	<c:forEach items="${countryLinks}" var="component">
+	<c:forEach items="${links}" var="component">
 		<c:if test="${component.visible}">
 			<cms:component component="${component}" evaluateRestriction="true" element="li" class="content-item" />
 		</c:if>

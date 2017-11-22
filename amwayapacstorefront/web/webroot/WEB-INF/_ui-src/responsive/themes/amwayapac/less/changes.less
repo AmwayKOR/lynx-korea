@@ -1,20 +1,4 @@
-.font16() {
-	font-size: 16px;
-}
-.btn_shop-now() {
-	margin: 26px 0;
-	display: inline-block;
-	background-color: #002F5F;
-	border: 2px solid #002F5F;
-	padding: 19px 50px;
-	font-size: 18px;
-	font-weight: 600;
-	color: #fff;
-	line-height: 1.11;
-	letter-spacing: 0;
-	text-transform: uppercase;
-}
-
+@import "../../../lib/ybase-0.1.0/less/main.less";
 
 .banner__shop-now {
 	margin: unset;
@@ -378,12 +362,14 @@ div.page-content-wrapper.page-shopping-lists div.create-list-button-wrapper{
 			}
 		}
 }
+
 .ui-widget-content.ui-autocomplete {
-	display: none !important;
+    display: none !important;
 }
 .auto-suggestion-popover .suggested-words-wrapper {
-	min-height: 55px;
+    min-height: 55px;
 }
+
 .amway-theme .ditto-schedule-table-content .ditto-schedule-table thead .ditto-field-name {
   padding: 0 10px 0 30px;
   width: 65%;
@@ -402,5 +388,28 @@ div.page-content-wrapper.page-shopping-lists div.create-list-button-wrapper{
   margin-top: unset;
 }
 #quickShopForm .auto-suggestion-popover {
-	position: inherit;
+    position: inherit;
+}
+.quick-links .quick-links-header a {
+	.font16;
+	color: @blue_1;
+	font-family: @font_sans;
+	line-height: 1.5em;
+	font-weight: @weight100;
+	text-transform: uppercase;
+}
+
+.quick-links ul li a {
+	.font16;
+	line-height: 2;
+	color: @blue_1;
+	font-weight: @weight100;
+	cursor: pointer;
+}
+.quick-links-misc li:nth-child(2) img:first-child {
+    width: 32px;
+}
+.quick-links-misc li:nth-child(2) a {
+	display: inline-block;
+	padding-right: 20px;
 }

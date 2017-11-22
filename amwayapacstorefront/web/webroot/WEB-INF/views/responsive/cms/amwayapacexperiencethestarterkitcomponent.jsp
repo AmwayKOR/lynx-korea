@@ -1,31 +1,32 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<div class="experience-brands clearfix clear-border">
-	<div class="new-hot-brand">
-		<div class="experience-brands__content bg-white clear-bg">
-			<div class="wrapper-limit extra3">
-				<div class="wrapper">
-					<div class="banner-content">
-						<div class="banner-title-wrapper">
-							<h2 class="banner-title">
-								<span>${headerText} </span>
-							</h2>
-							<div class="sub-title-wrap">
-								<span class="banner-sub-title"> <span><cms:component
-											component="${details}" /></span></span>
-							</div>
-						</div>
-						<div class="banner-button-wrap">
-							<cms:component component="${offerImageLink}" />
-						</div>
-					</div>
-					<img class="experience-brands__image experience-brands__image_magazine"
-						src="${backgroundImage.media.url}" alt="new-hot-brand" />
-				</div>
+<c:forEach items="${medias}" var="media">
+	<c:choose>
+		<c:when test="${empty imagerData}">
+			<c:set var="imagerData">"${media.width}":"${media.url}"</c:set>
+		</c:when>
+		<c:otherwise>
+			<c:set var="imagerData">${imagerData},"${media.width}":"${media.url}"</c:set>
+		</c:otherwise>
+	</c:choose>
+	<c:if test="${empty altText}">
+		<c:set var="altText" value="${fn:escapeXml(media.altText)}" />
+	</c:if>
+</c:forEach>
+
+<div class="wrapper-limit extra3">
+	<div class="wrapper">
+		<div class="banner-content">
+			<div class="banner-title-wrapper">
+				<cms:component component="${component.text}" />
+			</div>
+			<div class="banner-button-wrap">
+				<cms:component component="${component.link}" />
 			</div>
 		</div>
-
+		<img class="experience-brands__image experience-brands__image_magazine js-responsive-image" data-media='{${imagerData}}' alt='${altText}' title='${altText}' />
 	</div>
 </div>

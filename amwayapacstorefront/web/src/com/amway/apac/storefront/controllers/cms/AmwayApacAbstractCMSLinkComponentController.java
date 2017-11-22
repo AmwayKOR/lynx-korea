@@ -1,3 +1,6 @@
+/**
+ *
+ */
 package com.amway.apac.storefront.controllers.cms;
 
 import de.hybris.platform.cms2.model.contents.components.CMSLinkComponentModel;
@@ -11,9 +14,7 @@ import com.amway.apac.storefront.controllers.ControllerConstants;
 
 
 /**
- * Abstract controller to populate the url for link components.
- *
- * @author Avnish Alaugh
+ * @author avnishalaugh
  *
  */
 public abstract class AmwayApacAbstractCMSLinkComponentController<T extends CMSLinkComponentModel>
@@ -22,17 +23,10 @@ public abstract class AmwayApacAbstractCMSLinkComponentController<T extends CMSL
 	@Resource(name = "amwayApacCmsLinkComponentUrlResolver")
 	private UrlResolver<CMSLinkComponentModel> amwayApacCmsLinkComponentUrlResolver;
 
-	/**
-	 * Populates the url for the link component.
-	 *
-	 * @param model
-	 *           view model
-	 * @param component
-	 *           component
-	 */
 	protected void populateLinkUrl(final Model model, final T component)
 	{
-		model.addAttribute(ControllerConstants.ModelParameters.LINK_URL, amwayApacCmsLinkComponentUrlResolver.resolve(component));
+		model.addAttribute(ControllerConstants.ModelParameters.LINK_URL_STRING,
+				amwayApacCmsLinkComponentUrlResolver.resolve(component));
 	}
 }
 

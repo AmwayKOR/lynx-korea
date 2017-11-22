@@ -24,11 +24,25 @@ import de.hybris.platform.acceleratorcms.model.components.SubCategoryListCompone
 import de.hybris.platform.cms2.model.contents.components.CMSLinkComponentModel;
 import de.hybris.platform.cms2lib.model.components.ProductCarouselComponentModel;
 
-import com.amway.apac.core.model.components.AmwayApacShopByCategoryComponentModel;
+import com.amway.apac.storefront.components.model.AmwayApacAccountProfileBarLinkComponentModel;
+import com.amway.apac.storefront.components.model.AmwayApacArtistryDealCarouselComponentModel;
+import com.amway.apac.storefront.components.model.AmwayApacArtistryNewLuxuryCarouselComponentModel;
+import com.amway.apac.storefront.components.model.AmwayApacBuildYourBusinessComponentModel;
 import com.amway.apac.storefront.components.model.AmwayApacButtonLinkComponentModel;
+import com.amway.apac.storefront.components.model.AmwayApacCategoryTopBannerComponentModel;
+import com.amway.apac.storefront.components.model.AmwayApacExperienceTheStarterKitComponentModel;
 import com.amway.apac.storefront.components.model.AmwayApacIconLinkComponentModel;
 import com.amway.apac.storefront.components.model.AmwayApacImageLinkComponentModel;
-import com.amway.apac.storefront.components.model.AmwayApacMyAccountProfileBarURLComponentModel;
+import com.amway.apac.storefront.components.model.AmwayApacJoinAmwayComponentModel;
+import com.amway.apac.storefront.components.model.AmwayApacNewProductComponentModel;
+import com.amway.apac.storefront.components.model.AmwayApacOurNewProductComponentModel;
+import com.amway.apac.storefront.components.model.AmwayApacPathToSuccessPitchPerfectComponentModel;
+import com.amway.apac.storefront.components.model.AmwayApacPathwayToSuccessComponentModel;
+import com.amway.apac.storefront.components.model.AmwayApacPlatinumABOComponentModel;
+import com.amway.apac.storefront.components.model.AmwayApacShopByCategoryComponentModel;
+import com.amway.apac.storefront.components.model.AmwayApacSupplementsComponentModel;
+import com.amway.apac.storefront.components.model.AmwayApacToolsAndAdviceComponentModel;
+import com.amway.apac.storefront.components.model.AmwayApacYourOpportunityComponentModel;
 
 
 
@@ -73,8 +87,26 @@ public interface ControllerConstants
 			String AmwayApacButtonLinkComponent = _Prefix + AmwayApacButtonLinkComponentModel._TYPECODE + _Suffix; // NOSONAR
 			String AmwayApacIconLinkComponent = _Prefix + AmwayApacIconLinkComponentModel._TYPECODE + _Suffix; // NOSONAR
 			String AmwayApacImageLinkComponent = _Prefix + AmwayApacImageLinkComponentModel._TYPECODE + _Suffix; // NOSONAR
-			String AmwayApacMyAccountProfileBarURLComponent = _Prefix + AmwayApacMyAccountProfileBarURLComponentModel._TYPECODE
+			String AmwayApacAccountProfileBarLinkComponent = _Prefix + AmwayApacAccountProfileBarLinkComponentModel._TYPECODE
 					+ _Suffix; // NOSONAR
+			String AmwayApacCategoryTopBannerComponent = _Prefix + AmwayApacCategoryTopBannerComponentModel._TYPECODE + _Suffix; // NOSONAR
+			String AmwayApacOurNewProductComponent = _Prefix + AmwayApacOurNewProductComponentModel._TYPECODE + _Suffix; // NOSONAR
+			String AmwayApacToolsAndAdviceComponent = _Prefix + AmwayApacToolsAndAdviceComponentModel._TYPECODE + _Suffix; // NOSONAR
+			String AmwayApacPathToSuccessPitchPerfectComponent = _Prefix + AmwayApacPathToSuccessPitchPerfectComponentModel._TYPECODE
+					+ _Suffix; // NOSONAR
+			String AmwayApacPathwayToSuccessComponent = _Prefix + AmwayApacPathwayToSuccessComponentModel._TYPECODE + _Suffix; // NOSONAR
+			String AmwayApacBuildYourBusinessComponent = _Prefix + AmwayApacBuildYourBusinessComponentModel._TYPECODE + _Suffix; // NOSONAR
+			String AmwayApacPlatinumABOComponent = _Prefix + AmwayApacPlatinumABOComponentModel._TYPECODE + _Suffix; // NOSONAR
+			String AmwayApacExperienceTheStarterKitComponent = _Prefix + AmwayApacExperienceTheStarterKitComponentModel._TYPECODE
+					+ _Suffix; // NOSONAR
+			String AmwayApacJoinAmwayComponent = _Prefix + AmwayApacJoinAmwayComponentModel._TYPECODE + _Suffix; // NOSONAR
+			String AmwayApacArtistryDealCarouselComponent = _Prefix + AmwayApacArtistryDealCarouselComponentModel._TYPECODE
+					+ _Suffix; // NOSONAR
+			String AmwayApacArtistryNewLuxuryCarouselComponent = _Prefix + AmwayApacArtistryNewLuxuryCarouselComponentModel._TYPECODE
+					+ _Suffix; // NOSONAR
+			String AmwayApacNewProductComponent = _Prefix + AmwayApacNewProductComponentModel._TYPECODE + _Suffix; // NOSONAR
+			String AmwayApacSupplementsComponent = _Prefix + AmwayApacSupplementsComponentModel._TYPECODE + _Suffix; // NOSONAR
+			String AmwayApacYourOpportunityComponent = _Prefix + AmwayApacYourOpportunityComponentModel._TYPECODE + _Suffix; // NOSONAR
 		}
 	}
 
@@ -188,6 +220,7 @@ public interface ControllerConstants
 			{
 				String RegistrationSimpleTerms = "pages/registration/registrationSimpleTerms"; //NOSONAR
 			}
+
 		}
 
 		interface Fragments
@@ -315,6 +348,25 @@ public interface ControllerConstants
 		 */
 		String SUPPORTEDCOUNTRIES_ATTR = "supportedCountries";
 
+		/**
+		 * String constant linkUrl
+		 */
+		String LINK_URL_STRING = "linkUrl";
+
+		/**
+		 * String constant linkUrl
+		 */
+		String SECONDARY_LINK_URL_STRING = "secondaryLinkUrl";
+
+		/**
+		 * String constant linkUrl
+		 */
+		String MEDIAS_STRING = "medias";
+
+		/**
+		 * String constant linkUrl
+		 */
+		String SECONDARY_MEDIAS_STRING = "secondaryMedias";
 	}
 
 	/**
@@ -351,19 +403,9 @@ public interface ControllerConstants
 		String SHOPPING_LIST_SORT_BY_NAME = "byName";
 
 		/**
-		 * Shopping list sorting parameter to sort by addedFor user.
-		 */
-		String SHOPPING_LIST_SORT_BY_ADDED_FOR = "byAddedFor";
-
-		/**
 		 * Shopping list sorting parameter to sort by lastUpdated.
 		 */
 		String SHOPPING_LIST_SORT_BY_LAST_UPDATED = "byLastUpdated";
-
-		/**
-		 * Shopping list sorting parameter to sort by lastUpdated.
-		 */
-		String SHOPPING_LIST_SORT_BY_USER = "byUser";
 
 		/**
 		 * Prefix appended to status for add product to shopping list messages.

@@ -10,13 +10,11 @@
 
 <template:page pageTitle="${pageTitle}">
 	<div id="register-landing-page">
-	
 		<div id="masthead" class="main-container">
 			<cms:pageSlot position="JoinAmwayContentSlot" var="component">
 				<cms:component component="${component}" />
 			</cms:pageSlot>
 		</div>
-		
 		<div class="container-fluid main-container small-wrap">
 			<cms:pageSlot position="WeAreAmwayContentSlot" var="component">
 				<cms:component component="${component}" />
@@ -35,24 +33,21 @@
 				</div>
 			</div>
 			<div class="footer-notice italic">
-				<div class="tips">
-                    <div class="toolTips">
-                        <div id="triangle-down"></div>
-                        <cms:pageSlot position="FooterNoticeToolTipParagraphContentSlot"
-							var="component">
+				<cms:pageSlot position="FooterNoticeToolTipParagraphContentSlot" var="component">
+					<div class="tips">
+						<div class="toolTips">
+							<div id="triangle-down"></div>
 							<cms:component component="${component}" />
-						</cms:pageSlot>
-                    </div>
-                    <a href="javascript:void(0)" class="upTips">
-                        <i class="icon icon-infos"></i>
-                    </a>
-                </div>
-				<cms:pageSlot position="FooterNoticeParagraphContentSlot"
-					var="component">
+						</div>
+						<a href="javascript:void(0)" class="upTips">
+							<i class="icon icon-infos"></i>
+						</a>
+					</div>
+				</cms:pageSlot>
+				<cms:pageSlot position="FooterNoticeParagraphContentSlot" var="component">
 					<cms:component component="${component}" />
 				</cms:pageSlot>
 			</div>
 		</div>
-
 	</div>
 </template:page>

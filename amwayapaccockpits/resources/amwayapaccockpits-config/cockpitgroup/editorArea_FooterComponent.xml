@@ -132,7 +132,7 @@
 			    <value>true</value>
 			</parameter>
 		</property>
-		<property qualifier="FooterComponent.simpleBannerComponents">
+		<property qualifier="FooterComponent.brandBanners">
 			<parameter>
 				<name>editable</name>
 			    <value>true</value>

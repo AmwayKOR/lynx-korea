@@ -59,6 +59,7 @@
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.forgottenpassword.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.global.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.hopdebug.js"></script>
+		<script type="text/javascript" src="${commonResourcePath}/js/acc.registerterms.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.imagegallery.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.langcurrencyselector.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.minicart.js"></script>

@@ -26,341 +26,24 @@ $contentPage=contentPage(uid, $contentCV);
 $siteResource=jar:com.amway.apac.initialdata.setup.AmwayApacInitialDataSystemSetup&/amwayapacinitialdata/import/sampledata/contentCatalogs/$contentCatalog/images
 $productResource=jar:com.amway.apac.initialdata.setup.AmwayApacInitialDataSystemSetup&/amwayapacinitialdata/import/productCatalogs/$productCatalog
 $jarResourceCms=jar:com.amway.apac.initialdata.setup.AmwayApacInitialDataSystemSetup&/amwayapacinitialdata/import/cockpits/cmscockpit
+$medias=medias(code, $contentCV);
+$mediaContainer=media(qualifier, $contentCV);
 
+########## Top Header Logo
 
-#Top Header logo
-
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
-;;SiteLogoSlot;Header Logo;true;refTopHeaderLogo
-
-#INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='homepage'];contentSlot(uid,$contentCV)[unique=true]
-#;;TopHeaderLogo-Homepage;SiteLogo;;TopHeaderLogo-Homepage
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;SiteLogoSlot;TopHeaderLogoComponent
 
 INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink
-;;TopHeaderLogoSBComponent;Top Header Logo SB Component;refTopHeaderLogo;"/"
+;;TopHeaderLogoComponent;Top Header Logo Component;TopHeaderLogoComponent;"/"
 
+########## Top Header Logo ##########
 
 
+########## Country Selector
 
-#Section 1 carousel
-
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
-;;Section1CarouselSlot-Homepage;Section 1 Carousel Slot for Homepage;true;refSection1
-
-INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='homepage'];contentSlot(uid,$contentCV)[unique=true]
-;;Section1CarouselSlot-Homepage;Section1;;Section1CarouselSlot-Homepage
-
-
-INSERT_UPDATE AmwayApacArtistryDealCarouselComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink;
-;;AmwayApacArtistryDealCarouselComponent;Girl Thumbnail Detail;AmwayApacArtistryDealCarouselComponent;/
-
-
-INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow'];
-;;HomepageSection1CarouselShopNowNavLink;Shop Now Nav Link;/;HomepageSection1CarouselShopNowNavLink;HomepageSection1CarouselShopNowNavLink;;;;
-;;HomepageSection1CarouselSecNavLink;Secondary Action Nav Link;/;HomepageSection1CarouselSecNavLink;HomepageSection1CarouselSecNavLink;;;;
-
-
-INSERT_UPDATE RotatingImagesComponent;$contentCV[unique=true];uid[unique=true];name;banners(&componentRef);&componentRef
-;;HomepageSection1CarouselComponent;Homepage Carousel 1;AmwayApacArtistryDealCarouselComponent;refSection1
-
-
-
-
-#Section 2
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
-;;Section2ContentSlot-Homepage;Section 2 Content Slot for Homepage;true;refSection2
-
-INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='homepage'];contentSlot(uid,$contentCV)[unique=true]
-;;Section2ContentSlot-Homepage;Section2;;Section2ContentSlot-Homepage
-
-INSERT_UPDATE AmwayApacLatestNewsComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;
-;;AmwayApacLatestNewsComponent;Amway Latest News Detail;refSection2;
-
-INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow'];
-;;HomepageSection2ReadMoreNavLink;Read More Nav Link;/;HomepageSection2ReadMoreNavLink;HomepageSection2ReadMoreNavLink;;;;
-
-
-#Section 3
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
-;;Section3AContentSlot-Homepage;Section 3A Content Slot for Homepage;true;refSection3A
-;;Section3BContentSlot-Homepage;Section 3B Content Slot for Homepage;true;refSection3B
-
-INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='homepage'];contentSlot(uid,$contentCV)[unique=true]
-;;Section3AContentSlot-Homepage;Section3A;;Section3AContentSlot-Homepage
-;;Section3BContentSlot-Homepage;Section3B;;Section3BContentSlot-Homepage
-
-INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;target(code)[default='sameWindow'];&componentRef
-;;amwayApacHomepageSection3ATryNowNavLink;Try Now Nav Link;/;amwayApacHomepageSection3ATryNowNavLink;;amwayApacHomepageSection3ATryNowNavLink;
-;;amwayApacHomepageSection3BLearnMoreNavLink;Learn More Nav Link;/;amwayApacHomepageSection3BLearnMoreNavLink;;amwayApacHomepageSection3BLearnMoreNavLink;
-
-INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink
-;;Section3ASBComponent;Section 3A SB Component;Section3ASBComponent;"/"
-;;Section3BSBComponent;Section 3B SB Component;Section3BSBComponent;"/"
-
-INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
-;;Section3AParacomponent;;Section3AParacomponent
-;;Section3BParacomponent;;Section3BParacomponent
-
-INSERT_UPDATE AmwayApacPathToSuccessPitchPerfectComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;
-;;HomePageSection3ACustomComponent;Amway Path to success;refSection3A;
-;;HomePageSection3BCustomComponent;Amway Pitch Perfect;refSection3B;
-
-
-
-
-#Section 4
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
-;;Section4ContentSlot-Homepage;Section 4 Content Slot for Homepage;true;refSection4
-
-INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='homepage'];contentSlot(uid,$contentCV)[unique=true]
-;;Section4ContentSlot-Homepage;Section4;;Section4ContentSlot-Homepage
-
-INSERT_UPDATE AmwayApacOurNewProductComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;
-;;AmwayApacOurNewProductComponent;Section 4 details;refSection4;
-
-
-
-
-#Section 5 carousel
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
-;;Section5CarouselSlot-Homepage;Section 5 Carousel Slot for Homepage;true;refSection5
-
-INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='homepage'];contentSlot(uid,$contentCV)[unique=true]
-;;Section5CarouselSlot-Homepage;Section5;;Section5CarouselSlot-Homepage
-
-
-INSERT_UPDATE AmwayApacArtistryNewLuxuryCarouselComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink;
-;;AmwayApacArtistryNewLuxuryCarouselComponent;Artistry Section 5 Thumbnail Detail;AmwayApacArtistryNewLuxuryCarouselComponent;/
-
-INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow'];
-;;HomepageSection5CarouselShopNowNavLink;Shop Now Nav Link;/;HomepageSection5CarouselShopNowNavLink;HomepageSection5CarouselShopNowNavLink;;;;
-
-INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true]  ;&componentRef
-;;Section5ParaTitleComponent;;Section5ParaTitleComponent
-
-INSERT_UPDATE AmwayApacArtistryNewLuxuryRotatingComponent;$contentCV[unique=true];uid[unique=true];name;banners(&componentRef);&componentRef
-;;AmwayApacArtistryNewLuxuryRotatingComponent;Homepage Carousel Section 5;AmwayApacArtistryNewLuxuryCarouselComponent;refSection5
-
-
-#Section 6
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
-;;Section6ASlot-Homepage;Section 6A Slot for Homepage;true;refSection6A
-;;Section6BSlot-Homepage;Section 6B Slot for Homepage;true;refSection6B
-;;Section6CSlot-Homepage;Section 6C Slot for Homepage;true;refSection6C
-
-INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='homepage'];contentSlot(uid,$contentCV)[unique=true]
-;;Section6ASlot-Homepage;Section6A;;Section6ASlot-Homepage
-;;Section6BSlot-Homepage;Section6B;;Section6BSlot-Homepage
-;;Section6CSlot-Homepage;Section6C;;Section6CSlot-Homepage
-
-INSERT_UPDATE AmwayApacNewProductComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;
-;;HomePageSection6ACustomComponent;Section 6A Detail;refSection6A;
-;;HomePageSection6BCustomComponent;Section 6B Detail;refSection6B;
-;;HomePageSection6CCustomComponent;Section 6C Detail;refSection6C;
-
-INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink
-;;Section6ASBComponent;Section 6A SB Component;Section6ASBComponent;"/"
-;;Section6BSBComponent;Section 6B SB Component;Section6BSBComponent;"/"
-;;Section6CSBComponent;Section 6C SB Component;Section6CSBComponent;"/"
-
-INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow'];
-;;HomepageSection6AShopNowNavLink;Shop Now Nav Link;/;HomepageSection6AShopNowNavLink;HomepageSection6AShopNowNavLink;;;;
-;;HomepageSection6BShopNowNavLink;Shop Now Nav Link;/;HomepageSection6BShopNowNavLink;HomepageSection6BShopNowNavLink;;;;
-;;HomepageSection6CShopNowNavLink;Shop Now Nav Link;/;HomepageSection6CShopNowNavLink;HomepageSection6CShopNowNavLink;;;;
-
-INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true]  ;&componentRef
-;;Section6AParaComponent;;Section6AParaComponent
-;;Section6BParaComponent;;Section6BParaComponent
-;;Section6CParaComponent;;Section6CParaComponent
-
-
-
-#Section 7
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
-;;Section7Slot-Homepage;Section 7 Slot for Homepage;true;refSection7
-
-INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='homepage'];contentSlot(uid,$contentCV)[unique=true]
-;;Section7Slot-Homepage;Section7;;Section7Slot-Homepage
-
-INSERT_UPDATE AmwayApacPlatinumABOComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;
-;;AmwayApacPlatinumABOComponent;Section 7 Detail;refSection7;
-
-INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink
-;;Section7SBComponent;Section 7 SB Component;Section7SBComponent;"/"
-
-INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow'];
-;;HomepageSection7LearnMoreNavLink;Learn More Nav Link;/;HomepageSection7LearnMoreNavLink;HomepageSection7LearnMoreNavLink;;;;
-
-INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true]  ;&componentRef
-;;Section7ParaComponent;;Section7ParaComponent
-
-
-
-#Section 8
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
-;;Section8Slot-Homepage;Section 8 Slot for Homepage;true;refSection8
-
-INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='homepage'];contentSlot(uid,$contentCV)[unique=true]
-;;Section8Slot-Homepage;Section8;;Section8Slot-Homepage
-
-INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true]  ;&componentRef
-;;Section8ParaComponent;refSection8
-
-
-
-#Section 9
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
-;;Section9ASlot-Homepage;Section 9A Slot for Homepage;true;refSection9A
-;;Section9BSlot-Homepage;Section 9B Slot for Homepage;true;refSection9B
-;;Section9CSlot-Homepage;Section 9C Slot for Homepage;true;refSection9C
-
-INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='homepage'];contentSlot(uid,$contentCV)[unique=true]
-;;Section9ASlot-Homepage;Section9A;;Section9ASlot-Homepage
-;;Section9BSlot-Homepage;Section9B;;Section9BSlot-Homepage
-;;Section9CSlot-Homepage;Section9C;;Section9CSlot-Homepage
-
-INSERT_UPDATE AmwayApacSupplementsComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;
-;;HomePageSection9ACustomComponent;Section 9A Detail;refSection9A;
-;;HomePageSection9BCustomComponent;Section 9B Detail;refSection9B;
-;;HomePageSection9CCustomComponent;Section 9C Detail;refSection9C;
-
-INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink
-;;Section9ASBComponent;Section 9A SB Component;Section9ASBComponent;"/"
-;;Section9BSBComponent;Section 9B SB Component;Section9BSBComponent;"/"
-;;Section9CSBComponent;Section 9C SB Component;Section9CSBComponent;"/"
-
-INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow'];
-;;HomepageSection9AShopNowNavLink;Shop Now Nav Link;/;HomepageSection9AShopNowNavLink;HomepageSection9AShopNowNavLink;;;;
-;;HomepageSection9BShopNowNavLink;Shop Now Nav Link;/;HomepageSection9BShopNowNavLink;HomepageSection9BShopNowNavLink;;;;
-;;HomepageSection9CShopNowNavLink;Shop Now Nav Link;/;HomepageSection9CShopNowNavLink;HomepageSection9CShopNowNavLink;;;;
-
-INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true]  ;&componentRef
-;;Section9AParaComponent;;Section9AParaComponent
-;;Section9BParaComponent;;Section9BParaComponent
-;;Section9CParaComponent;;Section9CParaComponent
-
-
-#Section 10
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
-;;Section10Slot-Homepage;Section 10 Slot for Homepage;true;refSection10
-
-INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='homepage'];contentSlot(uid,$contentCV)[unique=true]
-;;Section10Slot-Homepage;Section10;;Section10Slot-Homepage
-
-INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true]  ;&componentRef
-;;Section10ParaComponent;;Section10ParaComponent
-
-INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink
-;;Section10SB1Component;Section 10 SB Component GIF 1;Section10SB1Component;"/"
-;;Section10SB2Component;Section 10 SB Component GIF 2;Section10SB2Component;"/"
-
-INSERT_UPDATE AmwayApacYourOpportunityComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;
-;;AmwayApacYourOpportunityComponent;Section 10 Detail;refSection10;
-
-
-#Section 11
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
-;;Section11Slot-Homepage;Section 11 Slot for Homepage;true;refSection11
-
-INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='homepage'];contentSlot(uid,$contentCV)[unique=true]
-;;Section11Slot-Homepage;Section11;;Section11Slot-Homepage
-
-INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true]  ;&componentRef
-;;Section11ParaComponent;refSection11
-
-
-#Section 12
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
-;;Section12Slot-Homepage;Section 12 Slot for Homepage;true;refSection12
-
-INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='homepage'];contentSlot(uid,$contentCV)[unique=true]
-;;Section12Slot-Homepage;Section12;;Section12Slot-Homepage
-
-INSERT_UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink;
-;;HomePageSection12NutriliteBannerComponent;Section 12 Nutrilite Banner Detail;HomePageSection12NutriliteBannerComponent;/
-;;HomePageSection12XSBannerComponent;Section 12 XS Banner Detail;HomePageSection12XSBannerComponent;/
-;;HomePageSection12ArtistryBannerComponent;Section 12 Artistry Banner Detail;HomePageSection12ArtistryBannerComponent;/
-;;HomePageSection12GlisterBannerComponent;Section 12 Glister Banner Detail;HomePageSection12GlisterBannerComponent;/
-;;HomePageSection12icookBannerComponent;Section 12 icook Banner Detail;HomePageSection12icookBannerComponent;/
-;;HomePageSection12Nutrilite2BannerComponent;Section 12 Nutrilite2 Banner Detail;HomePageSection12Nutrilite2BannerComponent;/
-
-INSERT_UPDATE AmwayApacFeaturedBrandsCarouselComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
-;;AmwayApacFeaturedBrandsCarouselComponent;Homepage Carousel Section 12;refSection12
-
-
-
-#Footer
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
-;;FooterSlot;FooterSlot-Homepage;true;refFooter
-
-
-# CMS Navigation Nodes
-INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);&nodeRef;links(&linkRef);visible;nodeLink(&componentRef)
-;root;;root;;root;;;;
-
-
-##### footer section
-;FooterNode;;FooterNode;root;FooterNode;;true;;
-;FeatureBrandsNode;;FeatureBrandsNode;FooterNode;FeatureBrandsNode;FooterFeaturedBrands_NutrilleNavLink,FooterFeaturedBrands_AtistryNavLink,FooterFeaturedBrands_LegacyNavLink,FooterFeaturedBrands_XSNavLink,FooterFeaturedBrands_SatiniqueNavLink;true;;
-;StartBusinessNode;;StartBusinessNode;FooterNode;StartBusinessNode;FooterStartYourBusiness_StartYourBusinessNavLink,FooterStartYourBusiness_ExclusiveProdNavLink,FooterStartYourBusiness_LowCostNavLink,FooterStartYourBusiness_SuccessSupportNavLink,FooterStartYourBusiness_OurLocationsNavLink,FooterStartYourBusiness_EventsNavLink;true;;
-;ResourcesNode;;ResourcesNode;FooterNode;ResourcesNode;FooterResources_CatalogsNavLink,FooterResources_RibbonGiftCardsNavLink,FooterResources_PartnerStoresNavLink,FooterResources_AchieveMagazineNavLink,FooterResources_IBOAssociationNavLink;true;;
-;SupportNode;;SupportNode;FooterNode;SupportNode;FooterSupport_ContactUsNavLink,FooterSupport_ReturnsNavLink,FooterSupport_ShippingAndDeliveryNavLink,FooterSupport_SalesTaxNavLink,FooterSupport_MagagingDittoNavLink;true;;
-
-
-INSERT_UPDATE FooterComponent;$contentCV[unique=true];uid[unique=true];navigationNodes(&nodeRef);&componentRef
-;;footerComponent;FooterNode;refFooter
-
-
-INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow'];
-
-;;FooterFeaturedBrands_NutrilleNavLink;Footer Featured Brands - Nutrille Nav Link;/;FooterFeaturedBrands_NutrilleNavLink;FooterFeaturedBrands_NutrilleNavLink;;;;
-;;FooterFeaturedBrands_AtistryNavLink;Footer Featured Brands - Atistry Nav Link;/;FooterFeaturedBrands_AtistryNavLink;FooterFeaturedBrands_AtistryNavLink;;;;
-;;FooterFeaturedBrands_LegacyNavLink;Footer Featured Brands - Legacy of Clean Nav Link;/;FooterFeaturedBrands_LegacyNavLink;FooterFeaturedBrands_LegacyNavLink;;;;
-;;FooterFeaturedBrands_XSNavLink;Footer Featured Brands - XS Nav Link;/;FooterFeaturedBrands_XSNavLink;FooterFeaturedBrands_XSNavLink;;;;
-;;FooterFeaturedBrands_SatiniqueNavLink;Footer Featured Brands - Satinique Nav Link;/;FooterFeaturedBrands_SatiniqueNavLink;FooterFeaturedBrands_SatiniqueNavLink;;;;
-
-;;FooterStartYourBusiness_StartYourBusinessNavLink;Footer StartYourBusiness - Start your business Nav Link;/;FooterStartYourBusiness_StartYourBusinessNavLink;FooterStartYourBusiness_StartYourBusinessNavLink;;;;
-;;FooterStartYourBusiness_ExclusiveProdNavLink;Footer StartYourBusiness - Exclusive Products Nav Link;/;FooterStartYourBusiness_ExclusiveProdNavLink;FooterStartYourBusiness_ExclusiveProdNavLink;;;;
-;;FooterStartYourBusiness_LowCostNavLink;Footer StartYourBusiness - Low Cost Setup Nav Link;/;FooterStartYourBusiness_LowCostNavLink;FooterStartYourBusiness_LowCostNavLink;;;;
-;;FooterStartYourBusiness_SuccessSupportNavLink;Footer StartYourBusiness - Success & Support Nav Link;/;FooterStartYourBusiness_SuccessSupportNavLink;FooterStartYourBusiness_SuccessSupportNavLink;;;;
-;;FooterStartYourBusiness_OurLocationsNavLink;Footer StartYourBusiness - Our Locations Nav Link;/;FooterStartYourBusiness_OurLocationsNavLink;FooterStartYourBusiness_OurLocationsNavLink;;;;
-;;FooterStartYourBusiness_EventsNavLink;Footer StartYourBusiness - Events Nav Link;/;FooterStartYourBusiness_EventsNavLink;FooterStartYourBusiness_EventsNavLink;;;;
-
-;;FooterResources_CatalogsNavLink;Footer Resources - Catalogs Nav Link;/;FooterResources_CatalogsNavLink;FooterResources_CatalogsNavLink;;;;
-;;FooterResources_RibbonGiftCardsNavLink;Footer Resources - Ribbon Gift Cards Nav Link;/;FooterResources_RibbonGiftCardsNavLink;FooterResources_RibbonGiftCardsNavLink;;;;
-;;FooterResources_PartnerStoresNavLink;Footer Resources - Partner Stores Nav Link;/;FooterResources_PartnerStoresNavLink;FooterResources_PartnerStoresNavLink;;;;
-;;FooterResources_AchieveMagazineNavLink;Footer Resources - Achieve Magazine Nav Link;/;FooterResources_AchieveMagazineNavLink;FooterResources_AchieveMagazineNavLink;;;;
-;;FooterResources_IBOAssociationNavLink;Footer Resources - IBO Association Nav Link;/;FooterResources_IBOAssociationNavLink;FooterResources_IBOAssociationNavLink;;;;
-
-;;FooterSupport_ContactUsNavLink;Footer Support - Contact Us Nav Link;/;FooterSupport_ContactUsNavLink;FooterSupport_ContactUsNavLink;;;;
-;;FooterSupport_ReturnsNavLink;Footer Support - Returns Nav Link;/;FooterSupport_ReturnsNavLink;FooterSupport_ReturnsNavLink;;;;
-;;FooterSupport_ShippingAndDeliveryNavLink;Footer Support - Shipping and Delivery Nav Link;/;FooterSupport_ShippingAndDeliveryNavLink;FooterSupport_ShippingAndDeliveryNavLink;;;;
-;;FooterSupport_SalesTaxNavLink;Footer Support - Sales Tax Nav Link;/;FooterSupport_SalesTaxNavLink;FooterSupport_SalesTaxNavLink;;;;
-;;FooterSupport_MagagingDittoNavLink;Footer Support - Magaging Ditto Nav Link;/;FooterSupport_MagagingDittoNavLink;FooterSupport_MagagingDittoNavLink;;;;
-
-;;FooterPrivacyNavLink;Footer Privacy and Security Nav Link;/;FooterPrivacyNavLink;FooterPrivacyNavLink;;;;
-;;FooterTermsNavLink;Footer Terms of Use Nav Link;/;FooterTermsNavLink;FooterTermsNavLink;;;;
-;;FooterSiteMapNavLink;Footer Site Map Nav Link;/;FooterSiteMapNavLink;FooterSiteMapNavLink;;;;
-;;FooteramwayGlobalNavLink;Footer amwayglobal Nav Link;www.amwayglobal.com;FooteramwayGlobalNavLink;FooteramwayGlobalNavLink;;;;
-
-INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink
-;;FooterFacebookSBComponent;Footer Facebook SB Component;FooterFacebookSBComponent;"/"
-;;FooterTwitterSBComponent;Footer Twitter SB Component;FooterTwitterSBComponent;"/"
-;;FooterGooglePlusSBComponent;Footer Google Plus SB Component;FooterGooglePlusSBComponent;"/"
-;;FooterInstagramSBComponent;Footer Instagram SB Component;FooterInstagramSBComponent;"/"
-;;FooterYoutubeSBComponent;Footer Youtube SB Component;FooterYoutubeSBComponent;"/"
-;;FooterLineSBComponent;Footer Line SB Component;FooterLineSBComponent;"/"
-;;FooterTalkSBComponent;Footer Talk SB Component;FooterTalkSBComponent;"/"
-;;FooterAmwayLogoSBComponent;Footer Amway Logo SB Component;FooterAmwayLogoSBComponent;"/"
-;;FooterConnectionsSBComponent;Footer Connections SB Component;FooterConnectionsSBComponent;"/"
-;;FooterAppleStoreSBComponent;Footer AppleStore SB Component;FooterAppleStoreSBComponent;"/"
-;;FooterSBComponent;Footer SB Component;FooterSBComponent;"/"
-
-
-########### Country Selector
-
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid,$contentCV)
-;;CountrySelectorSlot; Country Selector Links;true;amwayapacCountrySelectionCollectionComponent
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(uid,$contentCV)
+;;CountrySelectorSlot;amwayapacCountrySelectionCollectionComponent
 
 INSERT_UPDATE AmwayApacImageLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&componentRef;
 ;;amwayapacChinaComponent;China;/;amwayapacChinaComponent
@@ -371,33 +54,16 @@ INSERT_UPDATE AmwayApacImageLinkComponent;$contentCV[unique=true];uid[unique=tru
 ;;amwayapacSingaporeComponent;Singapore;/;amwayapacSingaporeComponent
 ;;amwayapacJapanComponent;Japan;/;amwayapacJapanComponent
 
-INSERT_UPDATE AmwayApacCountrySelectionCollectionComponent;$contentCV[unique=true];uid[unique=true];name;currentCountry(uid,$contentCV);countryLinks(uid,$contentCV)
-;;amwayapacCountrySelectionCollectionComponent; Country Selector Collection Component;amwayapacJapanComponent;amwayapacChinaComponent,amwayapacMalaysiaComponent,amwayapacPhilippinesComponent,amwayapacKoreaComponent,amwayapacThailandComponent,amwayapacSingaporeComponent,amwayapacJapanComponent;
+INSERT_UPDATE AmwayApacCountrySelectorComponent;$contentCV[unique=true];uid[unique=true];name;currentCountry(uid,$contentCV);links(uid,$contentCV);&componentRef
+;;amwayapacCountrySelectionCollectionComponent; Country Selector Collection Component;amwayapacJapanComponent;amwayapacChinaComponent,amwayapacMalaysiaComponent,amwayapacPhilippinesComponent,amwayapacKoreaComponent,amwayapacThailandComponent,amwayapacSingaporeComponent,amwayapacJapanComponent;amwayapacCountrySelectionCollectionComponent
+
+########## Country Selector ##########
 
 
-################ Search Slot
+########## Header Account Navigation
 
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
-;;SearchBoxSlot; Search Box Slot;true;topSearchBoxPlaceHolder
-
-INSERT_UPDATE SearchBoxComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
-;;sideSearchBoxPlaceHolder; Top Search Box PlaceHolder;topSearchBoxPlaceHolder
-
-######## Header Account Navigation
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid,$contentCV)
-;;HeaderAccountNavigationSlot; Header Account Navigation Slot;true;accountNavigationCollectionComponent
-
-# CMS Navigation Nodes
-INSERT_UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];name;parent(uid, $contentCV);&nodeRef;links(&linkRef);visible;nodeLink(&componentRef)
-
-######## Account Navigation Section
-;;AccountNavNode;AccountNavNode;root;AccountNavNode;;true;;
-;;MyAccountNode;MyAccountNode;AccountNavNode;MyAccountNode;;true;;
-;;BillingShippingNode;BillingShippingNode;AccountNavNode;BillingShippingNode;;true;;
-;;ShoppingListsNode;ShoppingListsNode;AccountNavNode;ShoppingListsNode;;true;;
-;;DittoNode;DittoNode;AccountNavNode;DittoNode;;true;;
-;;PersonalDetailsNode;PersonalDetailsNode;AccountNavNode;PersonalDetailsNode;;true;;
-;;OrderHistoryNode;OrderHistoryNode;AccountNavNode;OrderHistoryNode;;true;;
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(uid,$contentCV)
+;;HeaderAccountNavigationSlot;accountNavigationCollectionComponent
 
 INSERT_UPDATE AccountNavigationComponent;$contentCV[unique=true];uid[unique=true];navigationNode(&nodeRef);&componentRef
 ;;myAccountNavigationComponent;MyAccountNode;myAccountNavigationComponent
@@ -410,7 +76,6 @@ INSERT_UPDATE AccountNavigationComponent;$contentCV[unique=true];uid[unique=true
 INSERT_UPDATE AccountNavigationCollectionComponent;$contentCV[unique=true];uid[unique=true];components(uid,$contentCV)
 ;;accountNavigationCollectionComponent;myAccountNavigationComponent,billingShippingNavigationcomponent,shoppingListsNavigationComponent,dittoNavigationComponent,personalDetailsNavigationComponent,orderHistoryNavigationComponent;
 
-
 INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;target(code)[default='sameWindow'];&componentRef
 ;;MyAccountNodeLink; My Account Navigation Link;/;MyAccountNodeLink;;MyAccountNodeLink;
 ;;BillingShippingNodeLink; Billing Shipping Navigation Link;/;BillingShippingNodeLink;;BillingShippingNodeLink;
@@ -419,55 +84,28 @@ INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url
 ;;PersonalDetailsNodeLink; Personal Details Link;/;PersonalDetailsNodeLink;;PersonalDetailsNodeLink;
 ;;OrderHistoryNodeLink; Order History Link;/;OrderHistoryNodeLink;;OrderHistoryNodeLink;
 
+########## Header Account Navigation ##########
+
+
+########## Navigation Bar
+
 #NavigationBars
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
-;;NavigationBarSlot;NavigationBarSlot-Homepage;true;refNavigation1,refNavigation2,refNavigation3,refNavigation4
-;;MobileNavigationBarSlot;MobileNavigationBarSlot-Homepage;true;refMobileNavigation1,refMobileNavigation2,refMobileNavigation3,refMobileNavigation4
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;NavigationBarSlot;ShopNavBarComponent,BusinessCenterNavBarComponent,AboutAmwayNavBarComponent,EducationNavBarComponent
+;;MobileNavigationBarSlot;MobileShopNavBarComponent,MobileBusinessCenterNavBarComponent,MobileAboutAmwayNavBarComponent,MobileEducationNavBarComponent
 
 # Navigation Bar Component
-INSERT_UPDATE NavigationBarComponent;$contentCV[unique=true];uid[unique=true];name;wrapAfter;link(uid, $contentCV);styleClass;navigationNode(&nodeRef);&componentRef
-;;ShopNavBarComponent;Shops Nav Bar Component;10;Nav_ShopLink;;ShopNavNode;refNavigation1
-;;BusinessCenterNavBarComponent;Business Center Nav Bar Component;10;Nav_BusinessCenterLink;;BusinessCenterNavNode;refNavigation2
-;;AboutAmwayNavBarComponent;About Amway Nav Bar Component;10;Nav_AboutAmwayLink;;AboutNavNode;refNavigation3
-;;EducationNavBarComponent;Education Nav Bar Component;10;Nav_EducationLink;;EducationNavNode;refNavigation4
+INSERT_UPDATE NavigationBarComponent;$contentCV[unique=true];uid[unique=true];name;wrapAfter;link(&componentRef);styleClass;navigationNode(&nodeRef);&componentRef
+;;ShopNavBarComponent;Shops Nav Bar Component;10;NavShopLink;;ShopNavNode;ShopNavBarComponent
+;;BusinessCenterNavBarComponent;Business Center Nav Bar Component;10;NavBusinessCenterLink;;BusinessCenterNavNode;BusinessCenterNavBarComponent
+;;AboutAmwayNavBarComponent;About Amway Nav Bar Component;10;NavAboutAmwayLink;;AboutNavNode;AboutAmwayNavBarComponent
+;;EducationNavBarComponent;Education Nav Bar Component;10;NavEducationLink;;EducationNavNode;EducationNavBarComponent
 
-INSERT_UPDATE AmwayApacMobileNavigationComponent;$contentCV[unique=true];uid[unique=true];name;wrapAfter;link(uid, $contentCV);styleClass;navigationNode(&nodeRef);&componentRef
-;;MobileShopNavBarComponent;Mobile Shops Nav Bar Component;10;Nav_ShopLink;;ShopNavNode;refMobileNavigation1
-;;MobileBusinessCenterNavBarComponent;Mobile Business Center Nav Bar Component;10;Nav_BusinessCenterLink;;BusinessCenterNavNode;refMobileNavigation2
-;;MobileAboutAmwayNavBarComponent;Mobile About Amway Nav Bar Component;10;Nav_AboutAmwayLink;;AboutNavNode;refMobileNavigation3
-;;MobileEducationNavBarComponent;Mobile Education Nav Bar Component;10;Nav_EducationLink;;EducationNavNode;refMobileNavigation4
-
-
-INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;children(uid, $contentCV);&nodeRef;links(&linkRef);visible;nodeLink(&componentRef)
-;ShopNavNode;;ShopNavNode;NutritionNavNode,BeautyNavNode,BathAndBodyNavNode,HomeNavNode;ShopNavNode;;true;;
-;BusinessCenterNavNode;;BusinessCenterNavNode;;BusinessCenterNavNode;;true;;
-;AboutNavNode;;AboutNavNode;;AboutNavNode;;true;;
-;EducationNavNode;;EducationNavNode;;EducationNavNode;;true;;
-
-;NutritionNavNode;;NutritionNavNode;VitaminNutritionNavNode,WeightNutritionNavNode,SportsNutritionNavNode,EnergyNutritionNavNode;NutritionNavNode;;true;;
-;BeautyNavNode;;BeautyNavNode;SkinCareBeautyNavNode,ColourBeautyNavNode,MakeUpBeautyNavNode,BeautyAccessoriesBeautyNavNode;BeautyNavNode;;true;;
-;BathAndBodyNavNode;;BathAndBodyNavNode;HairCareBathAndBodyNavNode,BodyCareBathAndBodyNavNode,OralCareBathAndBodyNavNode,SunAndTanningBathAndBodyNavNode;BathAndBodyNavNode;;true;;
-;HomeNavNode;;HomeNavNode;HouseHoldHomeNavNode,LaundryHomeNavNode,WaterTreatmentHomeNavNode,CookwareHomeNavNode;HomeNavNode;  ;true;;
-
-;VitaminNutritionNavNode;;VitaminNutritionNavNode;;VitaminNutritionNavNode; Nav_Nutrition_Vitamins_BoneHealthLink,Nav_Nutrition_Vitamins_ChildrenLink,Nav_Nutrition_Vitamins_HeartHealthLink,Nav_Nutrition_Vitamins_ViewAllLink ;true;;
-;WeightNutritionNavNode;;WeightNutritionNavNode;;WeightNutritionNavNode; Nav_Nutrition_Weight_SupplementsLink,Nav_Nutrition_Weight_BarLink,Nav_Nutrition_Weight_ShakesLink,Nav_Nutrition_Weight_ViewAllLink ;true;;
-;SportsNutritionNavNode;;SportsNutritionNavNode;;SportsNutritionNavNode; Nav_Nutrition_Sports_EnergizeLink,Nav_Nutrition_Sports_HydrateLink,Nav_Nutrition_Sports_NutriliteLink,Nav_Nutrition_Sports_ViewAllLink ;true;;
-;EnergyNutritionNavNode;;EnergyNutritionNavNode;;EnergyNutritionNavNode; Nav_Nutrition_Energy_KosherLink,Nav_Nutrition_Energy_SugarFreeLink,Nav_Nutrition_Energy_LowCarbLink,Nav_Nutrition_Energy_ViewAllLink ;true;;
-
-;SkinCareBeautyNavNode;;SkinCareBeautyNavNode;;SkinCareBeautyNavNode;Nav_Beauty_SkinCare_AntiAgeingLink,Nav_Beauty_SkinCare_ArtistryLink,Nav_Beauty_SkinCare_DailySkinCareLink,Nav_Beauty_SkinCare_ViewAllLink;true;;
-;ColourBeautyNavNode;;ColourBeautyNavNode;;ColourBeautyNavNode; Nav_Beauty_Colour_ApplicatorsLink,Nav_Beauty_Colour_EyeBrowsLink,Nav_Beauty_Colour_EyeCheeksLink,Nav_Beauty_Colour_ViewAllLink;true;;
-;MakeUpBeautyNavNode;;MakeUpBeautyNavNode;;MakeUpBeautyNavNode; Nav_Beauty_MakeUp_CheeksLink,Nav_Beauty_MakeUp_ConcealersLink,Nav_Beauty_MakeUp_FoundationLink,Nav_Beauty_MakeUp_ViewAllLink;true;;
-;BeautyAccessoriesBeautyNavNode;;BeautyAccessoriesBeautyNavNode;;BeautyAccessoriesBeautyNavNode; Nav_Beauty_BeautyAccessories_FacialCottonLink,Nav_Beauty_BeautyAccessories_BrushSetLink,Nav_Beauty_BeautyAccessories_PowderCompactLink,Nav_Beauty_BeautyAccessories_ViewAllLink;true;;
-
-;HairCareBathAndBodyNavNode;;HairCareBathAndBodyNavNode;;HairCareBathAndBodyNavNode;Nav_BathAndBody_HairCare_ConditionersLink,Nav_BathAndBody_HairCare_ShampoosLink,Nav_BathAndBody_HairCare_StylingLink,Nav_BathAndBody_HairCare_ViewAllLink ;true;;
-;BodyCareBathAndBodyNavNode;;BodyCareBathAndBodyNavNode;;BodyCareBathAndBodyNavNode;Nav_BathAndBody_BodyCare_BodyWashLink,Nav_BathAndBody_BodyCare_DeodorantsLink,Nav_BathAndBody_BodyCare_LotionsLink,Nav_BathAndBody_BodyCare_ViewAllLink ;true;;
-;OralCareBathAndBodyNavNode;;OralCareBathAndBodyNavNode;;OralCareBathAndBodyNavNode; Nav_BathAndBody_OralCare_BreathSpraysLink,Nav_BathAndBody_OralCare_ToothpastesLink,Nav_BathAndBody_OralCare_BrushesAndFlossLink,Nav_BathAndBody_OralCare_ViewAllLink;true;;
-;SunAndTanningBathAndBodyNavNode;;SunAndTanningBathAndBodyNavNode;;SunAndTanningBathAndBodyNavNode; Nav_BathAndBody_SunAndTanning_SunscreenLotionLink,Nav_BathAndBody_SunAndTanning_SelfTanMousseLink,Nav_BathAndBody_SunAndTanning_ViewAllLink;true;;
-
-;HouseHoldHomeNavNode;;HouseHoldHomeNavNode;;HouseHoldHomeNavNode;Nav_Home_HouseHold_KitchenCleanerLink,Nav_Home_HouseHold_GeneralCleaningLink,Nav_Home_HouseHold_BathroomCleanerLink,Nav_Home_HouseHold_ViewAllLink ;true;;
-;LaundryHomeNavNode;;LaundryHomeNavNode;;LaundryHomeNavNode; Nav_Home_Laundry_DetergentsLink,Nav_Home_Laundry_TreatmentAndAdditivesLink,Nav_Home_Laundry_LotionsLink,Nav_Home_Laundry_ViewAllLink;true;;
-;WaterTreatmentHomeNavNode;;WaterTreatmentHomeNavNode;;WaterTreatmentHomeNavNode;Nav_Home_WaterTreatment_PurifiersLink,Nav_Home_WaterTreatment_ReplacementFiltersLink,Nav_Home_WaterTreatment_ViewAllLink ;true;;
-;CookwareHomeNavNode;;CookwareHomeNavNode;;CookwareHomeNavNode;Nav_Home_Cookware_CutleryLink,Nav_Home_Cookware_PansLink,Nav_Home_Cookware_ReplacementPartsLink,Nav_Home_Cookware_ViewAllLink ;true;;
+INSERT_UPDATE AmwayApacMobileNavigationComponent;$contentCV[unique=true];uid[unique=true];name;wrapAfter;link(&componentRef);styleClass;navigationNode(&nodeRef);&componentRef
+;;MobileShopNavBarComponent;Mobile Shops Nav Bar Component;10;NavShopLink;;ShopNavNode;MobileShopNavBarComponent
+;;MobileBusinessCenterNavBarComponent;Mobile Business Center Nav Bar Component;10;NavBusinessCenterLink;;BusinessCenterNavNode;MobileBusinessCenterNavBarComponent
+;;MobileAboutAmwayNavBarComponent;Mobile About Amway Nav Bar Component;10;NavAboutAmwayLink;;AboutNavNode;MobileAboutAmwayNavBarComponent
+;;MobileEducationNavBarComponent;Mobile Education Nav Bar Component;10;NavEducationLink;;EducationNavNode;MobileEducationNavBarComponent
 
 INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink
 ;;NavBarNutrition1SBComponent;Navigation Bar Nutrition SB 1 Component;NavBarNutrition1SBComponent;"/"
@@ -489,214 +127,477 @@ INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];nam
 
 INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow'];category(code,$productCV)
 
-;;Nav_ShopLink;Navigation Bar- Shop Link;/;Nav_ShopLink;Nav_ShopLink;;;
-;;Nav_BusinessCenterLink;Navigation Bar- Business Center Link;/;Nav_BusinessCenterLink;Nav_BusinessCenterLink;;;
-;;Nav_AboutAmwayLink;Navigation Bar- About Amway Link;/;Nav_AboutAmwayLink;Nav_AboutAmwayLink;;;
-;;Nav_EducationLink;Navigation Bar- Education Link;/;Nav_EducationLink;Nav_EducationLink;;;
+;;NavShopLink;Navigation Bar- Shop Link;/;NavShopLink;NavShopLink;;;
+;;NavBusinessCenterLink;Navigation Bar- Business Center Link;/;NavBusinessCenterLink;NavBusinessCenterLink;;;
+;;NavAboutAmwayLink;Navigation Bar- About Amway Link;/;NavAboutAmwayLink;NavAboutAmwayLink;;;
+;;NavEducationLink;Navigation Bar- Education Link;/;NavEducationLink;NavEducationLink;;;
 
-;;Nav_Shop_NutritionLink;Navigation Bar- Shop- Nutrition Link;/;Nav_Shop_NutritionLink;Nav_Shop_NutritionLink;;;
-;;Nav_Shop_BeautyLink;Navigation Bar- Shop- Beauty Link;/;Nav_Shop_BeautyLink;Nav_Shop_BeautyLink;;;
-;;Nav_Shop_BathBodyLink;Navigation Bar- Shop- Bath and Body Link;/;Nav_Shop_BathBodyLink;Nav_Shop_BathBodyLink;;;
-;;Nav_Shop_HomeLink;Navigation Bar- Shop- Home Link;/;Nav_Shop_HomeLink;Nav_Shop_HomeLink;;;
+;;NavShopNutritionLink;Navigation Bar- Shop- Nutrition Link;/;NavShopNutritionLink;NavShopNutritionLink;;;
+;;NavShopBeautyLink;Navigation Bar- Shop- Beauty Link;/;NavShopBeautyLink;NavShopBeautyLink;;;
+;;NavShopBathBodyLink;Navigation Bar- Shop- Bath and Body Link;/;NavShopBathBodyLink;NavShopBathBodyLink;;;
+;;NavhopHomeLink;Navigation Bar- Shop- Home Link;/;NavShopHomeLink;NavShopHomeLink;;;
 
-;;Nav_Nutrition_VitaminsLink;Navigation Bar- Vitamins Link;/category-landing-page;Nav_Nutrition_VitaminsLink;Nav_Nutrition_VitaminsLink;;;
-;;Nav_Nutrition_WeightLink;Navigation Bar- Weight Management Link;/category-landing-page;Nav_Nutrition_WeightLink;Nav_Nutrition_WeightLink;;;
-;;Nav_Nutrition_SportsLink;Navigation Bar- Sports Nutrion Link;/category-landing-page;Nav_Nutrition_SportsLink;Nav_Nutrition_SportsLink;;;
-;;Nav_Nutrition_EnergyLink;Navigation Bar- Energy Link;/category-landing-page;Nav_Nutrition_EnergyLink;Nav_Nutrition_EnergyLink;;;
+;;NavNutritionVitaminsLink;Navigation Bar- Vitamins Link;/category-landing-page;NavNutritionVitaminsLink;NavNutritionVitaminsLink;;;
+;;NavNutritionWeightLink;Navigation Bar- Weight Management Link;/category-landing-page;NavNutritionWeightLink;NavNutritionWeightLink;;;
+;;NavNutritionSportsLink;Navigation Bar- Sports Nutrion Link;/category-landing-page;NavNutritionSportsLink;NavNutritionSportsLink;;;
+;;NavNutritionEnergyLink;Navigation Bar- Energy Link;/category-landing-page;NavNutritionEnergyLink;NavNutritionEnergyLink;;;
 
-;;Nav_Nutrition_Vitamins_BoneHealthLink;Navigation Bar- Vitamins- Bone Health Link;;Nav_Nutrition_Vitamins_BoneHealthLink;Nav_Nutrition_Vitamins_BoneHealthLink;;bone-health
-;;Nav_Nutrition_Vitamins_ChildrenLink;Navigation Bar- Vitamins- Children Link;;Nav_Nutrition_Vitamins_ChildrenLink;Nav_Nutrition_Vitamins_ChildrenLink;;childrens-vitamins
-;;Nav_Nutrition_Vitamins_HeartHealthLink;Navigation Bar- Vitamins- Heart Health Link;;Nav_Nutrition_Vitamins_HeartHealthLink;Nav_Nutrition_Vitamins_HeartHealthLink;;heart-health
-;;Nav_Nutrition_Vitamins_ViewAllLink;Navigation Bar- Vitamins- View All Link;/;Nav_Nutrition_Vitamins_ViewAllLink;Nav_Nutrition_Vitamins_ViewAllLink;;
+;;NavNutritionVitaminsBoneHealthLink;Navigation Bar- Vitamins- Bone Health Link;;NavNutritionVitaminsBoneHealthLink;NavNutritionVitaminsBoneHealthLink;;bone-health
+;;NavNutritionVitaminsChildrenLink;Navigation Bar- Vitamins- Children Link;;NavNutritionVitaminsChildrenLink;NavNutritionVitaminsChildrenLink;;childrens-vitamins
+;;NavNutritionVitaminsHeartHealthLink;Navigation Bar- Vitamins- Heart Health Link;;NavNutritionVitaminsHeartHealthLink;NavNutritionVitaminsHeartHealthLink;;heart-health
+;;NavNutritionVitaminsViewAllLink;Navigation Bar- Vitamins- View All Link;/;NavNutritionVitaminsViewAllLink;NavNutritionVitaminsViewAllLink;;
 
-;;Nav_Nutrition_Weight_SupplementsLink;Navigation Bar- Weight- Supplements Link;;Nav_Nutrition_Weight_SupplementsLink;Nav_Nutrition_Weight_SupplementsLink;;supplements
-;;Nav_Nutrition_Weight_BarLink;Navigation Bar- Weight- Bar Link;;Nav_Nutrition_Weight_BarLink;Nav_Nutrition_Weight_BarLink;;bar
-;;Nav_Nutrition_Weight_ShakesLink;Navigation Bar- Weight- Shakes Link;;Nav_Nutrition_Weight_ShakesLink;Nav_Nutrition_Weight_ShakesLink;;shakes
-;;Nav_Nutrition_Weight_ViewAllLink;Navigation Bar- Weight- View All Link;/;Nav_Nutrition_Weight_ViewAllLink;Nav_Nutrition_Weight_ViewAllLink;;
+;;NavNutritionWeightSupplementsLink;Navigation Bar- Weight- Supplements Link;;NavNutritionWeightSupplementsLink;NavNutritionWeightSupplementsLink;;supplements
+;;NavNutritionWeightBarLink;Navigation Bar- Weight- Bar Link;;NavNutritionWeightBarLink;NavNutritionWeightBarLink;;bar
+;;NavNutritionWeightShakesLink;Navigation Bar- Weight- Shakes Link;;NavNutritionWeightShakesLink;NavNutritionWeightShakesLink;;shakes
+;;NavNutritionWeightViewAllLink;Navigation Bar- Weight- View All Link;/;NavNutritionWeightViewAllLink;NavNutritionWeightViewAllLink;;
 
-;;Nav_Nutrition_Sports_EnergizeLink;Navigation Bar- Sports- Energize Link;;Nav_Nutrition_Sports_EnergizeLink;Nav_Nutrition_Sports_EnergizeLink;;energize
-;;Nav_Nutrition_Sports_HydrateLink;Navigation Bar- Sports- Hydrate Link;;Nav_Nutrition_Sports_HydrateLink;Nav_Nutrition_Sports_HydrateLink;;hydrate
-;;Nav_Nutrition_Sports_NutriliteLink;Navigation Bar- Sports- Nutrilite Link;;Nav_Nutrition_Sports_NutriliteLink;Nav_Nutrition_Sports_NutriliteLink;;nutrilite-sports-nutrition
-;;Nav_Nutrition_Sports_ViewAllLink;Navigation Bar- Sports- View All Link;/;Nav_Nutrition_Sports_ViewAllLink;Nav_Nutrition_Sports_ViewAllLink;;
+;;NavNutritionSportsEnergizeLink;Navigation Bar- Sports- Energize Link;;NavNutritionSportsEnergizeLink;NavNutritionSportsEnergizeLink;;energize
+;;NavNutritionSportsHydrateLink;Navigation Bar- Sports- Hydrate Link;;NavNutritionSportsHydrateLink;NavNutritionSportsHydrateLink;;hydrate
+;;NavNutritionSportsNutriliteLink;Navigation Bar- Sports- Nutrilite Link;;NavNutritionSportsNutriliteLink;NavNutritionSportsNutriliteLink;;nutrilite-sports-nutrition
+;;NavNutritionSportsViewAllLink;Navigation Bar- Sports- View All Link;/;NavNutritionSportsViewAllLink;NavNutritionSportsViewAllLink;;
 
-;;Nav_Nutrition_Energy_KosherLink;Navigation Bar- Energy- Kosher Link;;Nav_Nutrition_Energy_KosherLink;Nav_Nutrition_Energy_KosherLink;;kosher
-;;Nav_Nutrition_Energy_SugarFreeLink;Navigation Bar- Energy- Sugar Free Link;;Nav_Nutrition_Energy_SugarFreeLink;Nav_Nutrition_Energy_SugarFreeLink;;sugar-free
-;;Nav_Nutrition_Energy_LowCarbLink;Navigation Bar- Energy- Low Carb Link;;Nav_Nutrition_Energy_LowCarbLink;Nav_Nutrition_Energy_LowCarbLink;;low-carb
-;;Nav_Nutrition_Energy_ViewAllLink;Navigation Bar- Energy- View All Link;/;Nav_Nutrition_Energy_ViewAllLink;Nav_Nutrition_Energy_ViewAllLink;;
+;;NavNutritionEnergyKosherLink;Navigation Bar- Energy- Kosher Link;;NavNutritionEnergyKosherLink;NavNutritionEnergyKosherLink;;kosher
+;;NavNutritionEnergySugarFreeLink;Navigation Bar- Energy- Sugar Free Link;;NavNutritionEnergySugarFreeLink;NavNutritionEnergySugarFreeLink;;sugar-free
+;;NavNutritionEnergyLowCarbLink;Navigation Bar- Energy- Low Carb Link;;NavNutritionEnergyLowCarbLink;NavNutritionEnergyLowCarbLink;;low-carb
+;;NavNutritionEnergyViewAllLink;Navigation Bar- Energy- View All Link;/;NavNutritionEnergyViewAllLink;NavNutritionEnergyViewAllLink;;
 
-;;Nav_Nutrition_ToolsAdvice_SkincareLink;Navigation Bar- Nutrition- Tools and Advice Skincare Recommender Link;/;Nav_Nutrition_ToolsAdvice_SkincareLink;Nav_Nutrition_ToolsAdvice_SkincareLink;;
-;;Nav_Nutrition_ToolsAdvice_DittoLink;Navigation Bar- Nutrition- Tools and Advice Ditto Scheduled Link;/ditto;Nav_Nutrition_ToolsAdvice_DittoLink;Nav_Nutrition_ToolsAdvice_DittoLink;;
-
-
-;;Nav_Beauty_SkinCareLink;Navigation Bar- Beauty- Skin Care Link;/category-landing-page;Nav_Beauty_SkinCareLink;Nav_Beauty_SkinCareLink;;;
-;;Nav_Beauty_ColourLink;Navigation Bar- Beauty- Colour Link;/category-landing-page;Nav_Beauty_ColourLink;Nav_Beauty_ColourLink;;;
-;;Nav_Beauty_MakeUpLink;Navigation Bar- Beauty- MakeUp Link;/category-landing-page;Nav_Beauty_MakeUpLink;Nav_Beauty_MakeUpLink;;;
-;;Nav_Beauty_BeautyAccessoriesLink;Navigation Bar- Beauty- Beauty Accessories Link;/category-landing-page;Nav_Beauty_BeautyAccessoriesLink;Nav_Beauty_BeautyAccessoriesLink;;;
-
-;;Nav_Beauty_SkinCare_AntiAgeingLink;Navigation Bar- Beauty- SkinCare- Anti Ageing Link;;Nav_Beauty_SkinCare_AntiAgeingLink;Nav_Beauty_SkinCare_AntiAgeingLink;;anti-ageing-solutions
-;;Nav_Beauty_SkinCare_ArtistryLink;Navigation Bar- Beauty- SkinCare- Artistry Link;;Nav_Beauty_SkinCare_ArtistryLink;Nav_Beauty_SkinCare_ArtistryLink;;artistry-special-care
-;;Nav_Beauty_SkinCare_DailySkinCareLink;Navigation Bar- Beauty- SkinCare- Daily Skincare Link;;Nav_Beauty_SkinCare_DailySkinCareLink;Nav_Beauty_SkinCare_DailySkinCareLink;;daily-skincare
-;;Nav_Beauty_SkinCare_ViewAllLink;Navigation Bar- Beauty- SkinCare- View All Link;/;Nav_Beauty_SkinCare_ViewAllLink;Nav_Beauty_SkinCare_ViewAllLink;;
-
-;;Nav_Beauty_Colour_ApplicatorsLink;Navigation Bar- Beauty- Colour- Applicators Link;;Nav_Beauty_Colour_ApplicatorsLink;Nav_Beauty_Colour_ApplicatorsLink;;applicators-and-accessories
-;;Nav_Beauty_Colour_EyeBrowsLink;Navigation Bar- Beauty- Colour- Eye Brows Link;;Nav_Beauty_Colour_EyeBrowsLink;Nav_Beauty_Colour_EyeBrowsLink;;eye-and-brows
-;;Nav_Beauty_Colour_EyeCheeksLink;Navigation Bar- Beauty- Colour- Eye Cheeks Link;;Nav_Beauty_Colour_EyeCheeksLink;Nav_Beauty_Colour_EyeCheeksLink;;eye-and-cheeks
-;;Nav_Beauty_Colour_ViewAllLink;Navigation Bar- Beauty- Colour- View All Link;/;Nav_Beauty_Colour_ViewAllLink;Nav_Beauty_Colour_ViewAllLink;;
-
-;;Nav_Beauty_MakeUp_CheeksLink;Navigation Bar- Beauty- Makeup- Cheeks Link;;Nav_Beauty_MakeUp_CheeksLink;Nav_Beauty_MakeUp_CheeksLink;;cheeks
-;;Nav_Beauty_MakeUp_ConcealersLink;Navigation Bar- Beauty- Makeup- Concealers Link;;Nav_Beauty_MakeUp_ConcealersLink;Nav_Beauty_MakeUp_ConcealersLink;;concealers
-;;Nav_Beauty_MakeUp_FoundationLink;Navigation Bar- Beauty- Makeup- Foundations Link;;Nav_Beauty_MakeUp_FoundationLink;Nav_Beauty_MakeUp_FoundationLink;;foundations-and-powders
-;;Nav_Beauty_MakeUp_ViewAllLink;Navigation Bar- Beauty- Makeup- View All Link;/;Nav_Beauty_MakeUp_ViewAllLink;Nav_Beauty_MakeUp_ViewAllLink;;
-
-;;Nav_Beauty_BeautyAccessories_FacialCottonLink;Navigation Bar- Beauty- Beauty Accessories- Facial Cotton Link;;Nav_Beauty_BeautyAccessories_FacialCottonLink;Nav_Beauty_BeautyAccessories_FacialCottonLink;;facial-cotton
-;;Nav_Beauty_BeautyAccessories_BrushSetLink;Navigation Bar- Beauty- Beauty Accessories- Brush Set Link;;Nav_Beauty_BeautyAccessories_BrushSetLink;Nav_Beauty_BeautyAccessories_BrushSetLink;;brush-set
-;;Nav_Beauty_BeautyAccessories_PowderCompactLink;Navigation Bar- Beauty- Beauty Accessories- Powder Compact Link;;Nav_Beauty_BeautyAccessories_PowderCompactLink;Nav_Beauty_BeautyAccessories_PowderCompactLink;;powder-compact
-;;Nav_Beauty_BeautyAccessories_ViewAllLink;Navigation Bar- Beauty- Beauty Accessories- View All Link;/;Nav_Beauty_BeautyAccessories_ViewAllLink;Nav_Beauty_BeautyAccessories_ViewAllLink;;
-
-;;Nav_Beauty_ToolsAdvice_SkincareLink;Navigation Bar- Beauty- Tools and Advice Skincare Recommender Link;/;Nav_Beauty_ToolsAdvice_SkincareLink;Nav_Beauty_ToolsAdvice_SkincareLink;;
-;;Nav_Beauty_ToolsAdvice_DittoLink;Navigation Bar- Beauty- Tools and Advice Ditto Scheduled Link;/;Nav_Beauty_ToolsAdvice_DittoLink;Nav_Beauty_ToolsAdvice_DittoLink;;
-
-;;Nav_BathAndBody_HairCareLink;Navigation Bar- Bath and Body- Hair Care Link;/category-landing-page;Nav_BathAndBody_HairCareLink;Nav_BathAndBody_HairCareLink;;;
-;;Nav_BathAndBody_BodyCareLink;Navigation Bar- Bath and Body- Body Care Link;/category-landing-page;Nav_BathAndBody_BodyCareLink;Nav_BathAndBody_BodyCareLink;;;
-;;Nav_BathAndBody_OralCareLink;Navigation Bar- Bath and Body- Oral Care Link;/category-landing-page;Nav_BathAndBody_OralCareLink;Nav_BathAndBody_OralCareLink;;;
-;;Nav_BathAndBody_SunAndTanningLink;Navigation Bar- Bath and Body- Sun And Tanning Link;/category-landing-page;Nav_BathAndBody_SunAndTanningLink;Nav_BathAndBody_SunAndTanningLink;;;
-
-;;Nav_BathAndBody_HairCare_ConditionersLink;Navigation Bar- Bath and Body- Hair Care- Conditioners Link;;Nav_BathAndBody_HairCare_ConditionersLink;Nav_BathAndBody_HairCare_ConditionersLink;;conditioners
-;;Nav_BathAndBody_HairCare_ShampoosLink;Navigation Bar- Bath and Body- Hair Care- Shampoos Link;;Nav_BathAndBody_HairCare_ShampoosLink;Nav_BathAndBody_HairCare_ShampoosLink;;shampoos
-;;Nav_BathAndBody_HairCare_StylingLink;Navigation Bar- Bath and Body- Hair Care- Styling and Treatments Link;;Nav_BathAndBody_HairCare_StylingLink;Nav_BathAndBody_HairCare_StylingLink;;styling-and-treatments
-;;Nav_BathAndBody_HairCare_ViewAllLink;Navigation Bar- Bath and Body- Hair Care- View All Link;/;Nav_BathAndBody_HairCare_ViewAllLink;Nav_BathAndBody_HairCare_ViewAllLink;;
-
-;;Nav_BathAndBody_BodyCare_BodyWashLink;Navigation Bar- Bath and Body- Body Care- Body Wash Link;;Nav_BathAndBody_BodyCare_BodyWashLink;Nav_BathAndBody_BodyCare_BodyWashLink;;body-wash
-;;Nav_BathAndBody_BodyCare_DeodorantsLink;Navigation Bar- Bath and Body- Body Care- Deodorants Link;;Nav_BathAndBody_BodyCare_DeodorantsLink;Nav_BathAndBody_BodyCare_DeodorantsLink;;deodorants
-;;Nav_BathAndBody_BodyCare_LotionsLink;Navigation Bar- Bath and Body- Body Care- Lotions Link;;Nav_BathAndBody_BodyCare_LotionsLink;Nav_BathAndBody_BodyCare_LotionsLink;;lotions
-;;Nav_BathAndBody_BodyCare_ViewAllLink;Navigation Bar- Bath and Body- Body Care- View All Link;/;Nav_BathAndBody_BodyCare_ViewAllLink;Nav_BathAndBody_BodyCare_ViewAllLink;;
-
-;;Nav_BathAndBody_OralCare_BreathSpraysLink;Navigation Bar- Bath and Body- Oral Care- Breath Sprays Link;;Nav_BathAndBody_OralCare_BreathSpraysLink;Nav_BathAndBody_OralCare_BreathSpraysLink;;breath-sprays
-;;Nav_BathAndBody_OralCare_ToothpastesLink;Navigation Bar- Bath and Body- Oral Care- Tooth Pastes Link;;Nav_BathAndBody_OralCare_ToothpastesLink;Nav_BathAndBody_OralCare_ToothpastesLink;;toothpastes
-;;Nav_BathAndBody_OralCare_BrushesAndFlossLink;Navigation Bar- Bath and Body- Oral Care- Brushes & Floss Link;;Nav_BathAndBody_OralCare_BrushesAndFlossLink;Nav_BathAndBody_OralCare_BrushesAndFlossLink;;brushes-and-floss
-;;Nav_BathAndBody_OralCare_ViewAllLink;Navigation Bar- Bath and Body- Oral Care- View All Link;/;Nav_BathAndBody_OralCare_ViewAllLink;Nav_BathAndBody_OralCare_ViewAllLink;;
-
-;;Nav_BathAndBody_SunAndTanning_SunscreenLotionLink;Navigation Bar- Bath and Body- Sun and Tanning- Sunscreen Lotion Link;;Nav_BathAndBody_SunAndTanning_SunscreenLotionLink;Nav_BathAndBody_SunAndTanning_SunscreenLotionLink;;sunscreen-lotion
-;;Nav_BathAndBody_SunAndTanning_SelfTanMousseLink;Navigation Bar- Bath and Body- Sun and Tanning- Self Tan Mousse Link;;Nav_BathAndBody_SunAndTanning_SelfTanMousseLink;Nav_BathAndBody_SunAndTanning_SelfTanMousseLink;;self-tan-mousse
-;;Nav_BathAndBody_SunAndTanning_ViewAllLink;Navigation Bar- Bath and Body- Sun and Tanning- View All Link;/;Nav_BathAndBody_SunAndTanning_ViewAllLink;Nav_BathAndBody_SunAndTanning_ViewAllLink;;
-
-;;Nav_BathAndBody_ToolsAdvice_QuickProductLink;Navigation Bar- BathAndBody- Tools and Advice Quick Product Link;/;Nav_BathAndBody_ToolsAdvice_QuickProductLink;Nav_BathAndBody_ToolsAdvice_QuickProductLink;;
-;;Nav_BathAndBody_ToolsAdvice_DittoScheduledLink;Navigation Bar- BathAndBody- Tools and Advice Ditto Scheduled Link;/;Nav_BathAndBody_ToolsAdvice_DittoScheduledLink;Nav_BathAndBody_ToolsAdvice_DittoScheduledLink;;
-
-;;Nav_Home_HouseHoldLink;Navigation Bar- Home- Household Hygiene Link;/category-landing-page;Nav_Home_HouseHoldLink;Nav_Home_HouseHoldLink;;;
-;;Nav_Home_LaundryLink;Navigation Bar- Home- Laundry Hygiene Link;/category-landing-page;Nav_Home_LaundryLink;Nav_Home_LaundryLink;;;
-;;Nav_Home_WaterTreatmentLink;Navigation Bar- Home- Water Treatment Hygiene Link;/category-landing-page;Nav_Home_WaterTreatmentLink;Nav_Home_WaterTreatmentLink;;;
-;;Nav_Home_CookwareLink;Navigation Bar- Home- Household Cookware Link;/category-landing-page;Nav_Home_CookwareLink;Nav_Home_CookwareLink;;;
-
-;;Nav_Home_HouseHold_KitchenCleanerLink;Navigation Bar- Home- Household- Kitchen Cleaner Link;;Nav_Home_HouseHold_KitchenCleanerLink;Nav_Home_HouseHold_KitchenCleanerLink;;kitchen-cleaner
-;;Nav_Home_HouseHold_GeneralCleaningLink;Navigation Bar- Home- Household- General Cleaning Link;;Nav_Home_HouseHold_GeneralCleaningLink;Nav_Home_HouseHold_GeneralCleaningLink;;general-cleaning
-;;Nav_Home_HouseHold_BathroomCleanerLink;Navigation Bar- Home- Household- Bathroom Cleaner Link;;Nav_Home_HouseHold_BathroomCleanerLink;Nav_Home_HouseHold_BathroomCleanerLink;;bathroom-cleaner
-;;Nav_Home_HouseHold_ViewAllLink;Navigation Bar- Home- Household- View All Link;/;Nav_Home_HouseHold_ViewAllLink;Nav_Home_HouseHold_ViewAllLink;;
-
-;;Nav_Home_Laundry_DetergentsLink;Navigation Bar- Home- Laundry- Detergents Link;;Nav_Home_Laundry_DetergentsLink;Nav_Home_Laundry_DetergentsLink;;detergents
-;;Nav_Home_Laundry_TreatmentAndAdditivesLink;Navigation Bar- Home- Laundry- Treatment and Additives Link;;Nav_Home_Laundry_TreatmentAndAdditivesLink;Nav_Home_Laundry_TreatmentAndAdditivesLink;;treatment-and-additives
-;;Nav_Home_Laundry_LotionsLink;Navigation Bar- Home- Laundry- Lotions Link;;Nav_Home_Laundry_LotionsLink;Nav_Home_Laundry_LotionsLink;;lotions
-;;Nav_Home_Laundry_ViewAllLink;Navigation Bar- Home- Laundry- View All Link;/;Nav_Home_Laundry_ViewAllLink;Nav_Home_Laundry_ViewAllLink;;
-
-;;Nav_Home_WaterTreatment_PurifiersLink;Navigation Bar- Home- Water treatment- Purifiers Link;;Nav_Home_WaterTreatment_PurifiersLink;Nav_Home_WaterTreatment_PurifiersLink;;purifiers
-;;Nav_Home_WaterTreatment_ReplacementFiltersLink;Navigation Bar- Home- Water treatment- Replacement Filters Link;;Nav_Home_WaterTreatment_ReplacementFiltersLink;Nav_Home_WaterTreatment_ReplacementFiltersLink;;replacement-filters
-;;Nav_Home_WaterTreatment_ViewAllLink;Navigation Bar- Home- Water treatment- View All Link;/;Nav_Home_WaterTreatment_ViewAllLink;Nav_Home_WaterTreatment_ViewAllLink;;
-
-;;Nav_Home_Cookware_CutleryLink;Navigation Bar- Home- Cookware- Cutlery Link;;Nav_Home_Cookware_CutleryLink;Nav_Home_Cookware_CutleryLink;;cutlery
-;;Nav_Home_Cookware_PansLink;Navigation Bar- Home- Cookware- Pans Link;;Nav_Home_Cookware_PansLink;Nav_Home_Cookware_PansLink;;pans
-;;Nav_Home_Cookware_ReplacementPartsLink;Navigation Bar- Home- Cookware- Replacement Parts Link;;Nav_Home_Cookware_ReplacementPartsLink;Nav_Home_Cookware_ReplacementPartsLink;;replacement-parts
-;;Nav_Home_Cookware_ViewAllLink;Navigation Bar- Home- Cookware- Replacement Parts Link;/;Nav_Home_Cookware_ViewAllLink;Nav_Home_Cookware_ViewAllLink;;
-
-;;Nav_Home_ToolsAdvice_QuickProductLink;Navigation Bar- Home- Tools and Advice Quick Product Link;/;Nav_Home_ToolsAdvice_QuickProductLink;Nav_Home_ToolsAdvice_QuickProductLink;;
-;;Nav_Home_ToolsAdvice_DittoScheduledLink;Navigation Bar- Home- Tools and Advice Ditto Scheduled Link;/;Nav_Home_ToolsAdvice_DittoScheduledLink;Nav_Home_ToolsAdvice_DittoScheduledLink;;
+;;NavNutritionToolsAdviceSkincareLink;Navigation Bar- Nutrition- Tools and Advice Skincare Recommender Link;/;NavNutritionToolsAdviceSkincareLink;NavNutritionToolsAdviceSkincareLink;;
+;;NavNutritionToolsAdviceDittoLink;Navigation Bar- Nutrition- Tools and Advice Ditto Scheduled Link;/ditto;NavNutritionToolsAdviceDittoLink;NavNutritionToolsAdviceDittoLink;;
 
 
+;;NavBeautySkinCareLink;Navigation Bar- Beauty- Skin Care Link;/category-landing-page;NavBeautySkinCareLink;NavBeautySkinCareLink;;;
+;;NavBeautyColourLink;Navigation Bar- Beauty- Colour Link;/category-landing-page;NavBeautyColourLink;NavBeautyColourLink;;;
+;;NavBeautyMakeUpLink;Navigation Bar- Beauty- MakeUp Link;/category-landing-page;NavBeautyMakeUpLink;NavBeautyMakeUpLink;;;
+;;NavBeautyBeautyAccessoriesLink;Navigation Bar- Beauty- Beauty Accessories Link;/category-landing-page;NavBeautyBeautyAccessoriesLink;NavBeautyBeautyAccessoriesLink;;;
 
-################## category page shop by category component
+;;NavBeautySkinCareAntiAgeingLink;Navigation Bar- Beauty- SkinCare- Anti Ageing Link;;NavBeautySkinCareAntiAgeingLink;NavBeautySkinCareAntiAgeingLink;;anti-ageing-solutions
+;;NavBeautySkinCareArtistryLink;Navigation Bar- Beauty- SkinCare- Artistry Link;;NavBeautySkinCareArtistryLink;NavBeautySkinCareArtistryLink;;artistry-special-care
+;;NavBeautySkinCareDailySkinCareLink;Navigation Bar- Beauty- SkinCare- Daily Skincare Link;;NavBeautySkinCareDailySkinCareLink;NavBeautySkinCareDailySkinCareLink;;daily-skincare
+;;NavBeautySkinCareViewAllLink;Navigation Bar- Beauty- SkinCare- View All Link;/;NavBeautySkinCareViewAllLink;NavBeautySkinCareViewAllLink;;
 
-INSERT_UPDATE AmwayApacShopByCategoryCollectionComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;shopByCategoryComponents(&componentRef)
-;;shopByCategoryCollectionComponent;shop by category collection component;shopByCategoryCollectionComponent;vitaminsAndSupplementsComponent,weightManagementComponent,sportsNutritionComponent,enerygyDrinksComponent,vitaminsAndSupplementsComponent1,weightManagementComponent1,sportsNutritionComponent1
+;;NavBeautyColourApplicatorsLink;Navigation Bar- Beauty- Colour- Applicators Link;;NavBeautyColourApplicatorsLink;NavBeautyColourApplicatorsLink;;applicators-and-accessories
+;;NavBeautyColourEyeBrowsLink;Navigation Bar- Beauty- Colour- Eye Brows Link;;NavBeautyColourEyeBrowsLink;NavBeautyColourEyeBrowsLink;;eye-and-brows
+;;NavBeautyColourEyeCheeksLink;Navigation Bar- Beauty- Colour- Eye Cheeks Link;;NavBeautyColourEyeCheeksLink;NavBeautyColourEyeCheeksLink;;eye-and-cheeks
+;;NavBeautyColourViewAllLink;Navigation Bar- Beauty- Colour- View All Link;/;NavBeautyColourViewAllLink;NavBeautyColourViewAllLink;;
 
-INSERT_UPDATE AmwayApacShopByCategoryComponent;$contentCV[unique=true];uid[unique=true];name;link(&componentRef);banner(&componentRef);&componentRef
-;;vitaminsAndSupplementsComponent;vitamins and supplements component;vitaminsAndSupplementsLinkComponent;vitaminsAndSupplementsBannerComponent;vitaminsAndSupplementsComponent
-;;weightManagementComponent;weight management component;weightManagementLinkComponent;weightManagementBannerComponent;weightManagementComponent
-;;sportsNutritionComponent;sports nutrition component;sportsNutritionLinkComponent;sportsNutritionBannerComponent;sportsNutritionComponent
-;;enerygyDrinksComponent;energy drinks component;energyDrinksLinkComponent;energyDrinksBannerComponent;enerygyDrinksComponent
-;;vitaminsAndSupplementsComponent1;vitamins and supplements component copy;vitaminsAndSupplementsLinkComponent;vitaminsAndSupplementsBannerComponent;vitaminsAndSupplementsComponent1
-;;weightManagementComponent1;weight management component copy;weightManagementLinkComponent;weightManagementBannerComponent;weightManagementComponent1
-;;sportsNutritionComponent1;sports nutrition component copy;sportsNutritionLinkComponent;sportsNutritionBannerComponent;sportsNutritionComponent1
+;;NavBeautyMakeUpCheeksLink;Navigation Bar- Beauty- Makeup- Cheeks Link;;NavBeautyMakeUpCheeksLink;NavBeautyMakeUpCheeksLink;;cheeks
+;;NavBeautyMakeUpConcealersLink;Navigation Bar- Beauty- Makeup- Concealers Link;;NavBeautyMakeUpConcealersLink;NavBeautyMakeUpConcealersLink;;concealers
+;;NavBeautyMakeUpFoundationLink;Navigation Bar- Beauty- Makeup- Foundations Link;;NavBeautyMakeUpFoundationLink;NavBeautyMakeUpFoundationLink;;foundations-and-powders
+;;NavBeautyMakeUpViewAllLink;Navigation Bar- Beauty- Makeup- View All Link;/;NavBeautyMakeUpViewAllLink;NavBeautyMakeUpViewAllLink;;
+
+;;NavBeautyBeautyAccessoriesFacialCottonLink;Navigation Bar- Beauty- Beauty Accessories- Facial Cotton Link;;NavBeautyBeautyAccessoriesFacialCottonLink;NavBeautyBeautyAccessoriesFacialCottonLink;;facial-cotton
+;;NavBeautyBeautyAccessoriesBrushSetLink;Navigation Bar- Beauty- Beauty Accessories- Brush Set Link;;NavBeautyBeautyAccessoriesBrushSetLink;NavBeautyBeautyAccessoriesBrushSetLink;;brush-set
+;;NavBeautyBeautyAccessoriesPowderCompactLink;Navigation Bar- Beauty- Beauty Accessories- Powder Compact Link;;NavBeautyBeautyAccessoriesPowderCompactLink;NavBeautyBeautyAccessoriesPowderCompactLink;;powder-compact
+;;NavBeautyBeautyAccessoriesViewAllLink;Navigation Bar- Beauty- Beauty Accessories- View All Link;/;NavBeautyBeautyAccessoriesViewAllLink;NavBeautyBeautyAccessoriesViewAllLink;;
+
+;;NavBeautyToolsAdviceSkincareLink;Navigation Bar- Beauty- Tools and Advice Skincare Recommender Link;/;NavBeautyToolsAdviceSkincareLink;NavBeautyToolsAdviceSkincareLink;;
+;;NavBeautyToolsAdviceDittoLink;Navigation Bar- Beauty- Tools and Advice Ditto Scheduled Link;/;NavBeautyToolsAdviceDittoLink;NavBeautyToolsAdviceDittoLink;;
+
+;;NavBathAndBodyHairCareLink;Navigation Bar- Bath and Body- Hair Care Link;/category-landing-page;NavBathAndBodyHairCareLink;NavBathAndBodyHairCareLink;;;
+;;NavBathAndBodyBodyCareLink;Navigation Bar- Bath and Body- Body Care Link;/category-landing-page;NavBathAndBodyBodyCareLink;NavBathAndBodyBodyCareLink;;;
+;;NavBathAndBodyOralCareLink;Navigation Bar- Bath and Body- Oral Care Link;/category-landing-page;NavBathAndBodyOralCareLink;NavBathAndBodyOralCareLink;;;
+;;NavBathAndBodySunAndTanningLink;Navigation Bar- Bath and Body- Sun And Tanning Link;/category-landing-page;NavBathAndBodySunAndTanningLink;NavBathAndBodySunAndTanningLink;;;
+
+;;NavBathAndBodyHairCareConditionersLink;Navigation Bar- Bath and Body- Hair Care- Conditioners Link;;NavBathAndBodyHairCareConditionersLink;NavBathAndBodyHairCareConditionersLink;;conditioners
+;;NavBathAndBodyHairCareShampoosLink;Navigation Bar- Bath and Body- Hair Care- Shampoos Link;;NavBathAndBodyHairCareShampoosLink;NavBathAndBodyHairCareShampoosLink;;shampoos
+;;NavBathAndBodyHairCareStylingLink;Navigation Bar- Bath and Body- Hair Care- Styling and Treatments Link;;NavBathAndBodyHairCareStylingLink;NavBathAndBodyHairCareStylingLink;;styling-and-treatments
+;;NavBathAndBodyHairCareViewAllLink;Navigation Bar- Bath and Body- Hair Care- View All Link;/;NavBathAndBodyHairCareViewAllLink;NavBathAndBodyHairCareViewAllLink;;
+
+;;NavBathAndBodyBodyCareBodyWashLink;Navigation Bar- Bath and Body- Body Care- Body Wash Link;;NavBathAndBodyBodyCareBodyWashLink;NavBathAndBodyBodyCareBodyWashLink;;body-wash
+;;NavBathAndBodyBodyCareDeodorantsLink;Navigation Bar- Bath and Body- Body Care- Deodorants Link;;NavBathAndBodyBodyCareDeodorantsLink;NavBathAndBodyBodyCareDeodorantsLink;;deodorants
+;;NavBathAndBodyBodyCareLotionsLink;Navigation Bar- Bath and Body- Body Care- Lotions Link;;NavBathAndBodyBodyCareLotionsLink;NavBathAndBodyBodyCareLotionsLink;;lotions
+;;NavBathAndBodyBodyCareViewAllLink;Navigation Bar- Bath and Body- Body Care- View All Link;/;NavBathAndBodyBodyCareViewAllLink;NavBathAndBodyBodyCareViewAllLink;;
+
+;;NavBathAndBodyOralCareBreathSpraysLink;Navigation Bar- Bath and Body- Oral Care- Breath Sprays Link;;NavBathAndBodyOralCareBreathSpraysLink;NavBathAndBodyOralCareBreathSpraysLink;;breath-sprays
+;;NavBathAndBodyOralCareToothpastesLink;Navigation Bar- Bath and Body- Oral Care- Tooth Pastes Link;;NavBathAndBodyOralCareToothpastesLink;NavBathAndBodyOralCareToothpastesLink;;toothpastes
+;;NavBathAndBodyOralCareBrushesAndFlossLink;Navigation Bar- Bath and Body- Oral Care- Brushes & Floss Link;;NavBathAndBodyOralCareBrushesAndFlossLink;NavBathAndBodyOralCareBrushesAndFlossLink;;brushes-and-floss
+;;NavBathAndBodyOralCareViewAllLink;Navigation Bar- Bath and Body- Oral Care- View All Link;/;NavBathAndBodyOralCareViewAllLink;NavBathAndBodyOralCareViewAllLink;;
+
+;;NavBathAndBodySunAndTanningSunscreenLotionLink;Navigation Bar- Bath and Body- Sun and Tanning- Sunscreen Lotion Link;;NavBathAndBodySunAndTanningSunscreenLotionLink;NavBathAndBodySunAndTanningSunscreenLotionLink;;sunscreen-lotion
+;;NavBathAndBodySunAndTanningSelfTanMousseLink;Navigation Bar- Bath and Body- Sun and Tanning- Self Tan Mousse Link;;NavBathAndBodySunAndTanningSelfTanMousseLink;NavBathAndBodySunAndTanningSelfTanMousseLink;;self-tan-mousse
+;;NavBathAndBodySunAndTanningViewAllLink;Navigation Bar- Bath and Body- Sun and Tanning- View All Link;/;NavBathAndBodySunAndTanningViewAllLink;NavBathAndBodySunAndTanningViewAllLink;;
+
+;;NavBathAndBodyToolsAdviceQuickProductLink;Navigation Bar- BathAndBody- Tools and Advice Quick Product Link;/;NavBathAndBodyToolsAdviceQuickProductLink;NavBathAndBodyToolsAdviceQuickProductLink;;
+;;NavBathAndBodyToolsAdviceDittoScheduledLink;Navigation Bar- BathAndBody- Tools and Advice Ditto Scheduled Link;/;NavBathAndBodyToolsAdviceDittoScheduledLink;NavBathAndBodyToolsAdviceDittoScheduledLink;;
+
+;;NavHomeHouseHoldLink;Navigation Bar- Home- Household Hygiene Link;/category-landing-page;NavHomeHouseHoldLink;NavHomeHouseHoldLink;;;
+;;NavHomeLaundryLink;Navigation Bar- Home- Laundry Hygiene Link;/category-landing-page;NavHomeLaundryLink;NavHomeLaundryLink;;;
+;;NavHomeWaterTreatmentLink;Navigation Bar- Home- Water Treatment Hygiene Link;/category-landing-page;NavHomeWaterTreatmentLink;NavHomeWaterTreatmentLink;;;
+;;NavHomeCookwareLink;Navigation Bar- Home- Household Cookware Link;/category-landing-page;NavHomeCookwareLink;NavHomeCookwareLink;;;
+
+;;NavHomeHouseHoldKitchenCleanerLink;Navigation Bar- Home- Household- Kitchen Cleaner Link;;NavHomeHouseHoldKitchenCleanerLink;NavHomeHouseHoldKitchenCleanerLink;;kitchen-cleaner
+;;NavHomeHouseHoldGeneralCleaningLink;Navigation Bar- Home- Household- General Cleaning Link;;NavHomeHouseHoldGeneralCleaningLink;NavHomeHouseHoldGeneralCleaningLink;;general-cleaning
+;;NavHomeHouseHoldBathroomCleanerLink;Navigation Bar- Home- Household- Bathroom Cleaner Link;;NavHomeHouseHoldBathroomCleanerLink;NavHomeHouseHoldBathroomCleanerLink;;bathroom-cleaner
+;;NavHomeHouseHoldViewAllLink;Navigation Bar- Home- Household- View All Link;/;NavHomeHouseHoldViewAllLink;NavHomeHouseHoldViewAllLink;;
+
+;;NavHomeLaundryDetergentsLink;Navigation Bar- Home- Laundry- Detergents Link;;NavHomeLaundryDetergentsLink;NavHomeLaundryDetergentsLink;;detergents
+;;NavHomeLaundryTreatmentAndAdditivesLink;Navigation Bar- Home- Laundry- Treatment and Additives Link;;NavHomeLaundryTreatmentAndAdditivesLink;NavHomeLaundryTreatmentAndAdditivesLink;;treatment-and-additives
+;;NavHomeLaundryLotionsLink;Navigation Bar- Home- Laundry- Lotions Link;;NavHomeLaundryLotionsLink;NavHomeLaundryLotionsLink;;lotions
+;;NavHomeLaundryViewAllLink;Navigation Bar- Home- Laundry- View All Link;/;NavHomeLaundryViewAllLink;NavHomeLaundryViewAllLink;;
+
+;;NavHomeWaterTreatmentPurifiersLink;Navigation Bar- Home- Water treatment- Purifiers Link;;NavHomeWaterTreatmentPurifiersLink;NavHomeWaterTreatmentPurifiersLink;;purifiers
+;;NavHomeWaterTreatmentReplacementFiltersLink;Navigation Bar- Home- Water treatment- Replacement Filters Link;;NavHomeWaterTreatmentReplacementFiltersLink;NavHomeWaterTreatmentReplacementFiltersLink;;replacement-filters
+;;NavHomeWaterTreatmentViewAllLink;Navigation Bar- Home- Water treatment- View All Link;/;NavHomeWaterTreatmentViewAllLink;NavHomeWaterTreatmentViewAllLink;;
+
+;;NavHomeCookwareCutleryLink;Navigation Bar- Home- Cookware- Cutlery Link;;NavHomeCookwareCutleryLink;NavHomeCookwareCutleryLink;;cutlery
+;;NavHomeCookwarePansLink;Navigation Bar- Home- Cookware- Pans Link;;NavHomeCookwarePansLink;NavHomeCookwarePansLink;;pans
+;;NavHomeCookwareReplacementPartsLink;Navigation Bar- Home- Cookware- Replacement Parts Link;;NavHomeCookwareReplacementPartsLink;NavHomeCookwareReplacementPartsLink;;replacement-parts
+;;NavHomeCookwareViewAllLink;Navigation Bar- Home- Cookware- Replacement Parts Link;/;NavHomeCookwareViewAllLink;NavHomeCookwareViewAllLink;;
+
+;;NavHomeToolsAdviceQuickProductLink;Navigation Bar- Home- Tools and Advice Quick Product Link;/;NavHomeToolsAdviceQuickProductLink;NavHomeToolsAdviceQuickProductLink;;
+;;NavHomeToolsAdviceDittoScheduledLink;Navigation Bar- Home- Tools and Advice Ditto Scheduled Link;/;NavHomeToolsAdviceDittoScheduledLink;NavHomeToolsAdviceDittoScheduledLink;;
+
+########## Navigation Bar ##########
 
 
-INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;target(code)[default='sameWindow'];category(code, $productCV)
-;;vitaminsAndSupplementsLinkComponent;vitamins and supplements category link;vitaminsAndSupplementsLinkComponent;;vitamins-and-supplements
-;;weightManagementLinkComponent;weight management category link;weightManagementLinkComponent;;weight-management
-;;sportsNutritionLinkComponent;sports nutrition category link;sportsNutritionLinkComponent;;sports-nutrition
-;;energyDrinksLinkComponent;energy drinks category link;energyDrinksLinkComponent;;energy-drinks
+########## CMS Navigation Nodes
 
-INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
-;;vitaminsAndSupplementsBannerComponent;vitamins and supplements banner component;vitaminsAndSupplementsBannerComponent
-;;weightManagementBannerComponent;weight management banner component;weightManagementBannerComponent
-;;sportsNutritionBannerComponent;sports nutrition banner component;sportsNutritionBannerComponent
-;;energyDrinksBannerComponent;energy drinks banner component;energyDrinksBannerComponent
+INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);&nodeRef;links(&linkRef);visible;nodeLink(&componentRef)
+;root;;root;;root;;;;
 
-INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
-;;ShopByCategoryTitleParagraphComponent;ShopByCategoryTitleParagraphComponent
+##### footer section
+;FooterNode;;FooterNode;root;FooterNode;;true;;
+;FeatureBrandsNode;;FeatureBrandsNode;FooterNode;FeatureBrandsNode;FooterFeaturedBrandsNutrilleNavLink,FooterFeaturedBrandsAtistryNavLink,FooterFeaturedBrandsLegacyNavLink,FooterFeaturedBrandsXSNavLink,FooterFeaturedBrandsSatiniqueNavLink;true;FooterFeaturedBrandsNodeLink;
+;StartBusinessNode;;StartBusinessNode;FooterNode;StartBusinessNode;FooterStartYourBusinessStartYourBusinessNavLink,FooterStartYourBusinessExclusiveProdNavLink,FooterStartYourBusinessLowCostNavLink,FooterStartYourBusinessSuccessSupportNavLink,FooterStartYourBusinessOurLocationsNavLink,FooterStartYourBusinessEventsNavLink;true;FooterStartYourBusinessNodeLink;
+;ResourcesNode;;ResourcesNode;FooterNode;ResourcesNode;FooterResourcesCatalogsNavLink,FooterResourcesRibbonGiftCardsNavLink,FooterResourcesPartnerStoresNavLink,FooterResourcesAchieveMagazineNavLink,FooterResourcesIBOAssociationNavLink;true;FooterResourcesNodeLink;
+;SupportNode;;SupportNode;FooterNode;SupportNode;FooterSupportContactUsNavLink,FooterSupportReturnsNavLink,FooterSupportShippingAndDeliveryNavLink,FooterSupportSalesTaxNavLink,FooterSupportMagagingDittoNavLink;true;FooterSupportNodeLink;
 
+##### Account Navigation Section
+INSERT_UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];name;parent(uid, $contentCV);&nodeRef;links(&linkRef);visible;nodeLink(&componentRef)
+;;AccountNavNode;AccountNavNode;root;AccountNavNode;;true;;
+;;MyAccountNode;MyAccountNode;AccountNavNode;MyAccountNode;MyAccountNodeLink;true;;
+;;BillingShippingNode;BillingShippingNode;AccountNavNode;BillingShippingNode;BillingShippingNodeLink;true;;
+;;ShoppingListsNode;ShoppingListsNode;AccountNavNode;ShoppingListsNode;ShoppingListsNodeLink;true;;
+;;DittoNode;DittoNode;AccountNavNode;DittoNode;DittoNodeLink;true;;
+;;PersonalDetailsNode;PersonalDetailsNode;AccountNavNode;PersonalDetailsNode;PersonalDetailsNodeLink;true;;
+;;OrderHistoryNode;OrderHistoryNode;AccountNavNode;OrderHistoryNode;OrderHistoryNodeLink;true;;
+
+INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;children(uid, $contentCV);&nodeRef;links(&linkRef);visible;nodeLink(&componentRef);brandBanners(&componentRef);toolAdviceLinks(&componentRef)
+;ShopNavNode;;ShopNavNode;NutritionNavNode,BeautyNavNode,BathAndBodyNavNode,HomeNavNode;ShopNavNode;;true;NavShopLink;
+;BusinessCenterNavNode;;BusinessCenterNavNode;;BusinessCenterNavNode;;true;NavBusinessCenterLink;
+;AboutNavNode;;AboutNavNode;;AboutNavNode;;true;NavAboutAmwayLink;
+;EducationNavNode;;EducationNavNode;;EducationNavNode;;true;NavEducationLink;
+
+;NutritionNavNode;;NutritionNavNode;VitaminNutritionNavNode,WeightNutritionNavNode,SportsNutritionNavNode,EnergyNutritionNavNode;NutritionNavNode;;true;NavShopNutritionLink;NavBarNutrition1SBComponent,NavBarNutrition2SBComponent,NavBarNutrition3SBComponent,NavBarNutrition4SBComponent;NavNutritionToolsAdviceSkincareLink,NavNutritionToolsAdviceDittoLink
+;BeautyNavNode;;BeautyNavNode;SkinCareBeautyNavNode,ColourBeautyNavNode,MakeUpBeautyNavNode,BeautyAccessoriesBeautyNavNode;BeautyNavNode;;true;NavShopBeautyLink;NavBarBeautySBComponent;NavBeautyToolsAdviceSkincareLink,NavBeautyToolsAdviceDittoLink
+;BathAndBodyNavNode;;BathAndBodyNavNode;HairCareBathAndBodyNavNode,BodyCareBathAndBodyNavNode,OralCareBathAndBodyNavNode,SunAndTanningBathAndBodyNavNode;BathAndBodyNavNode;;true;NavShopBathBodyLink;NavBarBathAndBodySB1Component,NavBarBathAndBodySB2Component,NavBarBathAndBodySB3Component,NavBarBathAndBodySB4Component;NavBathAndBodyToolsAdviceQuickProductLink,NavBathAndBodyToolsAdviceDittoScheduledLink
+;HomeNavNode;;HomeNavNode;HouseHoldHomeNavNode,LaundryHomeNavNode,WaterTreatmentHomeNavNode,CookwareHomeNavNode;HomeNavNode;  ;true;NavShopHomeLink;NavBarHomeSB1Component,NavBarHomeSB2Component,NavBarHomeSB3Component,NavBarHomeSB4Component;NavHomeToolsAdviceQuickProductLink,NavHomeToolsAdviceDittoScheduledLink
+
+;VitaminNutritionNavNode;;VitaminNutritionNavNode;;VitaminNutritionNavNode; NavNutritionVitaminsBoneHealthLink,NavNutritionVitaminsChildrenLink,NavNutritionVitaminsHeartHealthLink,NavNutritionVitaminsViewAllLink ;true;NavNutritionVitaminsLink;
+;WeightNutritionNavNode;;WeightNutritionNavNode;;WeightNutritionNavNode; NavNutritionWeightSupplementsLink,NavNutritionWeightBarLink,NavNutritionWeightShakesLink,NavNutritionWeightViewAllLink ;true;NavNutritionWeightLink;
+;SportsNutritionNavNode;;SportsNutritionNavNode;;SportsNutritionNavNode; NavNutritionSportsEnergizeLink,NavNutritionSportsHydrateLink,NavNutritionSportsNutriliteLink,NavNutritionSportsViewAllLink ;true;NavNutritionSportsLink;
+;EnergyNutritionNavNode;;EnergyNutritionNavNode;;EnergyNutritionNavNode; NavNutritionEnergyKosherLink,NavNutritionEnergySugarFreeLink,NavNutritionEnergyLowCarbLink,NavNutritionEnergyViewAllLink ;true;NavNutritionEnergyLink;
+
+;SkinCareBeautyNavNode;;SkinCareBeautyNavNode;;SkinCareBeautyNavNode;NavBeautySkinCareAntiAgeingLink,NavBeautySkinCareArtistryLink,NavBeautySkinCareDailySkinCareLink,NavBeautySkinCareViewAllLink;true;NavBeautySkinCareLink;
+;ColourBeautyNavNode;;ColourBeautyNavNode;;ColourBeautyNavNode; NavBeautyColourApplicatorsLink,NavBeautyColourEyeBrowsLink,NavBeautyColourEyeCheeksLink,NavBeautyColourViewAllLink;true;NavBeautyColourLink;
+;MakeUpBeautyNavNode;;MakeUpBeautyNavNode;;MakeUpBeautyNavNode; NavBeautyMakeUpCheeksLink,NavBeautyMakeUpConcealersLink,NavBeautyMakeUpFoundationLink,NavBeautyMakeUpViewAllLink;true;NavBeautyMakeUpLink;
+;BeautyAccessoriesBeautyNavNode;;BeautyAccessoriesBeautyNavNode;;BeautyAccessoriesBeautyNavNode; NavBeautyBeautyAccessoriesFacialCottonLink,NavBeautyBeautyAccessoriesBrushSetLink,NavBeautyBeautyAccessoriesPowderCompactLink,NavBeautyBeautyAccessoriesViewAllLink;true;NavBeautyBeautyAccessoriesLink;
+
+;HairCareBathAndBodyNavNode;;HairCareBathAndBodyNavNode;;HairCareBathAndBodyNavNode;NavBathAndBodyHairCareConditionersLink,NavBathAndBodyHairCareShampoosLink,NavBathAndBodyHairCareStylingLink,NavBathAndBodyHairCareViewAllLink ;true;NavBathAndBodyHairCareLink;
+;BodyCareBathAndBodyNavNode;;BodyCareBathAndBodyNavNode;;BodyCareBathAndBodyNavNode;NavBathAndBodyBodyCareBodyWashLink,NavBathAndBodyBodyCareDeodorantsLink,NavBathAndBodyBodyCareLotionsLink,NavBathAndBodyBodyCareViewAllLink ;true;NavBathAndBodyBodyCareLink;
+;OralCareBathAndBodyNavNode;;OralCareBathAndBodyNavNode;;OralCareBathAndBodyNavNode; NavBathAndBodyOralCareBreathSpraysLink,NavBathAndBodyOralCareToothpastesLink,NavBathAndBodyOralCareBrushesAndFlossLink,NavBathAndBodyOralCareViewAllLink;true;NavBathAndBodyOralCareLink;
+;SunAndTanningBathAndBodyNavNode;;SunAndTanningBathAndBodyNavNode;;SunAndTanningBathAndBodyNavNode; NavBathAndBodySunAndTanningSunscreenLotionLink,NavBathAndBodySunAndTanningSelfTanMousseLink,NavBathAndBodySunAndTanningViewAllLink;true;NavBathAndBodySunAndTanningLink;
+
+;HouseHoldHomeNavNode;;HouseHoldHomeNavNode;;HouseHoldHomeNavNode;NavHomeHouseHoldKitchenCleanerLink,NavHomeHouseHoldGeneralCleaningLink,NavHomeHouseHoldBathroomCleanerLink,NavHomeHouseHoldViewAllLink ;true;NavHomeHouseHoldLink;
+;LaundryHomeNavNode;;LaundryHomeNavNode;;LaundryHomeNavNode; NavHomeLaundryDetergentsLink,NavHomeLaundryTreatmentAndAdditivesLink,NavHomeLaundryLotionsLink,NavHomeLaundryViewAllLink;true;NavHomeLaundryLink;
+;WaterTreatmentHomeNavNode;;WaterTreatmentHomeNavNode;;WaterTreatmentHomeNavNode;NavHomeWaterTreatmentPurifiersLink,NavHomeWaterTreatmentReplacementFiltersLink,NavHomeWaterTreatmentViewAllLink ;true;NavHomeWaterTreatmentLink;
+;CookwareHomeNavNode;;CookwareHomeNavNode;;CookwareHomeNavNode;NavHomeCookwareCutleryLink,NavHomeCookwarePansLink,NavHomeCookwareReplacementPartsLink,NavHomeCookwareViewAllLink ;true;NavHomeCookwareLink;
+
+########## CMS Navigation Nodes ##########
+
+
+########## Home page section 1 carousel
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
-;;ShopByCategoryContentSlot;ShopByCategoryTitleParagraphComponent,shopByCategoryCollectionComponent
+;;Section1CarouselSlot;HomepageSection1CarouselComponent
+
+INSERT_UPDATE AmwayApacArtistryDealCarouselComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink;link(&componentRef);secondaryLink(&componentRef);text(&componentRef);secondaryImage(&componentRef)
+;;AmwayApacArtistryDealCarouselComponent;Girl Thumbnail Detail;AmwayApacArtistryDealCarouselComponent;;HomepageSection1CarouselShopNowNavLink;HomepageSection1CarouselSecLink;HomepageSection1CarouselImage1Text;homePageTopCarouselArtistryImageComponent
 
 
-################## category page tools and advice component
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow'];
+;;HomepageSection1CarouselShopNowNavLink;Shop Now Nav Link;/;HomepageSection1CarouselShopNowNavLink;HomepageSection1CarouselShopNowNavLink;;;;
 
-INSERT_UPDATE AmwayApacToolsAndAdviceComponent;$contentCV[unique=true];uid[unique=true];name;text(&componentRef);banner(&componentRef);&componentRef
-;;nutriliteGuideComponent;nutrilite guide component;nutriliteGuideTextComponent;nutriliteGuideBannerComponent;nutriliteGuideComponent
-;;bodyKeyChoicesComponent;weight management component;bodyKeyChoicesTextComponent;bodyKeyChoicesBannerComponent;bodyKeyChoicesComponent
-;;nutriliteFindSupplementsComponent;sports nutrition component;nutriliteFindSupplementsTextComponent;nutriliteFindSupplementsBannerComponent;nutriliteFindSupplementsComponent
+INSERT_UPDATE AmwayApacIconLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow'];
+;;HomepageSection1CarouselSecLink;Secondary Action Nav Link;/;HomepageSection1CarouselSecLink;HomepageSection1CarouselSecLink;;;;
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;
+;;HomepageSection1CarouselImage1Text; Home Page top carousel image 1;HomepageSection1CarouselImage1Text;        
+
+INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;homePageTopCarouselArtistryImageComponent;Home page top carousel artistry image component;homePageTopCarouselArtistryImageComponent
+
+INSERT_UPDATE RotatingImagesComponent;$contentCV[unique=true];uid[unique=true];name;responsiveBanners(&componentRef);&componentRef
+;;HomepageSection1CarouselComponent;Homepage section 1 Carousel;AmwayApacArtistryDealCarouselComponent;HomepageSection1CarouselComponent
+
+########## Home page section 1 carousel ##########
+
+
+########## Home Page section 2 Amway Latest News
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;Section2ContentSlot;amwayapacLatestNewsParagraphComponent,amwayapacHomepageReadMoreLink;
+
+INSERT_UPDATE AmwayApacIconLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;target(code)[default='sameWindow'];&componentRef;
+;;amwayapacHomepageReadMoreLink;Read More Nav Link;/;amwayapacHomepageReadMoreLink;;amwayapacHomepageReadMoreLink;
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;
+;;amwayapacLatestNewsParagraphComponent; Home Page Amway Latest News;amwayapacLatestNewsParagraphComponent;		
+
+########## Home Page section 2 Amway Latest News ##########
+	
+	
+########## Home Page section 3 Success Story
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;Section3AContentSlot;amwayapacHomePageSuccessStoryA
+;;Section3BContentSlot;amwayapacHomePageSuccessStoryB
+
+INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;target(code)[default='sameWindow'];&componentRef
+;;amwayApacHomepageTryNowNavLink;Try Now Nav Link;/;amwayApacHomepageTryNowNavLink;;amwayApacHomepageTryNowNavLink;
+;;amwayApacHomepageLearnMoreNavLink;Learn More Nav Link;/;amwayApacHomepageLearnMoreNavLink;;amwayApacHomepageLearnMoreNavLink;
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
+;;pathToSuccessParagraphComponent;pathToSuccessParagraphComponent
+;;pitchPerfectParagraphComponent;pitchPerfectParagraphComponent
+
+INSERT_UPDATE AmwayApacPathToSuccessPitchPerfectComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;link(&componentRef);text(&componentRef)
+;;amwayapacHomePageSuccessStoryA;Home Page Path to success;amwayapacHomePageSuccessStoryA;amwayApacHomepageTryNowNavLink;pathToSuccessParagraphComponent
+;;amwayapacHomePageSuccessStoryB;Home Page Pitch Perfect;amwayapacHomePageSuccessStoryB;amwayApacHomepageLearnMoreNavLink;pitchPerfectParagraphComponent
+
+########## Home Page section 3 Success Story ##########
+
+
+########## Section 4 Home page Our New Product
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;Section4ContentSlot;amwayapacOurNewProductParagraphComponent
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;
+;;amwayapacOurNewProductParagraphComponent;Home Page Our New Product;amwayapacOurNewProductParagraphComponent;	
+
+########## Section 4 Home page Our New Product ##########
+
+
+########## Section 5 Home Page Artistry New Luxury Carousel
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;Section5CarouselSlot;amwayapacArtistryNewLuxuryRotatingComponent
+
+INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;target(code)[default='sameWindow'];&componentRef;
+;;amwayApacArtistryNewLuxuryCarouselButtonLink;Shop Now Nav Link;/;amwayApacArtistryNewLuxuryCarouselButtonLink;;amwayApacArtistryNewLuxuryCarouselButtonLink;
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;amwayapacArtistryNewLuxuryParagraphComponent;Home Page Artistry New Luxury Carousel;amwayapacArtistryNewLuxuryParagraphComponent
+
+INSERT_UPDATE AmwayApacArtistryNewLuxuryCarouselComponent;$contentCV[unique=true];uid[unique=true];name;urlLink;text(&componentRef);link(&componentRef);&componentRef
+;;amwayapacArtistryNewLuxuryCarouselComponent;Home Page Artistry New Luxury Carousel Component;/;amwayapacArtistryNewLuxuryParagraphComponent;amwayApacArtistryNewLuxuryCarouselButtonLink;amwayapacArtistryNewLuxuryCarouselComponent;
+
+INSERT_UPDATE AmwayApacArtistryNewLuxuryRotatingComponent;$contentCV[unique=true];uid[unique=true];name;responsiveBanners(&componentRef);&componentRef
+;;amwayapacArtistryNewLuxuryRotatingComponent;Home Page Artistry New Luxury Rotating Component;amwayapacArtistryNewLuxuryCarouselComponent;amwayapacArtistryNewLuxuryRotatingComponent
+
+########## Section 5 Home Page Artistry New Luxury Carousel ##########
+
+
+########## Section 6 Home Page New Product Component
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;Section6ASlot;amwayapacFoundationalSupplementsComponent;
+;;Section6BSlot;amwayapacTargetedSupplementsComponent;
+;;Section6CSlot;amwayapacConvenienceProductsComponent;
+
+INSERT_UPDATE AmwayApacNewProductComponent;$contentCV[unique=true];uid[unique=true];name;text(uid, $contentCV);link(&linkRef);&componentRef
+;;amwayapacFoundationalSupplementsComponent;Foundational Supplements New Product Component;amwayapacFoundationalSupplementsParagraphComponent;amwayapacFoundationalSupplementsNavLink;amwayapacFoundationalSupplementsComponent
+;;amwayapacTargetedSupplementsComponent;Targeted Supplements New Product Component;amwayapacTargetedSupplementsParagraphComponent;amwayapacTargetedSupplementsNavLink;amwayapacTargetedSupplementsComponent;
+;;amwayapacConvenienceProductsComponent; Convenience Products New Product Component;amwayapacConvenienceProductsParagraphComponent;amwayapacConvenienceProductsNavLink;amwayapacConvenienceProductsComponent;	
+
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;target(code)[default='sameWindow'];&componentRef;
+;;amwayapacFoundationalSupplementsNavLink;Foundational Supplements Shop Now Nav Link;/;amwayapacFoundationalSupplementsNavLink;;amwayapacFoundationalSupplementsNavLink;
+;;amwayapacTargetedSupplementsNavLink;Targeted Supplements Shop Now Nav Link;/;amwayapacTargetedSupplementsNavLink;;amwayapacTargetedSupplementsNavLink;
+;;amwayapacConvenienceProductsNavLink;Convenience Products Shop Now Nav Link;/;amwayapacConvenienceProductsNavLink;;amwayapacConvenienceProductsNavLink;
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
+;;amwayapacFoundationalSupplementsParagraphComponent;amwayapacFoundationalSupplementsParagraphComponent
+;;amwayapacTargetedSupplementsParagraphComponent;amwayapacTargetedSupplementsParagraphComponent
+;;amwayapacConvenienceProductsParagraphComponent;amwayapacConvenienceProductsParagraphComponent
+
+########## Section 6 Home Page New Product Component ##########
+
+
+########## Section 7 Home Page Platinum ABO Component
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;Section7Slot;amwayapacPlatinumABOComponent;
+
+INSERT_UPDATE AmwayApacPlatinumABOComponent;$contentCV[unique=true];uid[unique=true];name;link(&componentRef);text(&componentRef);&componentRef;
+;;amwayapacPlatinumABOComponent;Home Page Platinum ABO Component;amwayapacPlatinumABOLearnMoreNavLink;amwayapacPlatinumABOParagraphComponent;amwayapacPlatinumABOComponent;
+
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;target(code)[default='sameWindow'];&componentRef
+;;amwayapacPlatinumABOLearnMoreNavLink;Platinum ABO Learn More Nav Link;/;amwayapacPlatinumABOLearnMoreNavLink;;amwayapacPlatinumABOLearnMoreNavLink;
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
+;;amwayapacPlatinumABOParagraphComponent;amwayapacPlatinumABOParagraphComponent
+
+########## Section 7 Home Page Platinum ABO Component ##########
+
+
+########## Section 8 Home Page Choose The Right Supplement Component
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;Section8Slot;amwayapacChooseRightSupplementParagraphComponent
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
+;;amwayapacChooseRightSupplementParagraphComponent;amwayapacChooseRightSupplementParagraphComponent
+
+########## Section 8 Home Page Choose The Right Supplement Component ##########
+
+
+########## Section 9 Home Page New Product Component 
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;Section9ASlot;amwayapacFoundationalSupplementsProductComponent
+;;Section9BSlot;amwayapacTargetedSupplementsProductComponent
+;;Section9CSlot;amwayapacConvenienceProductsProductComponent
+
+INSERT_UPDATE AmwayApacNewProductComponent;$contentCV[unique=true];uid[unique=true];name;text(uid, $contentCV);link(&linkRef);&componentRef
+;;amwayapacFoundationalSupplementsProductComponent;Foundational Supplements Supplement Product Component;amwayapacFoundationalSupplementsProductParagraphComponent;amwayapacFoundationalSupplementsProductNavLink;amwayapacFoundationalSupplementsProductComponent
+;;amwayapacTargetedSupplementsProductComponent;Targeted Supplements Supplement Product Component;amwayapacTargetedSupplementsProductParagraphComponent;amwayapacTargetedSupplementsProductNavLink;amwayapacTargetedSupplementsProductComponent;
+;;amwayapacConvenienceProductsProductComponent; Convenience Products Supplement Product Component;amwayapacConvenienceProductsProductParagraphComponent;amwayapacConvenienceProductsProductNavLink;amwayapacConvenienceProductsProductComponent;	
+
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;target(code)[default='sameWindow'];&componentRef;
+;;amwayapacFoundationalSupplementsProductNavLink;Foundational Supplements Shop Now Nav Link;/;amwayapacFoundationalSupplementsProductNavLink;;amwayapacFoundationalSupplementsProductNavLink;
+;;amwayapacTargetedSupplementsProductNavLink;Targeted Supplements Shop Now Nav Link;/;amwayapacTargetedSupplementsProductNavLink;;amwayapacTargetedSupplementsProductNavLink;
+;;amwayapacConvenienceProductsProductNavLink;Convenience Products Shop Now Nav Link;/;amwayapacConvenienceProductsProductNavLink;;amwayapacConvenienceProductsProductNavLink;
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
+;;amwayapacFoundationalSupplementsProductParagraphComponent;amwayapacFoundationalSupplementsProductParagraphComponent
+;;amwayapacTargetedSupplementsProductParagraphComponent;amwayapacTargetedSupplementsProductParagraphComponent
+;;amwayapacConvenienceProductsProductParagraphComponent;amwayapacConvenienceProductsProductParagraphComponent
+
+########## Section 9 Home Page New Product Component ##########
+
+
+########## Section 10 Home page Opportunity Component
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;Section10Slot;amwayapacYourOpportunityComponent
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
+;;amwayapacOpportunityParagraphComponent;amwayapacOpportunityParagraphComponent
+
+INSERT_UPDATE AmwayApacYourOpportunityComponent;$contentCV[unique=true];uid[unique=true];name;text(&componentRef);iconImage(&componentRef);&componentRef;
+;;amwayapacYourOpportunityComponent;Home Page Opportunity Component;amwayapacOpportunityParagraphComponent;amwayapacOpportunityBannerComponent;amwayapacYourOpportunityComponent;
+
+INSERT_UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];name;urlLink;&componentRef;
+;;amwayapacOpportunityBannerComponent; Opportuinty Banner component;/;amwayapacOpportunityBannerComponent;
+
+########## Section 10 Home page Opportunity Component ##########
+
+
+########## Section 11 Home Page Featured Brands Component
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;Section11Slot;amwayapacFeaturedBrandsParagraphComponent
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
+;;amwayapacFeaturedBrandsParagraphComponent;amwayapacFeaturedBrandsParagraphComponent
+
+########## Section 11 Home Page Featured Brands Component ##########
+
+
+########## Section 12 Home Page Featured Brands Carousel Component
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;Section12Slot;amwayapacFeaturedBrandsCarouselComponent
+
+INSERT_UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];name;urlLink;&componentRef;
+;;amwayapacNutriliteCarouselBannerComponent; Featured Brands Carousel Nutrilite Banner Detail;/;amwayapacNutriliteCarouselBannerComponent;	
+;;amwayapacXSCarouselBannerComponent; Featured Brands Carousel XS Banner Detail;/;amwayapacXSCarouselBannerComponent;
+;;amwayapacArtistryCarouselBannerComponent; Featured Brands Carousel Artistry Banner Detail;/;amwayapacArtistryCarouselBannerComponent;
+;;amwayapacGlisterCarouselBannerComponent; Featured Brands Carousel Glister Banner Detail;/;amwayapacGlisterCarouselBannerComponent;		
+;;amwayapacicookCarouselBannerComponent; Featured Brands Carousel icook Banner Detail;/;amwayapacicookCarouselBannerComponent;
+;;amwayapacNutriliteCarousel2BannerComponent; Featured Brands Carousel Nutrilite2 Banner Detail;/;amwayapacNutriliteCarousel2BannerComponent;	
+
+INSERT_UPDATE AmwayApacFeaturedBrandsCarouselComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;amwayapacFeaturedBrandsCarouselComponent;Homepage Featured Brands Carousel ;amwayapacFeaturedBrandsCarouselComponent
+
+########## Section 12 Home Page Featured Brands Carousel Component ##########
+
+
+########## Footer
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;FooterSlot;footerComponent
+
+INSERT_UPDATE FooterComponent;$contentCV[unique=true];uid[unique=true];navigationNodes(&nodeRef);footerBanner(&componentRef);links(&componentRef);specialComponents(&componentRef);&componentRef
+;;footerComponent;FooterNode;FooterBanner;FooterPrivacyNavLink,FooterTermsNavLink,FooterSiteMapNavLink,FooteramwayGlobalNavLink;FooterSocialLinksComponent,FooterAmwayConnectionsComponent,FooterAmwayAppComponent;footerComponent
+
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow'];
+
+;;FooterFeaturedBrandsNodeLink;Footer Featured Brands - Node Link;/;FooterFeaturedBrandsNodeLink;FooterFeaturedBrandsNodeLink;;;;
+
+;;FooterFeaturedBrandsNutrilleNavLink;Footer Featured Brands - Nutrille Nav Link;/;FooterFeaturedBrandsNutrilleNavLink;FooterFeaturedBrandsNutrilleNavLink;;;;
+;;FooterFeaturedBrandsAtistryNavLink;Footer Featured Brands - Atistry Nav Link;/;FooterFeaturedBrandsAtistryNavLink;FooterFeaturedBrandsAtistryNavLink;;;;
+;;FooterFeaturedBrandsLegacyNavLink;Footer Featured Brands - Legacy of Clean Nav Link;/;FooterFeaturedBrandsLegacyNavLink;FooterFeaturedBrandsLegacyNavLink;;;;
+;;FooterFeaturedBrandsXSNavLink;Footer Featured Brands - XS Nav Link;/;FooterFeaturedBrandsXSNavLink;FooterFeaturedBrandsXSNavLink;;;;
+;;FooterFeaturedBrandsSatiniqueNavLink;Footer Featured Brands - Satinique Nav Link;/;FooterFeaturedBrandsSatiniqueNavLink;FooterFeaturedBrandsSatiniqueNavLink;;;;
+
+;;FooterStartYourBusinessNodeLink;Footer StartYourBusiness - Node Link;/;FooterStartYourBusinessNodeLink;FooterStartYourBusinessNodeLink;;;;
+
+;;FooterStartYourBusinessStartYourBusinessNavLink;Footer StartYourBusiness - Start your business Nav Link;/;FooterStartYourBusinessStartYourBusinessNavLink;FooterStartYourBusinessStartYourBusinessNavLink;;;;
+;;FooterStartYourBusinessExclusiveProdNavLink;Footer StartYourBusiness - Exclusive Products Nav Link;/;FooterStartYourBusinessExclusiveProdNavLink;FooterStartYourBusinessExclusiveProdNavLink;;;;
+;;FooterStartYourBusinessLowCostNavLink;Footer StartYourBusiness - Low Cost Setup Nav Link;/;FooterStartYourBusinessLowCostNavLink;FooterStartYourBusinessLowCostNavLink;;;;
+;;FooterStartYourBusinessSuccessSupportNavLink;Footer StartYourBusiness - Success & Support Nav Link;/;FooterStartYourBusinessSuccessSupportNavLink;FooterStartYourBusinessSuccessSupportNavLink;;;;
+;;FooterStartYourBusinessOurLocationsNavLink;Footer StartYourBusiness - Our Locations Nav Link;/;FooterStartYourBusinessOurLocationsNavLink;FooterStartYourBusinessOurLocationsNavLink;;;;
+;;FooterStartYourBusinessEventsNavLink;Footer StartYourBusiness - Events Nav Link;/;FooterStartYourBusinessEventsNavLink;FooterStartYourBusinessEventsNavLink;;;;
+
+;;FooterResourcesNodeLink;Footer Resources node Link;/;FooterResourcesNodeLink;FooterResourcesNodeLink;;;;
+
+;;FooterResourcesCatalogsNavLink;Footer Resources - Catalogs Nav Link;/;FooterResourcesCatalogsNavLink;FooterResourcesCatalogsNavLink;;;;
+;;FooterResourcesRibbonGiftCardsNavLink;Footer Resources - Ribbon Gift Cards Nav Link;/;FooterResourcesRibbonGiftCardsNavLink;FooterResourcesRibbonGiftCardsNavLink;;;;
+;;FooterResourcesPartnerStoresNavLink;Footer Resources - Partner Stores Nav Link;/;FooterResourcesPartnerStoresNavLink;FooterResourcesPartnerStoresNavLink;;;;
+;;FooterResourcesAchieveMagazineNavLink;Footer Resources - Achieve Magazine Nav Link;/;FooterResourcesAchieveMagazineNavLink;FooterResourcesAchieveMagazineNavLink;;;;
+;;FooterResourcesIBOAssociationNavLink;Footer Resources - IBO Association Nav Link;/;FooterResourcesIBOAssociationNavLink;FooterResourcesIBOAssociationNavLink;;;;
+
+;;FooterSupportNodeLink;Footer Support - node Link;/;FooterSupportNodeLink;FooterSupportNodeLink;;;;
+
+;;FooterSupportContactUsNavLink;Footer Support - Contact Us Nav Link;/;FooterSupportContactUsNavLink;FooterSupportContactUsNavLink;;;;
+;;FooterSupportReturnsNavLink;Footer Support - Returns Nav Link;/;FooterSupportReturnsNavLink;FooterSupportReturnsNavLink;;;;
+;;FooterSupportShippingAndDeliveryNavLink;Footer Support - Shipping and Delivery Nav Link;/;FooterSupportShippingAndDeliveryNavLink;FooterSupportShippingAndDeliveryNavLink;;;;
+;;FooterSupportSalesTaxNavLink;Footer Support - Sales Tax Nav Link;/;FooterSupportSalesTaxNavLink;FooterSupportSalesTaxNavLink;;;;
+;;FooterSupportMagagingDittoNavLink;Footer Support - Magaging Ditto Nav Link;/;FooterSupportMagagingDittoNavLink;FooterSupportMagagingDittoNavLink;;;;
+
+;;FooterPrivacyNavLink;Footer Privacy and Security Nav Link;/;FooterPrivacyNavLink;FooterPrivacyNavLink;;;;
+;;FooterTermsNavLink;Footer Terms of Use Nav Link;/;FooterTermsNavLink;FooterTermsNavLink;;;;
+;;FooterSiteMapNavLink;Footer Site Map Nav Link;/;FooterSiteMapNavLink;FooterSiteMapNavLink;;;;
+;;FooteramwayGlobalNavLink;Footer amwayglobal Nav Link;www.amwayglobal.com;FooteramwayGlobalNavLink;FooteramwayGlobalNavLink;;;;
+
+INSERT_UPDATE AmwayApacFooterSpecialComponent;$contentCV[unique=true];uid[unique=true];name;simpleBanners(&componentRef);&componentRef
+;;FooterSocialLinksComponent;Footer Social links component;FooterFacebookBanner,FooterTwitterBanner,FooterGooglePlusBanner,FooterInstagramBanner,FooterYoutubeBanner,FooterLineBanner,FooterTalkBanner;FooterSocialLinksComponent
+;;FooterAmwayConnectionsComponent;Footer Amway connections component;FooterAmwayLogoBanner,FooterConnectionsBanner;FooterAmwayConnectionsComponent
+;;FooterAmwayAppComponent;Footer Amway app component;FooterAppleStoreBanner;FooterAmwayAppComponent
 
 INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink
-;;nutriliteGuideBannerComponent;nutrilite guide banner component;nutriliteGuideBannerComponent;"/"
-;;bodyKeyChoicesBannerComponent;bodyKey choices banner component;bodyKeyChoicesBannerComponent;"/"
-;;nutriliteFindSupplementsBannerComponent;nutrilite find supplements banner component;nutriliteFindSupplementsBannerComponent;"/"
+;;FooterFacebookBanner;Footer Facebook Banner;FooterFacebookBanner;"/"
+;;FooterTwitterBanner;Footer Twitter Banner;FooterTwitterBanner;"/"
+;;FooterGooglePlusBanner;Footer Google Plus Banner;FooterGooglePlusBanner;"/"
+;;FooterInstagramBanner;Footer Instagram Banner;FooterInstagramBanner;"/"
+;;FooterYoutubeBanner;Footer Youtube Banner;FooterYoutubeBanner;"/"
+;;FooterLineBanner;Footer Line Banner;FooterLineBanner;"/"
+;;FooterTalkBanner;Footer Talk Banner;FooterTalkBanner;"/"
+;;FooterAmwayLogoBanner;Footer Amway Logo Banner;FooterAmwayLogoBanner;"/"
+;;FooterConnectionsBanner;Footer Connections Banner;FooterConnectionsBanner;"/"
+;;FooterAppleStoreBanner;Footer AppleStore Banner;FooterAppleStoreBanner;"/"
+;;FooterBanner;Footer Banner;FooterBanner;"/"
 
-INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
-;;nutriliteGuideTextComponent;nutriliteGuideTextComponent
-;;bodyKeyChoicesTextComponent;bodyKeyChoicesTextComponent
-;;nutriliteFindSupplementsTextComponent;nutriliteFindSupplementsTextComponent
-;;toolsAndAdviceTitleTextComponent;toolsAndAdviceTitleTextComponent
-
-
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
-;;ToolsAndAdviceContentSlot;toolsAndAdviceTitleTextComponent
-;;ToolsAndAdviceBannerContentSlot1;nutriliteGuideComponent
-;;ToolsAndAdviceBannerContentSlot2;bodyKeyChoicesComponent
-;;ToolsAndAdviceBannerContentSlot3;nutriliteFindSupplementsComponent
+########## Footer ##########
 
 
-################## category page brand background image and banner component
+########## category page top banner component
 
-
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
-;;ExperienceBrandsContentSlot;ExperienceBrandsTitleComponent
-;;BrandBackgroundImageBannerContentSlot;ExperienceBrandBackgroundImageAndBannerComponent
-
-INSERT_UPDATE AmwayApacOurNewProductComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;
-;;ExperienceBrandsTitleComponent;experience brands title component;ExperienceBrandsTitleComponent;
-
-
-INSERT_UPDATE AmwayApacBackgroupImageBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink;shopnow(&componentRef);description(&componentRef)
-;;ExperienceBrandsBackgroundImageAndBannerComponent;experience brand background image and banner component;ExperienceBrandBackgroundImageAndBannerComponent;"/";ExperienceBrandsShopNowLinkComponents;ExperienceBrandsDescriptionParagraphComponent
-
-INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&componentRef;target(code)[default='sameWindow'];
-;;ExperienceBrandsShopNowLinkComponent;experience brands show now link component;"/";ExperienceBrandsShopNowLinkComponents;;;;
-
-INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
-;;ExperienceBrandsDescriptionParagraphComponent;ExperienceBrandsDescriptionParagraphComponent
-
-############# category page top banner component
-
-INSERT_UPDATE AmwayApacTextImageComponent;$contentCV[unique=true];uid[unique=true];name;backgroundImage(uid, $contentCV);logoImage(uid, $contentCV);details(uid, $contentCV);offerImageLink(&linkRef);;&componentRef
-;;amwayapactextImageComponent;Text Image Component;BackgroundSBComponent;LogoSBComponent;productDesc;amwayApacButtonLinkProductCategory;;amwayapactextImageComponent
+INSERT_UPDATE AmwayApacCategoryTopBannerComponent;$contentCV[unique=true];uid[unique=true];name;logoImage(uid, $contentCV);text(uid, $contentCV);link(&linkRef);&componentRef;
+;;amwayapacCategoryTopBannerComponent;Category Top Banner Component;LogoBComponent;productDesc;amwayApacButtonLinkProductCategory;amwayapacCategoryTopBannerComponent;
 
 INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;target(code)[default='sameWindow'];&componentRef
 ;;amwayApacButtonLinkProductCategory;View Products;/;amwayApacButtonLinkProductCategory;;amwayApacButtonLinkProductCategory;
@@ -704,62 +605,129 @@ INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=tr
 INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
 ;;productDesc;productDesc;
 
-INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;urlLink;&componentRef
-;;BackgroundSBComponent;Background SB Component;"/";BackgroundSBComponent
-;;LogoSBComponent;Logo SB Component;"/";LogoSBComponent
-
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
-;;TopBannerContentSlot;Text Image Slot;true;amwayapactextImageComponent;
-
-############### category page success stories components
+INSERT_UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];name;urlLink;&componentRef
+;;LogoBComponent;Logo Banner Component;"/";LogoBComponent
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
-;;SuccessStoryContentSlot1;bodyKeySuccessStoryComponent
-;;SuccessStoryContentSlot2;xsSportsSuccessStoryComponent
+;;TopBannerContentSlot;amwayapacCategoryTopBannerComponent;
+
+########## category page top banner component ##########
+
+
+########## category page shop by category component
+
+INSERT_UPDATE AmwayApacShopByCategoryCollectionComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;shopByCategoryComponents(&componentRef)
+;;shopByCategoryCollectionComponent;shop by category collection component;shopByCategoryCollectionComponent;vitaminsAndSupplementsComponent,weightManagementComponent,sportsNutritionComponent,enerygyDrinksComponent,vitaminsAndSupplementsComponent1,weightManagementComponent1,sportsNutritionComponent1
+
+INSERT_UPDATE AmwayApacShopByCategoryComponent;$contentCV[unique=true];uid[unique=true];name;link(&componentRef);&componentRef
+;;vitaminsAndSupplementsComponent;vitamins and supplements component;vitaminsAndSupplementsButtonLinkComponent;vitaminsAndSupplementsComponent
+;;weightManagementComponent;weight management component;weightManagementButtonLinkComponent;weightManagementComponent
+;;sportsNutritionComponent;sports nutrition component;sportsNutritionButtonLinkComponent;sportsNutritionComponent
+;;enerygyDrinksComponent;energy drinks component;energyDrinksButtonLinkComponent;enerygyDrinksComponent
+;;vitaminsAndSupplementsComponent1;vitamins and supplements component copy;vitaminsAndSupplementsButtonLinkComponent;vitaminsAndSupplementsComponent1
+;;weightManagementComponent1;weight management component copy;weightManagementButtonLinkComponent;weightManagementComponent1
+;;sportsNutritionComponent1;sports nutrition component copy;sportsNutritionButtonLinkComponent;sportsNutritionComponent1
+
+INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;target(code)[default='sameWindow'];category(code, $productCV)
+;;vitaminsAndSupplementsButtonLinkComponent;vitamins and supplements category link;vitaminsAndSupplementsButtonLinkComponent;;vitamins-and-supplements
+;;weightManagementButtonLinkComponent;weight management category link;weightManagementButtonLinkComponent;;weight-management
+;;sportsNutritionButtonLinkComponent;sports nutrition category link;sportsNutritionButtonLinkComponent;;sports-nutrition
+;;energyDrinksButtonLinkComponent;energy drinks category link;energyDrinksButtonLinkComponent;;energy-drinks
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
+;;amwayapacShopByCategoryTitleParagraphComponent;amwayapacShopByCategoryTitleParagraphComponent
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;ShopByCategoryTitleSlot;amwayapacShopByCategoryTitleParagraphComponent;
+;;ShopByCategoryContentSlot;shopByCategoryCollectionComponent;
+
+########## category page shop by category component ##########
+
+
+########## category Page Experience Our Brands
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
+;;amwayapacExperienceOurBrandsParagraphComponent;amwayapacExperienceOurBrandsParagraphComponent
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
+;;ExperienceBrandsContentSlot;Experience Our Brands Content Slot;true;amwayapacExperienceOurBrandsParagraphComponent
+
+########## category Page Experience Our Brands ##########
+
+
+########## Category page Experience Brands Background Component
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;BrandBackgroundImageBannerContentSlot;amwayapacExperienceBrandsBackgroundImageAndBannerComponent
+
+INSERT_UPDATE AmwayApacOurNewProductComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink;link(&componentRef);text(&componentRef);sideImage(uid, $contentCV)
+;;amwayapacExperienceBrandsBackgroundImageAndBannerComponent;Experience Brand Background Image and Banner component;amwayapacExperienceBrandsBackgroundImageAndBannerComponent;"/";amwayapacExperienceBrandsShopNowLinkComponent;amwayapacExperienceBrandsDescriptionParagraphComponent;ExperienceBrandsBackgroundBannerComponent
+
+INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=true];name;target(code)[default='sameWindow'];&componentRef;
+;;amwayapacExperienceBrandsShopNowLinkComponent;experience brands show now link component;;amwayapacExperienceBrandsShopNowLinkComponent;
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
+;;amwayapacExperienceBrandsDescriptionParagraphComponent;amwayapacExperienceBrandsDescriptionParagraphComponent
+
+INSERT_UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];name;urlLink;&componentRef
+;;ExperienceBrandsBackgroundBannerComponent;Experience Brand Background Banner Component;"/";ExperienceBrandsBackgroundBannerComponent
+
+########## Category page Experience Brands Background Component ##########
+
+
+########## category page tools and advice component
+
+INSERT_UPDATE AmwayApacToolsAndAdviceComponent;$contentCV[unique=true];uid[unique=true];name;text(&componentRef);&componentRef
+;;nutriliteGuideComponent;nutrilite guide component;nutriliteGuideTextComponent;nutriliteGuideComponent
+;;bodyKeyChoicesComponent;weight management component;bodyKeyChoicesTextComponent;bodyKeyChoicesComponent
+;;nutriliteFindSupplementsComponent;sports nutrition component;nutriliteFindSupplementsTextComponent;nutriliteFindSupplementsComponent
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
+;;nutriliteGuideTextComponent;nutriliteGuideTextComponent
+;;bodyKeyChoicesTextComponent;bodyKeyChoicesTextComponent
+;;nutriliteFindSupplementsTextComponent;nutriliteFindSupplementsTextComponent
+;;toolsAndAdviceTitleTextComponent;toolsAndAdviceTitleTextComponent
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;ToolsAndAdviceContentSlot;toolsAndAdviceTitleTextComponent
+;;ToolsAndAdviceBannerContentSlot1;nutriliteGuideComponent
+;;ToolsAndAdviceBannerContentSlot2;bodyKeyChoicesComponent
+;;ToolsAndAdviceBannerContentSlot3;nutriliteFindSupplementsComponent
+
+########## category page tools and advice component ##########
+
+
+########## category page success stories components
 
 INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;target(code)[default='sameWindow'];&componentRef
 ;;amwayApacBodyKeySuccessStoryLink;body key success story link component;/;amwayApacBodyKeySuccessStoryLink;;amwayApacBodyKeySuccessStoryLink
 ;;amwayApacXsSportsSuccessStoryLink;xs sports success story component;/;amwayApacXsSportsSuccessStoryLink;;amwayApacXsSportsSuccessStoryLink
 
-INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink
-;;bodyKeySuccessStoryBannerComponent;body key success story banner component;bodyKeySuccessStoryBannerComponent;"/"
-;;xsSportsSuccessStoryBannerComponent;xs sports success story banner component;xsSportsSuccessStoryBannerComponent;"/"
-
-INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true]  ;&componentRef
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
 ;;bodyKeySuccessStoryParagraphComponent;bodyKeySuccessStoryParagraphComponent
 ;;xsSportsSuccessStoryParagraphComponent;xsSportsSuccessStoryParagraphComponent
 
-INSERT_UPDATE AmwayApacPathToSuccessPitchPerfectComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;banner(&componentRef);link(&componentRef);description(&componentRef)
-;;bodyKeySuccessStoryComponent;Amway Path to success;bodyKeySuccessStoryComponent;bodyKeySuccessStoryBannerComponent;amwayApacBodyKeySuccessStoryLink;bodyKeySuccessStoryParagraphComponent
-;;xsSportsSuccessStoryComponent;Amway Pitch Perfect;xsSportsSuccessStoryComponent;xsSportsSuccessStoryBannerComponent;amwayApacXsSportsSuccessStoryLink;xsSportsSuccessStoryParagraphComponent
+INSERT_UPDATE AmwayApacPathToSuccessPitchPerfectComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;link(&componentRef);text(&componentRef)
+;;bodyKeySuccessStoryComponent;Amway Path to success;bodyKeySuccessStoryComponent;amwayApacBodyKeySuccessStoryLink;bodyKeySuccessStoryParagraphComponent
+;;xsSportsSuccessStoryComponent;Amway Pitch Perfect;xsSportsSuccessStoryComponent;amwayApacXsSportsSuccessStoryLink;xsSportsSuccessStoryParagraphComponent
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;SuccessStoryContentSlot1;bodyKeySuccessStoryComponent
+;;SuccessStoryContentSlot2;xsSportsSuccessStoryComponent
+
+########## category page success stories components ##########
 
 
-############################### content article page
+########## content article page
 
-INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;target(code)[default='sameWindow'];&componentRef
-;;amwayApacButtonlinkSuccessContent;LET'S GET STARTED;/;amwayApacButtonlinkSuccessContent;;amwayApacButtonlinkSuccessContent;
-;;amwayApacButtonlinkBusinessContent;GET YOUR APP NOW;/;amwayApacButtonlinkBusinessContent;;amwayApacButtonlinkBusinessContent;
-;;amwayApacButtonlinkArticleBodyKeySuccessStoryLink;body key success story link component;/;amwayApacButtonlinkArticleBodyKeySuccessStoryLink;;amwayApacButtonlinkArticleBodyKeySuccessStoryLink;
-;;amwayApacButtonlinkArticleXsSportsSuccessStoryLink;xs sports success story component;/;amwayApacButtonlinkArticleXsSportsSuccessStoryLink;;amwayApacButtonlinkArticleXsSportsSuccessStoryLink;
+INSERT_UPDATE AmwayApacPathwayToSuccessComponent;$contentCV[unique=true];uid[unique=true];name;text(uid, $contentCV);link(&linkRef);&componentRef
+;;amwayapacpathwayToSuccessComponent;Pathway To Success Component; bannerDesc;amwayApacButtonlinkSuccessContent;amwayapacpathwayToSuccessComponent
 
-INSERT_UPDATE AmwayApacIconLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;target(code)[default='sameWindow'];&componentRef
-;;amwayApacIconlinkExperienceContent;WATCH THE VIDEO;/;amwayApacIconlinkExperienceContent;;amwayApacIconlinkExperienceContent;
+INSERT_UPDATE AmwayApacBuildYourBusinessComponent;$contentCV[unique=true];uid[unique=true];name;text(uid, $contentCV);link(&linkRef);&componentRef
+;;amwayapacbuildYourBusinessComponent;Build Your Business Component;brandDesc;amwayApacButtonlinkBusinessContent;amwayapacbuildYourBusinessComponent
 
-INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;urlLink;&componentRef
-;;BannerSBComponent;Banner SB Component;"/";BannerSBComponent
-;;BrandSBComponent;Brand SB Component;"/";BrandSBComponent
-;;MagazineSBComponent;Magazine SB Component;"/";MagazineSBComponent
-;;articleBodyKeySuccessStoryBannerComponent;body key success story banner component;"/";articleBodyKeySuccessStoryBannerComponent
-;;articleXsSportsSuccessStoryBannerComponent;xs sports success story banner component;"/";articleXsSportsSuccessStoryBannerComponent
-
-INSERT_UPDATE AmwayApacPathwayToSuccessComponent;$contentCV[unique=true];uid[unique=true];name;backgroundImage(uid, $contentCV);details(uid, $contentCV);offerImageLink(&linkRef);&componentRef
-;;amwayapacpathwayToSuccessComponent;Pathway To Success Component;BannerSBComponent; bannerDesc;amwayApacButtonlinkSuccessContent;amwayapacpathwayToSuccessComponent
-
-INSERT_UPDATE AmwayApacBuildYourBusinessComponent;$contentCV[unique=true];uid[unique=true];name;backgroundImage(uid, $contentCV);details(uid, $contentCV);offerImageLink(&linkRef);&componentRef
-;;amwayapacbuildYourBusinessComponent;Build Your Business Component;BrandSBComponent;brandDesc;amwayApacButtonlinkBusinessContent;amwayapacbuildYourBusinessComponent
-
-INSERT_UPDATE AmwayApacExperienceTheStarterKitComponent;$contentCV[unique=true];uid[unique=true];name;backgroundImage(uid, $contentCV);details(uid, $contentCV);offerImageLink(&linkRef);&componentRef
-;;amwayapacexperienceTheStarterKitComponent;Experience The Starter Kit Component;MagazineSBComponent;magazineDesc;amwayApacIconlinkExperienceContent;amwayapacexperienceTheStarterKitComponent
+INSERT_UPDATE AmwayApacExperienceTheStarterKitComponent;$contentCV[unique=true];uid[unique=true];name;text(uid, $contentCV);link(&linkRef);&componentRef
+;;amwayapacexperienceTheStarterKitComponent;Experience The Starter Kit Component;magazineDesc;amwayApacIconlinkExperienceContent;amwayapacexperienceTheStarterKitComponent
 
 INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
 ;;brandDesc;brandDesc;
@@ -768,51 +736,64 @@ INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&co
 ;;articleBodyKeySuccessStoryParagraphComponent;articleBodyKeySuccessStoryParagraphComponent
 ;;articleXsSportsSuccessStoryParagraphComponent;articleXsSportsSuccessStoryParagraphComponent
 
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
-;;PathwayToSuccessContentSlot;Pathway To Success Slot;true;amwayapacpathwayToSuccessComponent
-;;BuildYourBusinessContentSlot;Build Your Business Slot;true;amwayapacbuildYourBusinessComponent
-;;ExperienceTheStarterKitContentSlot;Experience The Starter Kit Slot;true;amwayapacexperienceTheStarterKitComponent
-;;ArticleSuccessStoryContentSlot1;Success Story Slot1;true;articleBodyKeySuccessStoryComponent
-;;ArticleSuccessStoryContentSlot2;Success Story Slot2;true;articleXsSportsSuccessStoryComponent
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;PathwayToSuccessContentSlot;amwayapacpathwayToSuccessComponent
+;;BuildYourBusinessContentSlot;amwayapacbuildYourBusinessComponent
+;;ExperienceTheStarterKitContentSlot;amwayapacexperienceTheStarterKitComponent
+;;ArticleSuccessStoryContentSlot1;articleBodyKeySuccessStoryComponent
+;;ArticleSuccessStoryContentSlot2;articleXsSportsSuccessStoryComponent
 
-#INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;target(code)[default='sameWindow'];&componentRef
-#INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;urlLink;&componentRef
-#INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
+INSERT_UPDATE AmwayApacPathToSuccessPitchPerfectComponent;$contentCV[unique=true];uid[unique=true];name;link(&componentRef);text(&componentRef);&componentRef
+;;articleBodyKeySuccessStoryComponent;Amway Path to Success;amwayApacButtonlinkArticleBodyKeySuccessStoryLink;articleBodyKeySuccessStoryParagraphComponent;articleBodyKeySuccessStoryComponent
+;;articleXsSportsSuccessStoryComponent;Amway Pitch Perfect;amwayApacButtonlinkArticleXsSportsSuccessStoryLink;articleXsSportsSuccessStoryParagraphComponent;articleXsSportsSuccessStoryComponent
+	
+INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;target(code)[default='sameWindow'];&componentRef
+;;amwayApacButtonlinkSuccessContent;LET'S GET STARTED;/;amwayApacButtonlinkSuccessContent;;amwayApacButtonlinkSuccessContent;
+;;amwayApacButtonlinkBusinessContent;GET YOUR APP NOW;/;amwayApacButtonlinkBusinessContent;;amwayApacButtonlinkBusinessContent;
+;;amwayApacButtonlinkArticleBodyKeySuccessStoryLink;body key success story link component;/;amwayApacButtonlinkArticleBodyKeySuccessStoryLink;;amwayApacButtonlinkArticleBodyKeySuccessStoryLink;
+;;amwayApacButtonlinkArticleXsSportsSuccessStoryLink;xs sports success story component;/;amwayApacButtonlinkArticleXsSportsSuccessStoryLink;;amwayApacButtonlinkArticleXsSportsSuccessStoryLink;
+	
+INSERT_UPDATE AmwayApacIconLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;target(code)[default='sameWindow'];&componentRef
+;;amwayApacIconlinkExperienceContent;WATCH THE VIDEO;/;amwayApacIconlinkExperienceContent;;amwayApacIconlinkExperienceContent;
 
-INSERT_UPDATE AmwayAPACPathToSuccessPitchPerfectComponent;$contentCV[unique=true];uid[unique=true];name;banner(&componentRef);link(&componentRef);description(&componentRef);&componentRef
-;;articleBodyKeySuccessStoryComponent;Amway Path to Success;articleBodyKeySuccessStoryBannerComponent;amwayApacButtonlinkArticleBodyKeySuccessStoryLink;articleBodyKeySuccessStoryParagraphComponent;articleBodyKeySuccessStoryComponent
-;;articleXsSportsSuccessStoryComponent;Amway Pitch Perfect;articleXsSportsSuccessStoryBannerComponent;amwayApacButtonlinkArticleXsSportsSuccessStoryLink;articleXsSportsSuccessStoryParagraphComponent;articleXsSportsSuccessStoryComponent
+########## content article page ##########
 
 
-############# Register Landing Page
+########## Register Landing Page	
 
-INSERT_UPDATE AmwayApacJoinAmwayComponent;$contentCV[unique=true];uid[unique=true];name;backgroundImage(uid, $contentCV);details(uid, $contentCV);&componentRef
-;;amwayApacJoinAmwayComponent;Join Amway Component;HeaderSBComponent;headerDesc;amwayApacJoinAmwayComponent
-
-INSERT_UPDATE AmwayApacWeAreAmwayComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
-;;amwayApacWeAreAmwayComponent;We Are Amway Component;amwayApacWeAreAmwayComponent
-
-INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;urlLink;&componentRef
-;;HeaderSBComponent;Header SB Component;"/";HeaderSBComponent
+INSERT_UPDATE AmwayApacJoinAmwayComponent;$contentCV[unique=true];uid[unique=true];name;text(uid, $contentCV);&componentRef
+;;amwayApacJoinAmwayComponent;Join Amway Component;headerDesc;amwayApacJoinAmwayComponent
 
 INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
+;;amwayapacWeAreAmwayParagraphComponent;amwayapacWeAreAmwayParagraphComponent
 ;;headerDesc;headerDesc
 ;;becomeABODesc;becomeABODesc
 ;;becomeCustomerDesc;becomeCustomerDesc
-;;footerNoticeToolTipDesc;footerNoticeToolTipDesc
 ;;footerNoticeDesc;footerNoticeDesc
+;;footerNoticeToolTipDesc;footerNoticeToolTipDesc
 
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
-;;JoinAmwayContentSlot;Join Amway Slot;true;amwayApacJoinAmwayComponent
-;;WeAreAmwayContentSlot;We Are Amway Slot;true;amwayApacWeAreAmwayComponent
-;;BecomeAnABOContentSlot;Become An ABO Slot;true;becomeABODesc,amwayApacBecomeAnABOLinkContent
-;;BecomeACustomerContentSlot;Become A Customer;true;becomeCustomerDesc,amwayApacBecomeACustomerLinkContent
-;;FooterNoticeToolTipParagraphContentSlot; Footer Notice ToolTip;true;footerNoticeToolTipDesc
-;;FooterNoticeParagraphContentSlot; Footer Notice;true;footerNoticeDesc
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;JoinAmwayContentSlot;amwayApacJoinAmwayComponent
+;;WeAreAmwayContentSlot;amwayapacWeAreAmwayParagraphComponent
+;;BecomeAnABOContentSlot;becomeABODesc,amwayApacBecomeAnABOLinkContent
+;;BecomeACustomerContentSlot;becomeCustomerDesc,amwayApacBecomeACustomerLinkContent
+;;FooterNoticeParagraphContentSlot;footerNoticeDesc
+;;FooterNoticeToolTipParagraphContentSlot;footerNoticeToolTipDesc
 
 INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;target(code)[default='sameWindow'];&componentRef
-;;amwayApacBecomeAnABOLinkContent;BECOME AN ABO;/;amwayApacBecomeAnABOLinkContent;;amwayApacBecomeAnABOLinkContent;
+;;amwayApacBecomeAnABOLinkContent;BECOME AN ABO;/register/simple-terms;amwayApacBecomeAnABOLinkContent;;amwayApacBecomeAnABOLinkContent;
 ;;amwayApacBecomeACustomerLinkContent;BECOME A MEMBER;/;amwayApacBecomeACustomerLinkContent;;amwayApacBecomeACustomerLinkContent;
+
+########## Register Landing Page ##########
+
+################ Search Slot
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
+;;SearchBoxSlot; Search Box Slot;true;topSearchBoxPlaceHolder
+
+INSERT_UPDATE SearchBoxComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;sideSearchBoxPlaceHolder; Top Search Box PlaceHolder;topSearchBoxPlaceHolder
+
 
 ############ Search No Result Page
 
@@ -1145,21 +1126,3 @@ INSERT_UPDATE ProductCarouselComponent;$contentCV[unique=true];uid[unique=true];
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
 ;;ProductCarouselSlot;Empty Search page carousel component;true;searchPageEmptyResultBestSellerCarousel
 ###### Search Empty Page Template#########
-
-#######Shopping List Details Page Template######
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
-;;ShoppingListQuickShopSearchBoxSlot;Shopping List Search Box Slot;true;shoppingListQuickShopSearchComponent
-
-INSERT_UPDATE AmwayApacShoppingListSearchBoxComponent;$contentCV[unique=true];uid[unique=true];name;displaySuggestions;&componentRef
-;;shoppingListQuickShopSearchComponent; Shopping List Search Box PlaceHolder;false;shoppingListQuickShopSearchComponent
-#######Shopping List Details Page Template######
-
-#######Shopping Cart Page Template######
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
-;;ShoppingCartQuickShopSearchBoxSlot;Shopping Cart Search Box Slot;true;shoppingCartQuickShopSearchComponent
-
-INSERT_UPDATE AmwayApacShoppingCartSearchBoxComponent;$contentCV[unique=true];uid[unique=true];name;displaySuggestions;&componentRef
-;;shoppingCartQuickShopSearchComponent; Shopping Cart Search Box PlaceHolder;false;shoppingCartQuickShopSearchComponent
-#######Shopping Cart Page Template######
-
-

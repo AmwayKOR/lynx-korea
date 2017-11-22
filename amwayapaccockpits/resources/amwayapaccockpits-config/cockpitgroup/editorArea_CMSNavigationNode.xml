@@ -124,7 +124,7 @@
 			    <value>true</value>
 			</parameter>
 		</property>
-		<property qualifier="cmsnavigationnode.simpleBannerComponents">
+		<property qualifier="cmsnavigationnode.brandBanners">
 			<parameter>
 				<name>editable</name>
 			    <value>true</value>

@@ -71,7 +71,7 @@
 	                                                 <div class="">
 	                                                     <h6>Shop by Brands</h6>
 	                                                     <div class="row images-container">
-	                                                    		<c:forEach items="${childrenNode.simpleBannerComponents}" var="banner" varStatus="loop">
+	                                                    		<c:forEach items="${childrenNode.brandBanners}" var="banner" varStatus="loop">
 	                                                    			<div class=" col-md-3">
 	                                                    				<cms:component component="${banner}" element="div" class="banner__component banner"/>
 	                                                    			</div>

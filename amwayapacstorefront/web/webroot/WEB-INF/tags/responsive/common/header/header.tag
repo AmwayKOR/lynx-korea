@@ -25,324 +25,11 @@
 						<header:headerLoggedInAccountSection />
 					</c:when>
 					<c:otherwise>
-						<header:headerNonLoggedInSection />
+						<header:headerLoginForm />
 					</c:otherwise>
 				</c:choose>
-
-				<div class="collapse mini-cart-items-container js-mini-cart-items-container mini-cart-wrapper"
-					id="shoppingcar-drop-content">
-					<div class="arrow" style=""></div>
-					<ul class="nav nav-tabs">
-						<li class="active">
-							<a data-toggle="tab" href="#miniShoppingCartPopupContentPC">
-								Shopping Cart (
-								<span id="minicartTabTotalItems">18</span>
-								)
-							</a>
-						</li>
-						<li>
-							<a data-toggle="tab" href="#dittoPopupContentPC">My Ditto</a>
-						</li>
-					</ul>
-					<div class="tab-content js-tab-content">
-						<div id="miniShoppingCartPopupContentPC" class="tab-pane fade in active">
-							<div class="mini-cart js-mini-cart">
-								<div class="mini-cart-body">
-									<ol class="mini-cart-list">
-										<li class="mini-cart-item">
-											<div class="row product-wrapper">
-												<div class="product-item-element list-item-image col-xs-3">
-													<div class="thumb">
-														<a href="">
-															<img src="${themeResourcePath}/images/heart-health-65.png" alt="Lip Gloss Creme" title="Lip Gloss Creme" />
-														</a>
-													</div>
-												</div>
-												<div class="product-details col-xs-9">
-													<div class="name-wrapper">
-														<a class="name" href="">Lip Gloss Creme</a>
-													</div>
-													<div class="product-item-element list-item-ibo-price">
-														<div>
-															<div class="first-price">
-																<span class="label-wrapper">IBO Cost:</span>
-																<span class="value-wrapper">$24.80</span>
-																<div class="retail-price">
-																	<s>
-																		<span class="retail-price-strike-out">$24.99</span>
-																	</s>
-																</div>
-															</div>
-															<div>
-																<span class="label-wrapper">Retail price:</span>
-																<span class="value-wrapper">$25.99</span>
-															</div>
-														</div>
-													</div>
-													<div class="product-item-element list-item-pv-bv">
-														<span class="total-pv-bv-label">PV/BV:</span>
-														<span class="value-wrapper">4.0/3.0</span>
-													</div>
-													<div class="qty">
-														<span class="qty-label">Qty:</span>
-														<span class="qty-value">1</span>
-													</div>
-												</div>
-											</div>
-										</li>
-										<li class="mini-cart-item">
-											<div class="row product-wrapper">
-												<div class="product-item-element list-item-image col-xs-3">
-													<div class="thumb">
-														<a href="">
-															<img src="${themeResourcePath}/images/heart-health-65.png" alt="Spray Bottle" title="Spray Bottle" />
-														</a>
-													</div>
-												</div>
-												<div class="product-details col-xs-9">
-													<div class="name-wrapper">
-														<a class="name" href="">Spray Bottle</a>
-													</div>
-													<div class="product-item-element list-item-ibo-price">
-														<div>
-															<div class="first-price">
-																<span class="label-wrapper">IBO Cost:</span>
-																<span class="value-wrapper">$1.99</span>
-																<div class="retail-price">
-																	<s>
-																		<span class="retail-price-strike-out">$2.00</span>
-																	</s>
-																</div>
-															</div>
-															<div>
-																<span class="label-wrapper">Retail price:</span>
-																<span class="value-wrapper">$3.00</span>
-															</div>
-														</div>
-													</div>
-													<div class="product-item-element list-item-pv-bv">
-														<span class="total-pv-bv-label">PV/BV:</span>
-														<span class="value-wrapper">4.0/3.0</span>
-													</div>
-													<div class="qty">
-														<span class="qty-label">Qty:</span>
-														<span class="qty-value">1</span>
-													</div>
-												</div>
-											</div>
-										</li>
-										<li class="mini-cart-item">
-											<div class="row product-wrapper">
-												<div class="product-item-element list-item-image col-xs-3">
-													<div class="thumb">
-														<a href="">
-															<img src="${themeResourcePath}/images/heart-health-65.png"
-																alt="G&amp;H Refresh+&amp;trade; Body Wash - Gel" title="G&amp;H Refresh+&amp;trade; Body Wash - Gel" />
-														</a>
-													</div>
-												</div>
-												<div class="product-details col-xs-9">
-													<div class="name-wrapper">
-														<a class="name" href="">G&amp;H Refresh+™ Body Wash - Gel</a>
-													</div>
-													<div class="product-item-element list-item-ibo-price">
-														<div>
-															<div class="first-price">
-																<span class="label-wrapper">IBO Cost:</span>
-																<span class="value-wrapper">$8.73</span>
-																<div class="retail-price">
-																	<s>
-																		<span class="retail-price-strike-out">$8.80</span>
-																	</s>
-																</div>
-															</div>
-															<div>
-																<span class="label-wrapper">Retail price:</span>
-																<span class="value-wrapper">$10.14</span>
-															</div>
-														</div>
-													</div>
-													<div class="product-item-element list-item-pv-bv">
-														<span class="total-pv-bv-label">PV/BV:</span>
-														<span class="value-wrapper">4.0/3.0</span>
-													</div>
-													<div class="qty">
-														<span class="qty-label">Qty:</span>
-														<span class="qty-value">1</span>
-													</div>
-												</div>
-											</div>
-										</li>
-									</ol>
-									<div class="banner__component banner"></div>
-									<div class="summary-block">
-										<span>
-											There are
-											<span class="bold">18 items</span>
-											in your cart
-										</span>
-									</div>
-									<div class="mini-cart-totals">
-										<div class="key">ESTIMATED TOTAL</div>
-										<div class="value">$1,616.79</div>
-										<div class="key">TOTAL PV/BV</div>
-										<div class="value">82.0 / 64.0</div>
-									</div>
-									<div class="links">
-										<div>
-											<div class="cartPopupButtons"></div>
-										</div>
-									</div>
-									<a href="shopping-cart.html" class="btn btn-primary btn-block mini-cart-checkout-button view-cart-button">VIEW
-										CART</a>
-								</div>
-							</div>
-						</div>
-						<div id="dittoPopupContentPC" class="tab-pane fade">
-							<div class="ditto-content">
-								<p class="tip-gray">Your DITTO schedules are sorted by Drop Date,which is the date your order will arrive.</p>
-								<ul>
-									<li>
-										<h5>
-											<a href="">Jennifer Jones'First DITTO(20)</a>
-											<label class="label-date">11/15/16</label>
-										</h5>
-										<span>180.22PV/570.00BV</span>
-										<span>Subtotal:$500.00</span>
-									</li>
-									<li>
-										<h5>
-											<a href="">Second DITTO List Name(54)</a>
-											<label class="label-date">12/15/15</label>
-										</h5>
-										<span>180.22PV/570.00BV</span>
-										<span>Subtotal:$500.00</span>
-									</li>
-									<li>
-										<h5>
-											<a href="">My Other DITTO List Has a Long Name(999)</a>
-											<label class="label-date">05/12/10</label>
-										</h5>
-										<span>180.22PV/570.00BV</span>
-										<span>Subtotal:$500.00</span>
-									</li>
-								</ul>
-								<div class="bottom-total">
-									<a href="">
-										You have
-										<b>5</b>
-										DITTO schedules.
-									</a>
-								</div>
-								<div class="bottom-button">
-									<button class="btn-blue-white">VIEW ALL DITTO SCHEDULES</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="country-language-container header-content">
-					<div class="header-element-content">
-						<div class="site-logo">
-							<cms:pageSlot position="SiteLogo" var="component" element="div">
-								<cms:component component="${component}" />
-							</cms:pageSlot>
-						</div>
-
-						<span class="dropdown">
-							<cms:pageSlot position="CountrySelector" var="component">
-								<cms:component component="${component}" />
-							</cms:pageSlot>
-						</span>
-						<form id="lang-form" class="hidden" action="#" method="post">
-							<div class="form-group">
-								<select name="code" id="lang-selector" class="form-control select2-hidden-accessible" tabindex="-1"
-									aria-hidden="true">
-									<option value="en" lang="en">English</option>
-									<option value="es" lang="es">Espa&ntilde;ol</option>
-								</select>
-								<span class="select2 select2-container select2-container--default" dir="ltr" style="width: 100px;">
-									<span class="selection">
-										<span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true"
-											aria-expanded="false" tabindex="0" aria-labelledby="select2-lang-selector-container">
-											<span class="select2-selection__rendered" id="select2-lang-selector-container" title="English">English</span>
-											<span class="select2-selection__arrow" role="presentation">
-												<b role="presentation"></b>
-											</span>
-										</span>
-									</span>
-									<span class="dropdown-wrapper" aria-hidden="true"></span>
-								</span>
-							</div>
-							<div>
-								<input type="hidden" name="CSRFToken" value="a2a5ec40-53df-43c9-87ae-c3e661dbd64d" />
-							</div>
-						</form>
-						<div class="nav-links-container pos-relative">
-							<ul class="nav-list clearfix">
-								<c:choose>
-									<c:when test="${isUserAbo}">
-										<li class=" nav-item">
-											<a href="javascript:void(0);" data-toggle="collapse" data-target="#login-drop-content"
-												class="pos-relative img-nav-link js-my-account-menu opened">
-												<img src="${themeResourcePath}/images/yui.png" alt="" width="34px">
-												<span class="message-num-1">24</span>
-												<span class="user-name">Yui Mori</span>
-												<span class="icon icon-arrow-dropdown"></span>
-											</a>
-										</li>
-									</c:when>
-									<c:otherwise>
-										<li class="yCmsComponent nav-item">
-											<a href="#" data-toggle="collapse" data-target="#login-drop-content"
-												class="pos-relative img-nav-link js-my-account-menu opened">
-												<img src="${themeResourcePath}/images/user_avatar_pre_login.png" alt="" width="34px">
-											</a>
-										</li>
-									</c:otherwise>
-								</c:choose>
-								<li class="componentContainer liOffcanvas nav-item nav-mini-cart">
-									<span class="">
-										<div class="nav-cart nav-cart-wrapper js-nav-cart-wrapper print-hide">
-											<a href="javascript:void(0);" class="pos-relative mini-cart-link js-mini-cart-link clearfix "
-												data-toggle="collapse" data-target="#shoppingcar-drop-content">
-												<div class="mini-cart-icon">
-													<span class="icon-shopping-cart"></span>
-												</div>
-												<div class="mini-cart-count js-mini-cart-count">
-													<span class="nav-items-total">16</span>
-												</div>
-												<div class="cart-icon-wrapper">
-													<div class="mini-cart-arrow"></div>
-												</div>
-											</a>
-											<div class="mini-cart-items-container js-mini-cart-items-container">
-												<ul class="nav nav-tabs">
-													<li class="active">
-														<a data-toggle="tab" href="#miniShoppingCartPopupContent">
-															Shopping Cart (
-															<span id="minicartTabTotalItems">0</span>
-															)
-														</a>
-													</li>
-													<li>
-														<a data-toggle="tab" href="#dittoPopupContent">My Ditto</a>
-													</li>
-												</ul>
-												<div class="tab-content js-tab-content">
-													<div id="miniShoppingCartPopupContent" class="tab-pane fade in active"></div>
-													<div id="dittoPopupContent" class="tab-pane fade"></div>
-												</div>
-											</div>
-										</div>
-										<div class="mini-cart-container js-mini-cart-container"></div>
-									</span>
-								</li>
-							</ul>
-
-						</div>
-					</div>
-				</div>
+				<header:headerMiniCart />
+				<header:headerRightIconsSection />
 				<div class="">
 					<div class="nav-links-container">
 						<ul class="nav-list clearfix"></ul>
@@ -355,7 +42,6 @@
 		<nav class="print-hide amw-navigation-menu js-navigation--middle">
 			<div class="navigation-menu-container">
 				<div class="mobile-container">
-
 					<div class="mobile-wrapper">
 						<div class="mobile-header-cell navigation-menu-toggle-wrapper">
 							<a role="button" data-toggle="collapse" href="#mobile-menu-accordion" aria-expanded="false"
@@ -519,13 +205,11 @@
 							</div>
 						</div>
 					</div>
-
 				</div>
 				<div class="desktop-nav-menu clearfix">
 					<div class="col-sm-12 col-sm-8 top-menu">
 						<div class="top-menu-links pull-left">
 							<nav:topNavigation />
-
 						</div>
 					</div>
 					<div class="col-sm-12 col-md-4 top-search print-hide">
@@ -537,13 +221,10 @@
 					</div>
 				</div>
 			</div>
-	</div>
-	</nav>
+		</nav>
 	</div>
 
-	<!--search suggest-->
-		<header:headerSearchResultSection/>
-	<!--search end-->
+	<header:headerSearchResultSection />
 
 </header>
 <common:globalMessages />
