@@ -87,6 +87,17 @@ INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url
 ########## Header Account Navigation ##########
 
 
+########## Header Search box
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;SearchBoxSlot;topSearchBoxPlaceHolder
+
+INSERT_UPDATE SearchBoxComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;topSearchBoxPlaceHolder; Top Search Box PlaceHolder;topSearchBoxPlaceHolder
+
+########## Header Search box ##########
+
+
 ########## Navigation Bar
 
 #NavigationBars
@@ -305,6 +316,17 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;ch
 ;CookwareHomeNavNode;;CookwareHomeNavNode;;CookwareHomeNavNode;NavHomeCookwareCutleryLink,NavHomeCookwarePansLink,NavHomeCookwareReplacementPartsLink,NavHomeCookwareViewAllLink ;true;NavHomeCookwareLink;
 
 ########## CMS Navigation Nodes ##########
+
+
+########## Breadcumbs component
+
+INSERT_UPDATE BreadcrumbComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;breadcrumbComponent;Breadcrumb CMS Component;breadcrumbComponent
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef);;;
+;;BreadCrumbSlot;breadcrumbComponent;;;
+
+########## Breadcumbs component ##########
 
 
 ########## Home page section 1 carousel
@@ -786,28 +808,24 @@ INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=tr
 
 ########## Register Landing Page ##########
 
-################ Search Slot
 
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
-;;SearchBoxSlot; Search Box Slot;true;topSearchBoxPlaceHolder
-
-INSERT_UPDATE SearchBoxComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
-;;sideSearchBoxPlaceHolder; Top Search Box PlaceHolder;topSearchBoxPlaceHolder
-
-
-############ Search No Result Page
+########## Search No Result Page
 
 INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
 ;;searchDesc;searchDesc
 
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
-;;SideContentSlot; Search Side Content Slot;true;searchDesc;
-;;MiddleContentSlot; Search Middle Content Slot;true;middleSearchBoxPlaceHolder;
-;;BottomContentSlot; Search Bottom Content Slot;true;
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;SearchNoResultSideContentSlot;searchDesc;
+;;SearchNoResultsMiddleContentSlot;middleSearchBoxPlaceHolder;
+;;ProductCarouselSlot;searchPageEmptyResultBestSellerCarousel
+
+INSERT_UPDATE ProductCarouselComponent;$contentCV[unique=true];uid[unique=true];products(code, $productCV);name;&componentRef
+;;searchPageEmptyResultBestSellerCarousel;112161A, E9974M, A5923M, A5924M, A5985M, A8058M, AA0114M;Best Sellers;searchPageEmptyResultBestSellerCarousel
 
 INSERT_UPDATE SearchBoxComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
 ;;middleSearchBoxPlaceHolder; Middle Search Box PlaceHolder;middleSearchBoxPlaceHolder
 
+########## Search No Result Page ##########
 
 
 ######################## Product Details Page Tools And Advice
@@ -983,16 +1001,6 @@ INSERT_UPDATE CMSActionRestriction;$contentCV[unique=true];uid[unique=true];name
 INSERT_UPDATE AddToCartAction;$contentCV[unique=true];uid[unique=true];url;name;restrictions(uid,$contentCV);&actionRef
 ;;AddToCartAction;/cart/add;Product Add To Cart Action;ActionRestriction;AddToCartAction
 
-########## Breadcumbs component
-
-
-INSERT_UPDATE BreadcrumbComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
-;;breadcrumbComponent;Breadcrumb CMS Component;breadcrumbComponent
-
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
-;;BreadCrumbSlot;Bread crumb Content Slot;true;breadcrumbComponent;;;
-
-
 # CMS Cart Page components
 INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;actions(uid,$contentCV);&componentRef
 ;;ProductReviewsTabComponent;Product Reviews Tab;productReviewsTab.jsp;;ProductReviewsTabComponent
@@ -1118,11 +1126,3 @@ INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&co
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
 ;;NoResultsContentSlot;PLP No results Slot;true;productGridNoResultContent
 ######Product Grid Page Template######
-
-###### Search Empty Page Template#########
-INSERT_UPDATE ProductCarouselComponent;$contentCV[unique=true];uid[unique=true];products(code, $productCV);name;&componentRef
-;;searchPageEmptyResultBestSellerCarousel;112161A, E9974M, A5923M, A5924M, A5985M, A8058M, AA0114M;Best Sellers;searchPageEmptyResultBestSellerCarousel
-
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
-;;ProductCarouselSlot;Empty Search page carousel component;true;searchPageEmptyResultBestSellerCarousel
-###### Search Empty Page Template#########

@@ -714,7 +714,7 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active
 ;;NavigationBarSlot;Navigation Bar;true
 ;;TabsSlot;Tabs;true
 ;;TopContentSlot;Top Content;true
-;;SideContentSlot;Side Content;true
+;;SearchNoResultSideContentSlot;Search No results Side Content;true
 ;;BottomContentSlot;Bottom Content;true
 ;;FeatureContentSlot;Feature Content;true
 ;;FooterSlot;Footer;true
@@ -732,6 +732,7 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active
 ;;SearchResultsListSlot;Search Result List;true
 ;;SearchResultsGridSlot;Search Result Grid;true
 ;;MiddleContentSlot;Middle Content Slot;true
+;;SearchNoResultsMiddleContentSlot;Search no results page Middle Content Slot;true
 ;;LeftContentSlot;Left Content Slot;true
 ;;RightContentSlot;Right Content Slot;true
 ;;CenterContentSlot;Center Content Slot;true
@@ -880,9 +881,8 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 ;;BottomHeaderSlot-SearchResultsEmpty;BottomHeaderSlot;;BottomHeaderSlot;true
 ;;PlaceholderContentSlot-SearchResultsEmpty;PlaceholderContentSlot;;PlaceholderContentSlot;true
 ;;Mobile-NavigationBar-SearchResultsEmpty;MobileNavigationBar;;MobileNavigationBarSlot;true
-;;MiddleContent-SearchResultsEmpty;MiddleContent;;MiddleContentSlot;true
-;;BottomContent-SearchResultsEmpty;BottomContent;;BottomContentSlot;true
-;;SideContent-SearchResultsEmpty;SideContent;;SideContentSlot;true
+;;MiddleContent-SearchResultsEmpty;MiddleContent;;SearchNoResultsMiddleContentSlot;true
+;;SideContent-SearchResultsEmpty;SideContent;;SearchNoResultSideContentSlot;true
 ;;ProductCarouselSlot-ProductGridPage;ProductCarouselSlot;;ProductCarouselSlot;true
 
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='CategoryPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite

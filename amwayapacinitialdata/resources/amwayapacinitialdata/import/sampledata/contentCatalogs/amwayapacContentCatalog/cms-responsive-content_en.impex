@@ -66,6 +66,14 @@ INSERT_UPDATE AmwayApacImageLinkComponent;$contentCV[unique=true];uid[unique=tru
 ########## Country Selector ##########
 
 
+########## Header Search box
+
+INSERT_UPDATE SearchBoxComponent;$contentCV[unique=true];uid[unique=true];placeholder;
+;;topSearchBoxPlaceHolder;"Search"
+
+########## Header Search box ##########
+
+
 ########## Header Account Navigation
 
 UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang];url;&componentRef
@@ -774,15 +782,16 @@ INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=tr
 
 ########## Register Landing Page ##########
 
-################ Search No Result Page
+
+########## Search No Result Page
 
 INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content;
 ;;searchDesc;"<span>WE'RE SORRY! WE COULDN'T FIND ANY RESULTS FOR YOUR SEARCH.</span>But don't give up! Check the spelling or try search again with a less specific keyword."
 
 INSERT_UPDATE SearchBoxComponent;$contentCV[unique=true];uid[unique=true];placeholder;
-;;sideSearchBoxPlaceHolder;"Search"
 ;;middleSearchBoxPlaceHolder;"Search by name,SKU,or brand"
 
+########## Search No Result Page ##########
 
 ################## Product Detail page tools and advice component
 
