@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-        <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="gensrc"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="lib/hybris-commons-rest-client-5.5.1.0-M0.jar"/>
@@ -16,6 +16,6 @@
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/hmc"/>
 	<classpathentry kind="src" output="eclipsebin/hmc/classes" path="hmc/src"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/platform"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/warehousing"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/warehousing"/>
 	<classpathentry kind="output" path="eclipsebin/notused"/>
 </classpath>
