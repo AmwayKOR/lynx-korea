@@ -18,7 +18,7 @@
 			<div class="container-fluid">
 				<div class="row cartTitile">
 					<div class="product-list-page-title mb25">
-						<spring:theme code="checkout.step.one.checkout" />
+						<spring:theme code="checkout.multi.checkout" />
 					</div>
 				</div>
 			</div>
@@ -32,7 +32,7 @@
 					</div>
 					<div class="col-xs-12 col-md-3 shipping-delivery-summary">
 						<div class="shipping-delivery-side">
-							<multi-checkout:checkoutOrderDetails />
+							<multi-checkout:checkoutOrderDetails orderData="${cartData}"/>
 							<div class="shipping-delivery-summary-link">
 								<a href="${checkoutPaymentStepUrl}" class="shipping-delivery-summary-continue btn-blue-white">
 									<spring:theme code="checkout.step.one.continue" />
@@ -43,7 +43,7 @@
 				</div>
 			</div>
 		</div>
-		<multi-checkout:deliveryCartItems />
+		<multi-checkout:deliveryCartItems orderData="${cartData}"/>
 		<div class="amwa-btnbar">
 			<a href="${checkoutPaymentStepUrl}" class="btn-blue-white" onclick="">
 				<spring:theme code="checkout.step.one.continue" />

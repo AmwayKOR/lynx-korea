@@ -6,7 +6,8 @@ ACC.checkout = {
 		"bindSavedPayments",
 		"bindDeliverModeSelection",
 		"bindDeliveryAddressRadioControl",
-		"openAddressDiv"
+		"openAddressDiv",
+		"bindPaymentStepProceedButton"
 	],
 
 
@@ -160,6 +161,13 @@ ACC.checkout = {
 			var divIdToOpen = $("#shippingdiv #divToOpen").data("open");
 			$("#shippingdiv #"+divIdToOpen).trigger("click");
 		}
+	},
+	
+	bindPaymentStepProceedButton: function(){
+		$(document).on("click",".checkout-payment-step", function(event){
+			event.preventDefault();
+			$(this).closest(".main-container").find("#shippingdiv #silentOrderPostForm").submit();
+		});
 	}
 
 };

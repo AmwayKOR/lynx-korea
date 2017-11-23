@@ -11,8 +11,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="formElement" tagdir="/WEB-INF/tags/responsive/formElement"%>
 
-<c:url var="checkoutFinalStepUrl" value="/checkout/multi/summary/placeOrder" />
-<c:url var="checkoutFinalStepUrl" value="/" />
+<c:url var="checkoutFinalStepUrl" value="/checkout/multi/summary/placeOrder?termsCheck=true" />
 <c:url var="cartUrl" value="/cart" />
 <spring:htmlEscape defaultHtmlEscape="true" />
 <template:checkoutPage>
@@ -21,7 +20,7 @@
 			<div class="container-fluid">
 				<div class="row cartTitile">
 					<div class="product-list-page-title mb25">
-						<spring:theme code="checkout.step.one.checkout" />
+						<spring:theme code="checkout.multi.checkout" />
 					</div>
 				</div>
 			</div>
@@ -34,26 +33,18 @@
 					</div>
 					<div class="col-xs-12 col-md-3 shipping-delivery-summary">
 						<div class="shipping-delivery-side">
-							<multi-checkout:checkoutOrderDetails />
+							<multi-checkout:checkoutOrderDetails orderData="${cartData}" />
 							<div class="shipping-delivery-summary-link">
-								<%-- <form:form commandName="placeOrderForm" action="${checkoutFinalStepUrl}">
-									<input name="termsCheck" value="true" />
-									<button class="btn-blue-white">Submit Order</button>
-								</form:form> --%>
-								<a href="${checkoutFinalStepUrl}" class="btn-blue-white">Submit Order</a>
+								<a href="${checkoutFinalStepUrl}" class="btn-blue-white"><spring:theme code="order.preview.submit.order"/></a>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<multi-checkout:deliveryCartItems />
+		<multi-checkout:deliveryCartItems orderData="${cartData}" />
 		<div class="amwa-btnbar">
-			<%-- <form:form commandName="placeOrderForm" action="${checkoutFinalStepUrl}">
-				<input name="termsCheck" value="true" />
-				<button class="btn-blue-white">Submit Order</button>
-			</form:form> --%>
-			<a href="${checkoutFinalStepUrl}" class="btn-blue-white">Submit Order</a>
+			<a href="${checkoutFinalStepUrl}" class="btn-blue-white"><spring:theme code="order.preview.submit.order"/></a>
 			<a class="cartlist-cancelorder" href="${cartUrl}">
 				<spring:theme code="checkout.step.one.cancel.order" />
 			</a>

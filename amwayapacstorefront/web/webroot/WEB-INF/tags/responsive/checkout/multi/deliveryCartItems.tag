@@ -1,9 +1,10 @@
+<%@ attribute name="orderData" required="true" type="de.hybris.platform.commercefacades.order.data.AbstractOrderData" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="multi-checkout" tagdir="/WEB-INF/tags/responsive/checkout/multi"%>
 
 <div class="cartlist">
-	<span class="cartlist-header cartlist-detail-mob " data-toggle="collapse" href="#cartlistContent" data-parent="#accordion"> ORDER DETAILS </span>
+	<span class="cartlist-header cartlist-detail-mob " data-toggle="collapse" href="#cartlistContent" data-parent="#accordion"><spring:theme code="checkout.product.list.product.details"/></span>
 	<div id="cartlistContent" class="cartlist-content panel-collapse collapse in">
 		<div class="container-fluid">
 			<div class="row">
@@ -18,7 +19,7 @@
 						</div>
 					</div>
 					<div class="cartlist-tbody container-fluid">
-						<c:forEach items="${cartData.entries}" var="entry">
+						<c:forEach items="${orderData.entries}" var="entry">
 							<multi-checkout:checkoutIndividualEntrySection entry="${entry}" />
 						</c:forEach>
 					</div>

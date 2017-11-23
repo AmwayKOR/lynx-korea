@@ -45,13 +45,13 @@ INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;fronten
 ;;ContentArticlePagesTemplate;Content Article Pages Template;business/contentArticlePagesLayout;ContentPage
 ;;RegisterLandingPageTemplate;Register Landing Page Template;account/registerLandingLayoutPage;ContentPage
 ;;RegistrationTermsTemplate;Registration Terms Pages Template;account/accountRegisterTermsPage;ContentPage
+;;OrderConfirmationPageTemplate;Order Confirmation Page Template;checkout/checkoutConfirmationLayoutPage;ContentPage
 
 # Templates without a frontendTemplateName
 ;;CartPageTemplate;Cart Page Template;;ContentPage;false;
 ;;LoginPageTemplate;Login Page Template;;ContentPage;false;
 ;;CheckoutLoginPageTemplate;Checkout Login Page Template;;ContentPage;false;
 ;;MultiStepCheckoutSummaryPageTemplate;Multi Step Checkout Summary Page Template;;ContentPage;false;
-;;OrderConfirmationPageTemplate;Order Confirmation Page Template;;ContentPage;false;
 ;;ErrorPageTemplate;Error Page Template;;ContentPage;false;
 ;
 

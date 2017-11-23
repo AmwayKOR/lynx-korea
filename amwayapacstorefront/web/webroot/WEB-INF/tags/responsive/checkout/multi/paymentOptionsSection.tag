@@ -41,7 +41,7 @@
 				<c:forEach items="${sopPaymentDetailsForm.subscriptionSignatureParams}" var="entry" varStatus="status">
 					<input type="hidden" id="${entry.key}" name="${entry.key}" value="${fn:escapeXml(entry.value)}" />
 				</c:forEach>
-				<input type="hidden" value="${fn:escapeXml(silentOrderPageData.parameters['billTo_email'])}" name="billTo_email"
+				<input type="hidden" value="testemail@email.com" name="billTo_email"
 					id="billTo_email">
 
 
