@@ -795,15 +795,20 @@ INSERT_UPDATE SearchBoxComponent;$contentCV[unique=true];uid[unique=true];placeh
 
 ################## Product Detail page tools and advice component
 
-INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;folder(qualifier)[default='images'];altText
-;;nutriliteGuideProductDetailMedia;$siteResource/swatches-tools-beads.png;;nutriliteGuideProductDetailMedia;;"Your Guide to Nutrilite Kids Supplements"
-;;bodyKeyChoicesProductDetailMedia;$siteResource/swatches-tools-imagination.png;;bodyKeyChoicesProductDetailMedia;;"The BodyKey™4 Plan: Better Choices Everyday"
-;;nutriliteFindSupplementsProductDetailMedia;$siteResource/swatches-tools-liquid.png;;nutriliteFindSupplementsProductDetailMedia;;"Nutrilite: Find the Right Supplements"
+INSERT_UPDATE AmwayApacToolsAndAdviceComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
+;;nutriliteGuideProductDetailComponent;nutriliteGuideProductDetailMediaContainer;
+;;bodyKeyChoicesProductDetailComponent;bodyKeyChoicesProductDetailMediaContainer;
+;;nutriliteFindSupplementsProductDetailComponent;nutriliteFindSupplementsProductDetailMediaContainer;
 
-UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
-;;nutriliteGuideBannerProductDetailComponent;nutriliteGuideProductDetailMedia
-;;bodyKeyChoicesBannerProductDetailComponent;bodyKeyChoicesProductDetailMedia
-;;nutriliteFindSupplementsBannerProductDetailComponent;nutriliteFindSupplementsProductDetailMedia
+INSERT_UPDATE Media;mediaFormat(qualifier)[default=desktop];$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;folder(qualifier)[default='images'];altText
+;;;nutriliteGuideProductDetailMedia;$siteResource/swatches-tools-beads.png;;nutriliteGuideProductDetailMedia;;"Your Guide to Nutrilite Kids Supplements"
+;;;bodyKeyChoicesProductDetailMedia;$siteResource/swatches-tools-imagination.png;;bodyKeyChoicesProductDetailMedia;;"The BodyKey™4 Plan: Better Choices Everyday"
+;;;nutriliteFindSupplementsProductDetailMedia;$siteResource/swatches-tools-liquid.png;;nutriliteFindSupplementsProductDetailMedia;;"Nutrilite: Find the Right Supplements"
+
+INSERT_UPDATE MediaContainer;$contentCV[unique=true];qualifier[unique=true];$medias;
+;;nutriliteGuideProductDetailMediaContainer;nutriliteGuideProductDetailMedia
+;;bodyKeyChoicesProductDetailMediaContainer;bodyKeyChoicesProductDetailMedia
+;;nutriliteFindSupplementsProductDetailMediaContainer;nutriliteFindSupplementsProductDetailMedia
 
 UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=$lang]
 ;;toolsAndAdviceTitleTextProductDetailComponent;"<div class=""carousel-title-container""><h2 class=""carousel-title"">Tools &amp; Advice</h2></div>"
@@ -811,28 +816,32 @@ UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[la
 ;;bodyKeyChoicesTextProductDetailComponent;"<span>The BodyKey™4 Plan: Better Choices Everyday</span>"
 ;;nutriliteFindSupplementsTextProductDetailComponent;"<span>Nutrilite: Find the Right Supplements</span>"
 
+################## Product Detail page tools and advice component#########
+
 ################## Product Detail page Learning Opportunities component
 
-INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;folder(qualifier)[default='images'];altText
-;;nutriliteGuideLearningOpportunitiesMedia;$siteResource/swatches-tools-beads.png;;nutriliteGuideLearningOpportunitiesMedia;;"Your Guide to Nutrilite Kids Supplements"
-;;bodyKeyChoicesLearningOpportunitiesMedia;$siteResource/swatches-tools-imagination.png;;bodyKeyChoicesLearningOpportunitiesMedia;;"The BodyKey™4 Plan: Better Choices Everyday"
-;;nutriliteFindSupplementsLearningOpportunitiesMedia;$siteResource/swatches-tools-liquid.png;;nutriliteFindSupplementsLearningOpportunitiesMedia;;"Nutrilite: Find the Right Supplements"
+INSERT_UPDATE AmwayApacToolsAndAdviceComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
+;;nutriliteGuideLearningOpportunitiesComponent;nutriliteGuideLearningOpportunitiesMediaContainer;
+;;bodyKeyChoicesLearningOpportunitiesComponent;bodyKeyChoicesLearningOpportunitiesMediaContainer;
+;;nutriliteFindSupplementsLearningOpportunitiesComponent;nutriliteFindSupplementsLearningOpportunitiesMediaContainer;
 
-UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
-;;nutriliteGuideBannerLearningOpportunitiesComponent;nutriliteGuideLearningOpportunitiesMedia
-;;bodyKeyChoicesBannerLearningOpportunitiesComponent;bodyKeyChoicesLearningOpportunitiesMedia
-;;nutriliteFindSupplementsBannerLearningOpportunitiesComponent;nutriliteFindSupplementsLearningOpportunitiesMedia
+INSERT_UPDATE Media;mediaFormat(qualifier)[default=desktop];$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;folder(qualifier)[default='images'];altText
+;;;nutriliteGuideLearningOpportunitiesMedia;$siteResource/product-learning1.png;;nutriliteGuideLearningOpportunitiesMedia;;"From Seed to Supplement:<br>Why Nutrilite?"
+;;;bodyKeyChoicesLearningOpportunitiesMedia;$siteResource/product-learning2.png;;bodyKeyChoicesLearningOpportunitiesMedia;;"Summer Nutrition: 4 Essentials for Your Next Adventure"
+;;;nutriliteFindSupplementsLearningOpportunitiesMedia;$siteResource/product-learning3.png;;nutriliteFindSupplementsLearningOpportunitiesMedia;;"Strength in Numbers: Nutrilite Double X"
 
-UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true]  ;content[lang=$lang]
+INSERT_UPDATE MediaContainer;$contentCV[unique=true];qualifier[unique=true];$medias;
+;;nutriliteGuideLearningOpportunitiesMediaContainer;nutriliteGuideLearningOpportunitiesMedia
+;;bodyKeyChoicesLearningOpportunitiesMediaContainer;bodyKeyChoicesLearningOpportunitiesMedia
+;;nutriliteFindSupplementsLearningOpportunitiesMediaContainer;nutriliteFindSupplementsLearningOpportunitiesMedia
+
+UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=$lang]
 ;;productTitleTextLearningOpportunitiesComponent;"<div class=""carousel-title-container""><h2 class=""carousel-title"">Learning Opportunities</h2></div>"
-#;;nutriliteGuideTextLearningOpportunitiesComponent;"<span>Your Guide to Nutrilite Kids Supplements</span>";
-#;;bodyKeyChoicesTextLearningOpportunitiesComponent;"<span>The BodyKey™4 Plan: Better Choices Everyday</span>";
-#;;nutriliteFindSupplementsTextLearningOpportunitiesComponent;"<span>Nutrilite: Find the Right Supplements</span>";
+;;nutriliteGuideTextLearningOpportunitiesComponent;"<span>From Seed to Supplement:<br>Why Nutrilite?</span>";
+;;bodyKeyChoicesTextLearningOpportunitiesComponent;"<span>Summer Nutrition: 4 Essentials for Your Next Adventure</span>";
+;;nutriliteFindSupplementsTextLearningOpportunitiesComponent;"<span>Strength in Numbers: Nutrilite Double X</span>";
 
-INSERT_UPDATE AmwayApacTextImageComponent;$contentCV[unique=true];uid[unique=true];headerText
-;;nutriliteGuideLearningOpportunitiesCarouselComponent;"<span>Your Guide to Nutrilite Kids Supplements</span>";
-;;bodyKeyChoicesLearningOpportunitiesCarouselComponent;"<span>The BodyKey™4 Plan: Better Choices Everyday</span>";
-;;nutriliteFindSupplementsLearningOpportunitiesCarouselComponent;"<span>Nutrilite: Find the Right Supplements</span>";
+################## Product Detail page Learning Opportunities component###########
 
 ################## My Account Page
 UPDATE AmwayApacMyAccountProfileBarURLComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang];&componentRef

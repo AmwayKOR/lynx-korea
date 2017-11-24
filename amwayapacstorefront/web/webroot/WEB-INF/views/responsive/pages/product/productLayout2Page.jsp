@@ -65,59 +65,62 @@
 						<cms:component component="${component4}" />
 					</cms:pageSlot>
 
-
-					<cms:pageSlot position="LearningOpportunitiesBannerProductDetailSlot1" var="component5">
-						<cms:component component="${component5}" />
-					</cms:pageSlot>
-				</div>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="amway-recentlyviewed col-md-12">
-				<h2 class="amway-learning__title">
-					<span class="mH">Your</span>
-					Recently Viewed
-					<span class="mH">Items</span>
-				</h2>
-				<div class="product-recentlyviewed__imagelist" id="recentlyViewedListTab">
-					<div>
-						<img class="product-recentlyviewed__img" src="${themeResourcePath}/images/vitamin-c.png" alt="vitamin-c">
-					</div>
-					<div>
-						<img class="product-recentlyviewed__img" src="${themeResourcePath}/images/lip-gloss.png" alt="lip-gloss">
-					</div>
-					<div>
-						<img class="product-recentlyviewed__img" src="${themeResourcePath}/images/protein-powder-sm.png"
-							alt="protein-powder-sm">
-					</div>
-					<div>
-						<img class="product-recentlyviewed__img" src="${themeResourcePath}/images/truvivity.png" alt="truvivity">
-					</div>
-					<div>
-						<img class="product-recentlyviewed__img" src="${themeResourcePath}/images/perfect-pack.png" alt="perfect-pack">
-					</div>
-					<div>
-						<img class="product-recentlyviewed__img" src="${themeResourcePath}/images/cleanser.png" alt="cleanser">
-					</div>
-					<div>
-						<img class="product-recentlyviewed__img" src="${themeResourcePath}/images/blush.png" alt="blush">
-					</div>
-					<div>
-						<img class="product-recentlyviewed__img" src="${themeResourcePath}/images/blush.png" alt="blush">
-					</div>
-					<div>
-						<img class="product-recentlyviewed__img" src="${themeResourcePath}/images/perfect-pack.png" alt="perfect-pack">
-					</div>
-					<div>
-						<img class="product-recentlyviewed__img" src="${themeResourcePath}/images/lip-gloss.png" alt="lip-gloss">
+					<div id="productLearningListTabs" class="owl-carousel">
+						<cms:pageSlot position="LearningOpportunitiesBannerProductDetailSlot1" var="component5">
+							<cms:component component="${component5}" />
+						</cms:pageSlot>
 					</div>
 				</div>
 			</div>
-		</div>
+			</div>
+
+			<div class="row">
+				<div class="amway-recentlyviewed col-md-12">
+					<h2 class="amway-learning__title">
+						<span class="mH">Your</span>
+						Recently Viewed
+						<span class="mH">Items</span>
+					</h2>
+					<div class="product-recentlyviewed__imagelist" id="recentlyViewedListTab">
+						<div>
+							<img class="product-recentlyviewed__img" src="${themeResourcePath}/images/vitamin-c.png" alt="vitamin-c">
+						</div>
+						<div>
+							<img class="product-recentlyviewed__img" src="${themeResourcePath}/images/lip-gloss.png" alt="lip-gloss">
+						</div>
+						<div>
+							<img class="product-recentlyviewed__img" src="${themeResourcePath}/images/protein-powder-sm.png"
+								alt="protein-powder-sm">
+						</div>
+						<div>
+							<img class="product-recentlyviewed__img" src="${themeResourcePath}/images/truvivity.png" alt="truvivity">
+						</div>
+						<div>
+							<img class="product-recentlyviewed__img" src="${themeResourcePath}/images/perfect-pack.png" alt="perfect-pack">
+						</div>
+						<div>
+							<img class="product-recentlyviewed__img" src="${themeResourcePath}/images/cleanser.png" alt="cleanser">
+						</div>
+						<div>
+							<img class="product-recentlyviewed__img" src="${themeResourcePath}/images/blush.png" alt="blush">
+						</div>
+						<div>
+							<img class="product-recentlyviewed__img" src="${themeResourcePath}/images/blush.png" alt="blush">
+						</div>
+						<div>
+							<img class="product-recentlyviewed__img" src="${themeResourcePath}/images/perfect-pack.png" alt="perfect-pack">
+						</div>
+						<div>
+							<img class="product-recentlyviewed__img" src="${themeResourcePath}/images/lip-gloss.png" alt="lip-gloss">
+						</div>
+					</div>
+				</div>
+			</div>
 
 	</div>
-	<div class="cart-popup modal fade" id="product-zoom-image-panel" tabindex="-1" role="dialog"
+	<div class="cart-popup modal fade" id="product-zoom-image-panel" tabindex="-1" role="dialog">
+		</div>
+		<div class="cart-popup modal fade" id="product-zoom-image-panel" tabindex="-1" role="dialog"
 		aria-labelledby="cartModalLabel" aria-hidden="true"></div>
 	<product:productShoppingListPopups />
 	<product:productDittoPopups />
