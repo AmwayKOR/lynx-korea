@@ -183,6 +183,8 @@ public class AccountPageControllerTest
 	private ProfileValidator profileValidator; //NOPMD
 	@Mock
 	private SiteConfigService siteConfigService; //NOPMD
+	@Mock
+	private Boolean primaryAddress;
 
 	private List breadcrumbsList;
 
@@ -372,7 +374,8 @@ public class AccountPageControllerTest
 	{
 		BDDMockito.given(Boolean.valueOf(bindingResult.hasErrors())).willReturn(Boolean.TRUE);
 
-		final String addressBookPage = accountController.editAddress(addressForm, bindingResult, page, redirectModel);
+		final String addressBookPage = accountController.editAddress(addressForm, primaryAddress, bindingResult, page,
+				redirectModel);
 
 		Mockito.verify(accountController).setUpAddressFormAfterError(addressForm, page);
 		assertEquals(FULL_VIEW_PATH, addressBookPage);
@@ -390,7 +393,8 @@ public class AccountPageControllerTest
 						Mockito.eq(redirectModel), Mockito.eq(bindingResult), Mockito.anyBoolean(), Mockito.anyString())))
 				.willReturn(Boolean.TRUE);
 
-		final String addAddressPage = accountController.editAddress(addressForm, bindingResult, page, redirectModel);
+		final String addAddressPage = accountController.editAddress(addressForm, primaryAddress, bindingResult, page,
+				redirectModel);
 
 		assertEquals(FULL_VIEW_PATH, addAddressPage);
 	}
@@ -398,7 +402,8 @@ public class AccountPageControllerTest
 	@Test
 	public void shouldUpdateValidAddress() throws CMSItemNotFoundException
 	{
-		final String editAddressPage = accountController.editAddress(addressForm, bindingResult, page, redirectModel);
+		final String editAddressPage = accountController.editAddress(addressForm, primaryAddress, bindingResult, page,
+				redirectModel);
 
 		Mockito.verify(userFacade).editAddress(Mockito.any(AddressData.class));
 		assertThat(editAddressPage, CoreMatchers.containsString(REDIRECT_TO_EDIT_ADDRESS_PAGE));

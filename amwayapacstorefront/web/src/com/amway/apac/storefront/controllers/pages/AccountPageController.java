@@ -823,8 +823,10 @@ public class AccountPageController extends AbstractSearchPageController
 
 	@RequestMapping(value = "/edit-address/" + ADDRESS_CODE_PATH_VARIABLE_PATTERN, method = RequestMethod.POST)
 	@RequireHardLogIn
-	public String editAddress(final AmwayApacAddressForm addressForm, final BindingResult bindingResult, final Model model,
-			final RedirectAttributes redirectModel) throws CMSItemNotFoundException
+	public String editAddress(final AmwayApacAddressForm addressForm,
+			@RequestParam(value = "primaryAddress", required = false, defaultValue = "false") final Boolean primaryAddress,
+			final BindingResult bindingResult, final Model model, final RedirectAttributes redirectModel)
+			throws CMSItemNotFoundException
 	{
 		getAddressValidator().validate(addressForm, bindingResult);
 		if (bindingResult.hasErrors())
@@ -840,7 +842,8 @@ public class AccountPageController extends AbstractSearchPageController
 
 		final AddressData newAddress = addressDataUtil.convertToVisibleAddressData(addressForm);
 
-		if (Boolean.TRUE.equals(addressForm.getDefaultAddress()) || userFacade.getAddressBook().size() <= 1)
+		if (Boolean.TRUE.equals(addressForm.getDefaultAddress()) || userFacade.getAddressBook().size() <= 1
+				|| Boolean.TRUE.equals(primaryAddress))
 		{
 			newAddress.setDefaultAddress(true);
 		}
@@ -874,8 +877,8 @@ public class AccountPageController extends AbstractSearchPageController
 		GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.CONF_MESSAGES_HOLDER, "account.confirmation.address.updated",
 				null);
 
-		//Check if set as primary checkbox is being ticked
-		if (BooleanUtils.isTrue(addressForm.getDefaultAddress()))
+		//Check if set as primary checkbox is being ticked && Primary address being edit should only load the primary address detail
+		if (BooleanUtils.isTrue(addressForm.getDefaultAddress()) && Boolean.FALSE.equals(primaryAddress))
 		{
 			final List<AddressData> listAddressData = userFacade.getAddressBook();
 			model.addAttribute(ADDRESS_DATA_ATTR, listAddressData);

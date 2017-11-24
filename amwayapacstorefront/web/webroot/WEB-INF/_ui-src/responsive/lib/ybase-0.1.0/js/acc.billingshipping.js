@@ -9,11 +9,12 @@ ACC.billingshipping = {
 		var addressEditHtml = $(e).parents(".mailing-address-edit");
 		var addressHtml = addressEditHtml.prev(".mailing-address");
 		var addressId = $(e).attr('data-address-id');
+		var isPrimaryAddress = $(e).attr('data-address-default');
 		var setDefault = $('#shipping-address-form-'+addressId+'').find('input[id="address.defaultAddress-'+addressId+'"]').is(':checked');
 		var shippingAddressBodyHtml = $(e).parents(".primary-alternate-body");
         var options = {
     			url: $('#shipping-address-form-'+addressId+'').attr( "action"),
-    			data: $('form[id=shipping-address-form-'+addressId+']').serialize(),
+    			data: $('form[id=shipping-address-form-'+addressId+']').serialize() +"&primaryAddress="+isPrimaryAddress,
     			type: 'POST',
     			success: function (data)
     			{
