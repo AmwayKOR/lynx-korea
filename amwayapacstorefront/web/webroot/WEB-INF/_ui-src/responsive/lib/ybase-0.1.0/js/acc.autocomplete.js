@@ -103,7 +103,6 @@ ACC.autocomplete = {
 								desc: obj.description,
 								manufacturer: obj.manufacturer,
 								url:  ACC.config.encodedContextPath + obj.url,
-								price: obj.price.formattedValue,
 								type: "productResult",
 								image: (obj.images!=null && self.options.displayProductImages) ? ACC.autocomplete.getSuitableImageForAutoComplete(obj.images).url : null, // prevent errors if obj.images = null
 								searchTerm: request.term
@@ -219,7 +218,6 @@ ACC.autocomplete = {
 								desc: obj.description,
 								manufacturer: obj.manufacturer,
 								url:  ACC.config.encodedContextPath + obj.url,
-								price: obj.price.formattedValue,
 								type: "productResult",
 								image: (obj.images!=null && self.options.displayProductImages) ? ACC.autocomplete.getSuitableImageForAutoComplete(obj.images).url : null, // prevent errors if obj.images = null
 								searchTerm: request.term
@@ -315,7 +313,6 @@ ACC.autocomplete = {
 								desc: obj.description,
 								manufacturer: obj.manufacturer,
 								url:  ACC.config.encodedContextPath + obj.url,
-								price: obj.price.formattedValue,
 								type: "productResult",
 								image: (obj.images!=null && self.options.displayProductImages) ? ACC.autocomplete.getSuitableImageForAutoComplete(obj.images).url : null, // prevent errors if obj.images = null
 								searchTerm: request.term
