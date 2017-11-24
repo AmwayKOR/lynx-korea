@@ -19,7 +19,7 @@
 
 	<group qualifier="editorial" visible="true" initially-opened="false">
 		<label key="config.general.editorial" />
-		<property qualifier="AmwayApacYourOpportunityComponent.title">
+		<property qualifier="AmwayApacAbstractTextLinkImageComponent.text">
 			<parameter>
 				<name>editable</name>
 			    <value>true</value>
@@ -33,7 +33,7 @@
 			    <value>true</value>
 			</parameter>
 		</property>
-		<property qualifier="AmwayApacYourOpportunityComponent.description">
+		<property qualifier="AmwayApacAbstractTextLinkImageComponent.link">
 			<parameter>
 				<name>editable</name>
 			    <value>true</value>
@@ -47,7 +47,7 @@
 			    <value>true</value>
 			</parameter>
 		</property>
-		<property qualifier="AmwayApacYourOpportunityComponent.bannerGif1">
+		<property qualifier="AmwayApacAbstractTextLinkImageComponent.media">
 			<parameter>
 				<name>editable</name>
 			    <value>true</value>
@@ -61,21 +61,7 @@
 			    <value>true</value>
 			</parameter>
 		</property>
-		<property qualifier="AmwayApacYourOpportunityComponent.bannerGif2">
-			<parameter>
-				<name>editable</name>
-			    <value>true</value>
-			</parameter>
-			<parameter>
-			    <name>showEditButton</name>
-			    <value>true</value>
-			</parameter>
-			<parameter>
-			    <name>allowCreate</name>
-			    <value>true</value>
-			</parameter>
-		</property>
-		<property qualifier="AmwayApacYourOpportunityComponent.playbutton">
+		<property qualifier="AmwayApacYourOpportunityComponent.iconImage">
 			<parameter>
 				<name>editable</name>
 			    <value>true</value>

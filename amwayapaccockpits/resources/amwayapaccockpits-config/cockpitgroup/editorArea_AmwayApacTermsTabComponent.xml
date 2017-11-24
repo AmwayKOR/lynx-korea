@@ -33,6 +33,20 @@
 			    <value>true</value>
 			</parameter>
 		</property>
+		<property qualifier="AmwayApacTermsTabComponent.termsTabComponents">
+			<parameter>
+				<name>editable</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>showEditButton</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>allowCreate</name>
+			    <value>true</value>
+			</parameter>
+		</property>
 		<property qualifier="AmwayApacTermsTabComponent.description">
 			<parameter>
 				<name>editable</name>

@@ -17,9 +17,21 @@
 		<property qualifier="AbstractCMSComponent.visible"/>
 	</group>
 
-	<group qualifier="editorial" visible="true" initially-opened="true">
+	<group qualifier="editorial" visible="true" initially-opened="false">
 		<label key="config.general.editorial" />
-		<property qualifier="AmwayApacArtistryNewLuxuryRotatingComponent.image">
+		<property qualifier="CMSLinkComponent.linkName"/>
+		<property qualifier="CMSLinkComponent.external"/>
+		<property qualifier="CMSLinkComponent.contentPage">
+			<parameter>
+				<name>predefinedValuesStrategy</name>
+				<value>cmsItemPredefinedValuesStrategy</value>
+			</parameter>
+		</property>
+		<property qualifier="CMSLinkComponent.product"/>
+		<property qualifier="CMSLinkComponent.category"/>
+		<property qualifier="CMSLinkComponent.url"/>
+		<property qualifier="CMSLinkComponent.target"/>
+		<property qualifier="AmwayApacButtonLinkComponent.buttonStyleAttributes">
 			<parameter>
 				<name>editable</name>
 			    <value>true</value>
@@ -32,12 +44,22 @@
 			    <name>allowCreate</name>
 			    <value>true</value>
 			</parameter>
+
 		</property>
-		<property qualifier="RotatingImagesComponent.banners">
+		<property qualifier="AmwayApacButtonLinkComponent.styleAttributes">
 			<parameter>
-				<name>predefinedValuesStrategy</name>
-				<value>cmsItemPredefinedValuesStrategy</value>
+				<name>editable</name>
+			    <value>true</value>
 			</parameter>
+			<parameter>
+			    <name>showEditButton</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>allowCreate</name>
+			    <value>true</value>
+			</parameter>
+
 		</property>
 	</group>
 
@@ -47,6 +69,10 @@
 			<parameter>
 				<name>allowCreate</name>
 				<value>true</value>
+			</parameter>
+			<parameter>
+				<name>excludeCreateTypes</name>
+				<value>CMSUserRestriction</value>
 			</parameter>
 		</property>
 		<property qualifier="AbstractCMSComponent.onlyOneRestrictionMustApply"/>

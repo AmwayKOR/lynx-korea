@@ -176,7 +176,7 @@
 				<attributes>
 					<attribute qualifier="sideImage" type="BannerComponent">
 						<persistence type="property" />
-						<description>backgroud image</description>
+						<description>background image</description>
 					</attribute>
 				</attributes>
 			</itemtype>

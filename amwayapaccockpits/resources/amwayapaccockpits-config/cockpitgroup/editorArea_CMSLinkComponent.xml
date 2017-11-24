@@ -31,6 +31,34 @@
 		<property qualifier="CMSLinkComponent.category"/>
 		<property qualifier="CMSLinkComponent.url"/>
 		<property qualifier="CMSLinkComponent.target"/>
+		<property qualifier="AmwayApacAbstractTextLinkImageComponent.links">
+			<parameter>
+				<name>editable</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>showEditButton</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>allowCreate</name>
+			    <value>true</value>
+			</parameter>
+		</property>
+		<property qualifier="AmwayApacAbstractTextLinkImageComponent.toolAdviceLinks">
+			<parameter>
+				<name>editable</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>showEditButton</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>allowCreate</name>
+			    <value>true</value>
+			</parameter>
+		</property>
 	</group>
 
 	<group qualifier="visibility" visible="true" initially-opened="false">

@@ -26,6 +26,20 @@
 		<property qualifier="SearchBoxComponent.displayProductImages"/>
 		<property qualifier="SearchBoxComponent.minCharactersBeforeRequest"/>
 		<property qualifier="SearchBoxComponent.waitTimeBeforeRequest"/>
+		<property qualifier="SearchBoxComponent.placeholder">
+			<parameter>
+				<name>editable</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>showEditButton</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>allowCreate</name>
+			    <value>true</value>
+			</parameter>
+		</property>
 	</group>
 
 	<group qualifier="visibility" visible="true" initially-opened="false">

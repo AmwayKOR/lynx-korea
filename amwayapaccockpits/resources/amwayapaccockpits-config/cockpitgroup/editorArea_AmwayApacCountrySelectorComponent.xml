@@ -17,9 +17,9 @@
 		<property qualifier="AbstractCMSComponent.visible"/>
 	</group>
 
-	<group qualifier="editorial" visible="true" initially-opened="true">
+	<group qualifier="editorial" visible="true" initially-opened="false">
 		<label key="config.general.editorial" />
-		<property qualifier="AmwayApacArtistryNewLuxuryRotatingComponent.image">
+		<property qualifier="AmwayApacCountrySelectorComponent.currentCountry">
 			<parameter>
 				<name>editable</name>
 			    <value>true</value>
@@ -33,10 +33,18 @@
 			    <value>true</value>
 			</parameter>
 		</property>
-		<property qualifier="RotatingImagesComponent.banners">
+		<property qualifier="AmwayApacCountrySelectorComponent.links">
 			<parameter>
-				<name>predefinedValuesStrategy</name>
-				<value>cmsItemPredefinedValuesStrategy</value>
+				<name>editable</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>showEditButton</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>allowCreate</name>
+			    <value>true</value>
 			</parameter>
 		</property>
 	</group>
@@ -61,9 +69,9 @@
 		<property qualifier="Item.creationTime" />
 		<property qualifier="Item.modifiedtime" />
 	</group>
-	
-	<custom-group 
-		class="de.hybris.platform.cockpit.services.config.impl.UnassignedEditorSectionConfiguration" 
+
+	<custom-group
+		class="de.hybris.platform.cockpit.services.config.impl.UnassignedEditorSectionConfiguration"
 		qualifier="unassigned"
 		initially-opened="false"
 		visible="false">

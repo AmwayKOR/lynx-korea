@@ -70,9 +70,11 @@
 		<div class="row simpleimagecomponent pcp-banner">
 			<div class="amway-theme col-xs-12">
 				<div class="three-tile-component">
+				<div class="carousel-title-container">
 					<cms:pageSlot position="LearningOpportunitiesProductDetailSlot" var="component4">
 						<cms:component component="${component4}" />
 					</cms:pageSlot>
+				</div>
 
 
 					<cms:pageSlot position="LearningOpportunitiesBannerProductDetailSlot1" var="component5">

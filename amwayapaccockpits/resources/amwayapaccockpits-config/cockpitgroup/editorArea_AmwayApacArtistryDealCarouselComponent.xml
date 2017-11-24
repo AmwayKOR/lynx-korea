@@ -19,7 +19,7 @@
 
 	<group qualifier="editorial" visible="true" initially-opened="false">
 		<label key="config.general.editorial" />
-		<property qualifier="AmwayApacArtistryDealCarouselComponent.image2">
+		<property qualifier="AmwayApacAbstractTextLinkImageComponent.text">
 			<parameter>
 				<name>editable</name>
 			    <value>true</value>
@@ -33,7 +33,7 @@
 			    <value>true</value>
 			</parameter>
 		</property>
-		<property qualifier="AmwayApacArtistryDealCarouselComponent.shopnow">
+		<property qualifier="AmwayApacAbstractTextLinkImageComponent.link">
 			<parameter>
 				<name>editable</name>
 			    <value>true</value>
@@ -47,7 +47,35 @@
 			    <value>true</value>
 			</parameter>
 		</property>
-		<property qualifier="AmwayApacArtistryDealCarouselComponent.secondary">
+		<property qualifier="AmwayApacAbstractTextLinkImageComponent.media">
+			<parameter>
+				<name>editable</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>showEditButton</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>allowCreate</name>
+			    <value>true</value>
+			</parameter>
+		</property>
+		<property qualifier="AmwayApacArtistryDealCarouselComponent.secondaryImage">
+			<parameter>
+				<name>editable</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>showEditButton</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>allowCreate</name>
+			    <value>true</value>
+			</parameter>
+		</property>
+		<property qualifier="AmwayApacArtistryDealCarouselComponent.secondaryLink">
 			<parameter>
 				<name>editable</name>
 			    <value>true</value>

@@ -19,7 +19,7 @@
 
 	<group qualifier="editorial" visible="true" initially-opened="false">
 		<label key="config.general.editorial" />
-		<property qualifier="AmwayApacOurNewProductComponent.title">
+		<property qualifier="AmwayApacAbstractTextLinkImageComponent.text">
 			<parameter>
 				<name>editable</name>
 			    <value>true</value>
@@ -32,9 +32,8 @@
 			    <name>allowCreate</name>
 			    <value>true</value>
 			</parameter>
-
 		</property>
-		<property qualifier="AmwayApacOurNewProductComponent.title2">
+		<property qualifier="AmwayApacAbstractTextLinkImageComponent.link">
 			<parameter>
 				<name>editable</name>
 			    <value>true</value>
@@ -47,7 +46,34 @@
 			    <name>allowCreate</name>
 			    <value>true</value>
 			</parameter>
-
+		</property>
+		<property qualifier="AmwayApacAbstractTextLinkImageComponent.media">
+			<parameter>
+				<name>editable</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>showEditButton</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>allowCreate</name>
+			    <value>true</value>
+			</parameter>
+		</property>
+		<property qualifier="AmwayApacOurNewProductComponent.sideImage">
+			<parameter>
+				<name>editable</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>showEditButton</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>allowCreate</name>
+			    <value>true</value>
+			</parameter>
 		</property>
 	</group>
 

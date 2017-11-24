@@ -24,6 +24,20 @@
 		<property qualifier="AmwayApacShopByCategoryComponent.link"/>
 		<property qualifier="AmwayApacShopByCategoryComponent.banner"/>
 		<property qualifier="AmwayApacShopByCategoryComponent.group"/>
+		<property qualifier="AmwayApacShopByCategoryComponent.shopByCategoryComponents">
+			<parameter>
+				<name>editable</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>showEditButton</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>allowCreate</name>
+			    <value>true</value>
+			</parameter>
+		</property>
 	</group>
 
 	<group qualifier="visibility" visible="true" initially-opened="false">

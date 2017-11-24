@@ -82,20 +82,6 @@
 			    <value>true</value>
 			</parameter>
 		</property>
-		<property qualifier="cmsnavigationnode.nodeTitle">
-			<parameter>
-				<name>editable</name>
-			    <value>true</value>
-			</parameter>
-			<parameter>
-			    <name>showEditButton</name>
-			    <value>true</value>
-			</parameter>
-			<parameter>
-			    <name>allowCreate</name>
-			    <value>true</value>
-			</parameter>
-		</property>
 		<property qualifier="cmsnavigationnode.nodeImg">
 			<parameter>
 				<name>editable</name>
