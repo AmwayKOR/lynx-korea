@@ -3,7 +3,12 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
 
-
-<c:forEach items="${responsiveBanners}" var="learningComponent">
-	<cms:component component="${learningComponent}" />
-</c:forEach>
+<div id="productLearningListTabs" class="owl-carousel">
+	<c:forEach items="${responsiveBanners}" var="learningComponent">
+		<div class="item">
+			<div class="full-width-item second-option">
+				<cms:component component="${learningComponent}" />
+			</div>
+		</div>
+	</c:forEach>
+</div>

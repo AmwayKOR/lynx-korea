@@ -18,19 +18,17 @@
 	</c:if>
 </c:forEach>
 
-<div class="item">
-	<div class="full-width-item second-option">
-		<div class="item-image-wrap">
-			<a href="${linkUrl}" class="primary-link ">
-				<img class="desktop-image js-responsive-image" data-media='{${imagerData}}' alt='${altText}' title='${altText}' />
-			</a>
-		</div>
-		<div class="item-content-wrap">
-			<div class="carousel-link-wrap">
-				<a href="${linkUrl}" class="primary-link ">
-					<cms:component component="${component.text}" />
-				</a>
-			</div>
-		</div>
+
+<div class="item-image-wrap">
+	<a href="${linkUrl}" class="primary-link ">
+		<img class="desktop-image js-responsive-image" data-media='{${imagerData}}' alt='${altText}' title='${altText}' />
+	</a>
+</div>
+<div class="item-content-wrap">
+	<div class="carousel-link-wrap">
+		<a href="${linkUrl}" class="primary-link ">
+			<cms:component component="${component.text}" />
+		</a>
 	</div>
+
 </div>

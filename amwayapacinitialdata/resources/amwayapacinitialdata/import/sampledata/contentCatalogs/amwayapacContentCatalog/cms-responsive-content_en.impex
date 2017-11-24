@@ -811,7 +811,7 @@ INSERT_UPDATE MediaContainer;$contentCV[unique=true];qualifier[unique=true];$med
 ;;nutriliteFindSupplementsProductDetailMediaContainer;nutriliteFindSupplementsProductDetailMedia
 
 UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=$lang]
-;;toolsAndAdviceTitleTextProductDetailComponent;"<div class=""carousel-title-container""><h2 class=""carousel-title"">Tools &amp; Advice</h2></div>"
+;;toolsAndAdviceTitleTextProductDetailComponent;"<h2 class=""carousel-title"">Tools &amp; Advice</h2>"
 ;;nutriliteGuideTextProductDetailComponent;"<span>Your Guide to Nutrilite Kids Supplements</span>"
 ;;bodyKeyChoicesTextProductDetailComponent;"<span>The BodyKey™4 Plan: Better Choices Everyday</span>"
 ;;nutriliteFindSupplementsTextProductDetailComponent;"<span>Nutrilite: Find the Right Supplements</span>"
