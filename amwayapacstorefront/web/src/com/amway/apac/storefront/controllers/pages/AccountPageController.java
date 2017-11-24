@@ -118,8 +118,8 @@ public class AccountPageController extends AbstractSearchPageController
 
 	/**
 	 * We use this suffix pattern because of an issue with Spring 3.1 where a Uri value is incorrectly extracted if it
-	 * contains on or more '.' characters. Please see https://jira.springsource.org/browse/SPR-6164 for a discussion on the
-	 * issue and future resolution.
+	 * contains on or more '.' characters. Please see https://jira.springsource.org/browse/SPR-6164 for a discussion on
+	 * the issue and future resolution.
 	 */
 	private static final String ORDER_CODE_PATH_VARIABLE_PATTERN = "{orderCode:.*}";
 	private static final String ADDRESS_CODE_PATH_VARIABLE_PATTERN = "{addressCode:.*}";
@@ -279,9 +279,9 @@ public class AccountPageController extends AbstractSearchPageController
 
 	@RequestMapping(method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String account(final Model model, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
+	public String account(final Model model) throws CMSItemNotFoundException
 	{
-		model.addAttribute("ordersAmount", amwayApacOrderFacade.getCustomerOrderCounts());
+		model.addAttribute(ControllerConstants.ModelParameters.NUMBER_OF_ORDERS, amwayApacOrderFacade.getCustomerOrderCounts());
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(ACCOUNT_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ACCOUNT_CMS_PAGE));
@@ -292,7 +292,7 @@ public class AccountPageController extends AbstractSearchPageController
 
 	@RequestMapping(value = "/billingshipping", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String billingShipping(final Model model, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
+	public String billingShipping(final Model model) throws CMSItemNotFoundException
 	{
 		//Get address
 		final List<AddressData> listAddressData = userFacade.getAddressBook();

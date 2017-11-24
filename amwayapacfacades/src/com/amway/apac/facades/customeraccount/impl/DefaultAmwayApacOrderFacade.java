@@ -1,7 +1,5 @@
 package com.amway.apac.facades.customeraccount.impl;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.amway.apac.core.customer.services.AmwayApacCustomerAccountService;
@@ -17,10 +15,6 @@ import com.amway.core.facades.order.impl.DefaultAmwayOrderFacade;
  */
 public class DefaultAmwayApacOrderFacade extends DefaultAmwayOrderFacade implements AmwayApacOrderFacade
 {
-	/**
-	 * Logger instance to record events at class level
-	 */
-	private static final Logger LOGGER = LoggerFactory.getLogger(DefaultAmwayApacOrderFacade.class);
 
 	private AmwayApacCustomerAccountService amwayApacCustomerAccountService;
 

@@ -304,6 +304,11 @@ public interface ControllerConstants
 	interface ModelParameters
 	{
 		/**
+		 * String constant numberOfOrders
+		 */
+		String NUMBER_OF_ORDERS = "numberOfOrders";
+
+		/**
 		 * String constant linkUrl
 		 */
 		String LINK_URL = "linkUrl";

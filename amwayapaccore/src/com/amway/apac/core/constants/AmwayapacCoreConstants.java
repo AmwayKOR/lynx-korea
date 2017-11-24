@@ -98,6 +98,11 @@ public final class AmwayapacCoreConstants extends GeneratedAmwayapacCoreConstant
 	public static final String USER_STRING = "user";
 
 	/**
+	 * baseStore string constant
+	 */
+	public static final String BASE_STORE_STRING = "baseStore";
+
+	/**
 	 * baseProduct string constant.
 	 */
 	public static final String BASE_PRODUCT_STRING = "baseProduct";

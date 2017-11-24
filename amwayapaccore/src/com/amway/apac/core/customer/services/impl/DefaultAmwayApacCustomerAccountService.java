@@ -3,6 +3,7 @@ package com.amway.apac.core.customer.services.impl;
 import static com.amway.apac.core.constants.AmwayapacCoreConstants.TWO_HUNDRED_INT;
 
 import de.hybris.platform.core.model.user.UserModel;
+import de.hybris.platform.store.BaseStoreModel;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,18 +37,19 @@ public class DefaultAmwayApacCustomerAccountService extends DefaultAmwayCustomer
 	public Integer getOrdersCount()
 	{
 		final UserModel currentUser = getUserService().getCurrentUser();
+		final BaseStoreModel baseStore = getBaseStoreService().getCurrentBaseStore();
 		if (LOGGER.isInfoEnabled())
 		{
-			LOGGER.info(new StringBuilder(TWO_HUNDRED_INT).append("Fetching order counts for user [").append(currentUser.getUid())
-					.toString());
+			LOGGER.info(new StringBuilder(TWO_HUNDRED_INT).append("Fetching number of orders for user [")
+					.append(currentUser.getUid()).append("]").toString());
 		}
 
-		final Integer result = getAmwayApacCustomerAccountDao().findOrderCountsForUser(currentUser);
+		final Integer result = getAmwayApacCustomerAccountDao().findOrderCountsForUser(currentUser, baseStore);
 
 		if (LOGGER.isInfoEnabled())
 		{
-			LOGGER.info(new StringBuilder(TWO_HUNDRED_INT).append("Found ").append(result).append(" order counts for user [")
-					.append(currentUser.getUid()).toString());
+			LOGGER.info(new StringBuilder(TWO_HUNDRED_INT).append("Found ").append(result).append(" orders for user [")
+					.append(currentUser.getUid()).append("]").toString());
 		}
 
 		return result;

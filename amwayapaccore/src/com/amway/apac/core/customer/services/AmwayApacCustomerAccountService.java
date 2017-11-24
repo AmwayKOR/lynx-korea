@@ -11,5 +11,10 @@ import com.amway.core.customer.service.AmwayCustomerAccountService;
  */
 public interface AmwayApacCustomerAccountService extends AmwayCustomerAccountService
 {
+	/**
+	 * Featches the number of orders for the current user in current base store.
+	 *
+	 * @return number of orders found.
+	 */
 	Integer getOrdersCount();
 }
