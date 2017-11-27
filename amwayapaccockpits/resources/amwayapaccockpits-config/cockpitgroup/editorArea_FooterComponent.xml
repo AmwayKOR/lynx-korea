@@ -117,21 +117,6 @@
 			    <value>true</value>
 			</parameter>
 		</property>
-		
-		<property qualifier="FooterComponent.navigationNodes">
-			<parameter>
-				<name>editable</name>
-			    <value>true</value>
-			</parameter>
-			<parameter>
-			    <name>showEditButton</name>
-			    <value>true</value>
-			</parameter>
-			<parameter>
-			    <name>allowCreate</name>
-			    <value>true</value>
-			</parameter>
-		</property>
 		<property qualifier="FooterComponent.brandBanners">
 			<parameter>
 				<name>editable</name>
@@ -147,6 +132,20 @@
 			</parameter>
 		</property>
 		<property qualifier="FooterComponent.links">
+			<parameter>
+				<name>editable</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>showEditButton</name>
+			    <value>true</value>
+			</parameter>
+			<parameter>
+			    <name>allowCreate</name>
+			    <value>true</value>
+			</parameter>
+		</property>
+		<property qualifier="FooterComponent.specialComponents">
 			<parameter>
 				<name>editable</name>
 			    <value>true</value>
