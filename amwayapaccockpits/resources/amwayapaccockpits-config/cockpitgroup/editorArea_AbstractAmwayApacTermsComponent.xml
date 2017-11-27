@@ -33,20 +33,6 @@
 			    <value>true</value>
 			</parameter>
 		</property>
-		<property qualifier="AmwayApacCategoryTopBannerComponent.optional">
-			<parameter>
-				<name>editable</name>
-			    <value>true</value>
-			</parameter>
-			<parameter>
-			    <name>showEditButton</name>
-			    <value>true</value>
-			</parameter>
-			<parameter>
-			    <name>allowCreate</name>
-			    <value>true</value>
-			</parameter>
-		</property>
 		<property qualifier="AmwayApacCategoryTopBannerComponent.radio1Description">
 			<parameter>
 				<name>editable</name>
@@ -75,7 +61,7 @@
 			    <value>true</value>
 			</parameter>
 		</property>
-		
+
 	</group>
 
 	<group qualifier="visibility" visible="true" initially-opened="false">

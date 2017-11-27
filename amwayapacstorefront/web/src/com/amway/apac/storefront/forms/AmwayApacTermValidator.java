@@ -35,14 +35,9 @@ public class AmwayApacTermValidator implements Validator
 
 		for (final AmwayApacTerm term : termList)
 		{
-			if (BooleanUtils.isNotTrue(term.getOptional()) && BooleanUtils.isNotTrue(term.getTermAccepted()))
+			if (BooleanUtils.isNotTrue(term.getTermAccepted()))
 			{
 				errors.rejectValue(null, "account.term.accepted");
-			}
-
-			if (BooleanUtils.isTrue(term.getOptional()) && term.getTermAccepted() == null)
-			{
-				errors.rejectValue(null, "account.term.optional");
 			}
 		}
 

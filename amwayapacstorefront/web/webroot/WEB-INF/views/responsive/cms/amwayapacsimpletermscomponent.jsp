@@ -4,7 +4,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <li>
-	<form:hidden path="term[${radioCount}].optional" value="${optional}" />
     <div class="agreement-box">
     	<c:if test="${not empty title}">
 	    <h3 class="uppercase"><cms:component component="${title}"/>

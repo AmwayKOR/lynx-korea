@@ -60,20 +60,6 @@
 			    <value>true</value>
 			</parameter>
 		</property>
-		<property qualifier="AmawayApacSimpleContainerTermsComponent.optional">
-			<parameter>
-				<name>editable</name>
-			    <value>true</value>
-			</parameter>
-			<parameter>
-			    <name>showEditButton</name>
-			    <value>true</value>
-			</parameter>
-			<parameter>
-			    <name>allowCreate</name>
-			    <value>true</value>
-			</parameter>
-		</property>
 		<property qualifier="AmawayApacSimpleContainerTermsComponent.content">
 			<parameter>
 				<name>editable</name>

@@ -60,20 +60,6 @@
 			    <value>true</value>
 			</parameter>
 		</property>
-		<property qualifier="AmwayApacSimpleTermsComponent.optional">
-			<parameter>
-				<name>editable</name>
-			    <value>true</value>
-			</parameter>
-			<parameter>
-			    <name>showEditButton</name>
-			    <value>true</value>
-			</parameter>
-			<parameter>
-			    <name>allowCreate</name>
-			    <value>true</value>
-			</parameter>
-		</property>
 		<property qualifier="AmwayApacSimpleTermsComponent.content">
 			<parameter>
 				<name>editable</name>

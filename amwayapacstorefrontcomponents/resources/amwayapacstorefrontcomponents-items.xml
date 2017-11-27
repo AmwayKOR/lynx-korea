@@ -458,11 +458,6 @@
 						type="CMSParagraphComponent">
 						<persistence type="property" />
 					</attribute>
-					<attribute qualifier="optional" type="boolean">
-						<persistence type="property" />
-						<modifiers optional="true" />
-						<defaultvalue>Boolean.TRUE</defaultvalue>
-					</attribute>
 					<attribute qualifier="radio1Description" generate="true"
 						autocreate="true" type="localized:java.lang.String">
 						<persistence type="property" />
@@ -536,13 +531,13 @@
 	            jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacShoppingListSearchBoxComponent">
 	            <description>Represents the search box component for quick shop product search on shopping list page.</description>
 	        </itemtype>
-	
+
 	        <itemtype code="AmwayApacShoppingCartSearchBoxComponent" autocreate="true"
 	            generate="true" extends="SearchBoxComponent"
 	            jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacShoppingCartSearchBoxComponent">
 	            <description>Represents the search box component for quick shop product search on shopping list page.</description>
 	        </itemtype>
-			
+
 		</typegroup>
 
 	</itemtypes>

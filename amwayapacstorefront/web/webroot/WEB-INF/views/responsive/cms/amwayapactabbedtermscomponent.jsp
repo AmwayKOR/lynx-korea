@@ -4,7 +4,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <li>
-	<form:hidden path="term[${radioCount}].optional" value="${optional}" />
     <h3 class="uppercase"><cms:component component="${title}"/>
     	<a class="show-terms"><i class="icon icon-exports"></i></a>
     </h3>

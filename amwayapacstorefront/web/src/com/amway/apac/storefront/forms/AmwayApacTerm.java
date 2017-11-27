@@ -9,18 +9,7 @@ package com.amway.apac.storefront.forms;
  */
 public class AmwayApacTerm
 {
-	private Boolean optional;
 	private Boolean termAccepted;
-
-	public Boolean getOptional()
-	{
-		return optional;
-	}
-
-	public void setOptional(final Boolean optional)
-	{
-		this.optional = optional;
-	}
 
 	public Boolean getTermAccepted()
 	{
