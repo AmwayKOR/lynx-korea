@@ -918,8 +918,8 @@ INSERT_UPDATE AmwayApacMyAccountComponent;$contentCV[unique=true];uid[unique=tru
 ########## My Account Page ##########
 
 
+########## Account Billing & Shipping Page
 
-###### Account Billing & Shipping Page ######
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
 ;;BodyContentBillingShippingSlot;Body Content Slot for Account Billing & Shipping;true;AccountBillingShippingComponent;;;
 
@@ -928,6 +928,9 @@ INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];positi
 
 INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;actions(uid,$contentCV);&componentRef
 ;;AccountBillingShippingComponent;Account Billing & Shipping Component;accountBillingShippingPage.jsp;;AccountBillingShippingComponent
+
+########## Account Billing & Shipping Page ##########
+
 
 ###### Account Business Information Page ######
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
@@ -1044,7 +1047,7 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;c
 ;;TermsBannerContentSlot-SimpleTerms;Banner Slot for Registration Simple Terms;true;refSimpleTermsBanner
 ;;TermsContentSlot1-SimpleTerms;Slot for Registration Simple Terms;true;refSimpleTerms
 
-INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='registrationSimpleTerms'];contentSlot(uid,$contentCV)[unique=true]
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='registration-simple-terms'];contentSlot(uid,$contentCV)[unique=true]
 ;;TermsBannerContentSlot-SimpleTerms;TermsBanner;;TermsBannerContentSlot-SimpleTerms
 ;;TermsContentSlot1-SimpleTerms;Terms1;;TermsContentSlot1-SimpleTerms
 

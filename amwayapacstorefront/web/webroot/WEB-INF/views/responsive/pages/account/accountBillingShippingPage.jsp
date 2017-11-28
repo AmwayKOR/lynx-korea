@@ -56,15 +56,12 @@
 																	<div class="card-data">
 																		<span class="card-code">${fn:escapeXml(paymentInfo.cardTypeData.name)}</span>
 																		<span class="panel-title-text">ending in</span>
-																		<!-- <span class="expiration-date">0008</span> -->
-																		<!--<c:set var="creditcardNumber" value="${fn:split(fn:escapeXml(paymentInfo.cardNumber),fn:length(fn:escapeXml(paymentInfo.cardNumber))-4)}"></c:set> -->
 																		<ycommerce:testId code="paymentDetails_item_cardNumber_text">${fn:substring(fn:escapeXml(paymentInfo.cardNumber), 12, 16)}</ycommerce:testId>
 																	</div>
 																</div>
 																<div class="card-info">
 																	<div class="card-data expires-message-warpper">
 																		<span class="expires-label"> Expires</span>
-
 																		<span>
 																			<c:if test="${paymentInfo.expiryMonth lt 10}">0</c:if>${fn:escapeXml(paymentInfo.expiryMonth)}/${fn:escapeXml(paymentInfo.expiryYear)}</span>
 																	</div>
@@ -87,9 +84,7 @@
 																<div class="button-block">
 																	<button class="btn btn-primary edit">Edit</button>
 																</div>
-
 															</div>
-
 														</div>
 													</div>
 												</div>
@@ -172,7 +167,6 @@
 																		</div>
 																	</div>
 																	<div class="address-block col-md-7">
-
 																		<div class="row">
 																			<div class="address-form col-md-10">
 																				<div class="headline">Billing Address</div>
@@ -283,11 +277,9 @@
 																				</div>
 																			</div>
 																		</div>
-
 																	</div>
 																</div>
 															</div>
-
 															<div>
 																<input type="hidden" name="CSRFToken" value="f6eebe09-194d-436f-a044-29dc566efe76" />
 															</div>
@@ -297,8 +289,6 @@
 											</div>
 										</div>
 									</c:forEach>
-
-
 								</c:when>
 							</c:choose>
 							<div id="newPayment" class="container-fluid payment-new-wrapper js-create-accertify-session ">
@@ -471,7 +461,6 @@
 																	</div>
 																</div>
 															</div>
-
 														</div>
 													</div>
 												</div>
@@ -504,10 +493,7 @@
 						</h4>
 					</div>
 					<c:if test="${empty addressData}">
-
 					</c:if>
-
-
 					<div id="billingShippingBody" class="panel-collapse collapse billing-and-shipping-section" role="tabpanel"
 						aria-labelledby="headingOne">
 						<div class="panel-body">
@@ -537,8 +523,6 @@
 													</div>
 												</c:if>
 											</c:forEach>
-
-
 										</div>
 									</div>
 									<div class="alternative-address-section container-fluid">
@@ -565,13 +549,10 @@
 												</c:if>
 											</c:forEach>
 										</div>
-
 									</div>
 								</c:if>
 							</div>
-
 							<div class="add-alternate-address alternative-address-section container-fluid">
-
 								<div class="main row">
 									<div class="address-container col-xs-12 col-md-6">
 										<div class="add-new-alternate-address js-add-new-address-btn">
@@ -584,7 +565,6 @@
 												<c:url value="/my-account/add-address" var="addAddressUrl" />
 												<form:form id="shipping-address-form-new" action="${addAddressUrl}" commandName="addressForm" method="post">
 													<fieldset>
-
 														<formElement:formSelectBox idKey="address.title" labelKey="address.title" path="titleCode"
 															mandatory="true" skipBlank="false" selectCSSClass="form-control"
 															skipBlankMessageKey="address.title.pleaseSelect" items="${titleData}"
@@ -605,22 +585,16 @@
 																<spring:theme code="address.defaultAddress" />
 															</label>
 														</div>
-
 													</fieldset>
 												</form:form>
 											</div>
 										</div>
 									</div>
-
 								</div>
 							</div>
-
 						</div>
 					</div>
-
-
 				</div>
-
 			</div>
 		</div>
 	</div>

@@ -1309,6 +1309,25 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 ;;Section11-HomePageMain;Section11;;Section11Slot;true
 ;;Section12-HomePageMain;Section12;;Section12Slot;true
 
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='RegistrationTermsTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-RegisterTerms;SiteLogo;;SiteLogoSlot;true
+;;CountrySelector-RegisterTerms;CountrySelector;;CountrySelectorSlot;true
+;;MiniCart-RegisterTerms;MiniCart;;MiniCartSlot;true
+;;Footer-RegisterTerms;Footer;;FooterSlot;true
+;;SearchBox-RegisterTerms;SearchBox;;SearchBoxSlot;true
+;;NavigationBar-RegisterTerms;NavigationBar;;NavigationBarSlot;true
+;;Mobile-NavigationBar-RegisterTerms;MobileNavigationBar;;MobileNavigationBarSlot;true
+;;HeaderAccountNavigation-RegisterTerms;HeaderAccountNavigation;;HeaderAccountNavigationSlot;true
+;;BreadCrumb-RegisterTerms;BreadCrumb;;BreadCrumbSlot;true
+;;NavigationBar-RegisterTerms;NavigationBar;;NavigationBarSlot;true
+;;MiniCart-RegisterTerms;MiniCart;;MiniCartSlot;true
+;;Footer-RegisterTerms;Footer;;FooterSlot;true
+;;HeaderLinks-RegisterTerms;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-RegisterTerms;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-RegisterTerms;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-RegisterTerms;BottomHeaderSlot;;BottomHeaderSlot;true
+;;Mobile-NavigationBar-RegisterTerms;MobileNavigationBar;;MobileNavigationBarSlot;true
+
 # Create Content Pages
 
 # Site-wide Homepage
@@ -1347,6 +1366,8 @@ INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTe
 ;;register-landing-page;Register;RegisterLandingPageTemplate;/register-landing-page
 ;;billing-shipping;Billing Shipping Page;AccountPageTemplate;billing-shipping
 ;;business-information;Business Information Page;AccountPageTemplate;/business-information
+;;registration-simple-terms;Registration Simple Terms Page;RegistrationTermsTemplate;simple-terms
+;;registration-multiple-terms;Registration Multiple Terms Page;RegistrationTermsTemplate;multiple-terms
 
 # Simple Content Pages
 INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
@@ -1367,16 +1388,3 @@ INSERT_UPDATE CategoryPage;$contentCV[unique=true];uid[unique=true];name;masterT
 ;;productList;Product List;ProductListPageTemplate;false;
 ;;productGrid;Product Grid;ProductGridPageTemplate;true;
 ;;category;Default Category Page;CategoryPageTemplate;false;
-
-INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='RegistrationTermsTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
-;;SiteLogo-RegisterTerms;SiteLogo;;SiteLogoSlot;true
-;;MiniCart-RegisterTerms;MiniCart;;MiniCartSlot;true
-;;Footer-RegisterTerms;Footer;;FooterSlot;true
-;;SearchBox-RegisterTerms;SearchBox;;SearchBoxSlot;true
-;;NavigationBar-RegisterTerms;NavigationBar;;NavigationBarSlot;true
-;;Mobile-NavigationBar-RegisterTerms;MobileNavigationBar;;MobileNavigationBarSlot;true
-
-INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
-;;registrationSimpleTerms;Registration Simple Terms Page;RegistrationTermsTemplate;simple-terms
-;;registrationMultipleTerms;Registration Multiple Terms Page;RegistrationTermsTemplate;multiple-terms
-

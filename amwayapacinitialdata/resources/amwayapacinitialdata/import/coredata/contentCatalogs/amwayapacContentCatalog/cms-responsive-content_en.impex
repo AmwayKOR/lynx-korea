@@ -44,3 +44,6 @@ UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
  ;;category-landing-page;"Nutrilite"
  ;;content-article-pages;"New IBO Info"
  ;;register-landing-page;"Register"
+ ;;registration-simple-terms;"Registration Simple Terms Page"
+ ;;registration-multiple-terms;"Registration Multiple Terms Page"
+ 
