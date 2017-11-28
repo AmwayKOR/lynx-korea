@@ -934,8 +934,16 @@ INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;
 
 ########## register simple terms page
 
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;TermsBannerContentSlot;registerTermsBannerComponent
+
+INSERT_UPDATE AmwayApacTermsBannerComponent;$contentCV[unique=true];uid[unique=true];name;text(uid, $contentCV);&componentRef
+;;registerTermsBannerComponent;Terms Banner Component;bannerTermsDesc;registerTermsBannerComponent
+
 INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
 ;;bannerTermsDesc;;bannerTermsDesc
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
 ;;termsTitle1;;termsTitle1
 ;;tabbedTermsTitle2;;tabbedTermsTitle2
 ;;tabbedTermsTitle3;;tabbedTermsTitle3
@@ -956,18 +964,10 @@ INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&co
 ;;termsTabDesc1;;termsTabDesc1
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
-;;TermsBannerContentSlot-SimpleTerms;Banner Slot for Registration Simple Terms;true;refSimpleTermsBanner
 ;;TermsContentSlot1-SimpleTerms;Slot for Registration Simple Terms;true;refSimpleTerms
 
 INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='registration-simple-terms'];contentSlot(uid,$contentCV)[unique=true]
-;;TermsBannerContentSlot-SimpleTerms;TermsBanner;;TermsBannerContentSlot-SimpleTerms
 ;;TermsContentSlot1-SimpleTerms;Terms1;;TermsContentSlot1-SimpleTerms
-
-INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink
-;;termsBannerComponent;Terms Page Banner Component;termsBannerComponent;"/"
-
-INSERT_UPDATE AmwayApacTermsBannerComponent;$contentCV[unique=true];uid[unique=true];name;backgroundImage(uid, $contentCV);details(uid, $contentCV);offerImageLink(&linkRef);&componentRef
-;;AmwayApacSimpleTermsBannerComponent;Terms Banner Component;termsBannerComponent;bannerTermsDesc;;refSimpleTermsBanner
 
 INSERT_UPDATE AmawayApacSimpleContainerTermsComponent;$contentCV[unique=true];uid[unique=true];name;title(uid, $contentCV);content(uid, $contentCV);maxHeight[default=false];radio1Description;radio2Description;&componentRef
 ;;AmawayApacSimpleContainerTermsComponent;Simple Container Terms Component;termsTitle1;termsDesc1;true;"Accept";"Do Not Accept";refSimpleTerms

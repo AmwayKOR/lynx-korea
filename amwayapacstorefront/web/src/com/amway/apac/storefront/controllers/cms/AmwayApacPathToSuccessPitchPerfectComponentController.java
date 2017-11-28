@@ -12,6 +12,8 @@ import com.amway.apac.storefront.controllers.ControllerConstants;
 
 /**
  * Controller for CMS {@link AmwayApacPathToSuccessPitchPerfectComponentModel}
+ *
+ * @author Parvesh Goyal
  */
 @Controller("AmwayApacPathToSuccessPitchPerfectComponentController")
 @RequestMapping(value = ControllerConstants.Actions.Cms.AmwayApacPathToSuccessPitchPerfectComponent)

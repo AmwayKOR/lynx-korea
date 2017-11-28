@@ -16,6 +16,8 @@ import com.amway.apac.storefront.controllers.ControllerConstants;
 
 /**
  * Controller for CMS {@link AmwayApacArtistryDealCarouselComponentModel}
+ *
+ * @author Parvesh Goyal
  */
 @Controller("AmwayApacArtistryDealCarouselComponentController")
 @RequestMapping(value = ControllerConstants.Actions.Cms.AmwayApacArtistryDealCarouselComponent)

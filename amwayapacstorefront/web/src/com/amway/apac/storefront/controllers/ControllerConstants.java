@@ -41,6 +41,7 @@ import com.amway.apac.storefront.components.model.AmwayApacPathwayToSuccessCompo
 import com.amway.apac.storefront.components.model.AmwayApacPlatinumABOComponentModel;
 import com.amway.apac.storefront.components.model.AmwayApacShopByCategoryComponentModel;
 import com.amway.apac.storefront.components.model.AmwayApacSupplementsComponentModel;
+import com.amway.apac.storefront.components.model.AmwayApacTermsBannerComponentModel;
 import com.amway.apac.storefront.components.model.AmwayApacToolsAndAdviceComponentModel;
 import com.amway.apac.storefront.components.model.AmwayApacYourOpportunityComponentModel;
 
@@ -107,6 +108,7 @@ public interface ControllerConstants
 			String AmwayApacNewProductComponent = _Prefix + AmwayApacNewProductComponentModel._TYPECODE + _Suffix; // NOSONAR
 			String AmwayApacSupplementsComponent = _Prefix + AmwayApacSupplementsComponentModel._TYPECODE + _Suffix; // NOSONAR
 			String AmwayApacYourOpportunityComponent = _Prefix + AmwayApacYourOpportunityComponentModel._TYPECODE + _Suffix; // NOSONAR
+			String AmwayApacTermsBannerComponent = _Prefix + AmwayApacTermsBannerComponentModel._TYPECODE + _Suffix; // NOSONAR
 		}
 	}
 

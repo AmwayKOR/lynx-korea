@@ -6,19 +6,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.amway.apac.storefront.components.model.AmwayApacJoinAmwayComponentModel;
+import com.amway.apac.storefront.components.model.AmwayApacTermsBannerComponentModel;
 import com.amway.apac.storefront.controllers.ControllerConstants;
 
 
 /**
- * Controller for CMS {@link AmwayApacJoinAmwayComponentModel}
+ * Controller for CMS {@link AmwayApacTermsBannerComponentModel}
  *
  * @author Parvesh Goyal
  */
-@Controller("AmwayApacJoinAmwayComponentController")
-@RequestMapping(value = ControllerConstants.Actions.Cms.AmwayApacJoinAmwayComponent)
-public class AmwayApacJoinAmwayComponentController
-		extends AmwayApacAbstractResponsiveBannerComponentController<AmwayApacJoinAmwayComponentModel>
+@Controller("AmwayApacTermsBannerComponentController")
+@RequestMapping(value = ControllerConstants.Actions.Cms.AmwayApacTermsBannerComponent)
+public class AmwayApacTermsBannerComponentController
+		extends AmwayApacAbstractResponsiveBannerComponentController<AmwayApacTermsBannerComponentModel>
 {
 
 	/**
@@ -32,7 +32,8 @@ public class AmwayApacJoinAmwayComponentController
 	 *           component
 	 */
 	@Override
-	protected void fillModel(final HttpServletRequest request, final Model model, final AmwayApacJoinAmwayComponentModel component)
+	protected void fillModel(final HttpServletRequest request, final Model model,
+			final AmwayApacTermsBannerComponentModel component)
 	{
 		populateData(model, component);
 	}

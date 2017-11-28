@@ -10,11 +10,11 @@
 
 <template:page pageTitle="${pageTitle}">
 	<div id="register-landing-page">
-		<div id="masthead" class="main-container">
-			<cms:pageSlot position="JoinAmwayContentSlot" var="component">
-				<cms:component component="${component}" />
-			</cms:pageSlot>
-		</div>
+
+		<cms:pageSlot position="JoinAmwayContentSlot" var="component">
+			<cms:component component="${component}" />
+		</cms:pageSlot>
+
 		<div class="container-fluid main-container small-wrap">
 			<cms:pageSlot position="WeAreAmwayContentSlot" var="component">
 				<cms:component component="${component}" />

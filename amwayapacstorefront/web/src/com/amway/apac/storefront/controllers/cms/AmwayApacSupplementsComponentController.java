@@ -12,6 +12,8 @@ import com.amway.apac.storefront.controllers.ControllerConstants;
 
 /**
  * Controller for CMS {@link AmwayApacSupplementsComponentModel}
+ *
+ * @author Parvesh Goyal
  */
 @Controller("AmwayApacSupplementsComponentController")
 @RequestMapping(value = ControllerConstants.Actions.Cms.AmwayApacSupplementsComponent)

@@ -12,6 +12,8 @@ import com.amway.apac.storefront.controllers.ControllerConstants;
 
 /**
  * Controller for CMS {@link AmwayApacCategoryTopBannerComponentModel}
+ *
+ * @author Parvesh Goyal
  */
 @Controller("AmwayApacCategoryTopBannerComponentController")
 @RequestMapping(value = ControllerConstants.Actions.Cms.AmwayApacCategoryTopBannerComponent)

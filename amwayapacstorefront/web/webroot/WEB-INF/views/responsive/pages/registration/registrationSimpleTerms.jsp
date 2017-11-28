@@ -4,11 +4,12 @@
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-
-<c:url var="registerHomeUrl" value="simple-terms" />
-<c:set var="hasVerifiedFlagSection" value="false" />
 <template:page pageTitle="${pageTitle}">
+
+	<c:url var="registerHomeUrl" value="/simple-terms" />
+	<c:set var="hasVerifiedFlagSection" value="false" />
 	<c:set var="radioCount" scope="request" value="${0}" />
+	
 	<cms:pageSlot position="TermsBanner" var="component">
 		<cms:component component="${component}" />
 	</cms:pageSlot>

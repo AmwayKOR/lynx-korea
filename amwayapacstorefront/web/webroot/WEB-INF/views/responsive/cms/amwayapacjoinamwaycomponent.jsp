@@ -17,8 +17,9 @@
 	</c:if>
 </c:forEach>
 
-
-<img class="pc js-responsive-image" data-media='{${imagerData}}' alt='${altText}' title='${altText}' />
-<div class="text small-wrap">
-	<cms:component component="${component.text}" />
+<div id="masthead" class="main-container">
+	<img class="pc js-responsive-image" data-media='{${imagerData}}' alt='${altText}' title='${altText}' />
+	<div class="text small-wrap">
+		<cms:component component="${component.text}" />
+	</div>
 </div>

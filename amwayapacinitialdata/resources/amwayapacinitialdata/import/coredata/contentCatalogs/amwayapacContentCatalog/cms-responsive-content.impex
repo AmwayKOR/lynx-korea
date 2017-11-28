@@ -798,6 +798,8 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active
 
 ;;ShoppingListQuickShopSearchBoxSlot;Shopping List Quick Shop Search Box Slot;              true
 ;;ShoppingCartQuickShopSearchBoxSlot;Shopping Cart Quick Shop Search Box Slot;              true
+;;TermsBannerContentSlot;terms banner component slot;              true
+
 
 # Bind Content Slots to Page Templates
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ProductDetailsPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
@@ -1327,6 +1329,8 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 ;;TopHeaderSlot-RegisterTerms;TopHeaderSlot;;TopHeaderSlot;true
 ;;BottomHeaderSlot-RegisterTerms;BottomHeaderSlot;;BottomHeaderSlot;true
 ;;Mobile-NavigationBar-RegisterTerms;MobileNavigationBar;;MobileNavigationBarSlot;true
+;;TermsBanner-RegisterTerms;TermsBanner;;TermsBannerContentSlot;true
+
 
 # Create Content Pages
 

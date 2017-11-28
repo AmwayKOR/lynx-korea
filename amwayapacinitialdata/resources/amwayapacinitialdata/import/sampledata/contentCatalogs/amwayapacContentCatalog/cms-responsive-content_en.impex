@@ -869,12 +869,19 @@ UPDATE AmwayApacMyAccountComponent;$contentCV[unique=true];uid[unique=true];desc
 
 ########## register terms pages
 
-UPDATE AmwayApacTermsBannerComponent;$contentCV[unique=true];uid[unique=true];headerText
-;;AmwayApacSimpleTermsBannerComponent;"ABO Registration"
-;;AmwayApacMultipleTermsBannerComponent;"ABO Registration"
+UPDATE AmwayApacTermsBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
+;;registerTermsBannerComponent;termsBannerImageMediaContainer
+
+INSERT_UPDATE Media;$contentCV[unique=true];mediaFormat(qualifier)[default=desktop];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;folder(qualifier)[default='images'];altText
+;;;termsBannerImageMedia;$siteResource/image-2.jpg;;termsBannerImageMedia;;"ABO Registration"
+
+INSERT_UPDATE MediaContainer;$contentCV[unique=true];qualifier[unique=true];$medias;
+;;termsBannerImageMediaContainer;termsBannerImageMedia
 
 UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content;
-;;bannerTermsDesc;"<p>Welcome to Amway! It’s your time to build a business of your own with a strong community of mentoring and support.</p>"
+;;bannerTermsDesc;"<h2 class=""uppercase"">ABO registration</h2><p>Welcome to Amway! It’s your time to build a business of your own with a strong community of mentoring and support.</p>"
+
+UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content;
 ;;termsTitle1;"Terms and Conditions for Electronic Commerce"
 ;;tabbedTermsTitle2;"Personal Information Collection / Use Agreement"
 ;;tabbedTermsTitle3;"Consent for the transfer of personal information abroad"
@@ -893,12 +900,6 @@ UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content;
 ;;termsDesc2;"<p class=""bold"">I agree to the Terms, Agreement and Remarks of Amway.E-commerce Terms of Use, Personal Information Collection / Usage Agreement, Consent for Transfer of Personal Information to Foreign Countries, ABO Agreement Agreement, ABO Notice. </p> <p class=""italic"">If you do not want to accept a batch, you can choose whether to agree individually for each item.</p>"
 ;;termsDesc3;"<p>In accordance with Article 15 of the ""Law on Visiting Sales, Etc."", public officials and teachers recognize that they can not register as multi-level salespersons, and I confirm that they are not applicable.</p>"
 ;;termsTabDesc1;"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>"
-
-INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;folder(qualifier)[default='images'];altText
-;;termsBannerImageMedia;$siteResource/image-2.jpg;;termsBannerImageMedia;;"ABO Registration"
-
-UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture
-;;termsBannerComponent;termsBannerImageMedia;
 
 ########## register terms pages ##########
 
