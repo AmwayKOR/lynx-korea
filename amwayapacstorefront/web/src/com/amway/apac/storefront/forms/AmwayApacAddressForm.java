@@ -2,8 +2,12 @@ package com.amway.apac.storefront.forms;
 
 import de.hybris.platform.acceleratorstorefrontcommons.forms.AddressForm;
 
+import com.amway.core.constants.GeneratedAmwaycoreConstants.Attributes.Address;
+
 
 /**
+ * Extending OOTB {@link Address} to add APAC specific attributes.
+ *
  * @author Shubham Goyal
  */
 public class AmwayApacAddressForm extends AddressForm
@@ -27,6 +31,4 @@ public class AmwayApacAddressForm extends AddressForm
 	{
 		this.email = email;
 	}
-
-
 }

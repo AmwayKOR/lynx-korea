@@ -119,5 +119,4 @@ ACC.billingshipping = {
 
         }); 
 	}
-
 };

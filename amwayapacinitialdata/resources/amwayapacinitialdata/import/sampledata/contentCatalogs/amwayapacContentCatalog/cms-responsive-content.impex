@@ -906,7 +906,7 @@ INSERT_UPDATE AmwayApacAccountProfileBarLinkComponent;$contentCV[unique=true];ui
 ;;autoRenewalPBMyAccountLinkComponent;Auto Renewal - Profile Bar- Jump to Link;/;autoRenewalPBMyAccountLinkComponent;;;;
 ;;contractsPBMyAccountLinkComponent;Contracts - Profile Bar- Jump to Link;/;contractsPBMyAccountLinkComponent;;;;
 ;;editProfilePBMyAccountLinkComponent;Edit Profile - Profile Bar- Jump to Link;/;editProfilePBMyAccountLinkComponent;;;;
-;;billingShippingPBMyAccountLinkComponent;Billing Shipping - Profile Bar- Jump to Link;/my-account/billingshipping;billingShippingPBMyAccountLinkComponent;;;;
+;;billingShippingPBMyAccountLinkComponent;Billing Shipping - Profile Bar- Jump to Link;/my-account/billing-shipping;billingShippingPBMyAccountLinkComponent;;;;
 
 INSERT_UPDATE AmwayApacMyAccountComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
 ;;amwayApacMyAccountBusinessInformationComponent;Business Information & Upline;amwayApacMyAccountBusinessInformationComponent
@@ -923,7 +923,7 @@ INSERT_UPDATE AmwayApacMyAccountComponent;$contentCV[unique=true];uid[unique=tru
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
 ;;BodyContentBillingShippingSlot;Body Content Slot for Account Billing & Shipping;true;AccountBillingShippingComponent;;;
 
-INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='billingshipping'];contentSlot(uid,$contentCV)[unique=true];;;
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='billing-shipping'];contentSlot(uid,$contentCV)[unique=true];;;
 ;;BodyContent-billingShipping;BodyContent;;BodyContentBillingShippingSlot;;;
 
 INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;actions(uid,$contentCV);&componentRef

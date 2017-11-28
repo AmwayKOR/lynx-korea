@@ -1345,7 +1345,7 @@ INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTe
 ;;category-landing-page;Category Landing Page;CategoryLandingPageTemplate;/category-landing-page
 ;;content-article-pages;Content Article Pages;ContentArticlePagesTemplate;/content-article-pages
 ;;register-landing-page;Register;RegisterLandingPageTemplate;/register-landing-page
-;;billingshipping;Billing Shipping Page;AccountPageTemplate;billingshipping
+;;billing-shipping;Billing Shipping Page;AccountPageTemplate;billing-shipping
 ;;business-information;Business Information Page;AccountPageTemplate;/business-information
 
 # Simple Content Pages

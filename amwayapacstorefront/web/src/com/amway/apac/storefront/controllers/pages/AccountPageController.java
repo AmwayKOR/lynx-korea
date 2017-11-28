@@ -105,7 +105,7 @@ public class AccountPageController extends AbstractSearchPageController
 	private static final String COUNTRY_ATTR = "country";
 	private static final String REGIONS_ATTR = "regions";
 	private static final String MY_ACCOUNT_ADDRESS_BOOK_URL = "/my-account/address-book";
-	private static final String MY_ACCOUNT_BILLING_SHIPPING_URL = "/my-account/billingshipping";
+	private static final String MY_ACCOUNT_BILLING_SHIPPING_URL = "/my-account/billing-shipping";
 	// Internal Redirects
 	private static final String REDIRECT_TO_ADDRESS_BOOK_PAGE = REDIRECT_PREFIX + MY_ACCOUNT_ADDRESS_BOOK_URL;
 	private static final String REDIRECT_TO_PAYMENT_INFO_PAGE = REDIRECT_PREFIX + "/my-account/payment-details";
@@ -135,7 +135,7 @@ public class AccountPageController extends AbstractSearchPageController
 	private static final String PAYMENT_DETAILS_CMS_PAGE = "payment-details";
 	private static final String ORDER_HISTORY_CMS_PAGE = "orders";
 	private static final String ORDER_DETAIL_CMS_PAGE = "order";
-	private static final String BILLING_SHIPPING_CMS_PAGE = "billingshipping";
+	private static final String BILLING_SHIPPING_CMS_PAGE = "billing-shipping";
 	private static final String BUSINESS_INFORMATION_CMS_PAGE = "business-information";
 
 	private static final Logger LOG = Logger.getLogger(AccountPageController.class);
@@ -290,7 +290,7 @@ public class AccountPageController extends AbstractSearchPageController
 		return getViewForPage(model);
 	}
 
-	@RequestMapping(value = "/billingshipping", method = RequestMethod.GET)
+	@RequestMapping(value = "/billing-shipping", method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String billingShipping(final Model model) throws CMSItemNotFoundException
 	{

@@ -13,7 +13,7 @@
                 <account:accountProfileBar />
             </div>
         </div>
-        <div class="account-section">
+        <div class="row">
             <cms:pageSlot position="BodyContent" var="feature" element="div">
                 <cms:component component="${feature}" />
             </cms:pageSlot>
