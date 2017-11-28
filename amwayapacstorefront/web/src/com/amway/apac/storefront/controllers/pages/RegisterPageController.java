@@ -10,6 +10,7 @@
  */
 package com.amway.apac.storefront.controllers.pages;
 
+import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractRegisterPageController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.acceleratorstorefrontcommons.forms.RegisterForm;
@@ -51,6 +52,9 @@ public class RegisterPageController extends AbstractRegisterPageController
 
 	@Resource(name = "termValidator")
 	private AmwayApacTermValidator termValidator;
+
+	@Resource(name = "registrationBreadcrumbBuilder")
+	private ResourceBreadcrumbBuilder registrationBreadcrumbBuilder;
 
 	protected AmwayApacTermValidator getTermValidator()
 	{
@@ -94,7 +98,7 @@ public class RegisterPageController extends AbstractRegisterPageController
 	@RequestMapping(value = "/newcustomer", method = RequestMethod.POST)
 	public String doRegister(final RegisterForm form, final BindingResult bindingResult, final Model model,
 			final HttpServletRequest request, final HttpServletResponse response, final RedirectAttributes redirectModel)
-					throws CMSItemNotFoundException
+			throws CMSItemNotFoundException
 	{
 		getRegistrationValidator().validate(form, bindingResult);
 		return processRegisterUserRequest(null, form, bindingResult, model, request, response, redirectModel);
@@ -103,7 +107,9 @@ public class RegisterPageController extends AbstractRegisterPageController
 	@RequestMapping(value = "/simple-terms", method = RequestMethod.GET)
 	public String simpleTerms(final Model model) throws CMSItemNotFoundException
 	{
-		model.addAttribute("termForm", new AmwayApacTermForm());
+		model.addAttribute(ControllerConstants.ModelParameters.TERM_FORM_STRING, new AmwayApacTermForm());
+		model.addAttribute(ControllerConstants.GeneralConstants.BREADCRUMBS_ATTR, getRegistrationBreadcrumbBuilder()
+				.getBreadcrumbs((ControllerConstants.GeneralConstants.REGISTER_SIMPLE_TERMS_PAGE_BREADCRUMB_KEY)));
 		setCMSPage(model, SIMPLE_TERM_PAGE);
 		return ControllerConstants.Views.Pages.Registration.RegistrationSimpleTerms;
 	}
@@ -120,7 +126,7 @@ public class RegisterPageController extends AbstractRegisterPageController
 	{
 
 		getTermValidator().validate(termForm, bindingResult);
-		model.addAttribute("termForm", termForm);
+		model.addAttribute(ControllerConstants.ModelParameters.TERM_FORM_STRING, termForm);
 
 		if (bindingResult.hasErrors())
 		{
@@ -138,7 +144,7 @@ public class RegisterPageController extends AbstractRegisterPageController
 	@RequestMapping(value = "/multiple-terms", method = RequestMethod.GET)
 	public String multipleTerms(final Model model) throws CMSItemNotFoundException
 	{
-		model.addAttribute("termForm", new AmwayApacTermForm());
+		model.addAttribute(ControllerConstants.ModelParameters.TERM_FORM_STRING, new AmwayApacTermForm());
 		return setCMSPage(model, MULTIPLE_TERM_PAGE);
 	}
 
@@ -154,7 +160,7 @@ public class RegisterPageController extends AbstractRegisterPageController
 	{
 
 		getTermValidator().validate(termForm, bindingResult);
-		model.addAttribute("termForm", termForm);
+		model.addAttribute(ControllerConstants.ModelParameters.TERM_FORM_STRING, termForm);
 		if ((bindingResult.hasErrors()) || (BooleanUtils.isNotTrue(termForm.getVerified())))
 		{
 			GlobalMessages.addErrorMessage(model, FORM_GLOBAL_ERROR);
@@ -179,4 +185,13 @@ public class RegisterPageController extends AbstractRegisterPageController
 	{
 		return getPageTitleResolver().resolveHomePageTitle(string);
 	}
+
+	/**
+	 * @return the registrationBreadcrumbBuilder
+	 */
+	public ResourceBreadcrumbBuilder getRegistrationBreadcrumbBuilder()
+	{
+		return registrationBreadcrumbBuilder;
+	}
+
 }

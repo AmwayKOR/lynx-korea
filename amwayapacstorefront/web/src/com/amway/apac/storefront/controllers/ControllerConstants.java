@@ -374,6 +374,11 @@ public interface ControllerConstants
 		 * String constant linkUrl
 		 */
 		String SECONDARY_MEDIAS_STRING = "secondaryMedias";
+
+		/**
+		 * String termForm
+		 */
+		String TERM_FORM_STRING = "termForm";
 	}
 
 	/**
@@ -398,6 +403,11 @@ public interface ControllerConstants
 		 * Breadcrumbs Model attribute
 		 */
 		String BREADCRUMBS_ATTR = "breadcrumbs";
+
+		/**
+		 * Shopping list details breadcrumb key
+		 */
+		String REGISTER_SIMPLE_TERMS_PAGE_BREADCRUMB_KEY = "register.simple.terms.page.breadcrumb";
 
 		/**
 		 * Shopping list details breadcrumb key
