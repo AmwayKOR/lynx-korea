@@ -19,7 +19,7 @@
 
 	<group qualifier="editorial" visible="true" initially-opened="false">
 		<label key="config.general.editorial" />
-		<property qualifier="AmwayApacArtistryNewLuxuryCarouselComponent.shopnow">
+		<property qualifier="AmwayApacMyAccountComponent.iconClass">
 			<parameter>
 				<name>editable</name>
 			    <value>true</value>
@@ -33,7 +33,7 @@
 			    <value>true</value>
 			</parameter>
 		</property>
-		<property qualifier="AmwayApacArtistryNewLuxuryCarouselComponent.title">
+		<property qualifier="AmwayApacMyAccountComponent.title">
 			<parameter>
 				<name>editable</name>
 			    <value>true</value>
@@ -47,7 +47,7 @@
 			    <value>true</value>
 			</parameter>
 		</property>
-		<property qualifier="AmwayApacArtistryNewLuxuryCarouselComponent.description">
+		<property qualifier="AmwayApacMyAccountComponent.description">
 			<parameter>
 				<name>editable</name>
 			    <value>true</value>
@@ -61,6 +61,7 @@
 			    <value>true</value>
 			</parameter>
 		</property>
+		
 	</group>
 
 	<group qualifier="visibility" visible="true" initially-opened="false">

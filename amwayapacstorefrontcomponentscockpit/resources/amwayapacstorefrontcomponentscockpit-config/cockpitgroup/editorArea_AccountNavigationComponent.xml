@@ -19,51 +19,9 @@
 
 	<group qualifier="editorial" visible="true" initially-opened="false">
 		<label key="config.general.editorial" />
-		<property qualifier="AmwayApacLatestNewsComponent.title">
-			<parameter>
-				<name>editable</name>
-			    <value>true</value>
-			</parameter>
-			<parameter>
-			    <name>showEditButton</name>
-			    <value>true</value>
-			</parameter>
-			<parameter>
-			    <name>allowCreate</name>
-			    <value>true</value>
-			</parameter>
-
-		</property>
-		<property qualifier="AmwayApacLatestNewsComponent.news">
-			<parameter>
-				<name>editable</name>
-			    <value>true</value>
-			</parameter>
-			<parameter>
-			    <name>showEditButton</name>
-			    <value>true</value>
-			</parameter>
-			<parameter>
-			    <name>allowCreate</name>
-			    <value>true</value>
-			</parameter>
-
-		</property>
-		<property qualifier="AmwayApacLatestNewsComponent.link">
-			<parameter>
-				<name>editable</name>
-			    <value>true</value>
-			</parameter>
-			<parameter>
-			    <name>showEditButton</name>
-			    <value>true</value>
-			</parameter>
-			<parameter>
-			    <name>allowCreate</name>
-			    <value>true</value>
-			</parameter>
-
-		</property>
+		<property qualifier="AccountNavigationComponent.title"/>
+		<property qualifier="AccountNavigationComponent.navigationNode"/>
+		<property qualifier="AccountNavigationComponent.styleClass"/>
 	</group>
 
 	<group qualifier="visibility" visible="true" initially-opened="false">

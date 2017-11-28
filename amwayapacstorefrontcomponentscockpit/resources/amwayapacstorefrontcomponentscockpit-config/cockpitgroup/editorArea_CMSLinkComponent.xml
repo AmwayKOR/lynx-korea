@@ -19,7 +19,19 @@
 
 	<group qualifier="editorial" visible="true" initially-opened="false">
 		<label key="config.general.editorial" />
-		<property qualifier="AmwayApacCategoryTopBannerComponent.sectionTitle">
+		<property qualifier="CMSLinkComponent.linkName"/>
+		<property qualifier="CMSLinkComponent.external"/>
+		<property qualifier="CMSLinkComponent.contentPage">
+			<parameter>
+				<name>predefinedValuesStrategy</name>
+				<value>cmsItemPredefinedValuesStrategy</value>
+			</parameter>
+		</property>
+		<property qualifier="CMSLinkComponent.product"/>
+		<property qualifier="CMSLinkComponent.category"/>
+		<property qualifier="CMSLinkComponent.url"/>
+		<property qualifier="CMSLinkComponent.target"/>
+		<property qualifier="AmwayApacAbstractTextLinkImageComponent.links">
 			<parameter>
 				<name>editable</name>
 			    <value>true</value>
@@ -33,21 +45,7 @@
 			    <value>true</value>
 			</parameter>
 		</property>
-		<property qualifier="AmwayApacCategoryTopBannerComponent.simpleBanners">
-			<parameter>
-				<name>editable</name>
-			    <value>true</value>
-			</parameter>
-			<parameter>
-			    <name>showEditButton</name>
-			    <value>true</value>
-			</parameter>
-			<parameter>
-			    <name>allowCreate</name>
-			    <value>true</value>
-			</parameter>
-		</property>
-		<property qualifier="AmwayApacCategoryTopBannerComponent.specialComponents">
+		<property qualifier="AmwayApacAbstractTextLinkImageComponent.toolAdviceLinks">
 			<parameter>
 				<name>editable</name>
 			    <value>true</value>
@@ -70,6 +68,10 @@
 				<name>allowCreate</name>
 				<value>true</value>
 			</parameter>
+			<parameter>
+				<name>excludeCreateTypes</name>
+				<value>CMSUserRestriction</value>
+			</parameter>
 		</property>
 		<property qualifier="AbstractCMSComponent.onlyOneRestrictionMustApply"/>
 	</group>
@@ -83,9 +85,9 @@
 		<property qualifier="Item.creationTime" />
 		<property qualifier="Item.modifiedtime" />
 	</group>
-
-	<custom-group
-		class="de.hybris.platform.cockpit.services.config.impl.UnassignedEditorSectionConfiguration"
+	
+	<custom-group 
+		class="de.hybris.platform.cockpit.services.config.impl.UnassignedEditorSectionConfiguration" 
 		qualifier="unassigned"
 		initially-opened="false"
 		visible="false">

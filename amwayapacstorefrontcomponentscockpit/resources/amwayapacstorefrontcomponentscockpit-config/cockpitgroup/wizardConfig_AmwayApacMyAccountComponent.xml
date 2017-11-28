@@ -18,13 +18,9 @@
 		</group>
 		<group qualifier="Properties" visible="true" initially-opened="true">
 			<label key="config.wizardConfig.properties" />
-			<property qualifier="AbstractBannerComponent.urlLink"/>
-			<property qualifier="AbstractBannerComponent.external"/>
-			<property qualifier="SimpleBannerComponent.simpleBanners"/>
-			<property qualifier="SimpleBannerComponent.brandBanners"/>
-			<property qualifier="AbstractBannerComponent.media" editorCode="simpleMediaReferenceSelector">
-				<parameter name="predefinedValuesStrategy" value="imageMediaPredefinedValuesStrategy"/>
-			</property>
+			<property qualifier="AmwayApacMyAccountComponent.iconClass"/>
+			<property qualifier="AmwayApacMyAccountComponent.title"/>
+			<property qualifier="AmwayApacMyAccountComponent.description"/>
 		</group>
 	</displayed-properties>
 </wizard-config>

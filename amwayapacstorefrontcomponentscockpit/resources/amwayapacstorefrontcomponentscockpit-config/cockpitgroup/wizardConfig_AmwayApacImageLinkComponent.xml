@@ -18,13 +18,20 @@
 		</group>
 		<group qualifier="Properties" visible="true" initially-opened="true">
 			<label key="config.wizardConfig.properties" />
-			<property qualifier="AbstractBannerComponent.urlLink"/>
-			<property qualifier="AbstractBannerComponent.external"/>
-			<property qualifier="SimpleBannerComponent.simpleBanners"/>
-			<property qualifier="SimpleBannerComponent.brandBanners"/>
-			<property qualifier="AbstractBannerComponent.media" editorCode="simpleMediaReferenceSelector">
-				<parameter name="predefinedValuesStrategy" value="imageMediaPredefinedValuesStrategy"/>
-			</property>
+			<property qualifier="CMSLinkComponent.linkName"/>
+			<property qualifier="CMSLinkComponent.external"/>
+			<property qualifier="CMSLinkComponent.contentPage">
+			 <parameter>
+				<name>predefinedValuesStrategy</name>
+				<value>cmsItemPredefinedValuesStrategy</value>
+			</parameter>
+		</property>
+			<property qualifier="CMSLinkComponent.product"/>			
+			<property qualifier="CMSLinkComponent.url"/>			
+			<property qualifier="CMSLinkComponent.target"/>			
+			<property qualifier="CMSLinkComponent.category"/>	
+			<property qualifier="CMSLinkComponent.links"/>	
+			<property qualifier="AmwayApacImageLinkComponent.image"/>			
 		</group>
 	</displayed-properties>
 </wizard-config>

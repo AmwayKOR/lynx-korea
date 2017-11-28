@@ -18,13 +18,19 @@
 		</group>
 		<group qualifier="Properties" visible="true" initially-opened="true">
 			<label key="config.wizardConfig.properties" />
-			<property qualifier="AbstractBannerComponent.urlLink"/>
-			<property qualifier="AbstractBannerComponent.external"/>
-			<property qualifier="SimpleBannerComponent.simpleBanners"/>
-			<property qualifier="SimpleBannerComponent.brandBanners"/>
-			<property qualifier="AbstractBannerComponent.media" editorCode="simpleMediaReferenceSelector">
-				<parameter name="predefinedValuesStrategy" value="imageMediaPredefinedValuesStrategy"/>
-			</property>
+			<property qualifier="FooterComponent.title1"/>
+			<property qualifier="FooterComponent.title2"/>
+			<property qualifier="FooterComponent.amwayLogoBanner"/>
+			<property qualifier="FooterComponent.connectionsBanner"/>	
+			<property qualifier="FooterComponent.downloadAppStoreBanner"/>
+			<property qualifier="FooterComponent.copyRightTitle"/>
+			<property qualifier="FooterComponent.footerBanner"/>
+			<property qualifier="FooterComponent.brandBanners"/>		
+			<property qualifier="FooterComponent.links"/>
+			<property qualifier="FooterComponent.specialComponents"/>	
+			<property qualifier="FooterComponent.notice"/>
+	    	<property qualifier="FooterComponent.wrapAfter"/>
+		    <property qualifier="FooterComponent.showLanguageCurrency"/>		
 		</group>
 	</displayed-properties>
 </wizard-config>
