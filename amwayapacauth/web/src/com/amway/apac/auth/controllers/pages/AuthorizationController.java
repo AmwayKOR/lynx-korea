@@ -91,7 +91,15 @@ public class AuthorizationController extends AbstractLoginPageController
 
 		model.addAttribute("response_type", request.getParameter("response_type"));
 		model.addAttribute("client_id", request.getParameter("client_id"));
-		model.addAttribute("redirect_uri", referer);
+		final String redirectUrI = request.getParameter("redirect_uri");
+		if (StringUtils.isNotBlank(redirectUrI))
+		{
+			model.addAttribute("redirect_uri", redirectUrI);
+		}
+		else
+		{
+			model.addAttribute("redirect_uri", referer);
+		}
 
 		return getDefaultLoginPage(loginError, session, model);
 	}
