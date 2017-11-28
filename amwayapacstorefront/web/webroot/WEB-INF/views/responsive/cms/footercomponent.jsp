@@ -4,17 +4,19 @@
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
 <%@ taglib prefix="footer" tagdir="/WEB-INF/tags/responsive/common/footer"%>
 
-<div class="quick-links">
-	<div class="container">
-		<div class="row">
-			<footer:footerNavigation/>
-			<footer:footerQuickLinks/>
+<div id="quick">
+	<div class="quick-links">
+		<div class="container">
+			<div class="row">
+				<footer:footerNavigation />
+				<footer:footerQuickLinks />
+			</div>
 		</div>
 	</div>
 </div>
 
 <footer>
 	<div class="footer">
-		<footer:footerCopyrightTermsSection/>
+		<footer:footerCopyrightTermsSection />
 	</div>
 </footer>
