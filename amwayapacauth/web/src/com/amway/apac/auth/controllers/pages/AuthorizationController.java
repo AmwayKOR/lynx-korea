@@ -13,6 +13,10 @@ package com.amway.apac.auth.controllers.pages;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractLoginPageController;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
+import de.hybris.platform.jalo.JaloSession;
+
+import java.io.IOException;
+import java.util.Date;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -27,8 +31,10 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.amway.apac.auth.controllers.ControllerConstants;
+import com.amway.apac.auth.security.AmwayJWTTokenProvider;
 
 
 /**
@@ -39,6 +45,9 @@ import com.amway.apac.auth.controllers.ControllerConstants;
 public class AuthorizationController extends AbstractLoginPageController
 {
 	private HttpSessionRequestCache httpSessionRequestCache;
+
+	@Resource(name = "jWTokenProvider")
+	private AmwayJWTTokenProvider jwtTokenProvider;
 
 	@Override
 	protected String getView()
@@ -87,6 +96,60 @@ public class AuthorizationController extends AbstractLoginPageController
 		return getDefaultLoginPage(loginError, session, model);
 	}
 
+	@ResponseBody
+	@RequestMapping(method = RequestMethod.GET, value = "/sessions/me")
+	public String doValidateSession(@RequestHeader(value = "referer", required = false) final String referer,
+			final Model model,
+			final HttpServletRequest request, final HttpServletResponse response, final HttpSession session)
+			throws CMSItemNotFoundException, IOException
+	{
+		final JaloSession jaloSession = (JaloSession) session.getAttribute("jalosession");
+		final String userId = jaloSession.getUser().getUid();
+		if (!"anonymous".equals(userId))
+		{
+			return jwtTokenProvider.createJWToken(userId, new Date(session.getCreationTime()));
+		}
+		response.sendError(HttpServletResponse.SC_NOT_FOUND);
+		return null;
+	}
+
+	@ResponseBody
+	@RequestMapping(method = RequestMethod.POST, value = "/sessions/me/lifecycle/refresh")
+	public String doRefreshSession(@RequestHeader(value = "referer", required = false) final String referer,
+			final Model model,
+			final HttpServletRequest request, final HttpServletResponse response, final HttpSession session)
+			throws CMSItemNotFoundException, IOException
+	{
+		final JaloSession jaloSession = (JaloSession) session.getAttribute("jalosession");
+		final String userId = jaloSession.getUser().getUid();
+		if (!"anonymous".equals(userId))
+		{
+
+			return jwtTokenProvider.createJWToken(userId, new Date());
+		}
+		response.sendError(HttpServletResponse.SC_NOT_FOUND);
+		return null;
+	}
+
+	@ResponseBody
+	@RequestMapping(method = RequestMethod.DELETE, value = "/sessions/me")
+	public String doInValidateSession(@RequestHeader(value = "referer", required = false) final String referer,
+			final Model model,
+			final HttpServletRequest request, final HttpServletResponse response, final HttpSession session)
+			throws CMSItemNotFoundException, IOException
+	{
+		final JaloSession jaloSession = (JaloSession) session.getAttribute("jalosession");
+		final String userId = jaloSession.getUser().getUid();
+		if (!"anonymous".equals(userId))
+		{
+			response.setStatus(response.SC_NO_CONTENT);
+			session.invalidate();
+			return null;
+		}
+		response.sendError(HttpServletResponse.SC_NOT_FOUND);
+		return null;
+	}
+
 	protected void storeReferer(final String referer, final HttpServletRequest request, final HttpServletResponse response)
 	{
 		if (StringUtils.isNotBlank(referer) && !StringUtils.endsWith(referer, "/login")
@@ -94,5 +157,14 @@ public class AuthorizationController extends AbstractLoginPageController
 		{
 			httpSessionRequestCache.saveRequest(request, response);
 		}
+	}
+
+	/**
+	 * @param jwtTokenProvider
+	 *           the jwtTokenProvider to set
+	 */
+	public void setJwtTokenProvider(final AmwayJWTTokenProvider jwtTokenProvider)
+	{
+		this.jwtTokenProvider = jwtTokenProvider;
 	}
 }

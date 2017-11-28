@@ -11,25 +11,14 @@
 package com.amway.apac.auth.handler;
 
 import de.hybris.platform.acceleratorservices.uiexperience.UiExperienceService;
-import de.hybris.platform.acceleratorstorefrontcommons.security.StorefrontAuthenticationSuccessHandler;
 import de.hybris.platform.core.Constants;
-import de.hybris.platform.util.Config;
-
-import io.jsonwebtoken.JwtBuilder;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 
 import java.io.IOException;
-import java.security.Key;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
-import javax.crypto.spec.SecretKeySpec;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.bind.DatatypeConverter;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
@@ -44,9 +33,7 @@ import org.springframework.security.oauth2.provider.ClientDetails;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 
-import com.amway.core.model.AmwayAccountModel;
-import com.amway.lynxcore.strategies.LynxCustomerNameStrategy;
-import com.amway.lynxfacades.customer.LynxCustomerFacade;
+import com.amway.apac.auth.security.AmwayJWTTokenProvider;
 
 
 /**
@@ -56,21 +43,12 @@ import com.amway.lynxfacades.customer.LynxCustomerFacade;
  */
 public class AmwayStorefrontAuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler
 {
-	/**
-	 * 
-	 */
-	private static final String AMWAY_IDP_JWT_SECRET_KEY = "amway.idp.jwt.secret.key";
-	/**
-	 * 
-	 */
-	private static final String AMWAY_IDP_JWT_TTLMILES = "amway.idp.jwt.ttlmiles";
-	private LynxCustomerFacade lynxCustomerFacade;
-	private LynxCustomerNameStrategy customerNameStrategy;
 	private UiExperienceService uiExperienceService;
 	private ClientDetailsService clientDetailsService;
+	private AmwayJWTTokenProvider jwtTokenProvider;
 	private GrantedAuthority adminAuthority = new SimpleGrantedAuthority("ROLE_" + Constants.USER.ADMIN_USERGROUP.toUpperCase());
 
-	private static final Logger LOG = Logger.getLogger(StorefrontAuthenticationSuccessHandler.class);
+	private static final Logger LOG = Logger.getLogger(AmwayStorefrontAuthenticationSuccessHandler.class);
 
 	@Override
 	public void onAuthenticationSuccess(final HttpServletRequest request, final HttpServletResponse response,
@@ -82,25 +60,18 @@ public class AmwayStorefrontAuthenticationSuccessHandler extends SavedRequestAwa
 			final String redirectURL = request.getParameter("redirect_uri");
 			final String clientID = request.getParameter("client_id");
 
-			final String amwayAccountId = getAmwayAccountId((String) authentication.getPrincipal());
+			final ClientDetails client = clientDetailsService.loadClientByClientId(clientID);
 
-			final AmwayAccountModel amwayAccount = lynxCustomerFacade.getAmwayAccountById(amwayAccountId);
-
-			if (null != amwayAccount)
+			if (null != client)
 			{
-				final ClientDetails client = clientDetailsService.loadClientByClientId(clientID);
-
-				if (null != client)
+				if ("token".equals(responseType))
 				{
-					if ("token".equals(responseType))
-					{
-						final String token = createJWT(amwayAccount);
-						request.setAttribute("JWT", token);
+					final String token = jwtTokenProvider.createJWToken(((String) authentication.getPrincipal()), new Date());
+					request.setAttribute("JWT", token);
 
-						if (null == redirectURL)
-						{
-							throw new InvalidRequestException("Cannot approve request when no redirect URI is provided.");
-						}
+					if (null == redirectURL)
+					{
+						throw new InvalidRequestException("Cannot approve request when no redirect URI is provided.");
 					}
 				}
 			}
@@ -110,69 +81,6 @@ public class AmwayStorefrontAuthenticationSuccessHandler extends SavedRequestAwa
 			LOG.error(exp.getMessage());
 		}
 		super.onAuthenticationSuccess(request, response, authentication);
-	}
-
-	/**
-	 * @param principal
-	 * @return
-	 */
-	private String getAmwayAccountId(final String amwayAccountId)
-	{
-		if (amwayAccountId.contains("-"))
-		{
-			return amwayAccountId.substring((amwayAccountId.indexOf("-") + 1), (amwayAccountId.lastIndexOf("-")));
-		}
-		return amwayAccountId;
-	}
-
-	private String createJWT(final AmwayAccountModel amwayAccount)
-	{
-		final Long ttlMillis = Long.valueOf(Config.getParameter(AMWAY_IDP_JWT_TTLMILES));
-		//The JWT signature algorithm we will be using to sign the token
-		final SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
-
-		final long nowMillis = System.currentTimeMillis();
-		final Date now = new Date(nowMillis);
-
-		//We will sign our JWT with our ApiKey secret
-		final byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(Config.getParameter(AMWAY_IDP_JWT_SECRET_KEY));
-		final Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
-		final Map<String, Object> claims = new HashMap<>();
-		claims.put("name", amwayAccount.getName());
-		claims.put("locale", amwayAccount.getAccountPreferences().getPreferedLanguage().getIsocode());
-		claims.put("preferred_username", amwayAccount.getPrimaryParty().getCustomerID());
-
-		final String[] names = customerNameStrategy.splitName(amwayAccount.getPrimaryParty().getName());
-
-		if (null != names && names.length > 0)
-		{
-			claims.put("given_name", names[0]);
-		}
-
-		if (null != names && names.length == 2)
-		{
-			claims.put("family_name", names[1]);
-		}
-
-		claims.put("auth_time", Long.valueOf(new Date().getTime()));
-
-		//Let's set the JWT Claims
-		final JwtBuilder builder = Jwts.builder().setId(amwayAccount.getCode())
-				.setIssuedAt(now)
-				.setSubject("435473587345863475989090u")
-				.setIssuer("/oauth2/default/v1/authorize")
-				.addClaims(claims)
-				.signWith(signatureAlgorithm, signingKey);
-
-		//if it has been specified, let's add the expiration
-		if (ttlMillis >= 0)
-		{
-			final long expMillis = nowMillis + ttlMillis;
-			final Date exp = new Date(expMillis);
-			builder.setExpiration(exp);
-		}
-		//Builds the JWT and serializes it to a compact, URL-safe string
-		return builder.compact();
 	}
 
 	protected void invalidateSession(final HttpServletRequest request, final HttpServletResponse response) throws IOException
@@ -250,21 +158,11 @@ public class AmwayStorefrontAuthenticationSuccessHandler extends SavedRequestAwa
 	}
 
 	/**
-	 * @param lynxCustomerFacade
-	 *           the lynxCustomerFacade to set
+	 * @param jwtTokenProvider
+	 *           the jwtTokenProvider to set
 	 */
-	public void setLynxCustomerFacade(final LynxCustomerFacade lynxCustomerFacade)
+	public void setJwtTokenProvider(final AmwayJWTTokenProvider jwtTokenProvider)
 	{
-		this.lynxCustomerFacade = lynxCustomerFacade;
+		this.jwtTokenProvider = jwtTokenProvider;
 	}
-
-	/**
-	 * @param customerNameStrategy
-	 *           the customerNameStrategy to set
-	 */
-	public void setCustomerNameStrategy(final LynxCustomerNameStrategy customerNameStrategy)
-	{
-		this.customerNameStrategy = customerNameStrategy;
-	}
-
 }
