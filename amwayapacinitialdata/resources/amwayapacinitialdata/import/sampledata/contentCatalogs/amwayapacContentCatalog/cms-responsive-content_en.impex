@@ -867,6 +867,8 @@ UPDATE AmwayApacMyAccountComponent;$contentCV[unique=true];uid[unique=true];desc
 ########## My Account Page ##########
 
 
+########## register terms pages
+
 UPDATE AmwayApacTermsBannerComponent;$contentCV[unique=true];uid[unique=true];headerText
 ;;AmwayApacSimpleTermsBannerComponent;"ABO Registration"
 ;;AmwayApacMultipleTermsBannerComponent;"ABO Registration"
@@ -897,6 +899,9 @@ INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=
 
 UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture
 ;;termsBannerComponent;termsBannerImageMedia;
+
+########## register terms pages ##########
+
 
 # CMS ProductReferences Components
 UPDATE ProductReferencesComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang]

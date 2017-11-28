@@ -326,6 +326,93 @@
 			</itemtype>
 		</typegroup>
 
+		<typegroup name="TermsComponents">
+			<itemtype code="AmwayApacAbstractTermsComponent" extends="SimpleCMSComponent"
+				autocreate="true" generate="true" abstract="true"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacAbstractTermsComponent">
+				<description>Abstract Terms Component</description>
+				<attributes>
+					<attribute qualifier="title" generate="true" autocreate="true"
+						type="CMSParagraphComponent">
+						<description>Title text for the terms component.</description>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="radio1Description" generate="true"
+						autocreate="true" type="localized:java.lang.String">
+						<description>First radio button label</description>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="radio2Description" generate="true"
+						autocreate="true" type="localized:java.lang.String">
+						<description>Second radio button label</description>
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="AmwayApacSimpleTermsComponent" extends="AmwayApacAbstractTermsComponent"
+				autocreate="true" generate="true"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacSimpleTermsComponent">
+				<description>Simple Terms Component</description>
+				<attributes>
+					<attribute qualifier="content" generate="true"
+						autocreate="true" type="CMSParagraphComponent">
+						<description>The content of terms.</description>
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="AmawayApacSimpleContainerTermsComponent"
+				extends="AmwayApacAbstractTermsComponent" autocreate="true"
+				generate="true"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmawayApacSimpleContainerTermsComponent">
+				<description>Multiple Terms Component</description>
+				<attributes>
+					<attribute qualifier="content" generate="true"
+						autocreate="true" type="CMSParagraphComponent">
+						<description>The content of terms.</description>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="maxHeight" type="boolean">
+						<persistence type="property" />
+						<description>Decides whether to fix the height of the component.</description>
+						<defaultvalue>Boolean.TRUE</defaultvalue>
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="AmwayApacTabbedTermsComponent" extends="AmwayApacAbstractTermsComponent"
+				autocreate="true" generate="true"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacTabbedTermsComponent">
+				<description>Tabbed Terms Component</description>
+			</itemtype>
+
+			<itemtype code="AmwayApacTermsTabComponent" extends="SimpleCMSComponent"
+				autocreate="true" generate="true"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacTermsTabComponent">
+				<description>Represents one tab in the tabbed component.</description>
+				<attributes>
+					<attribute qualifier="title" generate="true" autocreate="true"
+						type="CMSParagraphComponent">
+						<description>Title of one tab.</description>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="description" generate="true"
+						autocreate="true" type="CMSParagraphComponent">
+						<description>Terms content of the tab.</description>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="colwidth" generate="true"
+						autocreate="true" type="java.lang.Integer">
+						<description>Decides the number of columns for the tab.</description>
+						<persistence type="property" />
+						<defaultvalue>Integer.valueOf(4)</defaultvalue>
+					</attribute>
+				</attributes>
+			</itemtype>
+		</typegroup>
+		
 		<typegroup name="Miscellaneous">
 			<itemtype code="SearchBoxComponent" generate="false"
 				autocreate="false">
@@ -449,95 +536,17 @@
 				</attributes>
 			</itemtype>
 
-			<itemtype code="AbstractAmwayApacTermsComponent" extends="SimpleCMSComponent"
-				autocreate="true" generate="true"
-				jaloclass="com.amway.apac.storefront.components.jalo.AbstractAmwayApacTermsComponent">
-				<description>Abstract Terms Component</description>
-				<attributes>
-					<attribute qualifier="title" generate="true" autocreate="true"
-						type="CMSParagraphComponent">
-						<persistence type="property" />
-					</attribute>
-					<attribute qualifier="radio1Description" generate="true"
-						autocreate="true" type="localized:java.lang.String">
-						<persistence type="property" />
-					</attribute>
-					<attribute qualifier="radio2Description" generate="true"
-						autocreate="true" type="localized:java.lang.String">
-						<persistence type="property" />
-					</attribute>
-				</attributes>
+			<itemtype code="AmwayApacShoppingListSearchBoxComponent"
+				autocreate="true" generate="true" extends="SearchBoxComponent"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacShoppingListSearchBoxComponent">
+				<description>Represents the search box component for quick shop product search on shopping list page.</description>
 			</itemtype>
 
-			<itemtype code="AmwayApacSimpleTermsComponent" extends="AbstractAmwayApacTermsComponent"
-				autocreate="true" generate="true"
-				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacSimpleTermsComponent">
-				<description>Simple Terms Component</description>
-				<attributes>
-					<attribute qualifier="content" generate="true"
-						autocreate="true" type="CMSParagraphComponent">
-						<persistence type="property" />
-					</attribute>
-				</attributes>
+			<itemtype code="AmwayApacShoppingCartSearchBoxComponent"
+				autocreate="true" generate="true" extends="SearchBoxComponent"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacShoppingCartSearchBoxComponent">
+				<description>Represents the search box component for quick shop product search on shopping list page.</description>
 			</itemtype>
-
-			<itemtype code="AmawayApacSimpleContainerTermsComponent"
-				extends="AbstractAmwayApacTermsComponent" autocreate="true"
-				generate="true"
-				jaloclass="com.amway.apac.storefront.components.jalo.AmawayApacSimpleContainerTermsComponent">
-				<description>Multiple Terms Component</description>
-				<attributes>
-					<attribute qualifier="content" generate="true"
-						autocreate="true" type="CMSParagraphComponent">
-						<persistence type="property" />
-					</attribute>
-					<attribute qualifier="maxHeight" type="boolean">
-						<persistence type="property" />
-						<modifiers optional="true" />
-						<defaultvalue>Boolean.TRUE</defaultvalue>
-					</attribute>
-				</attributes>
-			</itemtype>
-
-			<itemtype code="AmwayApacTabbedTermsComponent" extends="AbstractAmwayApacTermsComponent"
-				autocreate="true" generate="true"
-				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacTabbedTermsComponent">
-				<description>Tabbed Terms Component</description>
-			</itemtype>
-
-			<itemtype code="AmwayApacTermsTabComponent" extends="SimpleCMSComponent"
-				autocreate="true" generate="true"
-				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacTermsTabComponent">
-				<description>Terms Tab Component</description>
-				<attributes>
-					<attribute qualifier="title" generate="true" autocreate="true"
-						type="CMSParagraphComponent">
-						<persistence type="property" />
-					</attribute>
-					<attribute qualifier="description" generate="true"
-						autocreate="true" type="CMSParagraphComponent">
-						<persistence type="property" />
-					</attribute>
-					<attribute qualifier="colwidth" generate="true"
-						autocreate="true" type="java.lang.Integer">
-						<persistence type="property" />
-						<modifiers optional="true" />
-						<defaultvalue>Integer.valueOf(4)</defaultvalue>
-					</attribute>
-				</attributes>
-			</itemtype>
-	        <itemtype code="AmwayApacShoppingListSearchBoxComponent" autocreate="true"
-	            generate="true" extends="SearchBoxComponent"
-	            jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacShoppingListSearchBoxComponent">
-	            <description>Represents the search box component for quick shop product search on shopping list page.</description>
-	        </itemtype>
-
-	        <itemtype code="AmwayApacShoppingCartSearchBoxComponent" autocreate="true"
-	            generate="true" extends="SearchBoxComponent"
-	            jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacShoppingCartSearchBoxComponent">
-	            <description>Represents the search box component for quick shop product search on shopping list page.</description>
-	        </itemtype>
-
 		</typegroup>
 
 	</itemtypes>
