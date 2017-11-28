@@ -169,18 +169,6 @@
 				</attributes>
 			</itemtype>
 
-			<itemtype code="AmwayApacOurNewProductComponent" extends="AmwayApacAbstractTextLinkImageComponent"
-				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacOurNewProductComponent"
-				autocreate="true" generate="true">
-				<description>Experience our Brands Background Component.</description>
-				<attributes>
-					<attribute qualifier="sideImage" type="BannerComponent">
-						<persistence type="property" />
-						<description>background image</description>
-					</attribute>
-				</attributes>
-			</itemtype>
-
 			<itemtype code="AmwayApacYourOpportunityComponent" extends="AmwayApacAbstractTextLinkImageComponent"
 				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacYourOpportunityComponent"
 				autocreate="true" generate="true">

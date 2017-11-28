@@ -680,19 +680,19 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;c
 ########## Category page Experience Brands Background Component
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
-;;BrandBackgroundImageBannerContentSlot;amwayapacExperienceBrandsBackgroundImageAndBannerComponent
-
-INSERT_UPDATE AmwayApacOurNewProductComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink;link(&componentRef);text(&componentRef);sideImage(uid, $contentCV)
-;;amwayapacExperienceBrandsBackgroundImageAndBannerComponent;Experience Brand Background Image and Banner component;amwayapacExperienceBrandsBackgroundImageAndBannerComponent;"/";amwayapacExperienceBrandsShopNowLinkComponent;amwayapacExperienceBrandsDescriptionParagraphComponent;ExperienceBrandsBackgroundBannerComponent
+;;BrandBackgroundImageBannerContentSlot;amwayapacExperienceBrandsBackgroundBannerComponent
 
 INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=true];name;target(code)[default='sameWindow'];&componentRef;
 ;;amwayapacExperienceBrandsShopNowLinkComponent;experience brands show now link component;;amwayapacExperienceBrandsShopNowLinkComponent;
 
-INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
-;;amwayapacExperienceBrandsDescriptionParagraphComponent;amwayapacExperienceBrandsDescriptionParagraphComponent
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;amwayapacExperienceBrandsDescParagraphComponent;Experience Brands Background Banner Component;amwayapacExperienceBrandsDescParagraphComponent
 
-INSERT_UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];name;urlLink;&componentRef
-;;ExperienceBrandsBackgroundBannerComponent;Experience Brand Background Banner Component;"/";ExperienceBrandsBackgroundBannerComponent
+INSERT_UPDATE AmwayApacArtistryNewLuxuryCarouselComponent;$contentCV[unique=true];uid[unique=true];name;urlLink;link(&componentRef);text(&componentRef);&componentRef
+;;amwayapacExperienceBrandsBackgroundImageComponent;Experience Brand Background Image and Banner component;"/";amwayapacExperienceBrandsShopNowLinkComponent;amwayapacExperienceBrandsDescParagraphComponent;amwayapacExperienceBrandsBackgroundImageComponent;
+
+INSERT_UPDATE AmwayApacArtistryNewLuxuryRotatingComponent;$contentCV[unique=true];uid[unique=true];name;responsiveBanners(&componentRef);&componentRef
+;;amwayapacExperienceBrandsBackgroundBannerComponent;Experience Brand Background Banner Component;amwayapacExperienceBrandsBackgroundImageComponent;amwayapacExperienceBrandsBackgroundBannerComponent;
 
 ########## Category page Experience Brands Background Component ##########
 

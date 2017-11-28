@@ -628,24 +628,24 @@ INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];con
 
 ########## Category page Experience Brands Background Component
 
-INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang];buttonStyleAttributes;styleAttributes
-;;amwayapacExperienceBrandsShopNowLinkComponent;"Shop Now";btn-blue-white;banner-button-link;
-
-INSERT_UPDATE AmwayApacOurNewProductComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer;
-;;amwayapacExperienceBrandsBackgroundImageAndBannerComponent;ExperienceBrandsBannerMediaContainer;
-
-INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=$lang]
-;;amwayapacExperienceBrandsDescriptionParagraphComponent;"<h2 class=""banner-title""><span>Nutrilite headline<br />goes here</span></h2><div class=""sub-title-wrap""><span class=""banner-sub-title""><span>Duis autem vel eum iriure dolor in hendrerit<br />in vulputate velit esse molestie consequat</span></span></div>";
-
 INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];mediaFormat(qualifier)[default=desktop];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;folder(qualifier)[default='images'];altText
-;;ExperienceBrandsBannerMedia;;$siteResource/experience-brands-images.png;;ExperienceBrandsBannerMedia;;"Experience our brands"
-;;ExperienceBrandsBackgroundImage;;$siteResource/experience-brands-bg.jpg;;ExperienceBrandsBackgroundImage;;"Nutrilite headline"
+;;ExperienceBrandsBannerMedia;;$siteResource/new_products.png;;ExperienceBrandsBannerMedia;;"Experience our brands"
+;;ExperienceBrandsBackgroundImage;;$siteResource/new_product_banner.jpg;;ExperienceBrandsBackgroundImage;;"Nutrilite headline"
 
 INSERT_UPDATE MediaContainer;$contentCV[unique=true];qualifier[unique=true];$medias;
 ;;ExperienceBrandsBannerMediaContainer;ExperienceBrandsBannerMedia
 
-INSERT_UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];$picture
-;;ExperienceBrandsBackgroundBannerComponent;ExperienceBrandsBackgroundImage
+INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang];buttonStyleAttributes;styleAttributes
+;;amwayapacExperienceBrandsShopNowLinkComponent;"Shop Now";btn-blue-white;banner-button-link;
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=$lang];
+;;amwayapacExperienceBrandsDescParagraphComponent;"<span class=""banner__message--main"">ARTISTRY NEW LUXURY<br />BEAUTY PRODUCTS</span><br/><span class=""banner__message--sub"">Artistry™ is constantly pushing the boundaries of beauty with the world's most scientifically advanced range of beauty solutions.</span>";
+
+INSERT_UPDATE AmwayApacArtistryNewLuxuryCarouselComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
+;;amwayapacExperienceBrandsBackgroundImageComponent;ExperienceBrandsBannerMediaContainer;
+
+INSERT_UPDATE AmwayApacArtistryNewLuxuryRotatingComponent;$contentCV[unique=true];uid[unique=true];$image;
+;;amwayapacExperienceBrandsBackgroundBannerComponent;ExperienceBrandsBackgroundImage
 
 ########## Category page Experience Brands Background Component ##########
 
