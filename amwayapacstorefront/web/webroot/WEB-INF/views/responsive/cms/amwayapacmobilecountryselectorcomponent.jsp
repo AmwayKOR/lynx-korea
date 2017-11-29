@@ -29,7 +29,7 @@
 				</span>
 			</div>
 			<div id="openHead">
-				<span class="title-element title-text">COUNTRY</span>
+				<span class="title-element title-text"><spring:theme code="mobileselector.country" /></span>
 			</div>
 		</a>
 	</h4>

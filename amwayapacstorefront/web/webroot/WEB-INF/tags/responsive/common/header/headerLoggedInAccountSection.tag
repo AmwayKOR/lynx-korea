@@ -16,18 +16,18 @@
                         <div class="ico-wraper">
                             <i class="icon-caution"></i>
                         </div>
-                        <span>A new ABO has signed a contract!</span></div>
+                        <span><spring:theme code="text.header.logged.icon-caution" /></span></div>
                     <div class="sys-message">
                         <div class="ico-wraper">
-                            <span class="message-num">99</span></div>
-                        <span>You have new messages!</span></div>
+                            <span class="message-num"><spring:theme code="text.header.logged.message-num" /></span></div>
+                        <span><spring:theme code="text.header.logged.message" /></span></div>
                 </div>
             </li>
             <li class="account-popover__scores">
                 <ul>
-                    <li>PV: 300.0</li>
-                    <li>CVR: No</li></ul>
-                <p>Last Update: 8/17/2016 - 4:07pm</p>
+                    <li><spring:theme code="text.header.logged.account-popover_scores" /></li>
+                    <li><spring:theme code="text.header.logged.account-popover_scores.no" /></li></ul>
+                <p><spring:theme code="text.header.logged.account-popover_scores.update" /></p>
             </li>
             <li class="account-popover__pv-display" onclick="javascript:location.href='dashboard-MVP.html'">
                 <img src="${themeResourcePath}/images/performance-chart-arch-mobile.png" alt="" /></li>
@@ -38,7 +38,7 @@
             <li class="account-popover__element sign-out">
                <c:url value="/logout" var="logoutUrl"/>
                 <a href="${logoutUrl}" title="Sign Out">
-                    <i class="glyphicon glyphicon-log-out"></i>Sign Out</a>
+                    <i class="glyphicon glyphicon-log-out"></i><spring:theme code="text.header.logged.signout" /></a>
             </li>
         </ul>
     </div>
