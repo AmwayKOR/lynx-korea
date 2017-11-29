@@ -17,6 +17,8 @@ import java.util.Map;
 import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
 
+import org.apache.log4j.Logger;
+
 import com.amway.apac.auth.security.AmwayJWTTokenProvider;
 import com.amway.core.model.AmwayAccountModel;
 import com.amway.lynxcore.strategies.LynxCustomerNameStrategy;
@@ -29,6 +31,8 @@ import com.amway.lynxfacades.customer.LynxCustomerFacade;
 public class AmwayJWTTokenProviderImpl implements AmwayJWTTokenProvider
 {
 
+	private static final Logger LOG = Logger.getLogger(AmwayJWTTokenProviderImpl.class);
+
 	private static final String AMWAY_IDP_JWT_SECRET_KEY = "amway.idp.jwt.secret.key";
 	private static final String AMWAY_IDP_JWT_TTLMILES = "amway.idp.jwt.ttlmiles";
 
@@ -38,12 +42,13 @@ public class AmwayJWTTokenProviderImpl implements AmwayJWTTokenProvider
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see com.amway.apac.auth.security.AmwayJWTTokenProvider#createJWToken(com.amway.core.model.AmwayAccountModel)
 	 */
 	@Override
 	public String createJWToken(final String amwayAccountId, final Date creationDate)
 	{
+		LOG.info("JWT :: " + amwayAccountId);
 		// get AmwayAccount
 		final AmwayAccountModel amwayAccount = lynxCustomerFacade.getAmwayAccountById(getAmwayAccountId(amwayAccountId));
 
@@ -57,7 +62,11 @@ public class AmwayJWTTokenProviderImpl implements AmwayJWTTokenProvider
 		//We will sign our JWT with our ApiKey secret
 		final byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(Config.getParameter(AMWAY_IDP_JWT_SECRET_KEY));
 		final Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
+
+		LOG.info("JWT :: Preparing CLAIM");
+
 		final Map<String, Object> claims = prepareTokenClaim(amwayAccount);
+		LOG.info("JWT ::  CLAIM PREPAIRED");
 
 		//Let's set the JWT Claims
 		final JwtBuilder builder = Jwts.builder().setId(amwayAccount.getCode())
