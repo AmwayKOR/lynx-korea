@@ -351,10 +351,10 @@
 				</attributes>
 			</itemtype>
 
-			<itemtype code="AmawayApacSimpleContainerTermsComponent"
+			<itemtype code="AmwayApacSimpleContainerTermsComponent"
 				extends="AmwayApacAbstractTermsComponent" autocreate="true"
 				generate="true"
-				jaloclass="com.amway.apac.storefront.components.jalo.AmawayApacSimpleContainerTermsComponent">
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacSimpleContainerTermsComponent">
 				<description>Multiple Terms Component</description>
 				<attributes>
 					<attribute qualifier="content" generate="true"

@@ -407,7 +407,10 @@ public interface ControllerConstants
 		 * Shopping list details breadcrumb key
 		 */
 		String REGISTER_SIMPLE_TERMS_PAGE_BREADCRUMB_KEY = "register.simple.terms.page.breadcrumb";
-
+		/**
+		 * Shopping list details breadcrumb key
+		 */
+		String REGISTER_MULTIPLE_TERMS_PAGE_BREADCRUMB_KEY = "register.multiple.terms.page.breadcrumb";
 		/**
 		 * Shopping list details breadcrumb key
 		 */

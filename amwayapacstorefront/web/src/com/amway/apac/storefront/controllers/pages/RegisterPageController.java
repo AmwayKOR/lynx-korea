@@ -49,6 +49,7 @@ public class RegisterPageController extends AbstractRegisterPageController
 	// CMS Pages
 	private static final String SIMPLE_TERM_PAGE = "simple-terms";
 	private static final String MULTIPLE_TERM_PAGE = "multiple-terms";
+	private static final String REDIRECT_TO_MULTIPLE_TERMS = REDIRECT_PREFIX + "/register/multiple-terms";
 
 	@Resource(name = "termValidator")
 	private AmwayApacTermValidator termValidator;
@@ -98,12 +99,20 @@ public class RegisterPageController extends AbstractRegisterPageController
 	@RequestMapping(value = "/newcustomer", method = RequestMethod.POST)
 	public String doRegister(final RegisterForm form, final BindingResult bindingResult, final Model model,
 			final HttpServletRequest request, final HttpServletResponse response, final RedirectAttributes redirectModel)
-			throws CMSItemNotFoundException
+					throws CMSItemNotFoundException
 	{
 		getRegistrationValidator().validate(form, bindingResult);
 		return processRegisterUserRequest(null, form, bindingResult, model, request, response, redirectModel);
 	}
 
+	/**
+	 * Simple Registration Terms page loading controller.
+	 *
+	 * @param model
+	 *           view model
+	 * @return view
+	 * @throws CMSItemNotFoundException
+	 */
 	@RequestMapping(value = "/simple-terms", method = RequestMethod.GET)
 	public String simpleTerms(final Model model) throws CMSItemNotFoundException
 	{
@@ -115,61 +124,85 @@ public class RegisterPageController extends AbstractRegisterPageController
 	}
 
 	/**
-	 * Sample url mapping to test validation. Remove/change to function call on confirmed flow templates:
-	 * accountRegisterTermsPage.jsp
+	 * Simple Terms Form validating controller.
 	 *
+	 * @param termForm
+	 *           Simple Terms Form
+	 * @param bindingResult
+	 *           Binding Results
+	 * @param model
+	 *           View Model
+	 * @return view
 	 * @throws CMSItemNotFoundException
 	 */
-	@RequestMapping(value = "/validate-simple-terms", method = RequestMethod.POST)
-	public String validateSimpleTerms(final AmwayApacTermForm termForm, final BindingResult bindingResult, final Model model,
-			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+	@RequestMapping(value = "/simple-terms", method = RequestMethod.POST)
+	public String validateSimpleTerms(final AmwayApacTermForm termForm, final BindingResult bindingResult, final Model model)
+			throws CMSItemNotFoundException
 	{
 
 		getTermValidator().validate(termForm, bindingResult);
-		model.addAttribute(ControllerConstants.ModelParameters.TERM_FORM_STRING, termForm);
 
 		if (bindingResult.hasErrors())
 		{
+			model.addAttribute(ControllerConstants.ModelParameters.TERM_FORM_STRING, termForm);
 			GlobalMessages.addErrorMessage(model, FORM_GLOBAL_ERROR);
+			model.addAttribute(ControllerConstants.GeneralConstants.BREADCRUMBS_ATTR, getRegistrationBreadcrumbBuilder()
+					.getBreadcrumbs((ControllerConstants.GeneralConstants.REGISTER_SIMPLE_TERMS_PAGE_BREADCRUMB_KEY)));
 			setCMSPage(model, SIMPLE_TERM_PAGE);
 			return ControllerConstants.Views.Pages.Registration.RegistrationSimpleTerms;
 		}
 		else
 		{
-			GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.CONF_MESSAGES_HOLDER, "account.terms.success", null);
-			return setCMSPage(model, MULTIPLE_TERM_PAGE);
+			return REDIRECT_TO_MULTIPLE_TERMS;
 		}
 	}
 
+	/**
+	 * Multiple Registration Terms page loading controller.
+	 *
+	 * @param model
+	 *           view model
+	 * @return view
+	 * @throws CMSItemNotFoundException
+	 */
 	@RequestMapping(value = "/multiple-terms", method = RequestMethod.GET)
 	public String multipleTerms(final Model model) throws CMSItemNotFoundException
 	{
 		model.addAttribute(ControllerConstants.ModelParameters.TERM_FORM_STRING, new AmwayApacTermForm());
+		model.addAttribute(ControllerConstants.GeneralConstants.BREADCRUMBS_ATTR, getRegistrationBreadcrumbBuilder()
+				.getBreadcrumbs((ControllerConstants.GeneralConstants.REGISTER_MULTIPLE_TERMS_PAGE_BREADCRUMB_KEY)));
 		return setCMSPage(model, MULTIPLE_TERM_PAGE);
 	}
 
 	/**
-	 * Sample url mapping to test validation. Remove/change to function call on confirmed flow templates:
-	 * accountRegisterTermsPage.jsp
+	 * Multiple Terms Form validating controller.
 	 *
+	 * @param termForm
+	 *           Multiple Terms Registration form
+	 * @param bindingResult
+	 *           Binding Results
+	 * @param model
+	 *           View Model
+	 * @return vie
 	 * @throws CMSItemNotFoundException
 	 */
-	@RequestMapping(value = "/validate-multiple-terms", method = RequestMethod.POST)
-	public String validateMultipleTerms(final AmwayApacTermForm termForm, final BindingResult bindingResult, final Model model,
-			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+	@RequestMapping(value = "/multiple-terms", method = RequestMethod.POST)
+	public String validateMultipleTerms(final AmwayApacTermForm termForm, final BindingResult bindingResult, final Model model)
+			throws CMSItemNotFoundException
 	{
 
 		getTermValidator().validate(termForm, bindingResult);
 		model.addAttribute(ControllerConstants.ModelParameters.TERM_FORM_STRING, termForm);
 		if ((bindingResult.hasErrors()) || (BooleanUtils.isNotTrue(termForm.getVerified())))
 		{
+			model.addAttribute(ControllerConstants.GeneralConstants.BREADCRUMBS_ATTR, getRegistrationBreadcrumbBuilder()
+					.getBreadcrumbs((ControllerConstants.GeneralConstants.REGISTER_MULTIPLE_TERMS_PAGE_BREADCRUMB_KEY)));
 			GlobalMessages.addErrorMessage(model, FORM_GLOBAL_ERROR);
 			return setCMSPage(model, MULTIPLE_TERM_PAGE);
 		}
 		else
 		{
-			GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.CONF_MESSAGES_HOLDER, "account.terms.success", null);
-			return setCMSPage(model, MULTIPLE_TERM_PAGE);
+			return REDIRECT_TO_MULTIPLE_TERMS;
 		}
 	}
 

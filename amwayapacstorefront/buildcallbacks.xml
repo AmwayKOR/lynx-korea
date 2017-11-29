@@ -274,15 +274,15 @@
 				<fileset dir="${ext.amwayapacstorefront.path}/web/webroot/WEB-INF/_ui-src/responsive/lib/ybase-0.1.0/js" includes="**"/>
 			</copy>
 			<copy todir="${ext.amwayapacstorefront.path}/web/webroot/_ui/responsive/">
-				<fileset dir="${ext.amwayapacstorefront.path}/web/webroot/WEB-INF/_ui-src/responsive/" includes="themes/**/fonts/*"/>
+				<fileset dir="${ext.amwayapacstorefront.path}/web/webroot/WEB-INF/_ui-src/responsive/" includes="themes/**/fonts/**"/>
 				<regexpmapper from="themes/(.*)/fonts/(.*)" handledirsep="yes" to="theme-\1/fonts/\2"/>        
 			</copy>
 			<copy todir="${ext.amwayapacstorefront.path}/web/webroot/_ui/responsive/">
-				<fileset dir="${ext.amwayapacstorefront.path}/web/webroot/WEB-INF/_ui-src/responsive/" includes="themes/**/images/*"/>
+				<fileset dir="${ext.amwayapacstorefront.path}/web/webroot/WEB-INF/_ui-src/responsive/" includes="themes/**/images/**"/>
 				<regexpmapper from="themes/(.*)/images/(.*)" handledirsep="yes" to="theme-\1/images/\2"/>        
 			</copy>
 			<copy todir="${ext.amwayapacstorefront.path}/web/webroot/_ui/responsive/">
-				<fileset dir="${ext.amwayapacstorefront.path}/web/webroot/WEB-INF/_ui-src/responsive/" includes="themes/**/css/*"/>
+				<fileset dir="${ext.amwayapacstorefront.path}/web/webroot/WEB-INF/_ui-src/responsive/" includes="themes/**/css/**"/>
 				<regexpmapper from="themes/(.*)/css/(.*)" handledirsep="yes" to="theme-\1/css/\2"/>        
 			</copy>
 		</sequential>

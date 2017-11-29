@@ -7,17 +7,27 @@ ACC.registerterms = {
 		
 	bindRegisterTerms:function(){
 
-		$('.show-terms').click(function (){
+		 $(document).on('click', '.show-terms', function(){
 			$('#pop-terms').html($(this).closest("li").find("div:hidden").html());
 			$('#pop-terms').fadeIn();
 		});
 		
-	    $('.pop-close, #submit-btn, #cancel-btn').click(function (e) {
+	    $(document).on('click', '#submit-btn', function(e){
+	        e.preventDefault();
+	        var checkedRadio = $(this).closest(".pop-box").find("input:checked");
+	        var checkedRadioVal = checkedRadio.val();
+	        var radioName = checkedRadio.data("radioCount");
+	        var pageRadioToBeChecked = $(document).find("input."+radioName+"[value='"+checkedRadioVal+"']");
+	        pageRadioToBeChecked.trigger("click");
+	        $('.popup').fadeOut();
+	    });
+	    
+	    $(document).on('click', '.pop-close, #cancel-btn', function(e){
 	        e.preventDefault();
 	        $('.popup').fadeOut();
 	    });
         
-	    $('.view-all').click(function () {
+	    $(document).on('click', '.view-all', function(){
 	        var parent = $(this).parent();
 	        if (parent.hasClass('expand')) {
 	            parent.removeClass('expand');

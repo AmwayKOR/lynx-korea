@@ -4,19 +4,19 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-<li>
-	<h3 class="uppercase">
-		<cms:component component="${title}" />
-		<a class="show-terms">
-			<i class="icon icon-exports"></i>
-		</a>
-	</h3>
+<li class="${maxHeight ? 'simple' : ''}">
+	<c:if test="${not empty title}">
+		<h3 class="uppercase">
+			<cms:component component="${title}" />
+			<a class="show-terms">
+				<i class="icon icon-exports"></i>
+			</a>
+		</h3>
+	</c:if>
+	<form:errors path="term[${radioCount}].termAccepted" />
 	<div class="conditions">
-		<div class="row">
-			<c:set var="mdWidth" scope="request" value="${true}" />
-			<c:forEach items="${termsTabComponents}" var="tabTerms" varStatus="status">
-				<cms:component component="${tabTerms}" />
-			</c:forEach>
+		<div class="text">
+			<cms:component component="${content}" />
 		</div>
 		<button class="text-btn view-all">
 			<spring:theme code="register.terms.popup.viewall.button" />
@@ -52,10 +52,12 @@
 			<div class="pop-content">
 				<div id="terms">
 					<div class="div-table">
-						<c:set var="mdWidth" scope="request" value="${false}" />
-						<c:forEach items="${termsTabComponents}" var="tabTerms" varStatus="status">
-							<cms:component component="${tabTerms}" />
-						</c:forEach>
+						<div class="col-xs-12">
+							<div class="col-text">
+								<cms:component component="${content}" />
+							</div>
+							<div class="line"></div>
+						</div>
 					</div>
 				</div>
 				<div class="action amway-theme">
@@ -81,7 +83,7 @@
 				<a class="btn-blue-white" id="submit-btn">
 					<spring:theme code="register.terms.popup.submit.button" />
 				</a>
-				<button class="btn-cancel" id="cancel-btn">
+				<button class="btn-cancel" id="cancel-btn" data-radio-cancel="radio-${radioCount}">
 					<spring:theme code="register.terms.popup.cancel.button" />
 				</button>
 			</div>
