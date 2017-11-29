@@ -83,7 +83,7 @@ public class AmwayStorefrontAuthenticationSuccessHandler extends SavedRequestAwa
 		}
 		catch (final Exception exp)
 		{
-			LOG.error(exp.getMessage());
+			LOG.error(exp.getMessage(), exp);
 		}
 		super.onAuthenticationSuccess(request, response, authentication);
 	}
