@@ -257,7 +257,7 @@ public class DefaultAmwayCalculationService extends DefaultCalculationService im
 	@Override
 	public void calculateTotals(final AbstractOrderEntryModel entry, final boolean recalculate)
 	{
-		if (calculateKitEntry(entry))
+		if (checkKitEntry(entry))
 		{
 			if (recalculate || orderRequiresCalculationStrategy.requiresCalculation(entry))
 			{
@@ -281,7 +281,7 @@ public class DefaultAmwayCalculationService extends DefaultCalculationService im
 	 * @param entry
 	 * @return boolean
 	 */
-	protected boolean calculateKitEntry(final AbstractOrderEntryModel entry)
+	protected boolean checkKitEntry(final AbstractOrderEntryModel entry)
 	{
 		if (entry.getKitOrderEntry() != null)
 		{
