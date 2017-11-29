@@ -13,8 +13,9 @@
 				<td colspan="2" class="structureViewSection">
 					<cockpit code="HeaderLinks" />
 				</td>
-				<td colspan="2" width="20%" rowspan="2" class="structureViewSection">
+				<td colspan="2" width="20%" class="structureViewSection">
 					<cockpit code="MiniCart" />
+					<cockpit code="MobileMiniCart" />
 				</td>
 			</tr>
 			<tr>

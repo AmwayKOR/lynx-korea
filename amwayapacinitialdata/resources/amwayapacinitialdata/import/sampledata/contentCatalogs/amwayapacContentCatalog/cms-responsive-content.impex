@@ -1130,3 +1130,14 @@ INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&co
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
 ;;NoResultsContentSlot;PLP No results Slot;true;productGridNoResultContent
 ######Product Grid Page Template######
+
+############# Mini Cart Component #############
+INSERT_UPDATE MiniCartComponent;$contentCV[unique=true];uid[unique=true];name;shownProductCount;&componentRef
+;;MiniCartComponent;Mini Cart Component;5;MiniCartComponent
+
+INSERT_UPDATE AmwayApacMobileMiniCartComponent;$contentCV[unique=true];uid[unique=true];name;shownProductCount;&componentRef
+;;AmwayApacMobileMiniCartComponent;Amway Apac Mobile Mini Cart Component;5;AmwayApacMobileMiniCartComponent
+
+UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;MiniCartSlot;MiniCartComponent
+;;MobileMiniCartSlot;AmwayApacMobileMiniCartComponent

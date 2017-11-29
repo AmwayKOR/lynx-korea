@@ -541,6 +541,13 @@
 				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacShoppingCartSearchBoxComponent">
 				<description>Represents the search box component for quick shop product search on shopping list page.</description>
 			</itemtype>
+			
+			<itemtype code="AmwayApacMobileMiniCartComponent" extends="MiniCartComponent"
+				autocreate="true" generate="true"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacMobileMiniCartComponent">
+				<description>Mobile Mini Cart Component</description>
+			</itemtype>
+			
 		</typegroup>
 
 	</itemtypes>

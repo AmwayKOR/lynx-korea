@@ -5,8 +5,11 @@
 				<td height="55px"  class="structureViewSection">
 					<cockpit code="SiteLogo" />
 				</td>
-				<td colspan="3"   class="structureViewSection">
+				<td colspan="2"   class="structureViewSection">
 					<cockpit code="MiniCart" />
+				</td>
+				<td colspan="1"   class="structureViewSection">
+					<cockpit code="MobileMiniCart" />
 				</td>
 			</tr>
 			<tr>

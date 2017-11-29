@@ -3,12 +3,7 @@
 <%@ taglib prefix="formElement" tagdir="/WEB-INF/tags/responsive/formElement"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
-<c:set var="isUserAbo" value="false" />
-<sec:authorize ifNotGranted="ROLE_ANONYMOUS">
-	<c:set var="isUserAbo" value="true" />
-</sec:authorize>
 <div class="country-language-container header-content">
 	<div class="header-element-content">
 		<div class="site-logo">
@@ -45,43 +40,9 @@
 						</li>
 					</c:otherwise>
 				</c:choose>
-				<li class="componentContainer liOffcanvas nav-item nav-mini-cart">
-					<span class="">
-						<div class="nav-cart nav-cart-wrapper js-nav-cart-wrapper print-hide">
-							<a href="javascript:void(0);" class="pos-relative mini-cart-link js-mini-cart-link clearfix "
-								data-toggle="collapse" data-target="#shoppingcar-drop-content">
-								<div class="mini-cart-icon">
-									<span class="icon-shopping-cart"></span>
-								</div>
-								<div class="mini-cart-count js-mini-cart-count">
-									<span class="nav-items-total">16</span>
-								</div>
-								<div class="cart-icon-wrapper">
-									<div class="mini-cart-arrow"></div>
-								</div>
-							</a>
-							<div class="mini-cart-items-container js-mini-cart-items-container">
-								<ul class="nav nav-tabs">
-									<li class="active">
-										<a data-toggle="tab" href="#miniShoppingCartPopupContent">
-											Shopping Cart (
-											<span id="minicartTabTotalItems">0</span>
-											)
-										</a>
-									</li>
-									<li>
-										<a data-toggle="tab" href="#dittoPopupContent">My Ditto</a>
-									</li>
-								</ul>
-								<div class="tab-content js-tab-content">
-									<div id="miniShoppingCartPopupContent" class="tab-pane fade in active"></div>
-									<div id="dittoPopupContent" class="tab-pane fade"></div>
-								</div>
-							</div>
-						</div>
-						<div class="mini-cart-container js-mini-cart-container"></div>
-					</span>
-				</li>
+				<cms:pageSlot position="MiniCart" var="component">
+					<cms:component component="${component}"/>
+				</cms:pageSlot>
 			</ul>
 		</div>
 	</div>

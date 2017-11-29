@@ -38,6 +38,10 @@ ACC.cartitem = {
                 {
                     $('#cartContent').html($(data).filter("div#cartContentDiv").html());
                     ACC.global.findAndUpdateGlobalMessages(data);
+        			if(entryAction == 'REMOVE')
+        			{
+        				ACC.minicart.updateMiniCartDisplay();
+        			}
                 },
                 error: function(request, status, error)
                 {
