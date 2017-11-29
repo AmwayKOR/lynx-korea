@@ -52,55 +52,16 @@
 								id="mobile-menu-accordion" role="tablist" aria-multiselectable="true">
 
 								<cms:pageSlot position="MobileNavigationBar" var="component">
-									<cms:component component="${component}" />
+									<cms:component component="${component}" />,
 								</cms:pageSlot>
 
 								<li role="presentation" class=" nav-list-element">
 									<div class="overlay-menu-component-mobile-wrapper country">
 										<div class="panel-group" id="mobile-menu-category-accordion" role="tablist" aria-multiselectable="true">
 											<div class="panel panel-default overlay-menu-mobile__panel">
-												<div class="panel-heading overlay-menu-mobile__panel__heading" role="tab" id="navMenuMobHeading4">
-													<h4 class="panel-title">
-														<a class="panel-toggle collapsed" role="button" data-toggle="collapse"
-															data-parent="#mobile-menu-category-accordion" href="#navMenuMobCollapse4" aria-expanded="true"
-															aria-controls="navMenuMobCollapse4">
-															<div id="closeHead">
-																<span class="title-element tab-image">
-																	<img src="${themeResourcePath}/images/jp.jpg" />
-																</span>
-																<span class="title-element active-parent-icon">
-																	<span class="icon-chevron-left"></span>
-																</span>
-																<span class="title-element title-text">Japan</span>
-																<span class="title-element accordion-icon-wrapper">
-																	<span class="pull-right icon-minus"></span>
-																</span>
-															</div>
-															<div id="openHead">
-																<span class="title-element title-text">COUNTRY</span>
-															</div>
-														</a>
-													</h4>
-												</div>
-												<div id="navMenuMobCollapse4" class="panel-collapse collapse overlay-menu-mobile__panel__content"
-													role="tabpanel" aria-labelledby="navMenuMobHeading4">
-													<div class="panel-body">
-														<div class="overlay-menu-subcategory js-overlay-menu-subcategory main-subcategory">
-															<!--<h5>
-                                                                <a class="subcategory-toggle" data-toggle="collapse" href="Vitamins_and_Supplements_Product_listing_page.html" onclick="javascript:location.href='Vitamins_and_Supplements_Product_listing_page.html'" aria-expanded="false" aria-controls="navMenuMobCountry">
-                                                                    <span class="subcategory-title">COUNTRY</span>
-                                                                    <span class="subcategory-icon icon-chevron-right"></span>
-                                                                </a>
-                                                            </h5>-->
-															<ul class="subcategory-list countryBox" id="navMenuMobCountry">
-
-																<cms:pageSlot position="MobileCountrySelector" var="component1">
-																	<cms:component component="${component1}" />
-																</cms:pageSlot>
-															</ul>
-														</div>
-													</div>
-												</div>
+												<cms:pageSlot position="MobileCountrySelector" var="component1">
+													<cms:component component="${component1}" />
+												</cms:pageSlot>
 											</div>
 										</div>
 									</div>

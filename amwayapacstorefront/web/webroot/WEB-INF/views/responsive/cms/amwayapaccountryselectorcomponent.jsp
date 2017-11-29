@@ -18,8 +18,7 @@
 		<span class="flag-icon flag-icon-US"> <img class="topbar__flag"
 			src="${currentCountry.image.url}" alt="flag" /></span> <span
 			class="current-country-code">${currentCountry.linkName}</span> <span
-			class="icon icon-arrow-dropdown"> <i
-			class="location-arrow-down glyphicon glyphicon-menu-down"></i>
+			class="icon icon-arrow-dropdown"> <i class="location-arrow-down glyphicon glyphicon-menu-down"></i>
 		</span>
 	</div>
 </button>

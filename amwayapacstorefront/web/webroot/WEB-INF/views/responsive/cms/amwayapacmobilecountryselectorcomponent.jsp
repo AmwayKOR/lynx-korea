@@ -11,26 +11,41 @@
 <%@ taglib prefix="common" tagdir="/WEB-INF/tags/desktop/common"%>
 <%@ taglib prefix="breadcrumb" tagdir="/WEB-INF/tags/desktop/nav/breadcrumb"%>
 
+
 <div class="panel-heading overlay-menu-mobile__panel__heading" role="tab" id="navMenuMobHeading4">
 	<h4 class="panel-title">
 		<a class="panel-toggle" role="button" data-toggle="collapse" data-parent="#mobile-menu-category-accordion"
 			href="#navMenuMobCollapse4" aria-expanded="true" aria-controls="navMenuMobCollapse4">
-			<!-- <div id="closeHead"> -->
-			<span class="title-element tab-image">
-				<img src="${currentCountry.image.url}" alt="flag" />
-			</span>
-			<span class="title-element active-parent-icon">
-				<span class="icon-chevron-left"></span>
-			</span>
-			<span class="title-element title-text">${currentCountry.linkName}</span>
+			<div id="closeHead">
+				<span class="title-element tab-image">
+					<img src="${currentCountry.image.url}" alt="flag" />
+				</span>
+				<span class="title-element active-parent-icon">
+					<span class="icon-chevron-left"></span>
+				</span>
+				<span class="title-element title-text">${currentCountry.linkName}</span>
+				<span class="title-element accordion-icon-wrapper">
+					<span class="pull-right icon-minus"></span>
+				</span>
+			</div>
+			<div id="openHead">
+				<span class="title-element title-text">COUNTRY</span>
+			</div>
 		</a>
 	</h4>
 </div>
 
-<ul class="subcategory-list countryBox" id="navMenuMobCountry">
-	<c:forEach items="${links}" var="component">
-		<c:if test="${component.visible}">
-			<cms:component component="${component}" evaluateRestriction="true" element="li" class="content-item" />
-		</c:if>
-	</c:forEach>
-</ul>
+<div id="navMenuMobCollapse4" class="panel-collapse collapse overlay-menu-mobile__panel__content" role="tabpanel"
+	aria-labelledby="navMenuMobHeading4">
+	<div class="panel-body">
+		<div class="overlay-menu-subcategory js-overlay-menu-subcategory main-subcategory">
+			<ul class="subcategory-list countryBox" id="navMenuMobCountry">
+				<c:forEach items="${links}" var="component">
+					<c:if test="${component.visible}">
+						<cms:component component="${component}" evaluateRestriction="true" element="li" class="content-item" />
+					</c:if>
+				</c:forEach>
+			</ul>
+		</div>
+	</div>
+</div>
