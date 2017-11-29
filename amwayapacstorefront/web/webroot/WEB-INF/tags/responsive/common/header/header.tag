@@ -94,63 +94,9 @@
                                                             </h5>-->
 															<ul class="subcategory-list countryBox" id="navMenuMobCountry">
 
-																<li class="content-item">
-																	<a class="country-item-link" href="">
-																		<span class="flag-icon">
-																			<img class="topbar__flag" src="${themeResourcePath}/images/cn.jpg" alt="flag">
-																		</span>
-																		<span class="country-item-text">China</span>
-																	</a>
-																</li>
-																<li class="content-item">
-																	<a class="country-item-link" href="">
-																		<span class="flag-icon">
-																			<img class="topbar__flag" src="${themeResourcePath}/images/my.jpg" alt="flag">
-																		</span>
-																		<span class="country-item-text">Malaysia</span>
-																	</a>
-																</li>
-																<li class="content-item">
-																	<a class="country-item-link" href="">
-																		<span class="flag-icon">
-																			<img class="topbar__flag" src="${themeResourcePath}/images/ph.jpg" alt="flag">
-																		</span>
-																		<span class="country-item-text">Philippines</span>
-																	</a>
-																</li>
-																<li class="content-item">
-																	<a class="country-item-link" href="">
-																		<span class="flag-icon">
-																			<img class="topbar__flag" src="${themeResourcePath}/images/kr.jpg" alt="flag">
-																		</span>
-																		<span class="country-item-text">Korea</span>
-																	</a>
-																</li>
-																<li class="content-item">
-																	<a class="country-item-link" href="">
-																		<span class="flag-icon">
-																			<img class="topbar__flag" src="${themeResourcePath}/images/th.jpg" alt="flag">
-																		</span>
-																		<span class="country-item-text">Thailand</span>
-																	</a>
-																</li>
-																<li class="content-item">
-																	<a class="country-item-link" href="">
-																		<span class="flag-icon">
-																			<img class="topbar__flag" src="${themeResourcePath}/images/sg.jpg" alt="flag">
-																		</span>
-																		<span class="country-item-text">Singapore</span>
-																	</a>
-																</li>
-																<li class="content-item current-country">
-																	<a class="country-item-link" href="">
-																		<span class="flag-icon">
-																			<img class="topbar__flag" src="${themeResourcePath}/images/jp.jpg" alt="flag">
-																		</span>
-																		<span class="country-item-text">Japan</span>
-																	</a>
-																</li>
-
+																<cms:pageSlot position="MobileCountrySelector" var="component1">
+																	<cms:component component="${component1}" />
+																</cms:pageSlot>
 															</ul>
 														</div>
 													</div>

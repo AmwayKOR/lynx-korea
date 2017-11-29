@@ -35,7 +35,6 @@ import com.amway.apac.storefront.components.model.AmwayApacIconLinkComponentMode
 import com.amway.apac.storefront.components.model.AmwayApacImageLinkComponentModel;
 import com.amway.apac.storefront.components.model.AmwayApacJoinAmwayComponentModel;
 import com.amway.apac.storefront.components.model.AmwayApacNewProductComponentModel;
-import com.amway.apac.storefront.components.model.AmwayApacOurNewProductComponentModel;
 import com.amway.apac.storefront.components.model.AmwayApacPathToSuccessPitchPerfectComponentModel;
 import com.amway.apac.storefront.components.model.AmwayApacPathwayToSuccessComponentModel;
 import com.amway.apac.storefront.components.model.AmwayApacPlatinumABOComponentModel;
@@ -91,7 +90,6 @@ public interface ControllerConstants
 			String AmwayApacAccountProfileBarLinkComponent = _Prefix + AmwayApacAccountProfileBarLinkComponentModel._TYPECODE
 					+ _Suffix; // NOSONAR
 			String AmwayApacCategoryTopBannerComponent = _Prefix + AmwayApacCategoryTopBannerComponentModel._TYPECODE + _Suffix; // NOSONAR
-			String AmwayApacOurNewProductComponent = _Prefix + AmwayApacOurNewProductComponentModel._TYPECODE + _Suffix; // NOSONAR
 			String AmwayApacToolsAndAdviceComponent = _Prefix + AmwayApacToolsAndAdviceComponentModel._TYPECODE + _Suffix; // NOSONAR
 			String AmwayApacPathToSuccessPitchPerfectComponent = _Prefix + AmwayApacPathToSuccessPitchPerfectComponentModel._TYPECODE
 					+ _Suffix; // NOSONAR

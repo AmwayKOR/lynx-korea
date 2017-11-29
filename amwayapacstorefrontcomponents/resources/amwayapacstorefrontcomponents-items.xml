@@ -431,6 +431,12 @@
 					</attribute>
 				</attributes>
 			</itemtype>
+			
+			<itemtype code="AmwayApacMobileCountrySelectorComponent" extends="AmwayApacCountrySelectorComponent"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacMobileCountrySelectorComponent"
+				autocreate="true" generate="true">
+				<description>Mobile Country Collection component.</description>
+			</itemtype>
 
 			<itemtype code="AmwayApacMobileNavigationComponent" extends="NavigationBarComponent"
 				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacMobileNavigationComponent"
