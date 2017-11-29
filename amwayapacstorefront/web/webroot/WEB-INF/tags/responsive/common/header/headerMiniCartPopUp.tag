@@ -8,9 +8,7 @@
 	<div class="arrow" style=""></div>
 	<ul class="nav nav-tabs">
 		<li class="active">
-			<a data-toggle="tab" href="#miniShoppingCartPopupContentPC">
-				Shopping Cart
-			</a>
+			<a data-toggle="tab" href="#miniShoppingCartPopupContentPC"> Shopping Cart </a>
 		</li>
 		<li>
 			<a data-toggle="tab" href="#dittoPopupContentPC">My Ditto</a>

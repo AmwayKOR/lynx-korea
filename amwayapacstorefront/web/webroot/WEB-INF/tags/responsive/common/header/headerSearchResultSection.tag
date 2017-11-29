@@ -1,4 +1,8 @@
 <%@ tag language="java" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
 
 <div class="popover auto-suggestion-popover fade bottom in" role="tooltip" id="">
 	<div class="popover-arrow arrow" style="left: 71.9353%;"></div>
@@ -12,10 +16,14 @@
 			<div class="category-wrapper js-category-wrapper products-wrapper hidden-xs hidden-sm">
 				<div class="header row">
 					<div class="title col-md-6">
-						<span>Products</span>
+						<span>
+							<spring:theme code="text.header.search.title" />
+						</span>
 					</div>
 					<div class="view-all-container col-md-6">
-						<a class="js-products-view-all-results" href="">View all results</a>
+						<a class="js-products-view-all-results" href="">
+							<spring:theme code="text.header.search.viewallresults" />
+						</a>
 					</div>
 				</div>
 			</div>

@@ -21,39 +21,38 @@
 <c:choose>
 	<c:when test="${isUserAbo}">
 		<div class=" miniCartSlot componentContainer mobile-header-cell mobile-cart-container">
-		    <div class="">
-		        <div class="nav-cart nav-cart-wrapper js-nav-cart-wrapper print-hide">
-		            <a href="#" class="mini-cart-link js-mini-cart-link clearfix is-abo"
-						data-mini-cart-url="${miniCartUrl}"
-						data-mini-cart-item-url="${miniCartItemUrl}"
-		            	>
-		                <div class="mini-cart-icon">
-		                	<span class="nav-items-total"></span>
-		                	<span class="icon-shopping-cart"></span>
-		                </div>
-		                <div class="cart-icon-wrapper">
-		                    <div class="mini-cart-arrow"></div>
-		                </div>
-		            </a>
-		            <!--remove min-cart-->
-		        </div>
-		        <div class="mini-cart-container js-mini-cart-container"></div>
-		    </div>
+			<div class="">
+				<div class="nav-cart nav-cart-wrapper js-nav-cart-wrapper print-hide">
+					<a href="#" class="mini-cart-link js-mini-cart-link clearfix is-abo" data-mini-cart-url="${miniCartUrl}"
+						data-mini-cart-item-url="${miniCartItemUrl}">
+						<div class="mini-cart-icon">
+							<span class="nav-items-total"></span>
+							<span class="icon-shopping-cart"></span>
+						</div>
+						<div class="cart-icon-wrapper">
+							<div class="mini-cart-arrow"></div>
+						</div>
+					</a>
+					<!--remove min-cart-->
+				</div>
+				<div class="mini-cart-container js-mini-cart-container"></div>
+			</div>
 		</div>
 	</c:when>
 	<c:otherwise>
-         <div class=" miniCartSlot componentContainer mobile-header-cell mobile-cart-container">
-             <div class="">
-                 <div class="nav-cart nav-cart-wrapper js-nav-cart-wrapper print-hide">
-                     <a href="#" class="mini-cart-link js-mini-cart-link clearfix " data-mini-cart-url="" data-mini-cart-refresh-url="" data-mini-cart-name="Shopping Cart" data-mini-cart-empty-name="Empty Cart">
-                         <div class="mini-cart-icon ">
-                             <span class="icon-shopping-cart"></span>
-                         </div>
-                     </a>
-                     <!--remove min-cart-->
-                 </div>
-                 <div class="mini-cart-container js-mini-cart-container"></div>
-             </div>
-         </div>
+		<div class=" miniCartSlot componentContainer mobile-header-cell mobile-cart-container">
+			<div class="">
+				<div class="nav-cart nav-cart-wrapper js-nav-cart-wrapper print-hide">
+					<a href="#" class="mini-cart-link js-mini-cart-link clearfix " data-mini-cart-url="" data-mini-cart-refresh-url=""
+						data-mini-cart-name="Shopping Cart" data-mini-cart-empty-name="Empty Cart">
+						<div class="mini-cart-icon ">
+							<span class="icon-shopping-cart"></span>
+						</div>
+					</a>
+					<!--remove min-cart-->
+				</div>
+				<div class="mini-cart-container js-mini-cart-container"></div>
+			</div>
+		</div>
 	</c:otherwise>
 </c:choose>
