@@ -11,15 +11,11 @@ import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
-import java.security.Key;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-
-import javax.crypto.spec.SecretKeySpec;
-import javax.xml.bind.DatatypeConverter;
 
 import org.apache.log4j.Logger;
 
@@ -47,48 +43,55 @@ public class AmwayJWTTokenProviderImpl implements AmwayJWTTokenProvider
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see com.amway.apac.auth.security.AmwayJWTTokenProvider#createJWToken(com.amway.core.model.AmwayAccountModel)
 	 */
 	@Override
 	public String createJWToken(final String userId, final Date creationDate, final Locale locale)
 	{
-		final CustomerModel customer = userService.getUserForUID(userId, CustomerModel.class);
-
-		if (null != customer)
+		try
 		{
-			// 	get AmwayAccount
-			final AmwayAccountModel amwayAccount = accountService.getAmwayAccount(customer);
-			final Long ttlMillis = Long.valueOf(Config.getParameter(AMWAY_IDP_JWT_TTLMILES));
-			//The JWT signature algorithm we will be using to sign the token
-			final SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
+			final CustomerModel customer = userService.getUserForUID(userId, CustomerModel.class);
 
-			final long nowMillis = creationDate.getTime();
-			final Date now = new Date(nowMillis);
-
-			//We will sign our JWT with our ApiKey secret
-			final byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(Config.getParameter(AMWAY_IDP_JWT_SECRET_KEY));
-			final Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
-
-			final Map<String, Object> claims = prepareTokenClaim(amwayAccount, locale);
-
-			//Let's set the JWT Claims
-			final JwtBuilder builder = Jwts.builder().setId(amwayAccount.getCode())
-					.setIssuedAt(now)
-					.setSubject("435473587345863475989090u")
-					.setIssuer("/oauth2/default/v1/authorize")
-					.addClaims(claims)
-					.signWith(signatureAlgorithm, signingKey);
-
-			//if it has been specified, let's add the expiration
-			if (ttlMillis >= 0)
+			if (null != customer)
 			{
-				final long expMillis = nowMillis + ttlMillis;
-				final Date exp = new Date(expMillis);
-				builder.setExpiration(exp);
+				// 	get AmwayAccount
+				final AmwayAccountModel amwayAccount = accountService.getAmwayAccount(customer);
+				final Long ttlMillis = Long.valueOf(Config.getParameter(AMWAY_IDP_JWT_TTLMILES));
+				//The JWT signature algorithm we will be using to sign the token
+				final SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
+
+				final long nowMillis = creationDate.getTime();
+				final Date now = new Date(nowMillis);
+
+				//We will sign our JWT with our ApiKey secret
+				//final byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(Config.getParameter(AMWAY_IDP_JWT_SECRET_KEY));
+				//final Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
+
+				final Map<String, Object> claims = prepareTokenClaim(amwayAccount, locale);
+
+				//Let's set the JWT Claims
+				final JwtBuilder builder = Jwts.builder().setId(amwayAccount.getCode())
+						.setIssuedAt(now)
+						.setSubject("435473587345863475989090u")
+						.setIssuer("/oauth2/default/v1/authorize")
+						.addClaims(claims)
+						.signWith(signatureAlgorithm, Config.getParameter(AMWAY_IDP_JWT_SECRET_KEY).getBytes("UTF-8"));
+
+				//if it has been specified, let's add the expiration
+				if (ttlMillis >= 0)
+				{
+					final long expMillis = nowMillis + ttlMillis;
+					final Date exp = new Date(expMillis);
+					builder.setExpiration(exp);
+				}
+				//Builds the JWT and serializes it to a compact, URL-safe string
+				return builder.compact();
 			}
-			//Builds the JWT and serializes it to a compact, URL-safe string
-			return builder.compact();
+		}
+		catch (final Exception exp)
+		{
+			LOG.equals(exp.getMessage());
 		}
 		return null;
 	}
