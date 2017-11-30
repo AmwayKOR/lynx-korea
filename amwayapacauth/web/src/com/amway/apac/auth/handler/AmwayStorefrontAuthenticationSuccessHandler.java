@@ -60,17 +60,14 @@ public class AmwayStorefrontAuthenticationSuccessHandler extends SavedRequestAwa
 			final String redirectURL = request.getParameter("redirect_uri");
 			final String clientID = request.getParameter("client_id");
 
-			LOG.info("JWT :: " + responseType + " || " + redirectURL + " || " + clientID);
-
 			final ClientDetails client = clientDetailsService.loadClientByClientId(clientID);
 
 			if (null != client)
 			{
-				LOG.info("JWT :: " + client.getClientId());
 				if ("token".equals(responseType))
 				{
-					LOG.info("JWT :: Response type match");
-					final String token = jwtTokenProvider.createJWToken(((String) authentication.getPrincipal()), new Date());
+					final String token = jwtTokenProvider.createJWToken(((String) authentication.getPrincipal()), new Date(),
+							request.getLocale());
 					LOG.info("CREATE_JWT_TOKEN :: " + token);
 					request.setAttribute("JWT", token);
 

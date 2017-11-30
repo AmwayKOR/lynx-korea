@@ -115,7 +115,7 @@ public class AuthorizationController extends AbstractLoginPageController
 		final String userId = jaloSession.getUser().getUid();
 		if (!"anonymous".equals(userId))
 		{
-			return jwtTokenProvider.createJWToken(userId, new Date(session.getCreationTime()));
+			return jwtTokenProvider.createJWToken(userId, new Date(session.getCreationTime()), request.getLocale());
 		}
 		response.sendError(HttpServletResponse.SC_NOT_FOUND);
 		return null;
@@ -133,7 +133,7 @@ public class AuthorizationController extends AbstractLoginPageController
 		if (!"anonymous".equals(userId))
 		{
 
-			return jwtTokenProvider.createJWToken(userId, new Date());
+			return jwtTokenProvider.createJWToken(userId, new Date(), request.getLocale());
 		}
 		response.sendError(HttpServletResponse.SC_NOT_FOUND);
 		return null;
