@@ -32,13 +32,21 @@ public class DefaultAmwayApacCartFacade extends DefaultAmwayCartFacade implement
                 final List<OrderEntryData> recentlyAddedListEntries = new ArrayList<>(data.getEntries());
                 Collections.reverse(recentlyAddedListEntries);
                 data.setEntries(Collections.unmodifiableList(recentlyAddedListEntries));
-            } else if (AmwayapacFacadesConstants.SORT_BY_PRODUCT_NAME.equals(sortBy)) {
+            } else if (AmwayapacFacadesConstants.SORT_BY_PRICE_ASCENDING.equals(sortBy)) {
+                final List<OrderEntryData> recentlyAddedListEntries = new ArrayList<>(data.getEntries());
+                recentlyAddedListEntries.sort((o1, o2) -> Double.compare(o1.getBasePrice().getValue().doubleValue(), o2.getBasePrice().getValue().doubleValue()));
+                data.setEntries(Collections.unmodifiableList(recentlyAddedListEntries));
+            } else if (AmwayapacFacadesConstants.SORT_BY_PRICE_DESCEDNING.equals(sortBy)) {
+                final List<OrderEntryData> recentlyAddedListEntries = new ArrayList<>(data.getEntries());
+                recentlyAddedListEntries.sort((o1, o2) -> Double.compare(o2.getBasePrice().getValue().doubleValue(), o1.getBasePrice().getValue().doubleValue()));
+                data.setEntries(Collections.unmodifiableList(recentlyAddedListEntries));
+            } else if (AmwayapacFacadesConstants.SORT_BY_NAME_ASCENDING.equals(sortBy)) {
                 final List<OrderEntryData> recentlyAddedListEntries = new ArrayList<>(data.getEntries());
                 recentlyAddedListEntries.sort((o1, o2) -> o1.getProduct().getName().compareTo(o2.getProduct().getName()));
                 data.setEntries(Collections.unmodifiableList(recentlyAddedListEntries));
-            } else if (AmwayapacFacadesConstants.SORT_BY_CATEGORY_NAME.equals(sortBy)) {
+            } else if (AmwayapacFacadesConstants.SORT_BY_NAME_DESCEDNING.equals(sortBy)) {
                 final List<OrderEntryData> recentlyAddedListEntries = new ArrayList<>(data.getEntries());
-                recentlyAddedListEntries.sort((o1, o2) -> o1.getProduct().getCategories().stream().findFirst().get().getName().compareTo(o2.getProduct().getCategories().stream().findFirst().get().getName()));
+                recentlyAddedListEntries.sort((o1, o2) -> o2.getProduct().getName().compareTo(o1.getProduct().getName()));
                 data.setEntries(Collections.unmodifiableList(recentlyAddedListEntries));
             }
             return data;

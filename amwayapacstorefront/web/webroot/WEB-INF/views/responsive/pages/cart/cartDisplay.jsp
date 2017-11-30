@@ -21,9 +21,11 @@
                                 <form:form id="sortCartForm" action="${cartSortFormAction}" method="post" >
                                     <label class="control-label cart-detail__label" for="sortForm1">Sort by</label>
                                     <select class="cart-detail__size" name="sortBy">
-                                        <option value="Category"><spring:theme code="cart.page.sort.category" /></option>
-                                        <option value="ProductName"><spring:theme code="cart.page.sort.itemName" /></option>
                                         <option value="LastItemAdded"><spring:theme code="cart.page.sort.lastItemAdded" /></option>
+                                        <option value="PriceAscending"><spring:theme code="cart.page.sort.price.ascending" /></option>
+                                        <option value="PriceDescending"><spring:theme code="cart.page.sort.price.descending" /></option>
+                                        <option value="NameAscending"><spring:theme code="cart.page.sort.name.ascending" /></option>
+                                        <option value="NameDescending"><spring:theme code="cart.page.sort.name.descending" /></option>
                                     </select>
                                     <a class="btn-blue-white js-sort-cart-submit" href="#"><spring:theme code="cart.page.sort.button.apply" /></a>
                                 </form:form>
