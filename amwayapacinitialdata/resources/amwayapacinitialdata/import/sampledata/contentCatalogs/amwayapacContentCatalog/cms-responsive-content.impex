@@ -951,7 +951,24 @@ INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&co
 ;;bannerTermsDesc;;bannerTermsDesc
 
 INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
-;;termsTitle1;;termsTitle1
+;;termsTitle1;termsTitle1
+;;termsDesc1SimplePage;termsDesc1SimplePage
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
+;;TermsContentSlot1-SimpleTerms;Slot for Registration Simple Terms;true;AmwayApacSimpleContainerTermsComponent
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='registration-simple-terms'];contentSlot(uid,$contentCV)[unique=true]
+;;TermsContentSlot1-SimpleTerms;Terms1;;TermsContentSlot1-SimpleTerms
+
+INSERT_UPDATE AmwayApacSimpleContainerTermsComponent;$contentCV[unique=true];uid[unique=true];name;title(uid, $contentCV);content(uid, $contentCV);maxHeight[default=false];&componentRef
+;;AmwayApacSimpleContainerTermsComponent;Simple Container Terms Component;termsTitle1;termsDesc1SimplePage;true;AmwayApacSimpleContainerTermsComponent
+
+########## register simple terms page ##########
+
+
+########## register multiple terms page
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
 ;;tabbedTermsTitle2;;tabbedTermsTitle2
 ;;tabbedTermsTitle3;;tabbedTermsTitle3
 ;;tabbedTermsTitle4;;tabbedTermsTitle4
@@ -965,24 +982,10 @@ INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&co
 ;;termsTabTitle7;;termsTabTitle7
 ;;termsTabTitle8;;termsTabTitle8
 ;;termsTabTitle9;;termsTabTitle9
-;;termsDesc1;;termsDesc1
 ;;termsDesc2;;termsDesc2
 ;;termsDesc3;termsDesc3
 ;;termsTabDesc1;;termsTabDesc1
-
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
-;;TermsContentSlot1-SimpleTerms;Slot for Registration Simple Terms;true;AmwayApacSimpleContainerTermsComponent
-
-INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='registration-simple-terms'];contentSlot(uid,$contentCV)[unique=true]
-;;TermsContentSlot1-SimpleTerms;Terms1;;TermsContentSlot1-SimpleTerms
-
-INSERT_UPDATE AmwayApacSimpleContainerTermsComponent;$contentCV[unique=true];uid[unique=true];name;title(uid, $contentCV);content(uid, $contentCV);maxHeight[default=false];radio1Description;radio2Description;&componentRef
-;;AmwayApacSimpleContainerTermsComponent;Simple Container Terms Component;termsTitle1;termsDesc1;true;"Accept";"Do Not Accept";AmwayApacSimpleContainerTermsComponent
-
-########## register simple terms page ##########
-
-
-########## register multiple terms page
+;;termsDesc1MultiplePage;termsDesc1MultiplePage
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
 ;;TermsContentSlot1-MultipleTerms;Slot for Registration Multiple Terms;true;AmwayApacSimpleContainerMultipleTermsComponent1
@@ -1002,17 +1005,17 @@ INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];positi
 ;;TermsContentSlot6-MultipleTerms;Terms6;;TermsContentSlot6-MultipleTerms
 ;;TermsContentSlot7-MultipleTerms;Terms7;;TermsContentSlot7-MultipleTerms
 
-INSERT_UPDATE AmwayApacSimpleContainerTermsComponent;$contentCV[unique=true];uid[unique=true];name;title(uid, $contentCV);content(uid, $contentCV);maxHeight[default=false];radio1Description;radio2Description;&componentRef
-;;AmwayApacSimpleContainerMultipleTermsComponent1;Simple Container Multiple Terms Component;termsTitle1;termsDesc1;;"Accept";"Do Not Accept";AmwayApacSimpleContainerMultipleTermsComponent1
-;;AmwayApacSimpleContainerMultipleTermsComponent2;Simple Container Multiple Terms Component;tabbedTermsTitle4;termsTabDesc1;;"Accept";"Do Not Accept";AmwayApacSimpleContainerMultipleTermsComponent2
-;;AmwayApacSimpleContainerMultipleTermsComponent3;Simple Container Multiple Terms Component;tabbedTermsTitle5;termsTabDesc1;;"Accept";"Do Not Accept";AmwayApacSimpleContainerMultipleTermsComponent3
+INSERT_UPDATE AmwayApacSimpleContainerTermsComponent;$contentCV[unique=true];uid[unique=true];name;title(uid, $contentCV);content(uid, $contentCV);maxHeight[default=false];&componentRef
+;;AmwayApacSimpleContainerMultipleTermsComponent1;Simple Container Multiple Terms Component;termsTitle1;termsDesc1MultiplePage;;AmwayApacSimpleContainerMultipleTermsComponent1
+;;AmwayApacSimpleContainerMultipleTermsComponent2;Simple Container Multiple Terms Component;tabbedTermsTitle4;termsTabDesc1;;AmwayApacSimpleContainerMultipleTermsComponent2
+;;AmwayApacSimpleContainerMultipleTermsComponent3;Simple Container Multiple Terms Component;tabbedTermsTitle5;termsTabDesc1;;AmwayApacSimpleContainerMultipleTermsComponent3
 
 INSERT_UPDATE AmwayApacSimpleTermsComponent;$contentCV[unique=true];uid[unique=true];name;title(uid, $contentCV);content(uid, $contentCV);radio1Description;radio2Description;&componentRef
 ;;AmwayApacSimpleTermsComponent;Simple Multiple Terms Component;termsTitle1;termsDesc2;"Collective Agreement";"I do not agree with";AmwayApacSimpleTermsComponent
 
-INSERT_UPDATE AmwayApacTabbedTermsComponent;$contentCV[unique=true];uid[unique=true];name;title(uid, $contentCV);radio1Description(uid, $contentCV);radio2Description(uid, $contentCV);termsTabComponents(&componentRef);&componentRef
-;;AmwayApacMultipleTabbedTermsComponent2;Tabbed Terms Component;tabbedTermsTitle2;"Accept";"Do Not Accept";AmwayApacTermsTabComponent2,AmwayApacTermsTabComponent3,AmwayApacTermsTabComponent4;AmwayApacMultipleTabbedTermsComponent2
-;;AmwayApacMultipleTabbedTermsComponent3;Tabbed Terms Component;tabbedTermsTitle3;"Accept";"Do Not Accept";AmwayApacTermsTabComponent5,AmwayApacTermsTabComponent6,AmwayApacTermsTabComponent7,AmwayApacTermsTabComponent8,AmwayApacTermsTabComponent9,AmwayApacTermsTabComponent10;AmwayApacMultipleTabbedTermsComponent3
+INSERT_UPDATE AmwayApacTabbedTermsComponent;$contentCV[unique=true];uid[unique=true];name;title(uid, $contentCV);termsTabComponents(&componentRef);&componentRef
+;;AmwayApacMultipleTabbedTermsComponent2;Tabbed Terms Component;tabbedTermsTitle2;AmwayApacTermsTabComponent2,AmwayApacTermsTabComponent3,AmwayApacTermsTabComponent4;AmwayApacMultipleTabbedTermsComponent2
+;;AmwayApacMultipleTabbedTermsComponent3;Tabbed Terms Component;tabbedTermsTitle3;AmwayApacTermsTabComponent5,AmwayApacTermsTabComponent6,AmwayApacTermsTabComponent7,AmwayApacTermsTabComponent8,AmwayApacTermsTabComponent9,AmwayApacTermsTabComponent10;AmwayApacMultipleTabbedTermsComponent3
 
 INSERT_UPDATE AmwayApacTermsTabComponent;$contentCV[unique=true];uid[unique=true];name;title(uid, $contentCV);description(uid, $contentCV);colwidth[default=4];&componentRef
 ;;AmwayApacTermsTabComponent2;Terms Tab Component;termsTabTitle1;termsTabDesc1;;AmwayApacTermsTabComponent2

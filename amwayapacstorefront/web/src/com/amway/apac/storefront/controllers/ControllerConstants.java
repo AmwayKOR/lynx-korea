@@ -516,6 +516,19 @@ public interface ControllerConstants
 			String SHOPPING_LIST_ADD_PRODUCT_LIST_UID_EMPTY = "shopping.list.add.product.error.empty.listuid";
 
 		}
+
+		interface Registration
+		{
+			/**
+			 * Error Message for the case when some of the terms not accepted.
+			 */
+			String TERMS_ACCEPT_ERROR = "terms.accept.error";
+
+			/**
+			 * Error message for the case when no terms are accepted/un-accepted.
+			 */
+			String NO_TERMS_ACCEPTED = "no.term.accepted";
+		}
 	}
 
 	/**

@@ -13,22 +13,23 @@
 	</h3>
 	<div class="conditions">
 		<div class="row">
-			<c:set var="mdWidth" scope="request" value="${true}" />
 			<c:forEach items="${termsTabComponents}" var="tabTerms" varStatus="status">
-				<cms:component component="${tabTerms}" />
+				<div class="col-xs-12 col-md-${tabTerms.colwidth} col">
+					<cms:component component="${tabTerms}" />
+				</div>
 			</c:forEach>
 		</div>
-		<button class="text-btn view-all">
+		<a class="text-btn view-all">
 			<spring:theme code="register.terms.popup.viewall.button" />
 			<i class="icon icon-arrow-downs"></i>
 			<i class="icon icon-arrow-ups"></i>
-		</button>
+		</a>
 	</div>
-	<div class="action amway-theme">
+	<div class="action amway-theme page-radio-wrapper">
 		<div class="radio-wrapper">
 			<label class="amw-radio-wrap radio-label">
 				<form:radiobutton value="true" path="term[${radioCount}].termAccepted" name="radio-${radioCount}"
-					cssClass="amw-global-radio radio-${radioCount}" />
+					data-radio-count="radio-${radioCount}" cssClass="amw-global-radio radio-${radioCount}" />
 				<span class="amw-radio-overlay"></span>
 				<span class="amw-label-radio-text">${radio1Description}</span>
 			</label>
@@ -36,7 +37,7 @@
 		<div class="radio-wrapper">
 			<label class="amw-radio-wrap radio-label">
 				<form:radiobutton value="false" path="term[${radioCount}].termAccepted" name="radio-${radioCount}"
-					cssClass="amw-global-radio radio-${radioCount}" />
+					data-radio-count="radio-${radioCount}" cssClass="amw-global-radio radio-${radioCount}" />
 				<span class="amw-radio-overlay"></span>
 				<span class="amw-label-radio-text">${radio2Description}</span>
 			</label>
@@ -52,7 +53,6 @@
 			<div class="pop-content">
 				<div id="terms">
 					<div class="div-table">
-						<c:set var="mdWidth" scope="request" value="${false}" />
 						<c:forEach items="${termsTabComponents}" var="tabTerms" varStatus="status">
 							<cms:component component="${tabTerms}" />
 						</c:forEach>

@@ -8,6 +8,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+import com.amway.apac.storefront.controllers.ControllerConstants;
+
 
 /**
  * Validator for Terms and Condition Page
@@ -15,16 +17,21 @@ import org.springframework.validation.Validator;
  * @author Badrun Bandi
  *
  */
-
 @Component("termValidator")
 public class AmwayApacTermValidator implements Validator
 {
+	/**
+	 * Restricts the use of validator for any other type of form except {@link AmwayApacTermForm}.
+	 */
 	@Override
 	public boolean supports(final Class<?> aClass)
 	{
 		return AmwayApacTermForm.class.equals(aClass);
 	}
 
+	/**
+	 * Validates the Register Terms form.
+	 */
 	@Override
 	public void validate(final Object object, final Errors errors)
 	{
@@ -36,13 +43,13 @@ public class AmwayApacTermValidator implements Validator
 			{
 				if (BooleanUtils.isNotTrue(term.getTermAccepted()))
 				{
-					errors.rejectValue(null, "account.term.accepted");
+					errors.rejectValue(null, ControllerConstants.ErrorMessageKeys.Registration.TERMS_ACCEPT_ERROR);
 				}
 			}
 		}
 		else
 		{
-			errors.rejectValue(null, "no.term.accepted");
+			errors.rejectValue(null, ControllerConstants.ErrorMessageKeys.Registration.NO_TERMS_ACCEPTED);
 		}
 	}
 }

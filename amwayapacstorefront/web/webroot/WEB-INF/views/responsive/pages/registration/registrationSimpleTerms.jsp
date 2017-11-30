@@ -4,7 +4,9 @@
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+
 <template:page pageTitle="${pageTitle}">
+
 	<c:url var="registerHomeUrl" value="/register-landing-page" />
 	<c:set var="radioCount" scope="request" value="${0}" />
 

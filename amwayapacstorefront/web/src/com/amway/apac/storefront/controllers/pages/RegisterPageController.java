@@ -44,7 +44,7 @@ public class RegisterPageController extends AbstractRegisterPageController
 {
 	private HttpSessionRequestCache httpSessionRequestCache;
 
-	private static final String FORM_GLOBAL_ERROR = "form.global.error";
+	private static final String TERM_ACCEPT_ERROR = "terms.accept.error";
 
 	// CMS Pages
 	private static final String SIMPLE_TERM_PAGE = "simple-terms";
@@ -56,11 +56,6 @@ public class RegisterPageController extends AbstractRegisterPageController
 
 	@Resource(name = "registrationBreadcrumbBuilder")
 	private ResourceBreadcrumbBuilder registrationBreadcrumbBuilder;
-
-	protected AmwayApacTermValidator getTermValidator()
-	{
-		return termValidator;
-	}
 
 	@Override
 	protected AbstractPageModel getCmsPage() throws CMSItemNotFoundException
@@ -106,7 +101,7 @@ public class RegisterPageController extends AbstractRegisterPageController
 	}
 
 	/**
-	 * Simple Registration Terms page loading controller.
+	 * Simple Registration Terms page controller.
 	 *
 	 * @param model
 	 *           view model
@@ -117,7 +112,7 @@ public class RegisterPageController extends AbstractRegisterPageController
 	public String simpleTerms(final Model model) throws CMSItemNotFoundException
 	{
 		model.addAttribute(ControllerConstants.ModelParameters.TERM_FORM_STRING, new AmwayApacTermForm());
-		model.addAttribute(ControllerConstants.GeneralConstants.BREADCRUMBS_ATTR, getRegistrationBreadcrumbBuilder()
+		model.addAttribute(ControllerConstants.GeneralConstants.BREADCRUMBS_ATTR, registrationBreadcrumbBuilder
 				.getBreadcrumbs((ControllerConstants.GeneralConstants.REGISTER_SIMPLE_TERMS_PAGE_BREADCRUMB_KEY)));
 		setCMSPage(model, SIMPLE_TERM_PAGE);
 		return ControllerConstants.Views.Pages.Registration.RegistrationSimpleTerms;
@@ -140,25 +135,22 @@ public class RegisterPageController extends AbstractRegisterPageController
 			throws CMSItemNotFoundException
 	{
 
-		getTermValidator().validate(termForm, bindingResult);
-
+		termValidator.validate(termForm, bindingResult);
+		String viewPage = REDIRECT_TO_MULTIPLE_TERMS;
 		if (bindingResult.hasErrors())
 		{
 			model.addAttribute(ControllerConstants.ModelParameters.TERM_FORM_STRING, termForm);
-			GlobalMessages.addErrorMessage(model, FORM_GLOBAL_ERROR);
-			model.addAttribute(ControllerConstants.GeneralConstants.BREADCRUMBS_ATTR, getRegistrationBreadcrumbBuilder()
+			GlobalMessages.addErrorMessage(model, TERM_ACCEPT_ERROR);
+			model.addAttribute(ControllerConstants.GeneralConstants.BREADCRUMBS_ATTR, registrationBreadcrumbBuilder
 					.getBreadcrumbs((ControllerConstants.GeneralConstants.REGISTER_SIMPLE_TERMS_PAGE_BREADCRUMB_KEY)));
 			setCMSPage(model, SIMPLE_TERM_PAGE);
-			return ControllerConstants.Views.Pages.Registration.RegistrationSimpleTerms;
+			viewPage = ControllerConstants.Views.Pages.Registration.RegistrationSimpleTerms;
 		}
-		else
-		{
-			return REDIRECT_TO_MULTIPLE_TERMS;
-		}
+		return viewPage;
 	}
 
 	/**
-	 * Multiple Registration Terms page loading controller.
+	 * Multiple Registration Terms page controller.
 	 *
 	 * @param model
 	 *           view model
@@ -169,9 +161,10 @@ public class RegisterPageController extends AbstractRegisterPageController
 	public String multipleTerms(final Model model) throws CMSItemNotFoundException
 	{
 		model.addAttribute(ControllerConstants.ModelParameters.TERM_FORM_STRING, new AmwayApacTermForm());
-		model.addAttribute(ControllerConstants.GeneralConstants.BREADCRUMBS_ATTR, getRegistrationBreadcrumbBuilder()
+		model.addAttribute(ControllerConstants.GeneralConstants.BREADCRUMBS_ATTR, registrationBreadcrumbBuilder
 				.getBreadcrumbs((ControllerConstants.GeneralConstants.REGISTER_MULTIPLE_TERMS_PAGE_BREADCRUMB_KEY)));
-		return setCMSPage(model, MULTIPLE_TERM_PAGE);
+		setCMSPage(model, MULTIPLE_TERM_PAGE);
+		return getViewForPage(model);
 	}
 
 	/**
@@ -183,7 +176,7 @@ public class RegisterPageController extends AbstractRegisterPageController
 	 *           Binding Results
 	 * @param model
 	 *           View Model
-	 * @return vie
+	 * @return view
 	 * @throws CMSItemNotFoundException
 	 */
 	@RequestMapping(value = "/multiple-terms", method = RequestMethod.POST)
@@ -191,40 +184,30 @@ public class RegisterPageController extends AbstractRegisterPageController
 			throws CMSItemNotFoundException
 	{
 
-		getTermValidator().validate(termForm, bindingResult);
-		model.addAttribute(ControllerConstants.ModelParameters.TERM_FORM_STRING, termForm);
+		termValidator.validate(termForm, bindingResult);
+		String viewPage = REDIRECT_TO_MULTIPLE_TERMS;
 		if ((bindingResult.hasErrors()) || (BooleanUtils.isNotTrue(termForm.getVerified())))
 		{
-			model.addAttribute(ControllerConstants.GeneralConstants.BREADCRUMBS_ATTR, getRegistrationBreadcrumbBuilder()
+			model.addAttribute(ControllerConstants.ModelParameters.TERM_FORM_STRING, termForm);
+			model.addAttribute(ControllerConstants.GeneralConstants.BREADCRUMBS_ATTR, registrationBreadcrumbBuilder
 					.getBreadcrumbs((ControllerConstants.GeneralConstants.REGISTER_MULTIPLE_TERMS_PAGE_BREADCRUMB_KEY)));
-			GlobalMessages.addErrorMessage(model, FORM_GLOBAL_ERROR);
-			return setCMSPage(model, MULTIPLE_TERM_PAGE);
+			GlobalMessages.addErrorMessage(model, TERM_ACCEPT_ERROR);
+			setCMSPage(model, MULTIPLE_TERM_PAGE);
+			viewPage = getViewForPage(model);
 		}
-		else
-		{
-			return REDIRECT_TO_MULTIPLE_TERMS;
-		}
+		return viewPage;
 	}
 
-	protected String setCMSPage(final Model model, final String cmsPage) throws CMSItemNotFoundException
+	private void setCMSPage(final Model model, final String cmsPage) throws CMSItemNotFoundException
 	{
 		storeCmsPageInModel(model, getContentPageForLabelOrId(cmsPage));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(cmsPage));
 		storeContentPageTitleInModel(model, getPageTitle(getContentPageForLabelOrId(cmsPage).getTitle()));
-		return getViewForPage(model);
 	}
 
 	protected String getPageTitle(final String string)
 	{
 		return getPageTitleResolver().resolveHomePageTitle(string);
-	}
-
-	/**
-	 * @return the registrationBreadcrumbBuilder
-	 */
-	public ResourceBreadcrumbBuilder getRegistrationBreadcrumbBuilder()
-	{
-		return registrationBreadcrumbBuilder;
 	}
 
 }

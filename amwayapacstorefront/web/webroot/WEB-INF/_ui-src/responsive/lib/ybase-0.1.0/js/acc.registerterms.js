@@ -1,14 +1,16 @@
 ACC.registerterms = {
 		
 	_autoload: [
-        "bindRegisterTerms",
+        "bindRegisterTermsPopup",
         "bindTooltipInfoDisplay"
 	],
 		
-	bindRegisterTerms:function(){
-
+	bindRegisterTermsPopup:function(){
 		 $(document).on('click', '.show-terms', function(){
+			var checkedRadio = $(this).closest("li").find(".page-radio-wrapper input:checked");
+			var checkedRadioVal = checkedRadio.val();
 			$('#pop-terms').html($(this).closest("li").find("div:hidden").html());
+			$('#pop-terms').find("input[value='"+checkedRadioVal+"']").prop("checked",true);
 			$('#pop-terms').fadeIn();
 		});
 		
@@ -17,8 +19,8 @@ ACC.registerterms = {
 	        var checkedRadio = $(this).closest(".pop-box").find("input:checked");
 	        var checkedRadioVal = checkedRadio.val();
 	        var radioName = checkedRadio.data("radioCount");
-	        var pageRadioToBeChecked = $(document).find("input."+radioName+"[value='"+checkedRadioVal+"']");
-	        pageRadioToBeChecked.trigger("click");
+	        var pageRadioToBeChecked = $(document).find(".page-radio-wrapper input."+radioName+"[value='"+checkedRadioVal+"']");
+	        pageRadioToBeChecked.prop("checked",true);
 	        $('.popup').fadeOut();
 	    });
 	    

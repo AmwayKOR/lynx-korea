@@ -44,7 +44,7 @@ INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;fronten
 ;;HomePageMainTemplate;Home Main Page Template;layout/homePageLayout;CategoryPage,ContentPage
 ;;ContentArticlePagesTemplate;Content Article Pages Template;business/contentArticlePagesLayout;ContentPage
 ;;RegisterLandingPageTemplate;Register Landing Page Template;account/registerLandingLayoutPage;ContentPage
-;;RegistrationTermsTemplate;Registration Terms Pages Template;account/accountRegisterTermsPage;ContentPage
+;;RegistrationTermsTemplate;Registration Terms Pages Template;account/registerTermsPage;ContentPage
 ;;OrderConfirmationPageTemplate;Order Confirmation Page Template;checkout/checkoutConfirmationLayoutPage;ContentPage
 
 # Templates without a frontendTemplateName
@@ -85,7 +85,7 @@ UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];velocityTemplate[tr
 ;;HomePageMainTemplate      ;$jarResourceCms/structure-view/structure_homePageMainTemplate.vm
 ;;ContentArticlePagesTemplate		;$jarResourceCms/structure-view/structure_contentArticlePagesTemplate.vm
 ;;RegisterLandingPageTemplate       ;$jarResourceCms/structure-view/structure_registerLandingPageTemplate.vm
-;;RegistrationTermsTemplate      ;$jarResourceCms/structure-view/structure_accountRegistrationTermsTemplate.vm
+;;RegistrationTermsTemplate      ;$jarResourceCms/structure-view/structure_registrationTermsTemplate.vm
 
 # Create ContentSlotNames
 # Each PageTemplate has a number of ContentSlotNames, with a list of valid components for the slot.
@@ -743,11 +743,19 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 # Registration terms and Condition content slots
 INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='RegistrationTermsTemplate'];validComponentTypes(code);compTypeGroup(code)
 ;SiteLogo;;;logo
+;MobileCountrySelector;;;
+;CountrySelector;;;
+;HeaderLinks;;;headerlinks
+;HeaderAccountNavigation;;;
+;BreadCrumb;;;
 ;SearchBox;;;searchbox
 ;MiniCart;;;minicart
 ;MobileMiniCart;;;mobileminicart
-;MobileNavigationBar;;;navigation
 ;NavigationBar;;;navigation
+;MobileNavigationBar;;;navigation
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
 ;TermsBanner;;;
 ;Terms1;;;
 ;Terms2;;;
@@ -756,7 +764,6 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 ;Terms5;;;
 ;Terms6;;;
 ;Terms7;;;
-;Footer;;;footer
 
 # Create Content Slots
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active
@@ -1433,14 +1440,11 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 ;;Mobile-NavigationBar-RegisterTerms;MobileNavigationBar;;MobileNavigationBarSlot;true
 ;;HeaderAccountNavigation-RegisterTerms;HeaderAccountNavigation;;HeaderAccountNavigationSlot;true
 ;;BreadCrumb-RegisterTerms;BreadCrumb;;BreadCrumbSlot;true
-;;NavigationBar-RegisterTerms;NavigationBar;;NavigationBarSlot;true
-;;MiniCart-RegisterTerms;MiniCart;;MiniCartSlot;true
 ;;Footer-RegisterTerms;Footer;;FooterSlot;true
 ;;HeaderLinks-RegisterTerms;HeaderLinks;;HeaderLinksSlot;true
 ;;SearchBox-RegisterTerms;SearchBox;;SearchBoxSlot;true
 ;;TopHeaderSlot-RegisterTerms;TopHeaderSlot;;TopHeaderSlot;true
 ;;BottomHeaderSlot-RegisterTerms;BottomHeaderSlot;;BottomHeaderSlot;true
-;;Mobile-NavigationBar-RegisterTerms;MobileNavigationBar;;MobileNavigationBarSlot;true
 ;;TermsBanner-RegisterTerms;TermsBanner;;TermsBannerContentSlot;true
 
 

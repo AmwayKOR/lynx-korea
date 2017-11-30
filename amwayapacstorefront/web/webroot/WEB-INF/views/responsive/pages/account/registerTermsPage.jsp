@@ -5,12 +5,15 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-<c:url var="registerHomeUrl" value="/register-landing-page" />
 <template:page pageTitle="${pageTitle}">
+
 	<c:set var="radioCount" scope="request" value="${0}" />
+	<c:url var="registerHomeUrl" value="/register-landing-page" />
+
 	<cms:pageSlot position="TermsBanner" var="component">
 		<cms:component component="${component}" />
 	</cms:pageSlot>
+
 	<div class="container-fluid main-container">
 		<form:form method="post" modelAttribute="termForm" commandName="termForm" action="multiple-terms">
 			<ul id="terms" class="box-sizing">
@@ -39,21 +42,16 @@
 					<c:set var="radioCount" scope="request" value="${radioCount+1}" />
 				</cms:pageSlot>
 				<cms:pageSlot position="Terms7" var="component">
-					<c:if test="${not empty component}">
-						<li>
-							<div class="agreement-box">
-								<cms:component component="${component}" />
-							</div>
-							<div class="action amway-theme">
-								<spring:bind path="verified">
-									<input id="verified" name="verified" type="checkbox" />
-								</spring:bind>
-								<label for="verified" class="normal">Verified</label>
-							</div>
-						</li>
-					</c:if>
+					<li>
+						<div class="agreement-box">
+							<cms:component component="${component}" />
+						</div>
+						<div class="action amway-theme">
+							<input id="verified" name="verified" type="checkbox" />
+							<label for="verified" class="normal"><spring:theme code="register.terms.verified.label" /></label>
+						</div>
+					</li>
 					<c:set var="radioCount" scope="request" value="${radioCount+1}" />
-					<input type="hidden" name="radioCount" value="${radioCount}" />
 				</cms:pageSlot>
 			</ul>
 			<div class="next-control">
