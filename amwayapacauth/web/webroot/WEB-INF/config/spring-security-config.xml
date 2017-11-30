@@ -239,7 +239,8 @@
     
     <alias name="amwayJWTokenProvider" alias="jWTokenProvider"/>
     <bean id="amwayJWTokenProvider" class="com.amway.apac.auth.security.impl.AmwayJWTTokenProviderImpl">
-        <property name="lynxCustomerFacade" ref="customerFacade" />
+        <property name="accountService" ref="lynxAccountService" />
+        <property name="userService" ref="userService" />
         <property name="customerNameStrategy" ref="customerNameStrategy"/>
     </bean>
 

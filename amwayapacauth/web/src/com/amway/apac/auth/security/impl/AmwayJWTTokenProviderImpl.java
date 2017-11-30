@@ -3,6 +3,8 @@
  */
 package com.amway.apac.auth.security.impl;
 
+import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.platform.util.Config;
 
 import io.jsonwebtoken.JwtBuilder;
@@ -21,8 +23,8 @@ import org.apache.log4j.Logger;
 
 import com.amway.apac.auth.security.AmwayJWTTokenProvider;
 import com.amway.core.model.AmwayAccountModel;
+import com.amway.lynxcore.account.LynxAccountService;
 import com.amway.lynxcore.strategies.LynxCustomerNameStrategy;
-import com.amway.lynxfacades.customer.LynxCustomerFacade;
 
 
 /**
@@ -37,7 +39,8 @@ public class AmwayJWTTokenProviderImpl implements AmwayJWTTokenProvider
 	private static final String AMWAY_IDP_JWT_TTLMILES = "amway.idp.jwt.ttlmiles";
 
 	private LynxCustomerNameStrategy customerNameStrategy;
-	private LynxCustomerFacade lynxCustomerFacade;
+	private LynxAccountService accountService;
+	private UserService userService;
 
 
 	/*
@@ -46,45 +49,46 @@ public class AmwayJWTTokenProviderImpl implements AmwayJWTTokenProvider
 	 * @see com.amway.apac.auth.security.AmwayJWTTokenProvider#createJWToken(com.amway.core.model.AmwayAccountModel)
 	 */
 	@Override
-	public String createJWToken(final String amwayAccountId, final Date creationDate)
+	public String createJWToken(final String userId, final Date creationDate)
 	{
-		LOG.info("JWT :: " + amwayAccountId);
-		// get AmwayAccount
-		final AmwayAccountModel amwayAccount = lynxCustomerFacade.getAmwayAccountById(getAmwayAccountId(amwayAccountId));
+		final CustomerModel customer = userService.getUserForUID(userId, CustomerModel.class);
 
-		final Long ttlMillis = Long.valueOf(Config.getParameter(AMWAY_IDP_JWT_TTLMILES));
-		//The JWT signature algorithm we will be using to sign the token
-		final SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
-
-		final long nowMillis = creationDate.getTime();
-		final Date now = new Date(nowMillis);
-
-		//We will sign our JWT with our ApiKey secret
-		final byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(Config.getParameter(AMWAY_IDP_JWT_SECRET_KEY));
-		final Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
-
-		LOG.info("JWT :: Preparing CLAIM");
-
-		final Map<String, Object> claims = prepareTokenClaim(amwayAccount);
-		LOG.info("JWT ::  CLAIM PREPAIRED");
-
-		//Let's set the JWT Claims
-		final JwtBuilder builder = Jwts.builder().setId(amwayAccount.getCode())
-				.setIssuedAt(now)
-				.setSubject("435473587345863475989090u")
-				.setIssuer("/oauth2/default/v1/authorize")
-				.addClaims(claims)
-				.signWith(signatureAlgorithm, signingKey);
-
-		//if it has been specified, let's add the expiration
-		if (ttlMillis >= 0)
+		if (null != customer)
 		{
-			final long expMillis = nowMillis + ttlMillis;
-			final Date exp = new Date(expMillis);
-			builder.setExpiration(exp);
+			// 	get AmwayAccount
+			final AmwayAccountModel amwayAccount = accountService.getAmwayAccount(customer);
+			final Long ttlMillis = Long.valueOf(Config.getParameter(AMWAY_IDP_JWT_TTLMILES));
+			//The JWT signature algorithm we will be using to sign the token
+			final SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
+
+			final long nowMillis = creationDate.getTime();
+			final Date now = new Date(nowMillis);
+
+			//We will sign our JWT with our ApiKey secret
+			final byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(Config.getParameter(AMWAY_IDP_JWT_SECRET_KEY));
+			final Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
+
+			final Map<String, Object> claims = prepareTokenClaim(amwayAccount);
+
+			//Let's set the JWT Claims
+			final JwtBuilder builder = Jwts.builder().setId(amwayAccount.getCode())
+					.setIssuedAt(now)
+					.setSubject("435473587345863475989090u")
+					.setIssuer("/oauth2/default/v1/authorize")
+					.addClaims(claims)
+					.signWith(signatureAlgorithm, signingKey);
+
+			//if it has been specified, let's add the expiration
+			if (ttlMillis >= 0)
+			{
+				final long expMillis = nowMillis + ttlMillis;
+				final Date exp = new Date(expMillis);
+				builder.setExpiration(exp);
+			}
+			//Builds the JWT and serializes it to a compact, URL-safe string
+			return builder.compact();
 		}
-		//Builds the JWT and serializes it to a compact, URL-safe string
-		return builder.compact();
+		return null;
 	}
 
 	/**
@@ -137,14 +141,22 @@ public class AmwayJWTTokenProviderImpl implements AmwayJWTTokenProvider
 		this.customerNameStrategy = customerNameStrategy;
 	}
 
+	/**
+	 * @param accountService
+	 *           the accountService to set
+	 */
+	public void setAccountService(final LynxAccountService accountService)
+	{
+		this.accountService = accountService;
+	}
 
 	/**
-	 * @param lynxCustomerFacade
-	 *           the lynxCustomerFacade to set
+	 * @param userService
+	 *           the userService to set
 	 */
-	public void setLynxCustomerFacade(final LynxCustomerFacade lynxCustomerFacade)
+	public void setUserService(final UserService userService)
 	{
-		this.lynxCustomerFacade = lynxCustomerFacade;
+		this.userService = userService;
 	}
 
 }

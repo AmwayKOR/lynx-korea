@@ -13,8 +13,8 @@ import java.util.Date;
 public interface AmwayJWTTokenProvider
 {
 	/**
-	 * @param amwayAccount
+	 * @param userId
 	 * @return
 	 */
-	String createJWToken(final String amwayAccount, final Date creationDate);
+	String createJWToken(final String userId, final Date creationDate);
 }
