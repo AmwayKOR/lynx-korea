@@ -10,6 +10,7 @@
  */
 package com.amway.apac.storefront.controllers.pages;
 
+import com.amway.apac.facades.cart.AmwayApacCartFacade;
 import de.hybris.platform.acceleratorfacades.cart.action.CartEntryAction;
 import de.hybris.platform.acceleratorfacades.cart.action.CartEntryActionFacade;
 import de.hybris.platform.acceleratorfacades.cart.action.exceptions.CartEntryActionException;
@@ -133,7 +134,7 @@ public class CartPageController extends AbstractCartPageController
 	private CartEntryActionFacade cartEntryActionFacade;
 
 	@Resource(name = "cartFacade")
-	private CartFacade cartFacade;
+	private AmwayApacCartFacade cartFacade;
 
 	@ModelAttribute("showCheckoutStrategies")
 	public boolean isCheckoutStrategyVisible()
@@ -327,6 +328,16 @@ public class CartPageController extends AbstractCartPageController
 
 		prepareDataForPage(model);
 
+		// Return Cart Content
+		return ControllerConstants.Views.Pages.Cart.CartContentPage;
+	}
+
+	@RequestMapping(value = "/sort", method = RequestMethod.POST)
+	public String sortCartEntries(@RequestParam("sortBy") final String sortBy, final Model model) throws CMSItemNotFoundException
+	{
+		prepareDataForPage(model);
+
+		model.addAttribute("cartData", cartFacade.getSessionCartWithSortByOrdering(sortBy));
 		// Return Cart Content
 		return ControllerConstants.Views.Pages.Cart.CartContentPage;
 	}

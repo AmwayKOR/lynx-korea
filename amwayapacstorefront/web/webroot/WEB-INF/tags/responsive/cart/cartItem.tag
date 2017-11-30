@@ -1,7 +1,6 @@
 <%@ tag body-content="empty" trimDirectiveWhitespaces="true" %>
 <%@ attribute name="cartData" required="true" type="de.hybris.platform.commercefacades.order.data.CartData" %>
 <%@ attribute name="entry" required="true" type="de.hybris.platform.commercefacades.order.data.OrderEntryData" %>
-<%@ attribute name="index" required="false" type="java.lang.Integer"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
@@ -20,10 +19,6 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 <c:set var="errorStatus" value="<%= de.hybris.platform.catalog.enums.ProductInfoStatus.valueOf(\"ERROR\") %>" />
-<c:set var="entryNumber" value="${entry.entryNumber}"/>
-<c:if test="${empty index}">
-    <c:set property="index" value="${entryNumber}"/>
-</c:if>
 
 <li class="product-list-item  js-shopping-cart-list-item">
     <div class="col-xs-12 col-md-6 product-details print-col-6">

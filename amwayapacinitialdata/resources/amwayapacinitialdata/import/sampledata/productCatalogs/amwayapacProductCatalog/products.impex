@@ -1292,4 +1292,7 @@ UPDATE Product;code[unique=true];supercategories(code, $catalogVersion)[mode=app
 ;218694;festive;
 ;120467;stylingandtreatments;
 
-
+UPDATE Product;code[unique=true];supercategories(code,$catalogVersion);$catalogVersion
+;112628A;beauty-accessories;
+;120237A;artistrysignaturecolor;
+;101390M;nutrition;

@@ -18,6 +18,12 @@ public class AmwayapacFacadesConstants extends GeneratedAmwayapacFacadesConstant
 {
 	public static final String EXTENSIONNAME = "amwayapacfacades";
 
+	public static final String SORT_BY_PRODUCT_NAME = "ProductName";
+
+	public static final String SORT_BY_CATEGORY_NAME = "Category";
+
+	public static final String SORT_BY_LAST_ITEM_ADDED = "LastItemAdded";
+
 	private AmwayapacFacadesConstants()
 	{
 		//empty

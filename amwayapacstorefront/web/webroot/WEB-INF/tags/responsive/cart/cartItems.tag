@@ -18,7 +18,7 @@
             <div class="col-xs-2 list-item-price"><spring:theme code="basket.page.price"/></div>
             <div class="col-xs-2 list-item-total"><spring:theme code="basket.page.total"/></div></div>
     </li>
-    <c:forEach items="${cartData.rootGroups}" var="group" varStatus="loop">
-        <cart:rootEntryGroup cartData="${cartData}" entryGroup="${group}"/>
+    <c:forEach items="${cartData.entries}" var="entry" varStatus="loop">
+        <cart:cartItem cartData="${cartData}" entry="${entry}" />
     </c:forEach>
 </ul>

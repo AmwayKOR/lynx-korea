@@ -68,6 +68,11 @@ ACC.cartitem = {
         {
             ACC.cartitem.handleQuickShop(e);
         });
+
+        $(document).on("click", '#sortCartForm .js-sort-cart-submit', function (e)
+        {
+            ACC.cartitem.sortCartItems(e);
+        });
 	},
 
 	handleKeyEvent: function (elementRef, event)
@@ -147,6 +152,27 @@ ACC.cartitem = {
                 ACC.global.appendGlobalMessage(ACC.globalMessageTypes.ERROR_MESSAGES_HOLDER, request.responseText);
             }
         });
-    }
+    },
+
+     sortCartItems: function(event){
+         event.preventDefault();
+         var sortCartForm = $('#sortCartForm');
+
+         var sortBy = sortCartForm.find('select[name=sortBy]').val();
+         $.ajax({
+             url: sortCartForm.attr('action'),
+             data: {"sortBy" : sortBy},
+             type: sortCartForm.attr('method'),
+             success: function(data)
+             {
+                 $('#cartContent').html($(data).filter("div#cartContentDiv").html());
+                 ACC.global.findAndUpdateGlobalMessages(data);
+             },
+             error: function(request, status, error)
+             {
+                 ACC.global.appendGlobalMessage(ACC.globalMessageTypes.ERROR_MESSAGES_HOLDER, request.responseText);
+             }
+         });
+     }
 };
 

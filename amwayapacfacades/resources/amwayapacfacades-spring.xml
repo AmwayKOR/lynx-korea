@@ -174,6 +174,10 @@
 	
 	<alias name="defaultAmwayApacProductCarouselFacade" alias="productCarouselFacade"/>
     <bean id="defaultAmwayApacProductCarouselFacade" class="com.amway.apac.facades.product.impl.DefaultAmwayApacProductCarouselFacade" parent="defaultProductCarouselFacade" />
-	
-	
+
+	<alias alias="cartFacade" name="defaultAmwayApacCartFacade"/>
+	<bean id="defaultAmwayApacCartFacade" class="com.amway.apac.facades.cart.impl.DefaultAmwayApacCartFacade" parent="defaultCartFacade">
+		<property name="calculationService" ref="calculationService"/>
+		<property name="modelService" ref="modelService"/>
+	</bean>
 </beans>

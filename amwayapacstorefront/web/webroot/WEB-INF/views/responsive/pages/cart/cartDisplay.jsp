@@ -17,12 +17,17 @@
                     <div class="row">
                         <div class="col-xs-12 col-sm-7 col-md-7 pagination-controls-wrapper">
                             <div class="form-group">
-                                <label class="control-label cart-detail__label" for="sortForm1">Sort by</label>
-                                <select class="cart-detail__size" id="sortBy">
-                                    <option>Last Item Added</option>
-                                    <option selected="">Last Item Added</option>
-                                    <option>Last Item Added</option></select>
-                                <a class="payment-forms__apply btn-blue-white cart-detail__mob-hide" href="#">apply</a></div>
+                                <c:url value="/cart/sort" var="cartSortFormAction" />
+                                <form:form id="sortCartForm" action="${cartSortFormAction}" method="post" >
+                                    <label class="control-label cart-detail__label" for="sortForm1">Sort by</label>
+                                    <select class="cart-detail__size" name="sortBy">
+                                        <option value="Category"><spring:theme code="cart.page.sort.category" /></option>
+                                        <option value="ProductName"><spring:theme code="cart.page.sort.itemName" /></option>
+                                        <option value="LastItemAdded"><spring:theme code="cart.page.sort.lastItemAdded" /></option>
+                                    </select>
+                                    <a class="btn-blue-white js-sort-cart-submit" href="#"><spring:theme code="cart.page.sort.button.apply" /></a>
+                                </form:form>
+                            </div>
                         </div>
                         <div class="col-xs-12 col-sm-5 col-md-5 pagination-wrap">
                             <div class="add-to-component-container">
