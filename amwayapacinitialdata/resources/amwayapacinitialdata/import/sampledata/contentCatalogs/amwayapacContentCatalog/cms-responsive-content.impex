@@ -282,14 +282,14 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;pa
 ;SupportNode;;SupportNode;FooterNode;SupportNode;FooterSupportContactUsNavLink,FooterSupportReturnsNavLink,FooterSupportShippingAndDeliveryNavLink,FooterSupportSalesTaxNavLink,FooterSupportMagagingDittoNavLink;true;FooterSupportNodeLink;
 
 ##### Account Navigation Section
-INSERT_UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];name;parent(uid, $contentCV);&nodeRef;links(&linkRef);visible;nodeLink(&componentRef)
+INSERT_UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];name;parent(uid, $contentCV);&nodeRef;links(&linkRef);visible;nodeLink(&linkRef)
 ;;AccountNavNode;AccountNavNode;root;AccountNavNode;;true;;
-;;MyAccountNode;MyAccountNode;AccountNavNode;MyAccountNode;MyAccountNodeLink;true;;
-;;BillingShippingNode;BillingShippingNode;AccountNavNode;BillingShippingNode;BillingShippingNodeLink;true;;
-;;ShoppingListsNode;ShoppingListsNode;AccountNavNode;ShoppingListsNode;ShoppingListsNodeLink;true;;
-;;DittoNode;DittoNode;AccountNavNode;DittoNode;DittoNodeLink;true;;
-;;PersonalDetailsNode;PersonalDetailsNode;AccountNavNode;PersonalDetailsNode;PersonalDetailsNodeLink;true;;
-;;OrderHistoryNode;OrderHistoryNode;AccountNavNode;OrderHistoryNode;OrderHistoryNodeLink;true;;
+;;MyAccountNode;MyAccountNode;AccountNavNode;MyAccountNode;;true;MyAccountNodeLink;
+;;BillingShippingNode;BillingShippingNode;AccountNavNode;BillingShippingNode;;true;BillingShippingNodeLink;
+;;ShoppingListsNode;ShoppingListsNode;AccountNavNode;ShoppingListsNode;;true;ShoppingListsNodeLink;
+;;DittoNode;DittoNode;AccountNavNode;DittoNode;;true;DittoNodeLink;
+;;PersonalDetailsNode;PersonalDetailsNode;AccountNavNode;PersonalDetailsNode;;true;PersonalDetailsNodeLink;
+;;OrderHistoryNode;OrderHistoryNode;AccountNavNode;OrderHistoryNode;;true;OrderHistoryNodeLink;
 
 INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;children(uid, $contentCV);&nodeRef;links(&linkRef);visible;nodeLink(&componentRef);brandBanners(&componentRef);toolAdviceLinks(&componentRef)
 ;ShopNavNode;;ShopNavNode;NutritionNavNode,BeautyNavNode,BathAndBodyNavNode,HomeNavNode;ShopNavNode;;true;NavShopLink;

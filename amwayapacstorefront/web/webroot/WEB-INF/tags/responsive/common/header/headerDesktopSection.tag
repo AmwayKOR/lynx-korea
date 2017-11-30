@@ -3,6 +3,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
+<%@ taglib prefix="nav" tagdir="/WEB-INF/tags/responsive/nav"%>
 
 <div class="desktop-nav-menu clearfix">
 	<div class="col-sm-12 col-sm-8 top-menu">

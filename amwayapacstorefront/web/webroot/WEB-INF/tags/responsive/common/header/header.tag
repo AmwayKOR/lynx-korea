@@ -40,7 +40,7 @@
 		<nav class="print-hide amw-navigation-menu js-navigation--middle">
 			<div class="navigation-menu-container">
 				<header:headerMobileSection />
-				<header:headerDesktopCountrySelector />
+				<header:headerDesktopSection />
 			</div>
 		</nav>
 	</div>

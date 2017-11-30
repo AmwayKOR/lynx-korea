@@ -6,8 +6,6 @@
 
 <c:if test="${navigationNode.visible}">
 	<li class="account-popover__element">
-		<c:forEach items="${navigationNode.links}" var="link">
-			<cms:component component="${link}" evaluateRestriction="true"/>
-		</c:forEach>
+			<cms:component component="${navigationNode.nodeLink}" evaluateRestriction="true"/>
 	</li>
 </c:if>

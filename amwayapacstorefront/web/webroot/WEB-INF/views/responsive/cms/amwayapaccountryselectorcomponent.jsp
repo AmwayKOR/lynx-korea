@@ -11,22 +11,20 @@
 <%@ taglib prefix="common" tagdir="/WEB-INF/tags/desktop/common"%>
 <%@ taglib prefix="breadcrumb" tagdir="/WEB-INF/tags/desktop/nav/breadcrumb"%>
 
-<button id="countrySelectorDropdown" class="btn small dropdown-toggle"
-	type="button" data-toggle="dropdown" aria-haspopup="true"
-	aria-expanded="true">
+<button id="countrySelectorDropdown" class="btn small dropdown-toggle" type="button" data-toggle="dropdown"
+	aria-haspopup="true" aria-expanded="true">
 	<div class="wrapper">
-		<span class="flag-icon flag-icon-US"> <img class="topbar__flag"
-			src="${currentCountry.image.url}" alt="flag" /></span> <span
-			class="current-country-code">${currentCountry.linkName}</span> <span
-			class="icon icon-arrow-dropdown"> <i class="location-arrow-down glyphicon glyphicon-menu-down"></i>
+		<span class="flag-icon flag-icon-US">
+			<img class="topbar__flag" src="${currentCountry.image.url}" alt="flag" />
+		</span>
+		<span class="current-country-code">${currentCountry.linkName}</span>
+		<span class="icon icon-arrow-dropdown">
+			<i class="location-arrow-down glyphicon glyphicon-menu-down"></i>
 		</span>
 	</div>
 </button>
-<ul class="dropdown-menu countryBox"
-	aria-labelledby="countrySelectorDropdown">
+<ul class="dropdown-menu countryBox" aria-labelledby="countrySelectorDropdown">
 	<c:forEach items="${links}" var="component">
-		<c:if test="${component.visible}">
-			<cms:component component="${component}" evaluateRestriction="true" element="li" class="content-item" />
-		</c:if>
+		<cms:component component="${component}" evaluateRestriction="true" element="li" class="content-item" />
 	</c:forEach>
 </ul>

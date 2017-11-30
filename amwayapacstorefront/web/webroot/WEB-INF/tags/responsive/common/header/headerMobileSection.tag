@@ -7,6 +7,11 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
+<c:set var="isUserAbo" value="false" />
+<sec:authorize ifNotGranted="ROLE_ANONYMOUS">
+	<c:set var="isUserAbo" value="true" />
+</sec:authorize>
+
 <div class="mobile-container">
 	<div class="mobile-wrapper">
 		<nav:MobileTopNav />
@@ -26,10 +31,6 @@
 			</a>
 		</div>
 
-		<c:set var="isUserAbo" value="false" />
-		<sec:authorize ifNotGranted="ROLE_ANONYMOUS">
-			<c:set var="isUserAbo" value="true" />
-		</sec:authorize>
 		<c:choose>
 			<c:when test="${isUserAbo}">
 				<div class="mobile-header-cell user-info-container">
