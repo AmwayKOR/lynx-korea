@@ -5,12 +5,12 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-<spring:url value="/cart/mini-cart/{/componentUid}" var="miniCartUrl" htmlEscape="false">
-	<spring:param name="componentUid"  value="${component.uid}"/>
+<spring:url value="/cart/rollover/{/componentUid}" var="miniCartUrl" htmlEscape="false">
+	<spring:param name="componentUid" value="${component.uid}" />
 </spring:url>
 
 <spring:url value="/cart/miniCart/{/totalDisplay}" var="miniCartItemUrl" htmlEscape="false">
-	<spring:param name="totalDisplay"  value="${totalDisplay}"/>
+	<spring:param name="totalDisplay" value="${totalDisplay}" />
 </spring:url>
 
 <c:set var="isUserAbo" value="false" />
@@ -18,11 +18,11 @@
 	<c:set var="isUserAbo" value="true" />
 </sec:authorize>
 
-<c:choose>
-	<c:when test="${isUserAbo}">
-		<div class=" miniCartSlot componentContainer mobile-header-cell mobile-cart-container">
-			<div class="">
-				<div class="nav-cart nav-cart-wrapper js-nav-cart-wrapper print-hide">
+<div class=" miniCartSlot componentContainer mobile-header-cell mobile-cart-container">
+	<div class="">
+		<div class="nav-cart nav-cart-wrapper js-nav-cart-wrapper print-hide">
+			<c:choose>
+				<c:when test="${isUserAbo}">
 					<a href="#" class="mini-cart-link js-mini-cart-link clearfix is-abo" data-mini-cart-url="${miniCartUrl}"
 						data-mini-cart-item-url="${miniCartItemUrl}">
 						<div class="mini-cart-icon">
@@ -33,26 +33,18 @@
 							<div class="mini-cart-arrow"></div>
 						</div>
 					</a>
-					<!--remove min-cart-->
-				</div>
-				<div class="mini-cart-container js-mini-cart-container"></div>
-			</div>
-		</div>
-	</c:when>
-	<c:otherwise>
-		<div class=" miniCartSlot componentContainer mobile-header-cell mobile-cart-container">
-			<div class="">
-				<div class="nav-cart nav-cart-wrapper js-nav-cart-wrapper print-hide">
+				</c:when>
+				<c:otherwise>
 					<a href="#" class="mini-cart-link js-mini-cart-link clearfix " data-mini-cart-url="" data-mini-cart-refresh-url=""
 						data-mini-cart-name="Shopping Cart" data-mini-cart-empty-name="Empty Cart">
 						<div class="mini-cart-icon ">
 							<span class="icon-shopping-cart"></span>
 						</div>
 					</a>
-					<!--remove min-cart-->
-				</div>
-				<div class="mini-cart-container js-mini-cart-container"></div>
-			</div>
+				</c:otherwise>
+			</c:choose>
+			<!--remove min-cart-->
 		</div>
-	</c:otherwise>
-</c:choose>
+		<div class="mini-cart-container js-mini-cart-container"></div>
+	</div>
+</div>

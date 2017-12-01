@@ -3,6 +3,13 @@
 <%@ taglib prefix="formElement" tagdir="/WEB-INF/tags/responsive/formElement"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
+<%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+
+<c:set var="isUserAbo" value="false" />
+<sec:authorize ifNotGranted="ROLE_ANONYMOUS">
+	<c:set var="isUserAbo" value="true" />
+</sec:authorize>
 
 <div class="country-language-container header-content">
 	<div class="header-element-content">

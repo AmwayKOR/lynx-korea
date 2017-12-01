@@ -106,32 +106,4 @@ public class MiniCartController extends AbstractController
 		return ControllerConstants.Views.Fragments.Cart.CartPopup;
 	}
 
-	@RequestMapping(value = "/cart/mini-cart/" + COMPONENT_UID_PATH_VARIABLE_PATTERN, method = RequestMethod.GET)
-	public String getMiniCartList(@PathVariable final String componentUid, final Model model) throws CMSItemNotFoundException
-	{
-		final CartData cartData = cartFacade.getSessionCart();
-		model.addAttribute("cartData", cartData);
-
-		final MiniCartComponentModel component = (MiniCartComponentModel) cmsComponentService.getSimpleCMSComponent(componentUid);
-
-		final List entries = cartData.getEntries();
-		if (entries != null)
-		{
-			Collections.reverse(entries);
-			model.addAttribute("entries", entries);
-
-			model.addAttribute("numberItemsInCart", Integer.valueOf(entries.size()));
-			if (entries.size() < component.getShownProductCount())
-			{
-				model.addAttribute("numberShowing", Integer.valueOf(entries.size()));
-			}
-			else
-			{
-				model.addAttribute("numberShowing", Integer.valueOf(component.getShownProductCount()));
-			}
-		}
-		model.addAttribute("lightboxBannerComponent", component.getLightboxBannerComponent());
-
-		return ControllerConstants.Views.Fragments.Cart.MiniCart;
-	}
 }

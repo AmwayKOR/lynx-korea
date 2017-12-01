@@ -38,7 +38,7 @@
 						<a href="${cartPageUrl}" class="btn-blue-white">
 							<spring:theme code="checkout.checkout" />
 						</a>
-						<a class="cart-popup__item-link-text closeCbox" href="#">
+						<a class="cart-popup__item-link-text closeCbox">
 							<spring:theme code="cart.page.continue" />
 						</a>
 					</div>
