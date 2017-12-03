@@ -1,6 +1,8 @@
 <%@ taglib prefix="cart" tagdir="/WEB-INF/tags/responsive/cart" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:url value="/cart/checkout" var="checkoutUrl"/>
 <div class="col-md-3">
     <div class="row shopping-cart-total-wrapper">
         <div class="shopping-cart-total">

@@ -7,6 +7,7 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="header" tagdir="/WEB-INF/tags/responsive/common/header"%>
 
+<c:url value="/cart" var="cartUrl" />
 <div class="mini-cart js-mini-cart">
 	<div class="mini-cart-body">
 		<c:choose>

@@ -6,7 +6,6 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="header" tagdir="/WEB-INF/tags/responsive/common/header"%>
 
-<c:url value="/cart" var="cartUrl" />
 <ol class="mini-cart-list">
 	<c:forEach items="${entries}" var="entry" end="${numberShowing - 1}">
 		<header:minicartIndividualEntry entry="${entry}" />

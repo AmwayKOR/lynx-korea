@@ -13,13 +13,14 @@ ACC.minicart = {
 			var miniCartUrl = $(this).data("mini-cart-url");
 			var isAbo = $(this).hasClass("is-abo");
 			var isMinicartOpen = $(".main-header").hasClass("mincart-open");
-			if (isAbo && isMinicartOpen && typeof isMinicartOpen !== "undefined") {
+			if (isAbo && !isMinicartOpen) {
 				$.ajax({
 					url : miniCartUrl,
 					cache : false,
 					type : 'GET',
 					success : function(result) {
 						$("#miniShoppingCartPopupContentPC").html(result);
+						ACC.minicart.showMinicart();
 					}
 				});
 			} else {

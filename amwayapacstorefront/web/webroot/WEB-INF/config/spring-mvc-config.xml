@@ -72,8 +72,8 @@
 		<bean class="com.amway.apac.storefront.interceptors.beforecontroller.SecurityUserCheckBeforeControllerHandler" />
 		<bean class="com.amway.apac.storefront.interceptors.beforecontroller.RequireHardLoginBeforeControllerHandler" >
 				<property name="redirectStrategy" ref="redirectStrategy"/>
-				<property name="loginUrl" value="/login"/>
-				<property name="loginAndCheckoutUrl" value="/login/checkout"/>
+				<property name="loginUrl" value="/"/>
+				<property name="loginAndCheckoutUrl" value="/"/>
 				<property name="requireHardLoginEvaluator" ref="requireHardLoginEvaluator"/>
 		</bean>
 		<bean class="com.amway.apac.storefront.interceptors.beforecontroller.DeviceDetectionBeforeControllerHandler" />

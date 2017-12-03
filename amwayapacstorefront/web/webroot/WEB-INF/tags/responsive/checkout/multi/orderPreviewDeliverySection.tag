@@ -1,6 +1,8 @@
 <%@ tag language="java" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<c:url var="deliveyAddressStep" value="/checkout/multi/delivery-address/add" />
 <div id="shippingdiv" class="shipping-delivery-ship">
 	<p class="shipping-delivery-shipping-header"><spring:theme code="order.preview.shipping.delivery.title"/></p>
 	<div class="order-preview-box">
@@ -33,5 +35,5 @@
 			<p class="shipping-delivery-address-detail">No</p>
 		</div>
 	</div>
-	<a name="savebutton" href="#" class="shipping-delivery-save btn-blue-white"><spring:theme code="order.preview.address.edit"/></a>
+	<a name="savebutton" href="${deliveyAddressStep}" class="shipping-delivery-save btn-blue-white"><spring:theme code="order.preview.address.edit"/></a>
 </div>

@@ -5,4 +5,4 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
 
-<option value="${linkUrl}" class="js-account-option-link text-capitalize">${component.linkName}</option>
+<option value="<c:url value="${linkUrl}" />" class="js-account-option-link text-capitalize">${component.linkName}</option>
