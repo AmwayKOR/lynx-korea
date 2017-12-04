@@ -30,7 +30,7 @@
     <div class="upline-component">
         <div class="upline-header">
             <span class="title">{{= level}}</span>
-            <span class="id">&nbsp;&nbsp;|&nbsp;&nbsp;{{= abo_id}}</span>
+            <span class="id">&nbsp;&nbsp;|&nbsp;&nbsp;{{= aboId}}</span>
         </div>
         <div class="row upline-row">
             <div class="upline-item col-md-6">

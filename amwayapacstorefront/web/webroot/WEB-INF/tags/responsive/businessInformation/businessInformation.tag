@@ -34,12 +34,12 @@
     </div>
     <div class="row">
         <div class="col-xs-12 col-md-3 row-title"><spring:theme code="business.information.tax.id"/></div>
-        <div class="col-xs-12 col-md-5 row-description">{{= tax_id}}</div>
+        <div class="col-xs-12 col-md-5 row-description">{{= taxId}}</div>
     </div>
     <div class="row">
         <div class="col-xs-12 col-md-3 row-title"><spring:theme code="business.information.mission.statement"/></div>
-        <div id="mission-statement-text" class="col-xs-12 col-md-5 row-description mission-statement">{{= mission_statement}}</div>
-        <textarea id="mission-statement-textarea" class="col-xs-12 col-md-5 row-description mission-statement">{{= mission_statement}}</textarea>
+        <div id="mission-statement-text" class="col-xs-12 col-md-5 row-description mission-statement">{{= missionStatement}}</div>
+        <textarea id="mission-statement-textarea" class="col-xs-12 col-md-5 row-description mission-statement">{{= missionStatement}}</textarea>
     </div>
     <div class="row">
         <div class="col-xs-12 col-md-3 row-title">

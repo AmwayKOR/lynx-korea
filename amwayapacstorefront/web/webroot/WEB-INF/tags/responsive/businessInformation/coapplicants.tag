@@ -50,7 +50,7 @@
     	</div>
     	<div class="row">
     		<div class="col-xs-12 col-md-5 row-title"><spring:theme code="business.information.applicant.phone.secondary"/></div>
-    		<div class="col-xs-12 col-md-7 row-description">{{= secondary_phone}}</div>
+    		<div class="col-xs-12 col-md-7 row-description">{{= secondaryPhone}}</div>
     	</div>
     	<div class="row">
     		<div class="col-xs-12 col-md-5 row-title"><spring:theme code="business.information.applicant.email"/></div>
