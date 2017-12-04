@@ -118,8 +118,8 @@ public class AccountPageController extends AbstractSearchPageController
 
 	/**
 	 * We use this suffix pattern because of an issue with Spring 3.1 where a Uri value is incorrectly extracted if it
-	 * contains on or more '.' characters. Please see https://jira.springsource.org/browse/SPR-6164 for a discussion on
-	 * the issue and future resolution.
+	 * contains on or more '.' characters. Please see https://jira.springsource.org/browse/SPR-6164 for a discussion on the
+	 * issue and future resolution.
 	 */
 	private static final String ORDER_CODE_PATH_VARIABLE_PATTERN = "{orderCode:.*}";
 	private static final String ADDRESS_CODE_PATH_VARIABLE_PATTERN = "{addressCode:.*}";
@@ -256,6 +256,12 @@ public class AccountPageController extends AbstractSearchPageController
 
 		final AmwayApacAddressForm addressForm = new AmwayApacAddressForm();
 		model.addAttribute(ADDRESS_FORM_ATTR, addressForm);
+
+		//Get customer information for first name, last name and title code
+		model.addAttribute(ControllerConstants.ModelParameters.CUSTOMERDATA_ATTR, customerFacade.getCurrentCustomer());
+		//Add in region and country to populate edit form
+		model.addAttribute(COUNTRY_ATTR, getCmsSiteService().getCurrentSite().getDefaultCountry().getIsocode());
+
 		for (final AddressData addressData : userFacade.getAddressBook())
 		{
 			if (addressData.getId() != null && addressData.getId().equals(addressCode)
@@ -263,7 +269,11 @@ public class AccountPageController extends AbstractSearchPageController
 			{
 				model.addAttribute(ADDRESS_DATA_ATTR, addressData);
 				addressDataUtil.convert(addressData, addressForm);
+
+				//Temporary put like this, later will override the converter
+				addressForm.setLine3(addressData.getLine3());
 				addressForm.setEmail(addressData.getEmail());
+
 				addressForm.setDefaultAddress(addressData.isDefaultAddress());
 				break;
 			}
@@ -310,8 +320,8 @@ public class AccountPageController extends AbstractSearchPageController
 		model.addAttribute(TITLE_DATA_ATTR, userFacade.getTitles());
 
 		//Add in region and country for new form
-		//		model.addAttribute(REGIONS_ATTR, getI18NFacade().getRegionsForCountryIso(addressData.getCountry().getIsocode()));
-		//		model.addAttribute(COUNTRY_ATTR, addressData.getCountry().getIsocode());
+		final String countryIsoCode = getCmsSiteService().getCurrentSite().getDefaultCountry().getIsocode();
+		model.addAttribute(COUNTRY_ATTR, countryIsoCode);
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(BILLING_SHIPPING_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(BILLING_SHIPPING_CMS_PAGE));
@@ -333,11 +343,15 @@ public class AccountPageController extends AbstractSearchPageController
 		return getViewForPage(model);
 	}
 
-	@RequestMapping(value = "/orders", method = RequestMethod.GET)
+	@RequestMapping(value = "/orders", method =
+	{ RequestMethod.GET, RequestMethod.POST })
 	@RequireHardLogIn
 	public String orders(@RequestParam(value = "page", defaultValue = "0") final int page,
 			@RequestParam(value = "show", defaultValue = "Page") final ShowMode showMode,
-			@RequestParam(value = "sort", required = false) final String sortCode, final Model model) throws CMSItemNotFoundException
+			@RequestParam(value = "sort", required = false) final String sortCode, final Model model
+	//@ModelAttribute("searchForm") final AmwayApacOrderHistorySearchForm searchForm,
+	//@ModelAttribute("filterForm") final AmwayApacOrderHistoryFilterForm filterForm
+	) throws CMSItemNotFoundException
 	{
 		// Handle paged search results
 		final PageableData pageableData = createPageableData(page, 5, sortCode, showMode);
@@ -365,12 +379,6 @@ public class AccountPageController extends AbstractSearchPageController
 			final OrderData orderDetails = orderFacade.getOrderDetailsForCode(orderCode);
 			model.addAttribute("orderData", orderDetails);
 
-			final List<Breadcrumb> breadcrumbs = accountBreadcrumbBuilder.getBreadcrumbs(null);
-			breadcrumbs.add(new Breadcrumb("/my-account/orders",
-					getMessageSource().getMessage("text.account.orderHistory", null, getI18nService().getCurrentLocale()), null));
-			breadcrumbs.add(new Breadcrumb("#", getMessageSource().getMessage("text.account.order.orderBreadcrumb", new Object[]
-			{ orderDetails.getCode() }, "Order {0}", getI18nService().getCurrentLocale()), null));
-			model.addAttribute(BREADCRUMBS_ATTR, breadcrumbs);
 
 		}
 		catch (final UnknownIdentifierException e)
@@ -379,10 +387,8 @@ public class AccountPageController extends AbstractSearchPageController
 			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER, "system.error.page.not.found", null);
 			return REDIRECT_TO_ORDER_HISTORY_PAGE;
 		}
-		storeCmsPageInModel(model, getContentPageForLabelOrId(ORDER_DETAIL_CMS_PAGE));
-		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
-		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ORDER_DETAIL_CMS_PAGE));
-		return getViewForPage(model);
+
+		return ControllerConstants.Views.Fragments.Account.orderDetailsDetails;
 	}
 
 	@RequestMapping(value = "/order/" + ORDER_CODE_PATH_VARIABLE_PATTERN
@@ -704,6 +710,7 @@ public class AccountPageController extends AbstractSearchPageController
 		}
 
 		final AddressData newAddress = addressDataUtil.convertToVisibleAddressData(addressForm);
+		newAddress.setLine3(addressForm.getLine3());
 
 		if (userFacade.isAddressBookEmpty())
 		{
@@ -848,10 +855,16 @@ public class AccountPageController extends AbstractSearchPageController
 			newAddress.setDefaultAddress(true);
 		}
 
-		//set address
+		//set email
 		if (!StringUtils.isEmpty(addressForm.getEmail()))
 		{
 			newAddress.setEmail(addressForm.getEmail());
+		}
+
+		//set line 3
+		if (!StringUtils.isEmpty(addressForm.getLine3()))
+		{
+			newAddress.setLine3(addressForm.getLine3());
 		}
 
 		final AddressVerificationResult<AddressVerificationDecision> verificationResult = getAddressVerificationFacade()
@@ -901,6 +914,7 @@ public class AccountPageController extends AbstractSearchPageController
 
 
 	}
+
 
 	@RequestMapping(value = "/select-suggested-address", method = RequestMethod.POST)
 	public String doSelectSuggestedAddress(final AddressForm addressForm, final RedirectAttributes redirectModel)

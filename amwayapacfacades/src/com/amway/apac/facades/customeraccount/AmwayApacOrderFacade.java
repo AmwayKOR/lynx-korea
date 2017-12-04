@@ -1,5 +1,7 @@
 package com.amway.apac.facades.customeraccount;
 
+import java.util.List;
+
 import com.amway.core.facades.order.AmwayOrderFacade;
 
 
@@ -17,4 +19,8 @@ public interface AmwayApacOrderFacade extends AmwayOrderFacade
 	 * @return number of orders found.
 	 */
 	Integer getCustomerOrderCounts();
+
+	List<String> getOrderHistoryDateOptions();
+
+	List<String> getOrderHistoryTypeOptions();
 }

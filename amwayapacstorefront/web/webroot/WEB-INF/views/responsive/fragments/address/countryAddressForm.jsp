@@ -10,11 +10,14 @@
 	
 	<form:form id="shipping-address-form-${fn:escapeXml(addressData.id)}" action="${shippingAddressEditUrl}" commandName="addressForm" method="post">
 		<fieldset>
-			<address:addressFormElements regions="${regions}"
+		
+			<form:hidden path="regionIso" value="${country}"/>
+			<form:hidden path="titleCode" value="${customerData.titleCode}"/>
+			<form:hidden path="countryIso" value="${country}"/>
+			
+			<address:addressFormElements user="${customerData}" regions="${regions}"
 		                             country="${country}"/>
 			
-			<form:hidden path="countryIso"/>
-			<form:hidden path="titleCode"/>
 			<form:hidden path="addressId"/>
 			
 			<!-- Set this to pass the validation temporarily 

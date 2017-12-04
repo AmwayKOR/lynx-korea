@@ -20,6 +20,16 @@
                       jaloclass="com.amway.apac.core.jalo.AmwayApacVariantProduct">
                 <description>Amway Apac Variant Model</description>
             </itemtype>
+            
+            <itemtype code="Address" autocreate="false" generate="false">
+                <description>Amway Apac Address Model</description>
+                <attributes>
+					<attribute qualifier="line3" type="java.lang.String">
+						<persistence type="property" />
+						<description>Line 3 for address</description>
+					</attribute>
+				</attributes>
+            </itemtype>
         </typegroup>
 
     </itemtypes>

@@ -6,7 +6,7 @@
 <%@ taglib prefix="account" tagdir="/WEB-INF/tags/responsive/account"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-
+<spring:url value="/my-account/orders" var="ordersUrl"/>
    
     <div class="container-fluid main-container my-count">
         <div class="account-section">
@@ -74,13 +74,14 @@
 
                                                         </div>
                                                         <div class="form-wrapper search-form-wrapper col-md-5 col-sm-12 hidden-sm hidden-xs js-search-form-wrapper">
-                                                            <form id="searchForm" action="" method="POST">
+                                                             <form id="searchForm" action="" method="POST">
                                                                 <input id="searchData" name="searchData" placeholder="Search by order# or Item#" type="text" value="" />
                                                                 <button class="primary small js-automation-order-history-search-btn" type="submit">
                                                                     <span class="hidden-sm hidden-xs"> Search</span>
                                                                     <span class="icon-search hidden-md hidden-lg"></span>
                                                                 </button>
                                                             </form>
+
                                                         </div>
 
                                                     </div>

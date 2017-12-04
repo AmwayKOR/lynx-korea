@@ -13,8 +13,11 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util
+		http://www.springframework.org/schema/util/spring-util.xsd
 		http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 		
@@ -131,9 +134,23 @@
 			class="com.amway.apac.facades.populators.AmwayApacVariantFullPopulator" parent="defaultVariantFullPopulator">
 	</bean>
 	
+	<util:list id="orderHistoryTypeOptions" value-type="java.lang.String">
+		<value>#{T(com.amway.apac.facades.constants.AmwayapacFacadesConstants).SHOW_ALL}</value>
+		<value>#{T(com.amway.apac.facades.constants.AmwayapacFacadesConstants).PARTNER_STORES}</value>
+		<value>#{T(com.amway.apac.facades.constants.AmwayapacFacadesConstants).ACTIVE}</value>
+		<value>#{T(com.amway.apac.facades.constants.AmwayapacFacadesConstants).WEB}</value>
+		<value>#{T(com.amway.apac.facades.constants.AmwayapacFacadesConstants).DITTO}</value>
+		<value>#{T(com.amway.apac.facades.constants.AmwayapacFacadesConstants).TELEPHONE}</value>
+		<value>#{T(com.amway.apac.facades.constants.AmwayapacFacadesConstants).MAIL}</value>
+		<value>#{T(com.amway.apac.facades.constants.AmwayapacFacadesConstants).SERVICE_CENTER}</value>
+		<value>#{T(com.amway.apac.facades.constants.AmwayapacFacadesConstants).AUTO_RENEW}</value>
+		<value>#{T(com.amway.apac.facades.constants.AmwayapacFacadesConstants).REPLACEMENT}</value>
+	</util:list>
+	
 	<alias name="defaultAmwayApacOrderFacade" alias="amwayOrderFacade"/>
     <bean id="defaultAmwayApacOrderFacade" class="com.amway.apac.facades.customeraccount.impl.DefaultAmwayApacOrderFacade" parent="defaultAmwayOrderFacade">
         <property name="amwayApacCustomerAccountService" ref="customeraccountService"/>
+        <property name="orderHistoryTypeOptions" ref="orderHistoryTypeOptions"/>
     </bean>
     
     <alias name="defaultAmwayApacCustomerFacade" alias="customerFacade"/>
@@ -174,10 +191,22 @@
 	
 	<alias name="defaultAmwayApacProductCarouselFacade" alias="productCarouselFacade"/>
     <bean id="defaultAmwayApacProductCarouselFacade" class="com.amway.apac.facades.product.impl.DefaultAmwayApacProductCarouselFacade" parent="defaultProductCarouselFacade" />
-
+	
 	<alias alias="cartFacade" name="defaultAmwayApacCartFacade"/>
 	<bean id="defaultAmwayApacCartFacade" class="com.amway.apac.facades.cart.impl.DefaultAmwayApacCartFacade" parent="defaultCartFacade">
 		<property name="calculationService" ref="calculationService"/>
 		<property name="modelService" ref="modelService"/>
 	</bean>
+	
+	<alias name="defaultAmwayApacAddressReversePopulator" alias="addressReversePopulator"/>
+    <bean id="defaultAmwayApacAddressReversePopulator" class="com.amway.apac.facades.populators.AmwayApacAddressReversePopulator" parent="defaultAddressReversePopulator" />
+	
+	<alias name="defaultAmwayApacAddressPopulator" alias="addressPopulator"/>
+    <bean id="defaultAmwayApacAddressPopulator" class="com.amway.apac.facades.populators.AmwayApacAddressPopulator" parent="defaultAddressPopulator" />
+	
+	<alias name="defaultAmwayApacOrderHistoryPopulator" alias="orderHistoryPopulator"/>
+    <bean id="defaultAmwayApacOrderHistoryPopulator" class="com.amway.apac.facades.populators.AmwayApacOrderHistoryPopulator" parent="defaultOrderHistoryPopulator" >
+    		<property name="orderEntryConverter" ref="orderEntryConverter"/>
+    </bean>
+	
 </beans>

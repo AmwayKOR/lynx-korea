@@ -28,6 +28,18 @@ public class AmwayapacFacadesConstants extends GeneratedAmwayapacFacadesConstant
 
 	public static final String SORT_BY_NAME_DESCEDNING = "NameDescending";
 
+	//For order history
+	public static final String SHOW_ALL = "SHOW_ALL";
+	public static final String PARTNER_STORES = "PARTNER_STORES";
+	public static final String ACTIVE = "ACTIVE";
+	public static final String WEB = "WEB";
+	public static final String DITTO = "DITTO";
+	public static final String TELEPHONE = "TELEPHONE";
+	public static final String MAIL = "MAIL";
+	public static final String SERVICE_CENTER = "SERVICE_CENTER";
+	public static final String AUTO_RENEW = "AUTO_RENEW";
+	public static final String REPLACEMENT = "REPLACEMENT";
+
 	private AmwayapacFacadesConstants()
 	{
 		//empty

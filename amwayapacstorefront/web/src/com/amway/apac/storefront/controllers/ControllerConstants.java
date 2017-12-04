@@ -14,7 +14,6 @@ import de.hybris.platform.acceleratorcms.model.components.CMSTabParagraphContain
 import de.hybris.platform.acceleratorcms.model.components.CartSuggestionComponentModel;
 import de.hybris.platform.acceleratorcms.model.components.CategoryFeatureComponentModel;
 import de.hybris.platform.acceleratorcms.model.components.DynamicBannerComponentModel;
-import de.hybris.platform.acceleratorcms.model.components.MiniCartComponentModel;
 import de.hybris.platform.acceleratorcms.model.components.NavigationBarComponentModel;
 import de.hybris.platform.acceleratorcms.model.components.ProductFeatureComponentModel;
 import de.hybris.platform.acceleratorcms.model.components.ProductReferencesComponentModel;
@@ -239,6 +238,7 @@ public interface ControllerConstants
 				String ShippingAddressDetail = "fragments/address/shippingAddressDetail"; // NOSONAR
 				String ShippingAddressBody = "fragments/address/shippingAddressBody"; // NOSONAR
 				String SavedCartRestorePopup = "fragments/account/savedCartRestorePopup"; // NOSONAR
+				String orderDetailsDetails = "fragments/account/orderDetails"; // NOSONAR
 			}
 
 			interface Checkout // NOSONAR

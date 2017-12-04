@@ -34,5 +34,13 @@
 		<property name="productCode" type="String"/>
 		<property name="selected" type="java.lang.Boolean"/>
 	</bean>
+	
+	<bean class="de.hybris.platform.commercefacades.user.data.AddressData">
+		<property name="line3" type="String"/>
+	</bean>
+	
+	<bean class="de.hybris.platform.commercefacades.order.data.OrderHistoryData">
+		<property name="itemQuantity" type="java.lang.Integer"/>
+	</bean>
 
 </beans>

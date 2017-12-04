@@ -7,7 +7,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="account" tagdir="/WEB-INF/tags/responsive/account"%>
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags" %>
-<%@ taglib prefix="order" tagdir="/WEB-INF/tags/responsive/order" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <%@ attribute name="orders" required="true" type="de.hybris.platform.commerceservices.search.pagedata.SearchPageData"%>
@@ -51,13 +50,24 @@
             </thead>
             <tbody class="js-search-result-${category}">
                 <c:forEach items="${orders.results}" var="order">
-                    <account:accountOrderHistoryListItem order="${order}"/>
-                    
+                		<account:accountOrderHistoryListItem order="${order}"/>
+                		<account:accountOrderHistoryDetails order="${order}"/>
+                	
+				 
                 </c:forEach>
             </tbody>
         </table>
     </div>
     <div class="account-orderhistory-pagination">
-        
+        <c:set var="numberOfPages" value="${orders.pagination.totalNumberOfResults / orders.pagination.pageSize}"/>
+        <input type="hidden" class="js-numberOfPages-${category}" value="<fmt:formatNumber value="${numberOfPages + (numberOfPages % 1 == 0 ? 0 : 0.5)}" pattern="#" />"/>
+        <p class="text-center display-none">
+            <button type="button" id="show-more" class="btn btn-link show-more-orders js-show-more-${category}">
+              <span>
+                <spring:theme code="text.account.orderhistory.showMore"/>
+              </span>
+                <span class="icon icon-arrow-dropdown"></span>
+            </button>
+        </p>
     </div>
 </c:if>
