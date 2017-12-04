@@ -14,7 +14,6 @@ import de.hybris.platform.acceleratorservices.uiexperience.UiExperienceService;
 import de.hybris.platform.core.Constants;
 
 import java.io.IOException;
-import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -28,9 +27,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.oauth2.common.exceptions.InvalidRequestException;
+import org.springframework.security.oauth2.common.exceptions.RedirectMismatchException;
 import org.springframework.security.oauth2.provider.ClientDetails;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
+import org.springframework.security.oauth2.provider.endpoint.DefaultRedirectResolver;
+import org.springframework.security.oauth2.provider.endpoint.RedirectResolver;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 
 import com.amway.apac.auth.security.AmwayJWTTokenProvider;
@@ -46,9 +47,15 @@ public class AmwayStorefrontAuthenticationSuccessHandler extends SavedRequestAwa
 	private UiExperienceService uiExperienceService;
 	private ClientDetailsService clientDetailsService;
 	private AmwayJWTTokenProvider jwtTokenProvider;
+	private RedirectResolver redirectResolver;
 	private GrantedAuthority adminAuthority = new SimpleGrantedAuthority("ROLE_" + Constants.USER.ADMIN_USERGROUP.toUpperCase());
 
 	private static final Logger LOG = Logger.getLogger(AmwayStorefrontAuthenticationSuccessHandler.class);
+
+	public AmwayStorefrontAuthenticationSuccessHandler()
+	{
+		redirectResolver = new DefaultRedirectResolver();
+	}
 
 	@Override
 	public void onAuthenticationSuccess(final HttpServletRequest request, final HttpServletResponse response,
@@ -61,22 +68,19 @@ public class AmwayStorefrontAuthenticationSuccessHandler extends SavedRequestAwa
 			final String clientID = request.getParameter("client_id");
 
 			final ClientDetails client = clientDetailsService.loadClientByClientId(clientID);
-
-			if (null != client)
+			final String resolvedRedirect = this.redirectResolver.resolveRedirect(redirectURL, client);
+			if (!(StringUtils.isNotEmpty(resolvedRedirect)))
 			{
-				if ("token".equals(responseType))
-				{
-					final String token = jwtTokenProvider.createJWToken(((String) authentication.getPrincipal()), new Date(),
-							request.getLocale());
-					LOG.info("CREATE_JWT_TOKEN :: " + token);
-					request.setAttribute("JWT", token);
-
-					if (null == redirectURL)
-					{
-						throw new InvalidRequestException("Cannot approve request when no redirect URI is provided.");
-					}
-				}
+				throw new RedirectMismatchException("A redirectUri must be either supplied or preconfigured in the ClientDetails");
 			}
+			/*
+			 * if (null != client) { if ("token".equals(responseType)) { final String token =
+			 * jwtTokenProvider.createJWToken(((String) authentication.getPrincipal()), new Date(), request.getLocale());
+			 * LOG.info("CREATE_JWT_TOKEN :: " + token); request.setAttribute("JWT", token);
+			 *
+			 * if (null == redirectURL) { throw new
+			 * InvalidRequestException("Cannot approve request when no redirect URI is provided."); } } }
+			 */
 		}
 		catch (final Exception exp)
 		{
@@ -111,11 +115,19 @@ public class AmwayStorefrontAuthenticationSuccessHandler extends SavedRequestAwa
 	@Override
 	protected String determineTargetUrl(final HttpServletRequest request, final HttpServletResponse response)
 	{
-		String targetUrl = request.getParameter("redirect_uri");
-		final String token = (String) request.getAttribute("JWT");
-		LOG.info("RETRIVE_JWT_TOKEN :: " + token);
-		targetUrl = targetUrl + "#access_token=" + token;
-		return targetUrl;
+		final String responseType = request.getParameter("response_type");
+		final String responseMode = request.getParameter("response_mode");
+		final String scope = request.getParameter("scope");
+		final String state = request.getParameter("state");
+		final String redirectUrl = request.getParameter("redirect_uri");
+		final String clientId = request.getParameter("client_id");
+		final String nonce = request.getParameter("nonce");
+
+		final String redirect = this.getDefaultTargetUrl() + "?response_Type=" + responseType + "&response_Mode=" + responseMode
+				+ "&scope=" + scope
+				+ "&state=" + state + "&nonce=" + nonce + "&client_id=" + clientId + "&redirect_uri=" + redirectUrl;
+
+		return redirect;
 	}
 
 	protected UiExperienceService getUiExperienceService()
@@ -166,5 +178,14 @@ public class AmwayStorefrontAuthenticationSuccessHandler extends SavedRequestAwa
 	public void setJwtTokenProvider(final AmwayJWTTokenProvider jwtTokenProvider)
 	{
 		this.jwtTokenProvider = jwtTokenProvider;
+	}
+
+	/**
+	 * @param redirectResolver
+	 *           the redirectResolver to set
+	 */
+	public void setRedirectResolver(final RedirectResolver redirectResolver)
+	{
+		this.redirectResolver = redirectResolver;
 	}
 }

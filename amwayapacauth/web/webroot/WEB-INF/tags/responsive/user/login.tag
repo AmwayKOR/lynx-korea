@@ -48,6 +48,10 @@
             <input type="hidden" name="response_type" id="response_type" value="${response_type}">
             <input type="hidden" name="client_id" id="client_id" value="${client_id}">
             <input type="hidden" name="redirect_uri" id="redirect_uri" value="${redirect_uri}">
+            <input type="hidden" name="response_mode" id="response_mode" value="${responseMode}">
+            <input type="hidden" name="scope" id="scope" value="${scope}">
+            <input type="hidden" name="state" id="state" value="${state}">
+            <input type="hidden" name="nonce" id="nonce" value="${nonce}">
             
 		<ycommerce:testId code="loginAndCheckoutButton">
 			<button type="submit" class="btn btn-primary btn-block">

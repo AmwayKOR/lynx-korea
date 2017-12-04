@@ -11,9 +11,15 @@
 package com.amway.apac.auth.controllers.pages;
 
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
+import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
-import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
+
+import java.util.Date;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +28,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.amway.apac.auth.security.AmwayJWTTokenProvider;
+
+
 /**
  * Controller for home page
  */
@@ -29,8 +38,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping("/")
 public class HomePageController extends AbstractPageController
 {
+
+	@Resource(name = "jWTokenProvider")
+	private AmwayJWTTokenProvider jwtTokenProvider;
+
 	@RequestMapping(method = RequestMethod.GET)
 	public String home(@RequestParam(value = "logout", defaultValue = "false") final boolean logout, final Model model,
+			final HttpServletRequest request, final HttpServletResponse response,
 			final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
 		if (logout)
@@ -40,11 +54,27 @@ public class HomePageController extends AbstractPageController
 			return REDIRECT_PREFIX + ROOT;
 		}
 
-		storeCmsPageInModel(model, getContentPageForLabelOrId(null));
-		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(null));
-		updatePageTitle(model, getContentPageForLabelOrId(null));
+		/*
+		 * storeCmsPageInModel(model, getContentPageForLabelOrId(null)); setUpMetaDataForContentPage(model,
+		 * getContentPageForLabelOrId(null)); updatePageTitle(model, getContentPageForLabelOrId(null));
+		 * 
+		 * return getViewForPage(model);
+		 */
 
-		return getViewForPage(model);
+		final String state = request.getParameter("state");
+		final String redirectUrl = request.getParameter("redirect_uri");
+		final String clientId = request.getParameter("client_id");
+
+		final String token = jwtTokenProvider.createJWToken(getCustomerFacade().getCurrentCustomerUid(), new Date(),
+				request.getLocale());
+
+
+		model.addAttribute("id_token", token);
+		model.addAttribute("state", state);
+		model.addAttribute("redirect_Url", redirectUrl);
+		model.addAttribute("client_Id", clientId);
+
+		return "pages/account/accountIDPPage";
 	}
 
 	protected void updatePageTitle(final Model model, final AbstractPageModel cmsPage)

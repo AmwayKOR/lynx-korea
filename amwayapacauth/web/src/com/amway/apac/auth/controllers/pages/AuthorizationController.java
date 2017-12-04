@@ -32,6 +32,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.amway.apac.auth.controllers.ControllerConstants;
 import com.amway.apac.auth.security.AmwayJWTTokenProvider;
@@ -81,7 +82,8 @@ public class AuthorizationController extends AbstractLoginPageController
 	@RequestMapping(method = RequestMethod.GET)
 	public String doAuthorize(@RequestHeader(value = "referer", required = false) final String referer,
 			@RequestParam(value = "error", defaultValue = "false") final boolean loginError, final Model model,
-			final HttpServletRequest request, final HttpServletResponse response, final HttpSession session)
+			final HttpServletRequest request, final HttpServletResponse response, final HttpSession session,
+			final RedirectAttributes redirectModel)
 			throws CMSItemNotFoundException
 	{
 		if (!loginError)
@@ -89,12 +91,24 @@ public class AuthorizationController extends AbstractLoginPageController
 			storeReferer(referer, request, response);
 		}
 
-		model.addAttribute("response_type", request.getParameter("response_type"));
-		model.addAttribute("client_id", request.getParameter("client_id"));
-		final String redirectUrI = request.getParameter("redirect_uri");
-		if (StringUtils.isNotBlank(redirectUrI))
+		final String responseType = request.getParameter("response_type");
+		final String responseMode = request.getParameter("response_mode");
+		final String scope = request.getParameter("scope");
+		final String state = request.getParameter("state");
+		final String redirectUrl = request.getParameter("redirect_uri");
+		final String clientId = request.getParameter("client_id");
+		final String nonce = request.getParameter("nonce");
+
+		model.addAttribute("response_type", responseType);
+		model.addAttribute("client_id", clientId);
+		model.addAttribute("responseMode", responseMode);
+		model.addAttribute("scope", scope);
+		model.addAttribute("nonce", nonce);
+		model.addAttribute("state", state);
+
+		if (StringUtils.isNotBlank(redirectUrl))
 		{
-			model.addAttribute("redirect_uri", redirectUrI);
+			model.addAttribute("redirect_uri", redirectUrl);
 		}
 		else
 		{
