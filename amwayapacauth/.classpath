@@ -11,6 +11,8 @@
 	<classpathentry kind="lib" path="web/webroot/WEB-INF/lib/rhino-1.7R4.jar"/>
 	<classpathentry kind="lib" path="web/webroot/WEB-INF/lib/wro4j-core-1.7.9.jar"/>
 	<classpathentry exported="true" kind="lib" path="resources"/>
+	<classpathentry kind="lib" path="web/webroot/WEB-INF/lib/jjwt-0.9.0.jar"/>
+	<classpathentry kind="lib" path="lib/json-web-key-generator-0.1.jar"/>
 	<classpathentry kind="src" output="eclipsebin/web/classes" path="web/src"/>
 	<classpathentry kind="lib" path="lib/jjwt-0.9.0.jar"/>
 	<classpathentry kind="src" path="/lynxcore"/>

@@ -57,7 +57,7 @@ public class HomePageController extends AbstractPageController
 		/*
 		 * storeCmsPageInModel(model, getContentPageForLabelOrId(null)); setUpMetaDataForContentPage(model,
 		 * getContentPageForLabelOrId(null)); updatePageTitle(model, getContentPageForLabelOrId(null));
-		 * 
+		 *
 		 * return getViewForPage(model);
 		 */
 
@@ -66,7 +66,7 @@ public class HomePageController extends AbstractPageController
 		final String clientId = request.getParameter("client_id");
 
 		final String token = jwtTokenProvider.createJWToken(getCustomerFacade().getCurrentCustomerUid(), new Date(),
-				request.getLocale());
+				request);
 
 
 		model.addAttribute("id_token", token);

@@ -10,7 +10,7 @@
  license agreement you entered into with SAP.
 --><extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
 
-	<extension abstractclassprefix="Generated" classprefix="Amwayapacauth" name="amwayapacauth" usemaven="false">		
+	<extension abstractclassprefix="Generated" classprefix="Amwayapacauth" name="amwayapacauth" usemaven="true">		
         <requires-extension name="acceleratorstorefrontcommons"/>
 		<requires-extension name="amwayapacfacades"/>
         <requires-extension name="lynxcore"/>
