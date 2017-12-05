@@ -49,6 +49,7 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents
 ;;MobileCountrySelectorSlot;amwayapacPhoneCountrySelectionCollectionComponent
 
 INSERT_UPDATE AmwayApacImageLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&componentRef;
+##Links for desktop
 ;;amwayapacChinaComponent;China;/;amwayapacChinaComponent
 ;;amwayapacMalaysiaComponent;Malaysia;/;amwayapacMalaysiaComponent
 ;;amwayapacPhilippinesComponent;Philippines;/;amwayapacPhilippinesComponent
@@ -57,11 +58,20 @@ INSERT_UPDATE AmwayApacImageLinkComponent;$contentCV[unique=true];uid[unique=tru
 ;;amwayapacSingaporeComponent;Singapore;/;amwayapacSingaporeComponent
 ;;amwayapacJapanComponent;Japan;/;amwayapacJapanComponent
 
+##Links for mobile
+;;amwayapacChinaMobileComponent;China;/;amwayapacChinaMobileComponent
+;;amwayapacMalaysiaMobileComponent;Malaysia;/;amwayapacMalaysiaMobileComponent
+;;amwayapacPhilippinesMobileComponent;Philippines;/;amwayapacPhilippinesMobileComponent
+;;amwayapacKoreaMobileComponent;Korea;/;amwayapacKoreaMobileComponent
+;;amwayapacThailandMobileComponent;Thailand;/;amwayapacThailandMobileComponent
+;;amwayapacSingaporeMobileComponent;Singapore;/;amwayapacSingaporeMobileComponent
+;;amwayapacJapanMobileComponent;Japan;/;amwayapacJapanMobileComponent
+
 INSERT_UPDATE AmwayApacCountrySelectorComponent;$contentCV[unique=true];uid[unique=true];name;currentCountry(uid,$contentCV);links(uid,$contentCV);&componentRef
 ;;amwayapacCountrySelectionCollectionComponent; Country Selector Collection Component;amwayapacJapanComponent;amwayapacChinaComponent,amwayapacMalaysiaComponent,amwayapacPhilippinesComponent,amwayapacKoreaComponent,amwayapacThailandComponent,amwayapacSingaporeComponent,amwayapacJapanComponent;amwayapacCountrySelectionCollectionComponent
 
 INSERT_UPDATE AmwayApacMobileCountrySelectorComponent;$contentCV[unique=true];uid[unique=true];name;currentCountry(uid,$contentCV);links(uid,$contentCV);&componentRef
-;;amwayapacPhoneCountrySelectionCollectionComponent; Mobile Country Selector Collection Component;amwayapacJapanComponent;amwayapacChinaComponent,amwayapacMalaysiaComponent,amwayapacPhilippinesComponent,amwayapacKoreaComponent,amwayapacThailandComponent,amwayapacSingaporeComponent,amwayapacJapanComponent;amwayapacPhoneCountrySelectionCollectionComponent
+;;amwayapacPhoneCountrySelectionCollectionComponent; Mobile Country Selector Collection Component;amwayapacJapanMobileComponent;amwayapacChinaMobileComponent,amwayapacMalaysiaMobileComponent,amwayapacPhilippinesMobileComponent,amwayapacKoreaMobileComponent,amwayapacThailandMobileComponent,amwayapacSingaporeMobileComponent,amwayapacJapanMobileComponent;amwayapacPhoneCountrySelectionCollectionComponent
 
 
 ########## Country Selector ##########

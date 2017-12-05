@@ -5,6 +5,7 @@ ACC.header = {
         "bindHeader2",
         "bindHeaderProfilePopup",
         "bindLoginRegisterButton",
+        "bindOpenLoginDrop"
 	],
 	
 	bindHeaderProfilePopup: function() {
@@ -13,10 +14,17 @@ ACC.header = {
         });
 	},
 	
-	openLoginDrop : function(){
-		$('header').hasClass('userinfo-open') ? $('header').removeClass('userinfo-open') : $('header').addClass('userinfo-open');
-        $('.top-search').removeClass('search-open');
-        $('header').removeClass('mincart-open');
+	bindOpenLoginDrop : function(){
+		$(document).on('shown.bs.collapse', '#login-drop-content', function(){
+			$('header').addClass('userinfo-open');
+			$('.top-search').removeClass('search-open');
+	        $('header').removeClass('mincart-open');
+		});
+		$(document).on('hidden.bs.collapse', '#login-drop-content', function(){
+			$('header').removeClass('userinfo-open');
+			$('.top-search').removeClass('search-open');
+	        $('header').removeClass('mincart-open');
+		});
 	},
 	
 	bindLoginRegisterButton :  function(){

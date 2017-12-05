@@ -55,6 +55,7 @@ INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=
 ;;japanFlag;$siteResource/flag.jpg;;japanFlag;;"Japan flag"
 
 INSERT_UPDATE AmwayApacImageLinkComponent;$contentCV[unique=true];uid[unique=true];linkName;image(code, $contentCV);&componentRef
+##Desktop Links
 ;;amwayapacChinaComponent;CHINA;chinaFlag;amwayapacChinaComponent
 ;;amwayapacMalaysiaComponent;MALAYSIA;malaysiaFlag;amwayapacMalaysiaComponent
 ;;amwayapacPhilippinesComponent;PHILIPPINES;philippinesFlag;amwayapacPhilippinesComponent
@@ -62,6 +63,16 @@ INSERT_UPDATE AmwayApacImageLinkComponent;$contentCV[unique=true];uid[unique=tru
 ;;amwayapacThailandComponent;THAILAND;thailandFlag;amwayapacThailandComponent
 ;;amwayapacSingaporeComponent;SINGAPORE;singaporeFlag;amwayapacSingaporeComponent
 ;;amwayapacJapanComponent;JAPAN;japanFlag;amwayapacJapanComponent
+
+###Mobile Links
+
+;;amwayapacChinaMobileComponent;CHINA;chinaFlag;amwayapacChinaMobileComponent
+;;amwayapacMalaysiaMobileComponent;MALAYSIA;malaysiaFlag;amwayapacMalaysiaMobileComponent
+;;amwayapacPhilippinesMobileComponent;PHILIPPINES;philippinesFlag;amwayapacPhilippinesMobileComponent
+;;amwayapacKoreaMobileComponent;KOREA;koreaFlag;amwayapacKoreaMobileComponent
+;;amwayapacThailandMobileComponent;THAILAND;thailandFlag;amwayapacThailandMobileComponent
+;;amwayapacSingaporeMobileComponent;SINGAPORE;singaporeFlag;amwayapacSingaporeMobileComponent
+;;amwayapacJapanMobileComponent;JAPAN;japanFlag;amwayapacJapanMobileComponent
 
 ########## Country Selector ##########
 
