@@ -60,6 +60,8 @@
 			ACC.messages.productCodeEmptyErrorMessage= '<spring:theme code="shopping.list.add.product.error.empty.name"/>';
 			ACC.messages.productAddToCartError= '<spring:theme code="product.addtocart.error"/>';
 			ACC.messages.shoppingListProductAddToCartError= '<spring:theme code="shopping.list.grid.addtocart.none.selected"/>';
+			ACC.messages.quickShopProductCodeError= '<spring:theme code="quick.shop.product.code.error"/>';
+			ACC.messages.quickShopQuantityError= '<spring:theme code="quick.shop.quantity.error"/>';
 		/*]]>*/
 	</script>
 	<template:javaScriptAddOnsVariables/>

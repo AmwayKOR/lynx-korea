@@ -10,7 +10,8 @@
  */
 package com.amway.apac.storefront.controllers.pages;
 
-import com.amway.apac.facades.cart.AmwayApacCartFacade;
+import static com.amway.apac.storefront.controllers.ControllerConstants.ModelParameters.QUANTITY_ATTR;
+
 import de.hybris.platform.acceleratorfacades.cart.action.CartEntryAction;
 import de.hybris.platform.acceleratorfacades.cart.action.CartEntryActionFacade;
 import de.hybris.platform.acceleratorfacades.cart.action.exceptions.CartEntryActionException;
@@ -31,7 +32,6 @@ import de.hybris.platform.acceleratorstorefrontcommons.forms.VoucherForm;
 import de.hybris.platform.acceleratorstorefrontcommons.forms.validation.SaveCartFormValidator;
 import de.hybris.platform.acceleratorstorefrontcommons.util.XSSFilterUtil;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
-import de.hybris.platform.commercefacades.order.CartFacade;
 import de.hybris.platform.commercefacades.order.SaveCartFacade;
 import de.hybris.platform.commercefacades.order.data.CartData;
 import de.hybris.platform.commercefacades.order.data.CartModificationData;
@@ -48,6 +48,7 @@ import de.hybris.platform.commerceservices.order.CommerceCartModificationExcepti
 import de.hybris.platform.commerceservices.order.CommerceSaveCartException;
 import de.hybris.platform.core.enums.QuoteState;
 import de.hybris.platform.enumeration.EnumerationService;
+import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import de.hybris.platform.site.BaseSiteService;
 import de.hybris.platform.util.Config;
 
@@ -79,9 +80,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.amway.apac.facades.cart.AmwayApacCartFacade;
+import com.amway.apac.facades.cart.enums.AmwayApacCartSortCode;
 import com.amway.apac.storefront.controllers.ControllerConstants;
-
-import static com.amway.apac.storefront.controllers.ControllerConstants.ModelParameters.QUANTITY_ATTR;
 
 
 /**
@@ -103,6 +104,9 @@ public class CartPageController extends AbstractCartPageController
 	private static final String REDIRECT_CART_URL = REDIRECT_PREFIX + "/cart";
 	private static final String REDIRECT_QUOTE_EDIT_URL = REDIRECT_PREFIX + "/quote/%s/edit/";
 	private static final String REDIRECT_QUOTE_VIEW_URL = REDIRECT_PREFIX + "/my-account/my-quotes/%s/";
+
+	private static final String CART_CMS_PAGE_LABEL = "cart";
+	private static final String CONTINUE_URL = "continueUrl";
 
 	private static final Logger LOG = Logger.getLogger(CartPageController.class);
 
@@ -142,7 +146,6 @@ public class CartPageController extends AbstractCartPageController
 		return getSiteConfigService().getBoolean(SHOW_CHECKOUT_STRATEGY_OPTIONS, false);
 	}
 
-	@RequireHardLogIn
 	@RequestMapping(method = RequestMethod.GET)
 	public String showCart(final Model model) throws CMSItemNotFoundException
 	{
@@ -158,7 +161,7 @@ public class CartPageController extends AbstractCartPageController
 		}
 		else
 		{
-			prepareDataForPage(model);
+			prepareDataForPage(model, null);
 
 			return ControllerConstants.Views.Pages.Cart.CartPage;
 		}
@@ -168,11 +171,9 @@ public class CartPageController extends AbstractCartPageController
 	{
 		final QuoteData quoteData = getCartFacade().getSessionCart().getQuoteData();
 
-		return quoteData != null
-				? (QuoteState.BUYER_OFFER.equals(quoteData.getState())
-						? Optional.of(String.format(REDIRECT_QUOTE_VIEW_URL, urlEncode(quoteData.getCode())))
-						: Optional.of(String.format(REDIRECT_QUOTE_EDIT_URL, urlEncode(quoteData.getCode()))))
-				: Optional.empty();
+		return quoteData != null ? (QuoteState.BUYER_OFFER.equals(quoteData.getState())
+				? Optional.of(String.format(REDIRECT_QUOTE_VIEW_URL, urlEncode(quoteData.getCode())))
+				: Optional.of(String.format(REDIRECT_QUOTE_EDIT_URL, urlEncode(quoteData.getCode())))) : Optional.empty();
 	}
 
 	/**
@@ -294,9 +295,11 @@ public class CartPageController extends AbstractCartPageController
 	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String updateCartQuantities(@RequestParam("entryNumber") final long entryNumber, @RequestParam("quantity") final long quantity, final Model model,
-			@Valid final UpdateQuantityForm form, final BindingResult bindingResult, final HttpServletRequest request,
-			final RedirectAttributes redirectModel) throws CMSItemNotFoundException
+	public String updateCartQuantities(@RequestParam("entryNumber") final long entryNumber,
+			@RequestParam("quantity") final long quantity, final Model model,
+			@RequestParam(name = "sortBy", required = false) final String sortBy, @Valid final UpdateQuantityForm form,
+			final BindingResult bindingResult, final HttpServletRequest request, final RedirectAttributes redirectModel)
+					throws CMSItemNotFoundException
 	{
 		if (bindingResult.hasErrors())
 		{
@@ -326,26 +329,45 @@ public class CartPageController extends AbstractCartPageController
 			}
 		}
 
-		prepareDataForPage(model);
+		prepareDataForPage(model, sortBy);
 
 		// Return Cart Content
 		return ControllerConstants.Views.Pages.Cart.CartContentPage;
 	}
 
-	@RequestMapping(value = "/sort", method = RequestMethod.POST)
+	@RequestMapping(value = "/content", method = RequestMethod.POST)
 	public String sortCartEntries(@RequestParam("sortBy") final String sortBy, final Model model) throws CMSItemNotFoundException
 	{
-		prepareDataForPage(model);
-
-		model.addAttribute("cartData", cartFacade.getSessionCartWithSortByOrdering(sortBy));
+		prepareDataForPage(model, sortBy);
 		// Return Cart Content
 		return ControllerConstants.Views.Pages.Cart.CartContentPage;
 	}
 
-	@Override
-	protected void prepareDataForPage(final Model model) throws CMSItemNotFoundException
+	protected void prepareDataForPage(final Model model, final String sortBy) throws CMSItemNotFoundException
 	{
-		super.prepareDataForPage(model);
+		continueUrl(model);
+		model.addAttribute("sortOptions", AmwayApacCartSortCode.values());
+		final AmwayApacCartSortCode selectedSort = StringUtils.isNotBlank(sortBy) ? AmwayApacCartSortCode.valueOf(sortBy)
+				: AmwayApacCartSortCode.LAST_ITEM_ADDED;
+		model.addAttribute("selectedSort", selectedSort);
+		final CartData cartData = cartFacade.getSessionCartWithSortBySortCode(selectedSort);
+		createProductEntryList(model, cartData);
+
+		storeCmsPageInModel(model, getContentPageForLabelOrId(CART_CMS_PAGE_LABEL));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CART_CMS_PAGE_LABEL));
+
+		setupCartPageRestorationData(model);
+		clearSessionRestorationData();
+
+		model.addAttribute("isOmsEnabled", Boolean.valueOf(getSiteConfigService().getBoolean("oms.enabled", false)));
+		model.addAttribute("supportedCountries", cartFacade.getDeliveryCountries());
+		model.addAttribute("expressCheckoutAllowed", Boolean.valueOf(getCheckoutFacade().isExpressCheckoutAllowedForCart()));
+		model.addAttribute("taxEstimationEnabled", Boolean.valueOf(getCheckoutFacade().isTaxEstimationEnabledForCart()));
+		model.addAttribute("savedCartCount", saveCartFacade.getSavedCartsCountForCurrentUser());
+		if (!model.containsAttribute("saveCartForm"))
+		{
+			model.addAttribute("saveCartForm", new SaveCartForm());
+		}
 
 		if (!model.containsAttribute(VOUCHER_FORM))
 		{
@@ -360,8 +382,8 @@ public class CartPageController extends AbstractCartPageController
 		model.addAttribute("pageType", PageType.CART.name());
 	}
 
-	protected void addMessage(final UpdateQuantityForm form, final HttpServletRequest request,
-			final Model model, final CartModificationData cartModification)
+	protected void addMessage(final UpdateQuantityForm form, final HttpServletRequest request, final Model model,
+			final CartModificationData cartModification)
 	{
 		if (cartModification.getQuantity() == form.getQuantity().longValue())
 		{
@@ -384,14 +406,16 @@ public class CartPageController extends AbstractCartPageController
 
 			GlobalMessages.addMessage(model, GlobalMessages.ERROR_MESSAGES_HOLDER,
 					"basket.page.message.update.reducedNumberOfItemsAdded.lowStock", new Object[]
-					{ XSSFilterUtil.filter(cartModification.getEntry().getProduct().getName()), Long.valueOf(cartModification.getQuantity()), form.getQuantity(), request.getRequestURL().append(cartModification.getEntry().getProduct().getUrl()) });
+			{ XSSFilterUtil.filter(cartModification.getEntry().getProduct().getName()), Long.valueOf(cartModification.getQuantity()),
+					form.getQuantity(), request.getRequestURL().append(cartModification.getEntry().getProduct().getUrl()) });
 		}
 		else
 		{
 			// No more stock available
 			GlobalMessages.addMessage(model, GlobalMessages.ERROR_MESSAGES_HOLDER,
 					"basket.page.message.update.reducedNumberOfItemsAdded.noStock", new Object[]
-					{ XSSFilterUtil.filter(cartModification.getEntry().getProduct().getName()), request.getRequestURL().append(cartModification.getEntry().getProduct().getUrl()) });
+			{ XSSFilterUtil.filter(cartModification.getEntry().getProduct().getName()),
+					request.getRequestURL().append(cartModification.getEntry().getProduct().getUrl()) });
 		}
 	}
 
@@ -476,14 +500,14 @@ public class CartPageController extends AbstractCartPageController
 				final CommerceSaveCartResultData saveCartData = saveCartFacade.saveCart(commerceSaveCartParameterData);
 				GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.CONF_MESSAGES_HOLDER, "basket.save.cart.on.success",
 						new Object[]
-						{ saveCartData.getSavedCartData().getName() });
+				{ saveCartData.getSavedCartData().getName() });
 			}
 			catch (final CommerceSaveCartException csce)
 			{
 				LOG.error(csce.getMessage(), csce);
 				GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER, "basket.save.cart.on.error",
 						new Object[]
-						{ form.getName() });
+				{ form.getName() });
 			}
 		}
 		return REDIRECT_CART_URL;
@@ -540,7 +564,7 @@ public class CartPageController extends AbstractCartPageController
 				voucherFacade.applyVoucher(form.getVoucherCode());
 				redirectAttributes.addFlashAttribute("successMsg",
 						getMessageSource().getMessage("text.voucher.apply.applied.success", new Object[]
-						{ form.getVoucherCode() }, getI18nService().getCurrentLocale()));
+				{ form.getVoucherCode() }, getI18nService().getCurrentLocale()));
 			}
 		}
 		catch (final VoucherOperationException e)
@@ -571,7 +595,7 @@ public class CartPageController extends AbstractCartPageController
 		{
 			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER, "text.voucher.release.error",
 					new Object[]
-					{ form.getVoucherCode() });
+			{ form.getVoucherCode() });
 			if (LOG.isDebugEnabled())
 			{
 				LOG.debug(e.getMessage(), e);
@@ -593,7 +617,8 @@ public class CartPageController extends AbstractCartPageController
 
 	@RequestMapping(value = "/entry/execute/" + ACTION_CODE_PATH_VARIABLE_PATTERN, method = RequestMethod.POST)
 	public String executeCartEntryAction(@PathVariable(value = "actionCode", required = true) final String actionCode,
-			final Model model, @RequestParam("entryNumbers") final Long[] entryNumbers) throws CMSItemNotFoundException
+			final Model model, @RequestParam("entryNumbers") final Long[] entryNumbers,
+			@RequestParam(name = "sortBy", required = false) final String sortBy) throws CMSItemNotFoundException
 	{
 		CartEntryAction action = null;
 		try
@@ -612,7 +637,7 @@ public class CartPageController extends AbstractCartPageController
 			final Optional<String> redirectUrl = cartEntryActionFacade.executeAction(action, Arrays.asList(entryNumbers));
 			final Optional<String> successMessageKey = cartEntryActionFacade.getSuccessMessageKey(action);
 
-			prepareDataForPage(model);
+			prepareDataForPage(model, sortBy);
 
 			if (successMessageKey.isPresent())
 			{
@@ -640,8 +665,9 @@ public class CartPageController extends AbstractCartPageController
 	}
 
 	@RequestMapping(value = "/quickShop", method = RequestMethod.POST)
-	public String addToCart(@RequestParam("productCode") final String code, @RequestParam("quantity") final long qty, final Model model, @Valid final AddToCartForm form,
-							final BindingResult bindingErrors) throws CMSItemNotFoundException
+	public String addToCart(@RequestParam("productCode") final String code,
+			@RequestParam(name = "sortBy", required = false) final String sortBy, @RequestParam("quantity") final long qty,
+			final Model model, @Valid final AddToCartForm form, final BindingResult bindingErrors) throws CMSItemNotFoundException
 	{
 		if (qty <= 0)
 		{
@@ -669,6 +695,11 @@ public class CartPageController extends AbstractCartPageController
 							"basket.information.quantity.reducedNumberOfItemsAdded." + cartModification.getStatusCode());
 				}
 			}
+			catch (final UnknownIdentifierException ex)
+			{
+				logDebugException(ex);
+				GlobalMessages.addErrorMessage(model, ControllerConstants.ErrorMessageKeys.AddToCart.PRODUCT_NOT_FOUND);
+			}
 			catch (final CommerceCartModificationException ex)
 			{
 				logDebugException(ex);
@@ -677,7 +708,7 @@ public class CartPageController extends AbstractCartPageController
 			}
 		}
 
-		prepareDataForPage(model);
+		prepareDataForPage(model, sortBy);
 
 		// Return Cart Content
 		return ControllerConstants.Views.Pages.Cart.CartContentPage;

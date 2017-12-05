@@ -469,6 +469,11 @@ public interface ControllerConstants
 			 * Default error message for add to cart.
 			 */
 			String BASKET_ERROR = "basket.error.occurred";
+
+			/**
+			 * Error message for unknown identifier
+			 */
+			String PRODUCT_NOT_FOUND = "product.not.found.error";
 		}
 
 		/**

@@ -87,12 +87,12 @@
 		<security:remember-me key="amwayapacstorefront" services-ref="rememberMeServices" />
 
 		<!-- SSL / AUTHENTICATED pages -->
-		<security:intercept-url pattern="/my-account/addressform" access="hasAnyRole('ROLE_ANONYMOUS','ROLE_CUSTOMERGROUP')" requires-channel="https" />
-		<security:intercept-url pattern="/checkout/multi/billingaddressform" access="hasAnyRole('ROLE_ANONYMOUS','ROLE_CUSTOMERGROUP')" requires-channel="https" />
+		<security:intercept-url pattern="/my-account/addressform" access="hasAnyRole('ROLE_CUSTOMERGROUP')" requires-channel="https" />
+		<security:intercept-url pattern="/checkout/multi/billingaddressform" access="hasAnyRole('ROLE_CUSTOMERGROUP')" requires-channel="https" />
 		<security:intercept-url pattern="/my-account*" access="hasRole('ROLE_CUSTOMERGROUP')" requires-channel="https" />
 		<security:intercept-url pattern="/cart*" access="hasRole('ROLE_CUSTOMERGROUP')" requires-channel="https" />
 		<security:intercept-url pattern="/cart/**" access="hasRole('ROLE_CUSTOMERGROUP')" requires-channel="https" />
-		<security:intercept-url pattern="/my-account/order/*/getReadOnlyProductVariantMatrix" access="hasAnyRole('ROLE_ANONYMOUS','ROLE_CUSTOMERGROUP')" requires-channel="https" />
+		<security:intercept-url pattern="/my-account/order/*/getReadOnlyProductVariantMatrix" access="hasAnyRole('ROLE_CUSTOMERGROUP')" requires-channel="https" />
 		<security:intercept-url pattern="/my-account/**" access="hasRole('ROLE_CUSTOMERGROUP')" requires-channel="https" />
 		<security:intercept-url pattern="/quote/**" access="hasRole('ROLE_CUSTOMERGROUP')" requires-channel="https" />
 
@@ -296,7 +296,8 @@
 		<constructor-arg name="key" value="amwayapacstorefront" />
 		<constructor-arg name="userDetailsService" ref="originalUidUserDetailsService" />
 		<property name="cookieName" value="amwayapacstorefrontRememberMe" />
-		<property name="alwaysRemember" value="true" />
+		<property name="parameter" value="rememberMe" />
+		<property name="alwaysRemember" value="false" />
 		<property name="userService" ref="userService"/>
 		<property name="useSecureCookie" value="true"/>
 		<property name="customerFacade" ref="customerFacade"/>

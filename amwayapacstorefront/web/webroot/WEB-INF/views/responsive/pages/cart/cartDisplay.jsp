@@ -17,15 +17,13 @@
                     <div class="row">
                         <div class="col-xs-12 col-sm-7 col-md-7 pagination-controls-wrapper">
                             <div class="form-group">
-                                <c:url value="/cart/sort" var="cartSortFormAction" />
+                                <c:url value="/cart/content" var="cartSortFormAction" />
                                 <form:form id="sortCartForm" action="${cartSortFormAction}" method="post" >
                                     <label class="control-label cart-detail__label" for="sortForm1">Sort by</label>
-                                    <select class="cart-detail__size" name="sortBy">
-                                        <option value="LastItemAdded"><spring:theme code="cart.page.sort.lastItemAdded" /></option>
-                                        <option value="PriceAscending"><spring:theme code="cart.page.sort.price.ascending" /></option>
-                                        <option value="PriceDescending"><spring:theme code="cart.page.sort.price.descending" /></option>
-                                        <option value="NameAscending"><spring:theme code="cart.page.sort.name.ascending" /></option>
-                                        <option value="NameDescending"><spring:theme code="cart.page.sort.name.descending" /></option>
+                                    <select class="cart-detail__size" name="sortBy" >
+                                    	<c:forEach items="${sortOptions}" var="sortOption">
+                                    		<option value="${sortOption}" <c:if test="${selectedSort eq sortOption}">selected="selected"</c:if>><spring:theme code="cart.page.sort.${sortOption}" /></option>
+                                    	</c:forEach>
                                     </select>
                                     <a class="btn-blue-white js-sort-cart-submit" href="#"><spring:theme code="cart.page.sort.button.apply" /></a>
                                 </form:form>

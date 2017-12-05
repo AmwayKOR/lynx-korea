@@ -25,8 +25,8 @@
 			<input id="j_username" name="j_username" type="text" placeholder="Username or ABO ID" class="login-form__username">
 			<input id="j_password" name="j_password" type="password" placeholder="Password" class="login-form__password">
 			<input type="hidden" name="CSRFToken" value="${CSRFToken.token}" />
-			<input class="login-form__remember" id="remember" name="remember" type="checkbox">
-			<label for="remember" class="remember-me">
+			<input class="login-form__remember" id="rememberMe" name="rememberMe" type="checkbox">
+			<label for="rememberMe" class="remember-me">
 				<spring:theme code="text.header.loginform.remember" />
 			</label>
 			<button class="btn-primary button login-form__submit" type="submit" value="submit">
