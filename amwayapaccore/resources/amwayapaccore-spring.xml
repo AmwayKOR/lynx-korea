@@ -1,216 +1,241 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
- [y] hybris Platform
-
- Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
-
- This software is the confidential and proprietary information of SAP
- ("Confidential Information"). You shall not disclose such Confidential
- Information and shall use it only in accordance with the terms of the
- license agreement you entered into with SAP.
--->
+<!-- [y] hybris Platform Copyright (c) 2017 SAP SE or an SAP affiliate company. 
+	All rights reserved. This software is the confidential and proprietary information 
+	of SAP ("Confidential Information"). You shall not disclose such Confidential 
+	Information and shall use it only in accordance with the terms of the license 
+	agreement you entered into with SAP. -->
 
 <beans xmlns="http://www.springframework.org/schema/beans"
-	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	   xmlns:context="http://www.springframework.org/schema/context"
-	   xmlns:util="http://www.springframework.org/schema/util"
-	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
            http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
-     <context:annotation-config/>
+	<context:annotation-config />
 
 
-    <bean id="volumePriceComparator" class="com.amway.apac.core.comparators.VolumeAwarePriceInformationComparator" scope="singleton"/>
+	<bean id="volumePriceComparator"
+		class="com.amway.apac.core.comparators.VolumeAwarePriceInformationComparator"
+		scope="singleton" />
 
 
-	<!--
-		Event listeners are singletons, therefore the dependency for a bean in tenant-scope
-		must be configured with a lookup method.
-	-->
-	<bean id="orderCancelledEventListener"
-	      class="com.amway.apac.core.event.OrderCancelledEventListener" parent="abstractAcceleratorSiteEventListener">
-		<property name="modelService" ref="modelService"/>
-		<property name="businessProcessService" ref="businessProcessService"/>
+	<!-- Event listeners are singletons, therefore the dependency for a bean 
+		in tenant-scope must be configured with a lookup method. -->
+	<bean id="orderCancelledEventListener" class="com.amway.apac.core.event.OrderCancelledEventListener"
+		parent="abstractAcceleratorSiteEventListener">
+		<property name="modelService" ref="modelService" />
+		<property name="businessProcessService" ref="businessProcessService" />
 	</bean>
-	<bean id="orderRefundEventListener"
-	      class="com.amway.apac.core.event.OrderRefundEventListener" parent="abstractAcceleratorSiteEventListener">
-		<property name="modelService" ref="modelService"/>
-		<property name="businessProcessService" ref="businessProcessService"/>
+	<bean id="orderRefundEventListener" class="com.amway.apac.core.event.OrderRefundEventListener"
+		parent="abstractAcceleratorSiteEventListener">
+		<property name="modelService" ref="modelService" />
+		<property name="businessProcessService" ref="businessProcessService" />
 	</bean>
 	<bean id="forgottenPasswordEventListener"
-	      class="com.amway.apac.core.event.ForgottenPasswordEventListener" parent="abstractAcceleratorSiteEventListener">
-		<property name="modelService" ref="modelService"/>
-		<property name="businessProcessService" ref="businessProcessService"/>
+		class="com.amway.apac.core.event.ForgottenPasswordEventListener"
+		parent="abstractAcceleratorSiteEventListener">
+		<property name="modelService" ref="modelService" />
+		<property name="businessProcessService" ref="businessProcessService" />
 	</bean>
 
 	<!-- Process resources definition -->
 
 	<bean id="generateForgottenPasswordEmail" parent="abstractGenerateEmailAction">
-		<property name="frontendTemplateName" value="ForgottenPasswordEmailTemplate"/>
+		<property name="frontendTemplateName" value="ForgottenPasswordEmailTemplate" />
 	</bean>
 
-    <bean id="markQuoteNotificationAsSent"
-          class="com.amway.apac.core.actions.quote.MarkQuoteNotificationAsSentAction"
-          parent="abstractAction" abstract="true">
-        <property name="quoteService" ref="quoteService"/>
-    </bean>
+	<bean id="markQuoteNotificationAsSent"
+		class="com.amway.apac.core.actions.quote.MarkQuoteNotificationAsSentAction"
+		parent="abstractAction" abstract="true">
+		<property name="quoteService" ref="quoteService" />
+	</bean>
 
 
-	<bean id="mccSiteUrlHelper" class="com.amway.apac.core.util.MccSiteUrlHelper" >
-		<property name="siteChannelValidationStrategy" ref="siteChannelValidationStrategy"/>
-		<property name="siteBaseUrlResolutionService" ref="siteBaseUrlResolutionService"/>
-		<property name="cmsSiteService" ref="cmsSiteService"/>
+	<bean id="mccSiteUrlHelper" class="com.amway.apac.core.util.MccSiteUrlHelper">
+		<property name="siteChannelValidationStrategy" ref="siteChannelValidationStrategy" />
+		<property name="siteBaseUrlResolutionService" ref="siteBaseUrlResolutionService" />
+		<property name="cmsSiteService" ref="cmsSiteService" />
 	</bean>
 
 
 	<!-- checkout flow configuration -->
 
-	<bean id="pickUpInStoreCheckoutFlowStrategy" class="com.amway.apac.core.checkout.flow.impl.PickUpInStoreCheckoutFlowStrategy" >
+	<bean id="pickUpInStoreCheckoutFlowStrategy"
+		class="com.amway.apac.core.checkout.flow.impl.PickUpInStoreCheckoutFlowStrategy">
 		<property name="pickupStrategy" ref="pickupStrategy" />
-		<property name="defaultStrategy" ref="siteCheckoutFlowStrategy"/>
+		<property name="defaultStrategy" ref="siteCheckoutFlowStrategy" />
 		<property name="multiStepCheckoutFlowStrategy" ref="multiStepCheckoutFlowStrategy" />
 	</bean>
 
 	<bean id="siteCheckoutFlowStrategy"
-	      class="com.amway.apac.core.checkout.flow.impl.SiteCheckoutFlowStrategy" >
+		class="com.amway.apac.core.checkout.flow.impl.SiteCheckoutFlowStrategy">
 		<!-- This strategy looks up a strategy based on the current site UID -->
-		<property name="cmsSiteService" ref="cmsSiteService"/>
+		<property name="cmsSiteService" ref="cmsSiteService" />
 		<property name="siteMappings">
 			<map>
-				<entry key="electronics" value-ref="newCustomerCheckoutFlowStrategy"/>
-				<entry key="apparel-de" value-ref="multiStepCheckoutFlowStrategy"/>
-				<entry key="apparel-uk" value-ref="multiStepCheckoutFlowStrategy"/>
-				<entry key="powertoolsstore" value-ref="multiStepCheckoutFlowStrategy"/>
+				<entry key="electronics" value-ref="newCustomerCheckoutFlowStrategy" />
+				<entry key="apparel-de" value-ref="multiStepCheckoutFlowStrategy" />
+				<entry key="apparel-uk" value-ref="multiStepCheckoutFlowStrategy" />
+				<entry key="powertoolsstore" value-ref="multiStepCheckoutFlowStrategy" />
 			</map>
 		</property>
 		<!-- Default to SINGLE step checkout -->
-		<property name="defaultStrategy" ref="multiStepCheckoutFlowStrategy"/>
+		<property name="defaultStrategy" ref="multiStepCheckoutFlowStrategy" />
 	</bean>
 
 	<bean id="newCustomerCheckoutFlowStrategy"
-	      class="com.amway.apac.core.checkout.flow.impl.NewCustomerCheckoutFlowStrategy" >
+		class="com.amway.apac.core.checkout.flow.impl.NewCustomerCheckoutFlowStrategy">
 		<!-- This strategy works out if the user has created any data -->
-		<property name="userService" ref="userService"/>
-		<property name="customerAccountService" ref="customerAccountService"/>
-		<property name="defaultStrategy" ref="multiStepCheckoutFlowStrategy"/>
-		<property name="newCustomerStrategy" ref="multiStepCheckoutFlowStrategy"/>
+		<property name="userService" ref="userService" />
+		<property name="customerAccountService" ref="customerAccountService" />
+		<property name="defaultStrategy" ref="multiStepCheckoutFlowStrategy" />
+		<property name="newCustomerStrategy" ref="multiStepCheckoutFlowStrategy" />
 	</bean>
 
+	<alias alias="commerceStockLevelCalculationStrategy" name="amwayApacCommerceAvailabilityCalculationStrategy" />
+	<bean id="amwayApacCommerceAvailabilityCalculationStrategy"
+		class="com.amway.apac.core.stock.strategies.impl.AmwayApacCommerceAvailabilityCalculationStrategy"
+		parent="defaultCommerceStockLevelCalculationStrategy">
+		<property name="atpFormulaService" ref="atpFormulaService" />
+		<property name="restockConfigService" ref="restockConfigService" />
+		<property name="baseStoreService" ref="baseStoreService" />
+	</bean>
 
+	<alias alias="commerceStockService" name="defaultAmwayApacCommerceStockService" />
+	<bean id="defaultAmwayApacCommerceStockService"
+		class="com.amway.apac.core.stock.service.impl.DefaultAmwayApacCommerceStockService"
+		parent="defaultAmwayCommerceStockService">
+		<property name="amwayWarehouseSelectionStrategy" ref="amwayWarehouseSelectionStrategy" />
+		<property name="amwayStockService" ref="stockService" />
+		<property name="pickupWarehouseSelectionStrategy" ref="pickupWarehouseSelectionStrategy" />
+	</bean>
 
 	<!-- Sales quote process actions -->
 
-	<!-- quote-->
+	<!-- quote -->
 	<bean id="quoteBuyerSubmitEventListener" class="com.amway.apac.core.event.QuoteBuyerSubmitEventListener"
-		  parent="abstractEventListener">
-		<property name="modelService" ref="modelService"/>
-		<property name="businessProcessService" ref="businessProcessService"/>
+		parent="abstractEventListener">
+		<property name="modelService" ref="modelService" />
+		<property name="businessProcessService" ref="businessProcessService" />
 	</bean>
 
-	<bean id="quoteSalesRepSubmitEventListener" class="com.amway.apac.core.event.QuoteSalesRepSubmitEventListener"
-		  parent="abstractEventListener">
-		<property name="modelService" ref="modelService"/>
-		<property name="businessProcessService" ref="businessProcessService"/>
+	<bean id="quoteSalesRepSubmitEventListener"
+		class="com.amway.apac.core.event.QuoteSalesRepSubmitEventListener"
+		parent="abstractEventListener">
+		<property name="modelService" ref="modelService" />
+		<property name="businessProcessService" ref="businessProcessService" />
 	</bean>
 
-	<bean id="quoteSellerApprovalSubmitEventListener" class="com.amway.apac.core.event.QuoteSellerApprovalSubmitEventListener"
-		  parent="abstractEventListener">
-		<property name="modelService" ref="modelService"/>
-		<property name="businessProcessService" ref="businessProcessService"/>
+	<bean id="quoteSellerApprovalSubmitEventListener"
+		class="com.amway.apac.core.event.QuoteSellerApprovalSubmitEventListener"
+		parent="abstractEventListener">
+		<property name="modelService" ref="modelService" />
+		<property name="businessProcessService" ref="businessProcessService" />
 	</bean>
 
-	<bean id="quoteBuyerOrderPlacedEventListener" class="com.amway.apac.core.event.QuoteBuyerOrderPlacedEventListener"
-		  parent="abstractEventListener">
-		<property name="commerceQuoteService" ref="commerceQuoteService"/>
-		<property name="modelService" ref="modelService"/>
+	<bean id="quoteBuyerOrderPlacedEventListener"
+		class="com.amway.apac.core.event.QuoteBuyerOrderPlacedEventListener"
+		parent="abstractEventListener">
+		<property name="commerceQuoteService" ref="commerceQuoteService" />
+		<property name="modelService" ref="modelService" />
 	</bean>
 
-	<bean id="quoteToExpireSoonEventListener" class="com.amway.apac.core.event.QuoteToExpireSoonEventListener"
-		  parent="abstractEventListener">
-		<property name="modelService" ref="modelService"/>
-		<property name="businessProcessService" ref="businessProcessService"/>
+	<bean id="quoteToExpireSoonEventListener"
+		class="com.amway.apac.core.event.QuoteToExpireSoonEventListener"
+		parent="abstractEventListener">
+		<property name="modelService" ref="modelService" />
+		<property name="businessProcessService" ref="businessProcessService" />
 	</bean>
-	
+
 	<bean id="quoteExpiredEventListener" class="com.amway.apac.core.event.QuoteExpiredEventListener"
-		  parent="abstractEventListener">
-		<property name="modelService" ref="modelService"/>
-		<property name="businessProcessService" ref="businessProcessService"/>
+		parent="abstractEventListener">
+		<property name="modelService" ref="modelService" />
+		<property name="businessProcessService" ref="businessProcessService" />
 	</bean>
 
 	<bean id="quoteCancelEventListener" class="com.amway.apac.core.event.QuoteCancelEventListener"
-		  parent="abstractEventListener">
-		<property name="modelService" ref="modelService"/>
-		<property name="businessProcessService" ref="businessProcessService"/>
+		parent="abstractEventListener">
+		<property name="modelService" ref="modelService" />
+		<property name="businessProcessService" ref="businessProcessService" />
 	</bean>
 
 	<bean id="quoteBuyerProcessDefinitionResource"
-		  class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
-		<property name="resource" value="classpath:/amwayapaccore/processes/quote/quote-buyer-process.xml"/>
+		class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+		<property name="resource"
+			value="classpath:/amwayapaccore/processes/quote/quote-buyer-process.xml" />
 	</bean>
 
 	<bean id="quoteSalesRepProcessDefinitionResource"
-		  class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
-		<property name="resource" value="classpath:/amwayapaccore/processes/quote/quote-salesrep-process.xml"/>
+		class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+		<property name="resource"
+			value="classpath:/amwayapaccore/processes/quote/quote-salesrep-process.xml" />
 	</bean>
 
 
 	<bean id="quoteSellerApprovalProcessDefinitionResource"
-		  class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
-		<property name="resource" value="classpath:/amwayapaccore/processes/quote/quote-seller-approval-process.xml"/>
+		class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+		<property name="resource"
+			value="classpath:/amwayapaccore/processes/quote/quote-seller-approval-process.xml" />
 	</bean>
-	
+
 	<bean id="quotePostCancellationProcessDefinitionResource"
-		  class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
-		<property name="resource" value="classpath:/amwayapaccore/processes/quote/quote-post-cancellation-process.xml"/>
+		class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+		<property name="resource"
+			value="classpath:/amwayapaccore/processes/quote/quote-post-cancellation-process.xml" />
 	</bean>
 
 	<bean id="quoteToExpireSoonProcessDefinitionResource"
-		  class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
-		<property name="resource" value="classpath:/amwayapaccore/processes/quote/quote-to-expire-soon-email-process.xml"/>
+		class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+		<property name="resource"
+			value="classpath:/amwayapaccore/processes/quote/quote-to-expire-soon-email-process.xml" />
 	</bean>
-	
+
 	<bean id="quoteExpiredProcessDefinitionResource"
-		  class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
-		<property name="resource" value="classpath:/amwayapaccore/processes/quote/quote-expired-email-process.xml"/>
+		class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+		<property name="resource"
+			value="classpath:/amwayapaccore/processes/quote/quote-expired-email-process.xml" />
 	</bean>
 
 	<!-- Quotes email notification jobs -->
-	<bean id="quoteToExpireSoonJobPerformable"
-		  class="com.amway.apac.core.job.QuoteToExpireSoonJobPerformable"
-		  parent="abstractJobPerformable">
+	<bean id="quoteToExpireSoonJobPerformable" class="com.amway.apac.core.job.QuoteToExpireSoonJobPerformable"
+		parent="abstractJobPerformable">
 		<property name="supportedQuoteStatuses">
 			<set value-type="de.hybris.platform.core.enums.QuoteState">
 				<value>BUYER_OFFER</value>
 			</set>
 		</property>
-		<property name="commerceQuoteDao" ref="commerceQuoteDao"/>
+		<property name="commerceQuoteDao" ref="commerceQuoteDao" />
 		<property name="eventService" ref="eventService" />
 		<property name="configurationService" ref="configurationService" />
 		<property name="timeService" ref="timeService" />
 	</bean>
-	
-	<bean id="quoteExpiredJobPerformable"
-		  class="com.amway.apac.core.job.QuoteExpiredJobPerformable"
-		  parent="abstractJobPerformable">
+
+	<bean id="quoteExpiredJobPerformable" class="com.amway.apac.core.job.QuoteExpiredJobPerformable"
+		parent="abstractJobPerformable">
 		<property name="supportedQuoteStatuses">
 			<set value-type="de.hybris.platform.core.enums.QuoteState">
 				<value>BUYER_OFFER</value>
 			</set>
 		</property>
-		<property name="commerceQuoteDao" ref="commerceQuoteDao"/>
+		<property name="commerceQuoteDao" ref="commerceQuoteDao" />
 		<property name="eventService" ref="eventService" />
 		<property name="timeService" ref="timeService" />
 	</bean>
 
-	<import resource="/amwayapaccore/processes/quote/quote-buyer-process-spring.xml"/>
-	<import resource="/amwayapaccore/processes/quote/quote-salesrep-process-spring.xml"/>
-	<import resource="/amwayapaccore/processes/quote/quote-seller-approval-process-spring.xml"/>
-	
-	<import resource="/amwayapaccore/processes/quote/quote-to-expire-soon-email-process-spring.xml"/>
-	<import resource="/amwayapaccore/processes/quote/quote-expired-email-process-spring.xml"/>
+	<import resource="/amwayapaccore/processes/quote/quote-buyer-process-spring.xml" />
+	<import
+		resource="/amwayapaccore/processes/quote/quote-salesrep-process-spring.xml" />
+	<import
+		resource="/amwayapaccore/processes/quote/quote-seller-approval-process-spring.xml" />
 
-	<import resource="/amwayapaccore/processes/quote/quote-post-cancellation-process-spring.xml"/>
-	
+	<import
+		resource="/amwayapaccore/processes/quote/quote-to-expire-soon-email-process-spring.xml" />
+	<import
+		resource="/amwayapaccore/processes/quote/quote-expired-email-process-spring.xml" />
+
+	<import
+		resource="/amwayapaccore/processes/quote/quote-post-cancellation-process-spring.xml" />
+
 </beans>

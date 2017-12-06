@@ -1,37 +1,128 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<!--
- [y] hybris Platform
+<!-- [y] hybris Platform Copyright (c) 2017 SAP SE or an SAP affiliate company. 
+	All rights reserved. This software is the confidential and proprietary information 
+	of SAP ("Confidential Information"). You shall not disclose such Confidential 
+	Information and shall use it only in accordance with the terms of the license 
+	agreement you entered into with SAP. -->
 
- Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="items.xsd">
 
- This software is the confidential and proprietary information of SAP
- ("Confidential Information"). You shall not disclose such Confidential
- Information and shall use it only in accordance with the terms of the
- license agreement you entered into with SAP.
--->
+	<enumtypes>
+		<enumtype generate="true" code="AmwayBackOrderStatus"
+			autocreate="true" dynamic="true">
+			<value code="ACTIVE" />
+			<value code="CANCELLED" />
+			<value code="COMPLETED" />
+			<value code="RELEASED" />
+			<value code="EXPIRED" />
+		</enumtype>
+	</enumtypes>
+	<itemtypes>
 
-<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="items.xsd">
-
-    <itemtypes>
-
-        <!-- Add your item definitions here -->
+		<!-- Add your item definitions here -->
 
 
-        <!-- TypeGroups are for structure of this file only -->
-        
-        <typegroup name="product">
-	        <itemtype code="AmwayKitEntryProduct" generate="false" autocreate="false" jaloclass="com.amway.core.jalo.AmwayKitEntryProduct">
-					<attributes>
-						<attribute qualifier="isMajor" type="java.lang.Boolean">
-							<description>Indicates whether bundle child is major or minor.</description>
-							<modifiers read="true" write="true" search="true" optional="false" />
-							<defaultvalue>java.lang.Boolean.TRUE</defaultvalue>
-							<persistence type="property" />
-						</attribute>
-					</attributes>
+		<!-- TypeGroups are for structure of this file only -->
+
+		<typegroup name="product">
+			<itemtype code="AmwayKitEntryProduct" generate="false"
+				autocreate="false" jaloclass="com.amway.core.jalo.AmwayKitEntryProduct">
+				<attributes>
+					<attribute qualifier="isMajor" type="java.lang.Boolean">
+						<description>Indicates whether bundle child is major or minor.</description>
+						<modifiers read="true" write="true" search="true"
+							optional="false" />
+						<defaultvalue>java.lang.Boolean.TRUE</defaultvalue>
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+		</typegroup>
+		
+		<!-- Type groups for BackOrder -->
+		<typegroup name="backOrder">
+			<itemtype code="AmwayBackOrder" generate="true" autocreate="true"
+				jaloclass="com.amway.core.jalo.AmwayBackOrder">
+				<deployment table="BackOrder" typecode="21082" />
+				<attributes>
+					<attribute qualifier="product" type="Product">
+						<description>Specifies the product in the backorder.</description>
+						<modifiers read="true" write="true" search="true"
+							optional="false" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="warehouse" type="Warehouse">
+						<description>Specifies the warehouse of the backorder.</description>
+						<modifiers read="true" write="true" search="true"
+							optional="false" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="releaseByDate" type="java.util.Date">
+						<description>Specifies the date by which the backorder should be released.</description>
+						<modifiers read="true" write="true" search="true"
+							optional="false" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="originalOrder" type="Order">
+						<description>Specifies the original order which has B/O.</description>
+						<modifiers read="true" write="true" search="true"
+							optional="false" unique="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="consignment" type="Consignment">
+						<description>Specifies the Consignment which was created in original order for the backorder.</description>
+						<modifiers read="true" write="true" search="true"
+							optional="false" unique="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="orderingAbo" type="User">
+						<description>Specifies the ABO who placed the backorder.</description>
+						<modifiers read="true" write="true" search="true"
+							optional="false" unique="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="status" type="AmwayBackOrderStatus">
+						<description>Specifies the status of backorder.</description>
+						<modifiers read="true" write="true" search="true"
+							optional="false" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="site" type="BaseSite">
+						<persistence type="property" />
+						<description>Attribute contains base site reference.</description>
+					</attribute>
+				</attributes>
+			</itemtype>
+		</typegroup>
+		
+		<typegroup name="stocks">
+			<itemtype code="StockLevel" generate="false" autocreate="false">
+				<description>Extending the StockLevel type from core with additional attributes.</description>
+				<attributes>
+					<attribute qualifier="maxBoReleaseLimit" type="int">
+						<description>Maximum Back orders that can be released from this stock level</description>
+						<modifiers />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+		</typegroup>
+
+		<typegroup name="Consignment">
+			<itemtype code="ConsignmentProcess" autocreate="false"
+				generate="false">
+				<attributes>
+					<attribute qualifier="retryCount" type="java.lang.Integer">
+						<description>Retry count</description>
+						<modifiers read="true" write="true" optional="true" />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
 			</itemtype>
 		</typegroup>
 
 
-    </itemtypes>
+
+	</itemtypes>
 </items>
