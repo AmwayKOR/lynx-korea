@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.amway.apac.auth.security.AmwayJWTTokenProvider;
+import com.amway.apac.auth.security.impl.AmwayJWTKeyMakerImpl;
 
 
 /**
@@ -41,6 +42,9 @@ public class HomePageController extends AbstractPageController
 
 	@Resource(name = "jWTokenProvider")
 	private AmwayJWTTokenProvider jwtTokenProvider;
+
+	@Resource(name = "jwtKeyMaker")
+	AmwayJWTKeyMakerImpl jwtKeyMaker;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String home(@RequestParam(value = "logout", defaultValue = "false") final boolean logout, final Model model,
@@ -73,6 +77,10 @@ public class HomePageController extends AbstractPageController
 		model.addAttribute("state", state);
 		model.addAttribute("redirect_Url", redirectUrl);
 		model.addAttribute("client_Id", clientId);
+
+		model.addAttribute("kid", jwtKeyMaker.getKid());
+		model.addAttribute("n", jwtKeyMaker.getN());
+		model.addAttribute("e", jwtKeyMaker.getE());
 
 		return "pages/account/accountIDPPage";
 	}

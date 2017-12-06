@@ -166,6 +166,12 @@
         <!-- <div class="okta-iframe-overlay">
             <iframe name="interstitial" src="https&#x3a;&#x2f;&#x2f;account-test.amwayglobal.com&#x2f;en-us&#x2f;interstitial.html" frameborder="0" scrolling="auto"></iframe>
         </div> -->
+        Token :: <textarea rows="5"  cols="200">${id_token}</textarea><br/><br/>
+        
+        N :: <input type="text" name="n" value="${n}" size="200"/><br/><br/>
+        E :: <input type="text" name="e" value="${e}"  size="200"/><br/><br/>
+        Kid :: <input type="text" name="n" value="${kid}"  size="100"/><br/><br/>
+        <br/>
         <form id="appForm" method="post" name="oauthResponse" action="${redirect_Url}">
             <input type="hidden" name="state" value="${state}" /> <input type="hidden" name="id_token" value="${id_token}" />
             <input type="submit" name="submit" id ="submit" value="submit"/>
