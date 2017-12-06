@@ -481,4 +481,23 @@
 		<property name="useBaseStoreForSourcing" value="${oms.useBaseStoreForSourcing}" />
 	</bean-->
 	
+	<bean id="amwayEnumDataFacade"
+		class="com.amway.facades.enumData.impl.DefaultAmwayEnumDataFacade">
+		<property name="enumerationService" ref="enumerationService" />
+		<property name="enumConverter" ref="amwayEnumDataConverter" />
+	</bean>
+
+	<bean id="amwayEnumDataConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.cmsfacades.data.EnumData" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayEnumDataPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="amwayEnumDataPopulator" class="com.amway.facades.enumData.populator.AmwayEnumDataPopulator">
+		<property name="enumerationService" ref="enumerationService" />
+	</bean>
+	
 </beans>
