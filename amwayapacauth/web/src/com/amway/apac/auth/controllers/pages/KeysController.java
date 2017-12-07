@@ -14,6 +14,9 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.Abstrac
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,7 +25,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.amway.apac.auth.dto.JWTKeys;
+import com.amway.apac.auth.dto.Key;
 import com.amway.apac.auth.security.impl.AmwayJWTKeyMakerImpl;
 
 
@@ -39,14 +45,26 @@ public class KeysController extends AbstractPageController
 
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String getKeys(final Model model,
+	public @ResponseBody JWTKeys getKeys(final Model model,
 			final HttpServletRequest request, final HttpServletResponse response) throws CMSItemNotFoundException
 	{
+		final JWTKeys jwtKey = new JWTKeys();
+		final List<Key> keies = new ArrayList<>();
+		final Key key = new Key();
 
-		model.addAttribute("kid", jwtKeyMaker.getKid());
-		model.addAttribute("n", jwtKeyMaker.getN());
-		model.addAttribute("e", jwtKeyMaker.getE());
-		return "pages/account/accountKeys";
+		key.setAlg("RS256");
+		key.setE(jwtKeyMaker.getE());
+		key.setKid(jwtKeyMaker.getKid());
+		key.setKty("RSA");
+		key.setN(jwtKeyMaker.getN());
+		key.setUse("sig");
+		keies.add(key);
+		jwtKey.setKeys(keies);
+		/*
+		 * model.addAttribute("kid", jwtKeyMaker.getKid()); model.addAttribute("n", jwtKeyMaker.getN());
+		 * model.addAttribute("e", jwtKeyMaker.getE()); response.setContentType("application/json");
+		 */
+		return jwtKey;
 	}
 
 	protected void updatePageTitle(final Model model, final AbstractPageModel cmsPage)
