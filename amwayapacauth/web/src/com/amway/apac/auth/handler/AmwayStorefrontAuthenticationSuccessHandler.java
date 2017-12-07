@@ -73,14 +73,6 @@ public class AmwayStorefrontAuthenticationSuccessHandler extends SavedRequestAwa
 			{
 				throw new RedirectMismatchException("A redirectUri must be either supplied or preconfigured in the ClientDetails");
 			}
-			/*
-			 * if (null != client) { if ("token".equals(responseType)) { final String token =
-			 * jwtTokenProvider.createJWToken(((String) authentication.getPrincipal()), new Date(), request.getLocale());
-			 * LOG.info("CREATE_JWT_TOKEN :: " + token); request.setAttribute("JWT", token);
-			 *
-			 * if (null == redirectURL) { throw new
-			 * InvalidRequestException("Cannot approve request when no redirect URI is provided."); } } }
-			 */
 		}
 		catch (final Exception exp)
 		{

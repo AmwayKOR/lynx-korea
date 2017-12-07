@@ -3,29 +3,21 @@
  */
 package com.amway.apac.auth.security.impl;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.math.BigInteger;
-import java.security.GeneralSecurityException;
+import java.security.Key;
 import java.security.KeyPair;
-import java.security.KeyPairGenerator;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
-import java.security.SecureRandom;
-import java.security.cert.X509Certificate;
+import java.security.PublicKey;
+import java.security.UnrecoverableKeyException;
+import java.security.cert.Certificate;
+import java.security.cert.CertificateException;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
-import java.util.Date;
-
-import sun.security.x509.AlgorithmId;
-import sun.security.x509.CertificateAlgorithmId;
-import sun.security.x509.CertificateIssuerName;
-import sun.security.x509.CertificateSerialNumber;
-import sun.security.x509.CertificateSubjectName;
-import sun.security.x509.CertificateValidity;
-import sun.security.x509.CertificateVersion;
-import sun.security.x509.CertificateX509Key;
-import sun.security.x509.X500Name;
-import sun.security.x509.X509CertImpl;
-import sun.security.x509.X509CertInfo;
 
 import com.amway.apac.auth.security.AmwayJWTKeyMaker;
 import com.nimbusds.jose.JWSAlgorithm;
@@ -38,13 +30,11 @@ import com.nimbusds.jose.jwk.RSAKey;
  */
 public class AmwayJWTKeyMakerImpl implements AmwayJWTKeyMaker
 {
-
 	private String n;
 	private String e;
 	private String kid;
 	private RSAPrivateKey privateKey;
 	private RSAPublicKey publicKey;
-	private X509Certificate certificate;
 
 	/*
 	 * (non-Javadoc)
@@ -60,95 +50,68 @@ public class AmwayJWTKeyMakerImpl implements AmwayJWTKeyMaker
 
 	public void init()
 	{
-		KeyPairGenerator keyGenerator;
 		try
 		{
-			keyGenerator = KeyPairGenerator.getInstance("RSA");
-			keyGenerator.initialize(2048);
-			final KeyPair kp = keyGenerator.genKeyPair();
-			final RSAPublicKey publicKey = (RSAPublicKey) kp.getPublic();
-			final RSAPrivateKey privateKey = (RSAPrivateKey) kp.getPrivate();
+			final KeyPair kp = generateKeyPairFromCertificate();
+			if (null != kp)
+			{
+				final RSAPublicKey publicKey = (RSAPublicKey) kp.getPublic();
+				final RSAPrivateKey privateKey = (RSAPrivateKey) kp.getPrivate();
 
-			final RSAKey rsaKey = new RSAKey.Builder(publicKey)
-					.privateKey(privateKey)
-					.keyUse(KeyUse.SIGNATURE)
-					.algorithm(JWSAlgorithm.RS256)
-					.keyID(kid)
-					.build();
+				final RSAKey rsaKey = new RSAKey.Builder(publicKey)
+						.privateKey(privateKey)
+						.keyUse(KeyUse.SIGNATURE)
+						.algorithm(JWSAlgorithm.RS256)
+						.keyID(kid)
+						.build();
 
-			//final Gson gson = new GsonBuilder().setPrettyPrinting().create();
+				setN(rsaKey.getModulus().toString());
+				setE(rsaKey.getPublicExponent().toString());
 
-			//printKey(true, rsaKey, gson);
+				setKid("hybris-idp-key1");
 
-			setN(rsaKey.getModulus().toString());
-			setE(rsaKey.getPublicExponent().toString());
-
-			setKid("hybris-idp-key1");
-
-			setPrivateKey(privateKey);
-			setPublicKey(publicKey);
-
-			// generate X509 certificate
-			//	setCertificate(generateCertificate("amwaymalaysia.local", kp, 1000, "RS256"));
-
+				setPrivateKey(privateKey);
+				setPublicKey(publicKey);
+			}
 		}
-		catch (final GeneralSecurityException e)
+		catch (final Exception e)
 		{
-			// YTODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
 	/**
-	 * Create a self-signed X.509 Certificate
-	 *
-	 * @param dn
-	 *           the X.509 Distinguished Name, eg "CN=Test, L=London, C=GB"
-	 * @param pair
-	 *           the KeyPair
-	 * @param days
-	 *           how many days from now the Certificate is valid for
-	 * @param algorithm
-	 *           the signing algorithm, eg "SHA1withRSA"
+	 * @return
+	 * @throws NoSuchAlgorithmException
+	 * @throws KeyStoreException
+	 * @throws UnrecoverableKeyException
+	 * @throws IOException
+	 * @throws CertificateException
 	 */
-	X509Certificate generateCertificate(final String dn, final KeyPair pair, final int days, final String algorithm)
-			throws GeneralSecurityException, IOException
+	private KeyPair generateKeyPairFromCertificate() throws UnrecoverableKeyException, KeyStoreException,
+			NoSuchAlgorithmException, CertificateException, IOException
 	{
-		final PrivateKey privkey = pair.getPrivate();
-		final X509CertInfo info = new X509CertInfo();
-		final Date from = new Date();
-		final Date to = new Date(from.getTime() + days * 86400000l);
-		final CertificateValidity interval = new CertificateValidity(from, to);
-		final BigInteger sn = new BigInteger(64, new SecureRandom());
-		final X500Name owner = new X500Name(dn);
+		final ClassLoader classLoader = this.getClass().getClassLoader();
+		// Getting resource(File) from class loader
+		final File configFile = new File(classLoader.getResource("keystore.jks").getFile());
+		final FileInputStream is = new FileInputStream(configFile);
+		final KeyStore keystore = KeyStore.getInstance(KeyStore.getDefaultType());
+		keystore.load(is, "hybrismsb".toCharArray());
+		final String alias = "amwayqaidp";
+		System.out.println("Alias " + alias + " Found ::" + keystore.containsAlias(alias));
+		final Key key = keystore.getKey(alias, "hybrismsb".toCharArray());
 
-		info.set(X509CertInfo.VALIDITY, interval);
-		info.set(X509CertInfo.SERIAL_NUMBER, new CertificateSerialNumber(sn));
-		info.set(X509CertInfo.SUBJECT, new CertificateSubjectName(owner));
-		info.set(X509CertInfo.ISSUER, new CertificateIssuerName(owner));
-		info.set(X509CertInfo.KEY, new CertificateX509Key(pair.getPublic()));
-		info.set(X509CertInfo.VERSION, new CertificateVersion(CertificateVersion.V3));
-		AlgorithmId algo = new AlgorithmId(AlgorithmId.md5WithRSAEncryption_oid);
-		info.set(X509CertInfo.ALGORITHM_ID, new CertificateAlgorithmId(algo));
-
-		// Sign the cert to identify the algorithm that's used.
-		X509CertImpl cert = new X509CertImpl(info);
-		cert.sign(privkey, algorithm);
-
-		// Update the algorith, and resign.
-		algo = (AlgorithmId) cert.get(X509CertImpl.SIG_ALG);
-		info.set(CertificateAlgorithmId.NAME + "." + CertificateAlgorithmId.ALGORITHM, algo);
-		cert = new X509CertImpl(info);
-		cert.sign(privkey, algorithm);
-		return cert;
+		if (key instanceof PrivateKey)
+		{
+			// Get certificate of public key
+			final Certificate cert = keystore.getCertificate(alias);
+			// Get public key
+			final PublicKey publicKey = cert.getPublicKey();
+			// Return a key pair
+			return new KeyPair(publicKey, (PrivateKey) key);
+		}
+		return null;
 	}
-
-	/*
-	 * private void printKey(final boolean keySet, final JWK jwk, final Gson gson) { if (keySet) { final JWKSet jwkSet =
-	 * new JWKSet(jwk); final JsonElement json = new JsonParser().parse(jwkSet.toJSONObject(false).toJSONString());
-	 * System.out.println(gson.toJson(json)); } else { final JsonElement json = new
-	 * JsonParser().parse(jwk.toJSONString()); System.out.println(gson.toJson(json)); } }
-	 */
 
 	/**
 	 * @return the n
@@ -233,22 +196,5 @@ public class AmwayJWTKeyMakerImpl implements AmwayJWTKeyMaker
 	public void setPublicKey(final RSAPublicKey publicKey)
 	{
 		this.publicKey = publicKey;
-	}
-
-	/**
-	 * @return the certificate
-	 */
-	public X509Certificate getCertificate()
-	{
-		return certificate;
-	}
-
-	/**
-	 * @param certificate
-	 *           the certificate to set
-	 */
-	public void setCertificate(final X509Certificate certificate)
-	{
-		this.certificate = certificate;
 	}
 }
