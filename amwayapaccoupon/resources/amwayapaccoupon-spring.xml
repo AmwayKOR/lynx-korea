@@ -79,15 +79,9 @@
 	  -->
 	
     <bean id="amwayapaccouponSystemSetup" class="com.amway.apac.coupon.setup.AmwayapaccouponSystemSetup">
-        <!-- constructor arg injection example -->
-        <constructor-arg ref="amwayapaccouponService"/>
     </bean>
 
-    <bean id="amwayapaccouponService" class="com.amway.apac.coupon.service.impl.DefaultAmwayapaccouponService">
-        <!-- setter injection example -->
-        <property name="modelService" ref="modelService"/>
-        <property name="mediaService" ref="mediaService"/>
-        <property name="flexibleSearchService" ref="flexibleSearchService"/>
+	<alias name="defaultAmwayApacCouponService" alias="couponService"/>
+    <bean id="defaultAmwayApacCouponService" class="com.amway.apac.coupon.service.impl.DefaultAmwayApacCouponService" parent="defaultCouponService">
     </bean>
-			
 </beans>

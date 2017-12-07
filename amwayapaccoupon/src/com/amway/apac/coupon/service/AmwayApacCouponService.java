@@ -10,9 +10,16 @@
  */
 package com.amway.apac.coupon.service;
 
-public interface AmwayapaccouponService
-{
-	String getHybrisLogoUrl(String logoCode);
+import de.hybris.platform.couponservices.services.CouponService;
 
-	void createLogo(String logoCode);
+import com.amway.apac.coupon.data.AmwayCouponCreationParameter;
+
+
+public interface AmwayApacCouponService extends CouponService
+{
+
+	/**
+	 * Creates coupon in database on the basis of passed parameter.
+	 */
+	public void createAmwayCoupon(AmwayCouponCreationParameter couponCreationParameter);
 }

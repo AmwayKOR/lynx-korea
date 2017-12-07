@@ -10,34 +10,13 @@
  */
 package com.amway.apac.coupon.setup;
 
-import static com.amway.apac.coupon.constants.AmwayapaccouponConstants.PLATFORM_LOGO_CODE;
-
 import de.hybris.platform.core.initialization.SystemSetup;
 
-import java.io.InputStream;
-
 import com.amway.apac.coupon.constants.AmwayapaccouponConstants;
-import com.amway.apac.coupon.service.AmwayapaccouponService;
 
 
 @SystemSetup(extension = AmwayapaccouponConstants.EXTENSIONNAME)
 public class AmwayapaccouponSystemSetup
 {
-	private final AmwayapaccouponService amwayapaccouponService;
 
-	public AmwayapaccouponSystemSetup(final AmwayapaccouponService amwayapaccouponService)
-	{
-		this.amwayapaccouponService = amwayapaccouponService;
-	}
-
-	@SystemSetup(process = SystemSetup.Process.INIT, type = SystemSetup.Type.ESSENTIAL)
-	public void createEssentialData()
-	{
-		amwayapaccouponService.createLogo(PLATFORM_LOGO_CODE);
-	}
-
-	private InputStream getImageStream()
-	{
-		return AmwayapaccouponSystemSetup.class.getResourceAsStream("/amwayapaccoupon/sap-hybris-platform.png");
-	}
 }
