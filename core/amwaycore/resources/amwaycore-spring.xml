@@ -702,7 +702,6 @@
 	<bean id="amwayWishlistService" parent="defaultWishlistService" class="com.amway.core.wishlist.services.impl.AmwayWishlistServiceImpl">
 		<property name="amwayWishlistDao" ref="amwayWishlistDao" />
 		<property name="baseSiteService" ref="baseSiteService" />
-		<property name="saveAnonymousWishlists" value="true" />
 	</bean>
 
 	<alias alias="wishlistDao" name="amwayWishlistDao" />
