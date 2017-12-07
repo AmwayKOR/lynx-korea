@@ -16,6 +16,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.amway.apac.auth.security.AmwayJWTTokenProvider;
@@ -51,7 +52,7 @@ public class AmwayJWTTokenProviderImpl implements AmwayJWTTokenProvider
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.amway.apac.auth.security.AmwayJWTTokenProvider#createJWToken(com.amway.core.model.AmwayAccountModel)
 	 */
 	@Override
@@ -187,7 +188,7 @@ public class AmwayJWTTokenProviderImpl implements AmwayJWTTokenProvider
 				.claim("partyId", "47929860")
 				.claim("zoneinfo", Calendar.getInstance(request.getLocale()).getTimeZone().getID())
 				.claim("updated at", Long.valueOf(new Date().getTime()))
-				.claim("nonce", request.getParameter("nonce"))
+				.claim("nonce", StringUtils.replace(request.getParameter("nonce"), " ", "+"))
 				.claim("given_name", given_name)
 				.claim("family_name", family_name)
 				.expirationTime(new Date(new Date().getTime() + 60 * 1000))
