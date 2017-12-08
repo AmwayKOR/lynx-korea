@@ -83,7 +83,9 @@
 				</div>
 			</div>
 		</div>
-		<category:recentlyViewedProducts />
+		<cms:pageSlot position="RecentlyViewedProducts" var="comp">
+            <cms:component component="${comp}" />
+        </cms:pageSlot>
 	</div>
 
 	<div class="cart-popup modal fade" id="product-zoom-image-panel" tabindex="-1" role="dialog"></div>

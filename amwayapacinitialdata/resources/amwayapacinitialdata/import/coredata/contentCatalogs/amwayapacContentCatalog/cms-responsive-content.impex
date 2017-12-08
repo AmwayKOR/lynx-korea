@@ -136,6 +136,7 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 ;AddToCart;;ProductAddToCartComponent;narrow
 ;CrossSelling;;ProductReferencesComponent;narrow
 ;UpSelling;;ProductReferencesComponent;narrow
+;RecentlyViewedProducts;;RecentViewedItemsComponent;narrow
 ;Footer;;;footer
 ;Tabs;;CMSTabParagraphContainer
 ;TopHeaderSlot;;;wide
@@ -787,6 +788,7 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active
 ;;VariantSelectorSlot;Variant Selector;true
 ;;AddToCartSlot;Add To Cart;true
 ;;UpSellingSlot;Up Selling;true
+;;RecentlyViewedProductsSlot;Recently Viewed Products;true
 ;;CrossSellingSlot;Cross Selling;true
 ;;TopHeaderSlot;Top Header;true
 ;;BottomHeaderSlot;Bottom Header;true
@@ -884,6 +886,7 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 ;;VariantSelector-ProductDetails;VariantSelector;;VariantSelectorSlot;true
 ;;AddToCart-ProductDetails;AddToCart;;AddToCartSlot;true
 ;;UpSelling-ProductDetails;UpSelling;;UpSellingSlot;true
+;;RecentlyReviewedProducts-ProductDetails;RecentlyViewedProducts;;RecentlyViewedProductsSlot;true
 ;;CrossSelling-ProductDetails;CrossSelling;;CrossSellingSlot;true
 ;;TopHeaderSlot-ProductDetails;TopHeaderSlot;;TopHeaderSlot;true
 ;;BottomHeaderSlot-ProductDetails;BottomHeaderSlot;;BottomHeaderSlot;true

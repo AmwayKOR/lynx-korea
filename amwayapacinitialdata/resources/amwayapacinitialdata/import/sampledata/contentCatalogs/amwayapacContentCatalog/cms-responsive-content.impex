@@ -1149,3 +1149,7 @@ INSERT_UPDATE AmwayApacMobileMiniCartComponent;$contentCV[unique=true];uid[uniqu
 UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
 ;;MiniCartSlot;MiniCartComponent
 ;;MobileMiniCartSlot;AmwayApacMobileMiniCartComponent
+
+# CMS Recently Viewed Products Components
+INSERT_UPDATE RecentViewedItemsComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;
+;;RecentViewedItemsComponent;RecentViewedItemsComponent;RecentViewedItemsComponent;
