@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
+
 import com.amway.apac.facades.cart.AmwayApacCartFacade;
 import com.amway.apac.facades.cart.enums.AmwayApacCartSortCode;
 import com.amway.facades.cart.impl.DefaultAmwayCartFacade;
@@ -25,12 +27,12 @@ public class DefaultAmwayApacCartFacade extends DefaultAmwayCartFacade implement
 	@Override
 	public CartData getSessionCartWithSortBySortCode(final AmwayApacCartSortCode sortBy)
 	{
-		if (hasSessionCart())
+		final CartData data = getSessionCart();
+		if (CollectionUtils.isNotEmpty(data.getEntries()))
 		{
-			final CartData data = getSessionCart();
 			final List<OrderEntryData> recentlyAddedListEntries = new ArrayList<>(data.getEntries());
-
-			switch (sortBy)
+			final AmwayApacCartSortCode resolvedSortCode = sortBy == null ? AmwayApacCartSortCode.LAST_ITEM_ADDED : sortBy;
+			switch (resolvedSortCode)
 			{
 				case LAST_ITEM_ADDED:
 					Collections.reverse(recentlyAddedListEntries);
@@ -54,8 +56,7 @@ public class DefaultAmwayApacCartFacade extends DefaultAmwayCartFacade implement
 					break;
 			}
 			data.setEntries(Collections.unmodifiableList(recentlyAddedListEntries));
-			return data;
 		}
-		return createEmptyCart();
+		return data;
 	}
 }
