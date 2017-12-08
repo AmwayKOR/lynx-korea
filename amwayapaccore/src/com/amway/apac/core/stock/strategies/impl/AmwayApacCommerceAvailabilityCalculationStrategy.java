@@ -7,6 +7,7 @@ import de.hybris.platform.basecommerce.enums.InStockStatus;
 import de.hybris.platform.ordersplitting.model.StockLevelModel;
 import de.hybris.platform.warehousing.atp.strategy.impl.WarehousingAvailabilityCalculationStrategy;
 import de.hybris.platform.warehousing.model.AllocationEventModel;
+import de.hybris.platform.warehousing.model.InventoryEventModel;
 import de.hybris.platform.warehousing.model.ShrinkageEventModel;
 
 import java.util.Collection;
@@ -59,14 +60,40 @@ public class AmwayApacCommerceAvailabilityCalculationStrategy extends Warehousin
 	@Override
 	protected long getAvailableToSellQuantity(final StockLevelModel stockLevel)
 	{
-		long availability = stockLevel.getAvailable() - stockLevel.getReserved() + stockLevel.getInventoryEvents().stream()
-				.filter(event -> event instanceof ShrinkageEventModel).mapToLong(event -> event.getQuantity()).sum();
-		if (stockLevel.getInStockStatus().equals(InStockStatus.BACKORDER))
+		int availability = stockLevel.getAvailable() - stockLevel.getReserved();
+		if (isBackOrderStock(stockLevel))
 		{
-
-			availability = availability + stockLevel.getOverSelling() - stockLevel.getInventoryEvents().stream()
-					.filter(event -> event instanceof AllocationEventModel).mapToLong(event -> event.getQuantity()).sum();
+			availability = availability + stockLevel.getOverSelling()
+					- getInventoryEventQuantity(stockLevel, AllocationEventModel.class);
+		}
+		else
+		{
+			availability = availability - getInventoryEventQuantity(stockLevel, ShrinkageEventModel.class);
 		}
 		return availability;
+	}
+
+
+	/**
+	 * @param stockLevel
+	 * @param eventClass
+	 * @return quantity of that inventory event in stock level
+	 */
+	private int getInventoryEventQuantity(final StockLevelModel stockLevel, final Class<? extends InventoryEventModel> eventClass)
+	{
+		return (int) stockLevel.getInventoryEvents().stream().filter(event -> eventClass.isInstance(event))
+				.mapToLong(InventoryEventModel::getQuantity).sum();
+	}
+
+
+	/**
+	 * @param stockLevel
+	 * @return true, (if status is BackOrder) or (status is shipElseBackOrder with quantity less than equal to 0), else
+	 *         returns false
+	 */
+	private boolean isBackOrderStock(final StockLevelModel stockLevel)
+	{
+		return (stockLevel.getInStockStatus().equals(InStockStatus.BACKORDER))
+				|| (stockLevel.getInStockStatus().equals(InStockStatus.SHIPELSEBACKORDER) && stockLevel.getAvailable() <= 0);
 	}
 }

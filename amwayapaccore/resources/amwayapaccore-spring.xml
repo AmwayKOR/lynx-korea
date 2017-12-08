@@ -103,6 +103,12 @@
 		<property name="baseStoreService" ref="baseStoreService" />
 	</bean>
 
+	<alias alias="stockLevelStatusStrategy" name="amwayApacCommerceStockLevelStatusStrategy" />
+	<bean id="amwayApacCommerceStockLevelStatusStrategy"
+		class="com.amway.apac.core.stock.strategies.impl.AmwayApacCommerceStockLevelStatusStrategy"
+		parent="amwayCommerceStockLevelStatusStrategy">
+	</bean>
+
 	<alias alias="commerceStockService" name="defaultAmwayApacCommerceStockService" />
 	<bean id="defaultAmwayApacCommerceStockService"
 		class="com.amway.apac.core.stock.service.impl.DefaultAmwayApacCommerceStockService"
@@ -112,6 +118,13 @@
 		<property name="pickupWarehouseSelectionStrategy" ref="pickupWarehouseSelectionStrategy" />
 	</bean>
 
+	<alias name="defaultAmwayApacConsignmentService" alias="consignmentService" />
+	<bean id="defaultAmwayApacConsignmentService"
+		class="com.amway.apac.core.order.consignment.service.impl.DefaultAmwayApacConsignmentService"
+		parent="defaultAmwayConsignmentService">
+		<property name="consignmentBusinessProcessService" ref="consignmentBusinessProcessService" />
+	</bean>
+	
 	<!-- Sales quote process actions -->
 
 	<!-- quote -->

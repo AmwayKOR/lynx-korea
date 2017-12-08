@@ -8,6 +8,7 @@ import de.hybris.platform.core.model.order.AbstractOrderEntryModel;
 import de.hybris.platform.core.model.order.AbstractOrderModel;
 import de.hybris.platform.ordersplitting.ConsignmentCreationException;
 import de.hybris.platform.ordersplitting.model.ConsignmentModel;
+import de.hybris.platform.warehousing.process.WarehousingBusinessProcessService;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,6 +27,8 @@ import com.amway.core.order.consignment.service.impl.DefaultAmwayConsignmentServ
 public class DefaultAmwayApacConsignmentService extends DefaultAmwayConsignmentService implements AmwayApacConsignmentService
 {
 
+	private WarehousingBusinessProcessService<ConsignmentModel> consignmentBusinessProcessService;
+
 	/**
 	 * @param order
 	 *
@@ -41,8 +44,10 @@ public class DefaultAmwayApacConsignmentService extends DefaultAmwayConsignmentS
 		{
 			if (entry.getDispositionCode().equals(InStockStatus.BACKORDER))
 			{
-				allConsignments
-						.add(createConsignment(order, 'a' + order.getCode() + '_' + index.getAndIncrement(), Arrays.asList(entry)));
+				final ConsignmentModel consignment = createConsignment(order, 'a' + order.getCode() + '_' + index.getAndIncrement(),
+						Arrays.asList(entry));
+				consignmentBusinessProcessService.startProcess(consignment.getCode(), "consignment-process.xml");
+				allConsignments.add(consignment);
 			}
 			else
 			{
@@ -69,6 +74,16 @@ public class DefaultAmwayApacConsignmentService extends DefaultAmwayConsignmentS
 		{
 			allConsignments.add(createConsignment(order, 'a' + order.getCode(), remainingEntries));
 		}
+	}
+
+	/**
+	 * @param consignmentBusinessProcessService
+	 *           the consignmentBusinessProcessService to set
+	 */
+	public void setConsignmentBusinessProcessService(
+			final WarehousingBusinessProcessService<ConsignmentModel> consignmentBusinessProcessService)
+	{
+		this.consignmentBusinessProcessService = consignmentBusinessProcessService;
 	}
 
 }
