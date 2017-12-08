@@ -39,6 +39,16 @@ INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];nam
 
 ########## Top Header Logo ##########
 
+########## Top Header Logo For Mobile Site####
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;MobileSiteLogoSlot;MobileTopHeaderLogoComponent
+
+INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink
+;;MobileTopHeaderLogoComponent;Top Header Logo Component For Mobile Site;MobileTopHeaderLogoComponent;"/"
+
+########## Top Header Logo For Mobile Site####
+
 
 ########## Country Selector
 

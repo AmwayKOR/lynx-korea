@@ -43,6 +43,17 @@ UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[l
 ########## Top Header Logo ##########
 
 
+########## Top Header Logo For Mobile Site####
+
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];realfilename;mediaFormat(qualifier)[default=desktop];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];altText;folder(qualifier)[default='images']
+;;mobileTopHeaderLogoImage;mobileTopHeaderLogoImage;;$siteResource/logo2.png;image/png;Top header logo image;
+
+UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
+;;MobileTopHeaderLogoComponent;mobileTopHeaderLogoImage
+
+########## Top Header Logo For Mobile Site####
+
+
 ########## Country Selector 
 
 INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;folder(qualifier)[default='images'];altText

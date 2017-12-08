@@ -15,13 +15,12 @@
 <div class="mobile-container">
 	<div class="mobile-wrapper">
 		<nav:MobileTopNav />
-
 		<div class="mobile-header-cell mobile-nav-row-btn-logo">
 			<div class=" yComponentWrapper">
 				<div class="banner__component banner">
-					<a href="homepage.html">
-						<img title="" alt="" src="${themeResourcePath}/images/logo2.png" />
-					</a>
+					<cms:pageSlot position="MobileSiteLogo" var="component" element="div">
+						<cms:component component="${component}" />
+					</cms:pageSlot>
 				</div>
 			</div>
 		</div>

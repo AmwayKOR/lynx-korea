@@ -45,7 +45,7 @@
 					<spring:theme code="text.header.logged.account-popover_scores.update" />
 				</p>
 			</li>
-			<li class="account-popover__pv-display" onclick="javascript:location.href='dashboard-MVP.html'">
+			<li class="account-popover__pv-display">
 				<img src="${themeResourcePath}/images/performance-chart-arch-mobile.png" alt="" />
 			</li>
 
