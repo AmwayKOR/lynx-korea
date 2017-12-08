@@ -206,4 +206,24 @@ public interface ControllerConstants
 			}
 		}
 	}
+
+	interface IDPLogin
+	{
+		String E = "e";
+		String N = "n";
+		String KID = "kid";
+		String STATE = "state";
+		String SCOPE = "scope";
+		String NONCE = "nonce";
+		String ID_TOKEN = "id_token";
+		String CLIENT_ID = "client_id";
+		String JALOSESSION = "jalosession";
+		String REDIRECT_URI = "redirect_uri";
+		String RESPONSE_MODE = "response_mode";
+		String RESPONSE_TYPE = "response_type";
+		String IDP_SESSIONS_ME_URL = "/sessions/me";
+		String AMWAY_IDP_JWT_TTLMILES = "amway.idp.jwt.ttlmiles";
+		String AMWAY_IDP_JWT_KEYID = "amway.idp.jwt.secret.keyid";
+		String IDP_REFRESH_URL = "/sessions/me/lifecycle/refresh";
+	}
 }

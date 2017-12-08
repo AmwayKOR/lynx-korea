@@ -18,8 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,7 +27,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.amway.apac.auth.dto.JWTKeys;
 import com.amway.apac.auth.dto.Key;
-import com.amway.apac.auth.security.impl.AmwayJWTKeyMakerImpl;
+import com.amway.apac.auth.security.impl.AmwayJWTKeyMaker;
 
 
 /**
@@ -41,12 +39,12 @@ public class KeysController extends AbstractPageController
 {
 
 	@Resource(name = "jwtKeyMaker")
-	AmwayJWTKeyMakerImpl jwtKeyMaker;
+	AmwayJWTKeyMaker jwtKeyMaker;
 
 
 	@RequestMapping(method = RequestMethod.GET)
-	public @ResponseBody JWTKeys getKeys(final Model model,
-			final HttpServletRequest request, final HttpServletResponse response) throws CMSItemNotFoundException
+	@ResponseBody
+	public JWTKeys getKeys() throws CMSItemNotFoundException
 	{
 		final JWTKeys jwtKey = new JWTKeys();
 		final List<Key> keies = new ArrayList<>();
@@ -60,10 +58,6 @@ public class KeysController extends AbstractPageController
 		key.setUse("sig");
 		keies.add(key);
 		jwtKey.setKeys(keies);
-		/*
-		 * model.addAttribute("kid", jwtKeyMaker.getKid()); model.addAttribute("n", jwtKeyMaker.getN());
-		 * model.addAttribute("e", jwtKeyMaker.getE()); response.setContentType("application/json");
-		 */
 		return jwtKey;
 	}
 
@@ -76,7 +70,7 @@ public class KeysController extends AbstractPageController
 	 * @param jwtKeyMaker
 	 *           the jwtKeyMaker to set
 	 */
-	public void setJwtKeyMaker(final AmwayJWTKeyMakerImpl jwtKeyMaker)
+	public void setJwtKeyMaker(final AmwayJWTKeyMaker jwtKeyMaker)
 	{
 		this.jwtKeyMaker = jwtKeyMaker;
 	}

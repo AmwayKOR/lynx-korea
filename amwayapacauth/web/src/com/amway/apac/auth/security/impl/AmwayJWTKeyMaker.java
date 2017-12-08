@@ -3,6 +3,8 @@
  */
 package com.amway.apac.auth.security.impl;
 
+import de.hybris.platform.util.Config;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -19,34 +21,23 @@ import java.security.cert.CertificateException;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 
-import com.amway.apac.auth.security.AmwayJWTKeyMaker;
+import org.apache.log4j.Logger;
+
+import com.amway.apac.auth.controllers.ControllerConstants.IDPLogin;
 import com.nimbusds.jose.JWSAlgorithm;
 import com.nimbusds.jose.jwk.KeyUse;
 import com.nimbusds.jose.jwk.RSAKey;
 
 
-/**
- *
- */
-public class AmwayJWTKeyMakerImpl implements AmwayJWTKeyMaker
+public class AmwayJWTKeyMaker
 {
+	private static final Logger LOG = Logger.getLogger(AmwayJWTKeyMaker.class);
+
 	private String n;
 	private String e;
 	private String kid;
 	private RSAPrivateKey privateKey;
 	private RSAPublicKey publicKey;
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.amway.apac.auth.security.AmwayJWTKeyMaker#generateKeys()
-	 */
-	@Override
-	public void generateKeys()
-	{
-		// YTODO Auto-generated method stub
-
-	}
 
 	public void init()
 	{
@@ -55,33 +46,23 @@ public class AmwayJWTKeyMakerImpl implements AmwayJWTKeyMaker
 			final KeyPair kp = generateKeyPairFromCertificate();
 			if (null != kp)
 			{
-				final RSAPublicKey publicKey = (RSAPublicKey) kp.getPublic();
-				final RSAPrivateKey privateKey = (RSAPrivateKey) kp.getPrivate();
-
-				final RSAKey rsaKey = new RSAKey.Builder(publicKey)
-						.privateKey(privateKey)
-						.keyUse(KeyUse.SIGNATURE)
-						.algorithm(JWSAlgorithm.RS256)
-						.keyID(kid)
-						.build();
-
+				setPrivateKey((RSAPrivateKey) kp.getPrivate());
+				setPublicKey((RSAPublicKey) kp.getPublic());
+				setKid(Config.getParameter(IDPLogin.AMWAY_IDP_JWT_KEYID));
+				final RSAKey rsaKey = new RSAKey.Builder(publicKey).privateKey(privateKey).keyUse(KeyUse.SIGNATURE)
+						.algorithm(JWSAlgorithm.RS256).keyID(kid).build();
 				setN(rsaKey.getModulus().toString());
 				setE(rsaKey.getPublicExponent().toString());
-
-				setKid("hybris-idp-key1");
-
-				setPrivateKey(privateKey);
-				setPublicKey(publicKey);
 			}
 		}
 		catch (final Exception e)
 		{
-			e.printStackTrace();
+			LOG.error(e.getMessage(), e);
 		}
 	}
 
 	/**
-	 * @return
+	 * @return KeyPair
 	 * @throws NoSuchAlgorithmException
 	 * @throws KeyStoreException
 	 * @throws UnrecoverableKeyException
@@ -98,7 +79,7 @@ public class AmwayJWTKeyMakerImpl implements AmwayJWTKeyMaker
 		final KeyStore keystore = KeyStore.getInstance(KeyStore.getDefaultType());
 		keystore.load(is, "hybrismsb".toCharArray());
 		final String alias = "amwayqaidp";
-		System.out.println("Alias " + alias + " Found ::" + keystore.containsAlias(alias));
+		LOG.info("Alias " + alias + " Found ::" + keystore.containsAlias(alias));
 		final Key key = keystore.getKey(alias, "hybrismsb".toCharArray());
 
 		if (key instanceof PrivateKey)
@@ -106,9 +87,9 @@ public class AmwayJWTKeyMakerImpl implements AmwayJWTKeyMaker
 			// Get certificate of public key
 			final Certificate cert = keystore.getCertificate(alias);
 			// Get public key
-			final PublicKey publicKey = cert.getPublicKey();
+			final PublicKey certPublicKey = cert.getPublicKey();
 			// Return a key pair
-			return new KeyPair(publicKey, (PrivateKey) key);
+			return new KeyPair(certPublicKey, (PrivateKey) key);
 		}
 		return null;
 	}

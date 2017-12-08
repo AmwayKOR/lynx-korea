@@ -172,7 +172,7 @@
         E :: <input type="text" name="e" value="${e}"  size="200"/><br/><br/>
         Kid :: <input type="text" name="n" value="${kid}"  size="100"/><br/><br/>
         <br/>
-        <form id="appForm" method="post" name="oauthResponse" action="${redirect_Url}">
+        <form id="appForm" method="post" name="oauthResponse" action="${redirect_uri}">
             <input type="hidden" name="state" value="${state}" /> <input type="hidden" name="id_token" value="${id_token}" />
             <input type="submit" name="submit" id ="submit" value="submit"/>
         </form>

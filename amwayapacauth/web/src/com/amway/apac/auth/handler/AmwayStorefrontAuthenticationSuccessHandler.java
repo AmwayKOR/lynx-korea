@@ -34,8 +34,6 @@ import org.springframework.security.oauth2.provider.endpoint.DefaultRedirectReso
 import org.springframework.security.oauth2.provider.endpoint.RedirectResolver;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 
-import com.amway.apac.auth.security.AmwayJWTTokenProvider;
-
 
 /**
  * Success handler initializing user settings, restoring or merging the cart and ensuring the cart is handled correctly.
@@ -46,7 +44,6 @@ public class AmwayStorefrontAuthenticationSuccessHandler extends SavedRequestAwa
 {
 	private UiExperienceService uiExperienceService;
 	private ClientDetailsService clientDetailsService;
-	private AmwayJWTTokenProvider jwtTokenProvider;
 	private RedirectResolver redirectResolver;
 	private GrantedAuthority adminAuthority = new SimpleGrantedAuthority("ROLE_" + Constants.USER.ADMIN_USERGROUP.toUpperCase());
 
@@ -107,19 +104,8 @@ public class AmwayStorefrontAuthenticationSuccessHandler extends SavedRequestAwa
 	@Override
 	protected String determineTargetUrl(final HttpServletRequest request, final HttpServletResponse response)
 	{
-		final String responseType = request.getParameter("response_type");
-		final String responseMode = request.getParameter("response_mode");
-		final String scope = request.getParameter("scope");
-		final String state = request.getParameter("state");
-		final String redirectUrl = request.getParameter("redirect_uri");
-		final String clientId = request.getParameter("client_id");
-		final String nonce = request.getParameter("nonce");
-
-		final String redirect = this.getDefaultTargetUrl() + "?response_Type=" + responseType + "&response_Mode=" + responseMode
-				+ "&scope=" + scope
-				+ "&state=" + state + "&nonce=" + nonce + "&client_id=" + clientId + "&redirect_uri=" + redirectUrl;
-
-		return redirect;
+		return this.getDefaultTargetUrl() + "?state=" + request.getParameter("state") + "&nonce=" + request.getParameter("nonce")
+				+ "&client_id=" + request.getParameter("client_id") + "&redirect_uri=" + request.getParameter("redirect_uri");
 	}
 
 	protected UiExperienceService getUiExperienceService()
@@ -161,15 +147,6 @@ public class AmwayStorefrontAuthenticationSuccessHandler extends SavedRequestAwa
 	public void setClientDetailsService(final ClientDetailsService clientDetailsService)
 	{
 		this.clientDetailsService = clientDetailsService;
-	}
-
-	/**
-	 * @param jwtTokenProvider
-	 *           the jwtTokenProvider to set
-	 */
-	public void setJwtTokenProvider(final AmwayJWTTokenProvider jwtTokenProvider)
-	{
-		this.jwtTokenProvider = jwtTokenProvider;
 	}
 
 	/**

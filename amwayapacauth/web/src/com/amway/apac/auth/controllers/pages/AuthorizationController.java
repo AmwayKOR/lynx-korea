@@ -13,7 +13,9 @@ package com.amway.apac.auth.controllers.pages;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractLoginPageController;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
+import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.jalo.JaloSession;
+import de.hybris.platform.servicelayer.user.UserService;
 
 import java.io.IOException;
 import java.util.Date;
@@ -32,9 +34,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.amway.apac.auth.controllers.ControllerConstants;
+import com.amway.apac.auth.controllers.ControllerConstants.IDPLogin;
 import com.amway.apac.auth.security.AmwayJWTTokenProvider;
 
 
@@ -49,6 +51,10 @@ public class AuthorizationController extends AbstractLoginPageController
 
 	@Resource(name = "jWTokenProvider")
 	private AmwayJWTTokenProvider jwtTokenProvider;
+
+	@Resource(name = "userService")
+	private UserService userService;
+
 
 	@Override
 	protected String getView()
@@ -82,8 +88,7 @@ public class AuthorizationController extends AbstractLoginPageController
 	@RequestMapping(method = RequestMethod.GET)
 	public String doAuthorize(@RequestHeader(value = "referer", required = false) final String referer,
 			@RequestParam(value = "error", defaultValue = "false") final boolean loginError, final Model model,
-			final HttpServletRequest request, final HttpServletResponse response, final HttpSession session,
-			final RedirectAttributes redirectModel)
+			final HttpServletRequest request, final HttpServletResponse response, final HttpSession session)
 			throws CMSItemNotFoundException
 	{
 		if (!loginError)
@@ -91,41 +96,37 @@ public class AuthorizationController extends AbstractLoginPageController
 			storeReferer(referer, request, response);
 		}
 
-		final String responseType = request.getParameter("response_type");
-		final String responseMode = request.getParameter("response_mode");
-		final String scope = request.getParameter("scope");
-		final String state = request.getParameter("state");
-		final String redirectUrl = request.getParameter("redirect_uri");
-		final String clientId = request.getParameter("client_id");
-		final String nonce = request.getParameter("nonce");
+		final String redirectUrl = request.getParameter(IDPLogin.REDIRECT_URI);
 
-		model.addAttribute("response_type", responseType);
-		model.addAttribute("client_id", clientId);
-		model.addAttribute("responseMode", responseMode);
-		model.addAttribute("scope", scope);
-		model.addAttribute("nonce", nonce);
-		model.addAttribute("state", state);
+		model.addAttribute(IDPLogin.RESPONSE_TYPE, request.getParameter(IDPLogin.RESPONSE_TYPE));
+		model.addAttribute(IDPLogin.CLIENT_ID, request.getParameter(IDPLogin.CLIENT_ID));
+		model.addAttribute(IDPLogin.RESPONSE_MODE, request.getParameter(IDPLogin.RESPONSE_MODE));
+		model.addAttribute(IDPLogin.SCOPE, request.getParameter(IDPLogin.SCOPE));
+		model.addAttribute(IDPLogin.NONCE, request.getParameter(IDPLogin.NONCE));
+		model.addAttribute(IDPLogin.STATE, request.getParameter(IDPLogin.STATE));
 
 		if (StringUtils.isNotBlank(redirectUrl))
 		{
-			model.addAttribute("redirect_uri", redirectUrl);
+			model.addAttribute(IDPLogin.REDIRECT_URI, redirectUrl);
 		}
 		else
 		{
-			model.addAttribute("redirect_uri", referer);
+			model.addAttribute(IDPLogin.REDIRECT_URI, referer);
 		}
-
+		final CustomerModel customer = (CustomerModel) userService.getCurrentUser();
+		if (!userService.isAnonymousUser(customer))
+		{
+			return REDIRECT_PREFIX + ROOT;
+		}
 		return getDefaultLoginPage(loginError, session, model);
 	}
 
 	@ResponseBody
-	@RequestMapping(method = RequestMethod.GET, value = "/sessions/me")
-	public String doValidateSession(@RequestHeader(value = "referer", required = false) final String referer,
-			final Model model,
-			final HttpServletRequest request, final HttpServletResponse response, final HttpSession session)
+	@RequestMapping(method = RequestMethod.GET, value = IDPLogin.IDP_SESSIONS_ME_URL)
+	public String doValidateSession(final HttpServletRequest request, final HttpServletResponse response, final HttpSession session)
 			throws CMSItemNotFoundException, IOException
 	{
-		final JaloSession jaloSession = (JaloSession) session.getAttribute("jalosession");
+		final JaloSession jaloSession = (JaloSession) session.getAttribute(IDPLogin.JALOSESSION);
 		final String userId = jaloSession.getUser().getUid();
 		if (!"anonymous".equals(userId))
 		{
@@ -136,13 +137,11 @@ public class AuthorizationController extends AbstractLoginPageController
 	}
 
 	@ResponseBody
-	@RequestMapping(method = RequestMethod.POST, value = "/sessions/me/lifecycle/refresh")
-	public String doRefreshSession(@RequestHeader(value = "referer", required = false) final String referer,
-			final Model model,
-			final HttpServletRequest request, final HttpServletResponse response, final HttpSession session)
+	@RequestMapping(method = RequestMethod.POST, value = IDPLogin.IDP_REFRESH_URL)
+	public String doRefreshSession(final HttpServletRequest request, final HttpServletResponse response, final HttpSession session)
 			throws CMSItemNotFoundException, IOException
 	{
-		final JaloSession jaloSession = (JaloSession) session.getAttribute("jalosession");
+		final JaloSession jaloSession = (JaloSession) session.getAttribute(IDPLogin.JALOSESSION);
 		final String userId = jaloSession.getUser().getUid();
 		if (!"anonymous".equals(userId))
 		{
@@ -154,17 +153,15 @@ public class AuthorizationController extends AbstractLoginPageController
 	}
 
 	@ResponseBody
-	@RequestMapping(method = RequestMethod.DELETE, value = "/sessions/me")
-	public String doInValidateSession(@RequestHeader(value = "referer", required = false) final String referer,
-			final Model model,
-			final HttpServletRequest request, final HttpServletResponse response, final HttpSession session)
+	@RequestMapping(method = RequestMethod.DELETE, value = IDPLogin.IDP_SESSIONS_ME_URL)
+	public String doInValidateSession(final HttpServletResponse response, final HttpSession session)
 			throws CMSItemNotFoundException, IOException
 	{
-		final JaloSession jaloSession = (JaloSession) session.getAttribute("jalosession");
+		final JaloSession jaloSession = (JaloSession) session.getAttribute(IDPLogin.JALOSESSION);
 		final String userId = jaloSession.getUser().getUid();
 		if (!"anonymous".equals(userId))
 		{
-			response.setStatus(response.SC_NO_CONTENT);
+			response.setStatus(HttpServletResponse.SC_NO_CONTENT);
 			session.invalidate();
 			return null;
 		}

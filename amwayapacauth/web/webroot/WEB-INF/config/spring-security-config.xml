@@ -147,7 +147,6 @@
     <bean id="loginAuthenticationSuccessHandler" class="com.amway.apac.auth.handler.AmwayStorefrontAuthenticationSuccessHandler">
         <property name="uiExperienceService" ref="uiExperienceService" />
         <property name="clientDetailsService" ref="oauthClientDetails" />
-        <property name="jwtTokenProvider" ref="jWTokenProvider" />
     </bean>
 
 
@@ -236,5 +235,5 @@
         <property name="jwtKeyMaker" ref="jwtKeyMaker" />
     </bean>
 
-    <bean id="jwtKeyMaker" class="com.amway.apac.auth.security.impl.AmwayJWTKeyMakerImpl" init-method="init"/>
+    <bean id="jwtKeyMaker" class="com.amway.apac.auth.security.impl.AmwayJWTKeyMaker" init-method="init"/>
 </beans>
