@@ -289,4 +289,10 @@
 		<property name="amwayApacPrimaryVariantSelectionStrategy" ref="amwayApacPrimaryVariantSelectionStrategy"/>
 	</bean>
 	
+	
+	<alias name="defaultAmwayApacCommerceAddToCartStrategy" alias="commerceAddToCartStrategy"/>
+	<bean id="defaultAmwayApacCommerceAddToCartStrategy"
+			class="com.amway.apac.core.order.impl.DefaultAmwayApacCommerceAddToCartStrategy"
+			parent="defaultCommerceAddToCartStrategy"/>
+	
 </beans>
