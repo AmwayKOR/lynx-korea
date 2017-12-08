@@ -932,7 +932,7 @@ INSERT_UPDATE AmwayApacAccountProfileBarLinkComponent;$contentCV[unique=true];ui
 ;;orderHistoryPBMyAccountLinkComponent;Order History - Profile Bar- Jump to Link;/my-account/orders;orderHistoryPBMyAccountLinkComponent;;;;
 ;;autoRenewalPBMyAccountLinkComponent;Auto Renewal - Profile Bar- Jump to Link;/;autoRenewalPBMyAccountLinkComponent;;;;
 ;;contractsPBMyAccountLinkComponent;Contracts - Profile Bar- Jump to Link;/;contractsPBMyAccountLinkComponent;;;;
-;;editProfilePBMyAccountLinkComponent;Edit Profile - Profile Bar- Jump to Link;/;editProfilePBMyAccountLinkComponent;;;;
+;;editProfilePBMyAccountLinkComponent;Edit Profile - Profile Bar- Jump to Link;/my-account/profile;editProfilePBMyAccountLinkComponent;;;;
 ;;billingShippingPBMyAccountLinkComponent;Billing Shipping - Profile Bar- Jump to Link;/my-account/billing-shipping;billingShippingPBMyAccountLinkComponent;;;;
 
 INSERT_UPDATE AmwayApacMyAccountComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
@@ -1163,3 +1163,14 @@ UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&compo
 # CMS Recently Viewed Products Components
 INSERT_UPDATE RecentViewedItemsComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;
 ;;RecentViewedItemsComponent;RecentViewedItemsComponent;RecentViewedItemsComponent;
+
+###### Account Profile Information Page ######
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;BodyContentProfileSlot;Body Content Slot for Account Profile;true;AccountProfileComponent;;;
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='profile'];contentSlot(uid,$contentCV)[unique=true];;;
+;;BodyContent-profile;BodyContent;;BodyContentProfileSlot;;;
+
+INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;actions(uid,$contentCV);&componentRef
+;;AccountProfileComponent;Account Profile Component;accountProfilePage.jsp;;AccountProfileComponent

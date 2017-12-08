@@ -93,6 +93,7 @@
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.shoppinglists.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.shoppinglisttotals.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.popup.js"></script>
+		<script type="text/javascript" src="${commonResourcePath}/js/acc.profile.js"></script>
 
 		<script src="${commonResourcePath}/js/owl.carousel.js"></script>
 		<script src="${commonResourcePath}/js/select2.js"></script>
