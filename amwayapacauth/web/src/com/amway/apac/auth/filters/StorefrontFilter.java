@@ -17,7 +17,6 @@ import de.hybris.platform.commercefacades.storesession.StoreSessionFacade;
 
 import java.io.IOException;
 import java.util.Collections;
-import java.util.Set;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -32,8 +31,8 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 
 /**
- * Filter that initializes the session for the amwayapacauth. This is a spring configured filter that is
- * executed by the PlatformFilterChain.
+ * Filter that initializes the session for the amwayapacauth. This is a spring configured filter that is executed by the
+ * PlatformFilterChain.
  */
 public class StorefrontFilter extends OncePerRequestFilter
 {
@@ -42,7 +41,6 @@ public class StorefrontFilter extends OncePerRequestFilter
 
 	private StoreSessionFacade storeSessionFacade;
 	private BrowseHistory browseHistory;
-	private Set<String> refererExcludeUrlSet;
 	private PathMatcher pathMatcher;
 
 	@Override
@@ -61,7 +59,7 @@ public class StorefrontFilter extends OncePerRequestFilter
 
 		if (isGetMethod(request))
 		{
-			if (StringUtils.isBlank(request.getHeader(AJAX_REQUEST_HEADER_NAME)) && !isRequestPathExcluded(request))
+			if (StringUtils.isBlank(request.getHeader(AJAX_REQUEST_HEADER_NAME)))
 			{
 				final String requestURL = request.getRequestURL().toString();
 				session.setAttribute(ORIGINAL_REFERER, StringUtils.isNotBlank(queryString) ? requestURL + "?" + queryString
@@ -126,33 +124,6 @@ public class StorefrontFilter extends OncePerRequestFilter
 	protected void markSessionInitialized(final HttpSession session)
 	{
 		session.setAttribute(this.getClass().getName(), "initialized");
-	}
-
-	protected boolean isRequestPathExcluded(final HttpServletRequest request)
-	{
-		final Set<String> inputSet = getRefererExcludeUrlSet();
-		final String servletPath = request.getServletPath();
-
-		for (final String input : inputSet)
-		{
-			if (getPathMatcher().match(input, servletPath))
-			{
-				return true;
-			}
-		}
-
-		return false;
-	}
-
-	protected Set<String> getRefererExcludeUrlSet()
-	{
-		return refererExcludeUrlSet;
-	}
-
-	@Required
-	public void setRefererExcludeUrlSet(final Set<String> refererExcludeUrlSet)
-	{
-		this.refererExcludeUrlSet = refererExcludeUrlSet;
 	}
 
 	protected PathMatcher getPathMatcher()
