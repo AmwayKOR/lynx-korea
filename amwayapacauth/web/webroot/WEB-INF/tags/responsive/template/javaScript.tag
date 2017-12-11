@@ -17,6 +17,8 @@
 	</c:when>
 	<c:otherwise>
 		<%-- bootstrap --%>
+        <script src="${commonResourcePath}/js/jquery1.11.3.min.js"></script>
+        
 		<script type="text/javascript" src="${commonResourcePath}/bootstrap/dist/js/bootstrap.min.js"></script>
 		
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.common.js"></script>

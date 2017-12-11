@@ -138,11 +138,31 @@
 	window.okta.mixpanel = true;
 </script>
 
+<script src="${commonResourcePath}/js/jquery1.11.3.min.js"></script>
 
 <script>
-window.onload = function(){
-	 document.forms['appForm'].submit();
+	$(document).ready(function() {
+		$('#appForm').submit(ajax());
+	})
+
+	function ajax() {
+		$.ajax({
+			url : $("#appForm").attr('action'),
+			type : 'POST',
+			data : $('form').serialize(),
+			success : function(data) {
+				alert(data);
+			},
+			error: function(xhr, status, error) {
+				  alert(xhr.responseText);
+				}
+		});
+		return false;
 	}
+
+	/* window.onload = function(){
+	 document.forms['appForm'].submit();
+	 }*/
 </script>
 
 <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/glnpjglilkicbckjpbgcfkogebgllemb">
@@ -173,15 +193,15 @@ window.onload = function(){
         <!-- <div class="okta-iframe-overlay">
             <iframe name="interstitial" src="https&#x3a;&#x2f;&#x2f;account-test.amwayglobal.com&#x2f;en-us&#x2f;interstitial.html" frameborder="0" scrolling="auto"></iframe>
         </div> -->
-        Token :: <textarea rows="5"  cols="200">${id_token}</textarea><br/><br/>
-        
-        N :: <input type="text" name="n" value="${n}" size="200"/><br/><br/>
-        E :: <input type="text" name="e" value="${e}"  size="200"/><br/><br/>
-        Kid :: <input type="text" name="n" value="${kid}"  size="100"/><br/><br/>
-        <br/>
+        Token ::
+        <textarea rows="5" cols="200">${id_token}</textarea>
+        <br />
+        <br /> N :: <input type="text" name="n" value="${n}" size="200" /><br />
+        <br /> E :: <input type="text" name="e" value="${e}" size="200" /><br />
+        <br /> Kid :: <input type="text" name="n" value="${kid}" size="100" /><br />
+        <br /> <br />
         <form id="appForm" method="post" name="oauthResponse" action="${redirect_uri}">
-            <input type="hidden" name="state" value="${state}" /> 
-            <input type="hidden" name="id_token" value="${id_token}" />
+            <input type="hidden" name="state" value="${state}" /> <input type="hidden" name="id_token" value="${id_token}" />
             <!-- <input type="submit" id ="submit" value="submit"/> -->
         </form>
 
