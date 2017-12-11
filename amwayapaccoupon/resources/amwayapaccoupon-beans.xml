@@ -65,14 +65,4 @@
     </bean>
 
 	-->
-	<bean class="com.amway.apac.coupon.data.AmwayCouponCreationParameter">
-		<property name="reedeamableCouponCode" type="java.lang.String"/>
-		<property name="startDate" type="java.util.Date"/>
-		<property name="validityInDays" type="java.lang.Integer"/>
-		<property name="site" type="java.lang.String"/>
-		<property name="userId" type="java.lang.String"/>
-		<property name="amwayAccountId" type="java.lang.String"/>
-		<property name="status" type="com.amway.apac.coupon.enums.AmwayCouponStatus"/>
-	</bean>
-	
 </beans>

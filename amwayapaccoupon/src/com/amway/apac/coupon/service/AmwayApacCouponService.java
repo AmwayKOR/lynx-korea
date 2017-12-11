@@ -10,16 +10,33 @@
  */
 package com.amway.apac.coupon.service;
 
+import de.hybris.platform.cms2.model.site.CMSSiteModel;
+import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.couponservices.services.CouponService;
 
-import com.amway.apac.coupon.data.AmwayCouponCreationParameter;
+import java.util.Date;
+
+import com.amway.apac.coupon.model.AmwayCouponModel;
+import com.amway.core.model.AmwayAccountModel;
 
 
 public interface AmwayApacCouponService extends CouponService
 {
 
 	/**
-	 * Creates coupon in database on the basis of passed parameter.
+	 * Creates AmwayCoupon for customer.
 	 */
-	public void createAmwayCoupon(AmwayCouponCreationParameter couponCreationParameter);
+	AmwayCouponModel createAmwayCoupon(String redeemableCouponCode, Date startDate, int validityInDays, CMSSiteModel site,
+			CustomerModel customer);
+
+	/**
+	 * Creates AmwayCoupon for amway-account.
+	 */
+	AmwayCouponModel createAmwayCoupon(String redeemableCouponCode, Date startDate, int validityInDays, CMSSiteModel site,
+			AmwayAccountModel account);
+
+	/**
+	 * generates unique coupon code for AmwayCoupon
+	 */
+	String generateCodeForAmwayCoupon(AmwayCouponModel amwayCoupon);
 }
