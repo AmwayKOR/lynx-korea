@@ -137,7 +137,14 @@
 	window.okta || (window.okta = {});
 	window.okta.mixpanel = true;
 </script>
-<script src="https://op1static.oktacdn.com/assets/js/jquery-1.12.4.min.4f252523d4af0b478c810c2547a63e19.js" type="text/javascript"></script>
+
+
+<script>
+window.onload = function(){
+	 document.forms['appForm'].submit();
+	}
+</script>
+
 <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/glnpjglilkicbckjpbgcfkogebgllemb">
 <!--[if lt IE 9]><script src="https://op1static.oktacdn.com/assets/enduser/js/vendor/css3-mediaqueries.fa295f0132f5335f352071ca3613a94a.js" type="text/javascript"></script><![endif]-->
 
@@ -173,8 +180,9 @@
         Kid :: <input type="text" name="n" value="${kid}"  size="100"/><br/><br/>
         <br/>
         <form id="appForm" method="post" name="oauthResponse" action="${redirect_uri}">
-            <input type="hidden" name="state" value="${state}" /> <input type="hidden" name="id_token" value="${id_token}" />
-            <input type="submit" name="submit" id ="submit" value="submit"/>
+            <input type="hidden" name="state" value="${state}" /> 
+            <input type="hidden" name="id_token" value="${id_token}" />
+            <!-- <input type="submit" id ="submit" value="submit"/> -->
         </form>
 
         <!-- <script src="https://op1static.oktacdn.com/assets/js/app/sso/interstitial.0dee13f2d74d523aca30e2028a2b2199.js" type="text/javascript"></script> -->
