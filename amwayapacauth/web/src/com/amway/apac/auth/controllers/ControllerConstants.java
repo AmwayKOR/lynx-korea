@@ -79,6 +79,7 @@ public interface ControllerConstants
 		String E = "e";
 		String N = "n";
 		String KID = "kid";
+		String TOKEN = "id_token";
 		String STATE = "state";
 		String SCOPE = "scope";
 		String NONCE = "nonce";
@@ -88,6 +89,7 @@ public interface ControllerConstants
 		String REDIRECT_URI = "redirect_uri";
 		String RESPONSE_MODE = "response_mode";
 		String RESPONSE_TYPE = "response_type";
+		String ERROR_PAGE = "pages/error/error";
 		String IDP_SESSIONS_ME_URL = "/sessions/me";
 		String AMWAY_IDP_JWT_TTLMILES = "amway.idp.jwt.ttlmiles";
 		String AMWAY_IDP_JWT_KEYID = "amway.idp.jwt.secret.keyid";
