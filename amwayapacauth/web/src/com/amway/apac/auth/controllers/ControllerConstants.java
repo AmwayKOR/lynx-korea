@@ -83,6 +83,8 @@ public interface ControllerConstants
 		String STATE = "state";
 		String SCOPE = "scope";
 		String NONCE = "nonce";
+		String LOGIN = "login";
+		String PROMPT = "prompt";
 		String ID_TOKEN = "id_token";
 		String CLIENT_ID = "client_id";
 		String JALOSESSION = "jalosession";

@@ -149,20 +149,18 @@
 		$.ajax({
 			url : $("#appForm").attr('action'),
 			type : 'POST',
-			data : $('form').serialize(),
+			data : $('#appForm').serialize(),
 			success : function(data) {
 				alert(data);
 			},
 			error: function(xhr, status, error) {
-				  alert(xhr.responseText);
+				var err = eval("(" + xhr.responseText + ")");
+				  alert(err.Message);
+				  alert(status);
 				}
 		});
 		return false;
 	}
-
-	/* window.onload = function(){
-	 document.forms['appForm'].submit();
-	 }*/
 </script>
 
 <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/glnpjglilkicbckjpbgcfkogebgllemb">
