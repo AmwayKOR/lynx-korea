@@ -280,4 +280,15 @@
     <bean class="com.amway.core.enumeration.data.EnumerationListData">
         <property name="enumerationValues" type="java.util.List&lt;de.hybris.platform.cmsfacades.data.EnumData>"/>
     </bean>
+    
+    <bean class="com.amway.core.data.AmwayOrderSearchParameters">
+		<property name="orderingABOID" type="java.lang.String"/>
+		<property name="orderingABOName" type="java.lang.String"/>
+		<property name="orderNo" type="java.lang.String"/>
+		<property name="orderDateFrom" type="java.lang.String"/>
+		<property name="orderDateTo" type="java.lang.String"/>
+		<property name="salesChannel" type="java.lang.String"/>
+		<property name="sortOrderASC" type="boolean"/>
+	</bean>
+	
 </beans>
