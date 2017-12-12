@@ -11,13 +11,15 @@ import de.hybris.platform.warehousing.model.AllocationEventModel;
 import java.util.Collection;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.springframework.beans.factory.annotation.Required;
 
 import com.amway.apac.core.stock.service.AmwayApacCommerceStockService;
 import com.amway.core.stock.service.impl.DefaultAmwayCommerceStockService;
 
 
 /**
- *
+ * 
+ * Class used to override and implement methods of commerce stock stock service
  */
 public class DefaultAmwayApacCommerceStockService extends DefaultAmwayCommerceStockService
 		implements AmwayApacCommerceStockService
@@ -25,6 +27,11 @@ public class DefaultAmwayApacCommerceStockService extends DefaultAmwayCommerceSt
 	private InventoryEventService inventoryEventService;
 	private ModelService modelService;
 
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * This API release inventory by removing allocation events attached to the order entry
+	 */
 	@Override
 	public void releaseAllocationEvents(final OrderEntryModel orderEntry)
 	{
@@ -41,6 +48,7 @@ public class DefaultAmwayApacCommerceStockService extends DefaultAmwayCommerceSt
 	 * @param inventoryEventService
 	 *           the inventoryEventService to set
 	 */
+	@Required
 	public void setInventoryEventService(final InventoryEventService inventoryEventService)
 	{
 		this.inventoryEventService = inventoryEventService;
@@ -50,6 +58,7 @@ public class DefaultAmwayApacCommerceStockService extends DefaultAmwayCommerceSt
 	 * @param modelService
 	 *           the modelService to set
 	 */
+	@Required
 	public void setModelService(final ModelService modelService)
 	{
 		this.modelService = modelService;

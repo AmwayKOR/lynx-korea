@@ -29,10 +29,14 @@ public class DefaultAmwayApacConsignmentService extends DefaultAmwayConsignmentS
 
 	private WarehousingBusinessProcessService<ConsignmentModel> consignmentBusinessProcessService;
 
+
 	/**
-	 * @param order
+	 * {@inheritDoc}
 	 *
-	 *           This method creates multiple consignment on the basis of order entry statuses
+	 * This method creates multiple consignment on the basis of order entry statuses
+	 *
+	 * @param order
+	 * @return List of consignments
 	 */
 	@Override
 	public List<ConsignmentModel> createConsignments(final AbstractOrderModel order) throws ConsignmentCreationException
@@ -44,9 +48,10 @@ public class DefaultAmwayApacConsignmentService extends DefaultAmwayConsignmentS
 		{
 			if (entry.getDispositionCode().equals(InStockStatus.BACKORDER))
 			{
-				final ConsignmentModel consignment = createConsignment(order, 'a' + order.getCode() + '_' + index.getAndIncrement(),
-						Arrays.asList(entry));
-				consignmentBusinessProcessService.startProcess(consignment.getCode(), "consignment-process.xml");
+				final char prefixCode = 'a';
+				final ConsignmentModel consignment = createConsignment(order,
+						prefixCode + order.getCode() + '_' + index.getAndIncrement(), Arrays.asList(entry));
+				consignmentBusinessProcessService.startProcess(consignment.getCode(), "consignment-process");
 				allConsignments.add(consignment);
 			}
 			else

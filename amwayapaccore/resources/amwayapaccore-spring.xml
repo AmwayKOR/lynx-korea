@@ -113,9 +113,8 @@
 	<bean id="defaultAmwayApacCommerceStockService"
 		class="com.amway.apac.core.stock.service.impl.DefaultAmwayApacCommerceStockService"
 		parent="defaultAmwayCommerceStockService">
-		<property name="amwayWarehouseSelectionStrategy" ref="amwayWarehouseSelectionStrategy" />
-		<property name="amwayStockService" ref="stockService" />
-		<property name="pickupWarehouseSelectionStrategy" ref="pickupWarehouseSelectionStrategy" />
+		<property name="inventoryEventService" ref="inventoryEventService" />
+		<property name="modelService" ref="modelService" />
 	</bean>
 
 	<alias name="defaultAmwayApacConsignmentService" alias="consignmentService" />

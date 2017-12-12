@@ -43,7 +43,7 @@
 		<!-- Type groups for BackOrder -->
 		<typegroup name="backOrder">
 			<itemtype code="AmwayBackOrder" generate="true" autocreate="true"
-				jaloclass="com.amway.core.jalo.AmwayBackOrder">
+				jaloclass="com.amway.apac.core.jalo.AmwayBackOrder">
 				<deployment table="BackOrder" typecode="21082" />
 				<attributes>
 					<attribute qualifier="product" type="Product">

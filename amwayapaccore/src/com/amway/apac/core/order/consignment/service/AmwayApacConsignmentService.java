@@ -18,8 +18,13 @@ import com.amway.core.order.consignment.service.AmwayConsignmentService;
 public interface AmwayApacConsignmentService extends AmwayConsignmentService
 {
 
+
 	/**
 	 * Method to create multiple consignments for an order
+	 *
+	 * @param order
+	 * @return List of consignments
+	 * @throws ConsignmentCreationException
 	 */
 	List<ConsignmentModel> createConsignments(AbstractOrderModel order) throws ConsignmentCreationException;
 
