@@ -11,6 +11,7 @@
 package com.amway.apac.auth.controllers.pages;
 
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractLoginPageController;
+import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
 import de.hybris.platform.core.model.user.CustomerModel;
@@ -18,6 +19,7 @@ import de.hybris.platform.jalo.JaloSession;
 import de.hybris.platform.servicelayer.user.UserService;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.annotation.Resource;
@@ -25,6 +27,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.stereotype.Controller;
@@ -37,7 +40,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.amway.apac.auth.controllers.ControllerConstants;
 import com.amway.apac.auth.controllers.ControllerConstants.IDPLogin;
+import com.amway.apac.auth.dto.JWToken;
 import com.amway.apac.auth.security.AmwayJWTTokenProvider;
+import com.amway.apac.auth.validation.AmwayIdpLoginValidationService;
 
 
 /**
@@ -55,6 +60,8 @@ public class AuthorizationController extends AbstractLoginPageController
 	@Resource(name = "userService")
 	private UserService userService;
 
+	@Resource(name = "idpLoginValidationService")
+	private AmwayIdpLoginValidationService idpLoginValidationService;
 
 	@Override
 	protected String getView()
@@ -96,7 +103,27 @@ public class AuthorizationController extends AbstractLoginPageController
 			storeReferer(referer, request, response);
 		}
 
-		final String redirectUrl = request.getParameter(IDPLogin.REDIRECT_URI);
+		final Collection<String> errors = idpLoginValidationService.validationLoginRequest(request);
+
+		if (CollectionUtils.isNotEmpty(errors))
+		{
+			model.addAttribute("loginError", Boolean.valueOf(true));
+			errors.stream().forEach(error -> GlobalMessages.addErrorMessage(model, error));
+			return IDPLogin.ERROR_PAGE;
+		}
+
+		final String prompt = request.getParameter(IDPLogin.PROMPT);
+
+		if (!IDPLogin.LOGIN.equals(prompt))
+		{
+			return FORWARD_PREFIX + "/oauth2/default/v1/authorize/jwtoken";
+		}
+
+		final CustomerModel customer = (CustomerModel) userService.getCurrentUser();
+		if (!userService.isAnonymousUser(customer))
+		{
+			return REDIRECT_PREFIX + ROOT;
+		}
 
 		model.addAttribute(IDPLogin.RESPONSE_TYPE, request.getParameter(IDPLogin.RESPONSE_TYPE));
 		model.addAttribute(IDPLogin.CLIENT_ID, request.getParameter(IDPLogin.CLIENT_ID));
@@ -104,21 +131,29 @@ public class AuthorizationController extends AbstractLoginPageController
 		model.addAttribute(IDPLogin.SCOPE, request.getParameter(IDPLogin.SCOPE));
 		model.addAttribute(IDPLogin.NONCE, request.getParameter(IDPLogin.NONCE));
 		model.addAttribute(IDPLogin.STATE, request.getParameter(IDPLogin.STATE));
+		model.addAttribute(IDPLogin.REDIRECT_URI, request.getParameter(IDPLogin.REDIRECT_URI));
 
-		if (StringUtils.isNotBlank(redirectUrl))
-		{
-			model.addAttribute(IDPLogin.REDIRECT_URI, redirectUrl);
-		}
-		else
-		{
-			model.addAttribute(IDPLogin.REDIRECT_URI, referer);
-		}
+		return getDefaultLoginPage(loginError, session, model);
+	}
+
+	@RequestMapping(method = RequestMethod.GET, value = "/jwtoken")
+	@ResponseBody
+	public JWToken idpJWToken(final HttpServletRequest request, final HttpServletResponse response, final HttpSession session)
+			throws CMSItemNotFoundException, IOException
+	{
 		final CustomerModel customer = (CustomerModel) userService.getCurrentUser();
 		if (!userService.isAnonymousUser(customer))
 		{
-			return REDIRECT_PREFIX + ROOT;
+			final String idToken = jwtTokenProvider.createJWToken(customer.getUid(), new Date(session.getCreationTime()), request);
+			final String state = request.getParameter(IDPLogin.STATE);
+
+			final JWToken token = new JWToken();
+			token.setState(state);
+			token.setIdToken(idToken);
+			return token;
 		}
-		return getDefaultLoginPage(loginError, session, model);
+		response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+		return null;
 	}
 
 	@ResponseBody

@@ -133,7 +133,6 @@
 
     <bean id="loginAuthenticationSuccessHandler" class="com.amway.apac.auth.handler.AmwayStorefrontAuthenticationSuccessHandler">
         <property name="uiExperienceService" ref="uiExperienceService" />
-        <property name="clientDetailsService" ref="oauthClientDetails" />
     </bean>
 
     <bean id="loginAuthenticationFailureHandler" class="com.amway.apac.auth.security.LoginAuthenticationFailureHandler">
@@ -162,8 +161,8 @@
             </list>
         </constructor-arg>
     </bean>
-    
-        <!-- Remember Me -->
+
+    <!-- Remember Me -->
 
     <bean id="rememberMeProcessingFilter" class="org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter">
         <constructor-arg name="rememberMeServices" ref="rememberMeServices" />
@@ -212,5 +211,10 @@
         <property name="jwtKeyMaker" ref="jwtKeyMaker" />
     </bean>
 
-    <bean id="jwtKeyMaker" class="com.amway.apac.auth.security.impl.AmwayJWTKeyMaker" init-method="init"/>
+    <bean id="jwtKeyMaker" class="com.amway.apac.auth.security.impl.AmwayJWTKeyMaker" init-method="init" />
+
+    <alias name="amwayIdpLoginValidationService" alias="idpLoginValidationService" />
+    <bean id="amwayIdpLoginValidationService" class="com.amway.apac.auth.validation.impl.AmwayIdpLoginValidationServiceImpl">
+        <property name="clientDetailsService" ref="oauthClientDetails" />
+    </bean>
 </beans>

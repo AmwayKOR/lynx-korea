@@ -13,25 +13,14 @@ package com.amway.apac.auth.handler;
 import de.hybris.platform.acceleratorservices.uiexperience.UiExperienceService;
 import de.hybris.platform.core.Constants;
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.oauth2.common.exceptions.RedirectMismatchException;
-import org.springframework.security.oauth2.provider.ClientDetails;
-import org.springframework.security.oauth2.provider.ClientDetailsService;
-import org.springframework.security.oauth2.provider.endpoint.DefaultRedirectResolver;
-import org.springframework.security.oauth2.provider.endpoint.RedirectResolver;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 
 
@@ -42,64 +31,10 @@ import org.springframework.security.web.authentication.SavedRequestAwareAuthenti
  */
 public class AmwayStorefrontAuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler
 {
-	private UiExperienceService uiExperienceService;
-	private ClientDetailsService clientDetailsService;
-	private RedirectResolver redirectResolver;
-	private GrantedAuthority adminAuthority = new SimpleGrantedAuthority("ROLE_" + Constants.USER.ADMIN_USERGROUP.toUpperCase());
-
 	private static final Logger LOG = Logger.getLogger(AmwayStorefrontAuthenticationSuccessHandler.class);
 
-	public AmwayStorefrontAuthenticationSuccessHandler()
-	{
-		redirectResolver = new DefaultRedirectResolver();
-	}
-
-	@Override
-	public void onAuthenticationSuccess(final HttpServletRequest request, final HttpServletResponse response,
-			final Authentication authentication) throws IOException, ServletException
-	{
-		try
-		{
-			final String responseType = request.getParameter("response_type");
-			final String redirectURL = request.getParameter("redirect_uri");
-			final String clientID = request.getParameter("client_id");
-
-			final ClientDetails client = clientDetailsService.loadClientByClientId(clientID);
-			final String resolvedRedirect = this.redirectResolver.resolveRedirect(redirectURL, client);
-			if (!(StringUtils.isNotEmpty(resolvedRedirect)))
-			{
-				throw new RedirectMismatchException("A redirectUri must be either supplied or preconfigured in the ClientDetails");
-			}
-		}
-		catch (final Exception exp)
-		{
-			LOG.error(exp.getMessage(), exp);
-		}
-		super.onAuthenticationSuccess(request, response, authentication);
-	}
-
-	protected void invalidateSession(final HttpServletRequest request, final HttpServletResponse response) throws IOException
-	{
-		SecurityContextHolder.getContext().setAuthentication(null);
-		request.getSession().invalidate();
-		response.sendRedirect(request.getContextPath());
-	}
-
-	protected boolean isAdminAuthority(final Authentication authentication)
-	{
-		return CollectionUtils.isNotEmpty(authentication.getAuthorities())
-				&& authentication.getAuthorities().contains(adminAuthority);
-	}
-
-	/*
-	 * @see org.springframework.security.web.authentication.AbstractAuthenticationTargetUrlRequestHandler#
-	 * isAlwaysUseDefaultTargetUrl()
-	 */
-	@Override
-	protected boolean isAlwaysUseDefaultTargetUrl()
-	{
-		return true;
-	}
+	private GrantedAuthority adminAuthority = new SimpleGrantedAuthority("ROLE_" + Constants.USER.ADMIN_USERGROUP.toUpperCase());
+	private UiExperienceService uiExperienceService;
 
 	@Override
 	protected String determineTargetUrl(final HttpServletRequest request, final HttpServletResponse response)
@@ -138,23 +73,5 @@ public class AmwayStorefrontAuthenticationSuccessHandler extends SavedRequestAwa
 	protected GrantedAuthority getAdminAuthority()
 	{
 		return adminAuthority;
-	}
-
-	/**
-	 * @param clientDetailsService
-	 *           the clientDetailsService to set
-	 */
-	public void setClientDetailsService(final ClientDetailsService clientDetailsService)
-	{
-		this.clientDetailsService = clientDetailsService;
-	}
-
-	/**
-	 * @param redirectResolver
-	 *           the redirectResolver to set
-	 */
-	public void setRedirectResolver(final RedirectResolver redirectResolver)
-	{
-		this.redirectResolver = redirectResolver;
 	}
 }

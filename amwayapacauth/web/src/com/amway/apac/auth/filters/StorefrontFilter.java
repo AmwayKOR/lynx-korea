@@ -26,8 +26,8 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Required;
-import org.springframework.util.PathMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
+import org.springframework.web.util.CookieGenerator;
 
 
 /**
@@ -41,7 +41,7 @@ public class StorefrontFilter extends OncePerRequestFilter
 
 	private StoreSessionFacade storeSessionFacade;
 	private BrowseHistory browseHistory;
-	private PathMatcher pathMatcher;
+	private CookieGenerator cookieGenerator;
 
 	@Override
 	public void doFilterInternal(final HttpServletRequest request, final HttpServletResponse response,
@@ -57,6 +57,12 @@ public class StorefrontFilter extends OncePerRequestFilter
 			markSessionInitialized(session);
 		}
 
+		// For secure requests ensure that the JSESSIONID cookie is visible to insecure requests
+		if (isRequestSecure(request))
+		{
+			fixSecureHttpJSessionIdCookie(request, response);
+		}
+
 		if (isGetMethod(request))
 		{
 			if (StringUtils.isBlank(request.getHeader(AJAX_REQUEST_HEADER_NAME)))
@@ -70,6 +76,17 @@ public class StorefrontFilter extends OncePerRequestFilter
 		}
 
 		filterChain.doFilter(request, response);
+	}
+
+	protected void fixSecureHttpJSessionIdCookie(final HttpServletRequest httpServletRequest,
+			final HttpServletResponse httpServletResponse)
+	{
+		final HttpSession session = httpServletRequest.getSession(false);
+		if (session != null)
+		{
+			cookieGenerator.addCookie(httpServletResponse, session.getId());
+		}
+
 	}
 
 	protected boolean isGetMethod(final HttpServletRequest httpRequest)
@@ -126,14 +143,9 @@ public class StorefrontFilter extends OncePerRequestFilter
 		session.setAttribute(this.getClass().getName(), "initialized");
 	}
 
-	protected PathMatcher getPathMatcher()
-	{
-		return pathMatcher;
-	}
-
 	@Required
-	public void setPathMatcher(final PathMatcher pathMatcher)
+	public void setCookieGenerator(final CookieGenerator cookieGenerator)
 	{
-		this.pathMatcher = pathMatcher;
+		this.cookieGenerator = cookieGenerator;
 	}
 }

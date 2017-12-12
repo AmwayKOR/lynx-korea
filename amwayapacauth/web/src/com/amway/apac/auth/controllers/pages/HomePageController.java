@@ -39,7 +39,6 @@ import com.amway.apac.auth.security.impl.AmwayJWTKeyMaker;
 @RequestMapping("/")
 public class HomePageController extends AbstractPageController
 {
-
 	@Resource(name = "jWTokenProvider")
 	private AmwayJWTTokenProvider jwtTokenProvider;
 

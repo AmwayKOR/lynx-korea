@@ -137,7 +137,32 @@
 	window.okta || (window.okta = {});
 	window.okta.mixpanel = true;
 </script>
-<script src="https://op1static.oktacdn.com/assets/js/jquery-1.12.4.min.4f252523d4af0b478c810c2547a63e19.js" type="text/javascript"></script>
+
+<script src="${commonResourcePath}/js/jquery1.11.3.min.js"></script>
+
+<script>
+	$(document).ready(function() {
+		$('#appForm').submit(ajax());
+	})
+
+	function ajax() {
+		$.ajax({
+			url : $("#appForm").attr('action'),
+			type : 'POST',
+			data : $('#appForm').serialize(),
+			success : function(data) {
+				alert(data);
+			},
+			error: function(xhr, status, error) {
+				var err = eval("(" + xhr.responseText + ")");
+				  alert(err.Message);
+				  alert(status);
+				}
+		});
+		return false;
+	}
+</script>
+
 <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/glnpjglilkicbckjpbgcfkogebgllemb">
 <!--[if lt IE 9]><script src="https://op1static.oktacdn.com/assets/enduser/js/vendor/css3-mediaqueries.fa295f0132f5335f352071ca3613a94a.js" type="text/javascript"></script><![endif]-->
 
@@ -166,15 +191,16 @@
         <!-- <div class="okta-iframe-overlay">
             <iframe name="interstitial" src="https&#x3a;&#x2f;&#x2f;account-test.amwayglobal.com&#x2f;en-us&#x2f;interstitial.html" frameborder="0" scrolling="auto"></iframe>
         </div> -->
-        Token :: <textarea rows="5"  cols="200">${id_token}</textarea><br/><br/>
-        
-        N :: <input type="text" name="n" value="${n}" size="200"/><br/><br/>
-        E :: <input type="text" name="e" value="${e}"  size="200"/><br/><br/>
-        Kid :: <input type="text" name="n" value="${kid}"  size="100"/><br/><br/>
-        <br/>
+        Token ::
+        <textarea rows="5" cols="200">${id_token}</textarea>
+        <br />
+        <br /> N :: <input type="text" name="n" value="${n}" size="200" /><br />
+        <br /> E :: <input type="text" name="e" value="${e}" size="200" /><br />
+        <br /> Kid :: <input type="text" name="n" value="${kid}" size="100" /><br />
+        <br /> <br />
         <form id="appForm" method="post" name="oauthResponse" action="${redirect_uri}">
             <input type="hidden" name="state" value="${state}" /> <input type="hidden" name="id_token" value="${id_token}" />
-            <input type="submit" name="submit" id ="submit" value="submit"/>
+            <!-- <input type="submit" id ="submit" value="submit"/> -->
         </form>
 
         <!-- <script src="https://op1static.oktacdn.com/assets/js/app/sso/interstitial.0dee13f2d74d523aca30e2028a2b2199.js" type="text/javascript"></script> -->

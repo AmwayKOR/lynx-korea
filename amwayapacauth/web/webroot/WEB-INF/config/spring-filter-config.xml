@@ -126,7 +126,7 @@
 	<bean id="storefrontFilter" class="com.amway.apac.auth.filters.StorefrontFilter" >
 		<property name="storeSessionFacade" ref="storeSessionFacade"/>
 		<property name="browseHistory" ref="browseHistory"/>
-		<property name="pathMatcher" ref="defaultPathMatcher"/>
+        <property name="cookieGenerator" ref="sessionCookieGenerator"/>
 	</bean>
 	
 	<alias name="defaultSessionCookieGenerator" alias="sessionCookieGenerator"/>
