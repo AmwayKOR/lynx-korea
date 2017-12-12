@@ -38,50 +38,43 @@
                                                             <button class="col-sm-6 js-order-history-search"> <span class="icon-search"></span> <span>Search</span> </button>
                                                         </div>
                                                         <div class="form-wrapper col-md-7 col-sm-12 hidden-sm hidden-xs js-filter-form-wrapper">
-                                                            <form id="filterForm" action="" method="POST">
-                                                                <select id="date" name="date" class="js-filter-date select2-hidden-accessible" tabindex="-1" aria-hidden="true">
-                                                                    <option value="last30Days">Last 30 Days</option>
-                                                                    <option value="2017-07">July 2017</option>
-                                                                    <option value="2017-06">June 2017</option>
-                                                                    <option value="2017-05">May 2017</option>
-                                                                    <option value="2017-04">April 2017</option>
-                                                                    <option value="2017-03">March 2017</option>
-                                                                    <option value="2017-02">February 2017</option>
-                                                                    <option value="2017-01">January 2017</option>
-                                                                    <option value="2016-12">December 2016</option>
-                                                                    <option value="2016-11">November 2016</option>
-                                                                    <option value="2016-10">October 2016</option>
-                                                                    <option value="2016-09">September 2016</option>
-                                                                    <option value="2016-08">August 2016</option>
-                                                                    <option value="2016-07">July 2016</option>
-                                                                    <option value="2016-06">June 2016</option>
-                                                                    <option value="2016-05">May 2016</option>
-                                                                </select>
-                                                                <select id="type" name="type" class="js-filter-type select2-hidden-accessible" tabindex="-1" aria-hidden="true">
-                                                                    <option value="SHOW_ALL">Show All</option>
-                                                                    <option value="PARTNER_STORES">Partner Stores &amp; Services</option>
-                                                                    <option value="ACTIVE">Active orders</option>
-                                                                    <option value="WEB">Web orders</option>
-                                                                    <option value="DITTO">Ditto orders</option>
-                                                                    <option value="TELEPHONE">Telephone orders</option>
-                                                                    <option value="MAIL">Mail orders</option>
-                                                                    <option value="SERVICE_CENTER">Service Center orders</option>
-                                                                    <option value="AUTO_RENEW">Renewal orders</option>
-                                                                    <option value="REPLACEMENT">Replacement orders</option>
-                                                                </select>
-                                                                <button class="primary small js-automation-order-history-sort-apply" type="submit"><span>Apply</span></button>
-                                                            </form>
+                                                            
+                                                     
+                                                            <form:form method = "POST" action = "${ordersUrl}" modelAttribute="filterForm">
+								                                <form:select class="js-filter-date select2-hidden-accessible" path="date">
+								                                    <form:option value="${orderDateDefaultOption}">
+								                                    	<spring:theme code="text.account.orderHistory.orderDate.${orderDateDefaultOption}"/>
+								                                    </form:option>
+								                                    <c:forEach items="${orderDateOptions}" var="orderDateOption">
+								                                        <fmt:parseDate value="${orderDateOption}" pattern="yyyy-MM" var="parsedDate"/>
+								                                        <fmt:formatDate value='${parsedDate}' pattern="MMMM yyyy" var="formattedParsedDate"/>
+								                                        <form:option value="${orderDateOption}" label="${formattedParsedDate}"></form:option>
+								                                    </c:forEach> 
+								                                </form:select>
+								                                <form:select class="js-filter-type select2-hidden-accessible" path="type">
+								                                    <c:forEach items="${orderTypeOptions}" var="orderTypeOption">
+								                                        <form:option value="${orderTypeOption}"><spring:theme code="text.account.orderHistory.orderType.${orderTypeOption}"/></form:option>
+								                                    </c:forEach>
+								                                </form:select>
+								                                <button class="primary small js-automation-order-history-sort-apply" type="submit">
+								                                    <span>
+								                                        <spring:theme code='text.account.orderHistory.filters.apply'/>
+								                                    </span>
+								                                </button>
+								                            </form:form>
 
                                                         </div>
                                                         <div class="form-wrapper search-form-wrapper col-md-5 col-sm-12 hidden-sm hidden-xs js-search-form-wrapper">
-                                                             <form id="searchForm" action="" method="POST">
-                                                                <input id="searchData" name="searchData" placeholder="Search by order# or Item#" type="text" value="" />
-                                                                <button class="primary small js-automation-order-history-search-btn" type="submit">
-                                                                    <span class="hidden-sm hidden-xs"> Search</span>
-                                                                    <span class="icon-search hidden-md hidden-lg"></span>
-                                                                </button>
-                                                            </form>
-
+                                                             <form:form method = "POST" action = "${ordersUrl}" modelAttribute="searchForm">
+								                                <spring:theme code='text.account.orderHistory.search.placeholder' var="searchPlaceholder"/>
+								                                <form:input path="searchData" placeholder="${searchPlaceholder}"/>
+								                                <button class="primary small js-automation-order-history-search-btn" type="submit">
+								                                    <span class="hidden-sm hidden-xs">
+								                                        <spring:theme code='text.account.orderHistory.search'/>
+								                                    </span>
+								                                    <span class="icon-search hidden-md hidden-lg"></span>
+								                                </button>
+								                            </form:form>
                                                         </div>
 
                                                     </div>

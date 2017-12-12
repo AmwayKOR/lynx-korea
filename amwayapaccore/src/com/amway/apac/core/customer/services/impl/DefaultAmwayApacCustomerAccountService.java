@@ -1,9 +1,16 @@
 package com.amway.apac.core.customer.services.impl;
 
 import static com.amway.apac.core.constants.AmwayapacCoreConstants.TWO_HUNDRED_INT;
+import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNull;
 
+import de.hybris.platform.commerceservices.search.pagedata.PageableData;
+import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
+import de.hybris.platform.core.model.order.OrderModel;
+import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.store.BaseStoreModel;
+
+import java.time.LocalDate;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,6 +60,20 @@ public class DefaultAmwayApacCustomerAccountService extends DefaultAmwayCustomer
 		}
 
 		return result;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public SearchPageData<OrderModel> getOrderListByFilter(final CustomerModel customerModel, final BaseStoreModel store,
+			final LocalDate datefrom, final LocalDate dateto, final String type, final PageableData pageableData)
+	{
+		validateParameterNotNull(customerModel, "Customer model cannot be null");
+		validateParameterNotNull(store, "Store must not be null");
+		validateParameterNotNull(pageableData, "PageableData must not be null");
+		return getAmwayApacCustomerAccountDao().findOrdersByCustomerAndStoreAndFilterByDateAndType(customerModel, store, datefrom,
+				dateto, type, pageableData);
 	}
 
 	/**

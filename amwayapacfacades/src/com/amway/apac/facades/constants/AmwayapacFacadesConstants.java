@@ -29,6 +29,10 @@ public class AmwayapacFacadesConstants extends GeneratedAmwayapacFacadesConstant
 	public static final String SERVICE_CENTER = "SERVICE_CENTER";
 	public static final String AUTO_RENEW = "AUTO_RENEW";
 	public static final String REPLACEMENT = "REPLACEMENT";
+	public static final String FIRST_DAY_OF_MONTH = "-01";
+	public static final String LAST_DAY_OF_MONTH = "-31";
+	public static final String LAST_THIRTY_DAYS = "last30Days";
+	public static final String ORDER_DATE_FORMAT_PATTERN = "yyyy-MM-dd";
 
 	private AmwayapacFacadesConstants()
 	{

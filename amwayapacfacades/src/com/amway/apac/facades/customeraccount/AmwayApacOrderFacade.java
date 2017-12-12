@@ -1,5 +1,9 @@
 package com.amway.apac.facades.customeraccount;
 
+import de.hybris.platform.commercefacades.order.data.OrderHistoryData;
+import de.hybris.platform.commerceservices.search.pagedata.PageableData;
+import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
+
 import java.util.List;
 
 import com.amway.core.facades.order.AmwayOrderFacade;
@@ -23,4 +27,6 @@ public interface AmwayApacOrderFacade extends AmwayOrderFacade
 	List<String> getOrderHistoryDateOptions();
 
 	List<String> getOrderHistoryTypeOptions();
+
+	SearchPageData<OrderHistoryData> getPagedOrderHistoryByFilter(PageableData pageableData, String date, String type);
 }

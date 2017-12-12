@@ -82,6 +82,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.amway.apac.facades.customeraccount.AmwayApacOrderFacade;
 import com.amway.apac.storefront.controllers.ControllerConstants;
 import com.amway.apac.storefront.forms.AmwayApacAddressForm;
+import com.amway.apac.storefront.forms.AmwayApacOrderHistoryFilterForm;
+import com.amway.apac.storefront.forms.AmwayApacOrderHistorySearchForm;
 
 
 /**
@@ -137,6 +139,17 @@ public class AccountPageController extends AbstractSearchPageController
 	private static final String ORDER_DETAIL_CMS_PAGE = "order";
 	private static final String BILLING_SHIPPING_CMS_PAGE = "billing-shipping";
 	private static final String BUSINESS_INFORMATION_CMS_PAGE = "business-information";
+
+	//Order history
+	public static final String ORDER_DATE_OPTIONS_PARAMETER = "orderDateOptions";
+	public static final String ORDER_TYPE_OPTIONS_PARAMETER = "orderTypeOptions";
+	public static final String ORDER_DEFAULT_DATE_OPTION_PARAMETER = "orderDateDefaultOption";
+	public static final String LAST_THIRTY_DAYS = "last30Days";
+	public static final String SORT_BY_DATE = "byDate";
+	public static final String ASC = "Asc";
+	public static final String DESC = "Desc";
+	public static final String FIRST_DAY_OF_MONTH = "-01";
+	public static final String LAST_DAY_OF_MONTH = "-31";
 
 	private static final Logger LOG = Logger.getLogger(AccountPageController.class);
 
@@ -348,19 +361,33 @@ public class AccountPageController extends AbstractSearchPageController
 	@RequireHardLogIn
 	public String orders(@RequestParam(value = "page", defaultValue = "0") final int page,
 			@RequestParam(value = "show", defaultValue = "Page") final ShowMode showMode,
-			@RequestParam(value = "sort", required = false) final String sortCode, final Model model
-	//@ModelAttribute("searchForm") final AmwayApacOrderHistorySearchForm searchForm,
-	//@ModelAttribute("filterForm") final AmwayApacOrderHistoryFilterForm filterForm
-	) throws CMSItemNotFoundException
+			@RequestParam(value = "sort", required = false) final String sortCode, final Model model,
+			@ModelAttribute("searchForm") final AmwayApacOrderHistorySearchForm searchForm,
+			@ModelAttribute("filterForm") final AmwayApacOrderHistoryFilterForm filterForm) throws CMSItemNotFoundException
 	{
 		// Handle paged search results
-		final PageableData pageableData = createPageableData(page, 5, sortCode, showMode);
-		final SearchPageData<OrderHistoryData> searchPageData = orderFacade.getPagedOrderHistoryForStatuses(pageableData);
+		final PageableData pageableData = createPageableData(page, 5, SORT_BY_DATE + DESC, showMode);
+
+		SearchPageData<OrderHistoryData> searchPageData = new SearchPageData<OrderHistoryData>();
+		if (filterForm.getDate() != null || filterForm.getType() != null)
+		{
+			searchPageData = amwayApacOrderFacade.getPagedOrderHistoryByFilter(pageableData, filterForm.getDate(),
+					filterForm.getType());
+		}
+		else
+		{
+			searchPageData = orderFacade.getPagedOrderHistoryForStatuses(pageableData);
+		}
+
 		populateModel(model, searchPageData, showMode);
 
 		model.addAttribute("personalOrder", searchPageData);
 		model.addAttribute("customerOrder", searchPageData);
 
+		//Filter
+		model.addAttribute(ORDER_DEFAULT_DATE_OPTION_PARAMETER, LAST_THIRTY_DAYS);
+		model.addAttribute(ORDER_DATE_OPTIONS_PARAMETER, amwayApacOrderFacade.getOrderHistoryDateOptions());
+		model.addAttribute(ORDER_TYPE_OPTIONS_PARAMETER, amwayApacOrderFacade.getOrderHistoryTypeOptions());
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(ORDER_HISTORY_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ORDER_HISTORY_CMS_PAGE));
