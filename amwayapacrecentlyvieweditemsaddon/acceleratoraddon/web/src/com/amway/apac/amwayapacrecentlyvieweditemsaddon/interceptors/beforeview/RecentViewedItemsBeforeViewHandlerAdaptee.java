@@ -25,6 +25,7 @@ import java.util.Collection;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.ui.ModelMap;
 
@@ -56,7 +57,7 @@ public class RecentViewedItemsBeforeViewHandlerAdaptee implements BeforeViewHand
 			final String productCode = product.getCode();
 			String categoryCode = null;
 			final Collection<CategoryModel> categories = product.getSupercategories();
-			if (categories != null)
+			if (CollectionUtils.isNotEmpty(categories))
 			{
 				categoryCode = categories.iterator().next().getCode();
 			}
