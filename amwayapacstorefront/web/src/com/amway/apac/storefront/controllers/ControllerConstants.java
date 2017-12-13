@@ -218,12 +218,6 @@ public interface ControllerConstants
 			{
 				String RegistrationSimpleTerms = "pages/registration/registrationSimpleTerms"; //NOSONAR
 			}
-
-			interface Category //NOSONAR
-			{
-				String CategoryLandingPage = "pages/category/categoryLandingLayoutPage"; //NOSONAR
-			}
-
 		}
 
 		interface Fragments

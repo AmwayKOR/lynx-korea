@@ -70,7 +70,7 @@ public final class AmwayapacCoreConstants extends GeneratedAmwayapacCoreConstant
 	/**
 	 * Default quantity to add in the wishlist for a product.
 	 */
-	public static final Integer SHOPPING_LIST_ENTRY_DEFAULT_QUANTITY = Integer.valueOf(1);
+	public static final Integer ONE_INT = Integer.valueOf(1);
 
 	/**
 	 * String constant for ascending to be used in queries.

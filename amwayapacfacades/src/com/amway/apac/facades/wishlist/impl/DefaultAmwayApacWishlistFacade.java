@@ -1,7 +1,7 @@
 package com.amway.apac.facades.wishlist.impl;
 
 import static com.amway.apac.core.constants.AmwayapacCoreConstants.HUNDRED_INT;
-import static com.amway.apac.core.constants.AmwayapacCoreConstants.SHOPPING_LIST_ENTRY_DEFAULT_QUANTITY;
+import static com.amway.apac.core.constants.AmwayapacCoreConstants.ONE_INT;
 import static com.amway.apac.core.constants.AmwayapacCoreConstants.TWO_HUNDRED_INT;
 import static org.springframework.util.Assert.hasLength;
 
@@ -84,7 +84,7 @@ public class DefaultAmwayApacWishlistFacade extends DefaultAmwayWishlistFacade i
 		{
 			status = AmwayApacWishlistModificationStatus.WISHLIST_NOT_FOUND;
 		}
-		else if (productModel == null)
+		else if ((productModel == null) || (productModel.getVariantType() != null))
 		{
 			status = AmwayApacWishlistModificationStatus.PRODUCT_NOT_FONUD;
 		}
@@ -100,8 +100,8 @@ public class DefaultAmwayApacWishlistFacade extends DefaultAmwayWishlistFacade i
 		}
 		else
 		{
-			getWishlistService().addWishlistEntry(wishlistToAddProduct, productModel, SHOPPING_LIST_ENTRY_DEFAULT_QUANTITY,
-					Wishlist2EntryPriority.HIGH, StringUtils.EMPTY);
+			getWishlistService().addWishlistEntry(wishlistToAddProduct, productModel, ONE_INT, Wishlist2EntryPriority.HIGH,
+					StringUtils.EMPTY);
 
 			if (LOGGER.isInfoEnabled())
 			{

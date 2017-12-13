@@ -68,6 +68,11 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 	 */
 	private static final String SHOPPING_LIST_DETAILS_PAGE_URL = "/detail/" + SHOPPING_LIST_UID_PATH_VARIABLE_PATTERN;
 
+	/**
+	 *
+	 */
+	private static final String SHOPPING_LIST_CONFIGURED_MAX_LENGTH = "shopping.list.configured.max.length";
+
 	@Resource(name = "wishlistFacade")
 	private AmwayApacWishlistFacade amwayApacWishlistFacade;
 
@@ -206,7 +211,8 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 			isShoppingListNameValid = false;
 			GlobalMessages.addErrorMessage(model, ControllerConstants.ErrorMessageKeys.ShoppingList.SHOPPING_LIST_CREATE_NAME_EMPTY);
 		}
-		else if (shoppingListName.length() > AmwayapacCoreConstants.SHOPPING_LIST_DEFAULT_MAX_LENGTH) //check if shopping list name exceeds max length
+		else if (shoppingListName.length() > getSiteConfigService().getInt(SHOPPING_LIST_CONFIGURED_MAX_LENGTH,
+				AmwayapacCoreConstants.SHOPPING_LIST_DEFAULT_MAX_LENGTH)) //check if shopping list name exceeds max length
 		{
 			isShoppingListNameValid = false;
 			GlobalMessages.addErrorMessage(model,
