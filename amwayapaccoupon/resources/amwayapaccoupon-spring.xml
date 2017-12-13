@@ -17,6 +17,7 @@
            http://www.springframework.org/schema/aop
            http://www.springframework.org/schema/aop/spring-aop.xsd">
 
+    <import resource="amwayapaccoupon-daos.xml" />
     <bean id="amwayapaccouponSystemSetup" class="com.amway.apac.coupon.setup.AmwayapaccouponSystemSetup">
     </bean>
 
