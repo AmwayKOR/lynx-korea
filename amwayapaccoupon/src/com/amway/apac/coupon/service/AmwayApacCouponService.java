@@ -15,11 +15,18 @@ import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.couponservices.services.CouponService;
 
 import java.util.Date;
+import java.util.List;
 
+import com.amway.apac.coupon.enums.AmwayCouponStatus;
 import com.amway.apac.coupon.model.AmwayCouponModel;
 import com.amway.core.model.AmwayAccountModel;
 
 
+/**
+ * Interface containing API's related to AmwayCoupons for retrieval/modifications/generation
+ *
+ * @author kanwarpreetkaur
+ */
 public interface AmwayApacCouponService extends CouponService
 {
 	/**
@@ -57,4 +64,22 @@ public interface AmwayApacCouponService extends CouponService
 	 * @return generated coupon code
 	 */
 	String generateCodeForAmwayCoupon(AmwayCouponModel amwayCoupon);
+
+	/**
+	 * get Amway Coupon on the basis of unique coupon code
+	 *
+	 * @param couponCode
+	 */
+	AmwayCouponModel getAmwayCouponForCode(String couponCode);
+
+	/**
+	 * get Amway coupons for customer, particular status and withing date range
+	 *
+	 * @param customer
+	 * @param couponStatuses
+	 * @param filterByDate
+	 * @return AmwayCouponModel
+	 */
+	List<AmwayCouponModel> getAmwayCouponsForAbo(CustomerModel customer, List<AmwayCouponStatus> couponStatuses,
+			boolean filterByDate);
 }

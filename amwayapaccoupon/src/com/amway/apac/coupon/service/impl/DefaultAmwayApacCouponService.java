@@ -18,6 +18,7 @@ import de.hybris.platform.servicelayer.keygenerator.KeyGenerator;
 import de.hybris.platform.servicelayer.util.ServicesUtil;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -25,17 +26,25 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Required;
 
+import com.amway.apac.coupon.dao.AmwayApacCouponDao;
+import com.amway.apac.coupon.enums.AmwayCouponStatus;
 import com.amway.apac.coupon.model.AmwayCouponModel;
 import com.amway.apac.coupon.service.AmwayApacCouponService;
 import com.amway.core.model.AmwayAccountModel;
 
 
+/**
+ * Amway Coupon Service for generating/retrieving/modifying Amway coupons
+ *
+ * @author kanwarpreetkaur
+ */
 public class DefaultAmwayApacCouponService extends DefaultCouponService implements AmwayApacCouponService
 {
 	private static final Logger LOG = LoggerFactory.getLogger(DefaultAmwayApacCouponService.class);
 
 	private static final String DEFAULT_APAC_COUPON_KEY_GENERATOR = "defaultApacCouponKeyGenerator";
 
+	private AmwayApacCouponDao amwayApacCouponDao;
 	Map<String, KeyGenerator> couponCodeGeneratorMap;
 
 	/**
@@ -105,9 +114,29 @@ public class DefaultAmwayApacCouponService extends DefaultCouponService implemen
 	 * {@inheritDoc}
 	 */
 	@Override
+	public AmwayCouponModel getAmwayCouponForCode(final String couponCode)
+	{
+		return amwayApacCouponDao.findAmwayCouponByCode(couponCode);
+
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public String generateCodeForAmwayCoupon(final AmwayCouponModel amwayCoupon)
 	{
 		return (String) getCouponCodeGeneratorMap().get(DEFAULT_APAC_COUPON_KEY_GENERATOR).generate();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<AmwayCouponModel> getAmwayCouponsForAbo(final CustomerModel customer, final List<AmwayCouponStatus> couponStatuses,
+			final boolean filterByDate)
+	{
+		return amwayApacCouponDao.getAmwayCouponsForAbo(customer, couponStatuses, filterByDate);
 	}
 
 	/**
@@ -127,4 +156,24 @@ public class DefaultAmwayApacCouponService extends DefaultCouponService implemen
 	{
 		this.couponCodeGeneratorMap = couponCodeGeneratorMap;
 	}
+
+	/**
+	 * getter for AmwayApacCouponDao
+	 *
+	 * @return AmwayApacCouponDao
+	 */
+	public AmwayApacCouponDao getAmwayApacCouponDao()
+	{
+		return amwayApacCouponDao;
+	}
+
+	/**
+	 * setter for AmwayApacCouponDao
+	 */
+	public void setAmwayApacCouponDao(final AmwayApacCouponDao amwayApacCouponDao)
+	{
+		this.amwayApacCouponDao = amwayApacCouponDao;
+	}
+
+
 }

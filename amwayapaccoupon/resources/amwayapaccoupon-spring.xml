@@ -27,6 +27,7 @@
     			<entry key="defaultApacCouponKeyGenerator" value-ref="defaultAmwayCouponCodeGenerator"/>
     		</map>
     	</property>
+    	<property name="amwayApacCouponDao" ref="amwayApacCouponDao" />
     </bean>
     
     <bean id="amwayCouponPrepareInterceptor" class="com.amway.apac.coupon.interceptor.impl.AmwayCouponPrepareInterceptor">
@@ -47,4 +48,11 @@
 			<property name="numeric" value="${keygen.amway.coupon.code.numeric}" />
 			<property name="template" value="${keygen.amway.coupon.code.template}" />
 	 </bean>
+	 
+	<alias name="defaultAmwayApacCouponDao" alias="amwayApacCouponDao" />
+	<bean id="defaultAmwayApacCouponDao"
+		class="com.amway.apac.coupon.dao.impl.DefaultAmwayApacCouponDao">
+		<property name="amwayCouponGenericDao" ref="amwayCouponDao" />
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+	</bean>
 </beans>
