@@ -22,21 +22,39 @@ import com.amway.core.model.AmwayAccountModel;
 
 public interface AmwayApacCouponService extends CouponService
 {
-
 	/**
 	 * Creates AmwayCoupon for customer.
+	 *
+	 * @param redeemableCouponCode
+	 * @param startDate
+	 * @param endDate
+	 * @param site
+	 * @param customer
+	 *
+	 * @return AmwayCouponModel
 	 */
-	AmwayCouponModel createAmwayCoupon(String redeemableCouponCode, Date startDate, int validityInDays, CMSSiteModel site,
+	AmwayCouponModel createAmwayCoupon(String redeemableCouponCode, Date startDate, Date endDate, CMSSiteModel site,
 			CustomerModel customer);
 
 	/**
-	 * Creates AmwayCoupon for amway-account.
+	 * Creates AmwayCoupon for account.
+	 *
+	 * @param redeemableCouponCode
+	 * @param startDate
+	 * @param endDate
+	 * @param site
+	 * @param account
+	 *
+	 * @return AmwayCouponModel
 	 */
-	AmwayCouponModel createAmwayCoupon(String redeemableCouponCode, Date startDate, int validityInDays, CMSSiteModel site,
+	AmwayCouponModel createAmwayCoupon(String redeemableCouponCode, Date startDate, Date endDate, CMSSiteModel site,
 			AmwayAccountModel account);
 
 	/**
 	 * generates unique coupon code for AmwayCoupon
+	 *
+	 * @param amwayCoupon
+	 * @return generated coupon code
 	 */
 	String generateCodeForAmwayCoupon(AmwayCouponModel amwayCoupon);
 }
