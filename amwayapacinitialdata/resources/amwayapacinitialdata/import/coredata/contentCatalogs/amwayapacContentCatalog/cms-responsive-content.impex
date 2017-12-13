@@ -1541,7 +1541,7 @@ INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTe
 ;;update-email;Update Email Page;AccountPageTemplate;update-email
 ;;shopping-lists;Shopping Lists Page;ShoppingListsPageTemplate;shopping-lists
 ;;shopping-list-details;Shopping List Details Page;ShoppingListsPageTemplate;shopping-list-details
-;;category-landing-page;Category Landing Page;CategoryLandingPageTemplate;/category-landing-page
+;;category-landing-page;Category Landing Page;CategoryLandingPageTemplate;category-landing-page
 ;;content-article-pages;Content Article Pages;ContentArticlePagesTemplate;/content-article-pages
 ;;register-landing-page;Register;RegisterLandingPageTemplate;/register-landing-page
 ;;billing-shipping;Billing Shipping Page;AccountPageTemplate;billing-shipping

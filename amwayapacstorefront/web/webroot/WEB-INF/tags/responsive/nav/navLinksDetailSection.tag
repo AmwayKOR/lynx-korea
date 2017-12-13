@@ -5,6 +5,7 @@
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
 <%@ attribute name="navigationNode" required="true"	type="de.hybris.platform.cms2.model.navigation.CMSNavigationNodeModel"%>
 
+<c:url var="categoryLandingPageUrl" value="${navigationNode.nodeLink.url}"/>
 <div class="overlay-menu-tab-row">
 	<div class="overlay-menu-tab-categories clearfix row">
 		<c:forEach items="${navigationNode.children}" var="grandChildrenNode" varStatus="loop">
@@ -20,7 +21,7 @@
 					</c:forEach>
 				</ul>
 				<c:if test="${loop.index==0}">
-					<a href="categoryPage.html" class="overlay-tab-title-bottom">
+					<a href="${categoryLandingPageUrl}" class="overlay-tab-title-bottom">
 						<spring:theme code="text.header.nav.morecategories" />
 					</a>
 				</c:if>

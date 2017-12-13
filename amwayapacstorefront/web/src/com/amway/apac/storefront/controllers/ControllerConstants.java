@@ -219,6 +219,11 @@ public interface ControllerConstants
 				String RegistrationSimpleTerms = "pages/registration/registrationSimpleTerms"; //NOSONAR
 			}
 
+			interface Category //NOSONAR
+			{
+				String CategoryLandingPage = "pages/category/categoryLandingLayoutPage"; //NOSONAR
+			}
+
 		}
 
 		interface Fragments
@@ -381,6 +386,18 @@ public interface ControllerConstants
 		 * String termForm
 		 */
 		String TERM_FORM_STRING = "termForm";
+
+		/**
+		 * String category name
+		 */
+		String CATEGORY_NAME = "categoryName";
+
+
+		/**
+		 * String Category Code
+		 */
+		String CATEGORY_CODE = "categoryCode";
+
 	}
 
 	/**
