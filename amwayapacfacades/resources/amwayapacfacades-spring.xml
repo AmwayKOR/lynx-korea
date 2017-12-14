@@ -79,10 +79,28 @@
 		<property name="amwayApacUserBasicConverter" ref="amwayApacUserBasicConverter" />
 	</bean>
 
+	<alias name="amwayApacWishlistEntryBasicConverter" alias="amwayWishlistEntryBasicConverter" />
+	<bean id="amwayApacWishlistEntryBasicConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.facades.product.data.WishlistEntryData" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayWishlistEntryBasicPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="amwayApacWishlistEntryBasicPopulator" alias="amwayWishlistEntryBasicPopulator" />
+	<bean id="amwayApacWishlistEntryBasicPopulator"
+		class="com.amway.apac.facades.wishlist.populators.AmwayApacWishlistEntryBasicPopulator">
+		<property name="productConverter" ref="amwayApacWishlistProductConverter" />
+	</bean>
+
     <alias name="defaultAmwayApacWishlistFacade" alias="wishlistFacade"/>
     <bean id="defaultAmwayApacWishlistFacade" class="com.amway.apac.facades.wishlist.impl.DefaultAmwayApacWishlistFacade" parent="defaultAmwayWishlistFacade">
         <property name="amwayApacWishlistBasicConverter" ref="amwayApacWishlistBasicConverter"/>
         <property name="amwayApacWishlistService" ref="wishlistService"/>
+        <property name="amwayWishlistEntryBasicConverter" ref="amwayWishlistEntryBasicConverter" />
     </bean>
 
 	<alias name="defaultAmwayApacVariantOptionDataPopulator" alias="acceleratorVariantOptionDataPopulator"/>

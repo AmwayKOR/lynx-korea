@@ -5,6 +5,7 @@ import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 
 import java.util.List;
 
+import com.amway.apac.facades.wishlist.data.AmwayApacWishListModification;
 import com.amway.facades.product.data.WishlistData;
 import com.amway.facades.wishlist.AmwayWishlistFacade;
 import com.amway.facades.wishlist.modification.status.AmwayApacWishlistModificationStatus;
@@ -59,9 +60,9 @@ public interface AmwayApacWishlistFacade extends AmwayWishlistFacade
 	 *
 	 * @throws IllegalArgumentException
 	 *            if product code is null or empty, or if wishlistUid is null or empty
-	 * @return {@link AmwayApacWishlistModificationStatus} based on whether add to shopping list was successfull or not.
+	 * @return {@link AmwayApacWishListModification} based on whether add to shopping list was successful or not.
 	 */
-	AmwayApacWishlistModificationStatus addProductToWishlist(final String productCode, final String wishlistUid);
+	AmwayApacWishListModification addProductToWishlist(final String productCode, final String wishlistUid);
 
 	/**
 	 * Edits the name of the wishlist and returns the modification status.

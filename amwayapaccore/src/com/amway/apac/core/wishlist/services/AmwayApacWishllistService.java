@@ -1,7 +1,10 @@
 package com.amway.apac.core.wishlist.services;
 
+import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.servicelayer.exceptions.AmbiguousIdentifierException;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
+import de.hybris.platform.wishlist2.enums.Wishlist2EntryPriority;
+import de.hybris.platform.wishlist2.model.Wishlist2EntryModel;
 import de.hybris.platform.wishlist2.model.Wishlist2Model;
 
 import java.util.List;
@@ -47,5 +50,10 @@ public interface AmwayApacWishllistService extends AmwayWishlistService
 	 *            if more than one wishlists found with the uid
 	 */
 	Wishlist2Model getWishlistByUidForCurrentUser(final String uid);
+
+
+	Wishlist2EntryModel addAndReturnWishlistEntry(final Wishlist2Model wishlist, final ProductModel product, final Integer desired,
+			final Wishlist2EntryPriority priority, final String comment);
+
 
 }

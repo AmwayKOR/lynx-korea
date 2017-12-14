@@ -291,6 +291,11 @@ public interface ControllerConstants
 				String UpdateShoppingListNameResponse = "fragments/shoppingList/updateShoppingListNameResponse"; //NOSONAR
 
 				/**
+				 * Response UI when product is updated in the shopping list.
+				 */
+				String AddmultipleProductToShoppingListResponse = "fragments/shoppingList/addMultipleProductToShoppingListResponse"; //NOSONAR
+
+				/**
 				 * Response UI when shopping list is updated.
 				 */
 				String AddToShoppingListPopUp = "fragments/shoppingList/addToShoppingListPopUp"; //NOSONAR
@@ -382,6 +387,11 @@ public interface ControllerConstants
 		String TERM_FORM_STRING = "termForm";
 
 		/**
+		 * Model parameter for modification.
+		 */
+		String MODIFICATION = "modification";
+
+		/**
 		 * String category name
 		 */
 		String CATEGORY_NAME = "categoryName";
@@ -444,6 +454,11 @@ public interface ControllerConstants
 		 * Prefix appended to status for add product to shopping list messages.
 		 */
 		String SHOPPING_LIST_ADD_PRODUCT_MESSAGES_PREFIX = "shopping.list.add.product.status.";
+
+		/**
+		 * Prefix appended to status for add multiple product to shopping list messages.
+		 */
+		String SHOPPING_LIST_ADD_MULTIPLE_PRODUCT_MESSAGES_PREFIX = "shopping.list.add.product.status.multiple.";
 
 		/**
 		 * Prefix appended to status for add product to shopping list messages.

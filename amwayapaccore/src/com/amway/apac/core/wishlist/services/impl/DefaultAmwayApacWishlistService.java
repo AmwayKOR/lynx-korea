@@ -4,9 +4,13 @@ import static com.amway.apac.core.constants.AmwayapacCoreConstants.TWO_HUNDRED_I
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateIfSingleResult;
 
 import de.hybris.platform.basecommerce.model.site.BaseSiteModel;
+import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.core.model.user.UserModel;
+import de.hybris.platform.wishlist2.enums.Wishlist2EntryPriority;
+import de.hybris.platform.wishlist2.model.Wishlist2EntryModel;
 import de.hybris.platform.wishlist2.model.Wishlist2Model;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.collections4.CollectionUtils;
@@ -61,6 +65,22 @@ public class DefaultAmwayApacWishlistService extends AmwayWishlistServiceImpl im
 		}
 
 		return wishlistsFound;
+	}
+
+	@Override
+	public Wishlist2EntryModel addAndReturnWishlistEntry(final Wishlist2Model wishlist, final ProductModel product,
+			final Integer desired, final Wishlist2EntryPriority priority, final String comment)
+	{
+		final Wishlist2EntryModel entry = getModelService().create(Wishlist2EntryModel.class);
+		final Date currentDate = new Date();
+		entry.setProduct(product);
+		entry.setDesired(desired);
+		entry.setPriority(priority);
+		entry.setComment(comment);
+		entry.setAddedDate(currentDate);
+		addWishlistEntry(wishlist, entry);
+		getModelService().refresh(entry);
+		return entry;
 	}
 
 	/**

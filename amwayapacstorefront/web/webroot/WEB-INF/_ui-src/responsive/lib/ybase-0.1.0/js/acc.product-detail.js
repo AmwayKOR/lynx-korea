@@ -9,8 +9,78 @@ ACC.productdetail = {
         "bindAddToDitto",
         "bindCreateNewDitto",
         "bindContactsPopup",
-        "bindPreviousScreenPopup"
+        "bindPreviousScreenPopup",
+        "bindAddToCart",
+        "bindAddToShoppingListForm",
+        "bindNewList"
 	],
+	
+	bindNewList: function() {
+		 $(document).on("click", '#newlist', function(event) {
+			 var a = $(this);
+			 $.ajax({
+    				success: function(data) 
+       				{
+       				 window.location='shopping-lists/all';
+       			    },
+       				error: function(error) 
+       				{
+       					console.log(error);
+       		    		ACC.global.appendGlobalMessage(ACC.globalMessageTypes.ERROR_MESSAGES_HOLDER, ACC.messages.shoppingListAddProductError);
+       				}
+		 });
+		 })
+	},
+	
+	bindAddToShoppingListForm: function() {
+		
+            $('#multiShoppingListUpdateForm').ajaxForm({
+  				success: function(data) 
+  				{
+  					// data contains the shopping list page content
+  			    	if ($(data).filter("div.page-content").length > 0) {
+  			    		ACC.popup.showPopup($(data).filter("div.page-content").html());
+  			    		ACC.global.findAndUpdateGlobalMessages(data, false);
+  			    	} else {
+  			    		ACC.global.findAndUpdateGlobalMessages(data);
+  			    	}
+  			    },
+  				error: function(error) 
+  				{
+  					console.log(error);
+  		    		ACC.global.appendGlobalMessage(ACC.globalMessageTypes.ERROR_MESSAGES_HOLDER, ACC.messages.shoppingListAddProductError);
+  				}
+  			});           
+   		 },
+	
+	bindAddToCart: function() {
+	            	 $(document).on("click", '#addToLIST', function(event) {
+	            		 if($(".cart-detail__dropdown-menu.dropdown-menu.shopping-list-popup-wrapper").css('display')=='none'){
+		                  event.preventDefault();
+		                  var button = $(this);
+		                  var productcode= button.data("productCode");
+		                  $.ajax({
+		       				url: button.data("addToShoppingListUrl"),
+		       				type: "GET",
+		       				success: function(data) 
+		       				{
+		       					$(".cart-detail__dropdown-menu.dropdown-menu.shopping-list-popup-wrapper").html(data);
+		       					$(".js-populated-product-code").val(productcode);
+		       			     	$(".cart-detail__dropdown-menu.dropdown-menu.shopping-list-popup-wrapper").show();
+		       			        ACC.productdetail.bindAddToShoppingListForm();
+		       			     	
+		       			    },
+		       				error: function(error) 
+		       				{
+		       					console.log(error);
+		       		    		ACC.global.appendGlobalMessage(ACC.globalMessageTypes.ERROR_MESSAGES_HOLDER, ACC.messages.shoppingListAddProductError);
+		       				}
+		       			});           
+	            		 }else{
+	            			 $(".cart-detail__dropdown-menu.dropdown-menu.shopping-list-popup-wrapper").hide();
+	            		 }
+		              });
+	},
 
 	bindAddToDitto: function() {
 		 $(document).on("click", '#addToDitto', function(event) {

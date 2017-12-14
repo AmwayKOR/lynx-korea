@@ -11,6 +11,7 @@ import de.hybris.platform.servicelayer.dto.converter.Converter;
 import de.hybris.platform.servicelayer.exceptions.AmbiguousIdentifierException;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import de.hybris.platform.wishlist2.enums.Wishlist2EntryPriority;
+import de.hybris.platform.wishlist2.model.Wishlist2EntryModel;
 import de.hybris.platform.wishlist2.model.Wishlist2Model;
 
 import java.util.List;
@@ -23,7 +24,9 @@ import org.springframework.util.Assert;
 
 import com.amway.apac.core.wishlist.services.AmwayApacWishllistService;
 import com.amway.apac.facades.wishlist.AmwayApacWishlistFacade;
+import com.amway.apac.facades.wishlist.data.AmwayApacWishListModification;
 import com.amway.facades.product.data.WishlistData;
+import com.amway.facades.product.data.WishlistEntryData;
 import com.amway.facades.wishlist.impl.DefaultAmwayWishlistFacade;
 import com.amway.facades.wishlist.modification.status.AmwayApacWishlistModificationStatus;
 
@@ -44,6 +47,7 @@ public class DefaultAmwayApacWishlistFacade extends DefaultAmwayWishlistFacade i
 
 	private AmwayApacWishllistService amwayApacWishlistService;
 	private Converter<Wishlist2Model, WishlistData> amwayApacWishlistBasicConverter;
+	private Converter<Wishlist2EntryModel, WishlistEntryData> amwayWishlistEntryBasicConverter;
 
 	/**
 	 * {@inheritDoc}
@@ -70,27 +74,29 @@ public class DefaultAmwayApacWishlistFacade extends DefaultAmwayWishlistFacade i
 	 * {@inheritDoc}
 	 */
 	@Override
-	public AmwayApacWishlistModificationStatus addProductToWishlist(final String productCode, final String wishlistUid)
+	public AmwayApacWishListModification addProductToWishlist(final String productCode, final String wishlistUid)
 	{
 		Assert.hasLength(productCode, "Parameter productcode can not be null or empty.");
 		Assert.hasLength(wishlistUid, "Parameter wishlistUid can not be null or empty.");
 
-		AmwayApacWishlistModificationStatus status = AmwayApacWishlistModificationStatus.SUCCESS;
+		final AmwayApacWishListModification modification = new AmwayApacWishListModification();
+		modification.setStatus(AmwayApacWishlistModificationStatus.SUCCESS);
 
 		final Wishlist2Model wishlistToAddProduct = fetchWishlistByUidInternal(wishlistUid);
 		final ProductModel productModel = fetchProductByCodeInternal(productCode);
 
 		if (wishlistToAddProduct == null)
 		{
-			status = AmwayApacWishlistModificationStatus.WISHLIST_NOT_FOUND;
+			modification.setStatus(AmwayApacWishlistModificationStatus.WISHLIST_NOT_FOUND);
 		}
 		else if ((productModel == null) || (productModel.getVariantType() != null))
 		{
-			status = AmwayApacWishlistModificationStatus.PRODUCT_NOT_FONUD;
+			modification.setStatus(AmwayApacWishlistModificationStatus.PRODUCT_NOT_FONUD);
+
 		}
 		else if (getWishlistService().hasWishlistEntryForProduct(productModel, wishlistToAddProduct))
 		{
-			status = AmwayApacWishlistModificationStatus.PRODUCT_ALREADY_EXISTS;
+			modification.setStatus(AmwayApacWishlistModificationStatus.PRODUCT_ALREADY_EXISTS);
 
 			if (LOGGER.isInfoEnabled())
 			{
@@ -100,8 +106,11 @@ public class DefaultAmwayApacWishlistFacade extends DefaultAmwayWishlistFacade i
 		}
 		else
 		{
-			getWishlistService().addWishlistEntry(wishlistToAddProduct, productModel, ONE_INT, Wishlist2EntryPriority.HIGH,
-					StringUtils.EMPTY);
+			final Wishlist2EntryModel newEntryCreated = getAmwayApacWishlistService().addAndReturnWishlistEntry(wishlistToAddProduct,
+					productModel, ONE_INT, Wishlist2EntryPriority.HIGH, StringUtils.EMPTY);
+
+			final WishlistEntryData entryData = getAmwayWishlistEntryBasicConverter().convert(newEntryCreated);
+			modification.setEntry(entryData);
 
 			if (LOGGER.isInfoEnabled())
 			{
@@ -110,7 +119,7 @@ public class DefaultAmwayApacWishlistFacade extends DefaultAmwayWishlistFacade i
 			}
 		}
 
-		return status;
+		return modification;
 	}
 
 	/**
@@ -246,5 +255,25 @@ public class DefaultAmwayApacWishlistFacade extends DefaultAmwayWishlistFacade i
 	{
 		this.amwayApacWishlistService = amwayApacWishlistService;
 	}
+
+	/**
+	 * @return the amwayWishlistEntryBasicConverter
+	 */
+	public Converter<Wishlist2EntryModel, WishlistEntryData> getAmwayWishlistEntryBasicConverter()
+	{
+		return amwayWishlistEntryBasicConverter;
+	}
+
+	/**
+	 * @param amwayWishlistEntryBasicConverter
+	 *           the amwayWishlistEntryBasicConverter to set
+	 */
+	public void setAmwayWishlistEntryBasicConverter(
+			final Converter<Wishlist2EntryModel, WishlistEntryData> amwayWishlistEntryBasicConverter)
+	{
+		this.amwayWishlistEntryBasicConverter = amwayWishlistEntryBasicConverter;
+	}
+
+
 
 }

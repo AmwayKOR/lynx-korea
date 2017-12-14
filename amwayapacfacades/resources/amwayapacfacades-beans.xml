@@ -33,6 +33,11 @@
 		<property name="lastUpdated" type="java.util.Date" />
 		<property name="creationTime" type="java.util.Date" />
     </bean>
+    
+       <bean class="com.amway.apac.facades.wishlist.data.AmwayApacWishListModification">
+        <property name="status" type="com.amway.facades.wishlist.modification.status.AmwayApacWishlistModificationStatus" />
+		<property name="entry" type="com.amway.facades.product.data.WishlistEntryData" />
+    </bean>
 
 	<bean class="de.hybris.platform.commercefacades.product.data.StockData">
 		<property name="stockLevelStatusName" type="String"/>

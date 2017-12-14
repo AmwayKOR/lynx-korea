@@ -24,6 +24,7 @@
 <form:form method="post" id="addToCartForm" class="add_to_cart_form" action="${addToCartUrl}">
 	<sec:authorize access="!hasAnyRole('ROLE_ANONYMOUS')">
 		<input type="hidden" maxlength="3" size="1" id="qty" name="qty" class="qty js-qty-selector-input" value="1">
+		<c:set var="productCode" value="${product.code}" />
 		<input type="hidden" name="productCodePost" value="${fn:escapeXml(product.code)}" />
 		<input type="hidden" id="cartUrl" value="${cartUrl}" />
 		<button type="submit"
@@ -46,45 +47,13 @@
 <sec:authorize access="!hasAnyRole('ROLE_ANONYMOUS')">
 	<div class="row add-to-cart-extra-actions col-xs-12 col-sm-12 col-md-12 js-add-to-actions-wrapper">
 		<div class="add-button-wrap add-to-shopping-list-container new-add-to-shopping-list-container">
-			<button type="button" class="btn btn-link btn-block js-add-list-shopping-button" data-toggle="dropdown" id="">
+			<c:url var="addToShoppingListUrl" value="/shopping-lists/data/all" />
+			<button type="button" class="btn btn-link btn-block js-add-list-shopping-button acc" data-product-code="${productCode}" data-add-to-shopping-list-url="${addToShoppingListUrl}" id="addToLIST">
 				<span class="icon-add-shopping-list"></span>
 				<span class="shopping-list-button-text">Add To Shopping List</span>
 			</button>
-			<div class="cart-detail__dropdown-menu dropdown-menu" role="menu">
-				<ul>
-					<li>
-						<input class="" id="toSL1" name="toDitto" type="checkbox">
-						<label class="cart-detail__addto-options" for="toSL1"></label>
-						<span>1</span>
-					</li>
-					<li>
-						<input class="" id="toSL2" name="toDitto" type="checkbox">
-						<label class="cart-detail__addto-options" for="toSL2"></label>
-						<span>TEST2</span>
-
-					</li>
-					<li>
-						<input class="" id="toSL3" name="toDitto" type="checkbox">
-						<label class="cart-detail__addto-options" for="toSL3"></label>
-						<span>test1</span>
-
-					</li>
-					<li>
-						<input class="" id="toSL4" name="toDitto" type="checkbox">
-						<label class="cart-detail__addto-options" for="toSL4"></label>
-						<span>GG</span>
-
-					</li>
-					<li>
-						<input class="" id="toSL5" name="toDitto" type="checkbox">
-						<label class="cart-detail__addto-options" for="toSL5"></label>
-						<span>GG8</span>
-					</li>
-				</ul>
-				<div class="dropdown-menu-bottom">
-					<button id="addToLIST" class="btn btn-primary">ADD TO LIST</button>
-					<a href="javascript:void(0);" id="">Create New List</a>
-				</div>
+			<div class="cart-detail__dropdown-menu dropdown-menu shopping-list-popup-wrapper" role="menu">
+			
 			</div>
 		</div>
 		<div class="add-button-wrap add-to-ditto-container">
