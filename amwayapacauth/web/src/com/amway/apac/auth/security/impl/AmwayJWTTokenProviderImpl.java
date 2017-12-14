@@ -45,7 +45,7 @@ public class AmwayJWTTokenProviderImpl implements AmwayJWTTokenProvider
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.amway.apac.auth.security.AmwayJWTTokenProvider#createJWToken(com.amway.core.model.AmwayAccountModel)
 	 */
 	@Override
@@ -104,8 +104,10 @@ public class AmwayJWTTokenProviderImpl implements AmwayJWTTokenProvider
 			familyName = names[1];
 		}
 		// Prepare JWT with claims set
-		return new JWTClaimsSet.Builder().audience(request.getParameter(IDPLogin.CLIENT_ID)).subject("alice").issueTime(new Date())
-				.notBeforeTime(new Date()).issuer(request.getRequestURL().toString()).claim("name", amwayAccount.getName())
+
+		return new JWTClaimsSet.Builder().audience(request.getParameter(IDPLogin.CLIENT_ID)).subject("alice")
+				.issueTime(new Date())
+				.notBeforeTime(new Date()).issuer(Config.getParameter(IDPLogin.ISSUER)).claim("name", amwayAccount.getName())
 				.claim("locale", request.getLocale().getLanguage() + "-" + request.getLocale().getCountry())
 				.claim("preferred username", amwayAccount.getPrimaryParty().getCustomerID())
 				.claim("auth_time", Long.valueOf(new Date().getTime())).claim("partyId", "47929860")
@@ -113,6 +115,19 @@ public class AmwayJWTTokenProviderImpl implements AmwayJWTTokenProvider
 				.claim("updated at", Long.valueOf(new Date().getTime()))
 				.claim("nonce", StringUtils.replace(request.getParameter(IDPLogin.NONCE), " ", "+")).claim("given_name", givenName)
 				.claim("family_name", familyName).expirationTime(new Date(nowMillis + ttlMillis.longValue())).build();
+	}
+
+	/**
+	 * @param principal
+	 * @return
+	 */
+	private String getAmwayAccountId(final String amwayAccountId)
+	{
+		if (amwayAccountId.contains("-"))
+		{
+			return amwayAccountId.substring((amwayAccountId.indexOf("-") + 1), (amwayAccountId.lastIndexOf("-")));
+		}
+		return amwayAccountId;
 	}
 
 	/**

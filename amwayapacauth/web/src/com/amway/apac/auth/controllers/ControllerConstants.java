@@ -96,5 +96,6 @@ public interface ControllerConstants
 		String AMWAY_IDP_JWT_TTLMILES = "amway.idp.jwt.ttlmiles";
 		String AMWAY_IDP_JWT_KEYID = "amway.idp.jwt.secret.keyid";
 		String IDP_REFRESH_URL = "/sessions/me/lifecycle/refresh";
+		String ISSUER = "amway.idp.jwt.issuer";
 	}
 }
