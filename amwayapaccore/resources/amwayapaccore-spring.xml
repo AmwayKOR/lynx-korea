@@ -123,7 +123,7 @@
 		parent="defaultAmwayConsignmentService">
 		<property name="consignmentBusinessProcessService" ref="consignmentBusinessProcessService" />
 	</bean>
-	
+
 	<!-- Sales quote process actions -->
 
 	<!-- quote -->
@@ -250,4 +250,20 @@
 	<import
 		resource="/amwayapaccore/processes/quote/quote-post-cancellation-process-spring.xml" />
 
+	<bean id="amwayApacBackOrderDao"
+		class="com.amway.apac.core.backorder.dao.impl.DefaultAmwayApacBackOrderDao">
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+	</bean>
+	
+	<bean id="amwayApacBackOrderReleaseSelectionStrategy"
+		class="com.amway.apac.core.backorder.strategies.impl.DefaultAmwayApacBackOrderReleaseSelectionStrategy">
+		<property name="amwayApacBackOrderDao" ref="amwayApacBackOrderDao" />
+	</bean>
+	
+	<bean id="amwayApacBackOrderService"
+		class="com.amway.apac.core.backorder.service.impl.DefaultAmwayApacBackOrderService">
+		<property name="businessProcessService" ref="businessProcessService" />
+		<property name="stockService" ref="stockService" />
+		<property name="amwayApacBackOrderReleaseSelectionStrategy" ref="amwayApacBackOrderReleaseSelectionStrategy" />
+	</bean>
 </beans>
