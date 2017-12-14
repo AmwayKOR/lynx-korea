@@ -44,24 +44,6 @@ public class DefaultAmwayApacOrderFacade extends DefaultAmwayOrderFacade impleme
 
 	}
 
-	/**
-	 * @return the amwayApacCustomerAccountService
-	 */
-	public AmwayApacCustomerAccountService getAmwayApacCustomerAccountService()
-	{
-		return amwayApacCustomerAccountService;
-	}
-
-	/**
-	 * @param amwayApacCustomerAccountService
-	 *           the amwayApacCustomerAccountService to set
-	 */
-	@Required
-	public void setAmwayApacCustomerAccountService(final AmwayApacCustomerAccountService amwayApacCustomerAccountService)
-	{
-		this.amwayApacCustomerAccountService = amwayApacCustomerAccountService;
-	}
-
 	@Override
 	public List<String> getOrderHistoryDateOptions()
 	{
@@ -73,25 +55,6 @@ public class DefaultAmwayApacOrderFacade extends DefaultAmwayOrderFacade impleme
 			orderDateOptions.add(DateTimeFormatter.ofPattern("yyyy-MM").format(currentDate));
 		}
 		return orderDateOptions;
-	}
-
-	/**
-	 * @return the orderHistoryTypeOptions
-	 */
-	@Override
-	public List<String> getOrderHistoryTypeOptions()
-	{
-		return orderHistoryTypeOptions;
-	}
-
-	/**
-	 * @param orderHistoryTypeOptions
-	 *           the orderHistoryTypeOptions to set
-	 */
-	@Required
-	public void setOrderHistoryTypeOptions(final List<String> orderHistoryTypeOptions)
-	{
-		this.orderHistoryTypeOptions = orderHistoryTypeOptions;
 	}
 
 	@Override
@@ -134,5 +97,42 @@ public class DefaultAmwayApacOrderFacade extends DefaultAmwayOrderFacade impleme
 			return LocalDate.parse(date + AmwayapacFacadesConstants.LAST_DAY_OF_MONTH,
 					DateTimeFormatter.ofPattern(AmwayapacFacadesConstants.ORDER_DATE_FORMAT_PATTERN));
 		}
+	}
+
+	/**
+	 * @return the amwayApacCustomerAccountService
+	 */
+	public AmwayApacCustomerAccountService getAmwayApacCustomerAccountService()
+	{
+		return amwayApacCustomerAccountService;
+	}
+
+	/**
+	 * @param amwayApacCustomerAccountService
+	 *           the amwayApacCustomerAccountService to set
+	 */
+	@Required
+	public void setAmwayApacCustomerAccountService(final AmwayApacCustomerAccountService amwayApacCustomerAccountService)
+	{
+		this.amwayApacCustomerAccountService = amwayApacCustomerAccountService;
+	}
+
+	/**
+	 * @return the orderHistoryTypeOptions
+	 */
+	@Override
+	public List<String> getOrderHistoryTypeOptions()
+	{
+		return orderHistoryTypeOptions;
+	}
+
+	/**
+	 * @param orderHistoryTypeOptions
+	 *           the orderHistoryTypeOptions to set
+	 */
+	@Required
+	public void setOrderHistoryTypeOptions(final List<String> orderHistoryTypeOptions)
+	{
+		this.orderHistoryTypeOptions = orderHistoryTypeOptions;
 	}
 }

@@ -13,6 +13,7 @@ import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 import de.hybris.platform.servicelayer.search.SearchResult;
+import de.hybris.platform.servicelayer.util.ServicesUtil;
 import de.hybris.platform.store.BaseStoreModel;
 
 import java.time.LocalDate;
@@ -21,7 +22,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import com.amway.apac.core.constants.AmwayapacCoreConstants;
 import com.amway.apac.core.customer.daos.AmwayApacCustomerAccountDao;
@@ -49,7 +49,9 @@ public class DefaultAmwayApacCustomerAccountDao extends DefaultAmwayCustomerAcco
 	 */
 	private static final String FIND_ORDERS_BY_CUSTOMER_STORE_QUERY = "SELECT {" + OrderModel.PK + "}, {" + OrderModel.CREATIONTIME
 			+ "}, {" + OrderModel.CODE + "} FROM {" + OrderModel._TYPECODE + "} WHERE {" + OrderModel.USER + "} = ?customer AND {"
-			+ OrderModel.VERSIONID + "} IS NULL AND {" + OrderModel.STORE + "} = ?store";
+			+ OrderModel.VERSIONID + "} IS NULL AND {" + OrderModel.STORE + "} = ?store "
+			//+ "AND {" + OrderModel.DATE + "} BETWEEN ?startDate AND ?endDate ";
+			+ "AND {" + OrderModel.DATE + "} <= ?endDate " + "AND {" + OrderModel.DATE + "} >= ?startDate ";
 
 	private static final String SORT_ORDERS_BY_DATE = " ORDER BY {" + OrderModel.CREATIONTIME + "} DESC, {" + OrderModel.PK + "}";
 	private static final String SORT_ORDERS_BY_CODE = " ORDER BY {" + OrderModel.CODE + "},{" + OrderModel.CREATIONTIME
@@ -87,16 +89,27 @@ public class DefaultAmwayApacCustomerAccountDao extends DefaultAmwayCustomerAcco
 		final Map<String, Object> queryParams = new HashMap<String, Object>();
 		queryParams.put("customer", customerModel);
 		queryParams.put("store", store);
-		queryParams.put("startDate", Optional.ofNullable(datefrom).map(LocalDate::toString).orElse(null));
-		queryParams.put("endDate", Optional.ofNullable(dateto).map(d -> d.plusDays(1).toString()).orElse(null));
+
+		final java.util.Date dateFrom = java.util.Date.from(datefrom.atStartOfDay(java.time.ZoneId.systemDefault()).toInstant());
+		final java.util.Date dateTo = java.util.Date.from(dateto.atStartOfDay(java.time.ZoneId.systemDefault()).toInstant());
+
+		queryParams.put("startDate", dateFrom);
+		queryParams.put("endDate", dateTo);
+
+		validateParameters(queryParams);
 
 		final List<SortQueryData> sortQueries;
 		sortQueries = Arrays.asList(
-				createSortQueryData("byDate", createQuery(FIND_ORDERS_BY_CUSTOMER_STORE_QUERY, null, SORT_ORDERS_BY_DATE)),
-				createSortQueryData("byOrderNumber", createQuery(FIND_ORDERS_BY_CUSTOMER_STORE_QUERY, null, SORT_ORDERS_BY_CODE)));
+				createSortQueryData("byDate", createQuery(FIND_ORDERS_BY_CUSTOMER_STORE_QUERY, "", SORT_ORDERS_BY_DATE)),
+				createSortQueryData("byOrderNumber", createQuery(FIND_ORDERS_BY_CUSTOMER_STORE_QUERY, "", SORT_ORDERS_BY_CODE)));
 
 
 		return getPagedFlexibleSearchService().search(sortQueries, "byDate", queryParams, pageableData);
+	}
+
+	private void validateParameters(final Map<String, Object> parameters)
+	{
+		parameters.forEach(ServicesUtil::validateParameterNotNullStandardMessage);
 	}
 
 }
