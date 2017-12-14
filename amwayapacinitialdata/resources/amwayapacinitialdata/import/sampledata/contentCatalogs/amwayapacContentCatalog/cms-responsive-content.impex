@@ -1039,6 +1039,12 @@ UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&compo
 INSERT_UPDATE RecentViewedItemsComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;
 ;;RecentViewedItemsComponent;RecentViewedItemsComponent;RecentViewedItemsComponent;
 
+
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(uid,$contentCV)
+;;RecentlyViewedProductsSlot;RecentViewedItemsComponent
+
+
 ###### Account Profile Information Page ######
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;

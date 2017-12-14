@@ -21,6 +21,7 @@ $lang=en
 
 # Create Categories
 UPDATE Category;code[unique=true];name[lang=$lang];$catalogVersion
+;root;"Categories"
 ;nutrition;"Nutrition"
 ;vitamins-and-supplements;"Vitamins & Supplements"
 ;bone-health;"Bone Health"
