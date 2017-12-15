@@ -226,5 +226,8 @@
     <bean id="defaultAmwayApacOrderHistoryPopulator" class="com.amway.apac.facades.populators.AmwayApacOrderHistoryPopulator" parent="defaultOrderHistoryPopulator" >
     		<property name="orderEntryConverter" ref="orderEntryConverter"/>
     </bean>
-	
+
+	<alias name="defaultAmwayApacCommerceSearchSolrQueryPopulator" alias="commerceSearchSolrQueryPopulator" />
+	<bean id="defaultAmwayApacCommerceSearchSolrQueryPopulator" class="com.amway.apac.facades.product.populators.AmwayApacSearchSolrQueryPopulator" parent="defaultCommerceSearchSolrQueryPopulator" />
+
 </beans>

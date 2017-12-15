@@ -33,4 +33,13 @@
 		<property name="add" ref="getRecentViewedItemsBeforeViewHandler"/>
 	</bean>
 
+	<alias name="defaultAmwayApacSolrProductSearchService" alias="amwayApacCommerceProductSearchService" />
+	<bean id="defaultAmwayApacSolrProductSearchService" class="com.amway.apac.recentlyvieweditemsaddon.services.impl.DefaultAmwayApacSolrProductSearchService" parent="defaultCommerceSolrProductSearchService">
+		<property name="searchQueryPageableConverter" ref="commerceSearchQueryPageableConverter" />
+		<property name="searchRequestConverter" ref="commerceSolrSearchRequestConverter" />
+		<property name="searchResponseConverter" ref="commerceSolrSearchResponseConverter" />
+		<property name="productCategorySearchPageConverter" ref="productCategorySearchPageConverter"/>
+		<property name="threadContextService" ref="threadContextService"/>
+	</bean>
+
 </beans>

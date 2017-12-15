@@ -5,18 +5,18 @@
 <%@ taglib prefix="format" tagdir="/WEB-INF/tags/shared/format" %>
 <%@ taglib prefix="product" tagdir="/WEB-INF/tags/desktop/product" %>
 <%@ taglib prefix="component" tagdir="/WEB-INF/tags/shared/component" %>
+<%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
 
 <div class="row product-recentlyviewed">
 	<div class="col-sm-12 column product-description__section">
 		<div class="product-title-container">
 			<h2 class="amway-learning__title">
-				<span class="mH">Your</span>Recently Viewed
-				<span class="mH">Items</span></h2>
+				<span class="mH"><spring:theme code="recentvieweditems.heading"/></span></h2>
 		</div>
 		<div class="product-recentlyviewed__imagelist" id="recentlyViewedListTab">
-		    <c:forEach items="${recentlyViewedProducts}" var="product">
+		    <c:forEach items="${recentlyViewedProducts.results}" var="product">
 		        <div>
-               	    <img class="product-recentlyviewed__img" src="images/vitamin-c.png" alt="${product}" />
+                    <img class="product-recentlyviewed__img" src="${product.images[0].url}" alt="${product.name}" />
                 </div>
 		    </c:forEach>
 		</div>

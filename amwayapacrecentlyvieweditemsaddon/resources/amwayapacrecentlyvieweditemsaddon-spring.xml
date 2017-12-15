@@ -41,4 +41,8 @@
 		<property name="extensionName" value="recentViewedItemsAddon" />
 	</bean>
 
+	<bean id="recentViewedItemsService" class="com.hybris.ymkt.recentvieweditemsservices.impl.DefaultRecentViewedItemsService">
+		<property name="sessionService" ref="sessionService"/>
+		<property name="maxRecentViewedItems" value="10"/>
+	</bean>
 </beans>

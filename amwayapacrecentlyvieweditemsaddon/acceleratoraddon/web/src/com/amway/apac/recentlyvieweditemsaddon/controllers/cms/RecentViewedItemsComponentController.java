@@ -2,6 +2,7 @@ package com.amway.apac.recentlyvieweditemsaddon.controllers.cms;
 
 import com.amway.apac.amwayapacrecentlyvieweditemsaddon.constants.AmwayapacrecentlyvieweditemsaddonConstants;
 import com.amway.apac.recentlyvieweditemsaddon.model.RecentViewedItemsComponentModel;
+import com.amway.apac.recentlyvieweditemsaddon.services.AmwayApacProductSearchService;
 import com.hybris.ymkt.recentvieweditemsservices.RecentViewedItemsService;
 import de.hybris.platform.addonsupport.controllers.cms.AbstractCMSAddOnComponentController;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,9 @@ public class RecentViewedItemsComponentController extends AbstractCMSAddOnCompon
     @Resource(name = "recentViewedItemsService")
     private RecentViewedItemsService recentViewedItemsService;
 
+    @Resource(name = "amwayApacCommerceProductSearchService")
+    private AmwayApacProductSearchService amwayApacProductSearchService;
+
     @Override
     protected String getAddonUiExtensionName(final RecentViewedItemsComponentModel component)
     {
@@ -29,6 +33,6 @@ public class RecentViewedItemsComponentController extends AbstractCMSAddOnCompon
 
     @Override
     protected void fillModel(HttpServletRequest request, Model model, RecentViewedItemsComponentModel component) {
-        model.addAttribute("recentlyViewedProducts", recentViewedItemsService.getRecentViewedProducts());
+        model.addAttribute("recentlyViewedProducts", amwayApacProductSearchService.productCodesSearch(String.format("code_string:(%s)", String.join(" ", recentViewedItemsService.getRecentViewedProducts())), null));
     }
 }
