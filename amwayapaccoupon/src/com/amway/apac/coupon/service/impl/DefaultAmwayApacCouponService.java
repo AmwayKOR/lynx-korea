@@ -20,7 +20,6 @@ import de.hybris.platform.servicelayer.util.ServicesUtil;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,55 +50,34 @@ public class DefaultAmwayApacCouponService extends DefaultCouponService implemen
 	 * {@inheritDoc}
 	 */
 	@Override
-	public AmwayCouponModel createAmwayCoupon(final String redeemableCouponCode, final Date startDate, final Date endDate,
-			final CMSSiteModel site, final CustomerModel customer)
+	public AmwayCouponModel createAmwayCoupon(final AbstractCouponModel couponModel, final Date startDate, final Date endDate,
+			final CMSSiteModel site, final CustomerModel customer, final AmwayAccountModel account)
 	{
+		ServicesUtil.validateParameterNotNull(couponModel, "Coupon should not be null!");
 		ServicesUtil.validateParameterNotNull(startDate, "coupon start date should not be null!");
 		ServicesUtil.validateParameterNotNull(endDate, "coupon end date should not be null!");
 		ServicesUtil.validateParameterNotNull(site, "site should not be null!");
-		ServicesUtil.validateParameterNotNull(customer, "customer should not be null!");
 
 		AmwayCouponModel amwayCouponModel = null;
-		final Optional<AbstractCouponModel> optionalAmwaycoupon = getCouponForCode(redeemableCouponCode);
-		if (optionalAmwaycoupon.isPresent())
+		if (null != customer || null != account)
 		{
-			amwayCouponModel = createAmwayCoupon(startDate, endDate, site, optionalAmwaycoupon.get());
-			amwayCouponModel.setCustomer(customer);
-			LOG.info(new StringBuilder("Created new  Amway-Coupon with redeemable coupon[").append(redeemableCouponCode)
-					.append("] for customer[").append(customer.getUid()).append("].").toString());
-		}
-		return amwayCouponModel;
-	}
+			amwayCouponModel = createAmwayCoupon(startDate, endDate, site, couponModel, customer, account);
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public AmwayCouponModel createAmwayCoupon(final String redeemableCouponCode, final Date startDate, final Date endDate,
-			final CMSSiteModel site, final AmwayAccountModel account)
-	{
-		ServicesUtil.validateParameterNotNull(startDate, "coupon start date should not be null!");
-		ServicesUtil.validateParameterNotNull(endDate, "coupon end date should not be null!");
-		ServicesUtil.validateParameterNotNull(site, "site should not be null!");
-		ServicesUtil.validateParameterNotNull(account, "Amway-account should not be null!");
-
-		AmwayCouponModel amwayCouponModel = null;
-		final Optional<AbstractCouponModel> optionalAmwaycoupon = getCouponForCode(redeemableCouponCode);
-		if (optionalAmwaycoupon.isPresent())
-		{
-			amwayCouponModel = createAmwayCoupon(startDate, endDate, site, optionalAmwaycoupon.get());
-			amwayCouponModel.setAccount(account);
-			LOG.info(new StringBuilder("Created new  Amway-Coupon with redeemable coupon[").append(redeemableCouponCode)
-					.append("] for account[").append(account.getCode()).append("].").toString());
+			LOG.info(new StringBuilder("Created new  Amway-Coupon with redeemable coupon[").append(couponModel.getCouponId())
+					.append("] for customer[").append((null != customer ? customer.getUid() : account.getCode())).append("].")
+					.toString());
 		}
 		return amwayCouponModel;
 	}
 
 	/**
 	 * Creates and initializes AmwayCoupon.
+	 *
+	 * @param customer
+	 * @param account
 	 */
 	private AmwayCouponModel createAmwayCoupon(final Date startDate, final Date endDate, final CMSSiteModel site,
-			final AbstractCouponModel coupon)
+			final AbstractCouponModel coupon, final CustomerModel customer, final AmwayAccountModel account)
 	{
 		final AmwayCouponModel counponModel = getModelService().create(AmwayCouponModel.class);
 
@@ -107,6 +85,8 @@ public class DefaultAmwayApacCouponService extends DefaultCouponService implemen
 		counponModel.setSite(site);
 		counponModel.setStartDate(startDate);
 		counponModel.setEndDate(endDate);
+		counponModel.setCustomer(customer);
+		counponModel.setAccount(account);
 		return counponModel;
 	}
 
