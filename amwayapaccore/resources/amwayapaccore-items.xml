@@ -39,7 +39,7 @@
 				</attributes>
 			</itemtype>
 		</typegroup>
-		
+
 		<!-- Type groups for BackOrder -->
 		<typegroup name="backOrder">
 			<itemtype code="AmwayBackOrder" generate="true" autocreate="true"
@@ -95,7 +95,7 @@
 				</attributes>
 			</itemtype>
 		</typegroup>
-		
+
 		<typegroup name="stocks">
 			<itemtype code="StockLevel" generate="false" autocreate="false">
 				<description>Extending the StockLevel type from core with additional attributes.</description>
@@ -109,20 +109,19 @@
 			</itemtype>
 		</typegroup>
 
-		<typegroup name="Consignment">
-			<itemtype code="ConsignmentProcess" autocreate="false"
-				generate="false">
+		<typegroup name="BaseStore">
+			<itemtype code="BaseStore" autocreate="false" generate="false">
+				<description>Extending BaseStore type with additional attributes.</description>
 				<attributes>
-					<attribute qualifier="retryCount" type="java.lang.Integer">
-						<description>Retry count</description>
-						<modifiers read="true" write="true" optional="true" />
+					<attribute type="java.lang.Integer" qualifier="backOrderFulfillmentPeriod">
+						<description>Specifies the number of days for fulfillment of back order.</description>
 						<persistence type="property" />
+						<modifiers optional="true" />
+						<defaultvalue>Integer.valueOf(0)</defaultvalue>
 					</attribute>
 				</attributes>
 			</itemtype>
 		</typegroup>
-
-
 
 	</itemtypes>
 </items>

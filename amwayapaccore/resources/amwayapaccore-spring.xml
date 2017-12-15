@@ -121,7 +121,8 @@
 	<bean id="defaultAmwayApacConsignmentService"
 		class="com.amway.apac.core.order.consignment.service.impl.DefaultAmwayApacConsignmentService"
 		parent="defaultAmwayConsignmentService">
-		<property name="consignmentBusinessProcessService" ref="consignmentBusinessProcessService" />
+		<property name="businessProcessService" ref="businessProcessService" />
+		<property name="modelService" ref="modelService" />
 	</bean>
 
 	<!-- Sales quote process actions -->
@@ -254,16 +255,17 @@
 		class="com.amway.apac.core.backorder.dao.impl.DefaultAmwayApacBackOrderDao">
 		<property name="flexibleSearchService" ref="flexibleSearchService" />
 	</bean>
-	
+
 	<bean id="amwayApacBackOrderReleaseSelectionStrategy"
 		class="com.amway.apac.core.backorder.strategies.impl.DefaultAmwayApacBackOrderReleaseSelectionStrategy">
 		<property name="amwayApacBackOrderDao" ref="amwayApacBackOrderDao" />
 	</bean>
-	
+
 	<bean id="amwayApacBackOrderService"
 		class="com.amway.apac.core.backorder.service.impl.DefaultAmwayApacBackOrderService">
 		<property name="businessProcessService" ref="businessProcessService" />
 		<property name="stockService" ref="stockService" />
-		<property name="amwayApacBackOrderReleaseSelectionStrategy" ref="amwayApacBackOrderReleaseSelectionStrategy" />
+		<property name="amwayApacBackOrderReleaseSelectionStrategy"
+			ref="amwayApacBackOrderReleaseSelectionStrategy" />
 	</bean>
 </beans>
