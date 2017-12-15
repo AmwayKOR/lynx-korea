@@ -7,7 +7,7 @@ import de.hybris.platform.ordersplitting.model.StockLevelModel;
 
 import java.util.List;
 
-import com.amway.core.model.AmwayBackOrderModel;
+import com.amway.apac.core.model.AmwayBackOrderModel;
 
 
 /**
