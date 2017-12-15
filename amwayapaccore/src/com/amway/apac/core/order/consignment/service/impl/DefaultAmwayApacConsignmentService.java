@@ -35,7 +35,7 @@ public class DefaultAmwayApacConsignmentService extends DefaultAmwayConsignmentS
 	private BusinessProcessService businessProcessService;
 	private ModelService modelService;
 
-	private final char prefixCode = 'a';
+	private static final char PREFIX_CODE = 'a';
 
 	/**
 	 * {@inheritDoc}
@@ -56,7 +56,7 @@ public class DefaultAmwayApacConsignmentService extends DefaultAmwayConsignmentS
 			if (entry.getDispositionCode().equals(InStockStatus.BACKORDER))
 			{
 				final ConsignmentModel consignment = createConsignment(order,
-						prefixCode + order.getCode() + '_' + index.getAndIncrement(), Arrays.asList(entry));
+						PREFIX_CODE + order.getCode() + '_' + index.getAndIncrement(), Arrays.asList(entry));
 				if (consignment != null)
 				{
 					final ConsignmentProcessModel consignmentProcess = businessProcessService.createProcess(consignment.getCode(),
@@ -91,7 +91,7 @@ public class DefaultAmwayApacConsignmentService extends DefaultAmwayConsignmentS
 	{
 		if (CollectionUtils.isNotEmpty(remainingEntries))
 		{
-			allConsignments.add(createConsignment(order, prefixCode + order.getCode(), remainingEntries));
+			allConsignments.add(createConsignment(order, PREFIX_CODE + order.getCode(), remainingEntries));
 		}
 	}
 
