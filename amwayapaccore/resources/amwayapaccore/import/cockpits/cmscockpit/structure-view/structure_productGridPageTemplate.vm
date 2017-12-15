@@ -7,20 +7,39 @@
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2" height="125px" width="35%" rowspan="2" class="structureViewSection">
+				<td colspan="2" rowspan="1" class="structureViewSection">
 					<cockpit code="SiteLogo" />
 				</td>
-				<td colspan="2" class="structureViewSection">
-					<cockpit code="HeaderLinks" />
+				<td colspan="2" rowspan="1" class="structureViewSection">
+					<cockpit code="CountrySelector" />
 				</td>
-				<td colspan="2" width="20%" class="structureViewSection">
+				<td colspan="1" rowspan="1" class="structureViewSection">
+					<cockpit code="HeaderAccountNavigation" />
+				</td>
+				<td colspan="1" rowspan="1" class="structureViewSection">
 					<cockpit code="MiniCart" />
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" rowspan="1" class="structureViewSection">
+					<cockpit code="MobileSiteLogo" />
+				</td>
+				<td colspan="2" rowspan="1" class="structureViewSection">
+					<cockpit code="MobileCountrySelector" />
+				</td>
+				<td colspan="2" rowspan="1" class="structureViewSection">
 					<cockpit code="MobileMiniCart" />
 				</td>
 			</tr>
 			<tr>
-				<td colspan="6" class="structureViewSection">
+				<td  colspan="2" rowspan="1" class="structureViewSection">
 					<cockpit code="NavigationBar" />
+				</td>
+				<td  colspan="2" rowspan="1" class="structureViewSection">
+					<cockpit code="MobileNavigationBar" />
+				</td>
+				<td  colspan="2" rowspan="1" class="structureViewSection">
+					<cockpit code="SearchBox" />
 				</td>
 			</tr>
 			<tr>
@@ -28,6 +47,11 @@
 					<cockpit code="BottomHeaderSlot"/>
 				</td>
 			</tr>
+			<tr>
+                <td colspan="6" class="structureViewSection" height="40px">
+                        <cockpit code="BreadCrumb"/>
+                </td>
+        	</tr>
 			<tr>
 				<td colspan="6" class="structureViewSection">
 					<cockpit code="Section1" />

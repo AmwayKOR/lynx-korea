@@ -14,6 +14,10 @@
 	<c:set var="isUserAbo" value="true" />
 </sec:authorize>
 
+<cms:pageSlot position="TopHeaderSlot" var="component" element="div" class="container">
+	<cms:component component="${component}" />
+</cms:pageSlot>
+
 <header class="js-mainHeader main-header general-header <c:if test="${loginError}">userinfo-open</c:if>">
 	<div class="amway-theme">
 		<nav class="header-container">
@@ -48,6 +52,10 @@
 </header>
 <common:globalMessages />
 <common:globalMessagesTemplates />
+
+<cms:pageSlot position="BottomHeaderSlot" var="component" element="div"	class="container-fluid">
+	<cms:component component="${component}" />
+</cms:pageSlot>
 <cms:pageSlot position="BreadCrumb" var="component">
 	<cms:component component="${component}" />
 </cms:pageSlot>
