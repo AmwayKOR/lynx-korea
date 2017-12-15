@@ -14,7 +14,9 @@
                    <div class="form-container">
                            <div class="mailing-address">
                            	   <span class="primary-text mailing-address__title">Shipping address</span>
-                                <span class="secondary-text mailing-address__line-one">${fn:escapeXml(address.line1)}&nbsp;<c:if test="${not empty fn:escapeXml(address.line2)}">${fn:escapeXml(address.line2)}</c:if></span>
+                                <span class="secondary-text mailing-address__line-one">${fn:escapeXml(address.line1)}&nbsp;</span>
+                                <span class="secondary-text mailing-address__line-two"><c:if test="${not empty fn:escapeXml(address.line2)}">${fn:escapeXml(address.line2)}</c:if></span>
+							    <span class="secondary-text mailing-address__line-three"><c:if test="${not empty fn:escapeXml(address.line3)}">${fn:escapeXml(address.line3)}</c:if></span>
                                 <span class="secondary-text mailing-address__city">${fn:escapeXml(address.town)}</span>
                                 <div>
                                     ${fn:escapeXml(address.region.name)}
@@ -59,7 +61,10 @@
                 			<div class="form-container">
                     				  <div class="mailing-address">
                     				  	  <span class="primary-text mailing-address__title">Shipping address</span>
-                               <span class="secondary-text mailing-address__line-one">${fn:escapeXml(address.line1)}&nbsp;<c:if test="${not empty fn:escapeXml(address.line2)}">${fn:escapeXml(address.line2)}</c:if></span>
+                               <span class="secondary-text mailing-address__line-one">${fn:escapeXml(address.line1)}&nbsp;</span>
+                               
+                                <span class="secondary-text mailing-address__line-two"><c:if test="${not empty fn:escapeXml(address.line2)}">${fn:escapeXml(address.line2)}</c:if></span>
+							    <span class="secondary-text mailing-address__line-three"><c:if test="${not empty fn:escapeXml(address.line3)}">${fn:escapeXml(address.line3)}</c:if></span>
                                <span class="secondary-text mailing-address__city">${fn:escapeXml(address.town)}</span>
                                <div>
                                    ${fn:escapeXml(address.region.name)}

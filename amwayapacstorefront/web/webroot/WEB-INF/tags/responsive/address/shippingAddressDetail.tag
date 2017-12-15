@@ -5,9 +5,9 @@
 <%@ attribute name="addressData" required="false" type="de.hybris.platform.commercefacades.user.data.AddressData" %>
 
 <span class="primary-text mailing-address__title">Shipping address</span>
-<span class="secondary-text mailing-address__line-one">${fn:escapeXml(addressData.line1)}&nbsp;<c:if
-		test="${not empty fn:escapeXml(addressData.line2)}">${fn:escapeXml(addressData.line2)}</c:if>
-</span>
+<span class="secondary-text mailing-address__line-one">${fn:escapeXml(addressData.line1)}</span>
+<span class="secondary-text mailing-address__line-two"><c:if test="${not empty fn:escapeXml(addressData.line2)}">${fn:escapeXml(addressData.line2)}</c:if></span>
+<span class="secondary-text mailing-address__line-three"><c:if test="${not empty fn:escapeXml(addressData.line3)}">${fn:escapeXml(addressData.line3)}</c:if></span>
 <span class="secondary-text mailing-address__city">${fn:escapeXml(addressData.town)}</span>
 <div>${fn:escapeXml(addressData.region.name)}</div>
 <span class="secondary-text mailing-address__zip">${fn:escapeXml(addressData.postalCode)}</span>

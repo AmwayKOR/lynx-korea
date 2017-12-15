@@ -12,8 +12,6 @@
 
 <c:choose>
 	<c:when test="${country == 'ID'}">
-		<form:hidden path="firstName" value="${user.firstName}"/>
-		<form:hidden path="lastName" value="${user.lastName}"/>
 			
 		<formElement:formInputBox idKey="address.line1" labelKey="address.line1" path="line1" inputCSS="form-control" mandatory="true" />
     		<formElement:formInputBox idKey="address.line2" labelKey="address.line2" path="line2" inputCSS="form-control" mandatory="true"/>
@@ -23,8 +21,6 @@
      	
 	</c:when>
 	<c:otherwise>
-		<form:hidden path="firstName" value="${user.firstName}"/>
-		<form:hidden path="lastName" value="${user.lastName}"/>
 		
 		<formElement:formInputBox idKey="address.line1" labelKey="address.line1" path="line1" inputCSS="form-control" mandatory="true" />
     		<formElement:formInputBox idKey="address.line2" labelKey="address.line2" path="line2" inputCSS="form-control" mandatory="true"/>
