@@ -54,19 +54,22 @@ ACC.productdetail = {
    		 },
 	
 	bindAddToCart: function() {
-	            	 $(document).on("click", '#addToLIST', function(event) {
+	            	 $(document).on("click", '.addToList, #addToList', function(event) {
 	            		 if($(".cart-detail__dropdown-menu.dropdown-menu.shopping-list-popup-wrapper").css('display')=='none'){
 		                  event.preventDefault();
 		                  var button = $(this);
 		                  var productcode= button.data("productCode");
-		                  $.ajax({
+		                  var childelement = button.parent().children(".cart-detail__dropdown-menu.dropdown-menu.shopping-list-popup-wrapper");
+		                  console.log(childelement.length);
+		                  $.ajax({ 
 		       				url: button.data("addToShoppingListUrl"),
 		       				type: "GET",
 		       				success: function(data) 
 		       				{
-		       					$(".cart-detail__dropdown-menu.dropdown-menu.shopping-list-popup-wrapper").html(data);
+		       			
+		       					childelement.html(data);
 		       					$(".js-populated-product-code").val(productcode);
-		       			     	$(".cart-detail__dropdown-menu.dropdown-menu.shopping-list-popup-wrapper").show();
+		       					childelement.show();
 		       			        ACC.productdetail.bindAddToShoppingListForm();
 		       			     	
 		       			    },

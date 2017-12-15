@@ -9,7 +9,6 @@
 <%@ taglib prefix="common" tagdir="/WEB-INF/tags/responsive/common"%>
 
 <c:url var="addNewListToShoppingListUrl" value="/shopping-lists/all" />
-<
 <common:globalMessages />
 <c:if test="${not empty modification}">
 	<div class="page-content">

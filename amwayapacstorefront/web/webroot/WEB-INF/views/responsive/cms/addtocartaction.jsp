@@ -48,7 +48,7 @@
 	<div class="row add-to-cart-extra-actions col-xs-12 col-sm-12 col-md-12 js-add-to-actions-wrapper">
 		<div class="add-button-wrap add-to-shopping-list-container new-add-to-shopping-list-container">
 			<c:url var="addToShoppingListUrl" value="/shopping-lists/data/all" />
-			<button type="button" class="btn btn-link btn-block js-add-list-shopping-button acc" data-product-code="${productCode}" data-add-to-shopping-list-url="${addToShoppingListUrl}" id="addToLIST">
+			<button type="button" class="btn btn-link btn-block js-add-list-shopping-button acc addToList" data-product-code="${productCode}" data-add-to-shopping-list-url="${addToShoppingListUrl}">
 				<span class="icon-add-shopping-list"></span>
 				<span class="shopping-list-button-text">Add To Shopping List</span>
 			</button>

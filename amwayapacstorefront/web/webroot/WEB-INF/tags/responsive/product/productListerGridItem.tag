@@ -84,16 +84,24 @@
 								</a>
 							</c:when>
 							<c:otherwise>
+
 								<form action="${addToCartUrl}" method="post" class="add_to_cart_form">
 									<input type="hidden" name="productCodePost" value="${product.code}" />
-									<button class="btn-blue-white btn-primary" type="submit"
-										<c:if test="${product.stock.stockLevelStatus.code eq 'outOfStock'}">disabled="disabled"</c:if>>
-										<spring:theme code="plp.producttile.addtocart" />
-									</button>
+									
+										<button class="btn-blue-white btn-primary" type="submit"  
+											<c:if test="${product.stock.stockLevelStatus.code eq 'outOfStock'}">disabled="disabled"</c:if>>
+											
+											<spring:theme code="plp.producttile.addtocart" />
+										</button>
+									
 								</form>
-								<a class="product-list__item-link-text product-list__item-link-common col-xs-12 col-md-12" href="#">
+								<c:url var="addToShoppingListUrl" value="/shopping-lists/data/all" />
+								<a class="addToList product-list__item-link-text product-list__item-link-common col-xs-12 col-md-12" href="#"
+									data-add-to-shopping-list-url="${addToShoppingListUrl}" data-product-code="${product.code}">
 									<spring:theme code="plp.producttile.shoppinglist" />
 								</a>
+								<div class="cart-detail__dropdown-menu dropdown-menu shopping-list-popup-wrapper plp-add-to-shopping-list-popup" role="menu">
+								</div>
 							</c:otherwise>
 						</c:choose>
 					</sec:authorize>
