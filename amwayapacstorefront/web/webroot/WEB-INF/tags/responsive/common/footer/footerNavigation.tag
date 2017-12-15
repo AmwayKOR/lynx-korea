@@ -12,7 +12,7 @@
 			<c:forEach items="${node.children}" var="childnode" varStatus="loop">
 				<li class="quick-links-item col-sm-3 panel">
 					<h5 class="quick-links-header">
-						<cms:component component="${childnode.nodeLink}" />
+						${childnode.nodeLink.linkName}
 					</h5>
 					<ul id="quick-links-collapse1" class="panel-collapse collapse">
 						<c:forEach items="${childnode.links}" varStatus="i" var="childlink">

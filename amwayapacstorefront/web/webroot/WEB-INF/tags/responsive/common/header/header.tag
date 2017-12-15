@@ -14,7 +14,7 @@
 	<c:set var="isUserAbo" value="true" />
 </sec:authorize>
 
-<cms:pageSlot position="TopHeaderSlot" var="component" element="div" class="container">
+<cms:pageSlot position="TopHeaderSlot" var="component">
 	<cms:component component="${component}" />
 </cms:pageSlot>
 
@@ -53,7 +53,7 @@
 <common:globalMessages />
 <common:globalMessagesTemplates />
 
-<cms:pageSlot position="BottomHeaderSlot" var="component" element="div"	class="container-fluid">
+<cms:pageSlot position="BottomHeaderSlot" var="component">
 	<cms:component component="${component}" />
 </cms:pageSlot>
 <cms:pageSlot position="BreadCrumb" var="component">
