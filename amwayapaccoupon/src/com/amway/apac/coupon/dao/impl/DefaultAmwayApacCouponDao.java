@@ -50,9 +50,7 @@ public class DefaultAmwayApacCouponDao implements AmwayApacCouponDao
 		final Map<String, Object> parameters = new HashMap<>();
 		parameters.put("code", couponCode);
 		final List<AmwayCouponModel> amwayCouponModels = amwayCouponGenericDao.find(parameters);
-		ServicesUtil.validateIfSingleResult(amwayCouponModels, "No coupon with given code [" + couponCode + "] was found",
-				"More than one coupon with given code [" + couponCode + "] was found");
-		return amwayCouponModels.iterator().next();
+		return CollectionUtils.isNotEmpty(amwayCouponModels) ? amwayCouponModels.get(0) : null;
 	}
 
 	/**
@@ -91,24 +89,19 @@ public class DefaultAmwayApacCouponDao implements AmwayApacCouponDao
 	{
 		final String accountRestriction = " Where ({coupon." + AmwayCouponModel.ACCOUNT + "} = ?amwayAccount OR {coupon."
 				+ AmwayCouponModel.CUSTOMER + "}=?customer)";
-
 		selectAmwayCouponQuery.append(accountRestriction);
-
 		params.put("amwayAccount", amwayAccountModel);
 		params.put("customer", customer);
-
 		if (CollectionUtils.isNotEmpty(couponStatuses))
 		{
 			final String statusRestriction = " AND {coupon.status} IN (?statuses)";
 			selectAmwayCouponQuery.append(statusRestriction);
 			params.put("statuses", couponStatuses);
 		}
-
 		if (filterByDate)
-
 		{
-			final String dateRestriction = " AND {coupon." + AmwayCouponModel.STARTDATE + " } <= CURDATE() AND { coupon. "
-					+ AmwayCouponModel.ENDDATE + "} > CURDATE()";
+			final String dateRestriction = " AND NOW() BETWEEN {coupon." + AmwayCouponModel.STARTDATE + " } AND { coupon. "
+					+ AmwayCouponModel.ENDDATE + "}";
 			selectAmwayCouponQuery.append(dateRestriction);
 		}
 	}
