@@ -1036,13 +1036,13 @@ UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&compo
 ;;MobileMiniCartSlot;AmwayApacMobileMiniCartComponent
 
 # CMS Recently Viewed Products Components
-INSERT_UPDATE RecentViewedItemsComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;
-;;RecentViewedItemsComponent;RecentViewedItemsComponent;RecentViewedItemsComponent;
+INSERT_UPDATE AmwayApacRecentViewedItemsComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;
+;;AmwayApacRecentViewedItemsComponent;AmwayApacRecentViewedItemsComponent;AmwayApacRecentViewedItemsComponent;
 
 
 # ContentSlot
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(uid,$contentCV)
-;;RecentlyViewedProductsSlot;RecentViewedItemsComponent
+;;RecentlyViewedProductsSlot;AmwayApacRecentViewedItemsComponent
 
 
 ###### Account Profile Information Page ######

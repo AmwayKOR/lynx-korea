@@ -17,7 +17,7 @@
 			xsi:noNamespaceSchemaLocation="items.xsd">
 
 	<itemtypes>
-		<itemtype code="RecentViewedItemsComponent" generate="true" jaloclass="com.amway.apac.recentlyvieweditemsaddon.jalo.RecentViewedItemsComponent"
+		<itemtype code="AmwayApacRecentViewedItemsComponent" generate="true" jaloclass="com.amway.apac.recentlyvieweditemsaddon.jalo.AmwayApacRecentViewedItemsComponent"
 				  extends="SimpleCMSComponent" autocreate="true">
 			<description>It represent recently viewed products component</description>
 		</itemtype>

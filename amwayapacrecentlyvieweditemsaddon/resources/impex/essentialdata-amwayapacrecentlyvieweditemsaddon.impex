@@ -9,6 +9,6 @@
 # license agreement you entered into with SAP.
 # -----------------------------------------------------------------------
 INSERT_UPDATE ComponentTypeGroups2ComponentType;source(code)[unique=true];target(code)[unique=true]
-;wide;RecentViewedItemsComponent
-;narrow;RecentViewedItemsComponent
-;mobile;RecentViewedItemsComponent
+;wide;AmwayApacRecentViewedItemsComponent
+;narrow;AmwayApacRecentViewedItemsComponent
+;mobile;AmwayApacRecentViewedItemsComponent

@@ -138,7 +138,7 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 ;AddToCart;;ProductAddToCartComponent;narrow
 ;CrossSelling;;ProductReferencesComponent;narrow
 ;UpSelling;;ProductReferencesComponent;narrow
-;RecentlyViewedProducts;;RecentViewedItemsComponent;narrow
+;RecentlyViewedProducts;;AmwayApacRecentViewedItemsComponent;narrow
 ;Footer;;;footer
 ;Tabs;;CMSTabParagraphContainer
 ;TopHeaderSlot;;;wide
