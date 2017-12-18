@@ -7,21 +7,16 @@ import de.hybris.platform.ordersplitting.model.ConsignmentModel;
 import de.hybris.platform.ordersplitting.model.ConsignmentProcessModel;
 import de.hybris.platform.ordersplitting.model.StockLevelModel;
 import de.hybris.platform.processengine.BusinessProcessService;
-import de.hybris.platform.stock.StockService;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.amway.apac.core.backorder.service.AmwayApacBackOrderService;
-import com.amway.apac.core.backorder.strategies.AmwayApacBackOrderReleaseSelectionStrategy;
 import com.amway.apac.core.model.AmwayBackOrderModel;
 
 
@@ -39,53 +34,24 @@ public class DefaultAmwayApacBackOrderService implements AmwayApacBackOrderServi
 
 	private BusinessProcessService businessProcessService;
 
-	private StockService stockService;
-
-	private AmwayApacBackOrderReleaseSelectionStrategy amwayApacBackOrderReleaseSelectionStrategy;
 
 	/**
-	 * {@inheritDoc} #release(List)}
+	 * {@inheritDoc}
 	 */
 	@Override
-	public void release(final List<StockLevelModel> stockLevels)
+	public void releaseBackOrders(final List<AmwayBackOrderModel> amwayBackOrders, final StockLevelModel stockLevel)
 	{
-		//If stockLevels are empty or null than all AmwayBackOrders will be returned.
-		final List<AmwayBackOrderModel> backOrders = getAmwayApacBackOrderReleaseSelectionStrategy().getBackOrders(stockLevels);
-		if (CollectionUtils.isNotEmpty(backOrders))
+		if (CollectionUtils.isNotEmpty(amwayBackOrders) && Objects.nonNull(stockLevel))
 		{
-			//Grouping the AmwayBackOrders as per the stockLevels for stock calculation
-			final Map<StockLevelModel, List<AmwayBackOrderModel>> result = backOrders.stream().collect(
-					Collectors.groupingBy(backOrder -> getStockLevel(backOrder), Collectors.toList()));
-			for (final Entry<StockLevelModel, List<AmwayBackOrderModel>> entry : result.entrySet())
+			for (final AmwayBackOrderModel amwayBackOrder : amwayBackOrders)
 			{
-				final StockLevelModel stockLevel = entry.getKey();
-				for (final AmwayBackOrderModel amwayBackOrder : entry.getValue())
-				{
-					if (Objects.nonNull(stockLevel))
-					{
-						//TODO checking the stock level
-						//Trigger consignment process
-						triggerConsignmentProcess(amwayBackOrder.getConsignment());
-					}
-				}
+				//TODO checking the stock level vikrant
+				//Trigger consignment process
+				triggerConsignmentProcess(amwayBackOrder.getConsignment());
 			}
 		}
 	}
 
-	/**
-	 * Used to get Stocklevel for AmwayBackOrder product and warehouse
-	 *
-	 * @param backOrder
-	 * @return StockLevelModel
-	 */
-	private StockLevelModel getStockLevel(final AmwayBackOrderModel backOrder)
-	{
-		if (Objects.nonNull(backOrder))
-		{
-			return getStockService().getStockLevel(backOrder.getProduct(), backOrder.getWarehouse());
-		}
-		return null;
-	}
 
 	/**
 	 * Used to trigger Consignment process wait node
@@ -150,42 +116,7 @@ public class DefaultAmwayApacBackOrderService implements AmwayApacBackOrderServi
 		this.businessProcessService = businessProcessService;
 	}
 
-	/**
-	 * @return the amwayApacBackOrderReleaseSelectionStrategy
-	 */
-	public AmwayApacBackOrderReleaseSelectionStrategy getAmwayApacBackOrderReleaseSelectionStrategy()
-	{
-		return amwayApacBackOrderReleaseSelectionStrategy;
-	}
 
-	/**
-	 * @param amwayApacBackOrderReleaseSelectionStrategy
-	 *           the amwayApacBackOrderReleaseSelectionStrategy to set
-	 */
-	@Required
-	public void setAmwayApacBackOrderReleaseSelectionStrategy(
-			final AmwayApacBackOrderReleaseSelectionStrategy amwayApacBackOrderReleaseSelectionStrategy)
-	{
-		this.amwayApacBackOrderReleaseSelectionStrategy = amwayApacBackOrderReleaseSelectionStrategy;
-	}
-
-	/**
-	 * @return the stockService
-	 */
-	public StockService getStockService()
-	{
-		return stockService;
-	}
-
-	/**
-	 * @param stockService
-	 *           the stockService to set
-	 */
-	@Required
-	public void setStockService(final StockService stockService)
-	{
-		this.stockService = stockService;
-	}
 
 
 }

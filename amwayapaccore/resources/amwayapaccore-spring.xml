@@ -256,16 +256,13 @@
 		<property name="flexibleSearchService" ref="flexibleSearchService" />
 	</bean>
 
-	<bean id="amwayApacBackOrderReleaseSelectionStrategy"
-		class="com.amway.apac.core.backorder.strategies.impl.DefaultAmwayApacBackOrderReleaseSelectionStrategy">
+	<bean id="amwayApacBackOrderSelectionStrategy"
+		class="com.amway.apac.core.backorder.strategies.impl.DefaultAmwayApacBackOrderSelectionStrategy">
 		<property name="amwayApacBackOrderDao" ref="amwayApacBackOrderDao" />
 	</bean>
 
 	<bean id="amwayApacBackOrderService"
 		class="com.amway.apac.core.backorder.service.impl.DefaultAmwayApacBackOrderService">
 		<property name="businessProcessService" ref="businessProcessService" />
-		<property name="stockService" ref="stockService" />
-		<property name="amwayApacBackOrderReleaseSelectionStrategy"
-			ref="amwayApacBackOrderReleaseSelectionStrategy" />
 	</bean>
 </beans>

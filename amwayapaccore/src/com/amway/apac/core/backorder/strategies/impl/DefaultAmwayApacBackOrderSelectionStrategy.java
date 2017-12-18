@@ -6,14 +6,16 @@ package com.amway.apac.core.backorder.strategies.impl;
 import de.hybris.platform.ordersplitting.model.StockLevelModel;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.amway.apac.core.backorder.dao.AmwayApacBackOrderDao;
-import com.amway.apac.core.backorder.strategies.AmwayApacBackOrderReleaseSelectionStrategy;
+import com.amway.apac.core.backorder.strategies.AmwayApacBackOrderSelectionStrategy;
 import com.amway.apac.core.enums.AmwayBackOrderStatus;
 import com.amway.apac.core.model.AmwayBackOrderModel;
 
@@ -23,41 +25,53 @@ import com.amway.apac.core.model.AmwayBackOrderModel;
  *
  * @author ankushbhatia
  */
-public class DefaultAmwayApacBackOrderReleaseSelectionStrategy implements AmwayApacBackOrderReleaseSelectionStrategy
+public class DefaultAmwayApacBackOrderSelectionStrategy implements AmwayApacBackOrderSelectionStrategy
 {
-	private static final Logger LOG = Logger.getLogger(DefaultAmwayApacBackOrderReleaseSelectionStrategy.class);
+	private static final Logger LOG = Logger.getLogger(DefaultAmwayApacBackOrderSelectionStrategy.class);
 
 	private AmwayApacBackOrderDao amwayApacBackOrderDao;
 
 	/**
-	 * {@link #getBackOrders(List)}
+	 * {@inheritDoc}
 	 */
 	@Override
-	public List<AmwayBackOrderModel> getBackOrders(final List<StockLevelModel> stockLevels)
+	public Map<StockLevelModel, List<AmwayBackOrderModel>> getBackOrdersForRelease(final List<StockLevelModel> stockLevels)
 	{
-		try
+		if (CollectionUtils.isNotEmpty(stockLevels))
 		{
-			if (CollectionUtils.isEmpty(stockLevels))
+			try
 			{
-				return getAmwayApacBackOrderDao().getBackOrders(AmwayBackOrderStatus.ACTIVE, null, null, true);
-			}
-			else
-			{
-				final List<AmwayBackOrderModel> amwayBackOrdersListToRelease = new ArrayList<AmwayBackOrderModel>();
+				final Map<StockLevelModel, List<AmwayBackOrderModel>> amwayBackOrdersMap = new HashMap<StockLevelModel, List<AmwayBackOrderModel>>();
 				for (final StockLevelModel stockLevel : stockLevels)
 				{
 					final List<AmwayBackOrderModel> amwayBackOrdersList = getAmwayApacBackOrderDao().getBackOrders(
 							AmwayBackOrderStatus.ACTIVE, stockLevel.getWarehouse(), stockLevel.getProduct(), true);
-					amwayBackOrdersListToRelease.addAll(amwayBackOrdersList);
+					//Verify the payment of backOrders
+					validatePaymentAndUpdateList(amwayBackOrdersList);
+					amwayBackOrdersMap.put(stockLevel, amwayBackOrdersList);
+
 				}
-				return amwayBackOrdersListToRelease;
+				return amwayBackOrdersMap;
+
+			}
+			catch (final Exception e)
+			{
+				logDebugInfo(e, "Failed to fetch Amway Back Orders ");
 			}
 		}
-		catch (final Exception e)
-		{
-			logDebugInfo(e, "Failed to fetch Amway Back Orders ");
-		}
 		return null;
+	}
+
+	/**
+	 * Validate payment for Amway backOrders
+	 *
+	 * @param amwayBackOrdersList
+	 */
+	private List<AmwayBackOrderModel> validatePaymentAndUpdateList(final List<AmwayBackOrderModel> amwayBackOrdersList)
+	{
+		final List<AmwayBackOrderModel> amwayBackOrdersNewList = new ArrayList<AmwayBackOrderModel>();
+		//TODO payment Check
+		return amwayBackOrdersNewList;
 	}
 
 	/**
