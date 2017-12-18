@@ -7,7 +7,9 @@ import de.hybris.platform.ordersplitting.model.StockLevelModel;
 
 import java.util.List;
 
-import com.amway.core.model.AmwayBackOrderModel;
+import com.amway.apac.core.model.AmwayBackOrderModel;
+
+
 
 
 /**
@@ -26,5 +28,7 @@ public interface AmwayApacBackOrderReleaseSelectionStrategy
 	 * @return List<AmwayBackOrderModel>
 	 */
 	public List<AmwayBackOrderModel> getBackOrders(final List<StockLevelModel> stockLevels);
+
+	public List<AmwayBackOrderModel> getBackOrdersForExpiring(final String status, final Date date);
 
 }

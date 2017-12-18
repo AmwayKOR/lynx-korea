@@ -3,10 +3,12 @@
  */
 package com.amway.apac.core.backorder.service.impl;
 
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.ordersplitting.model.ConsignmentModel;
 import de.hybris.platform.ordersplitting.model.ConsignmentProcessModel;
 import de.hybris.platform.ordersplitting.model.StockLevelModel;
 import de.hybris.platform.processengine.BusinessProcessService;
+import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.stock.StockService;
 
 import java.util.Iterator;
@@ -22,7 +24,8 @@ import org.springframework.beans.factory.annotation.Required;
 
 import com.amway.apac.core.backorder.service.AmwayApacBackOrderService;
 import com.amway.apac.core.backorder.strategies.AmwayApacBackOrderReleaseSelectionStrategy;
-import com.amway.core.model.AmwayBackOrderModel;
+import com.amway.apac.core.model.AmwayBackOrderModel;
+
 
 
 /**
@@ -40,6 +43,7 @@ public class DefaultAmwayApacBackOrderService implements AmwayApacBackOrderServi
 	private BusinessProcessService businessProcessService;
 
 	private StockService stockService;
+	private ModelService modelService;
 
 	private AmwayApacBackOrderReleaseSelectionStrategy amwayApacBackOrderReleaseSelectionStrategy;
 
@@ -47,15 +51,16 @@ public class DefaultAmwayApacBackOrderService implements AmwayApacBackOrderServi
 	 * {@inheritDoc} #release(List)}
 	 */
 	@Override
-	public void release(final List<StockLevelModel> stockLevels)
+	public Boolean release(final List<StockLevelModel> stockLevels)
 	{
+		boolean backorderReleased = false;
 		//If stockLevels are empty or null than all AmwayBackOrders will be returned.
 		final List<AmwayBackOrderModel> backOrders = getAmwayApacBackOrderReleaseSelectionStrategy().getBackOrders(stockLevels);
 		if (CollectionUtils.isNotEmpty(backOrders))
 		{
 			//Grouping the AmwayBackOrders as per the stockLevels for stock calculation
-			final Map<StockLevelModel, List<AmwayBackOrderModel>> result = backOrders.stream().collect(
-					Collectors.groupingBy(backOrder -> getStockLevel(backOrder), Collectors.toList()));
+			final Map<StockLevelModel, List<AmwayBackOrderModel>> result = backOrders.stream()
+					.collect(Collectors.groupingBy(backOrder -> getStockLevel(backOrder), Collectors.toList()));
 			for (final Entry<StockLevelModel, List<AmwayBackOrderModel>> entry : result.entrySet())
 			{
 				final StockLevelModel stockLevel = entry.getKey();
@@ -63,13 +68,14 @@ public class DefaultAmwayApacBackOrderService implements AmwayApacBackOrderServi
 				{
 					if (Objects.nonNull(stockLevel))
 					{
-						//TODO checking the stock level
-						//Trigger consignment process
 						triggerConsignmentProcess(amwayBackOrder.getConsignment());
+						backorderReleased = true;
 					}
 				}
 			}
 		}
+		return backorderReleased;
+
 	}
 
 	/**
@@ -185,6 +191,26 @@ public class DefaultAmwayApacBackOrderService implements AmwayApacBackOrderServi
 	public void setStockService(final StockService stockService)
 	{
 		this.stockService = stockService;
+	}
+
+	@Override
+	public Boolean expireBackOrder(final String status, final Date date, List<AmwayBackOrderModel> backOrders)
+	{
+		boolean backorderReleased = false;
+
+		if (CollectionUtils.isNotEmpty(backOrders))
+		{
+			for (final AmwayBackOrderModel amwayBackOrder : entry.getValue())
+			{
+				amwayBackOrder.setStatus(AmwayBackOrderStatus.valueOf(status));
+				modelService.save(amwayBackOrder);
+				modelService.refresh(amwayBackOrder);
+
+			}
+
+		}
+
+
 	}
 
 

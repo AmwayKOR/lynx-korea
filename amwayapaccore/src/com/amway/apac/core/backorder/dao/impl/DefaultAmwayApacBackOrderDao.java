@@ -21,7 +21,8 @@ import org.springframework.beans.factory.annotation.Required;
 
 import com.amway.apac.core.backorder.dao.AmwayApacBackOrderDao;
 import com.amway.apac.core.enums.AmwayBackOrderStatus;
-import com.amway.core.model.AmwayBackOrderModel;
+import com.amway.apac.core.model.AmwayBackOrderModel;
+
 
 
 /**
@@ -39,6 +40,10 @@ public class DefaultAmwayApacBackOrderDao implements AmwayApacBackOrderDao
 			.append(AmwayBackOrderModel.PK).append("} FROM {").append(AmwayBackOrderModel._TYPECODE)
 			.append("as BO join AmwayBackOrderStatus as BOS on {BO.status}={BOS.pk}} WHERE {BOS.code} =? ")
 			.append(AmwayBackOrderModel.STATUS).toString().intern();
+	private static final String DEFAULT_EXPIRED_BACKORDER_FETCH_QUERY = "SELECT {ABO:pk} from {amwaybackorder as ABO join amwaybackorderstatus as BS on {ABO:status}={BS:pk}} where {BS:code}=?statusCode and {ABO:releasebydate}<?date";
+
+	private static final String STATUS_CODE = "statusCode";
+	private static final Date DATE = "date";
 
 
 	/**
@@ -108,6 +113,27 @@ public class DefaultAmwayApacBackOrderDao implements AmwayApacBackOrderDao
 	public void setFlexibleSearchService(final FlexibleSearchService flexibleSearchService)
 	{
 		this.flexibleSearchService = flexibleSearchService;
+	}
+
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see com.amway.apac.core.backorder.dao.AmwayApacBackOrderDao#getBackOrdersForExpiring()
+	 */
+	@Override
+	public List<AmwayBackOrderModel> getBackOrdersForExpiring(final String status, final Date date)
+	{
+		validateParameterNotNull(status, "AmwayBackOrderStatus must not be null!");
+		final Map queryParams = new HashMap();
+		queryParams.put(STATUS_CODE, status);
+		queryParams.put(DATE, date);
+		final FlexibleSearchQuery flexQuery = new FlexibleSearchQuery(DEFAULT_EXPIRED_BACKORDER_FETCH_QUERY);
+		query.addQueryParameters(queryParams);
+		final SearchResult<AmwayBackOrderModel> result = getFlexibleSearchService().search(flexQuery);
+		//log info in debug before returning
+		logDebugInfo(flexQuery.toString(), result.getResult());
+		return result.getResult();
 	}
 
 }

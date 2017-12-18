@@ -15,7 +15,9 @@ import org.springframework.beans.factory.annotation.Required;
 import com.amway.apac.core.backorder.dao.AmwayApacBackOrderDao;
 import com.amway.apac.core.backorder.strategies.AmwayApacBackOrderReleaseSelectionStrategy;
 import com.amway.apac.core.enums.AmwayBackOrderStatus;
-import com.amway.core.model.AmwayBackOrderModel;
+import com.amway.apac.core.model.AmwayBackOrderModel;
+
+
 
 
 /**
@@ -46,8 +48,8 @@ public class DefaultAmwayApacBackOrderReleaseSelectionStrategy implements AmwayA
 				final List<AmwayBackOrderModel> amwayBackOrdersListToRelease = new ArrayList<AmwayBackOrderModel>();
 				for (final StockLevelModel stockLevel : stockLevels)
 				{
-					final List<AmwayBackOrderModel> amwayBackOrdersList = getAmwayApacBackOrderDao().getBackOrders(
-							AmwayBackOrderStatus.ACTIVE, stockLevel.getWarehouse(), stockLevel.getProduct(), true);
+					final List<AmwayBackOrderModel> amwayBackOrdersList = getAmwayApacBackOrderDao()
+							.getBackOrders(AmwayBackOrderStatus.ACTIVE, stockLevel.getWarehouse(), stockLevel.getProduct(), true);
 					amwayBackOrdersListToRelease.addAll(amwayBackOrdersList);
 				}
 				return amwayBackOrdersListToRelease;
@@ -90,6 +92,19 @@ public class DefaultAmwayApacBackOrderReleaseSelectionStrategy implements AmwayA
 	public void setAmwayApacBackOrderDao(final AmwayApacBackOrderDao amwayApacBackOrderDao)
 	{
 		this.amwayApacBackOrderDao = amwayApacBackOrderDao;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see
+	 * com.amway.apac.core.backorder.strategies.AmwayApacBackOrderReleaseSelectionStrategy#getBackOrdersForExpiring()
+	 */
+	@Override
+	public List<AmwayBackOrderModel> getBackOrdersForExpiring(final String status, final Date date)
+	{
+		final List<AmwayBackOrderModel> amwayBackOrdersList = getAmwayApacBackOrderDao().getBackOrdersForExpiring(status, date);
+		return amwayBackOrdersList;
 	}
 
 

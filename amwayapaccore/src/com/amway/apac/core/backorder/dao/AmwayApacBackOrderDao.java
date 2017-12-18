@@ -9,7 +9,8 @@ import de.hybris.platform.ordersplitting.model.WarehouseModel;
 import java.util.List;
 
 import com.amway.apac.core.enums.AmwayBackOrderStatus;
-import com.amway.core.model.AmwayBackOrderModel;
+import com.amway.apac.core.model.AmwayBackOrderModel;
+
 
 
 /**
@@ -32,5 +33,5 @@ public interface AmwayApacBackOrderDao
 	List<AmwayBackOrderModel> getBackOrders(AmwayBackOrderStatus status, WarehouseModel warehouse, ProductModel product,
 			boolean isAscending);
 
-
+	List<AmwayBackOrderModel> getBackOrdersForExpiring(final String status, final Date date);
 }

@@ -23,6 +23,8 @@ public interface AmwayApacBackOrderService
 	 *
 	 * @param stockLevels
 	 */
-	void release(List<StockLevelModel> stockLevels);
+	Boolean release(List<StockLevelModel> stockLevels);
+
+	Boolean expireBackOrder();
 
 }
