@@ -20,6 +20,9 @@ public class AmwayApacCommerceAvailabilityCalculationStrategy extends Warehousin
 {
 	/**
 	 * This method is overridden as the ATP formula per base store is not supported for now
+	 *
+	 * @param stockLevels
+	 *           - The collection of stocks for which the availability is being evaluated
 	 */
 	@Override
 	public Long calculateAvailability(final Collection<StockLevelModel> stockLevels)
@@ -76,7 +79,9 @@ public class AmwayApacCommerceAvailabilityCalculationStrategy extends Warehousin
 
 	/**
 	 * @param stockLevel
+	 *           - The stock level model
 	 * @param eventClass
+	 *           - The inventory event class
 	 * @return quantity of that inventory event in stock level
 	 */
 	private int getInventoryEventQuantity(final StockLevelModel stockLevel, final Class<? extends InventoryEventModel> eventClass)

@@ -8,7 +8,9 @@ import de.hybris.platform.core.model.order.AbstractOrderEntryModel;
 import de.hybris.platform.core.model.order.AbstractOrderModel;
 import de.hybris.platform.ordersplitting.ConsignmentCreationException;
 import de.hybris.platform.ordersplitting.model.ConsignmentModel;
-import de.hybris.platform.warehousing.process.WarehousingBusinessProcessService;
+import de.hybris.platform.ordersplitting.model.ConsignmentProcessModel;
+import de.hybris.platform.processengine.BusinessProcessService;
+import de.hybris.platform.servicelayer.model.ModelService;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,6 +18,8 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Required;
 
 import com.amway.apac.core.order.consignment.service.AmwayApacConsignmentService;
 import com.amway.core.order.consignment.service.impl.DefaultAmwayConsignmentService;
@@ -26,9 +30,12 @@ import com.amway.core.order.consignment.service.impl.DefaultAmwayConsignmentServ
  */
 public class DefaultAmwayApacConsignmentService extends DefaultAmwayConsignmentService implements AmwayApacConsignmentService
 {
+	private static final Logger LOG = Logger.getLogger(DefaultAmwayApacConsignmentService.class);
 
-	private WarehousingBusinessProcessService<ConsignmentModel> consignmentBusinessProcessService;
+	private BusinessProcessService businessProcessService;
+	private ModelService modelService;
 
+	private static final char PREFIX_CODE = 'a';
 
 	/**
 	 * {@inheritDoc}
@@ -48,11 +55,18 @@ public class DefaultAmwayApacConsignmentService extends DefaultAmwayConsignmentS
 		{
 			if (entry.getDispositionCode().equals(InStockStatus.BACKORDER))
 			{
-				final char prefixCode = 'a';
 				final ConsignmentModel consignment = createConsignment(order,
-						prefixCode + order.getCode() + '_' + index.getAndIncrement(), Arrays.asList(entry));
-				consignmentBusinessProcessService.startProcess(consignment.getCode(), "consignment-process");
-				allConsignments.add(consignment);
+						PREFIX_CODE + order.getCode() + '_' + index.getAndIncrement(), Arrays.asList(entry));
+				if (consignment != null)
+				{
+					final ConsignmentProcessModel consignmentProcess = businessProcessService.createProcess(consignment.getCode(),
+							"consignment-backorder-process");
+					LOG.info(String.format("Created consignment with code : [%s] for order with code : [%s] ", consignment.getCode(),
+							consignment.getOrder().getCode()));
+					consignmentProcess.setConsignment(consignment);
+					getModelService().save(consignmentProcess);
+					businessProcessService.startProcess(consignmentProcess);
+				}
 			}
 			else
 			{
@@ -77,18 +91,34 @@ public class DefaultAmwayApacConsignmentService extends DefaultAmwayConsignmentS
 	{
 		if (CollectionUtils.isNotEmpty(remainingEntries))
 		{
-			allConsignments.add(createConsignment(order, 'a' + order.getCode(), remainingEntries));
+			allConsignments.add(createConsignment(order, PREFIX_CODE + order.getCode(), remainingEntries));
 		}
 	}
 
 	/**
-	 * @param consignmentBusinessProcessService
-	 *           the consignmentBusinessProcessService to set
+	 * @param businessProcessService
+	 *           the businessProcessService to set
 	 */
-	public void setConsignmentBusinessProcessService(
-			final WarehousingBusinessProcessService<ConsignmentModel> consignmentBusinessProcessService)
+	@Required
+	public void setBusinessProcessService(final BusinessProcessService businessProcessService)
 	{
-		this.consignmentBusinessProcessService = consignmentBusinessProcessService;
+		this.businessProcessService = businessProcessService;
+	}
+
+	/**
+	 * @param modelService
+	 *           the modelService to set
+	 */
+	@Required
+	@Override
+	public void setModelService(final ModelService modelService)
+	{
+		this.modelService = modelService;
+	}
+
+	protected ModelService getModelService()
+	{
+		return modelService;
 	}
 
 }

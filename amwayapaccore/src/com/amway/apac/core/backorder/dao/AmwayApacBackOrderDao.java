@@ -8,7 +8,7 @@ import de.hybris.platform.ordersplitting.model.WarehouseModel;
 
 import java.util.List;
 
-import com.amway.apac.core.enums.AmwayBackOrderStatus;
+import com.amway.apac.core.constants.GeneratedAmwayapacCoreConstants.Enumerations.AmwayBackOrderStatus;
 import com.amway.apac.core.model.AmwayBackOrderModel;
 
 
