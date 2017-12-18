@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Required;
 
 import com.amway.apac.core.backorder.dao.AmwayApacBackOrderDao;
 import com.amway.apac.core.backorder.strategies.AmwayApacBackOrderSelectionStrategy;
-import com.amway.apac.core.enums.AmwayBackOrderStatus;
+import com.amway.apac.core.constants.GeneratedAmwayapacCoreConstants.Enumerations.AmwayBackOrderStatus;
 import com.amway.apac.core.model.AmwayBackOrderModel;
 
 
@@ -44,8 +44,8 @@ public class DefaultAmwayApacBackOrderSelectionStrategy implements AmwayApacBack
 				final Map<StockLevelModel, List<AmwayBackOrderModel>> amwayBackOrdersMap = new HashMap<StockLevelModel, List<AmwayBackOrderModel>>();
 				for (final StockLevelModel stockLevel : stockLevels)
 				{
-					final List<AmwayBackOrderModel> amwayBackOrdersList = getAmwayApacBackOrderDao().getBackOrders(
-							AmwayBackOrderStatus.ACTIVE, stockLevel.getWarehouse(), stockLevel.getProduct(), true);
+					final List<AmwayBackOrderModel> amwayBackOrdersList = getAmwayApacBackOrderDao()
+							.getBackOrders(AmwayBackOrderStatus.ACTIVE, stockLevel.getWarehouse(), stockLevel.getProduct(), true);
 					//Verify the payment of backOrders
 					validatePaymentAndUpdateList(amwayBackOrdersList);
 					amwayBackOrdersMap.put(stockLevel, amwayBackOrdersList);
@@ -106,5 +106,11 @@ public class DefaultAmwayApacBackOrderSelectionStrategy implements AmwayApacBack
 		this.amwayApacBackOrderDao = amwayApacBackOrderDao;
 	}
 
+	@Override
+	public List<AmwayBackOrderModel> getBackOrdersForExpiring(final String status, final Date date)
+	{
+		final List<AmwayBackOrderModel> amwayBackOrdersList = getAmwayApacBackOrderDao().getBackOrdersForExpiring(status, date);
+		return amwayBackOrdersList;
+	}
 
 }

@@ -22,10 +22,13 @@ public interface AmwayApacBackOrderSelectionStrategy
 
 	/**
 	 * Select AmwayBackOrders for release based upon stockLevel
-	 * 
+	 *
 	 * @param stockLevels
 	 * @return Map<StockLevelModel,List<AmwayBackOrderModel>
 	 */
 	public Map<StockLevelModel, List<AmwayBackOrderModel>> getBackOrdersForRelease(final List<StockLevelModel> stockLevels);
+
+	public List<AmwayBackOrderModel> getBackOrdersForExpiring(final String status, final Date date);
+
 
 }
