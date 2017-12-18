@@ -1,7 +1,8 @@
 package com.amway.apac.recentlyvieweditemsaddon.controllers.cms;
 
 import com.amway.apac.amwayapacrecentlyvieweditemsaddon.constants.AmwayapacrecentlyvieweditemsaddonConstants;
-import com.amway.apac.recentlyvieweditemsaddon.model.RecentViewedItemsComponentModel;
+import com.amway.apac.recentlyvieweditemsaddon.model.AmwayApacRecentViewedItemsComponentModel;
+import com.amway.apac.recentlyvieweditemsaddon.model.AmwayApacRecentViewedItemsComponentModel;
 import com.amway.apac.recentlyvieweditemsaddon.services.AmwayApacProductSearchService;
 import com.hybris.ymkt.recentvieweditemsservices.RecentViewedItemsService;
 import de.hybris.platform.addonsupport.controllers.cms.AbstractCMSAddOnComponentController;
@@ -15,9 +16,9 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * Created by Govind on 12/8/2017.
  */
-@Controller("RecentViewedItemsComponentController")
-@RequestMapping(value = "/view/RecentViewedItemsComponentController")
-public class RecentViewedItemsComponentController extends AbstractCMSAddOnComponentController<RecentViewedItemsComponentModel> {
+@Controller("AmwayApacRecentViewedItemsComponentController")
+@RequestMapping(value = "/view/AmwayApacRecentViewedItemsComponentController")
+public class AmwayApacRecentViewedItemsComponentController extends AbstractCMSAddOnComponentController<AmwayApacRecentViewedItemsComponentModel> {
 
     @Resource(name = "recentViewedItemsService")
     private RecentViewedItemsService recentViewedItemsService;
@@ -26,13 +27,13 @@ public class RecentViewedItemsComponentController extends AbstractCMSAddOnCompon
     private AmwayApacProductSearchService amwayApacProductSearchService;
 
     @Override
-    protected String getAddonUiExtensionName(final RecentViewedItemsComponentModel component)
+    protected String getAddonUiExtensionName(final AmwayApacRecentViewedItemsComponentModel component)
     {
         return AmwayapacrecentlyvieweditemsaddonConstants.EXTENSIONNAME;
     }
 
     @Override
-    protected void fillModel(HttpServletRequest request, Model model, RecentViewedItemsComponentModel component) {
+    protected void fillModel(HttpServletRequest request, Model model, AmwayApacRecentViewedItemsComponentModel component) {
         model.addAttribute("recentlyViewedProducts", amwayApacProductSearchService.productCodesSearch(String.format("code_string:(%s)", String.join(" ", recentViewedItemsService.getRecentViewedProducts())), null));
     }
 }

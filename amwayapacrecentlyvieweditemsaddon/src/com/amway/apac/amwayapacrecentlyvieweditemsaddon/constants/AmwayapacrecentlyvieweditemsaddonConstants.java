@@ -20,7 +20,7 @@ public final class AmwayapacrecentlyvieweditemsaddonConstants
 
 	public static class TC
 	{
-		public static final String RECENTVIEWEDITEMSCOMPONENT = "RecentViewedItemsComponent".intern();
+		public static final String AMWAYAPACRECENTVIEWEDITEMSCOMPONENT = "RecentViewedItemsComponent".intern();
 	}
 
 	private AmwayapacrecentlyvieweditemsaddonConstants()
