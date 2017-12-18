@@ -264,5 +264,6 @@
 	<bean id="amwayApacBackOrderService"
 		class="com.amway.apac.core.backorder.service.impl.DefaultAmwayApacBackOrderService">
 		<property name="businessProcessService" ref="businessProcessService" />
+		<property name="amwayApacBackOrderSelectionStrategy" ref="amwayApacBackOrderSelectionStrategy" />
 	</bean>
 </beans>

@@ -21,11 +21,18 @@ public interface AmwayApacBackOrderService
 {
 
 	/**
-	 * This method is used to release AmwayBackOrders on the bases of stockLevel Passed
+	 * This method is used to release AmwayBackOrders on the bases of stockLevel and backOrder Passed
 	 *
 	 * @param amwayBackOrders
 	 * @param stockLevel
 	 */
 	void releaseBackOrders(List<AmwayBackOrderModel> amwayBackOrders, StockLevelModel stockLevel);
+
+	/**
+	 * This method is used to release AmwayBackOrders on the bases of list of stockLevels
+	 *
+	 * @param stockLevels
+	 */
+	void releaseBackOrdersForStocks(List<StockLevelModel> stockLevels);
 
 }

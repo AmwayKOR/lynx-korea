@@ -10,6 +10,8 @@ import de.hybris.platform.processengine.BusinessProcessService;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Objects;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -17,6 +19,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.amway.apac.core.backorder.service.AmwayApacBackOrderService;
+import com.amway.apac.core.backorder.strategies.AmwayApacBackOrderSelectionStrategy;
 import com.amway.apac.core.model.AmwayBackOrderModel;
 
 
@@ -34,6 +37,7 @@ public class DefaultAmwayApacBackOrderService implements AmwayApacBackOrderServi
 
 	private BusinessProcessService businessProcessService;
 
+	private AmwayApacBackOrderSelectionStrategy amwayApacBackOrderSelectionStrategy;
 
 	/**
 	 * {@inheritDoc}
@@ -51,6 +55,26 @@ public class DefaultAmwayApacBackOrderService implements AmwayApacBackOrderServi
 			}
 		}
 	}
+
+
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void releaseBackOrdersForStocks(final List<StockLevelModel> stockLevels)
+	{
+		final Map<StockLevelModel, List<AmwayBackOrderModel>> backOrderMap = getAmwayApacBackOrderSelectionStrategy()
+				.getBackOrdersForRelease(stockLevels);
+		for (final Entry<StockLevelModel, List<AmwayBackOrderModel>> entry : backOrderMap.entrySet())
+		{
+			//release all the backOrders for particular stocks
+			releaseBackOrders(entry.getValue(), entry.getKey());
+		}
+
+	}
+
+
 
 
 	/**
@@ -116,7 +140,22 @@ public class DefaultAmwayApacBackOrderService implements AmwayApacBackOrderServi
 		this.businessProcessService = businessProcessService;
 	}
 
+	/**
+	 * @return the amwayApacBackOrderSelectionStrategy
+	 */
+	public AmwayApacBackOrderSelectionStrategy getAmwayApacBackOrderSelectionStrategy()
+	{
+		return amwayApacBackOrderSelectionStrategy;
+	}
 
-
-
+	/**
+	 * @param amwayApacBackOrderSelectionStrategy
+	 *           the amwayApacBackOrderSelectionStrategy to set
+	 */
+	@Required
+	public void setAmwayApacBackOrderSelectionStrategy(
+			final AmwayApacBackOrderSelectionStrategy amwayApacBackOrderSelectionStrategy)
+	{
+		this.amwayApacBackOrderSelectionStrategy = amwayApacBackOrderSelectionStrategy;
+	}
 }
