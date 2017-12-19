@@ -22,18 +22,18 @@ import com.amway.core.stock.dao.AmwayStockLevelDao;
 
 
 /**
- * 
+ *
  * Default Implementaion
- * 
+ *
  */
 public class DefaultAmwayStockLevelDao extends DefaultStockLevelDao implements AmwayStockLevelDao
 {
 	private static final Logger LOG = Logger.getLogger(DefaultAmwayStockLevelDao.class);
-	private StockLevelColumns stockLevelColumns = null;
-	private TypeService typeService;
-	private TransactionTemplate transactionTemplate;
-	private JdbcTemplate jdbcTemplate;
-	private StockLevelDao stockLevelDao;
+	protected StockLevelColumns stockLevelColumns = null;
+	protected TypeService typeService;
+	protected TransactionTemplate transactionTemplate;
+	protected JdbcTemplate jdbcTemplate;
+	protected StockLevelDao stockLevelDao;
 
 	/**
 	 * @param typeService
@@ -69,7 +69,7 @@ public class DefaultAmwayStockLevelDao extends DefaultStockLevelDao implements A
 	}
 
 	/**
-	 * 
+	 *
 	 * @return stockLevelDao
 	 */
 	public StockLevelDao getStockLevelDao()
@@ -78,7 +78,7 @@ public class DefaultAmwayStockLevelDao extends DefaultStockLevelDao implements A
 	}
 
 	/**
-	 * 
+	 *
 	 * @param stockLevelDao
 	 *           the stockLevelDao to set
 	 */
@@ -87,7 +87,7 @@ public class DefaultAmwayStockLevelDao extends DefaultStockLevelDao implements A
 		this.stockLevelDao = stockLevelDao;
 	}
 
-	private class StockLevelColumns
+	protected class StockLevelColumns
 	{
 		private final String tableName;
 		private final String pkCol;
@@ -102,9 +102,33 @@ public class DefaultAmwayStockLevelDao extends DefaultStockLevelDao implements A
 			this.reservedCol = typeService.getAttributeDescriptor(stockLevelType, "reserved").getDatabaseColumn();
 			this.availableCol = typeService.getAttributeDescriptor(stockLevelType, "available").getDatabaseColumn();
 		}
+
+		/**
+		 * @return the availableCol
+		 */
+		public String getAvailableCol()
+		{
+			return availableCol;
+		}
+
+		/**
+		 * @return the tableName
+		 */
+		public String getTableName()
+		{
+			return tableName;
+		}
+
+		/**
+		 * @return the pkCol
+		 */
+		public String getPkCol()
+		{
+			return pkCol;
+		}
 	}
 
-	private void prepareStockLevelColumns()
+	protected void prepareStockLevelColumns()
 	{
 		if (this.stockLevelColumns != null)
 		{
@@ -116,10 +140,10 @@ public class DefaultAmwayStockLevelDao extends DefaultStockLevelDao implements A
 	private String assembleReserveAndAvailableStockLevelUpdateQuery()
 	{
 		prepareStockLevelColumns();
-		final StringBuilder query = new StringBuilder("UPDATE " + this.stockLevelColumns.tableName);
+		final StringBuilder query = new StringBuilder("UPDATE " + this.stockLevelColumns.getTableName());
 		query.append(" SET " + this.stockLevelColumns.reservedCol + " = " + this.stockLevelColumns.reservedCol + " - ?");
-		query.append(" , " + this.stockLevelColumns.availableCol + " = " + this.stockLevelColumns.availableCol + " - ? ");
-		query.append(" WHERE " + this.stockLevelColumns.pkCol + "=?");
+		query.append(" , " + this.stockLevelColumns.getAvailableCol() + " = " + this.stockLevelColumns.getAvailableCol() + " - ? ");
+		query.append(" WHERE " + this.stockLevelColumns.getPkCol() + "=?");
 
 		return query.toString();
 	}
@@ -139,7 +163,7 @@ public class DefaultAmwayStockLevelDao extends DefaultStockLevelDao implements A
 	/**
 	 * Method to commit stock for stock level. Used once order is passed to OMS. This method updates Available Amount &
 	 * Reserved Amount.
-	 * 
+	 *
 	 * {@link #commit(de.hybris.platform.ordersplitting.model.StockLevelModel, int)}
 	 */
 	@Override
@@ -167,7 +191,7 @@ public class DefaultAmwayStockLevelDao extends DefaultStockLevelDao implements A
 		});
 	}
 
-	private int runJdbcQuery(final String query, final int amount, final StockLevelModel stockLevel)
+	protected int runJdbcQuery(final String query, final int amount, final StockLevelModel stockLevel)
 	{
 		final Integer _amount = Integer.valueOf(amount);
 		final Long _pk = Long.valueOf(stockLevel.getPk().getLongValue());
