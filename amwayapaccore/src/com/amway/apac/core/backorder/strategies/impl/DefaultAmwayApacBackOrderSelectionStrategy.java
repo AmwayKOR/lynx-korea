@@ -32,11 +32,8 @@ import com.amway.apac.core.model.AmwayBackOrderModel;
 public class DefaultAmwayApacBackOrderSelectionStrategy implements AmwayApacBackOrderSelectionStrategy
 {
 	private static final Logger LOG = Logger.getLogger(DefaultAmwayApacBackOrderSelectionStrategy.class);
-
 	private static final String ACTIVE = "ACTIVE";
-
 	private AmwayApacBackOrderDao amwayApacBackOrderDao;
-
 	private StockService stockService;
 
 	/**

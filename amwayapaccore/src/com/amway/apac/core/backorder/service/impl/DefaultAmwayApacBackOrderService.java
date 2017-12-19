@@ -12,7 +12,6 @@ import de.hybris.platform.ordersplitting.model.StockLevelModel;
 import de.hybris.platform.processengine.BusinessProcessService;
 import de.hybris.platform.processengine.enums.ProcessState;
 import de.hybris.platform.servicelayer.model.ModelService;
-import de.hybris.platform.stock.StockService;
 import de.hybris.platform.warehousing.inventoryevent.service.InventoryEventService;
 import de.hybris.platform.warehousing.model.AllocationEventModel;
 
@@ -37,7 +36,7 @@ import com.amway.apac.core.stock.strategies.impl.AmwayApacCommerceAvailabilityCa
 
 
 /**
- * Default implementation for AmwayApacBackOrderReleaseStrategy
+ * Default implementation for AmwayApacBackOrderService
  *
  * @author ankushbhatia
  *
@@ -48,16 +47,9 @@ public class DefaultAmwayApacBackOrderService implements AmwayApacBackOrderServi
 
 	private static final String BACK_ORDER_RELEASE_EVENT_CODE = "WaitForRelease";
 	private static final String CONSIGNMENT_BACKORDER_PROCESS = "consignment-backorder-process";
-
 	private static final String EXPIRED = "EXPIRED";
-
 	private BusinessProcessService businessProcessService;
-
-
-	private StockService stockService;
 	private ModelService modelService;
-
-
 	private AmwayApacBackOrderSelectionStrategy amwayApacBackOrderSelectionStrategy;
 	private AmwayApacCommerceAvailabilityCalculationStrategy commerceAvailabilityCalculationStrategy;
 	private InventoryEventService inventoryEventService;
@@ -86,9 +78,12 @@ public class DefaultAmwayApacBackOrderService implements AmwayApacBackOrderServi
 						{
 							final Collection<AllocationEventModel> allocationEvents = inventoryEventService
 									.getAllocationEventsForOrderEntry((OrderEntryModel) consignmentEntry.getOrderEntry());
-							requestedQty = allocationEvents.stream().filter(allocationEvent -> allocationEvent.getConsignmentEntry()
-									.getConsignment().equals(consignmentEntry.getConsignment()))
-									.mapToLong(AllocationEventModel::getQuantity).sum();
+							requestedQty = allocationEvents
+									.stream()
+									.filter(
+											allocationEvent -> allocationEvent.getConsignmentEntry().getConsignment()
+													.equals(consignmentEntry.getConsignment())).mapToLong(AllocationEventModel::getQuantity)
+									.sum();
 						}
 					}
 					if (requestedQty <= available.longValue() && requestedQty <= maxBoReleaseLimit)
@@ -127,9 +122,6 @@ public class DefaultAmwayApacBackOrderService implements AmwayApacBackOrderServi
 
 	}
 
-
-
-
 	/**
 	 * Used to trigger Consignment process wait node
 	 *
@@ -161,8 +153,32 @@ public class DefaultAmwayApacBackOrderService implements AmwayApacBackOrderServi
 				logDebugInfo(e, "BackOrder consignment process not triggered successfully for code : " + consignment.getCode());
 			}
 		}
-
 	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @param backOrders
+	 * @return Boolean The method iterates on the list of backorders which needs to set as expired and changes their
+	 *         status to expired.
+	 */
+	@Override
+	public Boolean expireBackOrder(final List<AmwayBackOrderModel> backOrders)
+	{
+		boolean backorderexpired = false;
+		if (CollectionUtils.isNotEmpty(backOrders))
+		{
+			for (final AmwayBackOrderModel amwayBackOrder : backOrders)
+			{
+				amwayBackOrder.setStatus(AmwayBackOrderStatus.valueOf(EXPIRED));
+				modelService.save(amwayBackOrder);
+				modelService.refresh(amwayBackOrder);
+				backorderexpired = true;
+			}
+		}
+		return backorderexpired;
+	}
+
 
 
 	/**
@@ -217,8 +233,6 @@ public class DefaultAmwayApacBackOrderService implements AmwayApacBackOrderServi
 	}
 
 	/**
-	 *
-	 *
 	 * @return the modelService
 	 */
 	public ModelService getModelService()
@@ -226,51 +240,19 @@ public class DefaultAmwayApacBackOrderService implements AmwayApacBackOrderServi
 		return modelService;
 	}
 
-
-
 	/**
 	 * @param modelService
 	 *           the modelService to set
 	 */
+	@Required
 	public void setModelService(final ModelService modelService)
 	{
 		this.modelService = modelService;
 	}
 
 	/**
-	 * {@inheritDoc}
-	 *
-	 * @param List<AmwayBackOrderModel>
-	 *           return Boolean The method iterates on the list of backorders which needs to set as expired and changes
-	 *           their status to expired.
+	 * @param commerceAvailabilityCalculationStrategy
 	 */
-	@Override
-	public Boolean expireBackOrder(final List<AmwayBackOrderModel> backOrders)
-	{
-		boolean backorderexpired = false;
-
-		if (CollectionUtils.isNotEmpty(backOrders))
-		{
-			for (final AmwayBackOrderModel amwayBackOrder : backOrders)
-			{
-				amwayBackOrder.setStatus(AmwayBackOrderStatus.valueOf(EXPIRED));
-				modelService.save(amwayBackOrder);
-				modelService.refresh(amwayBackOrder);
-				backorderexpired = true;
-
-			}
-
-		}
-
-		return backorderexpired;
-	}
-
-
-	/*
-	 * @param commerceAvailabilityCalculationStrategy the commerceAvailabilityCalculationStrategy to set
-	 *
-	 **/
-
 	@Required
 	public void setCommerceAvailabilityCalculationStrategy(
 			final AmwayApacCommerceAvailabilityCalculationStrategy commerceAvailabilityCalculationStrategy)

@@ -37,9 +37,8 @@ public class DefaultAmwayApacBackOrderDao implements AmwayApacBackOrderDao
 
 	private FlexibleSearchService flexibleSearchService;
 
-	private static final String DEFAULT_EXPIRED_BACKORDER_FETCH_QUERY = "SELECT {ABO:pk} from {amwaybackorder as ABO join amwaybackorderstatus as BS on {ABO:status}={BS:pk}} where {BS:code}=?statusCode and {ABO:releasebydate}<?date";
-	private static final String STATUS_CODE = "statusCode";
-	private static final String DATE = "date";
+	private static final String DEFAULT_BACKORDER_FETCH_QUERY = "SELECT {ABO:pk} from {amwaybackorder as ABO join amwaybackorderstatus as BS on {ABO:status}={BS:pk}} where {BS:code}=?status ";
+	private static final String RELEASE_BY_DATE = "releaseByDate";
 
 	/**
 	 * {@inheritDoc}
@@ -50,30 +49,25 @@ public class DefaultAmwayApacBackOrderDao implements AmwayApacBackOrderDao
 	{
 		validateParameterNotNull(status, "AmwayBackOrderStatus must not be null!");
 
-		final StringBuilder query = new StringBuilder();
-		query.append("SELECT {").append(AmwayBackOrderModel.PK).append("} FROM {").append(AmwayBackOrderModel._TYPECODE)
-				.append("as BO join AmwayBackOrderStatus as BOS on {BO.status}={BOS.pk}} WHERE {BOS.code} =? ")
-				.append(AmwayBackOrderModel.STATUS);
-
-		final Map<String, Object> params = new HashMap<>();
-		params.put(AmwayBackOrderModel.STATUS, status);
+		final StringBuilder query = new StringBuilder(DEFAULT_BACKORDER_FETCH_QUERY);
+		final Map<String, Object> queryParams = new HashMap<>();
+		queryParams.put(AmwayBackOrderModel.STATUS, status);
 		if (Objects.nonNull(warehouse))
 		{
 			query.append(" AND {").append(AmwayBackOrderModel.WAREHOUSE).append("} =? ").append(AmwayBackOrderModel.WAREHOUSE);
-			params.put(AmwayBackOrderModel.WAREHOUSE, warehouse);
+			queryParams.put(AmwayBackOrderModel.WAREHOUSE, warehouse);
 		}
 		if (Objects.nonNull(product))
 		{
 			query.append(" AND {").append(AmwayBackOrderModel.PRODUCT).append("} =? ").append(AmwayBackOrderModel.PRODUCT);
-			params.put(AmwayBackOrderModel.PRODUCT, product);
+			queryParams.put(AmwayBackOrderModel.PRODUCT, product);
 		}
 		if (isAscending)
 		{
-			query.append("ORDER BY {BO.creationtime} ASC");
+			query.append("ORDER BY {BO:creationtime} ASC");
 		}
-		final FlexibleSearchQuery flexQuery = new FlexibleSearchQuery(query.toString(), params);
+		final FlexibleSearchQuery flexQuery = new FlexibleSearchQuery(query.toString(), queryParams);
 		final SearchResult<AmwayBackOrderModel> result = getFlexibleSearchService().search(flexQuery);
-		//log info in debug before returning
 		logDebugInfo(query.toString(), result.getResult());
 		return result.getResult();
 	}
@@ -86,18 +80,18 @@ public class DefaultAmwayApacBackOrderDao implements AmwayApacBackOrderDao
 	{
 		validateParameterNotNull(status, "AmwayBackOrderStatus must not be null!");
 		final Map queryParams = new HashMap();
-		queryParams.put(STATUS_CODE, status);
-		queryParams.put(DATE, date);
-		final FlexibleSearchQuery flexQuery = new FlexibleSearchQuery(DEFAULT_EXPIRED_BACKORDER_FETCH_QUERY);
-		flexQuery.addQueryParameters(queryParams);
+		queryParams.put(AmwayBackOrderModel.STATUS, status);
+		queryParams.put(RELEASE_BY_DATE, date);
+		final StringBuilder query = new StringBuilder(DEFAULT_BACKORDER_FETCH_QUERY);
+		query.append(" and {ABO:releasebydate} < ?releaseByDate");
+		final FlexibleSearchQuery flexQuery = new FlexibleSearchQuery(query.toString(), queryParams);
 		final SearchResult<AmwayBackOrderModel> result = getFlexibleSearchService().search(flexQuery);
-		//log info in debug before returning
 		logDebugInfo(flexQuery.toString(), result.getResult());
 		return result.getResult();
 	}
 
 	/**
-	 * To print result in debug mode
+	 * To print result and query in debug mode
 	 *
 	 * @param query
 	 * @param backOrders
