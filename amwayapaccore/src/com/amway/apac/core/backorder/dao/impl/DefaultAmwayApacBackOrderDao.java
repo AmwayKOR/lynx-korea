@@ -117,10 +117,8 @@ public class DefaultAmwayApacBackOrderDao implements AmwayApacBackOrderDao
 	}
 
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see com.amway.apac.core.backorder.dao.AmwayApacBackOrderDao#getBackOrdersForExpiring()
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public List<AmwayBackOrderModel> getBackOrdersForExpiring(final String status, final Date date)

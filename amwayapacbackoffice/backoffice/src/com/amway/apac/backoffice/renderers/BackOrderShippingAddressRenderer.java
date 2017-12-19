@@ -9,17 +9,13 @@ import de.hybris.platform.ordersplitting.model.ConsignmentModel;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
-import org.zkoss.util.resource.Labels;
-import org.zkoss.zk.ui.Component;
-
-import com.amway.apac.backoffice.renderers.util.ApacAttributeWithLabelRendererUtil;
 import com.amway.apac.core.model.AmwayBackOrderModel;
 import com.hybris.cockpitng.core.config.impl.jaxb.editorarea.CustomSection;
 import com.hybris.cockpitng.core.model.WidgetModel;
-import com.hybris.cockpitng.dataaccess.facades.type.DataType;
 import com.hybris.cockpitng.engine.WidgetInstanceManager;
 import com.hybris.cockpitng.widgets.common.WidgetComponentRenderer;
+
+import jdk.nashorn.internal.ir.Labels;
 
 
 /**
@@ -29,12 +25,13 @@ public class BackOrderShippingAddressRenderer implements WidgetComponentRenderer
 {
 	private static final Logger LOG = Logger.getLogger(BackOrderDetailsRenderer.class);
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Renders ShippingAddress view for backorder in backoffice
 	 *
-	 * @see com.hybris.cockpitng.widgets.common.WidgetComponentRenderer#render(java.lang.Object, java.lang.Object,
-	 * java.lang.Object, com.hybris.cockpitng.dataaccess.facades.type.DataType,
-	 * com.hybris.cockpitng.engine.WidgetInstanceManager)
+	 * @param CustomSection
+	 * @param Component
+	 * @param Object
+	 * @param dataType
 	 */
 	@Override
 	public void render(final Component parent, final CustomSection configuration, final Object data, final DataType dataType,

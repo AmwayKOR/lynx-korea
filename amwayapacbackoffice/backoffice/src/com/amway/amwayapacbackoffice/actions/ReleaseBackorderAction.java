@@ -11,13 +11,13 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.zkoss.zul.Messagebox;
-import org.apache.log4j.Logger;
+
 import com.amway.apac.core.backorder.service.AmwayApacBackOrderService;
 import com.hybris.cockpitng.actions.ActionContext;
 import com.hybris.cockpitng.actions.ActionResult;
 import com.hybris.cockpitng.actions.CockpitAction;
 
-import org.zkoss.util.resource.Labels;
+import jdk.nashorn.internal.ir.Labels;
 
 
 /**
@@ -32,9 +32,14 @@ public class ReleaseBackorderAction implements CockpitAction<StockLevelModel, St
 	AmwayApacBackOrderService amwayApacBackOrderService;
 
 	/*
-	 * (non-Javadoc)
+	 * Perform method to be called upon from release backorder button in stock level from back office. Releases the
+	 * backorder associated with the selected stock levels.
 	 *
 	 * @see com.hybris.cockpitng.actions.CockpitAction#perform(com.hybris.cockpitng.actions.ActionContext)
+	 *
+	 * @param ActionContext<StockLevelModel>
+	 *
+	 * @return ActionResult<String>
 	 */
 	@Override
 	public ActionResult<String> perform(final ActionContext<StockLevelModel> ctx)

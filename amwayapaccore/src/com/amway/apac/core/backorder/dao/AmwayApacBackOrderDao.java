@@ -34,5 +34,12 @@ public interface AmwayApacBackOrderDao
 	List<AmwayBackOrderModel> getBackOrders(AmwayBackOrderStatus status, WarehouseModel warehouse, ProductModel product,
 			boolean isAscending);
 
+	/**
+	 * Find all the AmwayBackOrder for a particular status, older than provided date
+	 *
+	 * @param status
+	 * @param Date
+	 * @return List<AmwayBackOrderModel>
+	 */
 	List<AmwayBackOrderModel> getBackOrdersForExpiring(final String status, final Date date);
 }

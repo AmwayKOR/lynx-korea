@@ -109,6 +109,9 @@ public class DefaultAmwayApacBackOrderSelectionStrategy implements AmwayApacBack
 		this.amwayApacBackOrderDao = amwayApacBackOrderDao;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<AmwayBackOrderModel> getBackOrdersForExpiring(final String status, final Date date)
 	{

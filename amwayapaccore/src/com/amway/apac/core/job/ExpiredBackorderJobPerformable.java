@@ -21,6 +21,7 @@ import com.amway.apac.core.model.AmwayBackOrderModel;
 
 /**
  *
+ * Cron job class for setting the backorders as expired
  */
 public class ExpiredBackorderJobPerformable extends AbstractJobPerformable<CronJobModel>
 {
@@ -34,10 +35,11 @@ public class ExpiredBackorderJobPerformable extends AbstractJobPerformable<CronJ
 
 
 	/*
-	 * (non-Javadoc)
-	 *
+	 * (non-Javadoc) G
+	 * 
 	 * @see de.hybris.platform.servicelayer.cronjob.AbstractJobPerformable#perform(de.hybris.platform.cronjob.model.
-	 * CronJobModel)
+	 * CronJobModel) Get all the amway backorders which are active and their release by date is older than today. Then
+	 * set their status to expired.
 	 */
 	@Override
 	public PerformResult perform(final CronJobModel cronJob)

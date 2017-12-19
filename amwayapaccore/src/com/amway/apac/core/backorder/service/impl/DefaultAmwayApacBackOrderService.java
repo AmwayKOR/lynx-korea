@@ -237,7 +237,13 @@ public class DefaultAmwayApacBackOrderService implements AmwayApacBackOrderServi
 		this.modelService = modelService;
 	}
 
-
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @param List<AmwayBackOrderModel>
+	 *           return Boolean The method iterates on the list of backorders which needs to set as expired and changes
+	 *           their status to expired.
+	 */
 	@Override
 	public Boolean expireBackOrder(final List<AmwayBackOrderModel> backOrders)
 	{
@@ -262,7 +268,7 @@ public class DefaultAmwayApacBackOrderService implements AmwayApacBackOrderServi
 
 	/*
 	 * @param commerceAvailabilityCalculationStrategy the commerceAvailabilityCalculationStrategy to set
-	 * 
+	 *
 	 **/
 
 	@Required

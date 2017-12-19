@@ -33,11 +33,16 @@ public interface AmwayApacBackOrderService
 	 *
 	 * @param stockLevels
 	 */
+	void releaseBackOrdersForStocks(List<StockLevelModel> stockLevels);
 
-
+	/**
+	 * This method is used to Expire AmwayBackOrders on the bases of Date(current)
+	 *
+	 * @param List<AmwayBackOrderModel>
+	 */
 	Boolean expireBackOrder(List<AmwayBackOrderModel> backOrders);
 
-	void releaseBackOrdersForStocks(List<StockLevelModel> stockLevels);
+
 
 
 }

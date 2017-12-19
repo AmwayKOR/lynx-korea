@@ -13,13 +13,7 @@ import java.util.Map.Entry;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.exception.ExceptionUtils;
-import org.apache.log4j.Logger;
-import org.zkoss.util.resource.Labels;
-import org.zkoss.zk.ui.Component;
-import org.zkoss.zul.Cell;
-import org.zkoss.zul.Div;
 import org.zkoss.zul.Hbox;
-import org.zkoss.zul.Label;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listhead;
@@ -28,6 +22,10 @@ import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Textbox;
 
 import com.hybris.cockpitng.util.UITools;
+import com.sun.org.apache.xpath.internal.operations.Div;
+
+import javafx.scene.control.Cell;
+import jdk.nashorn.internal.ir.Labels;
 
 
 /**
@@ -49,7 +47,8 @@ public class ApacAttributeWithLabelRendererUtil
 	public static final String SCLASS_CELL_LABEL_CONTAINER = "yw-editorarea-label-container";
 
 	/**
-	 *
+	 * Create a text field with lable where the field is non editable
+	 * 
 	 * @param parent
 	 *           (Component)
 	 * @param labelWithAttributeValueMap
@@ -106,6 +105,22 @@ public class ApacAttributeWithLabelRendererUtil
 		}
 		return result;
 	}
+
+	/**
+	 * Creates the row in the table view with headers
+	 *
+	 * @param parent
+	 *           (Component)
+	 * @param List<String>
+	 *           headerLabelList List of headers for the table to be created
+	 * @param List<String>
+	 *           parameters to be extrated fron the dto
+	 * @param List<?>
+	 *           list of dto from which value of the parameters will be extracted
+	 * @param String
+	 *           Value in case their is null value in the dto
+	 *
+	 */
 
 	public static void createView(final Component parent, final List<String> headerLabelList, final List<String> paramlist,
 			final List<?> dataList, final Class listType, final String valueForNull)
