@@ -3,7 +3,6 @@
  */
 package com.amway.apac.core.backorder.service.impl;
 
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.ordersplitting.model.ConsignmentModel;
 import de.hybris.platform.ordersplitting.model.ConsignmentProcessModel;
 import de.hybris.platform.ordersplitting.model.StockLevelModel;
@@ -22,9 +21,10 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.amway.apac.core.backorder.service.AmwayApacBackOrderService;
-import com.amway.apac.core.backorder.strategies.AmwayApacBackOrderReleaseSelectionStrategy;
+import com.amway.apac.core.backorder.strategies.AmwayApacBackOrderSelectionStrategy;
+import com.amway.apac.core.enums.AmwayBackOrderStatus;
 import com.amway.apac.core.model.AmwayBackOrderModel;
-import com.amway.apac.core.backorder.strategies.AmwayApacBackOrderSelectionStrategy;import com.amway.apac.core.model.AmwayBackOrderModel;>>>>>>>dd5ecd01eb601630bd1f7122684c96837f686e50
+
 
 
 /**
@@ -39,13 +39,17 @@ public class DefaultAmwayApacBackOrderService implements AmwayApacBackOrderServi
 
 	private static final String BACK_ORDER_RELEASE_EVENT_CODE = "WaitForRelease";
 
+	private static final String EXPIRED = "EXPIRED";
+
 	private BusinessProcessService businessProcessService;
+
+
 
 
 	private StockService stockService;
 	private ModelService modelService;
 
-	private AmwayApacBackOrderReleaseSelectionStrategy amwayApacBackOrderReleaseSelectionStrategy;
+	private AmwayApacBackOrderSelectionStrategy amwayApacBackOrderSelectionStrategy;
 
 	/**
 	 * {@inheritDoc}
@@ -57,14 +61,9 @@ public class DefaultAmwayApacBackOrderService implements AmwayApacBackOrderServi
 		{
 			for (final AmwayBackOrderModel amwayBackOrder : amwayBackOrders)
 			{
-				//TODO checking the stock level vikrant
-				//Trigger consignment process
 				triggerConsignmentProcess(amwayBackOrder.getConsignment());
-
 			}
 		}
-		return backorderReleased;
-
 	}
 
 
@@ -77,10 +76,13 @@ public class DefaultAmwayApacBackOrderService implements AmwayApacBackOrderServi
 	{
 		final Map<StockLevelModel, List<AmwayBackOrderModel>> backOrderMap = getAmwayApacBackOrderSelectionStrategy()
 				.getBackOrdersForRelease(stockLevels);
-		for (final Entry<StockLevelModel, List<AmwayBackOrderModel>> entry : backOrderMap.entrySet())
+		if (null != backOrderMap && !backOrderMap.isEmpty())
 		{
-			//release all the backOrders for particular stocks
-			releaseBackOrders(entry.getValue(), entry.getKey());
+			for (final Entry<StockLevelModel, List<AmwayBackOrderModel>> entry : backOrderMap.entrySet())
+			{
+				//release all the backOrders for particular stocks
+				releaseBackOrders(entry.getValue(), entry.getKey());
+			}
 		}
 
 	}
@@ -170,25 +172,45 @@ public class DefaultAmwayApacBackOrderService implements AmwayApacBackOrderServi
 		this.amwayApacBackOrderSelectionStrategy = amwayApacBackOrderSelectionStrategy;
 	}
 
+	/**
+	 * @return the modelService
+	 */
+	public ModelService getModelService()
+	{
+		return modelService;
+	}
+
+
+
+	/**
+	 * @param modelService
+	 *           the modelService to set
+	 */
+	public void setModelService(final ModelService modelService)
+	{
+		this.modelService = modelService;
+	}
+
 
 	@Override
-	public Boolean expireBackOrder(final String status, final Date date, List<AmwayBackOrderModel> backOrders)
+	public Boolean expireBackOrder(final List<AmwayBackOrderModel> backOrders)
 	{
-		boolean backorderReleased = false;
+		boolean backorderexpired = false;
 
 		if (CollectionUtils.isNotEmpty(backOrders))
 		{
-			for (final AmwayBackOrderModel amwayBackOrder : entry.getValue())
+			for (final AmwayBackOrderModel amwayBackOrder : backOrders)
 			{
-				amwayBackOrder.setStatus(AmwayBackOrderStatus.valueOf(status));
+				amwayBackOrder.setStatus(AmwayBackOrderStatus.valueOf(EXPIRED));
 				modelService.save(amwayBackOrder);
 				modelService.refresh(amwayBackOrder);
+				backorderexpired = true;
 
 			}
 
 		}
 
-
+		return backorderexpired;
 	}
 
 }

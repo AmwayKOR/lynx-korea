@@ -6,6 +6,7 @@ package com.amway.apac.core.backorder.strategies.impl;
 import de.hybris.platform.ordersplitting.model.StockLevelModel;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,7 +17,7 @@ import org.springframework.beans.factory.annotation.Required;
 
 import com.amway.apac.core.backorder.dao.AmwayApacBackOrderDao;
 import com.amway.apac.core.backorder.strategies.AmwayApacBackOrderSelectionStrategy;
-import com.amway.apac.core.constants.GeneratedAmwayapacCoreConstants.Enumerations.AmwayBackOrderStatus;
+import com.amway.apac.core.enums.AmwayBackOrderStatus;
 import com.amway.apac.core.model.AmwayBackOrderModel;
 
 
@@ -28,6 +29,8 @@ import com.amway.apac.core.model.AmwayBackOrderModel;
 public class DefaultAmwayApacBackOrderSelectionStrategy implements AmwayApacBackOrderSelectionStrategy
 {
 	private static final Logger LOG = Logger.getLogger(DefaultAmwayApacBackOrderSelectionStrategy.class);
+
+	private static final String ACTIVE = "ACTIVE";
 
 	private AmwayApacBackOrderDao amwayApacBackOrderDao;
 
@@ -44,8 +47,8 @@ public class DefaultAmwayApacBackOrderSelectionStrategy implements AmwayApacBack
 				final Map<StockLevelModel, List<AmwayBackOrderModel>> amwayBackOrdersMap = new HashMap<StockLevelModel, List<AmwayBackOrderModel>>();
 				for (final StockLevelModel stockLevel : stockLevels)
 				{
-					final List<AmwayBackOrderModel> amwayBackOrdersList = getAmwayApacBackOrderDao()
-							.getBackOrders(AmwayBackOrderStatus.ACTIVE, stockLevel.getWarehouse(), stockLevel.getProduct(), true);
+					final List<AmwayBackOrderModel> amwayBackOrdersList = getAmwayApacBackOrderDao().getBackOrders(
+							AmwayBackOrderStatus.valueOf(ACTIVE), stockLevel.getWarehouse(), stockLevel.getProduct(), true);
 					//Verify the payment of backOrders
 					validatePaymentAndUpdateList(amwayBackOrdersList);
 					amwayBackOrdersMap.put(stockLevel, amwayBackOrdersList);

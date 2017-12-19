@@ -33,8 +33,8 @@
 			<!-- <list:column qualifier="" label="amway.backorder.quantity"/> -->			
 		</list:list-view>
 	</context>
-	<context merge-by="type" parent="GenericItem" type="AmwayBackOrder" component="advanced-search" >
-        <advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+	<context merge-by="type" type="AmwayBackOrder" component="advanced-search" >
+        <advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch"> 
             <advanced-search:field-list>
                 <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="product" selected="true" />
                 <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="warehouse" selected="false"/>

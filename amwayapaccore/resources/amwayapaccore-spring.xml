@@ -236,7 +236,6 @@
 		<property name="eventService" ref="eventService" />
 		<property name="timeService" ref="timeService" />
 	</bean>
-
 	<import resource="/amwayapaccore/processes/quote/quote-buyer-process-spring.xml" />
 	<import
 		resource="/amwayapaccore/processes/quote/quote-salesrep-process-spring.xml" />
@@ -265,5 +264,12 @@
 		class="com.amway.apac.core.backorder.service.impl.DefaultAmwayApacBackOrderService">
 		<property name="businessProcessService" ref="businessProcessService" />
 		<property name="amwayApacBackOrderSelectionStrategy" ref="amwayApacBackOrderSelectionStrategy" />
+		<property name="modelService" ref="modelService" />
+	</bean>
+	<bean id="expiredBackorderJob" class="com.amway.apac.core.job.ExpiredBackorderJobPerformable"
+		parent="abstractJobPerformable">		
+		<property name="backOrderSelectionStrategy" ref="amwayApacBackOrderSelectionStrategy" />
+		<property name="backOrderService" ref="amwayApacBackOrderService" />
+		<property name="timeService" ref="timeService" />
 	</bean>
 </beans>

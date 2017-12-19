@@ -10,14 +10,14 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.apache.log4j.Logger;
-import org.zkoss.util.resource.Labels;
 import org.zkoss.zul.Messagebox;
-
+import org.apache.log4j.Logger;
 import com.amway.apac.core.backorder.service.AmwayApacBackOrderService;
 import com.hybris.cockpitng.actions.ActionContext;
 import com.hybris.cockpitng.actions.ActionResult;
 import com.hybris.cockpitng.actions.CockpitAction;
+
+import org.zkoss.util.resource.Labels;
 
 
 /**
@@ -43,17 +43,24 @@ public class ReleaseBackorderAction implements CockpitAction<StockLevelModel, St
 
 		final List<StockLevelModel> stockLevelList = new ArrayList<>();
 		stockLevelList.add(ctx.getData());
-
-		if (amwayApacBackOrderService.release(stockLevelList).booleanValue())
+		try
 		{
+			amwayApacBackOrderService.releaseBackOrdersForStocks(stockLevelList);
 			result = new ActionResult<>(ActionResult.SUCCESS);
 			result.setResultMessage(Labels.getLabel("backOrder.released.successfully"));
 		}
-		else
+		catch (final Exception e)
 		{
-			result = new ActionResult<>(ActionResult.ERROR);
-			result.setResultMessage(Labels.getLabel("backOrder.release.unsuccessful"));
+			if (LOG.isDebugEnabled())
+			{
+				LOG.error("Error occured while releasing backorder" + e);
+				result = new ActionResult<>(ActionResult.ERROR);
+				result.setResultMessage(Labels.getLabel("backOrder.release.unsuccessful"));
+			}
 		}
+
+
+
 		Messagebox.show(result.getResultMessage() + " (" + result.getResultCode() + ")");
 
 		return result;

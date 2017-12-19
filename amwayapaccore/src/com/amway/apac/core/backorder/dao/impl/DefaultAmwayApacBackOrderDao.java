@@ -11,6 +11,7 @@ import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 import de.hybris.platform.servicelayer.search.FlexibleSearchService;
 import de.hybris.platform.servicelayer.search.SearchResult;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,7 +44,7 @@ public class DefaultAmwayApacBackOrderDao implements AmwayApacBackOrderDao
 	private static final String DEFAULT_EXPIRED_BACKORDER_FETCH_QUERY = "SELECT {ABO:pk} from {amwaybackorder as ABO join amwaybackorderstatus as BS on {ABO:status}={BS:pk}} where {BS:code}=?statusCode and {ABO:releasebydate}<?date";
 
 	private static final String STATUS_CODE = "statusCode";
-	private static final Date DATE = "date";
+	private static final String DATE = "date";
 
 
 	/**
@@ -129,7 +130,7 @@ public class DefaultAmwayApacBackOrderDao implements AmwayApacBackOrderDao
 		queryParams.put(STATUS_CODE, status);
 		queryParams.put(DATE, date);
 		final FlexibleSearchQuery flexQuery = new FlexibleSearchQuery(DEFAULT_EXPIRED_BACKORDER_FETCH_QUERY);
-		query.addQueryParameters(queryParams);
+		flexQuery.addQueryParameters(queryParams);
 		final SearchResult<AmwayBackOrderModel> result = getFlexibleSearchService().search(flexQuery);
 		//log info in debug before returning
 		logDebugInfo(flexQuery.toString(), result.getResult());
