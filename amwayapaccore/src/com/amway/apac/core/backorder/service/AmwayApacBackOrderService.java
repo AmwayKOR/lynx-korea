@@ -38,7 +38,7 @@ public interface AmwayApacBackOrderService
 	/**
 	 * This method is used to Expire AmwayBackOrders on the bases of Date(current)
 	 *
-	 * @param List<AmwayBackOrderModel>
+	 * @param backOrders
 	 */
 	Boolean expireBackOrder(List<AmwayBackOrderModel> backOrders);
 

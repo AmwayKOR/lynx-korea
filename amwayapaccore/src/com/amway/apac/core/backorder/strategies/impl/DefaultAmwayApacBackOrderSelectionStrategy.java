@@ -4,12 +4,15 @@
 package com.amway.apac.core.backorder.strategies.impl;
 
 import de.hybris.platform.ordersplitting.model.StockLevelModel;
+import de.hybris.platform.stock.StockService;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.log4j.Logger;
@@ -34,6 +37,8 @@ public class DefaultAmwayApacBackOrderSelectionStrategy implements AmwayApacBack
 
 	private AmwayApacBackOrderDao amwayApacBackOrderDao;
 
+	private StockService stockService;
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -55,7 +60,6 @@ public class DefaultAmwayApacBackOrderSelectionStrategy implements AmwayApacBack
 
 				}
 				return amwayBackOrdersMap;
-
 			}
 			catch (final Exception e)
 			{
@@ -64,6 +68,56 @@ public class DefaultAmwayApacBackOrderSelectionStrategy implements AmwayApacBack
 		}
 		return null;
 	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Map<StockLevelModel, List<AmwayBackOrderModel>> getBackOrdersForRelease()
+	{
+		try
+		{
+			final List<AmwayBackOrderModel> amwayBackOrdersList = getAmwayApacBackOrderDao().getBackOrders(
+					AmwayBackOrderStatus.valueOf(ACTIVE), null, null, true);
+			validatePaymentAndUpdateList(amwayBackOrdersList);
+			//Grouping the AmwayBackOrders as per the stockLevels for stock calculation
+			final Map<StockLevelModel, List<AmwayBackOrderModel>> amwayBackOrdersMap = amwayBackOrdersList.stream().collect(
+					Collectors.groupingBy(backOrder -> getStockLevel(backOrder), Collectors.toList()));
+			return amwayBackOrdersMap;
+		}
+		catch (final Exception e)
+		{
+			logDebugInfo(e, "Failed to fetch Amway Back Orders ");
+		}
+		return null;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<AmwayBackOrderModel> getBackOrdersForExpiring(final String status, final Date date)
+	{
+		final List<AmwayBackOrderModel> amwayBackOrdersList = getAmwayApacBackOrderDao().getBackOrdersForExpiring(status, date);
+		return amwayBackOrdersList;
+	}
+
+
+	/**
+	 * Used to get Stocklevel for AmwayBackOrder product and warehouse
+	 *
+	 * @param backOrder
+	 * @return StockLevelModel
+	 */
+	private StockLevelModel getStockLevel(final AmwayBackOrderModel backOrder)
+	{
+		if (Objects.nonNull(backOrder))
+		{
+			return getStockService().getStockLevel(backOrder.getProduct(), backOrder.getWarehouse());
+		}
+		return null;
+	}
+
 
 	/**
 	 * Validate payment for Amway backOrders
@@ -110,13 +164,20 @@ public class DefaultAmwayApacBackOrderSelectionStrategy implements AmwayApacBack
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * @return the stockService
 	 */
-	@Override
-	public List<AmwayBackOrderModel> getBackOrdersForExpiring(final String status, final Date date)
+	public StockService getStockService()
 	{
-		final List<AmwayBackOrderModel> amwayBackOrdersList = getAmwayApacBackOrderDao().getBackOrdersForExpiring(status, date);
-		return amwayBackOrdersList;
+		return stockService;
 	}
 
+	/**
+	 * @param stockService
+	 *           the stockService to set
+	 */
+	@Required
+	public void setStockService(final StockService stockService)
+	{
+		this.stockService = stockService;
+	}
 }

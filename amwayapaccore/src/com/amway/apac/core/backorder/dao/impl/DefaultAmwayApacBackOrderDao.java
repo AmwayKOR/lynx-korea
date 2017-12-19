@@ -11,6 +11,7 @@ import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 import de.hybris.platform.servicelayer.search.FlexibleSearchService;
 import de.hybris.platform.servicelayer.search.SearchResult;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -25,7 +26,6 @@ import com.amway.apac.core.enums.AmwayBackOrderStatus;
 import com.amway.apac.core.model.AmwayBackOrderModel;
 
 
-
 /**
  * Default Implementation of AmwayApacBackOrderDao
  *
@@ -37,15 +37,9 @@ public class DefaultAmwayApacBackOrderDao implements AmwayApacBackOrderDao
 
 	private FlexibleSearchService flexibleSearchService;
 
-	private static final String DEFAULT_BACKORDER_FETCH_QUERY = new StringBuilder().append("SELECT {")
-			.append(AmwayBackOrderModel.PK).append("} FROM {").append(AmwayBackOrderModel._TYPECODE)
-			.append("as BO join AmwayBackOrderStatus as BOS on {BO.status}={BOS.pk}} WHERE {BOS.code} =? ")
-			.append(AmwayBackOrderModel.STATUS).toString().intern();
 	private static final String DEFAULT_EXPIRED_BACKORDER_FETCH_QUERY = "SELECT {ABO:pk} from {amwaybackorder as ABO join amwaybackorderstatus as BS on {ABO:status}={BS:pk}} where {BS:code}=?statusCode and {ABO:releasebydate}<?date";
-
 	private static final String STATUS_CODE = "statusCode";
 	private static final String DATE = "date";
-
 
 	/**
 	 * {@inheritDoc}
@@ -55,7 +49,12 @@ public class DefaultAmwayApacBackOrderDao implements AmwayApacBackOrderDao
 			final ProductModel product, final boolean isAscending)
 	{
 		validateParameterNotNull(status, "AmwayBackOrderStatus must not be null!");
-		final StringBuilder query = new StringBuilder(DEFAULT_BACKORDER_FETCH_QUERY);
+
+		final StringBuilder query = new StringBuilder();
+		query.append("SELECT {").append(AmwayBackOrderModel.PK).append("} FROM {").append(AmwayBackOrderModel._TYPECODE)
+				.append("as BO join AmwayBackOrderStatus as BOS on {BO.status}={BOS.pk}} WHERE {BOS.code} =? ")
+				.append(AmwayBackOrderModel.STATUS);
+
 		final Map<String, Object> params = new HashMap<>();
 		params.put(AmwayBackOrderModel.STATUS, status);
 		if (Objects.nonNull(warehouse))
@@ -79,9 +78,26 @@ public class DefaultAmwayApacBackOrderDao implements AmwayApacBackOrderDao
 		return result.getResult();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<AmwayBackOrderModel> getBackOrdersForExpiring(final String status, final Date date)
+	{
+		validateParameterNotNull(status, "AmwayBackOrderStatus must not be null!");
+		final Map queryParams = new HashMap();
+		queryParams.put(STATUS_CODE, status);
+		queryParams.put(DATE, date);
+		final FlexibleSearchQuery flexQuery = new FlexibleSearchQuery(DEFAULT_EXPIRED_BACKORDER_FETCH_QUERY);
+		flexQuery.addQueryParameters(queryParams);
+		final SearchResult<AmwayBackOrderModel> result = getFlexibleSearchService().search(flexQuery);
+		//log info in debug before returning
+		logDebugInfo(flexQuery.toString(), result.getResult());
+		return result.getResult();
+	}
 
 	/**
-	 * To print result and query in debug mode
+	 * To print result in debug mode
 	 *
 	 * @param query
 	 * @param backOrders
@@ -90,11 +106,13 @@ public class DefaultAmwayApacBackOrderDao implements AmwayApacBackOrderDao
 	{
 		if (LOG.isDebugEnabled())
 		{
-			LOG.debug(query);
+			final List<String> orderCodeList = new ArrayList<String>();
 			for (final AmwayBackOrderModel backOrder : backOrders)
 			{
-				LOG.debug("\t Order : " + backOrder.getOriginalOrder().getCode());
+				orderCodeList.add(backOrder.getOriginalOrder().getCode() + "-");
 			}
+			LOG.debug("Query : " + query);
+			LOG.debug("\t Order : " + orderCodeList.toString());
 		}
 	}
 
@@ -116,23 +134,5 @@ public class DefaultAmwayApacBackOrderDao implements AmwayApacBackOrderDao
 		this.flexibleSearchService = flexibleSearchService;
 	}
 
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public List<AmwayBackOrderModel> getBackOrdersForExpiring(final String status, final Date date)
-	{
-		validateParameterNotNull(status, "AmwayBackOrderStatus must not be null!");
-		final Map queryParams = new HashMap();
-		queryParams.put(STATUS_CODE, status);
-		queryParams.put(DATE, date);
-		final FlexibleSearchQuery flexQuery = new FlexibleSearchQuery(DEFAULT_EXPIRED_BACKORDER_FETCH_QUERY);
-		flexQuery.addQueryParameters(queryParams);
-		final SearchResult<AmwayBackOrderModel> result = getFlexibleSearchService().search(flexQuery);
-		//log info in debug before returning
-		logDebugInfo(flexQuery.toString(), result.getResult());
-		return result.getResult();
-	}
 
 }

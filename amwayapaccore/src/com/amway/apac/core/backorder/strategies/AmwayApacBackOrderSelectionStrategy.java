@@ -32,11 +32,18 @@ public interface AmwayApacBackOrderSelectionStrategy
 	/**
 	 * Select AmwayBackOrders for expiring based upon current date
 	 *
-	 * @param String
-	 * @param Date
+	 * @param status
+	 * @param date
 	 * @return List<AmwayBackOrderModel>
 	 */
 	public List<AmwayBackOrderModel> getBackOrdersForExpiring(final String status, final Date date);
+
+	/**
+	 * Select All AmwayBackOrders for release
+	 *
+	 * @return Map<StockLevelModel,List<AmwayBackOrderModel>
+	 */
+	public Map<StockLevelModel, List<AmwayBackOrderModel>> getBackOrdersForRelease();
 
 
 }
