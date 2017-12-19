@@ -13,7 +13,13 @@ import java.util.Map.Entry;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.exception.ExceptionUtils;
+import org.apache.log4j.Logger;
+import org.zkoss.util.resource.Labels;
+import org.zkoss.zk.ui.Component;
+import org.zkoss.zul.Cell;
+import org.zkoss.zul.Div;
 import org.zkoss.zul.Hbox;
+import org.zkoss.zul.Label;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listhead;
@@ -22,10 +28,9 @@ import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Textbox;
 
 import com.hybris.cockpitng.util.UITools;
-import com.sun.org.apache.xpath.internal.operations.Div;
 
-import javafx.scene.control.Cell;
-import jdk.nashorn.internal.ir.Labels;
+
+
 
 
 /**
@@ -48,7 +53,6 @@ public class ApacAttributeWithLabelRendererUtil
 
 	/**
 	 * Create a text field with lable where the field is non editable
-	 * 
 	 * @param parent
 	 *           (Component)
 	 * @param labelWithAttributeValueMap
