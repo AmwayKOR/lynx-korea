@@ -7,6 +7,7 @@ import de.hybris.platform.commerceservices.search.solrfacetsearch.populators.Sea
 import de.hybris.platform.solrfacetsearch.config.FacetSearchConfig;
 import de.hybris.platform.solrfacetsearch.config.IndexedType;
 import de.hybris.platform.solrfacetsearch.search.SearchQuery;
+import org.apache.commons.lang.StringUtils;
 
 /**
  * Created by MY020221 on 12/13/2017.
@@ -22,6 +23,8 @@ public class AmwayApacSearchSolrQueryPopulator<INDEXED_PROPERTY_TYPE, INDEXED_TY
                          final SolrSearchRequest<FacetSearchConfig, IndexedType, INDEXED_PROPERTY_TYPE, SearchQuery, INDEXED_TYPE_SORT_TYPE> target)
     {
         super.populate(source, target);
-        target.getSearchQuery().addRawQuery(source.getSearchQueryData().getRawQuery());
+        if(StringUtils.isNotEmpty(source.getSearchQueryData().getRawQuery())){
+            target.getSearchQuery().addRawQuery(source.getSearchQueryData().getRawQuery());
+        }
     }
 }
