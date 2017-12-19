@@ -265,5 +265,7 @@
 		class="com.amway.apac.core.backorder.service.impl.DefaultAmwayApacBackOrderService">
 		<property name="businessProcessService" ref="businessProcessService" />
 		<property name="amwayApacBackOrderSelectionStrategy" ref="amwayApacBackOrderSelectionStrategy" />
+		<property name="commerceAvailabilityCalculationStrategy" ref="commerceStockLevelCalculationStrategy"/>
+		<property name="inventoryEventService" ref="commerceStockLevelCalculationStrategy"/>
 	</bean>
 </beans>
