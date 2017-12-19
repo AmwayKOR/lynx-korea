@@ -62,6 +62,14 @@ public class DefaultAmwayApacStockLevelDao extends DefaultAmwayStockLevelDao imp
 				+ this.stockLevelColumns.getAvailableCol() + " - ?" + " WHERE " + this.stockLevelColumns.getPkCol() + "=?";
 	}
 
+	private int runJdbcQuery(final String query, final int amount, final StockLevelModel stockLevel)
+	{
+		final Integer _amount = Integer.valueOf(amount);
+		final Long _pk = Long.valueOf(stockLevel.getPk().getLongValue());
+
+		return this.jdbcTemplate.update(query, _amount, _pk);
+	}
+
 }
 
 

@@ -191,7 +191,7 @@ public class DefaultAmwayStockLevelDao extends DefaultStockLevelDao implements A
 		});
 	}
 
-	protected int runJdbcQuery(final String query, final int amount, final StockLevelModel stockLevel)
+	private int runJdbcQuery(final String query, final int amount, final StockLevelModel stockLevel)
 	{
 		final Integer _amount = Integer.valueOf(amount);
 		final Long _pk = Long.valueOf(stockLevel.getPk().getLongValue());
