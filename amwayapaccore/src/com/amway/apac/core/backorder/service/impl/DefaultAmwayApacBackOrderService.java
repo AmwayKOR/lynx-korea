@@ -71,14 +71,14 @@ public class DefaultAmwayApacBackOrderService implements AmwayApacBackOrderServi
 		if (CollectionUtils.isNotEmpty(amwayBackOrders) && Objects.nonNull(stockLevel)
 				&& !InStockStatus.BACKORDER.equals(stockLevel.getInStockStatus()))
 		{
-			final Long available = commerceAvailabilityCalculationStrategy.calculateAvailability(Arrays.asList(stockLevel));
+			Long available = commerceAvailabilityCalculationStrategy.calculateAvailability(Arrays.asList(stockLevel));
 			if (Objects.nonNull(available))
 			{
 
-				final int maxBoReleaseLimit = stockLevel.getMaxBoReleaseLimit();
+				int maxBoReleaseLimit = stockLevel.getMaxBoReleaseLimit();
 				for (final AmwayBackOrderModel amwayBackOrder : amwayBackOrders)
 				{
-					final long requestedQty = 0;
+					long requestedQty = 0;
 					if (stockLevel.getProduct().equals(amwayBackOrder.getProduct())
 							&& stockLevel.getWarehouse().equals(amwayBackOrder.getWarehouse()))
 					{
