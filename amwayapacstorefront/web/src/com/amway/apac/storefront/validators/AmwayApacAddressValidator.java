@@ -55,24 +55,10 @@ public class AmwayApacAddressValidator extends AddressValidator
 		{
 			switch (CountryCode.lookup(isoCode))
 			{
-				case CHINA:
-					validateStringField(AmwayApacAddressForm.getTitleCode(), AddressField.TITLE, MAX_FIELD_LENGTH, errors);
-					validateFieldNotNull(AmwayApacAddressForm.getRegionIso(), AddressField.REGION, errors);
-					break;
-				case CANADA:
-					validateStringField(AmwayApacAddressForm.getTitleCode(), AddressField.TITLE, MAX_FIELD_LENGTH, errors);
-					validateFieldNotNull(AmwayApacAddressForm.getRegionIso(), AddressField.REGION, errors);
-					break;
 				case USA:
-					validateStringField(AmwayApacAddressForm.getTitleCode(), AddressField.TITLE, MAX_FIELD_LENGTH, errors);
 					validateFieldNotNull(AmwayApacAddressForm.getRegionIso(), AddressField.REGION, errors);
-					break;
-				case JAPAN:
-					validateFieldNotNull(AmwayApacAddressForm.getRegionIso(), AddressField.REGION, errors);
-					validateStringField(AmwayApacAddressForm.getLine2(), AddressField.LINE2, MAX_FIELD_LENGTH, errors);
 					break;
 				default:
-					validateStringField(AmwayApacAddressForm.getTitleCode(), AddressField.TITLE, MAX_FIELD_LENGTH, errors);
 					break;
 			}
 		}

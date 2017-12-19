@@ -47,11 +47,10 @@ public class DefaultAmwayApacCustomerAccountDao extends DefaultAmwayCustomerAcco
 	/**
 	 * Query to search for order history based on filter by user.
 	 */
-	private static final String FIND_ORDERS_BY_CUSTOMER_STORE_QUERY = "SELECT {" + OrderModel.PK + "}, {" + OrderModel.CREATIONTIME
-			+ "}, {" + OrderModel.CODE + "} FROM {" + OrderModel._TYPECODE + "} WHERE {" + OrderModel.USER + "} = ?customer AND {"
-			+ OrderModel.VERSIONID + "} IS NULL AND {" + OrderModel.STORE + "} = ?store "
-			//+ "AND {" + OrderModel.DATE + "} BETWEEN ?startDate AND ?endDate ";
-			+ "AND {" + OrderModel.DATE + "} <= ?endDate " + "AND {" + OrderModel.DATE + "} >= ?startDate ";
+	private static final String FIND_ORDERS_BY_CUSTOMER_STORE_FILTER_QUERY = "SELECT {" + OrderModel.PK + "}, {"
+			+ OrderModel.CREATIONTIME + "}, {" + OrderModel.CODE + "} FROM {" + OrderModel._TYPECODE + "} WHERE {" + OrderModel.USER
+			+ "} = ?customer AND {" + OrderModel.VERSIONID + "} IS NULL AND {" + OrderModel.STORE + "} = ?store " + "AND {"
+			+ OrderModel.DATE + "} <= ?endDate " + "AND {" + OrderModel.DATE + "} >= ?startDate ";
 
 	private static final String SORT_ORDERS_BY_DATE = " ORDER BY {" + OrderModel.CREATIONTIME + "} DESC, {" + OrderModel.PK + "}";
 	private static final String SORT_ORDERS_BY_CODE = " ORDER BY {" + OrderModel.CODE + "},{" + OrderModel.CREATIONTIME
@@ -100,9 +99,9 @@ public class DefaultAmwayApacCustomerAccountDao extends DefaultAmwayCustomerAcco
 
 		final List<SortQueryData> sortQueries;
 		sortQueries = Arrays.asList(
-				createSortQueryData("byDate", createQuery(FIND_ORDERS_BY_CUSTOMER_STORE_QUERY, "", SORT_ORDERS_BY_DATE)),
-				createSortQueryData("byOrderNumber", createQuery(FIND_ORDERS_BY_CUSTOMER_STORE_QUERY, "", SORT_ORDERS_BY_CODE)));
-
+				createSortQueryData("byDate", createQuery(FIND_ORDERS_BY_CUSTOMER_STORE_FILTER_QUERY, "", SORT_ORDERS_BY_DATE)),
+				createSortQueryData("byOrderNumber",
+						createQuery(FIND_ORDERS_BY_CUSTOMER_STORE_FILTER_QUERY, "", SORT_ORDERS_BY_CODE)));
 
 		return getPagedFlexibleSearchService().search(sortQueries, "byDate", queryParams, pageableData);
 	}

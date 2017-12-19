@@ -28,5 +28,7 @@ public interface AmwayApacOrderFacade extends AmwayOrderFacade
 
 	List<String> getOrderHistoryTypeOptions();
 
-	SearchPageData<OrderHistoryData> getPagedOrderHistoryByFilter(PageableData pageableData, String date, String type);
+	SearchPageData<OrderHistoryData> getPagedOrderHistoryByFilterAndSearch(final PageableData pageableData, final String date,
+			final String type);
+
 }

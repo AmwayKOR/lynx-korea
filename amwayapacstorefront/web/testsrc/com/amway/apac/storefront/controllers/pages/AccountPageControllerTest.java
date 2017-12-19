@@ -435,7 +435,7 @@ public class AccountPageControllerTest
 		setupExistingOrder();
 		BDDMockito.given(orderFacade.getPagedOrderHistoryForStatuses(Mockito.any(PageableData.class))).willReturn(searchList);
 
-		final String orderHistoryPage = accountController.orders(1, showMode, "desc", page, null, null);
+		final String orderHistoryPage = accountController.orders(1, showMode, "desc", page, false, false, null, null);
 		Mockito.verify(orderFacade).getPagedOrderHistoryForStatuses(Mockito.any(PageableData.class));
 		assertEquals(FULL_VIEW_PATH, orderHistoryPage);
 	}

@@ -566,18 +566,8 @@
 												<form:form id="shipping-address-form-new" action="${addAddressUrl}" commandName="addressForm" method="post">
 													<fieldset>
 														<form:hidden path="regionIso" value="${country}"/>
+														<form:hidden path="countryIso" value="${country}"/>
 														
-														<formElement:formSelectBox idKey="address.title" labelKey="address.title" path="titleCode"
-															mandatory="true" skipBlank="false" selectCSSClass="form-control"
-															skipBlankMessageKey="address.title.pleaseSelect" items="${titleData}"
-															defaultValue="${customerData.titleCode}"
-															readonly="true"
-															/>
-															
-														<formElement:formSelectBox idKey="address.country" labelKey="address.country" path="countryIso"
-															mandatory="true" skipBlank="false" skipBlankMessageKey="address.country.pleaseSelect"
-															items="${supportedCountries}" itemValue="isocode" defaultValue="${country}" 
-															selectCSSClass="form-control" readonly="true"/>
 														
 														<address:addressFormElements user="${customerData}" regions="${regions}" country="${country}" />
 

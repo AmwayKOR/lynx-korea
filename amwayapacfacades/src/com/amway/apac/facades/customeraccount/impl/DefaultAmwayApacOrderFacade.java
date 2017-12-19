@@ -58,8 +58,8 @@ public class DefaultAmwayApacOrderFacade extends DefaultAmwayOrderFacade impleme
 	}
 
 	@Override
-	public SearchPageData<OrderHistoryData> getPagedOrderHistoryByFilter(final PageableData pageableData, final String date,
-			final String type)
+	public SearchPageData<OrderHistoryData> getPagedOrderHistoryByFilterAndSearch(final PageableData pageableData,
+			final String date, final String type)
 	{
 		final CustomerModel currentCustomer = (CustomerModel) getUserService().getCurrentUser();
 		final BaseStoreModel currentBaseStore = getBaseStoreService().getCurrentBaseStore();

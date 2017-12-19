@@ -30,7 +30,6 @@ import de.hybris.platform.acceleratorstorefrontcommons.forms.verification.Addres
 import de.hybris.platform.acceleratorstorefrontcommons.util.AddressDataUtil;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.address.AddressVerificationFacade;
-import de.hybris.platform.commercefacades.address.data.AddressVerificationResult;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.i18n.I18NFacade;
 import de.hybris.platform.commercefacades.order.CheckoutFacade;
@@ -46,7 +45,6 @@ import de.hybris.platform.commercefacades.user.data.CountryData;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.commercefacades.user.data.TitleData;
 import de.hybris.platform.commercefacades.user.exceptions.PasswordMismatchException;
-import de.hybris.platform.commerceservices.address.AddressVerificationDecision;
 import de.hybris.platform.commerceservices.customer.DuplicateUidException;
 import de.hybris.platform.commerceservices.search.pagedata.PageableData;
 import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
@@ -84,6 +82,7 @@ import com.amway.apac.storefront.controllers.ControllerConstants;
 import com.amway.apac.storefront.forms.AmwayApacAddressForm;
 import com.amway.apac.storefront.forms.AmwayApacOrderHistoryFilterForm;
 import com.amway.apac.storefront.forms.AmwayApacOrderHistorySearchForm;
+import com.amway.apac.storefront.validators.AmwayApacAddressValidator;
 
 
 /**
@@ -200,6 +199,15 @@ public class AccountPageController extends AbstractSearchPageController
 
 	@Resource(name = "amwayOrderFacade")
 	private AmwayApacOrderFacade amwayApacOrderFacade;
+
+	@Resource(name = "amwayApacAddressValidator")
+	private AmwayApacAddressValidator amwayApacAddressValidator;
+
+
+	protected AmwayApacAddressValidator getAmwayApacAddressValidator()
+	{
+		return amwayApacAddressValidator;
+	}
 
 	protected PasswordValidator getPasswordValidator()
 	{
@@ -362,6 +370,8 @@ public class AccountPageController extends AbstractSearchPageController
 	public String orders(@RequestParam(value = "page", defaultValue = "0") final int page,
 			@RequestParam(value = "show", defaultValue = "Page") final ShowMode showMode,
 			@RequestParam(value = "sort", required = false) final String sortCode, final Model model,
+			@RequestParam(value = "filterBy", required = false, defaultValue = "false") final Boolean filterBy,
+			@RequestParam(value = "searchBy", required = false, defaultValue = "false") final Boolean searchBy,
 			@ModelAttribute("searchForm") final AmwayApacOrderHistorySearchForm searchForm,
 			@ModelAttribute("filterForm") final AmwayApacOrderHistoryFilterForm filterForm) throws CMSItemNotFoundException
 	{
@@ -369,9 +379,9 @@ public class AccountPageController extends AbstractSearchPageController
 		final PageableData pageableData = createPageableData(page, 5, SORT_BY_DATE + DESC, showMode);
 
 		SearchPageData<OrderHistoryData> searchPageData = new SearchPageData<OrderHistoryData>();
-		if (filterForm.getDate() != null || filterForm.getType() != null)
+		if (filterBy)
 		{
-			searchPageData = amwayApacOrderFacade.getPagedOrderHistoryByFilter(pageableData, filterForm.getDate(),
+			searchPageData = amwayApacOrderFacade.getPagedOrderHistoryByFilterAndSearch(pageableData, filterForm.getDate(),
 					filterForm.getType());
 		}
 		else
@@ -726,7 +736,7 @@ public class AccountPageController extends AbstractSearchPageController
 	public String addAddress(final AmwayApacAddressForm addressForm, final BindingResult bindingResult, final Model model,
 			final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
-		getAddressValidator().validate(addressForm, bindingResult);
+		getAmwayApacAddressValidator().validate(addressForm, bindingResult);
 		if (bindingResult.hasErrors())
 		{
 			GlobalMessages.addErrorMessage(model, FORM_GLOBAL_ERROR);
@@ -748,22 +758,22 @@ public class AccountPageController extends AbstractSearchPageController
 			newAddress.setDefaultAddress(addressForm.getDefaultAddress() != null && addressForm.getDefaultAddress().booleanValue());
 		}
 
-		final AddressVerificationResult<AddressVerificationDecision> verificationResult = getAddressVerificationFacade()
-				.verifyAddressData(newAddress);
-		final boolean addressRequiresReview = getAddressVerificationResultHandler().handleResult(verificationResult, newAddress,
-				model, redirectModel, bindingResult, getAddressVerificationFacade().isCustomerAllowedToIgnoreAddressSuggestions(),
-				"checkout.multi.address.added");
+		//		final AddressVerificationResult<AddressVerificationDecision> verificationResult = getAddressVerificationFacade()
+		//				.verifyAddressData(newAddress);
+		//		final boolean addressRequiresReview = getAddressVerificationResultHandler().handleResult(verificationResult, newAddress,
+		//				model, redirectModel, bindingResult, getAddressVerificationFacade().isCustomerAllowedToIgnoreAddressSuggestions(),
+		//				"checkout.multi.address.added");
 
 		populateModelRegionAndCountry(model, addressForm.getCountryIso());
 		model.addAttribute("edit", Boolean.TRUE);
 		model.addAttribute(IS_DEFAULT_ADDRESS_ATTR, Boolean.valueOf(isDefaultAddress(addressForm.getAddressId())));
 
-		if (addressRequiresReview)
-		{
-			storeCmsPageInModel(model, getContentPageForLabelOrId(BILLING_SHIPPING_CMS_PAGE));
-			setUpMetaDataForContentPage(model, getContentPageForLabelOrId(BILLING_SHIPPING_CMS_PAGE));
-			return getViewForPage(model);
-		}
+		//		if (addressRequiresReview)
+		//		{
+		//			storeCmsPageInModel(model, getContentPageForLabelOrId(BILLING_SHIPPING_CMS_PAGE));
+		//			setUpMetaDataForContentPage(model, getContentPageForLabelOrId(BILLING_SHIPPING_CMS_PAGE));
+		//			return getViewForPage(model);
+		//		}
 
 		userFacade.addAddress(newAddress);
 
@@ -862,7 +872,7 @@ public class AccountPageController extends AbstractSearchPageController
 			final BindingResult bindingResult, final Model model, final RedirectAttributes redirectModel)
 			throws CMSItemNotFoundException
 	{
-		getAddressValidator().validate(addressForm, bindingResult);
+		getAmwayApacAddressValidator().validate(addressForm, bindingResult);
 		if (bindingResult.hasErrors())
 		{
 			GlobalMessages.addErrorMessage(model, FORM_GLOBAL_ERROR);
@@ -894,23 +904,23 @@ public class AccountPageController extends AbstractSearchPageController
 			newAddress.setLine3(addressForm.getLine3());
 		}
 
-		final AddressVerificationResult<AddressVerificationDecision> verificationResult = getAddressVerificationFacade()
-				.verifyAddressData(newAddress);
-		final boolean addressRequiresReview = getAddressVerificationResultHandler().handleResult(verificationResult, newAddress,
-				model, redirectModel, bindingResult, getAddressVerificationFacade().isCustomerAllowedToIgnoreAddressSuggestions(),
-				"checkout.multi.address.updated");
+		//		final AddressVerificationResult<AddressVerificationDecision> verificationResult = getAddressVerificationFacade()
+		//				.verifyAddressData(newAddress);
+		//		final boolean addressRequiresReview = getAddressVerificationResultHandler().handleResult(verificationResult, newAddress,
+		//				model, redirectModel, bindingResult, getAddressVerificationFacade().isCustomerAllowedToIgnoreAddressSuggestions(),
+		//				"checkout.multi.address.updated");
 
 		model.addAttribute(REGIONS_ATTR, getI18NFacade().getRegionsForCountryIso(addressForm.getCountryIso()));
 		model.addAttribute(COUNTRY_ATTR, addressForm.getCountryIso());
 		model.addAttribute("edit", Boolean.TRUE);
 		model.addAttribute(IS_DEFAULT_ADDRESS_ATTR, Boolean.valueOf(isDefaultAddress(addressForm.getAddressId())));
 
-		if (addressRequiresReview)
-		{
-			storeCmsPageInModel(model, getContentPageForLabelOrId(ADD_EDIT_ADDRESS_CMS_PAGE));
-			setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ADD_EDIT_ADDRESS_CMS_PAGE));
-			return getViewForPage(model);
-		}
+		//		if (addressRequiresReview)
+		//		{
+		//			storeCmsPageInModel(model, getContentPageForLabelOrId(ADD_EDIT_ADDRESS_CMS_PAGE));
+		//			setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ADD_EDIT_ADDRESS_CMS_PAGE));
+		//			return getViewForPage(model);
+		//		}
 
 		userFacade.editAddress(newAddress);
 

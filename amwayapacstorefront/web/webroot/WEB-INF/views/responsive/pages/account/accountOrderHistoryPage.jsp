@@ -61,6 +61,7 @@
 								                                        <spring:theme code='text.account.orderHistory.filters.apply'/>
 								                                    </span>
 								                                </button>
+								                                <input type="hidden" name="filterBy" value="true"/>
 								                            </form:form>
 
                                                         </div>
@@ -74,6 +75,7 @@
 								                                    </span>
 								                                    <span class="icon-search hidden-md hidden-lg"></span>
 								                                </button>
+								                                <input type="hidden" name="searchBy" value="true"/>
 								                            </form:form>
                                                         </div>
 
