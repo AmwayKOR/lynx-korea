@@ -266,6 +266,16 @@
 		<property name="businessProcessService" ref="businessProcessService" />
 		<property name="amwayApacBackOrderSelectionStrategy" ref="amwayApacBackOrderSelectionStrategy" />
 		<property name="commerceAvailabilityCalculationStrategy" ref="commerceStockLevelCalculationStrategy"/>
-		<property name="inventoryEventService" ref="commerceStockLevelCalculationStrategy"/>
+		<property name="inventoryEventService" ref="inventoryEventService"/>
 	</bean>
+	
+	<bean id="amwayApacStockLevelDao"
+        class="com.amway.apac.core.stock.dao.impl.DefaultAmwayApacStockLevelDao" parent="defaultAmwayStockLevelDao">
+    </bean>
+    
+    <bean id="amwayApacStockService"
+        class="com.amway.apac.core.stock.service.impl.DefaultAmwayApacStockService" parent="amwayStockService">
+        <property name="amwayApacStockLevelDao" ref="amwayApacStockLevelDao" />
+    </bean>
+	
 </beans>

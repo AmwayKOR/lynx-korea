@@ -37,6 +37,8 @@ public class DefaultAmwayApacConsignmentService extends DefaultAmwayConsignmentS
 
 	private static final char PREFIX_CODE = 'a';
 
+	private static final String PROCESS_CODE_SEPARATOR = null;
+
 	/**
 	 * {@inheritDoc}
 	 *
@@ -59,13 +61,18 @@ public class DefaultAmwayApacConsignmentService extends DefaultAmwayConsignmentS
 						PREFIX_CODE + order.getCode() + '_' + index.getAndIncrement(), Arrays.asList(entry));
 				if (consignment != null)
 				{
-					final ConsignmentProcessModel consignmentProcess = businessProcessService.createProcess(consignment.getCode(),
-							"consignment-backorder-process");
+					final String consignmentBackOrderProcessDefName = "consignment-backorder-process";
+					final ConsignmentProcessModel consignmentBackOrderProcess = businessProcessService
+							.createProcess(consignment.getCode(), consignmentBackOrderProcessDefName);
+					final String consignmentBackOrderProcessCode = new StringBuilder(consignmentBackOrderProcessDefName)
+							.append(PROCESS_CODE_SEPARATOR).append(consignment.getCode()).append(PROCESS_CODE_SEPARATOR)
+							.append(System.currentTimeMillis()).toString();
 					LOG.info(String.format("Created consignment with code : [%s] for order with code : [%s] ", consignment.getCode(),
 							consignment.getOrder().getCode()));
-					consignmentProcess.setConsignment(consignment);
-					getModelService().save(consignmentProcess);
-					businessProcessService.startProcess(consignmentProcess);
+					consignmentBackOrderProcess.setConsignment(consignment);
+					consignmentBackOrderProcess.setCode(consignmentBackOrderProcessCode);
+					getModelService().save(consignmentBackOrderProcess);
+					businessProcessService.startProcess(consignmentBackOrderProcess);
 				}
 			}
 			else
