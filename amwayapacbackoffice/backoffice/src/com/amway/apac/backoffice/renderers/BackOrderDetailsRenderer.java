@@ -35,7 +35,7 @@ public class BackOrderDetailsRenderer implements WidgetComponentRenderer<Compone
 
 	/**
 	 * Renders detail view for backorder in backoffice
-	 * 
+	 *
 	 * @param CustomSection
 	 * @param Component
 	 * @param Object
@@ -113,8 +113,13 @@ public class BackOrderDetailsRenderer implements WidgetComponentRenderer<Compone
 		attributeMap.put(itemsLabel9, itemsAttributeValue9);
 
 		final String itemsLabel10 = Labels.getLabel("amway.backorder.section.details.paymentRecieved");
-		final String itemsAttributeValue10 = String.valueOf(backOrderModel.getOriginalOrder().getPaymentStatus());
+		final String itemsAttributeValue10 = String.valueOf(null != backOrderModel.getOriginalOrder().getPaymentStatus()
+				? backOrderModel.getOriginalOrder().getPaymentStatus() : "");
 		attributeMap.put(itemsLabel10, itemsAttributeValue10);
+
+		final String itemsLabel11 = Labels.getLabel("amway.backorder.section.details.releaseBydate");
+		final String itemsAttributeValue11 = String.valueOf(backOrderModel.getReleaseByDate());
+		attributeMap.put(itemsLabel11, itemsAttributeValue11);
 
 		ApacAttributeWithLabelRendererUtil.createAttributeWithLabel(parent, attributeMap, 3);
 

@@ -57,6 +57,23 @@
 				<editorArea:customSection name="amway.backorder.section.consignmententries" spring-bean="backOrderConsignmentEntriesRenderer"/>				
 			</editorArea:tab>			
 		</editorArea:editorArea>
+	</context>
+	<context component="editor-area" type="AmwayBackOrder" merge-by="type">
+		<editorArea:editorArea
+			xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">			
+			<editorArea:tab name="amway.backorder.tab.properties">				
+				<editorArea:section name="amway.backorder.section.essentials">
+					<editorArea:attribute qualifier="consignment" />
+					<editorArea:attribute qualifier="status" />
+					<editorArea:attribute qualifier="originalOrder" />					
+					<editorArea:attribute qualifier="orderingAbo" />
+					<editorArea:attribute qualifier="releaseByDate" />					
+				</editorArea:section>
+				<editorArea:customSection name="amway.backorder.section.details" spring-bean="backOrderDetailsRenderer"/>
+				<editorArea:customSection name="amway.backorder.section.details.shippingaddress" spring-bean="backOrderShippingAddressRenderer"/>
+				<editorArea:customSection name="amway.backorder.section.consignmententries" spring-bean="backOrderConsignmentEntriesRenderer"/>				
+			</editorArea:tab>			
+		</editorArea:editorArea>
 	</context>	
 		<context type="StockLevel" component="editorareaactions" merge-by="type" >
 	         <y:actions xmlns:y="http://www.hybris.com/cockpit/config/hybris">
