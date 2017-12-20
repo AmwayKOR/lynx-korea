@@ -1,6 +1,7 @@
 package com.amway.apac.core.backorder.service;
 
 import de.hybris.platform.basecommerce.model.site.BaseSiteModel;
+import de.hybris.platform.ordersplitting.model.ConsignmentModel;
 import de.hybris.platform.ordersplitting.model.StockLevelModel;
 
 import java.util.List;
@@ -38,7 +39,12 @@ public interface AmwayApacBackOrderService
 	 */
 	boolean releaseBackOrdersForStocks(BaseSiteModel baseSite);
 
-
-
+	/**
+	 * This method is used to fetch BackOrder on the basis of consignment
+	 *
+	 * @param consignmentModel
+	 * @return AmwayBackOrder that refers to the given consignment
+	 */
+	AmwayBackOrderModel getBackOrderByConsignment(ConsignmentModel consignmentModel);
 
 }

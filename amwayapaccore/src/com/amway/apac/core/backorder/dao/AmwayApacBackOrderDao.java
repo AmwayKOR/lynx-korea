@@ -5,6 +5,7 @@ package com.amway.apac.core.backorder.dao;
 
 import de.hybris.platform.basecommerce.model.site.BaseSiteModel;
 import de.hybris.platform.core.model.product.ProductModel;
+import de.hybris.platform.ordersplitting.model.ConsignmentModel;
 import de.hybris.platform.ordersplitting.model.WarehouseModel;
 
 import java.util.Date;
@@ -43,4 +44,11 @@ public interface AmwayApacBackOrderDao
 	 * @return List<AmwayBackOrderModel>
 	 */
 	List<AmwayBackOrderModel> getBackOrdersForExpiring(final String status, final Date date);
+
+	/**
+	 * Fetches the back order for a given Consignment
+	 *
+	 * @param consignmentModel
+	 */
+	AmwayBackOrderModel getBackOrdersForConsignment(ConsignmentModel consignmentModel);
 }
