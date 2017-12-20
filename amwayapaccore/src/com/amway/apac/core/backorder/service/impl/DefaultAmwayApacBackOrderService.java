@@ -52,7 +52,7 @@ public class DefaultAmwayApacBackOrderService implements AmwayApacBackOrderServi
 	private static final String EXPIRED = "EXPIRED";
 	private BusinessProcessService businessProcessService;
 	private ModelService modelService;
-	private AmwayApacBackOrderDao amwayBackOrderDao;
+	private AmwayApacBackOrderDao amwayApacBackOrderDao;
 	private AmwayApacBackOrderSelectionStrategy amwayApacBackOrderSelectionStrategy;
 	private AmwayApacCommerceAvailabilityCalculationStrategy commerceAvailabilityCalculationStrategy;
 	private InventoryEventService inventoryEventService;
@@ -203,7 +203,7 @@ public class DefaultAmwayApacBackOrderService implements AmwayApacBackOrderServi
 	@Override
 	public AmwayBackOrderModel getBackOrderByConsignment(final ConsignmentModel consignmentModel)
 	{
-		return amwayBackOrderDao.getBackOrdersForConsignment(consignmentModel);
+		return amwayApacBackOrderDao.getBackOrdersForConsignment(consignmentModel);
 	}
 
 	/**
@@ -295,15 +295,14 @@ public class DefaultAmwayApacBackOrderService implements AmwayApacBackOrderServi
 		this.inventoryEventService = inventoryEventService;
 	}
 
-
 	/**
-	 * @param amwayBackOrderDao
-	 *           the amwayBackOrderDao to set
+	 * @param amwayApacBackOrderDao
+	 *           the amwayApacBackOrderDao to set
 	 */
 	@Required
-	public void setAmwayBackOrderDao(final AmwayApacBackOrderDao amwayBackOrderDao)
+	public void setAmwayApacBackOrderDao(final AmwayApacBackOrderDao amwayApacBackOrderDao)
 	{
-		this.amwayBackOrderDao = amwayBackOrderDao;
+		this.amwayApacBackOrderDao = amwayApacBackOrderDao;
 	}
 
 }
