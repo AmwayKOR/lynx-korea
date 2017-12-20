@@ -250,9 +250,16 @@
 	<import
 		resource="/amwayapaccore/processes/quote/quote-post-cancellation-process-spring.xml" />
 
+
+	<alias name="defaultAmwayBackOrderGenericDao" alias="amwayBackOrderGenericDao"/>
+	<bean name="defaultAmwayBackOrderGenericDao" class="de.hybris.platform.servicelayer.internal.dao.DefaultGenericDao">
+		<constructor-arg value="AmwayBackOrder"/>
+	</bean>
+	
 	<bean id="amwayApacBackOrderDao"
 		class="com.amway.apac.core.backorder.dao.impl.DefaultAmwayApacBackOrderDao">
 		<property name="flexibleSearchService" ref="flexibleSearchService" />
+		<property name="amwayBackOrderGenericDao" ref="amwayBackOrderGenericDao" />
 	</bean>
 
 	<bean id="amwayApacBackOrderSelectionStrategy"
@@ -266,6 +273,7 @@
 		<property name="businessProcessService" ref="businessProcessService" />
 		<property name="amwayApacBackOrderSelectionStrategy" ref="amwayApacBackOrderSelectionStrategy" />
 		<property name="modelService" ref="modelService" />
+		<property name="amwayApacBackOrderDao" ref="amwayApacBackOrderDao" />
 		<property name="commerceAvailabilityCalculationStrategy" ref="commerceStockLevelCalculationStrategy"/>
 		<property name="inventoryEventService" ref="inventoryEventService"/>
 	</bean>

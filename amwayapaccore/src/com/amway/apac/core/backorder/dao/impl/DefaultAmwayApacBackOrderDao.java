@@ -7,7 +7,9 @@ import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParamete
 
 import de.hybris.platform.basecommerce.model.site.BaseSiteModel;
 import de.hybris.platform.core.model.product.ProductModel;
+import de.hybris.platform.ordersplitting.model.ConsignmentModel;
 import de.hybris.platform.ordersplitting.model.WarehouseModel;
+import de.hybris.platform.servicelayer.internal.dao.GenericDao;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 import de.hybris.platform.servicelayer.search.FlexibleSearchService;
 import de.hybris.platform.servicelayer.search.SearchResult;
@@ -37,7 +39,7 @@ public class DefaultAmwayApacBackOrderDao implements AmwayApacBackOrderDao
 	private static final Logger LOG = Logger.getLogger(DefaultAmwayApacBackOrderDao.class);
 
 	private FlexibleSearchService flexibleSearchService;
-
+	private GenericDao<AmwayBackOrderModel> amwayBackOrderGenericDao;
 	private static final String DEFAULT_BACKORDER_FETCH_QUERY = "SELECT {ABO:pk} from {amwaybackorder as ABO join amwaybackorderstatus as BS on {ABO:status}={BS:pk}} where {BS:code}=?status ";
 	private static final String RELEASE_BY_DATE = "releaseByDate";
 
@@ -97,6 +99,25 @@ public class DefaultAmwayApacBackOrderDao implements AmwayApacBackOrderDao
 	}
 
 	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public AmwayBackOrderModel getBackOrdersForConsignment(final ConsignmentModel consignmentModel)
+	{
+		validateParameterNotNull(consignmentModel, "ConsignmentModel must not be null!");
+		final Map queryParams = new HashMap();
+		queryParams.put(AmwayBackOrderModel.CONSIGNMENT, consignmentModel);
+
+		final List<AmwayBackOrderModel> result = amwayBackOrderGenericDao.find(queryParams);
+		logDebugInfo("Found Backorder with code : ", result);
+		if (result.size() > 1)
+		{
+			LOG.warn("Found multiple backorders attached to same consignment!!");
+		}
+		return result.get(0);
+	}
+
+	/**
 	 * To print result and query in debug mode
 	 *
 	 * @param query
@@ -106,7 +127,7 @@ public class DefaultAmwayApacBackOrderDao implements AmwayApacBackOrderDao
 	{
 		if (LOG.isDebugEnabled())
 		{
-			final List<String> orderCodeList = new ArrayList<String>();
+			final List<String> orderCodeList = new ArrayList<>();
 			for (final AmwayBackOrderModel backOrder : backOrders)
 			{
 				orderCodeList.add(backOrder.getOriginalOrder().getCode() + "-");
@@ -134,5 +155,13 @@ public class DefaultAmwayApacBackOrderDao implements AmwayApacBackOrderDao
 		this.flexibleSearchService = flexibleSearchService;
 	}
 
-
+	/**
+	 * @param amwayBackOrderGenericDao
+	 *           the amwayBackOrderGenericDao to set
+	 */
+	@Required
+	public void setAmwayBackOrderGenericDao(final GenericDao<AmwayBackOrderModel> amwayBackOrderGenericDao)
+	{
+		this.amwayBackOrderGenericDao = amwayBackOrderGenericDao;
+	}
 }

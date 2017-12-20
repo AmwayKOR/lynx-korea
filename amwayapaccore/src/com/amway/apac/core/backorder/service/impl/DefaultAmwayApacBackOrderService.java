@@ -28,6 +28,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
 
+import com.amway.apac.core.backorder.dao.AmwayApacBackOrderDao;
 import com.amway.apac.core.backorder.service.AmwayApacBackOrderService;
 import com.amway.apac.core.backorder.strategies.AmwayApacBackOrderSelectionStrategy;
 import com.amway.apac.core.enums.AmwayBackOrderStatus;
@@ -51,6 +52,7 @@ public class DefaultAmwayApacBackOrderService implements AmwayApacBackOrderServi
 	private static final String EXPIRED = "EXPIRED";
 	private BusinessProcessService businessProcessService;
 	private ModelService modelService;
+	private AmwayApacBackOrderDao amwayApacBackOrderDao;
 	private AmwayApacBackOrderSelectionStrategy amwayApacBackOrderSelectionStrategy;
 	private AmwayApacCommerceAvailabilityCalculationStrategy commerceAvailabilityCalculationStrategy;
 	private InventoryEventService inventoryEventService;
@@ -195,7 +197,14 @@ public class DefaultAmwayApacBackOrderService implements AmwayApacBackOrderServi
 		return backorderexpired;
 	}
 
-
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public AmwayBackOrderModel getBackOrderByConsignment(final ConsignmentModel consignmentModel)
+	{
+		return amwayApacBackOrderDao.getBackOrdersForConsignment(consignmentModel);
+	}
 
 	/**
 	 * To print log in debug mode
@@ -285,4 +294,15 @@ public class DefaultAmwayApacBackOrderService implements AmwayApacBackOrderServi
 	{
 		this.inventoryEventService = inventoryEventService;
 	}
+
+	/**
+	 * @param amwayApacBackOrderDao
+	 *           the amwayApacBackOrderDao to set
+	 */
+	@Required
+	public void setAmwayApacBackOrderDao(final AmwayApacBackOrderDao amwayApacBackOrderDao)
+	{
+		this.amwayApacBackOrderDao = amwayApacBackOrderDao;
+	}
+
 }

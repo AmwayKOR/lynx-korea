@@ -6,6 +6,10 @@ package com.amway.apac.core.stock.service.impl;
 import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.ordersplitting.model.StockLevelModel;
 import de.hybris.platform.ordersplitting.model.WarehouseModel;
+import de.hybris.platform.stock.exception.StockLevelNotFoundException;
+import de.hybris.platform.util.Utilities;
+
+import java.util.Arrays;
 
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
@@ -46,6 +50,25 @@ public class DefaultAmwayApacStockService extends DefaultAmwayStockService imple
 	}
 
 	/**
+	 * @param product
+	 * @param warehouse
+	 * @param code
+	 * @return
+	 */
+	protected StockLevelModel checkAndGetStockLevel(final ProductModel product, final WarehouseModel warehouse, final String skuId)
+	{
+		for (final StockLevelModel stockLevelModel : getStockLevels(product, Arrays.asList(warehouse)))
+		{
+			if (stockLevelModel.getSkuId() != null && stockLevelModel.getSkuId().equals(skuId))
+			{
+				return stockLevelModel;
+			}
+		}
+		throw new StockLevelNotFoundException(
+				"no stock level for product [" + product + "] in warehouse [" + warehouse.getName() + "] found.");
+	}
+
+	/**
 	 * @return the amwayApacStockLevelDao
 	 */
 	public AmwayApacStockLevelDao getAmwayApacStockLevelDao()
@@ -62,5 +85,9 @@ public class DefaultAmwayApacStockService extends DefaultAmwayStockService imple
 		this.amwayApacStockLevelDao = amwayApacStockLevelDao;
 	}
 
-
+	protected void clearCacheForItem(final StockLevelModel stockLevel)
+	{
+		Utilities.invalidateCache(stockLevel.getPk());
+		getModelService().refresh(stockLevel);
+	}
 }
