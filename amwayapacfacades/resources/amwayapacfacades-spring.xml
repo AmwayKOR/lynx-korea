@@ -229,5 +229,10 @@
 
 	<alias name="defaultAmwayApacCommerceSearchSolrQueryPopulator" alias="commerceSearchSolrQueryPopulator" />
 	<bean id="defaultAmwayApacCommerceSearchSolrQueryPopulator" class="com.amway.apac.facades.product.populators.AmwayApacSearchSolrQueryPopulator" parent="defaultCommerceSearchSolrQueryPopulator" />
+    
+    <alias name="defaultAmwayApaccmsItemDropdownTypePopulator" alias="cmsItemDropdownComponentTypeAttributePopulator"/>
+    <bean id="defaultAmwayApaccmsItemDropdownTypePopulator" class="com.amway.apac.facades.cms.types.populator.AmwayApacCMSItemDropdownComponentTypeAttributePopulator" >
+        <property name="attributeDescriptorModelHelperService" ref="attributeDescriptorModelHelperService"/>
+    </bean>    
 
 </beans>
