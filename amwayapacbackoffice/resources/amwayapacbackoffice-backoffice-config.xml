@@ -20,6 +20,14 @@
 			</n:navigation-node>
 		</n:explorer-tree>
 	</context>
+	<context merge-mode="append" component="cs-explorer-tree"
+		principal="customersupportagentrole,customersupportadministratorrole,customersupportmanagerrole">
+		<n:explorer-tree xmlns:n="http://www.hybris.com/cockpitng/config/explorertree"
+			title="customer_support">
+			<n:type-node code="AmwayBackOrder" id="AmwayBackOrder"
+					position="1"  />
+		</n:explorer-tree>
+	</context>
 	<context type="AmwayBackOrder" component="listview">
 		<list:list-view xmlns:list="http://www.hybris.com/cockpitng/component/listView">
 			<list:column qualifier="product"  label="amway.backorder.product"/>
@@ -47,7 +55,7 @@
             </advanced-search:field-list>
         </advanced-search:advanced-search>
     </context>
-    <context component="editor-area" type="AmwayBackOrder" merge-by="type" principal="customersupportagentrole,customersupportadministratorrole,customersupportmanagerrole">
+    <context component="cs-editor-area" type="AmwayBackOrder" merge-by="type"  principal="customersupportagentrole,customersupportadministratorrole,customersupportmanagerrole">
 		<editorArea:editorArea
 			xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">			
 			<editorArea:tab name="amway.backorder.tab.properties">				
