@@ -36,7 +36,6 @@ import com.amway.apac.core.model.AmwayBackOrderModel;
 import com.amway.apac.core.stock.strategies.impl.AmwayApacCommerceAvailabilityCalculationStrategy;
 
 
-
 /**
  * Default implementation for AmwayApacBackOrderService
  *
@@ -61,7 +60,7 @@ public class DefaultAmwayApacBackOrderService implements AmwayApacBackOrderServi
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void releaseBackOrders(final List<AmwayBackOrderModel> amwayBackOrders, final StockLevelModel stockLevel)
+	public void releaseBackOrdersForStock(final List<AmwayBackOrderModel> amwayBackOrders, final StockLevelModel stockLevel)
 	{
 		if (CollectionUtils.isNotEmpty(amwayBackOrders) && Objects.nonNull(stockLevel)
 				&& !InStockStatus.BACKORDER.equals(stockLevel.getInStockStatus()))
@@ -81,9 +80,12 @@ public class DefaultAmwayApacBackOrderService implements AmwayApacBackOrderServi
 						{
 							final Collection<AllocationEventModel> allocationEvents = inventoryEventService
 									.getAllocationEventsForOrderEntry((OrderEntryModel) consignmentEntry.getOrderEntry());
-							requestedQty = allocationEvents.stream().filter(allocationEvent -> allocationEvent.getConsignmentEntry()
-									.getConsignment().equals(consignmentEntry.getConsignment()))
-									.mapToLong(AllocationEventModel::getQuantity).sum();
+							requestedQty = allocationEvents
+									.stream()
+									.filter(
+											allocationEvent -> allocationEvent.getConsignmentEntry().getConsignment()
+													.equals(consignmentEntry.getConsignment())).mapToLong(AllocationEventModel::getQuantity)
+									.sum();
 						}
 					}
 					if (requestedQty <= available.longValue() && requestedQty <= maxBoReleaseLimit)
@@ -102,12 +104,11 @@ public class DefaultAmwayApacBackOrderService implements AmwayApacBackOrderServi
 		}
 	}
 
-
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void releaseBackOrdersForStocks(final List<StockLevelModel> stockLevels)
+	public void releaseBackOrders(final List<StockLevelModel> stockLevels)
 	{
 		final Map<StockLevelModel, List<AmwayBackOrderModel>> backOrderMap = getAmwayApacBackOrderSelectionStrategy()
 				.getBackOrdersForRelease(stockLevels);
@@ -115,15 +116,15 @@ public class DefaultAmwayApacBackOrderService implements AmwayApacBackOrderServi
 		{
 			for (final Entry<StockLevelModel, List<AmwayBackOrderModel>> entry : backOrderMap.entrySet())
 			{
-				//release all the backOrders for particular stocks
-				releaseBackOrders(entry.getValue(), entry.getKey());
+				// release all the backOrders for particular stocks
+				releaseBackOrdersForStock(entry.getValue(), entry.getKey());
 			}
 		}
 
 	}
 
 	@Override
-	public boolean releaseBackOrdersForStocks(final BaseSiteModel baseSite)
+	public boolean releaseBackOrders(final BaseSiteModel baseSite)
 	{
 		boolean releaseBackOrdersForStocks = false;
 		final Map<StockLevelModel, List<AmwayBackOrderModel>> backOrderMap = getAmwayApacBackOrderSelectionStrategy()
@@ -132,8 +133,8 @@ public class DefaultAmwayApacBackOrderService implements AmwayApacBackOrderServi
 		{
 			for (final Entry<StockLevelModel, List<AmwayBackOrderModel>> entry : backOrderMap.entrySet())
 			{
-				//release all the backOrders for particular stocks
-				releaseBackOrders(entry.getValue(), entry.getKey());
+				// release all the backOrders for particular stocks
+				releaseBackOrdersForStock(entry.getValue(), entry.getKey());
 			}
 			releaseBackOrdersForStocks = true;
 		}
@@ -160,7 +161,8 @@ public class DefaultAmwayApacBackOrderService implements AmwayApacBackOrderServi
 					{
 						final String eventCode = (new StringBuilder(String.valueOf(process.getConsignment().getCode()))).append("_")
 								.append(BACK_ORDER_RELEASE_EVENT_CODE).toString();
-						//Trigger the business process event which release AmwayBackOrder
+						// Trigger the business process event which release
+						// AmwayBackOrder
 						getBusinessProcessService().triggerEvent(eventCode);
 						LOG.info("BackOrder consignment triggered successfully for code : " + consignment.getCode());
 					}

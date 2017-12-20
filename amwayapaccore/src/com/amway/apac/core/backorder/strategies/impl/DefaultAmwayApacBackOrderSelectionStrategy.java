@@ -33,7 +33,6 @@ import com.amway.apac.core.model.AmwayBackOrderModel;
 public class DefaultAmwayApacBackOrderSelectionStrategy implements AmwayApacBackOrderSelectionStrategy
 {
 	private static final Logger LOG = Logger.getLogger(DefaultAmwayApacBackOrderSelectionStrategy.class);
-	private static final String ACTIVE = "ACTIVE";
 	private AmwayApacBackOrderDao amwayApacBackOrderDao;
 	private StockService stockService;
 
@@ -51,7 +50,7 @@ public class DefaultAmwayApacBackOrderSelectionStrategy implements AmwayApacBack
 				for (final StockLevelModel stockLevel : stockLevels)
 				{
 					final List<AmwayBackOrderModel> amwayBackOrdersList = getAmwayApacBackOrderDao().getBackOrders(
-							AmwayBackOrderStatus.valueOf(ACTIVE), stockLevel.getWarehouse(), stockLevel.getProduct(), true, null);
+							AmwayBackOrderStatus.ACTIVE, stockLevel.getWarehouse(), stockLevel.getProduct(), true, null);
 					//Verify the payment of backOrders
 					validatePaymentAndUpdateList(amwayBackOrdersList);
 					amwayBackOrdersMap.put(stockLevel, amwayBackOrdersList);
@@ -75,12 +74,12 @@ public class DefaultAmwayApacBackOrderSelectionStrategy implements AmwayApacBack
 	{
 		try
 		{
-			final List<AmwayBackOrderModel> amwayBackOrdersList = getAmwayApacBackOrderDao()
-					.getBackOrders(AmwayBackOrderStatus.valueOf(ACTIVE), null, null, true, baseSite);
+			final List<AmwayBackOrderModel> amwayBackOrdersList = getAmwayApacBackOrderDao().getBackOrders(
+					AmwayBackOrderStatus.ACTIVE, null, null, true, baseSite);
 			validatePaymentAndUpdateList(amwayBackOrdersList);
 			//Grouping the AmwayBackOrders as per the stockLevels for stock calculation
-			final Map<StockLevelModel, List<AmwayBackOrderModel>> amwayBackOrdersMap = amwayBackOrdersList.stream()
-					.collect(Collectors.groupingBy(backOrder -> getStockLevel(backOrder), Collectors.toList()));
+			final Map<StockLevelModel, List<AmwayBackOrderModel>> amwayBackOrdersMap = amwayBackOrdersList.stream().collect(
+					Collectors.groupingBy(backOrder -> getStockLevel(backOrder), Collectors.toList()));
 			return amwayBackOrdersMap;
 		}
 		catch (final Exception e)
@@ -94,7 +93,7 @@ public class DefaultAmwayApacBackOrderSelectionStrategy implements AmwayApacBack
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<AmwayBackOrderModel> getBackOrdersForExpiring(final String status, final Date date)
+	public List<AmwayBackOrderModel> getBackOrdersForExpiring(final AmwayBackOrderStatus status, final Date date)
 	{
 		final List<AmwayBackOrderModel> amwayBackOrdersList = getAmwayApacBackOrderDao().getBackOrdersForExpiring(status, date);
 		return amwayBackOrdersList;

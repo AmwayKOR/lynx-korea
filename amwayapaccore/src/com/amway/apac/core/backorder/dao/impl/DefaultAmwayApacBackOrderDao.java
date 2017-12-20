@@ -54,25 +54,25 @@ public class DefaultAmwayApacBackOrderDao implements AmwayApacBackOrderDao
 
 		final StringBuilder query = new StringBuilder(DEFAULT_BACKORDER_FETCH_QUERY);
 		final Map<String, Object> queryParams = new HashMap<>();
-		queryParams.put(AmwayBackOrderModel.STATUS, status);
+		queryParams.put(AmwayBackOrderModel.STATUS, status.getCode());
 		if (Objects.nonNull(warehouse))
 		{
-			query.append(" AND {").append(AmwayBackOrderModel.WAREHOUSE).append("} =? ").append(AmwayBackOrderModel.WAREHOUSE);
+			query.append(" AND {").append(AmwayBackOrderModel.WAREHOUSE).append("}=?").append(AmwayBackOrderModel.WAREHOUSE);
 			queryParams.put(AmwayBackOrderModel.WAREHOUSE, warehouse);
 		}
 		if (Objects.nonNull(product))
 		{
-			query.append(" AND {").append(AmwayBackOrderModel.PRODUCT).append("} =? ").append(AmwayBackOrderModel.PRODUCT);
+			query.append(" AND {").append(AmwayBackOrderModel.PRODUCT).append("}=?").append(AmwayBackOrderModel.PRODUCT);
 			queryParams.put(AmwayBackOrderModel.PRODUCT, product);
 		}
 		if (Objects.nonNull(baseSite))
 		{
-			query.append(" AND {").append(AmwayBackOrderModel.SITE).append("} =? ").append(AmwayBackOrderModel.SITE);
+			query.append(" AND {").append(AmwayBackOrderModel.SITE).append("}=?").append(AmwayBackOrderModel.SITE);
 			queryParams.put(AmwayBackOrderModel.SITE, baseSite);
 		}
 		if (isAscending)
 		{
-			query.append("ORDER BY {BO:creationtime} ASC");
+			query.append(" ORDER BY {ABO:creationtime} ASC ");
 		}
 		final FlexibleSearchQuery flexQuery = new FlexibleSearchQuery(query.toString(), queryParams);
 		final SearchResult<AmwayBackOrderModel> result = getFlexibleSearchService().search(flexQuery);
@@ -84,11 +84,11 @@ public class DefaultAmwayApacBackOrderDao implements AmwayApacBackOrderDao
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<AmwayBackOrderModel> getBackOrdersForExpiring(final String status, final Date date)
+	public List<AmwayBackOrderModel> getBackOrdersForExpiring(final AmwayBackOrderStatus status, final Date date)
 	{
 		validateParameterNotNull(status, "AmwayBackOrderStatus must not be null!");
 		final Map queryParams = new HashMap();
-		queryParams.put(AmwayBackOrderModel.STATUS, status);
+		queryParams.put(AmwayBackOrderModel.STATUS, status.getCode());
 		queryParams.put(RELEASE_BY_DATE, date);
 		final StringBuilder query = new StringBuilder(DEFAULT_BACKORDER_FETCH_QUERY);
 		query.append(" and {ABO:releasebydate} < ?releaseByDate");

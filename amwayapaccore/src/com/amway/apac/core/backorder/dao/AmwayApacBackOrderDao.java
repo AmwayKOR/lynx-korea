@@ -40,10 +40,10 @@ public interface AmwayApacBackOrderDao
 	 * Find all the AmwayBackOrder for a particular status, older than provided date
 	 *
 	 * @param status
-	 * @param Date
+	 * @param date
 	 * @return List<AmwayBackOrderModel>
 	 */
-	List<AmwayBackOrderModel> getBackOrdersForExpiring(final String status, final Date date);
+	List<AmwayBackOrderModel> getBackOrdersForExpiring(final AmwayBackOrderStatus status, final Date date);
 
 	/**
 	 * Fetches the back order for a given Consignment

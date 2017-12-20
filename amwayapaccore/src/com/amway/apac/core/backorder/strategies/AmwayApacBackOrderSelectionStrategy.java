@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import com.amway.apac.core.enums.AmwayBackOrderStatus;
 import com.amway.apac.core.model.AmwayBackOrderModel;
 
 
@@ -37,7 +38,7 @@ public interface AmwayApacBackOrderSelectionStrategy
 	 * @param date
 	 * @return List<AmwayBackOrderModel>
 	 */
-	public List<AmwayBackOrderModel> getBackOrdersForExpiring(final String status, final Date date);
+	public List<AmwayBackOrderModel> getBackOrdersForExpiring(final AmwayBackOrderStatus status, final Date date);
 
 	/**
 	 * Select All AmwayBackOrders for release

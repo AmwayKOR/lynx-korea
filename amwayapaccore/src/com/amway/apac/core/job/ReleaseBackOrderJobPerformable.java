@@ -9,37 +9,34 @@ import de.hybris.platform.cronjob.enums.CronJobStatus;
 import de.hybris.platform.servicelayer.cronjob.AbstractJobPerformable;
 import de.hybris.platform.servicelayer.cronjob.PerformResult;
 
+import org.apache.log4j.Logger;
+
 import com.amway.apac.core.backorder.service.AmwayApacBackOrderService;
 import com.amway.apac.core.model.AmwayApacStoreSpecificCronJobModel;
 
 
 /**
- *
- * Cron job class for Releasing the backorders which are active
+ * CronJob class for Releasing the BackOrders which are active
  */
 public class ReleaseBackOrderJobPerformable extends AbstractJobPerformable<AmwayApacStoreSpecificCronJobModel>
 {
+	private static final Logger LOG = Logger.getLogger(ReleaseBackOrderJobPerformable.class);
 	private AmwayApacBackOrderService backOrderService;
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see de.hybris.platform.servicelayer.cronjob.AbstractJobPerformable#perform(de.hybris.platform.cronjob.model.
-	 * CronJobModel) Get all the amway backorders which are active and their release by date is later than today and
-	 * release them if stock allows them to be released
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public PerformResult perform(final AmwayApacStoreSpecificCronJobModel releaseBackOrderJobPerformable)
 	{
+		PerformResult result = new PerformResult(CronJobResult.SUCCESS, CronJobStatus.FINISHED);
 		final BaseSiteModel baseSite = releaseBackOrderJobPerformable.getBaseStore().getCmsSites().iterator().next();
-		if (backOrderService.releaseBackOrdersForStocks(baseSite))
+		if (!getBackOrderService().releaseBackOrders(baseSite))
 		{
-			return new PerformResult(CronJobResult.SUCCESS, CronJobStatus.FINISHED);
+			LOG.error("Not able to release the ACTIVE AmwayBackOrders");
+			result = new PerformResult(CronJobResult.FAILURE, CronJobStatus.FINISHED);
 		}
-		else
-		{
-			return new PerformResult(CronJobResult.FAILURE, CronJobStatus.FINISHED);
-		}
+		return result;
 	}
 
 	/**
