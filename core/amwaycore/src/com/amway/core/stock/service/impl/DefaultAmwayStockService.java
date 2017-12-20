@@ -63,14 +63,14 @@ public class DefaultAmwayStockService extends DefaultStockService implements Amw
 
 			final StockLevelModel currentStockLevel = checkAndGetStockLevel(product, warehouse, skuId);
 
-				LOG.info("Reserving stock amount of " + amount + " for product " + product.getCode() + " and skuId " + skuId);
-				final Integer reserved = getAmwayStockLevelDao().reserve(currentStockLevel, amount);
-				if (reserved == null)
-				{
-					throw new InsufficientStockLevelException("insufficient available amount for stock level ["
-							+ currentStockLevel.getPk() + "]");
+			LOG.info("Reserving stock amount of " + amount + " for product " + product.getCode() + " and skuId " + skuId);
+			final Integer reserved = getAmwayStockLevelDao().reserve(currentStockLevel, amount);
+			if (reserved == null)
+			{
+				throw new InsufficientStockLevelException(
+						"insufficient available amount for stock level [" + currentStockLevel.getPk() + "]");
 
-				}
+			}
 
 			clearCacheForItem(currentStockLevel);
 			//createStockLevelHistoryEntry(currentStockLevel, StockLevelUpdateType.CUSTOMER_RESERVE, reserved.intValue(), skuId); TODO: do we need history here?
@@ -162,13 +162,13 @@ public class DefaultAmwayStockService extends DefaultStockService implements Amw
 	}
 
 
-	private void clearCacheForItem(final StockLevelModel stockLevel)
+	protected void clearCacheForItem(final StockLevelModel stockLevel)
 	{
 		Utilities.invalidateCache(stockLevel.getPk());
 		getModelService().refresh(stockLevel);
 	}
 
-	private StockLevelModel checkAndGetStockLevel(final ProductModel product, final WarehouseModel warehouse, final String skuId)
+	protected StockLevelModel checkAndGetStockLevel(final ProductModel product, final WarehouseModel warehouse, final String skuId)
 	{
 		//TODO: use DAO instead of loop
 		for (final StockLevelModel stockLevelModel : getStockLevels(product, Arrays.asList(warehouse)))
@@ -178,8 +178,8 @@ public class DefaultAmwayStockService extends DefaultStockService implements Amw
 				return stockLevelModel;
 			}
 		}
-		throw new StockLevelNotFoundException("no stock level for product [" + product + "] in warehouse [" + warehouse.getName()
-				+ "] found.");
+		throw new StockLevelNotFoundException(
+				"no stock level for product [" + product + "] in warehouse [" + warehouse.getName() + "] found.");
 	}
 
 	/**

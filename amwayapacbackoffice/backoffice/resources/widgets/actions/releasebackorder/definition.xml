@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-definition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   id="com.amway.amwayapacbackoffice.actions"
+                   xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/action-definition.xsd">
+    <name>Release Backorder</name>
+    <description>
+        Action to release backorder stock.
+    </description>
+    <author></author>
+    <version>1.0</version>
+    <actionClassName>com.amway.amwayapacbackoffice.actions.ReleaseBackorderAction</actionClassName>
+    <inputType>de.hybris.platform.ordersplitting.model.StockLevelModel</inputType>
+    <iconUri>icons/icon_action_release_backorder_default.png</iconUri>
+    <iconDisabledUri>icons/icon_action_release_backorder_disabled.png</iconDisabledUri>
+    <iconHoverUri>icons/icon_action_release_backorder_hover.png</iconHoverUri>
+    <settings>
+        <setting key="confirmation.threshold" default-value="500" type="java.lang.Integer"/>
+    </settings>
+</action-definition>
