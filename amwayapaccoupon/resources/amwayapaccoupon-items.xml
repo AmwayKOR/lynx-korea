@@ -23,6 +23,7 @@
 			<value code="REDEEMED" />
 			<value code="EXPIRED" />
 			<value code="DELETED" />
+			<value code="FREEZED" />
 		</enumtype>
 	</enumtypes>
 	<itemtypes>
