@@ -3,6 +3,7 @@
  */
 package com.amway.apac.core.backorder.strategies;
 
+import de.hybris.platform.basecommerce.model.site.BaseSiteModel;
 import de.hybris.platform.ordersplitting.model.StockLevelModel;
 
 import java.util.Date;
@@ -43,7 +44,7 @@ public interface AmwayApacBackOrderSelectionStrategy
 	 *
 	 * @return Map<StockLevelModel,List<AmwayBackOrderModel>
 	 */
-	public Map<StockLevelModel, List<AmwayBackOrderModel>> getBackOrdersForRelease();
+	public Map<StockLevelModel, List<AmwayBackOrderModel>> getBackOrdersForRelease(final BaseSiteModel baseSite);
 
 
 }

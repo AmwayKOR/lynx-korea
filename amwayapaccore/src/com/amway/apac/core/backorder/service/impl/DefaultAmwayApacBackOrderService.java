@@ -4,6 +4,7 @@
 package com.amway.apac.core.backorder.service.impl;
 
 import de.hybris.platform.basecommerce.enums.InStockStatus;
+import de.hybris.platform.basecommerce.model.site.BaseSiteModel;
 import de.hybris.platform.core.model.order.OrderEntryModel;
 import de.hybris.platform.ordersplitting.model.ConsignmentEntryModel;
 import de.hybris.platform.ordersplitting.model.ConsignmentModel;
@@ -78,12 +79,9 @@ public class DefaultAmwayApacBackOrderService implements AmwayApacBackOrderServi
 						{
 							final Collection<AllocationEventModel> allocationEvents = inventoryEventService
 									.getAllocationEventsForOrderEntry((OrderEntryModel) consignmentEntry.getOrderEntry());
-							requestedQty = allocationEvents
-									.stream()
-									.filter(
-											allocationEvent -> allocationEvent.getConsignmentEntry().getConsignment()
-													.equals(consignmentEntry.getConsignment())).mapToLong(AllocationEventModel::getQuantity)
-									.sum();
+							requestedQty = allocationEvents.stream().filter(allocationEvent -> allocationEvent.getConsignmentEntry()
+									.getConsignment().equals(consignmentEntry.getConsignment()))
+									.mapToLong(AllocationEventModel::getQuantity).sum();
 						}
 					}
 					if (requestedQty <= available.longValue() && requestedQty <= maxBoReleaseLimit)
@@ -120,6 +118,24 @@ public class DefaultAmwayApacBackOrderService implements AmwayApacBackOrderServi
 			}
 		}
 
+	}
+
+	@Override
+	public boolean releaseBackOrdersForStocks(final BaseSiteModel baseSite)
+	{
+		boolean releaseBackOrdersForStocks = false;
+		final Map<StockLevelModel, List<AmwayBackOrderModel>> backOrderMap = getAmwayApacBackOrderSelectionStrategy()
+				.getBackOrdersForRelease(baseSite);
+		if (null != backOrderMap && !backOrderMap.isEmpty())
+		{
+			for (final Entry<StockLevelModel, List<AmwayBackOrderModel>> entry : backOrderMap.entrySet())
+			{
+				//release all the backOrders for particular stocks
+				releaseBackOrders(entry.getValue(), entry.getKey());
+			}
+			releaseBackOrdersForStocks = true;
+		}
+		return releaseBackOrdersForStocks;
 	}
 
 	/**

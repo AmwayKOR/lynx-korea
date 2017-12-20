@@ -122,6 +122,20 @@
 				</attributes>
 			</itemtype>
 		</typegroup>
+		<typegroup name="cronjob">
+		<itemtype code="AmwayApacStoreSpecificCronJob" generate="true"
+                autocreate="true" extends="CronJob">
+                <description>Cronjob for market specific localization</description>
+                <attributes>
+                   <attribute qualifier="baseStore" type="BaseStore">
+						<description>Base Store unique to the site.</description>
+						<persistence type="property" />
+						<modifiers optional="false" />
+					</attribute>
+                </attributes>
+       </itemtype>
+			
+		</typegroup>
 
 	</itemtypes>
 </items>

@@ -3,6 +3,7 @@
  */
 package com.amway.apac.core.backorder.dao;
 
+import de.hybris.platform.basecommerce.model.site.BaseSiteModel;
 import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.ordersplitting.model.WarehouseModel;
 
@@ -32,7 +33,7 @@ public interface AmwayApacBackOrderDao
 	 * @return List<AmwayBackOrderModel>
 	 */
 	List<AmwayBackOrderModel> getBackOrders(AmwayBackOrderStatus status, WarehouseModel warehouse, ProductModel product,
-			boolean isAscending);
+			boolean isAscending, final BaseSiteModel baseSite);
 
 	/**
 	 * Find all the AmwayBackOrder for a particular status, older than provided date

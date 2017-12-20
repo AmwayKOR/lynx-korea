@@ -275,6 +275,10 @@
 		<property name="backOrderService" ref="amwayApacBackOrderService" />
 		<property name="timeService" ref="timeService" />
 	</bean>
+	<bean id="releaseBackorderJob" class="com.amway.apac.core.job.ReleaseBackOrderJobPerformable"
+		parent="abstractJobPerformable">		
+		<property name="backOrderService" ref="amwayApacBackOrderService" />		
+	</bean>
 	
 	<bean id="amwayApacStockLevelDao"
         class="com.amway.apac.core.stock.dao.impl.DefaultAmwayApacStockLevelDao" parent="defaultAmwayStockLevelDao">

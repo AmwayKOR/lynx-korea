@@ -3,6 +3,7 @@
  */
 package com.amway.apac.core.backorder.strategies.impl;
 
+import de.hybris.platform.basecommerce.model.site.BaseSiteModel;
 import de.hybris.platform.ordersplitting.model.StockLevelModel;
 import de.hybris.platform.stock.StockService;
 
@@ -50,7 +51,7 @@ public class DefaultAmwayApacBackOrderSelectionStrategy implements AmwayApacBack
 				for (final StockLevelModel stockLevel : stockLevels)
 				{
 					final List<AmwayBackOrderModel> amwayBackOrdersList = getAmwayApacBackOrderDao().getBackOrders(
-							AmwayBackOrderStatus.valueOf(ACTIVE), stockLevel.getWarehouse(), stockLevel.getProduct(), true);
+							AmwayBackOrderStatus.valueOf(ACTIVE), stockLevel.getWarehouse(), stockLevel.getProduct(), true, null);
 					//Verify the payment of backOrders
 					validatePaymentAndUpdateList(amwayBackOrdersList);
 					amwayBackOrdersMap.put(stockLevel, amwayBackOrdersList);
@@ -70,16 +71,16 @@ public class DefaultAmwayApacBackOrderSelectionStrategy implements AmwayApacBack
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Map<StockLevelModel, List<AmwayBackOrderModel>> getBackOrdersForRelease()
+	public Map<StockLevelModel, List<AmwayBackOrderModel>> getBackOrdersForRelease(final BaseSiteModel baseSite)
 	{
 		try
 		{
-			final List<AmwayBackOrderModel> amwayBackOrdersList = getAmwayApacBackOrderDao().getBackOrders(
-					AmwayBackOrderStatus.valueOf(ACTIVE), null, null, true);
+			final List<AmwayBackOrderModel> amwayBackOrdersList = getAmwayApacBackOrderDao()
+					.getBackOrders(AmwayBackOrderStatus.valueOf(ACTIVE), null, null, true, baseSite);
 			validatePaymentAndUpdateList(amwayBackOrdersList);
 			//Grouping the AmwayBackOrders as per the stockLevels for stock calculation
-			final Map<StockLevelModel, List<AmwayBackOrderModel>> amwayBackOrdersMap = amwayBackOrdersList.stream().collect(
-					Collectors.groupingBy(backOrder -> getStockLevel(backOrder), Collectors.toList()));
+			final Map<StockLevelModel, List<AmwayBackOrderModel>> amwayBackOrdersMap = amwayBackOrdersList.stream()
+					.collect(Collectors.groupingBy(backOrder -> getStockLevel(backOrder), Collectors.toList()));
 			return amwayBackOrdersMap;
 		}
 		catch (final Exception e)

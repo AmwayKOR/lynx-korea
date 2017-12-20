@@ -1,5 +1,6 @@
 package com.amway.apac.core.backorder.service;
 
+import de.hybris.platform.basecommerce.model.site.BaseSiteModel;
 import de.hybris.platform.ordersplitting.model.StockLevelModel;
 
 import java.util.List;
@@ -31,6 +32,11 @@ public interface AmwayApacBackOrderService
 	 * @param backOrders
 	 */
 	Boolean expireBackOrder(List<AmwayBackOrderModel> backOrders);
+
+	/**
+	 * @param baseSite
+	 */
+	boolean releaseBackOrdersForStocks(BaseSiteModel baseSite);
 
 
 

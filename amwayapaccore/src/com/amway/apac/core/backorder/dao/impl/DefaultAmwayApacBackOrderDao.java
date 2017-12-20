@@ -5,6 +5,7 @@ package com.amway.apac.core.backorder.dao.impl;
 
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNull;
 
+import de.hybris.platform.basecommerce.model.site.BaseSiteModel;
 import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.ordersplitting.model.WarehouseModel;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
@@ -45,7 +46,7 @@ public class DefaultAmwayApacBackOrderDao implements AmwayApacBackOrderDao
 	 */
 	@Override
 	public List<AmwayBackOrderModel> getBackOrders(final AmwayBackOrderStatus status, final WarehouseModel warehouse,
-			final ProductModel product, final boolean isAscending)
+			final ProductModel product, final boolean isAscending, final BaseSiteModel baseSite)
 	{
 		validateParameterNotNull(status, "AmwayBackOrderStatus must not be null!");
 
@@ -61,6 +62,11 @@ public class DefaultAmwayApacBackOrderDao implements AmwayApacBackOrderDao
 		{
 			query.append(" AND {").append(AmwayBackOrderModel.PRODUCT).append("} =? ").append(AmwayBackOrderModel.PRODUCT);
 			queryParams.put(AmwayBackOrderModel.PRODUCT, product);
+		}
+		if (Objects.nonNull(baseSite))
+		{
+			query.append(" AND {").append(AmwayBackOrderModel.SITE).append("} =? ").append(AmwayBackOrderModel.SITE);
+			queryParams.put(AmwayBackOrderModel.SITE, baseSite);
 		}
 		if (isAscending)
 		{
