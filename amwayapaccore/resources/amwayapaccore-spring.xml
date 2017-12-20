@@ -295,4 +295,9 @@
 			class="com.amway.apac.core.order.impl.DefaultAmwayApacCommerceAddToCartStrategy"
 			parent="defaultCommerceAddToCartStrategy"/>
 	
+	<alias alias="cartFactory" name="amwayApacCommerceCartFactory" />
+	<bean id="amwayApacCommerceCartFactory" class="com.amway.apac.core.commerceservices.order.impl.AmwayApacCommerceCartFactory" parent="amwayCommerceCartFactory">
+		<property name="amwayApacWarehouseServiceabilityService" ref="amwayApacWarehouseServiceabilityService"/>
+	</bean>
+	
 </beans>
