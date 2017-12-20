@@ -13,19 +13,27 @@ public interface AmwayApacBackOrderService
 {
 
 	/**
-	 * This method is used to release AmwayBackOrders on the bases of stockLevel and backOrder Passed
+	 * This method is used to release AmwayBackOrders for the stockLevels.
 	 *
 	 * @param amwayBackOrders
 	 * @param stockLevel
 	 */
-	void releaseBackOrders(List<AmwayBackOrderModel> amwayBackOrders, StockLevelModel stockLevel);
+	void releaseBackOrdersForStock(List<AmwayBackOrderModel> amwayBackOrders, StockLevelModel stockLevel);
 
 	/**
-	 * This method is used to release AmwayBackOrders on the bases of list of stockLevels
+	 * This method is used to release AmwayBackOrders on the bases of list of stockLevels.
 	 *
 	 * @param stockLevels
 	 */
-	void releaseBackOrdersForStocks(List<StockLevelModel> stockLevels);
+	void releaseBackOrders(List<StockLevelModel> stockLevels);
+
+	/**
+	 * This method is used to release all available AmwayBackOrders for the site.
+	 *
+	 * @param baseSite
+	 * @return boolean
+	 */
+	boolean releaseBackOrders(BaseSiteModel baseSite);
 
 	/**
 	 * This method is used to Expire AmwayBackOrders on the bases of Date(current)
@@ -35,16 +43,13 @@ public interface AmwayApacBackOrderService
 	Boolean expireBackOrder(List<AmwayBackOrderModel> backOrders);
 
 	/**
-	 * @param baseSite
-	 */
-	boolean releaseBackOrdersForStocks(BaseSiteModel baseSite);
-
-	/**
 	 * This method is used to fetch BackOrder on the basis of consignment
 	 *
 	 * @param consignmentModel
 	 * @return AmwayBackOrder that refers to the given consignment
 	 */
 	AmwayBackOrderModel getBackOrderByConsignment(ConsignmentModel consignmentModel);
+
+
 
 }

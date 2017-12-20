@@ -12,50 +12,47 @@ import de.hybris.platform.servicelayer.time.TimeService;
 
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.log4j.Logger;
 
 import com.amway.apac.core.backorder.service.AmwayApacBackOrderService;
 import com.amway.apac.core.backorder.strategies.AmwayApacBackOrderSelectionStrategy;
+import com.amway.apac.core.enums.AmwayBackOrderStatus;
 import com.amway.apac.core.model.AmwayBackOrderModel;
 
 
 /**
- *
- * Cron job class for setting the backorders as expired
+ * CronJob class for setting the BackOrders as expired
  */
 public class ExpiredBackorderJobPerformable extends AbstractJobPerformable<CronJobModel>
 {
 	private static final Logger LOG = Logger.getLogger(ExpiredBackorderJobPerformable.class);
-
 	private AmwayApacBackOrderSelectionStrategy backOrderSelectionStrategy;
 	private AmwayApacBackOrderService backOrderService;
-	private static final String ACTIVE = "ACTIVE";
 	private TimeService timeService;
 
-
-
-	/*
-	 * (non-Javadoc) G
-	 * 
-	 * @see de.hybris.platform.servicelayer.cronjob.AbstractJobPerformable#perform(de.hybris.platform.cronjob.model.
-	 * CronJobModel) Get all the amway backorders which are active and their release by date is older than today. Then
-	 * set their status to expired.
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public PerformResult perform(final CronJobModel cronJob)
 	{
-		final List<AmwayBackOrderModel> amwayBackOrders = getBackOrderSelectionStrategy().getBackOrdersForExpiring(ACTIVE,
-				getTimeService().getCurrentTime());
-		if (getBackOrderService().expireBackOrder(amwayBackOrders).booleanValue())
+		PerformResult result = new PerformResult(CronJobResult.SUCCESS, CronJobStatus.FINISHED);
+		final List<AmwayBackOrderModel> amwayBackOrders = getBackOrderSelectionStrategy().getBackOrdersForExpiring(
+				AmwayBackOrderStatus.ACTIVE, getTimeService().getCurrentTime());
+		if (CollectionUtils.isNotEmpty(amwayBackOrders))
 		{
-			return new PerformResult(CronJobResult.SUCCESS, CronJobStatus.FINISHED);
+			if (!getBackOrderService().expireBackOrder(amwayBackOrders).booleanValue())
+			{
+				LOG.error("Not able to expire the ACTIVE AmwayBackOrders");
+				result = new PerformResult(CronJobResult.FAILURE, CronJobStatus.FINISHED);
+			}
 		}
 		else
 		{
-			return new PerformResult(CronJobResult.FAILURE, CronJobStatus.FINISHED);
+			LOG.warn("No Active AmwayBackOrderFound for  expiring");
 		}
-
-
+		return result;
 	}
 
 	/**
