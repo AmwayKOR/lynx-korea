@@ -62,8 +62,7 @@ public class DefaultAmwayApacBackOrderService implements AmwayApacBackOrderServi
 	@Override
 	public void releaseBackOrdersForStock(final List<AmwayBackOrderModel> amwayBackOrders, final StockLevelModel stockLevel)
 	{
-		if (CollectionUtils.isNotEmpty(amwayBackOrders) && Objects.nonNull(stockLevel)
-				&& !InStockStatus.BACKORDER.equals(stockLevel.getInStockStatus()))
+		if (CollectionUtils.isNotEmpty(amwayBackOrders) && Objects.nonNull(stockLevel) && isStockAvailableForRelease(stockLevel))
 		{
 			Long available = commerceAvailabilityCalculationStrategy.calculateAvailability(Arrays.asList(stockLevel));
 			if (Objects.nonNull(available))
@@ -73,19 +72,16 @@ public class DefaultAmwayApacBackOrderService implements AmwayApacBackOrderServi
 				for (final AmwayBackOrderModel amwayBackOrder : amwayBackOrders)
 				{
 					long requestedQty = 0;
-					if (stockLevel.getProduct().equals(amwayBackOrder.getProduct())
+					if (stockLevel.getProductCode().equals(amwayBackOrder.getProduct().getCode())
 							&& stockLevel.getWarehouse().equals(amwayBackOrder.getWarehouse()))
 					{
 						for (final ConsignmentEntryModel consignmentEntry : amwayBackOrder.getConsignment().getConsignmentEntries())
 						{
 							final Collection<AllocationEventModel> allocationEvents = inventoryEventService
 									.getAllocationEventsForOrderEntry((OrderEntryModel) consignmentEntry.getOrderEntry());
-							requestedQty = allocationEvents
-									.stream()
-									.filter(
-											allocationEvent -> allocationEvent.getConsignmentEntry().getConsignment()
-													.equals(consignmentEntry.getConsignment())).mapToLong(AllocationEventModel::getQuantity)
-									.sum();
+							requestedQty = allocationEvents.stream().filter(allocationEvent -> allocationEvent.getConsignmentEntry()
+									.getConsignment().equals(consignmentEntry.getConsignment()))
+									.mapToLong(AllocationEventModel::getQuantity).sum();
 						}
 					}
 					if (requestedQty <= available.longValue() && requestedQty <= maxBoReleaseLimit)
@@ -102,6 +98,19 @@ public class DefaultAmwayApacBackOrderService implements AmwayApacBackOrderServi
 				}
 			}
 		}
+	}
+
+	/**
+	 * @param stockLevel
+	 * @return if the stock level has correct status to be able to release back orders
+	 */
+	private boolean isStockAvailableForRelease(final StockLevelModel stockLevel)
+	{
+		return !InStockStatus.BACKORDER.equals(stockLevel.getInStockStatus())
+				|| !InStockStatus.FORCEOUTOFSTOCK.equals(stockLevel.getInStockStatus())
+				|| !InStockStatus.TEMPORARYNOTAVAILABLE.equals(stockLevel.getInStockStatus())
+				|| !InStockStatus.NOTYETAVAILABLE.equals(stockLevel.getInStockStatus())
+				|| !InStockStatus.NOLONGERAVAILABLE.equals(stockLevel.getInStockStatus());
 	}
 
 	/**
