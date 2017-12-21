@@ -10,15 +10,14 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.log4j.Logger;
+import org.zkoss.util.resource.Labels;
 import org.zkoss.zul.Messagebox;
 
 import com.amway.apac.core.backorder.service.AmwayApacBackOrderService;
 import com.hybris.cockpitng.actions.ActionContext;
 import com.hybris.cockpitng.actions.ActionResult;
 import com.hybris.cockpitng.actions.CockpitAction;
-
-import org.zkoss.util.resource.Labels;
-import org.apache.log4j.Logger;
 
 
 /**
@@ -51,7 +50,7 @@ public class ReleaseBackorderAction implements CockpitAction<StockLevelModel, St
 		stockLevelList.add(ctx.getData());
 		try
 		{
-			amwayApacBackOrderService.releaseBackOrdersForStocks(stockLevelList);
+			amwayApacBackOrderService.releaseBackOrders(stockLevelList);
 			result = new ActionResult<>(ActionResult.SUCCESS);
 			result.setResultMessage(Labels.getLabel("backOrder.released.successfully"));
 		}
