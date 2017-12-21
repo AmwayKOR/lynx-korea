@@ -266,6 +266,7 @@
 		class="com.amway.apac.core.backorder.strategies.impl.DefaultAmwayApacBackOrderSelectionStrategy">
 		<property name="amwayApacBackOrderDao" ref="amwayApacBackOrderDao" />
 		<property name="stockService" ref="stockService" />
+		<property name="amwayApacOrderService" ref="amwayApacOrderService" />
 	</bean>
 
 	<bean id="amwayApacBackOrderService"
@@ -296,5 +297,9 @@
         class="com.amway.apac.core.stock.service.impl.DefaultAmwayApacStockService" parent="amwayStockService">
         <property name="amwayApacStockLevelDao" ref="amwayApacStockLevelDao" />
     </bean>
+    
+    <bean id="amwayApacOrderService"
+		class="com.amway.apac.core.backorder.service.impl.DefaultAmwayApacOrderService" parent="defaultAmwayOrderService">
+	</bean>
 	
 </beans>
