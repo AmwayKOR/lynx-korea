@@ -104,6 +104,15 @@ public class DefaultAmwayApacCouponService extends DefaultCouponService implemen
 	 * {@inheritDoc}
 	 */
 	@Override
+	public List<AmwayCouponModel> getExpiredAmwayCoupons()
+	{
+		return amwayApacCouponDao.getExpiredAmwayCoupons();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public String generateCodeForAmwayCoupon(final AmwayCouponModel amwayCoupon)
 	{
 		return (String) getCouponCodeGeneratorMap().get(DEFAULT_APAC_COUPON_KEY_GENERATOR).generate();

@@ -70,4 +70,11 @@ public interface AmwayApacCouponService extends CouponService
 	 */
 	List<AmwayCouponModel> getAmwayCouponsForAbo(CustomerModel customer, List<AmwayCouponStatus> couponStatuses,
 			boolean filterByDate);
+
+	/**
+	 * Returns list of expired coupons.
+	 *
+	 * @return
+	 */
+	List<AmwayCouponModel> getExpiredAmwayCoupons();
 }

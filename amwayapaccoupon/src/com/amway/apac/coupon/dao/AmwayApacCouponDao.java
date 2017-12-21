@@ -45,5 +45,10 @@ public interface AmwayApacCouponDao
 	List<AmwayCouponModel> getAmwayCouponsForAbo(CustomerModel customer, List<AmwayCouponStatus> couponStatuses,
 			boolean filterByDate);
 
-
+	/**
+	 * Returns list of Expired AmwayCoupons
+	 * 
+	 * @return
+	 */
+	List<AmwayCouponModel> getExpiredAmwayCoupons();
 }

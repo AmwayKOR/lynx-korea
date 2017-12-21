@@ -19,6 +19,7 @@ import de.hybris.platform.servicelayer.search.FlexibleSearchService;
 import de.hybris.platform.servicelayer.search.SearchResult;
 import de.hybris.platform.servicelayer.util.ServicesUtil;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,6 +41,11 @@ public class DefaultAmwayApacCouponDao implements AmwayApacCouponDao
 {
 	private GenericDao<AmwayCouponModel> amwayCouponGenericDao;
 	private FlexibleSearchService flexibleSearchService;
+
+	private static final String EXPIRED_COUPON_QUERY = new StringBuilder("SELECT {AMWY_CPN.PK} FROM {")
+			.append(AmwayCouponModel._TYPECODE).append(" AS AMWY_CPN } WHERE NOW()> {AMWY_CPN.").append(AmwayCouponModel.ENDDATE)
+			.append("} AND {AMWY_CPN.").append(AmwayCouponModel.STATUS).append("} IN (?").append(AmwayCouponModel.STATUS).append(")")
+			.toString();
 
 	/**
 	 * {@inheritDoc}
@@ -106,6 +112,18 @@ public class DefaultAmwayApacCouponDao implements AmwayApacCouponDao
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<AmwayCouponModel> getExpiredAmwayCoupons()
+	{
+		final Map<String, Object> queryParams = new HashMap<>();
+		queryParams.put(AmwayCouponModel.STATUS,
+				Arrays.asList(AmwayCouponStatus.FREEZED, AmwayCouponStatus.NEW, AmwayCouponStatus.REISSUED));
+		final SearchResult<AmwayCouponModel> searchResult = flexibleSearchService.search(EXPIRED_COUPON_QUERY, queryParams);
+		return searchResult.getResult();
+	}
 
 	/**
 	 * getter for AmwayCouponGenericDao
@@ -147,8 +165,4 @@ public class DefaultAmwayApacCouponDao implements AmwayApacCouponDao
 	{
 		this.flexibleSearchService = flexibleSearchService;
 	}
-
-
-
-
 }
