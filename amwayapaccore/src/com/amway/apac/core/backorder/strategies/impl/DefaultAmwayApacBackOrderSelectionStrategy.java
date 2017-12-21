@@ -20,6 +20,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.amway.apac.core.backorder.dao.AmwayApacBackOrderDao;
+import com.amway.apac.core.backorder.service.AmwayApacOrderService;
 import com.amway.apac.core.backorder.strategies.AmwayApacBackOrderSelectionStrategy;
 import com.amway.apac.core.enums.AmwayBackOrderStatus;
 import com.amway.apac.core.model.AmwayBackOrderModel;
@@ -35,6 +36,7 @@ public class DefaultAmwayApacBackOrderSelectionStrategy implements AmwayApacBack
 	private static final Logger LOG = Logger.getLogger(DefaultAmwayApacBackOrderSelectionStrategy.class);
 	private AmwayApacBackOrderDao amwayApacBackOrderDao;
 	private StockService stockService;
+	private AmwayApacOrderService amwayApacOrderService;
 
 	/**
 	 * {@inheritDoc}
@@ -49,8 +51,8 @@ public class DefaultAmwayApacBackOrderSelectionStrategy implements AmwayApacBack
 				final Map<StockLevelModel, List<AmwayBackOrderModel>> amwayBackOrdersMap = new HashMap<StockLevelModel, List<AmwayBackOrderModel>>();
 				for (final StockLevelModel stockLevel : stockLevels)
 				{
-					final List<AmwayBackOrderModel> amwayBackOrdersList = getAmwayApacBackOrderDao().getBackOrders(
-							AmwayBackOrderStatus.ACTIVE, stockLevel.getWarehouse(), stockLevel.getProduct(), true, null);
+					final List<AmwayBackOrderModel> amwayBackOrdersList = getAmwayApacBackOrderDao()
+							.getBackOrders(AmwayBackOrderStatus.ACTIVE, stockLevel.getWarehouse(), stockLevel.getProduct(), true, null);
 					//Verify the payment of backOrders
 					validatePaymentAndUpdateList(amwayBackOrdersList);
 					amwayBackOrdersMap.put(stockLevel, amwayBackOrdersList);
@@ -74,12 +76,12 @@ public class DefaultAmwayApacBackOrderSelectionStrategy implements AmwayApacBack
 	{
 		try
 		{
-			final List<AmwayBackOrderModel> amwayBackOrdersList = getAmwayApacBackOrderDao().getBackOrders(
-					AmwayBackOrderStatus.ACTIVE, null, null, true, baseSite);
+			final List<AmwayBackOrderModel> amwayBackOrdersList = getAmwayApacBackOrderDao()
+					.getBackOrders(AmwayBackOrderStatus.ACTIVE, null, null, true, baseSite);
 			validatePaymentAndUpdateList(amwayBackOrdersList);
 			//Grouping the AmwayBackOrders as per the stockLevels for stock calculation
-			final Map<StockLevelModel, List<AmwayBackOrderModel>> amwayBackOrdersMap = amwayBackOrdersList.stream().collect(
-					Collectors.groupingBy(backOrder -> getStockLevel(backOrder), Collectors.toList()));
+			final Map<StockLevelModel, List<AmwayBackOrderModel>> amwayBackOrdersMap = amwayBackOrdersList.stream()
+					.collect(Collectors.groupingBy(backOrder -> getStockLevel(backOrder), Collectors.toList()));
 			return amwayBackOrdersMap;
 		}
 		catch (final Exception e)
@@ -124,7 +126,13 @@ public class DefaultAmwayApacBackOrderSelectionStrategy implements AmwayApacBack
 	private List<AmwayBackOrderModel> validatePaymentAndUpdateList(final List<AmwayBackOrderModel> amwayBackOrdersList)
 	{
 		final List<AmwayBackOrderModel> amwayBackOrdersNewList = new ArrayList<AmwayBackOrderModel>();
-		//TODO payment Check
+		for (final AmwayBackOrderModel amwayBackOrder : amwayBackOrdersList)
+		{
+			if (getAmwayApacOrderService().isOrderPaymentCaptured(amwayBackOrder.getOriginalOrder()))
+			{
+				amwayBackOrdersNewList.add(amwayBackOrder);
+			}
+		}
 		return amwayBackOrdersNewList;
 	}
 
@@ -176,5 +184,23 @@ public class DefaultAmwayApacBackOrderSelectionStrategy implements AmwayApacBack
 	public void setStockService(final StockService stockService)
 	{
 		this.stockService = stockService;
+	}
+
+	/**
+	 * @return the amwayApacOrderService
+	 */
+	public AmwayApacOrderService getAmwayApacOrderService()
+	{
+		return amwayApacOrderService;
+	}
+
+	/**
+	 * @param amwayApacOrderService
+	 *           the amwayApacOrderService to set
+	 */
+	@Required
+	public void setAmwayApacOrderService(final AmwayApacOrderService amwayApacOrderService)
+	{
+		this.amwayApacOrderService = amwayApacOrderService;
 	}
 }
