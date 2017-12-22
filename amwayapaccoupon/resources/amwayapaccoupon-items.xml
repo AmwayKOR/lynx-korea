@@ -17,7 +17,9 @@
 			xsi:noNamespaceSchemaLocation="items.xsd">
 
 	<enumtypes>
+
 		<enumtype code="AmwayCouponStatus" autocreate="true" generate="true" dynamic="true">
+		<description>Enum used for managing coupon-status</description>
 			<value code="NEW" />
 			<value code="REISSUED" />
 			<value code="REDEEMED" />
@@ -25,17 +27,35 @@
 			<value code="DELETED" />
 			<value code="FREEZED" />
 		</enumtype>
+		
+		<enumtype generate="true" code="AmwayCouponType" autocreate="true" dynamic="true">
+        <description>Enum used for classification of Coupons 'by-type'</description>
+            <value code="DEFAULT" />
+            <value code="REGISTRATION" />
+            <value code="RENEWAL" />
+            <value code="BEC" />
+            <value code="PROMOTION" />
+        </enumtype>
 	</enumtypes>
+	
 	<itemtypes>
 		<typegroup name="Coupons">
 			<itemtype code="SingleCodeCoupon" autocreate="false" generate="true">
 				<attributes>
 					<attribute qualifier="description" type="localized:java.lang.String">
+						<description>Description given here will be used on storefront.</description>
 						<persistence type="property"/>
 					</attribute>
 					<attribute qualifier="value" type="java.math.BigDecimal">
+						<description>Value given here will be on storefront.</description>
 						<persistence type="property"/>
 					</attribute>
+					<attribute qualifier="couponType" type="AmwayCouponType">
+                        <modifiers optional="false"/>
+                        <persistence type="property"/>
+						<description>Type of coupon.</description>
+                        <defaultvalue>em().getEnumerationValue("AmwayCouponType","DEFAULT")</defaultvalue>
+                    </attribute>
 				</attributes>
 			</itemtype>
 			<itemtype code="AmwayCoupon" autocreate="true" generate="true" jaloclass="com.amway.apac.coupon.jalo.AmwayCoupon">
@@ -72,6 +92,7 @@
 						<persistence type="property"/>
 					</attribute>
 					<attribute type="AbstractCoupon" qualifier="redemptionCoupon">
+						<description>Redemption coupon</description>
 						<modifiers optional="false"/>
 						<persistence type="property" />
 					</attribute>
