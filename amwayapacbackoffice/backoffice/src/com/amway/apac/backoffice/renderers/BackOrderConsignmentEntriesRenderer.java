@@ -9,6 +9,7 @@ import de.hybris.platform.util.TaxValue;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.zkoss.zk.ui.Component;
 
@@ -20,6 +21,8 @@ import com.hybris.cockpitng.core.model.WidgetModel;
 import com.hybris.cockpitng.dataaccess.facades.type.DataType;
 import com.hybris.cockpitng.engine.WidgetInstanceManager;
 import com.hybris.cockpitng.widgets.common.WidgetComponentRenderer;
+import de.hybris.platform.ordersplitting.model.ConsignmentEntryModel;
+
 
 
 /**
@@ -56,10 +59,10 @@ public class BackOrderConsignmentEntriesRenderer implements WidgetComponentRende
 	{
 		final List<BackOrderEntryData> orderEntriesDataList = new ArrayList<>();
 
-		final List<AbstractOrderEntryModel> abstractOrderEntries = backOrderModel.getOriginalOrder().getEntries();
+		final Set<ConsignmentEntryModel> abstractOrderEntries = backOrderModel.getConsignment().getConsignmentEntries();
 
 		abstractOrderEntries.forEach(abstractOrderEntry -> {
-			final OrderEntryModel orderEntryData = (OrderEntryModel) abstractOrderEntry;
+			final OrderEntryModel orderEntryData = (OrderEntryModel) abstractOrderEntry.getOrderEntry();
 			final BackOrderEntryData backOrderEntryData = new BackOrderEntryData();
 			backOrderEntryData.setEntry(String.valueOf(orderEntryData.getEntryNumber().intValue() + 1));
 			backOrderEntryData.setItemSKU(String.valueOf(orderEntryData.getAliasCode()));
@@ -67,9 +70,9 @@ public class BackOrderConsignmentEntriesRenderer implements WidgetComponentRende
 			backOrderEntryData.setQuantity(String.valueOf(orderEntryData.getQuantity()));
 			backOrderEntryData.setPrice(String.valueOf(orderEntryData.getBasePrice()));
 			backOrderEntryData.setTax(String.valueOf(calculateEntryTax(orderEntryData)));
-			backOrderEntryData.setTotalPrice(String.valueOf(abstractOrderEntry.getTotalPrice()));
-			backOrderEntryData.setBV(String.valueOf(abstractOrderEntry.getBusinessVolume()));
-			backOrderEntryData.setPV(String.valueOf(abstractOrderEntry.getPointValue()));
+			backOrderEntryData.setTotalPrice(String.valueOf(orderEntryData.getTotalPrice()));
+			backOrderEntryData.setBV(String.valueOf(orderEntryData.getBusinessVolume()));
+			backOrderEntryData.setPV(String.valueOf(orderEntryData.getPointValue()));
 			backOrderEntryData.setPaymentType(String.valueOf(backOrderModel.getOriginalOrder().getPaymentType()));
 			orderEntriesDataList.add(backOrderEntryData);
 		});
