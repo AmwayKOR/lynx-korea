@@ -22,25 +22,36 @@ public class DefaultAmwayApacWarehouseServiceabilityServiceImpl implements Amway
 
 	private AmwayApacWarehouseServiceabilitySelectionStrategy amwayApacWarehouseServiceabilitySelectionStrategy;
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public WarehouseModel getServiceableWareHouse(final String postalCode, final BaseSiteModel baseSite)
 	{
 		return getAmwayApacWarehouseServiceabilitySelectionStrategy().getServiceableWareHouse(postalCode, baseSite);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Boolean isPostalCodeServiceable(final String postalCode, final BaseSiteModel baseSite, final RegionModel region)
 	{
 		return getAmwayApacWarehouseServiceabilitySelectionStrategy().isPostalCodeServiceable(postalCode, baseSite, region);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<RegionModel> getRegionsForPostalCode(final String postalCode, final BaseSiteModel baseSite)
 	{
-
 		return getAmwayApacWarehouseServiceabilitySelectionStrategy().getRegionsForPostalCode(postalCode, baseSite);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Boolean isPostalCodeServiceableForCurrentBaseSite(final String postalCode)
 	{

@@ -58,21 +58,23 @@
 		<property name="mediaService" ref="mediaService"/> <property name="flexibleSearchService" 
 		ref="flexibleSearchService"/> </bean> -->
 
-	<alias name="amwayApacWarehouseServiceabilityDao" alias="amwayWarehouseServiceabilityDao"/>
+	
 	<bean id="amwayApacWarehouseServiceabilityDao"
-		class="com.amway.apac.serviceability.daos.impl.AmwayApacWarehouseServiceabilityDaoImpl">
+		class="com.amway.apac.serviceability.daos.impl.DefaultAmwayApacWarehouseServiceabilityDao">
 		<property name="flexibleSearchService" ref="flexibleSearchService"/>
 	</bean>
 
-	<!-- <alias name="amwayApacPostcodeWarehouseServiceabilityDao" alias="amwayWarehouseServiceabilityDao"/> -->
-	<bean id="amwayApacPostcodeWarehouseServiceabilityDao"
-		class="com.amway.apac.serviceability.daos.impl.AmwayApacPostcodeWarehouseServiceabilityDaoImpl">
-		<property name="flexibleSearchService" ref="flexibleSearchService"/>
-	</bean>
-
+	<alias name="amwayApacWarehouseServiceabilitySelectionStrategy" alias="amwayWarehouseServiceabilitySelectionStrategy"/>
 	<bean id="amwayApacWarehouseServiceabilitySelectionStrategy"
-		class="com.amway.apac.serviceability.strategy.impl.DefaultAmwayApacWarehouseServiceabilitySelectionStrategyImpl" >
-		<property name="amwayWarehouseServiceabilityDao" ref="amwayWarehouseServiceabilityDao"/>	
+		class="com.amway.apac.serviceability.strategy.impl.DefaultAmwayApacWarehouseServiceabilitySelectionStrategy" >
+		<property name="amwayApacWarehouseServiceabilityDao" ref="amwayApacWarehouseServiceabilityDao"/>	
+		<property name="baseSiteService" ref="baseSiteService"/>
+	</bean>
+	
+	<!-- <alias name="amwayApacPostcodeServiceabilitySelectionStrategy" alias="amwayWarehouseServiceabilitySelectionStrategy"/> -->
+	<bean id="amwayApacPostcodeServiceabilitySelectionStrategy"
+		class="com.amway.apac.serviceability.strategy.impl.AmwayApacPostcodeWarehouseServiceabilitySelectionStrategy" >
+		<property name="amwayApacWarehouseServiceabilityDao" ref="amwayApacWarehouseServiceabilityDao"/>	
 		<property name="baseSiteService" ref="baseSiteService"/>
 	</bean>
 

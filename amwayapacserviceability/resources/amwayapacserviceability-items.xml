@@ -21,7 +21,7 @@
 			</attribute> </attributes> </itemtype> -->
 
 		<typegroup name="Serviceability">
-			<itemtype code="AmwayApacAbstractWarehouseServiceability"
+			<itemtype code="AbstractAmwayWarehouseServiceability"
 				autocreate="true" generate="true" abstract="true">
 				<description>PIN code to Warehouse mapping</description>
 				<attributes>
@@ -47,8 +47,8 @@
 				</indexes>
 			</itemtype>
 
-			<itemtype code="AmwayApacWarehouseServiceability" autocreate="true"
-				generate="true" extends="AmwayApacAbstractWarehouseServiceability">
+			<itemtype code="AmwayWarehouseServiceability" autocreate="true"
+				generate="true" extends="AbstractAmwayWarehouseServiceability">
 				<description>PIN code to warehouse mapping for Major-Minor postal code model</description>
 				<deployment table="WarehouseServiceability" typecode="21006" />
 				<attributes>
@@ -73,8 +73,8 @@
 				</indexes>
 			</itemtype>
 
-			<itemtype code="AmwayApacPostcodeWarehouseServiceability"
-				autocreate="true" generate="true" extends="AmwayApacAbstractWarehouseServiceability">
+			<itemtype code="AmwayPostcodeWarehouseServiceability"
+				autocreate="true" generate="true" extends="AbstractAmwayWarehouseServiceability">
 				<description>Pin code to warehouse mapping for complete postal code model</description>
 				<deployment table="amwayPCWHServiceability" typecode="21065" />
 				<attributes>

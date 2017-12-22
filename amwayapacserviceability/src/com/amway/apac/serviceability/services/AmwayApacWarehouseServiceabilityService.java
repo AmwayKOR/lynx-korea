@@ -40,7 +40,7 @@ public interface AmwayApacWarehouseServiceabilityService
 	 *
 	 * @param postalCode
 	 * @param baseSite
-	 * @return
+	 * @return List of regions for given postal code
 	 */
 	List<RegionModel> getRegionsForPostalCode(final String postalCode, final BaseSiteModel baseSite);
 
