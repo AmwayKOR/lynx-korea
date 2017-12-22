@@ -71,11 +71,11 @@
 			xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">			
 			<editorArea:tab name="amway.backorder.tab.properties">				
 				<editorArea:section name="amway.backorder.section.essentials">
-					<editorArea:attribute qualifier="consignment" />
-					<editorArea:attribute qualifier="status" />
-					<editorArea:attribute qualifier="originalOrder" />					
-					<editorArea:attribute qualifier="orderingAbo" />
-					<editorArea:attribute qualifier="releaseByDate" />					
+					<editorArea:attribute qualifier="consignment" label="amway.backorder.section.essentials.consignment"/>
+					<editorArea:attribute qualifier="status" label="amway.backorder.section.essentials.status"/>
+					<editorArea:attribute qualifier="originalOrder" label="amway.backorder.section.essentials.originalorder"/>					
+					<editorArea:attribute qualifier="orderingAbo" label="amway.backorder.section.essentials.orderingABO"/>
+					<editorArea:attribute qualifier="releaseByDate" label="amway.backorder.section.details.releaseBydate"/>					
 				</editorArea:section>
 				<editorArea:customSection name="amway.backorder.section.details" spring-bean="backOrderDetailsRenderer"/>
 				<editorArea:customSection name="amway.backorder.section.details.shippingaddress" spring-bean="backOrderShippingAddressRenderer"/>
