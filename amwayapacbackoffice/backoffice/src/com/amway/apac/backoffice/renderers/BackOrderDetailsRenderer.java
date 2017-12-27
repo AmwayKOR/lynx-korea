@@ -68,7 +68,7 @@ public class BackOrderDetailsRenderer implements WidgetComponentRenderer<Compone
 
 		final String itemsLabel2 = Labels.getLabel("amway.backorder.section.details.shippingdate");
 		final String itemsAttributeValue2 = String.valueOf(consignment.getShippingDate());
-		attributeMap.put(itemsLabel2, itemsAttributeValue2);
+		attributeMap.put(itemsLabel2, null != itemsAttributeValue2 ? itemsAttributeValue2 : "");
 
 		final String itemsLabel3 = Labels.getLabel("amway.backorder.section.details.warehouse");
 		final String itemsAttributeValue3 = String.valueOf(backOrderModel.getWarehouse() != null
@@ -97,7 +97,8 @@ public class BackOrderDetailsRenderer implements WidgetComponentRenderer<Compone
 		attributeMap.put(itemsLabel5, itemsAttributeValue5);
 
 		final String itemsLabel6 = Labels.getLabel("amway.backorder.section.details.creationdate");
-		final String itemsAttributeValue6 = String.valueOf(backOrderModel.getCreationtime());
+		final String itemsAttributeValue6 = String.valueOf(backOrderModel.getCreationtime())
+				.replaceAll("(?<![A-Z])[A-Z]{3}(?![A-Z])", "");
 		attributeMap.put(itemsLabel6, itemsAttributeValue6);
 
 
