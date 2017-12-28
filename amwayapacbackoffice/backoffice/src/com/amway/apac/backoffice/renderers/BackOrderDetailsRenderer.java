@@ -5,6 +5,7 @@ package com.amway.apac.backoffice.renderers;
 
 import de.hybris.platform.ordersplitting.model.ConsignmentModel;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -103,6 +104,7 @@ public class BackOrderDetailsRenderer implements WidgetComponentRenderer<Compone
 
 
 		final Date today = new Date();
+		final SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
 		final String itemsLabel8 = Labels.getLabel("amway.backorder.section.details.fullfillperiod");
 		final String itemsAttributeValue8 = String.valueOf(TimeUnit.MILLISECONDS
 				.toDays(backOrderModel.getReleaseByDate().getTime() - backOrderModel.getCreationtime().getTime()));
@@ -119,7 +121,7 @@ public class BackOrderDetailsRenderer implements WidgetComponentRenderer<Compone
 		attributeMap.put(itemsLabel10, itemsAttributeValue10);
 
 		final String itemsLabel11 = Labels.getLabel("amway.backorder.section.details.releaseBydate");
-		final String itemsAttributeValue11 = String.valueOf(backOrderModel.getReleaseByDate());
+		final String itemsAttributeValue11 = String.valueOf(df.format(backOrderModel.getReleaseByDate()));
 		attributeMap.put(itemsLabel11, itemsAttributeValue11);
 
 		ApacAttributeWithLabelRendererUtil.createAttributeWithLabel(parent, attributeMap, 3);
