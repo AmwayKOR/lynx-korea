@@ -18,6 +18,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.checkout.steps.validation
 import de.hybris.platform.acceleratorstorefrontcommons.constants.WebConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.checkout.steps.AbstractCheckoutStepController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
+import de.hybris.platform.acceleratorstorefrontcommons.forms.validation.AddressValidator;
 import de.hybris.platform.acceleratorstorefrontcommons.util.AddressDataUtil;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.address.data.AddressVerificationResult;
@@ -42,7 +43,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.amway.apac.storefront.controllers.ControllerConstants;
 import com.amway.apac.storefront.forms.AmwayApacAddressForm;
-
+import com.amway.apac.storefront.validators.AmwayApacAddressValidator;
 
 @Controller
 @RequestMapping(value = "/checkout/multi/delivery-address")
@@ -54,6 +55,9 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 	@Resource(name = "addressDataUtil")
 	private AddressDataUtil addressDataUtil;
 
+	@Resource(name = "amwayApacAddressValidator")
+	private AmwayApacAddressValidator addressValidator;
+
 	@Override
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	@RequireHardLogIn
@@ -61,8 +65,10 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 	@PreValidateCheckoutStep(checkoutStep = DELIVERY_ADDRESS)
 	public String enterStep(final Model model, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
+
 		getCheckoutFacade().setDeliveryAddressIfAvailable();
 		getCheckoutFacade().setDeliveryModeIfAvailable();
+
 		final CartData cartData = getCheckoutFacade().getCheckoutCart();
 
 		populateCommonModelAttributes(model, cartData, new AmwayApacAddressForm());
@@ -73,23 +79,36 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	@RequireHardLogIn
 	public String add(final AmwayApacAddressForm addressForm, final BindingResult bindingResult, final Model model,
+			@RequestParam(value = "ajax", required = false, defaultValue = "false") final Boolean ajax,
 			final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
-		final CartData cartData = getCheckoutFacade().getCheckoutCart();
-		addressForm.setCountryIso("US");
-		addressForm.setRegionIso("TX");
-		//TODO
+
+		//set to default country and first region as the field is not mandatory
+		final String countryIso = getCmsSiteService().getCurrentSite().getDefaultCountry().getIsocode();
+		addressForm.setCountryIso(countryIso);
+		addressForm.setRegionIso(getI18NFacade().getRegionsForCountryIso(countryIso).iterator().next().getIsocode());
+
 		getAddressValidator().validate(addressForm, bindingResult);
-		populateCommonModelAttributes(model, cartData, addressForm);
 
 		if (bindingResult.hasErrors())
 		{
-			model.addAttribute("openCreateAddressForm", Boolean.TRUE);
-			GlobalMessages.addErrorMessage(model, "address.error.formentry.invalid");
-			return ControllerConstants.Views.Pages.MultiStepCheckout.AddEditDeliveryAddressPage;
+			GlobalMessages.addErrorMessage(model, "checkout.step.one.delivery.address.error.formentry.invalid");
+			if (Boolean.TRUE.equals(ajax))
+			{
+				return ControllerConstants.Views.Fragments.Checkout.DeliveryAddressListPage;
+			}
+			else
+			{
+				model.addAttribute("openCreateAddressForm", Boolean.TRUE);
+				return getCheckoutStep().currentStep();
+			}
 		}
 
 		final AddressData newAddress = addressDataUtil.convertToAddressData(addressForm);
+
+		//Custom for APAC
+		newAddress.setLine3(addressForm.getLine3());
+		newAddress.setEmail(addressForm.getEmail());
 
 		processAddressVisibilityAndDefault(addressForm, newAddress);
 
@@ -102,21 +121,32 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 
 		if (addressRequiresReview)
 		{
-			return ControllerConstants.Views.Pages.MultiStepCheckout.AddEditDeliveryAddressPage;
+			//return ControllerConstants.Views.Pages.MultiStepCheckout.AddEditDeliveryAddressPage;
 		}
 
-		getUserFacade().addAddress(newAddress);
-
 		final AddressData previousSelectedAddress = getCheckoutFacade().getCheckoutCart().getDeliveryAddress();
-		// Set the new address as the selected checkout delivery address
-		getCheckoutFacade().setDeliveryAddress(newAddress);
+
 		if (previousSelectedAddress != null && !previousSelectedAddress.isVisibleInAddressBook())
 		{ // temporary address should be removed
 			getUserFacade().removeAddress(previousSelectedAddress);
 		}
 
+		// Save address
+		getUserFacade().addAddress(newAddress);
+
 		// Set the new address as the selected checkout delivery address
+		getCheckoutFacade().setDeliveryModeIfAvailable();
 		getCheckoutFacade().setDeliveryAddress(newAddress);
+
+		final CartData cartData = getCheckoutFacade().getCheckoutCart();
+		populateCommonModelAttributes(model, cartData, addressForm);
+
+		if (Boolean.TRUE.equals(ajax))
+		{
+
+			GlobalMessages.addInfoMessage(model, "checkout.step.one.delivery.address.added");
+			return ControllerConstants.Views.Fragments.Checkout.DeliveryAddressListPage;
+		}
 
 		return getCheckoutStep().currentStep();
 	}
@@ -129,6 +159,10 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 			if (addressForm.getSaveInAddressBook().booleanValue() && getUserFacade().isAddressBookEmpty())
 			{
 				newAddress.setDefaultAddress(true);
+			}
+			else
+			{
+				newAddress.setDefaultAddress(addressForm.getDefaultAddress().booleanValue());
 			}
 		}
 		else if (getCheckoutCustomerStrategy().isAnonymousCheckout())
@@ -176,20 +210,29 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
 	@RequireHardLogIn
 	public String edit(final AmwayApacAddressForm addressForm, final BindingResult bindingResult, final Model model,
+			@RequestParam(value = "ajax", required = false, defaultValue = "false") final Boolean ajax,
 			final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
 		getAddressValidator().validate(addressForm, bindingResult);
 
-		final CartData cartData = getCheckoutFacade().getCheckoutCart();
-		populateCommonModelAttributes(model, cartData, addressForm);
-
 		if (bindingResult.hasErrors())
 		{
-			GlobalMessages.addErrorMessage(model, "address.error.formentry.invalid");
-			return ControllerConstants.Views.Pages.MultiStepCheckout.AddEditDeliveryAddressPage;
+			GlobalMessages.addErrorMessage(model, "checkout.step.one.delivery.address.error.formentry.invalid");
+			if (Boolean.TRUE.equals(ajax))
+			{
+				return ControllerConstants.Views.Fragments.Checkout.DeliveryAddressListPage;
+			}
+			else
+			{
+				return ControllerConstants.Views.Pages.MultiStepCheckout.AddEditDeliveryAddressPage;
+			}
 		}
 
 		final AddressData newAddress = addressDataUtil.convertToAddressData(addressForm);
+
+		//Custom for APAC
+		newAddress.setLine3(addressForm.getLine3());
+		newAddress.setEmail(addressForm.getEmail());
 
 		processAddressVisibility(addressForm, newAddress);
 
@@ -210,19 +253,35 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 				final AddressData addressData = getCheckoutFacade().getDeliveryAddressForCode(addressForm.getAddressId());
 				if (addressData != null)
 				{
-					model.addAttribute(SHOW_SAVE_TO_ADDRESS_BOOK_ATTR, Boolean.valueOf(!addressData.isVisibleInAddressBook()));
-					model.addAttribute("edit", Boolean.TRUE);
+					//model.addAttribute(SHOW_SAVE_TO_ADDRESS_BOOK_ATTR, Boolean.valueOf(!addressData.isVisibleInAddressBook()));
+					//model.addAttribute("edit", Boolean.TRUE);
 				}
 			}
 
-			return ControllerConstants.Views.Pages.MultiStepCheckout.AddEditDeliveryAddressPage;
+			if (Boolean.TRUE.equals(ajax))
+			{
+				//return ControllerConstants.Views.Fragments.Checkout.DeliveryAddressListPage;
+			}
+			else
+			{
+				return ControllerConstants.Views.Pages.MultiStepCheckout.AddEditDeliveryAddressPage;
+			}
 		}
 
 		getUserFacade().editAddress(newAddress);
 		getCheckoutFacade().setDeliveryModeIfAvailable();
 		getCheckoutFacade().setDeliveryAddress(newAddress);
 
-		return getCheckoutStep().nextStep();
+		final CartData cartData = getCheckoutFacade().getCheckoutCart();
+		populateCommonModelAttributes(model, cartData, addressForm);
+
+		if (Boolean.TRUE.equals(ajax))
+		{
+			GlobalMessages.addInfoMessage(model, "checkout.step.one.delivery.address.updated");
+			return ControllerConstants.Views.Fragments.Checkout.DeliveryAddressListPage;
+		}
+
+		return getCheckoutStep().currentStep();
 	}
 
 	protected void processAddressVisibility(final AmwayApacAddressForm addressForm, final AddressData newAddress)
@@ -242,6 +301,7 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 	{ RequestMethod.GET, RequestMethod.POST })
 	@RequireHardLogIn
 	public String removeAddress(@RequestParam("addressCode") final String addressCode, final RedirectAttributes redirectModel,
+			@RequestParam(value = "ajax", required = false, defaultValue = "false") final Boolean ajax,
 			final Model model) throws CMSItemNotFoundException
 	{
 		if (getCheckoutFacade().isRemoveAddressEnabledForCart())
@@ -252,6 +312,15 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.CONF_MESSAGES_HOLDER,
 					"account.confirmation.address.removed");
 		}
+
+		if (Boolean.TRUE.equals(ajax))
+		{
+			GlobalMessages.addInfoMessage(model, "checkout.step.one.delivery.address.removed");
+			final CartData cartData = getCheckoutFacade().getCheckoutCart();
+			populateCommonModelAttributes(model, cartData, new AmwayApacAddressForm());
+			return ControllerConstants.Views.Fragments.Checkout.DeliveryAddressListPage;
+		}
+
 		storeCmsPageInModel(model, getContentPageForLabelOrId(MULTI_CHECKOUT_SUMMARY_CMS_PAGE_LABEL));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(MULTI_CHECKOUT_SUMMARY_CMS_PAGE_LABEL));
 		model.addAttribute("addressForm", new AmwayApacAddressForm());
@@ -310,17 +379,20 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 	 *           - the id of the delivery address.
 	 *
 	 * @return - a URL to the page to load.
+	 * @throws CMSItemNotFoundException
 	 */
 	@RequestMapping(value = "/select-address", method = RequestMethod.POST)
 	@RequireHardLogIn
 	public String doSelectDeliveryAddress(@RequestParam("selectedAddressCode") final String selectedAddressCode,
-			final RedirectAttributes redirectAttributes)
+			final Model model, @RequestParam(value = "ajax", required = false, defaultValue = "false") final Boolean ajax,
+			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		final ValidationResults validationResults = getCheckoutStep().validate(redirectAttributes);
 		if (getCheckoutStep().checkIfValidationErrors(validationResults))
 		{
 			return getCheckoutStep().onValidation(validationResults);
 		}
+
 		if (StringUtils.isNotBlank(selectedAddressCode))
 		{
 			final AddressData selectedAddressData = getCheckoutFacade().getDeliveryAddressForCode(selectedAddressCode);
@@ -330,6 +402,15 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 				setDeliveryAddress(selectedAddressData);
 			}
 		}
+
+		if (Boolean.TRUE.equals(ajax))
+		{
+			GlobalMessages.addInfoMessage(model, "checkout.step.one.delivery.default.address.changed");
+			final CartData cartData = getCheckoutFacade().getCheckoutCart();
+			populateCommonModelAttributes(model, cartData, new AmwayApacAddressForm());
+			return ControllerConstants.Views.Fragments.Checkout.DeliveryAddressListPage;
+		}
+
 		return getCheckoutStep().currentStep();
 	}
 
@@ -406,6 +487,9 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 		model.addAttribute("metaRobots", "noindex,nofollow");
 		model.addAttribute("deliveryMethods", getCheckoutFacade().getSupportedDeliveryModes());
 
+		//for success ajax response
+		model.addAttribute("response", Boolean.TRUE);
+
 		if (StringUtils.isNotBlank(addressForm.getCountryIso()))
 		{
 			model.addAttribute("regions", getI18NFacade().getRegionsForCountryIso(addressForm.getCountryIso()));
@@ -415,6 +499,12 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 		storeCmsPageInModel(model, getContentPageForLabelOrId(MULTI_CHECKOUT_SUMMARY_CMS_PAGE_LABEL));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(MULTI_CHECKOUT_SUMMARY_CMS_PAGE_LABEL));
 		setCheckoutStepLinksForModel(model, getCheckoutStep());
+	}
+
+	@Override
+	protected AddressValidator getAddressValidator()
+	{
+		return addressValidator;
 	}
 
 }
