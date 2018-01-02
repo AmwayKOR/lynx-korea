@@ -31,6 +31,6 @@
 		<a href="${productUrl}">
 			<theme:image code="img.missingProductImage.responsive.${format}" alt="${fn:escapeXml(product.name)}"
 				title="${fn:escapeXml(product.name)}" cssClass="${cssClass}" />
-			<a href="${productUrl}">
+		</a>
 	</c:otherwise>
 </c:choose>
