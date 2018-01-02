@@ -12,6 +12,32 @@
 
 <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="items.xsd">
 
+	<enumtypes>
+		<enumtype code="PaymentType" dynamic="true" autocreate="true"
+			generate="true">
+			<description>Different payment types.</description>
+			<value code="EPP" />
+			<value code="ZIPP" />
+			<value code="PIF" />
+		</enumtype>
+	</enumtypes>
+	
+	<relations>
+		<relation localized="false" code="ProductPaymentOptionRel">
+			<description>Product Payment Option relation.</description>
+			<sourceElement type="Product" qualifier="product"
+				cardinality="one">
+				<modifiers read="true" write="true" unique="true"
+					optional="false" search="true" />
+			</sourceElement>
+			<targetElement type="AmwayPaymentOption" qualifier="paymentOption"
+				cardinality="many" collectiontype="set">
+				<modifiers read="true" write="true" optional="true"
+					search="true" partof="true" />
+			</targetElement>
+		</relation>
+	</relations>
+	
     <itemtypes>
 
         <typegroup name="AmwayApac">
@@ -45,6 +71,62 @@
                         <key attribute="volumeamwayaccount" />
                     </index>
                 </indexes>
+			</itemtype>
+			
+			<itemtype code="AmwayPaymentOption" autocreate="true"
+				generate="true">
+				<description>Supported Payment Options</description>
+				<deployment table="payment_optn" typecode="21010" />
+				<attributes>
+					<attribute type="java.lang.String" qualifier="aliasCode">
+						<description>Alias code(SKU) as AS400 has different SKU's as per payment option.</description>
+						<modifiers read="true" write="true" search="true"
+							unique="true" optional="false" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="localized:java.lang.String" qualifier="title">
+						<description>Display name of the payment option.</description>
+						<modifiers read="true" write="true" search="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.Boolean" qualifier="active">
+						<description>Identifies whether current payment option is active or not.</description>
+						<modifiers read="true" write="true" search="true"
+							optional="false" unique="false" />
+						<defaultvalue>Boolean.TRUE</defaultvalue>
+						<persistence type="property" />
+					</attribute>
+					<attribute type="PaymentType" qualifier="type">
+						<description>Identifies the type of payment option.</description>
+						<modifiers read="true" write="true" search="true"
+							unique="true" optional="false" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.Integer" qualifier="tenure">
+						<description>Identifies the Tenure of payment option.</description>
+						<modifiers read="true" write="true" search="true"
+							unique="true" />
+						<defaultvalue>0</defaultvalue>
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.util.Date" qualifier="startDate">
+                        <description>Start date of payment option.</description>
+                        <modifiers read="true" write="true" search="true"
+                            optional="true" />
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute type="java.util.Date" qualifier="endDate">
+                        <description>End date of payment option.</description>
+                        <modifiers read="true" write="true" search="true"
+                            optional="true" />
+                        <persistence type="property" />
+                    </attribute>
+				</attributes>
+				<indexes>
+					<index name="aliasCodeIDX" unique="false">
+						<key attribute="aliasCode" />
+					</index>
+				</indexes>
 			</itemtype>
         </typegroup>
 
