@@ -1552,4 +1552,19 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents
 
 ######### Content Slot Injection#######
 
+
+#########  category page recently viewed items component
+
+
+INSERT_UPDATE AmwayApacRecentViewedItemsComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;
+;;amwayapacRecentViewedItemsCarouselComponent;Recently Viewed Items Carousel Component;amwayapacRecentViewedItemsCarouselComponent;
+
+
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(uid,$contentCV)
+;;RecentlyViewedItemCarouselContentSlot;amwayapacRecentViewedItemsCarouselComponent
+
+
+
+
 ####################### Category Landing Page ###################################

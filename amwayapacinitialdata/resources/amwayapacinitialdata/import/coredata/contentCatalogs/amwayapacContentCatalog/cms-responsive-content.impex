@@ -657,6 +657,7 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 ;ToolsAndAdviceBannerContentSlot1;;;
 ;ToolsAndAdviceBannerContentSlot2;;;
 ;ToolsAndAdviceBannerContentSlot3;;;
+;RecentlyViewedItemCarousel;;AmwayApacRecentViewedItemsComponent;narrow
 
 # Content Article Page Template
 # Template used for content article landing page contentArticlePagesLayout
@@ -847,6 +848,7 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active
 ;;ToolsAndAdviceBannerContentSlot1;Tools and advice banner content slot 1;true
 ;;ToolsAndAdviceBannerContentSlot2;Tools and advice banner content slot 2;true
 ;;ToolsAndAdviceBannerContentSlot3;Tools and advice banner content slot 3;true
+;;RecentlyViewedItemCarouselContentSlot;Recently Viewed Item Carousel Content Slot;true
 ;;MobileNavigationBarSlot;Mobile Navigation Bar;true
 ;;ProfileBarJumpToSlot;Profile Bar;true
 ;;ToolsAndAdviceProductDetailContentSlot;Tools and advice Product Detail content slot;true
@@ -1362,6 +1364,7 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 ;;ToolsAndAdviceBannerContentSlot1-CategoryLandingPage;ToolsAndAdviceBannerContentSlot1;;ToolsAndAdviceBannerContentSlot1;true
 ;;ToolsAndAdviceBannerContentSlot2-CategoryLandingPage;ToolsAndAdviceBannerContentSlot2;;ToolsAndAdviceBannerContentSlot2;true
 ;;ToolsAndAdviceBannerContentSlot3-CategoryLandingPage;ToolsAndAdviceBannerContentSlot3;;ToolsAndAdviceBannerContentSlot3;true
+;;RecentlyViewedItemCarouselContentSlot-CategoryLandingPage;RecentlyViewedItemCarousel;;RecentlyViewedItemCarouselContentSlot;true
 ;;Mobile-NavigationBar-CategoryLandingPage;MobileNavigationBar;;MobileNavigationBarSlot;true
 
 # Content Article Page Template

@@ -107,6 +107,8 @@
 				</div>
 			</div>
 		</div>
-		<category:recentlyViewedProducts />
+		<cms:pageSlot position="RecentlyViewedItemCarousel" var="comp">
+            <cms:component component="${comp}" />
+        </cms:pageSlot>
 	</div>
 </template:page>

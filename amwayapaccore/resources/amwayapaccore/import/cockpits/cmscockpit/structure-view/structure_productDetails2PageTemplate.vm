@@ -105,6 +105,11 @@
                                 <cockpit code="LearningOpportunitiesBannerProductDetailSlot1"/>
                         </td>
                 </tr>
+                <tr>
+				<td colspan="6" class="structureViewSection">
+					<cockpit code="RecentlyViewedProducts"/>
+				</td>
+			</tr>
 			<tr>
 				<td height="100px" colspan="4" class="structureViewSection">
 					<cockpit code="Footer" />

@@ -108,6 +108,11 @@
                         <cockpit code="ToolsAndAdviceBannerContentSlot3"/>
                 </td>
             </tr>
+            <tr>
+				<td colspan="6" class="structureViewSection">
+					<cockpit code="RecentlyViewedItemCarousel"/>
+				</td>
+			</tr>
 			<tr>
 				<td height="270px" colspan="6" class="structureViewSection">
 					<cockpit code="Footer"/>
