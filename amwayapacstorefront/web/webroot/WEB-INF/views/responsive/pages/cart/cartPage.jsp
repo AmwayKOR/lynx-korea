@@ -11,7 +11,7 @@
 <c:url value="${continueUrl}" var="continueShoppingUrl" scope="session"/>
 
 <template:page pageTitle="${pageTitle}">
-    <div class="container-fluid main-container">
+    <div class="container-fluid main-container add-to-cart-entry-pagination">
         <div class="row border cartTitile">
             <h1 class="product-list-page-title shopping-list-page-title mb25"><spring:theme code="basket.page.heading" /></h1>
             <h4 class="product-list-page-sub-title"><spring:theme code="basket.page.welcomeMessage" /></h4></div>

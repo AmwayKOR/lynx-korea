@@ -10,6 +10,9 @@ import de.hybris.platform.servicelayer.exceptions.AmbiguousIdentifierException;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import de.hybris.platform.wishlist2.model.Wishlist2Model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -55,6 +58,11 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 	 * All shopping lists data URL.
 	 */
 	private static final String SHOPPING_LISTS_DATA_URL = "/data/all";
+
+	/**
+	 * All shopping lists data URL.
+	 */
+	private static final String SHOPPING_LISTS_CARTPAGE_DATA_URL = "/cart/data/all";
 
 	/**
 	 * All shopping lists multi-products data URL.
@@ -112,11 +120,27 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 	@RequestMapping(value = SHOPPING_LISTS_DATA_URL, method = RequestMethod.GET)
 	public String allShoppingData(final Model model) throws CMSItemNotFoundException
 	{
+		populateAllShoppingLists(model);
+		return ControllerConstants.Views.Fragments.ShoppingList.AddToShoppingListPopUp;
+	}
+
+	/**
+	 * @param model
+	 */
+	private void populateAllShoppingLists(final Model model)
+	{
 		model.addAttribute(ControllerConstants.ModelParameters.SHOPPING_LISTS_STRING,
 				amwayApacWishlistFacade.getAllWishlistsWithBasicData(
 						resolveSortField(ControllerConstants.GeneralConstants.SHOPPING_LIST_SORT_BY_LAST_UPDATED),
 						AmwayapacCoreConstants.DESC_STRING));
-		return ControllerConstants.Views.Fragments.ShoppingList.AddToShoppingListPopUp;
+	}
+
+	@RequireHardLogIn
+	@RequestMapping(value = SHOPPING_LISTS_CARTPAGE_DATA_URL, method = RequestMethod.GET)
+	public String updateShoppingData(final Model model) throws CMSItemNotFoundException
+	{
+		populateAllShoppingLists(model);
+		return ControllerConstants.Views.Fragments.ShoppingList.AddToShoppingListCartPopUp;
 	}
 
 	/**
@@ -392,6 +416,7 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 		}
 		else
 		{
+			final List<AmwayApacWishListModification> modifications = new ArrayList<>();
 			multiShoppingListUpdateForm.getProductCodes().forEach(pList -> multiShoppingListUpdateForm.getShoppingLists().stream()
 					.filter(s -> BooleanUtils.isTrue(s.getSelected())).forEach(sList -> {
 
@@ -425,13 +450,16 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 													shoppingListName, getI18nService().getCurrentLocale()));
 						}
 
-
-
 						if (modification.getEntry() != null)
 						{
-							model.addAttribute(ControllerConstants.ModelParameters.MODIFICATION, modification);
+							modifications.add(modification);
 						}
+
 					}));
+
+			model.addAttribute(ControllerConstants.ModelParameters.MODIFICATION, modifications);
+
+
 
 		}
 		return ControllerConstants.Views.Fragments.ShoppingList.AddmultipleProductToShoppingListResponse;

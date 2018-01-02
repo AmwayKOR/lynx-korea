@@ -10,6 +10,7 @@
 
 <c:url var="addNewListToShoppingListUrl" value="/shopping-lists/all" />
 <common:globalMessages />
+
 <c:if test="${not empty modification}">
 	<div class="page-content">
 		<div id="add-to-shopping-list" class="cbox">
@@ -22,9 +23,12 @@
 					</span>
 				</div>
 				<div class="cart-popup__content">
-					<shoppingList:shoppingListAddToListPopUp entry="${modification.entry}" />
+				 <c:forEach items="${modification}" var="modifcation" varStatus="loop">
+					<shoppingList:shoppingListAddToListPopUp entry="${modifcation.entry}" />
+					</c:forEach>
 					<div class="cart-popup__item-link">
 						<a href="${addNewListToShoppingListUrl}" class="btn-blue-white">
+						
 							<spring:theme code="text.shoppinglist.addtolistpopup.gotoshoppinglist" />
 						</a>
 						<a class="cart-popup__item-link-text closeCbox">

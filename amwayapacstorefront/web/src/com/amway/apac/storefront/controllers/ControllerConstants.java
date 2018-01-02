@@ -300,6 +300,11 @@ public interface ControllerConstants
 				 * Response UI when shopping list is updated.
 				 */
 				String AddToShoppingListPopUp = "fragments/shoppingList/addToShoppingListPopUp"; //NOSONAR
+
+				/**
+				 * Response UI when shopping list is updated.
+				 */
+				String AddToShoppingListCartPopUp = "fragments/shoppingList/addToShoppingListCartPopUp"; //NOSONAR
 			}
 		}
 	}

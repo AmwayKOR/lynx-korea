@@ -24,7 +24,7 @@
     <div class="col-xs-12 col-md-6 product-details print-col-6">
         <div class="product-item-element list-item-toggle">
             <label class="checkbox-element-wrapper">
-                <input class="shopping-cart-entry-checkbox _checkbox-element-global-class" value="" data-product-code="" type="checkbox">
+                <input class="shopping-cart-entry-checkbox _checkbox-element-global-class selectedProduct" data-product-code="${entry.product.code}" type="checkbox">
                 <span class="_checkbox-element-global-span"></span>
             </label>
         </div>

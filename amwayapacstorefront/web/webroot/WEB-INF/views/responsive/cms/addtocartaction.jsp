@@ -52,7 +52,7 @@
 				<span class="icon-add-shopping-list"></span>
 				<span class="shopping-list-button-text">Add To Shopping List</span>
 			</button>
-			<div class="cart-detail__dropdown-menu dropdown-menu shopping-list-popup-wrapper" role="menu">
+			<div class="cart-detail__dropdown-menu dropdown-menu shopping-list-popup-wrapper shoppinglist-popup" role="menu">
 			
 			</div>
 		</div>

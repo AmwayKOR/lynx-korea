@@ -33,7 +33,7 @@
                             <div class="add-to-component-container">
                                 <div class="pull-right action-panel-wrapper add-to-dropdown">
                                     <div class="cart-detail__dropdown dropdown dropdown-accordion" data-accordion="#addtoAccordion">
-                                        <div class="cart-detail__addto dropdown-toggle">add to</div>
+                                        <div class="cart-detail__addto dropdown-toggle"><spring:theme code="text.shoppinglist.addtolistcartpopup.addto" /></div>
                                         <ul class="cart-detail__dropdown-menu dropdown-menu" role="menu" aria-labelledby="dLabel">
                                             <div class="cart-detail__div-short"></div>
                                             <div id="addtoAccordion" class=" clearfix">
@@ -85,27 +85,16 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="cart-detail__addto-item panel">
-                                                    <h5 class="product-category__item-header collapsed" href="#addtoCollapse2" data-toggle="collapse" data-parent="#addtoAccordion" aria-expanded="false">ADD TO SHOPPING LIST</h5>
-                                                    <div class="panel-collapse collapse" id="addtoCollapse2" aria-expanded="false" style="height: 0px;">
-                                                        <div class="cart-detail__panel-body">
-                                                            <input class="" id="shoplistName" name="shoplistName" type="checkbox">
-                                                            <label class="cart-detail__addto-options" for="shoplistName">Shopping List Name</label>
-                                                            <br>
-                                                            <input class="" id="longShoplistName" name="longShoplistName" type="checkbox">
-                                                            <label class="cart-detail__addto-options" for="longShoplistName">Long Shopping List Name</label>
-                                                            <br>
-                                                            <input class="" id="shoplistName2" name="shoplistName2" type="checkbox">
-                                                            <label class="cart-detail__addto-options" for="shoplistName2">Shopping List Name</label>
-                                                            <br>
-                                                            <input class="" id="listName" name="listName" type="checkbox">
-                                                            <label class="cart-detail__addto-options" for="listName">List Name</label></div>
-                                                        <div class="cart-detail__panel-body-link">
-                                                            <a href="#" class="btn-blue-white">add to list</a>
-                                                            <a class="cartlist__cancelorder">Create New List</a></div>
-                                                    </div>
-                                                </div>
-                                                <div class="cart-detail__addto-item panel">
+												<div class="cart-detail__addto-item panel">
+													<c:url var="addToShoppingListCartPageUrl" value="/shopping-lists/cart/data/all" />
+													<c:set var="productCode" value="${product.code}" />
+													<h5 class="product-category__item-header collapsed updateToList" data-product-code="${productCode}"
+														data-add-to-shopping-list-url="${addToShoppingListCartPageUrl}" href="#addtoCollapse2" data-toggle="collapse" data-parent="#addtoAccordion" aria-expanded="false">ADD TO SHOPPING LIST</h5>
+													<div id="addtoCollapse2" class="panel-collapse collapse" aria-expanded="false"></div>
+													
+												</div>
+
+												<div class="cart-detail__addto-item panel">
                                                     <h5 class="product-category__item-header collapsed" href="#addtoCollapse3" data-toggle="collapse" data-parent="#addtoAccordion" aria-expanded="false">ADD TO RECEIPT</h5>
                                                     <div class="panel-collapse collapse" id="addtoCollapse3" aria-expanded="false" style="height: 0px;">
                                                         <div class="cart-detail__panel-body">

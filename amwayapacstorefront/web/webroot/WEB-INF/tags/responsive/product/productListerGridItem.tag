@@ -96,11 +96,11 @@
 									
 								</form>
 								<c:url var="addToShoppingListUrl" value="/shopping-lists/data/all" />
-								<a class="addToList product-list__item-link-text product-list__item-link-common col-xs-12 col-md-12" href="#"
+								<a class="addToList product-list__item-link-text product-list__item-link-common col-xs-12 col-md-12"
 									data-add-to-shopping-list-url="${addToShoppingListUrl}" data-product-code="${product.code}">
 									<spring:theme code="plp.producttile.shoppinglist" />
 								</a>
-								<div class="cart-detail__dropdown-menu dropdown-menu shopping-list-popup-wrapper plp-add-to-shopping-list-popup" role="menu">
+								<div class="cart-detail__dropdown-menu dropdown-menu shopping-list-popup-wrapper plp-add-to-shopping-list-popup shoppinglist-popup" role="menu">
 								</div>
 							</c:otherwise>
 						</c:choose>

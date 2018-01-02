@@ -10,8 +10,7 @@ ACC.productdetail = {
         "bindCreateNewDitto",
         "bindContactsPopup",
         "bindPreviousScreenPopup",
-        "bindAddToCart",
-        "bindAddToShoppingListForm",
+        "bindAddToShoppingList",
         "bindNewList"
 	],
 	
@@ -32,17 +31,23 @@ ACC.productdetail = {
 		 })
 	},
 	
-	bindAddToShoppingListForm: function() {
+	bindAddToShoppingListForm: function(form) {
 		
-            $('#multiShoppingListUpdateForm').ajaxForm({
+		form.ajaxForm({
   				success: function(data) 
   				{
   					// data contains the shopping list page content
   			    	if ($(data).filter("div.page-content").length > 0) {
   			    		ACC.popup.showPopup($(data).filter("div.page-content").html());
+  			    		setTimeout(function(){  			    			
+								$('.shoppinglist-popup').hide();
+							});
   			    		ACC.global.findAndUpdateGlobalMessages(data, false);
   			    	} else {
   			    		ACC.global.findAndUpdateGlobalMessages(data);
+  			    		setTimeout(function(){ 
+  			    			$('.shoppinglist-popup').hide();
+							});
   			    	}
   			    },
   				error: function(error) 
@@ -53,13 +58,14 @@ ACC.productdetail = {
   			});           
    		 },
 	
-	bindAddToCart: function() {
-	            	 $(document).on("click", '.addToList, #addToList', function(event) {
-	            		 if($(".cart-detail__dropdown-menu.dropdown-menu.shopping-list-popup-wrapper").css('display')=='none'){
+	bindAddToShoppingList: function() {
+	            	 $(document).on("click", '.addToList', function(event) {
+	            		 
+	            	 if(!$(this).parent().children('.shoppinglist-popup').is(':visible')){
 		                  event.preventDefault();
 		                  var button = $(this);
 		                  var productcode= button.data("productCode");
-		                  var childelement = button.parent().children(".cart-detail__dropdown-menu.dropdown-menu.shopping-list-popup-wrapper");
+		                  var childelement = button.parent().children(".shoppinglist-popup");
 		                  console.log(childelement.length);
 		                  $.ajax({ 
 		       				url: button.data("addToShoppingListUrl"),
@@ -68,10 +74,10 @@ ACC.productdetail = {
 		       				{
 		       			
 		       					childelement.html(data);
-		       					$(".js-populated-product-code").val(productcode);
+		       					childelement.find(".js-populated-product-code").val(productcode);
 		       					childelement.show();
-		       			        ACC.productdetail.bindAddToShoppingListForm();
-		       			     	
+		       			        ACC.productdetail.bindAddToShoppingListForm(childelement.find("#multiShoppingListUpdateForm"));
+		       		
 		       			    },
 		       				error: function(error) 
 		       				{
@@ -80,8 +86,11 @@ ACC.productdetail = {
 		       				}
 		       			});           
 	            		 }else{
-	            			 $(".cart-detail__dropdown-menu.dropdown-menu.shopping-list-popup-wrapper").hide();
+	            			 $(".shoppinglist-popup").hide();
 	            		 }
+	            	 
+	            	 $(".shoppinglist-popup").html("");
+	            	 $(".shoppinglist-popup").hide();
 		              });
 	},
 

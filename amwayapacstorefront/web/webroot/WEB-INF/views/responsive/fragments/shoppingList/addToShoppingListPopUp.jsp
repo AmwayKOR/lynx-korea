@@ -34,8 +34,7 @@
 	</ul>
 
 	<div class="dropdown-menu-bottom">
-		<button class="btn btn-primary" data-add-multi-product-to-shopping-list-response="${addMultiProductToShoppingListResponse}"
-			<c:if test="${empty shoppingLists}">disabled="disabled"</c:if> type="submit">
+		<button class="btn btn-primary" <c:if test="${empty shoppingLists}">disabled="disabled"</c:if> type="submit">
 			<spring:theme code="text.shoppinglist.addtolist" />
 		</button>
 		
