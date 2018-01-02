@@ -96,8 +96,7 @@ public class DefaultAmwayOrderDao extends DefaultOrderDao implements AmwayOrderD
 	{
 		if (amwayOrderSearchParameters.getOrderDateFrom() != null && amwayOrderSearchParameters.getOrderDateTo() != null)
 		{
-			final boolean appendAndOperator = true;
-			addDateConditionForSearch(param, queryBuilder, amwayOrderSearchParameters, appendAndOperator);
+			addDateConditionForSearch(param, queryBuilder, amwayOrderSearchParameters);
 		}
 		if (amwayOrderSearchParameters.getOrderingABOName() != null)
 		{
@@ -128,13 +127,8 @@ public class DefaultAmwayOrderDao extends DefaultOrderDao implements AmwayOrderD
 	}
 
 	private void addDateConditionForSearch(final Map<String, Object> param, final StringBuilder queryBuilder,
-			final AmwayOrderSearchParameters amwayOrderSearchParameters, final boolean appendAndOperator)
+			final AmwayOrderSearchParameters amwayOrderSearchParameters)
 	{
-		if (appendAndOperator)
-		{
-			queryBuilder.append(AND_OPERATOR);
-		}
-
 		param.put("dateFrom", amwayOrderSearchParameters.getOrderDateFrom());
 		param.put("dateTo", amwayOrderSearchParameters.getOrderDateTo());
 		queryBuilder.append("{").append(OrderModel.DATE).append("} >= ?dateFrom AND {").append(OrderModel.DATE)
