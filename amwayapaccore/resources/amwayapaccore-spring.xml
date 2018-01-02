@@ -313,4 +313,36 @@
 	
 	<bean id="amwayApacPaymentOptionInterceptor" class="com.amway.apac.core.interceptors.AmwayApacPaymentOptionInterceptor" scope="tenant"/>
 	
+	<alias alias="amwayAccountService" name="defaultAmwayApacAccountService" />
+	<bean id="defaultAmwayApacAccountService" class="com.amway.apac.core.account.service.impl.DefaultAmwayApacAccountService" parent="defaultAmwayAccountService">
+		<property name="genericDao" ref="amwayApacAccountDao"/>
+		<property name="amwayApacCommerceCommonI18NService" ref="commerceCommonI18NService"/>
+	</bean>
+	
+	<alias alias="amwayCommerceCheckoutService" name="defaultAmwayApacCommerceCheckoutService" />
+	<bean id="defaultAmwayApacCommerceCheckoutService" class="com.amway.apac.core.checkout.services.impl.DefaultAmwayApacCommerceCheckoutService" parent="defaultAmwayCommerceCheckoutService">
+		<property name="amwayApacCommerceWarehouseStrategy" ref="defaultAmwayApacCommerceWarehouseStrategy"/>
+	</bean>
+	
+	<bean id="defaultAmwayApacCommerceWarehouseStrategy" class="com.amway.apac.core.checkout.services.impl.DefaultAmwayApacCommerceWarehouseStrategy">
+		<property name="commerceCartCalculationStrategy" ref="commerceCartCalculationStrategy"/>
+		<property name="modelService" ref="modelService"/>
+	</bean>
+	
+	<alias alias="commerceCommonI18NService" name="defaultAmwayApacCommerceCommonI18NService" />
+	<bean id="defaultAmwayApacCommerceCommonI18NService" class="com.amway.apac.core.i18n.services.impl.DefaultAmwayApacCommerceCommonI18NService" parent="defaultCommerceCommonI18NService">
+		<property name="cmsSiteService" ref="cmsSiteService"/>
+		<property name="genericDao" ref="amwayApacCountryDao"/>
+	</bean>
+
+	<bean id="amwayApacCountryDao"
+	      class="de.hybris.platform.servicelayer.internal.dao.DefaultGenericDao">
+		 <constructor-arg name="typecode" value="Country"/>
+	</bean>
+	
+	<bean id="amwayApacAccountDao"
+	      class="de.hybris.platform.servicelayer.internal.dao.DefaultGenericDao">
+		 <constructor-arg name="typecode" value="AmwayAccount"/>
+	</bean>
+	
 </beans>

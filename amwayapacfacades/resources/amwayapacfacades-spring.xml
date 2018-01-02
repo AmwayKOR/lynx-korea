@@ -172,7 +172,10 @@
     </bean>
     
     <alias name="defaultAmwayApacCustomerFacade" alias="customerFacade"/>
-    <bean id="defaultAmwayApacCustomerFacade" class="com.amway.apac.facades.customer.impl.DefaultAmwayApacCustomerFacade" parent="defaultAmwayCustomerFacade" />
+    <bean id="defaultAmwayApacCustomerFacade" class="com.amway.apac.facades.customer.impl.DefaultAmwayApacCustomerFacade" parent="defaultAmwayCustomerFacade">
+    	<property name="amwayApacAccountService" ref="amwayAccountService"/>
+        <property name="addressPopulator" ref="addressPopulator"/>
+    </bean>
     
     <alias name="defaultAmwayApacStockPopulator" alias="stockPopulator"/>
 	<bean id="defaultAmwayApacStockPopulator" parent="defaultStockPopulator"
@@ -234,5 +237,14 @@
     <bean id="defaultAmwayApaccmsItemDropdownTypePopulator" class="com.amway.apac.facades.cms.types.populator.AmwayApacCMSItemDropdownComponentTypeAttributePopulator" >
         <property name="attributeDescriptorModelHelperService" ref="attributeDescriptorModelHelperService"/>
     </bean>    
-
+    
+    <alias name="defaultAmwayApacCheckoutFacade" alias="amwayCheckoutFacade"/>
+    <bean id="defaultAmwayApacCheckoutFacade" class="com.amway.apac.facades.checkout.DefaultAmwayApacCheckoutFacade" parent="defaultAmwayCheckoutFacade">
+        <property name="amwayApacWarehouseServiceabilityService" ref="amwayApacWarehouseServiceabilityService"/>
+        <property name="baseSiteService" ref="baseSiteService"/>
+        <property name="amwayApacCustomerFacade" ref="customerFacade"/>
+        <property name="amwayApacAccountService" ref="amwayAccountService"/>
+        <property name="amwayApacCommerceCheckoutService" ref="amwayCommerceCheckoutService"/>
+    </bean>    
+    
 </beans>

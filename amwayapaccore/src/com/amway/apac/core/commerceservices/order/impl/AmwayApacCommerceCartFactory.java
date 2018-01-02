@@ -36,6 +36,7 @@ public class AmwayApacCommerceCartFactory extends AmwayCommerceCartFactory
 				cart.setWarehouse(amwayApacWarehouseServiceabilityService.getServiceableWareHouse(registeredAddress.getPostalcode(),
 						currentBaseSite));
 			}
+			cart.setVolumeAmwayAccount(currentAccount.getCode());
 		}
 		return cart;
 	}

@@ -55,5 +55,9 @@
 	<bean class="de.hybris.platform.commercefacades.order.data.OrderHistoryData">
 		<property name="itemQuantity" type="java.lang.Integer"/>
 	</bean>
+	
+	<bean class="de.hybris.platform.commerceservices.service.data.CommerceCheckoutParameter">
+		<property name="warehouse" type="de.hybris.platform.ordersplitting.model.WarehouseModel"/>
+	</bean>	
 
 </beans>
