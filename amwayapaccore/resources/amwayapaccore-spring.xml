@@ -345,4 +345,10 @@
 		 <constructor-arg name="typecode" value="AmwayAccount"/>
 	</bean>
 	
+	<alias alias="warehouseSelectionStrategy" name="defaultAmwayApacWarehouseSelectionStrategy"/>
+	<alias alias="pickupWarehouseSelectionStrategy" name="defaultAmwayApacWarehouseSelectionStrategy"/>
+	<bean id="defaultAmwayApacWarehouseSelectionStrategy"
+			class="com.amway.apac.core.warehousing.strategies.impl.DefaultAmwayApacWarehouseSelectionStrategy">
+	</bean>
+	
 </beans>
