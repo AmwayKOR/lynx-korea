@@ -20,6 +20,29 @@
 			<value code="ZIPP" />
 			<value code="PIF" />
 		</enumtype>
+		
+		<enumtype code="InStockStatus" autocreate="false" generate="true">
+			<value code="temporaryNotAvailable" />
+			<value code="notYetAvailable" />
+			<value code="shipped" />
+		</enumtype>
+		
+			<enumtype code="StockLevelStatus" generate="true" autocreate="false"
+			dynamic="true">
+			<value code="temporaryNotAvailable" />
+			<value code="notYetAvailable" />
+			<value code="shipped" />
+			<value code="backOrder" />
+			<value code="notSpecified"/>
+		</enumtype>
+
+		<enumtype code="WarehouseServiceabilityType" autocreate="true"
+			generate="true">
+			<value code="PIS" />
+			<value code="HD" />
+			<value code="BOTH" />
+			<value code="NONE" />
+		</enumtype>
 	</enumtypes>
 	
 	<relations>
@@ -127,6 +150,42 @@
 						<key attribute="aliasCode" />
 					</index>
 				</indexes>
+			</itemtype>
+			
+			<itemtype code="AbstractOrderEntry" autocreate="false"
+				generate="false">
+				<attributes>
+					<attribute type="java.lang.String" qualifier="aliasCode">
+						<description>Alias code(SKU) as AS400 has different SKU's as per payment option.</description>
+						<modifiers read="true" write="true" search="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="PaymentType" qualifier="type">
+						<description>Identifies the type of payment option.</description>
+						<modifiers read="true" write="true" search="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.Integer" qualifier="tenure">
+						<description>Identifies the Tenure of payment option.</description>
+						<modifiers read="true" write="true" search="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="InStockStatus" qualifier="dispositionCode">
+						<description>Disposition Code.</description>
+						<modifiers read="true" write="true" search="true" />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+			
+			<itemtype code="Warehouse" autocreate="false" generate="false">
+				<attributes>
+					<attribute type="WarehouseServiceabilityType" qualifier="warehouseType">
+						<modifiers read="true" write="true" optional="false" />
+						<persistence type="property" />
+						<defaultvalue>em().getEnumerationValue("WarehouseServiceabilityType","BOTH")</defaultvalue>
+					</attribute>
+				</attributes>
 			</itemtype>
         </typegroup>
 
