@@ -123,6 +123,11 @@ public final class AmwayapacCoreConstants extends GeneratedAmwayapacCoreConstant
 	public static final String SEARCH_AUTO_COMPLETE_FORMAT = "autoComplete";
 
 	/**
+	 * Search Auto Complete image format
+	 */
+	public static final String RECENTLY_VIEWED_FORMAT = "recentlyViewed";
+
+	/**
 	 * Multidimensional attribute from SolR.
 	 */
 	public static final String MULTIDIMENSIONAL = "multidimensional";

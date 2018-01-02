@@ -3,7 +3,7 @@
 <%@ taglib prefix="theme" tagdir="/WEB-INF/tags/shared/theme" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="format" tagdir="/WEB-INF/tags/shared/format" %>
-<%@ taglib prefix="product" tagdir="/WEB-INF/tags/desktop/product" %>
+<%@ taglib prefix="product" tagdir="/WEB-INF/tags/responsive/product" %>
 <%@ taglib prefix="component" tagdir="/WEB-INF/tags/shared/component" %>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
 
@@ -16,7 +16,8 @@
 		<div class="product-recentlyviewed__imagelist" id="recentlyViewedListTab">
 		    <c:forEach items="${recentlyViewedProducts.results}" var="product">
 		        <div>
-                    <img class="product-recentlyviewed__img" src="${product.images[0].url}" alt="${product.name}" />
+                     <product:productPrimaryImage product="${product}" format="recentlyViewed" cssClass="product-recentlyviewed__img" />
+                   
                 </div>
 		    </c:forEach>
 		</div>

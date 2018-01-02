@@ -3,6 +3,7 @@ package com.amway.apac.facades.populators;
 import static com.amway.apac.core.constants.AmwayapacCoreConstants.MULTIDIMENSIONAL;
 import static com.amway.apac.core.constants.AmwayapacCoreConstants.PRODUCT_LIST_GRID_FORMAT;
 import static com.amway.apac.core.constants.AmwayapacCoreConstants.SEARCH_AUTO_COMPLETE_FORMAT;
+import static com.amway.apac.core.constants.AmwayapacCoreConstants.RECENTLY_VIEWED_FORMAT;
 
 import de.hybris.platform.commercefacades.product.data.ImageData;
 import de.hybris.platform.commercefacades.product.data.ProductData;
@@ -42,6 +43,7 @@ public class AmwayApacSearchResultProductPopulator extends AmwaySearchResultProd
 		final List<ImageData> result = new ArrayList<>();
 		addImageData(source, PRODUCT_LIST_GRID_FORMAT, result);
 		addImageData(source, SEARCH_AUTO_COMPLETE_FORMAT, result);
+		addImageData(source, RECENTLY_VIEWED_FORMAT, result);
 		return result;
 	}
 
