@@ -258,6 +258,13 @@
 	<alias alias="customeraccountDao" name="defaultAmwayApacCustomerAccountDao" />
     <bean id="defaultAmwayApacCustomerAccountDao" class="com.amway.apac.core.customer.daos.impl.DefaultAmwayApacCustomerAccountDao" parent="amwayCustomerAccountDao" />
     
+    <alias name="amwayApacProductService" alias="productService" />
+    <bean id="amwayApacProductService"
+          class="com.amway.apac.product.services.impl.AmwayApacProductServiceImpl" parent="defaultProductService">
+        <property name="amwayApacProductDao" ref="amwayApacProductDao" />
+    </bean>
+    
+    <bean id="amwayApacProductDao" class="com.amway.apac.core.product.daos.impl.AmwayApacProductDaoImpl" /> 
     
 	<alias name="defaultAmwayApacLowestPriceVariantStrategy" alias="amwayApacPrimaryVariantSelectionStrategy"/>
 	<bean id="defaultAmwayApacLowestPriceVariantStrategy" class="com.amway.apac.core.product.strategies.impl.DefaultAmwayApacLowestPriceVariantStrategy">
@@ -303,5 +310,7 @@
 	<bean id="amwayApacCommerceCartFactory" class="com.amway.apac.core.commerceservices.order.impl.AmwayApacCommerceCartFactory" parent="amwayCommerceCartFactory">
 		<property name="amwayApacWarehouseServiceabilityService" ref="amwayApacWarehouseServiceabilityService"/>
 	</bean>
+	
+	<bean id="amwayApacPaymentOptionInterceptor" class="com.amway.apac.core.interceptors.AmwayApacPaymentOptionInterceptor" scope="tenant"/>
 	
 </beans>
