@@ -5,11 +5,12 @@ package com.amway.apac.product.services;
 
 import de.hybris.platform.catalog.model.CatalogVersionModel;
 import de.hybris.platform.core.model.product.ProductModel;
+import de.hybris.platform.product.ProductService;
 
 import com.amway.apac.core.model.AmwayPaymentOptionModel;
 
 
-public interface AmwayApacProductService
+public interface AmwayApacProductService extends ProductService
 {
 
 	/**
@@ -31,4 +32,11 @@ public interface AmwayApacProductService
 	 * @return boolean for payment option availability
 	 */
 	boolean checkIfPIFIsActive(ProductModel productModel);
+
+	/**
+	 * @param splitOmsCode
+	 * @param omscodevalidationparams
+	 * @return
+	 */
+	boolean validateOmsCode(String[] splitOmsCode, int[] omscodevalidationparams);
 }

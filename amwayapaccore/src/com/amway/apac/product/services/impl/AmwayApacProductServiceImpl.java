@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Objects;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 
 import com.amway.apac.core.enums.PaymentType;
 import com.amway.apac.core.model.AmwayPaymentOptionModel;
@@ -37,7 +38,7 @@ public class AmwayApacProductServiceImpl extends DefaultProductService implement
 	public AmwayPaymentOptionModel getAllPaymentOptionForOmsCode(final String omsCode, final CatalogVersionModel catalogVersion)
 	{
 		ServicesUtil.validateParameterNotNullStandardMessage("omsCode", omsCode);
-		ServicesUtil.validateParameterNotNullStandardMessage("omsCode", catalogVersion);
+		ServicesUtil.validateParameterNotNullStandardMessage("catalogVersion", catalogVersion);
 
 		final List<AmwayPaymentOptionModel> paymentOptions = amwayApacProductDao.getAllAmwayPaymentOptionFromOmsCode(omsCode,
 				catalogVersion);
@@ -55,7 +56,7 @@ public class AmwayApacProductServiceImpl extends DefaultProductService implement
 	public AmwayPaymentOptionModel getPaymentOptionForOmsCode(final String omsCode, final CatalogVersionModel catalogVersion)
 	{
 		ServicesUtil.validateParameterNotNullStandardMessage("omsCode", omsCode);
-		ServicesUtil.validateParameterNotNullStandardMessage("omsCode", catalogVersion);
+		ServicesUtil.validateParameterNotNullStandardMessage("catalogVersion", catalogVersion);
 
 		final List<AmwayPaymentOptionModel> paymentOptions = amwayApacProductDao.getAmwayPaymentOptionFromOmsCode(omsCode,
 				catalogVersion);
@@ -117,5 +118,17 @@ public class AmwayApacProductServiceImpl extends DefaultProductService implement
 	public void setAmwayApacProductDao(final AmwayApacProductDao amwayApacProductDao)
 	{
 		this.amwayApacProductDao = amwayApacProductDao;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see com.amway.apac.product.services.AmwayApacProductService#validateOmsCode(java.lang.String[], int[])
+	 */
+	@Override
+	public boolean validateOmsCode(final String[] splitOmsCode, final int[] omsparams)
+	{
+		return (null != splitOmsCode) && (splitOmsCode.length == omsparams[0])
+				&& (StringUtils.isNotBlank(splitOmsCode[omsparams[1]])) && (StringUtils.isNotBlank(splitOmsCode[omsparams[2]]));
 	}
 }
