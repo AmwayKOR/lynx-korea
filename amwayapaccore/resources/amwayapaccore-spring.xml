@@ -353,4 +353,11 @@
 			<property name="baseStoreService" ref="baseStoreService" />
 	</bean>
 	
+	<alias alias="stockLevelStatusStrategy" name="amwayApacCommerceStockLevelStatusStrategy"/>
+    <bean id="amwayApacCommerceStockLevelStatusStrategy" class="com.amway.apac.core.stock.strategies.impl.AmwayApacCommerceStockLevelStatusStrategy" parent="amwayCommerceStockLevelStatusStrategy"/>
+    
+    <alias alias="commerceStockLevelCalculationStrategy" name="amwayApacCommerceAvailabilityCalculationStrategy"/>
+	<bean id="amwayApacCommerceAvailabilityCalculationStrategy" class="com.amway.apac.core.stock.strategies.impl.AmwayApacCommerceAvailabilityCalculationStrategy"
+			parent="warehousingAvailabilityCalculationStrategy"/>
+	
 </beans>
