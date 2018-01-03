@@ -30,6 +30,19 @@
 			</list>
 		</property>
 	</bean>
+	
+	<bean id="amwayApacEnumDataConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.amway.apacfacades.data.EnumData" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayApacEnumDataPopulator" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="amwayApacEnumDataPopulator" class="com.amway.apac.facades.populators.AmwayApacEnumDataPopulator">
+		<property name="enumerationService" ref="enumerationService" />
+	</bean>
 
 	<alias name="amwayApacImageFormatMapping" alias="imageFormatMapping"/>
 	<bean id="amwayApacImageFormatMapping" parent="defaultImageFormatMapping">
@@ -237,6 +250,21 @@
     <bean id="defaultAmwayApaccmsItemDropdownTypePopulator" class="com.amway.apac.facades.cms.types.populator.AmwayApacCMSItemDropdownComponentTypeAttributePopulator" >
         <property name="attributeDescriptorModelHelperService" ref="attributeDescriptorModelHelperService"/>
     </bean>    
+    
+    <bean id="amwayApacPaymentOptionConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.apacfacades.payment.data.AmwayPaymentOptionData" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayApacPaymentOptionPopulator" />
+			</list>
+		</property>
+	</bean>
+	
+    <bean id="amwayApacPaymentOptionPopulator"
+		class="com.amway.apac.facades.paymentoption.populators.AmwayApacPaymentOptionPopulator">
+		<property name="enumConverter" ref="amwayApacEnumDataConverter" />
+	</bean>
     
     <alias name="defaultAmwayApacCheckoutFacade" alias="amwayCheckoutFacade"/>
     <bean id="defaultAmwayApacCheckoutFacade" class="com.amway.apac.facades.checkout.DefaultAmwayApacCheckoutFacade" parent="defaultAmwayCheckoutFacade">
