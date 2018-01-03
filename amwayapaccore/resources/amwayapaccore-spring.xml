@@ -315,7 +315,7 @@
 	
 	<alias alias="amwayAccountService" name="defaultAmwayApacAccountService" />
 	<bean id="defaultAmwayApacAccountService" class="com.amway.apac.core.account.service.impl.DefaultAmwayApacAccountService" parent="defaultAmwayAccountService">
-		<property name="genericDao" ref="amwayApacAccountDao"/>
+		<property name="amwayApacAccountDao" ref="amwayApacAccountDao"/>
 		<property name="amwayApacCommerceCommonI18NService" ref="commerceCommonI18NService"/>
 	</bean>
 	
@@ -332,7 +332,7 @@
 	<alias alias="commerceCommonI18NService" name="defaultAmwayApacCommerceCommonI18NService" />
 	<bean id="defaultAmwayApacCommerceCommonI18NService" class="com.amway.apac.core.i18n.services.impl.DefaultAmwayApacCommerceCommonI18NService" parent="defaultCommerceCommonI18NService">
 		<property name="cmsSiteService" ref="cmsSiteService"/>
-		<property name="genericDao" ref="amwayApacCountryDao"/>
+		<property name="amwayApacCountryDao" ref="amwayApacCountryDao"/>
 	</bean>
 
 	<bean id="amwayApacCountryDao"

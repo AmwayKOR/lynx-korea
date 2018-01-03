@@ -6,6 +6,7 @@ import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.servicelayer.dto.converter.ConversionException;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.BooleanUtils;
 
 
 /**
@@ -24,5 +25,6 @@ public class AmwayApacProductBasicPopulator extends ProductBasicPopulator<Produc
 	{
 		super.populate(productModel, productData);
 		productData.setMultidimensional(Boolean.valueOf(CollectionUtils.isNotEmpty(productModel.getVariants())));
+		productData.setIsSellable(Boolean.valueOf(BooleanUtils.isNotFalse(productModel.getIsSellable())));
 	}
 }

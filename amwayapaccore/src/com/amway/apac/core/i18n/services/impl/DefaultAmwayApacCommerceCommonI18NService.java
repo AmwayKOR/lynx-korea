@@ -26,7 +26,7 @@ public class DefaultAmwayApacCommerceCommonI18NService extends DefaultCommerceCo
 	private static final Logger LOG = Logger.getLogger(DefaultAmwayApacCommerceCommonI18NService.class);
 
 	private CMSSiteService cmsSiteService;
-	private GenericDao<CountryModel> genericDao;
+	private GenericDao<CountryModel> amwayApacCountryDao;
 
 	/**
 	 * {@inheritDoc}
@@ -45,7 +45,8 @@ public class DefaultAmwayApacCommerceCommonI18NService extends DefaultCommerceCo
 	{
 		validateParameterNotNullStandardMessage("countryCode", countryCode);
 		LOG.debug("Get Country By Code : " + countryCode);
-		final List<CountryModel> countries = getGenericDao().find(Collections.singletonMap(CountryModel.COUNTRYCODE, countryCode));
+		final List<CountryModel> countries = getAmwayApacCountryDao()
+				.find(Collections.singletonMap(CountryModel.COUNTRYCODE, countryCode));
 		return CollectionUtils.isEmpty(countries) ? null : countries.get(0);
 	}
 
@@ -68,21 +69,21 @@ public class DefaultAmwayApacCommerceCommonI18NService extends DefaultCommerceCo
 	}
 
 	/**
-	 * @return the genericDao
+	 * @return the amwayApacCountryDao
 	 */
-	public GenericDao<CountryModel> getGenericDao()
+	public GenericDao<CountryModel> getAmwayApacCountryDao()
 	{
-		return genericDao;
+		return amwayApacCountryDao;
 	}
 
 	/**
-	 * @param genericDao
-	 *           the genericDao to set
+	 * @param amwayApacCountryDao
+	 *           the amwayApacCountryDao to set
 	 */
 	@Required
-	public void setGenericDao(final GenericDao<CountryModel> genericDao)
+	public void setAmwayApacCountryDao(final GenericDao<CountryModel> amwayApacCountryDao)
 	{
-		this.genericDao = genericDao;
+		this.amwayApacCountryDao = amwayApacCountryDao;
 	}
 
 }

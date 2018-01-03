@@ -20,7 +20,7 @@ import com.amway.core.model.AmwayAccountModel;
  */
 public class DefaultAmwayApacAccountService extends DefaultAmwayAccountService implements AmwayApacAccountService
 {
-	private GenericDao<AmwayAccountModel> genericDao;
+	private GenericDao<AmwayAccountModel> amwayApacAccountDao;
 	private AmwayApacCommerceCommonI18NService amwayApacCommerceCommonI18NService;
 
 	/**
@@ -33,26 +33,9 @@ public class DefaultAmwayApacAccountService extends DefaultAmwayAccountService i
 		final Map<String, Object> attributes = new HashMap<>(1);
 		attributes.put(AmwayAccountModel.CODE, aboId);
 		attributes.put(AmwayAccountModel.CONTROLLINGAFFILIATE, controllingAffiliate);
-		return getGenericDao().find(attributes);
+		return getAmwayApacAccountDao().find(attributes);
 	}
 
-	/**
-	 * @return the genericDao
-	 */
-	public GenericDao<AmwayAccountModel> getGenericDao()
-	{
-		return genericDao;
-	}
-
-	/**
-	 * @param genericDao
-	 *           the genericDao to set
-	 */
-	@Required
-	public void setGenericDao(final GenericDao<AmwayAccountModel> genericDao)
-	{
-		this.genericDao = genericDao;
-	}
 
 	/**
 	 * @return the amwayApacCommerceCommonI18NService
@@ -70,5 +53,27 @@ public class DefaultAmwayApacAccountService extends DefaultAmwayAccountService i
 	public void setAmwayApacCommerceCommonI18NService(final AmwayApacCommerceCommonI18NService amwayApacCommerceCommonI18NService)
 	{
 		this.amwayApacCommerceCommonI18NService = amwayApacCommerceCommonI18NService;
+	}
+
+
+
+	/**
+	 * @return the amwayApacAccountDao
+	 */
+	public GenericDao<AmwayAccountModel> getAmwayApacAccountDao()
+	{
+		return amwayApacAccountDao;
+	}
+
+
+
+	/**
+	 * @param amwayApacAccountDao
+	 *           the amwayApacAccountDao to set
+	 */
+	@Required
+	public void setAmwayApacAccountDao(final GenericDao<AmwayAccountModel> amwayApacAccountDao)
+	{
+		this.amwayApacAccountDao = amwayApacAccountDao;
 	}
 }

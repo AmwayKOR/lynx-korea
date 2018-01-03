@@ -187,6 +187,16 @@
 					</attribute>
 				</attributes>
 			</itemtype>
+			<itemtype code="Product" generate="false" autocreate="false">
+				<description>Extending the Product type from core with additional attributes.</description>
+				<attributes>
+					<attribute type="java.lang.Boolean" qualifier="isSellable">
+						<description>If the product is sellable or non-sellable</description>
+						<defaultvalue>true</defaultvalue>
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
         </typegroup>
 
     </itemtypes>

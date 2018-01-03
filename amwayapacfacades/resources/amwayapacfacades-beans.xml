@@ -71,5 +71,9 @@
     	<property name="paymentType" type="com.amway.apac.core.enums.PaymentType"/>
     	<property name="paymentTypeData" type="com.amway.apacfacades.data.EnumData"/>
     </bean>
+    
+	<bean class="de.hybris.platform.commercefacades.product.data.ProductData">
+		<property name="isSellable" type="java.lang.Boolean" />
+	</bean>
 
 </beans>
