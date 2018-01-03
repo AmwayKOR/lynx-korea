@@ -59,6 +59,21 @@
 					search="true" partof="true" />
 			</targetElement>
 		</relation>
+		
+		<relation localized="false" code="CustomerToPOSRelation"
+			autocreate="true" generate="true">
+			<deployment table="customerToPOSRelation" typecode="21005" />
+			<sourceElement type="Customer" qualifier="customer"
+				cardinality="many">
+				<modifiers read="true" write="true" optional="true"
+					search="true" />
+			</sourceElement>
+			<targetElement type="PointOfService" qualifier="favouriteShopList"
+				collectiontype="list" cardinality="many" ordered="false">
+				<modifiers read="true" write="true" optional="true"
+					search="true" />
+			</targetElement>
+		</relation>
 	</relations>
 	
     <itemtypes>
