@@ -9,7 +9,9 @@ import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.amway.apac.core.account.service.AmwayApacAccountService;
+import com.amway.apac.core.constants.AmwayapacCoreConstants;
 import com.amway.apac.facades.customer.AmwayApacCustomerFacade;
+import com.amway.core.constants.AmwaycoreConstants;
 import com.amway.core.facades.customer.impl.DefaultAmwayCustomerFacade;
 import com.amway.core.model.AmwayAccountModel;
 
@@ -25,13 +27,17 @@ public class DefaultAmwayApacCustomerFacade extends DefaultAmwayCustomerFacade i
 	private AddressPopulator addressPopulator;
 
 	/**
-	 * Overriding OOTB implementation to set the customer account and user price group in session.
+	 * Overriding OOTB implementation to set the customer account , user price group and user classification level in
+	 * session.
 	 */
 	@Override
 	public void loginSuccess()
 	{
 		super.loginSuccess();
 		getAmwayAccountCommerceService().setCurrentAccount(getCurrentUser());
+		final AmwayAccountModel currentAccount = getSessionService().getAttribute(AmwaycoreConstants.SessionVariables.ACCOUNT);
+		getSessionService().setAttribute(AmwayapacCoreConstants.ACCOUNT_CLASSIFICATION_CODE,
+				getAmwayApacAccountService().getClassificationForAccount(currentAccount).toString());
 	}
 
 	/**

@@ -10,9 +10,12 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.amway.apac.core.account.service.AmwayApacAccountService;
+import com.amway.apac.core.enums.AccountClassificationEnum;
 import com.amway.apac.core.i18n.services.AmwayApacCommerceCommonI18NService;
+import com.amway.apac.core.model.AmwayAccountClassificationModel;
 import com.amway.core.account.service.impl.DefaultAmwayAccountService;
 import com.amway.core.model.AmwayAccountModel;
+import com.amway.core.model.AmwayBusinessLevelModel;
 
 
 /**
@@ -21,6 +24,7 @@ import com.amway.core.model.AmwayAccountModel;
 public class DefaultAmwayApacAccountService extends DefaultAmwayAccountService implements AmwayApacAccountService
 {
 	private GenericDao<AmwayAccountModel> amwayApacAccountDao;
+	private GenericDao<AmwayAccountClassificationModel> amwayAccountClassificationDao;
 	private AmwayApacCommerceCommonI18NService amwayApacCommerceCommonI18NService;
 
 	/**
@@ -36,6 +40,30 @@ public class DefaultAmwayApacAccountService extends DefaultAmwayAccountService i
 		return getAmwayApacAccountDao().find(attributes);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public AccountClassificationEnum getClassificationForAccount(final AmwayAccountModel amwayAccount)
+	{
+		AccountClassificationEnum accountClassification = AccountClassificationEnum.NORMAL_ABO;
+		if (null != amwayAccount)
+		{
+			final AmwayBusinessLevelModel businessLevel = amwayAccount.getLevel();
+			if ((null != businessLevel) && (null != businessLevel.getQualificationLevel()))
+			{
+				final Map<String, Object> attributes = new HashMap<>(1);
+				attributes.put(AmwayAccountClassificationModel.QUALIFICATIONLEVEL, businessLevel.getQualificationLevel());
+				final AmwayAccountClassificationModel amwayAccountClassification = getAmwayAccountClassificationDao().find(attributes)
+						.iterator().next();
+				if (null != amwayAccountClassification)
+				{
+					accountClassification = amwayAccountClassification.getClassification();
+				}
+			}
+		}
+		return accountClassification;
+	}
 
 	/**
 	 * @return the amwayApacCommerceCommonI18NService
@@ -76,4 +104,25 @@ public class DefaultAmwayApacAccountService extends DefaultAmwayAccountService i
 	{
 		this.amwayApacAccountDao = amwayApacAccountDao;
 	}
+
+	/**
+	 * @return the amwayAccountClassificationDao
+	 */
+	public GenericDao<AmwayAccountClassificationModel> getAmwayAccountClassificationDao()
+	{
+		return amwayAccountClassificationDao;
+	}
+
+	/**
+	 * @param amwayAccountClassificationDao
+	 *           the amwayAccountClassificationDao to set
+	 */
+	@Required
+	public void setAmwayAccountClassificationDao(final GenericDao<AmwayAccountClassificationModel> amwayAccountClassificationDao)
+	{
+		this.amwayAccountClassificationDao = amwayAccountClassificationDao;
+	}
+
+
+
 }

@@ -43,6 +43,13 @@
 			<value code="BOTH" />
 			<value code="NONE" />
 		</enumtype>
+		
+		<enumtype generate="true" code="AccountClassificationEnum"
+			autocreate="true" dynamic="true">
+			<value code="NORMAL_ABO" />
+			<value code="PLATINUM_AND_ABOVE" />
+			<value code="DIAMOND_AND_ABOVE" />
+		</enumtype>
 	</enumtypes>
 	
 	<relations>
@@ -212,6 +219,29 @@
 					</attribute>
 				</attributes>
 			</itemtype>
+			
+			<itemtype code="AmwayAccountClassification" autocreate="true"
+				generate="true" >
+				<deployment table="accountClassification" typecode="21036" />
+				<attributes>
+					<attribute type="java.lang.String" qualifier="code">
+						<description>Unique identifier for classification model.</description>
+						<modifiers optional="false" unique="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="qualificationLevel" type="QualificationLevelTypeEnum">
+						<description>Qualification level enum from account to classify.</description>
+						<modifiers optional="false" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="classification" type="AccountClassificationEnum">
+						<description>Classification level enum</description>
+						<modifiers optional="false" />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+			
 			<itemtype code="VoucherPaymentInfo" extends="PaymentInfo"
 				autocreate="true" generate="true">
 			</itemtype>

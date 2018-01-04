@@ -63,6 +63,11 @@ public final class AmwayapacCoreConstants extends GeneratedAmwayapacCoreConstant
 	public static final int TWO_HUNDRED_INT = 200;
 
 	/**
+	 * int constant -> -1
+	 */
+	public static final int NEGATIVE_ONE = -1;
+
+	/**
 	 * Maximum length of the shopping lists names.
 	 */
 	public static final int SHOPPING_LIST_DEFAULT_MAX_LENGTH = 100;
@@ -131,6 +136,11 @@ public final class AmwayapacCoreConstants extends GeneratedAmwayapacCoreConstant
 	 * Multidimensional attribute from SolR.
 	 */
 	public static final String MULTIDIMENSIONAL = "multidimensional";
+
+	/**
+	 * Account Classification Code
+	 */
+	public static final String ACCOUNT_CLASSIFICATION_CODE = "accountClassficationCode";
 
 
 }

@@ -317,6 +317,7 @@
 	<bean id="defaultAmwayApacAccountService" class="com.amway.apac.core.account.service.impl.DefaultAmwayApacAccountService" parent="defaultAmwayAccountService">
 		<property name="amwayApacAccountDao" ref="amwayApacAccountDao"/>
 		<property name="amwayApacCommerceCommonI18NService" ref="commerceCommonI18NService"/>
+		<property name="amwayAccountClassificationDao" ref="amwayAccountClassificationDao"/>
 	</bean>
 	
 	<alias alias="amwayCommerceCheckoutService" name="defaultAmwayApacCommerceCheckoutService" />
@@ -333,6 +334,16 @@
 	<bean id="defaultAmwayApacCommerceCommonI18NService" class="com.amway.apac.core.i18n.services.impl.DefaultAmwayApacCommerceCommonI18NService" parent="defaultCommerceCommonI18NService">
 		<property name="cmsSiteService" ref="cmsSiteService"/>
 		<property name="amwayApacCountryDao" ref="amwayApacCountryDao"/>
+	</bean>
+	
+	<bean id="defaultAmwayApacAccountClassificationService" class="com.amway.apac.core.account.service.impl.DefaultAmwayApacAccountClassificationService">
+		<property name="amwayApacAccountClassificationComparator" ref="amwayApacAccountClassificationComparator"/>
+		<property name="sessionService" ref="sessionService"/>
+	</bean>
+	
+	<bean id="amwayAccountClassificationDao"
+	      class="de.hybris.platform.servicelayer.internal.dao.DefaultGenericDao">
+		 <constructor-arg name="typecode" value="AmwayAccountClassification"/>
 	</bean>
 
 	<bean id="amwayApacCountryDao"
@@ -359,5 +370,15 @@
     <alias alias="commerceStockLevelCalculationStrategy" name="amwayApacCommerceAvailabilityCalculationStrategy"/>
 	<bean id="amwayApacCommerceAvailabilityCalculationStrategy" class="com.amway.apac.core.stock.strategies.impl.AmwayApacCommerceAvailabilityCalculationStrategy"
 			parent="warehousingAvailabilityCalculationStrategy"/>
+	<bean id="amwayApacAccountClassificationComparator" class="com.amway.apac.core.comparators.AmwayApacAccountClassificationComparator" scope="singleton">
+		<property name="amwayAccountClassificationRankMapping" ref="amwayAccountClassificationRankMapping"/>
+	</bean>
+	
+	<util:map id="amwayAccountClassificationRankMapping" key-type="com.amway.apac.core.enums.AccountClassificationEnum" value-type="java.lang.Integer">
+		<description>Mapping for various classification levels against ranks</description>
+		<entry key="NORMAL_ABO" value="0"/>
+        <entry key="PLATINUM_AND_ABOVE" value="330"/>
+        <entry key="DIAMOND_AND_ABOVE" value="380"/>
+	</util:map>
 	
 </beans>
