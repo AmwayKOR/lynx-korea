@@ -16,7 +16,7 @@ import com.amway.facades.product.data.WishlistData;
 
 
 /**
- * Unit test for {@link AmwayApacWishlistBasicPopulator}
+ * Integration test for {@link AmwayApacWishlistBasicPopulator}
  *
  * @author Parvesh Goyal
  */
