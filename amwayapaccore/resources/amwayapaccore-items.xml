@@ -270,17 +270,6 @@
 				</attributes>
 			</itemtype>
 			
-			<itemtype code="AbstractOrder" autocreate="false" generate="false">
-				<description>Abstract Order additional attributes.</description>
-				<attributes>
-					<attribute type="java.lang.String" qualifier="itcassNumber">
-						<description>To hold ITCASS reference number in case of group renewal</description>
-						<modifiers read="true" write="true" search="false" />
-						<persistence type="property" />
-					</attribute>
-				</attributes>
-			</itemtype>
-			
         </typegroup>
         
         <typegroup name="Delivery">
