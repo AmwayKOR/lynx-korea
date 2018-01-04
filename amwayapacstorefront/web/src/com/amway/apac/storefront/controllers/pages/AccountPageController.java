@@ -77,7 +77,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.amway.apac.facades.customeraccount.AmwayApacOrderFacade;
+import com.amway.apac.facades.order.AmwayApacOrderFacade;
 import com.amway.apac.storefront.controllers.ControllerConstants;
 import com.amway.apac.storefront.forms.AmwayApacAddressForm;
 import com.amway.apac.storefront.forms.AmwayApacOrderHistoryFilterForm;
