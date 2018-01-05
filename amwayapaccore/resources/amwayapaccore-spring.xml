@@ -381,4 +381,16 @@
         <entry key="DIAMOND_AND_ABOVE" value="380"/>
 	</util:map>
 	
+	<!-- Delivery slot configuration -->
+    <alias name="amwayApacDeliverySlotManagementDao" alias="amwayApacDeliverySlotManagementDao"/>
+    <bean id="amwayApacDeliverySlotManagementDao" class="com.amway.apac.core.deliveryslot.daos.impl.AmwayApacDeliverySlotManagementDaoImpl">
+        <property name="flexibleSearchService" ref="flexibleSearchService"/>
+    </bean>
+    
+    <alias name="amwayApacDeliverySlotManagementService" alias="amwayApacDeliverySlotManagementService"/>
+    <bean id="amwayApacDeliverySlotManagementService" class="com.amway.apac.core.deliveryslot.services.impl.AmwayApacDeliverySlotManagementServiceImpl">
+        <property name="modelService" ref="modelService"/>
+        <property name="amwayApacDeliverySlotManagementDao" ref="amwayApacDeliverySlotManagementDao"/>
+    </bean>
+	
 </beans>
