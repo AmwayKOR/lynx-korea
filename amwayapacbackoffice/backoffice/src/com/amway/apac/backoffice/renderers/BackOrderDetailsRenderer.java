@@ -1,7 +1,7 @@
 /**
  *
  */
-package com.amway.apac.backoffice.renderers;
+package backoffice.src.com.amway.apac.backoffice.renderers;
 
 import de.hybris.platform.ordersplitting.model.ConsignmentModel;
 
@@ -15,13 +15,14 @@ import org.apache.log4j.Logger;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
 
-import com.amway.apac.backoffice.renderers.util.ApacAttributeWithLabelRendererUtil;
+import backoffice.src.com.amway.apac.backoffice.renderers.util.ApacAttributeWithLabelRendererUtil;
 import com.amway.apac.core.model.AmwayBackOrderModel;
 import com.hybris.cockpitng.core.config.impl.jaxb.editorarea.CustomSection;
 import com.hybris.cockpitng.core.model.WidgetModel;
 import com.hybris.cockpitng.dataaccess.facades.type.DataType;
 import com.hybris.cockpitng.engine.WidgetInstanceManager;
 import com.hybris.cockpitng.widgets.common.WidgetComponentRenderer;
+import backoffice.src.com.amway.apac.label.impl.ApacDateLabelProvider;
 
 
 /**
@@ -32,6 +33,8 @@ public class BackOrderDetailsRenderer implements WidgetComponentRenderer<Compone
 {
 
 	private static final Logger LOG = Logger.getLogger(BackOrderDetailsRenderer.class);
+
+	private ApacDateLabelProvider dateLabelProvider;
 
 	/**
 	 * Renders detail view for backorder in backoffice
@@ -68,7 +71,7 @@ public class BackOrderDetailsRenderer implements WidgetComponentRenderer<Compone
 
 		final String itemsLabel2 = Labels.getLabel("amway.backorder.section.details.shippingdate");
 		final String itemsAttributeValue2 = String.valueOf(consignment.getShippingDate());
-		attributeMap.put(itemsLabel2, itemsAttributeValue2);
+		attributeMap.put(itemsLabel2, null != itemsAttributeValue2 ? itemsAttributeValue2 : "");
 
 		final String itemsLabel3 = Labels.getLabel("amway.backorder.section.details.warehouse");
 		final String itemsAttributeValue3 = String.valueOf(backOrderModel.getWarehouse() != null
@@ -97,14 +100,16 @@ public class BackOrderDetailsRenderer implements WidgetComponentRenderer<Compone
 		attributeMap.put(itemsLabel5, itemsAttributeValue5);
 
 		final String itemsLabel6 = Labels.getLabel("amway.backorder.section.details.creationdate");
-		final String itemsAttributeValue6 = String.valueOf(backOrderModel.getCreationtime());
+		final String itemsAttributeValue6 = String.valueOf(dateLabelProvider.getLabel(backOrderModel.getCreationtime()));
 		attributeMap.put(itemsLabel6, itemsAttributeValue6);
 
 
 		final Date today = new Date();
+
 		final String itemsLabel8 = Labels.getLabel("amway.backorder.section.details.fullfillperiod");
-		final String itemsAttributeValue8 = String.valueOf(TimeUnit.MILLISECONDS
-				.toDays(backOrderModel.getReleaseByDate().getTime() - backOrderModel.getCreationtime().getTime()));
+		final String itemsAttributeValue8 = String.valueOf(
+				TimeUnit.MILLISECONDS.toDays(backOrderModel.getReleaseByDate().getTime() - backOrderModel.getCreationtime().getTime())
+						+ 1);
 		attributeMap.put(itemsLabel8, itemsAttributeValue8);
 
 		final String itemsLabel9 = Labels.getLabel("amway.backorder.section.details.age");
@@ -118,7 +123,7 @@ public class BackOrderDetailsRenderer implements WidgetComponentRenderer<Compone
 		attributeMap.put(itemsLabel10, itemsAttributeValue10);
 
 		final String itemsLabel11 = Labels.getLabel("amway.backorder.section.details.releaseBydate");
-		final String itemsAttributeValue11 = String.valueOf(backOrderModel.getReleaseByDate());
+		final String itemsAttributeValue11 = String.valueOf(dateLabelProvider.getLabel(backOrderModel.getReleaseByDate()));
 		attributeMap.put(itemsLabel11, itemsAttributeValue11);
 
 		ApacAttributeWithLabelRendererUtil.createAttributeWithLabel(parent, attributeMap, 3);
