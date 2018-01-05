@@ -12,6 +12,8 @@ import com.amway.apac.core.enums.AccountClassificationEnum;
 
 
 /**
+ * Default implementation of {@link AmwayApacAccountClassificationService}.
+ *
  * @author Shubham Goyal
  */
 public class DefaultAmwayApacAccountClassificationService implements AmwayApacAccountClassificationService

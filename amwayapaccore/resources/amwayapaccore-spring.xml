@@ -419,4 +419,7 @@
         </property>
 	</bean>
 	
+    <bean id="defaultAmwayApacProductPreLaunchStrategy" class="com.amway.apac.core.product.strategies.impl.DefaultAmwayApacProductPreLaunchStrategy">
+		<property name="amwayApacAccountClassificationService" ref="defaultAmwayApacAccountClassificationService" />
+    </bean>
 </beans>

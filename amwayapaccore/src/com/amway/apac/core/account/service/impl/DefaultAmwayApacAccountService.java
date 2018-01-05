@@ -19,6 +19,9 @@ import com.amway.core.model.AmwayBusinessLevelModel;
 
 
 /**
+ * Default implementation for {@link AmwayApacAccountService} and extension of {@link DefaultAmwayAccountService} to add
+ * functionality.
+ *
  * @author Shubham Goyal
  */
 public class DefaultAmwayApacAccountService extends DefaultAmwayAccountService implements AmwayApacAccountService

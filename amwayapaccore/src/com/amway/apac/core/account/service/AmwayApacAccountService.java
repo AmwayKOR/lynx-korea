@@ -8,6 +8,8 @@ import com.amway.core.model.AmwayAccountModel;
 
 
 /**
+ * Service layer for user account.
+ *
  * @author Shubham Goyal
  */
 public interface AmwayApacAccountService extends AmwayAccountService
@@ -23,7 +25,7 @@ public interface AmwayApacAccountService extends AmwayAccountService
 
 	/**
 	 * Returns {@link AccountClassificationEnum} as classification for given amwayAccount
-	 * 
+	 *
 	 * @param amwayAccount
 	 * @return
 	 */

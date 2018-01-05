@@ -156,6 +156,42 @@
 						<defaultvalue>true</defaultvalue>
 						<persistence type="property" />
 					</attribute>
+					<attribute type="AmwayPreLaunchConfig" qualifier="preLaunchConfig">
+						<description>Used to contain prelaunch configuration if exists</description>
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+			
+			<itemtype code="AmwayPreLaunchConfig" autocreate="true"
+				generate="true">
+				<deployment table="preLaunchConfig" typecode="21046" />
+				<attributes>
+					<attribute type="java.lang.string" qualifier="code">
+						<description>Unique code for PreLaunch configuration.</description>
+						<modifiers read="true" write="true" optional="false" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="AccountClassificationEnum" qualifier="classification">
+						<description>Classification level for pre launch.</description>
+						<modifiers read="true" write="true" optional="false" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.Util.Date" qualifier="startDate">
+						<modifiers read="true" write="true" optional="false" />
+						<description>Start Date Of Launch</description>
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.Util.Date" qualifier="endDate">
+						<modifiers read="true" write="true" optional="false" />
+						<description>End Date Of Launch</description>
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.Integer" qualifier="maxShoppingCount">
+						<modifiers read="true" write="true" optional="false" />
+						<description>Max shopping count per user in the time between startDate and endDate</description>
+						<persistence type="property" />
+					</attribute>
 				</attributes>
 			</itemtype>
 		</typegroup>
