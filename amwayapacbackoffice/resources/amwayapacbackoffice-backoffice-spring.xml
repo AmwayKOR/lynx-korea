@@ -30,5 +30,8 @@
     <alias alias="backOrderEssentialsRenderer" name="defaultBackOrderEssentialsRenderer"/>
     <bean id="defaultBackOrderEssentialsRenderer" class="com.amway.apac.backoffice.renderers.BackOrderEssentialsRenderer">	 	
     </bean>
+    <alias name="ApacDateLabelProvider" alias="dateLabelProvider"/>
+	<bean id="ApacDateLabelProvider" class="com.amway.apac.label.impl.ApacDateLabelProvider" parent="defaultDateLabelProvider">
+	</bean>
 
 </beans>

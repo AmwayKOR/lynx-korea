@@ -1,7 +1,7 @@
 /**
  *
  */
-package com.amway.apac.backoffice.renderers.util;
+package backoffice.src.com.amway.apac.backoffice.renderers.util;
 
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
@@ -53,6 +53,7 @@ public class ApacAttributeWithLabelRendererUtil
 
 	/**
 	 * Create a text field with lable where the field is non editable
+	 * 
 	 * @param parent
 	 *           (Component)
 	 * @param labelWithAttributeValueMap

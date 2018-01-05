@@ -1,7 +1,7 @@
 /**
  *
  */
-package com.amway.apac.backoffice.renderers;
+package backoffice.src.com.amway.apac.backoffice.renderers;
 
 import de.hybris.platform.core.model.user.AddressModel;
 import de.hybris.platform.ordersplitting.model.ConsignmentModel;
@@ -13,7 +13,6 @@ import org.apache.log4j.Logger;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
 
-import com.amway.apac.backoffice.renderers.util.ApacAttributeWithLabelRendererUtil;
 import com.amway.apac.core.model.AmwayBackOrderModel;
 import com.hybris.cockpitng.core.config.impl.jaxb.editorarea.CustomSection;
 import com.hybris.cockpitng.core.model.WidgetModel;
@@ -21,13 +20,15 @@ import com.hybris.cockpitng.dataaccess.facades.type.DataType;
 import com.hybris.cockpitng.engine.WidgetInstanceManager;
 import com.hybris.cockpitng.widgets.common.WidgetComponentRenderer;
 
+import backoffice.src.com.amway.apac.backoffice.renderers.util.ApacAttributeWithLabelRendererUtil;
+
 
 /**
  *
  */
 public class BackOrderShippingAddressRenderer implements WidgetComponentRenderer<Component, CustomSection, Object>
 {
-	private static final Logger LOG = Logger.getLogger(BackOrderDetailsRenderer.class);
+	private static final Logger LOG = Logger.getLogger(BackOrderShippingAddressRenderer.class);
 
 	/**
 	 * Renders ShippingAddress view for backorder in backoffice
