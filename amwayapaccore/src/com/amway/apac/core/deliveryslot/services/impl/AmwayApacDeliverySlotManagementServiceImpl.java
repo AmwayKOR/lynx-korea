@@ -9,7 +9,9 @@ import de.hybris.platform.servicelayer.model.ModelService;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -26,6 +28,8 @@ import com.amway.apac.core.model.AmwayDeliverySlotConfigModel;
 
 
 /**
+ * Default implementation of {@link AmwayApacDeliverySlotManagementService}
+ *
  * @author Ashish Sabal
  *
  */
@@ -155,6 +159,56 @@ public class AmwayApacDeliverySlotManagementServiceImpl implements AmwayApacDeli
 			n = 7 - Math.abs(n);
 		}
 		return orderingDate.plusDays(n);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see com.amway.apac.core.deliveryslot.services.AmwayApacDeliverySlotManagementService#
+	 * getNextDeliverySlotByDeliveryDateAndSlot(java.time.LocalDate, java.lang.String)
+	 */
+	@Override
+	public List<AmwayDeliverySlotAvailabilityModel> getNextDeliverySlotByDeliveryDateAndSlot(final LocalDate deliveryDate,
+			final String slotTime)
+	{
+		return getAmwayApacDeliverySlotManagementDao().getNextDeliverySlotByDeliveryDateAndSlot(deliveryDate, slotTime);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see com.amway.apac.core.deliveryslot.services.AmwayApacDeliverySlotManagementService#
+	 * updateInfoInSlotsAvailabilityModels(com.amway.apac.core.model.AmwayDeliverySlotConfigModel, java.util.List)
+	 */
+	@Override
+	public void updateInfoInSlotsAvailabilityModels(final AmwayDeliverySlotConfigModel slotConfigModel,
+			final List<AmwayDeliverySlotAvailabilityModel> slotModels)
+	{
+		Date deliveryDate = null;
+		if (CollectionUtils.isNotEmpty(slotModels))
+		{
+			for (final AmwayDeliverySlotAvailabilityModel slotModel : slotModels)
+			{
+				slotModel.setSlotCapacity(slotConfigModel.getSlotCapacity());
+				slotModel.setActive(slotConfigModel.getActive());
+				slotModel.setInstructions(slotConfigModel.getInstructions(Locale.ENGLISH), Locale.ENGLISH);
+				slotModel.setInstructions(slotConfigModel.getInstructions(Locale.CHINESE), Locale.CHINESE);
+				slotModel.setNotifyCount(slotConfigModel.getNotifyCount());
+				slotModel.setSlotNumber(
+						Objects.nonNull(slotConfigModel.getSlotNumber()) ? slotConfigModel.getSlotNumber() : Integer.valueOf(0));
+				getModelService().save(slotModel);
+
+				if (null == deliveryDate)
+				{
+					deliveryDate = slotModel.getDeliveryDate();
+				}
+			}
+			LOG.info("Modification of Slots data for delivery Date : " + deliveryDate + " successfully completed.");
+		}
+		else
+		{
+			LOG.info("NO SLOT MODEL FOUND for delivery Date : " + deliveryDate);
+		}
 	}
 
 	/**

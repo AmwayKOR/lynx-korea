@@ -22,6 +22,8 @@ import com.amway.apac.core.model.AmwayDeliverySlotConfigModel;
 
 
 /**
+ * Default implementation of {@link AmwayApacDeliverySlotManagementDao}
+ *
  * @author Ashish Sabal
  *
  */

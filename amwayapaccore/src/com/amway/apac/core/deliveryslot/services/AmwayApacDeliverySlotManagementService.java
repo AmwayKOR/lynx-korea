@@ -9,6 +9,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.amway.apac.core.model.AmwayDeliverySlotAvailabilityModel;
 import com.amway.apac.core.model.AmwayDeliverySlotConfigModel;
 
 
@@ -37,4 +38,19 @@ public interface AmwayApacDeliverySlotManagementService
 	 * @return
 	 */
 	LocalDate getDeliveryDate(final LocalDate orderingDate, final WeekDay deliveryDay);
+
+
+	/**
+	 * @param deliveryDate
+	 * @param slotTime
+	 * @return
+	 */
+	List<AmwayDeliverySlotAvailabilityModel> getNextDeliverySlotByDeliveryDateAndSlot(LocalDate deliveryDate, String slotTime);
+
+	/**
+	 * @param slotConfigModel
+	 * @param slotModels
+	 */
+	void updateInfoInSlotsAvailabilityModels(AmwayDeliverySlotConfigModel slotConfigModel,
+			List<AmwayDeliverySlotAvailabilityModel> slotModels);
 }

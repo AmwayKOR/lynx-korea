@@ -392,5 +392,15 @@
         <property name="modelService" ref="modelService"/>
         <property name="amwayApacDeliverySlotManagementDao" ref="amwayApacDeliverySlotManagementDao"/>
     </bean>
+    
+    <bean id="amwayApacDeliverySlotConfigUpdateInterceptor" class="com.amway.apac.core.interceptors.AmwayApacDeliverySlotConfigUpdateInterceptor">
+    	<property name="modelService" ref="modelService"/>
+    	<property name="amwayApacDeliverySlotManagementService" ref="amwayApacDeliverySlotManagementService"/>
+    </bean>
+
+    <bean id="amwayApacDeliverySlotConfigUpdateInterceptorMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+        <property name="interceptor" ref="amwayApacDeliverySlotConfigUpdateInterceptor" />
+        <property name="typeCode" value="AmwayDeliverySlotConfig" />
+    </bean>
 	
 </beans>
