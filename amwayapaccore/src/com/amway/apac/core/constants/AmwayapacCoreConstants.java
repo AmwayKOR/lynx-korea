@@ -142,5 +142,13 @@ public final class AmwayapacCoreConstants extends GeneratedAmwayapacCoreConstant
 	 */
 	public static final String ACCOUNT_CLASSIFICATION_CODE = "accountClassficationCode";
 
+	/**
+	 * Date pattern
+	 */
+	public static final String DATE_FORMAT_PROFILE = "yyyy-MM-dd";
 
+	/**
+	 * Time stamp pattern string
+	 */
+	public static final String TIME_FORMAT = "HH:mm:ss";
 }
