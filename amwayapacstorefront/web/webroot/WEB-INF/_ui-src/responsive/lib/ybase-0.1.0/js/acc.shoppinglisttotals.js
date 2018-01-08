@@ -15,6 +15,15 @@ ACC.shoppinglisttotals = {
 				}
 				ACC.shoppinglisttotals.calculateShoppingListEntryTotals($(this).closest("li.shopping-list-entry"));
 			});
+			$(".page-content-wrapper.page-shopping-list-details").on("keypress", ".js-update-shopping-list-entry-quantity-input", function(event) {
+				 if (event.which == '13') {
+					 event.preventDefault();
+				     if (!ACC.global.isNatural($(this).val())) {
+						$(this).val(1);
+					  }
+						ACC.shoppinglisttotals.calculateShoppingListEntryTotals($(this).closest("li.shopping-list-entry"));
+				}
+			});
 		}
 	},
 

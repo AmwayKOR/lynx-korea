@@ -11,9 +11,33 @@ ACC.shoppinglists = {
     	"bindRemoveProductFromShoppingListLink",
     	"bindRemoveShoppingListLink",
     	"bindShoppingListAddMultiForm",
-    	"bindShoppingListUpdateCartPopup"
+    	"bindShoppingListUpdateCartPopup",
+    	"bindShoppingListSelectAllCheckbox"
+    
     ],
     
+
+    bindShoppingListSelectAllCheckbox:function(){
+        $(".shopping-list-header").click(function(){
+            $(this).parents('.shopping-cart-item-list').find('.shopping-list-entry-checkbox').prop('checked', this.checked);
+        });
+            //clicking the last unchecked or checked checkbox should check or uncheck the parent checkbox
+        $('.shopping-list-entry-checkbox').click(function() {
+                    if ($(this).parents('.shopping-cart-item-list').find('.shopping-list-header').prop('checked') == true && this.checked == false)
+                        $(this).parents('.shopping-cart-item-list').find('.shopping-list-header').prop('checked', false);
+                    if (this.checked == true) {
+                        var flag = true;
+                        $(this).parents('.shopping-cart-item-list').find('.shopping-list-entry-checkbox').each(
+    	                    function() {
+    	                        if (this.checked == false)
+    	                            flag = false;
+    	                    }
+                        );
+                        $(this).parents('.shopping-cart-item-list').find('.shopping-list-header').prop('checked', flag);
+                    }
+                });
+        },
+        
     bindShoppingListUpdateCartPopup: function() {
         // only bind if the current page is shopping lists page
         if ($(".page-content-wrapper.page-shopping-list-details").length > 0) {

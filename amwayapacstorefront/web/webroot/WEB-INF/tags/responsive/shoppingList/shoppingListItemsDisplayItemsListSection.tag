@@ -13,6 +13,12 @@
 	<li class="visible-md visible-lg">
 		<div class="col-xs-12 list-header">
 			<div class="col-xs-6 list-item-info">
+				<label class="checkbox-element-wrapper">
+							<input class="shopping-cart-entry-checkbox _checkbox-element-global-class shopping-list-header" 
+								name="cartEntries[${loop.index}].selected"
+								data-product-code="${shoppingListEntry.product.code}" type="checkbox">
+							<span class="_checkbox-element-global-span shopping-list-header-checkbox" ></span>
+						</label>
 				<spring:theme code="shoppinglist.items.section.table.item.label" />
 			</div>
 			<div class="col-xs-2 list-item-quantity">
@@ -85,7 +91,7 @@
 					</span>
 				</div>
 
-				<div class="col-xs-9 col-md-2 product-item-element list-item-total js-item-total  print-col-6">
+				<div class="col-xs-9 col-md-2 product-item-element list-item-total js-item-total print-col-6">
 					<span class="total-price-label">
 						<spring:theme code="shoppinglist.items.section.table.item.pvbv.label" />
 					</span>
