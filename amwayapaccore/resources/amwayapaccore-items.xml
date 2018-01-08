@@ -109,6 +109,18 @@
 				<description>Amway Apac Variant Model</description>
 			</itemtype>
 
+			<itemtype code="AmwayKitEntryProduct" autocreate="false" generate="false">
+				<description>Extending AmwayKitEntryProduct to add APAC specific attributes.</description>
+				<attributes>
+					<attribute qualifier="isMajor" type="java.lang.Boolean">
+						<description>Indicates whether bundle child is major or minor.</description>
+						<modifiers optional="false" />
+						<defaultvalue>java.lang.Boolean.TRUE</defaultvalue>
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
 			<itemtype code="AmwayPaymentOption" autocreate="true"
 				generate="true">
 				<description>Supported Payment Options for product.</description>
