@@ -1,0 +1,23 @@
+$siteid=storetemplate
+
+$currencies=USD
+$defaultCurrency=USD
+$defaultLanguage=en
+$deliveryCountries=US
+
+$catalog-id=testOrderCatalog
+$catalog-version=Online
+
+$testOrderCategory0-id=testOrderCategory0
+$testOrderCategory1-id=testOrderCategory1
+
+$catalogversion=catalogversion(catalog(id),version)[unique=true,default=$catalog-id:$catalog-version]
+$supercategories=supercategories(code,catalogversion(catalog(id[default=$catalog-id]),version[default=$catalog-version]))
+$prices=europe1prices[translator=de.hybris.platform.europe1.jalo.impex.Europe1PricesTranslator]
+$product=product(code, catalogVersion(catalog(id[default='testOrderCatalog']),version[default='Online']));
+$baseProduct=baseProduct(code, catalogVersion(catalog(id[default='$catalog-id']),version[default='$catalog-version']))
+
+INSERT_UPDATE Order;store(uid);user(uid);code[unique=true];currency(isocode);date[dateformat=dd.MM.yyyy HH:mm:ss];net;calculated;site(uid);guid;;;;
+;testOrderStore;amway_user_test_1;testOrder1;USD;14.09.2017 13:18:05.075;false;false;;;;;
+;testOrderStore;amway_user_test_2;testOrder2;USD;13.09.2017 13:18:05.075;false;false;;;;;
+;testOrderStore;amway_user_test_2;testOrder3;USD;13.09.2017 13:18:05.075;false;false;;;;;

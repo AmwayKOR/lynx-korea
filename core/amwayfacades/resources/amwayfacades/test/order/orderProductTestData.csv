@@ -1,0 +1,74 @@
+$siteid=storetemplate
+$currencies=EUR,USD
+$defaultCurrency=EUR
+$defaultLanguage=en
+$deliveryCountries=US
+$catalog-id=testOrderCatalog
+$catalog-version=Online
+$catalog-id=testOrderCatalog
+$catalog-version=Online
+$testOrderCategory0-id=testOrderCategory0
+$testOrderCategory1-id=testOrderCategory1
+
+$catalogversion=catalogversion(catalog(id),version)[unique=true,default=$catalog-id:$catalog-version]
+$supercategories=supercategories(code,catalogversion(catalog(id[default=$catalog-id]),version[default=$catalog-version]))
+$prices=europe1prices[translator=de.hybris.platform.europe1.jalo.impex.Europe1PricesTranslator]
+$product=product(code, catalogVersion(catalog(id[default='testOrderCatalog']),version[default='Online']));
+$baseProduct=baseProduct(code, catalogVersion(catalog(id[default='$catalog-id']),version[default='$catalog-version']))
+
+INSERT_UPDATE Category;code[unique=true];$catalogversion;name[lang=de];name[lang=en];$supercategories
+;$testOrderCategory0-id;;$testOrderCategory0-id;$testOrderCategory0-id;
+;$testOrderCategory1-id;;$testOrderCategory1-id;$testOrderCategory1-id;$testOrderCategory0-id
+
+INSERT_UPDATE UserPriceGroup;code[unique=true];
+;AmwayDefaultABOPriceGroup;
+;AmwayDefaultRetailPriceGroup;
+
+INSERT_UPDATE Product;code[unique=true];$catalogversion;name[lang=de];name[lang=en];unit(code);approvalStatus(code);startLineNumber;$supercategories;picture(code);thumbnail(code);normal(code);logo(code);manufacturerName;
+;HW12101-3422;;testDE;testEN;pieces;approved;0;$testOrderCategory0-id;;;;;;
+;HW12101-3423;;test2DE;test2EN;pieces;approved;0;$testOrderCategory1-id;;;;;;
+;HW12101-3424;;test3DE;test3EN;pieces;approved;0;$testOrderCategory1-id;;;;;
+;HW12101-3425;;test3DE;test4EN;pieces;approved;0;$testOrderCategory1-id;;;;;;
+
+
+#to load ABO prices
+INSERT_UPDATE PriceRow;$product[unique=true];price[unique=true];unit(code)[default=pieces];startTime[dateformat=yyyy-MM-dd];pointValue;businessVolume;giftPoint;currency(isocode)[unique=true];ug(code)[unique=true, default='AmwayDefaultABOPriceGroup']
+;HW12101-3422;10,95;;;13,94;30,63;0;USD;
+;HW12101-3423;20,95;;;10,94;35,63;0;USD;
+;HW12101-3424;25,95;;;12,94;25,63;0;USD;
+;HW12101-3425;30,95;;;11,94;20,63;0;USD;
+#to load retail prices
+INSERT_UPDATE PriceRow;$product[unique=true];price[unique=true];unit(code)[default=pieces];startTime[dateformat=yyyy-MM-dd];pointValue;businessVolume;currency(isocode)[unique=true];ug(code)[unique=true, default='']
+;HW12101-3422;12,95;;;13,94;30,63;USD;
+;HW12101-3423;22,95;;;10,94;35,63;USD;
+;HW12101-3424;30,95;;;12,94;25,63;USD;
+;HW12101-3425;35,95;;;11,94;20,63;USD;
+
+INSERT_UPDATE PromotionGroup;Identifier[unique=true];
+;default;
+
+INSERT_UPDATE PromotionPriceRow;currency(isocode)[unique=true];price[unique=true];
+;USD;12;
+
+#INSERT_UPDATE ProductFixedPricePromotion;code[unique=true];title;description;enabled;products(code,catalogVersion(catalog(id),version));productFixedUnitPrice(price,currency(isocode));productBanner(code);PromotionGroup(Identifier);
+#;FixedPriceDefault;clearance sale;Fixed Price for default;true;HW12101-3425:$catalog-id:$catalog-version;12:USD;;default;
+
+INSERT_UPDATE Vendor;code[unique=true];
+;vendorTest11;
+
+INSERT_UPDATE Warehouse;code[unique=true];vendor(code);default;baseStores(uid)
+;warehouseTest1;vendorTest11;true;testOrderStore
+;warehouseTest2;vendorTest11;true;testOrderStore
+
+INSERT_UPDATE StockLevel;productCode;available;warehouse(code)[unique=true];
+;HW12101-3423;122;warehouseTest1;
+
+INSERT_UPDATE PointOfService;name[unique=true];displayname;description;type(code);address(&addrID);latitude;longitude;basestore(uid)[default=testOrderStore];warehouses(code);
+;pos1;"POS 1";"Point of Service";STORE;pos1-address;-23.561833;-46.663968;;;warehouseTest1
+
+INSERT_UPDATE Address;owner(PointOfService.name)[unique=true];&addrID;streetname[unique=true];streetnumber[unique=true];postalcode[unique=true];duplicate[unique=true];town;country(isocode);billingAddress;contactAddress;shippingAddress;unloadingAddress;firstname;lastname;email;gender(code);middlename;phone1;title(code);url;company;fax;department;
+;pos1;pos1-address;Zennerstrasse;45;28277;false;Bremen;US;false;false;false;true;Anja;Hertz;ahertz@na-du.de;FEMALE;;;;;hybris GmbH;
+
+INSERT_UPDATE Product;code[unique=true];$catalogversion;name[lang=de];name[lang=en];unit(code);$prices;approvalStatus(code);startLineNumber;$supercategories;varianttype(code)
+;HW12101-9999;;var1DE;var1EN;pieces;;approved;0;$testOrderCategory1-id;
+
