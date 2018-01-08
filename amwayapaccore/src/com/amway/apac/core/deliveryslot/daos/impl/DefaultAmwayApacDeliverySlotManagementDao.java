@@ -27,7 +27,7 @@ import com.amway.apac.core.model.AmwayDeliverySlotConfigModel;
  * @author Ashish Sabal
  *
  */
-public class AmwayApacDeliverySlotManagementDaoImpl implements AmwayApacDeliverySlotManagementDao
+public class DefaultAmwayApacDeliverySlotManagementDao implements AmwayApacDeliverySlotManagementDao
 {
 	private static final String DELIVERY_SLOT_BY_ORDER_DAY = new StringBuilder().append("Select {")
 			.append(AmwayDeliverySlotConfigModel.PK).append("} from {").append(AmwayDeliverySlotConfigModel._TYPECODE)

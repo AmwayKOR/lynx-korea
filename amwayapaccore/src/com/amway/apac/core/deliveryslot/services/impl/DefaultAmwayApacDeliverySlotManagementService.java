@@ -33,9 +33,9 @@ import com.amway.apac.core.model.AmwayDeliverySlotConfigModel;
  * @author Ashish Sabal
  *
  */
-public class AmwayApacDeliverySlotManagementServiceImpl implements AmwayApacDeliverySlotManagementService
+public class DefaultAmwayApacDeliverySlotManagementService implements AmwayApacDeliverySlotManagementService
 {
-	private static final Logger LOG = Logger.getLogger(AmwayApacDeliverySlotManagementServiceImpl.class);
+	private static final Logger LOG = Logger.getLogger(DefaultAmwayApacDeliverySlotManagementService.class);
 
 	private ModelService modelService;
 	private AmwayApacDeliverySlotManagementDao amwayApacDeliverySlotManagementDao;

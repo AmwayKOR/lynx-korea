@@ -25,9 +25,12 @@ import com.amway.apac.product.services.AmwayApacProductService;
 
 
 /**
- * Implementation for {@link AmwayApacProductService}
+ * Default implementation for {@link AmwayApacProductService}
+ *
+ * @author Ashish Sabal
+ *
  */
-public class AmwayApacProductServiceImpl extends DefaultProductService implements AmwayApacProductService
+public class DefaultAmwayApacProductService extends DefaultProductService implements AmwayApacProductService
 {
 	private AmwayApacProductDao amwayApacProductDao;
 

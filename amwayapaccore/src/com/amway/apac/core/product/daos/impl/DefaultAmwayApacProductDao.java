@@ -18,16 +18,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
-
 import com.amway.apac.core.model.AmwayPaymentOptionModel;
 import com.amway.apac.core.product.daos.AmwayApacProductDao;
 
 
 /**
- * Implementation for {@link AmwayApacProductDao}
+ * Default implementation for {@link AmwayApacProductDao}
+ * 
+ * @author Ashish Sabal
+ *
  */
-public class AmwayApacProductDaoImpl implements AmwayApacProductDao
+public class DefaultAmwayApacProductDao implements AmwayApacProductDao
 {
 	private static final String FIND_ALL_PAYMENTOPTION_FOR_OMSCODE_AND_CATALOG = new StringBuilder(200).append("SELECT {po.")
 			.append(AmwayPaymentOptionModel.PK).append("} FROM {").append(AmwayPaymentOptionModel._TYPECODE).append(" as po JOIN ")
@@ -53,7 +54,6 @@ public class AmwayApacProductDaoImpl implements AmwayApacProductDao
 			.append(AmwayPaymentOptionModel.ACTIVE).append("} = TRUE))").append(" AND {ap.code} = 'approved'").toString();
 
 
-	@Resource(name = "flexibleSearchService")
 	private FlexibleSearchService flexibleSearchService;
 
 	/**

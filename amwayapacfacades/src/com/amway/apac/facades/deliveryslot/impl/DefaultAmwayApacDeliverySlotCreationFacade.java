@@ -21,9 +21,9 @@ import com.amway.apac.facades.deliveryslot.AmwayApacDeliverySlotCreationFacade;
  * @author Ashish Sabal
  *
  */
-public class AmwayApacDeliverySlotCreationFacadeImpl implements AmwayApacDeliverySlotCreationFacade
+public class DefaultAmwayApacDeliverySlotCreationFacade implements AmwayApacDeliverySlotCreationFacade
 {
-	private static final Logger LOG = Logger.getLogger(AmwayApacDeliverySlotCreationFacadeImpl.class);
+	private static final Logger LOG = Logger.getLogger(DefaultAmwayApacDeliverySlotCreationFacade.class);
 
 	private AmwayApacDeliverySlotManagementService amwayApacDeliverySlotManagementService;
 

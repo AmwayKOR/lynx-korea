@@ -260,11 +260,13 @@
     
     <alias name="amwayApacProductService" alias="productService" />
     <bean id="amwayApacProductService"
-          class="com.amway.apac.product.services.impl.AmwayApacProductServiceImpl" parent="defaultProductService">
+          class="com.amway.apac.product.services.impl.DefaultAmwayApacProductService" parent="defaultProductService">
         <property name="amwayApacProductDao" ref="amwayApacProductDao" />
     </bean>
     
-    <bean id="amwayApacProductDao" class="com.amway.apac.core.product.daos.impl.AmwayApacProductDaoImpl" /> 
+    <bean id="amwayApacProductDao" class="com.amway.apac.core.product.daos.impl.DefaultAmwayApacProductDao">
+    	<property name="flexibleSearchService" ref="flexibleSearchService"/>
+    </bean> 
     
 	<alias name="defaultAmwayApacLowestPriceVariantStrategy" alias="amwayApacPrimaryVariantSelectionStrategy"/>
 	<bean id="defaultAmwayApacLowestPriceVariantStrategy" class="com.amway.apac.core.product.strategies.impl.DefaultAmwayApacLowestPriceVariantStrategy">
@@ -383,12 +385,12 @@
 	
 	<!-- Delivery slot configuration -->
     <alias name="amwayApacDeliverySlotManagementDao" alias="amwayApacDeliverySlotManagementDao"/>
-    <bean id="amwayApacDeliverySlotManagementDao" class="com.amway.apac.core.deliveryslot.daos.impl.AmwayApacDeliverySlotManagementDaoImpl">
+    <bean id="amwayApacDeliverySlotManagementDao" class="com.amway.apac.core.deliveryslot.daos.impl.DefaultAmwayApacDeliverySlotManagementDao">
         <property name="flexibleSearchService" ref="flexibleSearchService"/>
     </bean>
     
     <alias name="amwayApacDeliverySlotManagementService" alias="amwayApacDeliverySlotManagementService"/>
-    <bean id="amwayApacDeliverySlotManagementService" class="com.amway.apac.core.deliveryslot.services.impl.AmwayApacDeliverySlotManagementServiceImpl">
+    <bean id="amwayApacDeliverySlotManagementService" class="com.amway.apac.core.deliveryslot.services.impl.DefaultAmwayApacDeliverySlotManagementService">
         <property name="modelService" ref="modelService"/>
         <property name="amwayApacDeliverySlotManagementDao" ref="amwayApacDeliverySlotManagementDao"/>
     </bean>
@@ -403,13 +405,13 @@
         <property name="typeCode" value="AmwayDeliverySlotConfig" />
     </bean>
     
-    <bean id="amwayApacDeliverySlotDao" class="com.amway.apac.core.deliveryslot.daos.impl.AmwayApacDeliverySlotDaoImpl">
+    <bean id="amwayApacDeliverySlotDao" class="com.amway.apac.core.deliveryslot.daos.impl.DefaultAmwayApacDeliverySlotDao">
 		<property name="flexibleSearchService" ref="flexibleSearchService" />
 	</bean>
 	
 	<alias alias="deliveryService" name="amwayApacDeliveryService"/>
 	<bean id="amwayApacDeliveryService" parent="defaultDeliveryService"
-		class="com.amway.apac.core.deliveryslot.services.impl.AmwayApacDeliveryServiceImpl">
+		class="com.amway.apac.core.deliveryslot.services.impl.DefaultAmwayApacDeliveryService">
 		<property name="amwayApacDeliverySlotDao" ref="amwayApacDeliverySlotDao" />	
 		 <property name="cartService" ref="cartService" />
          <property name="transactionTemplate">
@@ -419,7 +421,7 @@
         </property>
 	</bean>
 	
-	<bean id="amwayApacDeliverySlotValidationHook" class="com.amway.apac.core.deliveryslot.hooks.impl.AmwayApacDeliverySlotValidationHookImpl">
+	<bean id="amwayApacDeliverySlotValidationHook" class="com.amway.apac.core.deliveryslot.hooks.impl.AmwayApacDeliverySlotValidationHook">
        <property name="modelService" ref="modelService" />
        <property name="amwayApacDeliveryService" ref="amwayApacDeliveryService" />
     </bean>

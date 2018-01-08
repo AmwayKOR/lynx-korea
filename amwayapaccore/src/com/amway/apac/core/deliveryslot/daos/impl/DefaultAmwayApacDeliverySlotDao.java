@@ -29,7 +29,7 @@ import com.amway.apac.core.model.AmwayDeliverySlotConfigModel;
  * @author Ashish Sabal
  *
  */
-public class AmwayApacDeliverySlotDaoImpl implements AmwayApacDeliverySlotDao
+public class DefaultAmwayApacDeliverySlotDao implements AmwayApacDeliverySlotDao
 {
 	private static final String WILD_CHARACTER = "%";
 	private static final StringBuilder DELIVERY_SLOTS_AVAILABILITY_QUERY = new StringBuilder(140).append("SELECT {")

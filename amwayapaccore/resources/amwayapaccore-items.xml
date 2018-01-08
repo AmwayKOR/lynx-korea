@@ -239,7 +239,7 @@
 						<persistence type="property" />
 					</attribute>
 					<attribute type="OrderType" qualifier="orderType">
-						<description>Defines the order type of order</description>
+						<description>Identifies the type of order</description>
 						<modifiers read="true" write="true" search="true" />
 						<persistence type="property" />
 					</attribute>

@@ -276,7 +276,7 @@
     </bean>    
     
     <alias name="amwayApacDeliverySlotCreationFacade" alias="amwayApacDeliverySlotCreationFacade"/>
-    <bean id="amwayApacDeliverySlotCreationFacade" class="com.amway.apac.facades.deliveryslot.impl.AmwayApacDeliverySlotCreationFacadeImpl">
+    <bean id="amwayApacDeliverySlotCreationFacade" class="com.amway.apac.facades.deliveryslot.impl.DefaultAmwayApacDeliverySlotCreationFacade">
     	<property name="amwayApacDeliverySlotManagementService" ref="amwayApacDeliverySlotManagementService"/>
     </bean>
     

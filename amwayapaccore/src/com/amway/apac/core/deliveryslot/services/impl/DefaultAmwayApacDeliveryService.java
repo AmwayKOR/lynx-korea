@@ -39,9 +39,9 @@ import com.amway.core.exceptions.AmwayServiceException;
  * @author Ashish Sabal
  *
  */
-public class AmwayApacDeliveryServiceImpl extends DefaultDeliveryService implements AmwayApacDeliveryService
+public class DefaultAmwayApacDeliveryService extends DefaultDeliveryService implements AmwayApacDeliveryService
 {
-	private static final Logger LOG = Logger.getLogger(AmwayApacDeliveryServiceImpl.class);
+	private static final Logger LOG = Logger.getLogger(DefaultAmwayApacDeliveryService.class);
 
 	private AmwayApacDeliverySlotDao amwayApacDeliverySlotDao;
 	private CartService cartService;

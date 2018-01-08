@@ -24,12 +24,14 @@ import com.amway.apac.core.orders.AmwayApacCommerceCartModificationStatus;
 
 
 /**
+ * Delivery slot validation hook default implementation to validate slot changes
+ *
  * @author Ashish Sabal
  *
  */
-public class AmwayApacDeliverySlotValidationHookImpl implements CartValidationHook
+public class AmwayApacDeliverySlotValidationHook implements CartValidationHook
 {
-	private static final Logger LOG = Logger.getLogger(AmwayApacDeliverySlotValidationHookImpl.class);
+	private static final Logger LOG = Logger.getLogger(AmwayApacDeliverySlotValidationHook.class);
 
 	private AmwayApacDeliveryService amwayApacDeliveryService;
 	private ModelService modelService;
