@@ -60,4 +60,12 @@ public interface AmwayApacDeliveryService extends DeliveryService
 	 * @return true if successfully set the delivery slot, otherwise false
 	 */
 	boolean setDeliverySlot(WarehouseModel warehouse, Date deliveryDate, String slotTime);
+
+	/**
+	 * @param warehouse
+	 * @param deliveryDate
+	 * @param slotTime
+	 * @return
+	 */
+	AmwayDeliverySlotAvailabilityModel getDeliverySlot(WarehouseModel warehouse, Date deliveryDate, String slotTime);
 }

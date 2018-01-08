@@ -419,6 +419,11 @@
         </property>
 	</bean>
 	
+	<bean id="amwayApacDeliverySlotValidationHook" class="com.amway.apac.core.deliveryslot.hooks.impl.AmwayApacDeliverySlotValidationHookImpl">
+       <property name="modelService" ref="modelService" />
+       <property name="amwayApacDeliveryService" ref="amwayApacDeliveryService" />
+    </bean>
+	
     <bean id="defaultAmwayApacProductPreLaunchStrategy" class="com.amway.apac.core.product.strategies.impl.DefaultAmwayApacProductPreLaunchStrategy">
 		<property name="amwayApacAccountClassificationService" ref="defaultAmwayApacAccountClassificationService" />
     </bean>

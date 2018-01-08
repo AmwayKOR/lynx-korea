@@ -246,6 +246,19 @@ public class AmwayApacDeliveryServiceImpl extends DefaultDeliveryService impleme
 		return successfullySet;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see com.amway.apac.core.deliveryslot.services.AmwayApacDeliveryService#getDeliverySlot(de.hybris.platform.
+	 * ordersplitting.model.WarehouseModel, java.util.Date, java.lang.String)
+	 */
+	@Override
+	public AmwayDeliverySlotAvailabilityModel getDeliverySlot(final WarehouseModel warehouse, final Date deliveryDate,
+			final String slotTime)
+	{
+		return getAmwayApacDeliverySlotDao().getDeliverySlot(warehouse, deliveryDate, slotTime);
+	}
+
 	/**
 	 * @return the cartService
 	 */

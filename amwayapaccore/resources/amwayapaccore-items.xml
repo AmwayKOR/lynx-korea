@@ -51,6 +51,21 @@
 			<value code="PLATINUM_AND_ABOVE" />
 			<value code="DIAMOND_AND_ABOVE" />
 		</enumtype>
+		
+		<enumtype code="OrderType" generate="true" autocreate="true"
+            dynamic="true">
+            <value code="STANDING_ORDER" />
+            <value code="NORMAL_ORDER" />
+            <value code="BACK_ORDER" />
+            <value code="RECURRING_ORDER" />
+            <value code="PRE_ORDER" />
+            <value code="ADVANCE_ORDER" />
+            <value code="REPLACEMENT" />
+            <value code="REGISTRATION" />
+            <value code="AUTO_ORDER_RENEWAL" />
+            <value code="GROUP_ORDER_RENEWAL" />
+        </enumtype>
+
 	</enumtypes>
 
 	<relations>
@@ -221,6 +236,11 @@
 						<description>Delivery Slot Selected</description>
 						<modifiers read="true" write="true" search="true"
 							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="OrderType" qualifier="orderType">
+						<description>Defines the order type of order</description>
+						<modifiers read="true" write="true" search="true" />
 						<persistence type="property" />
 					</attribute>
 				</attributes>
