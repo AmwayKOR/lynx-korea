@@ -14,6 +14,8 @@
 	xsi:noNamespaceSchemaLocation="items.xsd">
 
 	<enumtypes>
+
+		<!-- Enum types imported with the same codes for backward compatibility. -->
 		<enumtype code="PaymentType" dynamic="true" autocreate="true"
 			generate="true">
 			<description>Different payment types.</description>
@@ -51,20 +53,20 @@
 			<value code="PLATINUM_AND_ABOVE" />
 			<value code="DIAMOND_AND_ABOVE" />
 		</enumtype>
-		
+
 		<enumtype code="OrderType" generate="true" autocreate="true"
-            dynamic="true">
-            <value code="STANDING_ORDER" />
-            <value code="NORMAL_ORDER" />
-            <value code="BACK_ORDER" />
-            <value code="RECURRING_ORDER" />
-            <value code="PRE_ORDER" />
-            <value code="ADVANCE_ORDER" />
-            <value code="REPLACEMENT" />
-            <value code="REGISTRATION" />
-            <value code="AUTO_ORDER_RENEWAL" />
-            <value code="GROUP_ORDER_RENEWAL" />
-        </enumtype>
+			dynamic="true">
+			<value code="STANDING_ORDER" />
+			<value code="NORMAL_ORDER" />
+			<value code="BACK_ORDER" />
+			<value code="RECURRING_ORDER" />
+			<value code="PRE_ORDER" />
+			<value code="ADVANCE_ORDER" />
+			<value code="REPLACEMENT" />
+			<value code="REGISTRATION" />
+			<value code="AUTO_ORDER_RENEWAL" />
+			<value code="GROUP_ORDER_RENEWAL" />
+		</enumtype>
 
 	</enumtypes>
 
@@ -106,53 +108,43 @@
 				jaloclass="com.amway.apac.core.jalo.AmwayApacVariantProduct">
 				<description>Amway Apac Variant Model</description>
 			</itemtype>
-			
+
 			<itemtype code="AmwayPaymentOption" autocreate="true"
 				generate="true">
-				<description>Supported Payment Options</description>
+				<description>Supported Payment Options for product.</description>
 				<deployment table="payment_optn" typecode="21010" />
 				<attributes>
-					<attribute type="java.lang.String" qualifier="aliasCode">
-						<description>Alias code(SKU) as AS400 has different SKU's as per payment option.</description>
-						<modifiers read="true" write="true" search="true"
-							unique="true" optional="false" />
+					<attribute qualifier="aliasCode" type="java.lang.String">
+						<description>Alias code(SKU) as per payment option.</description>
+						<modifiers unique="true" optional="false" />
 						<persistence type="property" />
 					</attribute>
-					<attribute type="localized:java.lang.String" qualifier="title">
+					<attribute qualifier="title" type="localized:java.lang.String">
 						<description>Display name of the payment option.</description>
-						<modifiers read="true" write="true" search="true" />
 						<persistence type="property" />
 					</attribute>
-					<attribute type="java.lang.Boolean" qualifier="active">
-						<description>Identifies whether current payment option is active or not.</description>
-						<modifiers read="true" write="true" search="true"
-							optional="false" unique="false" />
+					<attribute qualifier="active" type="java.lang.Boolean">
+						<description>Identifies whether payment option is active or not.</description>
+						<modifiers optional="false" />
 						<defaultvalue>Boolean.TRUE</defaultvalue>
 						<persistence type="property" />
 					</attribute>
-					<attribute type="PaymentType" qualifier="type">
+					<attribute qualifier="type" type="PaymentType">
 						<description>Identifies the type of payment option.</description>
-						<modifiers read="true" write="true" search="true"
-							unique="true" optional="false" />
+						<modifiers optional="false" />
 						<persistence type="property" />
 					</attribute>
-					<attribute type="java.lang.Integer" qualifier="tenure">
+					<attribute qualifier="tenure" type="java.lang.Integer">
 						<description>Identifies the Tenure of payment option.</description>
-						<modifiers read="true" write="true" search="true"
-							unique="true" />
 						<defaultvalue>0</defaultvalue>
 						<persistence type="property" />
 					</attribute>
-					<attribute type="java.util.Date" qualifier="startDate">
-						<description>Start date of payment option.</description>
-						<modifiers read="true" write="true" search="true"
-							optional="true" />
+					<attribute qualifier="startDate" type="java.util.Date">
+						<description>Date starting from which the payment option is visible.</description>
 						<persistence type="property" />
 					</attribute>
-					<attribute type="java.util.Date" qualifier="endDate">
-						<description>End date of payment option.</description>
-						<modifiers read="true" write="true" search="true"
-							optional="true" />
+					<attribute qualifier="endDate" type="java.util.Date">
+						<description>Date till which the payment option is visible.</description>
 						<persistence type="property" />
 					</attribute>
 				</attributes>
@@ -162,49 +154,50 @@
 					</index>
 				</indexes>
 			</itemtype>
-			
-			<itemtype code="Product" generate="false" autocreate="false">
+
+			<itemtype code="Product" autocreate="false" generate="false">
 				<description>Extending the Product type from core with additional attributes.</description>
 				<attributes>
-					<attribute type="java.lang.Boolean" qualifier="isSellable">
+					<attribute qualifier="isSellable" type="java.lang.Boolean">
 						<description>If the product is sellable or non-sellable</description>
 						<defaultvalue>true</defaultvalue>
 						<persistence type="property" />
 					</attribute>
-					<attribute type="AmwayPreLaunchConfig" qualifier="preLaunchConfig">
-						<description>Used to contain prelaunch configuration if exists</description>
+					<attribute qualifier="preLaunchConfig" type="AmwayPreLaunchConfig">
+						<description>Configurations related to early launch of product for certain class of ABOs, if needed.</description>
 						<persistence type="property" />
 					</attribute>
 				</attributes>
 			</itemtype>
-			
+
 			<itemtype code="AmwayPreLaunchConfig" autocreate="true"
 				generate="true">
+				<description>Configurations related to early launch of product for certain class of ABOs, if needed.</description>
 				<deployment table="preLaunchConfig" typecode="21046" />
 				<attributes>
-					<attribute type="java.lang.string" qualifier="code">
+					<attribute qualifier="code" type="java.lang.string">
 						<description>Unique code for PreLaunch configuration.</description>
-						<modifiers read="true" write="true" optional="false" />
+						<modifiers optional="false" />
 						<persistence type="property" />
 					</attribute>
-					<attribute type="AccountClassificationEnum" qualifier="classification">
-						<description>Classification level for pre launch.</description>
-						<modifiers read="true" write="true" optional="false" />
+					<attribute qualifier="classification" type="AccountClassificationEnum">
+						<description>Classification level above which the ABOs will be able to purchase.</description>
+						<modifiers optional="false" />
 						<persistence type="property" />
 					</attribute>
-					<attribute type="java.Util.Date" qualifier="startDate">
-						<modifiers read="true" write="true" optional="false" />
-						<description>Start Date Of Launch</description>
+					<attribute qualifier="startDate" type="java.Util.Date">
+						<modifiers optional="false" />
+						<description>Start Date Of Launch - after which product is only available to specified class of users, untill the end date.</description>
 						<persistence type="property" />
 					</attribute>
-					<attribute type="java.Util.Date" qualifier="endDate">
-						<modifiers read="true" write="true" optional="false" />
-						<description>End Date Of Launch</description>
+					<attribute qualifier="endDate" type="java.Util.Date">
+						<modifiers optional="false" />
+						<description>End Date Of Launch - after which product is available for all users.</description>
 						<persistence type="property" />
 					</attribute>
-					<attribute type="java.lang.Integer" qualifier="maxShoppingCount">
-						<modifiers read="true" write="true" optional="false" />
-						<description>Max shopping count per user in the time between startDate and endDate</description>
+					<attribute qualifier="maxShoppingCount" type="java.lang.Integer">
+						<modifiers optional="false" />
+						<description>Max shopping count per user while the product is in pre launch.</description>
 						<persistence type="property" />
 					</attribute>
 				</attributes>
@@ -213,34 +206,31 @@
 
 		<typegroup name="Address">
 			<itemtype code="Address" autocreate="false" generate="false">
-				<description>Amway Apac Address Model</description>
+				<description>Extending address model to add APAC specific fields.</description>
 				<attributes>
 					<attribute qualifier="line3" type="java.lang.String">
-						<persistence type="property" />
 						<description>Line 3 for address</description>
+						<persistence type="property" />
 					</attribute>
 				</attributes>
 			</itemtype>
 		</typegroup>
-		
+
 		<typegroup name="Order">
 			<itemtype code="AbstractOrder" autocreate="false" generate="false">
-				<description>Abstract Order additional attributes.</description>
+				<description>Extending AbstractOrder to add APAC specific attributes.</description>
 				<attributes>
-					<attribute type="Warehouse" qualifier="warehouse">
-						<description>Warehouse used to service the products of the order</description>
-						<modifiers read="true" write="true" optional="true" />
+					<attribute qualifier="warehouse" type="Warehouse">
+						<description>Warehouse responsible for serving the order.</description>
+						<modifiers optional="true" />
 						<persistence type="property" />
 					</attribute>
 					<attribute qualifier="selectedDeliverySlot" type="AmwayDeliverySlotAvailability">
-						<description>Delivery Slot Selected</description>
-						<modifiers read="true" write="true" search="true"
-							optional="true" />
+						<description>Delivery Slot Selected for the order.</description>
 						<persistence type="property" />
 					</attribute>
-					<attribute type="OrderType" qualifier="orderType">
-						<description>Identifies the type of order</description>
-						<modifiers read="true" write="true" search="true" />
+					<attribute qualifier="orderType" type="OrderType">
+						<description>Defines the order type of order.</description>
 						<persistence type="property" />
 					</attribute>
 				</attributes>
@@ -253,72 +243,73 @@
 
 			<itemtype code="AbstractOrderEntry" autocreate="false"
 				generate="false">
+				<description>Extending AbstractOrderEntry to add APAC specific attributes.</description>
 				<attributes>
-					<attribute type="java.lang.String" qualifier="aliasCode">
-						<description>Alias code(SKU) as AS400 has different SKU's as per payment option.</description>
-						<modifiers read="true" write="true" search="true" />
+					<attribute qualifier="aliasCode" type="java.lang.String">
+						<description>Alias code(SKU) as per payment option.</description>
 						<persistence type="property" />
 					</attribute>
-					<attribute type="PaymentType" qualifier="type">
+					<attribute qualifier="type" type="PaymentType">
 						<description>Identifies the type of payment option.</description>
-						<modifiers read="true" write="true" search="true" />
 						<persistence type="property" />
 					</attribute>
-					<attribute type="java.lang.Integer" qualifier="tenure">
+					<attribute qualifier="tenure" type="java.lang.Integer">
 						<description>Identifies the Tenure of payment option.</description>
-						<modifiers read="true" write="true" search="true" />
 						<persistence type="property" />
 					</attribute>
-					<attribute type="InStockStatus" qualifier="dispositionCode">
-						<description>Disposition Code.</description>
-						<modifiers read="true" write="true" search="true" />
+					<attribute qualifier="dispositionCode" type="InStockStatus">
+						<description>Disposition Code based on the stock level of the product at the time of placing the order.</description>
 						<persistence type="property" />
 					</attribute>
 				</attributes>
 			</itemtype>
-			
+
 			<itemtype code="VoucherPaymentInfo" extends="PaymentInfo"
 				autocreate="true" generate="true">
+				<description>Payment info type created for voucher payments.</description>
 			</itemtype>
 		</typegroup>
-		
+
 		<typegroup name="BaseCommerce">
 			<itemtype code="Warehouse" autocreate="false" generate="false">
+				<description>Extending Warehouse to add APAC specific attributes.</description>
 				<attributes>
-					<attribute type="WarehouseServiceabilityType" qualifier="warehouseType">
-						<modifiers read="true" write="true" optional="false" />
-						<persistence type="property" />
+					<attribute qualifier="warehouseType" type="WarehouseServiceabilityType">
+						<description>Decides whether the warehouse can support delivery or pickup.</description>
+						<modifiers optional="false" />
 						<defaultvalue>em().getEnumerationValue("WarehouseServiceabilityType","BOTH")</defaultvalue>
+						<persistence type="property" />
 					</attribute>
 				</attributes>
 			</itemtype>
-			
+
 			<itemtype code="AmwayDeliverySlotConfig">
-				<description>Contains master data of delivery slot.</description>
+				<description>Contains template data of delivery slot using which actual delivery availability slots are generated.</description>
 				<deployment table="amwayDeliverySlotConfig" typecode="21080" />
 				<attributes>
-					<attribute type="Warehouse" qualifier="warehouse">
+					<attribute qualifier="warehouse" type="Warehouse">
+						<description>Warehouse to which the delivery slots belong.</description>
 						<modifiers optional="false" unique="true" />
 						<persistence type="property" />
 					</attribute>
-					<attribute type="WeekDay" qualifier="orderingDay">
+					<attribute qualifier="orderingDay" type="WeekDay">
+						<description>Day on which ABO is placing order.</description>
 						<modifiers optional="false" unique="true" />
-						<description>Day on which ABO is placing order</description>
 						<persistence type="property" />
 					</attribute>
-					<attribute type="java.util.Date" qualifier="orderingTime">
-						<modifiers unique="true" />
+					<attribute qualifier="orderingTime" type="java.util.Date">
 						<description>Time on which ABO is placing order</description>
+						<modifiers unique="true" />
 						<persistence type="property" />
 					</attribute>
-					<attribute type="WeekDay" qualifier="deliveryDay">
-						<modifiers optional="false" unique="true" />
+					<attribute qualifier="deliveryDay" type="WeekDay">
 						<description>Day on which order will be delivered</description>
+						<modifiers optional="false" unique="true" />
 						<persistence type="property" />
 					</attribute>
-					<attribute type="java.lang.String" qualifier="slotTime">
-						<modifiers optional="false" unique="true" />
+					<attribute qualifier="slotTime" type="java.lang.String">
 						<description>Slot in which order will be delivered</description>
+						<modifiers optional="false" unique="true" />
 						<persistence type="property" />
 					</attribute>
 					<attribute type="java.lang.Integer" qualifier="slotCapacity">
@@ -327,7 +318,7 @@
 						<persistence type="property" />
 					</attribute>
 					<attribute type="java.lang.Integer" qualifier="notifyCount">
-						<description>Notification count after which ABO will be notified on storefront</description>
+						<description>Notification count after which ABO will be notified on storefront.</description>
 						<modifiers optional="false" />
 						<persistence type="property" />
 					</attribute>
@@ -336,6 +327,7 @@
 						<persistence type="property" />
 					</attribute>
 					<attribute type="java.lang.Boolean" qualifier="active">
+						<description>Decides whether this slot is active or not.</description>
 						<persistence type="property" />
 						<defaultvalue>Boolean.FALSE</defaultvalue>
 					</attribute>
@@ -347,55 +339,56 @@
 			</itemtype>
 
 			<itemtype code="AmwayDeliverySlotAvailability">
-				<description>Delivery Slot Availability will be checked here</description>
+				<description>Delivery Slot Availability for orders.</description>
 				<deployment table="amwayDlvrySlotAvlablty" typecode="21081" />
 				<attributes>
-					<attribute type="java.util.Date" qualifier="deliveryDate">
-						<modifiers optional="false" unique="true" />
+					<attribute qualifier="deliveryDate" type="java.util.Date">
 						<description>Date on order will be delivered</description>
-						<persistence type="property" />
-					</attribute>
-					<attribute type="Warehouse" qualifier="warehouse">
 						<modifiers optional="false" unique="true" />
 						<persistence type="property" />
 					</attribute>
-					<attribute type="java.util.Date" qualifier="orderingTime">
-						<modifiers unique="true" />
+					<attribute qualifier="warehouse" type="Warehouse">
+						<description>Warehouse to which the delivery slots belong.</description>
+						<modifiers optional="false" unique="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="orderingTime" type="java.util.Date">
 						<description>Time on which ABO is placing order</description>
+						<modifiers unique="true" />
 						<persistence type="property" />
 					</attribute>
-					<attribute type="WeekDay" qualifier="deliveryDay">
-						<modifiers optional="false" />
+					<attribute qualifier="deliveryDay" type="WeekDay">
 						<description>Day on which order will be delivered</description>
+						<modifiers optional="false" />
 						<persistence type="property" />
 					</attribute>
-					<attribute type="java.lang.String" qualifier="slotTime">
-						<modifiers optional="false" unique="true" />
+					<attribute qualifier="slotTime" type="java.lang.String">
 						<description>Slot in which order will be delivered</description>
+						<modifiers optional="false" unique="true" />
 						<persistence type="property" />
 					</attribute>
-					<attribute type="java.lang.Integer" qualifier="slotCapacity">
-						<description>Number of deliveries to be taken in this slot</description>
+					<attribute qualifier="slotCapacity" type="java.lang.Integer">
+						<description>Total number of deliveries to be taken in this slot</description>
 						<persistence type="property" />
 					</attribute>
-					<attribute type="java.lang.Integer" qualifier="consumedCount">
+					<attribute qualifier="consumedCount" type="java.lang.Integer">
 						<description>Number of deliveries already taken in this slot</description>
 						<persistence type="property" />
 					</attribute>
-					<attribute type="java.lang.Integer" qualifier="notifyCount">
+					<attribute qualifier="notifyCount" type="java.lang.Integer">
 						<description>Notification count after which ABO will be notified on storefront</description>
 						<persistence type="property" />
 					</attribute>
-					<attribute type="localized:java.lang.String" qualifier="instructions">
+					<attribute qualifier="instructions" type="localized:java.lang.String">
 						<description>Special instruction</description>
 						<persistence type="property" />
 					</attribute>
-					<attribute type="java.lang.Boolean" qualifier="active">
-						<persistence type="property" />
+					<attribute qualifier="active" type="java.lang.Boolean">
+						<description>Decides whether this slot is active or not.</description>
 						<defaultvalue>Boolean.FALSE</defaultvalue>
+						<persistence type="property" />
 					</attribute>
-					<attribute type="java.lang.Integer" qualifier="slotNumber">
-						<modifiers read="true" write="true" optional="true" />
+					<attribute qualifier="slotNumber" type="java.lang.Integer">
 						<persistence type="property" />
 					</attribute>
 				</attributes>
@@ -406,13 +399,14 @@
 				</indexes>
 			</itemtype>
 		</typegroup>
-		
+
 		<typegroup name="Customer">
 			<itemtype code="AmwayAccountClassification" autocreate="true"
 				generate="true">
+				<description>Classifies the accounts according to levels. For instance, platinum and above, diamond and above and so on.</description>
 				<deployment table="accountClassification" typecode="21036" />
 				<attributes>
-					<attribute type="java.lang.String" qualifier="code">
+					<attribute qualifier="code" type="java.lang.String">
 						<description>Unique identifier for classification model.</description>
 						<modifiers optional="false" unique="true" />
 						<persistence type="property" />
@@ -423,7 +417,7 @@
 						<persistence type="property" />
 					</attribute>
 					<attribute qualifier="classification" type="AccountClassificationEnum">
-						<description>Classification level enum</description>
+						<description>Classification level enum deciding the level of the accout.</description>
 						<modifiers optional="false" />
 						<persistence type="property" />
 					</attribute>
