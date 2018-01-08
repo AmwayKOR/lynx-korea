@@ -1,7 +1,7 @@
 /**
  *
  */
-package backoffice.src.com.amway.apac.label.impl;
+package com.amway.apac.label.impl;
 
 import java.text.DateFormat;
 import java.util.Date;
