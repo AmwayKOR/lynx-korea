@@ -1,14 +1,14 @@
 /**
  *
  */
-package com.amway.apac.core.deliveryslot.daos;
+package com.amway.apac.deliveryslot.daos;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.List;
 
-import com.amway.apac.core.model.AmwayDeliverySlotAvailabilityModel;
-import com.amway.apac.core.model.AmwayDeliverySlotConfigModel;
+import com.amway.apac.deliveryslot.model.AmwayDeliverySlotAvailabilityModel;
+import com.amway.apac.deliveryslot.model.AmwayDeliverySlotConfigModel;
 
 
 /**

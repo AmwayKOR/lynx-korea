@@ -1,7 +1,15 @@
-/**
+/*
+ * [y] hybris Platform
  *
+ * Copyright (c) 2000-2018 SAP SE
+ * All rights reserved.
+ *
+ * This software is the confidential and proprietary information of SAP
+ * Hybris ("Confidential Information"). You shall not disclose such
+ * Confidential Information and shall use it only in accordance with the
+ * terms of the license agreement you entered into with SAP Hybris.
  */
-package com.amway.apac.core.deliveryslot.hooks.impl;
+package com.amway.apac.deliveryslot.hooks.impl;
 
 import de.hybris.platform.commerceservices.model.PickUpDeliveryModeModel;
 import de.hybris.platform.commerceservices.order.CommerceCartModification;
@@ -16,11 +24,12 @@ import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Required;
 
-import com.amway.apac.core.deliveryslot.services.AmwayApacDeliveryService;
 import com.amway.apac.core.enums.OrderType;
-import com.amway.apac.core.model.AmwayDeliverySlotAvailabilityModel;
 import com.amway.apac.core.orders.AmwayApacCommerceCartModificationStatus;
+import com.amway.apac.deliveryslot.model.AmwayDeliverySlotAvailabilityModel;
+import com.amway.apac.deliveryslot.services.AmwayApacDeliveryService;
 
 
 /**
@@ -152,6 +161,7 @@ public class AmwayApacDeliverySlotValidationHook implements CartValidationHook
 	 * @param modelService
 	 *           the modelService to set
 	 */
+	@Required
 	public void setModelService(final ModelService modelService)
 	{
 		this.modelService = modelService;
@@ -169,6 +179,7 @@ public class AmwayApacDeliverySlotValidationHook implements CartValidationHook
 	 * @param amwayApacDeliveryService
 	 *           the amwayApacDeliveryService to set
 	 */
+	@Required
 	public void setAmwayApacDeliveryService(final AmwayApacDeliveryService amwayApacDeliveryService)
 	{
 		this.amwayApacDeliveryService = amwayApacDeliveryService;

@@ -24,4 +24,13 @@ public final class AmwayapacdeliveryslotConstants extends GeneratedAmwayapacdeli
 
 	// implement here constants used by this extension
 
+	/**
+	 * Date pattern
+	 */
+	public static final String DATE_FORMAT_PROFILE = "yyyy-MM-dd";
+
+	/**
+	 * Time stamp pattern string
+	 */
+	public static final String TIME_FORMAT = "HH:mm:ss";
 }

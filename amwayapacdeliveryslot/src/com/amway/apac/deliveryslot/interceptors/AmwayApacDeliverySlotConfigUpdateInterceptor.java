@@ -1,7 +1,15 @@
-/**
+/*
+ * [y] hybris Platform
  *
+ * Copyright (c) 2000-2018 SAP SE
+ * All rights reserved.
+ *
+ * This software is the confidential and proprietary information of SAP
+ * Hybris ("Confidential Information"). You shall not disclose such
+ * Confidential Information and shall use it only in accordance with the
+ * terms of the license agreement you entered into with SAP Hybris.
  */
-package com.amway.apac.core.interceptors;
+package com.amway.apac.deliveryslot.interceptors;
 
 import de.hybris.platform.servicelayer.interceptor.InterceptorContext;
 import de.hybris.platform.servicelayer.interceptor.InterceptorException;
@@ -14,10 +22,11 @@ import java.util.Objects;
 
 import org.apache.log4j.Logger;
 import org.assertj.core.util.Preconditions;
+import org.springframework.beans.factory.annotation.Required;
 
-import com.amway.apac.core.deliveryslot.services.AmwayApacDeliverySlotManagementService;
-import com.amway.apac.core.model.AmwayDeliverySlotAvailabilityModel;
-import com.amway.apac.core.model.AmwayDeliverySlotConfigModel;
+import com.amway.apac.deliveryslot.model.AmwayDeliverySlotAvailabilityModel;
+import com.amway.apac.deliveryslot.model.AmwayDeliverySlotConfigModel;
+import com.amway.apac.deliveryslot.services.AmwayApacDeliverySlotManagementService;
 
 
 /**
@@ -77,6 +86,7 @@ public class AmwayApacDeliverySlotConfigUpdateInterceptor implements PrepareInte
 	 * @param modelService
 	 *           the modelService to set
 	 */
+	@Required
 	public void setModelService(final ModelService modelService)
 	{
 		this.modelService = modelService;
@@ -94,6 +104,7 @@ public class AmwayApacDeliverySlotConfigUpdateInterceptor implements PrepareInte
 	 * @param amwayApacDeliverySlotManagementService
 	 *           the amwayApacDeliverySlotManagementService to set
 	 */
+	@Required
 	public void setAmwayApacDeliverySlotManagementService(
 			final AmwayApacDeliverySlotManagementService amwayApacDeliverySlotManagementService)
 	{

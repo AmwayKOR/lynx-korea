@@ -1,7 +1,7 @@
 /**
  *
  */
-package com.amway.apac.core.deliveryslot.services;
+package com.amway.apac.deliveryslot.services;
 
 import de.hybris.platform.basecommerce.enums.WeekDay;
 
@@ -9,8 +9,8 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.List;
 
-import com.amway.apac.core.model.AmwayDeliverySlotAvailabilityModel;
-import com.amway.apac.core.model.AmwayDeliverySlotConfigModel;
+import com.amway.apac.deliveryslot.model.AmwayDeliverySlotAvailabilityModel;
+import com.amway.apac.deliveryslot.model.AmwayDeliverySlotConfigModel;
 
 
 /**
@@ -53,4 +53,10 @@ public interface AmwayApacDeliverySlotManagementService
 	 */
 	void updateInfoInSlotsAvailabilityModels(AmwayDeliverySlotConfigModel slotConfigModel,
 			List<AmwayDeliverySlotAvailabilityModel> slotModels);
+
+
+	/**
+	 *
+	 */
+	void createDeliverySlotData(LocalDate orderingDate);
 }

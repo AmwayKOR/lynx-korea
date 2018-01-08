@@ -1,7 +1,15 @@
-/**
+/*
+ * [y] hybris Platform
  *
+ * Copyright (c) 2000-2018 SAP SE
+ * All rights reserved.
+ *
+ * This software is the confidential and proprietary information of SAP
+ * Hybris ("Confidential Information"). You shall not disclose such
+ * Confidential Information and shall use it only in accordance with the
+ * terms of the license agreement you entered into with SAP Hybris.
  */
-package com.amway.apac.core.deliveryslot.services.impl;
+package com.amway.apac.deliveryslot.services.impl;
 
 import de.hybris.platform.basecommerce.enums.WeekDay;
 import de.hybris.platform.commerceservices.delivery.impl.DefaultDeliveryService;
@@ -22,14 +30,15 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionTemplate;
 
-import com.amway.apac.core.constants.AmwayapacCoreConstants;
-import com.amway.apac.core.deliveryslot.daos.AmwayApacDeliverySlotDao;
-import com.amway.apac.core.deliveryslot.services.AmwayApacDeliveryService;
-import com.amway.apac.core.model.AmwayDeliverySlotAvailabilityModel;
+import com.amway.apac.deliveryslot.constants.AmwayapacdeliveryslotConstants;
+import com.amway.apac.deliveryslot.daos.AmwayApacDeliverySlotDao;
+import com.amway.apac.deliveryslot.model.AmwayDeliverySlotAvailabilityModel;
+import com.amway.apac.deliveryslot.services.AmwayApacDeliveryService;
 import com.amway.core.exceptions.AmwayServiceException;
 
 
@@ -102,7 +111,7 @@ public class DefaultAmwayApacDeliveryService extends DefaultDeliveryService impl
 		calendar.setTime(now);
 		final int dayofWeek = calendar.get(Calendar.DAY_OF_WEEK);
 
-		final SimpleDateFormat dateFormat = new SimpleDateFormat(AmwayapacCoreConstants.TIME_FORMAT);
+		final SimpleDateFormat dateFormat = new SimpleDateFormat(AmwayapacdeliveryslotConstants.TIME_FORMAT);
 		final String formattedDate = dateFormat.format(new Date()).toString();
 		final Time orderingTime = Time.valueOf(formattedDate);
 
@@ -133,7 +142,7 @@ public class DefaultAmwayApacDeliveryService extends DefaultDeliveryService impl
 			localDateTime = localDateTime.plusDays(1);
 			if (localDateTime.getDayOfWeek().getValue() == dayValue)
 			{
-				final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(AmwayapacCoreConstants.DATE_FORMAT_PROFILE);
+				final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(AmwayapacdeliveryslotConstants.DATE_FORMAT_PROFILE);
 				final String formattedDate = localDateTime.format(formatter);
 				final LocalDate localDate = LocalDate.parse(formattedDate);
 				calculated = true;
@@ -271,6 +280,7 @@ public class DefaultAmwayApacDeliveryService extends DefaultDeliveryService impl
 	 * @param cartService
 	 *           the cartService to set
 	 */
+	@Required
 	public void setCartService(final CartService cartService)
 	{
 		this.cartService = cartService;
@@ -288,6 +298,7 @@ public class DefaultAmwayApacDeliveryService extends DefaultDeliveryService impl
 	 * @param amwayApacDeliverySlotDao
 	 *           the amwayApacDeliverySlotDao to set
 	 */
+	@Required
 	public void setAmwayApacDeliverySlotDao(final AmwayApacDeliverySlotDao amwayApacDeliverySlotDao)
 	{
 		this.amwayApacDeliverySlotDao = amwayApacDeliverySlotDao;
@@ -305,6 +316,7 @@ public class DefaultAmwayApacDeliveryService extends DefaultDeliveryService impl
 	 * @param transactionTemplate
 	 *           the transactionTemplate to set
 	 */
+	@Required
 	public void setTransactionTemplate(final TransactionTemplate transactionTemplate)
 	{
 		this.transactionTemplate = transactionTemplate;

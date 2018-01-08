@@ -1,7 +1,15 @@
-/**
+/*
+ * [y] hybris Platform
  *
+ * Copyright (c) 2000-2018 SAP SE
+ * All rights reserved.
+ *
+ * This software is the confidential and proprietary information of SAP
+ * Hybris ("Confidential Information"). You shall not disclose such
+ * Confidential Information and shall use it only in accordance with the
+ * terms of the license agreement you entered into with SAP Hybris.
  */
-package com.amway.apac.facades.cronjobs;
+package com.amway.apac.deliveryslot.cronjobs;
 
 import de.hybris.platform.cronjob.enums.CronJobResult;
 import de.hybris.platform.cronjob.enums.CronJobStatus;
@@ -14,9 +22,9 @@ import java.time.LocalDate;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
 
-import com.amway.apac.core.model.AmwayDeliverySlotAvailabilityModel;
-import com.amway.apac.core.model.AmwayDeliverySlotConfigModel;
-import com.amway.apac.facades.deliveryslot.AmwayApacDeliverySlotCreationFacade;
+import com.amway.apac.deliveryslot.model.AmwayDeliverySlotAvailabilityModel;
+import com.amway.apac.deliveryslot.model.AmwayDeliverySlotConfigModel;
+import com.amway.apac.deliveryslot.services.AmwayApacDeliverySlotManagementService;
 
 
 /**
@@ -30,7 +38,7 @@ public class AmwayApacDeliverySlotCreationCronJob extends AbstractJobPerformable
 {
 	private static final Logger LOG = Logger.getLogger(AmwayApacDeliverySlotCreationCronJob.class);
 
-	private AmwayApacDeliverySlotCreationFacade deliverySlotFacade;
+	private AmwayApacDeliverySlotManagementService amwayApacDeliverySlotManagementService;
 
 	/*
 	 * (non-Javadoc)
@@ -44,7 +52,7 @@ public class AmwayApacDeliverySlotCreationCronJob extends AbstractJobPerformable
 		PerformResult result = null;
 
 		// Create data and persist, result will be 1 for success.
-		getDeliverySlotFacade().createDeliverySlotData(getOrderingDate());
+		getAmwayApacDeliverySlotManagementService().createDeliverySlotData(getOrderingDate());
 
 		result = new PerformResult(CronJobResult.SUCCESS, CronJobStatus.FINISHED);
 
@@ -66,20 +74,21 @@ public class AmwayApacDeliverySlotCreationCronJob extends AbstractJobPerformable
 	}
 
 	/**
-	 * @return the deliverySlotFacade
+	 * @return the amwayApacDeliverySlotManagementService
 	 */
-	public AmwayApacDeliverySlotCreationFacade getDeliverySlotFacade()
+	public AmwayApacDeliverySlotManagementService getAmwayApacDeliverySlotManagementService()
 	{
-		return deliverySlotFacade;
+		return amwayApacDeliverySlotManagementService;
 	}
 
 	/**
-	 * @param deliverySlotFacade
-	 *           the deliverySlotFacade to set
+	 * @param amwayApacDeliverySlotManagementService
+	 *           the amwayApacDeliverySlotManagementService to set
 	 */
 	@Required
-	public void setDeliverySlotFacade(final AmwayApacDeliverySlotCreationFacade deliverySlotFacade)
+	public void setAmwayApacDeliverySlotManagementService(
+			final AmwayApacDeliverySlotManagementService amwayApacDeliverySlotManagementService)
 	{
-		this.deliverySlotFacade = deliverySlotFacade;
+		this.amwayApacDeliverySlotManagementService = amwayApacDeliverySlotManagementService;
 	}
 }

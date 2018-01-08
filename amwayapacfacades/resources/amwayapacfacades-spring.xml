@@ -273,16 +273,6 @@
         <property name="amwayApacCustomerFacade" ref="customerFacade"/>
         <property name="amwayApacAccountService" ref="amwayAccountService"/>
         <property name="amwayApacCommerceCheckoutService" ref="amwayCommerceCheckoutService"/>
-    </bean>    
-    
-    <alias name="amwayApacDeliverySlotCreationFacade" alias="amwayApacDeliverySlotCreationFacade"/>
-    <bean id="amwayApacDeliverySlotCreationFacade" class="com.amway.apac.facades.deliveryslot.impl.DefaultAmwayApacDeliverySlotCreationFacade">
-    	<property name="amwayApacDeliverySlotManagementService" ref="amwayApacDeliverySlotManagementService"/>
-    </bean>
-    
-    <alias name="amwayApacDeliverySlotCreationCronJob" alias="amwayApacDeliverySlotCreationCronJob" />
-    <bean id="amwayApacDeliverySlotCreationCronJob" class="com.amway.apac.facades.cronjobs.AmwayApacDeliverySlotCreationCronJob" parent="abstractJobPerformable">
-    	<property name="deliverySlotFacade" ref="amwayApacDeliverySlotCreationFacade"/>
     </bean>
     
 </beans>

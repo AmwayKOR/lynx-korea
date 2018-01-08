@@ -1,7 +1,15 @@
-/**
+/*
+ * [y] hybris Platform
  *
+ * Copyright (c) 2000-2018 SAP SE
+ * All rights reserved.
+ *
+ * This software is the confidential and proprietary information of SAP
+ * Hybris ("Confidential Information"). You shall not disclose such
+ * Confidential Information and shall use it only in accordance with the
+ * terms of the license agreement you entered into with SAP Hybris.
  */
-package com.amway.apac.core.deliveryslot.daos.impl;
+package com.amway.apac.deliveryslot.daos.impl;
 
 import de.hybris.platform.basecommerce.enums.WeekDay;
 import de.hybris.platform.ordersplitting.model.WarehouseModel;
@@ -17,10 +25,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.springframework.beans.factory.annotation.Required;
 
-import com.amway.apac.core.deliveryslot.daos.AmwayApacDeliverySlotDao;
-import com.amway.apac.core.model.AmwayDeliverySlotAvailabilityModel;
-import com.amway.apac.core.model.AmwayDeliverySlotConfigModel;
+import com.amway.apac.deliveryslot.daos.AmwayApacDeliverySlotDao;
+import com.amway.apac.deliveryslot.model.AmwayDeliverySlotAvailabilityModel;
+import com.amway.apac.deliveryslot.model.AmwayDeliverySlotConfigModel;
 
 
 /**
@@ -171,6 +180,7 @@ public class DefaultAmwayApacDeliverySlotDao implements AmwayApacDeliverySlotDao
 	 * @param flexibleSearchService
 	 *           the flexibleSearchService to set
 	 */
+	@Required
 	public void setFlexibleSearchService(final FlexibleSearchService flexibleSearchService)
 	{
 		this.flexibleSearchService = flexibleSearchService;

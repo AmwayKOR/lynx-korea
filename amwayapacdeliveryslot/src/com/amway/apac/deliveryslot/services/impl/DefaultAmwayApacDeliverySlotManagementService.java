@@ -1,7 +1,7 @@
 /**
  *
  */
-package com.amway.apac.core.deliveryslot.services.impl;
+package com.amway.apac.deliveryslot.services.impl;
 
 import de.hybris.platform.basecommerce.enums.WeekDay;
 import de.hybris.platform.servicelayer.model.ModelService;
@@ -21,10 +21,10 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
 
-import com.amway.apac.core.deliveryslot.daos.AmwayApacDeliverySlotManagementDao;
-import com.amway.apac.core.deliveryslot.services.AmwayApacDeliverySlotManagementService;
-import com.amway.apac.core.model.AmwayDeliverySlotAvailabilityModel;
-import com.amway.apac.core.model.AmwayDeliverySlotConfigModel;
+import com.amway.apac.deliveryslot.daos.AmwayApacDeliverySlotManagementDao;
+import com.amway.apac.deliveryslot.model.AmwayDeliverySlotAvailabilityModel;
+import com.amway.apac.deliveryslot.model.AmwayDeliverySlotConfigModel;
+import com.amway.apac.deliveryslot.services.AmwayApacDeliverySlotManagementService;
 
 
 /**
@@ -208,6 +208,23 @@ public class DefaultAmwayApacDeliverySlotManagementService implements AmwayApacD
 		else
 		{
 			LOG.info("NO SLOT MODEL FOUND for delivery Date : " + deliveryDate);
+		}
+	}
+
+	@Override
+	public void createDeliverySlotData(final LocalDate orderingDate)
+	{
+		final DayOfWeek orderingDay = orderingDate.getDayOfWeek();
+		LOG.debug("Week Of Day : " + orderingDay);
+
+		// If ordering day is SAT or SUN, data already exists in SYSTEM
+		if ((!orderingDay.equals(DayOfWeek.SATURDAY)) && (!orderingDay.equals(DayOfWeek.SUNDAY)))
+		{
+			// 1. Get delivery date from ordering date & day.
+			final List<AmwayDeliverySlotConfigModel> deliverySlotModels = getDeliverySlotByOrderDay(orderingDay);
+
+			// 2. Get newDeliverySlots for ordering date
+			createDeliverySlotForDate(deliverySlotModels, orderingDate);
 		}
 	}
 

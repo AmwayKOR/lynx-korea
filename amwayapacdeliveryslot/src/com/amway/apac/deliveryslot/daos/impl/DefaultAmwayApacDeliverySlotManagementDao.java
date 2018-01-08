@@ -1,7 +1,7 @@
 /**
  *
  */
-package com.amway.apac.core.deliveryslot.daos.impl;
+package com.amway.apac.deliveryslot.daos.impl;
 
 import de.hybris.platform.basecommerce.enums.WeekDay;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
@@ -16,9 +16,9 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Required;
 
-import com.amway.apac.core.deliveryslot.daos.AmwayApacDeliverySlotManagementDao;
-import com.amway.apac.core.model.AmwayDeliverySlotAvailabilityModel;
-import com.amway.apac.core.model.AmwayDeliverySlotConfigModel;
+import com.amway.apac.deliveryslot.daos.AmwayApacDeliverySlotManagementDao;
+import com.amway.apac.deliveryslot.model.AmwayDeliverySlotAvailabilityModel;
+import com.amway.apac.deliveryslot.model.AmwayDeliverySlotConfigModel;
 
 
 /**

@@ -383,49 +383,6 @@
         <entry key="DIAMOND_AND_ABOVE" value="380"/>
 	</util:map>
 	
-	<!-- Delivery slot configuration -->
-    <alias name="amwayApacDeliverySlotManagementDao" alias="amwayApacDeliverySlotManagementDao"/>
-    <bean id="amwayApacDeliverySlotManagementDao" class="com.amway.apac.core.deliveryslot.daos.impl.DefaultAmwayApacDeliverySlotManagementDao">
-        <property name="flexibleSearchService" ref="flexibleSearchService"/>
-    </bean>
-    
-    <alias name="amwayApacDeliverySlotManagementService" alias="amwayApacDeliverySlotManagementService"/>
-    <bean id="amwayApacDeliverySlotManagementService" class="com.amway.apac.core.deliveryslot.services.impl.DefaultAmwayApacDeliverySlotManagementService">
-        <property name="modelService" ref="modelService"/>
-        <property name="amwayApacDeliverySlotManagementDao" ref="amwayApacDeliverySlotManagementDao"/>
-    </bean>
-    
-    <bean id="amwayApacDeliverySlotConfigUpdateInterceptor" class="com.amway.apac.core.interceptors.AmwayApacDeliverySlotConfigUpdateInterceptor">
-    	<property name="modelService" ref="modelService"/>
-    	<property name="amwayApacDeliverySlotManagementService" ref="amwayApacDeliverySlotManagementService"/>
-    </bean>
-
-    <bean id="amwayApacDeliverySlotConfigUpdateInterceptorMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
-        <property name="interceptor" ref="amwayApacDeliverySlotConfigUpdateInterceptor" />
-        <property name="typeCode" value="AmwayDeliverySlotConfig" />
-    </bean>
-    
-    <bean id="amwayApacDeliverySlotDao" class="com.amway.apac.core.deliveryslot.daos.impl.DefaultAmwayApacDeliverySlotDao">
-		<property name="flexibleSearchService" ref="flexibleSearchService" />
-	</bean>
-	
-	<alias alias="deliveryService" name="amwayApacDeliveryService"/>
-	<bean id="amwayApacDeliveryService" parent="defaultDeliveryService"
-		class="com.amway.apac.core.deliveryslot.services.impl.DefaultAmwayApacDeliveryService">
-		<property name="amwayApacDeliverySlotDao" ref="amwayApacDeliverySlotDao" />	
-		 <property name="cartService" ref="cartService" />
-         <property name="transactionTemplate">
-            <bean class="org.springframework.transaction.support.TransactionTemplate">
-                <property name="transactionManager" ref="txManager"/>
-            </bean>
-        </property>
-	</bean>
-	
-	<bean id="amwayApacDeliverySlotValidationHook" class="com.amway.apac.core.deliveryslot.hooks.impl.AmwayApacDeliverySlotValidationHook">
-       <property name="modelService" ref="modelService" />
-       <property name="amwayApacDeliveryService" ref="amwayApacDeliveryService" />
-    </bean>
-	
     <bean id="defaultAmwayApacProductPreLaunchStrategy" class="com.amway.apac.core.product.strategies.impl.DefaultAmwayApacProductPreLaunchStrategy">
 		<property name="amwayApacAccountClassificationService" ref="defaultAmwayApacAccountClassificationService" />
     </bean>
