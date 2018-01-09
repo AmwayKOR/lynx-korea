@@ -258,13 +258,14 @@
 	<alias alias="customeraccountDao" name="defaultAmwayApacCustomerAccountDao" />
     <bean id="defaultAmwayApacCustomerAccountDao" class="com.amway.apac.core.customer.daos.impl.DefaultAmwayApacCustomerAccountDao" parent="amwayCustomerAccountDao" />
     
-    <alias name="amwayApacProductService" alias="productService" />
-    <bean id="amwayApacProductService"
-          class="com.amway.apac.product.services.impl.DefaultAmwayApacProductService" parent="defaultProductService">
+    <alias name="defaultAmwayApacProductService" alias="productService" />
+    <bean id="defaultAmwayApacProductService"
+          class="com.amway.apac.core.product.services.impl.DefaultAmwayApacProductService" parent="defaultProductService">
         <property name="amwayApacProductDao" ref="amwayApacProductDao" />
     </bean>
     
-    <bean id="amwayApacProductDao" class="com.amway.apac.core.product.daos.impl.DefaultAmwayApacProductDao">
+    <alias name="defaultAmwayApacProductDao" alias="amwayApacProductDao" />
+    <bean id="defaultAmwayApacProductDao" class="com.amway.apac.core.product.daos.impl.DefaultAmwayApacProductDao">
     	<property name="flexibleSearchService" ref="flexibleSearchService"/>
     </bean> 
     
