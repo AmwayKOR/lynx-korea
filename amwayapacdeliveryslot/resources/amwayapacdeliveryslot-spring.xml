@@ -19,33 +19,35 @@
 
 
 	<!-- Delivery slot configuration -->
-    <alias name="amwayApacDeliverySlotManagementDao" alias="amwayApacDeliverySlotManagementDao"/>
-    <bean id="amwayApacDeliverySlotManagementDao" class="com.amway.apac.deliveryslot.daos.impl.DefaultAmwayApacDeliverySlotManagementDao">
+    <alias alias="amwayApacDeliverySlotManagementDao" name="defaultAmwayApacDeliverySlotManagementDao"/>
+    <bean id="defaultAmwayApacDeliverySlotManagementDao" class="com.amway.apac.deliveryslot.daos.impl.DefaultAmwayApacDeliverySlotManagementDao">
         <property name="flexibleSearchService" ref="flexibleSearchService"/>
     </bean>
     
-    <alias name="amwayApacDeliverySlotManagementService" alias="amwayApacDeliverySlotManagementService"/>
-    <bean id="amwayApacDeliverySlotManagementService" class="com.amway.apac.deliveryslot.services.impl.DefaultAmwayApacDeliverySlotManagementService">
+    <alias alias="amwayApacDeliverySlotManagementService" name="defaultAmwayApacDeliverySlotManagementService"/>
+    <bean id="defaultAmwayApacDeliverySlotManagementService" class="com.amway.apac.deliveryslot.services.impl.DefaultAmwayApacDeliverySlotManagementService">
         <property name="modelService" ref="modelService"/>
         <property name="amwayApacDeliverySlotManagementDao" ref="amwayApacDeliverySlotManagementDao"/>
     </bean>
     
-    <bean id="amwayApacDeliverySlotConfigUpdateInterceptor" class="com.amway.apac.deliveryslot.interceptors.AmwayApacDeliverySlotConfigUpdateInterceptor">
+    <alias alias="amwayApacDeliverySlotConfigUpdateInterceptor" name="defaultAmwayApacDeliverySlotConfigUpdateInterceptor"/>
+    <bean id="defaultAmwayApacDeliverySlotConfigUpdateInterceptor" class="com.amway.apac.deliveryslot.interceptors.AmwayApacDeliverySlotConfigUpdateInterceptor">
     	<property name="modelService" ref="modelService"/>
     	<property name="amwayApacDeliverySlotManagementService" ref="amwayApacDeliverySlotManagementService"/>
     </bean>
 
-    <bean id="amwayApacDeliverySlotConfigUpdateInterceptorMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+    <bean id="defaultAmwayApacDeliverySlotConfigUpdateInterceptorMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
         <property name="interceptor" ref="amwayApacDeliverySlotConfigUpdateInterceptor" />
         <property name="typeCode" value="AmwayDeliverySlotConfig" />
     </bean>
     
-    <bean id="amwayApacDeliverySlotDao" class="com.amway.apac.deliveryslot.daos.impl.DefaultAmwayApacDeliverySlotDao">
+    <alias alias="amwayApacDeliverySlotDao" name="defaultAmwayApacDeliverySlotDao"/>
+    <bean id="defaultAmwayApacDeliverySlotDao" class="com.amway.apac.deliveryslot.daos.impl.DefaultAmwayApacDeliverySlotDao">
 		<property name="flexibleSearchService" ref="flexibleSearchService" />
 	</bean>
 	
-	<alias alias="deliveryService" name="amwayApacDeliveryService"/>
-	<bean id="amwayApacDeliveryService" parent="defaultDeliveryService"
+	<alias alias="deliveryService" name="defaultAmwayApacDeliveryService"/>
+	<bean id="defaultAmwayApacDeliveryService" parent="defaultDeliveryService"
 		class="com.amway.apac.deliveryslot.services.impl.DefaultAmwayApacDeliveryService">
 		<property name="amwayApacDeliverySlotDao" ref="amwayApacDeliverySlotDao" />	
 		 <property name="cartService" ref="cartService" />
@@ -56,13 +58,14 @@
         </property>
 	</bean>
 	
-	<bean id="amwayApacDeliverySlotValidationHook" class="com.amway.apac.deliveryslot.hooks.impl.AmwayApacDeliverySlotValidationHook">
+	<alias alias="amwayApacDeliverySlotValidationHook" name="defaultAmwayApacDeliverySlotValidationHook"/>
+	<bean id="defaultAmwayApacDeliverySlotValidationHook" class="com.amway.apac.deliveryslot.hooks.impl.AmwayApacDeliverySlotValidationHook">
        <property name="modelService" ref="modelService" />
-       <property name="amwayApacDeliveryService" ref="amwayApacDeliveryService" />
+       <property name="amwayApacDeliveryService" ref="deliveryService" />
     </bean>
     
-    <alias name="amwayApacDeliverySlotCreationCronJob" alias="amwayApacDeliverySlotCreationCronJob" />
-    <bean id="amwayApacDeliverySlotCreationCronJob" class="com.amway.apac.deliveryslot.cronjobs.AmwayApacDeliverySlotCreationCronJob" parent="abstractJobPerformable">
+    <alias alias="amwayApacDeliverySlotCreationCronJob" name="defaultAmwayApacDeliverySlotCreationCronJob" />
+    <bean id="defaultAmwayApacDeliverySlotCreationCronJob" class="com.amway.apac.deliveryslot.cronjobs.AmwayApacDeliverySlotCreationCronJob" parent="abstractJobPerformable">
         <property name="amwayApacDeliverySlotManagementService" ref="amwayApacDeliverySlotManagementService"/>
     </bean>
 

@@ -144,7 +144,7 @@ public class AmwayApacDeliverySlotValidationHook implements CartValidationHook
 	 * @param deliverySlotModel
 	 * @return
 	 */
-	private boolean isFilled(final AmwayDeliverySlotAvailabilityModel deliverySlotModel)
+	protected boolean isFilled(final AmwayDeliverySlotAvailabilityModel deliverySlotModel)
 	{
 		return deliverySlotModel.getSlotCapacity().intValue() - deliverySlotModel.getConsumedCount().intValue() == 0;
 	}
