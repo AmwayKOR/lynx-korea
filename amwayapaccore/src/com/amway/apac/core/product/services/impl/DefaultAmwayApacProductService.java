@@ -214,11 +214,6 @@ public class DefaultAmwayApacProductService extends DefaultProductService implem
 		this.amwayApacProductDao = amwayApacProductDao;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see com.amway.apac.product.services.AmwayApacProductService#validateOmsCode(java.lang.String[], int[])
-	 */
 	@Override
 	public boolean validateOmsCode(final String[] splitOmsCode, final int[] omsparams)
 	{

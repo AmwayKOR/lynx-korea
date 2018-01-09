@@ -11,8 +11,8 @@ import com.amway.apac.core.constants.AmwayapacCoreConstants;
 import com.amway.apac.core.model.AmwayPreLaunchConfigModel;
 import com.amway.apac.core.product.AmwayPreLaunchResponse;
 import com.amway.apac.core.product.AmwayProductPreLaunchStatus;
+import com.amway.apac.core.product.services.AmwayApacProductService;
 import com.amway.apac.core.product.strategies.AmwayApacProductPreLaunchStrategy;
-import com.amway.apac.product.services.AmwayApacProductService;
 import com.amway.core.model.AmwayAccountModel;
 import com.amway.core.service.AmwayAccountCommerceService;
 

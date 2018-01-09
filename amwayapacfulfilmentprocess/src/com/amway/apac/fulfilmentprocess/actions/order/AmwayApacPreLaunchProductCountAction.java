@@ -11,7 +11,7 @@ import java.util.Set;
 import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Required;
 
-import com.amway.apac.product.services.AmwayApacProductService;
+import com.amway.apac.core.product.services.AmwayApacProductService;
 import com.amway.core.model.AmwayAccountModel;
 
 
