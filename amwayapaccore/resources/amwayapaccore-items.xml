@@ -19,8 +19,6 @@
 		<enumtype code="PaymentType" dynamic="true" autocreate="true"
 			generate="true">
 			<description>Different payment types.</description>
-			<value code="EPP" />
-			<value code="ZIPP" />
 			<value code="PIF" />
 		</enumtype>
 
