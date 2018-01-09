@@ -1,34 +1,37 @@
-/**
- *
- */
 package com.amway.apac.core.product.daos.impl;
 
+import static com.amway.apac.core.model.AmwayUserPromotionCountModel.PRODUCTCODE;
+import static com.amway.apac.core.model.AmwayUserPromotionCountModel.PROMOTIONCODE;
+import static com.amway.apac.core.model.AmwayUserPromotionCountModel.USERID;
+import static de.hybris.platform.core.model.ItemModel.PK;
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNull;
 
 import de.hybris.platform.catalog.enums.ArticleApprovalStatus;
 import de.hybris.platform.catalog.model.CatalogVersionModel;
 import de.hybris.platform.core.model.product.ProductModel;
+import de.hybris.platform.product.daos.impl.DefaultProductDao;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
-import de.hybris.platform.servicelayer.search.FlexibleSearchService;
 import de.hybris.platform.servicelayer.search.SearchResult;
 
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.amway.apac.core.model.AmwayPaymentOptionModel;
+import com.amway.apac.core.model.AmwayUserPromotionCountModel;
 import com.amway.apac.core.product.daos.AmwayApacProductDao;
 
 
 /**
  * Default implementation for {@link AmwayApacProductDao}
- * 
+ *
  * @author Ashish Sabal
  *
  */
-public class DefaultAmwayApacProductDao implements AmwayApacProductDao
+public class DefaultAmwayApacProductDao extends DefaultProductDao implements AmwayApacProductDao
 {
 	private static final String FIND_ALL_PAYMENTOPTION_FOR_OMSCODE_AND_CATALOG = new StringBuilder(200).append("SELECT {po.")
 			.append(AmwayPaymentOptionModel.PK).append("} FROM {").append(AmwayPaymentOptionModel._TYPECODE).append(" as po JOIN ")
@@ -53,8 +56,16 @@ public class DefaultAmwayApacProductDao implements AmwayApacProductDao
 			.append("}<=?currentDate AND {po.").append(AmwayPaymentOptionModel.ENDDATE).append("}>=?currentDate AND{po.")
 			.append(AmwayPaymentOptionModel.ACTIVE).append("} = TRUE))").append(" AND {ap.code} = 'approved'").toString();
 
+	private static final String FIND_AMWAY_PROMOTION_COUNT_BY_USER_AND_PRODUCT = new StringBuilder(200).append("SELECT {")
+			.append(PK).append("} FROM {").append(AmwayUserPromotionCountModel._TYPECODE).append("} WHERE {").append(USERID)
+			.append("}=?").append(USERID).append(" AND {").append(PRODUCTCODE).append("} IN (?productCodes) AND {")
+			.append(PROMOTIONCODE).append("}=?").append(PROMOTIONCODE).toString();
 
-	private FlexibleSearchService flexibleSearchService;
+
+	public DefaultAmwayApacProductDao(final String typecode)
+	{
+		super(typecode);
+	}
 
 	/**
 	 * {@inheritDoc}
@@ -104,13 +115,17 @@ public class DefaultAmwayApacProductDao implements AmwayApacProductDao
 		return result.getResult();
 	}
 
-	public FlexibleSearchService getFlexibleSearchService()
+	@Override
+	public List<AmwayUserPromotionCountModel> getPromotionRuleCountByUserAndProduct(final String userId,
+			final List<String> productCodes, final String promotionCode)
 	{
-		return flexibleSearchService;
-	}
+		final FlexibleSearchQuery flexibleSearchQuery = new FlexibleSearchQuery(FIND_AMWAY_PROMOTION_COUNT_BY_USER_AND_PRODUCT);
+		flexibleSearchQuery.addQueryParameter(AmwayUserPromotionCountModel.USERID, userId);
+		flexibleSearchQuery.addQueryParameter(AmwayUserPromotionCountModel.PROMOTIONCODE, promotionCode);
+		flexibleSearchQuery.addQueryParameter("productCodes", productCodes);
+		final SearchResult<AmwayUserPromotionCountModel> ruleBasedPromotionActions = getFlexibleSearchService()
+				.search(flexibleSearchQuery);
+		return null != ruleBasedPromotionActions ? ruleBasedPromotionActions.getResult() : Collections.emptyList();
 
-	public void setFlexibleSearchService(final FlexibleSearchService flexibleSearchService)
-	{
-		this.flexibleSearchService = flexibleSearchService;
 	}
 }

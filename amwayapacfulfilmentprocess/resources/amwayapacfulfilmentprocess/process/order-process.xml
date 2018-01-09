@@ -104,11 +104,16 @@
 	</action>
 
 	<action id="sendOrderCompletedNotification" bean="sendOrderCompletedNotificationAction">
+		<transition name="OK" to="preLaunchProductCount"/>
+	</action>
+	
+	<action id="preLaunchProductCount" bean="amwayApacPreLaunchProductCountAction">
 		<transition name="OK" to="success"/>
 	</action>
-
+	
 	<end id="error" state="ERROR">All went wrong.</end>
 	<end id="failed" state="FAILED">Order not placed.</end>
 	<end id="success" state="SUCCEEDED">Order placed.</end>
-
+	
+	
 </process>

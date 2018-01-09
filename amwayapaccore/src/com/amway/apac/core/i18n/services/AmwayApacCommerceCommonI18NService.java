@@ -9,12 +9,6 @@ import de.hybris.platform.core.model.c2l.CountryModel;
  */
 public interface AmwayApacCommerceCommonI18NService extends CommerceCommonI18NService
 {
-	/**
-	 * get the current country from site
-	 *
-	 * @return current country
-	 */
-	CountryModel getCurrentCountry();
 
 	/**
 	 * gets the country using affiliate number

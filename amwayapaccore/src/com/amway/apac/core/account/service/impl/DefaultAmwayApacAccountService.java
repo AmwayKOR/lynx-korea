@@ -37,7 +37,7 @@ public class DefaultAmwayApacAccountService extends DefaultAmwayAccountService i
 	public List<AmwayAccountModel> getAmwayAccount(final String aboId, final String affiliateCountryCode)
 	{
 		final CountryModel controllingAffiliate = getAmwayApacCommerceCommonI18NService().getCountryForCode(affiliateCountryCode);
-		final Map<String, Object> attributes = new HashMap<>(1);
+		final Map<String, Object> attributes = new HashMap<>();
 		attributes.put(AmwayAccountModel.CODE, aboId);
 		attributes.put(AmwayAccountModel.CONTROLLINGAFFILIATE, controllingAffiliate);
 		return getAmwayApacAccountDao().find(attributes);
@@ -55,7 +55,7 @@ public class DefaultAmwayApacAccountService extends DefaultAmwayAccountService i
 			final AmwayBusinessLevelModel businessLevel = amwayAccount.getLevel();
 			if ((null != businessLevel) && (null != businessLevel.getQualificationLevel()))
 			{
-				final Map<String, Object> attributes = new HashMap<>(1);
+				final Map<String, Object> attributes = new HashMap<>();
 				attributes.put(AmwayAccountClassificationModel.QUALIFICATIONLEVEL, businessLevel.getQualificationLevel());
 				final AmwayAccountClassificationModel amwayAccountClassification = getAmwayAccountClassificationDao().find(attributes)
 						.iterator().next();

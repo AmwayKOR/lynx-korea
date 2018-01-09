@@ -261,12 +261,12 @@
     <alias name="defaultAmwayApacProductService" alias="productService" />
     <bean id="defaultAmwayApacProductService"
           class="com.amway.apac.core.product.services.impl.DefaultAmwayApacProductService" parent="defaultProductService">
-        <property name="amwayApacProductDao" ref="amwayApacProductDao" />
+        <property name="amwayApacProductDao" ref="productDao" />
+        <property name="amwayUserPromotionCountDao" ref="amwayUserPromotionCountDao"/>
     </bean>
     
-    <alias name="defaultAmwayApacProductDao" alias="amwayApacProductDao" />
-    <bean id="defaultAmwayApacProductDao" class="com.amway.apac.core.product.daos.impl.DefaultAmwayApacProductDao">
-    	<property name="flexibleSearchService" ref="flexibleSearchService"/>
+    <alias name="defaultAmwayApacProductDao" alias="productDao"/>
+    <bean id="defaultAmwayApacProductDao" class="com.amway.apac.core.product.daos.impl.DefaultAmwayApacProductDao" parent="defaultProductDao">
     </bean> 
     
 	<alias name="defaultAmwayApacLowestPriceVariantStrategy" alias="amwayApacPrimaryVariantSelectionStrategy"/>
@@ -322,18 +322,19 @@
         <property name="typeCode" value="AmwayDeliverySlotConfig" />
     </bean>
 	
-	<alias alias="amwayAccountService" name="defaultAmwayApacAccountService" />
+	<alias name="defaultAmwayApacAccountService" alias="amwayAccountService" />
 	<bean id="defaultAmwayApacAccountService" class="com.amway.apac.core.account.service.impl.DefaultAmwayApacAccountService" parent="defaultAmwayAccountService">
 		<property name="amwayApacAccountDao" ref="amwayApacAccountDao"/>
 		<property name="amwayApacCommerceCommonI18NService" ref="commerceCommonI18NService"/>
 		<property name="amwayAccountClassificationDao" ref="amwayAccountClassificationDao"/>
 	</bean>
 	
-	<alias alias="amwayCommerceCheckoutService" name="defaultAmwayApacCommerceCheckoutService" />
+	<alias name="defaultAmwayApacCommerceCheckoutService" alias="amwayCommerceCheckoutService" />
 	<bean id="defaultAmwayApacCommerceCheckoutService" class="com.amway.apac.core.checkout.services.impl.DefaultAmwayApacCommerceCheckoutService" parent="defaultAmwayCommerceCheckoutService">
 		<property name="amwayApacCommerceWarehouseStrategy" ref="defaultAmwayApacCommerceWarehouseStrategy"/>
 	</bean>
 	
+	<alias name="defaultAmwayApacCommerceWarehouseStrategy" alias="amwayApacCommerceWarehouseStrategy"/>
 	<bean id="defaultAmwayApacCommerceWarehouseStrategy" class="com.amway.apac.core.checkout.services.impl.DefaultAmwayApacCommerceWarehouseStrategy">
 		<property name="commerceCartCalculationStrategy" ref="commerceCartCalculationStrategy"/>
 		<property name="modelService" ref="modelService"/>
@@ -345,22 +346,26 @@
 		<property name="amwayApacCountryDao" ref="amwayApacCountryDao"/>
 	</bean>
 	
+	<alias name="defaultAmwayApacAccountClassificationService" alias="defaultAmwayApacAccountClassificationService"/>
 	<bean id="defaultAmwayApacAccountClassificationService" class="com.amway.apac.core.account.service.impl.DefaultAmwayApacAccountClassificationService">
 		<property name="amwayApacAccountClassificationComparator" ref="amwayApacAccountClassificationComparator"/>
 		<property name="sessionService" ref="sessionService"/>
 	</bean>
 	
-	<bean id="amwayAccountClassificationDao"
+	<alias name="defaultAmwayAccountClassificationDao" alias="amwayAccountClassificationDao"/>
+	<bean id="defaultAmwayAccountClassificationDao"
 	      class="de.hybris.platform.servicelayer.internal.dao.DefaultGenericDao">
 		 <constructor-arg name="typecode" value="AmwayAccountClassification"/>
 	</bean>
 
-	<bean id="amwayApacCountryDao"
+	<alias name="defaultAmwayApacCountryDao" alias="amwayApacCountryDao"/>
+	<bean id="defaultAmwayApacCountryDao"
 	      class="de.hybris.platform.servicelayer.internal.dao.DefaultGenericDao">
 		 <constructor-arg name="typecode" value="Country"/>
 	</bean>
 	
-	<bean id="amwayApacAccountDao"
+	<alias name="defaultAmwayApacAccountDao" alias="amwayApacAccountDao"/>
+	<bean id="defaultAmwayApacAccountDao"
 	      class="de.hybris.platform.servicelayer.internal.dao.DefaultGenericDao">
 		 <constructor-arg name="typecode" value="AmwayAccount"/>
 	</bean>
@@ -379,7 +384,9 @@
     <alias alias="commerceStockLevelCalculationStrategy" name="defaultAmwayApacCommerceAvailabilityCalculationStrategy"/>
 	<bean id="defaultAmwayApacCommerceAvailabilityCalculationStrategy" class="com.amway.apac.core.stock.strategies.impl.AmwayApacCommerceAvailabilityCalculationStrategy"
 			parent="warehousingAvailabilityCalculationStrategy"/>
-	<bean id="amwayApacAccountClassificationComparator" class="com.amway.apac.core.comparators.AmwayApacAccountClassificationComparator" scope="singleton">
+			
+	<alias name="defaultAmwayApacAccountClassificationComparator" alias="amwayApacAccountClassificationComparator"/>
+	<bean id="defaultAmwayApacAccountClassificationComparator" class="com.amway.apac.core.comparators.AmwayApacAccountClassificationComparator" scope="singleton">
 		<property name="amwayAccountClassificationRankMapping" ref="amwayAccountClassificationRankMapping"/>
 	</bean>
 	
@@ -390,7 +397,17 @@
         <entry key="DIAMOND_AND_ABOVE" value="380"/>
 	</util:map>
 	
+	<alias name="defaultAmwayApacProductPreLaunchStrategy" alias="amwayApacProductPreLaunchStrategy"/>
     <bean id="defaultAmwayApacProductPreLaunchStrategy" class="com.amway.apac.core.product.strategies.impl.DefaultAmwayApacProductPreLaunchStrategy">
 		<property name="amwayApacAccountClassificationService" ref="defaultAmwayApacAccountClassificationService" />
+		<property name="amwayApacProductService" ref="productService"/>
+		<property name="amwayAccountCommerceService" ref="amwayAccountCommerceService"/>
     </bean>
+    
+    <alias name="defaultAmwayUserPromotionCountDao" alias="amwayUserPromotionCountDao"/>
+	<bean id="defaultAmwayUserPromotionCountDao"
+	      class="de.hybris.platform.servicelayer.internal.dao.DefaultGenericDao">
+		 <constructor-arg name="typecode" value="AmwayUserPromotionCount"/>
+	</bean>
+    
 </beans>

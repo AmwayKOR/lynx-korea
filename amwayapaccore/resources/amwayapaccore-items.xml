@@ -170,7 +170,7 @@
 				<attributes>
 					<attribute qualifier="isSellable" type="java.lang.Boolean">
 						<description>If the product is sellable or non-sellable</description>
-						<defaultvalue>true</defaultvalue>
+						<defaultvalue>Boolean.TRUE</defaultvalue>
 						<persistence type="property" />
 					</attribute>
 					<attribute qualifier="preLaunchConfig" type="AmwayPreLaunchConfig">
@@ -310,6 +310,40 @@
 						<description>Classification level enum deciding the level of the accout.</description>
 						<modifiers optional="false" />
 						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+		</typegroup>
+		
+		<typegroup name="Promotions">
+			<itemtype code="AmwayUserPromotionCount" autocreate="true"
+				generate="true">
+				<description>Amway promotion count for user</description>
+				<deployment table="AmwayUserPromotionCount" typecode="21047"/>
+				<attributes>
+					<attribute type="java.lang.String" qualifier="userId">
+						<description>Amway ABO ID</description>
+						<persistence type="property"/>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="promotionCode">
+						<description>Amway Promotion Code</description>
+						<persistence type="property"/>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="productCode">
+						<description>Product code under promotion</description>
+						<persistence type="property"/>
+					</attribute>
+					<attribute type="java.lang.Integer" qualifier="currentCount">
+						<description>Current Count for user</description>
+						<persistence type="property"/>
+					</attribute>
+					<attribute type="java.lang.Integer" qualifier="maxLimit">
+						<description>Max limit for user</description>
+						<persistence type="property"/>
+					</attribute>
+					<attribute type="java.util.Date" qualifier="date">
+						<description>Date</description>
+						<persistence type="property"/>
 					</attribute>
 				</attributes>
 			</itemtype>
