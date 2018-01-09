@@ -66,10 +66,6 @@
                         <persistence type="property" />
                         <defaultvalue>Boolean.FALSE</defaultvalue>
                     </attribute>
-                    <attribute type="java.lang.Integer" qualifier="slotNumber">
-                        <modifiers read="true" write="true" optional="true" />
-                        <persistence type="property" />
-                    </attribute>
                 </attributes>
             </itemtype>
 
@@ -121,9 +117,6 @@
                     <attribute qualifier="active" type="java.lang.Boolean">
                         <description>Decides whether this slot is active or not.</description>
                         <defaultvalue>Boolean.FALSE</defaultvalue>
-                        <persistence type="property" />
-                    </attribute>
-                    <attribute qualifier="slotNumber" type="java.lang.Integer">
                         <persistence type="property" />
                     </attribute>
                 </attributes>
