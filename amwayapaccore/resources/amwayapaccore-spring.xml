@@ -372,11 +372,11 @@
 			<property name="baseStoreService" ref="baseStoreService" />
 	</bean>
 	
-	<alias alias="stockLevelStatusStrategy" name="amwayApacCommerceStockLevelStatusStrategy"/>
-    <bean id="amwayApacCommerceStockLevelStatusStrategy" class="com.amway.apac.core.stock.strategies.impl.AmwayApacCommerceStockLevelStatusStrategy" parent="amwayCommerceStockLevelStatusStrategy"/>
+	<alias alias="stockLevelStatusStrategy" name="defaultAmwayApacCommerceStockLevelStatusStrategy"/>
+    <bean id="defaultAmwayApacCommerceStockLevelStatusStrategy" class="com.amway.apac.core.stock.strategies.impl.AmwayApacCommerceStockLevelStatusStrategy" parent="amwayCommerceStockLevelStatusStrategy"/>
     
-    <alias alias="commerceStockLevelCalculationStrategy" name="amwayApacCommerceAvailabilityCalculationStrategy"/>
-	<bean id="amwayApacCommerceAvailabilityCalculationStrategy" class="com.amway.apac.core.stock.strategies.impl.AmwayApacCommerceAvailabilityCalculationStrategy"
+    <alias alias="commerceStockLevelCalculationStrategy" name="defaultAmwayApacCommerceAvailabilityCalculationStrategy"/>
+	<bean id="defaultAmwayApacCommerceAvailabilityCalculationStrategy" class="com.amway.apac.core.stock.strategies.impl.AmwayApacCommerceAvailabilityCalculationStrategy"
 			parent="warehousingAvailabilityCalculationStrategy"/>
 	<bean id="amwayApacAccountClassificationComparator" class="com.amway.apac.core.comparators.AmwayApacAccountClassificationComparator" scope="singleton">
 		<property name="amwayAccountClassificationRankMapping" ref="amwayAccountClassificationRankMapping"/>

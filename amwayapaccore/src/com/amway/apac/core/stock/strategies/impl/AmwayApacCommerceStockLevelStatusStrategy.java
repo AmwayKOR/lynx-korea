@@ -13,6 +13,7 @@ import com.amway.core.stock.strategies.impl.AmwayCommerceStockLevelStatusStrateg
 
 
 /**
+ * @author Ashish Sabal
  *
  */
 public class AmwayApacCommerceStockLevelStatusStrategy extends AmwayCommerceStockLevelStatusStrategy

@@ -10,6 +10,10 @@ import de.hybris.platform.warehousing.atp.strategy.impl.WarehousingAvailabilityC
 import java.util.Collection;
 
 
+/**
+ * @author Ashish Sabal
+ *
+ */
 public class AmwayApacCommerceAvailabilityCalculationStrategy extends WarehousingAvailabilityCalculationStrategy
 {
 	/*
