@@ -32,15 +32,6 @@ public class DefaultAmwayApacCommerceCommonI18NService extends DefaultCommerceCo
 	 * {@inheritDoc}
 	 */
 	@Override
-	public CountryModel getCurrentCountry()
-	{
-		return getCmsSiteService().getCurrentSite().getDefaultCountry();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
 	public CountryModel getCountryForCode(final String countryCode)
 	{
 		validateParameterNotNullStandardMessage("countryCode", countryCode);

@@ -15,6 +15,7 @@
 
 		<requires-extension name="acceleratorservices"/>
 		<requires-extension name="ticketsystem"/>
+		<requires-extension name="amwayapaccore"/>
 
 		<coremodule generated="true" manager="com.amway.apac.fulfilmentprocess.jalo.AmwayapacFulfilmentProcessManager" packageroot="com.amway.apac.fulfilmentprocess"/>
 

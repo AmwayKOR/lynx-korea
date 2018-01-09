@@ -51,12 +51,6 @@
 		&amp;&amp; !execution(* getPK(..))" /> <aop:pointcut id="profiledMethods" 
 		expression="execution(* *(..))" /> -->
 
-	<!-- <bean id="amwayapacserviceabilitySystemSetup" class="com.amway.apac.serviceability.setup.AmwayapacserviceabilitySystemSetup"> 
-		constructor arg injection example <constructor-arg ref="amwayapacserviceabilityService"/> 
-		</bean> <bean id="amwayapacserviceabilityService" class="com.amway.apac.serviceability.service.impl.DefaultAmwayapacserviceabilityService"> 
-		setter injection example <property name="modelService" ref="modelService"/> 
-		<property name="mediaService" ref="mediaService"/> <property name="flexibleSearchService" 
-		ref="flexibleSearchService"/> </bean> -->
 
 	
 	<bean id="amwayApacWarehouseServiceabilityDao"

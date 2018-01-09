@@ -142,4 +142,9 @@ public final class AmwayapacCoreConstants extends GeneratedAmwayapacCoreConstant
 	 */
 	public static final String ACCOUNT_CLASSIFICATION_CODE = "accountClassficationCode";
 
+	/**
+	 * Pre Launch Promotion Code
+	 */
+	public static final String PRE_LAUNCH_PROMOTION = "PRE_LAUNCH_PROMOTION";
+
 }

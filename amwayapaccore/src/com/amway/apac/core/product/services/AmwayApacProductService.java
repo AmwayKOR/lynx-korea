@@ -1,13 +1,14 @@
-/**
- *
- */
 package com.amway.apac.core.product.services;
 
 import de.hybris.platform.catalog.model.CatalogVersionModel;
+import de.hybris.platform.core.model.order.AbstractOrderModel;
 import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.product.ProductService;
 
+import java.util.Map;
+
 import com.amway.apac.core.model.AmwayPaymentOptionModel;
+import com.amway.apac.core.model.AmwayUserPromotionCountModel;
 
 
 /**
@@ -43,4 +44,29 @@ public interface AmwayApacProductService extends ProductService
 	 * @return
 	 */
 	boolean validateOmsCode(String[] splitOmsCode, int[] omscodevalidationparams);
+
+	/**
+	 * Returns the Available Purchasable Quantity.
+	 *
+	 * @param userId
+	 * @param productCode
+	 * @return
+	 */
+	int getUsedQuantityForPrelaunch(String userId, String productCode);
+
+	/**
+	 * Updates the {@link AmwayUserPromotionCountModel} for given product, quantity and account.
+	 *
+	 * @param productCodeToCount
+	 * @param amwayAccountCode
+	 */
+	void updatePreLaunchProductCount(final Map<String, Integer> productCodeToCount, final String amwayAccountCode);
+
+	/**
+	 * Returns a map of PreLauch products and their ordered quantity in a given order.
+	 *
+	 * @param orderModel
+	 * @return products
+	 */
+	Map<String, Integer> getPreLaunchConfigProducts(final AbstractOrderModel orderModel);
 }

@@ -12,6 +12,9 @@ import com.amway.apac.core.model.AmwayPreLaunchConfigModel;
 import com.amway.apac.core.product.AmwayPreLaunchResponse;
 import com.amway.apac.core.product.AmwayProductPreLaunchStatus;
 import com.amway.apac.core.product.strategies.AmwayApacProductPreLaunchStrategy;
+import com.amway.apac.product.services.AmwayApacProductService;
+import com.amway.core.model.AmwayAccountModel;
+import com.amway.core.service.AmwayAccountCommerceService;
 
 
 /**
@@ -22,6 +25,8 @@ import com.amway.apac.core.product.strategies.AmwayApacProductPreLaunchStrategy;
 public class DefaultAmwayApacProductPreLaunchStrategy implements AmwayApacProductPreLaunchStrategy
 {
 	private AmwayApacAccountClassificationService amwayApacAccountClassificationService;
+	private AmwayApacProductService amwayApacProductService;
+	private AmwayAccountCommerceService amwayAccountCommerceService;
 
 	/**
 	 * {@inheritDoc}
@@ -54,7 +59,7 @@ public class DefaultAmwayApacProductPreLaunchStrategy implements AmwayApacProduc
 					}
 					else
 					{
-						response.setAllowedQuantity(getOrderableQuantityForCurrentUserInPreLaunch(preLaunchConfig));
+						response.setAllowedQuantity(getOrderableQuantityForCurrentUserInPreLaunch(product));
 					}
 				}
 			}
@@ -69,9 +74,13 @@ public class DefaultAmwayApacProductPreLaunchStrategy implements AmwayApacProduc
 	 * @param preLaunchConfig
 	 * @return
 	 */
-	protected Integer getOrderableQuantityForCurrentUserInPreLaunch(final AmwayPreLaunchConfigModel preLaunchConfig)
+	protected Integer getOrderableQuantityForCurrentUserInPreLaunch(final ProductModel product)
 	{
-		return preLaunchConfig.getMaxShoppingCount();
+		final AmwayAccountModel currentAccount = getAmwayAccountCommerceService().getCurrentAccount();
+		final int usedQuantity = getAmwayApacProductService().getUsedQuantityForPrelaunch(currentAccount.getCode(),
+				product.getCode());
+
+		return Integer.valueOf(product.getPreLaunchConfig().getMaxShoppingCount().intValue() - usedQuantity);
 	}
 
 	/**
@@ -91,6 +100,42 @@ public class DefaultAmwayApacProductPreLaunchStrategy implements AmwayApacProduc
 			final AmwayApacAccountClassificationService amwayApacAccountClassificationService)
 	{
 		this.amwayApacAccountClassificationService = amwayApacAccountClassificationService;
+	}
+
+	/**
+	 * @return the amwayApacProductService
+	 */
+	public AmwayApacProductService getAmwayApacProductService()
+	{
+		return amwayApacProductService;
+	}
+
+	/**
+	 * @param amwayApacProductService
+	 *           the amwayApacProductService to set
+	 */
+	@Required
+	public void setAmwayApacProductService(final AmwayApacProductService amwayApacProductService)
+	{
+		this.amwayApacProductService = amwayApacProductService;
+	}
+
+	/**
+	 * @return the amwayAccountCommerceService
+	 */
+	public AmwayAccountCommerceService getAmwayAccountCommerceService()
+	{
+		return amwayAccountCommerceService;
+	}
+
+	/**
+	 * @param amwayAccountCommerceService
+	 *           the amwayAccountCommerceService to set
+	 */
+	@Required
+	public void setAmwayAccountCommerceService(final AmwayAccountCommerceService amwayAccountCommerceService)
+	{
+		this.amwayAccountCommerceService = amwayAccountCommerceService;
 	}
 
 }
