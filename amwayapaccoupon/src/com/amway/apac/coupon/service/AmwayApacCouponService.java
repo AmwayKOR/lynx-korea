@@ -61,7 +61,7 @@ public interface AmwayApacCouponService extends CouponService
 	AmwayCouponModel getAmwayCouponForCode(String couponCode);
 
 	/**
-	 * get Amway coupons for customer, particular status and withing date range
+	 * get Amway coupons for customer, particular status and within date range
 	 *
 	 * @param customer
 	 * @param couponStatuses

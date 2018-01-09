@@ -12,6 +12,7 @@
 package com.amway.apac.coupon.dao;
 
 import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.couponservices.dao.CouponDao;
 
 import java.util.List;
 
@@ -24,7 +25,7 @@ import com.amway.apac.coupon.model.AmwayCouponModel;
  *
  * @author kanwarpreetkaur
  */
-public interface AmwayApacCouponDao
+public interface AmwayApacCouponDao extends CouponDao
 {
 
 	/**
@@ -47,7 +48,7 @@ public interface AmwayApacCouponDao
 
 	/**
 	 * Returns list of Expired AmwayCoupons
-	 * 
+	 *
 	 * @return
 	 */
 	List<AmwayCouponModel> getExpiredAmwayCoupons();

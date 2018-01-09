@@ -12,6 +12,7 @@
 package com.amway.apac.coupon.dao.impl;
 
 import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.couponservices.dao.impl.DefaultCouponDao;
 import de.hybris.platform.jalo.Item;
 import de.hybris.platform.servicelayer.internal.dao.GenericDao;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
@@ -37,7 +38,7 @@ import com.amway.core.model.AmwayAccountModel;
  *
  * @author kanwarpreetkaur
  */
-public class DefaultAmwayApacCouponDao implements AmwayApacCouponDao
+public class DefaultAmwayApacCouponDao extends DefaultCouponDao implements AmwayApacCouponDao
 {
 	private GenericDao<AmwayCouponModel> amwayCouponGenericDao;
 	private FlexibleSearchService flexibleSearchService;
