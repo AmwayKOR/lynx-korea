@@ -10,15 +10,14 @@
 
 <%@ attribute name="product" required="true"
 	type="de.hybris.platform.commercefacades.product.data.ProductData"%>
-
-<fmt:parseNumber var="averageRating" type="number" integerOnly="true" value="${product.averageRating}" />
+<fmt:parseNumber var="averageRating" type="number" integerOnly="true" value="${product.averageRating > 5 ? 5 : product.averageRating}" />
 <div class="description-vote">
     <c:forEach  begin="1" end="${averageRating}">
         <img src="${themeResourcePath}/images/star-filled.png" alt="star">
     </c:forEach>
     <c:forEach  begin="${averageRating + 1}" end="5">
             <img src="${themeResourcePath}/images/star-empty.png" alt="star">
-        </c:forEach>
+    </c:forEach>
     <a href="#tabreview" class="js-openTab" id="tabreview">
         <span class="description-number">${averageRating}</span>
         <span class="description-reviews">

@@ -12,26 +12,26 @@
 
 <c:if test="${not empty reviews}">
 	<c:forEach items="${reviews}" var="review" varStatus="status">
-
+		<c:set value="${review.rating > 5 ? 5 : review.rating}" var="totalRating"/>
 		<p class="product-collapse__review">
-		    <c:forEach  begin="1" end="${review.rating}">
+		    <c:forEach  begin="1" end="${totalRating}">
                 <img src="${themeResourcePath}/images/star-filled.png" alt="star">
             </c:forEach>
-            <c:forEach  begin="${review.rating + 1}" end="5">
+            <c:forEach  begin="${totalRating + 1}" end="5">
                 <img src="${themeResourcePath}/images/star-empty.png" alt="star">
             </c:forEach>
             ${fn:escapeXml(review.headline)}</p>
             <p class="product-collapse__info">
                 <c:choose>
                     <c:when test="${not empty review.alias}">
-                        ${fn:escapeXml(review.alias)}
+                       <spring:theme code="review.submitted.user" arguments="${fn:escapeXml(review.alias)}" /> 
                     </c:when>
                     <c:otherwise>
                         <spring:theme code="review.submitted.anonymous" />
                     </c:otherwise>
                 </c:choose>
                 <c:set var="reviewDate" value="${review.date}" />
-                <fmt:formatDate value="${reviewDate}" pattern="MMMM dd, yyyy" />
+                &#160;<fmt:formatDate value="${reviewDate}" pattern="MMMM dd, yyyy" />
             </p>
             <p class="product-collapse_desc">${fn:escapeXml(review.comment)}</p>
 	</c:forEach>

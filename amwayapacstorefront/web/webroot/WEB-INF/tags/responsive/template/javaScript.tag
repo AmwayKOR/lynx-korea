@@ -21,6 +21,9 @@
 
 		<%-- bootstrap --%>
 		<script src="${commonResourcePath}/js/bootstrap.min.js"></script>
+		
+		<%-- vue --%>
+		<script src="${commonResourcePath}/js/vue.js"></script>
 
 		<%-- plugins --%>
 		<script type="text/javascript" src="${commonResourcePath}/js/enquire.min.js"></script>
@@ -37,7 +40,8 @@
 		<script type="text/javascript" src="${commonResourcePath}/js/jquery.currencies.min.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/jquery.waitforimages.min.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/jquery.slideviewer.custom.1.2.js"></script>
-
+		<script type="text/javascript" src="${commonResourcePath}/js/jquery.raty.min.js"></script>
+		
 		<%-- Custom ACC JS --%>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.myaccount.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.billingshipping.js"></script>
@@ -94,6 +98,7 @@
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.shoppinglisttotals.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.popup.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.profile.js"></script>
+		<script type="text/javascript" src="${commonResourcePath}/js/acc.productreview.js"></script>
 
 		<script src="${commonResourcePath}/js/owl.carousel.js"></script>
 		<script src="${commonResourcePath}/js/select2.js"></script>
