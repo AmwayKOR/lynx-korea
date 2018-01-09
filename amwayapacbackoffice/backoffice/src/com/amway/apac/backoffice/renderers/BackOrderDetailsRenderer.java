@@ -12,6 +12,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Required;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
 
@@ -34,15 +35,18 @@ public class BackOrderDetailsRenderer implements WidgetComponentRenderer<Compone
 
 	private static final Logger LOG = Logger.getLogger(BackOrderDetailsRenderer.class);
 
-	private AmwayApacDateLabelProvider dateLabelProvider;
+	private AmwayApacDateLabelProvider amwayApacDateLabelProvider;
+
+
 
 	/**
-	 * @param dateLabelProvider
-	 *           the dateLabelProvider to set
+	 * @param amwayApacDateLabelProvider
+	 *           the amwayApacDateLabelProvider to set
 	 */
-	public void setDateLabelProvider(final AmwayApacDateLabelProvider dateLabelProvider)
+	@Required
+	public void setAmwayApacDateLabelProvider(final AmwayApacDateLabelProvider amwayApacDateLabelProvider)
 	{
-		this.dateLabelProvider = dateLabelProvider;
+		this.amwayApacDateLabelProvider = amwayApacDateLabelProvider;
 	}
 
 	/**
@@ -109,7 +113,7 @@ public class BackOrderDetailsRenderer implements WidgetComponentRenderer<Compone
 		attributeMap.put(itemsLabel5, itemsAttributeValue5);
 
 		final String itemsLabel6 = Labels.getLabel("amway.backorder.section.details.creationdate");
-		final String itemsAttributeValue6 = String.valueOf(dateLabelProvider.getLabel(backOrderModel.getCreationtime()));
+		final String itemsAttributeValue6 = String.valueOf(amwayApacDateLabelProvider.getLabel(backOrderModel.getCreationtime()));
 		attributeMap.put(itemsLabel6, itemsAttributeValue6);
 
 
@@ -132,7 +136,7 @@ public class BackOrderDetailsRenderer implements WidgetComponentRenderer<Compone
 		attributeMap.put(itemsLabel10, itemsAttributeValue10);
 
 		final String itemsLabel11 = Labels.getLabel("amway.backorder.section.details.releaseBydate");
-		final String itemsAttributeValue11 = String.valueOf(dateLabelProvider.getLabel(backOrderModel.getReleaseByDate()));
+		final String itemsAttributeValue11 = String.valueOf(amwayApacDateLabelProvider.getLabel(backOrderModel.getReleaseByDate()));
 		attributeMap.put(itemsLabel11, itemsAttributeValue11);
 
 		ApacAttributeWithLabelRendererUtil.createAttributeWithLabel(parent, attributeMap, 3);
