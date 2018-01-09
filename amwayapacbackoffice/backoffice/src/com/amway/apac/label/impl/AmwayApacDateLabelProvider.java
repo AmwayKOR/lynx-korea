@@ -18,7 +18,7 @@ import com.hybris.cockpitng.labels.impl.DefaultDateLabelProvider;
 /**
  * Overrides OOTB Date Label Provider class
  */
-public class ApacDateLabelProvider extends DefaultDateLabelProvider
+public class AmwayApacDateLabelProvider extends DefaultDateLabelProvider
 {
 
 	/**

@@ -7,10 +7,12 @@ import de.hybris.platform.core.model.order.OrderEntryModel;
 import de.hybris.platform.ordersplitting.model.ConsignmentEntryModel;
 import de.hybris.platform.util.TaxValue;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.zkoss.zk.ui.Component;
 
 import com.amway.amwayapacbackoffice.data.BackOrderEntryData;
@@ -83,16 +85,22 @@ public class BackOrderConsignmentEntriesRenderer implements WidgetComponentRende
 
 	private double calculateEntryTax(final OrderEntryModel orderEntry)
 	{
-		double totalTax = 0;
-		for (final TaxValue tempTaxValue : orderEntry.getTaxValues())
+		BigDecimal tax = BigDecimal.ZERO;
+		final BigDecimal qty = BigDecimal.valueOf(orderEntry.getQuantity().longValue());
+		if (CollectionUtils.isNotEmpty(orderEntry.getTaxValues()))
 		{
-			if (Double.valueOf(tempTaxValue.getValue()).compareTo(Double.valueOf(0.0)) < 0)
+			//get total tax and discount applied on tax
+			for (final TaxValue taxValue : orderEntry.getTaxValues())
 			{
-				totalTax += tempTaxValue.getValue() * orderEntry.getQuantity().doubleValue() * -1.0D;
+				if (Double.compare(taxValue.getValue(), 0.0) > 0)
+				{ // Extra check for negative tax i.e. promotion cases
+					tax = tax.add(BigDecimal.valueOf(taxValue.getValue()));
+				}
 			}
 		}
-		return totalTax;
 
+		final BigDecimal totalTax = qty.multiply(tax);
+		return totalTax.doubleValue();
 	}
 
 	private List<String> getHeaderList()

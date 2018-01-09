@@ -18,8 +18,12 @@
   		<property name="location" value="/amwayapacbackoffice-backoffice-labels/"/>
   		<property name="name" value="labels"/>
   	</bean>
+  	<alias name="apacDateLabelProvider" alias="dateLabelProvider"/>
+	<bean id="apacDateLabelProvider" class="com.amway.apac.label.impl.AmwayApacDateLabelProvider" parent="defaultDateLabelProvider">
+	</bean>
   	<alias alias="backOrderDetailsRenderer" name="defaultBackOrderDetailsRenderer"/>
     <bean id="defaultBackOrderDetailsRenderer" class="com.amway.apac.backoffice.renderers.BackOrderDetailsRenderer">    	
+    	<property name="dateLabelProvider" ref="dateLabelProvider"/>   	
     </bean>
     <alias alias="backOrderConsignmentEntriesRenderer" name="defaultBackOrderConsignmentEntriesRenderer"/>
     <bean id="defaultBackOrderConsignmentEntriesRenderer" class="com.amway.apac.backoffice.renderers.BackOrderConsignmentEntriesRenderer">	 	
@@ -30,8 +34,6 @@
     <alias alias="backOrderEssentialsRenderer" name="defaultBackOrderEssentialsRenderer"/>
     <bean id="defaultBackOrderEssentialsRenderer" class="com.amway.apac.backoffice.renderers.BackOrderEssentialsRenderer">	 	
     </bean>
-    <alias name="ApacDateLabelProvider" alias="dateLabelProvider"/>
-	<bean id="ApacDateLabelProvider" class="com.amway.apac.label.impl.ApacDateLabelProvider" parent="defaultDateLabelProvider">
-	</bean>
+    
 
 </beans>

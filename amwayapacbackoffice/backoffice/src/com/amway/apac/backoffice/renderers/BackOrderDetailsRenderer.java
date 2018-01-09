@@ -17,7 +17,7 @@ import org.zkoss.zk.ui.Component;
 
 import com.amway.apac.backoffice.renderers.util.ApacAttributeWithLabelRendererUtil;
 import com.amway.apac.core.model.AmwayBackOrderModel;
-import com.amway.apac.label.impl.ApacDateLabelProvider;
+import com.amway.apac.label.impl.AmwayApacDateLabelProvider;
 import com.hybris.cockpitng.core.config.impl.jaxb.editorarea.CustomSection;
 import com.hybris.cockpitng.core.model.WidgetModel;
 import com.hybris.cockpitng.dataaccess.facades.type.DataType;
@@ -34,7 +34,16 @@ public class BackOrderDetailsRenderer implements WidgetComponentRenderer<Compone
 
 	private static final Logger LOG = Logger.getLogger(BackOrderDetailsRenderer.class);
 
-	private ApacDateLabelProvider dateLabelProvider;
+	private AmwayApacDateLabelProvider dateLabelProvider;
+
+	/**
+	 * @param dateLabelProvider
+	 *           the dateLabelProvider to set
+	 */
+	public void setDateLabelProvider(final AmwayApacDateLabelProvider dateLabelProvider)
+	{
+		this.dateLabelProvider = dateLabelProvider;
+	}
 
 	/**
 	 * Renders detail view for backorder in backoffice
@@ -71,18 +80,16 @@ public class BackOrderDetailsRenderer implements WidgetComponentRenderer<Compone
 
 		final String itemsLabel2 = Labels.getLabel("amway.backorder.section.details.shippingdate");
 		final String itemsAttributeValue2 = String.valueOf(consignment.getShippingDate());
-		attributeMap.put(itemsLabel2, null != itemsAttributeValue2 ? itemsAttributeValue2 : "");
+		attributeMap.put(itemsLabel2, "null".equalsIgnoreCase(itemsAttributeValue2) ? "" : itemsAttributeValue2);
 
 		final String itemsLabel3 = Labels.getLabel("amway.backorder.section.details.warehouse");
 		final String itemsAttributeValue3 = String.valueOf(backOrderModel.getWarehouse() != null
-				? backOrderModel.getWarehouse().getCode() + " " + backOrderModel.getWarehouse().getName()
-				: "");
+				? backOrderModel.getWarehouse().getCode() + " " + backOrderModel.getWarehouse().getName() : "");
 		attributeMap.put(itemsLabel3, itemsAttributeValue3);
 
 		final String itemsLabel4 = Labels.getLabel("amway.backorder.section.details.deliveryPOS");
 		final String itemsAttributeValue4 = String.valueOf(consignment.getDeliveryPointOfService() != null
-				? consignment.getDeliveryPointOfService() + " " + consignment.getDeliveryPointOfService().getName()
-				: "");
+				? consignment.getDeliveryPointOfService() + " " + consignment.getDeliveryPointOfService().getName() : "");
 		attributeMap.put(itemsLabel4, itemsAttributeValue4);
 		String itemsAttributeValue5 = "";
 		final String itemsLabel5 = Labels.getLabel("amway.backorder.section.details.volumeABO");
@@ -120,9 +127,8 @@ public class BackOrderDetailsRenderer implements WidgetComponentRenderer<Compone
 		attributeMap.put(itemsLabel9, itemsAttributeValue9);
 
 		final String itemsLabel10 = Labels.getLabel("amway.backorder.section.details.paymentRecieved");
-		final String itemsAttributeValue10 = String.valueOf(
-				null != backOrderModel.getOriginalOrder().getPaymentStatus() ? backOrderModel.getOriginalOrder().getPaymentStatus()
-						: "");
+		final String itemsAttributeValue10 = String.valueOf(null != backOrderModel.getOriginalOrder().getPaymentStatus()
+				? backOrderModel.getOriginalOrder().getPaymentStatus() : "");
 		attributeMap.put(itemsLabel10, itemsAttributeValue10);
 
 		final String itemsLabel11 = Labels.getLabel("amway.backorder.section.details.releaseBydate");
