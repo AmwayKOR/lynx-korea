@@ -46,8 +46,7 @@ public class DefaultAmwayApacDeliverySlotDao implements AmwayApacDeliverySlotDao
 			.append("} WHERE {").append(AmwayDeliverySlotAvailabilityModel.WAREHOUSE).append("} = ?")
 			.append(AmwayDeliverySlotAvailabilityModel.WAREHOUSE).append(" AND {").append(AmwayDeliverySlotAvailabilityModel.ACTIVE)
 			.append("} = ").append(Boolean.TRUE).append(" AND {").append(AmwayDeliverySlotAvailabilityModel.DELIVERYDATE)
-			.append("} LIKE ?").append(AmwayDeliverySlotAvailabilityModel.DELIVERYDATE).append(" ORDER BY {")
-			.append(AmwayDeliverySlotAvailabilityModel.SLOTNUMBER).append("}");
+			.append("} LIKE ?").append(AmwayDeliverySlotAvailabilityModel.DELIVERYDATE);
 
 	private static final StringBuilder FIND_DELIVERY_SLOT_QUERY = new StringBuilder(130).append("SELECT {")
 			.append(AmwayDeliverySlotAvailabilityModel.PK).append("} FROM {").append(AmwayDeliverySlotAvailabilityModel._TYPECODE)

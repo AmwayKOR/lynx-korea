@@ -13,7 +13,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -114,8 +113,7 @@ public class DefaultAmwayApacDeliverySlotManagementService implements AmwayApacD
 		availabilityModel.setDeliveryDay(configModel.getDeliveryDay());
 		availabilityModel.setNotifyCount(configModel.getNotifyCount());
 		availabilityModel.setInstructions(configModel.getInstructions());
-		availabilityModel
-				.setSlotNumber(Objects.nonNull(configModel.getSlotNumber()) ? configModel.getSlotNumber() : Integer.valueOf(0));
+
 		return availabilityModel;
 	}
 
@@ -194,8 +192,7 @@ public class DefaultAmwayApacDeliverySlotManagementService implements AmwayApacD
 				slotModel.setInstructions(slotConfigModel.getInstructions(Locale.ENGLISH), Locale.ENGLISH);
 				slotModel.setInstructions(slotConfigModel.getInstructions(Locale.CHINESE), Locale.CHINESE);
 				slotModel.setNotifyCount(slotConfigModel.getNotifyCount());
-				slotModel.setSlotNumber(
-						Objects.nonNull(slotConfigModel.getSlotNumber()) ? slotConfigModel.getSlotNumber() : Integer.valueOf(0));
+
 				getModelService().save(slotModel);
 
 				if (null == deliveryDate)
