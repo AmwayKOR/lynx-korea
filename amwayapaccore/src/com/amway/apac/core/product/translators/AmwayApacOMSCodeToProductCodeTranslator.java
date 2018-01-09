@@ -14,11 +14,14 @@ import de.hybris.platform.jalo.JaloInvalidParameterException;
 import org.apache.commons.lang.StringUtils;
 
 import com.amway.apac.core.model.AmwayPaymentOptionModel;
-import com.amway.apac.product.services.AmwayApacProductService;
+import com.amway.apac.core.product.services.AmwayApacProductService;
 
 
 /**
  * Translator to change OMS code into corresponding product code.
+ * 
+ * @author Ashish Sabal
+ *
  */
 public class AmwayApacOMSCodeToProductCodeTranslator extends AbstractValueTranslator
 {

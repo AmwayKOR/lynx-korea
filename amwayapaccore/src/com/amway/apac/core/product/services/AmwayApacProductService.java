@@ -1,7 +1,7 @@
 /**
  *
  */
-package com.amway.apac.product.services;
+package com.amway.apac.core.product.services;
 
 import de.hybris.platform.catalog.model.CatalogVersionModel;
 import de.hybris.platform.core.model.product.ProductModel;
@@ -10,6 +10,10 @@ import de.hybris.platform.product.ProductService;
 import com.amway.apac.core.model.AmwayPaymentOptionModel;
 
 
+/**
+ * @author Ashish Sabal
+ *
+ */
 public interface AmwayApacProductService extends ProductService
 {
 

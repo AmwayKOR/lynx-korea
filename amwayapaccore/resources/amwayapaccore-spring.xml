@@ -313,7 +313,13 @@
 		<property name="amwayApacWarehouseServiceabilityService" ref="amwayApacWarehouseServiceabilityService"/>
 	</bean>
 	
-	<bean id="amwayApacPaymentOptionInterceptor" class="com.amway.apac.core.interceptors.AmwayApacPaymentOptionInterceptor" scope="tenant"/>
+	<alias alias="amwayApacPaymentOptionInterceptor" name="defaultAmwayApacPaymentOptionInterceptor"/>
+	<bean id="defaultAmwayApacPaymentOptionInterceptor" class="com.amway.apac.core.interceptors.AmwayApacPaymentOptionInterceptor" scope="tenant"/>
+	
+	<bean id="defaultAmwayApacPaymentOptionInterceptorMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+        <property name="interceptor" ref="amwayApacPaymentOptionInterceptor" />
+        <property name="typeCode" value="AmwayDeliverySlotConfig" />
+    </bean>
 	
 	<alias alias="amwayAccountService" name="defaultAmwayApacAccountService" />
 	<bean id="defaultAmwayApacAccountService" class="com.amway.apac.core.account.service.impl.DefaultAmwayApacAccountService" parent="defaultAmwayAccountService">

@@ -31,7 +31,8 @@
 		</property>
 	</bean>
 	
-	<bean id="amwayApacEnumDataConverter" parent="abstractPopulatingConverter">
+	<alias alias="amwayApacEnumDataConverter" name="defaultAmwayApacEnumDataConverter" />
+	<bean id="defaultAmwayApacEnumDataConverter" parent="abstractPopulatingConverter">
 		<property name="targetClass" value="com.amway.apacfacades.data.EnumData" />
 		<property name="populators">
 			<list>
@@ -40,7 +41,8 @@
 		</property>
 	</bean>
 	
-	<bean id="amwayApacEnumDataPopulator" class="com.amway.apac.facades.populators.AmwayApacEnumDataPopulator">
+	<alias alias="amwayApacEnumDataPopulator" name="defaultAmwayApacEnumDataPopulator" />
+	<bean id="defaultAmwayApacEnumDataPopulator" class="com.amway.apac.facades.populators.AmwayApacEnumDataPopulator">
 		<property name="enumerationService" ref="enumerationService" />
 	</bean>
 
@@ -251,7 +253,8 @@
         <property name="attributeDescriptorModelHelperService" ref="attributeDescriptorModelHelperService"/>
     </bean>    
     
-    <bean id="amwayApacPaymentOptionConverter" parent="abstractPopulatingConverter">
+    <alias alias="amwayApacPaymentOptionConverter" name="defaultAmwayApacPaymentOptionConverter" />
+    <bean id="defaultAmwayApacPaymentOptionConverter" parent="abstractPopulatingConverter">
 		<property name="targetClass"
 			value="com.amway.apacfacades.payment.data.AmwayPaymentOptionData" />
 		<property name="populators">
@@ -261,7 +264,8 @@
 		</property>
 	</bean>
 	
-    <bean id="amwayApacPaymentOptionPopulator"
+	<alias alias="amwayApacPaymentOptionPopulator" name="defaultAmwayApacPaymentOptionPopulator" />
+    <bean id="defaultAmwayApacPaymentOptionPopulator"
 		class="com.amway.apac.facades.paymentoption.populators.AmwayApacPaymentOptionPopulator">
 		<property name="enumConverter" ref="amwayApacEnumDataConverter" />
 	</bean>

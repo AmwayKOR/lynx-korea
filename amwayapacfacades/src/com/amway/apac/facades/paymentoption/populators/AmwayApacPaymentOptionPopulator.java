@@ -21,6 +21,11 @@ import com.amway.apacfacades.data.EnumData;
 import com.amway.apacfacades.payment.data.AmwayPaymentOptionData;
 
 
+/**
+ *
+ * @author Ashish Sabal
+ *
+ */
 public class AmwayApacPaymentOptionPopulator implements Populator<AmwayPaymentOptionModel, AmwayPaymentOptionData>
 {
 	private Converter<HybrisEnumValue, EnumData> enumConverter;

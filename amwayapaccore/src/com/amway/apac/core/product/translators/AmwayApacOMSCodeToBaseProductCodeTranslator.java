@@ -16,11 +16,13 @@ import de.hybris.platform.variants.model.VariantProductModel;
 import org.apache.commons.lang.StringUtils;
 
 import com.amway.apac.core.model.AmwayPaymentOptionModel;
-import com.amway.apac.product.services.AmwayApacProductService;
+import com.amway.apac.core.product.services.AmwayApacProductService;
 
 
 /**
  * Translator to change OMS code into corresponding base product code in the product hierarchy.
+ *
+ * @author Ashish Sabal
  */
 public class AmwayApacOMSCodeToBaseProductCodeTranslator extends AbstractValueTranslator
 {

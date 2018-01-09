@@ -1,7 +1,7 @@
 /**
  *
  */
-package com.amway.apac.product.services.impl;
+package com.amway.apac.core.product.services.impl;
 
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateIfSingleResult;
 import static java.lang.String.format;
@@ -21,7 +21,7 @@ import org.apache.commons.lang.StringUtils;
 import com.amway.apac.core.enums.PaymentType;
 import com.amway.apac.core.model.AmwayPaymentOptionModel;
 import com.amway.apac.core.product.daos.AmwayApacProductDao;
-import com.amway.apac.product.services.AmwayApacProductService;
+import com.amway.apac.core.product.services.AmwayApacProductService;
 
 
 /**
@@ -99,7 +99,7 @@ public class DefaultAmwayApacProductService extends DefaultProductService implem
 	 * @param paymentOption
 	 * @return boolean for payment option availability
 	 */
-	private boolean isPaymentOptionCurrentlyAvailable(final AmwayPaymentOptionModel paymentOption)
+	protected boolean isPaymentOptionCurrentlyAvailable(final AmwayPaymentOptionModel paymentOption)
 	{
 		final Date currentDate = new Date();
 		return (Objects.isNull(paymentOption.getStartDate()) && Objects.isNull(paymentOption.getEndDate()))
