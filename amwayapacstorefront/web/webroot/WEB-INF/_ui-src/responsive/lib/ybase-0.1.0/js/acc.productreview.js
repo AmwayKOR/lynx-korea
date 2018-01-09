@@ -6,7 +6,6 @@ ACC.productreview = {
 
 	loadVM: function(){
 		
-			
 		var productReview = new Vue({
 		    el: '#product-review',
 		    data: {
@@ -87,9 +86,14 @@ ACC.productreview = {
         });
         
         $(".product-collapse__review").click(function() {
+        	
+        	productReview.headlineError = false;
+        	productReview.commentError = false;
+        	productReview.ratingError = false;
         	productReview.headline = '';
         	productReview.comment = '';
-        	productReview.rating = 0;
+        	$('#star').raty('set', { score: 0 });
+        	
         });
 
 	    $('.product-description__readmore').click(function(event) {

@@ -21,28 +21,17 @@ import com.amway.apac.storefront.response.dto.AmwayApacResponseMessageDto;
  */
 public class AmwayApacResponseUtils
 {
-
 	public static <T> List<AmwayApacResponseMessageDto> populateMessages(final BindingResult result,
 			final MessageSource messageSource, final I18NService i18n)
 	{
-
 		final List<FieldError> fieldErrors = result.getFieldErrors();
 		final List<AmwayApacResponseMessageDto> messages = new ArrayList<>();
 
 		for (final FieldError error : fieldErrors)
 		{
-			if (error.getCode() != null)
-			{
-				final String name = messageSource.getMessage(error.getCode(), null, i18n.getCurrentLocale());
-				messages.add(new AmwayApacResponseMessageDto(error.getObjectName(), error.getCode(), error.getField(), name));
-			}
-			else
-			{
-				messages.add(
-						new AmwayApacResponseMessageDto(error.getObjectName(), error.getCode(), error.getField(), error.getCode()));
-			}
+			final String name = messageSource.getMessage(error.getCode(), null, i18n.getCurrentLocale());
+			messages.add(new AmwayApacResponseMessageDto(error.getObjectName(), error.getCode(), error.getField(), name));
 		}
 		return messages;
 	}
-
 }
