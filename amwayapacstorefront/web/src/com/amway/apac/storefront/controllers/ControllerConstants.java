@@ -238,6 +238,7 @@ public interface ControllerConstants
 				String ShippingAddressBody = "fragments/address/shippingAddressBody"; // NOSONAR
 				String SavedCartRestorePopup = "fragments/account/savedCartRestorePopup"; // NOSONAR
 				String orderDetailsDetails = "fragments/account/orderDetails"; // NOSONAR
+				String ShippingAddressDetailError = "fragments/address/shippingAddressDetailError"; // NOSONAR
 			}
 
 			interface Checkout // NOSONAR

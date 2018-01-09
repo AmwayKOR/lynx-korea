@@ -513,8 +513,10 @@
 															</div>
 															<c:set var="addressID" scope="request" value="${fn:escapeXml(address.id)}" />
 															<c:set var="countryISO" scope="request" value="${fn:escapeXml(address.country.isocode)}" />
+															<div class="error-mailing-address"></div>
 															<div class="mailing-address-edit">
 																<h4>SHIPPING ADDRESS</h4>
+																
 																<div class="addressEdit"></div>
 
 															</div>
@@ -540,8 +542,10 @@
 
 															<c:set var="addressID" scope="request" value="${fn:escapeXml(address.id)}" />
 															<c:set var="countryISO" scope="request" value="${fn:escapeXml(address.country.isocode)}" />
+															<div class="error-mailing-address"></div>
 															<div class="mailing-address-edit">
 																<h4>SHIPPING ADDRESS</h4>
+																
 																<div class="addressEdit"></div>
 															</div>
 														</div>
@@ -562,6 +566,7 @@
 										</div>
 										<div class="form-container">
 											<div class="new-alternate-address mailing-address-edit">
+												<div class="error-mailing-address"></div>
 												<c:url value="/my-account/add-address" var="addAddressUrl" />
 												<form:form id="shipping-address-form-new" action="${addAddressUrl}" commandName="addressForm" method="post">
 													<fieldset>

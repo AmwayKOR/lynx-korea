@@ -44,6 +44,8 @@ public class AmwayApacAddressValidator extends AddressValidator
 	{
 		validateStringField(AmwayApacAddressForm.getCountryIso(), AddressField.COUNTRY, MAX_FIELD_LENGTH, errors);
 		validateStringField(AmwayApacAddressForm.getLine1(), AddressField.LINE1, MAX_FIELD_LENGTH, errors);
+		validateStringField(AmwayApacAddressForm.getLine2(), AddressField.LINE2, MAX_FIELD_LENGTH, errors);
+		validateStringField(AmwayApacAddressForm.getLine3(), AddressField.LINE3, MAX_FIELD_LENGTH, errors);
 		validateStringField(AmwayApacAddressForm.getTownCity(), AddressField.TOWN, MAX_FIELD_LENGTH, errors);
 		validateStringField(AmwayApacAddressForm.getPostcode(), AddressField.POSTCODE, MAX_POSTCODE_LENGTH, errors);
 	}
@@ -120,9 +122,10 @@ public class AmwayApacAddressValidator extends AddressValidator
 	protected enum AddressField
 	{
 		TITLE("titleCode", "address.title.invalid"), FIRSTNAME("firstName", "address.firstName.invalid"), LASTNAME("lastName",
-				"address.lastName.invalid"), LINE1("line1", "address.line1.invalid"), LINE2("line2", "address.line2.invalid"), TOWN(
-						"townCity", "address.townCity.invalid"), POSTCODE("postcode", "address.postcode.invalid"), REGION("regionIso",
-								"address.regionIso.invalid"), COUNTRY("countryIso", "address.country.invalid");
+				"address.lastName.invalid"), LINE1("line1", "address.line1.invalid"), LINE2("line2",
+						"address.line2.invalid"), LINE3("line3", "address.line3.invalid"), TOWN("townCity",
+								"address.townCity.invalid"), POSTCODE("postcode", "address.postcode.invalid"), REGION("regionIso",
+										"address.regionIso.invalid"), COUNTRY("countryIso", "address.country.invalid");
 
 		private final String fieldKey;
 		private final String errorKey;

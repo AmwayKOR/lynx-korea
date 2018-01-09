@@ -2,7 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="common" tagdir="/WEB-INF/tags/desktop/common" %>
 
+<common:globalMessages/>
     <div class="primary-address-section container-fluid">
         <div class="header">
             <span class="primary-text"> Primary addresses</span>
@@ -34,6 +36,7 @@
                            </div>
                            <c:set var="addressID" scope="request" value="${fn:escapeXml(address.id)}"/>
                            <c:set var="countryISO" scope="request" value="${fn:escapeXml(address.country.isocode)}"/>
+                           <div class="error-mailing-address"></div>
                            <div class="mailing-address-edit">
                                <h4>SHIPPING ADDRESS</h4>
                                <div class="addressEdit">
@@ -82,6 +85,7 @@
                            
                            <c:set var="addressID" scope="request" value="${fn:escapeXml(address.id)}"/>
                            <c:set var="countryISO" scope="request" value="${fn:escapeXml(address.country.isocode)}"/>
+                           <div class="error-mailing-address"></div>
                            <div class="mailing-address-edit">
                                <h4>SHIPPING ADDRESS</h4>
                                <div class="addressEdit">

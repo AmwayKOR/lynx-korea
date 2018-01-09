@@ -139,16 +139,19 @@ public class AccountPageController extends AbstractSearchPageController
 	private static final String BILLING_SHIPPING_CMS_PAGE = "billing-shipping";
 	private static final String BUSINESS_INFORMATION_CMS_PAGE = "business-information";
 
+	//Billing Shipping
+	private static final String BILLING_SHIPPING_ADDRESS_ERROR = "account.form.billingshipping.error";
+
 	//Order history
-	public static final String ORDER_DATE_OPTIONS_PARAMETER = "orderDateOptions";
-	public static final String ORDER_TYPE_OPTIONS_PARAMETER = "orderTypeOptions";
-	public static final String ORDER_DEFAULT_DATE_OPTION_PARAMETER = "orderDateDefaultOption";
-	public static final String LAST_THIRTY_DAYS = "last30Days";
-	public static final String SORT_BY_DATE = "byDate";
-	public static final String ASC = "Asc";
-	public static final String DESC = "Desc";
-	public static final String FIRST_DAY_OF_MONTH = "-01";
-	public static final String LAST_DAY_OF_MONTH = "-31";
+	private static final String ORDER_DATE_OPTIONS_PARAMETER = "orderDateOptions";
+	private static final String ORDER_TYPE_OPTIONS_PARAMETER = "orderTypeOptions";
+	private static final String ORDER_DEFAULT_DATE_OPTION_PARAMETER = "orderDateDefaultOption";
+	private static final String LAST_THIRTY_DAYS = "last30Days";
+	private static final String SORT_BY_DATE = "byDate";
+	private static final String ASC = "Asc";
+	private static final String DESC = "Desc";
+	private static final String FIRST_DAY_OF_MONTH = "-01";
+	private static final String LAST_DAY_OF_MONTH = "-31";
 
 	private static final Logger LOG = Logger.getLogger(AccountPageController.class);
 
@@ -278,8 +281,6 @@ public class AccountPageController extends AbstractSearchPageController
 		final AmwayApacAddressForm addressForm = new AmwayApacAddressForm();
 		model.addAttribute(ADDRESS_FORM_ATTR, addressForm);
 
-		//Get customer information for first name, last name and title code
-		model.addAttribute(ControllerConstants.ModelParameters.CUSTOMERDATA_ATTR, customerFacade.getCurrentCustomer());
 		//Add in region and country to populate edit form
 		model.addAttribute(COUNTRY_ATTR, getCmsSiteService().getCurrentSite().getDefaultCountry().getIsocode());
 
@@ -739,11 +740,13 @@ public class AccountPageController extends AbstractSearchPageController
 		getAmwayApacAddressValidator().validate(addressForm, bindingResult);
 		if (bindingResult.hasErrors())
 		{
-			GlobalMessages.addErrorMessage(model, FORM_GLOBAL_ERROR);
-			storeCmsPageInModel(model, getContentPageForLabelOrId(BILLING_SHIPPING_CMS_PAGE));
-			setUpMetaDataForContentPage(model, getContentPageForLabelOrId(BILLING_SHIPPING_CMS_PAGE));
-			setUpAddressFormAfterError(addressForm, model);
-			return getViewForPage(model);
+			GlobalMessages.addErrorMessage(model, BILLING_SHIPPING_ADDRESS_ERROR);
+			//			final AddressData addressData = addressDataUtil.convertToAddressData(addressForm);
+			//			model.addAttribute(COUNTRY_ATTR, getCmsSiteService().getCurrentSite().getDefaultCountry().getIsocode());
+			//			model.addAttribute(ADDRESS_DATA_ATTR, addressData);
+			//			model.addAttribute(ADDRESS_FORM_ATTR, addressForm);
+
+			return ControllerConstants.Views.Fragments.Account.ShippingAddressDetailError;
 		}
 
 		final AddressData newAddress = addressDataUtil.convertToVisibleAddressData(addressForm);
@@ -875,11 +878,13 @@ public class AccountPageController extends AbstractSearchPageController
 		getAmwayApacAddressValidator().validate(addressForm, bindingResult);
 		if (bindingResult.hasErrors())
 		{
-			GlobalMessages.addErrorMessage(model, FORM_GLOBAL_ERROR);
-			storeCmsPageInModel(model, getContentPageForLabelOrId(BILLING_SHIPPING_CMS_PAGE));
-			setUpMetaDataForContentPage(model, getContentPageForLabelOrId(BILLING_SHIPPING_CMS_PAGE));
-			setUpAddressFormAfterError(addressForm, model);
-			return getViewForPage(model);
+			GlobalMessages.addErrorMessage(model, BILLING_SHIPPING_ADDRESS_ERROR);
+			//			final AddressData addressData = addressDataUtil.convertToAddressData(addressForm);
+			//			model.addAttribute(COUNTRY_ATTR, getCmsSiteService().getCurrentSite().getDefaultCountry().getIsocode());
+			//			model.addAttribute(ADDRESS_DATA_ATTR, addressData);
+			//			model.addAttribute(ADDRESS_FORM_ATTR, addressForm);
+
+			return ControllerConstants.Views.Fragments.Account.ShippingAddressDetailError;
 		}
 
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);

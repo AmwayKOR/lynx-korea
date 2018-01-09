@@ -12,7 +12,6 @@
 		<fieldset>
 		
 			<form:hidden path="regionIso" value="${country}"/>
-			<form:hidden path="titleCode" value="${customerData.titleCode}"/>
 			<form:hidden path="countryIso" value="${country}"/>
 			
 			<address:addressFormElements user="${customerData}" regions="${regions}"
