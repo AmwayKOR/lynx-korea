@@ -173,5 +173,13 @@
 		<property name="tes" type="String"/>
 	</bean>
 
+    <bean class="com.amway.core.enumeration.dto.EnumerationWsDTO">
+        <property name="code" type="java.lang.String"/>
+        <property name="label" type="java.lang.String"/>
+    </bean>
+    
+    <bean class="com.amway.core.enumeration.dto.EnumerationListWsDTO">
+        <property name="enumerationValues" type="java.util.List&lt;com.amway.core.enumeration.dto.EnumerationWsDTO>"/>
+    </bean>
 
 </beans>

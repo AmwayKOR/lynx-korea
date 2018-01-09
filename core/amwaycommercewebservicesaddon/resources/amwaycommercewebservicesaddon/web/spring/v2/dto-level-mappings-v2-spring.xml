@@ -331,6 +331,30 @@
             </map>
         </property>
     </bean>
+    
+    <bean parent="fieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="com.amway.core.enumeration.dto.EnumerationListWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC" value="enumerationValues(BASIC)"/>
+                <entry key="DEFAULT" value="BASIC, enumerationValues(DEFAULT)"/>
+                <entry key="FULL" value="enumerationValues(FULL)"/>
+            </map>
+        </property>
+    </bean>
+    
+     <bean parent="fieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="com.amway.core.enumeration.dto.EnumerationWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC" value="code"/>
+                <entry key="DEFAULT" value="BASIC, label"/>
+                <entry key="FULL" value="code,label"/>
+            </map>
+        </property>
+    </bean>
 
     <!-- bean parent="fieldSetLevelMapping">
         <property name="dtoClass"

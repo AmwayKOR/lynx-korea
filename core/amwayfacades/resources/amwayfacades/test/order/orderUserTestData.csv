@@ -1,0 +1,44 @@
+$currencies=EUR,USD
+$defaultCurrency=EUR
+$defaultLanguage=en
+$deliveryCountries=US
+
+$catalog-id=testOrderCatalog
+$catalog-version=Online
+
+INSERT_UPDATE UserGroup;uid[unique=true];groups(uid);
+;cockpitgroup;;
+;customergroup;cockpitgroup;
+
+INSERT_UPDATE Customer;originalUid[unique=true];uid[unique=true];title(code);customerID;name;description;sessionLanguage(isocode);sessionCurrency(isocode);groups(uid);password[default=$defaultPassword];&userId;defaultPaymentAddress(&addId);defaultShipmentAddress(&addId)
+;amway_user_test_1;amway_user_test_1;;amway_user_test_1;testuser1;testUser1;en;USD;customergroup;;amway_user_test_1
+;amway_user_test_2;amway_user_test_2;;amway_user_test_2;testuser2;testUser2;en;USD;customergroup;;amway_user_test_2
+
+INSERT_UPDATE Address;owner(Customer.uid)[unique=true];streetname[unique=true];streetnumber[unique=true];postalcode[unique=true];duplicate[unique=true];town;country(isocode);billingAddress;contactAddress;shippingAddress;unloadingAddress;firstname;lastname;email;gender(code);middlename;phone1;title(code);url;company;fax;department
+;amway_user_test_1;Zennerstrasse;45;28277;false;Bremen;DE;false;false;false;true;Anja;Hertz;amway_user_test_1@na-du.de;FEMALE;;;;;hybris GmbH;;
+;amway_user_test_1;Schiller Allee;8;28277;false;Bremen;DE;true;true;true;false;Anja;Hertz;amway_user_test_1@na-du.de;FEMALE;;;;;hybris GmbH;;
+;amway_user_test_2;Feldweg;7;18551;false;Sagard;DE;true;false;true;true;Arin;Brode;arin@wow-europe.com;MALE;;;;;hybris GmbH;;
+
+INSERT_UPDATE Customer;uid[unique=true];defaultPaymentaddress(owner(Customer.uid), streetname, streetnumber, postalcode,duplicate);defaultShipmentAddress(owner(Customer.uid), streetname, streetnumber, postalcode, duplicate)
+;amway_user_test_1;amway_user_test_1:Schiller Allee:8:28277:false;amway_user_test_1:Zennerstrasse:45:28277:false
+;amway_user_test_2;amway_user_test_2:Feldweg:7:18551:false;amway_user_test_2:Feldweg:7:18551:false
+
+INSERT_UPDATE UserPriceGroup;code[unique=true];
+;AmwayDefaultABOPriceGroup;
+;AmwayDefaultRetailPriceGroup;
+
+INSERT_UPDATE AmwayBusinessNature;code[unique=true];name[lang=en];
+;AmwayBusinessNature_1;AMWAY BUSINESS OWNER;
+;AmwayBusinessNature_4;CLIENT;
+;AmwayBusinessNature_7;EMPLOYEE;
+
+#Sample Amway Accounts
+INSERT_UPDATE AmwayAccount;code[unique=true];businessNature(code);userPriceGroup(code);name;owner(Customer.originalUid);expiryDate[dateformat=dd.MM.yyyy HH:mm];status(code);primaryParty(Customer.originalUid)
+#;ABO_NUMBER;TYPE;PRICE_GROUP;DIST_NM;DEFAULT_PARTY_ID;
+;8888888888;AmwayBusinessNature_1;AmwayDefaultABOPriceGroup;"Test AmwayAccount 8";amway_user_test_1;01.12.2017 00:00;ACTIVE;amway_user_test_1
+;9999999999;AmwayBusinessNature_4;AmwayDefaultABOPriceGroup;"Test AmwayAccount 9";amway_user_test_2;01.12.2017 00:00;ACTIVE;amway_user_test_2
+
+#Sample Association Of Customers And Amway Accounts
+UPDATE Customer;originalUid[unique=true];accounts(code)[mode=append]
+;amway_user_test_1;8888888888
+;amway_user_test_2;9999999999

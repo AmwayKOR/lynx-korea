@@ -1,20 +1,16 @@
 package com.amway.core.order.services.impl;
 
 
-import de.hybris.platform.core.enums.OrderStatus;
+import de.hybris.platform.commerceservices.search.pagedata.PageableData;
+import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.order.impl.DefaultOrderService;
 import de.hybris.platform.ordercancel.dao.OrderCancelDao;
-
 import de.hybris.platform.servicelayer.search.FlexibleSearchService;
-import de.hybris.platform.servicelayer.util.ServicesUtil;
-
-import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.junit.Assert;
 
-import com.amway.core.enums.AmwayCartType;
+import com.amway.core.data.AmwayOrderSearchParameters;
 import com.amway.core.order.dao.AmwayOrderDao;
 import com.amway.core.order.services.AmwayOrderService;
 
@@ -29,6 +25,14 @@ public class DefaultAmwayOrderService extends DefaultOrderService implements Amw
 	private OrderCancelDao orderCancelDao;
 	private AmwayOrderDao amwayOrderDao;
 
+
+	@Override
+	public SearchPageData<OrderModel> getOrders(final AmwayOrderSearchParameters amwayOrderSearchParameters,
+			final PageableData pageableData)
+	{
+		return amwayOrderDao.getOrders(amwayOrderSearchParameters, pageableData);
+	}
+
 	/**
 	 * @return orderCancelDao
 	 */
@@ -38,7 +42,8 @@ public class DefaultAmwayOrderService extends DefaultOrderService implements Amw
 	}
 
 	/**
-	 * @param orderCancelDao the orderCancelDao to set
+	 * @param orderCancelDao
+	 *           the orderCancelDao to set
 	 */
 	public void setOrderCancelDao(final OrderCancelDao orderCancelDao)
 	{
@@ -54,7 +59,8 @@ public class DefaultAmwayOrderService extends DefaultOrderService implements Amw
 	}
 
 	/**
-	 * @param searchService the searchService to set
+	 * @param searchService
+	 *           the searchService to set
 	 */
 	public void setSearchService(final FlexibleSearchService searchService)
 	{
@@ -70,7 +76,8 @@ public class DefaultAmwayOrderService extends DefaultOrderService implements Amw
 	}
 
 	/**
-	 * @param amwayOrderDao the amwayOrderDao to set
+	 * @param amwayOrderDao
+	 *           the amwayOrderDao to set
 	 */
 	public void setAmwayOrderDao(final AmwayOrderDao amwayOrderDao)
 	{
