@@ -113,6 +113,7 @@ public class DefaultAmwayApacDeliverySlotManagementService implements AmwayApacD
 		availabilityModel.setDeliveryDay(configModel.getDeliveryDay());
 		availabilityModel.setNotifyCount(configModel.getNotifyCount());
 		availabilityModel.setInstructions(configModel.getInstructions());
+		availabilityModel.setSlotConfig(configModel);
 
 		return availabilityModel;
 	}

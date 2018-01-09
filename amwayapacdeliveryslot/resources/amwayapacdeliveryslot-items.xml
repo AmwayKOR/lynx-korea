@@ -119,6 +119,10 @@
                         <defaultvalue>Boolean.FALSE</defaultvalue>
                         <persistence type="property" />
                     </attribute>
+                    <attribute qualifier="slotConfig" type="AmwayDeliverySlotConfig">
+                        <description>Config template data from which availability is created</description>
+                        <persistence type="property" />
+                    </attribute>
                 </attributes>
                 <indexes>
                     <index name="deliveryDateIDX">
