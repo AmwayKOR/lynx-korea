@@ -1,0 +1,42 @@
+/*
+ * [y] hybris Platform
+ *
+ * Copyright (c) 2000-2018 SAP SE
+ * All rights reserved.
+ *
+ * This software is the confidential and proprietary information of SAP
+ * Hybris ("Confidential Information"). You shall not disclose such
+ * Confidential Information and shall use it only in accordance with the
+ * terms of the license agreement you entered into with SAP Hybris.
+ */
+package com.amway.apac.resourcecenter.daos;
+
+import de.hybris.platform.catalog.model.CatalogVersionModel;
+import de.hybris.platform.commerceservices.search.pagedata.PageableData;
+import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
+import de.hybris.platform.core.model.media.MediaContainerModel;
+import de.hybris.platform.core.model.product.ProductModel;
+
+import java.util.List;
+
+import com.amway.lynxresourcecentre.model.media.AmwayAssetAlbumModel;
+import com.amway.lynxresourcecentre.model.media.AmwayAssetModel;
+
+
+/**
+ * @author Ashish Sabal
+ *
+ */
+public interface AmwayApacAssetDao
+{
+	SearchPageData<AmwayAssetModel> getAssets(final String componentId, final PageableData pageableData,
+			final CatalogVersionModel catalogVersion, final String year);
+
+	SearchPageData<AmwayAssetModel> getAssetsForProduct(final ProductModel product, final PageableData pageableData,
+			final CatalogVersionModel catalogVersion, final String year);
+
+	SearchPageData<AmwayAssetAlbumModel> getAssetsAlbums(final String componentId, final PageableData pageableData,
+			final CatalogVersionModel catalogVersion, final String year);
+
+	List<MediaContainerModel> getAssetsAlbumMedia(final CatalogVersionModel catalogVersion, final String componentId);
+}

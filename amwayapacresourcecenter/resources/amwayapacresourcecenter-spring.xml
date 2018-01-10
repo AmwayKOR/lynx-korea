@@ -18,5 +18,18 @@
            http://www.springframework.org/schema/aop/spring-aop.xsd">
 
 
-			
+	<alias alias="amwayApacAssetDao" name="defaultAmwayApacAssetDao"/>
+	<bean id="defaultAmwayApacAssetDao" class="com.amway.apac.resourcecenter.daos.Impl.DefaultAmwayApacAssetDao">
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+		<property name="pagedFlexibleSearchService" ref="pagedFlexibleSearchService" />
+		<property name="userService" ref="userService"/>
+		<property name="sessionService" ref="sessionService"/>
+	</bean>
+	
+	<alias alias="amwayApacAssetService" name="defaultAmwayApacAssetService"/>
+	<bean id="defaultAmwayApacAssetService" class="com.amway.apac.resourcecenter.services.Impl.DefaultAmwayApacAssetService">
+		<property name="amwayApacAssetDao" ref="amwayApacAssetDao"/>
+		<property name="cmsSiteService" ref="cmsSiteService" />
+		<property name="catalogService" ref="catalogService"/>
+	</bean>
 </beans>
