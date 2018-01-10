@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+			  http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- Field mapping configuration -->
+	<bean id="dataMapper"
+		class="de.hybris.platform.webservicescommons.mapping.impl.DefaultDataMapper">
+		<property name="fieldSetBuilder" ref="fieldSetBuilder" />
+	</bean>
+
+	<bean id="fieldSetBuilder"
+		class="de.hybris.platform.webservicescommons.mapping.impl.DefaultFieldSetBuilder">
+		<property name="defaultRecurrencyLevel" value="4" />
+		<property name="defaultMaxFieldSetSize" value="50000" />
+		<property name="fieldSetLevelHelper" ref="fieldSetLevelHelper" />
+	</bean>
+
+	<alias alias="fieldSetLevelHelper" name="defaultFieldSetLevelHelper" />
+	<bean id="defaultFieldSetLevelHelper"
+		class="de.hybris.platform.webservicescommons.mapping.impl.DefaultFieldSetLevelHelper">
+	</bean>
+	
+	<bean class="de.hybris.platform.webservicescommons.mapping.filters.GeneralFieldFilter">
+		<property name="fieldSelectionStrategy" ref="fieldSelectionStrategy"/>
+	</bean>
+
+	<!-- Field mapping -->
+   	<bean id="amwayBeanFieldMapper" parent="fieldMapper">
+		<property name="sourceClass" value="com.amway.amwaycoetools.dto.AmwayBeanWsDTO"/>
+		<property name="destClass"   value="com.amway.amwaycoetools.data.AmwayBeanData"/>
+		<property name="fieldMapping">
+			<map>
+				<entry key="name" value="name"/>
+				<entry key="className" value="className"/>
+			</map>
+		</property>
+	</bean>
+
+   	<bean id="parentFieldMapper" parent="fieldMapper">
+		<property name="sourceClass" value="com.amway.amwaycoetools.dto.AmwayBeanParentWsDTO"/>
+		<property name="destClass"   value="com.amway.amwaycoetools.data.AmwayBeanParentData"/>
+		<property name="fieldMapping">
+			<map>
+				<entry key="className" value="className"/>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="methodFieldMapper" parent="fieldMapper">
+		<property name="sourceClass" value="com.amway.amwaycoetools.dto.AmwayBeanMethodWsDTO"/>
+		<property name="destClass"   value="com.amway.amwaycoetools.data.AmwayBeanMethodData"/>
+		<property name="fieldMapping">
+			<map>
+				<entry key="method" value="method"/>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="annotationFieldMapper" parent="fieldMapper">
+		<property name="sourceClass" value="com.amway.amwaycoetools.dto.AmwayBeanAnnotationWsDTO"/>
+		<property name="destClass"   value="com.amway.amwaycoetools.data.AmwayBeanAnnotationData"/>
+		<property name="fieldMapping">
+			<map>
+				<entry key="annotation" value="annotation"/>
+			</map>
+		</property>
+	</bean>
+	<!-- Fieldset mapping -->
+	
+	<bean parent="fieldSetLevelMapping" id="AmwayBeanListWsDTOFieldSetLevelMapping">
+		<property name="dtoClass"
+		          value="com.amway.amwaycoetools.dto.AmwayBeanListWsDTO"/>
+		<property name="levelMapping">
+			<map>
+				<entry key="BASIC" value="count,amwayBeans(BASIC)"/>
+				<entry key="DEFAULT" value="count,amwayBeans(DEFAULT)"/>
+				<entry key="FULL" value="count,amwayBeans(FULL)"/>
+			</map>
+		</property>
+	</bean>
+	
+	<bean parent="fieldSetLevelMapping" id="AmwayBeanWsDTOFieldSetLevelMapping">
+		<property name="dtoClass"
+		          value="com.amway.amwaycoetools.dto.AmwayBeanWsDTO"/>
+		<property name="levelMapping">
+			<map>
+				<entry key="BASIC" value="name,className,packageName"/>
+				<entry key="DEFAULT" value="name,className,packageName,parents(DEFAULT),methods(DEFAULT),annotations(DEFAULT)"/>
+				<entry key="FULL" value="name,className,packageName,parents(FULL),methods(FULL),annotations(FULL)"/>
+			</map>
+		</property>
+	</bean>
+
+
+
+	<bean parent="fieldSetLevelMapping" id="AmwayBeanParentWsDTOFieldSetLevelMapping">
+		<property name="dtoClass"
+		          value="com.amway.amwaycoetools.dto.AmwayBeanParentWsDTO"/>
+		<property name="levelMapping">
+			<map>
+				<entry key="BASIC" value="className,packageName"/>
+				<entry key="DEFAULT" value="className,packageName"/>
+				<entry key="FULL" value="className,packageName"/>
+			</map>
+		</property>
+	</bean>
+
+	<bean parent="fieldSetLevelMapping" id="AmwayBeanMethodWsDTOFieldSetLevelMapping">
+		<property name="dtoClass"
+				  value="com.amway.amwaycoetools.dto.AmwayBeanMethodWsDTO"/>
+		<property name="levelMapping">
+			<map>
+				<entry key="BASIC" value="method,paramCount,returnTypeName,returnTypePackage"/>
+				<entry key="DEFAULT" value="method,paramCount,returnTypeName,returnTypePackage"/>
+				<entry key="FULL" value="method,paramCount,returnTypeName,returnTypePackage"/>
+			</map>
+		</property>
+	</bean>
+
+	<bean parent="fieldSetLevelMapping" id="AmwayBeanAnnotationWsDTOFieldSetLevelMapping">
+		<property name="dtoClass"
+				  value="com.amway.amwaycoetools.dto.AmwayBeanAnnotationWsDTO"/>
+		<property name="levelMapping">
+			<map>
+				<entry key="BASIC" value="annotation"/>
+				<entry key="DEFAULT" value="annotation"/>
+				<entry key="FULL" value="annotation"/>
+			</map>
+		</property>
+	</bean>
+
+</beans>

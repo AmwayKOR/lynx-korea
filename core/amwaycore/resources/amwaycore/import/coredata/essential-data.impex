@@ -41,3 +41,8 @@ UPDATE CsTicketEventEmailConfiguration;code[unique=true];recipientType(code);
 
 INSERT_UPDATE CsAgentGroup;uid[unique=true];name;emailDistributionList;
 ;omsOrderAgentGroup;OMS Order Export Agent Group;aiu0256@amway.com
+
+INSERT_UPDATE AmwayReturnRequestType;code[unique=true];name[lang=en];noShippingRequired;labelRequired
+;NO_ARRAGEMENTS ;No arrangements (Ship Yourself); false ; false;
+;NO_SHIPPING    ;I request 'No Shipping'        ; true ; false;
+;REQUEST_LABEL  ;I request Label                ; false; true ;

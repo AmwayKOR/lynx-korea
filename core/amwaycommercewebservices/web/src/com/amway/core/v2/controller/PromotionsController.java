@@ -20,6 +20,7 @@ import de.hybris.platform.webservicescommons.cache.CacheControl;
 import de.hybris.platform.webservicescommons.cache.CacheControlDirective;
 import com.amway.core.constants.YcommercewebservicesConstants;
 import com.amway.core.product.data.PromotionDataList;
+import com.amway.core.swagger.ApiBaseSiteIdParam;
 
 import java.util.HashSet;
 import java.util.List;
@@ -36,6 +37,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.Authorization;
+
 
 /**
  * Main Controller for Promotions
@@ -45,6 +51,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping(value = "/{baseSiteId}/promotions")
 @CacheControl(directive = CacheControlDirective.PUBLIC, maxAge = 300)
+@Api(tags = "Promotions")
 public class PromotionsController extends BaseController
 {
 	private static final String ORDER_PROMOTION = "order";
@@ -67,31 +74,20 @@ public class PromotionsController extends BaseController
 	@Resource(name = "commercePromotionFacade")
 	private CommercePromotionFacade commercePromotionFacade;
 
-	/**
-	 * Returns promotions defined for a current base site. Requests pertaining to promotions have been developed for the
-	 * previous version of promotions and vouchers and therefore some of them are currently not compatible with the new
-	 * promotion engine.
-	 *
-	 * @queryparam type Defines what type of promotions should be returned. Values supported for that parameter are:
-	 *             <ul>
-	 *             <li>all: All available promotions are returned</li>
-	 *             <li>product: Only product promotions are returned</li>
-	 *             <li>order: Only order promotions are returned</li>
-	 *             </ul>
-	 * @queryparam promotionGroup Only promotions from this group are returned
-	 * @queryparam fields Response configuration (list of fields, which should be returned in response)
-	 * @return List of promotions
-	 * @throws RequestParameterException
-	 *            When value of 'type' parameter is incorrect
-	 * @security Permitted only for trusted client
-	 */
 	@Secured("ROLE_TRUSTED_CLIENT")
 	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
 	@Cacheable(value = "promotionCache", key = "T(de.hybris.platform.commercewebservicescommons.cache.CommerceCacheKeyGenerator).generateKey(false,true,'getPromotions',#type,#promotionGroup,#fields)")
-	public PromotionListWsDTO getPromotions(@RequestParam final String type,
-			@RequestParam(required = false) final String promotionGroup, @RequestParam(defaultValue = "BASIC") final String fields)
-					throws RequestParameterException //NOSONAR
+	@ApiOperation(value = "Get a list of promotions", notes = "Returns promotions defined for a current base site. Requests pertaining to promotions have been developed for the previous version of promotions and vouchers and"
+			+ " therefore some of them are currently not compatible with the new promotion engine.", authorizations =
+	{ @Authorization(value = "oauth2_client_credentials") })
+	@ApiBaseSiteIdParam
+	public PromotionListWsDTO getPromotions(
+			@ApiParam(value = "Defines what type of promotions should be returned. Values supported for that parameter are:"
+					+ "<ul><li>all: All available promotions are returned</li><li>product: Only product promotions are returned</li><li>order: Only order promotions are returned</li></ul>", allowableValues = "all, product, order", required = true) @RequestParam final String type,
+			@ApiParam(value = "Only promotions from this group are returned", required = false) @RequestParam(required = false) final String promotionGroup,
+			@ApiParam(value = "Response configuration (list of fields, which should be returned in response)", allowableValues = "BASIC, DEFAULT, FULL") @RequestParam(defaultValue = "BASIC") final String fields)
+			throws RequestParameterException //NOSONAR
 	{
 		validateTypeParameter(type);
 
@@ -100,21 +96,16 @@ public class PromotionsController extends BaseController
 		return getDataMapper().map(promotionDataList, PromotionListWsDTO.class, fields);
 	}
 
-	/**
-	 * Returns details of a single promotion specified by a promotion code. Requests pertaining to promotions have been
-	 * developed for the previous version of promotions and vouchers and therefore some of them are currently not
-	 * compatible with the new promotion engine.
-	 *
-	 * @queryparam fields Response configuration (list of fields, which should be returned in response)
-	 * @return Promotion details
-	 * @security Permitted only for trusted client
-	 */
 	@Secured("ROLE_TRUSTED_CLIENT")
 	@RequestMapping(value = "/{code}", method = RequestMethod.GET)
 	@Cacheable(value = "promotionCache", key = "T(de.hybris.platform.commercewebservicescommons.cache.CommerceCacheKeyGenerator).generateKey(false,true,'getPromotions',#code,#fields)")
 	@ResponseBody
-	public PromotionWsDTO getPromotionByCode(@PathVariable final String code,
-			@RequestParam(defaultValue = "BASIC") final String fields)
+	@ApiOperation(value = "Get a promotion based on code", notes = "Returns details of a single promotion specified by a promotion code. Requests pertaining to promotions have been developed for the previous version of promotions"
+			+ " and vouchers and therefore some of them are currently not compatible with the new promotion engine.", authorizations =
+	{ @Authorization(value = "oauth2_client_credentials") })
+	@ApiBaseSiteIdParam
+	public PromotionWsDTO getPromotionByCode(@ApiParam(value = "Promotion identifier (code)") @PathVariable final String code,
+			@ApiParam(value = "Response configuration (list of fields, which should be returned in response)", allowableValues = "BASIC, DEFAULT, FULL") @RequestParam(defaultValue = "BASIC") final String fields)
 	{
 		final PromotionData promotionData = commercePromotionFacade.getPromotion(code, OPTIONS);
 		return getDataMapper().map(promotionData, PromotionWsDTO.class, fields);
@@ -187,7 +178,7 @@ public class PromotionsController extends BaseController
 		return opts;
 	}
 
-	public CommercePromotionFacade getCommercePromotionFacade()
+	protected CommercePromotionFacade getCommercePromotionFacade()
 	{
 		return commercePromotionFacade;
 	}

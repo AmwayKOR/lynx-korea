@@ -7,10 +7,13 @@ import de.hybris.platform.commerceservices.customer.dao.CustomerAccountDao;
 import de.hybris.platform.commerceservices.search.pagedata.PageableData;
 import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
 import de.hybris.platform.core.model.order.OrderModel;
+import de.hybris.platform.core.model.order.payment.CreditCardPaymentInfoModel;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.store.BaseStoreModel;
 
 import com.amway.core.enums.AmwayCartType;
+
+import java.util.Optional;
 
 
 /**
@@ -41,4 +44,14 @@ public interface AmwayCustomerAccountDao extends CustomerAccountDao
 	 */
 	public OrderModel findOrderByCodeAndCustomerAndStoreAndType(CustomerModel currentUser, String code, BaseStoreModel store,
 			AmwayCartType type);
+
+	/**
+	 * Finds credit card payment info by customer and code.
+	 *
+	 * @param customerModel
+	 * @param code
+	 * @return CreditCardPaymentInfoModel
+	 */
+	public Optional<CreditCardPaymentInfoModel> findCreditCardPaymentInfoByCustomerAndCode(CustomerModel customerModel, String code);
+
 }

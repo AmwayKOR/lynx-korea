@@ -4,10 +4,13 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "getTaxIdRequest", propOrder =
 { "salesPlanAff", "aboNum", "partyId", "taxTypeCd" })
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class GetPartyTaxIdDetailsRequest extends BaseWebServiceInput
 {
 	protected String aboNum;

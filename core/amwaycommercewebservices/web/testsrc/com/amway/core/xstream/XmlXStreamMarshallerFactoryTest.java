@@ -10,7 +10,6 @@
  */
 package com.amway.core.xstream;
 
-import com.thoughtworks.xstream.core.DefaultConverterLookup;
 import de.hybris.bootstrap.annotations.UnitTest;
 import de.hybris.platform.commercefacades.xstream.alias.AttributeAliasMapping;
 import de.hybris.platform.commercefacades.xstream.alias.AttributeOmitMapping;
@@ -39,6 +38,7 @@ import com.thoughtworks.xstream.converters.basic.NullConverter;
 import com.thoughtworks.xstream.converters.enums.EnumConverter;
 import com.thoughtworks.xstream.converters.extended.TextAttributeConverter;
 import com.thoughtworks.xstream.converters.extended.ThrowableConverter;
+import com.thoughtworks.xstream.core.DefaultConverterLookup;
 
 
 /**
@@ -53,8 +53,7 @@ public class XmlXStreamMarshallerFactoryTest
 	@Mock
 	private ApplicationContext ctx;
 
-	private static final String SERVICE_BEAN_DEF = ""// NOPMD
-			+ "<beans xmlns=\"http://www.springframework.org/schema/beans\"\n"//
+	private static final String SERVICE_BEAN_DEF = "" + "<beans xmlns=\"http://www.springframework.org/schema/beans\"\n"//
 			+ "       xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n"//
 			+ "       xsi:schemaLocation=\"http://www.springframework.org/schema/beans\n"//
 			+ "                            http://www.springframework.org/schema/beans/spring-beans-3.1.xsd\">\n" //

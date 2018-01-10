@@ -59,7 +59,12 @@ public abstract class AbstractDmsService<X, Y, Z>
 	public X process(final Y requestData)
 	{
 
-		final Object input = getInputConverter().convert(requestData);
+		final Object input;
+		if (getInputConverter() == null) {
+			input = requestData;
+		} else {
+			input = getInputConverter().convert(requestData);
+		}
 
 		final Z dmsResponse = getOndemandHystrixCommandFactory()
 				.newCommand(getHystrixCommandConfig(), new de.hybris.platform.integration.commons.hystrix.HystrixExecutable<Z>()
@@ -122,6 +127,9 @@ public abstract class AbstractDmsService<X, Y, Z>
 
 	protected X extractOutput(final Object result)
 	{
+		if (getOutputConverter() == null) {
+			return (X) result;
+		}
 		return (X) getOutputConverter().convert(result, createResultObject());
 	}
 

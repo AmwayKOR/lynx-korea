@@ -22,14 +22,12 @@ public class JsonXStreamMarshallerFactory extends XmlXStreamMarshallerFactory
 {
 	private XStreamMarshaller jsonMarshallerInstance;
 
-	@SuppressWarnings("PMD")
 	@Override
 	public void afterPropertiesSet() throws Exception
 	{
 		jsonMarshallerInstance = getObjectInternal();
 	}
 
-	@SuppressWarnings("PMD")
 	@Override
 	public Object getObject() throws Exception
 	{

@@ -24,13 +24,13 @@ import de.hybris.platform.servicelayer.dto.converter.Converter;
 import java.util.ArrayList;
 import java.util.List;
 
-import junit.framework.Assert;
-
 import org.apache.commons.collections.CollectionUtils;
 
+import com.hybris.cis.api.model.CisAddress;
 import com.hybris.cis.client.avs.models.AvsResult;
 import com.hybris.cis.client.avs.models.CisFieldError;
-import com.hybris.cis.api.model.CisAddress;
+
+import junit.framework.Assert;
 
 
 /**

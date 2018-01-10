@@ -28,4 +28,13 @@ public interface AmwayPaymentModeDao extends PaymentModeDao
 	 */
 	List<AmwayPaymentConfigModel> getSupportedSplitCombinations(SalesApplication channel, AmwayBusinessNature custType,
 			AbstractOrderModel order, HashMap<String, Integer> modeList);
+	
+	/**
+	 * Method to get payment configs for specified code.
+	 * 
+	 * @param code
+	 *           the code
+	 * @return the amway payment config model list
+	 */
+	List<AmwayPaymentConfigModel> getPaymentConfigForCode(final String code, final SalesApplication channel);
 }

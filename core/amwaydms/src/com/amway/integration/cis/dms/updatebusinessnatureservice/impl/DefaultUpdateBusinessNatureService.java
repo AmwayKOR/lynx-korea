@@ -12,7 +12,10 @@ import org.springframework.util.Assert;
 
 /**
  * Service implementation for to update the business nature.
+ *
+ * port to amwaydms2
  */
+
 public class DefaultUpdateBusinessNatureService
 		extends AbstractDmsService<CommonResponseFieldsData, UpdateBusinessNatureInputRequestData, ReturnInfoService>
 		implements DmsService<UpdateBusinessNatureInputRequestData, CommonResponseFieldsData>

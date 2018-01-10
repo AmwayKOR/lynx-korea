@@ -21,7 +21,7 @@
 
     <!-- Secured pages -->
     <security:http entry-point-ref="samlEntryPoint" use-expressions="false">
-		<security:intercept-url pattern="/**" access="IS_AUTHENTICATED_FULLY"/>
+        <security:intercept-url pattern="/**" access="IS_AUTHENTICATED_FULLY"/>
         <!-- <security:custom-filter before="FIRST" ref="metadataGeneratorFilter"/> -->
         <security:custom-filter after="BASIC_AUTH_FILTER" ref="samlFilter"/>
         <security:csrf disabled="true"/>
@@ -161,7 +161,7 @@
 
     <!-- SAML 2.0 WebSSO Assertion Consumer -->
     <bean id="webSSOprofileConsumer" class="org.springframework.security.saml.websso.WebSSOProfileConsumerImpl">
-       <property name="releaseDOM" value="false" />
+        <property name="releaseDOM" value="false" />
     </bean>
 
     <!-- SAML 2.0 Holder-of-Key WebSSO Assertion Consumer -->

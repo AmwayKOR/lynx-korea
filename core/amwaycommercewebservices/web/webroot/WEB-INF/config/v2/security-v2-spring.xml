@@ -16,6 +16,12 @@
 		http://www.springframework.org/schema/security 
 		http://www.springframework.org/schema/security/spring-security.xsd">
 
+
+	<!-- Swagger resources -->
+	<security:http pattern="/v2/#{configurationService.configuration.getProperty('springfox.documentation.swagger.v2.path')}" security="none"/>
+	<security:http pattern="/v2/*swagger*/**" security="none"/>
+
+	<!-- Commerce Webservices V2-->
 	<http pattern="/v2/**" entry-point-ref="oauthAuthenticationEntryPointV2"
 	      access-decision-manager-ref="webSecurityAccessDecisionManager"
 	      xmlns="http://www.springframework.org/schema/security" create-session="stateless">

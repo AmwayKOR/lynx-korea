@@ -20,7 +20,7 @@ public class DmsAddressInformationInputPopulator implements Populator<AddressInf
 	public void populate(final AddressInformationRequestData source, final GetPartyAddressInput target) throws ConversionException
 	{
 		target.setSalesPlanAff(source.getSalesPlanAff());
-		target.setAboNum(source.getIboNo());
+		target.setAboNum(source.getAboNum());
 		target.setPartyId(source.getPartyId());
 		target.setContactPointPurposeCd(source.getContactPointPurposeCd());
 		target.setPrimaryFlag(source.getPrimaryFlag());

@@ -3,7 +3,7 @@
  */
 package com.amway.facades.populators;
 
-import com.amway.facades.order.data.PaymentModeData;
+import com.amway.core.order.data.PaymentModeData;
 
 import de.hybris.platform.converters.Populator;
 import de.hybris.platform.core.model.order.payment.PaymentModeModel;

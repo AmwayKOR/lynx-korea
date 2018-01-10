@@ -31,11 +31,12 @@
 		<property name="eventService" ref="eventService"/>
 		<property name="baseStoreService" ref="baseStoreService"/>
 		<property name="customerAccountService" ref="customerAccountService"/>
+		<property name="validationStrategy" ref="amwayOrderPaymentConfirmationValidationStrategy"/>
 	</bean>
 	<!-- [end] Order external modifications -->
 
 	<alias name="amwayTransactionInfoService" alias="transactionInfoService"/>
-	<bean id="amwayTransactionInfoService" parent="defaultTransactionInfoService" class="com.amway.amwayfinance.service.impl.DefaultAmwayTransactionInfoService">
+	<bean id="amwayTransactionInfoService" parent="defaultTransactionInfoService" class="com.amway.amwayfinance.services.impl.DefaultAmwayTransactionInfoService">
 		<property name="modelService" ref="modelService"/>
         <property name="allowedPaymentTypes">
             <list>
@@ -56,4 +57,8 @@
 			</set>
 		</property>
 	</bean>
+
+	<alias name="defaultAmwayOrderPaymentConfirmationValidationStrategy" alias="amwayOrderPaymentConfirmationValidationStrategy" />
+	<bean id="defaultAmwayOrderPaymentConfirmationValidationStrategy" class="com.amway.amwayfinance.services.impl.DefaultAmwayOrderPaymentConfirmationValidationStrategy" />
+
 </beans>

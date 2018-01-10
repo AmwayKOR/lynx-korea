@@ -103,6 +103,16 @@ public class DefaultAmwayCustomerFacade extends DefaultCustomerFacade implements
 		final List<CustomerModel> parties = amwayAccountService.lookupAccountsCustomersByEmail(searchKey);
 		return customerToCommonAccountResult(parties);
 	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public AmwayAccountDataList lookupAccountsByUidOrName(final String searchKey)
+	{
+		final List<AmwayAccountModel> accounts = amwayAccountService.findAccountsForAbo(searchKey);
+		return commonAccountResult(accounts);
+	}
 
 	/**
 	 * load Account and Customer data from DMS

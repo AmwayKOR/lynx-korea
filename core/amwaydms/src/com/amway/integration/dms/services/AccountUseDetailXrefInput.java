@@ -7,6 +7,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 /**
  * <p>Java class for accountUseDetailXrefInput complex type.
@@ -33,6 +35,7 @@ import javax.xml.bind.annotation.XmlType;
     "acctUseCode",
     "useFlag"
 })
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class AccountUseDetailXrefInput {
 
     @XmlElementRef(name = "acctUseCode", type = JAXBElement.class, required = false)

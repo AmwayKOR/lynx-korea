@@ -1,13 +1,14 @@
 /*
  * [y] hybris Platform
  *
- * Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+ * Copyright (c) 2017 SAP SE or an SAP affiliate company.  All  rights reserved.
  *
  * This software is the confidential and proprietary information of SAP
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with SAP.
  */
+
 package com.amway.core.v2.controller;
 
 import de.hybris.platform.commercefacades.address.AddressVerificationFacade;
@@ -38,7 +39,6 @@ import de.hybris.platform.commercewebservicescommons.errors.exceptions.RequestPa
 import de.hybris.platform.converters.Populator;
 import de.hybris.platform.core.PK.PKException;
 import de.hybris.platform.core.enums.OrderStatus;
-import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import de.hybris.platform.servicelayer.model.ModelService;
@@ -51,9 +51,13 @@ import de.hybris.platform.webservicescommons.errors.exceptions.WebserviceValidat
 import com.amway.core.constants.YcommercewebservicesConstants;
 import com.amway.core.populator.HttpRequestCustomerDataPopulator;
 import com.amway.core.populator.options.PaymentInfoOption;
+import com.amway.core.swagger.ApiBaseSiteIdAndUserIdParam;
+import com.amway.core.swagger.ApiBaseSiteIdParam;
 import com.amway.core.user.data.AddressDataList;
 import com.amway.core.validation.data.AddressValidationData;
 
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -62,6 +66,7 @@ import java.util.Set;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.validator.routines.EmailValidator;
@@ -83,22 +88,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.util.UriUtils;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
 
 
-/**
- * Main Controller for Users
- *
- * @pathparam userId User identifier or one of the literals below :
- *            <ul>
- *            <li>'current' for currently authenticated user</li>
- *            <li>'anonymous' for anonymous user</li>
- *            </ul>
- * @pathparam addressId Address identifier
- * @pathparam paymentDetailsId - Payment details identifier
- */
 @Controller
 @RequestMapping(value = "/{baseSiteId}/users")
 @CacheControl(directive = CacheControlDirective.PRIVATE)
+@Api(tags = "Users")
 public class UsersController extends BaseCommerceController
 {
 	private static final Logger LOG = Logger.getLogger(UsersController.class);
@@ -129,77 +132,83 @@ public class UsersController extends BaseCommerceController
 	@Resource(name = "passwordStrengthValidator")
 	private Validator passwordStrengthValidator;
 
-	/**
-	 * Registers a customer. The following two sets of parameters are available:
-	 * <ul>
-	 * <li>First set is used to register a customer. In this case the required parameters are: login, password,
-	 * firstName, lastName, titleCode.</li>
-	 * <li>Second set is used to convert a guest to a customer. In this case the required parameters are: guid, password.
-	 * </li>
-	 * <ul>
-	 *
-	 * @formparam login Customer's login. Customer login is case insensitive.
-	 * @formparam password Customer's password.
-	 * @formparam firstName Customer's first name.
-	 * @formparam lastName Customer's last name.
-	 * @formparam titleCode Customer's title code. For a list of codes, see /{baseSiteId}/titles resource
-	 * @formparam guid Guest order's guid.
-	 * @throws de.hybris.platform.commerceservices.customer.DuplicateUidException
-	 *            in case the requested login already exists
-	 * @throws de.hybris.platform.commercewebservicescommons.errors.exceptions.RequestParameterException
-	 *            in case given parameters are invalid
-	 * @security Permitted only for customer managers, clients or trusted clients.
-	 */
+
 	@Secured(
 	{ "ROLE_CLIENT", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERMANAGERGROUP" })
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseStatus(value = HttpStatus.CREATED)
-	public void registerUser(@RequestParam(required = false) final String login, @RequestParam final String password,
-			@RequestParam(required = false) final String titleCode, @RequestParam(required = false) final String firstName,
-			@RequestParam(required = false) final String lastName, @RequestParam(required = false) final String guid,
-			final HttpServletRequest request) throws DuplicateUidException, RequestParameterException, WebserviceValidationException //NOSONAR
+	@ResponseBody
+	@SuppressWarnings("squid:S1160")
+	@ApiOperation(hidden = true, value = " Registers a customer", notes = "Registers a customer. The following two sets of parameters are available: First set is used to register a customer. In this case the required parameters are: login, password, firstName, lastName, titleCode. Second set is used to convert a guest to a customer. In this case the required parameters are: guid, password.")
+	@ApiBaseSiteIdParam
+	public UserWsDTO registerUser(
+			@ApiParam(value = "Customer's login. Customer login is case insensitive.") @RequestParam(required = false) final String login,
+			@ApiParam(value = "Customer's password.") @RequestParam final String password,
+			@ApiParam(value = "Customer's title code. For a list of codes, see /{baseSiteId}/titles resource") @RequestParam(required = false) final String titleCode,
+			@ApiParam(value = "Customer's first name.") @RequestParam(required = false) final String firstName,
+			@ApiParam(value = "Customer's last name.") @RequestParam(required = false) final String lastName,
+			@ApiParam(value = "Guest order's guid.") @RequestParam(required = false) final String guid,
+			@ApiParam(value = "Response configuration (list of fields, which should be returned in response)", allowableValues = "BASIC, DEFAULT, FULL") @RequestParam(defaultValue = DEFAULT_FIELD_SET) final String fields,
+			final HttpServletRequest httpRequest, final HttpServletResponse httpResponse)
+			throws DuplicateUidException, RequestParameterException, WebserviceValidationException, UnsupportedEncodingException //NOSONAR
 	{
 		final UserSignUpWsDTO user = new UserSignUpWsDTO();
-		httpRequestUserSignUpDTOPopulator.populate(request, user);
-
+		httpRequestUserSignUpDTOPopulator.populate(httpRequest, user);
+		CustomerData customer = null;
+		String userId = login;
 		if (guid != null)
 		{
 			validate(user, "user", guestConvertingDTOValidator);
 			convertToCustomer(password, guid);
+			customer = customerFacade.getCurrentCustomer();
+			userId = customer.getUid();
 		}
 		else
 		{
 			validate(user, "user", userSignUpDTOValidator);
 			registerNewUser(login, password, titleCode, firstName, lastName);
+			customer = customerFacade.getUserForUID(userId);
 		}
+		httpResponse.setHeader(YcommercewebservicesConstants.LOCATION, getAbsoluteLocationURL(httpRequest, userId)); //NOSONAR
+		return getDataMapper().map(customer, UserWsDTO.class, fields);
 	}
 
-	/**
-	 * Registers a customer.
-	 *
-	 * @param user
-	 *           User's object
-	 * @bodyparams uid,password,titleCode,firstName,lastName
-	 * @throws de.hybris.platform.commerceservices.customer.DuplicateUidException
-	 *            in case the requested login already exists
-	 * @throws UnknownIdentifierException
-	 *            if the title code is invalid
-	 * @throws WebserviceValidationException
-	 *            if any filed is invalid
-	 * @security Permitted only for customer managers, clients or trusted clients.
-	 */
+
 	@Secured(
 	{ "ROLE_CLIENT", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERMANAGERGROUP" })
 	@RequestMapping(method = RequestMethod.POST, consumes =
 	{ MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	@ResponseStatus(value = HttpStatus.CREATED)
-	public void registerUser(@RequestBody final UserSignUpWsDTO user)
-			throws DuplicateUidException, UnknownIdentifierException, IllegalArgumentException, WebserviceValidationException //NOSONAR
+	@ResponseBody
+	@SuppressWarnings("squid:S1160")
+	@ApiOperation(value = " Registers a customer", notes = "Registers a customer. The following two sets of parameters are available: First set is used to register a customer. In this case the required parameters are: login, password, firstName, lastName, titleCode. Second set is used to convert a guest to a customer. In this case the required parameters are: guid, password.")
+	@ApiBaseSiteIdParam
+	public UserWsDTO registerUser(@ApiParam(value = "User's object.", required = true) @RequestBody final UserSignUpWsDTO user,
+			@ApiParam(value = "Response configuration (list of fields, which should be returned in response)", allowableValues = "BASIC, DEFAULT, FULL") @RequestParam(defaultValue = DEFAULT_FIELD_SET) final String fields,
+			final HttpServletRequest httpRequest, final HttpServletResponse httpResponse)
+			throws DuplicateUidException, UnknownIdentifierException, //NOSONAR
+			IllegalArgumentException, WebserviceValidationException, UnsupportedEncodingException //NOSONAR
 	{
 		validate(user, "user", userSignUpDTOValidator);
 		final RegisterData registration = getDataMapper().map(user, RegisterData.class,
 				"login,password,titleCode,firstName,lastName");
 		customerFacade.register(registration);
+		final String userId = user.getUid();
+		httpResponse.setHeader(YcommercewebservicesConstants.LOCATION, getAbsoluteLocationURL(httpRequest, userId)); //NOSONAR
+		return getDataMapper().map(customerFacade.getUserForUID(userId), UserWsDTO.class, fields);
+	}
+
+	protected String getAbsoluteLocationURL(final HttpServletRequest httpRequest, final String uid)
+			throws UnsupportedEncodingException
+	{
+		final String requestURL = httpRequest.getRequestURL().toString();
+		final StringBuilder absoluteURLSb = new StringBuilder(requestURL);
+		if (!requestURL.endsWith(YcommercewebservicesConstants.SLASH))
+		{
+			absoluteURLSb.append(YcommercewebservicesConstants.SLASH);
+		}
+		absoluteURLSb.append(UriUtils.encodePathSegment(uid, StandardCharsets.UTF_8.name()));
+		return absoluteURLSb.toString();
 	}
 
 	protected void registerNewUser(final String login, final String password, final String titleCode, final String firstName,
@@ -226,7 +235,7 @@ public class UsersController extends BaseCommerceController
 	}
 
 
-	protected void convertToCustomer(final String password, final String guid) 
+	protected void convertToCustomer(final String password, final String guid)
 			throws RequestParameterException, DuplicateUidException //NOSONAR
 	{
 		if (LOG.isDebugEnabled())
@@ -252,43 +261,35 @@ public class UsersController extends BaseCommerceController
 		}
 	}
 
-	/**
-	 * Returns customer profile.
-	 *
-	 * @queryparam fields Response configuration (list of fields, which should be returned in the response)
-	 *
-	 * @return Customer profile.
-	 * @security Permitted for clients, customers and customer managers
-	 */
+
 	@Secured(
 	{ "ROLE_CUSTOMERGROUP", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERMANAGERGROUP" })
 	@RequestMapping(value = "/{userId}", method = RequestMethod.GET)
 	@ResponseBody
-	public UserWsDTO getUser(@RequestParam(defaultValue = DEFAULT_FIELD_SET) final String fields)
+	@ApiOperation(value = "Get customer profile", notes = "Returns customer profile.")
+	@ApiBaseSiteIdAndUserIdParam
+	public UserWsDTO getUser(
+			@ApiParam(value = "Response configuration (list of fields, which should be returned in response)", allowableValues = "BASIC, DEFAULT, FULL") @RequestParam(defaultValue = DEFAULT_FIELD_SET) final String fields)
 	{
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
 		return getDataMapper().map(customerData, UserWsDTO.class, fields);
 	}
 
-	/**
-	 * Updates customer profile. Attributes not provided in the request body will be defined again (set to null or
-	 * default).
-	 *
-	 * @formparam firstName Customer's first name.
-	 * @formparam lastName Customer's last name.
-	 * @formparam titleCode Customer's title code. For a list of codes, see /{baseSiteId}/titles resource
-	 * @formparam language Customer's language.
-	 * @formparam currency Customer's currency.
-	 * @throws DuplicateUidException
-	 * @security Permitted for trusted clients, customers and customer managers. Trusted client or customer manager is
-	 *           able to impersonate as any other user and change profile on their behalf.
-	 */
+
 	@Secured(
 	{ "ROLE_CUSTOMERGROUP", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERMANAGERGROUP" })
 	@RequestMapping(value = "/{userId}", method = RequestMethod.PUT)
 	@ResponseStatus(HttpStatus.OK)
-	public void putUser(@RequestParam final String firstName, @RequestParam final String lastName,
-			@RequestParam(required = true) final String titleCode, final HttpServletRequest request) throws DuplicateUidException
+	@ApiOperation(hidden = true, value = "Updates customer profile", notes = "Updates customer profile. Attributes not provided in the request body will be defined again (set to null or default).")
+	@ApiImplicitParams(
+	{ @ApiImplicitParam(name = "baseSiteId", value = "Base site identifier", required = true, dataType = "String", paramType = "path"),
+			@ApiImplicitParam(name = "userId", value = "User identifier.", required = true, dataType = "String", paramType = "path"),
+			@ApiImplicitParam(name = "language", value = "Customer's language.", required = false, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "currency", value = "Customer's currency.", required = false, dataType = "String", paramType = "query") })
+	public void putUser(@ApiParam("Customer's first name.") @RequestParam final String firstName,
+			@ApiParam("Customer's last name.") @RequestParam final String lastName,
+			@ApiParam(value = "Customer's title code. For a list of codes, see /{baseSiteId}/titles resource", required = true) @RequestParam(required = true) final String titleCode,
+			final HttpServletRequest request) throws DuplicateUidException
 	{
 		final CustomerData customer = customerFacade.getCurrentCustomer();
 		if (LOG.isDebugEnabled())
@@ -305,23 +306,16 @@ public class UsersController extends BaseCommerceController
 		customerFacade.updateFullProfile(customer);
 	}
 
-	/**
-	 * Updates customer profile. Attributes not provided in the request body will be defined again (set to null or
-	 * default).
-	 *
-	 * @param user
-	 *           User's object
-	 * @bodyparams firstName,lastName,titleCode,currency(isocode),language(isocode)
-	 * @throws DuplicateUidException
-	 * @security Permitted for trusted clients, customers and customer managers. Trusted client or customer manager is
-	 *           able to impersonate as any other user and change profile on their behalf.
-	 */
+
 	@Secured(
 	{ "ROLE_CUSTOMERGROUP", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERMANAGERGROUP" })
 	@RequestMapping(value = "/{userId}", method = RequestMethod.PUT, consumes =
 	{ MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	@ResponseStatus(HttpStatus.OK)
-	public void putUser(@RequestBody final UserWsDTO user) throws DuplicateUidException
+	@ApiOperation(value = "Updates customer profile", notes = "Updates customer profile. Attributes not provided in the request body will be defined again (set to null or default).")
+	@ApiBaseSiteIdAndUserIdParam
+	public void putUser(@ApiParam(value = "User's object", required = true) @RequestBody final UserWsDTO user)
+			throws DuplicateUidException
 	{
 		validate(user, "user", putUserDTOValidator);
 
@@ -335,22 +329,20 @@ public class UsersController extends BaseCommerceController
 		customerFacade.updateFullProfile(customer);
 	}
 
-	/**
-	 * Updates customer profile. Only attributes provided in the request body will be changed.
-	 *
-	 * @formparam firstName Customer's first name.
-	 * @formparam lastName Customer's last name.
-	 * @formparam titleCode Customer's title code. For a list of codes, see /{baseSiteId}/titles resource
-	 * @formparam language Customer's language.
-	 * @formparam currency Customer's currency.
-	 * @throws DuplicateUidException
-	 * @security Permitted for trusted clients, customers and customer managers. Trusted client or customer manager is
-	 *           able to impersonate as any other user and change profile on their behalf.
-	 */
+
 	@Secured(
 	{ "ROLE_CUSTOMERGROUP", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERMANAGERGROUP" })
 	@RequestMapping(value = "/{userId}", method = RequestMethod.PATCH)
 	@ResponseStatus(HttpStatus.OK)
+	@ApiOperation(hidden = true, value = "Updates customer profile", notes = "Updates customer profile. Only attributes provided in the request body will be changed.")
+	@ApiImplicitParams(
+	{ @ApiImplicitParam(name = "baseSiteId", value = "Base site identifier", required = true, dataType = "String", paramType = "path"),
+			@ApiImplicitParam(name = "userId", value = "User identifier", required = true, dataType = "String", paramType = "path"),
+			@ApiImplicitParam(name = "firstName", value = "Customer's first name", required = false, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "lastName", value = "Customer's last name", required = false, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "titleCode", value = "Customer's title code. Customer's title code. For a list of codes, see /{baseSiteId}/titles resource", required = false, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "language", value = "Customer's language", required = false, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "currency", value = "Customer's currency", required = false, dataType = "String", paramType = "query") })
 	public void updateUser(final HttpServletRequest request) throws DuplicateUidException
 	{
 		final CustomerData customer = customerFacade.getCurrentCustomer();
@@ -362,22 +354,16 @@ public class UsersController extends BaseCommerceController
 		customerFacade.updateFullProfile(customer);
 	}
 
-	/**
-	 * Updates customer profile. Only attributes provided in the request body will be changed.
-	 *
-	 * @param user
-	 *           User's object
-	 * @bodyparams firstName,lastName,titleCode,currency(isocode),language(isocode)
-	 * @throws DuplicateUidException
-	 * @security Permitted for trusted clients, customers and customer managers. Trusted client or customer manager is
-	 *           able to impersonate as any other user and change profile on their behalf.
-	 */
+
 	@Secured(
 	{ "ROLE_CUSTOMERGROUP", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERMANAGERGROUP" })
 	@RequestMapping(value = "/{userId}", method = RequestMethod.PATCH, consumes =
 	{ MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	@ResponseStatus(HttpStatus.OK)
-	public void updateUser(@RequestBody final UserWsDTO user) throws DuplicateUidException
+	@ApiOperation(value = "Updates customer profile", notes = "Updates customer profile. Only attributes provided in the request body will be changed.")
+	@ApiBaseSiteIdAndUserIdParam
+	public void updateUser(@ApiParam(value = "User's object.", required = true) @RequestBody final UserWsDTO user)
+			throws DuplicateUidException
 	{
 		final CustomerData customer = customerFacade.getCurrentCustomer();
 		if (LOG.isDebugEnabled())
@@ -389,46 +375,31 @@ public class UsersController extends BaseCommerceController
 		customerFacade.updateFullProfile(customer);
 	}
 
-	/**
-	 * Removes customer profile.
-	 *
-	 * @security Permitted for trusted clients, customers and customer managers. Trusted client is able to impersonate as
-	 *           any other user and deactivate profile on their behalf.
-	 */
+
 	@Secured(
 	{ "ROLE_CUSTOMERGROUP", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERMANAGERGROUP" })
 	@RequestMapping(value = "/{userId}", method = RequestMethod.DELETE)
 	@ResponseStatus(HttpStatus.OK)
+	@ApiOperation(value = "Delete customer profile", notes = "Removes customer profile.")
+	@ApiBaseSiteIdAndUserIdParam
 	public void deactivateUser()
 	{
-		final UserModel userModel = userService.getCurrentUser();
-		if (!userModel.isLoginDisabled())
-		{
-			userModel.setLoginDisabled(true);
-			modelService.save(userModel);
-		}
+		final CustomerData customer = customerFacade.closeAccount();
 		if (LOG.isDebugEnabled())
 		{
-			LOG.debug("deactivateUser: userId=" + userModel.getUid());
+			LOG.debug("deactivateUser: userId=" + customer.getUid());
 		}
 	}
 
-	/**
-	 * Changes customer's login.
-	 *
-	 * @formparam newLogin Customer's new login. Customer login is case insensitive.
-	 * @formparam password Customer's current password.
-	 * @throws DuplicateUidException
-	 * @throws PasswordMismatchException
-	 * @throws RequestParameterException
-	 * @security Permitted for trusted clients, customers and customer managers. Trusted client or customer manager is
-	 *           able to impersonate as any other user and change login on their behalf.
-	 */
 	@Secured(
 	{ "ROLE_CUSTOMERGROUP", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERMANAGERGROUP" })
 	@RequestMapping(value = "/{userId}/login", method = RequestMethod.PUT)
 	@ResponseStatus(HttpStatus.OK)
-	public void changeLogin(@RequestParam final String newLogin, @RequestParam final String password)
+	@ApiOperation(value = "Changes customer's login", notes = "Changes customer's login.")
+	@ApiBaseSiteIdAndUserIdParam
+	public void changeLogin(
+			@ApiParam(value = "Customer's new login. Customer login is case insensitive.", required = true) @RequestParam final String newLogin,
+			@ApiParam(value = "Customer's current password.", required = true) @RequestParam final String password)
 			throws DuplicateUidException, PasswordMismatchException, RequestParameterException //NOSONAR
 	{
 		if (!EmailValidator.getInstance().isValid(newLogin))
@@ -439,20 +410,16 @@ public class UsersController extends BaseCommerceController
 		customerFacade.changeUid(newLogin, password);
 	}
 
-	/**
-	 * Changes customer's password.
-	 *
-	 * @formparam new New password
-	 * @formparam old Old password. Required only for ROLE_CUSTOMERGROUP
-	 * @security Permitted for trusted clients, customers and customer managers. Trusted client or customer manager may
-	 *           change someone's else password without knowing the old one.
-	 */
+
 	@Secured(
 	{ "ROLE_CUSTOMERGROUP", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERMANAGERGROUP" })
 	@RequestMapping(value = "/{userId}/password", method = RequestMethod.PUT)
 	@ResponseStatus(value = HttpStatus.ACCEPTED)
-	public void changePassword(@PathVariable final String userId, @RequestParam(required = false) final String old,
-			@RequestParam(value = "new") final String newPassword)
+	@ApiOperation(value = "Changes customer's password", notes = "Changes customer's password.")
+	@ApiBaseSiteIdAndUserIdParam
+	public void changePassword(@ApiParam("User identifier.") @PathVariable final String userId,
+			@ApiParam("Old password. Required only for ROLE_CUSTOMERGROUP") @RequestParam(required = false) final String old,
+			@ApiParam(value = "New password.", required = true) @RequestParam(value = "new") final String newPassword)
 	{
 		final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		final UserSignUpWsDTO customer = new UserSignUpWsDTO();
@@ -484,19 +451,16 @@ public class UsersController extends BaseCommerceController
 		return false;
 	}
 
-	/**
-	 * Returns customer's addresses.
-	 *
-	 * @queryparam fields Response configuration (list of fields, which should be returned in the response)
-	 * @return List of customer's addresses
-	 * @security Permitted for trusted clients, customers and customer managers. Trusted client or customer manager is
-	 *           able to impersonate as any other user and access data on their behalf.
-	 */
+
 	@Secured(
 	{ "ROLE_CUSTOMERGROUP", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERMANAGERGROUP" })
 	@RequestMapping(value = "/{userId}/addresses", method = RequestMethod.GET)
 	@ResponseBody
-	public AddressListWsDTO getAddresses(@RequestParam(defaultValue = DEFAULT_FIELD_SET) final String fields)
+	@ApiOperation(value = "Get customer's addresses", notes = "Returns customer's addresses.")
+	@ApiBaseSiteIdAndUserIdParam
+	@ApiResponse(code = 200, message = "List of customer's addresses")
+	public AddressListWsDTO getAddresses(
+			@ApiParam(value = "Response configuration (list of fields, which should be returned in response)", allowableValues = "BASIC, DEFAULT, FULL") @RequestParam(defaultValue = DEFAULT_FIELD_SET) final String fields)
 	{
 		final List<AddressData> addressList = getUserFacade().getAddressBook();
 		final AddressDataList addressDataList = new AddressDataList();
@@ -504,64 +468,50 @@ public class UsersController extends BaseCommerceController
 		return getDataMapper().map(addressDataList, AddressListWsDTO.class, fields);
 	}
 
-	/**
-	 * Creates a new address.
-	 *
-	 * @formparam firstName Customer's first name. This parameter is required.
-	 * @formparam lastName Customer's last name. This parameter is required.
-	 * @formparam titleCode Customer's title code. This parameter is required. For a list of codes, see
-	 *            /{baseSiteId}/titles resource
-	 * @formparam country.isocode Country isocode. This parameter is required and have influence on how rest of
-	 *            parameters are validated (e.g. if parameters are required : line1,line2,town,postalCode,region.isocode)
-	 * @formparam line1 First part of address. If this parameter is required depends on country (usually it is required).
-	 * @formparam line2 Second part of address. If this parameter is required depends on country (usually it is not
-	 *            required)
-	 * @formparam town Town name. If this parameter is required depends on country (usually it is required)
-	 * @formparam postalCode Postal code. If this parameter is required depends on country (usually it is required)
-	 * @formparam region.isocode Isocode for region. If this parameter is required depends on country.
-	 * @queryparam fields Response configuration (list of fields, which should be returned in the response)
-	 * @return Created address
-	 * @throws WebserviceValidationException
-	 * @security Permitted for customers, guests, customer managers or trusted client. Trusted client or customer manager
-	 *           is able to impersonate as any other user and access data on their behalf.
-	 */
+
 	@Secured(
 	{ "ROLE_CUSTOMERGROUP", "ROLE_GUEST", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERMANAGERGROUP" })
 	@RequestMapping(value = "/{userId}/addresses", method = RequestMethod.POST)
 	@ResponseBody
 	@ResponseStatus(value = HttpStatus.CREATED)
+	@ApiOperation(hidden = true, value = "Creates a new address.", notes = "Creates a new address.")
+	@ApiImplicitParams(
+	{ @ApiImplicitParam(name = "baseSiteId", value = "Base site identifier", required = true, dataType = "String", paramType = "path"),
+			@ApiImplicitParam(name = "userId", value = "User identifier", required = true, dataType = "String", paramType = "path"),
+			@ApiImplicitParam(name = "firstName", value = "Customer's first name", required = true, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "lastName", value = "Customer's last name", required = true, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "titleCode", value = "Customer's title code. Customer's title code. For a list of codes, see /{baseSiteId}/titles resource", required = true, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "country.isocode", value = "Country isocode. This parameter is required and have influence on how rest of parameters are validated (e.g. if parameters are required : line1,line2,town,postalCode,region.isocode)", required = true, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "line1", value = "First part of address. If this parameter is required depends on country (usually it is required).", required = false, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "line2", value = "Second part of address. If this parameter is required depends on country (usually it is not required)", required = false, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "town", value = "Town name. If this parameter is required depends on country (usually it is required)", required = false, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "postalCode", value = "Postal code. Isocode for region. If this parameter is required depends on country.", required = false, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "region.isocode", value = "Second part of address. If this parameter is required depends on country (usually it is not required)", required = false, dataType = "String", paramType = "query") })
 	public AddressWsDTO createAddress(final HttpServletRequest request,
-			@RequestParam(defaultValue = DEFAULT_FIELD_SET) final String fields) throws WebserviceValidationException //NOSONAR
+			@ApiParam(value = "Response configuration (list of fields, which should be returned in response)", allowableValues = "BASIC, DEFAULT, FULL") @RequestParam(defaultValue = DEFAULT_FIELD_SET) final String fields)
+			throws WebserviceValidationException //NOSONAR
 	{
 		final AddressData addressData = super.createAddressInternal(request);
 		return getDataMapper().map(addressData, AddressWsDTO.class, fields);
 	}
 
-	/**
-	 * Created a new address.
-	 *
-	 * @param address
-	 *           Address object
-	 * @queryparam fields Response configuration (list of fields, which should be returned in response)
-	 * @bodyparams firstName,lastName,titleCode,line1,line2,town,postalCode,country(isocode),region(isocode),
-	 *             defaultAddress
-	 * @return Created address
-	 * @throws WebserviceValidationException
-	 * @security Permitted for customers, guests, customer managers or trusted client. Trusted client or customer manager
-	 *           is able to impersonate as any other user and access data on their behalf.
-	 */
+
 	@Secured(
 	{ "ROLE_CUSTOMERGROUP", "ROLE_GUEST", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERMANAGERGROUP" })
 	@RequestMapping(value = "/{userId}/addresses", method = RequestMethod.POST, consumes =
 	{ MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	@ResponseBody
 	@ResponseStatus(value = HttpStatus.CREATED)
-	public AddressWsDTO createAddress(@RequestBody final AddressWsDTO address,
-			@RequestParam(defaultValue = DEFAULT_FIELD_SET) final String fields) throws WebserviceValidationException //NOSONAR
+	@ApiOperation(value = "Created a new address.", notes = "Created a new address.")
+	@ApiBaseSiteIdAndUserIdParam
+	public AddressWsDTO createAddress(
+			@ApiParam(value = "Address object.", required = true) @RequestBody final AddressWsDTO address,
+			@ApiParam(value = "Response configuration (list of fields, which should be returned in response)", allowableValues = "BASIC, DEFAULT, FULL") @RequestParam(defaultValue = DEFAULT_FIELD_SET) final String fields)
+			throws WebserviceValidationException //NOSONAR
 	{
 		validate(address, "address", getAddressDTOValidator());
 		final AddressData addressData = getDataMapper().map(address, AddressData.class,
-				"firstName,lastName,titleCode,line1,line2,town,postalCode,country(isocode),region(isocode),defaultAddress");
+				"firstName,lastName,titleCode,line1,line2,town,postalCode,country(isocode),region(isocode),defaultAddress,phone");
 		addressData.setShippingAddress(true);
 		addressData.setVisibleInAddressBook(true);
 
@@ -574,21 +524,16 @@ public class UsersController extends BaseCommerceController
 		return getDataMapper().map(addressData, AddressWsDTO.class, fields);
 	}
 
-	/**
-	 * Returns detailed information about address with a given id.
-	 *
-	 * @queryparam fields Response configuration (list of fields, which should be returned in the response)
-	 * @return Address data
-	 * @throws WebserviceValidationException
-	 * @security Permitted for customers, guests, customer managers or trusted client. Trusted client or customer manager
-	 *           is able to impersonate as any other user and access data on their behalf.
-	 */
+
 	@Secured(
 	{ "ROLE_CUSTOMERGROUP", "ROLE_GUEST", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERMANAGERGROUP" })
 	@RequestMapping(value = "/{userId}/addresses/{addressId}", method = RequestMethod.GET)
 	@ResponseBody
-	public AddressWsDTO getAddress(@PathVariable final String addressId,
-			@RequestParam(defaultValue = DEFAULT_FIELD_SET) final String fields) throws WebserviceValidationException //NOSONAR
+	@ApiOperation(value = "Get info about address", notes = "Returns detailed information about address with a given id.")
+	@ApiBaseSiteIdAndUserIdParam
+	public AddressWsDTO getAddress(@ApiParam(value = "Address identifier.", required = true) @PathVariable final String addressId,
+			@ApiParam(value = "Response configuration (list of fields, which should be returned in response)", allowableValues = "BASIC, DEFAULT, FULL") @RequestParam(defaultValue = DEFAULT_FIELD_SET) final String fields)
+			throws WebserviceValidationException //NOSONAR
 	{
 		if (LOG.isDebugEnabled())
 		{
@@ -605,32 +550,27 @@ public class UsersController extends BaseCommerceController
 		return getDataMapper().map(addressData, AddressWsDTO.class, fields);
 	}
 
-	/**
-	 * Updates the address. Attributes not provided in the request will be defined again (set to null or default).
-	 *
-	 * @formparam firstName Customer's first name. This parameter is required.
-	 * @formparam lastName Customer's last name. This parameter is required.
-	 * @formparam titleCode Customer's title code. This parameter is required. For a list of codes, see
-	 *            /{baseSiteId}/titles resource
-	 * @formparam country .isocode Country isocode. This parameter is required and have influence on how rest of
-	 *            parameters are validated (e.g. if parameters are required : line1,line2,town,postalCode,region.isocode)
-	 * @formparam line1 First part of address. If this parameter is required depends on country (usually it is required).
-	 * @formparam line2 Second part of address. If this parameter is required depends on country (usually it is not
-	 *            required)
-	 * @formparam town Town name. If this parameter is required depends on country (usually it is required)
-	 * @formparam postalCode Postal code. If this parameter is required depends on country (usually it is required)
-	 *            restparam region .isocode Isocode for region. If this parameter is required depends on country.
-	 * @formparam defaultAddress Parameter specifies if address should be default for customer
-	 * @throws WebserviceValidationException
-	 * @security Permitted for customers, guests, customer managers or trusted client. Trusted client or customer manager
-	 *           is able to impersonate as any other user and access data on their behalf.
-	 */
+
 	@Secured(
 	{ "ROLE_CUSTOMERGROUP", "ROLE_GUEST", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERMANAGERGROUP" })
 	@RequestMapping(value = "/{userId}/addresses/{addressId}", method = RequestMethod.PUT)
 	@ResponseStatus(HttpStatus.OK)
-	public void putAddress(@PathVariable final String addressId, final HttpServletRequest request)
-			throws WebserviceValidationException //NOSONAR
+	@ApiOperation(hidden = true, value = "Updates the address", notes = "Updates the address. Attributes not provided in the request will be defined again (set to null or default).")
+	@ApiImplicitParams(
+	{ @ApiImplicitParam(name = "baseSiteId", value = "Base site identifier", required = true, dataType = "String", paramType = "path"),
+			@ApiImplicitParam(name = "userId", value = "User identifier", required = true, dataType = "String", paramType = "path"),
+			@ApiImplicitParam(name = "firstName", value = "Customer's first name", required = true, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "lastName", value = "Customer's last name", required = true, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "titleCode", value = "Customer's title code. Customer's title code. For a list of codes, see /{baseSiteId}/titles resource", required = true, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "country.isocode", value = "Country isocode. This parameter is required and have influence on how rest of parameters are validated (e.g. if parameters are required : line1,line2,town,postalCode,region.isocode)", required = true, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "line1", value = "First part of address. If this parameter is required depends on country (usually it is required).", required = false, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "line2", value = "Second part of address. If this parameter is required depends on country (usually it is not required)", required = false, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "town", value = "Town name. If this parameter is required depends on country (usually it is required)", required = false, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "postalCode", value = "Postal code. Isocode for region. If this parameter is required depends on country.", required = false, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "region.isocode", value = "Isocode for region. If this parameter is required depends on country.", required = false, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "defaultAddress", value = "Parameter specifies if address should be default for customer.", required = false, dataType = "String", paramType = "query") })
+	public void putAddress(@ApiParam(value = "Address identifier.", required = true) @PathVariable final String addressId,
+			final HttpServletRequest request) throws WebserviceValidationException //NOSONAR
 	{
 		if (LOG.isDebugEnabled())
 		{
@@ -673,23 +613,16 @@ public class UsersController extends BaseCommerceController
 		}
 	}
 
-	/**
-	 * Updates the address. Attributes not provided in the request will be defined again (set to null or default).
-	 *
-	 * @param address
-	 *           Address object
-	 * @bodyparams firstName,lastName,titleCode,line1,line2,town,postalCode,region(isocode),country(isocode),
-	 *             defaultAddress
-	 * @throws WebserviceValidationException
-	 * @security Permitted for customers, guests, customer managers or trusted client. Trusted client or customer manager
-	 *           is able to impersonate as any other user and access data on their behalf.
-	 */
+
 	@Secured(
 	{ "ROLE_CUSTOMERGROUP", "ROLE_GUEST", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERMANAGERGROUP" })
 	@RequestMapping(value = "/{userId}/addresses/{addressId}", method = RequestMethod.PUT, consumes =
 	{ MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	@ResponseStatus(HttpStatus.OK)
-	public void putAddress(@PathVariable final String addressId, @RequestBody final AddressWsDTO address)
+	@ApiOperation(value = "Updates the address", notes = "Updates the address. Attributes not provided in the request will be defined again (set to null or default).")
+	@ApiBaseSiteIdAndUserIdParam
+	public void putAddress(@ApiParam(value = "Address identifier.", required = true) @PathVariable final String addressId,
+			@ApiParam(value = "Address object.", required = true) @RequestBody final AddressWsDTO address)
 			throws WebserviceValidationException //NOSONAR
 	{
 		validate(address, "address", getAddressDTOValidator());
@@ -713,32 +646,27 @@ public class UsersController extends BaseCommerceController
 		}
 	}
 
-	/**
-	 * Updates the address. Only attributes provided in the request body will be changed.
-	 *
-	 * @formparam firstName Customer's first name. This parameter is required.
-	 * @formparam lastName Customer's last name. This parameter is required.
-	 * @formparam titleCode Customer's title code. This parameter is required. For a list of codes, see
-	 *            /{baseSiteId}/titles resource
-	 * @formparam country.isocode Country isocode. This parameter is required and have influence on how rest of
-	 *            parameters are validated (e.g. if parameters are required : line1,line2,town,postalCode,region.isocode)
-	 * @formparam line1 First part of address. If this parameter is required depends on country (usually it is required).
-	 * @formparam line2 Second part of address. If this parameter is required depends on country (usually it is not
-	 *            required)
-	 * @formparam town Town name. If this parameter is required depends on country (usually it is required)
-	 * @formparam postalCode Postal code. If this parameter is required depends on country (usually it is required)
-	 * @formparam region.isocode ISO code for region. If this parameter is required depends on country.
-	 * @formparam defaultAddress Parameter specifies if address should be default for customer
-	 * @throws WebserviceValidationException
-	 * @security Permitted for customers, guests, customer managers or trusted client. Trusted client or customer manager
-	 *           is able to impersonate as any other user and access data on their behalf.
-	 */
+
 	@Secured(
 	{ "ROLE_CUSTOMERGROUP", "ROLE_GUEST", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERMANAGERGROUP" })
 	@RequestMapping(value = "/{userId}/addresses/{addressId}", method = RequestMethod.PATCH)
+	@ApiOperation(hidden = true, value = "Updates the address", notes = "Updates the address. Only attributes provided in the request body will be changed.")
+	@ApiImplicitParams(
+	{ @ApiImplicitParam(name = "baseSiteId", value = "Base site identifier", required = true, dataType = "String", paramType = "path"),
+			@ApiImplicitParam(name = "userId", value = "User identifier", required = true, dataType = "String", paramType = "path"),
+			@ApiImplicitParam(name = "firstName", value = "Customer's first name", required = true, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "lastName", value = "Customer's last name", required = true, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "titleCode", value = "Customer's title code. Customer's title code. For a list of codes, see /{baseSiteId}/titles resource", required = true, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "country.isocode", value = "Country isocode. This parameter is required and have influence on how rest of parameters are validated (e.g. if parameters are required : line1,line2,town,postalCode,region.isocode)", required = true, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "line1", value = "First part of address. If this parameter is required depends on country (usually it is required).", required = false, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "line2", value = "Second part of address. If this parameter is required depends on country (usually it is not required)", required = false, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "town", value = "Town name. If this parameter is required depends on country (usually it is required)", required = false, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "postalCode", value = "Postal code. Isocode for region. If this parameter is required depends on country.", required = false, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "region.isocode", value = "Isocode for region. If this parameter is required depends on country.", required = false, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "defaultAddress", value = "Parameter specifies if address should be default for customer.", required = false, dataType = "String", paramType = "query") })
 	@ResponseStatus(HttpStatus.OK)
-	public void patchAddress(@PathVariable final String addressId, final HttpServletRequest request)
-			throws WebserviceValidationException //NOSONAR
+	public void patchAddress(@ApiParam(value = "Address identifier.", required = true) @PathVariable final String addressId,
+			final HttpServletRequest request) throws WebserviceValidationException //NOSONAR
 	{
 		if (LOG.isDebugEnabled())
 		{
@@ -775,23 +703,16 @@ public class UsersController extends BaseCommerceController
 		getUserFacade().editAddress(addressData);
 	}
 
-	/**
-	 * Updates the address. Only attributes provided in the request body will be changed.
-	 *
-	 * @param address
-	 *           address object
-	 * @bodyparams firstName,lastName,titleCode,line1,line2,town,postalCode,region(isocode),country(isocode),
-	 *             defaultAddress
-	 * @throws WebserviceValidationException
-	 * @security Permitted for customers, guests, customer managers or trusted client. Trusted client or customer manager
-	 *           is able to impersonate as any other user and access data on their behalf.
-	 */
+
 	@Secured(
 	{ "ROLE_CUSTOMERGROUP", "ROLE_GUEST", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERMANAGERGROUP" })
 	@RequestMapping(value = "/{userId}/addresses/{addressId}", method = RequestMethod.PATCH, consumes =
 	{ MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+	@ApiOperation(value = "Updates the address", notes = "Updates the address. Only attributes provided in the request body will be changed.")
+	@ApiBaseSiteIdAndUserIdParam
 	@ResponseStatus(HttpStatus.OK)
-	public void patchAddress(@PathVariable final String addressId, @RequestBody final AddressWsDTO address)
+	public void patchAddress(@ApiParam(value = "Address identifier.", required = true) @PathVariable final String addressId,
+			@ApiParam(value = "Address object", required = true) @RequestBody final AddressWsDTO address)
 			throws WebserviceValidationException //NOSONAR
 	{
 		final AddressData addressData = getUserFacade().getAddressForCode(addressId);
@@ -820,17 +741,14 @@ public class UsersController extends BaseCommerceController
 		getUserFacade().editAddress(addressData);
 	}
 
-	/**
-	 * Removes customer's address.
-	 *
-	 * @security Permitted for customers, guests, customer managers or trusted client. Trusted client or customer manager
-	 *           is able to impersonate as any other user and access data on their behalf.
-	 */
+
 	@Secured(
 	{ "ROLE_CUSTOMERGROUP", "ROLE_GUEST", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERMANAGERGROUP" })
 	@RequestMapping(value = "/{userId}/addresses/{addressId}", method = RequestMethod.DELETE)
+	@ApiOperation(value = "Delete customer's address", notes = "Removes customer's address.")
+	@ApiBaseSiteIdAndUserIdParam
 	@ResponseStatus(HttpStatus.OK)
-	public void deleteAddress(@PathVariable final String addressId)
+	public void deleteAddress(@ApiParam(value = "Address identifier.", required = true) @PathVariable final String addressId)
 	{
 		if (LOG.isDebugEnabled())
 		{
@@ -846,28 +764,23 @@ public class UsersController extends BaseCommerceController
 		getUserFacade().removeAddress(address);
 	}
 
-	/**
-	 * Verifies the address.
-	 *
-	 * @formparam country.isocode Country isocode. This parameter is required and have influence on how rest of
-	 *            parameters are validated (e.g. if parameters are required : line1,line2,town,postalCode,region.isocode)
-	 * @formparam line1 First part of address. If this parameter is required depends on country (usually it is required).
-	 * @formparam line2 Second part of address. If this parameter is required depends on country (usually it is not
-	 *            required)
-	 * @formparam town Town name. If this parameter is required depends on country (usually it is required)
-	 * @formparam postalCode Postal code. If this parameter is required depends on country (usually it is required)
-	 * @formparam region.isocode Isocode for region. If this parameter is required depends on country.
-	 * @queryparam fields Response configuration (list of fields, which should be returned in the response)
-	 * @return verification results. If address is incorrect there are information about errors and suggested addresses
-	 * @security Permitted for customers, guests, customer managers or trusted client. Trusted client or customer manager
-	 *           is able to impersonate as any other user and access data on their behalf.
-	 */
+
 	@Secured(
 	{ "ROLE_CUSTOMERGROUP", "ROLE_GUEST", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERMANAGERGROUP" })
 	@RequestMapping(value = "/{userId}/addresses/verification", method = RequestMethod.POST)
 	@ResponseBody
+	@ApiOperation(hidden = true, value = "Verifies the address", notes = "Verifies the address.")
+	@ApiImplicitParams(
+	{ @ApiImplicitParam(name = "baseSiteId", value = "Base site identifier", required = true, dataType = "String", paramType = "path"),
+			@ApiImplicitParam(name = "userId", value = "User identifier", required = true, dataType = "String", paramType = "path"),
+			@ApiImplicitParam(name = "country.isocode", value = "Country isocode. This parameter is required and have influence on how rest of parameters are validated (e.g. if parameters are required : line1,line2,town,postalCode,region.isocode)", required = true, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "line1", value = "First part of address. If this parameter is required depends on country (usually it is required).", required = false, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "line2", value = "Second part of address. If this parameter is required depends on country (usually it is not required)", required = false, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "town", value = "Town name. If this parameter is required depends on country (usually it is required)", required = false, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "postalCode", value = "Postal code. Isocode for region. If this parameter is required depends on country.", required = false, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "region.isocode", value = "Isocode for region. If this parameter is required depends on country.", required = false, dataType = "String", paramType = "query") })
 	public AddressValidationWsDTO verifyAddress(final HttpServletRequest request,
-			@RequestParam(defaultValue = DEFAULT_FIELD_SET) final String fields)
+			@ApiParam(value = "Response configuration (list of fields, which should be returned in response)", allowableValues = "BASIC, DEFAULT, FULL") @RequestParam(defaultValue = DEFAULT_FIELD_SET) final String fields)
 	{
 		final AddressData addressData = new AddressData();
 		final Errors errors = new BeanPropertyBindingResult(addressData, "addressData");
@@ -881,24 +794,17 @@ public class UsersController extends BaseCommerceController
 		return getDataMapper().map(validationData, AddressValidationWsDTO.class, fields);
 	}
 
-	/**
-	 * Verifies address
-	 *
-	 * @param address
-	 *           address object
-	 * @queryparam fields Response configuration (list of fields, which should be returned in the response)
-	 * @bodyparams firstName,lastName,titleCode,line1,line2,town,postalCode,country(isocode),region(isocode)
-	 * @return verification results. If address is incorrect there are information about errors and suggested addresses
-	 * @security Permitted for customers, guests, customer managers or trusted client. Trusted client or customer manager
-	 *           is able to impersonate as any other user and access data on their behalf.
-	 */
+
 	@Secured(
 	{ "ROLE_CUSTOMERGROUP", "ROLE_GUEST", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERMANAGERGROUP" })
 	@RequestMapping(value = "/{userId}/addresses/verification", method = RequestMethod.POST, consumes =
 	{ MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+	@ApiOperation(value = "Verifies address", notes = "Verifies address.")
+	@ApiBaseSiteIdAndUserIdParam
 	@ResponseBody
-	public AddressValidationWsDTO verifyAddress(@RequestBody final AddressWsDTO address,
-			@RequestParam(defaultValue = DEFAULT_FIELD_SET) final String fields)
+	public AddressValidationWsDTO verifyAddress(
+			@ApiParam(value = "Address object.", required = true) @RequestBody final AddressWsDTO address,
+			@ApiParam(value = "Response configuration (list of fields, which should be returned in response)", allowableValues = "BASIC, DEFAULT, FULL") @RequestParam(defaultValue = DEFAULT_FIELD_SET) final String fields)
 	{
 		// validation is a bit different here
 		final AddressData addressData = getDataMapper().map(address, AddressData.class,
@@ -921,7 +827,8 @@ public class UsersController extends BaseCommerceController
 	 * @formparam validationData
 	 * @return true - adress is valid , false - address is invalid
 	 */
-	protected boolean isAddressValid(final AddressData addressData, final Errors errors, final AddressValidationData validationData)
+	protected boolean isAddressValid(final AddressData addressData, final Errors errors,
+			final AddressValidationData validationData)
 	{
 		getAddressValidator().validate(addressData, errors);
 
@@ -986,21 +893,16 @@ public class UsersController extends BaseCommerceController
 		addressDataErrorsPopulator.populate(addressVerificationResult, errors);
 	}
 
-	/**
-	 * Return customer's credit card payment details list.
-	 *
-	 * @queryparam saved Type of payment details
-	 * @queryparam fields Response configuration (list of fields, which should be returned in the response)
-	 * @return Customer's payment details list
-	 * @security Permitted for customers, customer managers or trusted client. Trusted client or customer manager is able
-	 *           to impersonate as any other user and access data on their behalf.
-	 */
+
 	@Secured(
 	{ "ROLE_CUSTOMERGROUP", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERMANAGERGROUP" })
 	@RequestMapping(value = "/{userId}/paymentdetails", method = RequestMethod.GET)
 	@ResponseBody
-	public PaymentDetailsListWsDTO getPaymentInfos(@RequestParam(required = false, defaultValue = "false") final boolean saved,
-			@RequestParam(defaultValue = DEFAULT_FIELD_SET) final String fields)
+	@ApiOperation(value = "Get customer's credit card payment details list.", notes = "Return customer's credit card payment details list.")
+	@ApiBaseSiteIdAndUserIdParam
+	public PaymentDetailsListWsDTO getPaymentInfos(
+			@ApiParam(value = "Type of payment details.", required = true) @RequestParam(required = false, defaultValue = "false") final boolean saved,
+			@ApiParam(value = "Response configuration (list of fields, which should be returned in response)", allowableValues = "BASIC, DEFAULT, FULL") @RequestParam(defaultValue = DEFAULT_FIELD_SET) final String fields)
 	{
 		if (LOG.isDebugEnabled())
 		{
@@ -1013,20 +915,16 @@ public class UsersController extends BaseCommerceController
 		return getDataMapper().map(paymentInfoDataList, PaymentDetailsListWsDTO.class, fields);
 	}
 
-	/**
-	 * Returns customer's credit card payment details for a given id.
-	 *
-	 * @queryparam fields Response configuration (list of fields, which should be returned in the response)
-	 * @return Customer's credit card payment details
-	 * @security Permitted for customers, customer managers or trusted client. Trusted client or customer manager is able
-	 *           to impersonate as any other user and access data on their behalf.
-	 */
+
 	@Secured(
 	{ "ROLE_CUSTOMERGROUP", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERMANAGERGROUP" })
 	@RequestMapping(value = "/{userId}/paymentdetails/{paymentDetailsId}", method = RequestMethod.GET)
 	@ResponseBody
-	public PaymentDetailsWsDTO getPaymentDetails(@PathVariable final String paymentDetailsId,
-			@RequestParam(defaultValue = DEFAULT_FIELD_SET) final String fields)
+	@ApiOperation(value = "Get customer's credit card payment details.", notes = "Returns customer's credit card payment details for a given id.")
+	@ApiBaseSiteIdAndUserIdParam
+	public PaymentDetailsWsDTO getPaymentDetails(
+			@ApiParam(value = "Payment details identifier.", required = true) @PathVariable final String paymentDetailsId,
+			@ApiParam(value = "Response configuration (list of fields, which should be returned in response)", allowableValues = "BASIC, DEFAULT, FULL") @RequestParam(defaultValue = DEFAULT_FIELD_SET) final String fields)
 	{
 		return getDataMapper().map(getPaymentInfo(paymentDetailsId), PaymentDetailsWsDTO.class, fields);
 	}
@@ -1051,17 +949,15 @@ public class UsersController extends BaseCommerceController
 		}
 	}
 
-	/**
-	 * Removes customer's credit card payment details based on its ID.
-	 * 
-	 * @security Permitted for customers, customer managers or trusted client. Trusted client or customer manager is able
-	 *           to impersonate as any other user and access data on their behalf.
-	 */
+
 	@Secured(
 	{ "ROLE_CUSTOMERGROUP", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERMANAGERGROUP" })
 	@RequestMapping(value = "/{userId}/paymentdetails/{paymentDetailsId}", method = RequestMethod.DELETE)
+	@ApiOperation(value = "Delete customer's credit card payment details.", notes = "Removes customer's credit card payment details based on its ID.")
+	@ApiBaseSiteIdAndUserIdParam
 	@ResponseStatus(HttpStatus.OK)
-	public void deletePaymentInfo(@PathVariable final String paymentDetailsId)
+	public void deletePaymentInfo(
+			@ApiParam(value = "Payment details identifier.", required = true) @PathVariable final String paymentDetailsId)
 	{
 		if (LOG.isDebugEnabled())
 		{
@@ -1071,49 +967,38 @@ public class UsersController extends BaseCommerceController
 		getUserFacade().removeCCPaymentInfo(paymentDetailsId);
 	}
 
-	/**
-	 * Updates existing customer's credit card payment details based on its ID. Only attributes given in request will be
-	 * changed.
-	 *
-	 * @formparam accountHolderName Name on card. This parameter is required.
-	 * @formparam cardNumber Card number. This parameter is required.
-	 * @formparam cardType Card type. This parameter is required. Call GET /{baseSiteId}/cardtypes beforehand to see what
-	 *            card types are supported
-	 * @formparam expiryMonth Month of expiry date. This parameter is required.
-	 * @formparam expiryYear Year of expiry date. This parameter is required.
-	 * @formparam issueNumber
-	 * @formparam startMonth
-	 * @formparam startYear
-	 * @formparam subscriptionId
-	 * @formparam saved Parameter defines if the payment details should be saved for the customer and than could be
-	 *            reused for future orders.
-	 * @formparam defaultPaymentInfo Parameter defines if the payment details should be used as default for customer.
-	 * @formparam billingAddress.firstName Customer's first name. This parameter is required.
-	 * @formparam billingAddress.lastName Customer's last name. This parameter is required.
-	 * @formparam billingAddress.titleCode Customer's title code. This parameter is required. For a list of codes, see
-	 *            /{baseSiteId}/titles resource
-	 * @formparam billingAddress.country.isocode Country isocode. This parameter is required and have influence on how
-	 *            rest of address parameters are validated (e.g. if parameters are required :
-	 *            line1,line2,town,postalCode,region.isocode)
-	 * @formparam billingAddress.line1 First part of address. If this parameter is required depends on country (usually
-	 *            it is required).
-	 * @formparam billingAddress.line2 Second part of address. If this parameter is required depends on country (usually
-	 *            it is not required)
-	 * @formparam billingAddress.town Town name. If this parameter is required depends on country (usually it is
-	 *            required)
-	 * @formparam billingAddress.postalCode Postal code. If this parameter is required depends on country (usually it is
-	 *            required)
-	 * @formparam billingAddress.region.isocode Isocode for region. If this parameter is required depends on country.
-	 * @throws RequestParameterException
-	 * @security Permitted for customers, customer managers or trusted client. Trusted client or customer manager is able
-	 *           to impersonate as any other user and access data on their behalf.
-	 */
+
+
 	@Secured(
 	{ "ROLE_CUSTOMERGROUP", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERMANAGERGROUP" })
 	@RequestMapping(value = "/{userId}/paymentdetails/{paymentDetailsId}", method = RequestMethod.PATCH)
+	@ApiOperation(hidden = true, value = "Updates existing customer's credit card payment details. ", notes = "Updates existing customer's credit card payment details based on its ID. Only attributes given in request will be changed.")
+	@ApiImplicitParams(
+	{ @ApiImplicitParam(name = "baseSiteId", value = "Base site identifier", required = true, dataType = "String", paramType = "path"),
+			@ApiImplicitParam(name = "userId", value = "User identifier", required = true, dataType = "String", paramType = "path"),
+			@ApiImplicitParam(name = "accountHolderName", value = "Name on card.", required = true, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "cardType", value = "Card type. Call GET /{baseSiteId}/cardtypes beforehand to see what card types are supported.", required = true, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "expiryMonth", value = "Month of expiry date.", required = true, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "expiryYear", value = "Year of expiry date.", required = true, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "issueNumber", dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "startMonth", dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "startYear", dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "subscriptionId", dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "saved", value = "Parameter defines if the payment details should be saved for the customer and than could be reused", dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "defaultPaymentInfo", value = "Parameter defines if the payment details should be used as default for customer.", dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "billingAddress.firstName", value = "Customer's first name.", required = true, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "billingAddress.lastName", value = "Customer's last name.", required = true, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "billingAddress.titleCode", value = "Customer's title code. For a list of codes, see /{baseSiteId}/titles resource", required = true, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "billingAddress.country.isocode", value = "Country isocode. This parameter havs influence on how rest of address parameters are validated (e.g. if parameters are required: line1,line2,town,postalCode,region.isocode)", required = true, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "billingAddress.line1", value = "If this parameter is required depends on country (usually it is required).", required = true, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "billingAddress.line2", value = "Second part of address. If this parameter is required depends on country (usually it is not required)", dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "bbillingAddress.town", value = "If this parameter is required depends on country (usually it is required)", required = true, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "billingAddress.postalCode", value = "Postal code. If this parameter is required depends on country (usually it is required)", required = true, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "billingAddressregion.isocode", value = "Isocode for region. If this parameter is required depends on country.", required = false, dataType = "String", paramType = "query") })
 	@ResponseStatus(HttpStatus.OK)
-	public void updatePaymentInfo(@PathVariable final String paymentDetailsId, final HttpServletRequest request)
-			throws RequestParameterException //NOSONAR
+	public void updatePaymentInfo(
+			@ApiParam(value = "Payment details identifier.", required = true) @PathVariable final String paymentDetailsId,
+			final HttpServletRequest request) throws RequestParameterException //NOSONAR
 	{
 		if (LOG.isDebugEnabled())
 		{
@@ -1137,28 +1022,18 @@ public class UsersController extends BaseCommerceController
 		}
 	}
 
-	/**
-	 * Updates existing customer's credit card payment details based on its ID. Only attributes given in request will be
-	 * changed.
-	 *
-	 * @param paymentDetails
-	 *           payment details object
-	 * @bodyparams accountHolderName,cardNumber,cardType,issueNumber,startMonth,expiryMonth,startYear,expiryYear,
-	 *             subscriptionId
-	 *             ,defaultPaymentInfo,saved,billingAddress(firstName,lastName,titleCode,line1,line2,town,postalCode,
-	 *             region(isocode),country(isocode),defaultAddress)
-	 * @throws RequestParameterException
-	 * @throws WebserviceValidationException
-	 * @security Permitted for customers, customer managers or trusted client. Trusted client or customer manager is able
-	 *           to impersonate as any other user and access data on their behalf.
-	 */
+
 	@Secured(
 	{ "ROLE_CUSTOMERGROUP", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERMANAGERGROUP" })
 	@RequestMapping(value = "/{userId}/paymentdetails/{paymentDetailsId}", method = RequestMethod.PATCH, consumes =
 	{ MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+	@ApiOperation(value = "Updates existing customer's credit card payment details.", notes = "Updates existing customer's credit card payment details based on its ID. Only attributes given in request will be changed.")
+	@ApiBaseSiteIdAndUserIdParam
 	@ResponseStatus(HttpStatus.OK)
-	public void updatePaymentInfo(@PathVariable final String paymentDetailsId,
-			@RequestBody final PaymentDetailsWsDTO paymentDetails) throws RequestParameterException //NOSONAR
+	public void updatePaymentInfo(
+			@ApiParam(value = "Payment details identifier.", required = true) @PathVariable final String paymentDetailsId,
+			@ApiParam(value = "Payment details object", required = true) @RequestBody final PaymentDetailsWsDTO paymentDetails)
+			throws RequestParameterException //NOSONAR
 	{
 		final CCPaymentInfoData paymentInfoData = getPaymentInfo(paymentDetailsId);
 		final boolean isAlreadyDefaultPaymentInfo = paymentInfoData.isDefaultPaymentInfo();
@@ -1176,46 +1051,33 @@ public class UsersController extends BaseCommerceController
 
 	}
 
-	/**
-	 * Updates existing customer's credit card payment info based on the payment info ID. Attributes not given in request
-	 * will be defined again (set to null or default).
-	 *
-	 * @formparam accountHolderName Name on card. This parameter is required.
-	 * @formparam cardNumber Card number. This parameter is required.
-	 * @formparam cardType Card type. This parameter is required. Call GET /{baseSiteId}/cardtypes beforehand to see what
-	 *            card types are supported
-	 * @formparam expiryMonth Month of expiry date. This parameter is required.
-	 * @formparam expiryYear Year of expiry date. This parameter is required.
-	 * @formparam issueNumber
-	 * @formparam startMonth
-	 * @formparam startYear
-	 * @formparam subscriptionId
-	 * @formparam saved Parameter defines if the payment details should be saved for the customer and than could be
-	 *            reused for future orders.
-	 * @formparam defaultPaymentInfo Parameter defines if the payment details should be used as default for customer.
-	 * @formparam billingAddress.firstName Customer's first name. This parameter is required.
-	 * @formparam billingAddress.lastName Customer's last name. This parameter is required.
-	 * @formparam billingAddress.titleCode Customer's title code. This parameter is required. For a list of codes, see
-	 *            /{baseSiteId}/titles resource
-	 * @formparam billingAddress.country.isocode Country isocode. This parameter is required and have influence on how
-	 *            rest of address parameters are validated (e.g. if parameters are required :
-	 *            line1,line2,town,postalCode,region.isocode)
-	 * @formparam billingAddress.line1 First part of address. If this parameter is required depends on country (usually
-	 *            it is required).
-	 * @formparam billingAddress.line2 Second part of address. If this parameter is required depends on country (usually
-	 *            it is not required)
-	 * @formparam billingAddress.town Town name. If this parameter is required depends on country (usually it is
-	 *            required)
-	 * @formparam billingAddress.postalCode Postal code. If this parameter is required depends on country (usually it is
-	 *            required)
-	 * @formparam billingAddress.region.isocode Isocode for region. If this parameter is required depends on country.
-	 * @throws RequestParameterException
-	 * @security Permitted for customers, customer managers or trusted client. Trusted client or customer manager is able
-	 *           to impersonate as any other user and access data on their behalf.
-	 */
+
 	@Secured(
 	{ "ROLE_CUSTOMERGROUP", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERMANAGERGROUP" })
 	@RequestMapping(value = "/{userId}/paymentdetails/{paymentDetailsId}", method = RequestMethod.PUT)
+	@ApiOperation(hidden = true, value = "Updates existing customer's credit card payment details. ", notes = "Updates existing customer's credit card payment info based on the payment info ID. Attributes not given in request will be defined again (set to null or default).")
+	@ApiImplicitParams(
+	{ @ApiImplicitParam(name = "baseSiteId", value = "Base site identifier", required = true, dataType = "String", paramType = "path"),
+			@ApiImplicitParam(name = "userId", value = "User identifier", required = true, dataType = "String", paramType = "path"),
+			@ApiImplicitParam(name = "accountHolderName", value = "Name on card.", required = true, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "cardType", value = "Card type. Call GET /{baseSiteId}/cardtypes beforehand to see what card types are supported.", required = true, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "expiryMonth", value = "Month of expiry date.", required = true, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "expiryYear", value = "Year of expiry date.", required = true, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "issueNumber", dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "startMonth", dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "startYear", dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "subscriptionId", dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "saved", value = "Parameter defines if the payment details should be saved for the customer and than could be reused", dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "defaultPaymentInfo", value = "Parameter defines if the payment details should be used as default for customer.", dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "billingAddress.firstName", value = "Customer's first name.", required = true, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "billingAddress.lastName", value = "Customer's last name.", required = true, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "billingAddress.titleCode", value = "Customer's title code. For a list of codes, see /{baseSiteId}/titles resource", required = true, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "billingAddress.country.isocode", value = "Country isocode. This parameter havs influence on how rest of address parameters are validated (e.g. if parameters are required: line1,line2,town,postalCode,region.isocode)", required = true, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "billingAddress.line1", value = "If this parameter is required depends on country (usually it is required).", required = true, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "billingAddress.line2", value = "Second part of address. If this parameter is required depends on country (usually it is not required)", dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "bbillingAddress.town", value = "If this parameter is required depends on country (usually it is required)", required = true, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "billingAddress.postalCode", value = "Postal code. If this parameter is required depends on country (usually it is required)", required = true, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "billingAddressregion.isocode", value = "Isocode for region. If this parameter is required depends on country.", required = false, dataType = "String", paramType = "query") })
 	@ResponseStatus(HttpStatus.OK)
 	public void putPaymentInfo(@PathVariable final String paymentDetailsId, final HttpServletRequest request)
 			throws RequestParameterException //NOSONAR
@@ -1266,26 +1128,17 @@ public class UsersController extends BaseCommerceController
 		}
 	}
 
-	/**
-	 * Updates existing customer's credit card payment info based on the payment info ID. Attributes not given in request
-	 * will be defined again (set to null or default).
-	 *
-	 * @param paymentDetails
-	 *           payment details object
-	 * @bodyparams accountHolderName,cardNumber,cardType,issueNumber,startMonth,expiryMonth,startYear,expiryYear,
-	 *             subscriptionId
-	 *             ,defaultPaymentInfo,saved,billingAddress(firstName,lastName,titleCode,line1,line2,town,postalCode,
-	 *             region(isocode),country(isocode),defaultAddress)
-	 * @throws RequestParameterException
-	 * @security Permitted for customers, customer managers or trusted client. Trusted client or customer manager is able
-	 *           to impersonate as any other user and access data on their behalf.
-	 */
+
 	@Secured(
 	{ "ROLE_CUSTOMERGROUP", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERMANAGERGROUP" })
 	@RequestMapping(value = "/{userId}/paymentdetails/{paymentDetailsId}", method = RequestMethod.PUT, consumes =
 	{ MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+	@ApiOperation(value = "Updates existing customer's credit card payment info.", notes = "Updates existing customer's credit card payment info based on the payment info ID. Attributes not given in request will be defined again (set to null or default).")
+	@ApiBaseSiteIdAndUserIdParam
 	@ResponseStatus(HttpStatus.OK)
-	public void putPaymentInfo(@PathVariable final String paymentDetailsId, @RequestBody final PaymentDetailsWsDTO paymentDetails)
+	public void putPaymentInfo(
+			@ApiParam(value = "Payment details identifier.", required = true) @PathVariable final String paymentDetailsId,
+			@ApiParam(value = "Payment details object.", required = true) @RequestBody final PaymentDetailsWsDTO paymentDetails)
 			throws RequestParameterException //NOSONAR
 	{
 		final CCPaymentInfoData paymentInfoData = getPaymentInfo(paymentDetailsId);
@@ -1303,20 +1156,16 @@ public class UsersController extends BaseCommerceController
 		}
 	}
 
-	/**
-	 * Returns all customer groups of a customer.
-	 *
-	 * @queryparam fields Response configuration (list of fields, which should be returned in the response)
-	 * @return All customer groups of a customer.
-	 * @security Permitted for customers, customer managers or trusted client. Trusted client or customer manager is able
-	 *           to impersonate as any other user and access data on their behalf.
-	 */
+
 	@Secured(
 	{ "ROLE_CUSTOMERGROUP", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERMANAGERGROUP" })
 	@RequestMapping(value = "/{userId}/customergroups", method = RequestMethod.GET)
+	@ApiOperation(value = "Get all customer groups of a customer.", notes = "Returns all customer groups of a customer.")
+	@ApiBaseSiteIdAndUserIdParam
 	@ResponseBody
-	public UserGroupListWsDTO getAllCustomerGroupsForCustomer(@PathVariable final String userId,
-			@RequestParam(defaultValue = DEFAULT_FIELD_SET) final String fields)
+	public UserGroupListWsDTO getAllCustomerGroupsForCustomer(
+			@ApiParam(value = "User identifier.", required = true) @PathVariable final String userId,
+			@ApiParam(value = "Response configuration (list of fields, which should be returned in response)", allowableValues = "BASIC, DEFAULT, FULL") @RequestParam(defaultValue = DEFAULT_FIELD_SET) final String fields)
 	{
 		final UserGroupDataList userGroupDataList = new UserGroupDataList();
 		userGroupDataList.setUserGroups(customerGroupFacade.getCustomerGroupsForUser(userId));

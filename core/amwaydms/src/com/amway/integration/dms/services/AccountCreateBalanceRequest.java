@@ -4,6 +4,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "accountCreateBalanceRequest", propOrder =
@@ -13,6 +15,7 @@ import javax.xml.bind.annotation.XmlType;
  * Dms Request for Account create balance
  *
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class AccountCreateBalanceRequest extends BaseWebServiceInput
 {
 

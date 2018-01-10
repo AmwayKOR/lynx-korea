@@ -7,6 +7,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 /**
  * <p>Java class for taxDetailsOutput complex type.
@@ -39,6 +41,7 @@ import javax.xml.bind.annotation.XmlType;
     "taxTypeCd",
     "taxTypeExpireDate"
 })
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class TaxDetailsOutput {
 
     @XmlElementRef(name = "countryTaxCd", type = JAXBElement.class, required = false)

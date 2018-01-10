@@ -90,6 +90,9 @@
 		<value>logoutsuccessful</value>
 		<value>oauth</value>
 		<value>customers/current/logout</value>
+		<value>swagger</value>
+		<value>api-docs</value>
+		<value>webjars</value>
 	</util:set>
 
 </beans>

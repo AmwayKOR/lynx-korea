@@ -47,6 +47,10 @@
         <ref bean="commerceWebServicesSessionAttributesFilterV2" />
 
         <ref bean="guestRoleFilterV2" />
+
+        <!-- Set sales application in session -->
+        <ref bean="amwaySalesApplicationFilter" />
+
     </util:list>
 
     <alias alias="userMatchingFilter" name="defaultAmwayUserMatchingFilter" />
@@ -60,6 +64,8 @@
     <bean id="defaultposMatchingFilter" class="com.amway.core.v2.filter.PosMatchingFilter">
         <property name="regexp" value="/account/([^/]+)" />
     </bean>
+
+    <bean id="amwaySalesApplicationFilter" class="com.amway.core.filter.v2.AmwaySalesApplicationFilter"/>
 
 
 </beans>

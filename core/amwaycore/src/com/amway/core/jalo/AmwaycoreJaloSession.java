@@ -40,7 +40,7 @@ public class AmwaycoreJaloSession extends CommerceJaloSession
 
 	private void updateSessionCtxTimeZone()
 	{
-		final BaseSiteModel currentBaseSite = Registry.getApplicationContext().getBean(BaseSiteService.class).getCurrentBaseSite();
+		final BaseSiteModel currentBaseSite = Registry.getApplicationContext().getBean("baseSiteService", BaseSiteService.class).getCurrentBaseSite();
 		final User user = getSessionContext().getUser();
 		String timeZone = null;
 		if (user != null && user instanceof Employee)

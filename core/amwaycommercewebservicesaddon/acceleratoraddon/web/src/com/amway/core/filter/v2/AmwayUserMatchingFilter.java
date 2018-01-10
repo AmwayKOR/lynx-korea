@@ -13,6 +13,7 @@
  */
 package com.amway.core.v2.filter;
 
+import com.amway.core.annotations.AmwayBean;
 import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.servicelayer.user.UserService;
 
@@ -23,6 +24,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;
@@ -39,6 +41,7 @@ import com.amway.core.service.AmwayAccountCommerceService;
 /**
  * Filter that puts user from the requested url into the session.
  */
+@AmwayBean(docs="https://jira.amway.com:8444/display/HC/amwaycommercewebservicesaddon")
 public class AmwayUserMatchingFilter extends AbstractUrlMatchingFilter
 {
 	public static final String ROLE_ANONYMOUS = "ROLE_ANONYMOUS";
@@ -168,7 +171,8 @@ public class AmwayUserMatchingFilter extends AbstractUrlMatchingFilter
 			currentAccount = accountCommerceService.getCurrentAccount();
 		}
 
-		if (!currentAccount.getParties().contains(userModel))
+		if ( null != currentAccount && CollectionUtils.isNotEmpty(currentAccount.getParties())
+				&& !currentAccount.getParties().contains(userModel))
 			throw new AccessDeniedException("Invalid user (party) associated to the b2bunit (account)");
 
 	}

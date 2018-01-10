@@ -21,6 +21,8 @@ import com.hybris.commons.client.RestResponse;
 
 /**
  * Service for to get address information from MAGIC.
+ *
+ * port to amwaydms2
  */
 public class DefaultAddressInformationService extends
 		AbstractDmsService<AddressResultData<AddressProcessDecision>, AddressInformationRequestData, AddressInformationResponse>

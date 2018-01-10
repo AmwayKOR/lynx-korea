@@ -1,0 +1,82 @@
+
+# Payment Modes
+INSERT_UPDATE StandardPaymentMode;code[unique=true];name[lang=de];name[lang=en];description[lang=en];active;paymentinfotype(code);allowOverpay[default=false];overpaymentThreshold
+;creditCard;creditCard;creditCard;payment with credit Card;true;CreditCardPaymentInfo;;
+;arCredit;arCredit;arCredit;payment with AR Credit;true;AmwayMonetaryPaymentInfo;;
+;cash;cash;cash;payment with Cash;true;AmwayCashPaymentInfo;true;100
+
+# Payment Config
+INSERT_UPDATE AmwayPaymentConfig;code[unique=true];businessNature(code);returnPaymentModes(code);channel(code)[unique=true][default=pos];type(code)[unique=true][default=pos];active[default=true];subtotal[default=1];baseStore(uid)[default=testStore]
+## cash
+;pos_abo_ca;AmwayBusinessNature_1;cash;
+;pos_cus_ca;AmwayBusinessNature_4;cash;
+
+## AR
+;pos_abo_ar;AmwayBusinessNature_1;
+
+##CC + CC
+;pos_abo_ccn;AmwayBusinessNature_1;;;;;200
+;pos_cus_ccn;AmwayBusinessNature_4;;;;;200
+
+##CC + AR
+;pos_abo_cc_ar;AmwayBusinessNature_1;
+
+## cash + n dc
+;pos_abo_ca_dc;AmwayBusinessNature_1;cash;
+;pos_cus_ca_dc;AmwayBusinessNature_1;cash;
+
+## cash + n cc
+;pos_abo_ca_cc;AmwayBusinessNature_1;cash;
+;pos_cus_ca_cc;AmwayBusinessNature_4;cash;
+
+## cash + ar
+;pos_abo_ca_ar;AmwayBusinessNature_1;cash;
+;pos_cus_ca_ar;AmwayBusinessNature_1;cash;
+
+## cash + pob
+;pos_abo_ca_pob;AmwayBusinessNature_1;cash;
+;pos_cus_ca_pob;AmwayBusinessNature_1;cash;
+
+## cash + n cc + n dc
+;pos_abo_ca_cc_dc;AmwayBusinessNature_1;cash;
+;pos_cus_ca_cc_dc;AmwayBusinessNature_1;cash;
+
+## cash + n dc + ar
+;pos_abo_ca_dc_ar;AmwayBusinessNature_1;cash;
+;pos_cus_ca_dc_ar;AmwayBusinessNature_1;cash;
+
+## cash + n dc + pob
+;pos_abo_ca_dc_pob;AmwayBusinessNature_1;cash;
+;pos_cus_ca_dc_pob;AmwayBusinessNature_1;cash;
+
+## cash + n dc + n cc + ar
+;pos_abo_ca_dc_cc_ar;AmwayBusinessNature_1;cash;
+;pos_cus_ca_dc_cc_ar;AmwayBusinessNature_1;cash;
+
+## cash + n dc + n cc + pob
+;pos_abo_ca_dc_cc_pob;AmwayBusinessNature_1;cash;
+;pos_cus_ca_dc_cc_pob;AmwayBusinessNature_1;cash;
+
+## cash + n dc + n cc + ar + pob
+;pos_abo_ca_dc_cc_ar_pob;AmwayBusinessNature_1;cash;
+;pos_cus_ca_dc_cc_ar_pob;AmwayBusinessNature_1;cash;
+
+INSERT_UPDATE AmwayPaymentTypeConfig;paymentMode(code)[unique=true];repeatableCount[unique=true];config(code)[unique=true]
+;creditCard;10;pos_abo_ccn
+;creditCard;10;pos_cus_ccn
+
+;arCredit;1;pos_abo_ar
+
+;creditCard;1;pos_abo_cc_ar
+;arCredit;1;pos_abo_cc_ar
+
+;cash;1;pos_abo_ca;
+;cash;1;pos_cus_ca;
+
+;cash;1;pos_abo_ca_cc;
+;cash;1;pos_cus_ca_cc;
+;creditCard;5;pos_abo_ca_cc;
+;creditCard;5;pos_cus_ca_cc;
+
+INSERT_UPDATE BaseStore;uid[unique=true];defaultReturnPaymentMode(code)
+;testStore;cash

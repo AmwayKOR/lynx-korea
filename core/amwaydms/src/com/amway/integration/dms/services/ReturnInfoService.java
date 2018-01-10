@@ -6,6 +6,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 /**
  * <p>Java class for returnInfoService complex type.
@@ -30,6 +32,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "returnInfoService", propOrder = {
+    "type",
     "returnCd",
     "returnMessage",
     "serverName"
@@ -51,11 +54,33 @@ import javax.xml.bind.annotation.XmlType;
     GetIdResponse.class,
     AccountPartyListResponse.class
 })
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ReturnInfoService {
 
+    protected String type;
     protected int returnCd;
     protected String returnMessage;
     protected String serverName;
+
+    /**
+     * @return the type
+     */
+    public String getType() {
+        return type;
+    }
+
+    /**
+     * @param type
+     *           the type to set
+     */
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    // merge with v3 CommonResponse
+    protected ErrorMessage errorMessage;
+    protected String contactId;
+    // merge with v3 CommonResponse
 
     /**
      * Gets the value of the returnCd property.
@@ -121,4 +146,27 @@ public class ReturnInfoService {
         this.serverName = value;
     }
 
+
+    // merge with v3 CommonResponse
+    public ErrorMessage getErrorMessage()
+    {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(ErrorMessage errorMessage)
+    {
+        this.errorMessage = errorMessage;
+    }
+
+    public String getContactId()
+    {
+        return contactId;
+    }
+
+    public void setContactId(String contactId)
+    {
+        this.contactId = contactId;
+    }
+
+    // merge with v3 CommonResponse
 }

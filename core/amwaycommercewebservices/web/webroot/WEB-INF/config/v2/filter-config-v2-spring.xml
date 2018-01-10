@@ -56,6 +56,7 @@
 	<bean id="defaultUserMatchingFilter" class="com.amway.core.v2.filter.UserMatchingFilter">
 		<property name="regexp" value="^/[^/]+/users/([^/]+)" />
 		<property name="userService" ref="userService" />
+		<property name="sessionService" ref="sessionService" />
 	</bean>
 
 	<alias alias="restSessionFilterV2" name="defaultRestSessionFilterV2" />
@@ -78,7 +79,7 @@
 
 	<alias alias="baseSiteMatchingFilter" name="defaultBaseSiteMatchingFilter" />
 	<bean id="defaultBaseSiteMatchingFilter" class="com.amway.core.v2.filter.BaseSiteMatchingFilter">
-		<property name="regexp" value="^/([^/]+)" />
+		<property name="regexp" value="^/(?!(swagger)|(.*api-docs)|(webjars))([^/]+)" />
 		<property name="baseSiteService" ref="baseSiteService" />
 	</bean>
 

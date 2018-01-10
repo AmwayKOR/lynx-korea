@@ -145,10 +145,13 @@ public class AmwayProductPricePopulator implements Populator<ProductModel, Produ
 				productData.getPrice().setAmwayValue(valueData);
 			}
 			productData.setRetailPrice(new PriceData());
-			productData.getRetailPrice().setValue(BigDecimal.valueOf(retailPriceRow.getPrice()));
-			productData.getRetailPrice().setCurrencyIso(retailPriceRow.getCurrency().getIsocode());
-			productData.getRetailPrice()
-					.setFormattedValue(retailPriceRow.getCurrency().getSymbol() + retailPriceRow.getPrice().toString());
+			if (retailPriceRow != null && retailPriceRow.getPrice() != null)
+			{
+				productData.getRetailPrice().setValue(BigDecimal.valueOf(retailPriceRow.getPrice()));
+				productData.getRetailPrice().setCurrencyIso(retailPriceRow.getCurrency().getIsocode());
+				productData.getRetailPrice().setFormattedValue(
+						retailPriceRow.getCurrency().getSymbol() + retailPriceRow.getPrice().toString());
+			}
 		}
 	}
 }

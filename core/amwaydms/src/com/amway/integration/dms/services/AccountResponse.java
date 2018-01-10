@@ -5,6 +5,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 /**
  * <p>Java class for accountResponse complex type.
@@ -55,6 +57,9 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "accountResponse", propOrder = {
+    "errorMessage",
+    "serverName",
+    "account",
     "aboEntryDate",
     "aboExpireDate",
     "aboNum",
@@ -85,9 +90,15 @@ import javax.xml.bind.annotation.XmlType;
     "userId",
     "userPin"
 })
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class AccountResponse
     extends ReturnInfoService
 {
+    //[start] v3 fields
+    protected ErrorMessage errorMessage;
+    protected String serverName;
+    protected Account account;
+    //[end] v3 fields
 
     protected String aboEntryDate;
     protected String aboExpireDate;

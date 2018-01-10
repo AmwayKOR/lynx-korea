@@ -867,7 +867,13 @@
 		<property name="XStream">
 			<bean class="com.amway.core.xstream.JsonXStreamFactory" />
 		</property>
+		<property name="excludeClasses" ref="xstreamMarshallerExcludedClasses"/>
 	</bean>
+
+	<util:list id="xstreamMarshallerExcludedClasses">
+    	<value>springfox.documentation.spring.web.json.Json</value>
+        <value>springfox.documentation.swagger.web.UiConfiguration</value>
+ 	</util:list>
 
 	<bean id="xmlXStreamFactory" class="com.amway.core.xstream.XmlXStreamFactory" />
 	<bean id="jsonXStreamFactory" class="com.amway.core.xstream.JsonXStreamFactory" />

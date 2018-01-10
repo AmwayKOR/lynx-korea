@@ -15,8 +15,6 @@ import de.hybris.platform.commercefacades.order.data.OrderData;
 import de.hybris.platform.commercefacades.order.data.OrderHistoriesData;
 import de.hybris.platform.commercewebservicescommons.dto.order.OrderHistoryListWsDTO;
 import de.hybris.platform.commercewebservicescommons.dto.order.OrderWsDTO;
-import de.hybris.platform.commercewebservicescommons.errors.exceptions.ProductLowStockException;
-import de.hybris.platform.commercewebservicescommons.errors.exceptions.StockSystemException;
 import de.hybris.platform.commercewebservicescommons.strategies.CartLoaderStrategy;
 import de.hybris.platform.order.InvalidCartException;
 import de.hybris.platform.webservicescommons.cache.CacheControl;
@@ -25,6 +23,8 @@ import de.hybris.platform.webservicescommons.errors.exceptions.WebserviceValidat
 import com.amway.core.exceptions.NoCheckoutCartException;
 import com.amway.core.exceptions.PaymentAuthorizationException;
 import com.amway.core.strategies.OrderCodeIdentificationStrategy;
+import com.amway.core.swagger.ApiBaseSiteIdAndUserIdParam;
+import com.amway.core.swagger.ApiBaseSiteIdParam;
 import com.amway.core.v2.helper.OrdersHelper;
 
 import javax.annotation.Resource;
@@ -42,20 +42,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.Authorization;
+
+
 
 /**
  * Web Service Controller for the ORDERS resource. Most methods check orders of the user. Methods require authentication
  * and are restricted to https channel.
- *
- * @pathparam code Order GUID (Globally Unique Identifier) or order CODE
- * @pathparam userId User identifier or one of the literals below :
- *            <ul>
- *            <li>'current' for currently authenticated user</li>
- *            <li>'anonymous' for anonymous user</li>
- *            </ul>
  */
+
+
 @Controller
 @RequestMapping(value = "/{baseSiteId}")
+@Api(tags = "Orders")
 public class OrdersController extends BaseCommerceController
 {
 	private static final Logger LOG = Logger.getLogger(OrdersController.class);
@@ -69,21 +71,18 @@ public class OrdersController extends BaseCommerceController
 	@Resource(name = "ordersHelper")
 	private OrdersHelper ordersHelper;
 
-	/**
-	 * Returns details of a specific order based on order GUID (Globally Unique Identifier) or order CODE. The response
-	 * contains a detailed order information.
-	 *
-	 * @queryparam fields Response configuration (list of fields, which should be returned in response)
-	 * @return Order data
-	 * @security Allowed only for trusted client
-	 */
+
 	@Secured("ROLE_TRUSTED_CLIENT")
 	@RequestMapping(value = "/orders/{code}", method = RequestMethod.GET)
 	@CacheControl(directive = CacheControlDirective.PUBLIC, maxAge = 120)
 	@Cacheable(value = "orderCache", key = "T(de.hybris.platform.commercewebservicescommons.cache.CommerceCacheKeyGenerator).generateKey(false,true,'getOrder',#code,#fields)")
 	@ResponseBody
-	public OrderWsDTO getOrder(@PathVariable final String code,
-			@RequestParam(defaultValue = DEFAULT_FIELD_SET) final String fields)
+	@ApiOperation(value = "Get a order", notes = "Returns details of a specific order based on order GUID (Globally Unique Identifier) or order CODE. The response contains a detailed order information.", authorizations =
+	{ @Authorization(value = "oauth2_client_credentials") })
+	@ApiBaseSiteIdParam
+	public OrderWsDTO getOrder(
+			@ApiParam(value = "Order GUID (Globally Unique Identifier) or order CODE", required = true) @PathVariable final String code,
+			@ApiParam(value = "Response configuration (list of fields, which should be returned in response)", allowableValues = "BASIC, DEFAULT, FULL") @RequestParam(defaultValue = DEFAULT_FIELD_SET) final String fields)
 	{
 		OrderData orderData;
 		if (orderCodeIdentificationStrategy.isID(code))
@@ -98,50 +97,38 @@ public class OrdersController extends BaseCommerceController
 		return getDataMapper().map(orderData, OrderWsDTO.class, fields);
 	}
 
-	/**
-	 * Returns specific order details based on a specific order code. The response contains detailed order information.
-	 *
-	 * @queryparam fields Response configuration (list of fields, which should be returned in response)
-	 * @return Order data
-	 * @security Allowed only for customers, customer managers, clients or trusted clients. Trusted client is able to
-	 *           impersonate as any customer and access their orders.
-	 */
+
 	@Secured(
 	{ "ROLE_CUSTOMERGROUP", "ROLE_CLIENT", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERMANAGERGROUP" })
 	@RequestMapping(value = "/users/{userId}/orders/{code}", method = RequestMethod.GET)
 	@CacheControl(directive = CacheControlDirective.PUBLIC, maxAge = 120)
 	@Cacheable(value = "orderCache", key = "T(de.hybris.platform.commercewebservicescommons.cache.CommerceCacheKeyGenerator).generateKey(true,true,'getOrderForUserByCode',#code,#fields)")
 	@ResponseBody
-	public OrderWsDTO getOrderForUserByCode(@PathVariable final String code,
-			@RequestParam(defaultValue = DEFAULT_FIELD_SET) final String fields)
+	@ApiOperation(value = "Get a order", notes = "Returns specific order details based on a specific order code. The response contains detailed order information.")
+	@ApiBaseSiteIdAndUserIdParam
+	public OrderWsDTO getOrderForUserByCode(
+			@ApiParam(value = "Order GUID (Globally Unique Identifier) or order CODE", required = true) @PathVariable final String code,
+			@ApiParam(value = "Response configuration (list of fields, which should be returned in response)", allowableValues = "BASIC, DEFAULT, FULL") @RequestParam(defaultValue = DEFAULT_FIELD_SET) final String fields)
 	{
 		final OrderData orderData = orderFacade.getOrderDetailsForCode(code);
 		return getDataMapper().map(orderData, OrderWsDTO.class, fields);
 	}
 
-	/**
-	 * Returns order history data for all orders placed by the specific user for the specific base store. Response
-	 * contains orders search result displayed in several pages if needed.
-	 *
-	 * @queryparam statuses Filters only certain order statuses. It means: statuses=CANCELLED,CHECKED_VALID would only
-	 *             return orders with status CANCELLED or CHECKED_VALID.
-	 * @queryparam currentPage The current result page requested.
-	 * @queryparam pageSize The number of results returned per page.
-	 * @queryparam sort Sorting method applied to the return results.
-	 * @queryparam fields Response configuration (list of fields, which should be returned in response)
-	 * @return Order history data.
-	 * @security Allowed only for customers, customer managers, trusted clients Trusted client is able to impersonate as
-	 *           any customer and access their orders.
-	 */
+
+
 	@Secured(
 	{ "ROLE_CUSTOMERGROUP", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERMANAGERGROUP" })
 	@CacheControl(directive = CacheControlDirective.PUBLIC, maxAge = 120)
 	@RequestMapping(value = "/users/{userId}/orders", method = RequestMethod.GET)
 	@ResponseBody
-	public OrderHistoryListWsDTO getOrdersForUser(@RequestParam(required = false) final String statuses,
-			@RequestParam(required = false, defaultValue = DEFAULT_CURRENT_PAGE) final int currentPage,
-			@RequestParam(required = false, defaultValue = DEFAULT_PAGE_SIZE) final int pageSize,
-			@RequestParam(required = false) final String sort, @RequestParam(defaultValue = DEFAULT_FIELD_SET) final String fields,
+	@ApiOperation(value = "Get order history for user", notes = "Returns order history data for all orders placed by the specific user for the specific base store. Response contains orders search result displayed in several pages if needed.")
+	@ApiBaseSiteIdAndUserIdParam
+	public OrderHistoryListWsDTO getOrdersForUser(
+			@ApiParam(value = "Filters only certain order statuses. It means: statuses=CANCELLED,CHECKED_VALID would only return orders with status CANCELLED or CHECKED_VALID.") @RequestParam(required = false) final String statuses,
+			@ApiParam(value = "The current result page requested.") @RequestParam(required = false, defaultValue = DEFAULT_CURRENT_PAGE) final int currentPage,
+			@ApiParam(value = "The number of results returned per page.") @RequestParam(required = false, defaultValue = DEFAULT_PAGE_SIZE) final int pageSize,
+			@ApiParam(value = "Sorting method applied to the return results.") @RequestParam(required = false) final String sort,
+			@ApiParam(value = "Response configuration (list of fields, which should be returned in response)", allowableValues = "BASIC, DEFAULT, FULL") @RequestParam(defaultValue = DEFAULT_FIELD_SET) final String fields,
 			final HttpServletResponse response)
 	{
 		validateStatusesEnumValue(statuses);
@@ -155,55 +142,35 @@ public class OrdersController extends BaseCommerceController
 		return orderHistoryList;
 	}
 
-	/**
-	 * Returns {@value com.amway.core.v2.controller.BaseController#HEADER_TOTAL_COUNT} header
-	 * with a total number of results (orders history for all orders placed by the specific user for the specific base
-	 * store).
-	 *
-	 * @queryparam statuses Filters only certain order statuses. It means: statuses=CANCELLED,CHECKED_VALID would only
-	 *             return orders with status CANCELLED or CHECKED_VALID.
-	 * @security Allowed only for customers, customer managers, trusted clients. Trusted client is able to impersonate as
-	 *           any customer and access their orders.
-	 */
+
 	@Secured(
 	{ "ROLE_CUSTOMERGROUP", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERMANAGERGROUP" })
 	@RequestMapping(value = "/users/{userId}/orders", method = RequestMethod.HEAD)
 	@ResponseBody
-	public void getCountOrdersForUser(@RequestParam(required = false) final String statuses, final HttpServletResponse response)
+	@ApiOperation(value = "Get total number of orders", notes = "Returns X-Total-Count header with a total number of results (orders history for all orders placed by the specific user for the specific base store).")
+	@ApiBaseSiteIdAndUserIdParam
+	public void getCountOrdersForUser(
+			@ApiParam(value = "Filters only certain order statuses. It means: statuses=CANCELLED,CHECKED_VALID would only return orders with status CANCELLED or CHECKED_VALID.") @RequestParam(required = false) final String statuses,
+			final HttpServletResponse response)
 	{
 		final OrderHistoriesData orderHistoriesData = ordersHelper.searchOrderHistory(statuses, 0, 1, null);
 
 		setTotalCountHeader(response, orderHistoriesData.getPagination());
 	}
 
-	/**
-	 * Authorizes cart and places the order. Response contains the new order data.
-	 *
-	 * @formparam cartId Cart code for logged in user, cart GUID for guest checkout
-	 * @formparam securityCode CCV security code.
-	 * @queryparam fields Response configuration (list of fields, which should be returned in response)
-	 * @return Created order data
-	 * @throws PaymentAuthorizationException
-	 *            When there are problems with the payment authorization. For example: there is no session cart or no
-	 *            payment information set for the cart.
-	 * @throws InvalidCartException
-	 * @throws WebserviceValidationException
-	 *            When the cart is not filled properly (e. g. delivery mode is not set, payment method is not set)
-	 * @throws ProductLowStockException
-	 *            When product is out of stock in store
-	 * @throws StockSystemException
-	 *            When there is no information about stock for stores.
-	 * @security Allowed only for customers, customer managers, clients or trusted clients. Trusted client is able to
-	 *           impersonate as any customer and place order on his behalf
-	 */
+
 	@Secured(
 	{ "ROLE_CUSTOMERGROUP", "ROLE_CLIENT", "ROLE_CUSTOMERMANAGERGROUP", "ROLE_TRUSTED_CLIENT" })
 	@RequestMapping(value = "/users/{userId}/orders", method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)
 	@ResponseBody
-	public OrderWsDTO placeOrder(@RequestParam(required = true) final String cartId, //NOSONAR
-			@RequestParam(required = false) final String securityCode,
-			@RequestParam(defaultValue = DEFAULT_FIELD_SET) final String fields)
+	@ApiOperation(value = "Post a order", notes = "Authorizes cart and places the order. Response contains the new order data.")
+	@ApiBaseSiteIdAndUserIdParam
+	@SuppressWarnings("squid:S1160")
+	public OrderWsDTO placeOrder(
+			@ApiParam(value = "Cart code for logged in user, cart GUID for guest checkout", required = true) @RequestParam(required = true) final String cartId, //NOSONAR
+			@ApiParam(value = "CCV security code.") @RequestParam(required = false) final String securityCode,
+			@ApiParam(value = "Response configuration (list of fields, which should be returned in response)", allowableValues = "BASIC, DEFAULT, FULL") @RequestParam(defaultValue = DEFAULT_FIELD_SET) final String fields)
 			throws PaymentAuthorizationException, InvalidCartException, WebserviceValidationException, NoCheckoutCartException //NOSONAR
 	{
 		if (LOG.isDebugEnabled())

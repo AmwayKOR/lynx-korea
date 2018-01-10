@@ -13,6 +13,7 @@ package com.amway.core.v2.controller;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.webservicescommons.cache.CacheControl;
 import de.hybris.platform.webservicescommons.cache.CacheControlDirective;
+import com.amway.core.swagger.ApiBaseSiteIdParam;
 
 import javax.annotation.Resource;
 
@@ -25,27 +26,32 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.Authorization;
+
 
 @Controller
 @RequestMapping(value = "/{baseSiteId}/forgottenpasswordtokens")
 @CacheControl(directive = CacheControlDirective.NO_STORE)
+@Api(tags = "Forgotten Passwords")
 public class ForgottenPasswordsController extends BaseController
 {
 	private static final Logger LOG = Logger.getLogger(ForgottenPasswordsController.class);
 	@Resource(name = "customerFacade")
 	private CustomerFacade customerFacade;
 
-	/**
-	 * Generates a token to restore customer's forgotten password.
-	 *
-	 * @formparam userId Customer's user id. Customer user id is case insensitive.
-	 * @security Allowed only for client or trusted client
-	 */
+
 	@Secured(
 	{ "ROLE_CLIENT", "ROLE_TRUSTED_CLIENT" })
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.ACCEPTED)
-	public void restorePassword(@RequestParam final String userId)
+	@ApiOperation(value = "Generates a token to restore customer's forgotten password.", notes = "Generates a token to restore customer's forgotten password.", authorizations =
+	{ @Authorization(value = "oauth2_client_credentials") })
+	@ApiBaseSiteIdParam
+	public void restorePassword(
+			@ApiParam(value = "Customer's user id. Customer user id is case insensitive.", required = true) @RequestParam final String userId)
 	{
 		if (LOG.isDebugEnabled())
 		{

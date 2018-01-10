@@ -8,6 +8,7 @@ import de.hybris.platform.commerceservices.customer.impl.DefaultCustomerAccountS
 import de.hybris.platform.commerceservices.search.pagedata.PageableData;
 import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
 import de.hybris.platform.core.model.order.OrderModel;
+import de.hybris.platform.core.model.order.payment.CreditCardPaymentInfoModel;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.util.ServicesUtil;
 import de.hybris.platform.store.BaseStoreModel;
@@ -17,6 +18,7 @@ import com.amway.core.customer.service.AmwayCustomerAccountService;
 import com.amway.core.enums.AmwayCartType;
 import com.amway.core.los.data.LosAccountDetailResponseData;
 
+import java.util.Optional;
 
 /**
  * Implementation for to get the ordes of amway customer account.
@@ -50,6 +52,12 @@ public class DefaultAmwayCustomerAccountService extends DefaultCustomerAccountSe
 		ServicesUtil.validateParameterNotNull(store, "Store must not be null");
 		ServicesUtil.validateParameterNotNull(code, "Order code must not be null");
 		return amwayCustomerAccountDao.findOrderByCodeAndCustomerAndStoreAndType(currentUser, code, store, type);
+	}
+
+	@Override
+	public Optional<CreditCardPaymentInfoModel> findCreditCardPaymentInfoByCustomerAndCode(CustomerModel user, String paymentCode)
+	{
+		return amwayCustomerAccountDao.findCreditCardPaymentInfoByCustomerAndCode(user, paymentCode);
 	}
 
 	/**

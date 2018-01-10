@@ -1,5 +1,9 @@
 package com.amway.integration.cis.dms.client.impl;
 
+import java.util.Collections;
+import java.util.Map;
+import java.util.Optional;
+
 import javax.ws.rs.core.MediaType;
 
 import com.amway.integration.cis.dms.client.DMSClient;
@@ -38,7 +42,6 @@ public class DMSClientImpl extends AbstractCisClient implements DMSClient
 			final Class<T> clazz) throws AbstractCisServiceException
 	{
 		final RestCallBuilder builder = getClient().call(urlPath, new Object[0]);
-		//builder.accept(MediaType.APPLICATION_JSON_TYPE);
 		builder.type(MediaType.APPLICATION_JSON_TYPE);
 		addHeader(builder, xCisClientRef);
 		try
@@ -52,4 +55,56 @@ public class DMSClientImpl extends AbstractCisClient implements DMSClient
 		}
 	}
 
+	@Override
+	public <T> RestResponse<T> executeDmsGetRequest(final String xCisClientRef, final String urlPath, final Object requestEntity,
+			final Class<T> clazz) throws AbstractCisServiceException
+	{
+		final RestCallBuilder builder = getClient().call(urlPath, new Object[0]);
+		builder.type(MediaType.APPLICATION_JSON_TYPE);
+		addHeader(builder, xCisClientRef);
+		try
+		{
+			return builder.get(clazz);
+		}
+		catch (final RestResponseException e)
+		{
+			LOG.warn(e.getMessage(), e);
+			return (RestResponse) e.unwrap(AbstractCisServiceException.class);
+		}
+	}
+
+	@Override
+	public <T> RestResponse<T> executeDmsPutRequest(final String xCisClientRef, final String urlPath, final Object requestEntity,
+			final Class<T> clazz, Object... params) throws AbstractCisServiceException
+	{
+		final RestCallBuilder builder = getClient().call(urlPath, params);
+		builder.type(MediaType.APPLICATION_JSON_TYPE);
+		addHeader(builder, xCisClientRef);
+		try
+		{
+			return builder.put(clazz, requestEntity);
+		}
+		catch (final RestResponseException e)
+		{
+			LOG.warn(e.getMessage(), e);
+			return (RestResponse) e.unwrap(AbstractCisServiceException.class);
+		}
+	}
+
+	@Override
+	public <T> RestResponse<T> executeDmsDeleteRequest(final String xCisClientRef, final String urlPath, final Object requestEntity,
+			final Class<T> clazz) throws AbstractCisServiceException
+	{
+		final RestCallBuilder builder = getClient().call(urlPath, new Object[0]);
+		addHeader(builder, xCisClientRef);
+		try
+		{
+			return builder.delete(clazz);
+		}
+		catch (final RestResponseException e)
+		{
+			LOG.warn(e.getMessage(), e);
+			return (RestResponse) e.unwrap(AbstractCisServiceException.class);
+		}
+	}
 }

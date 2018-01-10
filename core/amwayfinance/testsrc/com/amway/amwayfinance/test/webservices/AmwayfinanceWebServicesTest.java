@@ -7,7 +7,6 @@ import de.hybris.platform.core.enums.PaymentStatus;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.oauth2.constants.OAuth2Constants;
 import de.hybris.platform.order.PaymentModeService;
-import de.hybris.platform.payment.dto.TransactionStatus;
 import de.hybris.platform.payment.enums.PaymentTransactionType;
 import de.hybris.platform.payment.model.PaymentTransactionEntryModel;
 import de.hybris.platform.payment.model.PaymentTransactionModel;
@@ -39,7 +38,7 @@ import org.junit.Ignore;
 import org.springframework.http.HttpStatus;
 
 import com.amway.amwayfinance.constants.AmwayfinanceConstants;
-import com.amway.amwayfinance.service.AmwayTransactionInfoService;
+import com.amway.amwayfinance.services.AmwayTransactionInfoService;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonSerializer;

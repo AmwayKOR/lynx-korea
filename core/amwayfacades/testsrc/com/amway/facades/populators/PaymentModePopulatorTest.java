@@ -7,7 +7,7 @@ import org.mockito.BDDMockito;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import com.amway.facades.order.data.PaymentModeData;
+import com.amway.core.order.data.PaymentModeData;
 
 import de.hybris.bootstrap.annotations.UnitTest;
 import de.hybris.platform.commerceservices.util.ConverterFactory;

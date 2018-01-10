@@ -5,6 +5,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 /**
  * <p>Java class for deletePartyNameRequest complex type.
@@ -39,6 +41,7 @@ import javax.xml.bind.annotation.XmlType;
     "salesPlanAff",
     "userId"
 })
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class DeletePartyNameRequest
     extends BaseWebServiceInput
 {

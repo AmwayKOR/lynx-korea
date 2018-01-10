@@ -7,6 +7,8 @@ import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 /**
  * <p>Java class for blockPrivDetSrvcOutput complex type.
@@ -45,6 +47,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "isBlockFlag",
     "salesPlanAff"
 })
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class BlockPrivDetSrvcOutput {
 
     protected String aboNum;

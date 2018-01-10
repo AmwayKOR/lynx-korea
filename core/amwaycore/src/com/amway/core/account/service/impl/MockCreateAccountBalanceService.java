@@ -3,12 +3,9 @@
  */
 package com.amway.core.account.service.impl;
 
-
 import com.amway.core.data.CommonResponseFieldsData;
 import com.amway.core.dms.data.CreateBalanceRequestData;
 import com.amway.core.dms.service.DmsService;
-
-
 
 public class MockCreateAccountBalanceService implements DmsService<CreateBalanceRequestData, CommonResponseFieldsData>
 {

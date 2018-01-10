@@ -1,9 +1,11 @@
 package com.amway.core.pos.service.impl;
 
 import com.amway.core.model.AmwayBatchModel;
+import com.amway.core.model.AmwayTerminalMacAddressModel;
 import com.amway.core.model.AmwayTerminalModel;
 import com.amway.core.pos.dao.AmwayBatchDao;
 import com.amway.core.pos.dao.AmwayTerminalDao;
+import com.amway.core.pos.dao.AmwayTerminalMacAddressDao;
 import com.amway.core.pos.service.AmwayPOSService;
 import com.google.common.base.Preconditions;
 import de.hybris.platform.commerceservices.search.pagedata.PageableData;
@@ -14,6 +16,7 @@ import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.platform.servicelayer.util.ServicesUtil;
 import de.hybris.platform.storelocator.model.PointOfServiceModel;
 import de.hybris.platform.storelocator.pos.PointOfServiceService;
+import org.apache.commons.collections.CollectionUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -25,6 +28,7 @@ public class DefaultAmwayPOSService implements AmwayPOSService {
 
     private AmwayBatchDao batchDao;
     private AmwayTerminalDao terminalDao;
+    private AmwayTerminalMacAddressDao macAddressDao;
     private UserService userService;
     private PointOfServiceService pointOfServiceService;
 
@@ -79,7 +83,8 @@ public class DefaultAmwayPOSService implements AmwayPOSService {
         List<AmwayBatchModel> batchList = batchDao.getOpenBatches(resolvedTerminal);
 
         ServicesUtil.validateIfAnyResult(batchList, "No open Batch found for this terminal: " + terminal);
-        ServicesUtil.validateIfSingleResult(batchList, "More than one open Batch found for terminal: " + terminal, terminal) ;
+        ServicesUtil.validateIfSingleResult(batchList, "Terminal not found : " + terminal,
+                                                    "More than one open Batch found for terminal: " + terminal) ;
 
         return batchList.get(0);
     }
@@ -151,6 +156,58 @@ public class DefaultAmwayPOSService implements AmwayPOSService {
         SearchPageData<OrderModel> orders = batchDao.getOrders(pageableData, batchList, startDate, endDate);
 
         return orders;
+    }
+    
+ 	@Override
+ 	public Long getOrdersCount(final String batchId)
+ 	{
+ 		ServicesUtil.validateParameterNotNull(batchId, "Batch ID must not be null.");
+ 		final AmwayBatchModel batchModel = getBatch(batchId);
+ 		return batchDao.getOrdersCount(batchModel);
+ 	}
+
+ 	@Override
+ 	public Long getCustomersCount(final String batchId)
+ 	{
+ 		ServicesUtil.validateParameterNotNull(batchId, "Batch ID must not be null.");
+ 		final AmwayBatchModel batchModel = getBatch(batchId);
+ 		return batchDao.getCustomersCount(batchModel);
+ 	}
+
+ 	@Override
+ 	public Long getProductsCount(final String batchId)
+ 	{
+ 		ServicesUtil.validateParameterNotNull(batchId, "Batch ID must not be null.");
+ 		final AmwayBatchModel batchModel = getBatch(batchId);
+ 		return batchDao.getProductsCount(batchModel);
+ 	}
+
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public AmwayTerminalModel getPOSTerminalByMacAddress(final String macAddress)
+    {
+        final List<AmwayTerminalMacAddressModel> macAddresses = macAddressDao.getMacAddress(macAddress);
+        final AmwayTerminalModel terminal;
+        if (CollectionUtils.isNotEmpty(macAddresses))
+        {
+            terminal = macAddresses.get(0).getTerminal();
+            return terminal;
+        }
+        return null;
+    }
+
+
+    public AmwayTerminalMacAddressDao getMacAddressDao()
+    {
+        return macAddressDao;
+    }
+
+    public void setMacAddressDao(final AmwayTerminalMacAddressDao macAddressDao)
+    {
+        this.macAddressDao = macAddressDao;
     }
 
     public AmwayTerminalDao getTerminalDao() {

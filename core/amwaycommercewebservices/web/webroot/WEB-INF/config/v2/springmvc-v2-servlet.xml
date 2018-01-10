@@ -37,7 +37,15 @@
 		<bean class="de.hybris.platform.webservicescommons.interceptors.CacheControlHandlerInterceptor"/>
 	</mvc:interceptors>
 
-	<security:global-method-security order="-2147483648" secured-annotations="enabled"/>
+	<!--<security:global-method-security order="-2147483648" secured-annotations="enabled" pre-post-annotations="enabled" proxy-target-class="true"/>-->
+	<bean id="expressionHandler" class="org.springframework.security.oauth2.provider.expression.OAuth2MethodSecurityExpressionHandler"/>
+
+	<security:global-method-security order="-2147483648" secured-annotations="enabled" pre-post-annotations="enabled" proxy-target-class="true" >
+		<security:expression-handler ref="expressionHandler" />
+	</security:global-method-security>
+	
+	<mvc:resources mapping="**/swagger-ui.html" location="classpath:/META-INF/resources/"/>	
+	<mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/"/>
 
 	<bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
@@ -57,5 +65,4 @@
 			</map>
 		</constructor-arg>
 	</bean>
-
 </beans>

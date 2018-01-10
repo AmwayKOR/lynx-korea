@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-        <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+    <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="gensrc"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="lib/hybris-commons-rest-client-5.5.1.0-M0.jar"/>
@@ -8,7 +8,7 @@
 	<classpathentry kind="lib" path="lib/jersey-apache-client-1.13.jar"/>
 	<classpathentry kind="src" output="eclipsebin/web/classes" path="web/src"/>
 	<classpathentry kind="src" path="testsrc"/>
-	<classpathentry kind="src" path="/corepluscommons"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/corepluscommons"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/cms2"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/commerceservices"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/acceleratorservices"/>
@@ -18,4 +18,12 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/platform"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/warehousing"/>
 	<classpathentry kind="output" path="eclipsebin/notused"/>
+
+	<classpathentry combineaccessrules="false" kind="src" path="/wishlist"/>
+    <classpathentry kind="lib" path="lib/esapi-2.0_rc10.jar"/>
+    <classpathentry kind="lib" path="lib/powermock-api-mockito-1.5.6.jar"/>
+    <classpathentry kind="lib" path="lib/powermock-api-support-1.5.6.jar"/>
+    <classpathentry kind="lib" path="lib/powermock-module-junit4-1.5.6.jar"/>
+    <classpathentry kind="lib" path="lib/powermock-module-junit4-common-1.5.6.jar"/>
+    <classpathentry kind="lib" path="lib/powermock-reflect-1.5.6.jar"/>
 </classpath>

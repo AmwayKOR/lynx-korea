@@ -18,6 +18,7 @@ import de.hybris.platform.commercewebservicescommons.errors.exceptions.RequestPa
 import com.amway.core.constants.YcommercewebservicesConstants;
 import com.amway.core.formatters.WsDateFormatter;
 import com.amway.core.product.data.ProductDataList;
+import com.amway.core.swagger.ApiBaseSiteIdParam;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -33,6 +34,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.Authorization;
+
 
 /**
  * Web Services Controller to expose the functionality of the
@@ -40,11 +46,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 @RequestMapping(value = "/{baseSiteId}/export/products")
+@Api(tags = "Export")
 public class ExportController extends BaseController
 {
 	private static final Set<ProductOption> OPTIONS;
 	private static final String DEFAULT_PAGE_VALUE = "0";
-	private static final String MAX_INTEGER = "2147483647";
+	private static final String MAX_INTEGER = "20";
 	@Resource(name = "cwsProductExportFacade")
 	private ProductExportFacade productExportFacade;
 	@Resource(name = "wsDateFormatter")
@@ -74,28 +81,19 @@ public class ExportController extends BaseController
 		return opts;
 	}
 
-	/**
-	 * Used for product export. Depending on the timestamp parameter, it can return all products or only products
-	 * modified after the given time.
-	 *
-	 * @queryparam fields Response configuration (list of fields, which should be returned in response)
-	 * @queryparam currentPage The current result page requested.
-	 * @queryparam pageSize The number of results returned per page.
-	 * @queryparam catalog Catalog from which get products. Must be provided along with version.
-	 * @queryparam version Catalog version. Must be provided along with catalog.
-	 * @queryparam timestamp When this parameter is set, only products modified after given time will be returned.This
-	 *             parameter should be in RFC-8601 format.
-	 * @return List of products
-	 * @security Allowed only for trusted client
-	 */
 	@Secured("ROLE_TRUSTED_CLIENT")
 	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
-	public ProductListWsDTO exportProducts(@RequestParam(required = false, defaultValue = DEFAULT_FIELD_SET) final String fields,
-			@RequestParam(required = false, defaultValue = DEFAULT_PAGE_VALUE) final int currentPage,
-			@RequestParam(required = false, defaultValue = MAX_INTEGER) final int pageSize,
-			@RequestParam(required = false) final String catalog, @RequestParam(required = false) final String version,
-			@RequestParam(required = false) final String timestamp)
+	@ApiOperation(value = "Get a list of product exports.", notes = "Used for product export. Depending on the timestamp parameter, it can return all products or only products modified after the given time.", authorizations =
+	{ @Authorization(value = "oauth2_client_credentials") })
+	@ApiBaseSiteIdParam
+	public ProductListWsDTO exportProducts(
+			@ApiParam(value = "Response configuration (list of fields, which should be returned in response)", allowableValues = "BASIC, DEFAULT, FULL") @RequestParam(required = false, defaultValue = DEFAULT_FIELD_SET) final String fields,
+			@ApiParam(value = "The current result page requested.") @RequestParam(required = false, defaultValue = DEFAULT_PAGE_VALUE) final int currentPage,
+			@ApiParam(value = "The number of results returned per page.") @RequestParam(required = false, defaultValue = MAX_INTEGER) final int pageSize,
+			@ApiParam(value = "Catalog from which get products. Must be provided along with version.") @RequestParam(required = false) final String catalog,
+			@ApiParam(value = "Catalog version. Must be provided along with catalog.") @RequestParam(required = false) final String version,
+			@ApiParam(value = "When this parameter is set, only products modified after given time will be returned. This parameter should be in ISO-8601 format.") @RequestParam(required = false) final String timestamp)
 	{
 		if (StringUtils.isEmpty(catalog) && !StringUtils.isEmpty(version))
 		{

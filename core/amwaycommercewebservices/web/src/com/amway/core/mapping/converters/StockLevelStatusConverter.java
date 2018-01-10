@@ -13,6 +13,7 @@ package com.amway.core.mapping.converters;
 import de.hybris.platform.basecommerce.enums.StockLevelStatus;
 import de.hybris.platform.webservicescommons.mapping.WsDTOMapping;
 
+import ma.glasnost.orika.MappingContext;
 import ma.glasnost.orika.converter.BidirectionalConverter;
 import ma.glasnost.orika.metadata.Type;
 
@@ -24,13 +25,14 @@ import ma.glasnost.orika.metadata.Type;
 public class StockLevelStatusConverter extends BidirectionalConverter<StockLevelStatus, String>
 {
 	@Override
-	public String convertTo(final StockLevelStatus source, final Type<String> destinationType)
+	public String convertTo(final StockLevelStatus source, final Type<String> destinationType, final MappingContext mappingContext)
 	{
 		return source.toString();
 	}
 
 	@Override
-	public StockLevelStatus convertFrom(final String source, final Type<StockLevelStatus> destinationType)
+	public StockLevelStatus convertFrom(final String source, final Type<StockLevelStatus> destinationType,
+			final MappingContext mappingContext)
 	{
 		return StockLevelStatus.valueOf(source);
 	}

@@ -8,6 +8,10 @@
 
 	<packaging>jar</packaging>
 
+	<properties>
+		<httpclient.version>3.1</httpclient.version>
+	</properties>
+
     <repositories>
         <repository>
             <id>amway-public</id>
@@ -30,6 +34,11 @@
             <version>2.0_rc10</version>
         </dependency>
 
+		<dependency>
+			<groupId>commons-httpclient</groupId>
+			<artifactId>commons-httpclient</artifactId>
+			<version>${httpclient.version}</version>
+		</dependency>
 
         <!--    hybris 5.7 uses mockito 1.9.5  this need powermock 1.5.6  https://github.com/jayway/powermock/wiki/MockitoUsage
                 powermock 1.5.6 has issue with junit 4.12 - that requires powermock 1.6.1 :: org.powermock.reflect.exceptions.FieldNotFoundException: Field 'fTestClass' was not found in class org.junit.internal.runners.MethodValidator

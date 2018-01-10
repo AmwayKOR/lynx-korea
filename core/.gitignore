@@ -34,6 +34,10 @@ hs_err_pid*
 *-testclasses.xml
 *-webtestclasses.xml
 hmc.xsd
+velocity.log
+SESSIONS.ser
+commit.txt
+amwaycontentsolrsearchaddonhmc.jar
 beans.xsd
 items.xsd
 rebel.xml
@@ -74,6 +78,7 @@ amwaycontentsolrsearchaddon/web/webroot/WEB-INF/tags/addons/*
 amwaycontentsolrsearchaddon/web/webroot/WEB-INF/views/addons/*
 amwaycontentsolrsearchaddon/web/webroot/WEB-INF/views/addons/*
 amwaycontentsolrsearchaddon/web/webroot/WEB-INF/tld/addons/*
+amwaycontentsolrsearchaddon/hmc/bin/amwaycontentsolrsearchaddonhmc.jar
 amwaylos/web/webroot/cockpit/*
 lynximswebservices/web/webroot/cockpit/*
 lynxoms/web/webroot/cockpit/*
@@ -103,7 +108,7 @@ cis-services/amway-cis-api-avs/amway-cis-api-avs-test-configuration/target/class
 !amwaycommercewebservices/lib/*
 !amwaydms/lib/*
 !amwaylos/lib/*
-
+!amwaysso/web/webroot/WEB-INF/lib/*
 lynxvirtualstoreaddon/*
 amwaycommercewebservices/resources/enunciate-1.29/*
 *.iml

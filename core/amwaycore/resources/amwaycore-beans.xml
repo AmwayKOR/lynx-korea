@@ -52,27 +52,22 @@
 
 	<bean class="com.amway.dms.data.AddressInformationRequestData"
 		extends="com.amway.core.data.CommonRequestFieldsData">
-		<property name="iboNo" type="java.lang.String" />
 		<property name="contactPointPurposeCd" type="java.lang.String" />
 		<property name="partyId" type="java.lang.String" />
 		<property name="primaryFlag" type="java.lang.String" />
-		<property name="salesPlanAff" type="java.lang.String" />
 	</bean>
 
 	<bean class="com.amway.dms.data.UpdateBusinessNatureInputRequestData"
 		extends="com.amway.core.data.CommonRequestFieldsData">
-		<property name="aboNum" type="java.lang.String" />
 		<property name="accountSubTypeCd" type="java.lang.String" />
 		<property name="orderNum" type="java.lang.String" />
 		<property name="reasonCd" type="java.lang.String" />
-		<property name="salesPlanAff" type="java.lang.String" />
 	</bean>
 
 	<!-- ABO account pojo -->
 	<bean class="com.amway.core.data.AmwayProfileRequestData" extends="com.amway.core.data.CommonRequestFieldsData">
-		<property name="salesPlanAff" type="java.lang.String" />
-		<property name="aboNum" type="java.lang.String" />
 		<property name="deltailLevelCd" type="java.lang.String" />
+		<property name="accntBalType" type="java.lang.String" />
 	</bean>
 
 	<bean class="com.amway.core.dms.data.PartyNameDetailResponseData" extends="com.amway.core.data.CommonResponseFieldsData">
@@ -147,6 +142,7 @@
 		<property name="orderCreditLimit" type="java.lang.String" />
 		<property name="accountSubTypeCd" type="java.lang.String" />
 		<property name="lateRenewalEligibleFlg" type="java.lang.String" />
+		<property name="renewalFlag" type="java.lang.String"/>
 	</bean>
 
 	<bean class="com.amway.core.los.data.SponsorDetailsData">
@@ -252,6 +248,13 @@
 		<property name="validationResultCd" type="String" />
 		<property name="ignoreAddrssSuggestions" type="boolean" />
 		<property name="compliment" type="String" />
+		<property name="territory" type="de.hybris.platform.commercefacades.user.data.RegionData"/>
+		<property name="primaryShipping" type="boolean"/>
+		<property name="primaryBilling" type="boolean"/>
+		<property name="primaryMailing" type="boolean"/>
+		<property name="applicableForDefault" type="boolean"/>
+		<property name="county" type="String"/>
+		<property name="modificationDate" type="java.util.Date"/>
 	</bean>
 
 	<bean class="com.amway.core.dms.data.PartyDetailsData">
@@ -264,7 +267,32 @@
 		<property name="personalIdDetailsData" type="java.util.List&lt;com.amway.core.dms.data.PersonalIdDetailsData>" />
 		<property name="userId" type="java.lang.String" />
 		<property name="whishList" type="java.util.List&lt;de.hybris.platform.wishlist2.model.Wishlist2Model>" />
+		<property name="missingInfoList" type="java.util.List&lt;com.amway.core.dms.data.MissingInfoDetailData>" />
 		<property name="isLoggedIn" type="boolean"/>
+		<property name="subscriptions" type="java.util.Set&lt;com.amway.core.dms.data.PartySubscription&gt;" />
+	</bean>
+
+	<bean class="com.amway.core.dms.data.PartySubscription">
+		<property name="subscriptionId" type="String"/>
+		<property name="subscriptionName" type="String"/>
+		<property name="isPublicationCd" type="String"/>
+		<property name="pauseCd" type="String"/>
+		<property name="restoreCd" type="String"/>
+		<property name="cancelCd" type="String"/>
+		<property name="subscribeFlag" type="String"/>
+		<property name="languages" type="java.util.Set&lt;String&gt;"/>
+		<property name="deliveryWays" type="java.util.Set&lt;com.amway.core.dms.data.SubscriptionDeliveryData&gt;"/>
+	</bean>
+    <!-- renamed in core version 3.6 to avoid package conflicts with dms model object with same name -->
+	<bean class="com.amway.core.dms.data.SubscriptionDeliveryData">
+		<property name="deliveryTypeCd" type="String"/>
+		<property name="deliveryChoiceCd" type="String"/>
+	</bean>
+
+	<bean class="com.amway.core.dms.data.MissingInfoDetailData">
+		<property name="partyId" type="long" />
+		<property name="missingInfoId" type="java.lang.String" />
+		<property name="status" type="java.lang.String" />
 	</bean>
 
 	<bean class="com.amway.core.dms.data.BlockPrivDetailsData">
@@ -278,6 +306,8 @@
 		<property name="sponsorDetails" type="com.amway.core.los.data.SponsorDetailsData" />
 		<property name="accountBalance" type="java.util.List&lt;com.amway.core.dms.data.AccountBalanceData>" />
 		<property name="blockPrivDetailsData" type="java.util.List&lt;com.amway.core.dms.data.BlockPrivDetailsData>" />
+		<property name="missingInfoList" type="java.util.List&lt;com.amway.core.dms.data.MissingInfoDetailData>" />
+		<property name="subscriptions" type="java.util.Set&lt;com.amway.core.dms.data.PartySubscription&gt;" />
 	</bean>
 
 	<bean class="com.amway.core.dms.data.PersonalIdDetailsData" extends="com.amway.core.data.CommonRequestFieldsData">
@@ -430,6 +460,14 @@
 		<property name="partyId" type="java.lang.String" />
 		<property name="primaryFlag" type="java.lang.String" />
 	</bean>
+
+	<bean class="com.amway.core.dms.data.OrderRequestData" extends="com.amway.core.data.CommonRequestFieldsData">
+		<property name="actionType" type="java.lang.String" />
+		<property name="orderType" type="java.lang.String" />
+		<property name="invoiceNumber" type="java.lang.String" />
+		<property name="processDate" type="java.lang.String" />
+	</bean>
+
 
 	<bean class="com.amway.core.dms.data.SubscriptionDataResponse&lt;DECISION, FIELD_ERROR>"
 		  extends="com.amway.core.data.CommonResponseFieldsData">
@@ -986,6 +1024,9 @@
 		<property name="name" type="String"/>
 		<property name="amount" type="double"/>
 		<property name="repeatableCount" type="int"/>
+		<property name="usedCount" type="int"/>
+		<property name="allowOverpay" type="boolean"/>
+		<property name="overpaymentThreshold" type="java.lang.Double"/>
 	</bean>
 	
 	<bean class="com.amway.core.dms.data.BlockPrevRequestData" extends="com.amway.core.data.CommonRequestFieldsData">
@@ -1015,7 +1056,11 @@
 		<property name="returnMessage" type="String" />
 	</bean>
 
-
+	<bean class="com.amway.core.charon.data.ApiGatewayRequestData">
+		<property name="aboNumber" type="String" />
+		<property name="party" type="String" />
+		<property name="affiliate" type="String" />
+	</bean>
 	
 	<bean class="de.hybris.platform.commercefacades.order.data.AbstractOrderData">
 	</bean>
@@ -1040,5 +1085,59 @@
 		<property name="sponsorshipRequest" type="String"/>
 		<property name="officialIdentification" type="String"/>
 		<property name="downlines" type="java.util.List&lt;com.amway.core.facades.account.los.data.LosHierarchyData>"/>
-	</bean>	
+	</bean>
+
+	<bean class="com.amway.core.returns.data.AmwayReturnRequestTypeData">
+		<property name="code" type="String"/>
+		<property name="name" type="String"/>
+		<property name="noShippingRequired" type="boolean" />
+		<property name="labelRequired" type="boolean" />
+	</bean>
+
+	<bean class="com.amway.core.cart.data.AmwayPaymentInfoData">
+		<property name="requesttoken" type="String"/>
+		<property name="transactionid" type="String"/>
+		<property name="referenceNumber" type="String"/>
+		<property name="amount" type="java.lang.Double"/>
+		<property name="currency" type="de.hybris.platform.commercefacades.storesession.data.CurrencyData"/>
+		<property name="status" type="String"/>
+		<property name="comments" type="String"/>
+		<property name="paymentMode" type="com.amway.core.order.data.PaymentModeData"/>
+	</bean>
+
+	<bean class="com.amway.core.order.data.PaymentModeData" >
+		<property name="code" type="String"/>
+		<property name="name" type="String"/>
+		<property name="description" type="String"/>
+		<property name="active" type="boolean" />
+	</bean>
+
+	<bean class="com.amway.core.cart.data.AmwayCashPaymentInfoData" extends="com.amway.core.cart.data.AmwayPaymentInfoData" />
+
+	<bean class="com.amway.core.cart.data.AmwayCCPaymentInfoData" extends="com.amway.core.cart.data.AmwayPaymentInfoData">
+		<property name="maskedcardnumber" type="String"/>
+		<property name="validthru" type="String"/>
+		<property name="validfrom" type="String"/>
+		<property name="cardtype" type="String"/>
+	</bean>
+
+	<bean class="com.amway.core.cart.data.AmwayDCPaymentInfoData" extends="com.amway.core.cart.data.AmwayCCPaymentInfoData" />
+
+	<!-- Enterprise Error Messages -->
+	<bean class="com.amway.core.error.dto.EnterpriseErrorMessageContext">
+		<property name="solutionId" type="String"/>
+		<property name="messageId" type="String"/>
+		<property name="countryCode" type="String"/>
+		<property name="languageCode" type="String"/>
+	</bean>
+	
+	<bean class="com.amway.core.error.dto.EnterpriseErrorMessage">
+		<property name="messageId" type="String"/>
+		<property name="description" type="String"/>
+		<property name="severity" type="String"/>
+		<property name="solutionId" type="String"/>
+		<property name="localDescription" type="String"/>
+		<property name="language" type="String"/>
+	</bean>
+
 </beans>

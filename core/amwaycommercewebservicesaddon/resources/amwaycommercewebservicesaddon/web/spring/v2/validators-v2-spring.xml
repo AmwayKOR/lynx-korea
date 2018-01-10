@@ -20,4 +20,8 @@
           class="com.amway.core.validator.AmwayPlaceOrderCartValidator">
     </bean>
 
- </beans>
+    <alias name="defaultAmwayAutoRenewalRequestDataValidator" alias="autoRenewalRequestDataValidator"/>
+    <bean id="defaultAmwayAutoRenewalRequestDataValidator" class="com.amway.core.validator.AmwayAutoRenewalRequestDataValidator" />
+
+</beans>
+

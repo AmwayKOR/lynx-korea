@@ -88,3 +88,23 @@ INSERT_UPDATE OrderEntry;order(code)[unique=true];product(code,catalogVersion(ca
 ;testOrder12;HW1210-3423:testCatalog:Online;3;false;pieces;1
 ;testOrder13;HW1210-3422:testCatalog:Online;4;false;pieces;0
 ;testOrder13;HW1210-3423:testCatalog:Online;3;false;pieces;1
+
+
+INSERT_UPDATE Order;code[unique=true];user(uid);date[dateformat=dd.MM.yyyy HH:mm];currency(isocode);net;deliveryMode(code[default='premium-gross']);paymentMode(code);Discounts(code);calculated;site(uid);store(uid);status(code);;type(code)[default='pos']
+;testOrder14;orderhistoryuser@test.com;10.02.2016 15:10;USD;false;;advance;;false;storetemplate;defaultstore2;CREATED
+"#%   impex.getLastImportedItem().setDeliveryAddress(impex.getLastImportedItem().getUser().getDefaultDeliveryAddress());impex.getLastImportedItem().setPaymentAddress(impex.getLastImportedItem().getUser().getDefaultPaymentAddress());";
+"#%   impex.getLastImportedItem().calculate();";
+
+INSERT_UPDATE OrderEntry;order(code)[unique=true];product(code,catalogVersion(catalog(id),version))[unique=true];quantity;calculated;unit(code);entryNumber;
+;testOrder14;HW1210-3422:testCatalog:Online;4;false;pieces;0
+;testOrder14;HW1210-3423:testCatalog:Online;3;false;pieces;1
+
+# Rerun order update to perform order calculation after order entries import
+INSERT_UPDATE Order;code[unique=true];calculated
+;testOrder14;false
+"#%   impex.getLastImportedItem().setDeliveryAddress(impex.getLastImportedItem().getUser().getDefaultDeliveryAddress());impex.getLastImportedItem().setPaymentAddress(impex.getLastImportedItem().getUser().getDefaultPaymentAddress());";
+"#%   impex.getLastImportedItem().calculate();";
+
+;testOrder1;false
+"#%   impex.getLastImportedItem().setDeliveryAddress(impex.getLastImportedItem().getUser().getDefaultDeliveryAddress());impex.getLastImportedItem().setPaymentAddress(impex.getLastImportedItem().getUser().getDefaultPaymentAddress());";
+"#%   impex.getLastImportedItem().calculate();";

@@ -5,6 +5,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 /**
  * <p>Java class for deleteAddress complex type.
@@ -31,6 +33,7 @@ import javax.xml.bind.annotation.XmlType;
     "aboNum",
     "salesPlanAff"
 })
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class DeleteAddress
     extends Contact
 {

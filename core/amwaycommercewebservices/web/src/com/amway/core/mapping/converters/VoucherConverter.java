@@ -20,6 +20,7 @@ import de.hybris.platform.webservicescommons.mapping.WsDTOMapping;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
 
+import ma.glasnost.orika.MappingContext;
 import ma.glasnost.orika.converter.BidirectionalConverter;
 import ma.glasnost.orika.metadata.Type;
 
@@ -31,12 +32,12 @@ import ma.glasnost.orika.metadata.Type;
 public class VoucherConverter extends BidirectionalConverter<VoucherWsDTO, String> //NOSONAR
 {
 	private static final Logger LOG = Logger.getLogger(VoucherConverter.class);
-	
+
 	private VoucherFacade voucherFacade;
 	private DataMapper dataMapper;
 
 	@Override
-	public String convertTo(final VoucherWsDTO source, final Type<String> destinationType)
+	public String convertTo(final VoucherWsDTO source, final Type<String> destinationType, final MappingContext mappingContext)
 	{
 		if (source != null && source.getCode() != null)
 		{
@@ -46,7 +47,8 @@ public class VoucherConverter extends BidirectionalConverter<VoucherWsDTO, Strin
 	}
 
 	@Override
-	public VoucherWsDTO convertFrom(final String source, final Type<VoucherWsDTO> destinationType)
+	public VoucherWsDTO convertFrom(final String source, final Type<VoucherWsDTO> destinationType,
+			final MappingContext mappingContext)
 	{
 		try
 		{

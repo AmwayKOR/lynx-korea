@@ -54,8 +54,8 @@ import org.springframework.util.Assert;
  */
 @Component("httpRequestAddressDataPopulator")
 @Scope("prototype")
-public class HttpRequestAddressDataPopulator extends AbstractHttpRequestDataPopulator implements
-		Populator<HttpServletRequest, AddressData>
+public class HttpRequestAddressDataPopulator extends AbstractHttpRequestDataPopulator
+		implements Populator<HttpServletRequest, AddressData>
 {
 
 	private static final String ADDRESS_ID = "id";
@@ -66,6 +66,7 @@ public class HttpRequestAddressDataPopulator extends AbstractHttpRequestDataPopu
 	private static final String LINE2 = "line2";
 	private static final String TOWN = "town";
 	private static final String POSTCODE = "postalCode";
+	private static final String PHONE = "phone";
 	private static final String COUNTRY = "country.isocode";
 	private static final String REGION = "region.isocode";
 	private static final String DEFAULT_ADDRESS = "defaultAddress";
@@ -92,6 +93,7 @@ public class HttpRequestAddressDataPopulator extends AbstractHttpRequestDataPopu
 		addressData.setLine2(updateStringValueFromRequest(request, LINE2, addressData.getLine2()));
 		addressData.setTown(updateStringValueFromRequest(request, TOWN, addressData.getTown()));
 		addressData.setPostalCode(updateStringValueFromRequest(request, POSTCODE, addressData.getPostalCode()));
+		addressData.setPhone(updateStringValueFromRequest(request, PHONE, addressData.getPhone()));
 		addressData.setCountry(updateCountryFromRequest(request, addressData.getCountry()));
 		addressData.setRegion(updateRegionFromRequest(request, addressData.getRegion()));
 		addressData.setDefaultAddress(updateBooleanValueFromRequest(request, DEFAULT_ADDRESS, addressData.isDefaultAddress()));

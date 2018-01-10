@@ -40,7 +40,7 @@ public class BaseSiteMatchingFilter extends AbstractUrlMatchingFilter
 	protected void doFilterInternal(final HttpServletRequest request, final HttpServletResponse response,
 			final FilterChain filterChain) throws ServletException, IOException
 	{
-		final String baseSiteID = getValue(request, regexp);
+		final String baseSiteID = getBaseSiteValue(request, regexp);
 
 		if (baseSiteID != null)
 		{

@@ -8,14 +8,14 @@
 ###############  for web
 ########################################################################################
 
-INSERT_UPDATE AmwayPaymentConfig;code[unique=true];businessNature(code);channel(code)[unique=true][default=Web];type(code)[unique=true][default=web];active[default=true];subtotal[default=1]
+INSERT_UPDATE AmwayPaymentConfig;code[unique=true];businessNature(code);channel(code)[unique=true][default=Web];type(code)[unique=true][default=web];active[default=true];subtotal[default=1];baseStore(uid)[unique=true][default=defaultstore]
 ## cc
 ;web_abo_cc;AmwayBusinessNature_1;
 ;web_cus_cc;AmwayBusinessNature_4;
 
 ##CC + CC
-;web_abo_cc2;AmwayBusinessNature_1;;;;200
-;web_cus_cc2;AmwayBusinessNature_4;;;;200
+;web_abo_cc2;AmwayBusinessNature_1;;;;200;
+;web_cus_cc2;AmwayBusinessNature_4;;;;200;
 
 INSERT_UPDATE AmwayPaymentTypeConfig;paymentMode(code)[unique=true];repeatableCount[unique=true];config(code)[unique=true]
 ;creditCard;1          ;web_abo_cc
@@ -27,11 +27,11 @@ INSERT_UPDATE AmwayPaymentTypeConfig;paymentMode(code)[unique=true];repeatableCo
 ########################################################################################
 ###############  for web group
 ########################################################################################
-INSERT_UPDATE AmwayPaymentConfig;code[unique=true];businessNature(code);channel(code)[unique=true][default=Web];type(code)[unique=true][default=webgroup];active[default=true];subtotal[default=1]
+INSERT_UPDATE AmwayPaymentConfig;code[unique=true];businessNature(code);channel(code)[unique=true][default=Web];type(code)[unique=true][default=webgroup];active[default=true];subtotal[default=1];baseStore(uid)[unique=true][default=defaultstore]
 ## cc
 ;web_abo_cc_webgroup;AmwayBusinessNature_1;
 ##CC + CC
-;web_abo_cc2_webgroup;AmwayBusinessNature_1;;;;200
+;web_abo_cc2_webgroup;AmwayBusinessNature_1;;;;200;
 
 INSERT_UPDATE AmwayPaymentTypeConfig;paymentMode(code)[unique=true];repeatableCount[unique=true];config(code)[unique=true]
 ;creditCard;1          ;web_abo_cc_webgroup
@@ -40,7 +40,7 @@ INSERT_UPDATE AmwayPaymentTypeConfig;paymentMode(code)[unique=true];repeatableCo
 ########################################################################################
 ###############  for web recurring
 ########################################################################################
-INSERT_UPDATE AmwayPaymentConfig;code[unique=true];businessNature(code);channel(code)[unique=true][default=Web];type(code)[unique=true][default=webrecurring];active[default=true];subtotal[default=1]
+INSERT_UPDATE AmwayPaymentConfig;code[unique=true];businessNature(code);channel(code)[unique=true][default=Web];type(code)[unique=true][default=webrecurring];active[default=true];subtotal[default=1];baseStore(uid)[unique=true][default=defaultstore]
 ## cc
 ;web_abo_cc_webrecurring;AmwayBusinessNature_1;
 
@@ -52,14 +52,14 @@ INSERT_UPDATE AmwayPaymentTypeConfig;paymentMode(code)[unique=true];repeatableCo
 ########################################################################################
 ###############  for CallCenter
 ########################################################################################
-INSERT_UPDATE AmwayPaymentConfig;code[unique=true];businessNature(code);channel(code)[unique=true][default=CallCenter];type(code)[unique=true][default=web];active[default=true];subtotal[default=1]
+INSERT_UPDATE AmwayPaymentConfig;code[unique=true];businessNature(code);channel(code)[unique=true][default=CallCenter];type(code)[unique=true][default=web];active[default=true];subtotal[default=1];baseStore(uid)[unique=true][default=defaultstore]
 ## cc
 ;cs_abo_cc;AmwayBusinessNature_1;
 ;cs_cus_cc;AmwayBusinessNature_4;
 
 ##CC + CC
-;cs_abo_cc2;AmwayBusinessNature_1;;;;200
-;cs_cus_cc2;AmwayBusinessNature_4;;;;200
+;cs_abo_cc2;AmwayBusinessNature_1;;;;200;
+;cs_cus_cc2;AmwayBusinessNature_4;;;;200;
 
 ## AR
 ;cs_abo_ar;AmwayBusinessNature_1;
@@ -69,10 +69,10 @@ INSERT_UPDATE AmwayPaymentConfig;code[unique=true];businessNature(code);channel(
 ;cs_abo_cc_ar;AmwayBusinessNature_1;
 ;cs_cus_cc_ar;AmwayBusinessNature_4;
 
-INSERT_UPDATE AmwayPaymentConfig;code[unique=true];businessNature(code);channel(code)[unique=true][default=CallCenter];type(code)[unique=true][default=webgroup];active[default=true];subtotal[default=1]
+INSERT_UPDATE AmwayPaymentConfig;code[unique=true];businessNature(code);channel(code)[unique=true][default=CallCenter];type(code)[unique=true][default=webgroup];active[default=true];subtotal[default=1];baseStore(uid)[unique=true][default=defaultstore]
 ## cc for group order
 ;cs_abo_cc_webgroup;AmwayBusinessNature_1;
-;cs_abo_cc2_webgroup;AmwayBusinessNature_1;;;;200
+;cs_abo_cc2_webgroup;AmwayBusinessNature_1;;;;200;
 
 
 INSERT_UPDATE AmwayPaymentTypeConfig;paymentMode(code)[unique=true];repeatableCount[unique=true];config(code)[unique=true]
@@ -97,7 +97,7 @@ INSERT_UPDATE AmwayPaymentTypeConfig;paymentMode(code)[unique=true];repeatableCo
 ########################################################################################
 ###############  for pos
 ########################################################################################
-INSERT_UPDATE AmwayPaymentConfig;code[unique=true];businessNature(code);channel(code)[unique=true][default=pos];type(code)[unique=true][default=pos];active[default=true];subtotal[default=1]
+INSERT_UPDATE AmwayPaymentConfig;code[unique=true];businessNature(code);channel(code)[unique=true][default=pos];type(code)[unique=true][default=pos];active[default=true];subtotal[default=1];baseStore(uid)[unique=true][default=defaultstore]
 ## cash
 ;pos_abo_ca;AmwayBusinessNature_1;
 ;pos_cus_ca;AmwayBusinessNature_4;
@@ -107,8 +107,8 @@ INSERT_UPDATE AmwayPaymentConfig;code[unique=true];businessNature(code);channel(
 
 
 ##CC + CC
-;pos_abo_ccn;AmwayBusinessNature_1;;;;200
-;pos_cus_ccn;AmwayBusinessNature_4;;;;200
+;pos_abo_ccn;AmwayBusinessNature_1;;;;200;
+;pos_cus_ccn;AmwayBusinessNature_4;;;;200;
 
 ##CC + AR
 ;pos_abo_cc_ar;AmwayBusinessNature_1;
@@ -139,6 +139,53 @@ INSERT_UPDATE AmwayPaymentConfig;code[unique=true];businessNature(code);channel(
 ;pos_abo_ca_dc_cc_ar;AmwayBusinessNature_1;
 ;pos_cus_ca_dc_cc_ar;AmwayBusinessNature_1;
 
+
+########################################################################################
+###############  for pos for base store "defaultstore2"
+########################################################################################
+INSERT_UPDATE AmwayPaymentConfig;code[unique=true];businessNature(code);channel(code)[unique=true][default=pos];type(code)[unique=true][default=pos];active[default=true];subtotal[default=1];baseStore(uid)[unique=true][default=defaultstore2]
+## cash
+;defaultstore2_pos_abo_ca;AmwayBusinessNature_1;
+;defaultstore2_pos_cus_ca;AmwayBusinessNature_4;
+
+## AR
+;defaultstore2_pos_abo_ar;AmwayBusinessNature_1;
+
+
+##CC + CC
+;defaultstore2_pos_abo_ccn;AmwayBusinessNature_1;;;;200;
+;defaultstore2_pos_cus_ccn;AmwayBusinessNature_4;;;;200;
+
+##CC + AR
+;defaultstore2_pos_abo_cc_ar;AmwayBusinessNature_1;
+
+
+## cash + n dc
+;defaultstore2_pos_abo_ca_dc;AmwayBusinessNature_1;
+;defaultstore2_pos_cus_ca_dc;AmwayBusinessNature_1;
+
+## cash + n cc
+;defaultstore2_pos_abo_ca_cc;AmwayBusinessNature_1;
+;defaultstore2_pos_cus_ca_cc;AmwayBusinessNature_4;
+
+## cash + ar
+;defaultstore2_pos_abo_ca_ar;AmwayBusinessNature_1;
+;defaultstore2_pos_cus_ca_ar;AmwayBusinessNature_1;
+
+
+## cash + n cc + n dc
+;defaultstore2_pos_abo_ca_cc_dc;AmwayBusinessNature_1;
+;defaultstore2_pos_cus_ca_cc_dc;AmwayBusinessNature_1;
+
+## cash + n dc + ar
+;defaultstore2_pos_abo_ca_dc_ar;AmwayBusinessNature_1;
+;defaultstore2_pos_cus_ca_dc_ar;AmwayBusinessNature_1;
+
+## cash + n dc + n cc + ar
+;defaultstore2_pos_abo_ca_dc_cc_ar;AmwayBusinessNature_1;
+;defaultstore2_pos_cus_ca_dc_cc_ar;AmwayBusinessNature_1;
+
+
 INSERT_UPDATE AmwayPaymentTypeConfig;paymentMode(code)[unique=true];repeatableCount[unique=true];config(code)[unique=true]
 ;creditCard;10          ;pos_abo_ccn
 ;creditCard;10          ;pos_cus_ccn
@@ -157,6 +204,21 @@ INSERT_UPDATE AmwayPaymentTypeConfig;paymentMode(code)[unique=true];repeatableCo
 ;creditCard;5          ;pos_abo_ca_cc;
 ;creditCard;5          ;pos_cus_ca_cc;
 
+;creditCard;10          ;defaultstore2_pos_abo_ccn
+;creditCard;10          ;defaultstore2_pos_cus_ccn
 
+;arCredit;1          ;defaultstore2_pos_abo_ar
+
+;creditCard;1          ;defaultstore2_pos_abo_cc_ar
+;arCredit;1          ;defaultstore2_pos_abo_cc_ar
+
+
+;cash;1					;defaultstore2_pos_abo_ca;
+;cash;1					;defaultstore2_pos_cus_ca;
+
+;cash;1					;defaultstore2_pos_abo_ca_cc;
+;cash;1					;defaultstore2_pos_cus_ca_cc;
+;creditCard;5          ;defaultstore2_pos_abo_ca_cc;
+;creditCard;5          ;defaultstore2_pos_cus_ca_cc;
 
 

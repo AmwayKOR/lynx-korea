@@ -1,0 +1,21 @@
+$catalog-id=testCatalog
+$catalog-version=Online
+
+$catalogversion=catalogversion(catalog(id),version)[unique=true,default=$catalog-id:$catalog-version]
+$promoCatalogVersion=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$catalog-id]),CatalogVersion.version[default=$catalog-version])[default=$catalog-id:$catalog-version]
+
+# Zone Delivery Modes
+INSERT_UPDATE ZoneDeliveryMode;code[unique=true];net;active[default=true]
+;standard-gross;false
+
+#Sample Orders
+INSERT_UPDATE Order;code[unique=true];user(Customer.originalUid);account(code);date[dateformat=dd.MM.yyyy HH:mm];status(code);paymentStatus(code);totalPrice;totalTax;site(uid);store(uid);type(code);currency(isocode)[default='USD'];language(isocode)[default='en']
+;ahertzOrder1;ahertz;8888888888;01.09.2015 15:10;CREATED;PAID;100;0;amway;testStore;pos
+;ahertzOrder2;ahertz;8888888888;01.09.2015 15:10;CREATED;OVERPAID;100;0;amway;testStore;pos
+;ahertzOrder3;ahertz;9999999999;01.09.2015 15:10;CREATED;PARTPAID;44;0;amway;testStore;pos
+
+#Sample OrderEntries
+INSERT_UPDATE OrderEntry;order(code)[unique=true];product(code,catalogVersion(catalog(id),version));quantity;basePrice;totalPrice;calculated;entryNumber;namedDeliveryDate[dateformat=dd.MM.yyyy HH:mm];deliveryMode(code[default='standard-gross']);unit(code)[default='pieces']
+;ahertzOrder1;HW1210-3422:$catalog-id:$catalog-version;1;100;100;Y;0;01.09.2015 15:10;
+;ahertzOrder2;HW1210-3422:$catalog-id:$catalog-version;1;100;100;Y;0;01.09.2015 15:10;
+;ahertzOrder3;HW1210-3422:$catalog-id:$catalog-version;1;44;44;Y;0;01.09.2015 15:10;
