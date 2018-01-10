@@ -12,7 +12,6 @@ import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.amway.apac.core.product.services.AmwayApacProductService;
-import com.amway.core.model.AmwayAccountModel;
 
 
 /**
@@ -31,22 +30,12 @@ public class AmwayApacPreLaunchProductCountAction extends AbstractOrderAction<Or
 		final Map<String, Integer> productCodeToCount = getAmwayApacProductService().getPreLaunchConfigProducts(orderModel);
 		if (MapUtils.isNotEmpty(productCodeToCount))
 		{
-			final String amwayAccountCode = getNormalizedAmwayAccountCode(orderModel.getAccount());
-			getAmwayApacProductService().updatePreLaunchProductCount(productCodeToCount, amwayAccountCode);
+			getAmwayApacProductService().updatePreLaunchProductCount(productCodeToCount, orderModel);
 		}
 		return Transition.OK.toString();
 	}
 
-	/**
-	 * Get Amway Account Code with affiliate number and Amway Account
-	 *
-	 * @param amwayAccount
-	 * @return
-	 */
-	public String getNormalizedAmwayAccountCode(final AmwayAccountModel amwayAccount)
-	{
-		return amwayAccount.getControllingAffiliate().getAffiliateNumber() + "-" + amwayAccount.getCode();
-	}
+
 
 	@Override
 	public Set<String> getTransitions()

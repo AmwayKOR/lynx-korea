@@ -402,6 +402,7 @@
 		<property name="amwayApacAccountClassificationService" ref="defaultAmwayApacAccountClassificationService" />
 		<property name="amwayApacProductService" ref="productService"/>
 		<property name="amwayAccountCommerceService" ref="amwayAccountCommerceService"/>
+		<property name="baseStoreService" ref="baseStoreService" />
     </bean>
     
     <alias name="defaultAmwayUserPromotionCountDao" alias="amwayUserPromotionCountDao"/>

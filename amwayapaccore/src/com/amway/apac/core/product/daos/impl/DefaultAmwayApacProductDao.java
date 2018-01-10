@@ -2,6 +2,7 @@ package com.amway.apac.core.product.daos.impl;
 
 import static com.amway.apac.core.model.AmwayUserPromotionCountModel.PRODUCTCODE;
 import static com.amway.apac.core.model.AmwayUserPromotionCountModel.PROMOTIONCODE;
+import static com.amway.apac.core.model.AmwayUserPromotionCountModel.STORE;
 import static com.amway.apac.core.model.AmwayUserPromotionCountModel.USERID;
 import static de.hybris.platform.core.model.ItemModel.PK;
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNull;
@@ -12,6 +13,7 @@ import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.product.daos.impl.DefaultProductDao;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 import de.hybris.platform.servicelayer.search.SearchResult;
+import de.hybris.platform.store.BaseStoreModel;
 
 import java.util.Calendar;
 import java.util.Collections;
@@ -59,7 +61,8 @@ public class DefaultAmwayApacProductDao extends DefaultProductDao implements Amw
 	private static final String FIND_AMWAY_PROMOTION_COUNT_BY_USER_AND_PRODUCT = new StringBuilder(200).append("SELECT {")
 			.append(PK).append("} FROM {").append(AmwayUserPromotionCountModel._TYPECODE).append("} WHERE {").append(USERID)
 			.append("}=?").append(USERID).append(" AND {").append(PRODUCTCODE).append("} IN (?productCodes) AND {")
-			.append(PROMOTIONCODE).append("}=?").append(PROMOTIONCODE).toString();
+			.append(PROMOTIONCODE).append("}=?").append(PROMOTIONCODE).append(" AND {").append(STORE).append("}=?").append(STORE)
+			.toString();
 
 
 	public DefaultAmwayApacProductDao(final String typecode)
@@ -117,12 +120,13 @@ public class DefaultAmwayApacProductDao extends DefaultProductDao implements Amw
 
 	@Override
 	public List<AmwayUserPromotionCountModel> getPromotionRuleCountByUserAndProduct(final String userId,
-			final List<String> productCodes, final String promotionCode)
+			final List<String> productCodes, final String promotionCode, final BaseStoreModel store)
 	{
 		final FlexibleSearchQuery flexibleSearchQuery = new FlexibleSearchQuery(FIND_AMWAY_PROMOTION_COUNT_BY_USER_AND_PRODUCT);
-		flexibleSearchQuery.addQueryParameter(AmwayUserPromotionCountModel.USERID, userId);
-		flexibleSearchQuery.addQueryParameter(AmwayUserPromotionCountModel.PROMOTIONCODE, promotionCode);
+		flexibleSearchQuery.addQueryParameter(USERID, userId);
+		flexibleSearchQuery.addQueryParameter(PROMOTIONCODE, promotionCode);
 		flexibleSearchQuery.addQueryParameter("productCodes", productCodes);
+		flexibleSearchQuery.addQueryParameter(STORE, store);
 		final SearchResult<AmwayUserPromotionCountModel> ruleBasedPromotionActions = getFlexibleSearchService()
 				.search(flexibleSearchQuery);
 		return null != ruleBasedPromotionActions ? ruleBasedPromotionActions.getResult() : Collections.emptyList();

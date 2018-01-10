@@ -1,6 +1,7 @@
 package com.amway.apac.core.product.strategies.impl;
 
 import de.hybris.platform.core.model.product.ProductModel;
+import de.hybris.platform.store.services.BaseStoreService;
 
 import java.util.Date;
 
@@ -27,6 +28,7 @@ public class DefaultAmwayApacProductPreLaunchStrategy implements AmwayApacProduc
 	private AmwayApacAccountClassificationService amwayApacAccountClassificationService;
 	private AmwayApacProductService amwayApacProductService;
 	private AmwayAccountCommerceService amwayAccountCommerceService;
+	private BaseStoreService baseStoreService;
 
 	/**
 	 * {@inheritDoc}
@@ -78,7 +80,7 @@ public class DefaultAmwayApacProductPreLaunchStrategy implements AmwayApacProduc
 	{
 		final AmwayAccountModel currentAccount = getAmwayAccountCommerceService().getCurrentAccount();
 		final int usedQuantity = getAmwayApacProductService().getUsedQuantityForPrelaunch(currentAccount.getCode(),
-				product.getCode());
+				product.getCode(), getBaseStoreService().getCurrentBaseStore());
 
 		return Integer.valueOf(product.getPreLaunchConfig().getMaxShoppingCount().intValue() - usedQuantity);
 	}
@@ -136,6 +138,24 @@ public class DefaultAmwayApacProductPreLaunchStrategy implements AmwayApacProduc
 	public void setAmwayAccountCommerceService(final AmwayAccountCommerceService amwayAccountCommerceService)
 	{
 		this.amwayAccountCommerceService = amwayAccountCommerceService;
+	}
+
+	/**
+	 * @return the baseStoreService
+	 */
+	public BaseStoreService getBaseStoreService()
+	{
+		return baseStoreService;
+	}
+
+	/**
+	 * @param baseStoreService
+	 *           the baseStoreService to set
+	 */
+	@Required
+	public void setBaseStoreService(final BaseStoreService baseStoreService)
+	{
+		this.baseStoreService = baseStoreService;
 	}
 
 }

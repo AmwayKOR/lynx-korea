@@ -1,6 +1,10 @@
 package com.amway.apac.core.product.services.impl;
 
 import static com.amway.apac.core.constants.AmwayapacCoreConstants.PRE_LAUNCH_PROMOTION;
+import static com.amway.apac.core.model.AmwayUserPromotionCountModel.PRODUCTCODE;
+import static com.amway.apac.core.model.AmwayUserPromotionCountModel.PROMOTIONCODE;
+import static com.amway.apac.core.model.AmwayUserPromotionCountModel.STORE;
+import static com.amway.apac.core.model.AmwayUserPromotionCountModel.USERID;
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateIfSingleResult;
 import static java.lang.String.format;
 
@@ -11,6 +15,7 @@ import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.product.impl.DefaultProductService;
 import de.hybris.platform.servicelayer.internal.dao.GenericDao;
 import de.hybris.platform.servicelayer.util.ServicesUtil;
+import de.hybris.platform.store.BaseStoreModel;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,6 +35,7 @@ import com.amway.apac.core.model.AmwayPaymentOptionModel;
 import com.amway.apac.core.model.AmwayUserPromotionCountModel;
 import com.amway.apac.core.product.daos.AmwayApacProductDao;
 import com.amway.apac.core.product.services.AmwayApacProductService;
+import com.amway.core.model.AmwayAccountModel;
 
 
 /**
@@ -119,17 +125,19 @@ public class DefaultAmwayApacProductService extends DefaultProductService implem
 	 * {@inheritDoc}
 	 */
 	@Override
-	public int getUsedQuantityForPrelaunch(final String userId, final String productCode)
+	public int getUsedQuantityForPrelaunch(final String userId, final String productCode, final BaseStoreModel store)
 	{
 		ServicesUtil.validateParameterNotNullStandardMessage("userId", userId);
 		ServicesUtil.validateParameterNotNullStandardMessage("productCode", productCode);
+		ServicesUtil.validateParameterNotNullStandardMessage("store", store);
 
 		int usedQuantity = 0;
 
 		final Map<String, Object> attributes = new HashMap<>();
-		attributes.put(AmwayUserPromotionCountModel.USERID, userId);
-		attributes.put(AmwayUserPromotionCountModel.PRODUCTCODE, productCode);
-		attributes.put(AmwayUserPromotionCountModel.PROMOTIONCODE, PRE_LAUNCH_PROMOTION);
+		attributes.put(USERID, userId);
+		attributes.put(PRODUCTCODE, productCode);
+		attributes.put(PROMOTIONCODE, PRE_LAUNCH_PROMOTION);
+		attributes.put(STORE, store);
 
 		final List<AmwayUserPromotionCountModel> promotionCountModelList = getAmwayUserPromotionCountDao().find(attributes);
 
@@ -144,11 +152,12 @@ public class DefaultAmwayApacProductService extends DefaultProductService implem
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void updatePreLaunchProductCount(final Map<String, Integer> productCodeToCount, final String amwayAccountCode)
+	public void updatePreLaunchProductCount(final Map<String, Integer> productCodeToCount, final AbstractOrderModel order)
 	{
+		final String amwayAccountCode = getNormalizedAmwayAccountCode(order.getAccount());
 		final List<String> preLaunchProducts = new ArrayList<>(productCodeToCount.keySet());
 		final List<AmwayUserPromotionCountModel> userSavedCountList = getAmwayApacProductDao()
-				.getPromotionRuleCountByUserAndProduct(amwayAccountCode, preLaunchProducts, PRE_LAUNCH_PROMOTION);
+				.getPromotionRuleCountByUserAndProduct(amwayAccountCode, preLaunchProducts, PRE_LAUNCH_PROMOTION, order.getStore());
 		final List<AmwayUserPromotionCountModel> newUserPromotionCountList = new ArrayList<>();
 		for (final Entry<String, Integer> entry : productCodeToCount.entrySet())
 		{
@@ -170,6 +179,7 @@ public class DefaultAmwayApacProductService extends DefaultProductService implem
 				newUserPromotionCount.setPromotionCode(PRE_LAUNCH_PROMOTION);
 				newUserPromotionCount.setProductCode(entry.getKey());
 				newUserPromotionCount.setCurrentCount(entry.getValue());
+				newUserPromotionCount.setStore(order.getStore());
 				newUserPromotionCountList.add(newUserPromotionCount);
 			}
 		}
@@ -194,6 +204,17 @@ public class DefaultAmwayApacProductService extends DefaultProductService implem
 		}
 
 		return productCodeToCount;
+	}
+
+	/**
+	 * Get Amway Account Code with affiliate number and Amway Account
+	 *
+	 * @param amwayAccount
+	 * @return
+	 */
+	protected String getNormalizedAmwayAccountCode(final AmwayAccountModel amwayAccount)
+	{
+		return amwayAccount.getControllingAffiliate().getAffiliateNumber() + "-" + amwayAccount.getCode();
 	}
 
 	/**

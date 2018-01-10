@@ -345,6 +345,10 @@
 						<description>Date</description>
 						<persistence type="property"/>
 					</attribute>
+					<attribute type="BaseStore" qualifier="store">
+						<description>Base Store</description>
+						<persistence type="property"/>
+					</attribute>
 				</attributes>
 			</itemtype>
 		</typegroup>

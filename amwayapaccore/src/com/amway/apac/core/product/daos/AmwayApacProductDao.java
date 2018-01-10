@@ -2,6 +2,7 @@ package com.amway.apac.core.product.daos;
 
 import de.hybris.platform.catalog.model.CatalogVersionModel;
 import de.hybris.platform.product.daos.ProductDao;
+import de.hybris.platform.store.BaseStoreModel;
 
 import java.util.List;
 
@@ -37,5 +38,5 @@ public interface AmwayApacProductDao extends ProductDao
 	 * @return List<AmwayUserPromotionCountModel>
 	 */
 	List<AmwayUserPromotionCountModel> getPromotionRuleCountByUserAndProduct(final String userId, final List<String> productCodes,
-			final String promotionCode);
+			final String promotionCode, final BaseStoreModel store);
 }

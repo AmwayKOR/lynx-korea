@@ -4,6 +4,7 @@ import de.hybris.platform.catalog.model.CatalogVersionModel;
 import de.hybris.platform.core.model.order.AbstractOrderModel;
 import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.product.ProductService;
+import de.hybris.platform.store.BaseStoreModel;
 
 import java.util.Map;
 
@@ -52,7 +53,7 @@ public interface AmwayApacProductService extends ProductService
 	 * @param productCode
 	 * @return
 	 */
-	int getUsedQuantityForPrelaunch(String userId, String productCode);
+	int getUsedQuantityForPrelaunch(String userId, String productCode, final BaseStoreModel store);
 
 	/**
 	 * Updates the {@link AmwayUserPromotionCountModel} for given product, quantity and account.
@@ -60,7 +61,7 @@ public interface AmwayApacProductService extends ProductService
 	 * @param productCodeToCount
 	 * @param amwayAccountCode
 	 */
-	void updatePreLaunchProductCount(final Map<String, Integer> productCodeToCount, final String amwayAccountCode);
+	void updatePreLaunchProductCount(final Map<String, Integer> productCodeToCount, final AbstractOrderModel order);
 
 	/**
 	 * Returns a map of PreLauch products and their ordered quantity in a given order.
