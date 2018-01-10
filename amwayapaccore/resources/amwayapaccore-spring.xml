@@ -410,5 +410,10 @@
 	      class="de.hybris.platform.servicelayer.internal.dao.DefaultGenericDao">
 		 <constructor-arg name="typecode" value="AmwayUserPromotionCount"/>
 	</bean>
+	
+	<alias alias="amwayApacAssetDao" name="extendedAmwayApacAssetDao"/>
+	<bean id="extendedAmwayApacAssetDao"  parent="defaultAmwayApacAssetDao" class="com.amway.apac.core.resource.center.daos.Impl.ExtendedAmwayApacAssetDao">
+		<property name="amwayApacAccountClassificationService" ref="defaultAmwayApacAccountClassificationService"/>
+	</bean>
     
 </beans>

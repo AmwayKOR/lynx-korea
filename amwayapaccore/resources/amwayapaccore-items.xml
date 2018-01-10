@@ -97,6 +97,18 @@
 					search="true" />
 			</targetElement>
 		</relation>
+		
+		<relation localized="false" code="AmwayProd2AssetRel"
+			autocreate="true" generate="true">
+			<deployment table="prod2AssetRel" typecode="21024" />
+			<sourceElement qualifier="product" type="Product" cardinality="many">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</sourceElement>
+			<targetElement qualifier="assets" type="AbstractAmwayAsset"
+				cardinality="many" collectiontype="list" ordered="true">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</targetElement>
+		</relation>
 	</relations>
 
 	<itemtypes>
@@ -309,6 +321,22 @@
 					<attribute qualifier="classification" type="AccountClassificationEnum">
 						<description>Classification level enum deciding the level of the accout.</description>
 						<modifiers optional="false" />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+		</typegroup>
+		
+		<typegroup name="AmwayAccount">
+			<itemtype code="AbstractAmwayAsset" generate="false"
+				autocreate="false">
+				<attributes>
+					<attribute qualifier="accountClassification" type="AmwayAccountClassification">
+						<description>User Account Classification for the asset.</description>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="classification" type="AccountClassificationEnum">
+						<description>User Account Classification for the asset.</description>
 						<persistence type="property" />
 					</attribute>
 				</attributes>
