@@ -29,7 +29,7 @@
 	<import	resource="amwaycore-interceptors-spring.xml" />
 	<import	resource="amwaycore-infraavail-spring.xml" />
 	<import	resource="amwaycore-productdimensions-spring.xml" />
-
+	<import	resource="amwaycore-charon-spring.xml" />
 
 	<alias name="defaultCommerceSearchTextPopulator" alias="commerceSearchTextPopulator" />
 	<bean id="defaultCommerceSearchTextPopulator" class="de.hybris.platform.commerceservices.search.solrfacetsearch.populators.SearchTextPopulator">
@@ -105,11 +105,16 @@
 		<property name="modelService" ref="modelService" />
 	</bean>
 
+	<bean id="macAddressDao" class="com.amway.core.pos.dao.impl.DefaultAmwayPOSMacAddressDao" scope="tenant">
+		<property name="modelService" ref="modelService" />
+	</bean>
+
 	<bean id="amwayPOSService" class="com.amway.core.pos.service.impl.DefaultAmwayPOSService" scope="tenant">
 		<property name="batchDao" ref="batchDao"/>
 		<property name="terminalDao" ref="terminalDao"/>
 		<property name="userService" ref="userService"/>
 		<property name="pointOfServiceService" ref="pointOfServiceService"/>
+		<property name="macAddressDao" ref="macAddressDao"/>
 	</bean>
 
 	<!-- Custom Restriction for Amway Account -->
@@ -268,6 +273,7 @@
 		<property name="commerceStockService" ref="commerceStockService"/>
 		<property name="amwayOrderProrationService" ref="amwayOrderProrationService"/>
 		<property name="returnCalculationService" ref="returnCalculationService"/>
+		<property name="adjustOverpaymentStrategy" ref="adjustOverpaymentStrategy"/>
 	</bean>
 	
 	<util:list id="commercePlaceOrderMethodHooks" value-type="de.hybris.platform.commerceservices.order.hook.CommercePlaceOrderMethodHook">
@@ -688,6 +694,7 @@
 	<bean id="amwayCartCalculationHook" class="com.amway.core.order.hook.impl.AmwayCartCalculationHook">
 		<property name="amwayCalculationService" ref="calculationService" />
 		<property name="amwayPaymentService" ref="paymentService" />
+		<property name="sessionService" ref="sessionService" />
 	</bean>	  
 	
 	<alias name="defaultAmwayReturnCalculationService" alias="returnCalculationService"/>
@@ -709,5 +716,111 @@
 	
 	 <!-- Dynamic Attributes -->
  	<bean id="emailContactInfoAttributeHandler" class="com.amway.core.attributeHandlers.AmwayEmailContactInfoAttributeHandler" />
+
+	<!-- POS pAyment strategies --> 	
+ 	<bean id="abstractPOSCreatePaymentInfoStrategy" class="com.amway.core.payment.strategies.impl.AbstractAmwayCreatePaymentInfoStrategy" abstract="true">
+		<property name="modelService" ref="modelService"/>
+		<property name="configurationService" ref="configurationService"/>
+		<property name="amwayPaymentModeService" ref="paymentModeService"/>
+	</bean>
 	
+	<bean id="amwayCreateCashPaymentInfoStrategy" class="com.amway.core.payment.strategies.impl.AmwayCreateCashPaymentInfoStrategy" parent="abstractPOSCreatePaymentInfoStrategy">
+	</bean>
+	
+	<bean id="amwayCreateCCPaymentInfoStrategy" class="com.amway.core.payment.strategies.impl.AmwayCreateCCPaymentInfoStrategy" parent="abstractPOSCreatePaymentInfoStrategy">
+	</bean>
+	
+	<bean id="amwayCreateMonetaryPaymentInfoStrategy" class="com.amway.core.payment.strategies.impl.AmwayCreateMonetaryPaymentInfoStrategy" parent="abstractPOSCreatePaymentInfoStrategy">
+	</bean>
+	
+	<util:map id="amwayCreatePaymentInfoStrategiesMap">
+		<entry key="AmwayCashPaymentInfo" value-ref="amwayCreateCashPaymentInfoStrategy" />
+		<entry key="CreditCardPaymentInfo" value-ref="amwayCreateCCPaymentInfoStrategy"/>
+		<entry key="DebitPaymentInfo" value-ref="amwayCreateCCPaymentInfoStrategy"/>
+		<entry key="AmwayMonetaryPaymentInfo" value-ref="amwayCreateMonetaryPaymentInfoStrategy"/> 
+	</util:map>
+	
+	<util:map id="createPaymentInfoStrategiesMap">
+		<entry key="amway" value-ref="amwayCreatePaymentInfoStrategiesMap" />
+	</util:map>
+ 	
+ 	<alias name="defaultAmwaySplitPaymentsService" alias="amwaySplitPaymentsService"/>
+ 	<bean id="defaultAmwaySplitPaymentsService" class="com.amway.core.payment.service.impl.AmwaySplitPaymentsServiceImpl">
+ 		<property name="modelService" ref="modelService"/>
+ 		<property name="configurationService" ref="configurationService"/>
+ 		<property name="createPaymentInfoStrategiesMap" ref="createPaymentInfoStrategiesMap"/>
+ 		<property name="baseSiteService" ref="baseSiteService"/>
+ 		<property name="amwayPaymentModeService" ref="paymentModeService"/>
+ 	</bean>
+ 	
+ 	<bean id="abstractCreatePaymentInfoDataStrategy"
+	class="com.amway.core.payment.strategies.impl.AbstractAmwayCreatePaymentInfoDataStrategy"
+	abstract="true" />
+
+	<bean id="amwayCreateCashPaymentInfoDataStrategy"
+		class="com.amway.core.payment.strategies.impl.AmwayCreateCashPaymentInfoDataStrategy"
+		parent="abstractCreatePaymentInfoDataStrategy" />
+	
+	<util:map id="amwayCreatePaymentInfoDataStrategiesMap">
+		<entry key="cash" value-ref="amwayCreateCashPaymentInfoDataStrategy" />
+	</util:map>
+	
+	<util:map id="createPaymentInfoDataStrategiesMap">
+		<entry key="amway" value-ref="amwayCreatePaymentInfoDataStrategiesMap" />
+	</util:map>
+	
+	<alias name="amwayAdjustOverpaymentStrategy" alias="adjustOverpaymentStrategy" />
+	<bean id="amwayAdjustOverpaymentStrategy" class="com.amway.core.payment.strategies.impl.DefaultAmwayAdjustOverpaymentStrategy">
+		<property name="amwayPaymentModeService" ref="paymentModeService" />
+		<property name="amwaySplitPaymentsService" ref="amwaySplitPaymentsService" />
+		<property name="baseSiteService" ref="baseSiteService" />
+		<property name="baseStoreSelectorStrategy" ref="baseStoreSelectorStrategy" />
+		<property name="createPaymentInfoDataStrategiesMap" ref="createPaymentInfoDataStrategiesMap" />
+	</bean>
+
+	<alias alias="apiGatewayService" name="amwayApiGatewayService" />
+	  <bean id="amwayApiGatewayService"  class="com.amway.core.apigateway.service.impl.AmwayApiGatewayServiceImpl">
+		  <property name="url" value="${amwaycore.charon.authoken.url}" />
+		  <property name="clientId" value="${amwaycore.charon.authoken.clientId}" />
+		  <property name="clientSecret" value="${amwaycore.charon.authoken.clientSecret}" />
+		  <property name="grantType" value="${amwaycore.charon.authoken.grantType}" />
+	  </bean>
+
+	<alias alias="apiGatewayRequestStrategy" name="amwayApiGatewayRequestStrategy" />
+	<bean id="amwayApiGatewayRequestStrategy"  class="com.amway.core.apigateway.strategy.impl.AmwayApiGatewayRequestStrategyImpl">
+	</bean>
+
+	<bean id="returnRequestTotalTaxValuesAttributeHandler" class="com.amway.core.model.ReturnRequestTotalTaxValuesAttributeHandler" />
+
+	<bean id="returnEntryTaxValuesAttributeHandler" class="com.amway.core.model.ReturnEntryTaxValuesAttributeHandler" />
+ 	
+ 	<!-- Enterprise Error Message service -->
+ 	<alias name="amwayEnterpriseErrorMessageService" alias="enterpriseErrorMessageService" />
+ 	<bean id="amwayEnterpriseErrorMessageService" class="com.amway.core.error.service.impl.DefaultAmwayEnterpriseErrorMessageService" />
+
+	<!-- Auto Renewal -->
+	<alias name="defaultAmwayRenewalService" alias="amwayRenewalService"/>
+	<bean id="defaultAmwayRenewalService" class="com.amway.core.renewal.service.impl.DefaultAmwayRenewalService">
+		<property name="amwayRenewalDao" ref="amwayRenewalDao" />
+		<property name="commerceCheckoutService" ref="commerceCheckoutService" />
+		<property name="deliveryService" ref="deliveryService" />
+		<property name="sessionService" ref="sessionService" />
+	</bean>
+
+	<alias name="defaultAmwayRenewalDao" alias="amwayRenewalDao"/>
+	<bean id="defaultAmwayRenewalDao" class="com.amway.core.renewal.dao.impl.DefaultAmwayRenewalDao">
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+	</bean>
+
+	<alias name="defaultAmwayUserDao" alias="amwayUserDao"/>
+	<bean id="defaultAmwayUserDao" class="com.amway.core.user.dao.impl.DefaultAmwayUserDao" parent="userDao">
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+	</bean>
+
+	<alias name="defaultAmwayUserService" alias="userService"/>
+	<bean id="defaultAmwayUserService" class="com.amway.core.user.services.impl.DefaultAmwayUserService"
+		  parent="defaultUserService">
+		<property name="amwayUserDao" ref="amwayUserDao" />
+	</bean>
+
 </beans>

@@ -50,6 +50,19 @@ public interface AmwayBusinessEventQueueService
 	void setEventProperties(String code, AmwayBusinessEvent properties) throws IllegalArgumentException;
 
 	/**
+	 * Set event properties
+	 *
+	 * @param code
+	 * 		event code to find.
+	 * @param properties
+	 * 		new event properties.
+	 * @param ignoreNullValues
+	 * 		do not set null values.
+	 * @throws IllegalArgumentException
+	 */
+	void setEventProperties(String code, AmwayBusinessEvent properties, boolean ignoreNullValues) throws IllegalArgumentException;
+
+	/**
 	 * Confirm that the event has been already processed. It will not be returned by {@link #getUnexportedEvents(Integer, String)}  anymore.
 	 *
 	 * @param code

@@ -90,9 +90,9 @@
 			<map>
 				<entry key="BASIC" value="id"/>
 				<entry key="DEFAULT"
-				       value="BASIC,firstName,lastName,line1,line2,postalCode,town,region,country"/>
+				       value="BASIC,firstName,lastName,line1,line2,postalCode,phone,town,region,country,defaultAddress"/>
 				<entry key="FULL"
-				       value="region(FULL),lastName,titleCode,phone,companyName,country(FULL),id,title,postalCode,email,visibleInAddressBook,formattedAddress,town,firstName,line1,shippingAddress,line2"/>
+				       value="region(FULL),lastName,titleCode,phone,companyName,country(FULL),id,title,postalCode,email,visibleInAddressBook,formattedAddress,town,firstName,line1,shippingAddress,line2,defaultAddress"/>
 			</map>
 		</property>
 	</bean>
@@ -153,11 +153,11 @@
 		<property name="levelMapping">
 			<map>
 				<entry key="BASIC"
-				       value="lastName,title,titleCode,displayUid,defaultAddress,language,firstName,currency,uid,name"/>
+				       value="lastName,title,titleCode,displayUid,defaultAddress,language,firstName,currency,uid,name,customerId,deactivationDate"/>
 				<entry key="DEFAULT"
-				       value="lastName,title,titleCode,displayUid,defaultAddress(DEFAULT),language(DEFAULT),firstName,currency(DEFAULT),uid,name"/>
+				       value="lastName,title,titleCode,displayUid,defaultAddress(DEFAULT),language(DEFAULT),firstName,currency(DEFAULT),uid,name,customerId,deactivationDate"/>
 				<entry key="FULL"
-				       value="lastName,title,titleCode,displayUid,defaultAddress(FULL),language(FULL),firstName,currency(FULL),uid,name"/>
+				       value="lastName,title,titleCode,displayUid,defaultAddress(FULL),language(FULL),firstName,currency(FULL),uid,name,customerId,deactivationDate"/>
 			</map>
 		</property>
 	</bean>
@@ -1043,6 +1043,7 @@
 		</property>
 	</bean>
 
+	<!-- Deprecated since version 6.5. use de.hybris.platform.webservicescommons.dto.ExtPaginationWsDTO -->
 	<bean parent="fieldSetLevelMapping" id="pageableWsDTOFieldSetLevelMapping">
 		<property name="dtoClass"
 		          value="de.hybris.platform.commercewebservicescommons.dto.search.pagedata.PageableWsDTO"/>
@@ -1055,6 +1056,7 @@
 		</property>
 	</bean>
 
+	<!-- Deprecated since version 6.5. use de.hybris.platform.webservicescommons.dto.SortWsDTO -->
 	<bean parent="fieldSetLevelMapping" id="sortWsDTOFieldSetLevelMapping">
 		<property name="dtoClass"
 		          value="de.hybris.platform.commercewebservicescommons.dto.search.pagedata.SortWsDTO"/>
@@ -1094,6 +1096,7 @@
 		</property>
 	</bean>
 
+	<!-- Deprecated since version 6.5. use de.hybris.platform.webservicescommons.dto.ExtPaginationWsDTO -->
 	<bean parent="fieldSetLevelMapping" id="paginationWsDTOFieldSetLevelMapping">
 		<property name="dtoClass"
 		          value="de.hybris.platform.commercewebservicescommons.dto.search.pagedata.PaginationWsDTO"/>

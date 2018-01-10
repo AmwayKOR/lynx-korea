@@ -29,21 +29,18 @@ public class XmlXStreamFactory implements FactoryBean, InitializingBean
 {
 	private XStream xmlInstance;
 
-	@SuppressWarnings("PMD")
 	@Override
 	public void afterPropertiesSet() throws Exception
 	{
 		xmlInstance = getObjectInternal();
 	}
 
-	@SuppressWarnings("PMD")
 	@Override
 	public Object getObject() throws Exception
 	{
 		return xmlInstance;
 	}
 
-	@SuppressWarnings("PMD")
 	protected XStream getObjectInternal()
 	{
 		final XStream stream = new XStream()

@@ -7,6 +7,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 /**
  * <p>Java class for sponsorDetailResponse complex type.
@@ -37,6 +39,7 @@ import javax.xml.bind.annotation.XmlType;
     "sponsorName",
     "sponsorPhone"
 })
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class SponsorDetailResponse {
 
     public SponsorDetailResponse(){

@@ -1,8 +1,12 @@
 package com.amway.core.order.hook.impl;
 
+import de.hybris.platform.commerceservices.enums.SalesApplication;
 import de.hybris.platform.commerceservices.order.hook.CommerceCartCalculationMethodHook;
 import de.hybris.platform.commerceservices.service.data.CommerceCartParameter;
 import de.hybris.platform.core.model.order.CartModel;
+import de.hybris.platform.servicelayer.session.SessionService;
+
+import org.springframework.beans.factory.annotation.Required;
 
 import com.amway.core.order.services.AmwayCalculationService;
 import com.amway.core.payment.service.AmwayPaymentService;
@@ -15,6 +19,7 @@ public class AmwayCartCalculationHook implements CommerceCartCalculationMethodHo
 {
 	private AmwayCalculationService amwayCalculationService;
 	private AmwayPaymentService amwayPaymentService;
+	private SessionService sessionService;
 
 	/**
 	 * To calculate the price of gift wrap and to adjust the amount of payment.
@@ -24,7 +29,11 @@ public class AmwayCartCalculationHook implements CommerceCartCalculationMethodHo
 	{
 		final CartModel cartModel = parameter.getCart();
 		getAmwayCalculationService().calculateGiftWrapPrice(cartModel);
-		getAmwayPaymentService().adjustPaymentAmount(cartModel);
+		final SalesApplication currentChannel = sessionService.getCurrentSession().getAttribute("currentChannel");
+		if(!SalesApplication.POS.equals(currentChannel))
+		{
+			getAmwayPaymentService().adjustPaymentAmount(cartModel);
+		}
 	}
 
 	@Override
@@ -63,5 +72,20 @@ public class AmwayCartCalculationHook implements CommerceCartCalculationMethodHo
 	public void setAmwayPaymentService(final AmwayPaymentService amwayPaymentService)
 	{
 		this.amwayPaymentService = amwayPaymentService;
+	}
+
+	/**
+	 * @return the sessionService
+	 */
+	public SessionService getSessionService() {
+		return sessionService;
+	}
+
+	/**
+	 * @param sessionService the sessionService to set
+	 */
+	@Required
+	public void setSessionService(SessionService sessionService) {
+		this.sessionService = sessionService;
 	}
 }

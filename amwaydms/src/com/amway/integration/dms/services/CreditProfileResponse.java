@@ -5,12 +5,15 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 /**
  * 
  * Response for credit profile.
  * 
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class CreditProfileResponse extends ReturnInfoService
 {
 	@XmlElement(nillable = true)

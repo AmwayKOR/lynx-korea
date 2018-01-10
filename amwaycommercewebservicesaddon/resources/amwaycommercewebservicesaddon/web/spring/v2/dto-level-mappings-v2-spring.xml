@@ -202,7 +202,7 @@
                 <entry key="DEFAULT"
                        value="BASIC,totalItems,totalPrice(DEFAULT),totalPriceWithTax(DEFAULT),entries(DEFAULT),savings(DEFAULT),value(DEFAULT)"/>
                 <entry key="FULL"
-                       value="totalUnitCount,store,appliedOrderPromotions(FULL),appliedVouchers(FULL),productDiscounts(FULL),totalDiscounts(FULL),subTotal(FULL),orderDiscounts(FULL),entries(DEFAULT),appliedProductPromotions(FULL),totalPrice(FULL),code,paymentInfo(FULL),totalItems,totalPriceWithTax(FULL),user(FULL),deliveryAddress(FULL),deliveryCost(FULL),value(DEFAULT),potentialProductPromotions(FULL),potentialOrderPromotions(FULL),totalUnitCount,pickupItemsQuantity,net,calculated,appliedVouchers(FULL),productDiscounts(FULL),totalDiscounts(FULL),subTotal(FULL),orderDiscounts(FULL),entries(FULL),appliedProductPromotions(FULL),totalPrice(FULL),site,deliveryMode(FULL),code,deliveryOrderGroups(FULL),guid,paymentInfo(FULL),pickupOrderGroups(FULL),totalItems,totalPriceWithTax(FULL),deliveryItemsQuantity,totalTax(FULL),user(FULL),deliveryAddress(FULL),deliveryCost(FULL),savings(FULL)"/>
+                       value="totalUnitCount,store,appliedOrderPromotions(FULL),appliedVouchers(FULL),productDiscounts(FULL),totalDiscounts(FULL),subTotal(FULL),orderDiscounts(FULL),entries(DEFAULT),appliedProductPromotions(FULL),totalPrice(FULL),code,paymentInfo(FULL),totalItems,totalPriceWithTax(FULL),user(FULL),deliveryAddress(FULL),deliveryCost(FULL),value(DEFAULT),potentialProductPromotions(FULL),potentialOrderPromotions(FULL),totalUnitCount,pickupItemsQuantity,net,calculated,appliedVouchers(FULL),productDiscounts(FULL),totalDiscounts(FULL),subTotal(FULL),orderDiscounts(FULL),entries(FULL),appliedProductPromotions(FULL),totalPrice(FULL),site,deliveryMode(FULL),code,deliveryOrderGroups(FULL),guid,paymentInfo(FULL),pickupOrderGroups(FULL),totalItems,totalPriceWithTax(FULL),deliveryItemsQuantity,totalTax(FULL),user(FULL),deliveryAddress(FULL),deliveryCost(FULL),savings(FULL),paymentDetails(FULL)"/>
             </map>
         </property>
     </bean>
@@ -277,9 +277,9 @@
                   value="de.hybris.platform.commercewebservicescommons.dto.user.AmwayAccountWsDTO"/>
         <property name="levelMapping">
             <map>
-                <entry key="BASIC" value="uid,name,accountType"/>
-                <entry key="DEFAULT" value="uid,name,accountType,primaryParty(FULL)"/>
-                <entry key="FULL" value="uid,name,accountType,primaryParty(FULL),parties(FULL)"/>
+                <entry key="BASIC" value="uid,name,status,accountType"/>
+                <entry key="DEFAULT" value="uid,name,accountType,status,primaryParty(FULL)"/>
+                <entry key="FULL" value="uid,name,accountType,status,primaryParty(FULL),parties(FULL)"/>
             </map>
         </property>
     </bean>
@@ -332,6 +332,56 @@
         </property>
     </bean>
 
+     <bean parent="fieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="de.hybris.platform.commercewebservicescommons.dto.order.AmwayPaymentDetailsWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC" value="totalPaidAmount,balanceAmount"/>
+                <entry key="DEFAULT" value="paymentInfos(FULL),totalPaidAmount,balanceAmount"/>
+                <entry key="FULL" value="paymentInfos(FULL),totalPaidAmount,balanceAmount"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean parent="fieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="de.hybris.platform.commercewebservicescommons.dto.order.PosPaymentInfoWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC" value="requesttoken,transactionid,amount,status,comments"/>
+                <entry key="DEFAULT" value="requesttoken,transactionid,amount,status,comments,paymentMode(FULL)"/>
+                <entry key="FULL" value="requesttoken,transactionid,amount,status,comments,paymentMode(FULL)"/>
+            </map>
+        </property>
+    </bean>
+
+     <bean parent="fieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="com.amway.core.commercewebservices.dto.order.AmwayPaymentModeDataWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC" value="code,name"/>
+                <entry key="DEFAULT" value="code,name,amount,repeatableCount,usedCount,allowOverpay,overpaymentThreshold"/>
+                <entry key="FULL" value="code,name,amount,repeatableCount,usedCount,allowOverpay,overpaymentThreshold"/>
+            </map>
+        </property>
+    </bean>
+
+
+
+    <bean parent="fieldSetLevelMapping" id="cartModificationListWsDTOFieldSetLevelMapping">
+		<property name="dtoClass"
+		          value="de.hybris.platform.commercewebservicescommons.dto.report.AmwayReportWsDTO"/>
+		<property name="levelMapping">
+			<map>
+				<entry key="BASIC" value="code,name"/>
+				<entry key="DEFAULT" value="code,name"/>
+				<entry key="FULL" value="code,name,jasperMedia"/>
+			</map>
+		</property>
+	</bean>
+
     <!-- bean parent="fieldSetLevelMapping">
         <property name="dtoClass"
                   value="com.amway.lynxcommercewebserviceaddon.dto.login.LoginAuthResponseWsDTO"/>
@@ -343,5 +393,17 @@
             </map>
         </property>
     </bean -->
+    
+    <bean parent="fieldSetLevelMapping">
+		<property name="dtoClass" value="de.hybris.platform.commercewebservicescommons.dto.pos.AmwayPointOfSaleReceiptWsDTO"/>
+	  <property name="levelMapping">
+            <map>
+                <entry key="BASIC" value="orderWsDTO(BASIC),storeWsDTO(BASIC),placedBy(BASIC),customerABODetailWsDto(BASIC),paymentDetails(BASIC)"/>
+                <entry key="DEFAULT" value="orderWsDTO(DEFAULT),storeWsDTO(DEFAULT),placedBy(DEFAULT),customerABODetailWsDto(DEFAULT),paymentDetails(DEFAULT)"/>
+                <entry key="FULL" value="orderWsDTO(FULL),storeWsDTO(FULL),placedBy(FULL),customerABODetailWsDto(FULL),paymentDetails(FULL)"/>
+            </map>
+        </property>
+	</bean>
+    
     
 </beans>

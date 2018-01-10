@@ -13,11 +13,11 @@
 
 	<extension abstractclassprefix="Generated" classprefix="Ycommercewebservices" name="amwaycommercewebservices" usemaven="false">
 
-		<requires-extension name="amwaycommercewebservicesaddon"/>
 		<requires-extension name="commercefacades"/>
 		<requires-extension name="commerceservices"/>
 		<requires-extension name="commercewebservicescommons"/>
 		<requires-extension name="webservicescommons"/>
+		<requires-extension name="amwaycommercewebservicesaddon"/>
 	
 		<coremodule generated="true" manager="de.hybris.platform.jalo.extension.GenericManager" packageroot="com.amway.core"/>
 

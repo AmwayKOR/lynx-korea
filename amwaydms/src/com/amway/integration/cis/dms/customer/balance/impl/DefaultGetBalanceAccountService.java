@@ -16,6 +16,8 @@ import com.hybris.commons.client.RestResponse;
 
 /**
  * Service for to get the account balance information.
+ *
+ * port to amwaydms2
  */
 public class DefaultGetBalanceAccountService
 		extends AbstractDmsService<GetBalanceResponseData, CommonRequestFieldsData, AccountBalanceResponse>

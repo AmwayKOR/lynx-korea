@@ -5,6 +5,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 /**
  * <p>Java class for partyPersonNameServiceInput complex type.
@@ -41,6 +43,7 @@ import javax.xml.bind.annotation.XmlType;
     "personNameTypeCd",
     "preferredName"
 })
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class PartyPersonNameServiceInput {
 
     protected String charSetCd;

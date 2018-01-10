@@ -172,7 +172,7 @@
 	
 	<alias name="defaultRLSearchContentResponseFreeTextSearchPopulator" alias="rlSearchContentResponseFreeTextSearchPopulator"/>
 	<bean id="defaultRLSearchContentResponseFreeTextSearchPopulator" class="com.amway.service.search.solrfacetsearch.populators.RLSearchContentResponseFreeTextSearchPopulator" scope="tenant">
-		<property name="facetSearchConfigDao" ref="facetSearchConfigDao"/>
+		<property name="facetSearchConfigDao" ref="solrFacetSearchConfigDao"/>
 		<property name="cmsSiteService" ref="cmsSiteService"/>
 	</bean>
 
@@ -193,7 +193,7 @@
 		<property name="catalogVersionService" ref="catalogVersionService"/>
 		<property name="baseSiteService" ref="baseSiteService"/>
 		<property name="baseStoreService" ref="baseStoreService"/>
-		<property name="facetSearchConfigDao" ref="facetSearchConfigDao"/>
+		<property name="facetSearchConfigDao" ref="solrFacetSearchConfigDao"/>
 		<property name="cmsSiteService" ref="cmsSiteService"/>
 	</bean>
 			

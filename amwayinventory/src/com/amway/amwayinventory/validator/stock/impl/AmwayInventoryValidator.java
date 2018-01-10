@@ -1,5 +1,7 @@
 package com.amway.amwayinventory.validator.stock.impl;
 
+import static com.amway.amwayinventory.constants.AmwayInventoryConstants.*;
+
 import de.hybris.platform.ordersplitting.WarehouseService;
 
 import org.apache.commons.lang3.StringUtils;
@@ -28,22 +30,22 @@ public class AmwayInventoryValidator implements Validator
 	public void validate(Object inventoryBean, Errors errors)
 	{
 		AmwayInventoryBean amwayInventoryBean = (AmwayInventoryBean) inventoryBean;
-		if(StringUtils.isBlank(amwayInventoryBean.getBaseItemNumber()))
+		if (StringUtils.isBlank(amwayInventoryBean.getBaseItemNumber()))
 		{
-			errors.reject("amway.inventory.bean.baseitemnumber.empty");
+			errors.reject(ERROR_PRODUCT_CODE_BLANK);
 		}
-		if(StringUtils.isBlank(amwayInventoryBean.getWarehouseCode()))
+		if (StringUtils.isBlank(amwayInventoryBean.getWarehouseCode()))
 		{
-			errors.reject("amway.inventory.bean.warehousecode.empty");
+			errors.reject(ERROR_WAREHOUSE_CODE_BLANK);
 		}
-		else if(!checkWarehouseExisting(amwayInventoryBean.getWarehouseCode()))
+		else if (!checkWarehouseExisting(amwayInventoryBean.getWarehouseCode()))
 		{
-			errors.reject("amway.inventory.bean.warehousecode.doesnotexist");
+			errors.reject(ERROR_WAREHOUSE_NOT_FOUND);
 		}
 
-		if(amwayInventoryBean.getAvailable() == null)
+		if (amwayInventoryBean.getAvailable() == null)
 		{
-			errors.reject("amway.inventory.bean.available.empty");
+			errors.reject(ERROR_AVAILABLE_EMPTY);
 		}
 	}
 

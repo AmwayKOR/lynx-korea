@@ -2,11 +2,7 @@ package com.amway.core.facades.customer;
 
 import com.amway.facades.data.AmwayAccountData;
 import com.amway.facades.data.AmwayAccountDataList;
-
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
-import de.hybris.platform.core.model.user.CustomerModel;
-
-import java.util.List;
 
 
 /**
@@ -76,5 +72,13 @@ public interface AmwayCustomerFacade extends CustomerFacade
 	 * @uid Id fragment account order by Id
 	 */
 	public AmwayAccountDataList lookupAccountsCustomersByEmail(String searchKey);
+	
+	
+	/**
+	 * search the account on account number or name or a fragment
+	 *
+	 * @return the AmwayAccountDataList
+	 */
+	public AmwayAccountDataList lookupAccountsByUidOrName(String searchKey);
 
 }

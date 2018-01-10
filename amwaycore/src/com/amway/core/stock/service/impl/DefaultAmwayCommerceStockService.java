@@ -47,10 +47,13 @@ public class DefaultAmwayCommerceStockService extends WarehousingCommerceStockSe
 		{
 			try
 			{
-				WarehouseModel warehouse = abstractOrderEntryModel.getDeliveryPointOfService().getWarehouses().get(0);
+				if(abstractOrderEntryModel.getDeliveryPointOfService() != null) {
+					WarehouseModel warehouse = abstractOrderEntryModel.getDeliveryPointOfService().getWarehouses().get(0);
 
-				getAmwayStockService().reserve(abstractOrderEntryModel.getProduct(), warehouse,
+					getAmwayStockService().reserve(abstractOrderEntryModel.getProduct(), warehouse,
 						abstractOrderEntryModel.getQuantity().intValue(), abstractOrderEntryModel.getSkuVersion());
+				}
+
 			}
 			catch (final InsufficientStockLevelException e)
 			{

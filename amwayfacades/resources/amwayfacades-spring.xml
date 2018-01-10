@@ -13,9 +13,12 @@
 
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/util
+           http://www.springframework.org/schema/util/spring-util.xsd
            http://www.springframework.org/schema/aop
            http://www.springframework.org/schema/aop/spring-aop.xsd">
 
@@ -296,6 +299,7 @@
     <alias name="amwayCustomerPopulator" alias="customerPopulator"/>
     <bean id="amwayCustomerPopulator" class="com.amway.facades.populators.AmwayCustomerPopulator" parent="defaultCustomerPopulator">
     	<property name="userService" ref="userService"/>
+    	<property name="addressConverter" ref="addressConverter"/>
     </bean>
 
 	<alias name="amwayPriceDataFactory" alias="priceDataFactory"/>
@@ -344,7 +348,7 @@
 			</list>
 		</property>
 	</bean>
-	
+		
 	<bean id="amwayDimensionConverter" parent="abstractPopulatingConverter">
 		<property name="targetClass" value="com.amway.facades.product.data.AmwayDimensionData"/>
 		<property name="populators">
@@ -362,7 +366,7 @@
 		<property name="amwayAccountConverter" ref="amwayAccountConverter" />
 	</bean>
 
-	<bean id="paymentModeData" class="com.amway.facades.order.data.PaymentModeData" scope="prototype"/>
+	<bean id="paymentModeData" class="com.amway.core.order.data.PaymentModeData" scope="prototype"/>
 	
 	<alias name="defaultPaymentModeConverter" alias="paymentModeConverter"/> 
 	<bean id="defaultPaymentModeConverter" parent="abstractPopulatingConverter">
@@ -420,6 +424,18 @@
 		</property>
 	</bean>
 
+	<bean id="amwayReturnRequestTypePopulator" class="com.amway.facades.populators.AmwayReturnRequestTypePopulator"/>
+
+	<bean id="amwayReturnRequestTypeConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.amway.core.returns.data.AmwayReturnRequestTypeData"/>
+		<property name="populators">
+			<list>
+				<ref bean="amwayReturnRequestTypePopulator"/>
+			</list>
+		</property>
+	</bean>
+
+
 	<alias name="defaultAmwayCheckoutFacade" alias="checkoutFacade"/>
 
 	<alias name="defaultAmwayCheckoutFacade" alias="amwayCheckoutFacade"/>
@@ -433,7 +449,8 @@
 		<property name="modelService" ref="modelService" />
 		<property name="magicSessionDataHelper" ref="magicSessionDataHelper"/>
 		<property name="amwayAccountBalanceService" ref="amwayAccountBalanceService" />
-		
+		<property name="placeOrderPaymentsValidatorsMap" ref="amwayPlaceOrderPaymentsValidatorsMap" />
+		<property name="baseSiteService" ref="baseSiteService" />
 	</bean>
 
 	<alias name="amwayCommerceSearchResultProductPopulator" alias="commerceSearchResultProductPopulator"/>
@@ -460,25 +477,168 @@
 		<property name="amwayAccountService" ref="amwayAccountService"/>
 	</bean>
 
+
+	<alias alias="apiGatewayFacade" name="amwayApiGatewayFacade" />
+	<bean id="amwayApiGatewayFacade"  class="com.amway.facades.apigatateway.impl.AmwayApiGatewayFacadeImpl">
+	</bean>
 	<!--alias name="amwayOmsOrderPopulator" alias="omsOrderPopulator" />
-	<bean id="amwayOmsOrderPopulator"
-		  class="com.amway.facades.populators.AmwayOmsOrderPopulator"
-		  scope="tenant">
-		<property name="orderLineConverter" ref="omsOrderLineConverter" />
-		<property name="paymentInfoConverter" ref="omsPaymentInfoConverter" />
-		<property name="addressConverter" ref="omsAddressConverter" />
-		<property name="customerNameStrategy" ref="customerNameStrategy" />
-		<property name="customerEmailResolutionService" ref="customerEmailResolutionService" />
-		<property name="ondemandPromotionService" ref="onDemandPromotionService" />
-		<property name="ondemandTaxCalculationService" ref="ondemandTaxCalculationService" />
-		<property name="ondemandDeliveryAddressStrategy" ref="ondemandDeliveryAddressStrategy" />
-		<property name="shippingAttributeStrategy" ref="shippingAttributeStrategy" />
-		<property name="impersonationService" ref="impersonationService" />
-		<property name="commerceCommonI18NService" ref="commerceCommonI18NService" />
+<bean id="amwayOmsOrderPopulator"
+      class="com.amway.facades.populators.AmwayOmsOrderPopulator"
+      scope="tenant">
+    <property name="orderLineConverter" ref="omsOrderLineConverter" />
+    <property name="paymentInfoConverter" ref="omsPaymentInfoConverter" />
+    <property name="addressConverter" ref="omsAddressConverter" />
+    <property name="customerNameStrategy" ref="customerNameStrategy" />
+    <property name="customerEmailResolutionService" ref="customerEmailResolutionService" />
+    <property name="ondemandPromotionService" ref="onDemandPromotionService" />
+    <property name="ondemandTaxCalculationService" ref="ondemandTaxCalculationService" />
+    <property name="ondemandDeliveryAddressStrategy" ref="ondemandDeliveryAddressStrategy" />
+    <property name="shippingAttributeStrategy" ref="shippingAttributeStrategy" />
+    <property name="impersonationService" ref="impersonationService" />
+    <property name="commerceCommonI18NService" ref="commerceCommonI18NService" />
+    <property name="commonI18NService" ref="commonI18NService" />
+    <property name="omsZoneDeliveryModeValueStrategy" ref="omsZoneDeliveryModeValueStrategy" />
+    <property name="taxCodeStrategy" ref="taxCodeStrategy" />
+    <property name="useBaseStoreForSourcing" value="${oms.useBaseStoreForSourcing}" />
+</bean-->
+
+	<alias name="defaultAmwayRenewalFacade" alias="amwayRenewalFacade"/>
+	<bean id="defaultAmwayRenewalFacade" class="com.amway.facades.renewal.impl.DefaultAmwayRenewalFacade" >
+		<property name="cartService" ref="cartService"/>
+		<property name="amwayRenewalService" ref="amwayRenewalService"/>
+		<property name="amwayUserService" ref="userService"/>
+		<property name="amwayCustomerAccountService" ref="amwayCustomerAccountService"/>
+		<property name="amwayAccountService" ref="amwayAccountService"/>
+		<property name="amwayReverseRenewalAddressConverter" ref="amwayReverseRenewalAddressConverter"/>
+		<property name="commerceCheckoutService" ref="commerceCheckoutService"/>
+	</bean>
+
+	<alias name="defaultAmwayReverseRenewalAddressConverter" alias="amwayReverseRenewalAddressConverter"/>
+	<bean id="defaultAmwayReverseRenewalAddressConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.core.model.user.AddressModel"/>
+		<property name="populators">
+			<list>
+				<ref bean="amwayReverseRenewalAddressPopulator"/>
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultAmwayReverseRenewalAddressPopulator" alias="amwayReverseRenewalAddressPopulator"/>
+	<bean id="defaultAmwayReverseRenewalAddressPopulator"
+		  class="com.amway.facades.populators.AmwayReverseRenewalAddressPopulator">
 		<property name="commonI18NService" ref="commonI18NService" />
-		<property name="omsZoneDeliveryModeValueStrategy" ref="omsZoneDeliveryModeValueStrategy" />
-		<property name="taxCodeStrategy" ref="taxCodeStrategy" />
-		<property name="useBaseStoreForSourcing" value="${oms.useBaseStoreForSourcing}" />
-	</bean-->
-	
+	</bean>
+
+	<alias name="defaultAmwayPointOfSaleReceiptFacade" alias="amwayPointOfSaleReceiptFacade"/>
+	<bean  id="defaultAmwayPointOfSaleReceiptFacade" class="com.amway.core.facades.salesreceipt.impl.DefaultAmwayPointOfSaleReceiptFacade">
+		<property name="amwayOrderService" ref="orderService"/>
+		<property name="amwayCustomerFacade" ref="amwayCustomerFacade"/>
+		<property name="pointOfServiceConverter" ref="pointOfServiceConverter"/>
+		<property name="orderConverter" ref="defaultOrderConverter"/>
+		<property name="principalConverter" ref="principalConverter"/>
+		<property name="customerConverter" ref="customerConverter"/>
+		<property name="addressConverter" ref="addressConverter"/>
+		<property name="amwayPaymentDetailsConverter" ref="amwayPaymentDetailsConverter"></property>
+	</bean>
+
+	<bean id="amwayPaymentInfoDataPopulator" class="com.amway.facades.payment.populators.AmwayPaymentInfoDataPopulator">
+		<property name="paymentModeConverter" ref="paymentModeConverter"/>
+	</bean>
+
+	<bean id="amwayPaymentInfoDataConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.amway.core.cart.data.AmwayPaymentInfoData"/>
+			<property name="populators">
+				<list>
+					<ref bean="amwayPaymentInfoDataPopulator"/>
+				</list>
+			</property>
+	</bean>
+
+	<util:map id="paymentInfoConvertersMap" key-type="java.lang.String">
+		<entry key="CreditCardPaymentInfo" value-ref="amwayPaymentInfoDataConverter"/>
+		<entry key="AmwayCashPaymentInfo" value-ref="amwayPaymentInfoDataConverter"/>
+		<entry key="AmwayMonetaryPaymentInfo" value-ref="amwayPaymentInfoDataConverter"/>
+	</util:map>
+
+	<alias name="defaultAmwayPaymentDetailsPopulator" alias="amwayPaymentDetailsPopulator"/>
+	<bean id="defaultAmwayPaymentDetailsPopulator" class="com.amway.facades.populators.AmwayPaymentDetailsPopulator">
+		<property name="paymentInfoConvertersMap" ref="paymentInfoConvertersMap"/>
+	</bean>
+
+	<alias name="defaultAmwayCartPaymentDetailsPopulator" alias="amwayCartPaymentDetailsPopulator"/>
+	<bean id="defaultAmwayCartPaymentDetailsPopulator" class="com.amway.facades.populators.AmwayCartPaymentDetailsPopulator">
+		<property name="amwayPaymentDetailsConverter" ref="amwayPaymentDetailsConverter"/>
+	</bean>
+
+	<alias name="defaultAmwayPaymentDetailsConverter" alias="amwayPaymentDetailsConverter"/>
+	 <bean id="defaultAmwayPaymentDetailsConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.amway.facades.cart.data.PaymentDetailsData"/>
+			<property name="populators">
+				<list>
+					<ref bean="amwayPaymentDetailsPopulator"/>
+				</list>
+			</property>
+	</bean>
+
+	<bean parent="modifyPopulatorList">
+        <property name="list" ref="accExtendedCartConverter"/>
+        <property name="add" ref="amwayCartPaymentDetailsPopulator"/>
+    </bean>
+
+    <bean id="cartPaymentDetailsConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.amway.facades.cart.data.PaymentDetailsData"/>
+			<property name="populators">
+				<list>
+					<ref bean="amwayCartPaymentDetailsPopulator"/>
+				</list>
+			</property>
+	</bean>
+
+	<bean id="amwayOverpayPaymentValidator" class="com.amway.core.facades.payment.validators.impl.AmwayOverpayPaymentValidator">
+		<property name="amwayPaymentModeService" ref="paymentModeService" />
+	</bean>
+
+	<bean id="amwaySplitPaymentModeValidator" class="com.amway.core.facades.payment.validators.impl.AmwaySplitPaymentModeValidator" />
+
+	<bean id="amwayPaymentAmountValidator" class="com.amway.core.facades.payment.validators.impl.AmwayPaymentAmountValidator" />
+
+	<util:list id="amwayCapturePaymentValidators">
+		<ref bean="amwayPaymentAmountValidator" />
+		<ref bean="amwaySplitPaymentModeValidator"/>
+		<ref bean="amwayOverpayPaymentValidator"/>
+	</util:list>
+
+	<util:map id="paymentCaptureValidatorsMap">
+		<entry key="amway" value-ref="amwayCapturePaymentValidators" />
+	</util:map>
+
+    <alias name="defaultAmwayPaymentFacade" alias="amwayPaymentFacade"/>
+    <bean id="defaultAmwayPaymentFacade" class="com.amway.core.facades.payment.impl.DefaultAmwayPaymentFacade" parent="defaultPaymentFacade">
+    	<property name="cartService" ref="cartService"/>
+    	<property name="amwaySplitPaymentsService" ref="amwaySplitPaymentsService"/>
+    	<property name="paymentCaptureValidatorsMap" ref="paymentCaptureValidatorsMap"/>
+    	<property name="amwayPaymentModeService" ref="paymentModeService"/>
+    	<property name="amwayPaymentDetailsConverter" ref="amwayPaymentDetailsConverter"/>
+    	<property name="amwayAccountBalanceService" ref="amwayAccountBalanceService"/>
+    </bean>
+
+    <bean id="amwayOrderCompletePaymentValidator" class="com.amway.core.facades.order.validators.impl.AmwayOrderCompletePaymentValidator" />
+
+	<bean id="amwayOrderNonOverpayMethodsPaymentValidator" class="com.amway.core.facades.order.validators.impl.AmwayOrderNonOverpayMethodsPaymentValidator" />
+
+	<bean id="amwayOrderRedundantPaymentValidator" class="com.amway.core.facades.order.validators.impl.AmwayOrderRedundantPaymentValidator" />
+
+	<bean id="amwayOrderArPaymentValidator" class="com.amway.core.facades.order.validators.impl.AmwayOrderArPaymentValidator" />
+
+	<util:list id="amwayOrderCompletePaymentValidators">
+		<ref bean="amwayOrderCompletePaymentValidator" />
+		<ref bean="amwayOrderNonOverpayMethodsPaymentValidator"/>
+		<ref bean="amwayOrderRedundantPaymentValidator"/>
+		<ref bean="amwayOrderArPaymentValidator"/>
+	</util:list>
+
+	<util:map id="amwayPlaceOrderPaymentsValidatorsMap">
+		<entry key="amway" value-ref="amwayOrderCompletePaymentValidators" />
+	</util:map>
+
 </beans>

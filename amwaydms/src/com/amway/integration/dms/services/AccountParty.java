@@ -5,6 +5,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 /**
  * <p>Java class for accountParty complex type.
@@ -39,6 +41,7 @@ import javax.xml.bind.annotation.XmlType;
     "primaryOnAccount",
     "roleCd"
 })
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class AccountParty {
 
     protected String genderCd;

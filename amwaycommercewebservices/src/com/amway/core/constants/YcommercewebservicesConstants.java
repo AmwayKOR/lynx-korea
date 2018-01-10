@@ -10,7 +10,8 @@
  */
 package com.amway.core.constants;
 
-@SuppressWarnings({ "PMD", "deprecation" })
+@SuppressWarnings(
+{ "deprecation", "squid:CallToDeprecatedMethod" })
 public class YcommercewebservicesConstants extends GeneratedYcommercewebservicesConstants
 {
 	public static final String MODULE_NAME = "amwaycommercewebservices";
@@ -27,6 +28,8 @@ public class YcommercewebservicesConstants extends GeneratedYcommercewebservices
 	public static final String V2_ROOT_CONTEXT = "/" + MODULE_WEBROOT + "/v2";
 	public static final String URL_SPECIAL_CHARACTERS_PROPERTY = "commercewebservices.url.special.characters";
 	public static final String DEFAULT_URL_SPECIAL_CHARACTERS = "?,/";
+	public static final String LOCATION = "Location";
+	public static final String SLASH = "/";
 
 	private YcommercewebservicesConstants()
 	{

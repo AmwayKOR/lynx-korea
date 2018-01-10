@@ -16,9 +16,12 @@ import de.hybris.platform.oauth2.constants.OAuth2Constants;
 import de.hybris.platform.servicelayer.ServicelayerTest;
 import de.hybris.platform.servicelayer.i18n.CommonI18NService;
 import de.hybris.platform.servicelayer.model.ModelService;
+import de.hybris.platform.servicelayer.search.FlexibleSearchService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.platform.store.BaseStoreModel;
 import de.hybris.platform.store.services.BaseStoreService;
+import de.hybris.platform.webservicescommons.jalo.OAuthClientDetails;
+import de.hybris.platform.webservicescommons.model.OAuthClientDetailsModel;
 import de.hybris.platform.webservicescommons.testsupport.client.WsRequestBuilder;
 import de.hybris.platform.webservicescommons.testsupport.client.WsSecuredRequestBuilder;
 import de.hybris.platform.webservicescommons.testsupport.server.NeedsEmbeddedServer;
@@ -37,6 +40,7 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -59,7 +63,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
  * Integration test for shipment confirmation endpoint.
  * To run it, initialize junit teanant and execute 'ant integrationtests -Dtestclasses.extensions amwayfulfillment'
  */
-@NeedsEmbeddedServer(webExtensions = { AmwayfulfillmentConstants.EXTENSIONNAME, OAuth2Constants.EXTENSIONNAME })
+@NeedsEmbeddedServer(webExtensions = { AmwayfulfillmentConstants.EXTENSIONNAME, OAuth2Constants.EXTENSIONNAME})
 @IntegrationTest
 public class AmwayfulfillmentShipmentConfirmationWebServiceTest extends ServicelayerTest
 {
@@ -90,6 +94,8 @@ public class AmwayfulfillmentShipmentConfirmationWebServiceTest extends Servicel
 	private boolean createEmptyBodyParameter = false;
 	private boolean createWrongShippedQty = false;
 
+	private static final Logger LOG = Logger.getLogger(AmwayfulfillmentShipmentConfirmationWebServiceTest.class);
+
 	@Resource(name = "modelService")
 	ModelService modelService;
 
@@ -102,13 +108,19 @@ public class AmwayfulfillmentShipmentConfirmationWebServiceTest extends Servicel
 	@Resource(name = "baseStoreService")
 	BaseStoreService baseStoreService;
 
+	@Resource(name = "flexibleSearchService")
+	FlexibleSearchService flexibleSearchService;
+
 	@Before
 	public void setUp() throws Exception
 	{
-		importCsv("/amwayfulfillment/test/democustomer-data.impex", "utf-8");
 
-		//2017-04-12T23:20:50.52Z
-		//2017-04-12T23:20:50Z
+		importCsv("/amwayfulfillment/test/democustomer-data.impex", "utf-8");
+		LOG.info("imported democustomer-data.impex ");
+		// checking imported clients
+		final OAuthClientDetailsModel oauth2_client = flexibleSearchService.<OAuthClientDetailsModel> search("SELECT {PK} FROM {OAuthClientDetails} WHERE {clientId}='oauth2-client'").getResult().get(0);
+		Assert.assertNotNull(oauth2_client);
+
 
 		wsSecuredRequestBuilder1 = new WsSecuredRequestBuilder()//
 				.extensionName(AmwayfulfillmentConstants.EXTENSIONNAME)//

@@ -7,6 +7,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 /**
  * <p>Java class for contactPointTypeData complex type.
@@ -33,6 +35,7 @@ import javax.xml.bind.annotation.XmlType;
     "contactPointTypeCd",
     "deliveryChoiceCd"
 })
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ContactPointTypeData {
 
     @XmlElementRef(name = "contactPointTypeCd", type = JAXBElement.class, required = false)

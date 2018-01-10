@@ -4,6 +4,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 /**
  * <p>
@@ -32,6 +34,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "taxIdAdditionalAppDetail", propOrder =
 { "countryTaxCd", "taxId", "taxTypeCd", "taxTypeExpireDate" })
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class TaxIdAdditionalAppDetail
 {
 

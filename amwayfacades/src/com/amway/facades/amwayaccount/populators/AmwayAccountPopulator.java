@@ -37,5 +37,9 @@ public class AmwayAccountPopulator implements Populator<AmwayAccountModel, Amway
 			businessNature = "EMPLOYEE";
 		}
 		target.setAccountType(businessNature);
+		if(source.getStatus()!=null)
+		{
+			target.setStatus(source.getStatus().toString());
+		}
 	}
 }

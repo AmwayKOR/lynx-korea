@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <alias name="defaultAmwayOrderSearchService" alias="amwayOrderSearchService"/>
+    <bean id="defaultAmwayOrderSearchService"
+          class="com.amway.amwayordermanagementwebservices.services.impl.DefaultAmwayOrderSearchService"/>
+
+    <bean id="amwayInvoicePopulator" class="com.amway.amwayordermanagementwebservices.converters.AmwayInvoicePopulator">
+        <property name="enumerationService" ref="enumerationService"/>
+    </bean>
+    <bean id="defaultAmwayInvoiceConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="de.hybris.platform.commercefacades.order.data.InvoiceInfoData"/>
+        <property name="populators">
+            <list>
+                <ref bean="amwayInvoicePopulator"/>
+            </list>
+        </property>
+    </bean>
+    <alias name="defaultAmwayInvoiceConverter" alias="amwayInvoiceConverter"/>
+
+    <bean id="defaultAmwayRefundMethodPopulator"
+          class="com.amway.amwayordermanagementwebservices.converters.AmwayRefundMethodConverter"/>
+    <bean id="defaultAmwayRefundMethodConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="de.hybris.platform.ordermanagementfacade.returns.data.RefundMethodData"/>
+        <property name="populators">
+            <list>
+                <ref bean="defaultAmwayRefundMethodPopulator"/>
+            </list>
+        </property>
+    </bean>
+    <alias name="defaultAmwayRefundMethodConverter" alias="amwayRefundMethodConverter"/>
+
+    <bean id="defaultAmwayRefundInfoPopulator" class="com.amway.amwayordermanagementwebservices.converters.AmwayRefundInfoPopulator">
+        <property name="amwayRefundMethodConverter" ref="amwayRefundMethodConverter"/>
+    </bean>
+    <bean id="defaultAmwayRefundInfoConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="de.hybris.platform.ordermanagementfacade.returns.data.RefundInfoData"/>
+        <property name="populators">
+            <list>
+                <ref bean="defaultAmwayRefundInfoPopulator"/>
+            </list>
+        </property>
+    </bean>
+    <alias name="defaultAmwayRefundInfoConverter" alias="amwayRefundInfoConverter"/>
+
+    <bean id="amwayDefaultTaxValuePopulator" class="com.amway.amwayordermanagementwebservices.converters.AmwayTaxPopulator">
+    </bean>
+    <bean id="amwayDefaultTaxValueConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="de.hybris.platform.commercefacades.order.data.TaxValueData"/>
+        <property name="populators">
+            <list>
+                <ref bean="amwayDefaultTaxValuePopulator"/>
+            </list>
+        </property>
+    </bean>
+    <alias name="amwayDefaultTaxValueConverter" alias="amwayTaxValueConverter"/>
+
+    <bean id="amwayReturnPopulator" class="com.amway.amwayordermanagementwebservices.converters.AmwayOMSReturnPopulator">
+        <property name="accountConverter" ref="amwayAccountConverter"/>
+        <property name="amwayInvoiceConverter" ref="amwayInvoiceConverter"/>
+        <property name="orderPeriodConverter" ref="orderPeriodConverter"/>
+        <property name="amwayRefundInfoConverter" ref="amwayRefundInfoConverter"/>
+        <property name="taxValueConverter" ref="amwayTaxValueConverter"/>
+        <property name="bonusPeriodConverter" ref="bonusPeriodConverter"/>
+    </bean>
+
+    <bean parent="modifyPopulatorList">
+        <property name="list" ref="ordermanagementReturnConverter"/>
+        <property name="add" ref="amwayReturnPopulator"/>
+    </bean>
+
+    <bean id="amwayReturnEntryPopulator" class="com.amway.amwayordermanagementwebservices.converters.AmwayReturnEntryPopulator">
+        <property name="taxValueConverter" ref="amwayTaxValueConverter"/>
+    </bean>
+    
+    <bean parent="modifyPopulatorList">
+        <property name="list" ref="ordermanagementReturnEntryConverter"/>
+        <property name="add" ref="amwayReturnEntryPopulator"/>
+    </bean>
+
+
+
+    <beans profile="tenant_junit">
+        <!-- Configuration needed for tests to run properly. -->
+        <util:list id="jaxbTypeAdaptersList">
+            <value>de.hybris.platform.webservicescommons.jaxb.adapters.DateAdapter</value>
+            <value>de.hybris.platform.webservicescommons.jaxb.adapters.VariableMapAdapter</value>
+            <value>de.hybris.platform.webservicescommons.jaxb.adapters.XSSStringAdapter</value>
+        </util:list>
+
+
+        <util:list id="jaxbContextClasses">
+            <value>java.lang.Long</value>
+            <value>java.lang.String</value>
+            <value>java.util.ArrayList</value>
+        </util:list>
+
+        <bean id="jaxbWrapperSupport" class="de.hybris.platform.webservicescommons.jaxb.wrapper.JaxbWrapperSupport">
+            <property name="wrapperFactories">
+                <list>
+                    <bean class="de.hybris.platform.webservicescommons.jaxb.wrapper.impl.JaxbStringWrapperFactory"/>
+                    <bean class="de.hybris.platform.webservicescommons.jaxb.wrapper.impl.JaxbLongWrapperFactory"/>
+                    <bean class="de.hybris.platform.webservicescommons.jaxb.wrapper.impl.JaxbDoubleWrapperFactory"/>
+                    <bean class="de.hybris.platform.webservicescommons.jaxb.wrapper.impl.JaxbListWrapperFactory"/>
+                    <bean class="de.hybris.platform.webservicescommons.jaxb.wrapper.impl.JaxbMapWrapperFactory"/>
+                </list>
+            </property>
+        </bean>
+    </beans>
+</beans>

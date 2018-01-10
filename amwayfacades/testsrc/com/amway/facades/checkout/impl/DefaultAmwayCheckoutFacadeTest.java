@@ -1,39 +1,18 @@
 package com.amway.facades.checkout.impl;
 
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.verify;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.amway.core.balance.services.AmwayAccountBalanceService;
+import com.amway.core.checkout.services.AmwayCommerceCheckoutService;
 import com.amway.core.dms.data.AmwayProfileResponseData;
 import com.amway.core.dms.data.GetBalanceResponseData;
-import org.apache.commons.lang.StringUtils;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
-
-import com.amway.core.checkout.services.AmwayCommerceCheckoutService;
 import com.amway.core.order.data.AmwayPaymentModeData;
+import com.amway.core.order.data.PaymentModeData;
 import com.amway.core.payment.service.AmwayPaymentModeService;
-import com.amway.facades.order.data.PaymentModeData;
-
 import de.hybris.bootstrap.annotations.UnitTest;
 import de.hybris.platform.commercefacades.order.CartFacade;
 import de.hybris.platform.commercefacades.order.data.CartData;
 import de.hybris.platform.commercefacades.user.data.AddressData;
 import de.hybris.platform.commercefacades.user.data.CountryData;
 import de.hybris.platform.commerceservices.delivery.DeliveryService;
-import de.hybris.platform.commerceservices.order.CommerceCheckoutService;
 import de.hybris.platform.commerceservices.service.data.CommerceCheckoutParameter;
 import de.hybris.platform.commerceservices.strategies.CheckoutCustomerStrategy;
 import de.hybris.platform.converters.impl.AbstractPopulatingConverter;
@@ -48,6 +27,18 @@ import de.hybris.platform.payment.PaymentService;
 import de.hybris.platform.payment.dto.CardType;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
 import de.hybris.platform.servicelayer.model.ModelService;
+import org.apache.commons.lang.StringUtils;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+
+import java.util.*;
+
+import static org.mockito.BDDMockito.given;
 
 
 @UnitTest
@@ -190,7 +181,7 @@ public class DefaultAmwayCheckoutFacadeTest
 		AmwayProfileResponseData profileData = new AmwayProfileResponseData();
 		GetBalanceResponseData balanceResponseData = new GetBalanceResponseData();
 		given(cartService.getSessionCart()).willReturn(cartModel);
-		given(paymentModeService.getSupportedPaymentModesCombination(cartModel, profileData, true)).willReturn(paymentModeMap);
+		given(paymentModeService.getSupportedPaymentModesCombination(cartModel, profileData, true, StringUtils.EMPTY)).willReturn(paymentModeMap);
 		given(amwayAccountBalanceService.getAccountBalance(cartModel)).willReturn(balanceResponseData);
 		Map<String, List<AmwayPaymentModeData>> paymentModeMap = defaultAmwayCheckoutFacade.getSupportedPaymentModesCombinations();
 		Assert.assertNotNull(paymentModeMap);

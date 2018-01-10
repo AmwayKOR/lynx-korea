@@ -5,6 +5,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 /**
  * <p>Java class for personalIdDetailsInfo complex type.
@@ -41,6 +43,7 @@ import javax.xml.bind.annotation.XmlType;
     "personalId",
     "personalIdTypeCd"
 })
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class PersonalIdDetailsInfo {
 
     protected String countryPersonalId;

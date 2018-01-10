@@ -117,7 +117,7 @@ public class OAuthRedirectionFilter implements Filter
 		final String newUrl = getFinalUrl(httpRequest);
 
 		httpResponse.setStatus(redirectStatus);
-		httpResponse.addHeader("Location", newUrl);
+		httpResponse.addHeader("Location", newUrl); //NOSONAR
 	}
 
 	protected String getFinalUrl(final HttpServletRequest httpRequest)

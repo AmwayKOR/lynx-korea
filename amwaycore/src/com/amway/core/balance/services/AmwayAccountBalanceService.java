@@ -26,7 +26,7 @@ public interface AmwayAccountBalanceService
 	 * @return CommonResponseFieldsData
 	 */
 	public CommonResponseFieldsData creditAccountBalance(final PaymentTransactionEntryModel paymentTransactionEntryModel,
-			final String balanceTypeCd, final String referenceNumber);
+														 final String balanceTypeCd, final String referenceNumber);
 
 
 	/**
@@ -38,7 +38,7 @@ public interface AmwayAccountBalanceService
 	 * @return CommonResponseFieldsData
 	 */
 	public CommonResponseFieldsData debitAccountBalance(final AbstractOrderModel orderModel, final BigDecimal amount,
-			final String balanceTypeCd);
+														final String balanceTypeCd);
 
 
 	/**

@@ -37,12 +37,15 @@
 	</bean>
 
 
-	<bean class="com.amway.core.cart.data.PlaceOrderCartInfoData">
-		<property name="id" type="String"/>
+	<bean class="com.amway.core.cart.data.PlaceOrderCartInfoData" extends="com.amway.core.cart.data.AmwayPlaceOrderInfoData">
 		<property name="ccpaymententries" type="com.amway.core.cart.data.CCPosPaymentInfoDatas"/>
 		<property name="cashpaymententries" type="com.amway.core.cart.data.CashPosPaymentInfoDatas"/>
 		<property name="dcpaymententries" type="com.amway.core.cart.data.DCPosPaymentInfoDatas"/>
 		<property name="arCreditPaymentInfo" type="com.amway.core.cart.data.PosPaymentInfoData"/>
+	</bean>
+
+	<bean class="com.amway.core.cart.data.AmwayPlaceOrderInfoData">
+		<property name="id" type="String"/>
 		<property name="salesRepresentative" type="String"/>
 		<property name="pointOfService" type="String"/>
 		<property name="terminal" type="String"/>
@@ -66,6 +69,9 @@
 		<property name="name" type="String"/>
 		<property name="amount" type="double"/>
 		<property name="repeatableCount" type="int" />
+		<property name="usedCount" type="int"/>
+		<property name="allowOverpay" type="boolean"/>
+		<property name="overpaymentThreshold" type="Double"/>
 	</bean>
 
 	<bean class="com.amway.core.commercewebservices.dto.order.PaymentModeListWSDTO">
@@ -152,6 +158,13 @@
 		<property name="endDate" type="java.util.Date" />
 		<property name="status" type="String" />
 	</bean>
+
+	<bean class="de.hybris.platform.commercewebservicescommons.dto.order.AmwayPaymentDetailsWsDTO">
+		<property name="paymentInfos" type="java.util.List&lt;de.hybris.platform.commercewebservicescommons.dto.order.PosPaymentInfoWsDTO>"/>
+		<property name="totalPaidAmount" type="Double"/>
+	    <property name="balanceAmount" type="Double"/>
+	</bean>
+
 	<bean class="de.hybris.platform.commercewebservicescommons.dto.order.AbstractOrderWsDTO">
 		<!-- 		<property name="account" type="de.hybris.platform.commercewebservicescommons.dto.user.AmwayAccountWsDTO" /> -->
 		<property name="orderPeriod" type="de.hybris.platform.commercewebservicescommons.dto.order.AmwayOrderPeriodWsDTO" />
@@ -160,6 +173,7 @@
 		<property name="value" type="de.hybris.platform.commercewebservicescommons.dto.order.AmwayValueWsDTO" />
 		<!-- 		<property name="volumeAbo" type="de.hybris.platform.commercewebservicescommons.dto.user.AmwayAccountWsDTO" /> -->
 		<property name="totalWeight" type="double" />
+		<property name="paymentDetails" type="de.hybris.platform.commercewebservicescommons.dto.order.AmwayPaymentDetailsWsDTO"/>
 	</bean>
 
 	<bean class="de.hybris.platform.commercewebservicescommons.dto.order.OrderEntryWsDTO">
@@ -173,5 +187,57 @@
 		<property name="tes" type="String"/>
 	</bean>
 
+	<bean class="de.hybris.platform.commercewebservicescommons.dto.pos.AmwayPointOfSaleReceiptWsDTO">
+ 		<property name="orderWsDTO" type="de.hybris.platform.commercewebservicescommons.dto.order.OrderWsDTO"/>
+ 		<property name="storeWsDTO" type="de.hybris.platform.commercewebservicescommons.dto.store.PointOfServiceWsDTO"/>
+ 		<property name="placedBy" type="de.hybris.platform.commercewebservicescommons.dto.user.UserWsDTO"/>
+ 		<property name="customerABODetailWsDto" type="de.hybris.platform.commercewebservicescommons.dto.user.AmwayAccountWsDTO"/>
+		<property name="paymentDetails" type="de.hybris.platform.commercewebservicescommons.dto.order.AmwayPaymentDetailsWsDTO"/>
+ 	</bean>
+
+	<bean class="de.hybris.platform.commercewebservicescommons.dto.order.PosPaymentInfoWsDTO">
+		<property name="requesttoken" type="String"/>
+		<property name="transactionid" type="String"/>
+		<property name="amount" type="java.lang.Double"/>
+		<property name="status" type="String"/>
+		<property name="comments" type="String"/>
+		<property name="paymentMode" type="com.amway.core.commercewebservices.dto.order.AmwayPaymentModeDataWsDTO"/>
+	</bean>
+
+	<bean class="de.hybris.platform.commercewebservicescommons.dto.report.AmwayReportListWsDTO">
+		<property name="reports" type="java.util.List&lt;de.hybris.platform.commercewebservicescommons.dto.report.AmwayReportWsDTO>"/>
+	</bean>
+
+	<bean class="de.hybris.platform.commercewebservicescommons.dto.report.AmwayReportWsDTO">
+		<property name="code" type="String" />
+		<property name="name" type="String" />
+	</bean>
+
+	<bean class="com.amway.report.data.AmwayReportFilterParamsData">
+		<property name="params" type="java.util.List&lt;com.amway.report.data.AmwayReportFilterParamData>" />
+	</bean>
+
+	<bean class="com.amway.report.data.AmwayReportFilterParamData">
+		<property name="key" type="String" />
+		<property name="value" type="String" />
+	</bean>
+
+	<!-- Amway POS Batch Statistics DTO -->
+	<bean class="de.hybris.platform.commercewebservicescommons.dto.pos.AmwayBatchStatisticsWsDTO">
+		<property name="ordersCount" type="java.lang.Long" />
+		<property name="customersCount" type="java.lang.Long" />
+		<property name="productsCount" type="java.lang.Long" />
+	</bean>
+
+	<bean class="com.amway.core.batch.data.BatchCreationData">
+		<property name="pickupStore" type="String"/>
+		<property name="terminal" type="String"/>
+		<property name="startingBalance" type="String"/>
+	</bean>
+
+	<bean class="com.amway.core.commercewebservices.dto.renewal.AmwayAutoRenewalResponseWsDTO">
+		<property name="status" type="String" />
+		<property name="orderNumber" type="String" />
+	</bean>
 
 </beans>

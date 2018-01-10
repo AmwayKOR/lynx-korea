@@ -30,9 +30,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.Authorization;
+
 
 @Controller
 @RequestMapping(value = "/{baseSiteId}/feeds")
+@Api(tags = "Feeds")
 public class FeedsController extends BaseController
 {
 	@Resource(name = "wsDateFormatter")
@@ -41,22 +47,15 @@ public class FeedsController extends BaseController
 	private OrderStatusUpdateQueue orderStatusUpdateQueue;
 
 
-	/**
-	 * Returns the orders the status has changed for. Returns only the elements from the current baseSite, updated after
-	 * the provided timestamp.
-	 *
-	 * @queryparam timestamp Only items newer than the given parameter are retrieved. This parameter should be in
-	 *             RFC-8601 format.
-	 * @queryparam fields Response configuration (list of fields, which should be returned in response)
-	 * @return List of order status update
-	 * @security Allowed only for trusted client
-	 */
 	@Secured("ROLE_TRUSTED_CLIENT")
 	@RequestMapping(value = "/orders/statusfeed", method = RequestMethod.GET)
 	@ResponseBody
-	public OrderStatusUpdateElementListWsDTO orderStatusFeed(@RequestParam final String timestamp,
-			@PathVariable final String baseSiteId,
-			@RequestParam(required = false, defaultValue = DEFAULT_FIELD_SET) final String fields)
+	@ApiOperation(value = "Get a list of orders with status updates", notes = "Returns the orders the status has changed for. Returns only the elements from the current baseSite, updated after the provided timestamp.", authorizations =
+	{ @Authorization(value = "oauth2_client_credentials") })
+	public OrderStatusUpdateElementListWsDTO orderStatusFeed(
+			@ApiParam(value = "Only items newer than the given parameter are retrieved. This parameter should be in ISO-8601 format.", required = true) @RequestParam final String timestamp,
+			@ApiParam(value = "Base site identifier", required = true) @PathVariable final String baseSiteId,
+			@ApiParam(value = "Response configuration (list of fields, which should be returned in response)", allowableValues = "BASIC, DEFAULT, FULL") @RequestParam(required = false, defaultValue = DEFAULT_FIELD_SET) final String fields)
 	{
 		final Date timestampDate = wsDateFormatter.toDate(timestamp);
 		final List<OrderStatusUpdateElementData> orderStatusUpdateElements = orderStatusUpdateQueue.getItems(timestampDate);

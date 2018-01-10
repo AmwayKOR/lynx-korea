@@ -17,6 +17,8 @@ import com.hybris.commons.client.RestResponse;
 
 /**
  * Service for to get the block prev details.
+ *
+ * port to amwaydms2
  */
 public class DefaultGetBlockPrevService
 		extends AbstractDmsService<BlockPrevResponseDataList, BlockPrevRequestData, BlockPrivilegeServiceOutput>

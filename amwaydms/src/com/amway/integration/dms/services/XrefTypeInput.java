@@ -5,6 +5,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 /**
  * <p>Java class for xrefTypeInput complex type.
@@ -43,6 +45,7 @@ import javax.xml.bind.annotation.XmlType;
     "seqNum",
     "statusFlag"
 })
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class XrefTypeInput {
 
     protected String careOf;

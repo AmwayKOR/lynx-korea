@@ -8,6 +8,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 /**
  * <p>Java class for partyPersonName complex type.
@@ -44,6 +46,7 @@ import javax.xml.bind.annotation.XmlType;
     "personNameTypeCd",
     "preferredName"
 })
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class PartyPersonName {
 
     @XmlElementRef(name = "charSetCd", type = JAXBElement.class, required = false)

@@ -8,11 +8,12 @@ import java.util.Date;
 import java.util.TimeZone;
 
 import javax.xml.bind.JAXBElement;
-import javax.xml.namespace.QName;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.log4j.lf5.util.DateFormatManager;
+
+import com.amway.integration.cis.dms.constants.AmwayDMSConstants;
 
 
 /**

@@ -5,6 +5,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 /**
  * <p>Java class for updatePartyEcommRequest complex type.
@@ -29,6 +31,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "updatePartyEcommRequest", propOrder = {
     "partyEcommData"
 })
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class UpdatePartyEcommRequest
     extends BaseWebServiceInput
 {

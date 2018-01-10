@@ -24,6 +24,7 @@ import de.hybris.platform.commercewebservicescommons.dto.catalog.CategoryHierarc
 import de.hybris.platform.webservicescommons.mapping.DataMapper;
 import de.hybris.platform.webservicescommons.mapping.FieldSetBuilder;
 import de.hybris.platform.webservicescommons.mapping.impl.FieldSetBuilderContext;
+import com.amway.core.swagger.ApiBaseSiteIdParam;
 
 import java.util.HashSet;
 import java.util.List;
@@ -38,15 +39,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 
-/**
- *
- * @pathparam catalogId Catalog identifier
- * @pathparam catalogVersionId Catalog version identifier
- * @pathparam categoryId Category identifier
- */
+
 @Controller
 @RequestMapping(value = "/{baseSiteId}/catalogs")
+@Api(tags = "Catalogs")
 public class CatalogsController extends BaseController
 {
 	private static final Set<CatalogOption> OPTIONS;
@@ -61,15 +61,13 @@ public class CatalogsController extends BaseController
 	@Resource(name = "fieldSetBuilder")
 	private FieldSetBuilder fieldSetBuilder;
 
-	/**
-	 * Returns all catalogs with versions defined for the base store.
-	 *
-	 * @queryparam fields Response configuration (list of fields, which should be returned in response)
-	 * @return All catalogs defined for the base store.
-	 */
+
 	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
-	public CatalogListWsDTO getCatalogs(@RequestParam(defaultValue = DEFAULT_FIELD_SET) final String fields)
+	@ApiOperation(value = "Get a list of catalogs", notes = "Returns all catalogs with versions defined for the base store.")
+	@ApiBaseSiteIdParam
+	public CatalogListWsDTO getCatalogs(
+			@ApiParam(value = "Response configuration (list of fields, which should be returned in response)", allowableValues = "BASIC, DEFAULT, FULL") @RequestParam(defaultValue = DEFAULT_FIELD_SET) final String fields)
 	{
 		final List<CatalogData> catalogDataList = catalogFacade.getAllProductCatalogsForCurrentSite(OPTIONS);
 		final CatalogsData catalogsData = new CatalogsData();
@@ -84,16 +82,13 @@ public class CatalogsController extends BaseController
 	}
 
 
-	/**
-	 * Returns a information about a catalog based on its ID, along with versions defined for the current base store.
-	 *
-	 * @queryparam fields Response configuration (list of fields, which should be returned in response)
-	 * @return Catalog structure
-	 */
+
 	@RequestMapping(value = "/{catalogId}", method = RequestMethod.GET)
 	@ResponseBody
-	public CatalogWsDTO getCatalog(@PathVariable final String catalogId,
-			@RequestParam(defaultValue = DEFAULT_FIELD_SET) final String fields)
+	@ApiOperation(value = "Get a catalog", notes = "Returns a information about a catalog based on its ID, along with versions defined for the current base store.")
+	@ApiBaseSiteIdParam
+	public CatalogWsDTO getCatalog(@ApiParam(value = "Catalog identifier", required = true) @PathVariable final String catalogId,
+			@ApiParam(value = "Response configuration (list of fields, which should be returned in response)", allowableValues = "BASIC, DEFAULT, FULL") @RequestParam(defaultValue = DEFAULT_FIELD_SET) final String fields)
 	{
 		final CatalogData catalogData = catalogFacade.getProductCatalogForCurrentSite(catalogId, OPTIONS);
 
@@ -104,16 +99,15 @@ public class CatalogsController extends BaseController
 		return getDataMapper().map(catalogData, CatalogWsDTO.class, fieldSet);
 	}
 
-	/**
-	 * Returns information about catalog version that exists for the current base store.
-	 *
-	 * @queryparam fields Response configuration (list of fields, which should be returned in response)
-	 * @return Information about catalog version
-	 */
+
 	@RequestMapping(value = "/{catalogId}/{catalogVersionId}", method = RequestMethod.GET)
 	@ResponseBody
-	public CatalogVersionWsDTO getCatalogVersion(@PathVariable final String catalogId, @PathVariable final String catalogVersionId,
-			@RequestParam(defaultValue = DEFAULT_FIELD_SET) final String fields)
+	@ApiOperation(value = "Get information about catalog version", notes = "Returns information about catalog version that exists for the current base store.")
+	@ApiBaseSiteIdParam
+	public CatalogVersionWsDTO getCatalogVersion(
+			@ApiParam(value = "Catalog identifier", required = true) @PathVariable final String catalogId,
+			@ApiParam(value = "Catalog version identifier", required = true) @PathVariable final String catalogVersionId,
+			@ApiParam(value = "Response configuration (list of fields, which should be returned in response)", allowableValues = "BASIC, DEFAULT, FULL") @RequestParam(defaultValue = DEFAULT_FIELD_SET) final String fields)
 	{
 		final CatalogVersionData catalogVersionData = catalogFacade.getProductCatalogVersionForTheCurrentSite(catalogId,
 				catalogVersionId, OPTIONS);
@@ -126,18 +120,16 @@ public class CatalogsController extends BaseController
 		return getDataMapper().map(catalogVersionData, CatalogVersionWsDTO.class, fieldSet);
 	}
 
-	/**
-	 * Returns information about category that exists in a catalog version available for the current base store.
-	 *
-	 * @queryparam currentPage The current result page requested.
-	 * @queryparam pageSize The number of results returned per page.
-	 * @queryparam fields Response configuration (list of fields, which should be returned in response)
-	 * @return Information about category
-	 */
+
 	@RequestMapping(value = "/{catalogId}/{catalogVersionId}/categories/{categoryId}", method = RequestMethod.GET)
 	@ResponseBody
-	public CategoryHierarchyWsDTO getCategories(@PathVariable final String catalogId, @PathVariable final String catalogVersionId,
-			@PathVariable final String categoryId, @RequestParam(defaultValue = "DEFAULT") final String fields)
+	@ApiOperation(value = "Get information about catagory in a catalog version", notes = "Returns information about category that exists in a catalog version available for the current base store.")
+	@ApiBaseSiteIdParam
+	public CategoryHierarchyWsDTO getCategories(
+			@ApiParam(value = "Catalog identifier", required = true) @PathVariable final String catalogId,
+			@ApiParam(value = "Catalog version identifier", required = true) @PathVariable final String catalogVersionId,
+			@ApiParam(value = "Category identifier", required = true) @PathVariable final String categoryId,
+			@ApiParam(value = "Response configuration (list of fields, which should be returned in response)", allowableValues = "BASIC, DEFAULT, FULL") @RequestParam(defaultValue = "DEFAULT") final String fields)
 	{
 		final PageOption page = PageOption.createForPageNumberAndPageSize(0, 10);
 		final CategoryHierarchyData categoryHierarchyData = catalogFacade.getCategoryById(catalogId, catalogVersionId, categoryId,

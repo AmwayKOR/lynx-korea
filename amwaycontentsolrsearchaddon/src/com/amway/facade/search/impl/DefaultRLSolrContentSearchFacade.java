@@ -15,7 +15,6 @@ import de.hybris.platform.commerceservices.search.solrfacetsearch.data.Autocompl
 import de.hybris.platform.commerceservices.search.solrfacetsearch.data.SolrSearchQueryData;
 import de.hybris.platform.commerceservices.threadcontext.ThreadContextService;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
-import de.hybris.platform.solrfacetsearch.config.impl.FacetSearchConfigDao;
 
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.util.Assert;
@@ -25,6 +24,7 @@ import com.amway.facade.search.ContentSearchFacade;
 import com.amway.facade.search.facetdata.ContentCategorySearchPageData;
 import com.amway.facade.search.facetdata.ContentSearchPageData;
 import com.amway.service.search.ContentSearchService;
+import de.hybris.platform.solrfacetsearch.daos.SolrFacetSearchConfigDao;
 
 
 public class DefaultRLSolrContentSearchFacade<ITEM extends ContentData> implements ContentSearchFacade<ITEM>
@@ -35,12 +35,12 @@ public class DefaultRLSolrContentSearchFacade<ITEM extends ContentData> implemen
 	private Converter<AutocompleteSuggestion, AutocompleteSuggestionData> autocompleteSuggestionConverter;
 	private ProductSearchAutocompleteService<AutocompleteSuggestion> autocompleteService;
 	private ThreadContextService threadContextService;
-	private FacetSearchConfigDao facetSearchConfigDao;
+	private SolrFacetSearchConfigDao facetSearchConfigDao;
 
 	/**
 	 * @return the facetSearchConfigDao
 	 */
-	public FacetSearchConfigDao getFacetSearchConfigDao()
+	public SolrFacetSearchConfigDao getFacetSearchConfigDao()
 	{
 		return facetSearchConfigDao;
 	}
@@ -48,7 +48,7 @@ public class DefaultRLSolrContentSearchFacade<ITEM extends ContentData> implemen
 	/**
 	 * @param facetSearchConfigDao the facetSearchConfigDao to set
 	 */
-	public void setFacetSearchConfigDao(final FacetSearchConfigDao facetSearchConfigDao)
+	public void setFacetSearchConfigDao(final SolrFacetSearchConfigDao facetSearchConfigDao)
 	{
 		this.facetSearchConfigDao = facetSearchConfigDao;
 	}

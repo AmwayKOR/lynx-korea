@@ -1,0 +1,45 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+
+    <alias alias="amwayProfileService" name="defaultAmwayProfileService" />
+    <bean id="defaultAmwayProfileService"
+          class="com.amway.amwaydms.aboinformation.services.impl.DefaultAmwayProfileService"
+          parent="amwayAbstractDmsService">
+        <property name="outputConverter" ref="amwayAccountResponseConverter" />
+        <property name="urlPath"
+                  value="${amwaydms.dms.url}" />
+    </bean>
+
+    <bean id="mockAmwayProfileService" class="com.amway.amwaydms.aboinformation.services.impl.mock.MockAmwayProfileService">
+        <property name="outputConverter" ref="amwayAccountResponseConverter" />
+        <property name="urlPath"
+                  value="${amwaydms.dms.url}" />
+    </bean>
+
+    <alias alias="amwayAccountResponsePopulator" name="defaultAmwayAccountResponsePopulator" />
+    <bean id="defaultAmwayAccountResponsePopulator"
+          class="com.amway.amwaydms.populators.AccountResponsePopulator" parent="abstractDmsPopulator">
+        <property name="commonI18NService" ref="commonI18NService"/>
+        <property name="regionConverter" ref="regionConverter"/>
+        <property name="countryConverter" ref="countryConverter"/>
+    </bean>
+
+    <alias alias="amwayAccountResponseConverter" name="defaultAmwayAccountResponseConverter" />
+    <bean id="defaultAmwayAccountResponseConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass"
+                  value="com.amway.core.dms.data.AmwayProfileResponseData" />
+        <property name="populators">
+            <list>
+                <ref bean="amwayAccountResponsePopulator" />
+            </list>
+        </property>
+    </bean>
+
+
+</beans>

@@ -71,6 +71,11 @@ public class DmsAmwayProfileServiceOutputPopulator extends AbstractDmsPopulator
 	@Override
 	public void populate(final AmwayProfileOutput source, final AmwayProfileResponseData target) throws ConversionException
 	{
+		if (source.getAccount() != null)
+		{
+			//this is a v3 style response, skip this (another populator should handle it).
+			return;
+		}
 		target.setAccountMasterDetails(populateAccountMasterDetails(source.getAccountMasterDetails()));
 		target.setSponsorDetails(populateSponsorDetails(source.getSponsorDetails()));
 		target.setPartyDetailList(populatePartyDetails(source));

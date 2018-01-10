@@ -1,5 +1,6 @@
 package com.amway.core.payment.service.impl;
 
+import com.amway.core.annotations.AmwayBean;
 import de.hybris.platform.core.model.order.payment.PaymentInfoModel;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.order.impl.DefaultPaymentInfoService;
@@ -15,6 +16,7 @@ import com.amway.core.payment.service.AmwayPaymentInfoService;
 /**
  * Default implementation for {@link AmwayPaymentInfoService}
  */
+@AmwayBean(docs="https://jira.amway.com:8444/display/HC/Payment+customization")
 public class DefaultAmwayPaymentInfoService extends DefaultPaymentInfoService implements AmwayPaymentInfoService
 {
 	private static final int REFERENCE_NUMBER_SIZE = 4;

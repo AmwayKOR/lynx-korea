@@ -14,7 +14,8 @@
 package com.amway.core.constants;
 
 /**
- * Global class for all Amwaycommercewebservicesaddon web constants. You can add global constants for your extension into this class.
+ * Global class for all Amwaycommercewebservicesaddon web constants. You can add global constants for your extension
+ * into this class.
  */
 public final class AmwaycommercewebservicesaddonWebConstants
 {
@@ -27,4 +28,11 @@ public final class AmwaycommercewebservicesaddonWebConstants
 	}
 
 	// implement here constants used by this extension
+	public static final String AUTORENEWAL_SERVICE_DATE_FORMAT = "yyyy-MM-dd";
+	public static final String DATE_FORMAT_INCORRECT = "Date format is incorrect. Correct date format is yyyy-MM-dd";
+
+	public static final String AUTORENEWAL_COUNTRY_REQUIRED = "autorenewal.country.field.required.msg";
+	public static final String AUTORENEWAL_LANGUAGE_REQUIRED = "autorenewal.language.field.required.msg";
+	public static final String AUTORENEWAL_PAYMENT_ALIAS_REQUIRED = "autorenewal.payment.alias.field.required.msg";
+
 }

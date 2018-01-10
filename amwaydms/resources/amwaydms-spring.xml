@@ -6,91 +6,99 @@
 	into with hybris. -->
 
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
-		   http://www.springframework.org/schema/beans/spring-beans.xsd
-		   http://www.springframework.org/schema/util
-		   http://www.springframework.org/schema/util/spring-util.xsd">
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="
+	        http://www.springframework.org/schema/aop
+	        http://www.springframework.org/schema/aop/spring-aop.xsd
+	        http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/util
+            http://www.springframework.org/schema/util/spring-util.xsd">
 
-	<import resource="classpath:/hybris-cis-dms-client.xml" />
+    <import resource="classpath:/hybris-cis-dms-client.xml"/>
 
-	<!-- Hytrix configuration for dms calls -->
-	<alias alias="dmsCommandConfig" name="dmsCommandConfig" />
-	<bean id="dmsCommandConfig"
-		class="de.hybris.platform.integration.commons.hystrix.OndemandHystrixCommandConfiguration">
-		<property name="groupKey" value="${amwaydms.magic.groupKey}" />
-		<property name="threadTimeout" value="${amwaydms.magic.threadTimeout}" />
-		<property name="threadPoolSize" value="${amwaydms.magic.threadPoolSize}" />
-	</bean>
+    <!-- Hytrix configuration for dms calls -->
+    <alias alias="dmsCommandConfig" name="dmsCommandConfig"/>
+    <bean id="dmsCommandConfig"
+          class="de.hybris.platform.integration.commons.hystrix.OndemandHystrixCommandConfiguration">
+        <property name="groupKey" value="${amwaydms.magic.groupKey}"/>
+        <property name="threadTimeout" value="${amwaydms.magic.threadTimeout}"/>
+        <property name="threadPoolSize" value="${amwaydms.magic.threadPoolSize}"/>
+    </bean>
 
-	<bean id="abstractDmsService"
-		class="com.amway.integration.cis.dms.service.impl.AbstractDmsService"
-		abstract="true">
-		<property name="hystrixCommandConfig" ref="dmsCommandConfig" />
-		<property name="dmsClient" ref="dmsClient"></property>
-		<property name="ondemandHystrixCommandFactory" ref="ondemandHystrixCommandFactory" />
-		<property name="serviceAvailCode" value="#{configurationService.configuration.getProperty('amwaydms.availablity.code')}"/>
-		<property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
-	</bean>
-	
-	<bean id="abstractDmsPopulator" class="com.amway.integration.cis.dms.populators.AbstractDmsPopulator" abstract="true"/>
-	
-	<!-- Common fields populator for all requests going from Hybris to Magic DMS -->
-	<bean id="amwayCommonRequestFieldsPopulator" class="com.amway.integration.cis.dms.populators.AmwayCommonRequestFieldsPopulator">
-		<property name="amwayAccountCommerceService" ref="amwayAccountCommerceService" />
-		<property name="userService" ref="userService" />
-		<property name="sessionService" ref="sessionService"/>
-	</bean>
+    <bean id="abstractDmsService"
+          class="com.amway.integration.cis.dms.service.impl.AbstractDmsService"
+          abstract="true">
+        <property name="hystrixCommandConfig" ref="dmsCommandConfig"/>
+        <property name="dmsClient" ref="dmsClient"></property>
+        <property name="ondemandHystrixCommandFactory" ref="ondemandHystrixCommandFactory"/>
+        <property name="serviceAvailCode" value="#{configurationService.configuration.getProperty('amwaydms.availablity.code')}"/>
+        <property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService"/>
+    </bean>
 
-		<!-- Common fields populator for all requests going from Hybris to Magic DMS -->
-	<bean id="amwayCommonResponseFieldsPopulator" class="com.amway.integration.cis.dms.populators.AmwayCommonResponseFeildsPopulator"/>
-	<!--
-	<import resource="classpath:/amwaydms-customerregistration-spring.xml" />
-	<import resource="classpath:/amwaydms-addressinformation-spring.xml" />
-	<import resource="classpath:/amwaydms-subscriptionoption-spring.xml" />
-	<import resource="classpath:/amwaydms-distributorservice-spring.xml" />
-	<import resource="classpath:/amwaydms-partyprofileandname-spring.xml" />
-	<import resource="classpath:/amwaydms-businessnature-spring.xml" />
-    <import resource="classpath:/amwaydms-profileinformation-spring.xml" /> 
-    <import resource="classpath:/amwaydms-ecommservice-spring.xml" /> 
+    <bean id="abstractDmsPopulator" class="com.amway.integration.cis.dms.populators.AbstractDmsPopulator" abstract="true"/>
+
+    <!-- Common fields populator for all requests going from Hybris to Magic DMS -->
+    <bean id="amwayCommonRequestFieldsPopulator"
+          class="com.amway.integration.cis.dms.populators.AmwayCommonRequestFieldsPopulator">
+        <property name="amwayAccountCommerceService" ref="amwayAccountCommerceService"/>
+        <property name="userService" ref="userService"/>
+        <property name="sessionService" ref="sessionService"/>
+    </bean>
+
+    <!-- Common fields populator for all requests going from Hybris to Magic DMS -->
+    <bean id="amwayCommonResponseFieldsPopulator"
+          class="com.amway.integration.cis.dms.populators.AmwayCommonResponseFeildsPopulator"/>
+
+    <bean id="amwaydmsSystemSetup" class="com.amway.integration.cis.dms.setup.AmwaydmsSystemSetup" parent="abstractCoreSystemSetup"/>
+    <!--
+    <import resource="classpath:/amwaydms-customerregistration-spring.xml" />
+    <import resource="classpath:/amwaydms-addressinformation-spring.xml" />
+    <import resource="classpath:/amwaydms-subscriptionoption-spring.xml" />
+    <import resource="classpath:/amwaydms-distributorservice-spring.xml" />
+    <import resource="classpath:/amwaydms-partyprofileandname-spring.xml" />
+    <import resource="classpath:/amwaydms-businessnature-spring.xml" />
+    <import resource="classpath:/amwaydms-profileinformation-spring.xml" />
+    <import resource="classpath:/amwaydms-ecommservice-spring.xml" />
     <import resource="classpath:/amwaydms-updatepartyinformation-spring.xml"/>
     <import resource="classpath:/amwaydms-updatepartyname-spring.xml"/>
     <import resource="classpath:/amwaydms-partyphonedetails-spring.xml"/>
     <import resource="classpath:/amwaydms-sponsorsearch-spring.xml"/>
     <import resource="classpath:/amwaydms-customerbalance-spring.xml"/>
     <import resource="classpath:/amwaydms-createcustomerbalance-spring.xml"/>
-	<import resource="classpath:/amwaydms-accountrenewal-spring.xml"/>
-	<import resource="classpath:/amwaydms-bankaccountservice-spring.xml"/>
- 	<import resource="classpath:/amwaydms-partycreditprofile-spring.xml"/>
- 	<import resource="classpath:/amwaydms-partypersonalidservice-spring.xml" />
- 	<import resource="classpath:/amwaydms-partytaxidservice-spring.xml" />
- 	<import resource="classpath:/amwaydms-partyhistoryservice-spring.xml" />
- 	<import resource="classpath:/amwaydms-accounthistoryservice-spring.xml" />
- 	<import resource="classpath:/amwaydms-partypreferenceservices-spring.xml" />
- 	<import resource="classpath:/amwaydms-blockprevservice-spring.xml" />
- -->
-    <import resource="classpath:/amwaydms-accounthistoryservice-spring.xml" />
     <import resource="classpath:/amwaydms-accountrenewal-spring.xml"/>
-    <import resource="classpath:/amwaydms-addressinformation-spring.xml" />
     <import resource="classpath:/amwaydms-bankaccountservice-spring.xml"/>
-    <import resource="classpath:/amwaydms-blockprevservice-spring.xml" />
-    <import resource="classpath:/amwaydms-businessnature-spring.xml" />
-    <import resource="classpath:/amwaydms-customerregistration-spring.xml" />
+     <import resource="classpath:/amwaydms-partycreditprofile-spring.xml"/>
+     <import resource="classpath:/amwaydms-partypersonalidservice-spring.xml" />
+     <import resource="classpath:/amwaydms-partytaxidservice-spring.xml" />
+     <import resource="classpath:/amwaydms-partyhistoryservice-spring.xml" />
+     <import resource="classpath:/amwaydms-accounthistoryservice-spring.xml" />
+     <import resource="classpath:/amwaydms-partypreferenceservices-spring.xml" />
+     <import resource="classpath:/amwaydms-blockprevservice-spring.xml" />
+ -->
+    <import resource="classpath:/amwaydms-accounthistoryservice-spring.xml"/>
+    <import resource="classpath:/amwaydms-accountrenewal-spring.xml"/>
+    <import resource="classpath:/amwaydms-addressinformation-spring.xml"/>
+    <import resource="classpath:/amwaydms-bankaccountservice-spring.xml"/>
+    <import resource="classpath:/amwaydms-blockprevservice-spring.xml"/>
+    <import resource="classpath:/amwaydms-businessnature-spring.xml"/>
+    <import resource="classpath:/amwaydms-customerregistration-spring.xml"/>
     <import resource="classpath:/amwaydms-customerbalance-spring.xml"/>
     <import resource="classpath:/amwaydms-createcustomerbalance-spring.xml"/>
-    <import resource="classpath:/amwaydms-distributorservice-spring.xml" />
-    <import resource="classpath:/amwaydms-ecommservice-spring.xml" />
+    <import resource="classpath:/amwaydms-distributorservice-spring.xml"/>
+    <import resource="classpath:/amwaydms-ecommservice-spring.xml"/>
     <import resource="classpath:/amwaydms-partycreditprofile-spring.xml"/>
-    <import resource="classpath:/amwaydms-partyhistoryservice-spring.xml" />
+    <import resource="classpath:/amwaydms-partyhistoryservice-spring.xml"/>
     <!--import resource="classpath:/amwaydms-partynameservice-spring.xml" / -->
-    <import resource="classpath:/amwaydms-partypersonalidservice-spring.xml" />
+    <import resource="classpath:/amwaydms-partypersonalidservice-spring.xml"/>
     <import resource="classpath:/amwaydms-partyphonedetails-spring.xml"/>
-    <import resource="classpath:/amwaydms-partypreferenceservices-spring.xml" />
-    <import resource="classpath:/amwaydms-partyprofileandname-spring.xml" />
-    <import resource="classpath:/amwaydms-partytaxidservice-spring.xml" />
-    <import resource="classpath:/amwaydms-profileinformation-spring.xml" />
+    <import resource="classpath:/amwaydms-partypreferenceservices-spring.xml"/>
+    <import resource="classpath:/amwaydms-partyprofileandname-spring.xml"/>
+    <import resource="classpath:/amwaydms-partytaxidservice-spring.xml"/>
+    <import resource="classpath:/amwaydms-profileinformation-spring.xml"/>
     <import resource="classpath:/amwaydms-sponsorsearch-spring.xml"/>
-    <import resource="classpath:/amwaydms-subscriptionoption-spring.xml" />
+    <import resource="classpath:/amwaydms-subscriptionoption-spring.xml"/>
     <import resource="classpath:/amwaydms-updatepartyinformation-spring.xml"/>
     <import resource="classpath:/amwaydms-updatepartyname-spring.xml"/>
 </beans>

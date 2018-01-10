@@ -25,7 +25,10 @@ public final class AmwaycoreConstants extends GeneratedAmwaycoreConstants
 	// TODO use AmwayAccount relation
 	public static final String DISTRIBUTOR_GROUP = "amwaycore.defaultABOGroup";
 
+	public static final String DEFAULT_BASE_SITE_ID = "amwaycore.defaultBaseSiteId";
+
 	// implement here constants used by this extension
+	public static final String RENEWAL_NOT_FOUND_ERROR_MSG = "Renewal not found";
 
 	/**
 	 * Session variable account.
@@ -33,6 +36,7 @@ public final class AmwaycoreConstants extends GeneratedAmwaycoreConstants
 	public class SessionVariables
 	{
 		public static final String ACCOUNT = "account";
+		public static final String API_AUTH_TOKEN = "apiToken";
 	}
 
 
@@ -44,6 +48,7 @@ public final class AmwaycoreConstants extends GeneratedAmwaycoreConstants
 		public static final String ABO_USER_PRICE_GROUP = "AmwayDefaultABOPriceGroup";
 		public static final String RETAIL_PRICE_GROUP = "AmwayDefaultRetailPriceGroup";
 		public static final String EMPLOYEE_PRICE_GROUP = "AmwayDefaultEmployeePriceGroup";
+		public static final String MAX_DISCOUNT_PRICE_GROUP = "AmwayDefaultMaxDiscountPriceGroup";
 	}
 
 	/**

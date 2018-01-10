@@ -62,7 +62,7 @@ public class PointValueValueProvider extends AbstractPropertyFieldValueProvider 
 		{
 			productToIndex = (ProductModel) model;
 
-			LOG.info("Got product with code " + productToIndex.getCode());
+			LOG.debug("Got product with code " + productToIndex.getCode());
 
 			if (productToIndex != null)
 			{
@@ -72,7 +72,7 @@ public class PointValueValueProvider extends AbstractPropertyFieldValueProvider 
 					for (final CurrencyModel currency : currencies)
 					{
 
-						LOG.info("Got currency with code: " + currency.getSymbol());
+						LOG.debug("Got currency with code: " + currency.getSymbol());
 
 						fieldValues.addAll(createFieldValue(productToIndex, currency, indexedProperty));
 					}
@@ -122,13 +122,13 @@ public class PointValueValueProvider extends AbstractPropertyFieldValueProvider 
 					if (rangeNames.isEmpty())
 					{
 						addFieldValues(fieldValues, indexedProperty, currency, value);
-						LOG.info("Extracted PV: " + value);
+						LOG.debug("Extracted PV: " + value);
 					}
 					else
 					{
 						String range = (String) rangeNames.get(0);
 						addFieldValues(fieldValues, indexedProperty, currency, (range == null ? value : range));
-						LOG.info("Extracted PV range: " + (range == null ? value : range));
+						LOG.debug("Extracted PV range: " + (range == null ? value : range));
 					}
 				}
 			}
@@ -154,12 +154,12 @@ public class PointValueValueProvider extends AbstractPropertyFieldValueProvider 
 
 		for (final CatalogVersionModel catalogVersion : sessionCatalogVersions)
 		{
-			LOG.info("Checking catalog version " + catalogVersion.getVersion());
+			LOG.debug("Checking catalog version " + catalogVersion.getVersion());
 
 			if (!(catalogVersion instanceof ClassificationSystemVersionModel) && !(catalogVersion
 					.getCatalog() instanceof ContentCatalogModel))
 			{
-				LOG.info("Including version " + catalogVersion.getVersion());
+				LOG.debug("Including version " + catalogVersion.getVersion());
 				result.add(catalogVersion);
 			}
 		}

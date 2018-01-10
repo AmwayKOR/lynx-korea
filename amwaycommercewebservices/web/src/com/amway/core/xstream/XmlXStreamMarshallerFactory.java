@@ -18,10 +18,10 @@ import de.hybris.platform.commercefacades.xstream.alias.TypeAliasMapping;
 import de.hybris.platform.commercefacades.xstream.conv.AttributeConverterMapping;
 import de.hybris.platform.commercefacades.xstream.conv.TypeConverterMapping;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
-
-import javanet.staxutils.IndentingXMLStreamWriter;
 
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
@@ -42,6 +42,8 @@ import com.thoughtworks.xstream.converters.SingleValueConverter;
 import com.thoughtworks.xstream.io.xml.StaxDriver;
 import com.thoughtworks.xstream.io.xml.StaxWriter;
 
+import javanet.staxutils.IndentingXMLStreamWriter;
+
 
 /**
  *
@@ -59,7 +61,8 @@ public class XmlXStreamMarshallerFactory implements FactoryBean, ApplicationCont
 
 	private XStream xStream;
 
-	@SuppressWarnings("PMD")
+	private List<Class<?>> excludeClasses = new ArrayList<>();
+
 	@Override
 	public void afterPropertiesSet() throws Exception
 	{
@@ -67,14 +70,12 @@ public class XmlXStreamMarshallerFactory implements FactoryBean, ApplicationCont
 		configureXmlMarshaller(xmlMarshallerInstance);
 	}
 
-	@SuppressWarnings("PMD")
 	@Override
 	public Object getObject() throws Exception
 	{
 		return xmlMarshallerInstance;
 	}
 
-	@SuppressWarnings("PMD")
 	protected XStreamMarshaller getObjectInternal()
 	{
 		final XStreamMarshaller marshaller = createMarshaller();
@@ -135,6 +136,19 @@ public class XmlXStreamMarshallerFactory implements FactoryBean, ApplicationCont
 			protected XStream constructXStream()
 			{
 				return XmlXStreamMarshallerFactory.this.getXStream();
+			}
+
+			@Override
+			public boolean supports(final Class<?> clazz)
+			{
+				for (final Class excludeClass : excludeClasses)
+				{
+					if (excludeClass.isAssignableFrom(clazz))
+					{
+						return false;
+					}
+				}
+				return super.supports(clazz);
 			}
 		};
 
@@ -293,4 +307,15 @@ public class XmlXStreamMarshallerFactory implements FactoryBean, ApplicationCont
 	{
 		this.ctx = ctx;
 	}
+
+	public List<Class<?>> getExcludeClasses()
+	{
+		return excludeClasses;
+	}
+
+	public void setExcludeClasses(final List<Class<?>> excludeClasses)
+	{
+		this.excludeClasses = excludeClasses;
+	}
+
 }

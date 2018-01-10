@@ -3,14 +3,13 @@
  */
 package com.amway.core.account.service;
 
+import com.amway.core.dms.data.AmwayProfileResponseData;
+import com.amway.core.model.AmwayAccountModel;
 import de.hybris.platform.core.model.order.AbstractOrderModel;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.core.model.user.UserModel;
 
 import java.util.List;
-
-import com.amway.core.dms.data.AmwayProfileResponseData;
-import com.amway.core.model.AmwayAccountModel;
 
 
 

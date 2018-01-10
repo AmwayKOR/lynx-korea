@@ -12,6 +12,8 @@ import java.util.Map.Entry;
 
 import javax.validation.ValidationException;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.amway.core.dms.data.AmwayProfileResponseData;
 import com.amway.core.order.data.AmwayPaymentModeData;
 import com.amway.core.payment.service.AmwayPaymentModeService;
@@ -41,7 +43,7 @@ public class AmwayPaymentModeValidator
 		final Map<String, AmwayPaymentModeData> appliedPayments = getSelectedPaymentModesForCart(cart);
 
 		final Map<String, List<AmwayPaymentModeData>> supportedPayment = getPaymentModeService()
-				.getSupportedPaymentModesCombination(cart, amwayProfileData, true);
+				.getSupportedPaymentModesCombination(cart, amwayProfileData, true, StringUtils.EMPTY);
 		for (final List<AmwayPaymentModeData> value : supportedPayment.values())
 		{
 			if (value.size() == appliedPayments.size())

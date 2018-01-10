@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="items.xsd">
+    <enumtypes>
+        <enumtype code="AmwayDamOperation">
+            <value code="CREATE"/>
+            <value code="UPDATE"/>
+            <value code="METADATA_UPDATE"/>
+            <value code="REMOVE"/>
+        </enumtype>
+
+        <enumtype code="AmwayDamAssetTypeEnum">
+            <description>Asset type</description>
+            <value code="image"/>
+            <value code="video"/>
+            <value code="document"/>
+        </enumtype>
+    </enumtypes>
+
+    <itemtypes>
+        <typegroup name="AmwayDam">
+            <itemtype code="AmwayDamQueueEntry">
+                <description>The item is used to store events which are published by external DAM system,
+                    and processed by hybris cronjob.
+                </description>
+                <deployment table="AmwayDamQueueEntry" typecode="25050"/>
+                <attributes>
+                    <attribute qualifier="operation" type="AmwayDamOperation">
+                        <description>Type of event performed in DAM.</description>
+                        <modifiers optional="false" initial="true" write="false"/>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="path" type="java.lang.String">
+                        <description>DAM asset path.</description>
+                        <modifiers optional="false" initial="true" write="false"/>
+                        <persistence type="property"/>
+                    </attribute>
+                </attributes>
+            </itemtype>
+
+            <itemtype code="AmwayDamAsset" extends="MediaContainer" abstract="true">
+                <description>DAM asset</description>
+                <attributes>
+                    <attribute qualifier="description" type="localized:java.lang.String">
+                        <description>Media container description</description>
+                        <persistence type="property">
+                            <columntype database="oracle">
+                                <value>CLOB</value>
+                            </columntype>
+                            <columntype database="sap">
+                                <value>NCLOB</value>
+                            </columntype>
+                            <columntype database="mysql">
+                                <value>TEXT</value>
+                            </columntype>
+                            <columntype database="sqlserver">
+                                <value>NVARCHAR(MAX)</value>
+                            </columntype>
+                            <columntype>
+                                <value>HYBRIS.LONG_STRING</value>
+                            </columntype>
+                        </persistence>
+                    </attribute>
+                    <attribute qualifier="title" type="localized:java.lang.String">
+                        <description>Media title</description>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="type" type="AmwayDamAssetTypeEnum">
+                        <description>Type of asset</description>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="assetId" type="java.lang.String">
+                        <description>Dam asset id</description>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="languages" type="LanguageCollection">
+                        <description>Asset languages</description>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="original" type="java.lang.String">
+                        <description>Original Dam file</description>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="keywords" type="java.lang.String">
+                        <description>Keywords that can be used for indexing</description>
+                        <persistence type="property">
+                            <columntype database="oracle">
+                                <value>CLOB</value>
+                            </columntype>
+                            <columntype database="sap">
+                                <value>NCLOB</value>
+                            </columntype>
+                            <columntype database="mysql">
+                                <value>TEXT</value>
+                            </columntype>
+                            <columntype database="sqlserver">
+                                <value>NVARCHAR(MAX)</value>
+                            </columntype>
+                            <columntype>
+                                <value>HYBRIS.LONG_STRING</value>
+                            </columntype>
+                        </persistence>
+                    </attribute>
+                    <attribute qualifier="defaultAsset" type="java.lang.Boolean">
+                        <description>Default flag for several assets in the gallery</description>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="removed" type="java.lang.Boolean">
+                        <description>This flag set to true when asset removed</description>
+                        <persistence type="property"/>
+                    </attribute>
+                </attributes>
+            </itemtype>
+
+            <itemtype code="AmwayDamAssetImage" extends="AmwayDamAsset"/>
+            <itemtype code="AmwayDamAssetDocument" extends="AmwayDamAsset">
+                <description>Library Asset</description>
+            </itemtype>
+            <itemtype code="AmwayDamAssetVideo" extends="AmwayDamAsset">
+                <description>DAM video asset</description>
+                <attributes>
+                    <attribute qualifier="duration" type="java.lang.String">
+                        <description>Duration of video</description>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="videoId" type="java.lang.String">
+                        <description>Video id in BrightCove</description>
+                        <persistence type="property"/>
+                    </attribute>
+                </attributes>
+            </itemtype>
+
+            <itemtype code="AmwayDamAssetItem" extends="Media">
+                <description>DAM asset item</description>
+                <attributes>
+                    <attribute qualifier="path" type="java.lang.String">
+                        <description>Path to binary asset in DAM</description>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="removed" type="java.lang.Boolean">
+                        <description>This flag set to true when asset item removed</description>
+                        <persistence type="property"/>
+                        <defaultvalue>Boolean.FALSE</defaultvalue>
+                    </attribute>
+                    <attribute qualifier="mediaFormat" redeclare="true" type="AmwayDamAssetFormat">
+                        <description>Awmay Dam Format of this item</description>
+                        <persistence type="property"/>
+                    </attribute>
+                </attributes>
+            </itemtype>
+
+            <itemtype code="AmwayDamAssetFormat" extends="MediaFormat">
+                <description>Format of DAM asset</description>
+                <attributes>
+                    <attribute qualifier="assetType" type="java.lang.String">
+                        <description>Asset type</description>
+                        <modifiers optional="false"/>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="width" type="java.lang.Integer">
+                        <description>Asset rendition image width</description>
+                        <modifiers optional="false"/>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="height" type="java.lang.Integer">
+                        <description>Asset rendition image height</description>
+                        <modifiers optional="false"/>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="mimeType" type="java.lang.String">
+                        <description>Mime type of file</description>
+                        <persistence type="property"/>
+                    </attribute>
+                </attributes>
+            </itemtype>
+
+            <itemtype code="AmwayDamAssetMetadata">
+                <description>Metadata values</description>
+                <deployment table="AmwayDamAssetMetadata" typecode="25049"/>
+                <attributes>
+                    <attribute qualifier="damAssetId" type="java.lang.String">
+                        <description>id of AmwayDamAsset item</description>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="key" type="java.lang.String">
+                        <description>Key of metadata value</description>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="value" type="java.lang.String">
+                        <description>Metadata value</description>
+                        <persistence type="property">
+                            <columntype database="oracle">
+                                <value>CLOB</value>
+                            </columntype>
+                            <columntype database="sap">
+                                <value>NCLOB</value>
+                            </columntype>
+                            <columntype database="mysql">
+                                <value>TEXT</value>
+                            </columntype>
+                            <columntype database="sqlserver">
+                                <value>NTEXT</value>
+                            </columntype>
+                            <columntype>
+                                <value>HYBRIS.LONG_STRING</value>
+                            </columntype>
+                        </persistence>
+                    </attribute>
+                </attributes>
+            </itemtype>
+        </typegroup>
+    </itemtypes>
+</items>

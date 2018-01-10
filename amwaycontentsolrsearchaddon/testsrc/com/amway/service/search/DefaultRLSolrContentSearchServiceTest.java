@@ -402,23 +402,6 @@ public class DefaultRLSolrContentSearchServiceTest<ITEM>
 		Assert.assertEquals("value", searchPageData.getFacets().get(0).getValues().get(0).getName());
 		Assert.assertEquals(7, searchPageData.getFacets().get(0).getValues().get(0).getCount());
 
-		// Query Again, this time for the selected facet
-
-		final SolrSearchQueryData facetQuery = searchPageData.getFacets().get(0).getValues().get(0).getQuery();
-		final PageableData pageableData = new PageableData();
-		pageableData.setCurrentPage(1);
-		pageableData.setPageSize(2);
-		pageableData.setSort("size");
-		final FacetSearchPageData<SolrSearchQueryData, SearchResultValueData> secondSearchPageData = defaultRLSolrContentSearchService
-				.searchAgain(facetQuery, pageableData);
-
-		Assert.assertEquals("", secondSearchPageData.getCurrentQuery().getFreeTextSearch());
-		Assert.assertNull(secondSearchPageData.getCurrentQuery().getCategoryCode());
-		Assert.assertEquals(1, secondSearchPageData.getBreadcrumbs().size());
-		Assert.assertEquals("facet", secondSearchPageData.getBreadcrumbs().get(0).getFacetName());
-		Assert.assertEquals("value", secondSearchPageData.getBreadcrumbs().get(0).getFacetValueName());
-		Assert.assertNotNull(secondSearchPageData.getBreadcrumbs().get(0).getRemoveQuery());
-		Assert.assertNull(secondSearchPageData.getBreadcrumbs().get(0).getTruncateQuery());
 	}
 
 	public class SolrSearchResponseConverter extends

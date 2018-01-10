@@ -9,9 +9,11 @@ import de.hybris.platform.order.CartService;
 import de.hybris.platform.servicelayer.model.ModelService;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Required;
 
 import com.amway.core.order.returns.AmwayReturnCalculationService;
 import com.amway.core.order.services.AmwayOrderProrationService;
+import com.amway.core.payment.strategies.AmwayAdjustOverpaymentStrategy;
 import com.amway.core.stock.service.AmwayCommerceStockService;
 
 
@@ -25,6 +27,8 @@ public class AmwayPlaceOrderMethodHookImpl implements CommercePlaceOrderMethodHo
 	private AmwayCommerceStockService commerceStockService;
 	private AmwayOrderProrationService amwayOrderProrationService;
 	private AmwayReturnCalculationService returnCalculationService;
+	
+	private AmwayAdjustOverpaymentStrategy adjustOverpaymentStrategy;
 
 	/**
 	 * @deprecated Only in core for POS testing.  Override this!
@@ -70,7 +74,7 @@ public class AmwayPlaceOrderMethodHookImpl implements CommercePlaceOrderMethodHo
 	public void beforeSubmitOrder(final CommerceCheckoutParameter paramCommerceCheckoutParameter,
 			final CommerceOrderResult paramCommerceOrderResult)
 	{
-		// YTODO Auto-generated method stub
+		 adjustOverpaymentStrategy.adjustOverpayments(paramCommerceOrderResult.getOrder());
 	}
 
 	/**
@@ -151,5 +155,14 @@ public class AmwayPlaceOrderMethodHookImpl implements CommercePlaceOrderMethodHo
 	public void setReturnCalculationService(final AmwayReturnCalculationService returnCalculationService)
 	{
 		this.returnCalculationService = returnCalculationService;
+	}
+	
+	public AmwayAdjustOverpaymentStrategy getAdjustOverpaymentStrategy() {
+		return adjustOverpaymentStrategy;
+	}
+
+	@Required
+	public void setAdjustOverpaymentStrategy(final AmwayAdjustOverpaymentStrategy adjustOverpaymentStrategy) {
+		this.adjustOverpaymentStrategy = adjustOverpaymentStrategy;
 	}
 }

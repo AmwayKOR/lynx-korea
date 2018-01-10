@@ -1,5 +1,9 @@
 package com.amway.amwayinventory.service.stock.impl;
 
+import static com.amway.amwayinventory.AmwayInventoryTestConstants.PRODUCT_1;
+import static com.amway.amwayinventory.AmwayInventoryTestConstants.WAREHOUSE_1;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -11,19 +15,19 @@ import de.hybris.platform.ordersplitting.model.WarehouseModel;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.stock.impl.StockLevelDao;
 
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
-
-import com.amway.amwayinventory.AmwayInventoryTestConstants;
+import org.mockito.MockitoAnnotations;
 
 
 @UnitTest
-@RunWith(MockitoJUnitRunner.class)
 public class AmwayInventoryStockServiceImplTest
 {
+	@InjectMocks
+	private AmwayInventoryStockServiceImpl amwayInventoryStockService;
+
 	@Mock
 	private StockLevelDao stockLevelDao;
 	@Mock
@@ -31,40 +35,56 @@ public class AmwayInventoryStockServiceImplTest
 	@Mock
 	private ModelService modelService;
 
-	@InjectMocks
-	private AmwayInventoryStockServiceImpl amwayInventoryStockService = new AmwayInventoryStockServiceImpl();
+	@Mock
+	private WarehouseModel warehouse;
+	@Mock
+	private StockLevelModel stockLevel;
+
+	@Before
+	public void setUp()
+	{
+		MockitoAnnotations.initMocks(this);
+	}
 
 	@Test
-	public void whenGetStockLevelThenStockLevelDaoIsCalled() throws Exception
+	public void shouldFindWarehouseByCodeWhenGettingStockLevel()
 	{
-		WarehouseModel mockWarehouse = new WarehouseModel();
-		when(warehouseService.getWarehouseForCode(AmwayInventoryTestConstants.WAREHOUSE_1)).thenReturn(mockWarehouse);
-		amwayInventoryStockService.getStockLevel(AmwayInventoryTestConstants.PRODUCT_1, AmwayInventoryTestConstants.WAREHOUSE_1);
-		verify(stockLevelDao).findStockLevel(AmwayInventoryTestConstants.PRODUCT_1, mockWarehouse);
+		amwayInventoryStockService.getStockLevel(PRODUCT_1, WAREHOUSE_1);
+
+		verify(warehouseService).getWarehouseForCode(WAREHOUSE_1);
+	}
+
+	@Test
+	public void shouldFindStockLevelByDaoWhenGettingStockLevel()
+	{
+		when(warehouseService.getWarehouseForCode(WAREHOUSE_1)).thenReturn(warehouse);
+
+		amwayInventoryStockService.getStockLevel(PRODUCT_1, WAREHOUSE_1);
+
+		verify(stockLevelDao).findStockLevel(PRODUCT_1, warehouse);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void whenAvailableAmountIsNegativeThenThrowException() throws Exception
+	public void shouldThrowExceptionWhenAvailableAmountIsNegative()
 	{
-		amwayInventoryStockService.createStockLevel(AmwayInventoryTestConstants.PRODUCT_1, AmwayInventoryTestConstants.WAREHOUSE_1,-1);
+		amwayInventoryStockService.createStockLevel(PRODUCT_1, WAREHOUSE_1, -1);
 	}
 
 	@Test(expected = JaloSystemException.class)
-	public void whenStockLevelAlreadyExistsThenThrowException() throws Exception
+	public void shouldThrowExceptionWhenStockLevelAlreadyExists()
 	{
-		WarehouseModel mockWarehouse = new WarehouseModel();
-		when(warehouseService.getWarehouseForCode(AmwayInventoryTestConstants.WAREHOUSE_1)).thenReturn(mockWarehouse);
-		when(stockLevelDao.findStockLevel(AmwayInventoryTestConstants.PRODUCT_1, mockWarehouse)).thenReturn(new StockLevelModel());
-		amwayInventoryStockService.createStockLevel(AmwayInventoryTestConstants.PRODUCT_1, AmwayInventoryTestConstants.WAREHOUSE_1,0);
+		when(stockLevelDao.findStockLevel(eq(PRODUCT_1), any())).thenReturn(stockLevel);
+
+		amwayInventoryStockService.createStockLevel(PRODUCT_1, WAREHOUSE_1, 5);
 	}
 
 	@Test
-	public void whenStockLevelIsCreatedThenModelServiceSaveIsCalled() throws Exception
+	public void shouldSaveStockWhenStockNotExistAndAvailableIsPositive()
 	{
-		StockLevelModel mockStockLevel = new StockLevelModel();
-		when(modelService.create(StockLevelModel.class)).thenReturn(mockStockLevel);
-		amwayInventoryStockService.createStockLevel(AmwayInventoryTestConstants.PRODUCT_1, AmwayInventoryTestConstants.WAREHOUSE_1,0);
-		verify(modelService).save(mockStockLevel);
-	}
+		when(modelService.create(StockLevelModel.class)).thenReturn(stockLevel);
 
+		amwayInventoryStockService.createStockLevel(PRODUCT_1, WAREHOUSE_1, 5);
+
+		verify(modelService).save(stockLevel);
+	}
 }

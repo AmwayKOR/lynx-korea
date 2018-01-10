@@ -10,6 +10,7 @@ import de.hybris.platform.commerceservices.search.flexiblesearch.PagedFlexibleSe
 import de.hybris.platform.commerceservices.search.flexiblesearch.data.SortQueryData;
 import de.hybris.platform.commerceservices.search.pagedata.PageableData;
 import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
+import de.hybris.platform.core.model.order.OrderEntryModel;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.core.model.user.EmployeeModel;
 import de.hybris.platform.core.model.user.UserModel;
@@ -17,8 +18,8 @@ import de.hybris.platform.servicelayer.internal.dao.DefaultGenericDao;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 import de.hybris.platform.servicelayer.search.SearchResult;
-import de.hybris.platform.storelocator.model.PointOfServiceModel;
 import org.apache.log4j.Logger;
+import org.springframework.util.Assert;
 
 import java.util.*;
 
@@ -29,6 +30,23 @@ import java.util.*;
 public class DefaultAmwayBatchDao extends DefaultGenericDao<AmwayBatchModel> implements AmwayBatchDao
 {
 	private static final Logger LOG = Logger.getLogger(DefaultAmwayBatchDao.class);
+	
+	private static final String BATCH = "batch";
+
+	protected static final String ORDER_COUNT_BY_BATCH = new StringBuilder(100).append("SELECT COUNT( {").append(OrderModel.PK)
+			.append("} ) FROM {").append(OrderModel._TYPECODE).append("} WHERE {").append(OrderModel.VERSIONID)
+			.append("} IS NULL AND {").append(OrderModel.BATCH).append("} = ?").append(BATCH).toString();
+	
+	protected static final String CUSTOMER_COUNT_BY_BATCH = new StringBuilder(100).append("SELECT COUNT(DISTINCT( {")
+			.append(OrderModel.USER).append("} )) FROM {").append(OrderModel._TYPECODE).append("} WHERE {")
+			.append(OrderModel.VERSIONID).append("} IS NULL AND {").append(OrderModel.BATCH).append("} = ?").append(BATCH)
+			.toString();
+
+	protected static final String PRODUCT_COUNT_BY_BATCH = new StringBuilder(100).append("SELECT SUM( {oe.")
+			.append(OrderEntryModel.QUANTITY).append("} ) FROM {").append(OrderModel._TYPECODE).append(" as o JOIN ")
+			.append(OrderEntryModel._TYPECODE).append(" as oe ON { oe.").append(OrderEntryModel.ORDER).append("} = { o.")
+			.append(OrderModel.PK).append("}} WHERE { o.").append(OrderModel.VERSIONID).append("} IS NULL AND { o.")
+			.append(OrderModel.BATCH).append("} = ?").append(BATCH).toString();
 
 	private ModelService modelService;
 
@@ -193,6 +211,49 @@ public class DefaultAmwayBatchDao extends DefaultGenericDao<AmwayBatchModel> imp
 				createSortQueryData("byOrderNumber", "SELECT {pk}, {creationtime}, {code} FROM {Order} WHERE {versionID} IS NULL AND {batch} IN (?batchList) ORDER BY {code},{creationtime} DESC, {pk}") });
 
 		return getPagedFlexibleSearchService().search(sortQueries, "byDate", queryParams, pageableData);
+	}
+	
+	@Override
+	public Long getOrdersCount(final AmwayBatchModel batchModel)
+	{
+		Assert.notNull(batchModel, "Batch model must not be null");
+		final FlexibleSearchQuery query = new FlexibleSearchQuery(ORDER_COUNT_BY_BATCH);
+		query.getQueryParameters().putAll(Collections.singletonMap(BATCH, batchModel));
+		query.setResultClassList(Arrays.asList(Long.class));
+
+		LOG.debug("Query to get order count by batchID : "+query+"[Parameters] : "+query.getQueryParameters());
+
+		final SearchResult<Long> result = this.getFlexibleSearchService().search(query);
+		return result.getResult().get(0);
+	}
+
+	@Override
+	public Long getCustomersCount(final AmwayBatchModel batchModel)
+	{
+		Assert.notNull(batchModel, "Batch model must not be null");
+		final FlexibleSearchQuery query = new FlexibleSearchQuery(CUSTOMER_COUNT_BY_BATCH);
+		query.getQueryParameters().putAll(Collections.singletonMap(BATCH, batchModel));
+		query.setResultClassList(Arrays.asList(Long.class));
+
+		LOG.debug("Query to get customers count by batchID : "+query+"[Parameters] : "+query.getQueryParameters());
+
+		final SearchResult<Long> result = this.getFlexibleSearchService().search(query);
+		return result.getResult().get(0);
+	}
+
+	@Override
+	public Long getProductsCount(final AmwayBatchModel batchModel)
+	{
+		final FlexibleSearchQuery query = new FlexibleSearchQuery(PRODUCT_COUNT_BY_BATCH);
+		query.getQueryParameters().putAll(Collections.singletonMap(BATCH, batchModel));
+		query.setResultClassList(Arrays.asList(Long.class));
+
+		LOG.debug("Query to get item count by batchID : "+query+"[Parameters] : "+query.getQueryParameters());
+
+		final SearchResult<Long> result = this.getFlexibleSearchService().search(query);
+		final Long productCount = result.getResult().get(0);
+		return ((productCount == null) ? Long.valueOf(0) : productCount);
+
 	}
 
 	protected SortQueryData createSortQueryData(final String sortCode, final String query)

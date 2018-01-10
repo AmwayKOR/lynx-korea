@@ -7,6 +7,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 /**
  * <p>Java class for partyMasterServiceObject complex type.
@@ -71,6 +73,7 @@ import javax.xml.bind.annotation.XmlType;
     "userPasswd",
     "userPin"
 })
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class PartyMasterServiceObject {
 
     @XmlElementRef(name = "birthCountryCd", type = JAXBElement.class, required = false)

@@ -5,12 +5,14 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 /**
  * <p>Java class for sponsor complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="sponsor">
  *   &lt;complexContent>
@@ -25,117 +27,97 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "sponsor", propOrder = {
-    "cityName",
-    "sponsorAboNum",
+	 "cityName",
+	 "sponsorAboNum",
+	 "sponsorABONo",
+    "sponsorEmail",
     "sponsorName",
+    "sponsorPhone",
     "stateCd"
 })
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Sponsor {
 
-    protected String cityName;
-    protected String sponsorAboNum;
+    protected String sponsorABONo;
+    protected String sponsorEmail;
     protected String sponsorName;
+    protected String sponsorPhone;
+    protected String sponsorAboNum;
     protected String stateCd;
+    protected String cityName;
 
-    /**
-     * Gets the value of the cityName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getCityName() {
-        return cityName;
+    public String getSponsorABONo()
+    {
+        return sponsorABONo;
     }
 
-    /**
-     * Sets the value of the cityName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setCityName(String value) {
-        this.cityName = value;
+    public void setSponsorABONo(String sponsorABONo)
+    {
+        this.sponsorABONo = sponsorABONo;
     }
 
-    /**
-     * Gets the value of the sponsorAboNum property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getSponsorAboNum() {
-        return sponsorAboNum;
+    public String getSponsorEmail()
+    {
+        return sponsorEmail;
     }
 
-    /**
-     * Sets the value of the sponsorAboNum property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setSponsorAboNum(String value) {
-        this.sponsorAboNum = value;
+    public void setSponsorEmail(String sponsorEmail)
+    {
+        this.sponsorEmail = sponsorEmail;
     }
 
-    /**
-     * Gets the value of the sponsorName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getSponsorName() {
+    public String getSponsorName()
+    {
         return sponsorName;
     }
 
-    /**
-     * Sets the value of the sponsorName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setSponsorName(String value) {
-        this.sponsorName = value;
+    public void setSponsorName(String sponsorName)
+    {
+        this.sponsorName = sponsorName;
     }
 
-    /**
-     * Gets the value of the stateCd property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getStateCd() {
-        return stateCd;
+    public String getSponsorPhone()
+    {
+        return sponsorPhone;
     }
 
-    /**
-     * Sets the value of the stateCd property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setStateCd(String value) {
-        this.stateCd = value;
+    public void setSponsorPhone(String sponsorPhone)
+    {
+        this.sponsorPhone = sponsorPhone;
     }
 
+	public String getSponsorAboNum()
+	{
+		return sponsorAboNum;
+	}
+
+	public void setSponsorAboNum(String sponsorAboNum)
+	{
+		this.sponsorAboNum = sponsorAboNum;
+	}
+
+	public String getStateCd()
+	{
+		return stateCd;
+	}
+
+	public void setStateCd(String stateCd)
+	{
+		this.stateCd = stateCd;
+	}
+
+	public String getCityName()
+	{
+		return cityName;
+	}
+
+	public void setCityName(String cityName)
+	{
+		this.cityName = cityName;
+	}
 }

@@ -5,10 +5,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "updateCreditProfileRequest", propOrder =
 { "partyCreditProfile" })
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class UpdatePartyCreditProfileRequest extends BaseWebServiceInput
 {
 	@XmlElement(nillable = true)

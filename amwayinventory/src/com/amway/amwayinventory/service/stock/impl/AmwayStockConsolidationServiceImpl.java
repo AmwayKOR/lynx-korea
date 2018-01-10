@@ -18,11 +18,9 @@ public class AmwayStockConsolidationServiceImpl implements AmwayStockConsolidati
 	@Autowired
 	private AmwayConsolidationStockStrategy amwayConsolidationStockStrategy;
 
-
 	@Override
 	public Collection<AmwayConsolidatedInventoryBean> consolidateInventory(Collection<AmwayInventoryBean> inventoryBeans)
 	{
 		return amwayConsolidationStockStrategy.consolidateStocks(inventoryBeans);
 	}
-
 }

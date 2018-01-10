@@ -14,7 +14,7 @@ import de.hybris.platform.commerceservices.search.solrfacetsearch.data.SolrSearc
 import de.hybris.platform.commerceservices.threadcontext.ThreadContextService;
 import de.hybris.platform.core.model.media.MediaModel;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
-import de.hybris.platform.solrfacetsearch.config.impl.FacetSearchConfigDao;
+import de.hybris.platform.solrfacetsearch.daos.SolrFacetSearchConfigDao;
 
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.util.Assert;
@@ -35,9 +35,9 @@ public class DefaultSolrResourceSearchFacade<ITEM extends ResourceData> implemen
 	private Converter<AutocompleteSuggestion, AutocompleteSuggestionData> autocompleteSuggestionConverter;
 	private ProductSearchAutocompleteService<AutocompleteSuggestion> autocompleteService;
 	private ThreadContextService threadContextService;
-	private FacetSearchConfigDao facetSearchConfigDao;
+	private SolrFacetSearchConfigDao facetSearchConfigDao;
 
-	public FacetSearchConfigDao getFacetSearchConfigDao()
+	public SolrFacetSearchConfigDao getFacetSearchConfigDao()
 	{
 		return facetSearchConfigDao;
 	}
@@ -45,7 +45,7 @@ public class DefaultSolrResourceSearchFacade<ITEM extends ResourceData> implemen
 	/**
 	 * @param facetSearchConfigDao the facetSearchConfigDao to set
 	 */
-	public void setFacetSearchConfigDao(final FacetSearchConfigDao facetSearchConfigDao)
+	public void setFacetSearchConfigDao(final SolrFacetSearchConfigDao facetSearchConfigDao)
 	{
 		this.facetSearchConfigDao = facetSearchConfigDao;
 	}

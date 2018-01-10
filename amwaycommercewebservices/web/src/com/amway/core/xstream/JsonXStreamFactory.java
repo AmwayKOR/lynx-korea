@@ -21,21 +21,18 @@ public class JsonXStreamFactory extends XmlXStreamFactory
 {
 	private XStream jsonInstance;
 
-	@SuppressWarnings("PMD")
 	@Override
 	public void afterPropertiesSet() throws Exception
 	{
 		jsonInstance = getObjectInternal();
 	}
 
-	@SuppressWarnings("PMD")
 	@Override
 	public Object getObject() throws Exception
 	{
 		return jsonInstance;
 	}
 
-	@SuppressWarnings("PMD")
 	@Override
 	protected XStream getObjectInternal()
 	{

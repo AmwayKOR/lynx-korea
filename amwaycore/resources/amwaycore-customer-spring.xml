@@ -17,11 +17,10 @@
 		class="com.amway.core.account.dao.impl.DefaultAmwayAccountDao" >
 		<property name="sessionService" ref="sessionService"/>
 		<property name="userService" ref="userService"/>
-	</bean>	
+	</bean>
 
-    <bean id="amwayProfileService" class="com.amway.core.account.service.impl.MockAmwayProfileService" autowire-candidate="false">
-    </bean>
-
+	<bean id="amwayProfileService" class="com.amway.core.account.service.impl.MockAmwayProfileService" autowire-candidate="false">
+	</bean>
 
 	<alias name="defaultAmwayAccountService" alias="amwayAccountService" />
 	<bean id="defaultAmwayAccountService"

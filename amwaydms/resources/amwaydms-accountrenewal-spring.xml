@@ -38,6 +38,11 @@
 	
 	<bean id="dmsAccountRenewalInputPopulator" class="com.amway.integration.cis.dms.populators.DmsAccountRenewalInputPopulator">
 		<property name="renewalCd" value="Renewal1Years"/>
+		<property name="renewalCdMap">
+			<map>
+				<entry key="RV" value="RenewalReversal"></entry>
+			</map>
+		</property>
 	</bean>
 	
 	<bean id="accountRenewalServiceOutputConverter" parent="abstractPopulatingConverter">

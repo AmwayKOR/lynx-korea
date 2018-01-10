@@ -64,7 +64,7 @@ public class PromotionsController extends BaseController
 	 * on to the facade. BASIC is included by default. <br/>
 	 * Sample Call: https://localhost:9002/rest/v1/{SITE}/promotions/{CODE}?options=BASIC%2CEXTENDED <br/>
 	 * Keep in mind ',' needs to be encoded as %2C
-	 * 
+	 *
 	 * @param code
 	 *           - the unique code used to identify a promotion
 	 * @param options
@@ -93,8 +93,9 @@ public class PromotionsController extends BaseController
 	{
 		if (!ORDER_PROMOTION.equals(type) && !PRODUCT_PROMOTION.equals(type) && !ALL_PROMOTIONS.equals(type))
 		{
-			throw new RequestParameterException("Parameter type=" + sanitize(type)
-					+ " is not supported. Permitted values for this parameter are : 'order', 'product' or 'all'",
+			throw new RequestParameterException(
+					"Parameter type=" + sanitize(type)
+							+ " is not supported. Permitted values for this parameter are : 'order', 'product' or 'all'",
 					RequestParameterException.INVALID, "type");
 		}
 	}

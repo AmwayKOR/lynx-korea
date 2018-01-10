@@ -3,10 +3,13 @@ package com.amway.integration.dms.services;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 /**
@@ -32,6 +35,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "partyHistoryResponse", propOrder = {
     "partyHistoryData"
 })
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class PartyHistoryResponse
     extends ReturnInfoService
 {

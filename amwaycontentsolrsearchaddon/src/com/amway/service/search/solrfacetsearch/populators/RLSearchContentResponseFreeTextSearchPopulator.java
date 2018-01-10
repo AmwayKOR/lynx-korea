@@ -18,7 +18,7 @@ import de.hybris.platform.cms2.servicelayer.services.CMSSiteService;
 import de.hybris.platform.commerceservices.converter.Populator;
 import de.hybris.platform.commerceservices.search.solrfacetsearch.data.SolrSearchResponse;
 import de.hybris.platform.servicelayer.dto.converter.ConversionException;
-import de.hybris.platform.solrfacetsearch.config.impl.FacetSearchConfigDao;
+import de.hybris.platform.solrfacetsearch.daos.SolrFacetSearchConfigDao;
 
 import java.util.Collections;
 import java.util.List;
@@ -31,7 +31,7 @@ import com.amway.facade.search.facetdata.ContentSearchPageData;
 public class RLSearchContentResponseFreeTextSearchPopulator<STATE, ITEM>
 		implements Populator<SolrSearchResponse, ContentSearchPageData<STATE, ITEM>>
 {
-	private FacetSearchConfigDao facetSearchConfigDao;
+	private SolrFacetSearchConfigDao facetSearchConfigDao;
 	private CMSSiteService cmsSiteService;
 
 	@Override
@@ -48,12 +48,12 @@ public class RLSearchContentResponseFreeTextSearchPopulator<STATE, ITEM>
 		return Collections.EMPTY_LIST;
 	}
 
-	public FacetSearchConfigDao getFacetSearchConfigDao()
+	public SolrFacetSearchConfigDao getFacetSearchConfigDao()
 	{
 		return facetSearchConfigDao;
 	}
 
-	public void setFacetSearchConfigDao(final FacetSearchConfigDao facetSearchConfigDao)
+	public void setFacetSearchConfigDao(final SolrFacetSearchConfigDao facetSearchConfigDao)
 	{
 		this.facetSearchConfigDao = facetSearchConfigDao;
 	}

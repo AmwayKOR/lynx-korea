@@ -17,7 +17,8 @@ import org.springframework.beans.factory.annotation.Required;
 
 import com.amway.amwayfinance.facades.AmwayOrderExternalFinanceChangesFacade;
 import com.amway.amwayfinance.order.dto.PaymentEvent;
-import com.amway.amwayfinance.service.AmwayTransactionInfoService;
+import com.amway.amwayfinance.services.AmwayOrderPaymentConfirmationValidationStrategy;
+import com.amway.amwayfinance.services.AmwayTransactionInfoService;
 import com.amway.core.event.orderprocessing.AmwayPaymentConfirmationEvent;
 
 
@@ -38,6 +39,8 @@ public class DefaultAmwayOrderExternalFinanceChangesFacade implements AmwayOrder
 
 	private EventService eventService;
 
+	private AmwayOrderPaymentConfirmationValidationStrategy validationStrategy;
+
 	/**
 	 * {@inheritDoc}
 	 * <p>Implementation creates payment transactions in the specified order.</p>
@@ -47,6 +50,12 @@ public class DefaultAmwayOrderExternalFinanceChangesFacade implements AmwayOrder
 	{
 		LOG.info("External payment event for order {} received.", orderCode);
 		final OrderModel order = findOrderByCode(baseStoreId, orderCode);
+
+		if (!validationStrategy.validate(order))
+		{
+			throw new IllegalArgumentException("Current order is a suborder and is not eligible for payment confirmation.");
+		}
+
 		final PaymentTransactionEntryModel entry = getPayEventToPayTransactionEntryConverter().convert(paymentEvent);
 
 		String transactionId = paymentEvent.getTransactionId();
@@ -134,5 +143,16 @@ public class DefaultAmwayOrderExternalFinanceChangesFacade implements AmwayOrder
 	public void setCustomerAccountService(CustomerAccountService customerAccountService)
 	{
 		this.customerAccountService = customerAccountService;
+	}
+
+	public AmwayOrderPaymentConfirmationValidationStrategy getValidationStrategy()
+	{
+		return validationStrategy;
+	}
+
+	@Required
+	public void setValidationStrategy(AmwayOrderPaymentConfirmationValidationStrategy validationStrategy)
+	{
+		this.validationStrategy = validationStrategy;
 	}
 }
