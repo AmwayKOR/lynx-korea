@@ -16,8 +16,125 @@
 <items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 			xsi:noNamespaceSchemaLocation="items.xsd">
 
+	<relations>
+		<relation code="Asset2KeywordRelation" autocreate="true" generate="true" localized="true">
+			<description>Relation between Amway assets and keywords/tags that can be used for searching the asset.</description>
+			<deployment table="Asset2KeywordRel" typecode="21019" />
+			<sourceElement qualifier="assets" type="AbstractAmwayAsset" cardinality="many" ordered="false">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</sourceElement>
+			<targetElement qualifier="keywords" type="Keyword" cardinality="many" ordered="true" collectiontype="list">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</targetElement>
+		</relation>
+
+		<relation code="AmwayAssetAlbum2MediaContainerRel" autocreate="true" generate="true" localized="true">
+			<description>Relation between Amway asset album and media Container</description>
+			<deployment table="AssetAlbum2MediaContRel" typecode="21021" />
+			<sourceElement qualifier="album" type="AmwayAssetAlbum" cardinality="many" ordered="false">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</sourceElement>
+			<targetElement qualifier="gallery" type="MediaContainer" cardinality="many" ordered="true" collectiontype="list">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</targetElement>
+		</relation>
+	</relations>
+	
 	<itemtypes>
+		<typegroup name="assets">
+			<itemtype code="AbstractAmwayAsset" autocreate="true" generate="true"
+				jaloclass="com.amway.lynxresourcecentre.jalo.media.AbstractAmwayAsset"
+				abstract="true" extends="GenericItem">
+				<description>Model for amway assets like PDFs, and other documents.</description>
+				<deployment table="AmwayAsset" typecode="21018" />
+				<custom-properties>
+					<property name="catalogItemType">
+						<value>java.lang.Boolean.TRUE</value>
+					</property>
+					<property name="catalogVersionAttributeQualifier">
+						<value>"catalogVersion"</value>
+					</property>
+					<property name="uniqueKeyAttributeQualifier">
+						<value>"assetId"</value>
+					</property>
+					<property name="catalog.sync.default.root.type">
+						<value>Boolean.TRUE</value>
+					</property>
+					<property name="catalog.sync.default.root.type.order">
+						<value>Integer.valueOf(9)</value>
+					</property>
+				</custom-properties>
+				<attributes>
+					<attribute qualifier="assetId" type="java.lang.String">
+						<description>Unique Asset id for the media</description>
+						<modifiers read="true" write="true" search="true" optional="false" unique="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="active" type="java.lang.Boolean">
+						<description>active/inactive flag for amway assets.</description>
+						<modifiers optional="false" />
+						<defaultvalue>Boolean.TRUE</defaultvalue>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="catalogVersion" type="CatalogVersion">
+						<description>Catalog version of asset</description>
+						<modifiers read="true" write="true" search="true" optional="false" unique="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="title" type="localized:java.lang.String">
+						<description>Title of the media</description>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="subTitle" type="localized:java.lang.String">
+						<description>Sub-Title</description>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="description" type="localized:java.lang.String">
+						<description>Title of the media</description>
+						<modifiers dontOptimize="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="date" type="java.util.Date">
+						<description>Display date for the media</description>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="displayImage" type="localized:Media">
+						<description>Localized media for the asset.</description>
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
 
+			<itemtype code="AmwayAsset" autocreate="true" generate="true"
+				jaloclass="com.amway.lynxresourcecentre.jalo.media.AmwayAsset"
+				extends="AbstractAmwayAsset">
+				<description>Model for amway assets like PDFs, and other documents.</description>
+				<attributes>
+					<attribute qualifier="file" type="localized:Media">
+						<description>Localized media for the asset.</description>
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
 
+			<itemtype code="AmwayExternalAsset" autocreate="true" generate="true"
+				jaloclass="com.amway.lynxresourcecentre.jalo.media.AmwayExternalAsset"
+				extends="AbstractAmwayAsset">
+				<description>Model for amway external assets videos .</description>
+				<attributes>
+					<attribute qualifier="url" type="localized:java.lang.String">
+						<description>Localized url for the asset.</description>
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="AmwayAssetAlbum" autocreate="true" generate="true"
+				jaloclass="com.amway.lynxresourcecentre.jalo.media.AmwayAssetAlbum"
+				extends="AbstractAmwayAsset">
+				<description>Model for amway albums</description>
+			</itemtype>
+
+		</typegroup>
 	</itemtypes>
 </items>
