@@ -306,6 +306,12 @@ public interface ControllerConstants
 				 * Response UI when shopping list is updated.
 				 */
 				String AddToShoppingListCartPopUp = "fragments/shoppingList/addToShoppingListCartPopUp"; //NOSONAR
+
+				/**
+				 * Response UI when sortby is updated in the shopping list.
+				 */
+				String SortProductInShoppingListDetailsResponse = "fragments/shoppingList/sortProductInShoppingListDetailsResponse"; //NOSONAR
+
 			}
 		}
 	}
@@ -555,6 +561,12 @@ public interface ControllerConstants
 			 * Error message to be displayed on add to Shopping list when product code is empty.
 			 */
 			String SHOPPING_LIST_ADD_PRODUCT_LIST_UID_EMPTY = "shopping.list.add.product.error.empty.listuid";
+
+			/**
+			 * Error message to be displayed on add to Shopping list when product code is empty.
+			 */
+			String SHOPPING_LIST_SORT_PRODUCT_CODE_EMPTY = "shopping.list.sort.product.error.empty.sort.code";
+
 
 		}
 

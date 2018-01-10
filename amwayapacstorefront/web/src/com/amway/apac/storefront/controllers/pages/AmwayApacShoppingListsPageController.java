@@ -12,6 +12,7 @@ import de.hybris.platform.wishlist2.model.Wishlist2Model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.annotation.Resource;
 
@@ -29,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.amway.apac.core.constants.AmwayapacCoreConstants;
+import com.amway.apac.facades.cart.enums.AmwayApacCartSortCode;
 import com.amway.apac.facades.wishlist.AmwayApacWishlistFacade;
 import com.amway.apac.facades.wishlist.data.AmwayApacWishListModification;
 import com.amway.apac.storefront.controllers.ControllerConstants;
@@ -85,6 +87,12 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 	private static final String SHOPPING_LIST_DETAILS_PAGE_URL = "/detail/" + SHOPPING_LIST_UID_PATH_VARIABLE_PATTERN;
 
 	/**
+	 * URL for the shopping list details page
+	 */
+	private static final String SHOPPING_LIST_DETAILS_SORT_PAGE_URL = "/detail/sort";
+
+	/**
+	 * /**
 	 *
 	 */
 	private static final String SHOPPING_LIST_CONFIGURED_MAX_LENGTH = "shopping.list.configured.max.length";
@@ -95,6 +103,9 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 
 	@Resource(name = "shoppingListDetailsBreadcrumbBuilder")
 	private ResourceBreadcrumbBuilder shoppingListDetailsBreadcrumbBuilder;
+
+	@Resource(name = "wishlistFacade")
+	private AmwayApacWishlistFacade wishlistFacade;
 
 	/**
 	 * Controller method for the page displaying all the shopping lists of the user.
@@ -338,6 +349,7 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 	private void populateShoppingListDetailsPage(final Model model) throws CMSItemNotFoundException
 	{
 		model.addAttribute(new AddToCartOrderForm());
+		model.addAttribute("sortOptions", AmwayApacCartSortCode.values());
 		storeCmsPageInModel(model, getContentPageForLabelOrId(ControllerConstants.GeneralConstants.SHOPPING_LIST_DETAILS_CMS_PAGE));
 		setUpMetaDataForContentPage(model,
 				getContentPageForLabelOrId((ControllerConstants.GeneralConstants.SHOPPING_LIST_DETAILS_CMS_PAGE)));
@@ -385,6 +397,43 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 			}
 		}
 		return ControllerConstants.Views.Fragments.ShoppingList.UpdateProductInShoppingListResponse;
+	}
+
+	/**
+	 * Controller method to sort shopping list details product
+	 *
+	 * @param model
+	 *           view model
+	 * @return the view
+	 * @throws CMSItemNotFoundException
+	 */
+	@RequireHardLogIn
+	@RequestMapping(value = SHOPPING_LIST_DETAILS_SORT_PAGE_URL, method = RequestMethod.GET)
+	public String sortShoppingListDetailsList(@RequestParam(name = "shoppingListUid") final String shoppingListUid,
+			final Model model, @RequestParam(name = "sortBy", required = false) final String sortBy) throws CMSItemNotFoundException
+	{
+		if (StringUtils.isBlank(shoppingListUid))
+		{
+			GlobalMessages.addErrorMessage(model, ControllerConstants.ErrorMessageKeys.ShoppingList.SHOPPING_LIST_DETAILS_NOT_FOUND);
+		}
+		else
+		{
+			final AmwayApacCartSortCode selectedSort = StringUtils.isNotBlank(sortBy) ? AmwayApacCartSortCode.valueOf(sortBy)
+					: AmwayApacCartSortCode.LAST_ITEM_ADDED;
+			model.addAttribute("selectedSort", selectedSort);
+			final WishlistData shoppingListData = amwayApacWishlistFacade.getWishlistByUidForCurrentUser(shoppingListUid);
+			if (Objects.nonNull(shoppingListData))
+			{
+
+				wishlistFacade.getShoppingListDetailsSortBySortCode(selectedSort, shoppingListData);
+			}
+			model.addAttribute(ControllerConstants.ModelParameters.SHOPPING_LIST_DATA, shoppingListData);
+			populateShoppingListDetailsPage(model);
+
+		}
+		return ControllerConstants.Views.Fragments.ShoppingList.SortProductInShoppingListDetailsResponse;
+
+
 	}
 
 	/**
