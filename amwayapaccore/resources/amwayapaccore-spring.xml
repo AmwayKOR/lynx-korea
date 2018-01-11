@@ -427,5 +427,13 @@
 		<property name="amwayApacAccountClassificationService" ref="amwayApacAccountClassificationService"/>
 		<property name="amwayAccountClassificationRankMapping" ref="amwayAccountClassificationRankMapping"/>
 	</bean>
+	
+	<!--     AmwayPOSRestriction Model Dynamic Handler -->
+	<alias alias="amwayApacPOSDynamicDescriptionHandler" name="defaultAmwayApacPOSDynamicDescriptionHandler"/>
+    <bean id="defaultAmwayApacPOSDynamicDescriptionHandler" class="com.amway.apac.core.model.AmwayApacPOSDescriptionHandler" scope="tenant" />
     
+    <!-- Custom Restriction for Amway ShopFinder -->
+    <alias alias="amwayApacPOSRestrictionEvaluator" name="defaultAmwayApacPOSRestrictionEvaluator"/>
+	<bean id="defaultAmwayApacPOSRestrictionEvaluator" class="com.amway.apac.core.shopfinder.evaluators.AmwayApacPOSRestrictionEvaluator" scope="tenant"/>
+	
 </beans>
