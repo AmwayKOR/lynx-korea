@@ -3,7 +3,7 @@ package com.amway.apac.cockpits.label.providers;
 import org.apache.commons.lang.LocaleUtils;
 import org.apache.commons.lang.StringUtils;
 
-import com.amway.lynxresourcecentre.model.media.AbstractAmwayAssetModel;
+import com.amway.apac.resourcecentre.model.media.AbstractAmwayAssetModel;
 
 import de.hybris.platform.cockpit.services.label.AbstractModelLabelProvider;
 

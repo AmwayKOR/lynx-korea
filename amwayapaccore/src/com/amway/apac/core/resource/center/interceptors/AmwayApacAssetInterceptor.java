@@ -15,7 +15,7 @@ import java.util.Objects;
 import org.assertj.core.util.Preconditions;
 
 import com.amway.apac.core.enums.AccountClassificationEnum;
-import com.amway.lynxresourcecentre.model.media.AbstractAmwayAssetModel;
+import com.amway.apac.resourcecentre.model.media.AbstractAmwayAssetModel;
 
 
 /**

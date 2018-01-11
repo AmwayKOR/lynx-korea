@@ -38,8 +38,8 @@ import org.apache.commons.lang.StringUtils;
 
 import com.amway.apac.resourcecenter.daos.AmwayAssetDao;
 import com.amway.apac.resourcecenter.enums.AmwayApacAssetsSort;
-import com.amway.lynxresourcecentre.model.media.AmwayAssetAlbumModel;
-import com.amway.lynxresourcecentre.model.media.AmwayAssetModel;
+import com.amway.apac.resourcecentre.model.media.AmwayAssetAlbumModel;
+import com.amway.apac.resourcecentre.model.media.AmwayAssetModel;
 
 
 /**

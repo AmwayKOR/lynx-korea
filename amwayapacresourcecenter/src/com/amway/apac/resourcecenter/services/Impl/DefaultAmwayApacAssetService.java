@@ -26,8 +26,8 @@ import java.util.List;
 
 import com.amway.apac.resourcecenter.daos.AmwayAssetDao;
 import com.amway.apac.resourcecenter.services.AmwayApacAssetService;
-import com.amway.lynxresourcecentre.model.media.AmwayAssetAlbumModel;
-import com.amway.lynxresourcecentre.model.media.AmwayAssetModel;
+import com.amway.apac.resourcecentre.model.media.AmwayAssetAlbumModel;
+import com.amway.apac.resourcecentre.model.media.AmwayAssetModel;
 
 
 /**

@@ -19,8 +19,8 @@ import de.hybris.platform.core.model.product.ProductModel;
 
 import java.util.List;
 
-import com.amway.lynxresourcecentre.model.media.AmwayAssetAlbumModel;
-import com.amway.lynxresourcecentre.model.media.AmwayAssetModel;
+import com.amway.apac.resourcecentre.model.media.AmwayAssetAlbumModel;
+import com.amway.apac.resourcecentre.model.media.AmwayAssetModel;
 
 
 /**
