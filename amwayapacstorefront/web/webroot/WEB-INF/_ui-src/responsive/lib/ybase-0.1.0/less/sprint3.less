@@ -10,6 +10,15 @@
 	.jump-to-wrapper {
 		display: inline-block;
 		padding-left: 20px;
+		select{
+			padding-left:15px;
+			@media(max-width:768px){
+				min-width: 68%;
+				max-width: 68%;
+				overflow: hidden;
+				margin-bottom: 0;
+			}
+		}
 	}
 	.jump-to {
 		display: inline-block;
@@ -790,6 +799,8 @@ header.main-header .icon-arrow-dropdown {
             }
 			.card-image {
 				width: 52px;
+				position: relative;
+				top: -5px;
 				img {
 					width: @w100;
 				}
@@ -919,7 +930,7 @@ header.main-header .icon-arrow-dropdown {
 }
 .card-form {
 	label.control-label {
-		width: 125px;
+		//width: 125px;
 	}
 }
 .width-auto {
@@ -1041,7 +1052,31 @@ select.form-control#mailingAddressRegionIso {
 .bonus-payment-method-form__acceptance-checkbox {
 	display: inline-block;
 }
-
+//11/22 angela add for billing-shiping-add-new-payment-method
+.billing-shipping{
+	.accordion-billing-shipping{
+		.panel{
+			#paymentInformationBody{
+				.create-payment-container{
+					#newCreditCardPostForm {
+						.address-block{
+							.address-form{
+								label{
+									margin-top:10px;
+								}
+								@media(max-width:768px){
+									label{
+										margin-top:0;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
 @media (min-width: 769px) {
 	.user-account-header {
 		
@@ -1099,12 +1134,16 @@ select.form-control#mailingAddressRegionIso {
 					width: @w100;
 					display: table;
 					top: 0;
+					text-align: center;
+					padding: 5px 0;
 					.amway-theme {
 						width: @w100;
 						display: table;
 						.jump-to {
 							display: table-cell;
 							min-width: 62px;
+							position: relative;
+							left: 10px;
 						}
 						.jump-to-wrapper {
 							display: table-cell;
@@ -1654,13 +1693,9 @@ select.form-control#mailingAddressRegionIso {
 	 #cboxClose {
 		.a_link;
 		.modal-close-icon {
-			color: @blue_2;
+			color: inherit!important;
 		}
-		&:hover {
-			.modal-close-icon {
-				color: @blue_1;
-			}
-		}
+
 	 }
 }
 
@@ -1734,7 +1769,7 @@ select.form-control#mailingAddressRegionIso {
 				bottom: 30px;
 			}
 			.bonus-payment__item-button--activated-icon {
-				bottom: 30px;
+				//bottom: 30px;
 				left: 38px;
 			}
 			.bonus-payment__history {

@@ -13,25 +13,7 @@
 <c:url value="${product.url}/reviewhtml/all" var="getAllReviewsUrl"/>
 <c:url value="${product.url}/review" var="productReviewActionUrl"/>
 
-<c:set var="isUserAbo" value="false" />
-<sec:authorize ifNotGranted="ROLE_ANONYMOUS">
-	<c:set var="isUserAbo" value="true" />
-</sec:authorize>
-
 <div class="product-collapse__rating">
-	<c:choose>
-		<c:when test="${isUserAbo}">
-			<p class="product-collapse__review">
-				<a href="#" class="product-description__readmore">
-					<img class="product-collapse__review-icon" src="${themeResourcePath}/images/review.png">
-					<spring:theme code="review.reviews.add" />
-				</a>
-			</p>
-		</c:when>
-		<c:otherwise>
-			<spring:theme code="review.reviews.add.login" />
-		</c:otherwise>
-	</c:choose>
 	<div>
 		<ul id="reviews" class="review-list" data-reviews="${getPageOfReviewsUrl}" data-allreviews="${getAllReviewsUrl}"></ul>
 		<div class="product-collapse__rating">

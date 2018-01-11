@@ -72,8 +72,9 @@ import com.amway.apac.storefront.controllers.ControllerConstants;
 import com.amway.apac.storefront.response.dto.AmwayApacResponseDto;
 import com.amway.apac.storefront.response.dto.AmwayApacResponseMessageDto;
 import com.amway.apac.storefront.util.AmwayApacResponseUtils;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Maps;
-
 
 /**
  * Controller for product details page
@@ -143,6 +144,9 @@ public class ProductPageController extends AbstractPageController
 		model.addAttribute(new ReviewForm());
 		model.addAttribute("pageType", PageType.PRODUCT.name());
 		model.addAttribute("futureStockEnabled", Boolean.valueOf(Config.getBoolean(FUTURE_STOCK_ENABLED, false)));
+
+		final List<ReviewData> reviewDataList = productFacade.getReviews(productCode);
+		model.addAttribute("allReviewCount", getReviewCount(reviewDataList));
 
 		final String metaKeywords = MetaSanitizerUtil.sanitizeKeywords(productData.getKeywords());
 		final String metaDescription = MetaSanitizerUtil.sanitizeDescription(productData.getDescription());
@@ -512,6 +516,37 @@ public class ProductPageController extends AbstractPageController
 		return cmsPageService.getPageForProduct(productModel);
 	}
 
+	protected String getReviewCount(final List<ReviewData> reviewDataList)
+	{
+		final Map<String, Integer> result = new HashMap<String, Integer>();
+		final ObjectMapper mapper = new ObjectMapper();
+		String jsonResult = "";
 
+		try
+		{
+			for (final ReviewData review : reviewDataList)
+			{
+				final Integer rating = Integer.valueOf(review.getRating().intValue());
+				final String key = String.valueOf(rating).concat("star");
+				if (result.containsKey(key))
+				{
+					final Integer value = result.get(key);
+					final int total = value.intValue() + 1;
+					result.put(String.valueOf(key), Integer.valueOf(total));
+				}
+				else
+				{
+					result.put(String.valueOf(key), new Integer(1));
+				}
+			}
+			jsonResult = mapper.writeValueAsString(result);
+		}
+		catch (final JsonProcessingException e)
+		{
+			LOG.error(e);
+		}
+
+		return jsonResult;
+	}
 
 }

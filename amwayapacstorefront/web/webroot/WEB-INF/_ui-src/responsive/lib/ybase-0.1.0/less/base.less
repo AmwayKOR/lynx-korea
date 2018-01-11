@@ -712,11 +712,15 @@ header.main-header {
 										}
 									}
 									.dropdown-menu-bottom {
-										padding: 10px 0 10px 20px;
+										padding: 10px 20px;
 										border-top: 1px solid #dadada;
 										button{
 											padding: 0 10px!important;
 											margin-right: 5px!important;
+										}
+										a{
+											position: relative;
+											left: 25px;
 										}
 									}
 								}
@@ -737,11 +741,11 @@ header.main-header {
 							}
 							.add-to-ditto-container {
 								@media (max-width: 520px){
-									display: block!important;
+									//display: block!important;
 									width: 130px!important;
 									.dropdown-menu{
 										right: auto;
-										left: -1px;
+										left: -136px;
 									}
 								}
 								margin: 10px 0;
@@ -754,6 +758,9 @@ header.main-header {
 									@media (max-width: @w768){
 										right: -1px;
 										top: 52px;
+									}
+									@media (min-width: @w768){
+										left:-1px;
 									}
 									ul {
 										max-height: 335px;
@@ -1572,6 +1579,7 @@ header.main-header {
 				padding: 11px 0 14px;
 				width: 38%;
 				float: right;
+				margin-right:0!important;
 			}
 			&:hover {
 				color: @blue_2;
@@ -1831,6 +1839,10 @@ footer {
 	display: @none;
 	visibility: visible;
 	top: 5%;
+	left:50%;
+	-webkit-transform: translate(-50%, 0);
+	-ms-transform: translate(-50%, 0);
+	transform: translate(-50%, 0);
 	position: fixed;
 	width: auto;
 	min-width: 300px;
@@ -1995,6 +2007,97 @@ footer {
 	top: 25px;
 	cursor: pointer;
 }
+.review {
+	top: 14%;
+
+	.review-popup {
+		min-height: 530px; 
+		.cart-popup__item-info {
+			padding-top:0;
+		}
+		.review-popup_item {
+			background: @gray_9;
+			padding: 20px;
+			margin: 0 auto;
+			border-bottom: 1px solid #dadada;
+			.cart-popup__thumbnail {
+				width:100%;
+				height:auto;
+				margin:0;
+				border: 1px solid #dadada;
+			}
+			.cart-popup__item-title {
+				margin-top:15px;
+				text-transform: uppercase;
+				@media (max-width:475px) {
+					margin-top: 5px;
+				}
+			}
+			.cart-popup__item-count {
+				color: @gray_3;
+				height: auto;
+				margin-bottom: 0;
+			}
+		}
+		.dialog-form-module {
+			margin: 15px 20px 30px;
+			.row {
+				margin: 10px 0;
+			}
+			textarea {
+				min-height: calc(~"15vh"); 
+				resize: none;
+			}
+		}
+		.cart-popup__item-link {
+			padding:25px 20px;
+		}
+
+		
+	}
+	#star {
+		min-width: 100%;
+		img {
+			max-width: 24px;
+		}
+	}
+	
+}
+@media (max-width: @w768) {
+	.review {	
+		top: 5%;
+		.cart-popup__dialog {
+			.review-popup {
+				min-height: calc(~"70vh"); 
+				[class*="col-"] {
+					padding-left: 5px;
+					padding-right:5px;
+				}
+				.cart-popup__item-info {
+					.dialog-form-module {
+						.form-control {
+							width: 100%;
+						}
+					}
+					.cart-popup__item-link {
+						padding:20px;
+					}
+				}
+				
+
+			}
+			
+		}
+	}
+}
+.star_evaluate {
+	position:relative;
+	width:100px;
+	height:20px;
+	background:url("../images/icon-star-default.svg") repeat-x;
+}
+
+
 .checkout-steps {
 	padding: 0;
 	list-style-type: @none;
@@ -2142,7 +2245,7 @@ footer {
 			font-weight: @weight600;
 			color: @blue_1;
 			text-transform: uppercase;
-			width: 144px;
+			//width: 144px;
 		}
 		input {
 			width: 300px;
@@ -2524,6 +2627,42 @@ ul {
 }
 .product-list-page-title {
 	margin-left: 0;
+}
+.comuserinfo {
+	width: 250px;
+	display: block;
+	overflow: hidden;
+	clear: both;
+	dl {
+		display: table;
+		width:100%;
+		margin-bottom: 7px;
+		overflow: hidden;
+		dt {
+			float:left;
+			width:50px;
+			color: #0075a4;
+			font-weight: 100;
+		}
+		dd {
+			float: left;
+			width: 200px;
+
+			div {
+				height: 25px;
+				overflow: hidden;
+				float: left;
+				max-width: 180px;
+				background: #fad000;
+			}
+			span {
+				float: left;
+				padding-left: 5px;
+				font-size:14px;
+				line-height: 25px;
+			}
+		}
+	}
 }
 .confirm-box {
 	padding-bottom: 36px;
@@ -3051,7 +3190,7 @@ label.mobile-hidden {
 	color: @blue_2;
 	display: block;
 	text-align: center;
-	margin-top: -25px;
+	margin-top: -20px;
 }
 .performance-box__message-abstract {
 	display: block;
@@ -4311,6 +4450,9 @@ h1.sponsorship__title {
 			&:hover {
 				border: 2px solid @blue_1;
 			}
+			&#createShoppingList{
+				margin-top:30px;
+			}
 		}
 	}
 	label {
@@ -4379,7 +4521,7 @@ h1.sponsorship__title {
 		width: @w100;
 		margin: 0;
 		.banner-content {
-			min-height: auto;s
+			min-height: auto;
 			.sub-title-wrap {
 				margin: 0 0 10px;
 				.banner-sub-title {
@@ -5096,9 +5238,8 @@ header.main-header {
 	}
 }
 .product-collapse__rating {
-	padding-left: 15px;
-	padding-right: 40px;
-	padding-left: 15px;
+	display: none;
+	padding-left: 0;
 	padding-right: 40px;
 }
 .product-collapse__review {
@@ -5412,6 +5553,10 @@ p {
 }
 .product-list__item-abovalue {
 	float: right;
+	@media(max-width:768px){
+		position: relative;
+		right:15px;
+	}
 }
 .product-list__item-retailprice {
 	font-weight: @weight100;
@@ -5493,12 +5638,12 @@ p {
 		background-image: url(../images/plus_circle_hover.png);
 	}
 }
-.product-list__item-link-ditto {
-	display: @none;
-	&:before {
-		content: url("../images/ditto.png");
-	}
-}
+//.product-list__item-link-ditto {
+//	display: @none;
+//	&:before {
+//		content: url("../images/ditto.png");
+//	}
+//}
 .product-category__bg {
 	height: 40px;
 	background-color: @gray_9;
@@ -6455,30 +6600,44 @@ select.form-control {
 }
 .new-product__listing {
 	.product-list__item-link-ditto {
-		display: @inlineBlock;
-		&:before {
-			content: "";
-		}
-		.like-shape {
-			background: url(../images/new-shape-mb.png) no-repeat;
-			position: absolute;
-			background-size: @w100;
-			width: 20px;
-			height: 20px;
-			right: 16px;
-			&:hover{
-				background-image: url(../images/new-like.png);
+		display: @block;
+		background: url(../images/ditto_2.svg) 28px no-repeat;
+		position: relative;
+		background-size: auto 100%;
+		padding-left: 52px;
+		@media(max-width: 768px){
+			float: left;
+			text-align: left;
+			left:0;
+			padding-left: 0!important;
+			background: url(../images/ditto_2.svg) no-repeat!important;
+			top:1px;
+	    }
+		&:hover{
+			background: url(../images/ditto.svg) 28px no-repeat;
+			@media(max-width: 768px){
+				background: url(../images/ditto.svg) no-repeat!important;
 			}
 		}
-			
+		sup{
+			font-size: 24px;
+			position: absolute;
+			top: 10px;
+			right:4px;
+			@media(max-width:768px){
+				right:auto;
+			}
+		}
 	}
 	.product-list__item-link-ditto.product-list__item-link-common.col-md-2 {
 		.wish-list {
-			display: @none;
+			display: inline-block;
+			left: 3px;
+			position: relative;
 		}
 	}
 }
-.list-item-wrapper {
+.product-list__thum{
 	position: relative;
 	&:hover {
 		.quick-view-btn {
@@ -6489,14 +6648,18 @@ select.form-control {
 .product-list__item-content.amwahover {
 	.checkbox-element-wrapper {
 		position: absolute;
-		top: 5px;
-		right: 2px;
+		top: 21px;
+		right: 13px;
+		@media(max-width:768px){
+			top:24px;
+		}
 	}
 	._checkbox-element-global-class {
 		&~span._checkbox-element-global-span {
 			&:before {
-				left: 4px;
-				top: -1px;
+				left: 2px;
+				top: 0;
+				font-size: 12px;
 			}
 		}
 	}
@@ -6511,13 +6674,13 @@ select.form-control {
 	position: absolute;
 	background: rgba(255, 255, 255, 0.8);
 	margin-left: -79px;
-	left: 50%;
+	left: 143px;
 	border: 1px solid @blue_1;
 	z-index: 999;
 	padding: 8px 0px;
 	color: @blue_1;
 	width: 158px;
-	top: 120px;
+	top: -160px;
 	display: @none;
 }
 #createShoppingListAccordion {
@@ -6554,7 +6717,10 @@ select.form-control {
 #colorbox {
 	display: @none;
 	top: 5%;
-	left: 20%;
+	left:50%;
+	-webkit-transform: translate(-50%, 0);
+	-ms-transform: translate(-50%, 0);
+	transform: translate(-50%, 0);
 	position: fixed;
 	width: 60%;
 	height: 90%;
@@ -6582,6 +6748,10 @@ select.form-control {
 	display: @none;
 	visibility: visible;
 	top: 5%;
+	left: 50%;
+	-webkit-transform: translate(-50%, 0);
+	-ms-transform: translate(-50%, 0);
+	transform: translate(-50%, 0);
 	position: fixed;
 	width: auto;
 	min-width: 300px;
@@ -6601,6 +6771,8 @@ select.form-control {
 			&:nth-child(2) {
 				vertical-align: -webkit-baseline-middle;
 				padding-left: 10px;
+				position: relative;
+				top: 6px;
 			}
 		}
 	}
@@ -6680,7 +6852,7 @@ select.form-control {
 		margin-top: 10px;
 		margin-left: 12px;
 		padding-top: 15px;
-		font-size: 600;
+		font-size:600;
 		.a_link;
 	}
 	.cart-popup__item-link {
@@ -6738,7 +6910,7 @@ select.form-control {
 		background: @white !important;
 		color: @blue_1!important;
 		border: 2px solid @blue_1;
-		text-transform: capitalize;
+		text-transform: uppercase;
 		&:hover {
 			background: @blue_1 !important;
 			color: @white !important;
@@ -6810,10 +6982,12 @@ select.form-control {
 	left: 0 !important;
 	padding-right:0!important;
 }
-.shopping-list-row-button-wrapper {
-	.btn {
-		text-transform: uppercase;
-		padding: 0 25px;
+.amway-theme{
+	.shopping-list-row-button-wrapper {
+		.btn {
+			text-transform: uppercase;
+			padding: 0 25px;
+		}
 	}
 }
 .new-shopping-list-landing-row {
@@ -7073,6 +7247,23 @@ select.form-control {
 
 		}
 
+	}
+}
+.prompt {
+	top: 15%;
+	.prompt_item {
+		text-align: center;
+		padding: 30px 30px 0;
+		font-size: 18px;
+		.cart-popup__item-title {
+			font-size: 30px;
+			line-height: 2;
+			text-align: center;
+			margin-bottom: 15px;
+		}
+		@media (max-width: 768px) {
+			padding: 30px 30px 40px;
+		}
 	}
 }
 
@@ -8226,11 +8417,11 @@ select.form-control {
 			margin-top: 40px;
 			.form-group {
 				input {
-					width: @w100;
+					//width: @w100;
 					margin-left: 0px;
 				}
 				label {
-					width: @w100;
+					//width: @w100;
 				}
 			}
 		}
@@ -8781,7 +8972,25 @@ select.form-control {
 			border-top: 3px solid @blue_1;
 		}
 		.auto-suggestion-popover {
-			display: none !important;
+			-webkit-box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.2);
+			box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.2);
+			&.popover.bottom{
+				margin-top:2px;
+			}
+
+			.popover-arrow{
+				display: none;
+			}
+			.popover-content{
+				padding: 10px;
+				ul{
+					padding: 0;
+				}
+				.search-results-close{
+					right: 10px;
+				}
+			}
+
 		}
 		.mobile-user-btn {
 			padding: 0 !important;
@@ -9361,7 +9570,7 @@ select.form-control {
 			height: auto;
 		}
 		#reviewsbody.accordion-panel-collapse {
-			padding-left: 32px;
+			padding-left: 16px;
 		}
 		.product-collapse__rating {
 			padding-left: 0;
@@ -9441,7 +9650,7 @@ select.form-control {
 			padding-left: 0;
 		}
 		.product-list__item-link-text {
-			padding-left:35px;
+			padding-left:32px;
 			background-position: left center;
 		}
 		.product-list__item-link-ditto {
@@ -9721,7 +9930,7 @@ select.form-control {
 					content: "";
 				}
 				.like-shape {
-					background: url(../images/new-shape-mb.png) no-repeat;
+					background: url(../images/ditto_2.svg) no-repeat;
 					background-size: auto @w100;
 					position: relative;
 					width: 24px;
@@ -9742,7 +9951,6 @@ select.form-control {
 		#colorbox {
 			height: 96%;
 			width: 90%;
-			left: 5%;
 			top: 2%;
 		}
 		#cboxWrapper {
@@ -9979,9 +10187,17 @@ select.form-control {
 
 		.new-product__listing {
 			.product-list__item-link-ditto {
-
+				cursor: pointer;
 				&:before {
 					float: right;
+				}
+				@media(max-width: 768px){
+					&:before {
+						float: left;
+						left: 1px;
+						width: 21px;
+						height: 21px;
+					}
 				}
 			}
 		}
@@ -10238,6 +10454,7 @@ select.form-control {
 			.cart-voucher__input {
 				width: 68%;
 				margin-right: 2%;
+				font-size: 16px!important;
 			}
 			.cart-voucher {
 				.btn-blue-white {
@@ -10267,9 +10484,12 @@ select.form-control {
 		}
 
 		.cbox {
-			width: auto;
-
-			.cart-popup__thumbnail，#add-to-cart-box {
+			width: 100%;
+			.cart-popup__dialog {
+				width:80%;
+				margin-left:10%;
+			}
+			.cart-popup__thumbnail,#add-to-cart-box {
 				.cart-popup__item-detail {
 					display: @inlineBlock;
 					vertical-align: top;
@@ -10386,11 +10606,23 @@ select.form-control {
 .plp-item-label {
 	&.limit-stock{
 		background-color:#731472;
+		left:111px;
+		z-index: 98;
 	}
 	&.bundle-save{
+		width: 110px;
 		background-color:@red;
+		margin-right: 15px;
+		.right-white {
+			border:0;
+			right: -15px;
+			background: url(../images/icon_arrow.png) no-repeat;
+			background-size: 16px 30px;
+			width: 16px;
+			height: 30px;
+		}
 	}
-	width: 150px;
+	width: 140px;
 	height: 30px;
 	position: absolute;
 	color: #fff;
@@ -10398,17 +10630,25 @@ select.form-control {
 	font-weight: 600;
 	padding-top: 4px;
 	text-transform: uppercase;
-	font-size:16px;
+	font-size:13px;
+	line-height: 1.6;
 	z-index:99;
 	.right-white{
 		width: 0;
 		height: 0;
 		border-left: 15px solid transparent;
 		border-right: 14px solid transparent;
-		border-bottom: 30px solid #fff;
+		border-bottom: 30px solid #fff;		
 		position: absolute;
 		top: 0px;
 		right: -14px;
+	}
+}
+.amway-suggest__item{
+	.plp-item-label{
+		&.limit-stock{
+			margin-left:10px;
+		}
 	}
 }
 .test{
@@ -10443,6 +10683,7 @@ select.form-control {
 		position: absolute;
 		top: 40px;
 		left: 0;
+		width:300px;
 		z-index: 1000!important;
 		li{
 			line-height: 50px;
@@ -10455,8 +10696,14 @@ select.form-control {
 			}
 		}
 		.dropdown-menu-bottom{
-			padding: 10px 0 10px 20px;
+			padding: 10px 20px 10px 20px;
 			border-top: 1px solid #dadada;
+			a{
+				float: right;
+				position: relative;
+				top: 12px;
+				left:-10px;
+			}
 		}
 	}
 }
@@ -10480,8 +10727,872 @@ select.form-control {
 		color: @blue_2;
 	}
 }
+#shopping-list-content{
+	.ditto-action-panel{
+		padding-left:12px;
+	}
+}
+.pdp-cart-popup__content{
+	max-height:1000px;
+}
+#contract-renewal{
+	.contract-renewal-sign{
+		text-transform:initial;
+		font-weight: 100;
+		a{
+			padding-left:5px;
+		}
+	}
+	.amway-theme{
+		table{
+			tbody{
+				td{
+					vertical-align: middle;
+				}
+			}
+		}
+	}
+}
+#contracts{
+	.billing-shipping{
+		.accordion-billing-shipping{
+			.panel-title{
+				div{
+					span{
+						font-size:20px;
+					}
+				}
+			}
+		}
+	}
+	.performance-box__tool-icon{
+		margin-top:0;
+	}
+	.bonus-payment__description{
+		width:80%;
+		padding:15px 0;
+	}
+	.product-availability{
+		&>span{
+			padding-left:0;
+		}
+	}
+	#paymentInformationBody{
+		margin-bottom:40px;
+	}
+	.new-table-block-wrapper{
+		padding-top:0;
+	}
+	.amway-theme{
+		.ditto-schedule-table-content{
+			.ditto-schedule-table{
+				thead{
+					.ditto-field-name{
+						width:50%;
+					}
+					tr{
+						th{
+							.ditto-header-button{
+								cursor:default;
+								&.pointer{
+									cursor: pointer;
+								}
+							}
+						}
+					}
+				}
+				tbody{
+					tr{
+						td{
+							span.divider{
+								color: #88888b;
+								padding: 0 5px;
+							}
+						}
+					}
+				}
+			}
+		}
+		.ditto-nav-tabs-wrap{
+			margin-bottom:2em;
+		}
+	}
+	.show-more-orders{
+		text-transform: initial;
+	}
+	.billing-shipping{
+		.accordion-billing-shipping{
+			padding:40px 0;
+			.product-availability{
+				.text{
+					font-size:1.25em;
+				}
+			}
+		}
+	}
+}
+.plp-add-to-ditto{
+	position: relative;
+	cursor:pointer;
+	&:hover{
+		color:@blue_1;
+	}
+	.dropdown-menu{
+		position: absolute;
+		top: 40px;
+		left:25px;
+		z-index: 1999!important;
+		width: 300px;
+		ul{
+			max-height: 335px;
+			overflow-y: auto;
+			li{
+				line-height: 20px;
+				padding-top: 15px;
+				border-bottom: 1px solid #dadada;
+				margin: 0 15px 0 20px;
+				p{
+					margin-left: 30px;
+				}
+			}
+		}
+		.dropdown-menu-bottom {
+			padding: 10px 20px 10px 20px;
+			border-top: 1px solid #dadada;
+			a{
+				float: right;
+				position: relative;
+				top: 12px;
+				left:-10px;
+			}
+		}
+	}
+}
+select.no-uppercase-form-control{
+	text-transform: initial;
+}
+#reports-page.los-listview{
+	.list{
+		.top-bar{
+			.idx{
+				display: @block;
+				left:10px;
+			}
+			.indicator-box{
+				.indicator{
+					&.black{
+						background-color: @black;
+					}
+					&.orange{
+						background-color: #C25413;
+					}
+					&.blue{
+						background-color: @blue_2;
+					}
+				}
+				.amw-at-ibo-inactive-symbol{
+					color: @gray_6;
+					margin-left:10px;
+					text-transform: uppercase;
+				}
+				.icon-Icon-Inactive-transparent{
+					width: 20px;
+					height: 20px;
+					line-height: 20px;
+					border-radius: 4px;
+					font-size: 1.2em;
+					background-color: transparent;
+					color: #bbb;
+					font-family: 'AmwayIcons' !important;
+					&:before{
+						content: "\EA7C";
+					}
+				}
+			}
+		}
+		li{
+			margin:26px 0 40px;
+			.icon-arrow-dropdown{
+				padding: 0 8px;
+				font-size: .7em;
+				cursor: pointer;
+				transition: -webkit-transform .5s ease;
+				transition: transform .5s ease;
+				transition: transform .5s ease,-webkit-transform .5s ease;
+			}
+		}
+	}
+	.amw-page-los-container{
+		.amway-theme{
+			margin-top:40px;
+		}
+		.amw-toggle-downlines {
+			padding: 35px 0 5px;
+			text-align: right;
+			font-size: 16px;
+			.amw-toggle-downlines-button{
+				display: inline-block;
+				color: #0075a4;
+				font-weight: 700;
+				cursor: pointer;
+				span{
+					&:first-child{
+						.icon-minus{
+							&:before{
+								content: "\ea78"!important;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	.action-list li{
+		margin: 0;
+		border: none;
+		border-bottom: 1px solid #e3e3e3;
+		cursor: pointer;
+		font-size: 16px;
+		padding: 12px 10px 12px 35px;
+		position: relative;
+		font-weight: normal;
+	}
+}
+.amway-theme{
+	.ditto-schedule-table-content{
+		&.mob-btn-table-content{
+			.ditto-panel-element{
+				.amw-checkbox-overlay{
+					top:60px;
+				}
+				.amw-label-checkbox-text{
+					display: @none;
+				}
+			}
+		}
+	}
+}
+.new-shopping-cart-item-list{
+	margin-top:-68px;
+}
+.ditto-site{
+	.amway-theme{
+		.create-ditto-schedule-form{
+			.new-ditto-search-contacts{
+				.new-ditto-link-wrap{
+
+				}
+			}
+		}
+	}
+}
+.amway-theme{
+	.create-ditto-schedule-form{
+		.new-ditto-search-contacts{
+			.new-ditto-link-wrap{
+				border-left: 1px solid @gray_8;
+				display: @inlineBlock;
+			}
+		}
+	}
+}
+//1120 modify checkout-1 width style to col-xs style
+.shipping-delivery{
+	.col-panel{
+		.form-group{
+			label {
+				margin-top: 10px;
+			}
+			.shipping-delivery-options-container{
+				margin-left:0;
+				margin-top:0;
+			}
+		}
+	}
+}
+.best-sellers-quick-view{
+	font-size:16px;
+}
+
+.shopping-list{
+	.amway-theme{
+		.ditto-schedule-table-content{
+			.ditto-schedule-table{
+				thead{
+					.ditto-field-name{
+						width:50%;
+					}
+				}
+			}
+		}
+		@media(max-width:768px){
+			.create-new-shopping-list-container{
+				.create-shopping-list-form{
+					.new-ditto-search-contacts{
+						.new-ditto-link-wrap{
+							display: @inlineBlock;
+							&:nth-child(2){
+								border-left: 1px solid #dadada;
+								margin-left: 10px;
+								position: relative;
+								top: -2px;
+								.link-text{
+									padding-left:10px!important;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+.create-a-receipt-2{
+	.search-wrap{
+		margin-left:6px;
+	}
+}
+.search-no-result{
+	.amway-suggest__item-container{
+		.amway-suggest__item-link {
+			padding: 5px 0 40px 0;
+		}
+	}
+	.plp-add-to-shopping-list{
+		.dropdown-menu{
+			bottom:0;
+			font-weight: 100;
+			top:inherit;
+			@media(max-width:768px){
+				left: -6px!important;
+			}
+			@media(max-width:380px){
+				left: -8px!important;
+				width:280px;
+			}
+			.dropdown-menu-bottom{
+				@media(max-width:380px){
+					padding:10px;
+					a{
+						top: 16px;
+						left: -28px;
+					}
+				}
+			}
+		}
+
+	}
+	.plp-add-to-ditto{
+		sup {
+			position: absolute;
+			top: 5px;
+			right:5px;
+			font-size:24px;
+			@media(max-width:768px){
+				right:auto;
+			}
+		}
+		.dropdown-menu{
+			bottom:0;
+			font-weight: 100;
+			top:inherit;
+			@media(max-width:768px){
+				left: -6px!important;
+			}
+			@media(max-width:380px){
+				left: -8px!important;
+				width:280px;
+			}
+			.dropdown-menu-bottom{
+				@media(max-width:380px){
+					padding:10px;
+				}
+			}
+		}
+	}
+	.product-list__item-link-ditto {
+		display: block;
+		background: url(../images/ditto_2.svg) 20px no-repeat;
+		position: relative;
+		background-size: auto 100%;
+		padding-left: 15%;
+		height:20px;
+		padding-right: 0;
+		&:hover{
+			background: url(../images/ditto.svg) 20px no-repeat;
+		}
+		@media(max-width:768px){
+			background: url(../images/ditto_2.svg) 1px no-repeat;
+			padding-left: 32px;
+			margin-bottom: 15px;
+			&:hover{
+				background: url(../images/ditto.svg) 1px no-repeat;
+			}
+		}
+	}
+}
+.termsAndConditions-icon{
+	.icon{
+		background: url(../images/T&C.png) 12px no-repeat;
+		position: relative;
+		top: -10px;
+		&:hover{
+			background: url(../images/T&C-hover.png) 12px no-repeat;
+		}
+	}
+}
+.pointManagement-icon{
+	.icon{
+		background: url(../images/point-management.png) 12px no-repeat;
+		position: relative;
+		top: -10px;
+		left:-3px;
+		&:hover{
+			background: url(../images/point-management-hover.png) 12px no-repeat;
+		}
+	}
+}
+.coupon-management-icon{
+	.icon{
+		background: url(../images/coupon-management.png) 12px no-repeat;
+		position: relative;
+		top: -10px;
+		&:hover{
+			background: url(../images/coupon-management-hover.png) 12px no-repeat;
+		}
+	}
+}
+.ditto-site{
+	.ditto-field-pv-bv,.ditto-field-price{
+		button{
+			cursor: inherit;
+		}
+	}
+}
+
+//modify select dropdown
+.new-select{
+	select{
+		width: 200px!important;
+		margin-right: 8px!important;
+		min-width: 0;
+		@media(max-width:768px){
+			width:100%!important;
+		}
+		&.register-absolute-width{
+			width:283px!important;
+			@media(max-width: 768px){
+				width:100%!important;
+			}
+		}
+	}
+	button{
+		vertical-align: inherit!important;
+	}
+}
+select.form-control{
+	&.create-a-receipt-select{
+		width:116px;
+	}
+	&.city-select{
+		width:100%;
+	}
+	&.width-auto{
+		width:auto;
+	}
+	&.width125{
+		width:125px;
+	}
+	&.width167{
+		width:167px;
+	}
+	&.width100{
+		width:100px;
+	}
+	&.width125{
+		width:125px;
+	}
+	&.width185{
+		width:185px!important;
+		min-width:0;
+		@media(max-width: 768px){
+			width:100%!important;
+		}
+	}
+	&.width280{
+		width:280px!important;
+	}
+}
+.order-history-container{
+	.order-history-search-wrapper{
+		.form-wrapper{
+			select.form-control{
+				&.width185{
+					margin-right:10px;
+				}
+			}
+		}
+	}
+}
+.new-btn{
+	vertical-align: inherit!important;
+}
+.action-reports-birthday-date-select{
+	select{
+		span{
+			position: absolute;
+			right:12px;
+		}
+	}
+}
+@media (max-width: 768px){
+	select.form-control {
+		padding:6px 12px;
+		line-height: 20px;
+	}
+}
+
+.amway-theme{
+	.prw-nav{
+		.prw-nav-container{
+			position: relative;
+			top: 8px;
+			.jump-dropdown-container{
+				top:0;
+				select.form-control{
+					background: white url(../images/selector-arrow.png) no-repeat scroll right center;
+					background-size: 18px auto;
+					width: auto;
+				}
+			}
+		}
+	}
+}
+.amway-theme{
+	.outer-border-bottom{
+		.tabs-toggles{
+			.tab-toggle-wrap.active{
+				.tab-toggle{
+					border-bottom:1px solid #fff;
+					margin-bottom:-1px;
+				}
+			}
+		}
+	}
+}
+.did-you-mean{
+	.wrap{
+		padding:0;
+	}
+}
+.business-information{
+	#business-page-accordion{
+		.businees-action-btn{
+			border:2px solid @blue_1;
+		}
+	}
+}
+.apply-coupon-label{
+	padding-top:20px;
+}
+
+.promotion-applied{
+	display: @none;
+	.cart-totals-left{
+		padding-left:1em;
+	}
+	.cart-totals-right{
+		padding-right:24px;
+		text-align: right;
+		color:@blue_2;
+		cursor:pointer;
+		&:hover{
+			color:@blue_1;
+		}
+	}
+	.promotion-applied-alert{
+		color: #20883e;
+		text-align: left;
+		margin-right: 0;
+		padding: 10px;
+		line-height: 12px;
+		.check{
+			position: relative;
+			left: -4px;
+			top: -2px;
+		}
+	}
+}
+.coupon-apply-btn{
+	.select-coupon{
+		padding: 6px;
+		width: 56%;
+	}
+}
+.coupon-applied{
+	display: @none;
+	.coupon-applied-text{
+		line-height: 24px;
+		//background-color: @gray_9;
+		padding:10px 10px 10px 0;
+		.cart-totals-left{
+			padding-left:1em;
+		}
+		.cart-totals-right{
+			padding-right:15px;
+			text-align: right;
+			color:@blue_2;
+			cursor:pointer;
+			&:hover{
+				color:@blue_1;
+			}
+		}
+	}
+	.coupon-applied-alert{
+		color: #20883e;
+		text-align: left;
+		margin-right: 0;
+		padding: 10px;
+		line-height: 12px;
+		.check{
+			position: relative;
+			left: -4px;
+			top: -2px;
+		}
+	}
+}
+#select-coupon{
+	.cart-popup__content{
+		max-height: inherit;
+		overflow-y: hidden;
+	}
+	.cart-popup__item-info{
+		padding:40px 20px 0 20px;
+		min-height:430px;
+		.form-wrapper{
+			form{
+				input{
+					width:62%;
+					margin-right:10px;
+					height: 40px;
+					border: 1px solid #dadada;
+					padding: 0 12px;
+				}
+				button{
+					border:2px solid @blue_1;
+					text-transform: uppercase;
+					&:hover{
+						border:2px solid @blue_1;
+						color:@blue_1;
+						background-color: @white;
+					}
+				}
+			}
+		}
+		.announcement{
+			.announcement-container{
+				.popup-coupon-text {
+					color: #002f5f;
+					text-transform: uppercase;
+					padding-top: 20px;
+				}
+				.amway-theme{
+					.ditto-schedule-table-content{
+						.table-block-wrapper{
+							position: relative;
+							padding-top: 0;
+							overflow-y: auto;
+							overflow-x: hidden;
+							height: 300px;
+							margin-top: 20px;
+							.ditto-schedule-table{
+								thead{
+									.ditto-field-name{
+										padding:0 10px;
+									}
+									tr{
+										th{
+											&:nth-child(3){
+												text-align: right;
+												button{
+													text-align: right;
+												}
+											}
+										}
+									}
+								}
+								tbody{
+									tr{
+										height: 90px;
+										td{
+											&:nth-child(1){
+												position: absolute;
+												input.amw-global-radio{
+													&:checked{
+														&+.amw-radio-overlay{
+															background-color: @blue_2;
+															&:before{
+																width: 6px;
+																height: 6px;
+																top: 5px;
+																left: 5px;
+																background-color:@white;
+															}
+														}
+													}
+												}
+												.amw-radio-overlay{
+													left:-4px;
+												}
+											}
+											&:nth-child(3){
+												text-align: right;
+											}
+											&:nth-child(4){
+												padding-left: 0;
+												left: 38px;
+												position: absolute;
+												width: 100%;
+												padding-top: 48px;
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	.cart-popup__item-link{
+		text-align: right;
+		z-index: 999;
+		#coupon-apply{
+			padding:10px 20px!important;
+			width: 99px;
+		}
+	}
+}
+.account-orderhistory-pagination{
+	.text-center{
+		#show-more{
+			span{
+				text-transform: capitalize;;
+			}
+		}
+	}
+}
+.applicant-row{
+	display: @none;
+}
+.amway-theme{
+	input[type=text]{
+		height:40px;
+	}
+}
 @media(max-width: 768px){
-	#homepage{
+	//.cboxAddToYourDitto,.cboxCreateNewDitto,#add-to-cart-box{
+	//	left:0!important;
+	//}
+	.coupon-applied{
+		.cart-totals-right{
+			padding-right:0;
+		}
+		.coupon-applied-text{
+			margin:0 -2px;
+			.cart-totals-left{
+				padding-left:2px;
+			}
+		}
+		.coupon-applied-alert{
+			padding-left:5px;
+		}
+	}
+	.promotion-applied{
+		.cart-totals-left{
+			padding-left:0;
+		}
+		.promotion-applied-alert{
+			padding-left:5px;
+		}
+	}
+	#select-coupon{
+		&.cbox{
+			.cart-popup__item-link{
+				z-index: 999;
+			}
+			.cart-popup__dialog{
+				width:100%;
+				margin-left:0;
+				.cart-popup__item-info{
+					height:272px;
+					min-height:366px;
+					.form-wrapper{
+						form{
+							input{
+								width: 70%;
+								margin-right: 0;
+								font-size: 16px!important;
+								padding: 0 10px;
+								line-height:inherit;
+								font-weight: 100;
+							}
+							button{
+								position: relative;
+								top:2px;
+								width:28%;
+							}
+						}
+					}
+					.announcement{
+						.announcement-container{
+							.amway-theme{
+								.ditto-schedule-table-content{
+									.table-block-wrapper{
+										height: 235px;
+										.ditto-schedule-table{
+											tbody{
+												tr{
+													height:110px;
+													td{
+														&:nth-child(1){
+															position: absolute;
+														}
+														&:nth-child(3){
+															padding-left:10px;
+															padding-right:10px;
+														}
+														&:nth-child(4){
+															padding-top:66px;
+															width: 98%;
+															line-height: 16px;
+															left:32px;
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	#contracts{
+		.performance-box__tool-icon{
+			position: relative;
+			top:6px;
+			margin-right:5px;
+		}
+		#paymentInformationBody{
+			padding:0 25px;
+		}
+	}
+	.homepage{
 		.owl-theme{
 			.owl-controls{
 				.owl-nav{
@@ -10495,7 +11606,249 @@ select.form-control {
 			}
 		}
 	}
+	#shopping-list-content{
+		.ditto-action-panel{
+			padding-left:0;
+		}
+	}
+	.plp-add-to-ditto {
+		.dropdown-menu {
+			top:68px;
+			left:155px!important;
+		}
+	}
+	.plp-add-to-shopping-list{
+		.dropdown-menu{
+			left:155px;
+		}
+	}
+
+	//jira 179
+	.amway-theme{
+		.ditto-schedule-table-content{
+			&.mob-btn-table-content{
+				.ditto-panel-element{
+					.amw-checkbox-wrap{
+						background-color:@blue_1;
+						height: 40px;
+						line-height: 38px;
+						width: 150px;
+						border:2px solid @blue_1;
+						text-align: center;
+						&:hover{
+							background-color: @white;
+							.checkbox-text{
+								color:@blue_1;
+							}
+						}
+					}
+					.amw-global-checkbox{
+						width:0;
+					}
+					.amw-checkbox-overlay{
+						top:0;
+						appearance: @none;
+						-webkit-appearance: @none;
+						-moz-appearance: @none;
+						background-color: transparent;
+						border: none;
+						&:before{
+							content:'';
+						}
+					}
+					.amw-label-checkbox-text{
+						display: @inlineBlock;
+						margin: 0;
+						top: -8px;
+						position: relative;
+						.checkbox-text{
+							color:@white;
+							font-weight: 600;
+						}
+					}
+				}
+
+			}
+
+		}
+	}
+
+	#reports-page.los-listview{
+		.list {
+			.top-bar {
+				padding-left:27px;
+				.indicator-box{
+					.text{
+						display: @none;
+					}
+					.international{
+						display: @none;
+					}
+					.amw-at-ibo-inactive-symbol{
+						display: @none;
+					}
+				}
+			}
+		}
+		.amway-theme{
+			.ditto-nav-tabs-wrap{
+				a.tab-toggle{
+					padding:10px 15px!important;
+				}
+			}
+		}
+	}
+
+	.shopping-list-detail-shop-wrapper{
+		&.shopping-cart-quick-shop-wrapper {
+			.quick-shop-container.new-quick-shop-container {
+				#quickShopAccordion {
+					.panel {
+						.panel-heading {
+							.panel-title {
+								div {
+									.icon-minus {
+										font-size:0.875em;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	.new-shopping-cart-item-list{
+		margin-top:0;
+	}
+
+	//modify mob tab
+	.outer-border-bottom{
+		border-bottom: 1px solid @gray_7;
+		margin-left: -24px;
+		margin-right: -24px;
+		.tabs-toggles{
+			margin-left: 24px;
+			margin-right: 24px;
+			margin-bottom: -1px;
+			.tab-toggle-wrap{
+				margin-bottom:-1px!important;
+			}
+		}
+	}
+	.pvbv-transfer{
+		.outer-border-bottom{
+			margin-left: -40px;
+		}
+		.select-ditto-month{
+			width: -webkit-fill-available;
+		}
+	}
+	.announcement{
+		.outer-border-bottom{
+			.tabs-toggles{
+				margin-right:0;
+			}
+		}
+	}
+	.kpi-tracking{
+		.outer-border-bottom{
+			margin-left:-20px;
+			margin-right:-20px;
+		}
+	}
+	.dashboard{
+		.business-tracking,.resource-center,.events-recognition{
+			.business-tracking__title{
+				border-bottom:none;
+			}
+			.outer-border-bottom{
+				margin-left:0;
+				margin-right:0;
+				.business-tracking__nav{
+					margin-left:15px;
+					margin-right:15px;
+					display: flex;
+					width:auto;
+					margin-bottom: -1px;
+					&>li{
+						display: inline-flex;
+						padding-top: 0;
+						margin: initial;
+						width:33%;
+						&>a{
+							padding: 8px;
+							margin-top: 0;
+							width: 100%;
+							white-space: initial;
+							@media(max-width:768px){
+								position: relative;
+								padding-top:20px;
+							}
+							@media(max-width:420px){
+								position: relative;
+								padding-top:8px;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	.dashboard{
+		.events-recognition{
+			.outer-border-bottom{
+				.business-tracking__nav{
+					&>li{
+						width:50%;
+						&>a{
+							@media(max-width:768px){
+								position: relative;
+								padding-top:20px;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	.did-you-mean{
+		.outer-border-bottom {
+			.switch-buttons-wrapper {
+				margin-left: 24px;
+				margin-bottom: -1px;
+				margin-right: 24px;
+				width: auto;
+				.wrap{
+					padding:0;
+				}
+			}
+		}
+	}
+	.go-block{
+		.jump-to-wrapper{
+			position: relative;
+			left:-80px;
+		}
+	}
+	.plp{
+		.pagination-bar{
+			border-top:0;
+			padding-top:0;
+			.pagination-toolbar{
+				padding-top:0;
+				.pagination-wrapper.print-hide{
+					border-bottom:1px solid @gray_8;
+				}
+			}
+			.pagination-bar-results{
+				margin-bottom:0;
+			}
+		}
+	}
 }
+
 	@media (max-width:660px) {
 		.cart-popup__content {
 			max-height: 420px;
@@ -10508,6 +11861,39 @@ select.form-control {
 			font-size: 24px;
 			padding: 0;
 			line-height: 1.2;
+		}
+		.plp-add-to-ditto {
+			.dropdown-menu {
+				top:68px;
+				left:25px!important;
+			}
+		}
+		.plp-add-to-shopping-list{
+			.dropdown-menu{
+				left:0;
+			}
+		}
+		.product__list--item{
+			&:last-child{
+				.plp-add-to-shopping-list{
+					.dropdown-menu{
+						top:auto;
+						bottom:0;
+					}
+				}
+				.plp-add-to-ditto {
+					.dropdown-menu {
+						top:auto;
+						bottom:-38px;
+					}
+				}
+			}
+		}
+		.go-block{
+			.jump-to-wrapper{
+				position: relative;
+				left:0;
+			}
 		}
 	}
 	@media (max-width: 640px) {
@@ -10556,7 +11942,24 @@ select.form-control {
 		}
 
 	}
+@media(max-width:1380px){
+	.new-product__listing {
+		.product-list__item-link-ditto {
+			padding-left:45px;
+			background: url(../images/ditto_2.svg) 20px no-repeat;
+			&:hover{
+				background: url(../images/ditto.svg) 20px no-repeat;
+			}
+			}
+		}
+	.plp-add-to-ditto{
+		.dropdown-menu{
+			left:-10px;
+		}
+	}
+}
 	@import 'bonus.less';
 	@import 'sprint3.less';
 	@import 'sprint4.less';
 	@import 'leon.less';
+

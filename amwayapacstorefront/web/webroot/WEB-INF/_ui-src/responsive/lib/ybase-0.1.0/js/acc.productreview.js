@@ -100,11 +100,35 @@ ACC.productreview = {
 	        event.preventDefault();
 	        $(".review, .overlay").show();
 	    });
+	    
+	    if(reviewArray){
+	    	ACC.productreview.yellowGraph(reviewArray);
+	    }
 		
 	},
 
 	openPrompt: function(){
 	    $(".review").hide();
 	    $(".prompt").slideDown();
-	}
+	},
+	
+	maxValue: function(arra){
+        var max = 0;
+        for (var i in arra){
+            if ( arra[i] > max ) {
+                max = arra[i];
+            }
+        }
+        return max;
+    },
+    
+    yellowGraph: function(arra) {
+    	console.log(arra);
+        var max = ACC.productreview.maxValue(arra);
+        $(".comuserinfo dl").each(function(index, element){
+            var percent = arra[(5 - index) + 'star']/max*100;
+            $(element).find("div").css('width', percent + "%" );
+            $(element).find("span").html(arra[(5 - index) + 'star']);
+        });
+    }
 };
