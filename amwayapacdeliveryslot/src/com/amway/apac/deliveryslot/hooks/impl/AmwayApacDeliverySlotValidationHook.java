@@ -27,8 +27,8 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.amway.apac.core.enums.OrderType;
-import com.amway.apac.core.orders.AmwayApacCommerceCartModificationStatus;
 import com.amway.apac.deliveryslot.model.AmwayDeliverySlotAvailabilityModel;
+import com.amway.apac.deliveryslot.orders.AmwayApacCommerceCartModificationStatus;
 import com.amway.apac.deliveryslot.services.AmwayApacDeliveryService;
 
 
