@@ -122,7 +122,8 @@ public class AuthorizationController extends AbstractLoginPageController
 		final CustomerModel customer = (CustomerModel) userService.getCurrentUser();
 		if (!userService.isAnonymousUser(customer))
 		{
-			return REDIRECT_PREFIX + ROOT;
+			return REDIRECT_PREFIX + ROOT + "?state=" + request.getParameter("state") + "&nonce=" + request.getParameter("nonce")
+					+ "&client_id=" + request.getParameter("client_id") + "&redirect_uri=" + request.getParameter("redirect_uri");
 		}
 
 		model.addAttribute(IDPLogin.RESPONSE_TYPE, request.getParameter(IDPLogin.RESPONSE_TYPE));
