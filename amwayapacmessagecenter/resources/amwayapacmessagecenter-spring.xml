@@ -34,48 +34,33 @@
 	your web/webroot/WEB-INF/<extname>-web-spring.xml.
 	-->
 	
-	<!--  Example how to override a manager -->
-	<!--
-	<bean id="core.productManager"   class="com.amway.apac.message.center.jalo.AmwayapacmessagecenterProductManager" 	init-method="init"	destroy-method="destroy" />
-	-->
-	
-	
- 	<!--  Example how to configure the class to use for jalo session creation -->
-	<!--
-	<bean id="jalosession"   class="de.hybris.platform.jalo.JaloSessionFactory">
-		<property name="targetClassName" value="com.amway.apac.message.center.jalo.AmwayapacmessagecenterJaloSession"/>
+	<alias name="defaultAmwayApacNotificationService" alias="amwayApacNotificationService"/>
+	<bean id="defaultAmwayApacNotificationService" class="com.amway.apac.message.center.notification.services.impl.DefaultAmwayApacNotificationService">
+		<property name="amwayApacNotificationDao" ref="amwayApacNotificationDao"/>
+		<property name="amwayNotificationUserActionDao" ref="amwayNotificationUserActionDao"/>
+		<property name="amwayNotificationDao" ref="amwayNotificationDao"/>
+		<property name="baseSiteService" ref="baseSiteService"/>
+		<property name="modelService" ref="modelService"/>
+		<property name="sessionService" ref="sessionService"/>
 	</bean>
-	-->
-
 	
-	<!--  Example how to override an item  -->
-	<!-- 
-	<bean id="de.hybris.platform.jalo.product.Product" class="com.amway.apac.message.center.jalo.AmwayapacmessagecenterProduct" scope="prototype" />		
- 	-->
-
-	<!--  
-	 Example how to register and use an AOP aspect 
-     Also see http://static.springframework.org/spring/docs/2.5.x/reference/aop.html	
-     -->
+	<alias name="defaultAmwayNotificationUserActionDao" alias="amwayNotificationUserActionDao"/>
+	<bean id="defaultAmwayNotificationUserActionDao"
+	      class="de.hybris.platform.servicelayer.internal.dao.DefaultGenericDao">
+		 <constructor-arg name="typecode" value="AmwayAccount"/>
+	</bean>
 	
-	<!-- 
-	<bean id="amwayapacmessagecenterProfBean" class="com.amway.apac.message.center.aop.AmwayapacmessagecenterProfilingAspect"/>
-	<aop:config proxy-target-class="true">
-  		<aop:aspect id="amwayapacmessagecenterProfAspect" ref="amwayapacmessagecenterProfBean" >
-    	  <aop:pointcut id="profiledMethods" 
-	      	expression="execution(* getModificationTime(..))" />  	            
-	   		<aop:around pointcut-ref="profiledMethods" method="profile" />
-  		</aop:aspect>
-	</aop:config>
-	 -->
-
+	<alias name="defaultAmwayNotificationDao" alias="amwayNotificationDao"/>
+	<bean id="defaultAmwayNotificationDao"
+	      class="de.hybris.platform.servicelayer.internal.dao.DefaultGenericDao">
+		 <constructor-arg name="typecode" value="AmwayAccount"/>
+	</bean>
 	
-	<!-- some other examples of a pointcut that matches everything:
-
-    	  <aop:pointcut id="profiledMethods" 
-	      	expression="bean(de.hybris.platform.jalo.user.Customer) &amp;&amp; 
-	      	            !execution(* getPK(..))" />  	            
-	       <aop:pointcut id="profiledMethods" expression="execution(* *(..))" />	
-	  -->
+	<alias name="defaultAmwayApacNotificationDao" alias="amwayApacNotificationDao"/>
+	<bean id="defaultAmwayApacNotificationDao" class="com.amway.apac.message.center.notification.daos.impl.DefaultAmwayApacNotificationDao">
+		<property name="pagedFlexibleSearchService" ref="pagedFlexibleSearchService" />
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+		<property name="amwayAccountClassificationRankMapping" ref="amwayAccountClassificationRankMapping"/>
+	</bean>
 	
 </beans>
