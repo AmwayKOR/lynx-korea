@@ -13,8 +13,20 @@ ACC.shoppinglists = {
     	"bindShoppingListAddMultiForm",
     	"bindShoppingListUpdateCartPopup",
     	"bindShoppingListSelectAllCheckbox",
-    	"bindOnApplyClick"
+    	"bindOnApplyClick",
+    	"bindAddToCartPopup"
         ],
+        
+        bindAddToCartPopup : function() {
+			 $(".cart-detail__addto.dropdown-toggle").click(function () {
+           if($(".cart-detail__dropdown-menu.dropdown-menu").css('display')=='none'){
+               $(".cart-detail__dropdown-menu.dropdown-menu").show();
+           }else{
+               $(".cart-detail__dropdown-menu.dropdown-menu").hide();
+           }
+
+       })
+},
         
         bindSortShoppingListItems : function() {
     		
