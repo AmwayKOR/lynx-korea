@@ -27,7 +27,7 @@ import com.amway.lynxresourcecentre.model.media.AmwayAssetModel;
  * @author Ashish Sabal
  *
  */
-public interface AmwayApacAssetDao
+public interface AmwayAssetDao
 {
 	SearchPageData<AmwayAssetModel> getAssets(final String componentId, final PageableData pageableData,
 			final CatalogVersionModel catalogVersion, final String year);

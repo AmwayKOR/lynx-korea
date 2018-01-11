@@ -36,7 +36,7 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.amway.apac.resourcecenter.daos.AmwayApacAssetDao;
+import com.amway.apac.resourcecenter.daos.AmwayAssetDao;
 import com.amway.apac.resourcecenter.enums.AmwayApacAssetsSort;
 import com.amway.lynxresourcecentre.model.media.AmwayAssetAlbumModel;
 import com.amway.lynxresourcecentre.model.media.AmwayAssetModel;
@@ -48,7 +48,7 @@ import com.amway.lynxresourcecentre.model.media.AmwayAssetModel;
  * @author Ashish Sabal
  *
  */
-public class DefaultAmwayApacAssetDao implements AmwayApacAssetDao
+public class DefaultAmwayAssetDao implements AmwayAssetDao
 {
 	private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ssz";
 	private static final String CATALOG_VERSION_PARAM = "catalogVersion";

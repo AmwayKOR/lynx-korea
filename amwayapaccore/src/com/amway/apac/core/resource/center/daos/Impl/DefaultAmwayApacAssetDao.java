@@ -13,8 +13,8 @@ import org.apache.commons.lang.StringUtils;
 
 import com.amway.apac.core.account.service.AmwayApacAccountClassificationService;
 import com.amway.apac.core.constants.AmwayapacCoreConstants;
-import com.amway.apac.core.model.AmwayAccountClassificationModel;
-import com.amway.apac.resourcecenter.daos.Impl.DefaultAmwayApacAssetDao;
+import com.amway.apac.core.enums.AccountClassificationEnum;
+import com.amway.apac.resourcecenter.daos.Impl.DefaultAmwayAssetDao;
 import com.amway.apac.resourcecenter.enums.AmwayApacAssetsSort;
 
 
@@ -22,11 +22,12 @@ import com.amway.apac.resourcecenter.enums.AmwayApacAssetsSort;
  * @author Ashish Sabal
  *
  */
-public class ExtendedAmwayApacAssetDao extends DefaultAmwayApacAssetDao
+public class DefaultAmwayApacAssetDao extends DefaultAmwayAssetDao
 {
 	private static final String RANK = "rank";
 
 	private AmwayApacAccountClassificationService amwayApacAccountClassificationService;
+	private Map<AccountClassificationEnum, Integer> amwayAccountClassificationRankMapping;
 
 	@Override
 	protected List<SortQueryData> buildSearchQuery(final Map<String, Object> queryParams, final String year, final String typQuery)
@@ -59,18 +60,9 @@ public class ExtendedAmwayApacAssetDao extends DefaultAmwayApacAssetDao
 				.getAttribute(AmwayapacCoreConstants.ACCOUNT_CLASSIFICATION_CODE);
 		if (StringUtils.isNotEmpty(accountClassficationCode))
 		{
-			final AmwayAccountClassificationModel amwayAccountClassification = getAmwayApacAccountClassificationService()
-					.getAmwayAccountClassificationByCode(accountClassficationCode);
-
-			if (null != amwayAccountClassification)
-			{
-				//				queryParams.put(RANK, amwayAccountClassification.getRank());
-				rankQuery = "AND (({a.classification} IN ({{SELECT {ace.pk} FROM {AccountClassificationEnum as ace JOIN AmwayAccountClassification as aac ON {ace.pk}={aac.classification}} WHERE {aac.rank}<=?rank}})) OR ({a.classification} IS NULL)) ";
-			}
-			else
-			{
-				rankQuery = "AND {a.accountClassification} IS NULL ";
-			}
+			queryParams.put(RANK,
+					getAmwayAccountClassificationRankMapping().get(AccountClassificationEnum.valueOf(accountClassficationCode)));
+			rankQuery = "AND ({a.rank}<=?rank OR ({a.classification} IS NULL)) ";
 		}
 		else
 		{
@@ -96,5 +88,23 @@ public class ExtendedAmwayApacAssetDao extends DefaultAmwayApacAssetDao
 			final AmwayApacAccountClassificationService amwayApacAccountClassificationService)
 	{
 		this.amwayApacAccountClassificationService = amwayApacAccountClassificationService;
+	}
+
+	/**
+	 * @return the amwayAccountClassificationRankMapping
+	 */
+	public Map<AccountClassificationEnum, Integer> getAmwayAccountClassificationRankMapping()
+	{
+		return amwayAccountClassificationRankMapping;
+	}
+
+	/**
+	 * @param amwayAccountClassificationRankMapping
+	 *           the amwayAccountClassificationRankMapping to set
+	 */
+	public void setAmwayAccountClassificationRankMapping(
+			final Map<AccountClassificationEnum, Integer> amwayAccountClassificationRankMapping)
+	{
+		this.amwayAccountClassificationRankMapping = amwayAccountClassificationRankMapping;
 	}
 }

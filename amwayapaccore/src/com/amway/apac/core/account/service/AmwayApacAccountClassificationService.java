@@ -1,7 +1,6 @@
 package com.amway.apac.core.account.service;
 
 import com.amway.apac.core.enums.AccountClassificationEnum;
-import com.amway.apac.core.model.AmwayAccountClassificationModel;
 
 
 /**
@@ -19,10 +18,4 @@ public interface AmwayApacAccountClassificationService
 	 * @return true if session user has higher classification than reference.
 	 */
 	boolean checkUserClassification(final AccountClassificationEnum referenceClassification);
-
-	/**
-	 * @param accountClassficationCode
-	 * @return
-	 */
-	AmwayAccountClassificationModel getAmwayAccountClassificationByCode(String accountClassficationCode);
 }

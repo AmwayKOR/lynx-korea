@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Required;
 import com.amway.apac.core.account.service.AmwayApacAccountClassificationService;
 import com.amway.apac.core.constants.AmwayapacCoreConstants;
 import com.amway.apac.core.enums.AccountClassificationEnum;
-import com.amway.apac.core.model.AmwayAccountClassificationModel;
 
 
 /**
@@ -75,20 +74,4 @@ public class DefaultAmwayApacAccountClassificationService implements AmwayApacAc
 	{
 		this.amwayApacAccountClassificationComparator = amwayApacAccountClassificationComparator;
 	}
-
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see
-	 * com.amway.apac.core.account.service.AmwayApacAccountClassificationService#getAmwayAccountClassificationByCode(java
-	 * .lang.String)
-	 */
-	@Override
-	public AmwayAccountClassificationModel getAmwayAccountClassificationByCode(final String accountClassficationCode)
-	{
-		// YTODO Auto-generated method stub
-		return null;
-	}
-
-
 }

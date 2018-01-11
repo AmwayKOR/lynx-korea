@@ -321,6 +321,17 @@
         <property name="interceptor" ref="amwayApacPaymentOptionInterceptor" />
         <property name="typeCode" value="AmwayDeliverySlotConfig" />
     </bean>
+    
+    <alias alias="amwayApacAssetInterceptor" name="defaultAmwayApacAssetInterceptor"/>
+    <bean id="defaultAmwayApacAssetInterceptor" class="com.amway.apac.core.resource.center.interceptors.AmwayApacAssetInterceptor">
+    	<property name="modelService" ref="modelService"/>
+    	<property name="amwayAccountClassificationRankMapping" ref="amwayAccountClassificationRankMapping"/>
+    </bean>
+
+    <bean id="defaultAmwayApacAssetInterceptorMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+        <property name="interceptor" ref="amwayApacAssetInterceptor" />
+        <property name="typeCode" value="AbstractAmwayAsset" />
+    </bean>
 	
 	<alias name="defaultAmwayApacAccountService" alias="amwayAccountService" />
 	<bean id="defaultAmwayApacAccountService" class="com.amway.apac.core.account.service.impl.DefaultAmwayApacAccountService" parent="defaultAmwayAccountService">
@@ -346,7 +357,7 @@
 		<property name="amwayApacCountryDao" ref="amwayApacCountryDao"/>
 	</bean>
 	
-	<alias name="defaultAmwayApacAccountClassificationService" alias="defaultAmwayApacAccountClassificationService"/>
+	<alias name="defaultAmwayApacAccountClassificationService" alias="amwayApacAccountClassificationService"/>
 	<bean id="defaultAmwayApacAccountClassificationService" class="com.amway.apac.core.account.service.impl.DefaultAmwayApacAccountClassificationService">
 		<property name="amwayApacAccountClassificationComparator" ref="amwayApacAccountClassificationComparator"/>
 		<property name="sessionService" ref="sessionService"/>
@@ -399,7 +410,7 @@
 	
 	<alias name="defaultAmwayApacProductPreLaunchStrategy" alias="amwayApacProductPreLaunchStrategy"/>
     <bean id="defaultAmwayApacProductPreLaunchStrategy" class="com.amway.apac.core.product.strategies.impl.DefaultAmwayApacProductPreLaunchStrategy">
-		<property name="amwayApacAccountClassificationService" ref="defaultAmwayApacAccountClassificationService" />
+		<property name="amwayApacAccountClassificationService" ref="amwayApacAccountClassificationService" />
 		<property name="amwayApacProductService" ref="productService"/>
 		<property name="amwayAccountCommerceService" ref="amwayAccountCommerceService"/>
 		<property name="baseStoreService" ref="baseStoreService" />
@@ -411,9 +422,10 @@
 		 <constructor-arg name="typecode" value="AmwayUserPromotionCount"/>
 	</bean>
 	
-	<alias alias="amwayApacAssetDao" name="extendedAmwayApacAssetDao"/>
-	<bean id="extendedAmwayApacAssetDao"  parent="defaultAmwayApacAssetDao" class="com.amway.apac.core.resource.center.daos.Impl.ExtendedAmwayApacAssetDao">
-		<property name="amwayApacAccountClassificationService" ref="defaultAmwayApacAccountClassificationService"/>
+	<alias alias="amwayAssetDao" name="defaultAmwayApacAssetDao"/>
+	<bean id="defaultAmwayApacAssetDao"  parent="defaultAmwayAssetDao" class="com.amway.apac.core.resource.center.daos.Impl.DefaultAmwayApacAssetDao">
+		<property name="amwayApacAccountClassificationService" ref="amwayApacAccountClassificationService"/>
+		<property name="amwayAccountClassificationRankMapping" ref="amwayAccountClassificationRankMapping"/>
 	</bean>
     
 </beans>

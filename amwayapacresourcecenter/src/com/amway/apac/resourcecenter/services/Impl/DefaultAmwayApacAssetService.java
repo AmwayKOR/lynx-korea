@@ -24,7 +24,7 @@ import de.hybris.platform.servicelayer.util.ServicesUtil;
 import java.util.Collection;
 import java.util.List;
 
-import com.amway.apac.resourcecenter.daos.AmwayApacAssetDao;
+import com.amway.apac.resourcecenter.daos.AmwayAssetDao;
 import com.amway.apac.resourcecenter.services.AmwayApacAssetService;
 import com.amway.lynxresourcecentre.model.media.AmwayAssetAlbumModel;
 import com.amway.lynxresourcecentre.model.media.AmwayAssetModel;
@@ -43,14 +43,14 @@ public class DefaultAmwayApacAssetService implements AmwayApacAssetService
 
 	private CatalogService catalogService;
 	private CMSSiteService cmsSiteService;
-	private AmwayApacAssetDao amwayApacAssetDao;
+	private AmwayAssetDao amwayAssetDao;
 
 	@Override
 	public SearchPageData<AmwayAssetModel> getAssets(final String componentId, final PageableData pageableData, final String year)
 	{
 		ServicesUtil.validateParameterNotNull(componentId, ERROR_MESSAGE_NULL_COMPONENT);
 		ServicesUtil.validateParameterNotNull(pageableData, ERROR_MESSAGE_NULL_PAGEABLE_DATA);
-		return getAmwayApacAssetDao().getAssets(componentId, pageableData, getCatalogVersion(), year);
+		return getAmwayAssetDao().getAssets(componentId, pageableData, getCatalogVersion(), year);
 	}
 
 	/**
@@ -62,8 +62,7 @@ public class DefaultAmwayApacAssetService implements AmwayApacAssetService
 	{
 		ServicesUtil.validateParameterNotNull(product, "Product cannot be null");
 		ServicesUtil.validateParameterNotNull(pageableData, ERROR_MESSAGE_NULL_PAGEABLE_DATA);
-		return getAmwayApacAssetDao().getAssetsForProduct(product, pageableData, getCmsSiteService().getCurrentCatalogVersion(),
-				year);
+		return getAmwayAssetDao().getAssetsForProduct(product, pageableData, getCmsSiteService().getCurrentCatalogVersion(), year);
 	}
 
 	@Override
@@ -72,14 +71,14 @@ public class DefaultAmwayApacAssetService implements AmwayApacAssetService
 	{
 		ServicesUtil.validateParameterNotNull(componentId, ERROR_MESSAGE_NULL_COMPONENT);
 		ServicesUtil.validateParameterNotNull(pageableData, ERROR_MESSAGE_NULL_PAGEABLE_DATA);
-		return getAmwayApacAssetDao().getAssetsAlbums(componentId, pageableData, getCatalogVersion(), year);
+		return getAmwayAssetDao().getAssetsAlbums(componentId, pageableData, getCatalogVersion(), year);
 	}
 
 	@Override
 	public List<MediaContainerModel> getAssetsAlbumMedia(final String componentId)
 	{
 		ServicesUtil.validateParameterNotNull(componentId, ERROR_MESSAGE_NULL_COMPONENT);
-		return getAmwayApacAssetDao().getAssetsAlbumMedia(getCatalogVersion(), componentId);
+		return getAmwayAssetDao().getAssetsAlbumMedia(getCatalogVersion(), componentId);
 	}
 
 	protected CatalogVersionModel getCatalogVersion()
@@ -137,20 +136,20 @@ public class DefaultAmwayApacAssetService implements AmwayApacAssetService
 	}
 
 	/**
-	 * @return the amwayApacAssetDao
+	 * @return the amwayAssetDao
 	 */
-	public AmwayApacAssetDao getAmwayApacAssetDao()
+	public AmwayAssetDao getAmwayAssetDao()
 	{
-		return amwayApacAssetDao;
+		return amwayAssetDao;
 	}
 
 	/**
-	 * @param amwayApacAssetDao
-	 *           the amwayApacAssetDao to set
+	 * @param amwayAssetDao
+	 *           the amwayAssetDao to set
 	 */
-	public void setAmwayApacAssetDao(final AmwayApacAssetDao amwayApacAssetDao)
+	public void setAmwayAssetDao(final AmwayAssetDao amwayAssetDao)
 	{
-		this.amwayApacAssetDao = amwayApacAssetDao;
+		this.amwayAssetDao = amwayAssetDao;
 	}
 
 }
