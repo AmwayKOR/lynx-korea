@@ -121,6 +121,18 @@
 				<modifiers read="true" write="true" search="true" optional="true" />
 			</targetElement>
 		</relation>
+		<relation code="AmwayPOSRestrictionRelation" localized="false"
+			autocreate="true" generate="true">
+			<deployment table="amwayPOSResRel" typecode="21008" />
+			<sourceElement qualifier="restrictions" type="AmwayPOSRestriction"
+				cardinality="many">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</sourceElement>
+			<targetElement qualifier="shops" type="PointOfService"
+				cardinality="many">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</targetElement>
+		</relation>
 	</relations>
 
 	<itemtypes>
@@ -388,6 +400,20 @@
 					<attribute type="BaseStore" qualifier="store">
 						<description>Base Store</description>
 						<persistence type="property"/>
+					</attribute>
+				</attributes>
+			</itemtype>
+		</typegroup>
+		
+		<typegroup name="AmwayRestriction">
+			<itemtype code="AmwayPOSRestriction" autocreate="true"
+				generate="true" jaloclass="com.amway.apac.core.jalo.AmwayPOSRestriction"
+				extends="AbstractRestriction">
+				<description>Restriction to check for content of a particular shop.</description>
+				<attributes>
+					<attribute qualifier="description" type="java.lang.String" redeclare="true">
+						<modifiers write="false" />
+						<persistence type="dynamic" attributeHandler="amwayApacPOSDynamicDescriptionHandler" />
 					</attribute>
 				</attributes>
 			</itemtype>
