@@ -1,8 +1,5 @@
 package com.amway.apac.message.center.notification.daos.impl;
 
-import static com.amway.apac.message.center.enums.AmwayAccountGroupTagType.CLASSIFICATION;
-import static com.amway.apac.message.center.enums.AmwayAccountGroupTagType.HYBRIS_GROUP;
-import static com.amway.apac.message.center.enums.AmwayNotificationStatus.PUBLISHED;
 import static com.amway.apac.message.center.model.AmwayAccountGroupTagModel.ACTIVE;
 import static com.amway.apac.message.center.model.AmwayAccountGroupTagModel.AFFILIATE;
 import static com.amway.apac.message.center.model.AmwayAccountGroupTagModel.GROUPTYPE;
@@ -40,6 +37,8 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.amway.apac.core.enums.AccountClassificationEnum;
+import com.amway.apac.message.center.enums.AmwayAccountGroupTagType;
+import com.amway.apac.message.center.enums.AmwayNotificationStatus;
 import com.amway.apac.message.center.enums.AmwayNotificationUserActionStatus;
 import com.amway.apac.message.center.model.AmwayAccountGroupTagModel;
 import com.amway.apac.message.center.model.AmwayNotificationModel;
@@ -56,6 +55,9 @@ public class DefaultAmwayApacNotificationDao implements AmwayApacNotificationDao
 {
 	private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ssz";
 	private static final String STATUSES = "statuses";
+	private static final String PUBLISHED = "published";
+	private static final String CLASSIFICATION = "classification";
+	private static final String HYBRIS_GROUP = "hybrisGroup";
 	private static final String CURRENT_DATE = "currentDate";
 	private static final String USER = "user";
 	private static final String ERROR_MESSAGE_NULL_PAGEABLE_DATA = "pageableData must not be null";
@@ -137,6 +139,9 @@ public class DefaultAmwayApacNotificationDao implements AmwayApacNotificationDao
 		queryParams.put(STATUSES, Collections.unmodifiableList(statuses));
 		queryParams.put(CURRENT_DATE, currentDate);
 		queryParams.put(SITE, baseSite);
+		queryParams.put(CLASSIFICATION, AmwayAccountGroupTagType.CLASSIFICATION);
+		queryParams.put(HYBRIS_GROUP, AmwayAccountGroupTagType.HYBRIS_GROUP);
+		queryParams.put(PUBLISHED, AmwayNotificationStatus.PUBLISHED);
 		queryParams.put(ACTIVE, Boolean.TRUE);
 		queryParams.put(USER, customer);
 		queryParams.put(AFFILIATE, baseSite.getStores().iterator().next().getAffiliateNumber());
