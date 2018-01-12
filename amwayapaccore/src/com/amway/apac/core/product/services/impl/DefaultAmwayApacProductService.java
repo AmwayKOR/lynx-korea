@@ -35,7 +35,9 @@ import com.amway.apac.core.model.AmwayPaymentOptionModel;
 import com.amway.apac.core.model.AmwayUserPromotionCountModel;
 import com.amway.apac.core.product.daos.AmwayApacProductDao;
 import com.amway.apac.core.product.services.AmwayApacProductService;
+import com.amway.core.enums.AmwayKitProductType;
 import com.amway.core.model.AmwayAccountModel;
+import com.amway.core.model.AmwayKitProductModel;
 
 
 /**
@@ -204,6 +206,23 @@ public class DefaultAmwayApacProductService extends DefaultProductService implem
 		}
 
 		return productCodeToCount;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see
+	 * com.amway.apac.core.product.services.AmwayApacProductService#checkKitProductByType(de.hybris.platform.core.model.
+	 * product.ProductModel, com.amway.core.enums.AmwayKitProductType)
+	 */
+	@Override
+	public boolean checkKitProductByType(final ProductModel product, final AmwayKitProductType kitProductType)
+	{
+		if ((product instanceof AmwayKitProductModel) && (kitProductType.equals(((AmwayKitProductModel) product).getType())))
+		{
+			return true;
+		}
+		return false;
 	}
 
 	/**

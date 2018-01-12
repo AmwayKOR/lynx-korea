@@ -436,4 +436,16 @@
     <alias alias="amwayApacPOSRestrictionEvaluator" name="defaultAmwayApacPOSRestrictionEvaluator"/>
 	<bean id="defaultAmwayApacPOSRestrictionEvaluator" class="com.amway.apac.core.shopfinder.evaluators.AmwayApacPOSRestrictionEvaluator" scope="tenant"/>
 	
+	<alias alias="amwayApacStockService" name="defaultAmwayApacStockService" />
+	<bean id="defaultAmwayApacStockService" class="com.amway.apac.core.stock.services.Impl.DefaultAmwayApacStockService" parent="amwayStockService">
+        <property name="commerceStockService" ref="commerceStockService"/>
+    </bean>
+    
+	<alias alias="commerceStockService" name="defaultAmwayApacCommerceStockService" />
+	<bean id="defaultAmwayApacCommerceStockService" class="com.amway.apac.core.stock.services.Impl.DefaultAmwayApacCommerceStockService"
+		parent="defaultAmwayCommerceStockService">
+		<property name="amwayApacProductService" ref="productService"/>
+		<property name="amwayApacStockService" ref="defaultAmwayApacStockService" />
+	</bean>
+	
 </beans>
