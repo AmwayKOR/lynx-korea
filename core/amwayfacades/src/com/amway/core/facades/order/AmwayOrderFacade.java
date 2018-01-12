@@ -1,5 +1,7 @@
 package com.amway.core.facades.order;
 
+import com.amway.core.data.AmwayOrderSearchParameters;
+
 import com.amway.core.enums.AmwayCartType;
 
 import de.hybris.platform.commercefacades.order.OrderFacade;
@@ -49,4 +51,6 @@ public interface AmwayOrderFacade extends OrderFacade
 	SearchPageData<OrderHistoryData> getPagedOrderHistoryForBatch(PageableData pageableData, String batch_id);
 
 	SearchPageData<OrderHistoryData> getPagedOrderHistoryForPOS(PageableData pageableData, String pickupStore, Date startDate, Date endDate);
+	
+	SearchPageData<OrderHistoryData> getOrders(AmwayOrderSearchParameters amwayOrderSearchParameters, PageableData pageableData);
 }

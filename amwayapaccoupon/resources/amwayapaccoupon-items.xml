@@ -60,7 +60,7 @@
 			</itemtype>
 			<itemtype code="AmwayCoupon" autocreate="true" generate="true" jaloclass="com.amway.apac.coupon.jalo.AmwayCoupon">
 				<description>Amway Coupon Model</description>
-				<deployment table="amwayCoupon" typecode="21082"/>
+				<deployment table="amwayCoupon" typecode="21083"/>
 				<attributes>
 					<attribute type="java.lang.String" qualifier="code">
 						<modifiers read="true" write="true" search="true"

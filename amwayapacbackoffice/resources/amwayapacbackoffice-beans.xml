@@ -15,12 +15,25 @@
 
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
 
-    <!-- Example Data POJO
+		<!-- Example Data POJO
 
-        <bean class="com.hybris.backoffice.data.MyPojo">
-            <property name="id" type="String"/>
-            <property name="flag" type="boolean"/>
-        </bean>
-    -->
+        	<bean class="com.hybris.backoffice.data.MyPojo">
+            	<property name="id" type="String"/>
+            	<property name="flag" type="boolean"/>
+       		</bean>
+    	-->
+ 
+        <bean class="com.amway.amwayapacbackoffice.data.BackOrderEntryData">            
+            <property name="entry" type="String"/>
+            <property name="itemSKU" type="String"/>
+            <property name="item" type="String"/>
+            <property name="quantity" type="String"/>
+            <property name="price" type="String"/>
+            <property name="tax" type="String"/>
+            <property name="totalPrice" type="String"/>
+            <property name="PV" type="String"/>
+            <property name="BV" type="String"/>
+            <property name="paymentType" type="String"/>     
+        </bean>          
 
 </beans>

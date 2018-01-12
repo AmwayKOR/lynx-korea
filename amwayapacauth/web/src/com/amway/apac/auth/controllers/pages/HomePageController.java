@@ -19,7 +19,6 @@ import java.util.Date;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,8 +27,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.amway.apac.auth.controllers.ControllerConstants.IDPLogin;
 import com.amway.apac.auth.security.AmwayJWTTokenProvider;
-import com.amway.apac.auth.security.impl.AmwayJWTKeyMakerImpl;
+import com.amway.apac.auth.security.impl.AmwayJWTKeyMaker;
 
 
 /**
@@ -39,48 +39,34 @@ import com.amway.apac.auth.security.impl.AmwayJWTKeyMakerImpl;
 @RequestMapping("/")
 public class HomePageController extends AbstractPageController
 {
-
 	@Resource(name = "jWTokenProvider")
 	private AmwayJWTTokenProvider jwtTokenProvider;
 
 	@Resource(name = "jwtKeyMaker")
-	AmwayJWTKeyMakerImpl jwtKeyMaker;
+	private AmwayJWTKeyMaker jwtKeyMaker;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String home(@RequestParam(value = "logout", defaultValue = "false") final boolean logout, final Model model,
-			final HttpServletRequest request, final HttpServletResponse response,
-			final RedirectAttributes redirectModel) throws CMSItemNotFoundException
+			final HttpServletRequest request, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
 		if (logout)
 		{
-			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.INFO_MESSAGES_HOLDER,
-					"account.confirmation.signout.title");
+			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.INFO_MESSAGES_HOLDER, "account.confirmation.signout.title");
 			return REDIRECT_PREFIX + ROOT;
 		}
 
-		/*
-		 * storeCmsPageInModel(model, getContentPageForLabelOrId(null)); setUpMetaDataForContentPage(model,
-		 * getContentPageForLabelOrId(null)); updatePageTitle(model, getContentPageForLabelOrId(null));
-		 *
-		 * return getViewForPage(model);
-		 */
-
-		final String state = request.getParameter("state");
 		final String redirectUrl = request.getParameter("redirect_uri");
-		final String clientId = request.getParameter("client_id");
 
-		final String token = jwtTokenProvider.createJWToken(getCustomerFacade().getCurrentCustomerUid(), new Date(),
-				request);
+		final String token = jwtTokenProvider.createJWToken(getCustomerFacade().getCurrentCustomerUid(), new Date(), request);
 
+		model.addAttribute(IDPLogin.ID_TOKEN, token);
+		model.addAttribute(IDPLogin.REDIRECT_URI, redirectUrl);
+		model.addAttribute(IDPLogin.STATE, request.getParameter(IDPLogin.STATE));
+		model.addAttribute(IDPLogin.CLIENT_ID, request.getParameter(IDPLogin.CLIENT_ID));
 
-		model.addAttribute("id_token", token);
-		model.addAttribute("state", state);
-		model.addAttribute("redirect_Url", redirectUrl);
-		model.addAttribute("client_Id", clientId);
-
-		model.addAttribute("kid", jwtKeyMaker.getKid());
-		model.addAttribute("n", jwtKeyMaker.getN());
-		model.addAttribute("e", jwtKeyMaker.getE());
+		model.addAttribute(IDPLogin.KID, jwtKeyMaker.getKid());
+		model.addAttribute(IDPLogin.N, jwtKeyMaker.getN());
+		model.addAttribute(IDPLogin.E, jwtKeyMaker.getE());
 
 		return "pages/account/accountIDPPage";
 	}

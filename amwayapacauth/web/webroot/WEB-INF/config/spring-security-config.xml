@@ -50,16 +50,6 @@
         <security:remember-me key="amwayapacauth" services-ref="rememberMeServices" />
 
         <!-- SSL / AUTHENTICATED pages -->
-        <security:intercept-url pattern="/my-account/addressform" access="hasAnyRole('ROLE_ANONYMOUS','ROLE_CUSTOMERGROUP')"
-            requires-channel="https" />
-        <security:intercept-url pattern="/checkout/multi/billingaddressform" access="hasAnyRole('ROLE_ANONYMOUS','ROLE_CUSTOMERGROUP')"
-            requires-channel="https" />
-        <security:intercept-url pattern="/my-account*" access="hasRole('ROLE_CUSTOMERGROUP')" requires-channel="https" />
-        <security:intercept-url pattern="/my-account/order/*/getReadOnlyProductVariantMatrix" access="hasAnyRole('ROLE_ANONYMOUS','ROLE_CUSTOMERGROUP')"
-            requires-channel="https" />
-        <security:intercept-url pattern="/my-account/**" access="hasRole('ROLE_CUSTOMERGROUP')" requires-channel="https" />
-        <security:intercept-url pattern="/quote/**" access="hasRole('ROLE_CUSTOMERGROUP')" requires-channel="https" />
-
         <security:intercept-url pattern="/**" requires-channel="https" /> <!-- Everything should be secure -->
 
         <security:form-login login-page="/login" authentication-failure-handler-ref="loginAuthenticationFailureHandler"
@@ -126,10 +116,7 @@
     <bean id="excludeRedirectUrlRequestMatcher" class="com.amway.apac.auth.security.ExcludeUrlRequestMatcher">
         <property name="excludeUrlSet">
             <set>
-                <value>/guest/*</value>
-                <value>/orderConfirmation/*</value>
                 <value>/login</value>
-                <value>/login/checkout</value>
             </set>
         </property>
         <property name="pathMatcher" ref="defaultPathMatcher" />
@@ -146,15 +133,6 @@
 
     <bean id="loginAuthenticationSuccessHandler" class="com.amway.apac.auth.handler.AmwayStorefrontAuthenticationSuccessHandler">
         <property name="uiExperienceService" ref="uiExperienceService" />
-        <property name="clientDetailsService" ref="oauthClientDetails" />
-        <property name="jwtTokenProvider" ref="jWTokenProvider" />
-    </bean>
-
-
-    <alias name="defaultCommerceRedirectStrategy" alias="commerceRedirectStrategy" />
-    <bean name="defaultCommerceRedirectStrategy" class="com.amway.apac.auth.security.impl.DefaultCommerceRedirectStrategy" parent="redirectStrategy">
-        <property name="checkoutFlowFacade" ref="checkoutFlowFacade" />
-        <property name="expressTargetUrl" value="/checkout/multi/express" />
     </bean>
 
     <bean id="loginAuthenticationFailureHandler" class="com.amway.apac.auth.security.LoginAuthenticationFailureHandler">
@@ -165,9 +143,6 @@
     <!-- Logout Success Handler -->
 
     <util:list id="logoutRestrictedPages" value-type="java.lang.String">
-        <value>/my-account</value>
-        <value>/checkout</value>
-        <value>/quote</value>
     </util:list>
 
     <bean id="logoutSuccessHandler" class="de.hybris.platform.acceleratorstorefrontcommons.security.StorefrontLogoutSuccessHandler">
@@ -236,5 +211,10 @@
         <property name="jwtKeyMaker" ref="jwtKeyMaker" />
     </bean>
 
-    <bean id="jwtKeyMaker" class="com.amway.apac.auth.security.impl.AmwayJWTKeyMakerImpl" init-method="init"/>
+    <bean id="jwtKeyMaker" class="com.amway.apac.auth.security.impl.AmwayJWTKeyMaker" init-method="init" />
+
+    <alias name="amwayIdpLoginValidationService" alias="idpLoginValidationService" />
+    <bean id="amwayIdpLoginValidationService" class="com.amway.apac.auth.validation.impl.AmwayIdpLoginValidationServiceImpl">
+        <property name="clientDetailsService" ref="oauthClientDetails" />
+    </bean>
 </beans>

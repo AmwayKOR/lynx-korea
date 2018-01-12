@@ -16,7 +16,10 @@
 		<!-- <requires-extension name="cms"/> -->
 
 		<requires-extension name="backoffice"/>
-		
+		<requires-extension name="amwayapaccore"/>		
+		<requires-extension name="platformbackoffice"/>
+		<requires-extension name="ruleengineservices"/>
+		<requires-extension name="ruleenginebackoffice"/>
 
 		<coremodule generated="true" manager="com.amaway.apac.jalo.AmwayapacbackofficeManager" packageroot="com.amaway.apac"/>
 

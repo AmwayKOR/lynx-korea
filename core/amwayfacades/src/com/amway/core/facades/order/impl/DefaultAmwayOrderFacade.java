@@ -5,6 +5,7 @@ import javax.annotation.Resource;
 import com.amway.core.customer.service.AmwayCustomerAccountService;
 import com.amway.core.enums.AmwayCartType;
 import com.amway.core.facades.order.AmwayOrderFacade;
+import com.amway.core.data.AmwayOrderSearchParameters;
 import com.amway.core.pos.service.AmwayPOSService;
 import com.amway.core.returns.services.AmwayReturnService;
 import com.amway.core.service.AmwayAccountCommerceService;
@@ -27,6 +28,7 @@ import de.hybris.platform.servicelayer.dto.converter.Converter;
 import de.hybris.platform.servicelayer.event.EventService;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import de.hybris.platform.store.BaseStoreModel;
+import com.amway.core.order.services.AmwayOrderService;
 
 import java.util.Date;
 
@@ -46,6 +48,9 @@ public class DefaultAmwayOrderFacade extends DefaultOrderFacade implements Amway
 	private AmwayReturnService amwayReturnService;
 	@Resource(name = "amwayPOSService")
 	private AmwayPOSService amwayPOSService;
+	
+	@Resource(name = "orderService")
+	private AmwayOrderService orderService;
 
 	/**
 	 * To get the paged order history
@@ -159,6 +164,12 @@ public class DefaultAmwayOrderFacade extends DefaultOrderFacade implements Amway
 	@Override
 	public SearchPageData<OrderHistoryData> getPagedOrderHistoryForPOS(PageableData pageableData, String pickupStore, Date startDate, Date endDate) {
 		final SearchPageData<OrderModel> orderResults = amwayPOSService.getOrders(pageableData, pickupStore, startDate, endDate);
+		return convertPageData(orderResults, getOrderHistoryConverter());
+	}
+	
+	@Override
+	public SearchPageData<OrderHistoryData> getOrders(AmwayOrderSearchParameters amwayOrderSearchParameters, PageableData pageableData) {
+		final SearchPageData<OrderModel> orderResults = orderService.getOrders(amwayOrderSearchParameters, pageableData);
 		return convertPageData(orderResults, getOrderHistoryConverter());
 	}
 

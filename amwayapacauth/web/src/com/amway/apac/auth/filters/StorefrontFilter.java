@@ -17,7 +17,6 @@ import de.hybris.platform.commercefacades.storesession.StoreSessionFacade;
 
 import java.io.IOException;
 import java.util.Collections;
-import java.util.Set;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -27,13 +26,13 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Required;
-import org.springframework.util.PathMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
+import org.springframework.web.util.CookieGenerator;
 
 
 /**
- * Filter that initializes the session for the amwayapacauth. This is a spring configured filter that is
- * executed by the PlatformFilterChain.
+ * Filter that initializes the session for the amwayapacauth. This is a spring configured filter that is executed by the
+ * PlatformFilterChain.
  */
 public class StorefrontFilter extends OncePerRequestFilter
 {
@@ -42,8 +41,7 @@ public class StorefrontFilter extends OncePerRequestFilter
 
 	private StoreSessionFacade storeSessionFacade;
 	private BrowseHistory browseHistory;
-	private Set<String> refererExcludeUrlSet;
-	private PathMatcher pathMatcher;
+	private CookieGenerator cookieGenerator;
 
 	@Override
 	public void doFilterInternal(final HttpServletRequest request, final HttpServletResponse response,
@@ -59,9 +57,15 @@ public class StorefrontFilter extends OncePerRequestFilter
 			markSessionInitialized(session);
 		}
 
+		// For secure requests ensure that the JSESSIONID cookie is visible to insecure requests
+		if (isRequestSecure(request))
+		{
+			fixSecureHttpJSessionIdCookie(request, response);
+		}
+
 		if (isGetMethod(request))
 		{
-			if (StringUtils.isBlank(request.getHeader(AJAX_REQUEST_HEADER_NAME)) && !isRequestPathExcluded(request))
+			if (StringUtils.isBlank(request.getHeader(AJAX_REQUEST_HEADER_NAME)))
 			{
 				final String requestURL = request.getRequestURL().toString();
 				session.setAttribute(ORIGINAL_REFERER, StringUtils.isNotBlank(queryString) ? requestURL + "?" + queryString
@@ -72,6 +76,17 @@ public class StorefrontFilter extends OncePerRequestFilter
 		}
 
 		filterChain.doFilter(request, response);
+	}
+
+	protected void fixSecureHttpJSessionIdCookie(final HttpServletRequest httpServletRequest,
+			final HttpServletResponse httpServletResponse)
+	{
+		final HttpSession session = httpServletRequest.getSession(false);
+		if (session != null)
+		{
+			cookieGenerator.addCookie(httpServletResponse, session.getId());
+		}
+
 	}
 
 	protected boolean isGetMethod(final HttpServletRequest httpRequest)
@@ -128,41 +143,9 @@ public class StorefrontFilter extends OncePerRequestFilter
 		session.setAttribute(this.getClass().getName(), "initialized");
 	}
 
-	protected boolean isRequestPathExcluded(final HttpServletRequest request)
-	{
-		final Set<String> inputSet = getRefererExcludeUrlSet();
-		final String servletPath = request.getServletPath();
-
-		for (final String input : inputSet)
-		{
-			if (getPathMatcher().match(input, servletPath))
-			{
-				return true;
-			}
-		}
-
-		return false;
-	}
-
-	protected Set<String> getRefererExcludeUrlSet()
-	{
-		return refererExcludeUrlSet;
-	}
-
 	@Required
-	public void setRefererExcludeUrlSet(final Set<String> refererExcludeUrlSet)
+	public void setCookieGenerator(final CookieGenerator cookieGenerator)
 	{
-		this.refererExcludeUrlSet = refererExcludeUrlSet;
-	}
-
-	protected PathMatcher getPathMatcher()
-	{
-		return pathMatcher;
-	}
-
-	@Required
-	public void setPathMatcher(final PathMatcher pathMatcher)
-	{
-		this.pathMatcher = pathMatcher;
+		this.cookieGenerator = cookieGenerator;
 	}
 }

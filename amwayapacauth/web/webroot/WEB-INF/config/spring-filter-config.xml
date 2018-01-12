@@ -42,28 +42,19 @@
 	<util:list id="defaultStorefrontTenantDefaultFilterChainList">
 		<!-- filter for handling session failover -->
     	<ref bean="hybrisSpringSessionFilter"/>
-	
 		<!-- generic platform filters -->
 		<ref bean="log4jFilter"/>
-        
         <ref bean="storefrontSessionFilter"/>
 		<!-- filter to log the current request -->
 		<ref bean="requestLoggerFilter"/>
-
 		<!-- filter to setup the cms integration -->
 		<ref bean="cmsSiteFilter"/>
-
 		<!-- filter to initialize the storefront -->
 		<ref bean="storefrontFilter"/>
-
 		<!-- filter to handle url encoding attributes -->
 		<ref bean="urlEncoderFilter"/>
-
 		<!-- Security -->
 		<ref bean="springSecurityFilterChain"/>
-
-		<!-- filter to restore customer preferred location -->
-		<ref bean="customerLocationRestorationFilter"/>
 
 	</util:list>
 	
@@ -131,49 +122,13 @@
 	<util:set id="b2cAcceleratorSiteChannels" value-type="de.hybris.platform.commerceservices.enums.SiteChannel">
 		<ref bean="SiteChannel.B2C"/>
 	</util:set>
-
-	<alias name="defaultRefererExcludeUrlSet" alias="refererExcludeUrlSet"/>
-	<util:set id="defaultRefererExcludeUrlSet" value-type="java.lang.String">
-		<value>/**/cart/export</value>
-	</util:set>
-	
+		
 	<bean id="storefrontFilter" class="com.amway.apac.auth.filters.StorefrontFilter" >
 		<property name="storeSessionFacade" ref="storeSessionFacade"/>
 		<property name="browseHistory" ref="browseHistory"/>
-		<property name="refererExcludeUrlSet" ref="refererExcludeUrlSet"/>
-		<property name="pathMatcher" ref="defaultPathMatcher"/>
+        <property name="cookieGenerator" ref="sessionCookieGenerator"/>
 	</bean>
 	
-	<bean id="cartRestorationFilter" class="com.amway.apac.auth.filters.CartRestorationFilter" >
-		<property name="baseSiteService" ref="baseSiteService"/>
-		<property name="cartService" ref="cartService"/>
-		<property name="cartFacade" ref="cartFacade"/>
-		<property name="cartRestoreCookieGenerator" ref="cartRestoreCookieGenerator"/>
-		<property name="userService" ref="userService"/>
-		<property name="sessionService" ref="sessionService"/>	
-	</bean>
-
-	<bean id="anonymousCheckoutFilter" class="com.amway.apac.auth.filters.AnonymousCheckoutFilter" >
-		<property name="guestCheckoutCartCleanStrategy"  ref="guestCheckoutCartCleanStrategy" />
-	</bean>
-
-	<bean id="customerLocationRestorationFilter" class="com.amway.apac.auth.filters.CustomerLocationRestorationFilter" >
-		<property name="customerLocationFacade" ref="customerLocationFacade"/>
-		<property name="customerLocationCookieGenerator" ref="customerLocationCookieGenerator"/>
-	</bean>
-
-	<alias name="defaultFileUploadUrlFilterMappings" alias="fileUploadUrlFilterMappings" />
-	<util:map id="defaultFileUploadUrlFilterMappings" key-type="java.lang.String" value-type="org.springframework.web.multipart.support.MultipartFilter">
-		<entry key="/import/csv/*" value-ref="importCSVMultipartFilter"/>
-	</util:map>
-
-	<bean id="fileUploadFilter" class="com.amway.apac.auth.filters.FileUploadFilter" >
-		<property name="urlFilterMapping">
-			<ref bean="fileUploadUrlFilterMappings" />
-		</property>
-		<property name="pathMatcher" ref="defaultPathMatcher"/>
-	</bean>
-
 	<alias name="defaultSessionCookieGenerator" alias="sessionCookieGenerator"/>
 	<bean id="defaultSessionCookieGenerator" class="com.amway.apac.auth.security.cookie.EnhancedCookieGenerator" >
 		<property name="cookieSecure" value="true"/>
@@ -181,31 +136,5 @@
 		<property name="cookieMaxAge" value="-1"/>
 		<property name="useDefaultPath" value="false"/>
 		<property name="httpOnly" value="true"/>
-	</bean>
-	
-	<alias name="defaultCartRestoreCookieGenerator" alias="cartRestoreCookieGenerator"/>
-	<bean id="defaultCartRestoreCookieGenerator" class="com.amway.apac.auth.security.cookie.CartRestoreCookieGenerator" >
-		<property name="cookieSecure" value="true"/>
-		<property name="cookieMaxAge" value="360000000"/>
-		<property name="useDefaultPath" value="false"/>
-		<property name="httpOnly" value="true"/>
-		<property name="baseSiteService" ref="baseSiteService"/>
-	</bean>
-
-	<alias name="defaultCustomerLocationCookieGenerator" alias="customerLocationCookieGenerator"/>
-	<bean id="defaultCustomerLocationCookieGenerator" class="com.amway.apac.auth.security.cookie.CustomerLocationCookieGenerator" >
-		<property name="cookieSecure" value="true"/>
-		<property name="cookieMaxAge" value="360000000"/>
-		<property name="useDefaultPath" value="false"/>
-		<property name="httpOnly" value="true"/>
-		<property name="baseSiteService" ref="baseSiteService"/>
-	</bean>
-	
-	<bean id="importCSVMultipartFilter" class="org.springframework.web.multipart.support.MultipartFilter">
-		<property name="multipartResolverBeanName" value="importCSVMultipartResolver"/>
-	</bean>
-
-	<bean id="importCSVMultipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<property name="maxUploadSize" value="#{configurationService.configuration.getProperty('import.csv.max.upload.size.bytes')}" />
 	</bean>
 </beans>

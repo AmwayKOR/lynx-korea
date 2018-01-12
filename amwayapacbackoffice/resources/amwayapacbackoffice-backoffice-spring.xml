@@ -14,11 +14,26 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<bean id="amwayapacbackofficeService" class="com.amaway.apac.services.AmwayapacbackofficeService" />
-
 	<bean id="amwayapacbackofficeLabelLocator" class="com.hybris.cockpitng.util.labels.ResourcesLabelLocator" scope="singleton" init-method="init" lazy-init="false">
   		<property name="location" value="/amwayapacbackoffice-backoffice-labels/"/>
   		<property name="name" value="labels"/>
   	</bean>
+  	<alias name="amwayApacDateLabelProvider" alias="dateLabelProvider"/>
+	<bean id="amwayApacDateLabelProvider" class="com.amway.apac.label.impl.AmwayApacDateLabelProvider" parent="defaultDateLabelProvider">
+	</bean>
+  	<alias alias="backOrderDetailsRenderer" name="defaultBackOrderDetailsRenderer"/>
+    <bean id="defaultBackOrderDetailsRenderer" class="com.amway.apac.backoffice.renderers.BackOrderDetailsRenderer">    	
+    	<property name="amwayApacDateLabelProvider" ref="dateLabelProvider"/>   	
+    </bean>
+    <alias alias="backOrderConsignmentEntriesRenderer" name="defaultBackOrderConsignmentEntriesRenderer"/>
+    <bean id="defaultBackOrderConsignmentEntriesRenderer" class="com.amway.apac.backoffice.renderers.BackOrderConsignmentEntriesRenderer">	 	
+    </bean>    			  
+    <alias alias="backOrderShippingAddressRenderer" name="defaultBackOrderShippingAddressRenderer"/>
+    <bean id="defaultBackOrderShippingAddressRenderer" class="com.amway.apac.backoffice.renderers.BackOrderShippingAddressRenderer">	 	
+    </bean>
+    <alias alias="backOrderEssentialsRenderer" name="defaultBackOrderEssentialsRenderer"/>
+    <bean id="defaultBackOrderEssentialsRenderer" class="com.amway.apac.backoffice.renderers.BackOrderEssentialsRenderer">	 	
+    </bean>
+    
 
 </beans>
