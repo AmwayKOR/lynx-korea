@@ -66,6 +66,10 @@
 			<value code="GROUP_ORDER_RENEWAL" />
 		</enumtype>
 
+		<enumtype code="AmwayContactUsTopicEnum" generate="true"
+			autocreate="true" dynamic="true">
+			<value code="GENERAL_ENQUIRIES" />
+		</enumtype>
 	</enumtypes>
 
 	<relations>
@@ -262,8 +266,7 @@
 				</attributes>
 			</itemtype>
 			
-			<itemtype code="AmwayFAQ" autocreate="true" generate="true"
-				jaloclass="com.amway.apac.core.jalo.AmwayFAQ" extends="GenericItem">
+			<itemtype code="AmwayFAQ" autocreate="true" generate="true" >
 				<description>Frequently asked question.</description>
 				<deployment table="AmwayFAQ" typecode="21022" />
 				<attributes>
@@ -451,5 +454,60 @@
 				</attributes>
 			</itemtype>
 		</typegroup>
+		
+		<typegroup name="ContactUs">
+			<itemtype code="AmwayContactUs" autocreate="true" generate="true" >
+				<deployment table="AmwayContactUs" typecode="21028" />
+				<attributes>
+					<attribute type="java.lang.String" qualifier="aboId">
+						<persistence type="property"/>
+						<description>ABO ID for the Contact Us form on contact us page</description>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="firstName">
+						<persistence type="property"/>
+						<description>First Name for the Contact Us form on contact us page</description>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="lastName">
+						<persistence type="property"/>
+						<description>Lastname for the Contact Us form on contact us page</description>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="eMail">
+						<persistence type="property"/>
+						<description>E-Mail for the Contact Us form on contact us page</description>
+					</attribute>
+					<attribute type="AmwayContactUsTopicEnum" qualifier="topics">
+						<persistence type="property"/>
+						<description>Topics for the Contact Us form on contact us page</description>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="subject">
+						<persistence type="property"/>
+						<description>Subject for the Contact Us form on contact us page</description>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="message">
+						<persistence type="property"/>
+						<modifiers dontOptimize="true" />
+						<description>Message for the Contact Us form</description>
+					</attribute>
+					<attribute type="java.lang.Boolean" qualifier="receiveMail">
+						<persistence type="property"/>
+						<description>Subject for the Contact Us form on contact us page</description>
+					</attribute>
+				</attributes>
+			</itemtype>
+		</typegroup>
+		
+		<typegroup name="BusinessProcesses">
+			<itemtype code="StoreFrontContactUsProcess"
+					  extends="StoreFrontProcess" autocreate="true" generate="true">
+				<description>Represents contact us email .</description>
+				<attributes>
+					<attribute qualifier="amwayContactUsModel" type="AmwayContactUs">
+						<persistence type="property"/>
+						<description>Attribute contains contact us model that will be used in the process.</description>
+					</attribute>
+				</attributes>
+			</itemtype>
+		</typegroup>
+		
 	</itemtypes>
 </items>

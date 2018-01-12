@@ -64,6 +64,9 @@ public class DefaultAmwayApacNotificationDao implements AmwayApacNotificationDao
 	private static final String ERROR_MESSAGE_NULL_CUSTOMER = "[customer] must not be null";
 	private static final String SORT_BY_DESC_DATE = " ORDER BY {an.publishDate} DESC";
 	private static final String SORT_BY_ASC_DATE = " ORDER BY {an.publishDate} ASC";
+	private static final String CLASSIFICATION_LIST = "classificationsList";
+	private static final String GROUP_LIST = "groupsList";
+
 
 
 	public static final StringBuilder AMWAY_NOTIFICATION_MAPPING_QUERY = new StringBuilder().append("SELECT {an.")
@@ -128,8 +131,9 @@ public class DefaultAmwayApacNotificationDao implements AmwayApacNotificationDao
 		final String currentDate = dateFormat.format(start);
 
 		queryBuilder.append(" AND (({aagt.").append(GROUPTYPE).append("} = ").append(CLASSIFICATION).append(" AND {aagt.")
-				.append(AmwayAccountGroupTagModel.CODE).append("} IN (?classifications)) OR ({aagt.").append(GROUPTYPE).append("} = ")
-				.append(HYBRIS_GROUP).append(" AND {aagt.").append(AmwayAccountGroupTagModel.CODE).append("} IN (?groupNames)))");
+				.append(AmwayAccountGroupTagModel.CODE).append("} IN (?").append(CLASSIFICATION_LIST).append(")) OR ({aagt.")
+				.append(GROUPTYPE).append("} = ").append(HYBRIS_GROUP).append(" AND {aagt.").append(AmwayAccountGroupTagModel.CODE)
+				.append("} IN (?").append(GROUP_LIST).append(")))");
 
 		queryBuilder.append(" AND ({an.").append(AmwayNotificationModel.PK).append("} NOT IN ({{Select {").append(NOTIFICATION)
 				.append("} FROM {").append(AmwayNotificationUserActionModel._TYPECODE).append("} WHERE {")
@@ -145,8 +149,8 @@ public class DefaultAmwayApacNotificationDao implements AmwayApacNotificationDao
 		queryParams.put(ACTIVE, Boolean.TRUE);
 		queryParams.put(USER, customer);
 		queryParams.put(AFFILIATE, baseSite.getStores().iterator().next().getAffiliateNumber());
-		queryParams.put("groupNames", Collections.unmodifiableList(getCurrentUserGroupNames(customer)));
-		queryParams.put("classifications", Collections.unmodifiableList(getClassificationNames(accountClassficationCode)));
+		queryParams.put(GROUP_LIST, Collections.unmodifiableList(getCurrentUserGroupNames(customer)));
+		queryParams.put(CLASSIFICATION_LIST, Collections.unmodifiableList(getClassificationNames(accountClassficationCode)));
 
 	}
 
