@@ -17,11 +17,13 @@
 	<div>
 		<ul id="reviews" class="review-list" data-reviews="${getPageOfReviewsUrl}" data-allreviews="${getAllReviewsUrl}"></ul>
 		<div class="product-collapse__rating">
+		<c:if test="${not empty reviewsCount and reviewsCount > 3}">
 			<p class="more">
 				<a href="#" class="all-reviews-btn">
 					<spring:theme code="review.show.all" />
 				</a>
 			</p>
+			</c:if>
 		</div>
 	</div>
 </div>
@@ -66,7 +68,7 @@
                             </div>
                         </div>
 	                </div>
-	                <div class="cart-popup__item-link"><a class="btn-blue-white" v-on:click.stop.prevent="submit" href="${productReviewActionUrl}"><spring:theme code="review.submit" /></a><a class="cart-popup__item-link-text closeCbox" href="javascript:void(0);"><spring:theme code="review.cancel" /></a></div>
+	                <div class="cart-popup__item-link"><a class="review-btn btn-blue-white" v-on:click.stop.prevent="submit" href="${productReviewActionUrl}"><spring:theme code="review.submit" /></a><a class="review-btn btn-blue-white cart-popup__item-link-text closeCbox" href="javascript:void(0);"><spring:theme code="review.cancel" /></a></div>
 	                </form>
 	            </div>
 	        </div>

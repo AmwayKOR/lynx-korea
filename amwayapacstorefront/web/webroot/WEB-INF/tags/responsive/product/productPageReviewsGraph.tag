@@ -6,13 +6,11 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<script type="text/javascript">
-	var reviewArray = JSON.parse('${allReviewCount}');
-</script>
+<c:url value="${product.url}/reviewCount" var="productReviewGraphActionUrl"/>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="product-review">
-	<div class="comuserinfo">
+	<div id="reviewgraph" class="comuserinfo" data-url="${productReviewGraphActionUrl}">
 		<dl>
 		    <dt>5 star</dt>
 		    <dd class="star5"><div style="width:0%;"></div><span>0</span></dd>

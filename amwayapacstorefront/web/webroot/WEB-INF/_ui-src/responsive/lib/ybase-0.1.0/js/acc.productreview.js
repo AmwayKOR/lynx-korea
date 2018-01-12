@@ -101,10 +101,23 @@ ACC.productreview = {
 	        $(".review, .overlay").show();
 	    });
 	    
-	    if(reviewArray){
-	    	ACC.productreview.yellowGraph(reviewArray);
-	    }
-		
+	    $('.js-tabs #tabreview').click(function(event) {
+	        event.preventDefault();
+            $.ajax({
+    			url : $("#reviewgraph").data("url"),
+    			cache : true,
+    			success : function(response) 
+    			{
+    				if(response.success){
+    					var reviewArray = response.data;
+    				    ACC.productreview.yellowGraph(reviewArray);
+    				}
+    			},
+    			error : function (request, status, error){
+    			}
+    		});
+	    });
+
 	},
 
 	openPrompt: function(){
@@ -123,7 +136,6 @@ ACC.productreview = {
     },
     
     yellowGraph: function(arra) {
-    	console.log(arra);
         var max = ACC.productreview.maxValue(arra);
         $(".comuserinfo dl").each(function(index, element){
             var percent = arra[(5 - index) + 'star']/max*100;
