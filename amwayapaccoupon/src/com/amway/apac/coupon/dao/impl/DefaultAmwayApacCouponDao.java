@@ -16,7 +16,6 @@ import de.hybris.platform.couponservices.dao.impl.DefaultCouponDao;
 import de.hybris.platform.jalo.Item;
 import de.hybris.platform.servicelayer.internal.dao.GenericDao;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
-import de.hybris.platform.servicelayer.search.FlexibleSearchService;
 import de.hybris.platform.servicelayer.search.SearchResult;
 import de.hybris.platform.servicelayer.util.ServicesUtil;
 
@@ -24,6 +23,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.apache.commons.collections.CollectionUtils;
 
@@ -41,7 +41,6 @@ import com.amway.core.model.AmwayAccountModel;
 public class DefaultAmwayApacCouponDao extends DefaultCouponDao implements AmwayApacCouponDao
 {
 	private GenericDao<AmwayCouponModel> amwayCouponGenericDao;
-	private FlexibleSearchService flexibleSearchService;
 
 	private static final String EXPIRED_COUPON_QUERY = new StringBuilder("SELECT {AMWY_CPN.PK} FROM {")
 			.append(AmwayCouponModel._TYPECODE).append(" AS AMWY_CPN } WHERE NOW()> {AMWY_CPN.").append(AmwayCouponModel.ENDDATE)
@@ -65,16 +64,17 @@ public class DefaultAmwayApacCouponDao extends DefaultCouponDao implements Amway
 	 */
 	@Override
 	public List<AmwayCouponModel> getAmwayCouponsForAbo(final CustomerModel customer, final List<AmwayCouponStatus> couponStatuses,
-			final boolean filterByDate)
+			final boolean showActive)
 	{
 		ServicesUtil.validateParameterNotNull(customer, "customer cannot be null");
-		final AmwayAccountModel amwayAccountModel = customer.getAccounts().iterator().next();
+		final Optional<AmwayAccountModel> amwayAccountModel = customer.getAccounts().stream()
+				.filter(account -> account.getPrimaryParty().equals(customer)).findFirst();
 		final Map<String, Object> params = new HashMap<>();
 
 		final StringBuilder selectAmwayCouponQuery = new StringBuilder(100).append("SELECT {").append(Item.PK).append("} ")
 				.append("FROM   { ").append(AmwayCouponModel._TYPECODE).append(" as coupon } ");
 
-		buildSelectRestrictions(customer, couponStatuses, filterByDate, amwayAccountModel, params, selectAmwayCouponQuery);
+		buildSelectRestrictions(customer, couponStatuses, showActive, amwayAccountModel.get(), params, selectAmwayCouponQuery);
 		final SearchResult<AmwayCouponModel> result = getFlexibleSearchService()
 				.search(new FlexibleSearchQuery(selectAmwayCouponQuery.toString(), params));
 		return result.getResult();
@@ -85,13 +85,13 @@ public class DefaultAmwayApacCouponDao extends DefaultCouponDao implements Amway
 	 *
 	 * @param customer
 	 * @param couponStatuses
-	 * @param filterByDate
+	 * @param showActive
 	 * @param amwayAccountModel
 	 * @param params
 	 * @param selectAmwayCouponQuery
 	 */
 	private void buildSelectRestrictions(final CustomerModel customer, final List<AmwayCouponStatus> couponStatuses,
-			final boolean filterByDate, final AmwayAccountModel amwayAccountModel, final Map<String, Object> params,
+			final boolean showActive, final AmwayAccountModel amwayAccountModel, final Map<String, Object> params,
 			final StringBuilder selectAmwayCouponQuery)
 	{
 		final String accountRestriction = " Where ({coupon." + AmwayCouponModel.ACCOUNT + "} = ?amwayAccount OR {coupon."
@@ -105,7 +105,7 @@ public class DefaultAmwayApacCouponDao extends DefaultCouponDao implements Amway
 			selectAmwayCouponQuery.append(statusRestriction);
 			params.put("statuses", couponStatuses);
 		}
-		if (filterByDate)
+		if (showActive)
 		{
 			final String dateRestriction = " AND NOW() BETWEEN {coupon." + AmwayCouponModel.STARTDATE + " } AND { coupon. "
 					+ AmwayCouponModel.ENDDATE + "}";
@@ -122,7 +122,7 @@ public class DefaultAmwayApacCouponDao extends DefaultCouponDao implements Amway
 		final Map<String, Object> queryParams = new HashMap<>();
 		queryParams.put(AmwayCouponModel.STATUS,
 				Arrays.asList(AmwayCouponStatus.FREEZED, AmwayCouponStatus.NEW, AmwayCouponStatus.REISSUED));
-		final SearchResult<AmwayCouponModel> searchResult = flexibleSearchService.search(EXPIRED_COUPON_QUERY, queryParams);
+		final SearchResult<AmwayCouponModel> searchResult = getFlexibleSearchService().search(EXPIRED_COUPON_QUERY, queryParams);
 		return searchResult.getResult();
 	}
 
@@ -145,25 +145,5 @@ public class DefaultAmwayApacCouponDao extends DefaultCouponDao implements Amway
 	public void setAmwayCouponGenericDao(final GenericDao<AmwayCouponModel> amwayCouponGenericDao)
 	{
 		this.amwayCouponGenericDao = amwayCouponGenericDao;
-	}
-
-	/**
-	 * getter for flexibleSearchService
-	 *
-	 * @return flexibleSearchService
-	 */
-	public FlexibleSearchService getFlexibleSearchService()
-	{
-		return flexibleSearchService;
-	}
-
-	/**
-	 * setter for flexibleSearchService
-	 *
-	 * @param flexibleSearchService
-	 */
-	public void setFlexibleSearchService(final FlexibleSearchService flexibleSearchService)
-	{
-		this.flexibleSearchService = flexibleSearchService;
 	}
 }

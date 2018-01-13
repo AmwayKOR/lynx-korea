@@ -20,27 +20,35 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.amway.apac.coupon.model.AmwayCouponModel;
-import com.amway.apac.coupon.service.AmwayApacCouponService;
+import com.amway.apac.coupon.services.AmwayApacCouponService;
 
 
 /**
  * Interceptor implementation for populating code.
+ *
+ * @author tusharsharma
  */
 public class AmwayCouponPrepareInterceptor implements PrepareInterceptor<AmwayCouponModel>
 {
 	AmwayApacCouponService couponService;
 
+	/**
+	 *
+	 * @param amwayCoupon
+	 * @param context
+	 * @throws InterceptorException
+	 */
 	@Override
 	public void onPrepare(final AmwayCouponModel amwayCoupon, final InterceptorContext context) throws InterceptorException
 	{
 		populateAmwayCouponCode(amwayCoupon, context);
 	}
 
-	private void populateAmwayCouponCode(final AmwayCouponModel amwayCoupon, final InterceptorContext context)
+	protected void populateAmwayCouponCode(final AmwayCouponModel amwayCoupon, final InterceptorContext context)
 	{
-		if (null != amwayCoupon.getSite())
+		if (null != amwayCoupon.getStore())
 		{
-			if (StringUtils.isEmpty(amwayCoupon.getCode()) || context.isModified(amwayCoupon, AmwayCouponModel.SITE))
+			if (StringUtils.isEmpty(amwayCoupon.getCode()) || context.isModified(amwayCoupon, AmwayCouponModel.STORE))
 			{
 				amwayCoupon.setCode(getCouponCode(amwayCoupon));
 			}

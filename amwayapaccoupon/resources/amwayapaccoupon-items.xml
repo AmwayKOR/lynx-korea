@@ -86,8 +86,8 @@
 						<modifiers optional="false"/>
 						<persistence type="property"/>
 					</attribute>
-					<attribute type="CMSSite" qualifier="site">
-						<description>Site for the coupon</description>
+					<attribute type="BaseStore" qualifier="store">
+						<description>Store for the coupon</description>
 						<modifiers optional="false"/>
 						<persistence type="property"/>
 					</attribute>

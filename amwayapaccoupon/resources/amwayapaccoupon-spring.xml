@@ -18,11 +18,11 @@
            http://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <import resource="amwayapaccoupon-daos.xml" />
-    <bean id="amwayapaccouponSystemSetup" class="com.amway.apac.coupon.setup.AmwayapaccouponSystemSetup">
+    <bean id="amwayapaccouponSystemSetup" class="com.amway.apac.coupon.setup.AmwayapaccouponSystemSetup" parent="abstractCoreSystemSetup">
     </bean>
 
 	<alias name="defaultAmwayApacCouponService" alias="couponService"/>
-    <bean id="defaultAmwayApacCouponService" class="com.amway.apac.coupon.service.impl.DefaultAmwayApacCouponService" parent="defaultCouponService">
+    <bean id="defaultAmwayApacCouponService" class="com.amway.apac.coupon.services.impl.DefaultAmwayApacCouponService" parent="defaultCouponService">
     	<property name="couponCodeGeneratorMap">
     		<map>
     			<entry key="defaultApacCouponKeyGenerator" value-ref="defaultAmwayCouponCodeGenerator"/>
@@ -54,6 +54,5 @@
 	<bean id="defaultAmwayApacCouponDao"
 		class="com.amway.apac.coupon.dao.impl.DefaultAmwayApacCouponDao" parent="defaultCouponDao">
 		<property name="amwayCouponGenericDao" ref="amwayCouponDao" />
-		<property name="flexibleSearchService" ref="flexibleSearchService"/>
 	</bean>
 </beans>

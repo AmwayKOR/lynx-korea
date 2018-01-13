@@ -59,7 +59,7 @@
 					xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="status"
 					selected="true" />
 				<advanced-search:field
-					xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="site"
+					xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="store"
 					selected="false" />
 				<advanced-search:field
 					xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="account"
@@ -83,7 +83,7 @@
 			merge-mode="REPLACE">
 			<list-view:column qualifier="code" position="0" />
 			<list-view:column qualifier="redemptionCoupon" position="1" />
-			<list-view:column qualifier="site" position="2" />
+			<list-view:column qualifier="store" position="2" />
 			<list-view:column qualifier="status" position="3" />
 			<list-view:column qualifier="account" position="4" />
 			<list-view:column qualifier="customer" position="5" />
@@ -101,7 +101,7 @@
 			<wz:step id="step1" label="create.AmwayCoupon.general.label">
 				<wz:content id="step1.content">
 					<wz:property-list root="newAmwayCoupon">
-						<wz:property qualifier="site" />
+						<wz:property qualifier="store" />
 						<wz:property qualifier="redemptionCoupon" />
 						<wz:property qualifier="account" />
 						<wz:property qualifier="customer" />
@@ -111,7 +111,7 @@
 				</wz:content>
 				<wz:navigation id="step1.navigation">
 					<wz:cancel />
-					<wz:done visible="(newAmwayCoupon.account != null OR newAmwayCoupon.customer != null) AND newAmwayCoupon.site != null AND newAmwayCoupon.redemptionCoupon != null AND newAmwayCoupon.startDate != null AND newAmwayCoupon.endDate != null">
+					<wz:done visible="(newAmwayCoupon.account != null OR newAmwayCoupon.customer != null) AND newAmwayCoupon.store != null AND newAmwayCoupon.redemptionCoupon != null AND newAmwayCoupon.startDate != null AND newAmwayCoupon.endDate != null">
 						<wz:save property="newAmwayCoupon" />
 					</wz:done>
 				</wz:navigation>
@@ -132,7 +132,7 @@
 					<editorArea:section name="section.amwayCoupon.basic.details">
 						<editorArea:attribute qualifier="code"/>
 						<editorArea:attribute qualifier="redemptionCoupon"/>
-						<editorArea:attribute qualifier="site"/>
+						<editorArea:attribute qualifier="store"/>
 						<editorArea:attribute qualifier="startDate"/>
 						<editorArea:attribute qualifier="endDate"/>
 						<editorArea:attribute qualifier="status"/>

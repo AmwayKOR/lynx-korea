@@ -8,19 +8,22 @@
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with SAP.
  */
-package com.amway.apac.coupon.service.impl;
+package com.amway.apac.coupon.services.impl;
 
-import de.hybris.platform.cms2.model.site.CMSSiteModel;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.couponservices.model.AbstractCouponModel;
 import de.hybris.platform.couponservices.services.impl.DefaultCouponService;
 import de.hybris.platform.servicelayer.keygenerator.KeyGenerator;
 import de.hybris.platform.servicelayer.util.ServicesUtil;
+import de.hybris.platform.store.BaseStoreModel;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Required;
@@ -28,7 +31,8 @@ import org.springframework.beans.factory.annotation.Required;
 import com.amway.apac.coupon.dao.AmwayApacCouponDao;
 import com.amway.apac.coupon.enums.AmwayCouponStatus;
 import com.amway.apac.coupon.model.AmwayCouponModel;
-import com.amway.apac.coupon.service.AmwayApacCouponService;
+import com.amway.apac.coupon.service.data.AmwayCouponCreationParameter;
+import com.amway.apac.coupon.services.AmwayApacCouponService;
 import com.amway.core.model.AmwayAccountModel;
 
 
@@ -50,39 +54,44 @@ public class DefaultAmwayApacCouponService extends DefaultCouponService implemen
 	 * {@inheritDoc}
 	 */
 	@Override
-	public AmwayCouponModel createAmwayCoupon(final AbstractCouponModel couponModel, final Date startDate, final Date endDate,
-			final CMSSiteModel site, final CustomerModel customer, final AmwayAccountModel account)
+	public List<AmwayCouponModel> createAmwayCoupon(final AmwayCouponCreationParameter... couponCreationParam)
 	{
-		ServicesUtil.validateParameterNotNull(couponModel, "Coupon should not be null!");
-		ServicesUtil.validateParameterNotNull(startDate, "coupon start date should not be null!");
-		ServicesUtil.validateParameterNotNull(endDate, "coupon end date should not be null!");
-		ServicesUtil.validateParameterNotNull(site, "site should not be null!");
-
-		AmwayCouponModel amwayCouponModel = null;
-		if (null != customer || null != account)
+		final List<AmwayCouponModel> amwayCouponList = new ArrayList<>();
+		for (final AmwayCouponCreationParameter couponCreationParameter : couponCreationParam)
 		{
-			amwayCouponModel = createAmwayCoupon(startDate, endDate, site, couponModel, customer, account);
+			ServicesUtil.validateParameterNotNull(couponCreationParameter.getRedemptionCoupon(), "Coupon should not be null!");
+			ServicesUtil.validateParameterNotNull(couponCreationParameter.getStartDate(), "coupon start date should not be null!");
+			ServicesUtil.validateParameterNotNull(couponCreationParameter.getEndDate(), "coupon end date should not be null!");
+			ServicesUtil.validateParameterNotNull(couponCreationParameter.getStore(), "store should not be null!");
+			if (Objects.isNull(couponCreationParameter.getCustomer()) && Objects.isNull(couponCreationParameter.getAmwayAccount()))
+			{
+				throw new IllegalArgumentException("Both account and customer should not be null!");
+			}
 
-			LOG.info(new StringBuilder("Created new  Amway-Coupon with redeemable coupon[").append(couponModel.getCouponId())
-					.append("] for customer[").append((null != customer ? customer.getUid() : account.getCode())).append("].")
-					.toString());
+			final AmwayCouponModel amwayCoupon = createAmwayCoupon(couponCreationParameter.getStartDate(),
+					couponCreationParameter.getEndDate(), couponCreationParameter.getStore(),
+					couponCreationParameter.getRedemptionCoupon(), couponCreationParameter.getCustomer(),
+					couponCreationParameter.getAmwayAccount());
+
+			amwayCouponList.add(amwayCoupon);
 		}
-		return amwayCouponModel;
+		if (CollectionUtils.isNotEmpty(amwayCouponList))
+		{
+			getModelService().saveAll(amwayCouponList);
+		}
+		return amwayCouponList;
 	}
 
 	/**
 	 * Creates and initializes AmwayCoupon.
-	 *
-	 * @param customer
-	 * @param account
 	 */
-	private AmwayCouponModel createAmwayCoupon(final Date startDate, final Date endDate, final CMSSiteModel site,
+	protected AmwayCouponModel createAmwayCoupon(final Date startDate, final Date endDate, final BaseStoreModel store,
 			final AbstractCouponModel coupon, final CustomerModel customer, final AmwayAccountModel account)
 	{
 		final AmwayCouponModel counponModel = getModelService().create(AmwayCouponModel.class);
 
 		counponModel.setRedemptionCoupon(coupon);
-		counponModel.setSite(site);
+		counponModel.setStore(store);
 		counponModel.setStartDate(startDate);
 		counponModel.setEndDate(endDate);
 		counponModel.setCustomer(customer);
@@ -123,9 +132,9 @@ public class DefaultAmwayApacCouponService extends DefaultCouponService implemen
 	 */
 	@Override
 	public List<AmwayCouponModel> getAmwayCouponsForAbo(final CustomerModel customer, final List<AmwayCouponStatus> couponStatuses,
-			final boolean filterByDate)
+			final boolean showActive)
 	{
-		return amwayApacCouponDao.getAmwayCouponsForAbo(customer, couponStatuses, filterByDate);
+		return amwayApacCouponDao.getAmwayCouponsForAbo(customer, couponStatuses, showActive);
 	}
 
 	/**
@@ -163,6 +172,5 @@ public class DefaultAmwayApacCouponService extends DefaultCouponService implemen
 	{
 		this.amwayApacCouponDao = amwayApacCouponDao;
 	}
-
 
 }

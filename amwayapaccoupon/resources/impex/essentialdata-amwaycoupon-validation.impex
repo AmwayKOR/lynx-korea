@@ -1,0 +1,8 @@
+##
+#
+# Validation on coupon dates.
+#
+##
+
+insert_update DynamicConstraint;active[allownull=true];id[unique=true,allownull=true];message;language(code);expression;severity(code,itemtype(code));target;type(code);annotation
+;true;amwayCouponDateDiffConstraint;"End date must be after start date";BEANSHELL;"return getEndDate() == null || getStartDate() == null || getEndDate().after(getStartDate());";ERROR:Severity;com.amway.apac.coupon.model.AmwayCouponModel;AmwayCoupon;de.hybris.platform.validation.annotations.Dynamic

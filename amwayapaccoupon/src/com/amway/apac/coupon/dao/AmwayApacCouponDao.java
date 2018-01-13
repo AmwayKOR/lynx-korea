@@ -36,15 +36,15 @@ public interface AmwayApacCouponDao extends CouponDao
 	AmwayCouponModel findAmwayCouponByCode(final String couponCode);
 
 	/**
-	 * get Amway coupons for customer, particular status and withing date range
+	 * get Amway coupons for customer, particular status and within date range
 	 *
 	 * @param customer
 	 * @param couponStatuses
-	 * @param filterByDate
+	 * @param showActive
 	 * @return AmwayCouponModel
 	 */
 	List<AmwayCouponModel> getAmwayCouponsForAbo(CustomerModel customer, List<AmwayCouponStatus> couponStatuses,
-			boolean filterByDate);
+			boolean showActive);
 
 	/**
 	 * Returns list of Expired AmwayCoupons

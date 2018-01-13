@@ -8,19 +8,16 @@
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with SAP.
  */
-package com.amway.apac.coupon.service;
+package com.amway.apac.coupon.services;
 
-import de.hybris.platform.cms2.model.site.CMSSiteModel;
 import de.hybris.platform.core.model.user.CustomerModel;
-import de.hybris.platform.couponservices.model.AbstractCouponModel;
 import de.hybris.platform.couponservices.services.CouponService;
 
-import java.util.Date;
 import java.util.List;
 
 import com.amway.apac.coupon.enums.AmwayCouponStatus;
 import com.amway.apac.coupon.model.AmwayCouponModel;
-import com.amway.core.model.AmwayAccountModel;
+import com.amway.apac.coupon.service.data.AmwayCouponCreationParameter;
 
 
 /**
@@ -32,18 +29,8 @@ public interface AmwayApacCouponService extends CouponService
 {
 	/**
 	 * Creates AmwayCoupon.
-	 *
-	 * @param couponModel
-	 * @param startDate
-	 * @param endDate
-	 * @param site
-	 * @param customer
-	 * @param account
-	 *
-	 * @return AmwayCouponModel
 	 */
-	AmwayCouponModel createAmwayCoupon(final AbstractCouponModel couponModel, final Date startDate, final Date endDate,
-			final CMSSiteModel site, final CustomerModel customer, final AmwayAccountModel account);
+	List<AmwayCouponModel> createAmwayCoupon(final AmwayCouponCreationParameter... couponCreationParam);
 
 	/**
 	 * generates unique coupon code for AmwayCoupon
@@ -65,11 +52,11 @@ public interface AmwayApacCouponService extends CouponService
 	 *
 	 * @param customer
 	 * @param couponStatuses
-	 * @param filterByDate
+	 * @param showActive
 	 * @return AmwayCouponModel
 	 */
 	List<AmwayCouponModel> getAmwayCouponsForAbo(CustomerModel customer, List<AmwayCouponStatus> couponStatuses,
-			boolean filterByDate);
+			boolean showActive);
 
 	/**
 	 * Returns list of expired coupons.
