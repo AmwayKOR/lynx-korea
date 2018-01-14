@@ -78,16 +78,6 @@
 	       <aop:pointcut id="profiledMethods" expression="execution(* *(..))" />	
 	  -->
 	
-    <bean id="amwayapacextendedorderingSystemSetup" class="com.amway.apac.extended.ordering.setup.AmwayapacextendedorderingSystemSetup">
-        <!-- constructor arg injection example -->
-        <constructor-arg ref="amwayapacextendedorderingService"/>
-    </bean>
-
-    <bean id="amwayapacextendedorderingService" class="com.amway.apac.extended.ordering.service.impl.DefaultAmwayapacextendedorderingService">
-        <!-- setter injection example -->
-        <property name="modelService" ref="modelService"/>
-        <property name="mediaService" ref="mediaService"/>
-        <property name="flexibleSearchService" ref="flexibleSearchService"/>
-    </bean>
+  
 			
 </beans>
