@@ -3,16 +3,19 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
-<%@ attribute name="navigationNode" required="true"	type="de.hybris.platform.cms2.model.navigation.CMSNavigationNodeModel"%>
+<%@ attribute name="navigationNode" required="true"
+	type="de.hybris.platform.cms2.model.navigation.CMSNavigationNodeModel"%>
 
-<c:url var="categoryLandingPageUrl" value="${navigationNode.nodeLink.url}"/>
+<c:url var="categoryLandingPageUrl" value="${navigationNode.nodeLink.url}" />
 <div class="overlay-menu-tab-row">
 	<div class="overlay-menu-tab-categories clearfix row">
 		<c:forEach items="${navigationNode.children}" var="grandChildrenNode" varStatus="loop">
 			<div class="col-sm-3 tab__category">
 				<c:url var="childLinkUrl" value="${grandChildrenNode.nodeLink.url}" />
-				<div class="category-top-link" onclick="javascript:location.href='${childLinkUrl}'">
-					<h6>${grandChildrenNode.nodeLink.linkName}</h6>
+				<div class="category-top-link">
+					<h6>
+						<a class="no-padding" href="${childLinkUrl}"> ${grandChildrenNode.nodeLink.linkName} </a>
+					</h6>
 				</div>
 				<!-- <cms:component component="${grandChildrenNode.nodeLink}" element="span" class="category-top-link"/> -->
 				<ul class="category-links">

@@ -175,10 +175,10 @@ INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url
 ;;NavShopBathBodyLink;Navigation Bar- Shop- Bath and Body Link;/category/bath-and-body;NavShopBathBodyLink;NavShopBathBodyLink;;;
 ;;NavShopHomeLink;Navigation Bar- Shop- Home Link;/category/home;NavShopHomeLink;NavShopHomeLink;;;
 
-;;NavNutritionVitaminsLink;Navigation Bar- Vitamins Link;/category-landing-page;NavNutritionVitaminsLink;NavNutritionVitaminsLink;;;
-;;NavNutritionWeightLink;Navigation Bar- Weight Management Link;/category-landing-page;NavNutritionWeightLink;NavNutritionWeightLink;;;
-;;NavNutritionSportsLink;Navigation Bar- Sports Nutrion Link;/category-landing-page;NavNutritionSportsLink;NavNutritionSportsLink;;;
-;;NavNutritionEnergyLink;Navigation Bar- Energy Link;/category-landing-page;NavNutritionEnergyLink;NavNutritionEnergyLink;;;
+;;NavNutritionVitaminsLink;Navigation Bar- Vitamins Link;/category/beauty;NavNutritionVitaminsLink;NavNutritionVitaminsLink;;;
+;;NavNutritionWeightLink;Navigation Bar- Weight Management Link;/category/bath-and-body;NavNutritionWeightLink;NavNutritionWeightLink;;;
+;;NavNutritionSportsLink;Navigation Bar- Sports Nutrion Link;/category/nutrition;NavNutritionSportsLink;NavNutritionSportsLink;;;
+;;NavNutritionEnergyLink;Navigation Bar- Energy Link;/category/home;NavNutritionEnergyLink;NavNutritionEnergyLink;;;
 
 ;;NavNutritionVitaminsBoneHealthLink;Navigation Bar- Vitamins- Bone Health Link;;NavNutritionVitaminsBoneHealthLink;NavNutritionVitaminsBoneHealthLink;;bone-health
 ;;NavNutritionVitaminsChildrenLink;Navigation Bar- Vitamins- Children Link;;NavNutritionVitaminsChildrenLink;NavNutritionVitaminsChildrenLink;;childrens-vitamins
