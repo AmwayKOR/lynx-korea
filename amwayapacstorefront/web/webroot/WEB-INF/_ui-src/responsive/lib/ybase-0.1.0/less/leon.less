@@ -9,10 +9,17 @@
 
 .los-tree-view-opera{
 	.los-tree-view-opera-left{
-
 		display: inline-block;
-	.select2-container{
+	select.form-control{
 		margin-right:10px;
+		@media(max-width:768px){
+			width:45%;
+		}
+		&#group-order{
+			@media(max-width:768px){
+				display: @none;
+			}
+		}
 	}
 	input[type="text"]{
 		width:250px;
@@ -20,14 +27,19 @@
 		line-height: 40px;
 		height: 40px;
 	}
-	button{
-		line-height: 38px!important;
-		height: 40px!important;
-		padding: 0 20px;
-		margin-left:10px;
-		position: relative;
-		top:-2px;
-	}
+		button{
+			line-height: 38px!important;
+			height: 40px!important;
+			padding: 0 20px;
+			margin-left:10px;
+			position: relative;
+			top:-2px;
+			&#search-order-button{
+				@media(max-width:768px){
+					margin-bottom:2px;
+				}
+			}
+		}
 	}
 	.los-tree-view-opera-right{
 		float:right;
