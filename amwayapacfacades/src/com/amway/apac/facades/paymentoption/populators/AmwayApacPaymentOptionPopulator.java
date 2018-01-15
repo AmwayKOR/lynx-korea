@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.amway.apac.facades.paymentoption.populators;
 
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
@@ -14,6 +11,7 @@ import de.hybris.platform.servicelayer.dto.converter.Converter;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Required;
 
+import com.amway.apac.core.constants.AmwayapacCoreConstants;
 import com.amway.apac.core.enums.PaymentType;
 import com.amway.apac.core.model.AmwayApacVariantProductModel;
 import com.amway.apac.core.model.AmwayPaymentOptionModel;
@@ -22,6 +20,7 @@ import com.amway.apacfacades.payment.data.AmwayPaymentOptionData;
 
 
 /**
+ * Payment option Populator
  *
  * @author Ashish Sabal
  *
@@ -31,14 +30,13 @@ public class AmwayApacPaymentOptionPopulator implements Populator<AmwayPaymentOp
 	private Converter<HybrisEnumValue, EnumData> enumConverter;
 
 	/**
-	 * {@inheritDoc}
+	 * Payment option populate method
 	 */
 	@Override
 	public void populate(final AmwayPaymentOptionModel source, final AmwayPaymentOptionData target) throws ConversionException
 	{
-		validateParameterNotNullStandardMessage("target", source);
-		validateParameterNotNullStandardMessage("source", target);
-
+		validateParameterNotNullStandardMessage(AmwayapacCoreConstants.TARGET_STRING, source);
+		validateParameterNotNullStandardMessage(AmwayapacCoreConstants.SOURCE_STRING, target);
 
 		target.setAliasCode(source.getAliasCode());
 
@@ -66,8 +64,8 @@ public class AmwayApacPaymentOptionPopulator implements Populator<AmwayPaymentOp
 	}
 
 	/**
-	 * @param source
-	 * @return
+	 * @param paymentOption
+	 * @return Product name of product attached in payment option
 	 */
 	private String getProductName(final AmwayPaymentOptionModel paymentOption)
 	{

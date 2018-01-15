@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.amway.apac.core.stock.strategies.impl;
 
 import de.hybris.platform.basecommerce.enums.InStockStatus;
@@ -11,16 +8,19 @@ import java.util.Collection;
 
 
 /**
+ * Availability calculation strategy overridden to add custom InStockStatus at APAC level
+ *
  * @author Ashish Sabal
  *
  */
 public class AmwayApacCommerceAvailabilityCalculationStrategy extends WarehousingAvailabilityCalculationStrategy
 {
-	/*
-	 * (non-Javadoc)
+
+	/**
+	 * Returns available quantity for provided stock level models
 	 *
-	 * @see de.hybris.platform.commerceservices.stock.strategies.impl.DefaultCommerceAvailabilityCalculationStrategy#
-	 * calculateAvailability(java.util.Collection)
+	 * @param stockLevels
+	 * @return Available quantity
 	 */
 	@Override
 	public Long calculateAvailability(final Collection<StockLevelModel> stockLevels)

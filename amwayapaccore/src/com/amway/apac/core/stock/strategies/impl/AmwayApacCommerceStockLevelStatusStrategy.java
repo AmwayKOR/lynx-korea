@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.amway.apac.core.stock.strategies.impl;
 
 import de.hybris.platform.basecommerce.enums.InStockStatus;
@@ -13,16 +10,15 @@ import com.amway.core.stock.strategies.impl.AmwayCommerceStockLevelStatusStrateg
 
 
 /**
+ * Commerce stock level status strategy overridden to add custom InStockStatus at APAC level
+ *
  * @author Ashish Sabal
  *
  */
 public class AmwayApacCommerceStockLevelStatusStrategy extends AmwayCommerceStockLevelStatusStrategy
 {
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see com.amway.core.stock.strategies.impl.AmwayCommerceStockLevelStatusStrategy#checkStatus(de.hybris.platform.
-	 * ordersplitting.model.StockLevelModel)
+	/**
+	 * Returns Stock level status enum for provided stock level model
 	 */
 	@Override
 	public StockLevelStatus checkStatus(final StockLevelModel stockLevel)
@@ -47,10 +43,8 @@ public class AmwayApacCommerceStockLevelStatusStrategy extends AmwayCommerceStoc
 		return resultStatus;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see com.amway.core.stock.strategies.impl.AmwayCommerceStockLevelStatusStrategy#checkStatus(java.util.Collection)
+	/**
+	 * Returns Stock level status enum for provided stock level model collection
 	 */
 	@Override
 	public StockLevelStatus checkStatus(final Collection<StockLevelModel> stockLevels)

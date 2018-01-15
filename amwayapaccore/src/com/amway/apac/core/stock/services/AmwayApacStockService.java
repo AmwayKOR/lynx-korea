@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.amway.apac.core.stock.services;
 
 import de.hybris.platform.basecommerce.enums.StockLevelStatus;
@@ -12,27 +9,30 @@ import com.amway.core.model.AmwayKitProductModel;
 
 
 /**
- * Interface to define methods for stock at APAC level
+ * Stock service interface to define methods for stock at APAC level
  *
  * @author Ashish Sabal
  *
  */
 public interface AmwayApacStockService
 {
-
 	/**
+	 * Checks for stock availability
+	 *
 	 * @param stockStatus
-	 * @return
+	 * @return Checks for stock availability
 	 */
-	boolean isStockAvailable(StockLevelStatus stockStatus);
+	boolean isStockAvailable(final StockLevelStatus stockStatus);
 
 	/**
+	 * Returns stock status of bundle product calculated on basis of all major child products status
+	 *
 	 * @param parentBundle
 	 * @param baseStore
 	 * @param pointOfService
 	 * @param warehouse
-	 * @return
+	 * @return Stock status of bundle product calculated on basis of all major child products status
 	 */
-	StockLevelStatus updateParentBundleStockStatus(AmwayKitProductModel parentBundle, BaseStoreModel baseStore,
-			PointOfServiceModel pointOfService, WarehouseModel warehouse);
+	StockLevelStatus getUpdateBundleProductStockStatus(final AmwayKitProductModel parentBundle, final BaseStoreModel baseStore,
+			final PointOfServiceModel pointOfService, final WarehouseModel warehouse);
 }

@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.amway.apac.facades.populators;
 
 import de.hybris.platform.converters.Populator;
@@ -14,6 +11,7 @@ import com.amway.apacfacades.data.EnumData;
 
 
 /**
+ * Enum data populator
  *
  * @author Ashish Sabal
  *
@@ -22,10 +20,8 @@ public class AmwayApacEnumDataPopulator implements Populator<HybrisEnumValue, En
 {
 	private EnumerationService enumerationService;
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see de.hybris.platform.converters.Populator#populate(java.lang.Object, java.lang.Object)
+	/**
+	 * Enum data populate method
 	 */
 	@Override
 	public void populate(final HybrisEnumValue source, final EnumData target) throws ConversionException

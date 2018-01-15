@@ -11,7 +11,8 @@ import com.amway.apac.core.model.AmwayUserPromotionCountModel;
 
 
 /**
- *
+ * DAO containing all product related APIs
+ * 
  * @author Ashish Sabal
  */
 public interface AmwayApacProductDao extends ProductDao
@@ -22,14 +23,15 @@ public interface AmwayApacProductDao extends ProductDao
 	 * @param catalogVersion
 	 * @return list of all payment option available for OMS code
 	 */
-	List<AmwayPaymentOptionModel> getAllAmwayPaymentOptionFromOmsCode(String omsCode, CatalogVersionModel catalogVersion);
+	List<AmwayPaymentOptionModel> getAllAmwayPaymentOptionFromOmsCode(final String omsCode,
+			final CatalogVersionModel catalogVersion);
 
 	/**
 	 * @param omsCode
 	 * @param catalogVersion
 	 * @return payment option for OMS code
 	 */
-	List<AmwayPaymentOptionModel> getAmwayPaymentOptionFromOmsCode(String omsCode, CatalogVersionModel catalogVersion);
+	List<AmwayPaymentOptionModel> getAmwayPaymentOptionFromOmsCode(final String omsCode, final CatalogVersionModel catalogVersion);
 
 	/**
 	 * @param userId

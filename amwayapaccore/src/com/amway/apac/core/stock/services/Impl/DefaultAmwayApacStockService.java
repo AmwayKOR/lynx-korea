@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.amway.apac.core.stock.services.Impl;
 
 import de.hybris.platform.basecommerce.enums.StockLevelStatus;
@@ -23,6 +20,8 @@ import com.amway.core.stock.service.impl.DefaultAmwayStockService;
 
 
 /**
+ * Stock service implementation for APAC specific APIs
+ *
  * @author Ashish Sabal
  *
  */
@@ -30,12 +29,8 @@ public class DefaultAmwayApacStockService extends DefaultAmwayStockService imple
 {
 	private CommerceStockService commerceStockService;
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see
-	 * com.amway.apac.core.stock.services.AmwayApacStockService#isStockAvailable(de.hybris.platform.basecommerce.enums.
-	 * StockLevelStatus)
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public boolean isStockAvailable(final StockLevelStatus parentBundleStockStatus)
@@ -50,15 +45,12 @@ public class DefaultAmwayApacStockService extends DefaultAmwayStockService imple
 		return isParentStockAvailable;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see com.amway.apac.core.stock.services.AmwayApacStockService#updateParentBundleStockStatus(com.amway.core.model.
-	 * AmwayKitProductModel, de.hybris.platform.store.BaseStoreModel, java.lang.Object, java.lang.Object)
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
-	public StockLevelStatus updateParentBundleStockStatus(final AmwayKitProductModel parentBundle, final BaseStoreModel baseStore,
-			final PointOfServiceModel pointOfService, final WarehouseModel warehouse)
+	public StockLevelStatus getUpdateBundleProductStockStatus(final AmwayKitProductModel parentBundle,
+			final BaseStoreModel baseStore, final PointOfServiceModel pointOfService, final WarehouseModel warehouse)
 	{
 		StockLevelStatus stockStatus = null;
 		boolean isBackOrder = true;
@@ -107,7 +99,7 @@ public class DefaultAmwayApacStockService extends DefaultAmwayStockService imple
 	}
 
 	/**
-	 * Used to get Child Stock Status based upon different parameter
+	 * Returns Child Stock Status based upon different parameter
 	 *
 	 * @param baseStore
 	 * @param pointOfService
@@ -115,7 +107,7 @@ public class DefaultAmwayApacStockService extends DefaultAmwayStockService imple
 	 * @param kitEntryProduct
 	 * @return StockLevelStatus
 	 */
-	private StockLevelStatus getChildStockStatus(final BaseStoreModel baseStore, final PointOfServiceModel pointOfService,
+	protected StockLevelStatus getChildStockStatus(final BaseStoreModel baseStore, final PointOfServiceModel pointOfService,
 			final WarehouseModel warehouse, final AmwayKitEntryProductModel kitEntryProduct)
 	{
 		StockLevelStatus childStockStatus = null;
@@ -164,7 +156,7 @@ public class DefaultAmwayApacStockService extends DefaultAmwayStockService imple
 	 * @param warehouse
 	 * @return StockLevelStatus
 	 */
-	private StockLevelStatus getStockLevelStatusForVariantProductWarehouse(final AmwayKitEntryProductModel kitEntryProduct,
+	protected StockLevelStatus getStockLevelStatusForVariantProductWarehouse(final AmwayKitEntryProductModel kitEntryProduct,
 			final WarehouseModel warehouse)
 	{
 		final StockLevelStatus stockStatus;
@@ -191,8 +183,8 @@ public class DefaultAmwayApacStockService extends DefaultAmwayStockService imple
 	 * @param pointOfService
 	 * @return StockLevelStatus
 	 */
-	private StockLevelStatus getStockLevelStatusForVariantProductAndPointOfService(final AmwayKitEntryProductModel kitEntryProduct,
-			final PointOfServiceModel pointOfService)
+	protected StockLevelStatus getStockLevelStatusForVariantProductAndPointOfService(
+			final AmwayKitEntryProductModel kitEntryProduct, final PointOfServiceModel pointOfService)
 	{
 		final StockLevelStatus stockStatus;
 		// if product is Base product, fetch from all variants
@@ -221,7 +213,7 @@ public class DefaultAmwayApacStockService extends DefaultAmwayStockService imple
 	 * @param baseStore
 	 * @return StockLevelStatus
 	 */
-	private StockLevelStatus getStockLevelStatusForVariantProductAndBaseStore(final AmwayKitEntryProductModel kitEntryProduct,
+	protected StockLevelStatus getStockLevelStatusForVariantProductAndBaseStore(final AmwayKitEntryProductModel kitEntryProduct,
 			final BaseStoreModel baseStore)
 	{
 		final StockLevelStatus stockStatus;

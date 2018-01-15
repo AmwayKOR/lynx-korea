@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.amway.apac.core.interceptors;
 
 import de.hybris.platform.core.model.product.ProductModel;
@@ -16,14 +13,17 @@ import java.util.Calendar;
 import com.amway.apac.core.model.AmwayPaymentOptionModel;
 
 
+/**
+ * Interceptor to update product modified time while removing and updating payment option model
+ * 
+ * @author Ashish Sabal
+ *
+ */
 public class AmwayApacPaymentOptionInterceptor
 		implements PrepareInterceptor<AmwayPaymentOptionModel>, RemoveInterceptor<AmwayPaymentOptionModel>
 {
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see de.hybris.platform.servicelayer.interceptor.RemoveInterceptor#onRemove(java.lang.Object,
-	 * de.hybris.platform.servicelayer.interceptor.InterceptorContext)
+	/**
+	 * Method to update product model modified time while removing payment option
 	 */
 	@Override
 	public void onRemove(final AmwayPaymentOptionModel model, final InterceptorContext ctx) throws InterceptorException
@@ -40,11 +40,8 @@ public class AmwayApacPaymentOptionInterceptor
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see de.hybris.platform.servicelayer.interceptor.PrepareInterceptor#onPrepare(java.lang.Object,
-	 * de.hybris.platform.servicelayer.interceptor.InterceptorContext)
+	/**
+	 * Method to update product model modified time while updating payment option
 	 */
 	@Override
 	public void onPrepare(final AmwayPaymentOptionModel model, final InterceptorContext ctx) throws InterceptorException
@@ -69,7 +66,6 @@ public class AmwayApacPaymentOptionInterceptor
 				{
 					ctx.registerElementFor(variant.getBaseProduct(), PersistenceOperation.SAVE);
 				}
-
 			}
 		}
 	}

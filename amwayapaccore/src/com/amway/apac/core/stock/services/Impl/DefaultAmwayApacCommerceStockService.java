@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.amway.apac.core.stock.services.Impl;
 
 import de.hybris.platform.basecommerce.enums.StockLevelStatus;
@@ -20,6 +17,8 @@ import com.amway.core.stock.service.impl.DefaultAmwayCommerceStockService;
 
 
 /**
+ * Commerce stock service implementation for APAC specific APIs
+ *
  * @author Ashish Sabal
  *
  */
@@ -28,12 +27,8 @@ public class DefaultAmwayApacCommerceStockService extends DefaultAmwayCommerceSt
 	private AmwayApacProductService amwayApacProductService;
 	private AmwayApacStockService amwayApacStockService;
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see
-	 * de.hybris.platform.commerceservices.stock.CommerceStockService#getStockLevelStatusForProductAndBaseStore(de.hybris
-	 * .platform.core.model.product.ProductModel, de.hybris.platform.store.BaseStoreModel)
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public StockLevelStatus getStockLevelStatusForProductAndBaseStore(final ProductModel product, final BaseStoreModel baseStore)
@@ -42,13 +37,13 @@ public class DefaultAmwayApacCommerceStockService extends DefaultAmwayCommerceSt
 		StockLevelStatus stockStatus = super.getStockLevelStatusForProductAndBaseStore(product, baseStore);
 
 		// Replace stock status with child stock in case of bundled product
-		if (amwayApacProductService.checkKitProductByType(product, AmwayKitProductType.BUNDLED))
+		if (getAmwayApacProductService().checkKitProductByType(product, AmwayKitProductType.BUNDLED))
 		{
-			if (amwayApacStockService.isStockAvailable(stockStatus))
+			if (getAmwayApacStockService().isStockAvailable(stockStatus))
 			{
 				// iterate for child and fetch stock level status from all major child
-				final StockLevelStatus childStatus = amwayApacStockService
-						.updateParentBundleStockStatus((AmwayKitProductModel) product, baseStore, null, null);
+				final StockLevelStatus childStatus = getAmwayApacStockService()
+						.getUpdateBundleProductStockStatus((AmwayKitProductModel) product, baseStore, null, null);
 				if (Objects.nonNull(childStatus))
 				{
 					stockStatus = childStatus;
@@ -58,12 +53,8 @@ public class DefaultAmwayApacCommerceStockService extends DefaultAmwayCommerceSt
 		return stockStatus;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see de.hybris.platform.warehousing.atp.services.impl.WarehousingCommerceStockService#
-	 * getStockLevelStatusForProductAndPointOfService(de.hybris.platform.core.model.product.ProductModel,
-	 * de.hybris.platform.storelocator.model.PointOfServiceModel)
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public StockLevelStatus getStockLevelStatusForProductAndPointOfService(final ProductModel product,
@@ -72,13 +63,13 @@ public class DefaultAmwayApacCommerceStockService extends DefaultAmwayCommerceSt
 		StockLevelStatus stockStatus = super.getStockLevelStatusForProductAndPointOfService(product, pointOfService);
 
 		// iterate for child and fetch stock level status from all major child
-		if (amwayApacProductService.checkKitProductByType(product, AmwayKitProductType.BUNDLED))
+		if (getAmwayApacProductService().checkKitProductByType(product, AmwayKitProductType.BUNDLED))
 		{
-			if (amwayApacStockService.isStockAvailable(stockStatus))
+			if (getAmwayApacStockService().isStockAvailable(stockStatus))
 			{
 				// iterate for child and fetch stock level status from all major child
-				final StockLevelStatus childStatus = amwayApacStockService
-						.updateParentBundleStockStatus((AmwayKitProductModel) product, null, pointOfService, null);
+				final StockLevelStatus childStatus = getAmwayApacStockService()
+						.getUpdateBundleProductStockStatus((AmwayKitProductModel) product, null, pointOfService, null);
 				if (Objects.nonNull(childStatus))
 				{
 					stockStatus = childStatus;
@@ -101,7 +92,7 @@ public class DefaultAmwayApacCommerceStockService extends DefaultAmwayCommerceSt
 	 *           the amwayApacProductService to set
 	 */
 	@Required
-	public void setAmwayApacProductService(AmwayApacProductService amwayApacProductService)
+	public void setAmwayApacProductService(final AmwayApacProductService amwayApacProductService)
 	{
 		this.amwayApacProductService = amwayApacProductService;
 	}
@@ -119,7 +110,7 @@ public class DefaultAmwayApacCommerceStockService extends DefaultAmwayCommerceSt
 	 *           the amwayApacStockService to set
 	 */
 	@Required
-	public void setAmwayApacStockService(AmwayApacStockService amwayApacStockService)
+	public void setAmwayApacStockService(final AmwayApacStockService amwayApacStockService)
 	{
 		this.amwayApacStockService = amwayApacStockService;
 	}

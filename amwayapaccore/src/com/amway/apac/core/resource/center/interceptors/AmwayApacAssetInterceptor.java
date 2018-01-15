@@ -1,7 +1,6 @@
-/**
- *
- */
 package com.amway.apac.core.resource.center.interceptors;
+
+import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
 
 import de.hybris.platform.servicelayer.interceptor.InitDefaultsInterceptor;
 import de.hybris.platform.servicelayer.interceptor.InterceptorContext;
@@ -12,13 +11,15 @@ import de.hybris.platform.servicelayer.model.ModelService;
 import java.util.Map;
 import java.util.Objects;
 
-import org.assertj.core.util.Preconditions;
+import org.springframework.beans.factory.annotation.Required;
 
 import com.amway.apac.core.enums.AccountClassificationEnum;
 import com.amway.apac.resourcecentre.model.media.AbstractAmwayAssetModel;
 
 
 /**
+ * Interceptor to set and update classification rank in asset
+ *
  * @author Ashish Sabal
  *
  */
@@ -28,11 +29,8 @@ public class AmwayApacAssetInterceptor
 	private ModelService modelService;
 	private Map<AccountClassificationEnum, Integer> amwayAccountClassificationRankMapping;
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see de.hybris.platform.servicelayer.interceptor.InitDefaultsInterceptor#onInitDefaults(java.lang.Object,
-	 * de.hybris.platform.servicelayer.interceptor.InterceptorContext)
+	/**
+	 * Sets rank during asset object initialize
 	 */
 	@Override
 	public void onInitDefaults(final AbstractAmwayAssetModel amwayAssetModel, final InterceptorContext ctx)
@@ -41,11 +39,9 @@ public class AmwayApacAssetInterceptor
 		setAssetRank(amwayAssetModel);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see de.hybris.platform.servicelayer.interceptor.PrepareInterceptor#onPrepare(java.lang.Object,
-	 * de.hybris.platform.servicelayer.interceptor.InterceptorContext)
+
+	/**
+	 * Sets rank during asset object update
 	 */
 	@Override
 	public void onPrepare(final AbstractAmwayAssetModel amwayAssetModel, final InterceptorContext ctx) throws InterceptorException
@@ -54,12 +50,14 @@ public class AmwayApacAssetInterceptor
 	}
 
 	/**
+	 * Sets classification rank from classification model to asset model
+	 *
 	 * @param amwayAssetModel
 	 * @throws InterceptorException
 	 */
 	private void setAssetRank(final AbstractAmwayAssetModel amwayAssetModel) throws InterceptorException
 	{
-		Preconditions.checkArgument(Objects.nonNull(amwayAssetModel), "Asset model cannot be NULL.");
+		validateParameterNotNullStandardMessage("Asset model", amwayAssetModel);
 
 		if (Objects.nonNull(amwayAssetModel.getClassification()))
 		{
@@ -93,6 +91,7 @@ public class AmwayApacAssetInterceptor
 	 * @param modelService
 	 *           the modelService to set
 	 */
+	@Required
 	public void setModelService(final ModelService modelService)
 	{
 		this.modelService = modelService;
@@ -110,6 +109,7 @@ public class AmwayApacAssetInterceptor
 	 * @param amwayAccountClassificationRankMapping
 	 *           the amwayAccountClassificationRankMapping to set
 	 */
+	@Required
 	public void setAmwayAccountClassificationRankMapping(
 			final Map<AccountClassificationEnum, Integer> amwayAccountClassificationRankMapping)
 	{

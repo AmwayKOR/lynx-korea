@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.amway.apac.core.model;
 
 import de.hybris.platform.servicelayer.model.attribute.DynamicAttributeHandler;
@@ -18,12 +15,9 @@ import org.apache.commons.collections.CollectionUtils;
  */
 public class AmwayApacPOSDescriptionHandler implements DynamicAttributeHandler<String, AmwayPOSRestrictionModel>
 {
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see
-	 * de.hybris.platform.servicelayer.model.attribute.DynamicAttributeHandler#get(de.hybris.platform.servicelayer.model.
-	 * AbstractItemModel)
+
+	/**
+	 * Returns string list of all shops with POS available
 	 */
 	@Override
 	public String get(final AmwayPOSRestrictionModel model)
@@ -42,12 +36,10 @@ public class AmwayApacPOSDescriptionHandler implements DynamicAttributeHandler<S
 		return result.toString();
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Setter method for message string in POS restriction model
 	 *
-	 * @see
-	 * de.hybris.platform.servicelayer.model.attribute.DynamicAttributeHandler#set(de.hybris.platform.servicelayer.model.
-	 * AbstractItemModel, java.lang.Object)
+	 * @throws UnsupportedOperationException
 	 */
 	@Override
 	public void set(final AmwayPOSRestrictionModel model, final String value)

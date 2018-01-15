@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.amway.apac.core.resource.center.daos.Impl;
 
 import de.hybris.platform.commerceservices.search.flexiblesearch.data.SortQueryData;
@@ -10,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Required;
 
 import com.amway.apac.core.account.service.AmwayApacAccountClassificationService;
 import com.amway.apac.core.constants.AmwayapacCoreConstants;
@@ -19,16 +17,34 @@ import com.amway.apac.resourcecenter.enums.AmwayApacAssetsSort;
 
 
 /**
+ * Asset DAO implementation extended from {@link DefaultAmwayAssetDao} of resource center extension
+ *
  * @author Ashish Sabal
  *
  */
 public class DefaultAmwayApacAssetDao extends DefaultAmwayAssetDao
 {
+	/**
+	 * Classification Rank constant
+	 */
 	private static final String RANK = "rank";
+
+	/**
+	 * Query condition part with rank and classification conditions
+	 */
+	private static final String QUERY_STRING_WITH_RANK_PARAM_AND_CLASSIFICATION_NULL = "AND ({a.rank}<=?rank OR ({a.classification} IS NULL)) ";
+
+	/**
+	 * Query condition part with classification NULL
+	 */
+	private static final String QUERY_STRING_WITH_CLASSIFICATION_NULL = "AND {a.accountClassification} IS NULL ";
 
 	private AmwayApacAccountClassificationService amwayApacAccountClassificationService;
 	private Map<AccountClassificationEnum, Integer> amwayAccountClassificationRankMapping;
 
+	/**
+	 * BuildSearchQuery method of parent overridden to add classification rank in asset search query
+	 */
 	@Override
 	protected List<SortQueryData> buildSearchQuery(final Map<String, Object> queryParams, final String year, final String typQuery)
 	{
@@ -50,7 +66,7 @@ public class DefaultAmwayApacAssetDao extends DefaultAmwayAssetDao
 
 	/**
 	 * @param queryParams
-	 * @return
+	 * @return Condition clause for account classification
 	 */
 	private String generateRankQuery(final Map<String, Object> queryParams)
 	{
@@ -62,11 +78,11 @@ public class DefaultAmwayApacAssetDao extends DefaultAmwayAssetDao
 		{
 			queryParams.put(RANK,
 					getAmwayAccountClassificationRankMapping().get(AccountClassificationEnum.valueOf(accountClassficationCode)));
-			rankQuery = "AND ({a.rank}<=?rank OR ({a.classification} IS NULL)) ";
+			rankQuery = QUERY_STRING_WITH_RANK_PARAM_AND_CLASSIFICATION_NULL;
 		}
 		else
 		{
-			rankQuery = "AND {a.accountClassification} IS NULL ";
+			rankQuery = QUERY_STRING_WITH_CLASSIFICATION_NULL;
 		}
 		return rankQuery;
 	}
@@ -84,6 +100,7 @@ public class DefaultAmwayApacAssetDao extends DefaultAmwayAssetDao
 	 * @param amwayApacAccountClassificationService
 	 *           the amwayApacAccountClassificationService to set
 	 */
+	@Required
 	public void setAmwayApacAccountClassificationService(
 			final AmwayApacAccountClassificationService amwayApacAccountClassificationService)
 	{
@@ -102,6 +119,7 @@ public class DefaultAmwayApacAssetDao extends DefaultAmwayAssetDao
 	 * @param amwayAccountClassificationRankMapping
 	 *           the amwayAccountClassificationRankMapping to set
 	 */
+	@Required
 	public void setAmwayAccountClassificationRankMapping(
 			final Map<AccountClassificationEnum, Integer> amwayAccountClassificationRankMapping)
 	{
