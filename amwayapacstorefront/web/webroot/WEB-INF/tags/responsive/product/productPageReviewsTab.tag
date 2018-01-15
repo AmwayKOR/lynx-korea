@@ -44,27 +44,27 @@
 	                <form v-on:submit.prevent="submit" action="#" method="get">
 	                <div class="dialog-form-module">
 	                	<input type="hidden" ref="alias" value="${user.name}" class="form-control" name="alias" >
-                        <div class="row form-group" v-bind:class="{'has-error': ratingError}">
+                        <div class="row form-group" v-bind:class="{'has-error': message.rating.error}">
                             <div class="col-md-12 form-name"><spring:theme code="review.rating" /></div>
                             <div class="col-md-12 form-opera star" >
                                <div id="star"></div>
-                               <div v-bind:class="[ratingError ? 'visible' : 'invisible', {'help-block with-errors' : ratingError}]">{{ ratingMessage }}</div>
+                               <div v-bind:class="[message.rating.error ? 'visible' : 'invisible', {'help-block with-errors' : message.rating.error}]">{{ message.rating.message }}</div>
                             </div>
                         </div>
-                        <div class="row form-group" v-bind:class="{'has-error': headlineError}">
+                        <div class="row form-group" v-bind:class="{'has-error': message.headline.error}">
                             <div class="col-md-12 form-name"><spring:theme code="review.headline" /></div>
                             <div class="col-md-12 form-opera">
                             	<input v-model="headline" name="headline" type="text" class="form-control" required="required">
-                            	<div v-bind:class="[headlineError ? 'visible' : 'invisible', {'help-block with-errors' : headlineError}]">{{ headlineMessage }}</div>
+                            	<div v-bind:class="[message.headline.error ? 'visible' : 'invisible', {'help-block with-errors' : message.headline.error}]">{{ message.headline.message }}</div>
                             </div>
                         </div>
-                        <div class="row form-group" v-bind:class="{'has-error': commentError}">
+                        <div class="row form-group" v-bind:class="{'has-error': message.comment.error}">
                             <div class="col-md-12 form-name"><spring:theme code="review.comment" /></div>
                             <div class="col-md-12 form-opera">
                             	<textarea v-model="comment" name="comment" class="form-control"></textarea>
                             </div>
                             <div class="col-md-12 form-opera">
-                            	<div v-bind:class="[commentError ? 'visible' : 'invisible', {'help-block with-errors' : commentError}]">{{ commentMessage }}</div>
+                            	<div v-bind:class="[message.comment.error ? 'visible' : 'invisible', {'help-block with-errors' : message.comment.error}]">{{ message.comment.message }}</div>
                             </div>
                         </div>
 	                </div>

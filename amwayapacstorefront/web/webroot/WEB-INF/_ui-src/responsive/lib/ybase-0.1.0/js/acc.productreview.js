@@ -1,25 +1,23 @@
 ACC.productReview = {
 
 	_autoload: [
-		"loadVM",
+		"loadVM"
 	],
 
 	loadVM: function(){
 		
 		var productReviewVM = new Vue({
 		    el: '#product-review',
-		    data: {
-		    	headline: '',
-		    	comment: '',
-		    	rating: 0,
-		    	alias: '',
-		        response: null,
-		        headlineError: false,
-		        commentError: false,
-		        ratingError: false,
-		        headlineMessage: '',
-		        commentMessage: '',
-		        ratingMessage: ''
+		    data:{
+		    	headline:"",
+		    	comment:"",
+		    	rating:0,
+		    	alias:"",
+		    	message : {
+		    		headline : { error: false, message: ""},
+		    		comment : { error: false, message: ""},
+		    		rating : { error: false, message: ""}
+		    	}
 		    },
 		    methods: {
 		        submit: function(e) {
@@ -40,9 +38,9 @@ ACC.productReview = {
 		    			type : 'GET',
 		    			success : function(data) 
 		    			{
-	    					self.headlineError = false;
-	    					self.commentError = false;
-	    					self.ratingError = false;
+	    					self.message.headline.error = false;
+	    					self.message.comment.error = false;
+	    					self.message.rating.error = false;
 	    					
 		    				if(data.success){
 		    					ACC.productReview.openPrompt();
@@ -50,15 +48,15 @@ ACC.productReview = {
 		    				else
 		    				{
 		    					data.message.forEach(function(value, index) {
-		    						if(value.field == 'headline'){
-		    							self.headlineError = true;
-		    							self.headlineMessage = value.message;
-		    						}else if(value.field == 'comment'){
-		    							self.commentError = true;
-		    							self.commentMessage = value.message;
-		    						}else if(value.field == 'rating'){
-		    							self.ratingError = true;
-		    							self.ratingMessage = value.message;
+		    						if(value.field == "headline"){
+		    							self.message.headline.error = true;
+		    							self.message.headline.message = value.message;
+		    						}else if(value.field == "comment"){
+		    							self.message.comment.error = true;
+		    							self.message.comment.message = value.message;
+		    						}else if(value.field == "rating"){
+		    							self.message.rating.error = true;
+		    							self.message.rating.message = value.message;
 		    						}
 		    			        });
 		    				}
@@ -86,13 +84,13 @@ ACC.productReview = {
         });
         
         $(".product-collapse__review").click(function() {
-        	
-        	productReviewVM.headlineError = false;
-        	productReviewVM.commentError = false;
-        	productReviewVM.ratingError = false;
+			productReviewVM.message.headline.error = false;
+			productReviewVM.message.comment.error = false;
+			productReviewVM.message.rating.error = false;
         	productReviewVM.headline = '';
         	productReviewVM.comment = '';
-        	$('#star').raty('set', { score: 0 });
+        	productReviewVM.rating = 0;
+        	$("#star").raty("score", 0);
         	
         });
 
