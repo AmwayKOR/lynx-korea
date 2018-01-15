@@ -5,6 +5,7 @@ import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 
 import java.util.List;
 
+import com.amway.apac.facades.cart.enums.AmwayApacCartSortCode;
 import com.amway.apac.facades.wishlist.data.AmwayApacWishListModification;
 import com.amway.facades.product.data.WishlistData;
 import com.amway.facades.wishlist.AmwayWishlistFacade;
@@ -77,5 +78,13 @@ public interface AmwayApacWishlistFacade extends AmwayWishlistFacade
 	 *            if uid or name is null or empty.
 	 */
 	AmwayApacWishlistModificationStatus updateWishlistNameAndReturnStatus(final String uid, final String newName);
+
+	/**
+	 *
+	 * @param data
+	 * @param sortBy
+	 * @return CartData This method accepts CartData and sort by and returns CartData in given order.
+	 */
+	WishlistData getShoppingListDetailsSortBySortCode(AmwayApacCartSortCode sortBy, final WishlistData data);
 
 }

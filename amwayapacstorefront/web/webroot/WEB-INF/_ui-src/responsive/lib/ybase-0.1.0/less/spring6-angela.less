@@ -1,0 +1,226 @@
+@import 'main.less';
+
+//rewards-tracking
+.rewards-tracking{
+  .icon-minus{
+    &:before{
+      content: "\ea78" !important;
+      color:@blue_2;
+    }
+  }
+  .collapsed{
+    .icon-minus{
+      &:before{
+        content: "\ea79" !important;
+      }
+    }
+  }
+  .order-history-box{
+    display: inherit;
+    .customer-sales-history-searched-content{
+      padding-left:12px;
+      .key-indicator-description{
+        width:68%;
+        font-size:16px;
+      }
+    }
+    .account-section-content{
+      padding-top:40px;
+      margin-bottom:0;
+      .ditto-nav-tabs-wrap{
+        margin-bottom:0;
+        .tabs-toggles{
+          .tab-toggle-wrap{
+            .tab-toggle{
+              min-width: 200px;
+              text-align: center;
+              padding: 1.1875em 1.875em;
+            }
+          }
+        }
+        .tab-content{
+          p{
+            text-align: right;
+            padding:10px 0;
+            font-size: 16px;
+            font-style: italic;
+            margin-top:10px;
+          }
+          .create-new-shopping-list-container{
+            margin-bottom:0;
+            .accordion-panel{
+              .accordion-toggle{
+                .pull-right{
+                  &:before{
+                    color:@blue_2;
+                  }
+                }
+                .title-element{
+                  .divider{
+                    padding:0 10px;
+                  }
+                  .green{
+                    text-transform: initial;
+                  }
+                  .not-tracking{
+                    color:@mainColor;
+                    text-transform: initial;
+                  }
+                }
+              }
+              .tracking-body-list-item{
+                margin: 0 auto;
+                width: 96%;
+                .content-list-item{
+                  border-top: 1px solid @gray_8;
+                  color: @blue_1;
+                  font-size: 16px;
+                  padding: 15px;
+                  font-weight: 600;
+                  span{
+                    float: right;
+                    &.green-number{
+                      width: 24px;
+                      text-align: center;
+                    }
+                    &.double-icon{
+                      margin-right: 20px;
+                    }
+                    &.icon-gray{
+                      margin-right:0;
+                    }
+                  }
+                  &:last-child{
+                    border-bottom: 1px solid #dadada;
+                    margin-bottom: 52px;
+                  }
+                  .icon-gray{
+                    color:@gray_8;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      .extra2{
+        margin-top:70px;
+        .rewards-tracking-tutorial{
+          .experience-brands__content{
+            .wrapper-limit{
+              .wrapper{
+                max-width: 1400px;
+                .banner-content{
+                  position: absolute;
+                  top: 0;
+                  left: 0px;
+                  .banner-title{
+                    margin-top:0;
+                    font-size: 20px;
+                    font-weight: 600;
+                  }
+                  .sub-title-wrap{
+                    width:45%;
+                    .banner-sub-title{
+                      span{
+                        font-size:16px;
+                      }
+                    }
+                  }
+                }
+                .experience-brands__image_magazine{
+                  bottom: auto;
+                  margin-top: 0;
+                  width:45%;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+  }
+}
+@media(max-width:768px){
+  .rewards-tracking{
+    .key-indicator-description{
+      width:100%!important;
+    }
+    .order-history-box{
+      .account-section-content{
+        .ditto-nav-tabs-wrap{
+          margin-bottom: 0 !important;
+          .tabs-toggles{
+            .tab-toggle-wrap{
+              width:25%;
+              .tab-toggle{
+                min-width:0;
+                width:100%;
+                text-align: center;
+              }
+            }
+          }
+          .tracking-body-list-item{
+            .content-list-item{
+              span{
+                float: none!important;
+                display: @block;
+                &.double-icon{
+                  margin-right: 20px;
+                  display: @inlineBlock;
+                }
+                &.icon-gray{
+                  margin-right: 20px!important;
+                }
+              }
+            }
+          }
+        }
+        .extra2{
+          .rewards-tracking-tutorial{
+            .experience-brands__content{
+              .wrapper-limit{
+                .wrapper{
+                  .banner-content{
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    left:50%!important;
+                    width:100%;
+                    .banner-button-wrap {
+                      position: absolute;
+                      bottom: 0;
+                      width: 300px;
+                      left: 50%;
+                      margin-left: -150px;
+                      font-size:16px;
+                    }
+                  }
+                  .experience-brands__image_magazine{
+                    float: none;
+                    margin-top:0;
+                    bottom: 0;
+                    right: auto;
+                    left: auto;
+                    width:100%;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+//fast-tracking
+.fast-tracking{
+  .content-block{
+    display: @block;
+  }
+  .icon-gay{
+    color:@gray_8;
+  }
+}

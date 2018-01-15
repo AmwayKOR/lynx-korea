@@ -63,7 +63,7 @@
 			ACC.messages.quickShopProductCodeError= '<spring:theme code="quick.shop.product.code.error"/>';
 			ACC.messages.quickShopQuantityError= '<spring:theme code="quick.shop.quantity.error"/>';
 			ACC.messages.shoppingListProductSelectedError= '<spring:theme code="shopping.list.product.selected.error"/>';
-			
+			ACC.messages.shoppingListSortingError='<spring:theme code="shoppinglist.sorting.error"/>';
 		/*]]>*/
 	</script>
 	<template:javaScriptAddOnsVariables/>

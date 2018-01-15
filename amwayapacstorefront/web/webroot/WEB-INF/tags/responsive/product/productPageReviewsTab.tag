@@ -13,33 +13,17 @@
 <c:url value="${product.url}/reviewhtml/all" var="getAllReviewsUrl"/>
 <c:url value="${product.url}/review" var="productReviewActionUrl"/>
 
-<c:set var="isUserAbo" value="false" />
-<sec:authorize ifNotGranted="ROLE_ANONYMOUS">
-	<c:set var="isUserAbo" value="true" />
-</sec:authorize>
-
 <div class="product-collapse__rating">
-	<c:choose>
-		<c:when test="${isUserAbo}">
-			<p class="product-collapse__review">
-				<a href="#" class="product-description__readmore">
-					<img class="product-collapse__review-icon" src="${themeResourcePath}/images/review.png">
-					<spring:theme code="review.reviews.add" />
-				</a>
-			</p>
-		</c:when>
-		<c:otherwise>
-			<spring:theme code="review.reviews.add.login" />
-		</c:otherwise>
-	</c:choose>
 	<div>
 		<ul id="reviews" class="review-list" data-reviews="${getPageOfReviewsUrl}" data-allreviews="${getAllReviewsUrl}"></ul>
 		<div class="product-collapse__rating">
+		<c:if test="${not empty reviewsCount and reviewsCount > 3}">
 			<p class="more">
 				<a href="#" class="all-reviews-btn">
 					<spring:theme code="review.show.all" />
 				</a>
 			</p>
+			</c:if>
 		</div>
 	</div>
 </div>
@@ -84,7 +68,7 @@
                             </div>
                         </div>
 	                </div>
-	                <div class="cart-popup__item-link"><a class="btn-blue-white" v-on:click.stop.prevent="submit" href="${productReviewActionUrl}"><spring:theme code="review.submit" /></a><a class="cart-popup__item-link-text closeCbox" href="javascript:void(0);"><spring:theme code="review.cancel" /></a></div>
+	                <div class="cart-popup__item-link"><a class="review-btn btn-blue-white" v-on:click.stop.prevent="submit" href="${productReviewActionUrl}"><spring:theme code="review.submit" /></a><a class="review-btn btn-blue-white cart-popup__item-link-text closeCbox" href="javascript:void(0);"><spring:theme code="review.cancel" /></a></div>
 	                </form>
 	            </div>
 	        </div>

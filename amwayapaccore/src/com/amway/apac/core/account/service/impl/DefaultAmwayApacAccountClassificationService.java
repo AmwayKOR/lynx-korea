@@ -74,6 +74,4 @@ public class DefaultAmwayApacAccountClassificationService implements AmwayApacAc
 	{
 		this.amwayApacAccountClassificationComparator = amwayApacAccountClassificationComparator;
 	}
-
-
 }

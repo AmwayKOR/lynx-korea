@@ -43,7 +43,7 @@
 	<itemtypes>
 		<typegroup name="assets">
 			<itemtype code="AbstractAmwayAsset" autocreate="true" generate="true"
-				jaloclass="com.amway.lynxresourcecentre.jalo.media.AbstractAmwayAsset"
+				jaloclass="com.amway.apac.resourcecentre.jalo.media.AbstractAmwayAsset"
 				abstract="true" extends="GenericItem">
 				<description>Model for amway assets like PDFs, and other documents.</description>
 				<deployment table="AmwayAsset" typecode="21018" />
@@ -102,11 +102,16 @@
 						<description>Localized media for the asset.</description>
 						<persistence type="property" />
 					</attribute>
+					<attribute qualifier="rank" type="java.lang.Integer">
+						<description>Rank of the User</description>
+						<modifiers read="true" write="true" optional="true" />
+						<persistence type="property" />
+					</attribute>
 				</attributes>
 			</itemtype>
 
 			<itemtype code="AmwayAsset" autocreate="true" generate="true"
-				jaloclass="com.amway.lynxresourcecentre.jalo.media.AmwayAsset"
+				jaloclass="com.amway.apac.resourcecentre.jalo.media.AmwayAsset"
 				extends="AbstractAmwayAsset">
 				<description>Model for amway assets like PDFs, and other documents.</description>
 				<attributes>
@@ -118,7 +123,7 @@
 			</itemtype>
 
 			<itemtype code="AmwayExternalAsset" autocreate="true" generate="true"
-				jaloclass="com.amway.lynxresourcecentre.jalo.media.AmwayExternalAsset"
+				jaloclass="com.amway.apac.resourcecentre.jalo.media.AmwayExternalAsset"
 				extends="AbstractAmwayAsset">
 				<description>Model for amway external assets videos .</description>
 				<attributes>
@@ -130,7 +135,7 @@
 			</itemtype>
 
 			<itemtype code="AmwayAssetAlbum" autocreate="true" generate="true"
-				jaloclass="com.amway.lynxresourcecentre.jalo.media.AmwayAssetAlbum"
+				jaloclass="com.amway.apac.resourcecentre.jalo.media.AmwayAssetAlbum"
 				extends="AbstractAmwayAsset">
 				<description>Model for amway albums</description>
 			</itemtype>

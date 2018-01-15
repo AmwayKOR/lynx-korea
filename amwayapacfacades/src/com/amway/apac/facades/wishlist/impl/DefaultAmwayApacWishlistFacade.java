@@ -14,8 +14,11 @@ import de.hybris.platform.wishlist2.enums.Wishlist2EntryPriority;
 import de.hybris.platform.wishlist2.model.Wishlist2EntryModel;
 import de.hybris.platform.wishlist2.model.Wishlist2Model;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +26,7 @@ import org.springframework.beans.factory.annotation.Required;
 import org.springframework.util.Assert;
 
 import com.amway.apac.core.wishlist.services.AmwayApacWishllistService;
+import com.amway.apac.facades.cart.enums.AmwayApacCartSortCode;
 import com.amway.apac.facades.wishlist.AmwayApacWishlistFacade;
 import com.amway.apac.facades.wishlist.data.AmwayApacWishListModification;
 import com.amway.facades.product.data.WishlistData;
@@ -53,6 +57,44 @@ public class DefaultAmwayApacWishlistFacade extends DefaultAmwayWishlistFacade i
 	 * {@inheritDoc}
 	 */
 	@Override
+	public WishlistData getShoppingListDetailsSortBySortCode(final AmwayApacCartSortCode sortBy, final WishlistData data)
+	{
+		if (CollectionUtils.isNotEmpty(data.getEntries()))
+		{
+			final List<WishlistEntryData> recentlyAddedListEntries = new ArrayList<>(data.getEntries());
+			final AmwayApacCartSortCode resolvedSortCode = sortBy == null ? AmwayApacCartSortCode.LAST_ITEM_ADDED : sortBy;
+			switch (resolvedSortCode)
+			{
+				case LAST_ITEM_ADDED:
+					Collections.reverse(recentlyAddedListEntries);
+					break;
+				case PRICE_ASCENDING:
+					recentlyAddedListEntries.sort((o1, o2) -> Double.compare(o1.getProduct().getPrice().getValue().doubleValue(),
+							o2.getProduct().getPrice().getValue().doubleValue()));
+					break;
+				case PRICE_DESCEDNING:
+					recentlyAddedListEntries.sort((o1, o2) -> Double.compare(o2.getProduct().getPrice().getValue().doubleValue(),
+							o1.getProduct().getPrice().getValue().doubleValue()));
+					break;
+				case NAME_ASCENDING:
+					recentlyAddedListEntries.sort((o1, o2) -> o1.getProduct().getName().compareTo(o2.getProduct().getName()));
+					break;
+				case NAME_DESCEDNING:
+					recentlyAddedListEntries.sort((o1, o2) -> o2.getProduct().getName().compareTo(o1.getProduct().getName()));
+					break;
+				default:
+					Collections.reverse(recentlyAddedListEntries);
+					break;
+			}
+			data.setEntries(Collections.unmodifiableList(recentlyAddedListEntries));
+		}
+		return data;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public List<WishlistData> getAllWishlistsWithBasicData(final String sortField, final String sortOrder)
 	{
 		return Converters.convertAll(getAmwayApacWishlistService().getWishlists(sortField, sortOrder),
@@ -67,7 +109,10 @@ public class DefaultAmwayApacWishlistFacade extends DefaultAmwayWishlistFacade i
 	{
 		Assert.hasLength(uid, "Parameter uid can not be null or empty.");
 
-		return getWishlistConverter().convert(getAmwayApacWishlistService().getWishlistByUidForCurrentUser(uid));
+		final WishlistData wishlistData = getWishlistConverter()
+				.convert(getAmwayApacWishlistService().getWishlistByUidForCurrentUser(uid));
+
+		return wishlistData;
 	}
 
 	/**

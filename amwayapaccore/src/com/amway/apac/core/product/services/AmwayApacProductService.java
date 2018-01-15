@@ -10,6 +10,7 @@ import java.util.Map;
 
 import com.amway.apac.core.model.AmwayPaymentOptionModel;
 import com.amway.apac.core.model.AmwayUserPromotionCountModel;
+import com.amway.core.enums.AmwayKitProductType;
 
 
 /**
@@ -70,4 +71,11 @@ public interface AmwayApacProductService extends ProductService
 	 * @return products
 	 */
 	Map<String, Integer> getPreLaunchConfigProducts(final AbstractOrderModel orderModel);
+
+	/**
+	 * @param product
+	 * @param bundled
+	 * @return
+	 */
+	boolean checkKitProductByType(ProductModel product, AmwayKitProductType bundled);
 }

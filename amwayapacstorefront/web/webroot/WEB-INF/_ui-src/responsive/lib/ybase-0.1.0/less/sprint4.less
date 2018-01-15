@@ -797,6 +797,11 @@
 /*Ditto-Details-Lynx-Site.html*/
 /*PRW-Landing-Lynx-Site.html*/
 .ditto-landing-hero-component {
+	.hero-button-wrap{
+		.transparent{
+			line-height: 43px!important;
+		}
+	}
 	.hero-link-wrap {
 		.primary-link {
 			span {
@@ -816,6 +821,14 @@
 	}
 	.ditto-schedule-table-content {
 		.ditto-schedule-table {
+			.amw-checkbox-wrap{
+				input{
+					position: absolute;
+				}
+				.amw-checkbox-overlay{
+					top:3px;
+				}
+			}
 			td {
 				.ditto-schedule-link {
 					.a_link;
@@ -1293,12 +1306,14 @@
 		label {
 			margin-bottom: 6px;
 		}
-		#quickShopAccordion {
+		#quickShopAccordion ,#shoppingListDetailAccordion{
 			.panel {
 				.panel-heading {
 					.panel-title {
 						div.collapsed {
 							.icon-minus {
+								font-size: 0.875em;
+								font-weight:100;
 								&:before {
 									content: "\ea79" !important;
 								}
@@ -1306,6 +1321,8 @@
 						}
 						div {
 							.icon-minus {
+								font-size: 0.875em;
+								font-weight:100;
 								&:before {
 									content: "\ea78" !important;
 									color: @blue_2;
@@ -1333,6 +1350,12 @@
 .account-section {
 	.account-section-content {
 		.ditto-view-by-month-wrapper, .ditto-view-by-year-wrapper {
+			.proceed-to-checkout-container {
+				.btn-blue-white {
+					width: @w100;
+					line-height: 48px!important;
+				}
+			}
 			form {
 				display: inline-block;
 				padding: 0;
@@ -1663,12 +1686,14 @@
 }
 .shopping-cart-quick-shop-wrapper {
 	.quick-shop-container {
-		#quickShopAccordion {
+		#quickShopAccordion,#shoppingListDetailAccordion {
 			.panel {
 				.panel-heading {
 					.panel-title {
 						div.collapsed {
 							.icon-minus {
+								font-size: 0.875em;
+								font-weight:100;
 								&:before {
 									content: "\ea79" !important;
 								}
@@ -1676,6 +1701,8 @@
 						}
 						div {
 							.icon-minus {
+								font-size: 0.875em;
+								font-weight:100;
 								&:before {
 									content: "\ea78" !important;
 									color: @blue_2;
@@ -1796,6 +1823,9 @@
 			z-index: 99;
 			background-color: transparent;
 			cursor:pointer;
+		}
+		#contacts-search{
+			cursor: auto;
 		}
 		div {
 			label {
@@ -2239,6 +2269,21 @@
 }
 .amway-theme .prw-nav .prw-nav-container .edit-button-wrap .prw-btn-reg span{
 	text-transform: uppercase;
+}
+#ContentArticlePages{
+	.banner-button-wrap{
+		.btn-ink{
+			line-height: 48px!important;
+		}
+	}
+}
+#billing-shipping{
+	.select2-container{
+		top:-2px;
+	}
+	.button-right-check{
+		display: @block;
+	}
 }
 @media (max-width: 767px) {
 	.amway-theme {

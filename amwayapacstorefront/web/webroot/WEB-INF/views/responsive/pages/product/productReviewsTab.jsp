@@ -16,6 +16,7 @@
 </div>
 <div id="reviewsbody" class="accordion-panel-collapse collapse">
 	<div class="panel-body">
+        <product:productPageReviewsGraph />
     	<product:productPageReviewsTab product="${product}" />
     </div>
 </div>

@@ -12,13 +12,55 @@ ACC.shoppinglists = {
     	"bindRemoveShoppingListLink",
     	"bindShoppingListAddMultiForm",
     	"bindShoppingListUpdateCartPopup",
-    	"bindShoppingListSelectAllCheckbox"
-    
-    ],
+    	"bindShoppingListSelectAllCheckbox",
+    	"bindOnApplyClick",
+    	"bindAddToCartPopup"
+        ],
+        
+        bindAddToCartPopup : function() {
+			 $(".cart-detail__addto.dropdown-toggle").click(function () {
+           if($(".cart-detail__dropdown-menu.dropdown-menu").css('display')=='none'){
+               $(".cart-detail__dropdown-menu.dropdown-menu").show();
+           }else{
+               $(".cart-detail__dropdown-menu.dropdown-menu").hide();
+           }
+
+       })
+},
+        
+        bindSortShoppingListItems : function() {
+    		
+    		var sortShoppingListForm = $('#sortShoppingListForm');
+            var shoppingListUid= sortShoppingListForm.find('input[name=shoppingListUid1]').val();
+    		var sortBy = sortShoppingListForm.find('select[name=sortBy]').val();
+    		$.ajax({
+    			url : sortShoppingListForm.attr('action'),
+    			type : sortShoppingListForm.attr('method'),
+    			data : {
+    				"shoppingListUid" : shoppingListUid,
+    				"sortBy" : sortBy
+    			},
+    			success : function(data) {
+    				ACC.shoppinglists.refreshShoppingListDetailsPage(data);
+    				ACC.global.findAndUpdateGlobalMessages(data);
+    			},
+    			error : function(error) {
+    				ACC.global.appendGlobalMessage(ACC.globalMessageTypes.ERROR_MESSAGES_HOLDER,ACC.messages.shoppingListSortingError);
+    			}
+    		});
+    	},
+    	
+    	bindOnApplyClick : function() {
+    		
+    		 $(document).on("click",".payment-forms__apply ", function(){
+       			 ACC.shoppinglists.bindSortShoppingListItems();
+   		}
+   	);
+   	},
     
 
     bindShoppingListSelectAllCheckbox:function(){
-        $(".shopping-list-header").click(function(){
+        $(".shopping-list-header").on("click" , function () {
             $(this).parents('.shopping-cart-item-list').find('.shopping-list-entry-checkbox').prop('checked', this.checked);
         });
             //clicking the last unchecked or checked checkbox should check or uncheck the parent checkbox

@@ -229,7 +229,7 @@
     <bean id="defaultAmwayApacProductCarouselFacade" class="com.amway.apac.facades.product.impl.DefaultAmwayApacProductCarouselFacade" parent="defaultProductCarouselFacade" />
 	
 	<alias alias="cartFacade" name="defaultAmwayApacCartFacade"/>
-	<bean id="defaultAmwayApacCartFacade" class="com.amway.apac.facades.cart.impl.DefaultAmwayApacCartFacade" parent="defaultCartFacade">
+	<bean id="defaultAmwayApacCartFacade" class="com.amway.apac.facades.cart.impl.DefaultAmwayApacCartFacade" parent="defaultAmwayCartFacade">
 		<property name="calculationService" ref="calculationService"/>
 		<property name="modelService" ref="modelService"/>
 	</bean>

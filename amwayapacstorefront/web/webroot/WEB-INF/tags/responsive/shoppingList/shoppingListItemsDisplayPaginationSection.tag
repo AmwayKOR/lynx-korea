@@ -12,15 +12,19 @@
 				<div class="row">
 					<div class="col-xs-12 col-sm-7 col-md-7 pagination-controls-wrapper">
 						<div class="form-group">
+						<c:url value="/shopping-lists/detail/sort" var="shoppinglistSortFormAction" />
+						    <form:form id="sortShoppingListForm" action="${shoppinglistSortFormAction}" method="get" >
 							<label class="control-label cart-detail__label" for="sortForm1">
 								<spring:theme code="shoppinglist.items.section.sortby.label" />
 							</label>
-							<select class="cart-detail__size" id="sortBy">
-								<option><spring:theme code="shoppinglist.items.section.sortby.lastitemadded.label" /></option>
-								<option><spring:theme code="shoppinglist.items.section.sortby.price.label" /></option>
-								<option><spring:theme code="shoppinglist.items.section.sortby.ascending.label" /></option>
-								<option><spring:theme code="shoppinglist.items.section.sortby.decending.label" /></option>
+							<input type="hidden" name="shoppingListUid1" value="${shoppingListData.uid} ">
+							<select class="cart-detail__size" id="sortBy" name="sortBy">
+							
+								<c:forEach items="${sortOptions}" var="sortOption">
+                                    		<option value="${sortOption}" <c:if test="${selectedSort eq sortOption}">selected="selected"</c:if>><spring:theme code="cart.page.sort.${sortOption}" /></option>
+                                    	</c:forEach>
 							</select>
+							</form:form>
 							<a class="payment-forms__apply btn-blue-white cart-detail__mob-hide" href="#">
 								<spring:theme code="shoppinglist.items.section.sortby.apply.button.label" />
 							</a>
