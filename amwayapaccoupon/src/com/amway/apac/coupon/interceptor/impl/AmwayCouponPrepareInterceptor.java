@@ -30,7 +30,7 @@ import com.amway.apac.coupon.services.AmwayApacCouponService;
  */
 public class AmwayCouponPrepareInterceptor implements PrepareInterceptor<AmwayCouponModel>
 {
-	AmwayApacCouponService couponService;
+	private AmwayApacCouponService couponService;
 
 	/**
 	 *
@@ -55,7 +55,7 @@ public class AmwayCouponPrepareInterceptor implements PrepareInterceptor<AmwayCo
 		}
 		else
 		{
-			throw new ModelSavingException("Please provide site.");
+			throw new ModelSavingException("Please provide store.");
 		}
 	}
 
