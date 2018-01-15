@@ -161,6 +161,21 @@
 					optional="true" />
 			</targetElement>
 		</relation>
+		
+		<relation code="CategoryProductReferenceRelation" generate="true"
+			localized="false" autocreate="true">
+			<sourceElement qualifier="sourceCategory" type="Category"
+				cardinality="one">
+				<modifiers read="true" write="false" initial="true"
+					optional="false" unique="true" />
+			</sourceElement>
+			<targetElement qualifier="productReferences"
+				type="AmwayCategoryProductReference" cardinality="many" ordered="true"
+				collectiontype="collection">
+				<modifiers read="true" write="true" optional="true"
+					partof="true" />
+			</targetElement>
+		</relation>
 	</relations>
 
 	<itemtypes>
@@ -295,6 +310,63 @@
 						<persistence type="property" />
 					</attribute>
 				</attributes>
+			</itemtype>
+			
+			<itemtype code="AmwayCategoryProductReference" generate="true"
+				jaloclass="com.amway.lynxcore.jalo.catalog.AmwayCategoryProductReference"
+				extends="GenericItem" autocreate="true">
+				<deployment table="CategoryProductReference" typecode="21015" />
+				<attributes>
+					<attribute qualifier="qualifier" type="java.lang.String">
+						<description>Qualifier</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="target" type="Product">
+						<description>Target</description>
+						<modifiers read="true" write="true" search="true"
+							optional="false" unique="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="quantity" type="java.lang.Integer">
+						<description>Quantity</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="referenceType" type="ProductReferenceTypeEnum">
+						<modifiers read="true" write="true" search="true"
+							optional="true" unique="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="icon" type="Media">
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="description" type="localized:java.lang.String">
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="preselected" type="java.lang.Boolean">
+						<modifiers read="true" write="true" optional="false" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="active" type="java.lang.Boolean">
+						<modifiers read="true" write="true" optional="false" />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+				<indexes>
+					<index name="targetIDX">
+						<key attribute="target" />
+					</index>
+					<index name="qualifierIDX">
+						<key attribute="qualifier" />
+					</index>
+				</indexes>
 			</itemtype>
 		</typegroup>
 

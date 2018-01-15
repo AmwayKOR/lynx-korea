@@ -21,60 +21,31 @@
 		list of files where first is tried to find a file per classpath and then 
 		per file system. If you want to configure beans for your web module please 
 		have a look at your web/webroot/WEB-INF/<extname>-web-spring.xml. -->
-
-	<!-- Example how to override a manager -->
-	<!-- <bean id="core.productManager" class="com.amway.apac.serviceability.jalo.AmwayapacserviceabilityProductManager" 
-		init-method="init" destroy-method="destroy" /> -->
-
-
-	<!-- Example how to configure the class to use for jalo session creation -->
-	<!-- <bean id="jalosession" class="de.hybris.platform.jalo.JaloSessionFactory"> 
-		<property name="targetClassName" value="com.amway.apac.serviceability.jalo.AmwayapacserviceabilityJaloSession"/> 
-		</bean> -->
-
-
-	<!-- Example how to override an item -->
-	<!-- <bean id="de.hybris.platform.jalo.product.Product" class="com.amway.apac.serviceability.jalo.AmwayapacserviceabilityProduct" 
-		scope="prototype" /> -->
-
-	<!-- Example how to register and use an AOP aspect Also see http://static.springframework.org/spring/docs/2.5.x/reference/aop.html -->
-
-	<!-- <bean id="amwayapacserviceabilityProfBean" class="com.amway.apac.serviceability.aop.AmwayapacserviceabilityProfilingAspect"/> 
-		<aop:config proxy-target-class="true"> <aop:aspect id="amwayapacserviceabilityProfAspect" 
-		ref="amwayapacserviceabilityProfBean" > <aop:pointcut id="profiledMethods" 
-		expression="execution(* getModificationTime(..))" /> <aop:around pointcut-ref="profiledMethods" 
-		method="profile" /> </aop:aspect> </aop:config> -->
-
-
-	<!-- some other examples of a pointcut that matches everything: <aop:pointcut 
-		id="profiledMethods" expression="bean(de.hybris.platform.jalo.user.Customer) 
-		&amp;&amp; !execution(* getPK(..))" /> <aop:pointcut id="profiledMethods" 
-		expression="execution(* *(..))" /> -->
-
-
 	
-	<bean id="amwayApacWarehouseServiceabilityDao"
+	<alias name="defaultAmwayApacWarehouseServiceabilityDao" alias="amwayApacWarehouseServiceabilityDao"/>
+	<bean id="defaultAmwayApacWarehouseServiceabilityDao"
 		class="com.amway.apac.serviceability.daos.impl.DefaultAmwayApacWarehouseServiceabilityDao">
 		<property name="flexibleSearchService" ref="flexibleSearchService"/>
 	</bean>
 
-	<alias name="amwayApacWarehouseServiceabilitySelectionStrategy" alias="amwayWarehouseServiceabilitySelectionStrategy"/>
-	<bean id="amwayApacWarehouseServiceabilitySelectionStrategy"
+	<alias name="defaultAmwayApacWarehouseServiceabilitySelectionStrategy" alias="amwayWarehouseServiceabilitySelectionStrategy"/>
+	<bean id="defaultAmwayApacWarehouseServiceabilitySelectionStrategy"
 		class="com.amway.apac.serviceability.strategy.impl.DefaultAmwayApacWarehouseServiceabilitySelectionStrategy" >
 		<property name="amwayApacWarehouseServiceabilityDao" ref="amwayApacWarehouseServiceabilityDao"/>	
 		<property name="baseSiteService" ref="baseSiteService"/>
 	</bean>
 	
-	<!-- <alias name="amwayApacPostcodeServiceabilitySelectionStrategy" alias="amwayWarehouseServiceabilitySelectionStrategy"/> -->
-	<bean id="amwayApacPostcodeServiceabilitySelectionStrategy"
+	<!-- <alias name="defaultAmwayApacPostcodeServiceabilitySelectionStrategy" alias="amwayWarehouseServiceabilitySelectionStrategy"/> -->
+	<bean id="defaultAmwayApacPostcodeServiceabilitySelectionStrategy"
 		class="com.amway.apac.serviceability.strategy.impl.AmwayApacPostcodeWarehouseServiceabilitySelectionStrategy" >
 		<property name="amwayApacWarehouseServiceabilityDao" ref="amwayApacWarehouseServiceabilityDao"/>	
 		<property name="baseSiteService" ref="baseSiteService"/>
 	</bean>
 
-	<bean id="amwayApacWarehouseServiceabilityService"
+	<alias name="defaultAmwayApacWarehouseServiceabilityService" alias="amwayApacWarehouseServiceabilityService"/>
+	<bean id="defaultAmwayApacWarehouseServiceabilityService"
 		class="com.amway.apac.serviceability.services.impl.DefaultAmwayApacWarehouseServiceabilityServiceImpl">
-		<property name="amwayApacWarehouseServiceabilitySelectionStrategy" ref="amwayApacWarehouseServiceabilitySelectionStrategy"/>	
+		<property name="amwayApacWarehouseServiceabilitySelectionStrategy" ref="amwayWarehouseServiceabilitySelectionStrategy"/>	
 	</bean>
 
 

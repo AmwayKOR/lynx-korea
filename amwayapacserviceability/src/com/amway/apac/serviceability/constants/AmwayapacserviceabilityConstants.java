@@ -27,4 +27,12 @@ public final class AmwayapacserviceabilityConstants extends GeneratedAmwayapacse
 
 	// implement here constants used by this extension
 
+	/**
+	 * baseSite string constant
+	 */
+	public static final String BASESITE_STRING = "baseSite";
+	/**
+	 * region string constant
+	 */
+	public static final String REGION_STRING = "region";
 }

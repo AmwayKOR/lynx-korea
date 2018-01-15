@@ -11,7 +11,7 @@ import com.amway.apac.serviceability.model.AmwayWarehouseServiceabilityModel;
 
 
 /**
- * Warehouse servicability Dao interface
+ * DAO layer for warehouse serviceability.
  *
  * @author Shubham Goyal
  */
@@ -30,9 +30,11 @@ public interface AmwayApacWarehouseServiceabilityDao
 	 * @param region
 	 *           region filter for finding warehouse
 	 * @return warehouse for given Postalcode, Basesite and Region
+	 * @throws IllegalArgumentException
+	 *            if region, minorPostalCode, majorPostalCode or baseSite is null.
 	 */
 	List<AmwayWarehouseServiceabilityModel> getServiceableWarehouseListForPostalCodeRegion(final String minorPostalCode,
-			final String majorPostalCode, final BaseSiteModel baseSite, RegionModel region);
+			final String majorPostalCode, final BaseSiteModel baseSite, final RegionModel region);
 
 	/**
 	 * Returns a list of warehouse serviceablities {@link AbstractAmwayWarehouseServiceabilityModel} for given Postal
@@ -45,6 +47,8 @@ public interface AmwayApacWarehouseServiceabilityDao
 	 * @param baseSite
 	 *           basesite for which warehouse needed
 	 * @return List of serviceabilities for given postalcode and basesite
+	 * @throws IllegalArgumentException
+	 *            if minorPostalCode, majorPostalCode or baseSite is null.
 	 */
 	List<AmwayWarehouseServiceabilityModel> getWarehouseServiceabilityList(final String minorPostalCode,
 			final String majorPostalCode, final BaseSiteModel baseSite);
@@ -59,9 +63,11 @@ public interface AmwayApacWarehouseServiceabilityDao
 	 * @param region
 	 *           region filter for finding warehouse
 	 * @return warehouse for given Postalcode, Basesite and Region
+	 * @throws IllegalArgumentException
+	 *            if region, postalCode or baseSite is null.
 	 */
 	List<AmwayPostcodeWarehouseServiceabilityModel> getServiceableWarehouseListForPostalCodeRegion(final String postalcode,
-			final BaseSiteModel baseSite, RegionModel region);
+			final BaseSiteModel baseSite, final RegionModel region);
 
 	/**
 	 * Returns a list of warehouse serviceablities {@link AbstractAmwayWarehouseServiceabilityModel} for given Postal
@@ -72,6 +78,8 @@ public interface AmwayApacWarehouseServiceabilityDao
 	 * @param baseSite
 	 *           basesite for which warehouse needed
 	 * @return List of serviceabilities for given postalcode and basesite
+	 * @throws IllegalArgumentException
+	 *            if postalCode or baseSite is null.
 	 */
 	List<AmwayPostcodeWarehouseServiceabilityModel> getWarehouseServiceabilityList(final String postalcode,
 			final BaseSiteModel baseSite);
