@@ -29,6 +29,8 @@ public interface AmwayApacNotificationService
 	 * @param searchText
 	 *           searchText to search notifications
 	 * @return {@link AmwayNotificationModel}
+	 * @throws IllegalArgumentException
+	 *            if pageableData or customer is null
 	 */
 	SearchPageData<AmwayNotificationModel> getNotificationsByMapping(PageableData pageableData, CustomerModel userModel,
 			List<AmwayNotificationUserActionStatus> statuses, String searchText);
@@ -37,7 +39,10 @@ public interface AmwayApacNotificationService
 	 * Returns {@link AmwayNotificationModel} for a given unique code.
 	 *
 	 * @param notificationCode
-	 * @return
+	 *           Unique code for a notification
+	 * @return AmwayNotification
+	 * @throws IllegalArgumentException
+	 *            if notificationCode is null or empty.
 	 */
 	AmwayNotificationModel getNotificationByCode(String notificationCode);
 

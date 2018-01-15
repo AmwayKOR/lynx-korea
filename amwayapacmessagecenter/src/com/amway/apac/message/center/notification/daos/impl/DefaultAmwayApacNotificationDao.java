@@ -10,6 +10,7 @@ import static com.amway.apac.message.center.model.AmwayNotificationModel.SHORTDE
 import static com.amway.apac.message.center.model.AmwayNotificationModel.SITE;
 import static com.amway.apac.message.center.model.AmwayNotificationUserActionModel.NOTIFICATION;
 import static de.hybris.platform.core.model.security.PrincipalGroupModel._PRINCIPALGROUPRELATION;
+import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNull;
 
 import de.hybris.platform.basecommerce.model.site.BaseSiteModel;
 import de.hybris.platform.commerceservices.search.flexiblesearch.PagedFlexibleSearchService;
@@ -21,11 +22,11 @@ import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 import de.hybris.platform.servicelayer.search.FlexibleSearchService;
 import de.hybris.platform.servicelayer.search.SearchResult;
-import de.hybris.platform.servicelayer.util.ServicesUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -67,9 +68,13 @@ public class DefaultAmwayApacNotificationDao implements AmwayApacNotificationDao
 	private static final String CLASSIFICATION_LIST = "classificationsList";
 	private static final String GROUP_LIST = "groupsList";
 
+	private final SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
 
-
-	public static final StringBuilder AMWAY_NOTIFICATION_MAPPING_QUERY = new StringBuilder().append("SELECT {an.")
+	/**
+	 * Query to search active PUBLISHED AmwayNotifications with publishDate before and expiryDate after the current time
+	 * and given baseSite, affiliate.
+	 */
+	private static final StringBuilder AMWAY_NOTIFICATION_MAPPING_QUERY = new StringBuilder().append("SELECT {an.")
 			.append(AmwayNotificationModel.PK).append("} FROM {").append(AmwayNotificationModel._TYPECODE).append(" as an ")
 			.append(" JOIN ").append(_AMWAYNOTIFICATIONACCOUNTGROUPTAGREL).append(" as anagt ON {anagt.source} = {an.")
 			.append(AmwayNotificationModel.PK).append("} JOIN ").append(AmwayAccountGroupTagModel._TYPECODE)
@@ -92,8 +97,8 @@ public class DefaultAmwayApacNotificationDao implements AmwayApacNotificationDao
 			final BaseSiteModel baseSite, final CustomerModel customer, final List<AmwayNotificationUserActionStatus> statuses,
 			final String searchText, final String accountClassficationCode)
 	{
-		ServicesUtil.validateParameterNotNull(pageableData, ERROR_MESSAGE_NULL_PAGEABLE_DATA);
-		ServicesUtil.validateParameterNotNull(customer, ERROR_MESSAGE_NULL_CUSTOMER);
+		validateParameterNotNull(pageableData, ERROR_MESSAGE_NULL_PAGEABLE_DATA);
+		validateParameterNotNull(customer, ERROR_MESSAGE_NULL_CUSTOMER);
 
 		final Map<String, Object> queryParams = new HashMap<>();
 		final StringBuilder queryBuilder = new StringBuilder(AMWAY_NOTIFICATION_MAPPING_QUERY);
@@ -122,19 +127,20 @@ public class DefaultAmwayApacNotificationDao implements AmwayApacNotificationDao
 	 * @param queryParams
 	 * @param queryBuilder
 	 */
-	private void buildNotificationQuery(final BaseSiteModel baseSite, final CustomerModel customer,
+	protected void buildNotificationQuery(final BaseSiteModel baseSite, final CustomerModel customer,
 			final List<AmwayNotificationUserActionStatus> statuses, final Map<String, Object> queryParams,
 			final StringBuilder queryBuilder, final String accountClassficationCode)
 	{
-		final Date start = new Date();
-		final SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
+		final Date start = Calendar.getInstance().getTime();
 		final String currentDate = dateFormat.format(start);
 
+		//This section appends the group and classification based restriction to the query in the queryBuilder.
 		queryBuilder.append(" AND (({aagt.").append(GROUPTYPE).append("} = ").append(CLASSIFICATION).append(" AND {aagt.")
 				.append(AmwayAccountGroupTagModel.CODE).append("} IN (?").append(CLASSIFICATION_LIST).append(")) OR ({aagt.")
 				.append(GROUPTYPE).append("} = ").append(HYBRIS_GROUP).append(" AND {aagt.").append(AmwayAccountGroupTagModel.CODE)
 				.append("} IN (?").append(GROUP_LIST).append(")))");
 
+		//This Section appends the restriction based on user notification action.
 		queryBuilder.append(" AND ({an.").append(AmwayNotificationModel.PK).append("} NOT IN ({{Select {").append(NOTIFICATION)
 				.append("} FROM {").append(AmwayNotificationUserActionModel._TYPECODE).append("} WHERE {")
 				.append(AmwayNotificationUserActionModel.STATUS).append("} NOT IN (?").append(STATUSES).append(") AND {").append(USER)
@@ -198,7 +204,7 @@ public class DefaultAmwayApacNotificationDao implements AmwayApacNotificationDao
 		queryParams.put(USER, customer);
 		final FlexibleSearchQuery query = new FlexibleSearchQuery(queryBuilder.toString(), queryParams);
 		query.setResultClassList(Collections.singletonList(String.class));
-		final SearchResult<String> result = flexibleSearchService.search(query);
+		final SearchResult<String> result = getFlexibleSearchService().search(query);
 		return result.getResult();
 
 	}

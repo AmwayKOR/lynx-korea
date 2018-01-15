@@ -32,6 +32,8 @@ public interface AmwayApacNotificationDao
 	 * @param searchText
 	 *           searchText to search notifications
 	 * @return {@link AmwayNotificationModel}
+	 * @throws IllegalArgumentException
+	 *            if customer is null
 	 */
 	SearchPageData<AmwayNotificationModel> getNotificationsByMapping(PageableData pageableData, BaseSiteModel baseSiteModel,
 			CustomerModel customer, final List<AmwayNotificationUserActionStatus> statuses, String searchText,
