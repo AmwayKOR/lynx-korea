@@ -140,6 +140,7 @@ ACC.productdetail = {
             $("#reviewsbody.accordion-panel-collapse.collapse").css("height","auto");
             $("#tabreview .accordion-toggle.collapsed").removeClass("collapsed");
 			ACC.tabs.showReviewsAction("reviews");
+			ACC.productReview.populateGraph();
 			ACC.tabs.showReviewBtn(".all-reviews-btn");
         });
 	},

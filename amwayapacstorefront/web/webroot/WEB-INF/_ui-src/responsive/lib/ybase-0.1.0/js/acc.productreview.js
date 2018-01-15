@@ -1,4 +1,4 @@
-ACC.productreview = {
+ACC.productReview = {
 
 	_autoload: [
 		"loadVM",
@@ -6,7 +6,7 @@ ACC.productreview = {
 
 	loadVM: function(){
 		
-		var productReview = new Vue({
+		var productReviewVM = new Vue({
 		    el: '#product-review',
 		    data: {
 		    	headline: '',
@@ -45,7 +45,7 @@ ACC.productreview = {
 	    					self.ratingError = false;
 	    					
 		    				if(data.success){
-		    					ACC.productreview.openPrompt();
+		    					ACC.productReview.openPrompt();
 		    				}
 		    				else
 		    				{
@@ -77,7 +77,7 @@ ACC.productreview = {
 		      starOn    : 'star-filled.png',
 		      scoreName : 'rating',
 		      click: function (score, e) {
-		    	  productReview.rating = score;
+		    	  productReviewVM.rating = score;
 			  }
 		});
 		
@@ -87,11 +87,11 @@ ACC.productreview = {
         
         $(".product-collapse__review").click(function() {
         	
-        	productReview.headlineError = false;
-        	productReview.commentError = false;
-        	productReview.ratingError = false;
-        	productReview.headline = '';
-        	productReview.comment = '';
+        	productReviewVM.headlineError = false;
+        	productReviewVM.commentError = false;
+        	productReviewVM.ratingError = false;
+        	productReviewVM.headline = '';
+        	productReviewVM.comment = '';
         	$('#star').raty('set', { score: 0 });
         	
         });
@@ -103,19 +103,7 @@ ACC.productreview = {
 	    
 	    $('.js-tabs #tabreview').click(function(event) {
 	        event.preventDefault();
-            $.ajax({
-    			url : $("#reviewgraph").data("url"),
-    			cache : true,
-    			success : function(response) 
-    			{
-    				if(response.success){
-    					var reviewArray = response.data;
-    				    ACC.productreview.yellowGraph(reviewArray);
-    				}
-    			},
-    			error : function (request, status, error){
-    			}
-    		});
+	        ACC.productReview.populateGraph();
 	    });
 
 	},
@@ -136,11 +124,27 @@ ACC.productreview = {
     },
     
     yellowGraph: function(arra) {
-        var max = ACC.productreview.maxValue(arra);
+        var max = ACC.productReview.maxValue(arra);
         $(".comuserinfo dl").each(function(index, element){
             var percent = arra[(5 - index) + 'star']/max*100;
             $(element).find("div").css('width', percent + "%" );
             $(element).find("span").html(arra[(5 - index) + 'star']);
         });
+    },
+    
+    populateGraph: function() {
+        $.ajax({
+			url : $("#reviewgraph").data("url"),
+			cache : true,
+			success : function(response) 
+			{
+				if(response.success){
+					var reviewArray = response.data;
+				    ACC.productReview.yellowGraph(reviewArray);
+				}
+			},
+			error : function (request, status, error){
+			}
+		});
     }
 };
