@@ -28,24 +28,11 @@
 		<property name="flexibleSearchService" ref="flexibleSearchService"/>
 	</bean>
 
-	<alias name="defaultAmwayApacWarehouseServiceabilitySelectionStrategy" alias="amwayWarehouseServiceabilitySelectionStrategy"/>
-	<bean id="defaultAmwayApacWarehouseServiceabilitySelectionStrategy"
-		class="com.amway.apac.serviceability.strategy.impl.DefaultAmwayApacWarehouseServiceabilitySelectionStrategy" >
-		<property name="amwayApacWarehouseServiceabilityDao" ref="amwayApacWarehouseServiceabilityDao"/>	
-		<property name="baseSiteService" ref="baseSiteService"/>
-	</bean>
-	
-	<!-- <alias name="defaultAmwayApacPostcodeServiceabilitySelectionStrategy" alias="amwayWarehouseServiceabilitySelectionStrategy"/> -->
-	<bean id="defaultAmwayApacPostcodeServiceabilitySelectionStrategy"
-		class="com.amway.apac.serviceability.strategy.impl.AmwayApacPostcodeWarehouseServiceabilitySelectionStrategy" >
-		<property name="amwayApacWarehouseServiceabilityDao" ref="amwayApacWarehouseServiceabilityDao"/>	
-		<property name="baseSiteService" ref="baseSiteService"/>
-	</bean>
-
 	<alias name="defaultAmwayApacWarehouseServiceabilityService" alias="amwayApacWarehouseServiceabilityService"/>
 	<bean id="defaultAmwayApacWarehouseServiceabilityService"
 		class="com.amway.apac.serviceability.services.impl.DefaultAmwayApacWarehouseServiceabilityServiceImpl">
-		<property name="amwayApacWarehouseServiceabilitySelectionStrategy" ref="amwayWarehouseServiceabilitySelectionStrategy"/>	
+		<property name="amwayApacWarehouseServiceabilityDao" ref="amwayApacWarehouseServiceabilityDao"/>	
+		<property name="baseSiteService" ref="baseSiteService"/>
 	</bean>
 
 

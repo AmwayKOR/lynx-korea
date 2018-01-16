@@ -79,7 +79,7 @@ public interface AmwayApacWarehouseServiceabilityDao
 	 *           basesite for which warehouse needed
 	 * @return List of serviceabilities for given postalcode and basesite
 	 * @throws IllegalArgumentException
-	 *            if postalCode or baseSite is null.
+	 *            if  postalCode or baseSite is null.
 	 */
 	List<AmwayPostcodeWarehouseServiceabilityModel> getWarehouseServiceabilityList(final String postalcode,
 			final BaseSiteModel baseSite);
