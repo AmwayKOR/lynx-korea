@@ -101,6 +101,7 @@
 		<property name="atpFormulaService" ref="atpFormulaService" />
 		<property name="restockConfigService" ref="restockConfigService" />
 		<property name="baseStoreService" ref="baseStoreService" />
+		<property name="inventoryEventService" ref="inventoryEventService" />
 	</bean>
 
 	<alias alias="stockLevelStatusStrategy" name="amwayApacCommerceStockLevelStatusStrategy" />

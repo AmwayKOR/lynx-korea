@@ -6,11 +6,15 @@ package com.amway.apac.core.stock.strategies.impl;
 import de.hybris.platform.basecommerce.enums.InStockStatus;
 import de.hybris.platform.ordersplitting.model.StockLevelModel;
 import de.hybris.platform.warehousing.atp.strategy.impl.WarehousingAvailabilityCalculationStrategy;
+import de.hybris.platform.warehousing.inventoryevent.service.InventoryEventService;
 import de.hybris.platform.warehousing.model.AllocationEventModel;
 import de.hybris.platform.warehousing.model.InventoryEventModel;
 import de.hybris.platform.warehousing.model.ShrinkageEventModel;
 
 import java.util.Collection;
+
+import org.apache.commons.collections.CollectionUtils;
+import org.springframework.beans.factory.annotation.Required;
 
 
 /**
@@ -18,6 +22,8 @@ import java.util.Collection;
  */
 public class AmwayApacCommerceAvailabilityCalculationStrategy extends WarehousingAvailabilityCalculationStrategy
 {
+	private InventoryEventService inventoryEventService;
+
 	/**
 	 * This method is overridden as the ATP formula per base store is not supported for now
 	 *
@@ -82,20 +88,28 @@ public class AmwayApacCommerceAvailabilityCalculationStrategy extends Warehousin
 	 *
 	 * @param stockLevel
 	 *           - The stock level model
-	 * @param eventClass
+	 * @param inventoryEventClass
 	 *           - The inventory event class
 	 * @return int - quantity of that inventory event in stock level
 	 */
-	private int getInventoryEventQuantity(final StockLevelModel stockLevel, final Class<? extends InventoryEventModel> eventClass)
+	private int getInventoryEventQuantity(final StockLevelModel stockLevel,
+			final Class<? extends InventoryEventModel> inventoryEventClass)
 	{
-		return (int) stockLevel.getInventoryEvents().stream().filter(event -> eventClass.isInstance(event))
-				.mapToLong(InventoryEventModel::getQuantity).sum();
+		int totalInventoryEventQuantity = 0;
+		final Collection<? extends InventoryEventModel> inventoryEvents = inventoryEventService
+				.getInventoryEventsForStockLevel(stockLevel, inventoryEventClass);
+		if (CollectionUtils.isNotEmpty(inventoryEvents))
+		{
+			totalInventoryEventQuantity = (int) inventoryEvents.stream().mapToLong(InventoryEventModel::getQuantity).sum();
+		}
+		return totalInventoryEventQuantity;
 	}
+
 
 
 	/**
 	 * evaluates the availability of stock
-	 * 
+	 *
 	 * @param stockLevel
 	 * @return boolean - true, (if status is BackOrder) or (status is shipElseBackOrder with quantity less than equal to
 	 *         0), else returns false
@@ -105,4 +119,23 @@ public class AmwayApacCommerceAvailabilityCalculationStrategy extends Warehousin
 		return (stockLevel.getInStockStatus().equals(InStockStatus.BACKORDER))
 				|| (stockLevel.getInStockStatus().equals(InStockStatus.SHIPELSEBACKORDER) && stockLevel.getAvailable() <= 0);
 	}
+
+	/**
+	 * @return the inventoryEventService
+	 */
+	public InventoryEventService getInventoryEventService()
+	{
+		return inventoryEventService;
+	}
+
+	/**
+	 * @param inventoryEventService
+	 *           the inventoryEventService to set
+	 */
+	@Required
+	public void setInventoryEventService(final InventoryEventService inventoryEventService)
+	{
+		this.inventoryEventService = inventoryEventService;
+	}
+
 }
