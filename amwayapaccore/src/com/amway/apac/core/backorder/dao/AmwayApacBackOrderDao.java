@@ -48,7 +48,7 @@ public interface AmwayApacBackOrderDao
 	List<AmwayBackOrderModel> getBackOrdersByStatusAndDate(final AmwayBackOrderStatus status, final Date date);
 
 	/**
-	 * Fetches the back order for a given Consignment.
+	 * Fetches the AmwayBackOrder for a given Consignment.
 	 *
 	 * @param consignment
 	 *           the Consignment the AmwayBackOrder belong to. <Mandatory>

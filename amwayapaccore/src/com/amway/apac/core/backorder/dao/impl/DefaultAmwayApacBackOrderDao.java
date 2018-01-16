@@ -67,7 +67,6 @@ public class DefaultAmwayApacBackOrderDao implements AmwayApacBackOrderDao
 		}
 		if (Objects.nonNull(baseStore))
 		{
-			//TODO
 			query.append(" AND {").append(AmwayBackOrderModel.BASESTORE).append("}=?").append(AmwayBackOrderModel.BASESTORE);
 			queryParams.put(AmwayBackOrderModel.BASESTORE, baseStore);
 		}
@@ -102,9 +101,8 @@ public class DefaultAmwayApacBackOrderDao implements AmwayApacBackOrderDao
 	public AmwayBackOrderModel getBackOrdersByConsignment(final ConsignmentModel consignmentModel)
 	{
 		validateParameterNotNull(consignmentModel, "ConsignmentModel must not be null!");
-		final Map queryParams = new HashMap();
+		final Map queryParams = new HashMap(1);
 		queryParams.put(AmwayBackOrderModel.CONSIGNMENT, consignmentModel);
-
 		final List<AmwayBackOrderModel> result = amwayBackOrderGenericDao.find(queryParams);
 		logDebugInfo("Found Backorder with code : ", result);
 		if (result.size() > 1)

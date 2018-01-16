@@ -4,6 +4,7 @@
 package com.amway.apac.core.backorder.strategies.impl;
 
 import de.hybris.platform.ordersplitting.model.StockLevelModel;
+import de.hybris.platform.servicelayer.util.ServicesUtil;
 import de.hybris.platform.stock.StockService;
 import de.hybris.platform.store.BaseStoreModel;
 
@@ -26,7 +27,7 @@ import com.amway.apac.core.order.service.AmwayApacOrderService;
 
 
 /**
- * Created to fetch all the available back orders for release in fifo
+ * Created to fetch all the available back orders for release.
  *
  * @author ankushbhatia
  */
@@ -44,6 +45,7 @@ public class DefaultAmwayApacBackOrderSelectionStrategy implements AmwayApacBack
 	@Override
 	public Map<StockLevelModel, List<AmwayBackOrderModel>> getBackOrdersForRelease(final List<StockLevelModel> stockLevels)
 	{
+		ServicesUtil.validateParameterNotNull(stockLevels, "stockLevels cannot be null!");
 		final Map<StockLevelModel, List<AmwayBackOrderModel>> amwayBackOrdersMap = new HashMap<StockLevelModel, List<AmwayBackOrderModel>>();
 		if (CollectionUtils.isNotEmpty(stockLevels))
 		{
@@ -65,6 +67,7 @@ public class DefaultAmwayApacBackOrderSelectionStrategy implements AmwayApacBack
 	@Override
 	public Map<StockLevelModel, List<AmwayBackOrderModel>> getBackOrdersForRelease(final BaseStoreModel baseStore)
 	{
+		ServicesUtil.validateParameterNotNull(baseStore, "baseStore cannot be null!");
 		final List<AmwayBackOrderModel> amwayBackOrdersList = getAmwayApacBackOrderDao().getBackOrders(AmwayBackOrderStatus.ACTIVE,
 				null, null, baseStore);
 		validatePaymentAndUpdateList(amwayBackOrdersList);
@@ -80,9 +83,9 @@ public class DefaultAmwayApacBackOrderSelectionStrategy implements AmwayApacBack
 	@Override
 	public List<AmwayBackOrderModel> getBackOrdersForExpiring(final AmwayBackOrderStatus status, final Date date)
 	{
+		ServicesUtil.validateParameterNotNull(status, "status cannot be null!");
 		return getAmwayApacBackOrderDao().getBackOrdersByStatusAndDate(status, date);
 	}
-
 
 	/**
 	 * Used to get Stock level for AmwayBackOrder product and warehouse
@@ -93,11 +96,8 @@ public class DefaultAmwayApacBackOrderSelectionStrategy implements AmwayApacBack
 	 */
 	private StockLevelModel getStockLevel(final AmwayBackOrderModel backOrder)
 	{
-		if (Objects.nonNull(backOrder))
-		{
-			return getStockService().getStockLevel(backOrder.getProduct(), backOrder.getWarehouse());
-		}
-		return null;
+		return Objects.nonNull(backOrder) ? getStockService().getStockLevel(backOrder.getProduct(), backOrder.getWarehouse())
+				: null;
 	}
 
 
