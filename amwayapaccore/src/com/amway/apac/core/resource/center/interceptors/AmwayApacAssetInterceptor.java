@@ -26,11 +26,25 @@ import com.amway.apac.resourcecentre.model.media.AbstractAmwayAssetModel;
 public class AmwayApacAssetInterceptor
 		implements InitDefaultsInterceptor<AbstractAmwayAssetModel>, PrepareInterceptor<AbstractAmwayAssetModel>
 {
+
+	/** The Constant ASSET_MODEL. */
+	private static final String ASSET_MODEL = "Asset model";
+
+	/** The model service. */
 	private ModelService modelService;
+
+	/** The amway account classification rank mapping. */
 	private Map<AccountClassificationEnum, Integer> amwayAccountClassificationRankMapping;
 
 	/**
-	 * Sets rank during asset object initialize
+	 * Sets rank during asset object initialize.
+	 *
+	 * @param amwayAssetModel
+	 *           the amway asset model
+	 * @param ctx
+	 *           the ctx
+	 * @throws InterceptorException
+	 *            the interceptor exception
 	 */
 	@Override
 	public void onInitDefaults(final AbstractAmwayAssetModel amwayAssetModel, final InterceptorContext ctx)
@@ -41,7 +55,14 @@ public class AmwayApacAssetInterceptor
 
 
 	/**
-	 * Sets rank during asset object update
+	 * Sets rank during asset object update.
+	 *
+	 * @param amwayAssetModel
+	 *           the amway asset model
+	 * @param ctx
+	 *           the ctx
+	 * @throws InterceptorException
+	 *            the interceptor exception
 	 */
 	@Override
 	public void onPrepare(final AbstractAmwayAssetModel amwayAssetModel, final InterceptorContext ctx) throws InterceptorException
@@ -50,14 +71,16 @@ public class AmwayApacAssetInterceptor
 	}
 
 	/**
-	 * Sets classification rank from classification model to asset model
+	 * Sets classification rank from classification model to asset model.
 	 *
 	 * @param amwayAssetModel
-	 * @throws InterceptorException
+	 *           the new asset rank
+	 * @throws InterceptorException,
+	 *            IllegalArgumentException
 	 */
 	private void setAssetRank(final AbstractAmwayAssetModel amwayAssetModel) throws InterceptorException
 	{
-		validateParameterNotNullStandardMessage("Asset model", amwayAssetModel);
+		validateParameterNotNullStandardMessage(ASSET_MODEL, amwayAssetModel);
 
 		if (Objects.nonNull(amwayAssetModel.getClassification()))
 		{
@@ -80,6 +103,8 @@ public class AmwayApacAssetInterceptor
 	}
 
 	/**
+	 * Gets the model service.
+	 *
 	 * @return the modelService
 	 */
 	public ModelService getModelService()
@@ -88,6 +113,8 @@ public class AmwayApacAssetInterceptor
 	}
 
 	/**
+	 * Sets the model service.
+	 *
 	 * @param modelService
 	 *           the modelService to set
 	 */
@@ -98,6 +125,8 @@ public class AmwayApacAssetInterceptor
 	}
 
 	/**
+	 * Gets the amway account classification rank mapping.
+	 *
 	 * @return the amwayAccountClassificationRankMapping
 	 */
 	public Map<AccountClassificationEnum, Integer> getAmwayAccountClassificationRankMapping()
@@ -106,6 +135,8 @@ public class AmwayApacAssetInterceptor
 	}
 
 	/**
+	 * Sets the amway account classification rank mapping.
+	 *
 	 * @param amwayAccountClassificationRankMapping
 	 *           the amwayAccountClassificationRankMapping to set
 	 */

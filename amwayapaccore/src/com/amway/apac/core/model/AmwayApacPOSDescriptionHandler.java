@@ -1,5 +1,7 @@
 package com.amway.apac.core.model;
 
+import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
+
 import de.hybris.platform.servicelayer.model.attribute.DynamicAttributeHandler;
 import de.hybris.platform.storelocator.model.PointOfServiceModel;
 import de.hybris.platform.util.localization.Localization;
@@ -16,16 +18,24 @@ import org.apache.commons.collections.CollectionUtils;
  */
 public class AmwayApacPOSDescriptionHandler implements DynamicAttributeHandler<String, AmwayPOSRestrictionModel>
 {
+
+	/** The Constant POS_RESTRICTION. */
+	private static final String POS_RESTRICTION = "POS Restriction Model";
+
 	/**
 	 * Returns string list of all shops with POS available.
 	 *
 	 * @param model
 	 *           the model
 	 * @return the string
+	 *
+	 * @throws IllegalArgumentException
 	 */
 	@Override
 	public String get(final AmwayPOSRestrictionModel model)
 	{
+		validateParameterNotNullStandardMessage(POS_RESTRICTION, model);
+
 		final Collection<PointOfServiceModel> shops = model.getShops();
 		final StringBuilder result = new StringBuilder();
 		if (CollectionUtils.isNotEmpty(shops))
@@ -48,7 +58,6 @@ public class AmwayApacPOSDescriptionHandler implements DynamicAttributeHandler<S
 	 * @param value
 	 *           the value
 	 * @throws UnsupportedOperationException
-	 *            the unsupported operation exception
 	 */
 	@Override
 	public void set(final AmwayPOSRestrictionModel model, final String value)

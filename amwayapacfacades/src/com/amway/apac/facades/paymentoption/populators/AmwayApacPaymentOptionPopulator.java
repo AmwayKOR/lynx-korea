@@ -27,10 +27,19 @@ import com.amway.apacfacades.payment.data.AmwayPaymentOptionData;
  */
 public class AmwayApacPaymentOptionPopulator implements Populator<AmwayPaymentOptionModel, AmwayPaymentOptionData>
 {
+
+	/** The enum converter. */
 	private Converter<HybrisEnumValue, EnumData> enumConverter;
 
 	/**
-	 * Payment option populate method
+	 * Payment option populate method.
+	 *
+	 * @param source
+	 *           the source
+	 * @param target
+	 *           the target
+	 * @throws ConversionException
+	 *            the conversion exception
 	 */
 	@Override
 	public void populate(final AmwayPaymentOptionModel source, final AmwayPaymentOptionData target) throws ConversionException
@@ -64,7 +73,10 @@ public class AmwayApacPaymentOptionPopulator implements Populator<AmwayPaymentOp
 	}
 
 	/**
+	 * Gets the product name.
+	 *
 	 * @param paymentOption
+	 *           the payment option
 	 * @return Product name of product attached in payment option
 	 */
 	private String getProductName(final AmwayPaymentOptionModel paymentOption)
@@ -84,6 +96,8 @@ public class AmwayApacPaymentOptionPopulator implements Populator<AmwayPaymentOp
 	}
 
 	/**
+	 * Gets the enum converter.
+	 *
 	 * @return the enumConverter
 	 */
 	public Converter<HybrisEnumValue, EnumData> getEnumConverter()
@@ -92,6 +106,8 @@ public class AmwayApacPaymentOptionPopulator implements Populator<AmwayPaymentOp
 	}
 
 	/**
+	 * Sets the enum converter.
+	 *
 	 * @param enumConverter
 	 *           the enumConverter to set
 	 */

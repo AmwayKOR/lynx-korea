@@ -11,17 +11,25 @@ import com.amway.apacfacades.data.EnumData;
 
 
 /**
- * Enum data populator
+ * Enum data populator.
  *
  * @author Ashish Sabal
- *
  */
 public class AmwayApacEnumDataPopulator implements Populator<HybrisEnumValue, EnumData>
 {
+
+	/** The enumeration service. */
 	private EnumerationService enumerationService;
 
 	/**
-	 * Enum data populate method
+	 * Enum data populate method.
+	 *
+	 * @param source
+	 *           the source
+	 * @param target
+	 *           the target
+	 * @throws ConversionException
+	 *            the conversion exception
 	 */
 	@Override
 	public void populate(final HybrisEnumValue source, final EnumData target) throws ConversionException
@@ -31,6 +39,8 @@ public class AmwayApacEnumDataPopulator implements Populator<HybrisEnumValue, En
 	}
 
 	/**
+	 * Sets the enumeration service.
+	 *
 	 * @param enumerationService
 	 *           the enumerationService to set
 	 */

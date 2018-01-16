@@ -21,6 +21,8 @@ public interface AmwayApacDeliverySlotManagementService
 	/**
 	 * @param orderingDay
 	 * @return List of {@link AmwayDeliverySlotConfigModel}
+	 *
+	 * @throws IllegalArgumentException
 	 */
 	List<AmwayDeliverySlotConfigModel> getDeliverySlotByOrderDay(final DayOfWeek orderingDay);
 
@@ -28,6 +30,8 @@ public interface AmwayApacDeliverySlotManagementService
 	/**
 	 * @param applicableDeliverySlots
 	 * @param orderingDate
+	 *
+	 * @throws IllegalArgumentException
 	 */
 	void createDeliverySlotForDate(final List<AmwayDeliverySlotConfigModel> applicableDeliverySlots, final LocalDate orderingDate);
 
@@ -39,6 +43,8 @@ public interface AmwayApacDeliverySlotManagementService
 	 * @param deliveryDay
 	 *           the delivery day
 	 * @return the delivery date
+	 *
+	 * @throws IllegalArgumentException
 	 */
 	LocalDate getDeliveryDate(final LocalDate orderingDate, final WeekDay deliveryDay);
 
@@ -51,6 +57,8 @@ public interface AmwayApacDeliverySlotManagementService
 	 * @param slotTime
 	 *           the slot time
 	 * @return the next delivery slot by delivery date and slot
+	 *
+	 * @throws IllegalArgumentException
 	 */
 	List<AmwayDeliverySlotAvailabilityModel> getNextDeliverySlotByDeliveryDateAndSlot(final LocalDate deliveryDate,
 			final String slotTime);
@@ -60,6 +68,8 @@ public interface AmwayApacDeliverySlotManagementService
 	 *
 	 * @param slotConfigModel
 	 * @param slotModels
+	 *
+	 * @throws IllegalArgumentException
 	 */
 	void updateInfoInSlotsAvailabilityModels(final AmwayDeliverySlotConfigModel slotConfigModel,
 			final List<AmwayDeliverySlotAvailabilityModel> slotModels);
@@ -70,6 +80,8 @@ public interface AmwayApacDeliverySlotManagementService
 	 *
 	 * @param orderingDate
 	 *           the ordering date
+	 *
+	 * @throws IllegalArgumentException
 	 */
 	void createDeliverySlotData(final LocalDate orderingDate);
 }

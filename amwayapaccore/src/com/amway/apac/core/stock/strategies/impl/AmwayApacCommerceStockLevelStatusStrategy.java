@@ -17,8 +17,13 @@ import com.amway.core.stock.strategies.impl.AmwayCommerceStockLevelStatusStrateg
  */
 public class AmwayApacCommerceStockLevelStatusStrategy extends AmwayCommerceStockLevelStatusStrategy
 {
+
 	/**
-	 * Returns Stock level status enum for provided stock level model
+	 * Returns Stock level status enum for provided stock level model.
+	 *
+	 * @param stockLevel
+	 *           the stock level
+	 * @return the stock level status
 	 */
 	@Override
 	public StockLevelStatus checkStatus(final StockLevelModel stockLevel)
@@ -44,7 +49,11 @@ public class AmwayApacCommerceStockLevelStatusStrategy extends AmwayCommerceStoc
 	}
 
 	/**
-	 * Returns Stock level status enum for provided stock level model collection
+	 * Returns Stock level status enum for provided stock level model collection.
+	 *
+	 * @param stockLevels
+	 *           the stock levels
+	 * @return the stock level status
 	 */
 	@Override
 	public StockLevelStatus checkStatus(final Collection<StockLevelModel> stockLevels)

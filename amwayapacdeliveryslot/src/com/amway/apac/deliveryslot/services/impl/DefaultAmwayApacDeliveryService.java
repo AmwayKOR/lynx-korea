@@ -1,5 +1,8 @@
 package com.amway.apac.deliveryslot.services.impl;
 
+import static com.amway.apac.deliveryslot.model.AmwayDeliverySlotAvailabilityModel.DELIVERYDATE;
+import static com.amway.apac.deliveryslot.model.AmwayDeliverySlotAvailabilityModel.SLOTTIME;
+import static com.amway.apac.deliveryslot.model.AmwayDeliverySlotAvailabilityModel.WAREHOUSE;
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
 
 import de.hybris.platform.basecommerce.enums.WeekDay;
@@ -54,7 +57,6 @@ public class DefaultAmwayApacDeliveryService extends DefaultDeliveryService impl
 	/** The transaction template. */
 	private TransactionTemplate transactionTemplate;
 
-
 	/**
 	 * {@inheritDoc}
 	 */
@@ -102,6 +104,8 @@ public class DefaultAmwayApacDeliveryService extends DefaultDeliveryService impl
 	@Override
 	public Date getDeliveryDate(final WarehouseModel warehouse)
 	{
+		validateParameterNotNullStandardMessage(WAREHOUSE, warehouse);
+
 		final Date now = new Date();
 		final Calendar calendar = Calendar.getInstance();
 		calendar.setTime(now);
@@ -160,6 +164,7 @@ public class DefaultAmwayApacDeliveryService extends DefaultDeliveryService impl
 	public Integer reserve(final AmwayDeliverySlotAvailabilityModel deliverySlot) throws AmwayServiceException
 	{
 		validateParameterNotNullStandardMessage("deliverySlot", deliverySlot);
+
 		return (Integer) getTransactionTemplate().execute(new TransactionCallback()
 		{
 			@Override
@@ -200,6 +205,7 @@ public class DefaultAmwayApacDeliveryService extends DefaultDeliveryService impl
 	public Integer release(final AmwayDeliverySlotAvailabilityModel deliverySlot) throws AmwayServiceException
 	{
 		validateParameterNotNullStandardMessage("deliverySlot", deliverySlot);
+
 		return (Integer) getTransactionTemplate().execute(new TransactionCallback()
 		{
 			@Override
@@ -233,6 +239,10 @@ public class DefaultAmwayApacDeliveryService extends DefaultDeliveryService impl
 	@Override
 	public boolean setDeliverySlot(final WarehouseModel warehouse, final Date deliveryDate, final String slotTime)
 	{
+		validateParameterNotNullStandardMessage(WAREHOUSE, warehouse);
+		validateParameterNotNullStandardMessage(DELIVERYDATE, deliveryDate);
+		validateParameterNotNullStandardMessage(SLOTTIME, slotTime);
+
 		boolean successfullySet = false;
 		final AmwayDeliverySlotAvailabilityModel slot = getAmwayApacDeliverySlotDao().getDeliverySlot(warehouse, deliveryDate,
 				slotTime);
@@ -255,6 +265,10 @@ public class DefaultAmwayApacDeliveryService extends DefaultDeliveryService impl
 	public AmwayDeliverySlotAvailabilityModel getDeliverySlot(final WarehouseModel warehouse, final Date deliveryDate,
 			final String slotTime)
 	{
+		validateParameterNotNullStandardMessage(WAREHOUSE, warehouse);
+		validateParameterNotNullStandardMessage(DELIVERYDATE, deliveryDate);
+		validateParameterNotNullStandardMessage(SLOTTIME, slotTime);
+
 		return getAmwayApacDeliverySlotDao().getDeliverySlot(warehouse, deliveryDate, slotTime);
 	}
 

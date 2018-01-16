@@ -1,5 +1,7 @@
 package com.amway.apac.core.interceptors;
 
+import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
+
 import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.servicelayer.interceptor.InterceptorContext;
 import de.hybris.platform.servicelayer.interceptor.InterceptorException;
@@ -22,12 +24,20 @@ import com.amway.apac.core.model.AmwayPaymentOptionModel;
 public class AmwayApacPaymentOptionInterceptor
 		implements PrepareInterceptor<AmwayPaymentOptionModel>, RemoveInterceptor<AmwayPaymentOptionModel>
 {
+
+	/** The Constant PAYMENT_OPTION. */
+	private static final String PAYMENT_OPTION = "Payment Option Model";
+
 	/**
 	 * Method to update product model modified time while removing payment option
+	 *
+	 * @throws IllegalArgumentException
 	 */
 	@Override
 	public void onRemove(final AmwayPaymentOptionModel model, final InterceptorContext ctx) throws InterceptorException
 	{
+		validateParameterNotNullStandardMessage(PAYMENT_OPTION, model);
+
 		final ProductModel productModel = model.getProduct();
 		if (null != productModel)
 		{
@@ -42,10 +52,14 @@ public class AmwayApacPaymentOptionInterceptor
 
 	/**
 	 * Method to update product model modified time while updating payment option
+	 *
+	 * @throws IllegalArgumentException
 	 */
 	@Override
 	public void onPrepare(final AmwayPaymentOptionModel model, final InterceptorContext ctx) throws InterceptorException
 	{
+		validateParameterNotNullStandardMessage(PAYMENT_OPTION, model);
+
 		final ProductModel productModel = model.getProduct();
 
 		if (null != productModel)

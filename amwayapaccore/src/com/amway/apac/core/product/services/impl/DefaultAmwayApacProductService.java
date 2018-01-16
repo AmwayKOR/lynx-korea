@@ -1,10 +1,12 @@
 package com.amway.apac.core.product.services.impl;
 
 import static com.amway.apac.core.constants.AmwayapacCoreConstants.PRE_LAUNCH_PROMOTION;
+import static com.amway.apac.core.model.AmwayPaymentOptionModel.ALIASCODE;
 import static com.amway.apac.core.model.AmwayUserPromotionCountModel.PRODUCTCODE;
 import static com.amway.apac.core.model.AmwayUserPromotionCountModel.PROMOTIONCODE;
 import static com.amway.apac.core.model.AmwayUserPromotionCountModel.STORE;
 import static com.amway.apac.core.model.AmwayUserPromotionCountModel.USERID;
+import static de.hybris.platform.core.model.product.ProductModel.CATALOGVERSION;
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateIfSingleResult;
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
 
@@ -26,7 +28,7 @@ import java.util.Objects;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
-import org.junit.Assert;
+import org.fest.util.Collections;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.amway.apac.core.constants.AmwayapacCoreConstants;
@@ -48,7 +50,26 @@ import com.amway.core.model.AmwayKitProductModel;
  */
 public class DefaultAmwayApacProductService extends DefaultProductService implements AmwayApacProductService
 {
+
+	/** The Constant String PRODUCT. */
+	private static final String PRODUCT = "Product";
+
+	/** The Constant String PRODUCT_CODE_MAP. */
+	private static final String PRODUCT_CODE_MAP = "Product Code Map";
+
+	/** The Constant String ORDER. */
+	private static final String ORDER = "Order";
+
+	/** The Constant String KIT_TYPE. */
+	private static final String KIT_TYPE = "Kit Type";
+
+	/** The Constant String OMS_PARAMS. */
+	private static final String OMS_PARAMS = "OMS parameters";
+
+	/** The amway apac product dao. */
 	private AmwayApacProductDao amwayApacProductDao;
+
+	/** The amway user promotion count dao. */
 	private GenericDao<AmwayUserPromotionCountModel> amwayUserPromotionCountDao;
 
 	/**
@@ -57,9 +78,8 @@ public class DefaultAmwayApacProductService extends DefaultProductService implem
 	@Override
 	public AmwayPaymentOptionModel getAllPaymentOptionForOmsCode(final String omsCode, final CatalogVersionModel catalogVersion)
 	{
-		validateParameterNotNullStandardMessage("omsCode", omsCode);
-		validateParameterNotNullStandardMessage("catalogVersion", catalogVersion);
-
+		validateParameterNotNullStandardMessage(ALIASCODE, omsCode);
+		validateParameterNotNullStandardMessage(CATALOGVERSION, catalogVersion);
 
 		final List<AmwayPaymentOptionModel> paymentOptions = getAmwayApacProductDao().getAllAmwayPaymentOptionFromOmsCode(omsCode,
 				catalogVersion);
@@ -78,8 +98,8 @@ public class DefaultAmwayApacProductService extends DefaultProductService implem
 	@Override
 	public AmwayPaymentOptionModel getPaymentOptionForOmsCode(final String omsCode, final CatalogVersionModel catalogVersion)
 	{
-		validateParameterNotNullStandardMessage("omsCode", omsCode);
-		validateParameterNotNullStandardMessage("catalogVersion", catalogVersion);
+		validateParameterNotNullStandardMessage(ALIASCODE, omsCode);
+		validateParameterNotNullStandardMessage(CATALOGVERSION, catalogVersion);
 
 		final List<AmwayPaymentOptionModel> paymentOptions = getAmwayApacProductDao().getAmwayPaymentOptionFromOmsCode(omsCode,
 				catalogVersion);
@@ -99,6 +119,8 @@ public class DefaultAmwayApacProductService extends DefaultProductService implem
 	@Override
 	public boolean checkIfPIFIsActive(final ProductModel productModel)
 	{
+		validateParameterNotNullStandardMessage(PRODUCT, productModel);
+
 		boolean isActive = Boolean.FALSE.booleanValue();
 		if (CollectionUtils.isNotEmpty(productModel.getPaymentOption()))
 		{
@@ -134,9 +156,9 @@ public class DefaultAmwayApacProductService extends DefaultProductService implem
 	@Override
 	public int getUsedQuantityForPrelaunch(final String userId, final String productCode, final BaseStoreModel store)
 	{
-		validateParameterNotNullStandardMessage("userId", userId);
-		validateParameterNotNullStandardMessage("productCode", productCode);
-		validateParameterNotNullStandardMessage("store", store);
+		validateParameterNotNullStandardMessage(USERID, userId);
+		validateParameterNotNullStandardMessage(PRODUCTCODE, productCode);
+		validateParameterNotNullStandardMessage(STORE, store);
 
 		int usedQuantity = 0;
 
@@ -161,6 +183,9 @@ public class DefaultAmwayApacProductService extends DefaultProductService implem
 	@Override
 	public void updatePreLaunchProductCount(final Map<String, Integer> productCodeToCount, final AbstractOrderModel order)
 	{
+		validateParameterNotNullStandardMessage(PRODUCT_CODE_MAP, productCodeToCount);
+		validateParameterNotNullStandardMessage(ORDER, order);
+
 		final String amwayAccountCode = getNormalizedAmwayAccountCode(order.getAccount());
 		final List<String> preLaunchProducts = new ArrayList<>(productCodeToCount.keySet());
 		final List<AmwayUserPromotionCountModel> userSavedCountList = getAmwayApacProductDao()
@@ -200,16 +225,19 @@ public class DefaultAmwayApacProductService extends DefaultProductService implem
 	@Override
 	public Map<String, Integer> getPreLaunchConfigProducts(final AbstractOrderModel orderModel)
 	{
-		Assert.assertNotNull("Order is null !", orderModel);
-		Assert.assertNotNull("Order Entry NULL !", orderModel.getEntries());
+		validateParameterNotNullStandardMessage(ORDER, orderModel);
 
 		final Map<String, Integer> productCodeToCount = new HashMap<>();
-		for (final AbstractOrderEntryModel tempOrderEntry : orderModel.getEntries())
+
+		if (!(Collections.isEmpty(orderModel.getEntries())))
 		{
-			if (tempOrderEntry.getProduct().getPreLaunchConfig() != null)
+			for (final AbstractOrderEntryModel tempOrderEntry : orderModel.getEntries())
 			{
-				productCodeToCount.put(tempOrderEntry.getProduct().getCode(),
-						Integer.valueOf(tempOrderEntry.getQuantity().intValue()));
+				if (tempOrderEntry.getProduct().getPreLaunchConfig() != null)
+				{
+					productCodeToCount.put(tempOrderEntry.getProduct().getCode(),
+							Integer.valueOf(tempOrderEntry.getQuantity().intValue()));
+				}
 			}
 		}
 
@@ -222,6 +250,9 @@ public class DefaultAmwayApacProductService extends DefaultProductService implem
 	@Override
 	public boolean checkKitProductByType(final ProductModel product, final AmwayKitProductType kitProductType)
 	{
+		validateParameterNotNullStandardMessage(PRODUCT, product);
+		validateParameterNotNullStandardMessage(KIT_TYPE, kitProductType);
+
 		if ((product instanceof AmwayKitProductModel) && (kitProductType.equals(((AmwayKitProductModel) product).getType())))
 		{
 			return Boolean.TRUE.booleanValue();
@@ -246,6 +277,8 @@ public class DefaultAmwayApacProductService extends DefaultProductService implem
 	@Override
 	public boolean validateOmsCode(final String[] splitOmsCode, final int[] omsparams)
 	{
+		validateParameterNotNullStandardMessage(OMS_PARAMS, omsparams);
+
 		return (null != splitOmsCode) && (splitOmsCode.length == omsparams[0])
 				&& (StringUtils.isNotBlank(splitOmsCode[omsparams[1]])) && (StringUtils.isNotBlank(splitOmsCode[omsparams[2]]));
 	}

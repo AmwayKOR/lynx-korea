@@ -29,6 +29,9 @@ public class AmwayApacDeliverySlotCreationCronJob extends AbstractJobPerformable
 	/** The LOGGER Constant. */
 	private static final Logger LOGGER = LoggerFactory.getLogger(AmwayApacDeliverySlotCreationCronJob.class);
 
+	/** Days count to add to get ordering date. */
+	private static final long DAYS_TO_ADD = 1L;
+
 	/** The amway apac delivery slot management service. */
 	private AmwayApacDeliverySlotManagementService amwayApacDeliverySlotManagementService;
 
@@ -56,7 +59,7 @@ public class AmwayApacDeliverySlotCreationCronJob extends AbstractJobPerformable
 	 */
 	public LocalDate getOrderingDate()
 	{
-		final LocalDate orderingDate = LocalDate.now().plusDays(1L);
+		final LocalDate orderingDate = LocalDate.now().plusDays(DAYS_TO_ADD);
 		LOGGER.debug(new StringBuilder(50).append("Preparing data for date : ").append(orderingDate).toString());
 
 		return orderingDate;

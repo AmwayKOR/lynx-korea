@@ -16,10 +16,12 @@ import com.amway.core.model.AmwayKitProductModel;
  */
 public interface AmwayApacStockService
 {
+
 	/**
-	 * Checks for stock availability
+	 * Checks for stock availability.
 	 *
 	 * @param stockStatus
+	 *           the stock status
 	 * @return Checks for stock availability
 	 */
 	boolean isStockAvailable(final StockLevelStatus stockStatus);

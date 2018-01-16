@@ -1,5 +1,7 @@
 package com.amway.apac.deliveryslot.hooks.impl;
 
+import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
+
 import de.hybris.platform.commerceservices.model.PickUpDeliveryModeModel;
 import de.hybris.platform.commerceservices.order.CommerceCartModification;
 import de.hybris.platform.commerceservices.service.data.CommerceCartParameter;
@@ -33,6 +35,9 @@ public class AmwayApacDeliverySlotValidationHook implements CartValidationHook
 	/** The LOGGER Constant. */
 	private static final Logger LOGGER = LoggerFactory.getLogger(AmwayApacDeliverySlotValidationHook.class);
 
+	/** The Constant String CART PARAM. */
+	private static final String CART_PARAM = "Cart Parameter";
+
 	/** The amway apac delivery service. */
 	private AmwayApacDeliveryService amwayApacDeliveryService;
 
@@ -59,6 +64,8 @@ public class AmwayApacDeliverySlotValidationHook implements CartValidationHook
 	@Override
 	public void afterValidateCart(final CommerceCartParameter parameter, final List<CommerceCartModification> modifications)
 	{
+		validateParameterNotNullStandardMessage(CART_PARAM, parameter);
+
 		final CartModel cartModel = parameter.getCart();
 
 		if (cartModel != null && CollectionUtils.isNotEmpty(cartModel.getEntries()))

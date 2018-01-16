@@ -24,26 +24,32 @@ import com.amway.apac.resourcecenter.enums.AmwayApacAssetsSort;
  */
 public class DefaultAmwayApacAssetDao extends DefaultAmwayAssetDao
 {
-	/**
-	 * Classification Rank constant
-	 */
+
+	/** Classification Rank constant. */
 	private static final String RANK = "rank";
 
-	/**
-	 * Query condition part with rank and classification conditions
-	 */
+	/** Query condition part with rank and classification conditions. */
 	private static final String QUERY_STRING_WITH_RANK_PARAM_AND_CLASSIFICATION_NULL = "AND ({a.rank}<=?rank OR ({a.classification} IS NULL)) ";
 
-	/**
-	 * Query condition part with classification NULL
-	 */
+	/** Query condition part with classification NULL. */
 	private static final String QUERY_STRING_WITH_CLASSIFICATION_NULL = "AND {a.accountClassification} IS NULL ";
 
+	/** The amway apac account classification service. */
 	private AmwayApacAccountClassificationService amwayApacAccountClassificationService;
+
+	/** The amway account classification rank mapping. */
 	private Map<AccountClassificationEnum, Integer> amwayAccountClassificationRankMapping;
 
 	/**
-	 * BuildSearchQuery method of parent overridden to add classification rank in asset search query
+	 * BuildSearchQuery method of parent overridden to add classification rank in asset search query.
+	 *
+	 * @param queryParams
+	 *           the query params
+	 * @param year
+	 *           the year
+	 * @param typQuery
+	 *           the typ query
+	 * @return the list
 	 */
 	@Override
 	protected List<SortQueryData> buildSearchQuery(final Map<String, Object> queryParams, final String year, final String typQuery)
@@ -65,7 +71,10 @@ public class DefaultAmwayApacAssetDao extends DefaultAmwayAssetDao
 	}
 
 	/**
+	 * Generate rank query.
+	 *
 	 * @param queryParams
+	 *           the query params
 	 * @return Condition clause for account classification
 	 */
 	private String generateRankQuery(final Map<String, Object> queryParams)
@@ -89,6 +98,8 @@ public class DefaultAmwayApacAssetDao extends DefaultAmwayAssetDao
 
 
 	/**
+	 * Gets the amway apac account classification service.
+	 *
 	 * @return the amwayApacAccountClassificationService
 	 */
 	public AmwayApacAccountClassificationService getAmwayApacAccountClassificationService()
@@ -97,6 +108,8 @@ public class DefaultAmwayApacAssetDao extends DefaultAmwayAssetDao
 	}
 
 	/**
+	 * Sets the amway apac account classification service.
+	 *
 	 * @param amwayApacAccountClassificationService
 	 *           the amwayApacAccountClassificationService to set
 	 */
@@ -108,6 +121,8 @@ public class DefaultAmwayApacAssetDao extends DefaultAmwayAssetDao
 	}
 
 	/**
+	 * Gets the amway account classification rank mapping.
+	 *
 	 * @return the amwayAccountClassificationRankMapping
 	 */
 	public Map<AccountClassificationEnum, Integer> getAmwayAccountClassificationRankMapping()
@@ -116,6 +131,8 @@ public class DefaultAmwayApacAssetDao extends DefaultAmwayAssetDao
 	}
 
 	/**
+	 * Sets the amway account classification rank mapping.
+	 *
 	 * @param amwayAccountClassificationRankMapping
 	 *           the amwayAccountClassificationRankMapping to set
 	 */

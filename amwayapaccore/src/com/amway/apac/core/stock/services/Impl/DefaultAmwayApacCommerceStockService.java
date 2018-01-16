@@ -24,7 +24,11 @@ import com.amway.core.stock.service.impl.DefaultAmwayCommerceStockService;
  */
 public class DefaultAmwayApacCommerceStockService extends DefaultAmwayCommerceStockService
 {
+
+	/** The amway apac product service. */
 	private AmwayApacProductService amwayApacProductService;
+
+	/** The amway apac stock service. */
 	private AmwayApacStockService amwayApacStockService;
 
 	/**

@@ -12,7 +12,7 @@ import static com.amway.apac.core.model.AmwayUserPromotionCountModel.USERID;
 import static de.hybris.platform.core.model.ItemModel.PK;
 import static de.hybris.platform.core.model.product.ProductModel.APPROVALSTATUS;
 import static de.hybris.platform.core.model.product.ProductModel.CATALOGVERSION;
-import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNull;
+import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
 
 import de.hybris.platform.catalog.enums.ArticleApprovalStatus;
 import de.hybris.platform.catalog.model.CatalogVersionModel;
@@ -66,13 +66,26 @@ public class DefaultAmwayApacProductDao extends DefaultProductDao implements Amw
 			.append(STARTDATE).append("}<=?currentDate AND {po.").append(ENDDATE).append("}>=?currentDate AND{po.").append(ACTIVE)
 			.append("} = TRUE))").append(" AND {ap.code} = 'approved'").toString();
 
+
+	/** Query to fetch promotion count by user and product. */
 	private static final String FIND_AMWAY_PROMOTION_COUNT_BY_USER_AND_PRODUCT = new StringBuilder(200).append("SELECT {")
 			.append(PK).append("} FROM {").append(AmwayUserPromotionCountModel._TYPECODE).append("} WHERE {").append(USERID)
 			.append("}=?").append(USERID).append(" AND {").append(PRODUCTCODE).append("} IN (?productCodes) AND {")
 			.append(PROMOTIONCODE).append("}=?").append(PROMOTIONCODE).append(" AND {").append(STORE).append("}=?").append(STORE)
 			.toString();
 
+	/** The Constant PRODUCT_CODES. */
+	private static final String PRODUCT_CODES = "productCodes";
 
+	/** The Constant CURRENT_DATE. */
+	private static final String CURRENT_DATE = "currentDate";
+
+	/**
+	 * Instantiates a new default amway apac product dao.
+	 *
+	 * @param typecode
+	 *           the typecode
+	 */
 	public DefaultAmwayApacProductDao(final String typecode)
 	{
 		super(typecode);
@@ -85,12 +98,10 @@ public class DefaultAmwayApacProductDao extends DefaultProductDao implements Amw
 	public List<AmwayPaymentOptionModel> getAllAmwayPaymentOptionFromOmsCode(final String omsCode,
 			final CatalogVersionModel catalogVersion)
 	{
-		validateParameterNotNull(omsCode, "No OmsCode is specified");
-		validateParameterNotNull(catalogVersion, "No catalog version is specified");
+		validateParameterNotNullStandardMessage(ALIASCODE, omsCode);
+		validateParameterNotNullStandardMessage(CATALOGVERSION, catalogVersion);
 
-		// search for products
 		final Map params = new HashMap();
-
 		params.put(ALIASCODE, omsCode);
 		params.put(CATALOGVERSION, catalogVersion);
 
@@ -108,8 +119,8 @@ public class DefaultAmwayApacProductDao extends DefaultProductDao implements Amw
 	public List<AmwayPaymentOptionModel> getAmwayPaymentOptionFromOmsCode(final String omsCode,
 			final CatalogVersionModel catalogVersion)
 	{
-		validateParameterNotNull(omsCode, "No OmsCode is specified");
-		validateParameterNotNull(catalogVersion, "No catalog version is specified");
+		validateParameterNotNullStandardMessage(ALIASCODE, omsCode);
+		validateParameterNotNullStandardMessage(CATALOGVERSION, catalogVersion);
 
 		// search for products
 		final Map params = new HashMap();
@@ -117,7 +128,7 @@ public class DefaultAmwayApacProductDao extends DefaultProductDao implements Amw
 		final Date currentDate = calendar.getTime();
 		params.put(ALIASCODE, omsCode);
 		params.put(CATALOGVERSION, catalogVersion);
-		params.put("currentDate", currentDate);
+		params.put(CURRENT_DATE, currentDate);
 
 		final FlexibleSearchQuery query = new FlexibleSearchQuery(FIND_PAYMENTOPTION_FOR_OMSCODE_AND_CATALOG);
 		query.addQueryParameters(params);
@@ -130,10 +141,15 @@ public class DefaultAmwayApacProductDao extends DefaultProductDao implements Amw
 	public List<AmwayUserPromotionCountModel> getPromotionRuleCountByUserAndProduct(final String userId,
 			final List<String> productCodes, final String promotionCode, final BaseStoreModel store)
 	{
+		validateParameterNotNullStandardMessage(USERID, userId);
+		validateParameterNotNullStandardMessage(PROMOTIONCODE, promotionCode);
+		validateParameterNotNullStandardMessage(PRODUCT_CODES, productCodes);
+		validateParameterNotNullStandardMessage(STORE, store);
+
 		final FlexibleSearchQuery flexibleSearchQuery = new FlexibleSearchQuery(FIND_AMWAY_PROMOTION_COUNT_BY_USER_AND_PRODUCT);
 		flexibleSearchQuery.addQueryParameter(USERID, userId);
 		flexibleSearchQuery.addQueryParameter(PROMOTIONCODE, promotionCode);
-		flexibleSearchQuery.addQueryParameter("productCodes", productCodes);
+		flexibleSearchQuery.addQueryParameter(PRODUCT_CODES, productCodes);
 		flexibleSearchQuery.addQueryParameter(STORE, store);
 		final SearchResult<AmwayUserPromotionCountModel> ruleBasedPromotionActions = getFlexibleSearchService()
 				.search(flexibleSearchQuery);

@@ -17,9 +17,10 @@ public class AmwayApacCommerceAvailabilityCalculationStrategy extends Warehousin
 {
 
 	/**
-	 * Returns available quantity for provided stock level models
+	 * Returns available quantity for provided stock level models.
 	 *
 	 * @param stockLevels
+	 *           the stock levels
 	 * @return Available quantity
 	 */
 	@Override

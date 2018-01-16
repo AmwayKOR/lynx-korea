@@ -1,5 +1,11 @@
 package com.amway.apac.deliveryslot.services.impl;
 
+import static com.amway.apac.deliveryslot.model.AmwayDeliverySlotAvailabilityModel.DELIVERYDATE;
+import static com.amway.apac.deliveryslot.model.AmwayDeliverySlotAvailabilityModel.SLOTTIME;
+import static com.amway.apac.deliveryslot.model.AmwayDeliverySlotConfigModel.DELIVERYDAY;
+import static com.amway.apac.deliveryslot.model.AmwayDeliverySlotConfigModel.ORDERINGDAY;
+import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
+
 import de.hybris.platform.basecommerce.enums.WeekDay;
 import de.hybris.platform.servicelayer.model.ModelService;
 
@@ -38,6 +44,12 @@ public class DefaultAmwayApacDeliverySlotManagementService implements AmwayApacD
 	/** The Constant DAYS_IN_WEEK. */
 	private static final int DAYS_IN_WEEK = 7;
 
+	/** The Constant ORDERING_DATE. */
+	private static final String ORDERING_DATE = "OrderingDate";
+
+	/** The Constant CONFIG_MODEL. */
+	private static final String CONFIG_MODEL = "Config Model";
+
 	/** The model service. */
 	private ModelService modelService;
 
@@ -50,6 +62,8 @@ public class DefaultAmwayApacDeliverySlotManagementService implements AmwayApacD
 	@Override
 	public List<AmwayDeliverySlotConfigModel> getDeliverySlotByOrderDay(final DayOfWeek orderingDay)
 	{
+		validateParameterNotNullStandardMessage(ORDERINGDAY, orderingDay);
+
 		return getAmwayApacDeliverySlotManagementDao().getDeliverySlotByOrderDay(orderingDay);
 	}
 
@@ -60,6 +74,8 @@ public class DefaultAmwayApacDeliverySlotManagementService implements AmwayApacD
 	public void createDeliverySlotForDate(final List<AmwayDeliverySlotConfigModel> applicableDeliverySlots,
 			final LocalDate orderingDate)
 	{
+		validateParameterNotNullStandardMessage(ORDERING_DATE, orderingDate);
+
 		final List<AmwayDeliverySlotAvailabilityModel> deliverySlotAvailabilityModels = new ArrayList<AmwayDeliverySlotAvailabilityModel>();
 
 		if (CollectionUtils.isNotEmpty(applicableDeliverySlots))
@@ -153,6 +169,9 @@ public class DefaultAmwayApacDeliverySlotManagementService implements AmwayApacD
 	@Override
 	public LocalDate getDeliveryDate(final LocalDate orderingDate, final WeekDay deliveryDay)
 	{
+		validateParameterNotNullStandardMessage(ORDERING_DATE, orderingDate);
+		validateParameterNotNullStandardMessage(DELIVERYDAY, deliveryDay);
+
 		final DayOfWeek orderingDay = orderingDate.getDayOfWeek();
 		final DayOfWeek deliveryWeekDay = DayOfWeek.valueOf(deliveryDay.getCode());
 
@@ -171,6 +190,9 @@ public class DefaultAmwayApacDeliverySlotManagementService implements AmwayApacD
 	public List<AmwayDeliverySlotAvailabilityModel> getNextDeliverySlotByDeliveryDateAndSlot(final LocalDate deliveryDate,
 			final String slotTime)
 	{
+		validateParameterNotNullStandardMessage(DELIVERYDATE, deliveryDate);
+		validateParameterNotNullStandardMessage(SLOTTIME, slotTime);
+
 		return getAmwayApacDeliverySlotManagementDao().getNextDeliverySlotByDeliveryDateAndSlot(deliveryDate, slotTime);
 	}
 
@@ -181,6 +203,8 @@ public class DefaultAmwayApacDeliverySlotManagementService implements AmwayApacD
 	public void updateInfoInSlotsAvailabilityModels(final AmwayDeliverySlotConfigModel slotConfigModel,
 			final List<AmwayDeliverySlotAvailabilityModel> slotModels)
 	{
+		validateParameterNotNullStandardMessage(CONFIG_MODEL, slotConfigModel);
+
 		Date deliveryDate = null;
 		if (CollectionUtils.isNotEmpty(slotModels))
 		{
@@ -214,6 +238,8 @@ public class DefaultAmwayApacDeliverySlotManagementService implements AmwayApacD
 	@Override
 	public void createDeliverySlotData(final LocalDate orderingDate)
 	{
+		validateParameterNotNullStandardMessage(ORDERING_DATE, orderingDate);
+
 		final DayOfWeek orderingDay = orderingDate.getDayOfWeek();
 		LOGGER.debug("Week Of Day : " + orderingDay);
 
