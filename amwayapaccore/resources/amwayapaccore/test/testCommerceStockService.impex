@@ -60,20 +60,18 @@ INSERT_UPDATE Warehouse;code[unique=true];name[lang=en];vendor(code);default;bas
 
 INSERT_UPDATE StockLevel;&stockId;available;warehouse(code)[unique=true];inStockStatus(code);maxPreOrder;maxStockLevelHistoryCount;overSelling;preOrder;productCode[unique=true];reserved;
 ;stockId1;0;testWarehouse1;forceInStock;0;-1;0;0;testProduct1;0;
-;stockId2;10;testWarehouse1;notSpecified;0;-1;0;0;testProduct2;0;
 
 # Customers
 INSERT_UPDATE Customer;originalUid[unique=true];uid[unique=true];title(code);name;description;sessionLanguage(isocode);sessionCurrency(isocode);groups(uid);password[default=$defaultPassword];&userId;defaultPaymentAddress(&addId);defaultShipmentAddress(&addId)
 ;amwayTestUser;amwayTestUser;;test user;test user;en;EUR;customergroup;;amwayTestUser
 
 # Customer addresses
-INSERT_UPDATE Address;&addId;owner(&userId)[unique=true];streetname[unique=true];postalcode[unique=true];duplicate[unique=true];town;country(isocode);billingAddress;contactAddress;shippingAddress;unloadingAddress;firstname;lastname;email;gender(code);middlename;phone1;title(code);url;company;fax;department
-;amwayTestAddr;amwayTestUser;express Street;10019;false;New York;US;true;true;true;true;Enterprise;User;amwayTestUser;MALE;;+001 1234567;;Hybris;;
+INSERT_UPDATE Address;&addId;owner(&userId)[unique=true];streetname[unique=true];streetnumber[unique=true];postalcode[unique=true];duplicate[unique=true];town;country(isocode);billingAddress;contactAddress;shippingAddress;unloadingAddress;firstname;lastname;email;gender(code);middlename;phone1;title(code);url;company;fax;department
+;amwayTestAddr;amwayTestUser;express Street;1;10019;false;New York;US;true;true;true;true;Enterprise;User;amwayTestUser;MALE;;+001 1234567;;Hybris;;
 
 # Products
 INSERT_UPDATE Product;code[unique=true];$catalogversion;name[lang=de];name[lang=en];unit(code);approvalStatus(code);owner(Principal.uid)
 ;testProduct1;testProductCatalog:Online;testProduct1;testProduct1;pieces;approved;admin
-;testProduct2;testProductCatalog:Online;testProduct2;testProduct2;pieces;approved;admin
 
 
 
@@ -83,10 +81,18 @@ INSERT_UPDATE Order;store(uid);user(uid);code[unique=true];currency(isocode);dat
 ;testStore;amwaytestuser;testOrder2;USD;14.09.2017 13:18:05.075;false;false;testSite;;standard-gross;;
 
 # Order Entries
-INSERT_UPDATE OrderEntry;&orderEntryId;order(Order.code)[unique=true];creationTime[dateformat=yyyy-MM-dd HH:mm:ss];product(code,$catalogversion)[unique=true];quantity;unit(code);dispositionCode(code);deliveryPointOfService(name);wareHouse(code)
-;orderEntryId1;testOrder1;2011-04-27 18:54:00;testProduct1;1;pieces;shipped;;testWarehouse1;
-;orderEntryId2;testOrder2;2011-04-27 18:54:00;testProduct2;1;pieces;shipped;;testWarehouse1;
+INSERT_UPDATE OrderEntry;&orderEntryId;order(Order.code)[unique=true];creationTime[dateformat=yyyy-MM-dd HH:mm:ss];product(code,$catalogversion)[unique=true];quantity;unit(code);dispositionCode(code);deliveryPointOfService(name);wareHouse(code);entryNumber
+;orderEntryId1;testOrder1;2011-04-27 18:54:00;testProduct1;1;pieces;shipped;;testWarehouse1;0;
+;orderEntryId2;testOrder2;2011-04-27 18:54:00;testProduct1;1;pieces;shipped;;testWarehouse1;0;
 
-INSERT_UPDATE AllocationEvent;stockLevel(&stockId);orderEntry(&orderEntryId)
-;stockId1;orderEntryId1
-;stockId2;orderEntryId2
+INSERT_UPDATE Consignment;code[unique=true];status(code);order(code);shippingAddress(owner(Customer.uid),streetname,streetnumber);warehouse(code);deliveryMode(code);
+;atestOrder1;READY;testOrder1;amwaytestuser:express Street:1;testWarehouse1;standard-gross;
+;atestOrder2;READY;testOrder2;amwaytestuser:express Street:1;testWarehouse1;standard-gross;
+
+INSERT_UPDATE ConsignmentEntry;quantity;shippedQuantity;orderEntry(order(code), entryNumber)[unique=true];consignment(code);inventoryEvents(&event)
+;1;0;testOrder2:0;atestOrder1;event1;
+;1;0;testOrder2:0;atestOrder2;event2;
+
+INSERT_UPDATE AllocationEvent;&event;stockLevel(&stockId)[unique=true];orderEntry(&orderEntryId)[unique=true];
+;event1;stockId1;orderEntryId1;
+;event2;stockId1;orderEntryId2;

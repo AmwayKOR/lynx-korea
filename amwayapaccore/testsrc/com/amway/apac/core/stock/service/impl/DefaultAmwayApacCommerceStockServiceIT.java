@@ -40,7 +40,7 @@ public class DefaultAmwayApacCommerceStockServiceIT extends ServicelayerTransact
 	private static final String TEST_ORDER_1 = "testOrder1";
 	private static final String TEST_ORDER_2 = "testOrder2";
 
-	@Resource(name = "amwayApacCommerceStockService")
+	@Resource(name = "defaultAmwayApacCommerceStockService")
 	private AmwayApacCommerceStockService amwayApacCommerceStockService;
 
 	@Resource(name = "commerceOrderDao")
@@ -88,7 +88,7 @@ public class DefaultAmwayApacCommerceStockServiceIT extends ServicelayerTransact
 	{
 
 		final StockLevelModel stock = stockLevelDao.findStockLevel("testProduct1",
-				warehouseService.getWarehouseForCode("testWarehosue1"));
+				warehouseService.getWarehouseForCode("testWarehouse1"));
 		final OrderModel order = getOrderByCode(TEST_ORDER_2);
 
 		final Collection<AllocationEventModel> orderEntryAllocationEvents = new ArrayList<>();
