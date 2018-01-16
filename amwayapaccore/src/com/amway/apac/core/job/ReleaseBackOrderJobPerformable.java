@@ -3,7 +3,6 @@
  */
 package com.amway.apac.core.job;
 
-import de.hybris.platform.basecommerce.model.site.BaseSiteModel;
 import de.hybris.platform.cronjob.enums.CronJobResult;
 import de.hybris.platform.cronjob.enums.CronJobStatus;
 import de.hybris.platform.servicelayer.cronjob.AbstractJobPerformable;
@@ -30,8 +29,7 @@ public class ReleaseBackOrderJobPerformable extends AbstractJobPerformable<Amway
 	public PerformResult perform(final AmwayApacStoreSpecificCronJobModel releaseBackOrderJobPerformable)
 	{
 		PerformResult result = new PerformResult(CronJobResult.SUCCESS, CronJobStatus.FINISHED);
-		final BaseSiteModel baseSite = releaseBackOrderJobPerformable.getBaseStore().getCmsSites().iterator().next();
-		if (!getBackOrderService().releaseBackOrders(baseSite))
+		if (!getBackOrderService().releaseBackOrdersForBaseStore(releaseBackOrderJobPerformable.getBaseStore()))
 		{
 			LOG.error("Not able to release the ACTIVE AmwayBackOrders");
 			result = new PerformResult(CronJobResult.FAILURE, CronJobStatus.FINISHED);

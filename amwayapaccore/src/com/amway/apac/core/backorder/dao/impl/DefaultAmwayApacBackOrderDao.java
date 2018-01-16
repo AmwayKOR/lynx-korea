@@ -5,7 +5,6 @@ package com.amway.apac.core.backorder.dao.impl;
 
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNull;
 
-import de.hybris.platform.basecommerce.model.site.BaseSiteModel;
 import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.ordersplitting.model.ConsignmentModel;
 import de.hybris.platform.ordersplitting.model.WarehouseModel;
@@ -13,6 +12,7 @@ import de.hybris.platform.servicelayer.internal.dao.GenericDao;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 import de.hybris.platform.servicelayer.search.FlexibleSearchService;
 import de.hybris.platform.servicelayer.search.SearchResult;
+import de.hybris.platform.store.BaseStoreModel;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -48,7 +48,7 @@ public class DefaultAmwayApacBackOrderDao implements AmwayApacBackOrderDao
 	 */
 	@Override
 	public List<AmwayBackOrderModel> getBackOrders(final AmwayBackOrderStatus status, final WarehouseModel warehouse,
-			final ProductModel product, final boolean isAscending, final BaseSiteModel baseSite)
+			final ProductModel product, final BaseStoreModel baseStore)
 	{
 		validateParameterNotNull(status, "AmwayBackOrderStatus must not be null!");
 
@@ -65,14 +65,11 @@ public class DefaultAmwayApacBackOrderDao implements AmwayApacBackOrderDao
 			query.append(" AND {").append(AmwayBackOrderModel.PRODUCT).append("}=?").append(AmwayBackOrderModel.PRODUCT);
 			queryParams.put(AmwayBackOrderModel.PRODUCT, product);
 		}
-		if (Objects.nonNull(baseSite))
+		if (Objects.nonNull(baseStore))
 		{
-			query.append(" AND {").append(AmwayBackOrderModel.SITE).append("}=?").append(AmwayBackOrderModel.SITE);
-			queryParams.put(AmwayBackOrderModel.SITE, baseSite);
-		}
-		if (isAscending)
-		{
-			query.append(" ORDER BY {ABO:creationtime} ASC ");
+			//TODO
+			query.append(" AND {").append(AmwayBackOrderModel.BASESTORE).append("}=?").append(AmwayBackOrderModel.BASESTORE);
+			queryParams.put(AmwayBackOrderModel.BASESTORE, baseStore);
 		}
 		final FlexibleSearchQuery flexQuery = new FlexibleSearchQuery(query.toString(), queryParams);
 		final SearchResult<AmwayBackOrderModel> result = getFlexibleSearchService().search(flexQuery);
@@ -84,10 +81,10 @@ public class DefaultAmwayApacBackOrderDao implements AmwayApacBackOrderDao
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<AmwayBackOrderModel> getBackOrdersForExpiring(final AmwayBackOrderStatus status, final Date date)
+	public List<AmwayBackOrderModel> getBackOrdersByStatusAndDate(final AmwayBackOrderStatus status, final Date date)
 	{
 		validateParameterNotNull(status, "AmwayBackOrderStatus must not be null!");
-		final Map queryParams = new HashMap();
+		final Map queryParams = new HashMap(2);
 		queryParams.put(AmwayBackOrderModel.STATUS, status.getCode());
 		queryParams.put(RELEASE_BY_DATE, date);
 		final StringBuilder query = new StringBuilder(DEFAULT_BACKORDER_FETCH_QUERY);
@@ -102,7 +99,7 @@ public class DefaultAmwayApacBackOrderDao implements AmwayApacBackOrderDao
 	 * {@inheritDoc}
 	 */
 	@Override
-	public AmwayBackOrderModel getBackOrdersForConsignment(final ConsignmentModel consignmentModel)
+	public AmwayBackOrderModel getBackOrdersByConsignment(final ConsignmentModel consignmentModel)
 	{
 		validateParameterNotNull(consignmentModel, "ConsignmentModel must not be null!");
 		final Map queryParams = new HashMap();
@@ -144,6 +141,7 @@ public class DefaultAmwayApacBackOrderDao implements AmwayApacBackOrderDao
 	{
 		return flexibleSearchService;
 	}
+
 
 	/**
 	 * @param flexibleSearchService

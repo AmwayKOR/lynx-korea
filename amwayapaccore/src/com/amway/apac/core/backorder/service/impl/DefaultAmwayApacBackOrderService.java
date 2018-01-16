@@ -1,10 +1,6 @@
-/**
- *
- */
 package com.amway.apac.core.backorder.service.impl;
 
 import de.hybris.platform.basecommerce.enums.InStockStatus;
-import de.hybris.platform.basecommerce.model.site.BaseSiteModel;
 import de.hybris.platform.core.model.order.OrderEntryModel;
 import de.hybris.platform.ordersplitting.model.ConsignmentEntryModel;
 import de.hybris.platform.ordersplitting.model.ConsignmentModel;
@@ -14,6 +10,7 @@ import de.hybris.platform.processengine.BusinessProcessService;
 import de.hybris.platform.processengine.enums.ProcessState;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.util.ServicesUtil;
+import de.hybris.platform.store.BaseStoreModel;
 import de.hybris.platform.warehousing.inventoryevent.service.InventoryEventService;
 import de.hybris.platform.warehousing.model.AllocationEventModel;
 
@@ -57,11 +54,62 @@ public class DefaultAmwayApacBackOrderService implements AmwayApacBackOrderServi
 	private AmwayApacCommerceAvailabilityCalculationStrategy commerceAvailabilityCalculationStrategy;
 	private InventoryEventService inventoryEventService;
 
+
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void releaseBackOrdersForStock(final List<AmwayBackOrderModel> amwayBackOrders, final StockLevelModel stockLevel)
+	public boolean releaseBackOrdersForStockLevels(final List<StockLevelModel> stockLevels)
+	{
+		ServicesUtil.validateParameterNotNull(stockLevels, "Parameter StockLevels cannot be null!");
+		boolean releaseBackOrdersForStocks = false;
+		final Map<StockLevelModel, List<AmwayBackOrderModel>> backOrderMap = getAmwayApacBackOrderSelectionStrategy()
+				.getBackOrdersForRelease(stockLevels);
+		if (MapUtils.isNotEmpty(backOrderMap))
+		{
+			for (final Entry<StockLevelModel, List<AmwayBackOrderModel>> entry : backOrderMap.entrySet())
+			{
+				// release all the backOrders for particular stocks
+				releaseBackOrders(entry.getValue(), entry.getKey());
+			}
+			releaseBackOrdersForStocks = true;
+		}
+		return releaseBackOrdersForStocks;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean releaseBackOrdersForBaseStore(final BaseStoreModel baseStore)
+	{
+		ServicesUtil.validateParameterNotNull(baseStore, "Base Site cannot be null!");
+		boolean releaseBackOrdersForStocks = false;
+		final Map<StockLevelModel, List<AmwayBackOrderModel>> backOrderMap = getAmwayApacBackOrderSelectionStrategy()
+				.getBackOrdersForRelease(baseStore);
+		if (MapUtils.isNotEmpty(backOrderMap))
+		{
+			for (final Entry<StockLevelModel, List<AmwayBackOrderModel>> entry : backOrderMap.entrySet())
+			{
+				// release all the backOrders for particular stocks
+				releaseBackOrders(entry.getValue(), entry.getKey());
+			}
+			releaseBackOrdersForStocks = true;
+		}
+		return releaseBackOrdersForStocks;
+	}
+
+	/**
+	 * This method is used to release AmwayBackOrders for the stockLevels.
+	 *
+	 * @param amwayBackOrders
+	 *           list of AmwayBackOrders for release.
+	 * @param stockLevel
+	 *           Stock level which belong to amwayBackOrders.
+	 *
+	 */
+	protected void releaseBackOrders(final List<AmwayBackOrderModel> amwayBackOrders, final StockLevelModel stockLevel)
 	{
 		ServicesUtil.validateParameterNotNull(stockLevel, "StockLevel cannot be null!");
 		ServicesUtil.validateParameterNotNull(amwayBackOrders, "List of BackOrders cannot be null!");
@@ -90,9 +138,11 @@ public class DefaultAmwayApacBackOrderService implements AmwayApacBackOrderServi
 
 
 	/**
+	 * Check if valid AmwayBackOrder or not.
+	 *
 	 * @param stockLevel
 	 * @param amwayBackOrder
-	 * @return
+	 * @return boolean
 	 */
 	private boolean isValidBackOrder(final StockLevelModel stockLevel, final AmwayBackOrderModel amwayBackOrder)
 	{
@@ -117,8 +167,11 @@ public class DefaultAmwayApacBackOrderService implements AmwayApacBackOrderServi
 			{
 				final Collection<AllocationEventModel> allocationEvents = inventoryEventService
 						.getAllocationEventsForOrderEntry((OrderEntryModel) consignmentEntry.getOrderEntry());
-				requestedQty = allocationEvents.stream().filter(allocationEvent -> allocationEvent.getConsignmentEntry()
-						.getConsignment().equals(consignmentEntry.getConsignment())).mapToLong(AllocationEventModel::getQuantity).sum();
+				requestedQty = allocationEvents
+						.stream()
+						.filter(
+								allocationEvent -> allocationEvent.getConsignmentEntry().getConsignment()
+										.equals(consignmentEntry.getConsignment())).mapToLong(AllocationEventModel::getQuantity).sum();
 			}
 		}
 		return requestedQty;
@@ -140,47 +193,7 @@ public class DefaultAmwayApacBackOrderService implements AmwayApacBackOrderServi
 				|| !InStockStatus.NOLONGERAVAILABLE.equals(stockLevel.getInStockStatus());
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void releaseBackOrders(final List<StockLevelModel> stockLevels)
-	{
-		ServicesUtil.validateParameterNotNull(stockLevels, "Parameter StockLevels cannot be null!");
-		final Map<StockLevelModel, List<AmwayBackOrderModel>> backOrderMap = getAmwayApacBackOrderSelectionStrategy()
-				.getBackOrdersForRelease(stockLevels);
-		if (MapUtils.isNotEmpty(backOrderMap))
-		{
-			for (final Entry<StockLevelModel, List<AmwayBackOrderModel>> entry : backOrderMap.entrySet())
-			{
-				// release all the backOrders for particular stocks
-				releaseBackOrdersForStock(entry.getValue(), entry.getKey());
-			}
-		}
 
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean releaseBackOrders(final BaseSiteModel baseSite)
-	{
-		ServicesUtil.validateParameterNotNull(baseSite, "Base Site cannot be null!");
-		boolean releaseBackOrdersForStocks = false;
-		final Map<StockLevelModel, List<AmwayBackOrderModel>> backOrderMap = getAmwayApacBackOrderSelectionStrategy()
-				.getBackOrdersForRelease(baseSite);
-		if (MapUtils.isNotEmpty(backOrderMap))
-		{
-			for (final Entry<StockLevelModel, List<AmwayBackOrderModel>> entry : backOrderMap.entrySet())
-			{
-				// release all the backOrders for particular stocks
-				releaseBackOrdersForStock(entry.getValue(), entry.getKey());
-			}
-			releaseBackOrdersForStocks = true;
-		}
-		return releaseBackOrdersForStocks;
-	}
 
 	/**
 	 * Used to trigger Consignment process wait node(Triggers the waitForRelease event)
@@ -220,7 +233,7 @@ public class DefaultAmwayApacBackOrderService implements AmwayApacBackOrderServi
 	 *
 	 */
 	@Override
-	public boolean expireBackOrder(final List<AmwayBackOrderModel> backOrders)
+	public boolean expireBackOrders(final List<AmwayBackOrderModel> backOrders)
 	{
 		ServicesUtil.validateParameterNotNull(backOrders, "Parameter backOrders cannot be null!");
 		boolean backorderexpired = false;
@@ -240,7 +253,7 @@ public class DefaultAmwayApacBackOrderService implements AmwayApacBackOrderServi
 	@Override
 	public AmwayBackOrderModel getBackOrderByConsignment(final ConsignmentModel consignmentModel)
 	{
-		return amwayApacBackOrderDao.getBackOrdersForConsignment(consignmentModel);
+		return amwayApacBackOrderDao.getBackOrdersByConsignment(consignmentModel);
 	}
 
 	/**

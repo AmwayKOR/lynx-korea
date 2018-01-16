@@ -1,12 +1,9 @@
-/**
- *
- */
 package com.amway.apac.core.backorder.dao;
 
-import de.hybris.platform.basecommerce.model.site.BaseSiteModel;
 import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.ordersplitting.model.ConsignmentModel;
 import de.hybris.platform.ordersplitting.model.WarehouseModel;
+import de.hybris.platform.store.BaseStoreModel;
 
 import java.util.Date;
 import java.util.List;
@@ -15,9 +12,8 @@ import com.amway.apac.core.enums.AmwayBackOrderStatus;
 import com.amway.apac.core.model.AmwayBackOrderModel;
 
 
-
 /**
- * Data access to {@link com.amway.core.model.AmwayBackOrderModel}
+ * Data access to {@link AmwayBackOrderModel}
  *
  * @author ankushbhatia
  */
@@ -25,30 +21,38 @@ public interface AmwayApacBackOrderDao
 {
 
 	/**
-	 * Find all the AmwayBackOrder for a particular status, warehouse and product in created order(FIFO)
+	 * Find all the AmwayBackOrder for a particular Status, Warehouse, Product or BaseStore.
 	 *
 	 * @param status
+	 *           AmwayBackOrderStatus EG. ACTIVE, CANCELLED etc. <Mandatory>
 	 * @param warehouse
+	 *           the warehouse the AmwayBackOrder belong to. <NonMandatory>
 	 * @param product
-	 * @param isAscending
+	 *           the product the AmwayBackOrder belong to. <NonMandatory>
+	 * @param baseStore
+	 *           the baseStore the AmwayBackOrder belong to. <NonMandatory>
 	 * @return List<AmwayBackOrderModel>
 	 */
-	List<AmwayBackOrderModel> getBackOrders(AmwayBackOrderStatus status, WarehouseModel warehouse, ProductModel product,
-			boolean isAscending, final BaseSiteModel baseSite);
+	List<AmwayBackOrderModel> getBackOrders(final AmwayBackOrderStatus status, final WarehouseModel warehouse,
+			final ProductModel product, BaseStoreModel baseStore);
 
 	/**
-	 * Find all the AmwayBackOrder for a particular status, older than provided date
+	 * Find all the AmwayBackOrder for a particular Status, older than provided date.
 	 *
 	 * @param status
+	 *           AmwayBackOrderStatus EG. ACTIVE, CANCELLED etc. <Mandatory>
 	 * @param date
-	 * @return List<AmwayBackOrderModel>
+	 *           for getting AmwayBackOrder before the date. <Mandatory>
+	 * @return All the AmwayBackOrders for status and before date.
 	 */
-	List<AmwayBackOrderModel> getBackOrdersForExpiring(final AmwayBackOrderStatus status, final Date date);
+	List<AmwayBackOrderModel> getBackOrdersByStatusAndDate(final AmwayBackOrderStatus status, final Date date);
 
 	/**
-	 * Fetches the back order for a given Consignment
+	 * Fetches the back order for a given Consignment.
 	 *
-	 * @param consignmentModel
+	 * @param consignment
+	 *           the Consignment the AmwayBackOrder belong to. <Mandatory>
+	 * @return AmwayBackOrder for particular Consignment
 	 */
-	AmwayBackOrderModel getBackOrdersForConsignment(ConsignmentModel consignmentModel);
+	AmwayBackOrderModel getBackOrdersByConsignment(final ConsignmentModel consignment);
 }

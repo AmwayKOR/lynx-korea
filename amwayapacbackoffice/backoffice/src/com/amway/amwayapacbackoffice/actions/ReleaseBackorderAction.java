@@ -50,7 +50,7 @@ public class ReleaseBackorderAction implements CockpitAction<StockLevelModel, St
 		stockLevelList.add(ctx.getData());
 		try
 		{
-			amwayApacBackOrderService.releaseBackOrders(stockLevelList);
+			amwayApacBackOrderService.releaseBackOrdersForStockLevels(stockLevelList);
 			result = new ActionResult<>(ActionResult.SUCCESS);
 			result.setResultMessage(Labels.getLabel("backOrder.released.successfully"));
 		}
@@ -63,11 +63,7 @@ public class ReleaseBackorderAction implements CockpitAction<StockLevelModel, St
 				result.setResultMessage(Labels.getLabel("backOrder.release.unsuccessful"));
 			}
 		}
-
-
-
 		Messagebox.show(result.getResultMessage());
-
 		return result;
 	}
 

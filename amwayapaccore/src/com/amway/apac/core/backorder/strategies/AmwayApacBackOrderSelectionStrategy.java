@@ -3,8 +3,8 @@
  */
 package com.amway.apac.core.backorder.strategies;
 
-import de.hybris.platform.basecommerce.model.site.BaseSiteModel;
 import de.hybris.platform.ordersplitting.model.StockLevelModel;
+import de.hybris.platform.store.BaseStoreModel;
 
 import java.util.Date;
 import java.util.List;
@@ -27,7 +27,8 @@ public interface AmwayApacBackOrderSelectionStrategy
 	 * Select AmwayBackOrders for release based upon stockLevel
 	 *
 	 * @param stockLevels
-	 * @return Map<StockLevelModel,List<AmwayBackOrderModel>
+	 *           List of Stock Levels the AmwayBackOrders belongs to
+	 * @return List of AmwayBackOrders corresponding of each stock level
 	 */
 	public Map<StockLevelModel, List<AmwayBackOrderModel>> getBackOrdersForRelease(final List<StockLevelModel> stockLevels);
 
@@ -35,17 +36,20 @@ public interface AmwayApacBackOrderSelectionStrategy
 	 * Select AmwayBackOrders for expiring based upon current date
 	 *
 	 * @param status
+	 *           AmwayBackOrderStatus EG. ACTIVE, CANCELLED etc.
 	 * @param date
-	 * @return List<AmwayBackOrderModel>
+	 *           Current date to compare AmwayBackOrder creation time
+	 * @return List of AmwayBackOrders for status and before current date
 	 */
 	public List<AmwayBackOrderModel> getBackOrdersForExpiring(final AmwayBackOrderStatus status, final Date date);
 
 	/**
-	 * Select All AmwayBackOrders for release
+	 * Select All AmwayBackOrders for release for particular BaseStore
 	 *
-	 * @return Map<StockLevelModel,List<AmwayBackOrderModel>
+	 * @param baseStore
+	 * @return Map of AmwayBackOrders and StockLevel where each StockLevel is mapped to list of AmwayBackOrders
 	 */
-	public Map<StockLevelModel, List<AmwayBackOrderModel>> getBackOrdersForRelease(final BaseSiteModel baseSite);
+	public Map<StockLevelModel, List<AmwayBackOrderModel>> getBackOrdersForRelease(final BaseStoreModel baseStore);
 
 
 }

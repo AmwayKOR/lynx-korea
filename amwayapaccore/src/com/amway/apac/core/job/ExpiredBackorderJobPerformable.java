@@ -42,7 +42,7 @@ public class ExpiredBackorderJobPerformable extends AbstractJobPerformable<CronJ
 				AmwayBackOrderStatus.ACTIVE, getTimeService().getCurrentTime());
 		if (CollectionUtils.isNotEmpty(amwayBackOrders))
 		{
-			if (!getBackOrderService().expireBackOrder(amwayBackOrders).booleanValue())
+			if (!getBackOrderService().expireBackOrders(amwayBackOrders))
 			{
 				LOG.error("Not able to expire the ACTIVE AmwayBackOrders");
 				result = new PerformResult(CronJobResult.FAILURE, CronJobStatus.FINISHED);

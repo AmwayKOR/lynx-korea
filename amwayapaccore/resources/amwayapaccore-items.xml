@@ -108,9 +108,9 @@
 							optional="false" />
 						<persistence type="property" />
 					</attribute>
-					<attribute qualifier="site" type="BaseSite">
+					<attribute qualifier="baseStore" type="BaseStore">
 						<persistence type="property" />
-						<description>Attribute contains base site reference.</description>
+						<description>Attribute contains base store reference.</description>
 					</attribute>
 				</attributes>
 			</itemtype>
