@@ -12,6 +12,7 @@ import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 import de.hybris.platform.servicelayer.search.FlexibleSearchService;
 import de.hybris.platform.servicelayer.search.SearchResult;
+import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.servicelayer.user.UserService;
 
 import java.text.SimpleDateFormat;
@@ -79,6 +80,9 @@ public class DefaultAmwayAssetDao implements AmwayAssetDao
 
 	/** The user service. */
 	private UserService userService;
+
+	/** The session service. */
+	private SessionService sessionService;
 
 	/**
 	 * {@inheritDoc}
@@ -322,5 +326,27 @@ public class DefaultAmwayAssetDao implements AmwayAssetDao
 	public void setUserService(final UserService userService)
 	{
 		this.userService = userService;
+	}
+
+	/**
+	 * Gets the session service.
+	 *
+	 * @return the sessionService
+	 */
+	public SessionService getSessionService()
+	{
+		return sessionService;
+	}
+
+	/**
+	 * Sets the session service.
+	 *
+	 * @param sessionService
+	 *           the sessionService to set
+	 */
+	@Required
+	public void setSessionService(final SessionService sessionService)
+	{
+		this.sessionService = sessionService;
 	}
 }
