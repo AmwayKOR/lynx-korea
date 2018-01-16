@@ -8,22 +8,30 @@ import com.amway.apac.core.model.AmwayPOSRestrictionModel;
 
 
 /**
- * Class to evaluate POS Restriction
+ * Class to evaluate POS Restriction.
  *
  * @author Ashish Sabal
- *
  */
 public class AmwayApacPOSRestrictionEvaluator implements CMSRestrictionEvaluator<AmwayPOSRestrictionModel>
 {
+	/** The Constant POS. */
+	private static final String POS = "pos";
+
 	/**
-	 * Checks if current shop in context exist in restriction model shop list
+	 * Checks if current shop in context exist in restriction model shop list.
+	 *
+	 * @param model
+	 *           the model
+	 * @param context
+	 *           the context
+	 * @return true, if successful
 	 */
 	@Override
 	public boolean evaluate(final AmwayPOSRestrictionModel model, final RestrictionData context)
 	{
 		boolean allowed = false;
 
-		final Object pos = context.getValue("pos");
+		final Object pos = context.getValue(POS);
 		final PointOfServiceModel currentShop = (pos instanceof PointOfServiceModel) ? (PointOfServiceModel) pos : null;
 		if (null != currentShop)
 		{

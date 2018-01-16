@@ -10,14 +10,14 @@ import de.hybris.platform.util.localization.Localization;
 import java.util.Collection;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.log4j.Logger;
 
 
+/**
+ * The Class AmwayPOSRestriction.
+ */
 public class AmwayPOSRestriction extends GeneratedAmwayPOSRestriction
 {
-	@SuppressWarnings("unused")
-	private final static Logger LOG = Logger.getLogger(AmwayPOSRestriction.class.getName());
-
+	@SuppressWarnings("deprecation")
 	@Override
 	protected Item createItem(final SessionContext ctx, final ComposedType type, final ItemAttributeMap allAttributes)
 			throws JaloBusinessException
@@ -30,12 +30,7 @@ public class AmwayPOSRestriction extends GeneratedAmwayPOSRestriction
 		return item;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see de.hybris.platform.cms2.jalo.restrictions.AbstractRestriction#getDescription(de.hybris.platform.jalo.
-	 * SessionContext)
-	 */
+	@SuppressWarnings("deprecation")
 	@Deprecated
 	@Override
 	public String getDescription(final SessionContext paramSessionContext)

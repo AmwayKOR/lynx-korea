@@ -10,14 +10,18 @@ import org.apache.commons.collections.CollectionUtils;
 
 
 /**
- * @author Ashish Sabal
+ * The Class POS Description Handler.
  *
+ * @author Ashish Sabal
  */
 public class AmwayApacPOSDescriptionHandler implements DynamicAttributeHandler<String, AmwayPOSRestrictionModel>
 {
-
 	/**
-	 * Returns string list of all shops with POS available
+	 * Returns string list of all shops with POS available.
+	 *
+	 * @param model
+	 *           the model
+	 * @return the string
 	 */
 	@Override
 	public String get(final AmwayPOSRestrictionModel model)
@@ -37,9 +41,14 @@ public class AmwayApacPOSDescriptionHandler implements DynamicAttributeHandler<S
 	}
 
 	/**
-	 * Setter method for message string in POS restriction model
+	 * Setter method for message string in POS restriction model.
 	 *
+	 * @param model
+	 *           the model
+	 * @param value
+	 *           the value
 	 * @throws UnsupportedOperationException
+	 *            the unsupported operation exception
 	 */
 	@Override
 	public void set(final AmwayPOSRestrictionModel model, final String value)
