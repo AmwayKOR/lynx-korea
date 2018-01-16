@@ -15,14 +15,15 @@ import com.amway.facades.cart.impl.DefaultAmwayCartFacade;
 
 
 /**
+ * Default implementation for {@link AmwayApacCartFacade}
+ *
  * Created by Govind on 11/27/2017.
  */
 public class DefaultAmwayApacCartFacade extends DefaultAmwayCartFacade implements AmwayApacCartFacade
 {
 
 	/**
-	 * @param sortBy
-	 * @return CartData This method accepts sort by and returns CartData in given order.
+	 * {@inheritDoc}
 	 */
 	@Override
 	public CartData getSessionCartWithSortBySortCode(final AmwayApacCartSortCode sortBy)

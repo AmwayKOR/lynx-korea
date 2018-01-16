@@ -47,12 +47,12 @@ public class DefaultAmwayApacProductPreLaunchStrategy implements AmwayApacProduc
 			if (currentDate.before(preLaunchConfig.getStartDate()))
 			{
 				preLaunchStatus = AmwayProductPreLaunchStatus.NOT_YET_LAUNCHED;
-				allowedQuantity = AmwayapacCoreConstants.ZERO_INT;
+				allowedQuantity = AmwayapacCoreConstants.ZERO_INTEGER;
 			}
 			else if ((currentDate.after(preLaunchConfig.getStartDate())) && (currentDate.before(preLaunchConfig.getEndDate())))
 			{
 				preLaunchStatus = AmwayProductPreLaunchStatus.IN_PRE_LAUNCH_PERIOD;
-				allowedQuantity = AmwayapacCoreConstants.ZERO_INT;
+				allowedQuantity = AmwayapacCoreConstants.ZERO_INTEGER;
 				if (getAmwayApacAccountClassificationService().checkUserClassification(preLaunchConfig.getClassification()))
 				{
 					if (preLaunchConfig.getMaxShoppingCount().intValue() < 0)

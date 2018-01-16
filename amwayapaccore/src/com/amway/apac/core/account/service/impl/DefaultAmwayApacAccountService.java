@@ -1,5 +1,7 @@
 package com.amway.apac.core.account.service.impl;
 
+import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
+
 import de.hybris.platform.core.model.c2l.CountryModel;
 import de.hybris.platform.servicelayer.internal.dao.GenericDao;
 
@@ -36,6 +38,8 @@ public class DefaultAmwayApacAccountService extends DefaultAmwayAccountService i
 	@Override
 	public List<AmwayAccountModel> getAmwayAccount(final String aboId, final String affiliateCountryCode)
 	{
+		validateParameterNotNullStandardMessage("aboId", aboId);
+
 		final CountryModel controllingAffiliate = getAmwayApacCommerceCommonI18NService().getCountryForCode(affiliateCountryCode);
 		final Map<String, Object> attributes = new HashMap<>();
 		attributes.put(AmwayAccountModel.CODE, aboId);

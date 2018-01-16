@@ -10,6 +10,8 @@ import de.hybris.platform.servicelayer.dto.converter.ConversionException;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
 import de.hybris.platform.wishlist2.model.Wishlist2EntryModel;
 
+import org.springframework.beans.factory.annotation.Required;
+
 import com.amway.apac.core.constants.AmwayapacCoreConstants;
 import com.amway.facades.product.data.WishlistEntryData;
 
@@ -24,6 +26,9 @@ public class AmwayApacWishlistEntryBasicPopulator implements Populator<Wishlist2
 {
 	private Converter<ProductModel, ProductData> productConverter;
 
+	/**
+	 * Populator to populate {@link Wishlist2EntryModel} values into {@link WishlistEntryData}
+	 */
 	@Override
 	public void populate(final Wishlist2EntryModel source, final WishlistEntryData target) throws ConversionException
 	{
@@ -34,16 +39,23 @@ public class AmwayApacWishlistEntryBasicPopulator implements Populator<Wishlist2
 		target.setProduct(getProductConverter().convert(source.getProduct()));
 	}
 
+	/**
+	 * @return the productConverter
+	 */
 	public Converter<ProductModel, ProductData> getProductConverter()
 	{
 		return productConverter;
 	}
 
+	/**
+	 * @param productConverter
+	 *           the productConverter to set
+	 */
+	@Required
 	public void setProductConverter(final Converter<ProductModel, ProductData> productConverter)
 	{
 		this.productConverter = productConverter;
 	}
-
 
 
 }

@@ -21,6 +21,8 @@ import com.amway.facades.checkout.impl.DefaultAmwayCheckoutFacade;
 
 
 /**
+ * Overriding {@link DefaultAmwayCheckoutFacade} implementation for APAC specific requirements.
+ *
  * @author Shubham Goyal
  */
 public class DefaultAmwayApacCheckoutFacade extends DefaultAmwayCheckoutFacade
@@ -32,7 +34,7 @@ public class DefaultAmwayApacCheckoutFacade extends DefaultAmwayCheckoutFacade
 	private AmwayApacCommerceCheckoutService amwayApacCommerceCheckoutService;
 
 	/**
-	 * {@inheritDoc}. Overriding OOTB implementation to set the warehouse in cart when address is changed.
+	 * {@inheritDoc} Overriding OOTB implementation to set the warehouse in cart when address is changed.
 	 */
 	@Override
 	public boolean setDeliveryAddress(final AddressData addressData)
@@ -74,9 +76,11 @@ public class DefaultAmwayApacCheckoutFacade extends DefaultAmwayCheckoutFacade
 	 * Updates the delivery address in cart
 	 *
 	 * @param cartModel
+	 *           CartModel in which address need to be set.
 	 * @param addressModel
+	 *           Address that need to be set
 	 * @param setAddressAsDefaultShippingAddress
-	 * @return
+	 * @return true is the action is successful.
 	 */
 	protected boolean setDeliveryAddress(final CartModel cartModel, final AddressModel addressModel,
 			final boolean setAddressAsDefaultShippingAddress)
@@ -96,10 +100,10 @@ public class DefaultAmwayApacCheckoutFacade extends DefaultAmwayCheckoutFacade
 	}
 
 	/**
-	 * Returns true if passed address is registered address for user in session
+	 * Returns true if passed address is registered address for user in session.
 	 *
 	 * @param cartCheckoutDeliveryAddress
-	 * @return
+	 * @return true is the passed address is the registered address for current user.
 	 */
 	protected boolean isRegisteredAddress(final AddressData cartCheckoutDeliveryAddress)
 	{
@@ -109,9 +113,13 @@ public class DefaultAmwayApacCheckoutFacade extends DefaultAmwayCheckoutFacade
 	}
 
 	/**
-	 * Updates the warehouse for cart
+	 * Updates the warehouse evaluated on the basis of postalCode given for cart.
 	 *
-	 * @return
+	 * @param cartModel
+	 *           CartModel in which warehouse need to be set
+	 * @param postalCode
+	 *           Postal Code against which warehouse need to be searched
+	 * @return true if the action is successful
 	 */
 	protected boolean setCartWarehouse(final CartModel cartModel, final String postalCode)
 	{

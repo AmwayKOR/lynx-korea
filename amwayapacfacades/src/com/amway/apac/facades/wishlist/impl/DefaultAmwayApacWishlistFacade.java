@@ -109,10 +109,7 @@ public class DefaultAmwayApacWishlistFacade extends DefaultAmwayWishlistFacade i
 	{
 		Assert.hasLength(uid, "Parameter uid can not be null or empty.");
 
-		final WishlistData wishlistData = getWishlistConverter()
-				.convert(getAmwayApacWishlistService().getWishlistByUidForCurrentUser(uid));
-
-		return wishlistData;
+		return getWishlistConverter().convert(getAmwayApacWishlistService().getWishlistByUidForCurrentUser(uid));
 	}
 
 	/**

@@ -80,9 +80,12 @@ public interface AmwayApacWishlistFacade extends AmwayWishlistFacade
 	AmwayApacWishlistModificationStatus updateWishlistNameAndReturnStatus(final String uid, final String newName);
 
 	/**
+	 * Returns the passed {@link WishlistData} with entries sorted in the way corresponding to the passed sortBy value.
 	 *
 	 * @param data
+	 *           WishlistData
 	 * @param sortBy
+	 *           Sort Code
 	 * @return CartData This method accepts CartData and sort by and returns CartData in given order.
 	 */
 	WishlistData getShoppingListDetailsSortBySortCode(AmwayApacCartSortCode sortBy, final WishlistData data);

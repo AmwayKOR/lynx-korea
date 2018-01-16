@@ -88,7 +88,7 @@ public class DefaultAmwayApacProductService extends DefaultProductService implem
 		validateIfSingleResult(paymentOptions,
 				new StringBuilder(200).append("aliasCode '").append(aliasCode).append("' not found!").toString(),
 				new StringBuilder(200).append("aliasCode '").append(aliasCode).append("' is not unique, ")
-						.append(AmwayapacCoreConstants.ZERO_INT).append(" products found!").toString());
+						.append(AmwayapacCoreConstants.ZERO_INTEGER).append(" products found!").toString());
 
 		return paymentOptions.iterator().next();
 	}
@@ -108,9 +108,9 @@ public class DefaultAmwayApacProductService extends DefaultProductService implem
 		validateIfSingleResult(paymentOptions,
 				new StringBuilder(200).append("aliasCode '").append(aliasCode).append("' not found!").toString(),
 				new StringBuilder(200).append("aliasCode '").append(aliasCode).append("' is not unique, ")
-						.append(AmwayapacCoreConstants.ZERO_INT).append(" products found!").toString());
+						.append(AmwayapacCoreConstants.ZERO_INTEGER).append(" products found!").toString());
 
-		return paymentOptions.get(AmwayapacCoreConstants.ZERO_INT.intValue());
+		return paymentOptions.get(AmwayapacCoreConstants.ZERO_INTEGER.intValue());
 	}
 
 

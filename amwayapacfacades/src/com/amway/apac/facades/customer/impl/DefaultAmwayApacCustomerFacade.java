@@ -17,7 +17,8 @@ import com.amway.core.model.AmwayAccountModel;
 
 
 /**
- * Overriding {@link DefaultAmwayCustomerFacade} to update for APAC.
+ * Overriding {@link DefaultAmwayCustomerFacade} to update for APAC and default implementation for
+ * {@link AmwayApacCustomerFacade}.
  *
  * @author Shubham Goyal
  */
