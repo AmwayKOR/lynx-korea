@@ -3,7 +3,6 @@ package com.amway.apac.core.product.translators;
 import de.hybris.platform.catalog.CatalogVersionService;
 import de.hybris.platform.catalog.model.CatalogVersionModel;
 import de.hybris.platform.core.Registry;
-import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.impex.jalo.header.StandardColumnDescriptor;
 import de.hybris.platform.impex.jalo.translators.AbstractValueTranslator;
 import de.hybris.platform.jalo.Item;
@@ -17,17 +16,17 @@ import com.amway.apac.core.product.services.AmwayApacProductService;
 
 
 /**
- * Translator to change OMS code into corresponding product.
+ * Translator to change Alias Code into corresponding product code.
  *
  * @author Ashish Sabal
  *
  */
-public class AmwayApacOMSCodeToProductPKTranslator extends AbstractValueTranslator
+public class AmwayApacAliasCodeToProductCodeTranslator extends AbstractValueTranslator
 {
 	/**
 	 * Separator character to split values provided through Impex
 	 */
-	private static final String OMS_CODE_CATALOG_VERSION_SEPARATOR = ":";
+	private static final String ALIAS_CODE_CATALOG_VERSION_SEPARATOR = ":";
 
 	/**
 	 * APAC product service name constant
@@ -40,25 +39,25 @@ public class AmwayApacOMSCodeToProductPKTranslator extends AbstractValueTranslat
 	private static final String CATALOG_VERSION_SERVICE = "catalogVersionService";
 
 	/**
-	 * OMS code index constant
+	 * Alias Code index constant
 	 */
-	private static final int OMS_CODE_STRING_OMS_CODE_INDEX = 0;
+	private static final int ALIAS_CODE_STRING_OMS_CODE_INDEX = 0;
 
 	/**
 	 * Catalog name value index constant
 	 */
-	private static final int OMS_CODE_STRING_CATALOG_INDEX = 1;
+	private static final int ALIAS_CODE_STRING_CATALOG_INDEX = 1;
 
 	/**
 	 * Catalog version value index constant
 	 */
-	private static final int OMS_CODE_STRING_VERSION_INDEX = 2;
+	private static final int ALIAS_CODE_STRING_VERSION_INDEX = 2;
 
 	/**
 	 * Parameter array constant to pass into param validation method
 	 */
-	private static final int[] omsCodeValidationParams =
-	{ 3, OMS_CODE_STRING_CATALOG_INDEX, OMS_CODE_STRING_VERSION_INDEX };
+	private static final int[] aliasCodeValidationParams =
+	{ 3, ALIAS_CODE_STRING_CATALOG_INDEX, ALIAS_CODE_STRING_VERSION_INDEX };
 
 	private AmwayApacProductService amwayApacProductService;
 
@@ -82,30 +81,30 @@ public class AmwayApacOMSCodeToProductPKTranslator extends AbstractValueTranslat
 	}
 
 	/**
-	 * Returns product model for provided OMS code
+	 * Returns product code for provided Alias Code
 	 */
 	@Override
-	public ProductModel importValue(final String omsCode, final Item arg1) throws JaloInvalidParameterException
+	public String importValue(final String aliasCode, final Item arg1) throws JaloInvalidParameterException
 	{
-		ProductModel productCode = null;
-		if (StringUtils.isNotBlank(omsCode))
+		String productCode = aliasCode;
+		if (StringUtils.isNotBlank(aliasCode))
 		{
-			final String[] splitOmsCode = omsCode.split(OMS_CODE_CATALOG_VERSION_SEPARATOR);
+			final String[] splitAliasCode = aliasCode.split(ALIAS_CODE_CATALOG_VERSION_SEPARATOR);
 
 			CatalogVersionModel catalogVersion = null;
-			if (amwayApacProductService.validateOmsCode(splitOmsCode, omsCodeValidationParams))
+			if (amwayApacProductService.validateAliasCode(splitAliasCode, aliasCodeValidationParams))
 			{
-				catalogVersion = getCatalogVersionService().getCatalogVersion(splitOmsCode[OMS_CODE_STRING_CATALOG_INDEX],
-						splitOmsCode[OMS_CODE_STRING_VERSION_INDEX]);
+				catalogVersion = getCatalogVersionService().getCatalogVersion(splitAliasCode[ALIAS_CODE_STRING_CATALOG_INDEX],
+						splitAliasCode[ALIAS_CODE_STRING_VERSION_INDEX]);
 			}
 
 			if (null != catalogVersion)
 			{
 				final AmwayPaymentOptionModel amwayPaymentOptionModel = amwayApacProductService
-						.getAllPaymentOptionForOmsCode(splitOmsCode[OMS_CODE_STRING_OMS_CODE_INDEX], catalogVersion);
+						.getAllPaymentOptionForAliasCode(splitAliasCode[ALIAS_CODE_STRING_OMS_CODE_INDEX], catalogVersion);
 				if ((amwayPaymentOptionModel != null) && (amwayPaymentOptionModel.getProduct() != null))
 				{
-					productCode = amwayPaymentOptionModel.getProduct();
+					productCode = amwayPaymentOptionModel.getProduct().getCode();
 				}
 			}
 		}

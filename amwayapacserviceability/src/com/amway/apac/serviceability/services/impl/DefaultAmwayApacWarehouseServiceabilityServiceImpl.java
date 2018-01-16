@@ -8,13 +8,20 @@ import static org.springframework.util.Assert.hasText;
 import de.hybris.platform.basecommerce.model.site.BaseSiteModel;
 import de.hybris.platform.core.model.c2l.RegionModel;
 import de.hybris.platform.ordersplitting.model.WarehouseModel;
+import de.hybris.platform.site.BaseSiteService;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Required;
 
+import com.amway.apac.serviceability.daos.AmwayApacWarehouseServiceabilityDao;
+import com.amway.apac.serviceability.model.AbstractAmwayWarehouseServiceabilityModel;
+import com.amway.apac.serviceability.model.AmwayPostcodeWarehouseServiceabilityModel;
 import com.amway.apac.serviceability.services.AmwayApacWarehouseServiceabilityService;
-import com.amway.apac.serviceability.strategy.AmwayApacWarehouseServiceabilitySelectionStrategy;
 
 
 /**
@@ -25,7 +32,10 @@ import com.amway.apac.serviceability.strategy.AmwayApacWarehouseServiceabilitySe
 public class DefaultAmwayApacWarehouseServiceabilityServiceImpl implements AmwayApacWarehouseServiceabilityService
 {
 
-	private AmwayApacWarehouseServiceabilitySelectionStrategy amwayApacWarehouseServiceabilitySelectionStrategy;
+	private static final Logger LOGGER = LoggerFactory.getLogger(DefaultAmwayApacWarehouseServiceabilityServiceImpl.class);
+
+	private AmwayApacWarehouseServiceabilityDao amwayApacWarehouseServiceabilityDao;
+	private BaseSiteService baseSiteService;
 
 	/**
 	 * {@inheritDoc}
@@ -36,7 +46,20 @@ public class DefaultAmwayApacWarehouseServiceabilityServiceImpl implements Amway
 		hasText(postalCode);
 		validateParameterNotNullStandardMessage(BASESITE_STRING, baseSite);
 
-		return getAmwayApacWarehouseServiceabilitySelectionStrategy().getServiceableWareHouse(postalCode, baseSite);
+		WarehouseModel warehouse = null;
+		if (LOGGER.isInfoEnabled())
+		{
+			LOGGER.info(new StringBuilder(100).append("Searching serviceable warehouse for postalcode [").append(postalCode)
+					.append("] and basesite [").append(baseSite.getName()).append("].").toString());
+		}
+		final List<AmwayPostcodeWarehouseServiceabilityModel> searchResult = getAmwayApacWarehouseServiceabilityDao()
+				.getWarehouseServiceabilityList(postalCode, baseSite);
+		if (CollectionUtils.isNotEmpty(searchResult))
+		{
+			warehouse = searchResult.get(0).getWarehouse();
+		}
+
+		return warehouse;
 	}
 
 	/**
@@ -49,7 +72,9 @@ public class DefaultAmwayApacWarehouseServiceabilityServiceImpl implements Amway
 		validateParameterNotNullStandardMessage(BASESITE_STRING, baseSite);
 		validateParameterNotNullStandardMessage(REGION_STRING, region);
 
-		return getAmwayApacWarehouseServiceabilitySelectionStrategy().isPostalCodeServiceable(postalCode, baseSite, region);
+		final List<AmwayPostcodeWarehouseServiceabilityModel> searchResult = getAmwayApacWarehouseServiceabilityDao()
+				.getServiceableWarehouseListForPostalCodeRegion(postalCode, baseSite, region);
+		return Boolean.valueOf(CollectionUtils.isNotEmpty(searchResult));
 	}
 
 	/**
@@ -61,7 +86,14 @@ public class DefaultAmwayApacWarehouseServiceabilityServiceImpl implements Amway
 		hasText(postalCode);
 		validateParameterNotNullStandardMessage(BASESITE_STRING, baseSite);
 
-		return getAmwayApacWarehouseServiceabilitySelectionStrategy().getRegionsForPostalCode(postalCode, baseSite);
+		final List<RegionModel> regionList = new ArrayList<>();
+		final List<AmwayPostcodeWarehouseServiceabilityModel> amwayWarehouseServiceabilityList = getAmwayApacWarehouseServiceabilityDao()
+				.getWarehouseServiceabilityList(postalCode, baseSite);
+		for (final AbstractAmwayWarehouseServiceabilityModel warehouseServiceability : amwayWarehouseServiceabilityList)
+		{
+			regionList.add(warehouseServiceability.getRegion());
+		}
+		return regionList;
 	}
 
 	/**
@@ -72,27 +104,46 @@ public class DefaultAmwayApacWarehouseServiceabilityServiceImpl implements Amway
 	{
 		hasText(postalCode);
 
-		return getAmwayApacWarehouseServiceabilitySelectionStrategy().isPostalCodeServiceableForCurrentBaseSite(postalCode);
+		final List<AmwayPostcodeWarehouseServiceabilityModel> searchResult = getAmwayApacWarehouseServiceabilityDao()
+				.getWarehouseServiceabilityList(postalCode, getBaseSiteService().getCurrentBaseSite());
+		return Boolean.valueOf(CollectionUtils.isNotEmpty(searchResult));
 	}
 
-
 	/**
-	 * @return the amwayApacWarehouseServiceabilitySelectionStrategy
+	 * @return the baseSiteService
 	 */
-	public AmwayApacWarehouseServiceabilitySelectionStrategy getAmwayApacWarehouseServiceabilitySelectionStrategy()
+	public BaseSiteService getBaseSiteService()
 	{
-		return amwayApacWarehouseServiceabilitySelectionStrategy;
+		return baseSiteService;
 	}
 
 	/**
-	 * @param amwayApacWarehouseServiceabilitySelectionStrategy
-	 *           the amwayApacWarehouseServiceabilitySelectionStrategy to set
+	 * @param baseSiteService
+	 *           the baseSiteService to set
 	 */
 	@Required
-	public void setAmwayApacWarehouseServiceabilitySelectionStrategy(
-			final AmwayApacWarehouseServiceabilitySelectionStrategy amwayApacWarehouseServiceabilitySelectionStrategy)
+	public void setBaseSiteService(final BaseSiteService baseSiteService)
 	{
-		this.amwayApacWarehouseServiceabilitySelectionStrategy = amwayApacWarehouseServiceabilitySelectionStrategy;
+		this.baseSiteService = baseSiteService;
+	}
+
+	/**
+	 * @return the amwayApacWarehouseServiceabilityDao
+	 */
+	public AmwayApacWarehouseServiceabilityDao getAmwayApacWarehouseServiceabilityDao()
+	{
+		return amwayApacWarehouseServiceabilityDao;
+	}
+
+	/**
+	 * @param amwayApacWarehouseServiceabilityDao
+	 *           the amwayApacWarehouseServiceabilityDao to set
+	 */
+	@Required
+	public void setAmwayApacWarehouseServiceabilityDao(
+			final AmwayApacWarehouseServiceabilityDao amwayApacWarehouseServiceabilityDao)
+	{
+		this.amwayApacWarehouseServiceabilityDao = amwayApacWarehouseServiceabilityDao;
 	}
 
 }

@@ -23,26 +23,26 @@ public interface AmwayApacProductService extends ProductService
 {
 
 	/**
-	 * Returns all payment options available for OMS code.
+	 * Returns all payment options available for Alias Code.
 	 *
-	 * @param omsCode
+	 * @param aliasCode
 	 * @param catalogVersion
-	 * @return all payment option models for OMS code
+	 * @return all payment option models for Alias Code
 	 *
 	 * @throws IllegalArgumentException
 	 */
-	AmwayPaymentOptionModel getAllPaymentOptionForOmsCode(final String omsCode, final CatalogVersionModel catalogVersion);
+	AmwayPaymentOptionModel getAllPaymentOptionForAliasCode(final String aliasCode, final CatalogVersionModel catalogVersion);
 
 	/**
 	 * Returns all active payment options for approved products
 	 *
-	 * @param omsCode
+	 * @param aliasCode
 	 * @param catalogVersion
-	 * @return payment option for OMS code
+	 * @return payment option for Alias Code
 	 *
 	 * @throws IllegalArgumentException
 	 */
-	AmwayPaymentOptionModel getPaymentOptionForOmsCode(final String omsCode, final CatalogVersionModel catalogVersion);
+	AmwayPaymentOptionModel getPaymentOptionForAliasCode(final String aliasCode, final CatalogVersionModel catalogVersion);
 
 	/**
 	 * Checks if PIF is currently active for product
@@ -55,15 +55,15 @@ public interface AmwayApacProductService extends ProductService
 	boolean checkIfPIFIsActive(final ProductModel productModel);
 
 	/**
-	 * Checks for OMS code and catalog params to be not empty
+	 * Checks for Alias Code and catalog params to be not empty
 	 *
-	 * @param splitOmsCode
-	 * @param omscodevalidationparams
-	 * @return Checks for OMS code and catalog params not empty
+	 * @param splitAliasCode
+	 * @param aliasCodevalidationparams
+	 * @return Checks for Alias Code and catalog params not empty
 	 *
 	 * @throws IllegalArgumentException
 	 */
-	boolean validateOmsCode(final String[] splitOmsCode, final int[] omscodevalidationparams);
+	boolean validateAliasCode(final String[] splitAliasCode, final int[] aliasCodevalidationparams);
 
 	/**
 	 * Returns the Available Purchasable Quantity.

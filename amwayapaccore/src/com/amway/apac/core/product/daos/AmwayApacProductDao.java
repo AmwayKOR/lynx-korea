@@ -12,38 +12,39 @@ import com.amway.apac.core.model.AmwayUserPromotionCountModel;
 
 /**
  * DAO containing all product related APIs
- * 
+ *
  * @author Ashish Sabal
  */
 public interface AmwayApacProductDao extends ProductDao
 {
 
 	/**
-	 * Gets all amway payment options for oms code.
+	 * Gets the all amway payment option from alias code.
 	 *
-	 * @param omsCode
-	 *           the oms code
+	 * @param aliasCode
+	 *           the alias code
 	 * @param catalogVersion
 	 *           the catalog version
-	 * @return list of all payment option available for OMS code
+	 * @return list of all payment option available for Alias Code
 	 * @throws IllegalArgumentException
 	 *            the illegal argument exception
 	 */
-	List<AmwayPaymentOptionModel> getAllAmwayPaymentOptionFromOmsCode(final String omsCode,
+	List<AmwayPaymentOptionModel> getAllAmwayPaymentOptionFromAliasCode(final String aliasCode,
 			final CatalogVersionModel catalogVersion);
 
 	/**
-	 * Gets active amway payment options for approved products.
+	 * Gets active amway payment option from alias code.
 	 *
-	 * @param omsCode
-	 *           the oms code
+	 * @param aliasCode
+	 *           the alias code
 	 * @param catalogVersion
 	 *           the catalog version
-	 * @return payment option for OMS code
+	 * @return payment option for Alias Code
 	 * @throws IllegalArgumentException
 	 *            the illegal argument exception
 	 */
-	List<AmwayPaymentOptionModel> getAmwayPaymentOptionFromOmsCode(final String omsCode, final CatalogVersionModel catalogVersion);
+	List<AmwayPaymentOptionModel> getAmwayPaymentOptionFromAliasCode(final String aliasCode,
+			final CatalogVersionModel catalogVersion);
 
 	/**
 	 * Gets the promotion rule count by user and product.
