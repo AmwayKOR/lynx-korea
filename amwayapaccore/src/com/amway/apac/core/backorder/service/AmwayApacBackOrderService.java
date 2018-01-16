@@ -36,11 +36,13 @@ public interface AmwayApacBackOrderService
 	boolean releaseBackOrders(BaseSiteModel baseSite);
 
 	/**
-	 * This method is used to Expire AmwayBackOrders on the bases of Date(current)
+	 * This method is used to Expire AmwayBackOrders on the basis of Date(current).It looks for all backorders which
+	 * needs to mark as expired
 	 *
 	 * @param backOrders
+	 * @return Boolean
 	 */
-	Boolean expireBackOrder(List<AmwayBackOrderModel> backOrders);
+	boolean expireBackOrder(List<AmwayBackOrderModel> backOrders);
 
 	/**
 	 * This method is used to fetch BackOrder on the basis of consignment
