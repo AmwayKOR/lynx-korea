@@ -28,14 +28,9 @@ public class DefaultAmwayApacStockService extends DefaultAmwayStockService imple
 
 	private AmwayApacStockLevelDao amwayApacStockLevelDao;
 
+
 	/**
-	 * @param product
-	 *           -The product for which the stock is to be updated
-	 * @param warehouse
-	 *           -The WH for which the stock is to updated
-	 * @param amount
-	 *           -The actual amount that shall be updated into the stock
-	 *
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void updateAvailableAmount(final ProductModel product, final WarehouseModel warehouse, final int amount)
@@ -55,6 +50,7 @@ public class DefaultAmwayApacStockService extends DefaultAmwayStockService imple
 	 * @param code
 	 * @return
 	 */
+	@Override
 	protected StockLevelModel checkAndGetStockLevel(final ProductModel product, final WarehouseModel warehouse, final String skuId)
 	{
 		for (final StockLevelModel stockLevelModel : getStockLevels(product, Arrays.asList(warehouse)))
@@ -85,6 +81,7 @@ public class DefaultAmwayApacStockService extends DefaultAmwayStockService imple
 		this.amwayApacStockLevelDao = amwayApacStockLevelDao;
 	}
 
+	@Override
 	protected void clearCacheForItem(final StockLevelModel stockLevel)
 	{
 		Utilities.invalidateCache(stockLevel.getPk());

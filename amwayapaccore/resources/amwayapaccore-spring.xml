@@ -298,7 +298,7 @@
     </bean>
     
     <bean id="amwayApacOrderService"
-		class="com.amway.apac.core.backorder.service.impl.DefaultAmwayApacOrderService" parent="defaultAmwayOrderService">
+		class="com.amway.apac.core.order.service.impl.DefaultAmwayApacOrderService" parent="defaultAmwayOrderService">
 	</bean>
 	
 </beans>

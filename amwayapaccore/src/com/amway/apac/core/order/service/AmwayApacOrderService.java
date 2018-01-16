@@ -1,7 +1,7 @@
 /**
  *
  */
-package com.amway.apac.core.backorder.service;
+package com.amway.apac.core.order.service;
 
 import de.hybris.platform.core.model.order.OrderModel;
 
@@ -17,7 +17,7 @@ public interface AmwayApacOrderService extends AmwayOrderService
 	 * Identifies whether payment for a particular order is captured or not.
 	 *
 	 * @param order
-	 * @return true if order payment is captured.
+	 * @return boolean - true if order payment is captured, false otherwise.
 	 */
 	boolean isOrderPaymentCaptured(final OrderModel order);
 }

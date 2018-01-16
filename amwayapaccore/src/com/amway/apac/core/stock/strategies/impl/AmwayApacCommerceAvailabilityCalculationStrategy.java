@@ -78,11 +78,13 @@ public class AmwayApacCommerceAvailabilityCalculationStrategy extends Warehousin
 
 
 	/**
+	 * evaluates and returns the amount of inventory available for stock levels
+	 *
 	 * @param stockLevel
 	 *           - The stock level model
 	 * @param eventClass
 	 *           - The inventory event class
-	 * @return quantity of that inventory event in stock level
+	 * @return int - quantity of that inventory event in stock level
 	 */
 	private int getInventoryEventQuantity(final StockLevelModel stockLevel, final Class<? extends InventoryEventModel> eventClass)
 	{
@@ -92,9 +94,11 @@ public class AmwayApacCommerceAvailabilityCalculationStrategy extends Warehousin
 
 
 	/**
+	 * evaluates the availability of stock
+	 * 
 	 * @param stockLevel
-	 * @return true, (if status is BackOrder) or (status is shipElseBackOrder with quantity less than equal to 0), else
-	 *         returns false
+	 * @return boolean - true, (if status is BackOrder) or (status is shipElseBackOrder with quantity less than equal to
+	 *         0), else returns false
 	 */
 	private boolean isBackOrderStock(final StockLevelModel stockLevel)
 	{
