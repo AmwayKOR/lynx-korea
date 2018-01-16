@@ -24,8 +24,7 @@ public class DefaultAmwayApacStockLevelDao extends DefaultAmwayStockLevelDao imp
 	private static final Logger LOG = Logger.getLogger(DefaultAmwayApacStockLevelDao.class);
 
 	/**
-	 * {@inheritDoc} This API updates the AVAILABLE field for stock level but does not change the RESERVED field value in
-	 * the stock level
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void updateAvailableAmount(final StockLevelModel stockLevel, final int amount)
@@ -53,7 +52,9 @@ public class DefaultAmwayApacStockLevelDao extends DefaultAmwayStockLevelDao imp
 	}
 
 	/**
-	 * @return query for updating the available field
+	 * Returns the query for updating the available field only
+	 *
+	 * @return String
 	 */
 	private String assembleAvailableStockLevelUpdateQuery()
 	{
@@ -62,6 +63,11 @@ public class DefaultAmwayApacStockLevelDao extends DefaultAmwayStockLevelDao imp
 				+ this.stockLevelColumns.getAvailableCol() + " - ?" + " WHERE " + this.stockLevelColumns.getPkCol() + "=?";
 	}
 
+	/**
+	 * Method to execute the JDBC query
+	 *
+	 * @return int
+	 */
 	private int runJdbcQuery(final String query, final int amount, final StockLevelModel stockLevel)
 	{
 		final Integer _amount = Integer.valueOf(amount);
