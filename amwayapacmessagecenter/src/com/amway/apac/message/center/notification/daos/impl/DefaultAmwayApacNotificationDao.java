@@ -93,7 +93,7 @@ public class DefaultAmwayApacNotificationDao implements AmwayApacNotificationDao
 	 * {@inheritDoc}
 	 */
 	@Override
-	public SearchPageData<AmwayNotificationModel> getNotificationsByMapping(final PageableData pageableData,
+	public SearchPageData<AmwayNotificationModel> getNotifications(final PageableData pageableData,
 			final BaseSiteModel baseSite, final CustomerModel customer, final List<AmwayNotificationUserActionStatus> statuses,
 			final String searchText, final String accountClassficationCode)
 	{

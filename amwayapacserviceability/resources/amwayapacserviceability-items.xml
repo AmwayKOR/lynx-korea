@@ -36,32 +36,6 @@
 				</indexes>
 			</itemtype>
 
-			<itemtype code="AmwayWarehouseServiceability" autocreate="true"
-				generate="true" extends="AbstractAmwayWarehouseServiceability">
-				<description>PIN code to warehouse mapping for Major-Minor postal code model</description>
-				<deployment table="WarehouseServiceability" typecode="21006" />
-				<attributes>
-					<attribute qualifier="majorPostalCode" type="java.lang.String">
-						<description>Major postal code of the area</description>
-						<modifiers unique="true" />
-						<persistence type="property" />
-					</attribute>
-					<attribute qualifier="minorPostalCode" type="java.lang.String">
-						<description>Minor postal code of the area</description>
-						<modifiers unique="true" />
-						<persistence type="property" />
-					</attribute>
-				</attributes>
-				<indexes>
-					<index name="majorPostalCodeIDX" unique="false">
-						<key attribute="majorPostalCode" />
-					</index>
-					<index name="minorPostalCodeIDX" unique="false">
-						<key attribute="minorPostalCode" />
-					</index>
-				</indexes>
-			</itemtype>
-
 			<itemtype code="AmwayPostcodeWarehouseServiceability"
 				autocreate="true" generate="true" extends="AbstractAmwayWarehouseServiceability">
 				<description>Pin code to warehouse mapping for complete postal code model</description>

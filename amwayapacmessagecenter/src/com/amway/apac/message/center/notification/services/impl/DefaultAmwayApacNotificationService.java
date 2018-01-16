@@ -58,14 +58,14 @@ public class DefaultAmwayApacNotificationService implements AmwayApacNotificatio
 	 * {@inheritDoc}
 	 */
 	@Override
-	public SearchPageData<AmwayNotificationModel> getNotificationsByMapping(final PageableData pageableData,
+	public SearchPageData<AmwayNotificationModel> getNotifications(final PageableData pageableData,
 			final CustomerModel customer, final List<AmwayNotificationUserActionStatus> statuses, final String searchText)
 	{
 		validateParameterNotNull(pageableData, ERROR_MESSAGE_NULL_PAGEABLE_DATA);
 		validateParameterNotNull(customer, ERROR_MESSAGE_NULL_CUSTOMER);
 		final String accountClassficationCode = getSessionService().getAttribute(ACCOUNT_CLASSIFICATION_CODE);
 
-		return getAmwayApacNotificationDao().getNotificationsByMapping(pageableData, getBaseSiteService().getCurrentBaseSite(),
+		return getAmwayApacNotificationDao().getNotifications(pageableData, getBaseSiteService().getCurrentBaseSite(),
 				customer, statuses, searchText, accountClassficationCode);
 	}
 
@@ -103,7 +103,7 @@ public class DefaultAmwayApacNotificationService implements AmwayApacNotificatio
 		}
 		final List<AmwayNotificationUserActionModel> results = getAmwayNotificationUserActionDao().find(params);
 
-		if (CollectionUtils.isNotEmpty(results) && results.size() == 1)
+		if (CollectionUtils.isNotEmpty(results))
 		{
 			LOGGER.info(new StringBuilder(100).append(results.size()).append(" match found. Updating the status to ")
 					.append(newStatus.getCode()).toString());

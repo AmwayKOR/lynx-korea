@@ -32,7 +32,7 @@ public interface AmwayApacNotificationService
 	 * @throws IllegalArgumentException
 	 *            if pageableData or customer is null
 	 */
-	SearchPageData<AmwayNotificationModel> getNotificationsByMapping(PageableData pageableData, CustomerModel userModel,
+	SearchPageData<AmwayNotificationModel> getNotifications(PageableData pageableData, CustomerModel userModel,
 			List<AmwayNotificationUserActionStatus> statuses, String searchText);
 
 	/**
