@@ -17,6 +17,15 @@
 			<value code="RELEASED" />
 			<value code="EXPIRED" />
 		</enumtype>
+		<enumtype code="InStockStatus" autocreate="false" generate="true">
+			<value code="temporaryNotAvailable" />
+			<value code="notYetAvailable" />
+			<value code="shipped" />
+		</enumtype>
+		<enumtype code="StockLevelStatus" generate="true" autocreate="false"
+			dynamic="true">
+			<value code="backOrder" />
+		</enumtype>
 	</enumtypes>
 	<itemtypes>
 
@@ -39,7 +48,18 @@
 				</attributes>
 			</itemtype>
 		</typegroup>
-
+		<typegroup name="order">
+			<itemtype code="AbstractOrderEntry" autocreate="false"
+				generate="false">
+				<attributes>
+					<attribute type="InStockStatus" qualifier="dispositionCode">
+						<description>Disposition Code.</description>
+						<modifiers read="true" write="true" search="true" />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+		</typegroup>
 		<!-- Type groups for BackOrder -->
 		<typegroup name="backOrder">
 			<itemtype code="AmwayBackOrder" generate="true" autocreate="true"
@@ -95,7 +115,7 @@
 				</attributes>
 			</itemtype>
 		</typegroup>
-		
+
 		<typegroup name="stocks">
 			<itemtype code="StockLevel" generate="false" autocreate="false">
 				<description>Extending the StockLevel type from core with additional attributes.</description>

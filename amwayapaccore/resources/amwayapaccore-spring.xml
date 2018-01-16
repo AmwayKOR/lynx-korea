@@ -121,7 +121,6 @@
 	<bean id="defaultAmwayApacConsignmentService"
 		class="com.amway.apac.core.order.consignment.service.impl.DefaultAmwayApacConsignmentService"
 		parent="defaultAmwayConsignmentService">
-		<property name="businessProcessService" ref="businessProcessService" />
 		<property name="modelService" ref="modelService" />
 	</bean>
 
