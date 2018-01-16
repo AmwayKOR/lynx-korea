@@ -23,7 +23,6 @@
 		<property name="flexibleSearchService" ref="flexibleSearchService"/>
 		<property name="pagedFlexibleSearchService" ref="pagedFlexibleSearchService" />
 		<property name="userService" ref="userService"/>
-		<property name="sessionService" ref="sessionService"/>
 	</bean>
 	
 	<alias alias="amwayApacAssetService" name="defaultAmwayApacAssetService"/>

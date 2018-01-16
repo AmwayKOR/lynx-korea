@@ -23,6 +23,13 @@ public final class AmwayapacresourcecenterConstants extends GeneratedAmwayapacre
 		//empty to avoid instantiating this constant class
 	}
 
-	// implement here constants used by this extension
+	/**
+	 * int constant - 0.
+	 */
+	public static final Integer ZERO_INT = Integer.valueOf(0);
 
+	/**
+	 * int constant - 1.
+	 */
+	public static final Integer ONE_INT = Integer.valueOf(1);
 }

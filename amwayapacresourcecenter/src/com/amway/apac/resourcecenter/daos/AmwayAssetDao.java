@@ -1,14 +1,3 @@
-/*
- * [y] hybris Platform
- *
- * Copyright (c) 2000-2018 SAP SE
- * All rights reserved.
- *
- * This software is the confidential and proprietary information of SAP
- * Hybris ("Confidential Information"). You shall not disclose such
- * Confidential Information and shall use it only in accordance with the
- * terms of the license agreement you entered into with SAP Hybris.
- */
 package com.amway.apac.resourcecenter.daos;
 
 import de.hybris.platform.catalog.model.CatalogVersionModel;
@@ -24,19 +13,77 @@ import com.amway.apac.resourcecentre.model.media.AmwayAssetModel;
 
 
 /**
- * @author Ashish Sabal
+ * DAO Interface for Assets
  *
+ * @author Ashish Sabal
  */
 public interface AmwayAssetDao
 {
+
+	/**
+	 * Gets the assets for component ID.
+	 *
+	 * @param componentId
+	 *           the component id
+	 * @param pageableData
+	 *           the pageable data
+	 * @param catalogVersion
+	 *           the catalog version
+	 * @param year
+	 *           the year
+	 * @return the assets
+	 *
+	 * @throws IllegalArgumentException
+	 */
 	SearchPageData<AmwayAssetModel> getAssets(final String componentId, final PageableData pageableData,
 			final CatalogVersionModel catalogVersion, final String year);
 
+	/**
+	 * Gets the assets for product.
+	 *
+	 * @param product
+	 *           the product
+	 * @param pageableData
+	 *           the pageable data
+	 * @param catalogVersion
+	 *           the catalog version
+	 * @param year
+	 *           the year
+	 * @return the assets for product
+	 *
+	 * @throws IllegalArgumentException
+	 */
 	SearchPageData<AmwayAssetModel> getAssetsForProduct(final ProductModel product, final PageableData pageableData,
 			final CatalogVersionModel catalogVersion, final String year);
 
+	/**
+	 * Gets the assets albums for component ID.
+	 *
+	 * @param componentId
+	 *           the component id
+	 * @param pageableData
+	 *           the pageable data
+	 * @param catalogVersion
+	 *           the catalog version
+	 * @param year
+	 *           the year
+	 * @return the assets albums
+	 *
+	 * @throws IllegalArgumentException
+	 */
 	SearchPageData<AmwayAssetAlbumModel> getAssetsAlbums(final String componentId, final PageableData pageableData,
 			final CatalogVersionModel catalogVersion, final String year);
 
+	/**
+	 * Gets the assets album media for component ID.
+	 *
+	 * @param catalogVersion
+	 *           the catalog version
+	 * @param componentId
+	 *           the component id
+	 * @return the assets album media
+	 *
+	 * @throws IllegalArgumentException
+	 */
 	List<MediaContainerModel> getAssetsAlbumMedia(final CatalogVersionModel catalogVersion, final String componentId);
 }
