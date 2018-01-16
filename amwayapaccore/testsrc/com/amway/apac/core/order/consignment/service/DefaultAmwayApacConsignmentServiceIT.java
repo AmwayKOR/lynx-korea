@@ -44,10 +44,10 @@ public class DefaultAmwayApacConsignmentServiceIT extends ServicelayerTransactio
 	@Test
 	public void testCreateConsignments() throws ConsignmentCreationException
 	{
-		final Map<String,Object> parameters=new HashMap<>();
+		final Map<String, Object> parameters = new HashMap<>();
 		parameters.put(OrderModel.CODE, "testOrder1");
-		final List<OrderModel> orderList=orderDao.find(parameters);
-		final OrderModel order=orderList.get(0);
+		final List<OrderModel> orderList = orderDao.find(parameters);
+		final OrderModel order = orderList.get(0);
 		final List<ConsignmentModel> consignments = amwayApacConsignmentService.createConsignments(order);
 		Assert.assertEquals(1, consignments.size());
 	}
@@ -61,6 +61,66 @@ public class DefaultAmwayApacConsignmentServiceIT extends ServicelayerTransactio
 		final OrderModel order = orderList.get(0);
 		final List<ConsignmentModel> consignments = amwayApacConsignmentService.createConsignments(order);
 		Assert.assertEquals(2, consignments.size());
+	}
+
+	@Test(expected = ConsignmentCreationException.class)
+	public void testCreateConsignmentsWithNoWarehouse() throws ConsignmentCreationException
+	{
+		final Map<String, Object> parameters = new HashMap<>();
+		parameters.put(OrderModel.CODE, "testOrder3");
+		final List<OrderModel> orderList = orderDao.find(parameters);
+		final OrderModel order = orderList.get(0);
+		amwayApacConsignmentService.createConsignments(order);
+	}
+
+	@Test
+	public void testCreateConsignmentsForShippingDate() throws ConsignmentCreationException
+	{
+		final Map<String,Object> parameters=new HashMap<>();
+		parameters.put(OrderModel.CODE, "testOrder1");
+		final List<OrderModel> orderList=orderDao.find(parameters);
+		final OrderModel order=orderList.get(0);
+		final List<ConsignmentModel> consignments = amwayApacConsignmentService.createConsignments(order);
+		final ConsignmentModel consignment=consignments.get(0);
+		Assert.assertNotNull(consignment.getShippingDate());
+	}
+
+	@Test
+	public void testCreateConsignmentsForDeliveryMode() throws ConsignmentCreationException
+	{
+		final Map<String,Object> parameters=new HashMap<>();
+		parameters.put(OrderModel.CODE, "testOrder1");
+		final List<OrderModel> orderList=orderDao.find(parameters);
+		final OrderModel order=orderList.get(0);
+		final List<ConsignmentModel> consignments = amwayApacConsignmentService.createConsignments(order);
+		final ConsignmentModel consignment=consignments.get(0);
+		Assert.assertNotNull(consignment.getDeliveryMode());
+		Assert.assertEquals(order.getDeliveryMode(),consignment.getDeliveryMode());
+	}
+
+	@Test
+	public void testCreateConsignmentsForDeliveryPointOfService() throws ConsignmentCreationException
+	{
+		final Map<String,Object> parameters=new HashMap<>();
+		parameters.put(OrderModel.CODE, "testOrder4");
+		final List<OrderModel> orderList=orderDao.find(parameters);
+		final OrderModel order=orderList.get(0);
+		final List<ConsignmentModel> consignments = amwayApacConsignmentService.createConsignments(order);
+		final ConsignmentModel consignment=consignments.get(0);
+		Assert.assertNotNull(consignment.getDeliveryMode());
+		Assert.assertEquals(order.getDeliveryMode(),consignment.getDeliveryMode());
+	}
+
+	@Test
+	public void testCreateConsignmentsForWarehouse() throws ConsignmentCreationException
+	{
+		final Map<String, Object> parameters = new HashMap<>();
+		parameters.put(OrderModel.CODE, "testOrder4");
+		final List<OrderModel> orderList = orderDao.find(parameters);
+		final OrderModel order = orderList.get(0);
+		final List<ConsignmentModel> consignments = amwayApacConsignmentService.createConsignments(order);
+		final ConsignmentModel consignment = consignments.get(0);
+		Assert.assertNotNull(consignment.getWarehouse());
 	}
 
 }
