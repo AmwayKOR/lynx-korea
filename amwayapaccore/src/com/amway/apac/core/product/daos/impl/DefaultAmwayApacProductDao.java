@@ -45,7 +45,7 @@ public class DefaultAmwayApacProductDao extends DefaultProductDao implements Amw
 	/**
 	 * Query to fetch all payment option available for given OMS & catalog version
 	 */
-	private static final String FIND_ALL_PAYMENTOPTION_FOR_OMSCODE_AND_CATALOG = new StringBuilder(200).append("SELECT {po.")
+	private static final String FIND_ALL_PAYMENTOPTION_FOR_ALIAS_CODE_AND_CATALOG = new StringBuilder(200).append("SELECT {po.")
 			.append(PK).append("} FROM {").append(AmwayPaymentOptionModel._TYPECODE).append(" as po JOIN ")
 			.append(ProductModel._TYPECODE).append(" as p ON {po.").append(PRODUCT).append("} = {p.").append(PK).append("} JOIN ")
 			.append(CatalogVersionModel._TYPECODE).append(" AS cv ON {p.").append(CATALOGVERSION).append("} = {cv.").append(PK)
@@ -55,7 +55,7 @@ public class DefaultAmwayApacProductDao extends DefaultProductDao implements Amw
 	/**
 	 * Query to fetch all ACTIVE payment options available for APPROVED products
 	 */
-	private static final String FIND_PAYMENTOPTION_FOR_OMSCODE_AND_CATALOG = new StringBuilder(200).append("SELECT {po.")
+	private static final String FIND_PAYMENTOPTION_FOR_ALIAS_CODE_AND_CATALOG = new StringBuilder(200).append("SELECT {po.")
 			.append(PK).append("} FROM {").append(AmwayPaymentOptionModel._TYPECODE).append(" as po JOIN ")
 			.append(ProductModel._TYPECODE).append(" as p ON {po.").append(PRODUCT).append("} = {p.").append(PK).append("} JOIN ")
 			.append(CatalogVersionModel._TYPECODE).append(" AS cv ON {p.").append(CATALOGVERSION).append("} = {cv.").append(PK)
@@ -82,19 +82,19 @@ public class DefaultAmwayApacProductDao extends DefaultProductDao implements Amw
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<AmwayPaymentOptionModel> getAllAmwayPaymentOptionFromOmsCode(final String omsCode,
+	public List<AmwayPaymentOptionModel> getAllAmwayPaymentOptionFromAliasCode(final String aliasCode,
 			final CatalogVersionModel catalogVersion)
 	{
-		validateParameterNotNull(omsCode, "No OmsCode is specified");
+		validateParameterNotNull(aliasCode, "No aliasCode is specified");
 		validateParameterNotNull(catalogVersion, "No catalog version is specified");
 
 		// search for products
 		final Map params = new HashMap();
 
-		params.put(ALIASCODE, omsCode);
+		params.put(ALIASCODE, aliasCode);
 		params.put(CATALOGVERSION, catalogVersion);
 
-		final FlexibleSearchQuery query = new FlexibleSearchQuery(FIND_ALL_PAYMENTOPTION_FOR_OMSCODE_AND_CATALOG);
+		final FlexibleSearchQuery query = new FlexibleSearchQuery(FIND_ALL_PAYMENTOPTION_FOR_ALIAS_CODE_AND_CATALOG);
 		query.addQueryParameters(params);
 
 		final SearchResult<AmwayPaymentOptionModel> result = getFlexibleSearchService().search(query);
@@ -105,21 +105,21 @@ public class DefaultAmwayApacProductDao extends DefaultProductDao implements Amw
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<AmwayPaymentOptionModel> getAmwayPaymentOptionFromOmsCode(final String omsCode,
+	public List<AmwayPaymentOptionModel> getAmwayPaymentOptionFromAliasCode(final String aliasCode,
 			final CatalogVersionModel catalogVersion)
 	{
-		validateParameterNotNull(omsCode, "No OmsCode is specified");
+		validateParameterNotNull(aliasCode, "No aliasCode is specified");
 		validateParameterNotNull(catalogVersion, "No catalog version is specified");
 
 		// search for products
 		final Map params = new HashMap();
 		final Calendar calendar = Calendar.getInstance();
 		final Date currentDate = calendar.getTime();
-		params.put(ALIASCODE, omsCode);
+		params.put(ALIASCODE, aliasCode);
 		params.put(CATALOGVERSION, catalogVersion);
 		params.put("currentDate", currentDate);
 
-		final FlexibleSearchQuery query = new FlexibleSearchQuery(FIND_PAYMENTOPTION_FOR_OMSCODE_AND_CATALOG);
+		final FlexibleSearchQuery query = new FlexibleSearchQuery(FIND_PAYMENTOPTION_FOR_ALIAS_CODE_AND_CATALOG);
 		query.addQueryParameters(params);
 
 		final SearchResult<AmwayPaymentOptionModel> result = getFlexibleSearchService().search(query);

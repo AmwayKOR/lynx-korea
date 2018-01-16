@@ -19,19 +19,19 @@ public interface AmwayApacProductDao extends ProductDao
 {
 
 	/**
-	 * @param omsCode
+	 * @param aliasCode
 	 * @param catalogVersion
-	 * @return list of all payment option available for OMS code
+	 * @return list of all payment option available for Alias Code
 	 */
-	List<AmwayPaymentOptionModel> getAllAmwayPaymentOptionFromOmsCode(final String omsCode,
+	List<AmwayPaymentOptionModel> getAllAmwayPaymentOptionFromAliasCode(final String aliasCode,
 			final CatalogVersionModel catalogVersion);
 
 	/**
-	 * @param omsCode
+	 * @param aliasCode
 	 * @param catalogVersion
-	 * @return payment option for OMS code
+	 * @return payment option for Alias Code
 	 */
-	List<AmwayPaymentOptionModel> getAmwayPaymentOptionFromOmsCode(final String omsCode, final CatalogVersionModel catalogVersion);
+	List<AmwayPaymentOptionModel> getAmwayPaymentOptionFromAliasCode(final String aliasCode, final CatalogVersionModel catalogVersion);
 
 	/**
 	 * @param userId

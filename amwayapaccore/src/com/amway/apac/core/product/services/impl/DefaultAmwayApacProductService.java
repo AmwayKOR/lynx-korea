@@ -55,18 +55,19 @@ public class DefaultAmwayApacProductService extends DefaultProductService implem
 	 * {@inheritDoc}
 	 */
 	@Override
-	public AmwayPaymentOptionModel getAllPaymentOptionForOmsCode(final String omsCode, final CatalogVersionModel catalogVersion)
+	public AmwayPaymentOptionModel getAllPaymentOptionForAliasCode(final String aliasCode,
+			final CatalogVersionModel catalogVersion)
 	{
-		validateParameterNotNullStandardMessage("omsCode", omsCode);
+		validateParameterNotNullStandardMessage("aliasCode", aliasCode);
 		validateParameterNotNullStandardMessage("catalogVersion", catalogVersion);
 
 
-		final List<AmwayPaymentOptionModel> paymentOptions = getAmwayApacProductDao().getAllAmwayPaymentOptionFromOmsCode(omsCode,
+		final List<AmwayPaymentOptionModel> paymentOptions = getAmwayApacProductDao().getAllAmwayPaymentOptionFromAliasCode(aliasCode,
 				catalogVersion);
 
 		validateIfSingleResult(paymentOptions,
-				new StringBuilder(200).append("omsCode '").append(omsCode).append("' not found!").toString(),
-				new StringBuilder(200).append("omsCode '").append(omsCode).append("' is not unique, ")
+				new StringBuilder(200).append("aliasCode '").append(aliasCode).append("' not found!").toString(),
+				new StringBuilder(200).append("aliasCode '").append(aliasCode).append("' is not unique, ")
 						.append(AmwayapacCoreConstants.ZERO_INT).append(" products found!").toString());
 
 		return paymentOptions.iterator().next();
@@ -76,17 +77,17 @@ public class DefaultAmwayApacProductService extends DefaultProductService implem
 	 * {@inheritDoc}
 	 */
 	@Override
-	public AmwayPaymentOptionModel getPaymentOptionForOmsCode(final String omsCode, final CatalogVersionModel catalogVersion)
+	public AmwayPaymentOptionModel getPaymentOptionForAliasCode(final String aliasCode, final CatalogVersionModel catalogVersion)
 	{
-		validateParameterNotNullStandardMessage("omsCode", omsCode);
+		validateParameterNotNullStandardMessage("aliasCode", aliasCode);
 		validateParameterNotNullStandardMessage("catalogVersion", catalogVersion);
 
-		final List<AmwayPaymentOptionModel> paymentOptions = getAmwayApacProductDao().getAmwayPaymentOptionFromOmsCode(omsCode,
+		final List<AmwayPaymentOptionModel> paymentOptions = getAmwayApacProductDao().getAmwayPaymentOptionFromAliasCode(aliasCode,
 				catalogVersion);
 
 		validateIfSingleResult(paymentOptions,
-				new StringBuilder(200).append("omsCode '").append(omsCode).append("' not found!").toString(),
-				new StringBuilder(200).append("omsCode '").append(omsCode).append("' is not unique, ")
+				new StringBuilder(200).append("aliasCode '").append(aliasCode).append("' not found!").toString(),
+				new StringBuilder(200).append("aliasCode '").append(aliasCode).append("' is not unique, ")
 						.append(AmwayapacCoreConstants.ZERO_INT).append(" products found!").toString());
 
 		return paymentOptions.get(AmwayapacCoreConstants.ZERO_INT.intValue());
@@ -244,10 +245,10 @@ public class DefaultAmwayApacProductService extends DefaultProductService implem
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean validateOmsCode(final String[] splitOmsCode, final int[] omsparams)
+	public boolean validateAliasCode(final String[] splitAliasCode, final int[] aliasParams)
 	{
-		return (null != splitOmsCode) && (splitOmsCode.length == omsparams[0])
-				&& (StringUtils.isNotBlank(splitOmsCode[omsparams[1]])) && (StringUtils.isNotBlank(splitOmsCode[omsparams[2]]));
+		return (null != splitAliasCode) && (splitAliasCode.length == aliasParams[0])
+				&& (StringUtils.isNotBlank(splitAliasCode[aliasParams[1]])) && (StringUtils.isNotBlank(splitAliasCode[aliasParams[2]]));
 	}
 
 	/**
