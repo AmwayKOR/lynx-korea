@@ -13,6 +13,7 @@ import de.hybris.platform.ordersplitting.model.StockLevelModel;
 import de.hybris.platform.processengine.BusinessProcessService;
 import de.hybris.platform.processengine.enums.ProcessState;
 import de.hybris.platform.servicelayer.model.ModelService;
+import de.hybris.platform.servicelayer.util.ServicesUtil;
 import de.hybris.platform.warehousing.inventoryevent.service.InventoryEventService;
 import de.hybris.platform.warehousing.model.AllocationEventModel;
 
@@ -24,7 +25,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
 
-import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.MapUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
 
@@ -62,47 +63,73 @@ public class DefaultAmwayApacBackOrderService implements AmwayApacBackOrderServi
 	@Override
 	public void releaseBackOrdersForStock(final List<AmwayBackOrderModel> amwayBackOrders, final StockLevelModel stockLevel)
 	{
-		if (CollectionUtils.isNotEmpty(amwayBackOrders) && Objects.nonNull(stockLevel) && isStockAvailableForRelease(stockLevel))
+		ServicesUtil.validateParameterNotNull(stockLevel, "StockLevel cannot be null!");
+		ServicesUtil.validateParameterNotNull(amwayBackOrders, "List of BackOrders cannot be null!");
+
+		if (isStockAvailableForRelease(stockLevel))
 		{
 			Long available = commerceAvailabilityCalculationStrategy.calculateAvailability(Arrays.asList(stockLevel));
-			if (Objects.nonNull(available))
+			int maxBoReleaseLimit = stockLevel.getMaxBoReleaseLimit();
+			for (final AmwayBackOrderModel amwayBackOrder : amwayBackOrders)
 			{
-
-				int maxBoReleaseLimit = stockLevel.getMaxBoReleaseLimit();
-				for (final AmwayBackOrderModel amwayBackOrder : amwayBackOrders)
+				final long requestedQty = getRequestedQuantity(amwayBackOrder, stockLevel);
+				if (requestedQty <= available.longValue() && requestedQty <= maxBoReleaseLimit)
 				{
-					long requestedQty = 0;
-					if (stockLevel.getProductCode().equals(amwayBackOrder.getProduct().getCode())
-							&& stockLevel.getWarehouse().equals(amwayBackOrder.getWarehouse()))
-					{
-						for (final ConsignmentEntryModel consignmentEntry : amwayBackOrder.getConsignment().getConsignmentEntries())
-						{
-							final Collection<AllocationEventModel> allocationEvents = inventoryEventService
-									.getAllocationEventsForOrderEntry((OrderEntryModel) consignmentEntry.getOrderEntry());
-							requestedQty = allocationEvents.stream().filter(allocationEvent -> allocationEvent.getConsignmentEntry()
-									.getConsignment().equals(consignmentEntry.getConsignment()))
-									.mapToLong(AllocationEventModel::getQuantity).sum();
-						}
-					}
-					if (requestedQty <= available.longValue() && requestedQty <= maxBoReleaseLimit)
-					{
-						available = Long.valueOf(available.longValue() - requestedQty);
-						maxBoReleaseLimit -= requestedQty;
-						triggerConsignmentProcess(amwayBackOrder.getConsignment());
-					}
+					available = Long.valueOf(available.longValue() - requestedQty);
+					maxBoReleaseLimit -= requestedQty;
+					triggerConsignmentProcess(amwayBackOrder.getConsignment());
+				}
 
-					if (available.longValue() == 0 || maxBoReleaseLimit == 0)
-					{
-						break;
-					}
+				if (available.longValue() == 0 || maxBoReleaseLimit == 0)
+				{
+					break;
 				}
 			}
 		}
 	}
 
+
 	/**
 	 * @param stockLevel
-	 * @return if the stock level has correct status to be able to release back orders
+	 * @param amwayBackOrder
+	 * @return
+	 */
+	private boolean isValidBackOrder(final StockLevelModel stockLevel, final AmwayBackOrderModel amwayBackOrder)
+	{
+		return stockLevel.getProductCode().equals(amwayBackOrder.getProduct().getCode())
+				&& stockLevel.getWarehouse().equals(amwayBackOrder.getWarehouse());
+	}
+
+
+	/**
+	 * Evaluates and returns the quantity that is present in the back order
+	 *
+	 * @param amwayBackOrder
+	 * @param stockLevel
+	 * @return long - requested backorder qty
+	 */
+	private long getRequestedQuantity(final AmwayBackOrderModel amwayBackOrder, final StockLevelModel stockLevel)
+	{
+		long requestedQty = 0;
+		if (isValidBackOrder(stockLevel, amwayBackOrder))
+		{
+			for (final ConsignmentEntryModel consignmentEntry : amwayBackOrder.getConsignment().getConsignmentEntries())
+			{
+				final Collection<AllocationEventModel> allocationEvents = inventoryEventService
+						.getAllocationEventsForOrderEntry((OrderEntryModel) consignmentEntry.getOrderEntry());
+				requestedQty = allocationEvents.stream().filter(allocationEvent -> allocationEvent.getConsignmentEntry()
+						.getConsignment().equals(consignmentEntry.getConsignment())).mapToLong(AllocationEventModel::getQuantity).sum();
+			}
+		}
+		return requestedQty;
+	}
+
+
+	/**
+	 * Checks if the stock level has correct status to be able to release back orders
+	 *
+	 * @param stockLevel
+	 * @return boolean
 	 */
 	private boolean isStockAvailableForRelease(final StockLevelModel stockLevel)
 	{
@@ -119,9 +146,10 @@ public class DefaultAmwayApacBackOrderService implements AmwayApacBackOrderServi
 	@Override
 	public void releaseBackOrders(final List<StockLevelModel> stockLevels)
 	{
+		ServicesUtil.validateParameterNotNull(stockLevels, "Parameter StockLevels cannot be null!");
 		final Map<StockLevelModel, List<AmwayBackOrderModel>> backOrderMap = getAmwayApacBackOrderSelectionStrategy()
 				.getBackOrdersForRelease(stockLevels);
-		if (null != backOrderMap && !backOrderMap.isEmpty())
+		if (MapUtils.isNotEmpty(backOrderMap))
 		{
 			for (final Entry<StockLevelModel, List<AmwayBackOrderModel>> entry : backOrderMap.entrySet())
 			{
@@ -132,13 +160,17 @@ public class DefaultAmwayApacBackOrderService implements AmwayApacBackOrderServi
 
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean releaseBackOrders(final BaseSiteModel baseSite)
 	{
+		ServicesUtil.validateParameterNotNull(baseSite, "Base Site cannot be null!");
 		boolean releaseBackOrdersForStocks = false;
 		final Map<StockLevelModel, List<AmwayBackOrderModel>> backOrderMap = getAmwayApacBackOrderSelectionStrategy()
 				.getBackOrdersForRelease(baseSite);
-		if (null != backOrderMap && !backOrderMap.isEmpty())
+		if (MapUtils.isNotEmpty(backOrderMap))
 		{
 			for (final Entry<StockLevelModel, List<AmwayBackOrderModel>> entry : backOrderMap.entrySet())
 			{
@@ -151,9 +183,9 @@ public class DefaultAmwayApacBackOrderService implements AmwayApacBackOrderServi
 	}
 
 	/**
-	 * Used to trigger Consignment process wait node
+	 * Used to trigger Consignment process wait node(Triggers the waitForRelease event)
 	 *
-	 * @param ConsignmentModel
+	 * @param consignment
 	 */
 	private void triggerConsignmentProcess(final ConsignmentModel consignment)
 	{
@@ -170,8 +202,7 @@ public class DefaultAmwayApacBackOrderService implements AmwayApacBackOrderServi
 					{
 						final String eventCode = (new StringBuilder(String.valueOf(process.getConsignment().getCode()))).append("_")
 								.append(BACK_ORDER_RELEASE_EVENT_CODE).toString();
-						// Trigger the business process event which release
-						// AmwayBackOrder
+						// Trigger the business process event which releases the backorder
 						getBusinessProcessService().triggerEvent(eventCode);
 						LOG.info("BackOrder consignment triggered successfully for code : " + consignment.getCode());
 					}
@@ -187,23 +218,18 @@ public class DefaultAmwayApacBackOrderService implements AmwayApacBackOrderServi
 	/**
 	 * {@inheritDoc}
 	 *
-	 * @param backOrders
-	 * @return Boolean The method iterates on the list of backorders which needs to set as expired and changes their
-	 *         status to expired.
 	 */
 	@Override
-	public Boolean expireBackOrder(final List<AmwayBackOrderModel> backOrders)
+	public boolean expireBackOrder(final List<AmwayBackOrderModel> backOrders)
 	{
+		ServicesUtil.validateParameterNotNull(backOrders, "Parameter backOrders cannot be null!");
 		boolean backorderexpired = false;
-		if (CollectionUtils.isNotEmpty(backOrders))
+		for (final AmwayBackOrderModel amwayBackOrder : backOrders)
 		{
-			for (final AmwayBackOrderModel amwayBackOrder : backOrders)
-			{
-				amwayBackOrder.setStatus(AmwayBackOrderStatus.valueOf(EXPIRED));
-				modelService.save(amwayBackOrder);
-				modelService.refresh(amwayBackOrder);
-				backorderexpired = true;
-			}
+			amwayBackOrder.setStatus(AmwayBackOrderStatus.valueOf(EXPIRED));
+			modelService.save(amwayBackOrder);
+			modelService.refresh(amwayBackOrder);
+			backorderexpired = true;
 		}
 		return backorderexpired;
 	}

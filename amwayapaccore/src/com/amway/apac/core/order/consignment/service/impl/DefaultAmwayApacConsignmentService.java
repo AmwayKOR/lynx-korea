@@ -38,10 +38,6 @@ public class DefaultAmwayApacConsignmentService extends DefaultAmwayConsignmentS
 	/**
 	 * {@inheritDoc}
 	 *
-	 * This method creates multiple consignment on the basis of order entry statuses
-	 *
-	 * @param order
-	 * @return List of consignments
 	 */
 	@Override
 	public List<ConsignmentModel> createConsignments(final AbstractOrderModel order) throws ConsignmentCreationException
@@ -80,7 +76,7 @@ public class DefaultAmwayApacConsignmentService extends DefaultAmwayConsignmentS
 	 * @param allConsignments
 	 * @throws ConsignmentCreationException
 	 *
-	 *            Creates the consignment for all the remaining entries in order
+	 *            Creates a single consignment for all the remaining entries in order
 	 */
 	private void createConsignmentForRemainingEntries(final AbstractOrderModel order,
 			final List<AbstractOrderEntryModel> remainingEntries, final List<ConsignmentModel> allConsignments)

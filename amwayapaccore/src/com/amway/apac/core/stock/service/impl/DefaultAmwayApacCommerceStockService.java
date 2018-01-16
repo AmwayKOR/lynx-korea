@@ -5,6 +5,7 @@ package com.amway.apac.core.stock.service.impl;
 
 import de.hybris.platform.core.model.order.OrderEntryModel;
 import de.hybris.platform.servicelayer.model.ModelService;
+import de.hybris.platform.servicelayer.util.ServicesUtil;
 import de.hybris.platform.warehousing.inventoryevent.service.InventoryEventService;
 import de.hybris.platform.warehousing.model.AllocationEventModel;
 
@@ -18,7 +19,7 @@ import com.amway.core.stock.service.impl.DefaultAmwayCommerceStockService;
 
 
 /**
- * 
+ *
  * Class used to override and implement methods of commerce stock stock service
  */
 public class DefaultAmwayApacCommerceStockService extends DefaultAmwayCommerceStockService
@@ -29,12 +30,13 @@ public class DefaultAmwayApacCommerceStockService extends DefaultAmwayCommerceSt
 
 	/**
 	 * {@inheritDoc}
-	 * 
+	 *
 	 * This API release inventory by removing allocation events attached to the order entry
 	 */
 	@Override
 	public void releaseAllocationEvents(final OrderEntryModel orderEntry)
 	{
+		ServicesUtil.validateParameterNotNull(orderEntry, "OrderEntry cannot be null!");
 		//release any allocation event attached to any of the order entries for this order(instanceOf as the allocation events are only attached to order entries and not cart entries)
 		final Collection<AllocationEventModel> allocationEvents = inventoryEventService
 				.getAllocationEventsForOrderEntry(orderEntry);
