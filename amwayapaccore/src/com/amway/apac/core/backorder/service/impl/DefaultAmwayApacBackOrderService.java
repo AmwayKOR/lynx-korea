@@ -251,6 +251,7 @@ public class DefaultAmwayApacBackOrderService implements AmwayApacBackOrderServi
 	@Override
 	public AmwayBackOrderModel getBackOrderByConsignment(final ConsignmentModel consignmentModel)
 	{
+		ServicesUtil.validateParameterNotNull(consignmentModel, "consignmentModel cannot be null!");
 		return amwayApacBackOrderDao.getBackOrdersByConsignment(consignmentModel);
 	}
 
