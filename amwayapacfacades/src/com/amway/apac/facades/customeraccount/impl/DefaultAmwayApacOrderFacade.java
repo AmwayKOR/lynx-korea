@@ -139,6 +139,7 @@ public class DefaultAmwayApacOrderFacade extends DefaultAmwayOrderFacade impleme
 	/**
 	 * @return the orderHistoryTypeOptions
 	 */
+	@Override
 	public List<String> getOrderHistoryTypeOptions()
 	{
 		return orderHistoryTypeOptions;
