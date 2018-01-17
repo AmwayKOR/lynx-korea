@@ -1,41 +1,118 @@
 package com.amway.apac.core.stock.services.Impl;
 
+import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
+
 import de.hybris.platform.basecommerce.enums.StockLevelStatus;
-import de.hybris.platform.commerceservices.stock.CommerceStockService;
+import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.ordersplitting.model.WarehouseModel;
-import de.hybris.platform.store.BaseStoreModel;
-import de.hybris.platform.storelocator.model.PointOfServiceModel;
 import de.hybris.platform.variants.model.VariantProductModel;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Objects;
 import java.util.Optional;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Required;
 
-import com.amway.apac.core.stock.services.AmwayApacStockService;
+import com.amway.apac.core.product.services.AmwayApacProductService;
+import com.amway.core.enums.AmwayKitProductType;
 import com.amway.core.model.AmwayKitEntryProductModel;
 import com.amway.core.model.AmwayKitProductModel;
 import com.amway.core.stock.service.impl.DefaultAmwayStockService;
 
 
 /**
- * Stock service implementation for APAC specific APIs
+ * Stock service implementation for APAC specific APIs.
  *
  * @author Ashish Sabal
- *
  */
-public class DefaultAmwayApacStockService extends DefaultAmwayStockService implements AmwayApacStockService
+public class DefaultAmwayApacStockService extends DefaultAmwayStockService
 {
+	/** The Constant String PRODUCT. */
+	private static final String PRODUCT = "Product";
 
-	/** The commerce stock service. */
-	private CommerceStockService commerceStockService;
+	/** The Constant String WAREHOUSE. */
+	private static final String WAREHOUSE = "Warehouse";
+
+	/** The Constant String WAREHOUSE_LIST. */
+	private static final String WAREHOUSE_LIST = "Warehouse List";
+
+	/** The amway apac product service. */
+	private AmwayApacProductService amwayApacProductService;
 
 	/**
-	 * {@inheritDoc}
+	 * Returns stock level status for bundle product by warehouse.
+	 *
+	 * @param product
+	 *           the product
+	 * @param warehouse
+	 *           the warehouse
+	 * @return Stock level status for product
+	 * @throws IllegalArgumentException
+	 *            the illegal argument exception
 	 */
 	@Override
-	public boolean isStockAvailable(final StockLevelStatus parentBundleStockStatus)
+	public StockLevelStatus getProductStatus(final ProductModel product, final WarehouseModel warehouse)
+	{
+		validateParameterNotNullStandardMessage(PRODUCT, product);
+		validateParameterNotNullStandardMessage(WAREHOUSE, warehouse);
+
+		StockLevelStatus stockStatus = super.getProductStatus(product, warehouse);
+		if (getAmwayApacProductService().checkKitProductByType(product, AmwayKitProductType.BUNDLED)
+				&& isStockAvailable(stockStatus))
+		{
+			final StockLevelStatus childStatus = getUpdatedBundleProductStockStatus((AmwayKitProductModel) product,
+					new ArrayList<WarehouseModel>(Arrays.asList(warehouse)));
+			// iterate for child and fetch stock level status from all major child
+			if (Objects.nonNull(childStatus))
+			{
+				stockStatus = childStatus;
+			}
+		}
+		return stockStatus;
+	}
+
+	/**
+	 * Returns stock level status for bundle product by list of warehouses.
+	 *
+	 * @param product
+	 *           the product
+	 * @param warehouses
+	 *           the warehouses
+	 * @return Stock level status for product
+	 * @throws IllegalArgumentException
+	 *            the illegal argument exception
+	 */
+	@Override
+	public StockLevelStatus getProductStatus(final ProductModel product, final Collection<WarehouseModel> warehouses)
+	{
+		validateParameterNotNullStandardMessage(PRODUCT, product);
+		validateParameterNotNullStandardMessage(WAREHOUSE_LIST, warehouses);
+
+		StockLevelStatus stockStatus = super.getProductStatus(product, warehouses);
+		if (getAmwayApacProductService().checkKitProductByType(product, AmwayKitProductType.BUNDLED)
+				&& isStockAvailable(stockStatus))
+		{
+			final StockLevelStatus childStatus = getUpdatedBundleProductStockStatus((AmwayKitProductModel) product, warehouses);
+			// iterate for child and fetch stock level status from all major child
+			if (Objects.nonNull(childStatus))
+			{
+				stockStatus = childStatus;
+			}
+		}
+		return stockStatus;
+	}
+
+	/**
+	 * Checks if stock is not any of TNA, NYA, NLA.
+	 *
+	 * @param parentBundleStockStatus
+	 *           the parent bundle stock status
+	 * @return true, if is stock available
+	 */
+	protected boolean isStockAvailable(final StockLevelStatus parentBundleStockStatus)
 	{
 		boolean isParentStockAvailable = true;
 		if (StockLevelStatus.TEMPORARYNOTAVAILABLE.equals(parentBundleStockStatus)
@@ -48,18 +125,23 @@ public class DefaultAmwayApacStockService extends DefaultAmwayStockService imple
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Gets the updated bundle product stock status combined of all major minor child products.
+	 *
+	 * @param parentBundle
+	 *           the parent bundle
+	 * @param warehouses
+	 *           the warehouses
+	 * @return the updated bundle product stock status
 	 */
-	@Override
-	public StockLevelStatus getUpdateBundleProductStockStatus(final AmwayKitProductModel parentBundle,
-			final BaseStoreModel baseStore, final PointOfServiceModel pointOfService, final WarehouseModel warehouse)
+	protected StockLevelStatus getUpdatedBundleProductStockStatus(final AmwayKitProductModel parentBundle,
+			final Collection<WarehouseModel> warehouses)
 	{
 		StockLevelStatus stockStatus = null;
 		boolean isBackOrder = true;
 		boolean isAllMinor = true;
 		for (final AmwayKitEntryProductModel kitEntryProduct : parentBundle.getKitEntry())
 		{
-			final StockLevelStatus childStockStatus = getChildStockStatus(baseStore, pointOfService, warehouse, kitEntryProduct);
+			final StockLevelStatus childStockStatus = getChildStockStatus(warehouses, kitEntryProduct);
 			if (kitEntryProduct.getIsMajor().booleanValue())
 			{
 				isAllMinor = false;
@@ -101,51 +183,28 @@ public class DefaultAmwayApacStockService extends DefaultAmwayStockService imple
 	}
 
 	/**
-	 * Returns Child Stock Status based upon different parameter
+	 * Returns Child Stock Status based upon different parameter.
 	 *
-	 * @param baseStore
-	 * @param pointOfService
-	 * @param warehouse
+	 * @param warehouses
+	 *           the warehouses
 	 * @param kitEntryProduct
+	 *           the kit entry product
 	 * @return StockLevelStatus
 	 */
-	protected StockLevelStatus getChildStockStatus(final BaseStoreModel baseStore, final PointOfServiceModel pointOfService,
-			final WarehouseModel warehouse, final AmwayKitEntryProductModel kitEntryProduct)
+	protected StockLevelStatus getChildStockStatus(final Collection<WarehouseModel> warehouses,
+			final AmwayKitEntryProductModel kitEntryProduct)
 	{
 		StockLevelStatus childStockStatus = null;
-		if (Objects.nonNull(baseStore))
+
+		if (Objects.nonNull(warehouses))
 		{
 			if (CollectionUtils.isNotEmpty(kitEntryProduct.getEntry().getVariants()))
 			{
-				childStockStatus = getStockLevelStatusForVariantProductAndBaseStore(kitEntryProduct, baseStore);
+				childStockStatus = getStockLevelStatusForVariantProductWarehouse(kitEntryProduct, warehouses);
 			}
 			else
 			{
-				childStockStatus = getCommerceStockService().getStockLevelStatusForProductAndBaseStore(kitEntryProduct.getEntry(),
-						baseStore);
-			}
-		}
-		else if (Objects.nonNull(pointOfService))
-		{
-			if (CollectionUtils.isNotEmpty(kitEntryProduct.getEntry().getVariants()))
-			{
-				childStockStatus = getStockLevelStatusForVariantProductAndPointOfService(kitEntryProduct, pointOfService);
-			}
-			else
-			{
-				childStockStatus = getCommerceStockService()
-						.getStockLevelStatusForProductAndPointOfService(kitEntryProduct.getEntry(), pointOfService);
-			}
-		}
-		else if (Objects.nonNull(warehouse))
-		{
-			if (CollectionUtils.isNotEmpty(kitEntryProduct.getEntry().getVariants()))
-			{
-				childStockStatus = getStockLevelStatusForVariantProductWarehouse(kitEntryProduct, warehouse);
-			}
-			else
-			{
-				childStockStatus = super.getProductStatus(kitEntryProduct.getEntry(), warehouse);
+				childStockStatus = super.getProductStatus(kitEntryProduct.getEntry(), warehouses);
 			}
 		}
 		return childStockStatus;
@@ -155,103 +214,50 @@ public class DefaultAmwayApacStockService extends DefaultAmwayStockService imple
 	 * Gets stock level status for variant product and warehouse.
 	 *
 	 * @param kitEntryProduct
-	 * @param warehouse
+	 *           the kit entry product
+	 * @param warehouses
+	 *           the warehouses
 	 * @return StockLevelStatus
 	 */
 	protected StockLevelStatus getStockLevelStatusForVariantProductWarehouse(final AmwayKitEntryProductModel kitEntryProduct,
-			final WarehouseModel warehouse)
+			final Collection<WarehouseModel> warehouses)
 	{
 		final StockLevelStatus stockStatus;
 		// if product is Base product, fetch from all variants
 		final Optional<VariantProductModel> product = kitEntryProduct.getEntry().getVariants().stream()
-				.filter(variant -> isStockAvailable(super.getProductStatus(variant, warehouse))).findAny();
+				.filter(variant -> isStockAvailable(super.getProductStatus(variant, warehouses))).findAny();
 		// if any product having stock status other than TNA/ NLA/ NYA is present, set childStockStatus as its status
 		if (product.isPresent())
 		{
-			stockStatus = super.getProductStatus(product.get(), warehouse);
+			stockStatus = super.getProductStatus(product.get(), warehouses);
 		}
 		else
 		{
 			// if all variants having disposition status as TNA/ NLA/ NYA, set childStockStatus as first variant product status
-			stockStatus = super.getProductStatus(kitEntryProduct.getEntry().getVariants().iterator().next(), warehouse);
+			stockStatus = super.getProductStatus(kitEntryProduct.getEntry().getVariants().iterator().next(), warehouses);
 		}
 		return stockStatus;
 	}
 
 	/**
-	 * Gets stock level status for variant product and point of service.
+	 * Gets the amway apac product service.
 	 *
-	 * @param kitEntryProduct
-	 * @param pointOfService
-	 * @return StockLevelStatus
+	 * @return the amwayApacProductService
 	 */
-	protected StockLevelStatus getStockLevelStatusForVariantProductAndPointOfService(
-			final AmwayKitEntryProductModel kitEntryProduct, final PointOfServiceModel pointOfService)
+	public AmwayApacProductService getAmwayApacProductService()
 	{
-		final StockLevelStatus stockStatus;
-		// if product is Base product, fetch from all variants
-		final Optional<VariantProductModel> product = kitEntryProduct.getEntry().getVariants().stream()
-				.filter(variant -> isStockAvailable(
-						getCommerceStockService().getStockLevelStatusForProductAndPointOfService(variant, pointOfService)))
-				.findAny();
-		// if any product having stock status other than TNA/ NLA/ NYA is present, set childStockStatus as its status
-		if (product.isPresent())
-		{
-			stockStatus = getCommerceStockService().getStockLevelStatusForProductAndPointOfService(product.get(), pointOfService);
-		}
-		else
-		{
-			// if all variants having disposition status as TNA/ NLA/ NYA, set childStockStatus as first variant product status
-			stockStatus = getCommerceStockService().getStockLevelStatusForProductAndPointOfService(
-					kitEntryProduct.getEntry().getVariants().iterator().next(), pointOfService);
-		}
-		return stockStatus;
+		return amwayApacProductService;
 	}
 
 	/**
-	 * Gets stock level status for Variant product and base store
+	 * Sets the amway apac product service.
 	 *
-	 * @param kitEntryProduct
-	 * @param baseStore
-	 * @return StockLevelStatus
-	 */
-	protected StockLevelStatus getStockLevelStatusForVariantProductAndBaseStore(final AmwayKitEntryProductModel kitEntryProduct,
-			final BaseStoreModel baseStore)
-	{
-		final StockLevelStatus stockStatus;
-		// if product is Base product, fetch from all variants
-		final Optional<VariantProductModel> product = kitEntryProduct.getEntry().getVariants().stream().filter(
-				variant -> isStockAvailable(getCommerceStockService().getStockLevelStatusForProductAndBaseStore(variant, baseStore)))
-				.findAny();
-		// if any product having stock status other than TNA/ NLA/ NYA is present, set childStockStatus as its status
-		if (product.isPresent())
-		{
-			stockStatus = getCommerceStockService().getStockLevelStatusForProductAndBaseStore(product.get(), baseStore);
-		}
-		else
-		{
-			// if all variants having disposition status as TNA/ NLA/ NYA, set childStockStatus as first variant product status
-			stockStatus = getCommerceStockService()
-					.getStockLevelStatusForProductAndBaseStore(kitEntryProduct.getEntry().getVariants().iterator().next(), baseStore);
-		}
-		return stockStatus;
-	}
-
-	/**
-	 * @return the commerceStockService
-	 */
-	public CommerceStockService getCommerceStockService()
-	{
-		return commerceStockService;
-	}
-
-	/**
-	 * @param commerceStockService
-	 *           the commerceStockService to set
+	 * @param amwayApacProductService
+	 *           the amwayApacProductService to set
 	 */
 	@Required
-	public void setCommerceStockService(final CommerceStockService commerceStockService)
+	public void setAmwayApacProductService(final AmwayApacProductService amwayApacProductService)
 	{
-		this.commerceStockService = commerceStockService;
+		this.amwayApacProductService = amwayApacProductService;
 	}
 }
