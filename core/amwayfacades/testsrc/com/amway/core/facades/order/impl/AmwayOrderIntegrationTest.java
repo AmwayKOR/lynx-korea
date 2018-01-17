@@ -4,37 +4,22 @@
 package com.amway.core.facades.order.impl;
 
 import de.hybris.bootstrap.annotations.IntegrationTest;
-import de.hybris.platform.commercefacades.order.data.AbstractOrderData;
-import de.hybris.platform.commercefacades.order.data.OrderData;
-import de.hybris.platform.commerceservices.order.dao.CommerceOrderDao;
-import de.hybris.platform.core.model.order.AbstractOrderModel;
-import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.servicelayer.ServicelayerTransactionalTest;
 
-import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 import javax.annotation.Resource;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang.StringUtils;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.apache.log4j.Logger;
 
 import com.amway.core.facades.order.AmwayOrderFacade;
-import com.amway.core.facades.order.impl.DefaultAmwayOrderFacade;
 import com.amway.facades.enumData.AmwayEnumDataFacade;
-import com.amway.lynxfacades.PromotionDTO;
 import com.amway.core.data.AmwayOrderSearchParameters;
 import de.hybris.platform.cmsfacades.data.EnumData;
 
@@ -69,13 +54,7 @@ public class AmwayOrderIntegrationTest extends ServicelayerTransactionalTest
 	
 	protected static final String BASE_RESOURCE_PATH = "/amwayfacades/test/order";
 	
-	@InjectMocks
-	private DefaultAmwayOrderFacade defaultAmwayOrderFacade = new DefaultAmwayOrderFacade();
-	
 	AmwayOrderSearchParameters amwayOrderSearchParameters;
-	
-	@Resource
-	CommerceOrderDao commerceOrderDao;
 	
 	@Resource
 	private AmwayEnumDataFacade amwayEnumDataFacade;
