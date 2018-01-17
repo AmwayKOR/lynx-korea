@@ -67,6 +67,8 @@
 	<import resource="/amwayapacfulfilmentprocess/process/order-process-spring.xml"/>
 	<import resource="/amwayapacfulfilmentprocess/process/consignment-process-spring.xml"/>
 	<import resource="/amwayapacfulfilmentprocess/process/return-process-spring.xml"/>
+	<import resource="/amwayapacfulfilmentprocess/process/consignment-process-spring.xml" />
+	<import resource="/amwayapacfulfilmentprocess/process/consignment-backorder-process-spring.xml" />
 
 	<!-- Order Check Service -->
 	<!-- Performs some basic validation for the order as part of the first stage of the process. -->
