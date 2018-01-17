@@ -1,6 +1,7 @@
 package com.amway.apac.core.backorder.service.impl;
 
 import de.hybris.platform.basecommerce.enums.InStockStatus;
+import de.hybris.platform.core.model.order.AbstractOrderEntryModel;
 import de.hybris.platform.core.model.order.OrderEntryModel;
 import de.hybris.platform.ordersplitting.model.ConsignmentEntryModel;
 import de.hybris.platform.ordersplitting.model.ConsignmentModel;
@@ -31,6 +32,7 @@ import com.amway.apac.core.backorder.service.AmwayApacBackOrderService;
 import com.amway.apac.core.backorder.strategies.AmwayApacBackOrderSelectionStrategy;
 import com.amway.apac.core.enums.AmwayBackOrderStatus;
 import com.amway.apac.core.model.AmwayBackOrderModel;
+import com.amway.apac.core.stock.service.AmwayApacStockService;
 import com.amway.apac.core.stock.strategies.impl.AmwayApacCommerceAvailabilityCalculationStrategy;
 
 
@@ -53,8 +55,18 @@ public class DefaultAmwayApacBackOrderService implements AmwayApacBackOrderServi
 	private AmwayApacBackOrderSelectionStrategy amwayApacBackOrderSelectionStrategy;
 	private AmwayApacCommerceAvailabilityCalculationStrategy commerceAvailabilityCalculationStrategy;
 	private InventoryEventService inventoryEventService;
+	private AmwayApacStockService stockService;
 
 
+
+	/**
+	 * @param stockService
+	 *           the stockService to set
+	 */
+	public void setStockService(final AmwayApacStockService stockService)
+	{
+		this.stockService = stockService;
+	}
 
 	/**
 	 * {@inheritDoc}
@@ -167,11 +179,8 @@ public class DefaultAmwayApacBackOrderService implements AmwayApacBackOrderServi
 			{
 				final Collection<AllocationEventModel> allocationEvents = inventoryEventService
 						.getAllocationEventsForOrderEntry((OrderEntryModel) consignmentEntry.getOrderEntry());
-				requestedQty = allocationEvents
-						.stream()
-						.filter(
-								allocationEvent -> allocationEvent.getConsignmentEntry().getConsignment()
-										.equals(consignmentEntry.getConsignment())).mapToLong(AllocationEventModel::getQuantity).sum();
+				requestedQty = allocationEvents.stream().filter(allocationEvent -> allocationEvent.getConsignmentEntry()
+						.getConsignment().equals(consignmentEntry.getConsignment())).mapToLong(AllocationEventModel::getQuantity).sum();
 			}
 		}
 		return requestedQty;
@@ -237,12 +246,41 @@ public class DefaultAmwayApacBackOrderService implements AmwayApacBackOrderServi
 		boolean backorderexpired = false;
 		for (final AmwayBackOrderModel amwayBackOrder : backOrders)
 		{
+			updateAllocationAvailableAmount(amwayBackOrder.getConsignment());
 			amwayBackOrder.setStatus(AmwayBackOrderStatus.valueOf(EXPIRED));
 			modelService.save(amwayBackOrder);
 			modelService.refresh(amwayBackOrder);
 			backorderexpired = true;
 		}
 		return backorderexpired;
+	}
+
+	/**
+	 * @param consignment
+	 */
+	private void updateAllocationAvailableAmount(final ConsignmentModel consignment)
+	{
+		if (consignment != null)
+		{
+			consignment.getConsignmentEntries().stream().filter(entry -> Objects.nonNull(entry.getOrderEntry()))
+					.forEach(consignmentEntry -> {
+						final AbstractOrderEntryModel orderEntry = consignmentEntry.getOrderEntry();
+						if (orderEntry instanceof OrderEntryModel)
+						{
+							final Collection<AllocationEventModel> allocationEvents = inventoryEventService
+									.getAllocationEventsForOrderEntry((OrderEntryModel) orderEntry);
+							LOG.info(String.format("Removing [%s] Allocation Event(s) for consignment : [%s] of order : [%s]",
+									Integer.valueOf(allocationEvents.size()), consignment.getCode(), consignment.getOrder().getCode()));
+							final long allocatedQuantity = allocationEvents.stream().filter(allocationEvent -> allocationEvent
+									.getConsignmentEntry().getConsignment().equals(consignmentEntry.getConsignment()))
+									.mapToLong(AllocationEventModel::getQuantity).sum();
+							getModelService().removeAll(allocationEvents);
+							stockService.updateAvailableAmount(orderEntry.getProduct(), consignment.getWarehouse(),
+									(int) allocatedQuantity);
+						}
+					});
+		}
+
 	}
 
 	/**

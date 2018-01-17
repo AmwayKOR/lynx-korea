@@ -268,7 +268,10 @@
 		<property name="stockService" ref="stockService" />
 		<property name="amwayApacOrderService" ref="amwayApacOrderService" />
 	</bean>
-
+	<bean id="amwayApacStockService"
+        class="com.amway.apac.core.stock.service.impl.DefaultAmwayApacStockService" parent="amwayStockService">
+        <property name="amwayApacStockLevelDao" ref="amwayApacStockLevelDao" />
+    </bean>
 	<bean id="amwayApacBackOrderService"
 		class="com.amway.apac.core.backorder.service.impl.DefaultAmwayApacBackOrderService">
 		<property name="businessProcessService" ref="businessProcessService" />
@@ -277,6 +280,7 @@
 		<property name="amwayApacBackOrderDao" ref="amwayApacBackOrderDao" />
 		<property name="commerceAvailabilityCalculationStrategy" ref="commerceStockLevelCalculationStrategy"/>
 		<property name="inventoryEventService" ref="inventoryEventService"/>
+		<property name="stockService" ref="amwayApacStockService"/>
 	</bean>
 	<bean id="expiredBackorderJob" class="com.amway.apac.core.job.ExpiredBackorderJobPerformable"
 		parent="abstractJobPerformable">		
@@ -293,10 +297,7 @@
         class="com.amway.apac.core.stock.dao.impl.DefaultAmwayApacStockLevelDao" parent="defaultAmwayStockLevelDao">
     </bean>
     
-    <bean id="amwayApacStockService"
-        class="com.amway.apac.core.stock.service.impl.DefaultAmwayApacStockService" parent="amwayStockService">
-        <property name="amwayApacStockLevelDao" ref="amwayApacStockLevelDao" />
-    </bean>
+    
     
     <bean id="amwayApacOrderService"
 		class="com.amway.apac.core.order.service.impl.DefaultAmwayApacOrderService" parent="defaultAmwayOrderService">
