@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<process xmlns="http://www.hybris.de/xsd/processdefinition"
+	start="createBackOrderEntry" name="consignment-backorder-process"
+	processClass="de.hybris.platform.ordersplitting.model.ConsignmentProcessModel">
+
+	<action id="createBackOrderEntry" bean="createBackOrderEntryAction">
+		<transition name="OK" to="reserveStock" />
+		<transition name="NOK" to="error" />
+	</action>
+
+	<action id="reserveStock" bean="reserveStockAction">
+		<transition name="OK" to="waitForRelease" />
+		<transition name="NOK" to="error" />
+	</action>
+ 
+	<wait id="waitForRelease" then="commitBackOrderStock" prependProcessCode="false">
+		<event>${process.consignment.code}_WaitForRelease</event>
+	</wait>
+
+<!-- 	<action id="pushOrder" bean="pushOrderAction">
+		<transition name="OK" to="commitStock" />
+		<transition name="NOK" to="error" />
+	</action> -->
+
+	<action id="commitBackOrderStock" bean="commitBackOrderStockAction">
+		<transition name="OK" to="success" />
+		<transition name="NOK" to="error" />
+	</action>
+
+	<end id="error" state="ERROR">All went wrong.</end>
+	<end id="success" state="SUCCEEDED">Consignment Process Success.</end>
+</process>
