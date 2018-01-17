@@ -123,6 +123,7 @@
 		class="com.amway.apac.core.order.consignment.service.impl.DefaultAmwayApacConsignmentService"
 		parent="defaultAmwayConsignmentService">
 		<property name="modelService" ref="modelService" />
+		<property name="businessProcessService" ref="businessProcessService" />
 	</bean>
 
 	<!-- Sales quote process actions -->
