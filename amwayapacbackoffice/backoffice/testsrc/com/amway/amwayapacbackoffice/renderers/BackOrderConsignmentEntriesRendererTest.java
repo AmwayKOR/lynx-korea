@@ -6,6 +6,7 @@ package com.amway.amwayapacbackoffice.renderers;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.when;
 
+import de.hybris.bootstrap.annotations.UnitTest;
 import de.hybris.platform.core.model.order.OrderEntryModel;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.core.model.product.ProductModel;
@@ -41,6 +42,7 @@ import com.hybris.cockpitng.engine.WidgetInstanceManager;
  * @author deepankarshukla
  *
  */
+@UnitTest
 public class BackOrderConsignmentEntriesRendererTest
 {
 
@@ -90,7 +92,7 @@ public class BackOrderConsignmentEntriesRendererTest
 	{
 		MockitoAnnotations.initMocks(this);
 		when(widgetInstanceManager.getModel()).thenReturn(widgetModel);
-		Mockito.doReturn(amwayBackOrderModel).when(widgetModel.getValue("currentObject", AmwayBackOrderModel.class));		
+		Mockito.doReturn(amwayBackOrderModel).when(widgetModel.getValue("currentObject", AmwayBackOrderModel.class));
 		parent = new Window();
 		final Set<ConsignmentEntryModel> abstractOrderEntries = new HashSet<>();
 		abstractOrderEntries.add(consignmentEntryModel);

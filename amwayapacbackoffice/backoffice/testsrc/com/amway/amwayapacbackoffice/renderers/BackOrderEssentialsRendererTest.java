@@ -6,6 +6,7 @@ package com.amway.amwayapacbackoffice.renderers;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.when;
 
+import de.hybris.bootstrap.annotations.UnitTest;
 import de.hybris.platform.core.enums.PaymentStatus;
 import de.hybris.platform.core.model.order.OrderEntryModel;
 import de.hybris.platform.core.model.order.OrderModel;
@@ -44,6 +45,7 @@ import com.hybris.cockpitng.engine.WidgetInstanceManager;
  * @author deepankarshukla
  *
  */
+@UnitTest
 public class BackOrderEssentialsRendererTest
 {
 
