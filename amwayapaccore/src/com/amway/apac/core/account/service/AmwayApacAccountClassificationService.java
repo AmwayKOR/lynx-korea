@@ -16,6 +16,8 @@ public interface AmwayApacAccountClassificationService
 	 * @param referenceClassification
 	 *           Classification level code of the entity (Like Asset or Pre launch config).
 	 * @return true if session user has higher classification than reference.
+	 * @throws IllegalArgumentException
+	 *            if referenceClassification is null.
 	 */
 	boolean checkUserClassification(final AccountClassificationEnum referenceClassification);
 }

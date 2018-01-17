@@ -1,6 +1,5 @@
 package com.amway.apac.recentlyvieweditemsaddon.services.impl;
 
-import com.amway.apac.recentlyvieweditemsaddon.services.AmwayApacProductSearchService;
 import de.hybris.platform.category.model.CategoryModel;
 import de.hybris.platform.commercefacades.product.data.CategoryData;
 import de.hybris.platform.commercefacades.product.data.ProductData;
@@ -14,57 +13,72 @@ import de.hybris.platform.commerceservices.search.solrfacetsearch.data.SolrSearc
 import de.hybris.platform.commerceservices.search.solrfacetsearch.impl.DefaultSolrProductSearchService;
 import de.hybris.platform.commerceservices.threadcontext.ThreadContextService;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
-import org.springframework.beans.factory.annotation.Required;
 
 import java.util.Collections;
+
+import org.springframework.beans.factory.annotation.Required;
+
+import com.amway.apac.recentlyvieweditemsaddon.services.AmwayApacProductSearchService;
 
 /**
  * Created by Govind on 12/13/2017.
  */
-public class DefaultAmwayApacSolrProductSearchService<ITEM extends ProductData> extends DefaultSolrProductSearchService implements AmwayApacProductSearchService{
+public class DefaultAmwayApacSolrProductSearchService<ITEM extends ProductData> extends DefaultSolrProductSearchService
+		implements AmwayApacProductSearchService {
 
-    private Converter<ProductCategorySearchPageData<SolrSearchQueryData, SearchResultValueData, CategoryModel>, ProductCategorySearchPageData<SearchStateData, ITEM, CategoryData>> productCategorySearchPageConverter;
-    private ThreadContextService threadContextService;
+	private Converter<ProductCategorySearchPageData<SolrSearchQueryData, SearchResultValueData, CategoryModel>, ProductCategorySearchPageData<SearchStateData, ITEM, CategoryData>> productCategorySearchPageConverter;
+	private ThreadContextService threadContextService;
 
-    protected Converter<ProductCategorySearchPageData<SolrSearchQueryData, SearchResultValueData, CategoryModel>, ProductCategorySearchPageData<SearchStateData, ITEM, CategoryData>> getProductCategorySearchPageConverter()
-    {
-        return productCategorySearchPageConverter;
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ProductSearchPageData<SearchStateData, ITEM> productCodesSearch(final String productCodes,
+			final PageableData pageableData) {
+		final SolrSearchQueryData searchQueryData = createSearchQueryData();
 
-    @Required
-    public void setProductCategorySearchPageConverter(
-            final Converter<ProductCategorySearchPageData<SolrSearchQueryData, SearchResultValueData, CategoryModel>, ProductCategorySearchPageData<SearchStateData, ITEM, CategoryData>> productCategorySearchPageConverter)
-    {
-        this.productCategorySearchPageConverter = productCategorySearchPageConverter;
-    }
+		searchQueryData.setFilterTerms(Collections.<SolrSearchQueryTermData> emptyList());
+		searchQueryData.setRawQuery(productCodes);
 
-    protected ThreadContextService getThreadContextService()
-    {
-        return threadContextService;
-    }
+		return getThreadContextService().executeInContext(
+				new ThreadContextService.Executor<ProductSearchPageData<SearchStateData, ITEM>, ThreadContextService.Nothing>() {
+					@Override
+					public ProductSearchPageData<SearchStateData, ITEM> execute() {
+						return getProductCategorySearchPageConverter().convert(doSearch(searchQueryData, pageableData));
+					}
+				});
+	}
 
-    @Required
-    public void setThreadContextService(final ThreadContextService threadContextService)
-    {
-        this.threadContextService = threadContextService;
-    }
+	/**
+	 * @return the threadContextService
+	 */
+	public ThreadContextService getThreadContextService() {
+		return threadContextService;
+	}
 
+	/**
+	 * @param threadContextService
+	 *            the threadContextService to set
+	 */
+	@Required
+	public void setThreadContextService(final ThreadContextService threadContextService) {
+		this.threadContextService = threadContextService;
+	}
 
-    public ProductSearchPageData<SearchStateData, ITEM> productCodesSearch(String productCodes, PageableData pageableData) {
-        final SolrSearchQueryData searchQueryData = createSearchQueryData();
+	/**
+	 * @return the productCategorySearchPageConverter
+	 */
+	public Converter<ProductCategorySearchPageData<SolrSearchQueryData, SearchResultValueData, CategoryModel>, ProductCategorySearchPageData<SearchStateData, ITEM, CategoryData>> getProductCategorySearchPageConverter() {
+		return productCategorySearchPageConverter;
+	}
 
-        searchQueryData.setFilterTerms(Collections.<SolrSearchQueryTermData> emptyList());
-        searchQueryData.setRawQuery(productCodes);
-
-        return getThreadContextService().executeInContext(
-                new ThreadContextService.Executor<ProductSearchPageData<SearchStateData, ITEM>, ThreadContextService.Nothing>()
-                {
-                    @Override
-                    public ProductSearchPageData<SearchStateData, ITEM> execute()
-                    {
-                        return getProductCategorySearchPageConverter()
-                                .convert(doSearch(searchQueryData, pageableData));
-                    }
-                });
-    }
+	/**
+	 * @param productCategorySearchPageConverter
+	 *            the productCategorySearchPageConverter to set
+	 */
+	@Required
+	public void setProductCategorySearchPageConverter(
+			final Converter<ProductCategorySearchPageData<SolrSearchQueryData, SearchResultValueData, CategoryModel>, ProductCategorySearchPageData<SearchStateData, ITEM, CategoryData>> productCategorySearchPageConverter) {
+		this.productCategorySearchPageConverter = productCategorySearchPageConverter;
+	}
 }

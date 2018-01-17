@@ -74,7 +74,9 @@ public class DefaultAmwayApacProductPreLaunchStrategy implements AmwayApacProduc
 	 * Creates and returns {@link AmwayPreLaunchResponse} for given preLaunchStatus and allowedQuantity.
 	 *
 	 * @param preLaunchStatus
+	 *           Pre-Launch Status
 	 * @param allowedQuantity
+	 *           Orderable Quantity
 	 * @return AmwayPreLaunchResponse
 	 */
 	protected AmwayPreLaunchResponse createPreLaunchResponse(final AmwayProductPreLaunchStatus preLaunchStatus,

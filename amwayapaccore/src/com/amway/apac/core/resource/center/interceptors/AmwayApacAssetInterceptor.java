@@ -30,10 +30,7 @@ public class AmwayApacAssetInterceptor
 	/** The Constant ASSET_MODEL. */
 	private static final String ASSET_MODEL = "Asset model";
 
-	/** The model service. */
 	private ModelService modelService;
-
-	/** The amway account classification rank mapping. */
 	private Map<AccountClassificationEnum, Integer> amwayAccountClassificationRankMapping;
 
 	/**

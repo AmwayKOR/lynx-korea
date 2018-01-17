@@ -1,6 +1,6 @@
 package com.amway.apac.core.checkout.services.impl;
 
-import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNull;
+import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
 
 import de.hybris.platform.commerceservices.order.CommerceCartCalculationStrategy;
 import de.hybris.platform.commerceservices.service.data.CommerceCartParameter;
@@ -21,6 +21,8 @@ import com.amway.apac.core.checkout.services.AmwayApacCommerceWarehouseStrategy;
 
 
 /**
+ * Default implementation for {@link AmwayApacCommerceWarehouseStrategy}.
+ *
  * @author Shubham Goyal
  */
 public class DefaultAmwayApacCommerceWarehouseStrategy implements AmwayApacCommerceWarehouseStrategy
@@ -34,10 +36,11 @@ public class DefaultAmwayApacCommerceWarehouseStrategy implements AmwayApacComme
 	@Override
 	public boolean setWarehouse(final CommerceCheckoutParameter parameter)
 	{
+		validateParameterNotNullStandardMessage("parameter", parameter);
 		final CartModel cartModel = parameter.getCart();
 		final WarehouseModel warehouse = parameter.getWarehouse();
 
-		validateParameterNotNull(cartModel, "Cart model cannot be null");
+		validateParameterNotNullStandardMessage("cartModel", cartModel);
 
 		cartModel.setWarehouse(warehouse);
 		cartModel.setCalculated(Boolean.FALSE);

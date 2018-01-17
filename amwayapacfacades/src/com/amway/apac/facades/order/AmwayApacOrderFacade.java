@@ -31,8 +31,6 @@ public interface AmwayApacOrderFacade extends AmwayOrderFacade
 	 */
 	List<String> getOrderHistoryDateOptions();
 
-	List<String> getOrderHistoryTypeOptions();
-
 	/**
 	 * Returns the paginated order history for the given date and type.
 	 *

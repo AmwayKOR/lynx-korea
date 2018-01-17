@@ -20,6 +20,8 @@ public interface AmwayApacAccountService extends AmwayAccountService
 	 * @param aboId
 	 * @param affiliateCountryCode
 	 * @return List<AmwayAccountModel>
+	 * @throws IllegalArgumentException
+	 *            if aboId is null.
 	 */
 	List<AmwayAccountModel> getAmwayAccount(final String aboId, final String affiliateCountryCode);
 
@@ -27,7 +29,7 @@ public interface AmwayApacAccountService extends AmwayAccountService
 	 * Returns {@link AccountClassificationEnum} as classification for given amwayAccount
 	 *
 	 * @param amwayAccount
-	 * @return
+	 * @return AccountClassificationEnum
 	 */
 	AccountClassificationEnum getClassificationForAccount(final AmwayAccountModel amwayAccount);
 }

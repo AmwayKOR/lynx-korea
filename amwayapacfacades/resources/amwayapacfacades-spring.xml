@@ -183,7 +183,6 @@
 	<alias name="defaultAmwayApacOrderFacade" alias="amwayOrderFacade"/>
     <bean id="defaultAmwayApacOrderFacade" class="com.amway.apac.facades.customeraccount.impl.DefaultAmwayApacOrderFacade" parent="defaultAmwayOrderFacade">
         <property name="amwayApacCustomerAccountService" ref="customeraccountService"/>
-        <property name="orderHistoryTypeOptions" ref="orderHistoryTypeOptions"/>
     </bean>
     
     <alias name="defaultAmwayApacCustomerFacade" alias="customerFacade"/>

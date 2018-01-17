@@ -16,7 +16,8 @@ public interface AmwayApacProductPreLaunchStrategy
 	 * Returns the preLaunch access status of given product for current user.
 	 *
 	 * @param product
-	 * @return
+	 *           Pre-Launch product
+	 * @return {@link AmwayPreLaunchResponse} for the passes pre-launch product for current user.
 	 */
 	AmwayPreLaunchResponse getProductPrelaunchStatusForCurrentUser(final ProductModel product);
 }

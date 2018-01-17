@@ -33,6 +33,24 @@ public interface AmwayApacCustomerAccountDao extends AmwayCustomerAccountDao
 	 */
 	Integer findOrderCountsForUser(final UserModel user, final BaseStoreModel baseStore);
 
+	/**
+	 * Returns orders list for given customer, basestore, date limits and order type.
+	 *
+	 * @param customerModel
+	 *           Customer for whom, orders need to be searched.
+	 * @param store
+	 *           Base Store
+	 * @param datefrom
+	 *           From Date
+	 * @param dateto
+	 *           To Date
+	 * @param type
+	 *           Order Type
+	 * @param pageableData
+	 * @return OrderModels as per given restrictions.
+	 * @throws IllegalArgumentException
+	 *            if customerModel or store is null.
+	 */
 	SearchPageData<OrderModel> findOrdersByCustomerAndStoreAndFilterByDateAndType(final CustomerModel customerModel,
 			final BaseStoreModel store, final LocalDate datefrom, final LocalDate dateto, final String type,
 			final PageableData pageableData);

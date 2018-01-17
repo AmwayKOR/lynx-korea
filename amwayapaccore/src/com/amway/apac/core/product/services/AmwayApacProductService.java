@@ -30,6 +30,7 @@ public interface AmwayApacProductService extends ProductService
 	 * @return all payment option models for Alias Code
 	 *
 	 * @throws IllegalArgumentException
+	 *            if aliasCode or catalogVersion is null.
 	 */
 	AmwayPaymentOptionModel getAllPaymentOptionForAliasCode(final String aliasCode, final CatalogVersionModel catalogVersion);
 

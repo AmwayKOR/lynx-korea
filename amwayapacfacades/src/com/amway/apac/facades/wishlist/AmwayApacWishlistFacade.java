@@ -88,6 +88,6 @@ public interface AmwayApacWishlistFacade extends AmwayWishlistFacade
 	 *           Sort Code
 	 * @return CartData This method accepts CartData and sort by and returns CartData in given order.
 	 */
-	WishlistData getShoppingListDetailsSortBySortCode(AmwayApacCartSortCode sortBy, final WishlistData data);
+	WishlistData getShoppingListDetailsSortBySortCode(final AmwayApacCartSortCode sortBy, final WishlistData data);
 
 }

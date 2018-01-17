@@ -85,7 +85,7 @@ public class DefaultAmwayApacCustomerAccountDao extends DefaultAmwayCustomerAcco
 		validateParameterNotNull(customerModel, "Customer must not be null");
 		validateParameterNotNull(store, "Store must not be null");
 
-		final Map<String, Object> queryParams = new HashMap<String, Object>();
+		final Map<String, Object> queryParams = new HashMap<>();
 		queryParams.put("customer", customerModel);
 		queryParams.put("store", store);
 
@@ -106,7 +106,14 @@ public class DefaultAmwayApacCustomerAccountDao extends DefaultAmwayCustomerAcco
 		return getPagedFlexibleSearchService().search(sortQueries, "byDate", queryParams, pageableData);
 	}
 
-	private void validateParameters(final Map<String, Object> parameters)
+	/**
+	 * Validates each parameter for null value.
+	 *
+	 * @param parameters
+	 * @throws IllegalArgumentException
+	 *            if any of the parameters is null.
+	 */
+	protected void validateParameters(final Map<String, Object> parameters)
 	{
 		parameters.forEach(ServicesUtil::validateParameterNotNullStandardMessage);
 	}

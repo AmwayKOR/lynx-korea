@@ -119,8 +119,8 @@ public class AccountPageController extends AbstractSearchPageController
 
 	/**
 	 * We use this suffix pattern because of an issue with Spring 3.1 where a Uri value is incorrectly extracted if it
-	 * contains on or more '.' characters. Please see https://jira.springsource.org/browse/SPR-6164 for a discussion on the
-	 * issue and future resolution.
+	 * contains on or more '.' characters. Please see https://jira.springsource.org/browse/SPR-6164 for a discussion on
+	 * the issue and future resolution.
 	 */
 	private static final String ORDER_CODE_PATH_VARIABLE_PATTERN = "{orderCode:.*}";
 	private static final String ADDRESS_CODE_PATH_VARIABLE_PATTERN = "{addressCode:.*}";
@@ -205,6 +205,9 @@ public class AccountPageController extends AbstractSearchPageController
 
 	@Resource(name = "amwayApacAddressValidator")
 	private AmwayApacAddressValidator amwayApacAddressValidator;
+
+	@Resource(name = "orderHistoryTypeOptions")
+	private List<String> orderHistoryTypeOptions;
 
 
 	protected AmwayApacAddressValidator getAmwayApacAddressValidator()
@@ -398,7 +401,7 @@ public class AccountPageController extends AbstractSearchPageController
 		//Filter
 		model.addAttribute(ORDER_DEFAULT_DATE_OPTION_PARAMETER, LAST_THIRTY_DAYS);
 		model.addAttribute(ORDER_DATE_OPTIONS_PARAMETER, amwayApacOrderFacade.getOrderHistoryDateOptions());
-		model.addAttribute(ORDER_TYPE_OPTIONS_PARAMETER, amwayApacOrderFacade.getOrderHistoryTypeOptions());
+		model.addAttribute(ORDER_TYPE_OPTIONS_PARAMETER, orderHistoryTypeOptions);
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(ORDER_HISTORY_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ORDER_HISTORY_CMS_PAGE));
@@ -873,7 +876,7 @@ public class AccountPageController extends AbstractSearchPageController
 	public String editAddress(final AmwayApacAddressForm addressForm,
 			@RequestParam(value = "primaryAddress", required = false, defaultValue = "false") final Boolean primaryAddress,
 			final BindingResult bindingResult, final Model model, final RedirectAttributes redirectModel)
-			throws CMSItemNotFoundException
+					throws CMSItemNotFoundException
 	{
 		getAmwayApacAddressValidator().validate(addressForm, bindingResult);
 		if (bindingResult.hasErrors())

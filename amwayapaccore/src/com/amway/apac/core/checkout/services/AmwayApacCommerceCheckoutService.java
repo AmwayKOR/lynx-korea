@@ -6,6 +6,8 @@ import com.amway.core.checkout.services.AmwayCommerceCheckoutService;
 
 
 /**
+ * Service layer for Checkout specific operations.
+ *
  * @author Shubham Goyal
  */
 public interface AmwayApacCommerceCheckoutService extends AmwayCommerceCheckoutService

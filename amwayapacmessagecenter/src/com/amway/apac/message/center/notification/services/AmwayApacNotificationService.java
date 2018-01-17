@@ -32,8 +32,8 @@ public interface AmwayApacNotificationService
 	 * @throws IllegalArgumentException
 	 *            if pageableData or customer is null
 	 */
-	SearchPageData<AmwayNotificationModel> getNotifications(PageableData pageableData, CustomerModel userModel,
-			List<AmwayNotificationUserActionStatus> statuses, String searchText);
+	SearchPageData<AmwayNotificationModel> getNotifications(final PageableData pageableData, final CustomerModel userModel,
+			final List<AmwayNotificationUserActionStatus> statuses, final String searchText);
 
 	/**
 	 * Returns {@link AmwayNotificationModel} for a given unique code.
@@ -44,7 +44,7 @@ public interface AmwayApacNotificationService
 	 * @throws IllegalArgumentException
 	 *            if notificationCode is null or empty.
 	 */
-	AmwayNotificationModel getNotificationByCode(String notificationCode);
+	AmwayNotificationModel getNotificationByCode(final String notificationCode);
 
 	/**
 	 * Changes the status flag in {@link AmwayNotificationUserActionModel} for a given notification and customer to
@@ -57,7 +57,7 @@ public interface AmwayApacNotificationService
 	 * @param newStatus
 	 *           New status
 	 */
-	void changeUserNotificationStatus(AmwayNotificationModel notification, CustomerModel customer,
-			AmwayNotificationUserActionStatus newStatus);
+	void changeUserNotificationStatus(final AmwayNotificationModel notification, final CustomerModel customer,
+			final AmwayNotificationUserActionStatus newStatus);
 
 }

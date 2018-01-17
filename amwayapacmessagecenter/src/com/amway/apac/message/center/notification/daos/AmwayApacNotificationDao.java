@@ -35,8 +35,8 @@ public interface AmwayApacNotificationDao
 	 * @throws IllegalArgumentException
 	 *            if customer is null
 	 */
-	SearchPageData<AmwayNotificationModel> getNotifications(PageableData pageableData, BaseSiteModel baseSiteModel,
-			CustomerModel customer, final List<AmwayNotificationUserActionStatus> statuses, String searchText,
+	SearchPageData<AmwayNotificationModel> getNotifications(final PageableData pageableData, final BaseSiteModel baseSiteModel,
+			final CustomerModel customer, final List<AmwayNotificationUserActionStatus> statuses, final String searchText,
 			final String accountClassficationCode);
 
 }

@@ -30,15 +30,7 @@ public class AmwayApacStockFacetDisplayNameProvider extends AbstractFacetValueDi
 		{
 			return getEnumerationService().getEnumerationName(StockLevelStatus.valueOf(facetValue));
 		}
-
 		return facetValue;
-	}
-
-
-	@Required
-	public void setEnumerationService(final EnumerationService enumerationService)
-	{
-		this.enumerationService = enumerationService;
 	}
 
 	/**
@@ -48,5 +40,17 @@ public class AmwayApacStockFacetDisplayNameProvider extends AbstractFacetValueDi
 	{
 		return enumerationService;
 	}
+
+	/**
+	 * @param enumerationService
+	 *           the enumerationService to set
+	 */
+	@Required
+	public void setEnumerationService(final EnumerationService enumerationService)
+	{
+		this.enumerationService = enumerationService;
+	}
+
+
 
 }

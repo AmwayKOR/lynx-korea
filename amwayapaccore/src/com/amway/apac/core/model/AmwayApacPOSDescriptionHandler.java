@@ -30,6 +30,7 @@ public class AmwayApacPOSDescriptionHandler implements DynamicAttributeHandler<S
 	 * @return the string
 	 *
 	 * @throws IllegalArgumentException
+	 *            if model is null.
 	 */
 	@Override
 	public String get(final AmwayPOSRestrictionModel model)

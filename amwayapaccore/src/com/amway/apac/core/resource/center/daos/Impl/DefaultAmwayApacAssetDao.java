@@ -34,10 +34,7 @@ public class DefaultAmwayApacAssetDao extends DefaultAmwayAssetDao
 	/** Query condition part with classification NULL. */
 	private static final String QUERY_STRING_WITH_CLASSIFICATION_NULL = "AND {a.accountClassification} IS NULL ";
 
-	/** The amway apac account classification service. */
 	private AmwayApacAccountClassificationService amwayApacAccountClassificationService;
-
-	/** The amway account classification rank mapping. */
 	private Map<AccountClassificationEnum, Integer> amwayAccountClassificationRankMapping;
 
 	/**
