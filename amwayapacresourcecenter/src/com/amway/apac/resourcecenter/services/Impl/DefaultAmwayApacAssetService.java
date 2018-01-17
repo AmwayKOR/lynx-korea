@@ -1,5 +1,8 @@
 package com.amway.apac.resourcecenter.services.Impl;
 
+import static com.amway.apac.resourcecenter.constants.AmwayapacresourcecenterConstants.COMPONENT_STRING;
+import static com.amway.apac.resourcecenter.constants.AmwayapacresourcecenterConstants.PAGEABLEDATA_STRING;
+import static com.amway.apac.resourcecenter.constants.AmwayapacresourcecenterConstants.PRODUCT_STRING;
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
 
 import de.hybris.platform.catalog.CatalogService;
@@ -42,8 +45,8 @@ public class DefaultAmwayApacAssetService implements AmwayApacAssetService
 	@Override
 	public SearchPageData<AmwayAssetModel> getAssets(final String componentId, final PageableData pageableData, final String year)
 	{
-		validateParameterNotNullStandardMessage("Component", componentId);
-		validateParameterNotNullStandardMessage("PageableData", pageableData);
+		validateParameterNotNullStandardMessage(COMPONENT_STRING, componentId);
+		validateParameterNotNullStandardMessage(PAGEABLEDATA_STRING, pageableData);
 
 		return getAmwayAssetDao().getAssets(componentId, pageableData, getCatalogVersion(), year);
 	}
@@ -55,8 +58,8 @@ public class DefaultAmwayApacAssetService implements AmwayApacAssetService
 	public SearchPageData<AmwayAssetModel> getAssetsForProduct(final ProductModel product, final PageableData pageableData,
 			final String year)
 	{
-		validateParameterNotNullStandardMessage("Product", product);
-		validateParameterNotNullStandardMessage("PageableData", pageableData);
+		validateParameterNotNullStandardMessage(PRODUCT_STRING, product);
+		validateParameterNotNullStandardMessage(PAGEABLEDATA_STRING, pageableData);
 
 		return getAmwayAssetDao().getAssetsForProduct(product, pageableData, getCmsSiteService().getCurrentCatalogVersion(), year);
 	}
@@ -68,8 +71,8 @@ public class DefaultAmwayApacAssetService implements AmwayApacAssetService
 	public SearchPageData<AmwayAssetAlbumModel> getAssetsAlbums(final String componentId, final PageableData pageableData,
 			final String year)
 	{
-		validateParameterNotNullStandardMessage("Component", componentId);
-		validateParameterNotNullStandardMessage("PageableData", pageableData);
+		validateParameterNotNullStandardMessage(COMPONENT_STRING, componentId);
+		validateParameterNotNullStandardMessage(PAGEABLEDATA_STRING, pageableData);
 
 		return getAmwayAssetDao().getAssetsAlbums(componentId, pageableData, getCatalogVersion(), year);
 	}
@@ -80,7 +83,7 @@ public class DefaultAmwayApacAssetService implements AmwayApacAssetService
 	@Override
 	public List<MediaContainerModel> getAssetsAlbumMedia(final String componentId)
 	{
-		validateParameterNotNullStandardMessage("Component", componentId);
+		validateParameterNotNullStandardMessage(COMPONENT_STRING, componentId);
 
 		return getAmwayAssetDao().getAssetsAlbumMedia(getCatalogVersion(), componentId);
 	}

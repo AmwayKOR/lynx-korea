@@ -72,8 +72,9 @@ public class AmwayApacAssetInterceptor
 	 *
 	 * @param amwayAssetModel
 	 *           the new asset rank
-	 * @throws InterceptorException,
-	 *            IllegalArgumentException
+	 * @throws InterceptorException
+	 * @throws IllegalArgumentException
+	 *            if amwayAssetModel is null.
 	 */
 	private void setAssetRank(final AbstractAmwayAssetModel amwayAssetModel) throws InterceptorException
 	{

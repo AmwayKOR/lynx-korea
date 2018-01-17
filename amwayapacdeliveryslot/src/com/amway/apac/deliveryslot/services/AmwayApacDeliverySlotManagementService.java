@@ -12,7 +12,7 @@ import com.amway.apac.deliveryslot.model.AmwayDeliverySlotConfigModel;
 
 /**
  * Delivery slot management service interface
- * 
+ *
  * @author Ashish Sabal
  *
  */
@@ -23,6 +23,7 @@ public interface AmwayApacDeliverySlotManagementService
 	 * @return List of {@link AmwayDeliverySlotConfigModel}
 	 *
 	 * @throws IllegalArgumentException
+	 *            if orderingDay is null.
 	 */
 	List<AmwayDeliverySlotConfigModel> getDeliverySlotByOrderDay(final DayOfWeek orderingDay);
 
@@ -32,6 +33,7 @@ public interface AmwayApacDeliverySlotManagementService
 	 * @param orderingDate
 	 *
 	 * @throws IllegalArgumentException
+	 *            if applicableDeliverySlots, orderingDate is null
 	 */
 	void createDeliverySlotForDate(final List<AmwayDeliverySlotConfigModel> applicableDeliverySlots, final LocalDate orderingDate);
 
@@ -45,6 +47,7 @@ public interface AmwayApacDeliverySlotManagementService
 	 * @return the delivery date
 	 *
 	 * @throws IllegalArgumentException
+	 *            if orderingDate, deliveryDay is null
 	 */
 	LocalDate getDeliveryDate(final LocalDate orderingDate, final WeekDay deliveryDay);
 
@@ -59,6 +62,7 @@ public interface AmwayApacDeliverySlotManagementService
 	 * @return the next delivery slot by delivery date and slot
 	 *
 	 * @throws IllegalArgumentException
+	 *            if deliveryDate, slotTime is null
 	 */
 	List<AmwayDeliverySlotAvailabilityModel> getNextDeliverySlotByDeliveryDateAndSlot(final LocalDate deliveryDate,
 			final String slotTime);
@@ -70,6 +74,7 @@ public interface AmwayApacDeliverySlotManagementService
 	 * @param slotModels
 	 *
 	 * @throws IllegalArgumentException
+	 *            if slotConfigModel, slotModels is null
 	 */
 	void updateInfoInSlotsAvailabilityModels(final AmwayDeliverySlotConfigModel slotConfigModel,
 			final List<AmwayDeliverySlotAvailabilityModel> slotModels);
@@ -82,6 +87,7 @@ public interface AmwayApacDeliverySlotManagementService
 	 *           the ordering date
 	 *
 	 * @throws IllegalArgumentException
+	 *            if orderingDate is null
 	 */
 	void createDeliverySlotData(final LocalDate orderingDate);
 }

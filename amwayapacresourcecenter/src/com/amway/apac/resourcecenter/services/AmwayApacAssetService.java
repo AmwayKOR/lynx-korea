@@ -31,6 +31,7 @@ public interface AmwayApacAssetService
 	 * @return the assets
 	 *
 	 * @throws IllegalArgumentException
+	 *            if componentId or pageableData is null
 	 */
 	SearchPageData<AmwayAssetModel> getAssets(final String componentId, final PageableData pageableData, final String year);
 
@@ -46,6 +47,7 @@ public interface AmwayApacAssetService
 	 * @return the assets for product
 	 *
 	 * @throws IllegalArgumentException
+	 *            if product or pageableData is null
 	 */
 	SearchPageData<AmwayAssetModel> getAssetsForProduct(final ProductModel product, final PageableData pageableData,
 			final String year);
@@ -62,6 +64,7 @@ public interface AmwayApacAssetService
 	 * @return the assets albums
 	 *
 	 * @throws IllegalArgumentException
+	 *            if componentId or pageableData is null
 	 */
 	SearchPageData<AmwayAssetAlbumModel> getAssetsAlbums(final String componentId, final PageableData pageableData,
 			final String year);
@@ -74,6 +77,7 @@ public interface AmwayApacAssetService
 	 * @return the assets album media
 	 *
 	 * @throws IllegalArgumentException
+	 *            if componentId is null
 	 */
 	List<MediaContainerModel> getAssetsAlbumMedia(final String componentId);
 

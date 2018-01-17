@@ -56,6 +56,8 @@ public interface AmwayApacNotificationService
 	 *           Customer for which UserAction to be modified
 	 * @param newStatus
 	 *           New status
+	 * @throws IllegalArgumentException
+	 *            if notification, customer or newStatus is null.
 	 */
 	void changeUserNotificationStatus(final AmwayNotificationModel notification, final CustomerModel customer,
 			final AmwayNotificationUserActionStatus newStatus);

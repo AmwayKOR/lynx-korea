@@ -42,6 +42,7 @@ public interface AmwayApacProductService extends ProductService
 	 * @return payment option for Alias Code
 	 *
 	 * @throws IllegalArgumentException
+	 *            if aliasCode or catalogVersion is null.
 	 */
 	AmwayPaymentOptionModel getPaymentOptionForAliasCode(final String aliasCode, final CatalogVersionModel catalogVersion);
 
@@ -52,6 +53,7 @@ public interface AmwayApacProductService extends ProductService
 	 * @return boolean for payment option availability
 	 *
 	 * @throws IllegalArgumentException
+	 *            if productModel is null.
 	 */
 	boolean checkIfPIFIsActive(final ProductModel productModel);
 
@@ -59,12 +61,13 @@ public interface AmwayApacProductService extends ProductService
 	 * Checks for Alias Code and catalog params to be not empty
 	 *
 	 * @param splitAliasCode
-	 * @param aliasCodevalidationparams
+	 * @param aliasParams
 	 * @return Checks for Alias Code and catalog params not empty
 	 *
 	 * @throws IllegalArgumentException
+	 *            if aliasParams is null.
 	 */
-	boolean validateAliasCode(final String[] splitAliasCode, final int[] aliasCodevalidationparams);
+	boolean validateAliasCode(final String[] splitAliasCode, final int[] aliasParams);
 
 	/**
 	 * Returns the Available Purchasable Quantity.
@@ -74,6 +77,7 @@ public interface AmwayApacProductService extends ProductService
 	 * @return the Available Purchasable Quantity.
 	 *
 	 * @throws IllegalArgumentException
+	 *            if userId, productCode or store is null.
 	 */
 	int getUsedQuantityForPrelaunch(final String userId, final String productCode, final BaseStoreModel store);
 
@@ -84,6 +88,7 @@ public interface AmwayApacProductService extends ProductService
 	 * @param order
 	 *
 	 * @throws IllegalArgumentException
+	 *            if productCodeToCount or order is null.
 	 */
 	void updatePreLaunchProductCount(final Map<String, Integer> productCodeToCount, final AbstractOrderModel order);
 
@@ -94,6 +99,7 @@ public interface AmwayApacProductService extends ProductService
 	 * @return products
 	 *
 	 * @throws IllegalArgumentException
+	 *            if orderModel is null.
 	 */
 	Map<String, Integer> getPreLaunchConfigProducts(final AbstractOrderModel orderModel);
 
@@ -101,10 +107,11 @@ public interface AmwayApacProductService extends ProductService
 	 * Checks for product if it is a kit product of given type.
 	 *
 	 * @param product
-	 * @param bundled
+	 * @param kitProductType
 	 * @return checks for product if it is a kit product of given type
 	 *
 	 * @throws IllegalArgumentException
+	 *            if product or kitProductType is null.
 	 */
-	boolean checkKitProductByType(final ProductModel product, final AmwayKitProductType bundled);
+	boolean checkKitProductByType(final ProductModel product, final AmwayKitProductType kitProductType);
 }

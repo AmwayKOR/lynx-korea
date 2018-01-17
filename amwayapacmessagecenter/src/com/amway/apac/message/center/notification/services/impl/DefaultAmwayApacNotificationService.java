@@ -6,6 +6,7 @@ import static com.amway.apac.message.center.model.AmwayNotificationModel.SITE;
 import static com.amway.apac.message.center.model.AmwayNotificationUserActionModel.NOTIFICATION;
 import static com.amway.apac.message.center.model.AmwayNotificationUserActionModel.USER;
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNull;
+import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
 
 import de.hybris.platform.basecommerce.model.site.BaseSiteModel;
 import de.hybris.platform.commerceservices.search.pagedata.PageableData;
@@ -45,6 +46,9 @@ public class DefaultAmwayApacNotificationService implements AmwayApacNotificatio
 	private static final String ERROR_MESSAGE_NULL_PAGEABLE_DATA = "[pageableData] must not be null";
 	private static final String ERROR_MESSAGE_NULL_CUSTOMER = "[customer] must not be null";
 	private static final String ERROR_MESSAGE_NULL_NOTIFICATION_CODE = "[notificationCode] field can not be null";
+	private static final String NOTIFICATION_STRING = "notification";
+	private static final String CUSTOMER_STRING = "customer";
+	private static final String NEW_STATUS_STRING = "newStatus";
 
 	private AmwayApacNotificationDao amwayApacNotificationDao;
 	private GenericDao<AmwayNotificationUserActionModel> amwayNotificationUserActionDao;
@@ -58,15 +62,15 @@ public class DefaultAmwayApacNotificationService implements AmwayApacNotificatio
 	 * {@inheritDoc}
 	 */
 	@Override
-	public SearchPageData<AmwayNotificationModel> getNotifications(final PageableData pageableData,
-			final CustomerModel customer, final List<AmwayNotificationUserActionStatus> statuses, final String searchText)
+	public SearchPageData<AmwayNotificationModel> getNotifications(final PageableData pageableData, final CustomerModel customer,
+			final List<AmwayNotificationUserActionStatus> statuses, final String searchText)
 	{
 		validateParameterNotNull(pageableData, ERROR_MESSAGE_NULL_PAGEABLE_DATA);
 		validateParameterNotNull(customer, ERROR_MESSAGE_NULL_CUSTOMER);
 		final String accountClassficationCode = getSessionService().getAttribute(ACCOUNT_CLASSIFICATION_CODE);
 
-		return getAmwayApacNotificationDao().getNotifications(pageableData, getBaseSiteService().getCurrentBaseSite(),
-				customer, statuses, searchText, accountClassficationCode);
+		return getAmwayApacNotificationDao().getNotifications(pageableData, getBaseSiteService().getCurrentBaseSite(), customer,
+				statuses, searchText, accountClassficationCode);
 	}
 
 	/**
@@ -76,6 +80,7 @@ public class DefaultAmwayApacNotificationService implements AmwayApacNotificatio
 	public AmwayNotificationModel getNotificationByCode(final String notificationCode)
 	{
 		validateParameterNotNull(notificationCode, ERROR_MESSAGE_NULL_NOTIFICATION_CODE);
+
 		final Map<String, Object> params = new HashMap<>();
 		final BaseSiteModel currentBasesite = getBaseSiteService().getCurrentBaseSite();
 		params.put(CODE, notificationCode);
@@ -93,6 +98,10 @@ public class DefaultAmwayApacNotificationService implements AmwayApacNotificatio
 	public void changeUserNotificationStatus(final AmwayNotificationModel notification, final CustomerModel customer,
 			final AmwayNotificationUserActionStatus newStatus)
 	{
+		validateParameterNotNullStandardMessage(NOTIFICATION_STRING, notification);
+		validateParameterNotNullStandardMessage(CUSTOMER_STRING, customer);
+		validateParameterNotNullStandardMessage(NEW_STATUS_STRING, newStatus);
+
 		final Map<String, Object> params = new HashMap<>();
 		params.put(NOTIFICATION, notification);
 		params.put(USER, customer);

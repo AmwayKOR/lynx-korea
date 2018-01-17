@@ -51,7 +51,7 @@ public class DefaultAmwayApacStockService extends DefaultAmwayStockService
 	 *           the warehouse
 	 * @return Stock level status for product
 	 * @throws IllegalArgumentException
-	 *            the illegal argument exception
+	 *            if product or warehouse is null.
 	 */
 	@Override
 	public StockLevelStatus getProductStatus(final ProductModel product, final WarehouseModel warehouse)
@@ -83,7 +83,7 @@ public class DefaultAmwayApacStockService extends DefaultAmwayStockService
 	 *           the warehouses
 	 * @return Stock level status for product
 	 * @throws IllegalArgumentException
-	 *            the illegal argument exception
+	 *            if product or warehouses is null.
 	 */
 	@Override
 	public StockLevelStatus getProductStatus(final ProductModel product, final Collection<WarehouseModel> warehouses)
