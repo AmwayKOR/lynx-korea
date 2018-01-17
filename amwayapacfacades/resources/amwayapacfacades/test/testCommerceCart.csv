@@ -133,6 +133,13 @@ INSERT_UPDATE Product;code[unique=true];$catalogversion;stockLevels(productCode,
 INSERT_UPDATE ProductPercentageDiscountPromotion;code[unique=true];title;description;enabled;products(code,$promoCatalogVersion);percentageDiscount;PromotionGroup(Identifier);priority;messageFired[lang=$defaultLanguage];
 ;PercentageDiscount_3425promo;Percentage discount 19%;19% off on HW1210-3425promo;true;HW1210-3425promo;19;default;1000;19% Discount.<br>You saved {2}.;
 
+INSERT_UPDATE AmwayAccount;code[unique=true]     ;businessNature(code)    ;primaryParty(uid);name       ;registeredAddress(&addRef);level(&businessLevelRef)
+                          ;ahertz                ;"AmwayBusinessNature_1" ;ahertz           ;Test User  ;testuserAdd               ;testUserQual
 
+INSERT_UPDATE Address;owner(AmwayAccount.code)[unique=true];country(isocode);postalcode;firstname;lastname;streetname;streetnumber;shippingAddress;billingAddress;&addRef
+;ahertz;US;100000;TestFirstName;TestLastName;TestStreetName;TestStreetNumber;true;true;testuserAdd
+
+INSERT_UPDATE AmwayBusinessLevel;qualificationLevel(code)[unique=true];&businessLevelRef
+;QualificationLevelTypeEnum_340;testUserQual
 
 
