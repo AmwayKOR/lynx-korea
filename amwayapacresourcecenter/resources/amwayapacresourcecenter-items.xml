@@ -21,10 +21,8 @@
 			<description>Relation between Amway assets and keywords/tags that can be used for searching the asset.</description>
 			<deployment table="Asset2KeywordRel" typecode="21019" />
 			<sourceElement qualifier="assets" type="AbstractAmwayAsset" cardinality="many" ordered="false">
-				<modifiers read="true" write="true" search="true" optional="true" />
 			</sourceElement>
 			<targetElement qualifier="keywords" type="Keyword" cardinality="many" ordered="true" collectiontype="list">
-				<modifiers read="true" write="true" search="true" optional="true" />
 			</targetElement>
 		</relation>
 
@@ -32,10 +30,8 @@
 			<description>Relation between Amway asset album and media Container</description>
 			<deployment table="AssetAlbum2MediaContRel" typecode="21021" />
 			<sourceElement qualifier="album" type="AmwayAssetAlbum" cardinality="many" ordered="false">
-				<modifiers read="true" write="true" search="true" optional="true" />
 			</sourceElement>
 			<targetElement qualifier="gallery" type="MediaContainer" cardinality="many" ordered="true" collectiontype="list">
-				<modifiers read="true" write="true" search="true" optional="true" />
 			</targetElement>
 		</relation>
 	</relations>
@@ -67,7 +63,7 @@
 				<attributes>
 					<attribute qualifier="assetId" type="java.lang.String">
 						<description>Unique Asset id for the media</description>
-						<modifiers read="true" write="true" search="true" optional="false" unique="true" />
+						<modifiers optional="false" unique="true" />
 						<persistence type="property" />
 					</attribute>
 					<attribute qualifier="active" type="java.lang.Boolean">
@@ -78,7 +74,7 @@
 					</attribute>
 					<attribute qualifier="catalogVersion" type="CatalogVersion">
 						<description>Catalog version of asset</description>
-						<modifiers read="true" write="true" search="true" optional="false" unique="true" />
+						<modifiers optional="false" unique="true" />
 						<persistence type="property" />
 					</attribute>
 					<attribute qualifier="title" type="localized:java.lang.String">
@@ -104,7 +100,7 @@
 					</attribute>
 					<attribute qualifier="rank" type="java.lang.Integer">
 						<description>Rank of the User</description>
-						<modifiers read="true" write="true" optional="true" />
+						<modifiers optional="true" />
 						<persistence type="property" />
 					</attribute>
 				</attributes>

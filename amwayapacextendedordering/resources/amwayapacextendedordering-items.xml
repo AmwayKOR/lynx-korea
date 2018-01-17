@@ -109,14 +109,14 @@
 					<attribute qualifier="groupOrder" type="AmwayGroupOrder">
 						<description>This attribute represents the single payment part of
 							the group combined order.</description>
-						<persistence type="property" />
 						<modifiers optional="false" />
+						<persistence type="property" />
 					</attribute>
 					<attribute qualifier="combinedOrder" type="AmwayCombinedOrder">
 						<description>This attribute represents the single shipping part of
 							the group combined order.</description>
-						<persistence type="property" />
 						<modifiers optional="false" />
+						<persistence type="property" />
 					</attribute>
 				</attributes>
 			</itemtype>

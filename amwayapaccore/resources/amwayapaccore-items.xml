@@ -77,13 +77,11 @@
 			<description>Product Payment Option relation.</description>
 			<sourceElement type="Product" qualifier="product"
 				cardinality="one">
-				<modifiers read="true" write="true" unique="true"
-					optional="false" search="true" />
+				<modifiers optional="false"/>
 			</sourceElement>
 			<targetElement type="AmwayPaymentOption" qualifier="paymentOption"
 				cardinality="many" collectiontype="set">
-				<modifiers read="true" write="true" optional="true"
-					search="true" partof="true" />
+				<modifiers partof="true" />
 			</targetElement>
 		</relation>
 
@@ -92,13 +90,9 @@
 			<deployment table="customerToPOSRelation" typecode="21005" />
 			<sourceElement type="Customer" qualifier="customer"
 				cardinality="many">
-				<modifiers read="true" write="true" optional="true"
-					search="true" />
 			</sourceElement>
 			<targetElement type="PointOfService" qualifier="favouriteShopList"
 				collectiontype="list" cardinality="many" ordered="false">
-				<modifiers read="true" write="true" optional="true"
-					search="true" />
 			</targetElement>
 		</relation>
 
@@ -107,13 +101,9 @@
 			<deployment table="prod2AssetRel" typecode="21024" />
 			<sourceElement qualifier="product" type="Product"
 				cardinality="many">
-				<modifiers read="true" write="true" search="true"
-					optional="true" />
 			</sourceElement>
 			<targetElement qualifier="assets" type="AbstractAmwayAsset"
 				cardinality="many" collectiontype="list" ordered="true">
-				<modifiers read="true" write="true" search="true"
-					optional="true" />
 			</targetElement>
 		</relation>
 
@@ -122,13 +112,9 @@
 			<deployment table="album2AmwayAccount" typecode="21035" />
 			<sourceElement qualifier="album" type="AmwayAssetAlbum"
 				cardinality="many">
-				<modifiers read="true" write="true" search="true"
-					optional="true" />
 			</sourceElement>
 			<targetElement qualifier="user" type="AmwayAccount"
 				cardinality="many" collectiontype="list" ordered="true">
-				<modifiers read="true" write="true" search="true"
-					optional="true" />
 			</targetElement>
 		</relation>
 
@@ -137,13 +123,9 @@
 			<deployment table="prod2faqRel" typecode="21023" />
 			<sourceElement qualifier="product" type="Product"
 				cardinality="many">
-				<modifiers read="true" write="true" search="true"
-					optional="true" />
 			</sourceElement>
 			<targetElement qualifier="faqs" type="AmwayFAQ"
 				cardinality="many" collectiontype="list" ordered="true">
-				<modifiers read="true" write="true" search="true"
-					optional="true" />
 			</targetElement>
 		</relation>
 
@@ -152,13 +134,9 @@
 			<deployment table="amwayPOSResRel" typecode="21008" />
 			<sourceElement qualifier="restrictions" type="AmwayPOSRestriction"
 				cardinality="many">
-				<modifiers read="true" write="true" search="true"
-					optional="true" />
 			</sourceElement>
 			<targetElement qualifier="shops" type="PointOfService"
 				cardinality="many">
-				<modifiers read="true" write="true" search="true"
-					optional="true" />
 			</targetElement>
 		</relation>
 		
@@ -166,14 +144,12 @@
 			localized="false" autocreate="true">
 			<sourceElement qualifier="sourceCategory" type="Category"
 				cardinality="one">
-				<modifiers read="true" write="false" initial="true"
-					optional="false" unique="true" />
+				<modifiers initial="true" optional="false" unique="true" />
 			</sourceElement>
 			<targetElement qualifier="productReferences"
 				type="AmwayCategoryProductReference" cardinality="many" ordered="true"
 				collectiontype="collection">
-				<modifiers read="true" write="true" optional="true"
-					partof="true" />
+				<modifiers partof="true" />
 			</targetElement>
 		</relation>
 	</relations>
@@ -276,18 +252,18 @@
 						<persistence type="property" />
 					</attribute>
 					<attribute qualifier="startDate" type="java.Util.Date">
-						<modifiers optional="false" />
 						<description>Start Date Of Launch - after which product is only available to specified class of users, untill the end date.</description>
+						<modifiers optional="false" />
 						<persistence type="property" />
 					</attribute>
 					<attribute qualifier="endDate" type="java.Util.Date">
-						<modifiers optional="false" />
 						<description>End Date Of Launch - after which product is available for all users.</description>
+						<modifiers optional="false" />
 						<persistence type="property" />
 					</attribute>
 					<attribute qualifier="maxShoppingCount" type="java.lang.Integer">
-						<modifiers optional="false" />
 						<description>Max shopping count per user while the product is in pre launch.</description>
+						<modifiers optional="false" />
 						<persistence type="property" />
 					</attribute>
 				</attributes>
@@ -298,14 +274,17 @@
 				<deployment table="AmwayFAQ" typecode="21022" />
 				<attributes>
 					<attribute qualifier="code" type="java.lang.String">
+						<description>Unique code for the FAQ object</description>
 						<modifiers optional="false" unique="true" />
 						<persistence type="property" />
 					</attribute>
 					<attribute qualifier="question" type="localized:java.lang.String">
+						<description>FAQ question content</description>
 						<modifiers dontOptimize="true" />
 						<persistence type="property" />
 					</attribute>
 					<attribute qualifier="answer" type="localized:java.lang.String">
+						<description>FAQ answer content</description>
 						<modifiers dontOptimize="true" />
 						<persistence type="property" />
 					</attribute>
@@ -319,43 +298,33 @@
 				<attributes>
 					<attribute qualifier="qualifier" type="java.lang.String">
 						<description>Qualifier</description>
-						<modifiers read="true" write="true" search="true"
-							optional="true" />
 						<persistence type="property" />
 					</attribute>
 					<attribute qualifier="target" type="Product">
 						<description>Target</description>
-						<modifiers read="true" write="true" search="true"
-							optional="false" unique="true" />
+						<modifiers optional="false" unique="true" />
 						<persistence type="property" />
 					</attribute>
 					<attribute qualifier="quantity" type="java.lang.Integer">
 						<description>Quantity</description>
-						<modifiers read="true" write="true" search="true"
-							optional="true" />
 						<persistence type="property" />
 					</attribute>
 					<attribute qualifier="referenceType" type="ProductReferenceTypeEnum">
-						<modifiers read="true" write="true" search="true"
-							optional="true" unique="true" />
+						<modifiers unique="true" />
 						<persistence type="property" />
 					</attribute>
 					<attribute qualifier="icon" type="Media">
-						<modifiers read="true" write="true" search="true"
-							optional="true" />
 						<persistence type="property" />
 					</attribute>
 					<attribute qualifier="description" type="localized:java.lang.String">
-						<modifiers read="true" write="true" search="true"
-							optional="true" />
 						<persistence type="property" />
 					</attribute>
 					<attribute qualifier="preselected" type="java.lang.Boolean">
-						<modifiers read="true" write="true" optional="false" />
+						<modifiers optional="false" />
 						<persistence type="property" />
 					</attribute>
 					<attribute qualifier="active" type="java.lang.Boolean">
-						<modifiers read="true" write="true" optional="false" />
+						<modifiers optional="false" />
 						<persistence type="property" />
 					</attribute>
 				</attributes>
@@ -388,7 +357,6 @@
 				<attributes>
 					<attribute qualifier="warehouse" type="Warehouse">
 						<description>Warehouse responsible for serving the order.</description>
-						<modifiers optional="true" />
 						<persistence type="property" />
 					</attribute>
 					<attribute qualifier="orderType" type="OrderType">
@@ -430,10 +398,12 @@
 				autocreate="true" generate="true">
 				<description>Payment info type created for voucher payments.</description>
 			</itemtype>
+			
 			<itemtype code="AmwayCODPaymentInfo" autocreate="true"
 				generate="true" extends="PaymentInfo">
 				<description>COD Payment Info to store payment information done using COD</description>
 			</itemtype>
+			
 			<itemtype code="DefaultPaymentInfo" extends="PaymentInfo"
 				autocreate="true" generate="true">
 				<description>Default payment info for order.</description>
@@ -566,37 +536,37 @@
 				<deployment table="AmwayContactUs" typecode="21028" />
 				<attributes>
 					<attribute type="java.lang.String" qualifier="aboId">
-						<persistence type="property" />
 						<description>ABO ID for the Contact Us form on contact us page</description>
+						<persistence type="property" />
 					</attribute>
 					<attribute type="java.lang.String" qualifier="firstName">
-						<persistence type="property" />
 						<description>First Name for the Contact Us form on contact us page</description>
+						<persistence type="property" />
 					</attribute>
 					<attribute type="java.lang.String" qualifier="lastName">
-						<persistence type="property" />
 						<description>Lastname for the Contact Us form on contact us page</description>
+						<persistence type="property" />
 					</attribute>
 					<attribute type="java.lang.String" qualifier="eMail">
-						<persistence type="property" />
 						<description>E-Mail for the Contact Us form on contact us page</description>
+						<persistence type="property" />
 					</attribute>
 					<attribute type="AmwayContactUsTopicEnum" qualifier="topics">
-						<persistence type="property" />
 						<description>Topics for the Contact Us form on contact us page</description>
+						<persistence type="property" />
 					</attribute>
 					<attribute type="java.lang.String" qualifier="subject">
-						<persistence type="property" />
 						<description>Subject for the Contact Us form on contact us page</description>
+						<persistence type="property" />
 					</attribute>
 					<attribute type="java.lang.String" qualifier="message">
-						<persistence type="property" />
-						<modifiers dontOptimize="true" />
 						<description>Message for the Contact Us form</description>
+						<modifiers dontOptimize="true" />
+						<persistence type="property" />
 					</attribute>
 					<attribute type="java.lang.Boolean" qualifier="receiveMail">
-						<persistence type="property" />
 						<description>Subject for the Contact Us form on contact us page</description>
+						<persistence type="property" />
 					</attribute>
 				</attributes>
 			</itemtype>
@@ -605,11 +575,11 @@
 		<typegroup name="BusinessProcesses">
 			<itemtype code="StoreFrontContactUsProcess" extends="StoreFrontProcess"
 				autocreate="true" generate="true">
-				<description>Represents contact us email .</description>
+				<description>Represents contact us email.</description>
 				<attributes>
 					<attribute qualifier="amwayContactUsModel" type="AmwayContactUs">
-						<persistence type="property" />
 						<description>Attribute contains contact us model that will be used in the process.</description>
+						<persistence type="property" />
 					</attribute>
 				</attributes>
 			</itemtype>

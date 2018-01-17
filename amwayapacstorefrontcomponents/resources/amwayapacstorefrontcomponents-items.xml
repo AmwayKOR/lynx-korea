@@ -119,12 +119,12 @@
 				<description>Abstract component which will serve as the parent of all the components with image, text and link.</description>
 				<attributes>
 					<attribute qualifier="text" type="CMSParagraphComponent">
-						<persistence type="property" />
 						<description>Text component of the component</description>
+						<persistence type="property" />
 					</attribute>
 					<attribute qualifier="link" type="CMSLinkComponent">
-						<persistence type="property" />
 						<description>Link component</description>
+						<persistence type="property" />
 					</attribute>
 				</attributes>
 			</itemtype>
@@ -142,12 +142,12 @@
 				<description>Homepage top carousel banner.</description>
 				<attributes>
 					<attribute qualifier="secondaryImage" type="SimpleResponsiveBannerComponent">
-						<persistence type="property" />
 						<description>Banner for second image.</description>
+						<persistence type="property" />
 					</attribute>
 					<attribute qualifier="secondaryLink" type="CMSLinkComponent">
-						<persistence type="property" />
 						<description>Link component for the second link.</description>
+						<persistence type="property" />
 					</attribute>
 				</attributes>
 			</itemtype>
@@ -159,12 +159,12 @@
 				<description>Category page top banner component</description>
 				<attributes>
 					<attribute qualifier="logoImage" type="BannerComponent">
-						<persistence type="property" />
 						<description>Logo media</description>
+						<persistence type="property" />
 					</attribute>
 					<attribute qualifier="headerText" type="localized:java.lang.String">
-						<persistence type="property" />
 						<description>Header Text</description>
+						<persistence type="property" />
 					</attribute>
 				</attributes>
 			</itemtype>
@@ -175,8 +175,8 @@
 				<description>Homepage your opportunity component.</description>
 				<attributes>
 					<attribute qualifier="iconImage" type="BannerComponent">
-						<persistence type="property" />
 						<description>Icon displayed over the component.</description>
+						<persistence type="property" />
 					</attribute>
 				</attributes>
 			</itemtype>
@@ -258,12 +258,12 @@
 				autocreate="false">
 				<attributes>
 					<attribute qualifier="nodeLink" type="CMSLinkComponent">
-						<persistence type="property" />
 						<description>Link to be used for the navigation node.</description>
+						<persistence type="property" />
 					</attribute>
 					<attribute qualifier="nodeImg" type="localized:Media">
-						<persistence type="property" />
 						<description>Image displayed with the navigation node.</description>
+						<persistence type="property" />
 					</attribute>
 				</attributes>
 			</itemtype>
@@ -276,8 +276,8 @@
 				<description>Link component with button UI.</description>
 				<attributes>
 					<attribute qualifier="buttonStyleAttributes" type="java.lang.String">
-						<persistence type="property" />
 						<description>button style definitions and classes</description>
+						<persistence type="property" />
 					</attribute>
 				</attributes>
 			</itemtype>
@@ -288,8 +288,8 @@
 				<description>Link component with icon UI.</description>
 				<attributes>
 					<attribute qualifier="iconStyleAttributes" type="java.lang.String">
-						<persistence type="property" />
 						<description>icon style definitions and classes</description>
+						<persistence type="property" />
 					</attribute>
 				</attributes>
 			</itemtype>
@@ -300,8 +300,8 @@
 				<description>Country component with icon UI.</description>
 				<attributes>
 					<attribute qualifier="image" type="localized:Media">
-						<persistence type="property" />
 						<description> Image Icon definitions and classes</description>
+						<persistence type="property" />
 					</attribute>
 				</attributes>
 			</itemtype>
@@ -363,9 +363,9 @@
 						<persistence type="property" />
 					</attribute>
 					<attribute qualifier="maxHeight" type="boolean">
-						<persistence type="property" />
 						<description>Decides whether to fix the height of the component.</description>
 						<defaultvalue>Boolean.TRUE</defaultvalue>
+						<persistence type="property" />
 					</attribute>
 				</attributes>
 			</itemtype>
@@ -394,8 +394,8 @@
 					<attribute qualifier="colwidth" generate="true"
 						autocreate="true" type="java.lang.Integer">
 						<description>Decides the number of columns for the tab.</description>
-						<persistence type="property" />
 						<defaultvalue>Integer.valueOf(4)</defaultvalue>
+						<persistence type="property" />
 					</attribute>
 				</attributes>
 			</itemtype>
@@ -407,8 +407,8 @@
 				<description>Overriding Search Box component to add Placeholder</description>
 				<attributes>
 					<attribute qualifier="placeholder" type="localized:java.lang.String">
-						<persistence type="property" />
 						<description> Used to give Default Text</description>
+						<persistence type="property" />
 					</attribute>
 				</attributes>
 			</itemtype>
@@ -426,8 +426,8 @@
 				<description>Country Collection component.</description>
 				<attributes>
 					<attribute qualifier="currentCountry" type="AmwayApacImageLinkComponent">
-						<persistence type="property" />
 						<description>The link component to display current country.</description>
+						<persistence type="property" />
 					</attribute>
 				</attributes>
 			</itemtype>
@@ -458,8 +458,8 @@
 				<description>Rotating images component with background image.</description>
 				<attributes>
 					<attribute qualifier="image" type="localized:Media">
-						<persistence type="property" />
 						<description>background image</description>
+						<persistence type="property" />
 					</attribute>
 				</attributes>
 			</itemtype>
@@ -477,16 +477,16 @@
 				<description>Account page component for links</description>
 				<attributes>
 					<attribute qualifier="iconClass" type="java.lang.String">
-						<persistence type="property" />
 						<description>Header Text</description>
+						<persistence type="property" />
 					</attribute>
 					<attribute qualifier="title" type="localized:java.lang.String">
-						<persistence type="property" />
 						<description>Header Text</description>
+						<persistence type="property" />
 					</attribute>
 					<attribute qualifier="description" type="localized:java.lang.String">
-						<persistence type="property" />
 						<description>description</description>
+						<persistence type="property" />
 					</attribute>
 				</attributes>
 			</itemtype>
@@ -511,8 +511,8 @@
 				<description>Footer component with a list of banners.</description>
 				<attributes>
 					<attribute qualifier="sectionTitle" type="localized:java.lang.String">
-						<persistence type="property" />
 						<description>The title to be displayed above the special component banners group.</description>
+						<persistence type="property" />
 					</attribute>
 				</attributes>
 			</itemtype>

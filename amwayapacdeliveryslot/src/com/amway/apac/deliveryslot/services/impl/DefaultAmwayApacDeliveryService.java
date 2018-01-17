@@ -44,6 +44,7 @@ import com.amway.core.exceptions.AmwayServiceException;
  */
 public class DefaultAmwayApacDeliveryService extends DefaultDeliveryService implements AmwayApacDeliveryService
 {
+	private final SimpleDateFormat dateFormat = new SimpleDateFormat(AmwayapacdeliveryslotConstants.TIME_FORMAT);
 
 	/** The LOGGER Constant. */
 	private static final Logger LOGGER = LoggerFactory.getLogger(DefaultAmwayApacDeliveryService.class);
@@ -111,7 +112,6 @@ public class DefaultAmwayApacDeliveryService extends DefaultDeliveryService impl
 		calendar.setTime(now);
 		final int dayofWeek = calendar.get(Calendar.DAY_OF_WEEK);
 
-		final SimpleDateFormat dateFormat = new SimpleDateFormat(AmwayapacdeliveryslotConstants.TIME_FORMAT);
 		final String formattedDate = dateFormat.format(new Date()).toString();
 		final Time orderingTime = Time.valueOf(formattedDate);
 
