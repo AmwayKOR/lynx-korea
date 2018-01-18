@@ -76,7 +76,7 @@ public class AmwayApacAssetInterceptor
 	 * @throws IllegalArgumentException
 	 *            if amwayAssetModel is null.
 	 */
-	private void setAssetRank(final AbstractAmwayAssetModel amwayAssetModel) throws InterceptorException
+	protected void setAssetRank(final AbstractAmwayAssetModel amwayAssetModel) throws InterceptorException
 	{
 		validateParameterNotNullStandardMessage(ASSET_MODEL, amwayAssetModel);
 
