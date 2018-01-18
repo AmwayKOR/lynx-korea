@@ -165,7 +165,7 @@ public class AmwayPOSController extends BaseCommerceController
 	 */
 	@Secured(
 			{ "ROLE_CUSTOMERGROUP", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERMANAGERGROUP" })
-	@RequestMapping(value = {"/pos/account/{accountUid}/customer/{user_id}"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/account/{accountUid}/customer/{user_id}","/pos/account/{accountUid}/customer/{user_id}"}, method = RequestMethod.GET)
 	@ResponseBody
 	public AmwayAccountWsDTO loadAccountCustomer(@PathVariable final String accountUid, @PathVariable final String user_id,
 			@RequestParam(defaultValue = DEFAULT_FIELD_SET) final String fields)
@@ -181,7 +181,7 @@ public class AmwayPOSController extends BaseCommerceController
 	 */
 	@Secured(
 			{ "ROLE_CUSTOMERGROUP", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERMANAGERGROUP" })
-	@RequestMapping(value = {"/pos/accounts/name"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/accounts/name","/pos/accounts/name"}, method = RequestMethod.GET)
 	@ResponseBody
 	public AmwayAccountDataListWsDTO lookupAccountsByName(@RequestParam  final String searchKey,
 			@RequestParam(defaultValue = FieldSetLevelHelper.FULL_LEVEL) final String fields)
@@ -199,7 +199,7 @@ public class AmwayPOSController extends BaseCommerceController
 	 */
 	@Secured(
 			{ "ROLE_CUSTOMERGROUP", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERMANAGERGROUP" })
-	@RequestMapping(value = {"/pos/accounts/Uid/{searchKey}"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/accounts/Uid/{searchKey}", "/pos/accounts/Uid/{searchKey}"}, method = RequestMethod.GET)
 	@ResponseBody
 	public AmwayAccountDataListWsDTO lookupAccountsByUid(@PathVariable final String searchKey,
 			@RequestParam(defaultValue = FieldSetLevelHelper.FULL_LEVEL) final String fields)
@@ -218,7 +218,7 @@ public class AmwayPOSController extends BaseCommerceController
 	 */
 	@Secured(
 			{ "ROLE_CUSTOMERGROUP", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERMANAGERGROUP" })
-	@RequestMapping(value = {"/pos/customers/name"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/customers/name","/pos/customers/name"}, method = RequestMethod.GET)
 	@ResponseBody
 	public AmwayAccountDataListWsDTO lookupAccountsCustomersByPartyName(@RequestParam  final String searchKey,
 			@RequestParam(defaultValue = FieldSetLevelHelper.FULL_LEVEL) final String fields)
@@ -236,7 +236,7 @@ public class AmwayPOSController extends BaseCommerceController
 	 */
 	@Secured(
 			{ "ROLE_CUSTOMERGROUP", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERMANAGERGROUP" })
-	@RequestMapping(value = {"/pos/customers/email"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/customers/email","/pos/customers/email"}, method = RequestMethod.GET)
 	@ResponseBody
 	public AmwayAccountDataListWsDTO lookupAccountsCustomersByEmail(@RequestParam final String searchKey,
 			@RequestParam(defaultValue = FieldSetLevelHelper.FULL_LEVEL) final String fields)
@@ -254,7 +254,7 @@ public class AmwayPOSController extends BaseCommerceController
 	 */
 	@Secured(
 			{ "ROLE_CUSTOMERGROUP", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERMANAGERGROUP" })
-	@RequestMapping(value = {"/pos/customers/partyid/{searchKey}"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/customers/partyid/{searchKey}","/pos/customers/partyid/{searchKey}"}, method = RequestMethod.GET)
 	@ResponseBody
 	public AmwayAccountDataListWsDTO lookupAccountsCustomersByPartyId(@PathVariable final String searchKey,
 			@RequestParam(defaultValue = FieldSetLevelHelper.FULL_LEVEL) final String fields)
@@ -272,7 +272,7 @@ public class AmwayPOSController extends BaseCommerceController
 	 */
 	@Secured(
 			{ "ROLE_CUSTOMERGROUP", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERMANAGERGROUP" })
-	@RequestMapping(value = {"/pos/customers/Uid/{searchKey}"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/customers/Uid/{searchKey}","/pos/customers/Uid/{searchKey}"}, method = RequestMethod.GET)
 	@ResponseBody
 	public AmwayAccountDataListWsDTO lookupAccountsCustomersByUid(@PathVariable final String searchKey,
 			@RequestParam(defaultValue = FieldSetLevelHelper.FULL_LEVEL) final String fields)
@@ -295,7 +295,7 @@ public class AmwayPOSController extends BaseCommerceController
 	 */
 	//@Secured(
 	//{ "ROLE_CUSTOMERGROUP", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERMANAGERGROUP","ROLE_CUSTOMERGROUP", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERMANAGERGROUP" })
-	@RequestMapping(value = {"/pos/account/{accountUid}/users/{user_id}/getcart"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/account/{accountUid}/users/{user_id}/getcart","/pos/account/{accountUid}/users/{user_id}/getcart"}, method = RequestMethod.GET)
 	@ResponseBody
 	public AmwayCartWsDTO getCart(@PathVariable final String accountUid, @PathVariable final String user_id,
 			@RequestParam(required = false, defaultValue = DEFAULT_FIELD_SET) final String fields)
@@ -329,7 +329,7 @@ public class AmwayPOSController extends BaseCommerceController
 
 	@Secured(
 			{ "ROLE_CUSTOMERGROUP", "ROLE_GUEST", "ROLE_CUSTOMERMANAGERGROUP", "ROLE_TRUSTED_CLIENT" })
-	@RequestMapping(value = {"/pos/account/{accountUid}/users/{user_id}/getSupportedPaymentModes/{cartId}"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/account/{accountUid}/users/{user_id}/getSupportedPaymentModes/{cartId}", "/pos/account/{accountUid}/users/{user_id}/getSupportedPaymentModes/{cartId}"}, method = RequestMethod.GET)
 	@ResponseBody
 	public PaymentModeListWSDTO getSupportedPaymentModesCombinations(@PathVariable final String accountUid,
 			@PathVariable final String user_id, @PathVariable final String cartId,
@@ -382,7 +382,7 @@ public class AmwayPOSController extends BaseCommerceController
 	 */
 	@Secured(
 			{ "ROLE_CUSTOMERGROUP", "ROLE_CLIENT", "ROLE_CUSTOMERMANAGERGROUP", "ROLE_TRUSTED_CLIENT" })
-	@RequestMapping(value = {"/pos/account/{accountUid}/users/{userId}/placeorder"}, method = RequestMethod.POST)
+	@RequestMapping(value = {"/account/{accountUid}/users/{userId}/placeorder","/pos/account/{accountUid}/users/{userId}/placeorder"}, method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)
 	@ResponseBody
 	public OrderWsDTO placeOrder(@RequestBody final PlaceOrderCartInfoData cartInfoData,
@@ -450,7 +450,7 @@ public class AmwayPOSController extends BaseCommerceController
 
 	@Secured(
 			{ "ROLE_CUSTOMERGROUP", "ROLE_GUEST", "ROLE_CUSTOMERMANAGERGROUP", "ROLE_TRUSTED_CLIENT" })
-	@RequestMapping(value = {"/pos/account/{accountUid}/users/{user_id}/cancel-order/{orderCode}"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/account/{accountUid}/users/{user_id}/cancel-order/{orderCode}","/pos/account/{accountUid}/users/{user_id}/cancel-order/{orderCode}"}, method = RequestMethod.GET)
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
 	public MessageDTO cancelOrder(@PathVariable(value = "accountUid") final String accountUid,
@@ -474,7 +474,7 @@ public class AmwayPOSController extends BaseCommerceController
 
 	@Secured(
 			{ "ROLE_CUSTOMERGROUP", "ROLE_GUEST", "ROLE_CUSTOMERMANAGERGROUP", "ROLE_TRUSTED_CLIENT" })
-	@RequestMapping(value = {"/pos/account/{accountUid}/users/{user_id}/return-order/{orderCode}"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/account/{accountUid}/users/{user_id}/return-order/{orderCode}","/pos/account/{accountUid}/users/{user_id}/return-order/{orderCode}"}, method = RequestMethod.GET)
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
 	public MessageDTO returnOrder(@PathVariable(value = "accountUid") final String accountUid,
@@ -498,7 +498,7 @@ public class AmwayPOSController extends BaseCommerceController
 
 	@Secured(
 			{ "ROLE_POSEMPLOYEEGROUP", "ROLE_TRUSTED_CLIENT" })
-	@RequestMapping(value = "/pos/batches/users/{user_id}", method = RequestMethod.POST)
+	@RequestMapping(value = {"/batches/users/{user_id}","/pos/batches/users/{user_id}"}, method = RequestMethod.POST)
 	@ResponseBody
 	public AmwayBatchWsDTO createBatch(@PathVariable final String baseSiteId,
 			@PathVariable final String user_id,
@@ -521,7 +521,7 @@ public class AmwayPOSController extends BaseCommerceController
 
 	@Secured(
 			{ "ROLE_POSEMPLOYEEGROUP", "ROLE_TRUSTED_CLIENT" })
-	@RequestMapping(value = "/pos/batches/batch/{batch_id}", method = RequestMethod.POST)
+	@RequestMapping(value = {"/batches/batch/{batch_id}", "/pos/batches/batch/{batch_id}"}, method = RequestMethod.POST)
 	@ResponseBody
 	public AmwayBatchWsDTO updateBatch(@PathVariable final String baseSiteId,
 			@PathVariable final String batch_id,
@@ -543,7 +543,7 @@ public class AmwayPOSController extends BaseCommerceController
 
 	@Secured(
 			{ "ROLE_CUSTOMERGROUP", "ROLE_GUEST", "ROLE_CUSTOMERMANAGERGROUP", "ROLE_TRUSTED_CLIENT" })
-	@RequestMapping(value = "/pos/batches/batch/{batch_id}", method = RequestMethod.GET)
+	@RequestMapping(value = {"/batches/batch/{batch_id}", "/pos/batches/batch/{batch_id}"}, method = RequestMethod.GET)
 	@ResponseBody
 	public AmwayBatchWsDTO getBatch(@PathVariable final String baseSiteId,
 			@PathVariable final String batch_id)
@@ -561,7 +561,7 @@ public class AmwayPOSController extends BaseCommerceController
 
 	@Secured(
 			{ "ROLE_CUSTOMERGROUP", "ROLE_GUEST", "ROLE_CUSTOMERMANAGERGROUP", "ROLE_TRUSTED_CLIENT" })
-	@RequestMapping(value = "/pos/batches", method = RequestMethod.GET)
+	@RequestMapping(value = {"/batches","/pos/batches"}, method = RequestMethod.GET)
 	@ResponseBody
 	public AmwayBatchListWsDTO getBatches(@PathVariable final String baseSiteId,
 			@RequestParam(required = true) final String pickupStore,
@@ -592,7 +592,7 @@ public class AmwayPOSController extends BaseCommerceController
 
 	@Secured(
 			{ "ROLE_CUSTOMERGROUP", "ROLE_GUEST", "ROLE_CUSTOMERMANAGERGROUP", "ROLE_TRUSTED_CLIENT" })
-	@RequestMapping(value = "/pos/openbatch", method = RequestMethod.GET)
+	@RequestMapping(value = { "/openbatch","/pos/openbatch"}, method = RequestMethod.GET)
 	@ResponseBody
 	public AmwayBatchWsDTO getOpenBatch(@PathVariable final String baseSiteId,
 			@RequestParam(required = true) final String pickupStore,
@@ -612,7 +612,7 @@ public class AmwayPOSController extends BaseCommerceController
 
 	@Secured(
 			{ "ROLE_CUSTOMERGROUP", "ROLE_GUEST", "ROLE_CUSTOMERMANAGERGROUP", "ROLE_TRUSTED_CLIENT" })
-	@RequestMapping(value = "/pos/batches/users/{user_id}", method = RequestMethod.GET)
+	@RequestMapping(value = {"/batches/users/{user_id}","/pos/batches/users/{user_id}"}, method = RequestMethod.GET)
 	@ResponseBody
 	public AmwayBatchListWsDTO getEmployeeBatches(@PathVariable final String baseSiteId,
 			@PathVariable final String user_id,
@@ -643,7 +643,7 @@ public class AmwayPOSController extends BaseCommerceController
 
 	@Secured(
 			{ "ROLE_CUSTOMERGROUP", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERMANAGERGROUP" })
-	@RequestMapping(value = "/pos/orders/batch/{batch_id}", method = RequestMethod.GET)
+	@RequestMapping(value = {"/orders/batch/{batch_id}","/pos/orders/batch/{batch_id}"}, method = RequestMethod.GET)
 	@ResponseBody
 	public OrderHistoryListWsDTO getOrdersForBatch(
 			@PathVariable final String baseSiteId,
@@ -665,7 +665,7 @@ public class AmwayPOSController extends BaseCommerceController
 
 	@Secured(
 			{ "ROLE_CUSTOMERGROUP", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERMANAGERGROUP" })
-	@RequestMapping(value = "/pos/orders", method = RequestMethod.GET)
+	@RequestMapping(value = {"/orders","/pos/orders"}, method = RequestMethod.GET)
 	@ResponseBody
 	public OrderHistoryListWsDTO getOrdersForDateRange(
 			@PathVariable final String baseSiteId,
@@ -867,7 +867,7 @@ public class AmwayPOSController extends BaseCommerceController
 	@Deprecated
 	@Secured(
 			{ "ROLE_CUSTOMERGROUP", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERMANAGERGROUP" })
-	@RequestMapping(value = {"/pos/account/{accountUid}/users/{user_id}/buildcart"}, method = RequestMethod.POST)
+	@RequestMapping(value = {"/account/{accountUid}/users/{user_id}/buildcart","/pos/account/{accountUid}/users/{user_id}/buildcart"}, method = RequestMethod.POST)
 	@ResponseBody
 	public AmwayCartWsDTO buildCart(@RequestBody final CartInfoData cartInfoData, @PathVariable final String baseSiteId,
 			@PathVariable final String accountUid, @PathVariable final String user_id,

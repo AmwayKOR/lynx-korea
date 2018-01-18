@@ -22,8 +22,6 @@ import de.hybris.platform.category.model.CategoryModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.servicelayer.services.impl.DefaultCMSComponentService;
 import de.hybris.platform.commercefacades.product.data.ProductData;
-import com.amway.apac.facades.suggestion.SimpleSuggestionFacade;
-import com.amway.apac.storefront.controllers.ControllerConstants;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -31,8 +29,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import junit.framework.Assert;
 
 import org.apache.commons.lang.StringUtils;
 import org.junit.Before;
@@ -42,6 +38,11 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.ui.Model;
+
+import com.amway.apac.facades.suggestion.AmwaySimpleSuggestionFacade;
+import com.amway.apac.storefront.controllers.ControllerConstants;
+
+import junit.framework.Assert;
 
 
 /**
@@ -70,7 +71,7 @@ public class PurchasedCategorySuggestionComponentControllerTest
 	@Mock
 	private DefaultCMSComponentService cmsComponentService;
 	@Mock
-	private SimpleSuggestionFacade simpleSuggestionFacade;
+	private AmwaySimpleSuggestionFacade simpleSuggestionFacade;
 	@Mock
 	private HttpServletRequest request;
 	@Mock
@@ -98,14 +99,13 @@ public class PurchasedCategorySuggestionComponentControllerTest
 	{
 		given(purchasedCategorySuggestionComponentModel.getMaximumNumberProducts()).willReturn(Integer.valueOf(1));
 		given(purchasedCategorySuggestionComponentModel.getTitle()).willReturn(TITLE_VALUE);
-		given(purchasedCategorySuggestionComponentModel.getProductReferenceTypes()).willReturn(
-				Arrays.asList(ProductReferenceTypeEnum.ACCESSORIES));
+		given(purchasedCategorySuggestionComponentModel.getProductReferenceTypes())
+				.willReturn(Arrays.asList(ProductReferenceTypeEnum.ACCESSORIES));
 		given(purchasedCategorySuggestionComponentModel.getCategory()).willReturn(categoryModel);
 		given(categoryModel.getCode()).willReturn(CATEGORY_CODE);
 		given(Boolean.valueOf(purchasedCategorySuggestionComponentModel.isFilterPurchased())).willReturn(Boolean.TRUE);
-		given(
-				simpleSuggestionFacade.getReferencesForPurchasedInCategory(Mockito.anyString(), Mockito.anyList(),
-						Mockito.anyBoolean(), Mockito.<Integer> any())).willReturn(productDataList);
+		given(simpleSuggestionFacade.getReferencesForPurchasedInCategory(Mockito.anyString(), Mockito.anyList(),
+				Mockito.anyBoolean(), Mockito.<Integer> any())).willReturn(productDataList);
 		given(request.getAttribute(COMPONENT)).willReturn(purchasedCategorySuggestionComponentModel);
 
 		final String viewName = purchasedCategorySuggestionComponentController.handleGet(request, response, model);
@@ -123,15 +123,14 @@ public class PurchasedCategorySuggestionComponentControllerTest
 				.willReturn(purchasedCategorySuggestionComponentModel);
 		given(purchasedCategorySuggestionComponentModel.getMaximumNumberProducts()).willReturn(Integer.valueOf(1));
 		given(purchasedCategorySuggestionComponentModel.getTitle()).willReturn(TITLE_VALUE);
-		given(purchasedCategorySuggestionComponentModel.getProductReferenceTypes()).willReturn(
-				Arrays.asList(ProductReferenceTypeEnum.ACCESSORIES));
+		given(purchasedCategorySuggestionComponentModel.getProductReferenceTypes())
+				.willReturn(Arrays.asList(ProductReferenceTypeEnum.ACCESSORIES));
 		given(purchasedCategorySuggestionComponentModel.getCategory()).willReturn(categoryModel);
 		given(categoryModel.getCode()).willReturn(CATEGORY_CODE);
 		given(Boolean.valueOf(purchasedCategorySuggestionComponentModel.isFilterPurchased())).willReturn(Boolean.TRUE);
 
-		given(
-				simpleSuggestionFacade.getReferencesForPurchasedInCategory(Mockito.anyString(), Mockito.anyList(),
-						Mockito.anyBoolean(), Mockito.<Integer> any())).willReturn(productDataList);
+		given(simpleSuggestionFacade.getReferencesForPurchasedInCategory(Mockito.anyString(), Mockito.anyList(),
+				Mockito.anyBoolean(), Mockito.<Integer> any())).willReturn(productDataList);
 
 		final String viewName = purchasedCategorySuggestionComponentController.handleGet(request, response, model);
 		verify(model, Mockito.times(1)).addAttribute(COMPONENT, purchasedCategorySuggestionComponentModel);

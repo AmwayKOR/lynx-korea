@@ -10,9 +10,15 @@
  license agreement you entered into with SAP.
 --><extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
 
-	<extension abstractclassprefix="Generated" classprefix="AmwayapacStorefront" name="amwayapacstorefront" usemaven="false">		
-        <requires-extension name="acceleratorstorefrontcommons"/>
+	<extension abstractclassprefix="Generated" classprefix="AmwayapacStorefront" name="amwayapacstorefront" usemaven="true">
+        
+
+<requires-extension name="smarteditaddon"/>
+<requires-extension name="amwayapacrecentlyvieweditemsaddon"/>
+
+<requires-extension name="acceleratorstorefrontcommons"/>
 		<requires-extension name="amwayapacfacades"/>
+		<requires-extension name="amwayapacstorefrontcomponents"/>
 
 		<webmodule jspcompile="false" webroot="/amwayapacstorefront"/>
 

@@ -1,0 +1,214 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+#
+# Import the Solr configuration for the Amway APAC store
+#
+$productCatalog=amwayapacProductCatalog
+$catalogVersions=catalogVersions(catalog(id),version);
+$serverConfigName=amwayamwayapacSolrServerConfig
+$indexConfigName=amwayamwayapacSolrIndexConfig
+$searchConfigName=amwayamwayapacPageSize
+$facetSearchConfigName=amwayapacIndex
+$facetSearchConfigDescription=APAC Solr Index
+$searchIndexNamePrefix=amwayapac
+$solrIndexedType=amwayapacProductType
+$indexBaseSite=amwayapac
+$indexLanguages=ja,en,de,zh
+$indexCurrencies=USD
+
+
+# Import config properties into impex macros
+UPDATE GenericItem[processor=de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor];pk[unique=true]
+
+#
+# Setup the indexed types, their properties, and the update queries
+#
+
+# Declare the indexed type Product
+INSERT_UPDATE SolrIndexedType;identifier[unique=true];type(code);variant;sorts(&sortRefID)
+;$solrIndexedType;Product;false;sortRef1,sortRef2,sortRef3,sortRef4,sortRef5,sortRef6,sortRef7,sortRef8,sortRef9,sortRef10
+
+INSERT_UPDATE SolrFacetSearchConfig;name[unique=true];description;indexNamePrefix;languages(isocode);currencies(isocode);solrServerConfig(name);solrSearchConfig(description);solrIndexConfig(name);solrIndexedTypes(identifier);enabledLanguageFallbackMechanism;$catalogVersions
+;$facetSearchConfigName;$facetSearchConfigDescription;$searchIndexNamePrefix;$indexLanguages;$indexCurrencies;Default;Default;Default;$solrIndexedType;true;$productCatalog:Online
+
+UPDATE BaseSite;uid[unique=true];solrFacetSearchConfiguration(name)
+;$indexBaseSite;$facetSearchConfigName
+
+# Define price range set
+INSERT_UPDATE SolrValueRangeSet;name[unique=true];qualifier;type;solrValueRanges(&rangeValueRefID)
+;amwayApacPriceRangeUSD;USD;double;rangeRefUSD1,rangeRefUSD2,rangeRefUSD3,rangeRefUSD4,rangeRefUSD5
+
+# Define price ranges
+INSERT_UPDATE SolrValueRange;&rangeValueRefID;solrValueRangeSet(name)[unique=true];name[unique=true];from;to
+;rangeRefUSD1;amwayApacPriceRangeUSD;      $0-$49.99;   0;  49.99
+;rangeRefUSD2;amwayApacPriceRangeUSD;    $50-$199.99;  50; 199.99
+;rangeRefUSD3;amwayApacPriceRangeUSD;   $200-$499.99; 200; 499.99
+;rangeRefUSD4;amwayApacPriceRangeUSD;   $500-$999.99; 500; 999.99
+;rangeRefUSD5;amwayApacPriceRangeUSD;$1,000-$100,000;1000; 100000
+
+
+
+# Non-facet properties
+INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);sortableType(code);currency[default=false];localized[default=false];multiValue[default=false];useForSpellchecking[default=false];useForAutocomplete[default=false];fieldValueProvider                       ;valueProviderParameter;ftsPhraseQuery[default=false];ftsPhraseQueryBoost;ftsQuery[default=false];ftsQueryBoost;ftsFuzzyQuery[default=false];ftsFuzzyQueryBoost;ftsWildcardQuery[default=false];ftsWildcardQueryType(code)[default=POSTFIX];ftsWildcardQueryBoost;ftsWildcardQueryMinTermLength
+;$solrIndexedType; itemtype                                                                 ;string    ;                  ;                       ;                        ;                         ;                                  ;                                 ;                                         ;              ;    ;   ;    ;   ;    ;  ;    ;   ;
+;$solrIndexedType; code                                                                     ;string    ;                  ;                       ;                        ;                         ;true                              ;true                             ;springELValueProvider                    ;code          ;    ;   ;true;90 ;    ;  ;true;POSTFIX;45;3
+;$solrIndexedType; name                                                                     ;text      ;sortabletext      ;                       ;true                    ;                         ;true                              ;true                             ;springELValueProvider                    ;getName(#lang);true;100;true;50 ;true;25;    ;   ;  ;
+#;$solrIndexedType; description                                                             ;text      ;                  ;                       ;true                    ;                         ;                                  ;                                 ;                                         ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
+;$solrIndexedType; summary                                                                  ;text      ;                  ;                       ;true                    ;                         ;                                  ;                                 ;                                         ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
+;$solrIndexedType; aboPriceValue                                                            ;double    ;double            ;true                   ;                        ;                         ;                                  ;                                 ;amwayApacABOPriceValueProvider                    ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
+#;$solrIndexedType; keywords                                                                ;text      ;                  ;                       ;true                    ;                         ;true                              ;true                             ;productKeywordsValueProvider             ;              ;true;40 ;true;20 ;true;10;    ;   ;  ;
+;$solrIndexedType; reviewAvgRating                                                          ;double    ;                  ;                       ;true                    ;                         ;                                  ;                                 ;productReviewAverageRatingValueProvider  ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
+;$solrIndexedType; img-Product_176Wx245H                                                    ;string    ;                  ;                       ;                        ;                         ;                                  ;                                 ;image176ValueProvider                    ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
+;$solrIndexedType; img-Product_96Wx96H                                                      ;string    ;                  ;                       ;                        ;                         ;                                  ;                                 ;image96ValueProvider                     ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
+;$solrIndexedType; img-Product_133Wx133H                                                    ;string    ;                  ;                       ;                        ;                         ;                                  ;                                 ;image133ValueProvider                    ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
+;$solrIndexedType; url                                                                      ;string    ;                  ;                       ;true                    ;                         ;                                  ;                                 ;amwayApacProductUrlValueProvider                  ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
+#;$solrIndexedType; primaryPromotionCode                                                    ;string    ;                  ;                       ;                        ;                         ;                                  ;                                 ;promotionCodeValueProvider               ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
+#;$solrIndexedType; primaryPromotionBanner                                                  ;string    ;                  ;                       ;                        ;                         ;                                  ;                                 ;promotionImageValueProvider              ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
+;$solrIndexedType; stockLevelStatus                                                         ;string    ;                  ;                       ;                        ;                         ;                                  ;                                 ;productStockLevelStatusValueProvider     ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
+#;$solrIndexedType; inStockFlag                                                             ;boolean   ;                  ;                       ;                        ;                         ;                                  ;                                 ;productInStockFlagValueProvider          ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
+#;$solrIndexedType; pickupAvailableFlag                                                     ;boolean   ;                  ;                       ;                        ;                         ;                                  ;                                 ;productPickupAvailabilityValueProvider   ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
+;$solrIndexedType; configurable                                                             ;boolean   ;                  ;                       ;                        ;                         ;                                  ;                                 ;productConfigurableProvider              ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
+;$solrIndexedType; multidimensional                                                         ;boolean   ;                  ;                       ;                        ;                         ;                                  ;                                 ;multidimentionalProductFlagValueProvider ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
+;$solrIndexedType; creationtime                                                             ;date      ;date              ;                       ;                        ;                         ;                                  ;                                 ;amwayApacProductCreationTimeValueResolver;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
+;$solrIndexedType; priceValue                                                               ;double    ;double            ;true                   ;                        ;                         ;                                  ;                                 ;amwayApacProductPricesValueResolver               ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
+;$solrIndexedType; pointValue                                                               ;double    ;double            ;true                   ;                        ;                         ;                                  ;                                 ;amwayApacPointValueValueProvider             ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
+;$solrIndexedType; businessVolume                                                           ;double    ;double            ;true                   ;                        ;                         ;                                  ;                                 ;amwayApacBusinessVolumeValueProvider         ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
+
+
+# Category fields
+INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);localized[default=false];multiValue[default=true];categoryField[default=true];useForSpellchecking[default=false];useForAutocomplete[default=false];fieldValueProvider;ftsPhraseQuery[default=false];ftsPhraseQueryBoost;ftsQuery[default=false];ftsQueryBoost;ftsFuzzyQuery[default=false];ftsFuzzyQueryBoost
+;$solrIndexedType; categoryName     ;text   ;true;;;true;true;amwayCategoryNameValueProvider     ;true;40;true;20;true;10
+;$solrIndexedType; brandName        ;text   ;true;;;    ;    ;amwayBrandCategoryNameValueProvider;    ;  ;    ;  ;    ;
+
+# Category facets
+INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);multiValue[default=true];facet[default=true];facetType(code);facetSort(code);priority;visible;categoryField[default=true];fieldValueProvider;facetDisplayNameProvider;topValuesProvider
+                                 ;$solrIndexedType                        ;allCategories   ;string    ;                        ;                   ;Refine		    ;Alpha          ;-9999   ;false  ;                           ;categoryCodeValueProvider;
+                                 ;$solrIndexedType                        ;categoryPath    ;string    ;                        ;                   ;Refine		    ;Alpha          ;-9999   ;false  ;false                      ;categoryPathValueProvider;
+                                 ;$solrIndexedType                        ;category        ;string    ;                        ;                   ;Refine		    ;Alpha          ; 6000   ;true   ;                           ;amwayCategoryCodeValueProvider;categoryFacetDisplayNameProvider;defaultTopValuesProvider
+                                 ;$solrIndexedType                        ;brand           ;string    ;                        ;                   ;Refine		    ;Alpha          ; 5000   ;true   ;                           ;amwayBrandCategoryCodeValueProvider;categoryFacetDisplayNameProvider;defaultTopValuesProvider
+
+# Other facet properties
+INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true] ;type(code);sortableType(code);currency[default=false];localized[default=false];multiValue[default=false];facet[default=true];facetType(code);facetSort(code);priority;visible;useForSpellchecking[default=false];useForAutocomplete[default=false];fieldValueProvider           ;facetDisplayNameProvider;customFacetSortProvider;topValuesProvider;rangeSets(name)
+#                                ;$solrIndexedType                        ;price        	 ;double    ;	               ;true                   ;                        ;                         ;                   ;MultiSelectOr  ;Alpha          ; 4000   ;true   ;                                  ;                                 ;amwayApacABOPriceValueProvider 	      ;;;defaultTopValuesProvider;amwayApacPriceRangeUSD
+#                                ;$solrIndexedType                        ;allPromotions	 ;string    ;	               ;                       ;                        ;true                     ;                   ;MultiSelectOr  ;Alpha          ; 0      ;false  ;                                  ;                                 ;promotionCodeValueProvider	  ;promotionFacetDisplayNameProvider;                         ;
+#                                ;$solrIndexedType                        ;availableInStores ;string	;	               ;                       ;                        ;true                     ;                   ;MultiSelectOr  ;Custom         ;10000   ;true   ;                                  ;                                 ;productStoreStockValueProvider;pointOfServiceFacetDisplayNameProvider;distanceAttributeSortProvider
+
+# Amway APAC facet properties
+INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true] ;displayName          ;type(code);sortableType(code);currency[default=false];localized[default=false];multiValue[default=false];facet[default=true];facetType(code);facetSort(code);priority;visible;useForSpellchecking[default=false];useForAutocomplete[default=false];fieldValueProvider           ;facetDisplayNameProvider;customFacetSortProvider;topValuesProvider;rangeSets(name)
+                                 ;$solrIndexedType                        ;aboPriceRange   	 ;Price                ;double    ;	               ;true                   ;                        ;                         ;                   ;MultiSelectOr  ;Alpha          ; 4000   ;true   ;                                  ;                                 ;amwayApacABOPriceValueProvider 	      ;;;defaultTopValuesProvider;amwayApacPriceRangeUSD
+                                 ;$solrIndexedType                        ;retailPriceRange	 ;Price                ;double    ;	               ;true                   ;                        ;                         ;                   ;MultiSelectOr  ;Alpha          ; 4000   ;true   ;                                  ;                                 ;amwayApacProductPricesValueResolver 	      ;;;defaultTopValuesProvider;amwayApacPriceRangeUSD
+                                 ;$solrIndexedType                        ;stockLevelFacet   ;Product Availability ;string	;	               ;                       ;                        ;true                     ;                   ;MultiSelectOr  ;Custom         ;10000   ;true   ;                                  ;                                 ;productStockLevelStatusValueProvider;amwayApacStockFacetDisplayNameProvider;distanceAttributeSortProvider
+
+UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];visible
+						  ;$solrIndexedType                        ;allCategories    ;false
+                          ;$solrIndexedType                        ;categoryPath     ;false
+                          ;$solrIndexedType                        ;category         ;false
+                          ;$solrIndexedType                        ;brand            ;false
+
+# Create the queries that will be used to extract data for Solr
+INSERT_UPDATE SolrIndexerQuery;solrIndexedType(identifier)[unique=true];identifier[unique=true];type(code);injectCurrentDate[default=true];injectCurrentTime[default=true];injectLastIndexTime[default=true];query;user(uid)
+;$solrIndexedType;$searchIndexNamePrefix-fullQuery;full;;;false;"
+SELECT DISTINCT {p:PK} AS pk
+FROM { Product! AS p join ArticleApprovalStatus as ap on {p.approvalstatus}={ap.pk}
+} WHERE {ap.code} = 'approved'
+";anonymous
+
+;$solrIndexedType;$searchIndexNamePrefix-updateQuery;update;;;;"
+SELECT DISTINCT tbl.pk, tbl.code FROM (
+	{{
+		SELECT DISTINCT {p:PK} AS pk, {p:code} AS code, {p:varianttype} AS varianttype
+		FROM {Product AS p LEFT JOIN CustomerReview AS cr ON {cr:product}={p:PK} }
+		WHERE {p:modifiedtime} >= ?lastIndexTime OR {cr:modifiedtime} >= ?lastIndexTime
+	}}
+	UNION
+	{{
+		SELECT {p:PK}  AS pk, {p:code} AS code, {p:varianttype} AS varianttype FROM {Product AS p} WHERE {p:code} IN (
+			{{
+				SELECT DISTINCT {sl:productCode} FROM {StockLevel AS sl} WHERE {sl:modifiedtime} >= ?lastIndexTime
+			}}
+		)
+	}}
+) tbl ORDER BY tbl.code
+";anonymous
+
+# Define the available sorts
+INSERT_UPDATE SolrSort;&sortRefID;indexedType(identifier)[unique=true];code[unique=true];name;useBoost
+;sortRef1;$solrIndexedType;newest-desc-c;Latest items first;false
+;sortRef2;$solrIndexedType;newest-asc-c;Oldest items first;false
+;sortRef3;$solrIndexedType;retail-price-desc-c;Price (highest first);false
+;sortRef4;$solrIndexedType;retail-price-asc-c;Price (lowest first);false
+;sortRef5;$solrIndexedType;abo-price-desc-c;Price (highest first);false
+;sortRef6;$solrIndexedType;abo-price-asc-c;Price (lowest first);false
+;sortRef7;$solrIndexedType;pvbv-desc-c;PV/BV (highest first);false
+;sortRef8;$solrIndexedType;pvbv-asc-c;PV/BV (lowest first);false
+;sortRef9;$solrIndexedType;name-asc-c;Name (A-Z);true
+;sortRef10;$solrIndexedType;name-desc-c;Name (Z-A);false
+
+# Define the sort fields
+INSERT_UPDATE SolrSortField;sort(indexedType(identifier),code)[unique=true];fieldName[unique=true];ascending[unique=true]
+;$solrIndexedType:newest-desc-c;creationtime;false
+;$solrIndexedType:newest-asc-c;creationtime;true
+;$solrIndexedType:retail-price-desc-c;priceValue;false
+;$solrIndexedType:retail-price-asc-c;priceValue;true
+;$solrIndexedType:abo-price-desc-c;aboPriceValue;false
+;$solrIndexedType:abo-price-asc-c;aboPriceValue;true
+;$solrIndexedType:pvbv-desc-c;pointValue;false
+;$solrIndexedType:pvbv-asc-c;pointValue;true
+;$solrIndexedType:name-asc-c;name;true
+;$solrIndexedType:name-desc-c;name;false
+
+# Search query template
+INSERT_UPDATE SolrSearchQueryTemplate;name[unique=true];indexedType(identifier)[unique=true];ftsQueryBuilder
+;DEFAULT;$solrIndexedType;defaultFreeTextQueryBuilder
+
+# Non-facet search query properties
+INSERT_UPDATE SolrSearchQueryProperty;indexedProperty(name, solrIndexedType(identifier))[unique=true];searchQueryTemplate(name, indexedType(identifier))[unique=true][default=DEFAULT:$solrIndexedType];facet;ftsPhraseQuery[default=false];ftsPhraseQueryBoost;ftsQuery[default=false];ftsQueryBoost;ftsFuzzyQuery[default=false];ftsFuzzyQueryBoost;ftsWildcardQuery[default=false];ftsWildcardQueryType(code)[default=POSTFIX];ftsWildcardQueryBoost;ftsWildcardQueryMinTermLength;includeInResponse[default=true]
+;itemtype:$solrIndexedType 				  ;    ;   ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;code:$solrIndexedType                   ;    ;   ;TRUE;90 ;    ;  ;TRUE;	 ;  ;POSTFIX;45;3;
+;name:$solrIndexedType                   ;	 ;	  ;TRUE;100;TRUE;50;TRUE;25 ;  ;   	   ;  ;
+#;description:$solrIndexedType            ;	 ;	  ;TRUE;50 ;TRUE;25;TRUE;10 ;  ;       ;  ;
+;summary:$solrIndexedType                ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;aboPriceValue:$solrIndexedType             ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+#;keywords:$solrIndexedType               ;	 ;   ;TRUE;40 ;TRUE;20;TRUE;10 ;  ;       ;  ;
+;reviewAvgRating:$solrIndexedType        ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;img-Product_176Wx245H:$solrIndexedType            ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;url:$solrIndexedType                    ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+#;primaryPromotionCode:$solrIndexedType   ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+#;primaryPromotionBanner:$solrIndexedType ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;stockLevelStatus:$solrIndexedType       ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+#;inStockFlag:$solrIndexedType            ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+#;pickupAvailableFlag:$solrIndexedType    ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;configurable:$solrIndexedType           ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;multidimensional:$solrIndexedType		 ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;creationtime:$solrIndexedType           ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;priceValue:$solrIndexedType		     ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+
+# Category search query fields
+INSERT_UPDATE SolrSearchQueryProperty;indexedProperty(name, solrIndexedType(identifier))[unique=true];searchQueryTemplate(name, indexedType(identifier))[unique=true][default=DEFAULT:$solrIndexedType];facet;ftsPhraseQuery[default=false];ftsPhraseQueryBoost;ftsQuery[default=false];ftsQueryBoost;ftsFuzzyQuery[default=false];ftsFuzzyQueryBoost;includeInResponse[default=true]
+;categoryName:$solrIndexedType                   ;    ;   ;true;40;true;20;true;10;
+;brandName:$solrIndexedType 				  	 ;    ;   ;    ;  ;    ;  ;    ;  ;
+
+# Category search query facets
+INSERT_UPDATE SolrSearchQueryProperty;indexedProperty(name, solrIndexedType(identifier))[unique=true];searchQueryTemplate(name, indexedType(identifier))[unique=true][default=DEFAULT:$solrIndexedType];facet[default=true];facetType(code);includeInResponse[default=true];facetDisplayNameProvider;facetSortProvider;facetTopValuesProvider
+;allCategories:$solrIndexedType  ;;;Refine;;;
+;categoryPath:$solrIndexedType 	;;;Refine;;;
+;category:$solrIndexedType 		;;;Refine;;categoryFacetDisplayNameProvider;defaultTopValuesProvider
+;brand:$solrIndexedType 		;;;Refine;;categoryFacetDisplayNameProvider;defaultTopValuesProvider
+
+# Other search query facets
+INSERT_UPDATE SolrSearchQueryProperty;indexedProperty(name, solrIndexedType(identifier))[unique=true];facet[default=true];facetType(code);priority;facetDisplayNameProvider;facetSortProvider;facetTopValuesProvider;includeInResponse[default=true];searchQueryTemplate(name, indexedType(identifier))[unique=true][default=DEFAULT:$solrIndexedType]
+#									 ;price:$solrIndexedType										 ;					 ;MultiSelectOr	 ;4000	  ;						   							;				 			  ;defaultTopValuesProvider	;;
+#									 ;allPromotions:$solrIndexedType								 ;					 ;MultiSelectOr	 ;0		  ;promotionFacetDisplayNameProvider				;		 					  ;						  	;;
+#									 ;availableInStores:$solrIndexedType							 ;					 ;MultiSelectOr	 ;10000	  ;pointOfServiceFacetDisplayNameProvider;distanceAttributeSortProvider;							;;
+									 ;aboPriceRange:$solrIndexedType								 ;					 ;MultiSelectOr	 ;4000	  ;						   							;				 			  ;defaultTopValuesProvider	;;
+									 ;retailPriceRange:$solrIndexedType								 ;					 ;MultiSelectOr	 ;4000	  ;						   							;				 			  ;defaultTopValuesProvider	;;
+ 									 ;stockLevelFacet:$solrIndexedType							     ;					 ;MultiSelectOr	 ;10000	  ;amwayApacStockFacetDisplayNameProvider;distanceAttributeSortProvider;							;;
+

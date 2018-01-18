@@ -6,8 +6,72 @@ ACC.global = {
         "bindToggleXsSearch",
         "bindHoverIntentMainNavigation",
         "initImager",
-        "backToHome"
+        "backToHome",
+        "ajaxBlockUI",
+        "formatPrice",
+        "isNatural",
+        "bindSelect2"
     ],
+    
+    bindSelect2: function() {
+    	$(".select2-hidden-accessible").select2();
+    },
+    
+    isNatural: function(value) {
+    	var number = Number(value);
+    	return (value) && (Math.floor(number) == number) && (number >= 0.0) && (number !== Infinity);
+    },
+    
+    formatPrice: function(value, currency){
+    	  var formattedValue = "0.00"
+		  if (value) {
+		        var parts = value.toString().split(".");
+		        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		        if (!parts[1]) {
+		            parts[1] = "00";
+		        }
+		        if (parts[1].length == 1) {
+		            parts[1] = parts[1] + '0';
+		        }
+		        formattedValue = parts.join(".");
+		  }
+    	  if (currency) {
+    		  formattedValue = currency + formattedValue;
+    	  }
+    	  return formattedValue;
+    },
+    
+    findAndUpdateGlobalMessages: function(data, hideMessage = true) {
+    	if (($(data).filter(".global-alerts").length > 0) && ($(data).filter(".global-alerts").html().trim() != "")) {
+    		$('html').animate({scrollTop:0}, 'slow', function() {
+    			$(".global-alerts").append($(data).filter(".global-alerts").html());
+    		});	
+    		if (hideMessage) {
+    			setTimeout(function(){ $(".global-alerts").html(""); }, 5000);
+    		}
+    	}
+    },
+    
+    appendGlobalMessage : function(globalMessageType, message) {
+		var globalErrorMessage = {};
+		globalErrorMessage.globalMessageType = globalMessageType; 
+		globalErrorMessage.message = message; 
+		$('html').animate({scrollTop:0}, 'slow', function() {
+			$(".global-alerts").appendGlobalMessages([globalErrorMessage]);
+		});	
+    },
+    
+    ajaxBlockUI: function() {
+    	$(document).ajaxStart(function() {
+    		$.blockUI({ message: ACC.common.processingMessage, css: ACC.common.processingImageCSS, overlayCSS:ACC.common.processingImageOverlayCSS });
+    	}).ajaxStop(function() {
+    		$.unblockUI();
+    	});
+    },
+    
+    isNullOrWhiteSpace: function(str) {
+    	  return (!str || str.length === 0 || /^\s*$/.test(str))
+    },
 
     passwordStrength: function () {
         $('.password-strength').pstrength({

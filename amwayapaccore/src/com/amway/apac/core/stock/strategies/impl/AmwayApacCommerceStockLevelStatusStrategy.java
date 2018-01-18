@@ -1,41 +1,83 @@
-/**
- *
- */
 package com.amway.apac.core.stock.strategies.impl;
 
 import de.hybris.platform.basecommerce.enums.InStockStatus;
 import de.hybris.platform.basecommerce.enums.StockLevelStatus;
 import de.hybris.platform.ordersplitting.model.StockLevelModel;
 
-import java.util.Objects;
+import java.util.Collection;
 
 import com.amway.core.stock.strategies.impl.AmwayCommerceStockLevelStatusStrategy;
 
 
 /**
- * Created to override methods for Amway StockLevelStatus Strategy
+ * Commerce stock level status strategy overridden to add custom InStockStatus at APAC level
+ *
+ * @author Ashish Sabal
+ *
  */
 public class AmwayApacCommerceStockLevelStatusStrategy extends AmwayCommerceStockLevelStatusStrategy
 {
-
 	/**
-	 * evaluates available quantity and returns the stock level status for stocks
+	 * Returns Stock level status enum for provided stock level model.
 	 *
 	 * @param stockLevel
-	 *           - The stock level model *
-	 * @return StockLevelStatus - instock if available is greater than 0 else backorder
+	 *           the stock level
+	 * @return the stock level status
 	 */
 	@Override
 	public StockLevelStatus checkStatus(final StockLevelModel stockLevel)
 	{
-		// Stock level to be considered as SHIPPED if qty is greater than 0, else consider it as BACKORDER
-		if (Objects.nonNull(stockLevel) && (InStockStatus.SHIPELSEBACKORDER.equals(stockLevel.getInStockStatus())))
+		StockLevelStatus resultStatus;
+		if ((null != stockLevel) && (InStockStatus.BACKORDER.equals(stockLevel.getInStockStatus())))
 		{
-			return stockLevel.getAvailable() > 0 ? StockLevelStatus.INSTOCK : StockLevelStatus.BACKORDER;
+			resultStatus = StockLevelStatus.BACKORDER;
+		}
+		else if ((null != stockLevel) && (InStockStatus.NOTYETAVAILABLE.equals(stockLevel.getInStockStatus())))
+		{
+			resultStatus = StockLevelStatus.NOTYETAVAILABLE;
+		}
+		else if ((null != stockLevel) && (InStockStatus.TEMPORARYNOTAVAILABLE.equals(stockLevel.getInStockStatus())))
+		{
+			resultStatus = StockLevelStatus.TEMPORARYNOTAVAILABLE;
+		}
+		else if ((null != stockLevel) && (InStockStatus.SHIPELSEBACKORDER.equals(stockLevel.getInStockStatus())))
+		{
+			resultStatus = stockLevel.getAvailable() > 0 ? StockLevelStatus.INSTOCK : StockLevelStatus.BACKORDER;
 		}
 		else
 		{
-			return super.checkStatus(stockLevel);
+			resultStatus = super.checkStatus(stockLevel);
 		}
+		return resultStatus;
+	}
+
+	/**
+	 * Returns Stock level status enum for provided stock level model collection.
+	 *
+	 * @param stockLevels
+	 *           the stock levels
+	 * @return the stock level status
+	 */
+	@Override
+	public StockLevelStatus checkStatus(final Collection<StockLevelModel> stockLevels)
+	{
+		StockLevelStatus resultStatus = StockLevelStatus.OUTOFSTOCK;
+
+		for (final StockLevelModel level : stockLevels)
+		{
+			final StockLevelStatus tmpStatus = checkStatus(level);
+			if (StockLevelStatus.INSTOCK.equals(tmpStatus) || StockLevelStatus.BACKORDER.equals(tmpStatus)
+					|| StockLevelStatus.TEMPORARYNOTAVAILABLE.equals(tmpStatus) || StockLevelStatus.NOTYETAVAILABLE.equals(tmpStatus)
+					|| StockLevelStatus.NOLONGERAVAILABLE.equals(tmpStatus))
+			{
+				resultStatus = tmpStatus;
+				break;
+			}
+			else if (StockLevelStatus.LOWSTOCK.equals(tmpStatus))
+			{
+				resultStatus = tmpStatus;
+			}
+		}
+		return resultStatus;
 	}
 }

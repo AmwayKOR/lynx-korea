@@ -137,7 +137,7 @@
 			<map merge="true">
 				<entry key="previous" value-ref="REDIRECT_TO_CART"/>
 				<entry key="current" value-ref="REDIRECT_TO_DELIVERY_ADDRESS"/>
-				<entry key="next" value-ref="REDIRECT_TO_DELIVERY_METHOD"/>
+				<entry key="next" value-ref="REDIRECT_TO_PAYMENT_METHOD"/>
 			</map>
 		</property>
 		<property name="progressBarId" value="deliveryAddress"/>
@@ -163,7 +163,7 @@
 		<property name="checkoutStepValidator" ref="defaultResponsivePaymentMethodCheckoutValidator"/>
 		<property name="transitions">
 			<map merge="true">
-				<entry key="previous" value-ref="REDIRECT_TO_DELIVERY_METHOD"/>
+				<entry key="previous" value-ref="REDIRECT_TO_DELIVERY_ADDRESS"/>
 				<entry key="current" value-ref="REDIRECT_TO_PAYMENT_METHOD"/>
 				<entry key="next" value-ref="REDIRECT_TO_SUMMARY"/>
 			</map>
@@ -271,7 +271,6 @@
 			<map merge="true">
 				<entry key="multi" value-ref="responsiveMultiStepCheckout"/>
 				<entry key="delivery-address" value-ref="responsiveDeliveryAddressCheckoutStep"/>
-				<entry key="delivery-method" value-ref="responsiveDeliveryMethodCheckoutStep"/>
 				<entry key="payment-method" value-ref="responsivePaymentMethodCheckoutStep"/>
 				<entry key="summary" value-ref="responsiveSummaryCheckoutStep"/>
 			</map>
@@ -282,16 +281,14 @@
 				<entry key="REDIRECT_TO_DELIVERY_ADDRESS" value-ref="REDIRECT_TO_DELIVERY_ADDRESS"/>
 				<entry key="REDIRECT_TO_CART" value-ref="REDIRECT_TO_CART"/>
 				<entry key="REDIRECT_TO_PAYMENT_METHOD" value-ref="REDIRECT_TO_PAYMENT_METHOD"/>
-				<entry key="REDIRECT_TO_DELIVERY_METHOD" value-ref="REDIRECT_TO_DELIVERY_METHOD"/>
 				<entry key="REDIRECT_TO_SUMMARY" value-ref="REDIRECT_TO_SUMMARY"/>
 			</map>
 		</property>
 		<property name="checkoutProgressBar">
 			<map merge="true">
 				<entry key="1" value-ref="responsiveDeliveryAddressCheckoutStep"/>
-				<entry key="2" value-ref="responsiveDeliveryMethodCheckoutStep"/>
-				<entry key="3" value-ref="responsivePaymentMethodCheckoutStep"/>
-				<entry key="4" value-ref="responsiveSummaryCheckoutStep"/>
+				<entry key="2" value-ref="responsivePaymentMethodCheckoutStep"/>
+				<entry key="3" value-ref="responsiveSummaryCheckoutStep"/>
 			</map>
 		</property>
 	</bean>

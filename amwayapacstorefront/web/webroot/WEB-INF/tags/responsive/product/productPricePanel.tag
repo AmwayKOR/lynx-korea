@@ -5,53 +5,25 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="format" tagdir="/WEB-INF/tags/shared/format" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-
-<c:choose>
-	<c:when test="${empty product.volumePrices}">
-		<c:choose>
-			<c:when test="${(not empty product.priceRange) and (product.priceRange.minPrice.value ne product.priceRange.maxPrice.value) and ((empty product.baseProduct) or (not empty isOrderForm and isOrderForm))}">
-				<span>
-					<format:price priceData="${product.priceRange.minPrice}"/>
-				</span>
-				<span>
-					-
-				</span>
-				<span>
-					<format:price priceData="${product.priceRange.maxPrice}"/>
-				</span>
-			</c:when>
-			<c:otherwise>
-				<p class="price">
-					<format:fromPrice priceData="${product.price}"/>
-				</p>
-			</c:otherwise>
-		</c:choose>
-	</c:when>
-	<c:otherwise>
-		<table class="volume__prices" cellpadding="0" cellspacing="0" border="0">
-			<thead>
-			<th class="volume__prices-quantity"><spring:theme code="product.volumePrices.column.qa"/></th>
-			<th class="volume__price-amount"><spring:theme code="product.volumePrices.column.price"/></th>
-			</thead>
-			<tbody>
-			<c:forEach var="volPrice" items="${product.volumePrices}">
-				<tr>
-					<td class="volume__price-quantity">
-						<c:choose>
-							<c:when test="${empty volPrice.maxQuantity}">
-								${volPrice.minQuantity}+
-							</c:when>
-							<c:otherwise>
-								${volPrice.minQuantity}-${volPrice.maxQuantity}
-							</c:otherwise>
-						</c:choose>
-					</td>
-					<td class="volume__price-amount text-right">${fn:escapeXml(volPrice.formattedValue)}</td>
-				</tr>
-			</c:forEach>
-			</tbody>
-		</table>
-	</c:otherwise>
-</c:choose>
+<div class="product-details">
+    <div class="bundle"></div>
+    <p class="price retail-price-discount">
+        <format:fromPrice priceData="${product.price}"/>
+        <span class="description-cost">
+            <sec:authorize access="!hasAnyRole('ROLE_ANONYMOUS')">
+                <spring:theme code="product.volumePrices.column.aboCost"/>
+            </sec:authorize>
+        </span>
+    </p>
+    <sec:authorize access="!hasAnyRole('ROLE_ANONYMOUS')">
+        <span class="additional-price">
+            <ul>
+                <li><spring:theme code="product.volumePrices.column.retailPrice" />
+                    <span class="retail-price-strike-out"><format:fromPrice priceData="${product.retailPrice}"/> | <spring:theme code="product.volumePrices.column.pvBV"/> ${product.price.amwayValue.pointValue} / ${product.price.amwayValue.businessVolume}</span></li>
+            </ul>
+        </span>
+    </sec:authorize>
+</div>

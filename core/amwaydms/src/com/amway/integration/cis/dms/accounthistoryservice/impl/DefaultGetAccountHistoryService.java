@@ -41,12 +41,8 @@ public class DefaultGetAccountHistoryService
 	@Override
 	protected AccountHistoryResponse executeEvent(final Object input)
 	{
-		final RestResponse<AccountHistoryResponse> dmsResultRestResponse = getDmsClient()
-				.executeDmsRequest(getXclientRefId(), getUrlPath(),
-						 input,
-						AccountHistoryResponse.class);
-		Assert.notNull(dmsResultRestResponse, "Get Party History failure");
-		return dmsResultRestResponse.getResult();
+		//see Deprecated comment above
+		return null;
 	}
 
 }

@@ -1,0 +1,1573 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+#
+# Import the CMS content for the site
+#
+$contentCatalog=amwayapacContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+
+# Import config properties into impex macros
+UPDATE GenericItem[processor=de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor];pk[unique=true]
+$jarResourceCms=$config-jarResourceCmsValue
+
+# Create PageTemplates
+# These define the layout for pages
+# "FrontendTemplateName" is used to define the JSP that should be used to render the page for pages with multiple possible layouts.
+# "RestrictedPageTypes" is used to restrict templates to page types
+INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;frontendTemplateName;restrictedPageTypes(code);active[default=true]
+;;ProductDetailsPageTemplate;Product Details Page Template;product/productLayout2Page;ProductPage
+;;ProductListPageTemplate;Product List Page Template;category/productListPage;CategoryPage
+;;ProductGridPageTemplate;Product Grid Page Template;category/productGridPage;CategoryPage
+;;SearchResultsListPageTemplate;Search Results List Page Template;search/searchListPage;ContentPage
+;;SearchResultsGridPageTemplate;Search Results Grid Page Template;search/searchGridPage;ContentPage
+;;SearchResultsEmptyPageTemplate;Search Results Empty Page Template;search/searchEmptyPage;ContentPage
+;;CategoryPageTemplate;Category Page Template;category/categoryPage;CategoryPage
+;;LandingPage1Template;Landing Page 1 Template;layout/landingLayout1Page;CategoryPage,ContentPage
+;;LandingPage2Template;Landing Page 2 Template;layout/landingLayout2Page;CategoryPage,ContentPage
+;;LandingPage3Template;Landing Page 3 Template;layout/landingLayout3Page;CategoryPage,ContentPage
+;;LandingPage4Template;Landing Page 4 Template;layout/landingLayout4Page;CategoryPage,ContentPage
+;;LandingPage5Template;Landing Page 5 Template;layout/landingLayout5Page;CategoryPage,ContentPage
+;;LandingPage6Template;Landing Page 6 Template;layout/landingLayout6Page;CategoryPage,ContentPage
+;;ContentPage1Template;Content Page 1 Template;layout/contentLayout1Page;ContentPage
+;;AccountPageTemplate;Account Page Template;account/accountLayoutPage;ContentPage;false;
+;;StoreFinderPageTemplate;Store Finder Page Template;storeFinder/storeFinderSearchPage;ContentPage;false;
+;;ShoppingListsPageTemplate;Shopping Lists Page Template;shoppingList/shoppingListsLayoutPage;ContentPage
+;;CategoryLandingPageTemplate;Category Landing Page Template;category/categoryLandingLayoutPage;ContentPage
+;;HomePageMainTemplate;Home Main Page Template;layout/homePageLayout;CategoryPage,ContentPage
+;;ContentArticlePagesTemplate;Content Article Pages Template;business/contentArticlePagesLayout;ContentPage
+;;RegisterLandingPageTemplate;Register Landing Page Template;account/registerLandingLayoutPage;ContentPage
+;;RegistrationTermsTemplate;Registration Terms Pages Template;account/registerTermsPage;ContentPage
+;;OrderConfirmationPageTemplate;Order Confirmation Page Template;checkout/checkoutConfirmationLayoutPage;ContentPage
+
+# Templates without a frontendTemplateName
+;;CartPageTemplate;Cart Page Template;;ContentPage;false;
+;;LoginPageTemplate;Login Page Template;;ContentPage;false;
+;;CheckoutLoginPageTemplate;Checkout Login Page Template;;ContentPage;false;
+;;MultiStepCheckoutSummaryPageTemplate;Multi Step Checkout Summary Page Template;;ContentPage;false;
+;;ErrorPageTemplate;Error Page Template;;ContentPage;false;
+;
+
+# Add Velocity templates that are in the CMS Cockpit. These give a better layout for editing pages
+# The FileLoaderValueTranslator loads a File into a String property. The templates could also be inserted in-line in this file.
+UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];velocityTemplate[translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+;;ProductDetailsPageTemplate;$jarResourceCms/structure-view/structure_productDetails2PageTemplate.vm
+;;ProductListPageTemplate   ;$jarResourceCms/structure-view/structure_productListPageTemplate.vm
+;;ProductGridPageTemplate   ;$jarResourceCms/structure-view/structure_productGridPageTemplate.vm
+;;CategoryPageTemplate      ;$jarResourceCms/structure-view/structure_categoryPageTemplate.vm
+;;LandingPage1Template      ;$jarResourceCms/structure-view/structure_landingPage1Template.vm
+;;LandingPage2Template      ;$jarResourceCms/structure-view/structure_landingPage2Template.vm
+;;LandingPage3Template      ;$jarResourceCms/structure-view/structure_landingPage3Template.vm
+;;LandingPage4Template      ;$jarResourceCms/structure-view/structure_landingPage4Template.vm
+;;LandingPage5Template      ;$jarResourceCms/structure-view/structure_landingPage5Template.vm
+;;LandingPage6Template      ;$jarResourceCms/structure-view/structure_landingPage6Template.vm
+;;ContentPage1Template      ;$jarResourceCms/structure-view/structure_contentPage1Template.vm
+;;SearchResultsListPageTemplate ;$jarResourceCms/structure-view/structure_searchResultsListPageTemplate.vm
+;;SearchResultsGridPageTemplate ;$jarResourceCms/structure-view/structure_searchResultsGridPageTemplate.vm
+;;CartPageTemplate 		    ;$jarResourceCms/structure-view/structure_cartPageTemplate.vm
+;;AccountPageTemplate 		;$jarResourceCms/structure-view/structure_accountPageTemplate.vm
+;;StoreFinderPageTemplate	;$jarResourceCms/structure-view/structure_storefinderSearchTemplate.vm
+;;ErrorPageTemplate			;$jarResourceCms/structure-view/structure_errorPageTemplate.vm
+;;SearchResultsEmptyPageTemplate;$jarResourceCms/structure-view/structure_errorPageTemplate.vm
+;;MultiStepCheckoutSummaryPageTemplate   ;$jarResourceCms/structure-view/structure_multiStepCheckoutSummaryPageTemplate.vm
+;;OrderConfirmationPageTemplate;$jarResourceCms/structure-view/structure_orderConfirmationPageTemplate.vm
+;;LoginPageTemplate         ;$jarResourceCms/structure-view/structure_loginPageTemplate.vm
+;;CheckoutLoginPageTemplate ;$jarResourceCms/structure-view/structure_checkoutLoginPageTemplate.vm
+;;ShoppingListsPageTemplate 		;$jarResourceCms/structure-view/structure_shoppingListsPageTemplate.vm
+;;CategoryLandingPageTemplate		;$jarResourceCms/structure-view/structure_categoryLandingPageTemplate.vm
+;;HomePageMainTemplate      ;$jarResourceCms/structure-view/structure_homePageMainTemplate.vm
+;;ContentArticlePagesTemplate		;$jarResourceCms/structure-view/structure_contentArticlePagesTemplate.vm
+;;RegisterLandingPageTemplate       ;$jarResourceCms/structure-view/structure_registerLandingPageTemplate.vm
+;;RegistrationTermsTemplate      ;$jarResourceCms/structure-view/structure_registrationTermsTemplate.vm
+
+# Create ContentSlotNames
+# Each PageTemplate has a number of ContentSlotNames, with a list of valid components for the slot.
+# There are a standard set of slots and a number of specific slots for each template.
+# Standard slots are SiteLogo, HeaderLinks, MiniCart and NavigationBar (that all appear in the Header), and the Footer.
+
+# Error Page Template
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='ErrorPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;MobileSiteLogo;;;logo
+;MobileCountrySelector;;;
+;CountrySelector;;;
+;HeaderLinks;;;headerlinks
+;HeaderAccountNavigation;;;
+;BreadCrumb;;;
+;SearchBox;;;searchbox
+;MiniCart;;;minicart
+;MobileMiniCart;;;mobileminicart
+;NavigationBar;;;navigation
+;MobileNavigationBar;;;navigation
+;MiddleContent;;CMSParagraphComponent
+;BottomContent;;;wide
+;SideContent;;;narrow
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;PlaceholderContentSlot;;;
+
+# Product Details Page Template
+# The CrossSelling and UpSelling slots are designed for related products, cross-sells and up-sells.
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='ProductDetailsPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;MobileSiteLogo;;;logo
+;MobileCountrySelector;;;
+;CountrySelector;;;
+;HeaderLinks;;;headerlinks
+;HeaderAccountNavigation;;;
+;BreadCrumb;;;
+;SearchBox;;;searchbox
+;MiniCart;;;minicart
+;MobileMiniCart;;;mobileminicart
+;NavigationBar;;;navigation
+;MobileNavigationBar;;;navigation
+;Section1;;;wide
+;Section2;;;wide
+;Section3;;;wide
+;Section4;;;wide
+;ColorVariantSelector;;ProductVariantSelectorComponent;narrow
+;VariantSelector;;ProductVariantSelectorComponent;narrow
+;AddToCart;;ProductAddToCartComponent;narrow
+;CrossSelling;;ProductReferencesComponent;narrow
+;UpSelling;;ProductReferencesComponent;narrow
+;RecentlyViewedProducts;;AmwayApacRecentViewedItemsComponent;narrow
+;Footer;;;footer
+;Tabs;;CMSTabParagraphContainer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;PlaceholderContentSlot;;;
+;ToolsAndAdviceProductDetailSlot;;;
+;ToolsAndAdviceBannerProductDetailSlot1;;;
+;ToolsAndAdviceBannerProductDetailSlot2;;;
+;ToolsAndAdviceBannerProductDetailSlot3;;;
+;LearningOpportunitiesProductDetailSlot;;;
+;LearningOpportunitiesBannerProductDetailSlot1;;;
+
+# Product List / Grid are two layouts for Category Browsing pages
+
+# Product List Page Template
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='ProductListPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;MobileSiteLogo;;;logo
+;MobileCountrySelector;;;
+;CountrySelector;;;
+;HeaderLinks;;;headerlinks
+;HeaderAccountNavigation;;;
+;BreadCrumb;;;
+;SearchBox;;;searchbox
+;MiniCart;;;minicart
+;MobileMiniCart;;;mobileminicart
+;NavigationBar;;;navigation
+;MobileNavigationBar;;;navigation
+;Section1;;;wide
+;ProductLeftRefinements;;;narrow
+;ProductListSlot;;;wide
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;PlaceholderContentSlot;;;
+
+# Product Grid Page Template
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='ProductGridPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;MobileSiteLogo;;;logo
+;MobileCountrySelector;;;
+;CountrySelector;;;
+;HeaderLinks;;;headerlinks
+;HeaderAccountNavigation;;;
+;BreadCrumb;;;
+;SearchBox;;;searchbox
+;MiniCart;;;minicart
+;MobileMiniCart;;;mobileminicart
+;NavigationBar;;;navigation
+;MobileNavigationBar;;;navigation
+;Section1;;;wide
+;ProductLeftRefinements;;;narrow
+;ProductGridSlot;;;wide
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;PlaceholderContentSlot;;;
+;NoResultsContentSlot;;;
+
+# Search Result List / Grid are two layouts for Search Result pages
+# Search Empty is displayed when no results are found
+
+# Search Results List Page Template
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='SearchResultsListPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;MobileSiteLogo;;;logo
+;MobileCountrySelector;;;
+;CountrySelector;;;
+;HeaderLinks;;;headerlinks
+;HeaderAccountNavigation;;;
+;BreadCrumb;;;
+;SearchBox;;;searchbox
+;MiniCart;;;minicart
+;MobileMiniCart;;;mobileminicart
+;NavigationBar;;;navigation
+;MobileNavigationBar;;;navigation
+;ProductLeftRefinements;;;narrow
+;SearchResultListSlot;;;wide
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;PlaceholderContentSlot;;;
+
+# Search Results Grid Page Template
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='SearchResultsGridPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;MobileSiteLogo;;;logo
+;MobileCountrySelector;;;
+;CountrySelector;;;
+;HeaderLinks;;;headerlinks
+;HeaderAccountNavigation;;;
+;BreadCrumb;;;
+;SearchBox;;;searchbox
+;MiniCart;;;minicart
+;MobileMiniCart;;;mobileminicart
+;NavigationBar;;;navigation
+;MobileNavigationBar;;;navigation
+;ProductLeftRefinements;;;narrow
+;SearchResultsGridSlot;;;wide
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;PlaceholderContentSlot;;;
+
+# Search Results Empty Page Template
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='SearchResultsEmptyPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;MobileSiteLogo;;;logo
+;MobileCountrySelector;;;
+;CountrySelector;;;
+;HeaderLinks;;;headerlinks
+;HeaderAccountNavigation;;;
+;BreadCrumb;;;
+;SearchBox;;;searchbox
+;MiniCart;;;minicart
+;MobileMiniCart;;;mobileminicart
+;NavigationBar;;;navigation
+;MobileNavigationBar;;;navigation
+;MiddleContent;;CMSParagraphComponent
+;BottomContent;;;wide
+;SideContent;;;narrow
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;PlaceholderContentSlot;;;
+;ProductCarouselSlot;;;
+
+
+# Category and Landing Pages are various layouts for a Category Landing page
+# Landing Pages are also good layouts for Homepages or general Content Pages
+
+# Category Page Template
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='CategoryPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;MobileSiteLogo;;;logo
+;MobileCountrySelector;;;
+;CountrySelector;;;
+;HeaderLinks;;;headerlinks
+;HeaderAccountNavigation;;;
+;BreadCrumb;;;
+;SearchBox;;;searchbox
+;MiniCart;;;minicart
+;MobileMiniCart;;;mobileminicart
+;NavigationBar;;;navigation
+;MobileNavigationBar;;;navigation
+;Section1;;;wide
+;Section2;;;wide
+;Section3;;;narrow
+;Section4;;;narrow
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;PlaceholderContentSlot;;;
+
+# Landing Page Templates
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='LandingPage1Template'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;MobileSiteLogo;;;logo
+;MobileCountrySelector;;;
+;CountrySelector;;;
+;HeaderLinks;;;headerlinks
+;HeaderAccountNavigation;;;
+;BreadCrumb;;;
+;SearchBox;;;searchbox
+;MiniCart;;;minicart
+;MobileMiniCart;;;mobileminicart
+;NavigationBar;;;navigation
+;MobileNavigationBar;;;navigation
+;Section1;;;wide
+;Section2A;;;wide
+;Section2B;;;narrow
+;Section2C;;;narrow
+;Section3;;;wide
+;Section4;;;narrow
+;Section5;;;wide
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;PlaceholderContentSlot;;;
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='LandingPage2Template'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;MobileSiteLogo;;;logo
+;MobileCountrySelector;;;
+;CountrySelector;;;
+;HeaderLinks;;;headerlinks
+;HeaderAccountNavigation;;;
+;BreadCrumb;;;
+;SearchBox;;;searchbox
+;MiniCart;;;minicart
+;MobileMiniCart;;;mobileminicart
+;NavigationBar;;;navigation
+;MobileNavigationBar;;;navigation
+;Section1;;;wide
+;Section2A;;;narrow
+;Section2B;;;narrow
+;Section2C;;;wide
+;Section3;;;wide
+;Section4;;;narrow
+;Section5;;;wide
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;PlaceholderContentSlot;;;
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='LandingPage3Template'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;MobileSiteLogo;;;logo
+;MobileCountrySelector;;;
+;CountrySelector;;;
+;HeaderLinks;;;headerlinks
+;HeaderAccountNavigation;;;
+;BreadCrumb;;;
+;SearchBox;;;searchbox
+;MiniCart;;;minicart
+;MobileMiniCart;;;mobileminicart
+;NavigationBar;;;navigation
+;MobileNavigationBar;;;navigation
+;Section1;;;wide
+;Section2A;;;wide
+;Section2B;;;narrow
+;Section2C;;;narrow
+;Section3;;;wide
+;Section4;;;narrow
+;Section5;;;wide
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;PlaceholderContentSlot;;;
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='LandingPage4Template'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;MobileSiteLogo;;;logo
+;MobileCountrySelector;;;
+;CountrySelector;;;
+;HeaderLinks;;;headerlinks
+;HeaderAccountNavigation;;;
+;BreadCrumb;;;
+;SearchBox;;;searchbox
+;MiniCart;;;minicart
+;MobileMiniCart;;;mobileminicart
+;NavigationBar;;;navigation
+;MobileNavigationBar;;;navigation
+;Section1;;;wide
+;Section2A;;;narrow
+;Section2B;;;narrow
+;Section2C;;;wide
+;Section3;;;wide
+;Section4;;;narrow
+;Section5;;;wide
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;PlaceholderContentSlot;;;
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='LandingPage5Template'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;MobileSiteLogo;;;logo
+;MobileCountrySelector;;;
+;CountrySelector;;;
+;HeaderLinks;;;headerlinks
+;HeaderAccountNavigation;;;
+;BreadCrumb;;;
+;SearchBox;;;searchbox
+;MiniCart;;;minicart
+;MobileMiniCart;;;mobileminicart
+;NavigationBar;;;navigation
+;MobileNavigationBar;;;navigation
+;Section1;;;wide
+;Section2;;;wide
+;Section3;;;narrow
+;Section4;;;narrow
+;Section5;;;wide
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;PlaceholderContentSlot;;;
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='LandingPage6Template'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;MobileSiteLogo;;;logo
+;MobileCountrySelector;;;
+;CountrySelector;;;
+;HeaderLinks;;;headerlinks
+;HeaderAccountNavigation;;;
+;BreadCrumb;;;
+;SearchBox;;;searchbox
+;MiniCart;;;minicart
+;MobileMiniCart;;;mobileminicart
+;NavigationBar;;;navigation
+;MobileNavigationBar;;;navigation
+;Section1;;;wide
+;Section2;;;wide
+;Section3;;;narrow
+;Section4;;;narrow
+;Section5;;;wide
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;PlaceholderContentSlot;;;
+
+# Simple Content Page Templates
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='ContentPage1Template'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;MobileSiteLogo;;;logo
+;MobileCountrySelector;;;
+;CountrySelector;;;
+;HeaderLinks;;;headerlinks
+;HeaderAccountNavigation;;;
+;BreadCrumb;;;
+;SearchBox;;;searchbox
+;MiniCart;;;minicart
+;MobileMiniCart;;;mobileminicart
+;NavigationBar;;;navigation
+;MobileNavigationBar;;;navigation
+;Section1;;;wide
+;Section2A;;;narrow
+;Section2B;;;wide
+;Section3;;;wide
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;PlaceholderContentSlot;;;
+
+# Cart Page Template
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='CartPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;MobileSiteLogo;;;logo
+;MobileCountrySelector;;;
+;CountrySelector;;;
+;HeaderLinks;;;headerlinks
+;HeaderAccountNavigation;;;
+;BreadCrumb;;;
+;SearchBox;;;searchbox
+;MiniCart;;;minicart
+;MobileMiniCart;;;mobileminicart
+;NavigationBar;;;navigation
+;MobileNavigationBar;;;navigation
+;TopContent;;;wide
+;EmptyCartMiddleContent;;CMSParagraphComponent
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;CenterLeftContentSlot;;;narrow
+;CenterRightContentSlot;;;narrow
+;BottomContentSlot;;;wide
+;PlaceholderContentSlot;;;
+;ShoppingCartQuickShopSearchBoxSlot;;;searchbox
+
+# Login Page Template
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='LoginPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;MobileSiteLogo;;;logo
+;MobileCountrySelector;;;
+;CountrySelector;;;
+;HeaderLinks;;;headerlinks
+;HeaderAccountNavigation;;;
+;BreadCrumb;;;
+;SearchBox;;;searchbox
+;MiniCart;;;minicart
+;MobileMiniCart;;;mobileminicart
+;NavigationBar;;;navigation
+;MobileNavigationBar;;;navigation
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;LeftContentSlot;;;wide
+;RightContentSlot;;;wide
+;PlaceholderContentSlot;;;
+
+# Checkout Login Page Template
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='CheckoutLoginPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;MobileSiteLogo;;;logo
+;MobileCountrySelector;;;
+;CountrySelector;;;
+;HeaderLinks;;;headerlinks
+;HeaderAccountNavigation;;;
+;BreadCrumb;;;
+;SearchBox;;;searchbox
+;MiniCart;;;minicart
+;MobileMiniCart;;;mobileminicart
+;NavigationBar;;;navigation
+;MobileNavigationBar;;;navigation
+;TopContent;;;wide
+;BottomContent;;;wide
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;LeftContentSlot;;;wide
+;RightContentSlot;;;wide
+;CenterContentSlot;;;wide
+;PlaceholderContentSlot;;;
+
+# Multi Step Checkout Summary Page Templates
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='MultiStepCheckoutSummaryPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;MobileSiteLogo;;;logo
+;MobileCountrySelector;;;
+;CountrySelector;;;
+;HeaderLinks;;;headerlinks
+;HeaderAccountNavigation;;;
+;BreadCrumb;;;
+;SearchBox;;;searchbox
+;MiniCart;;;minicart
+;MobileMiniCart;;;mobileminicart
+;NavigationBar;;;navigation
+;MobileNavigationBar;;;navigation
+;SideContent;;;narrow
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;PlaceholderContentSlot;;;
+
+# Order Confirmation Page Template
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='OrderConfirmationPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;MobileSiteLogo;;;logo
+;MobileCountrySelector;;;
+;CountrySelector;;;
+;HeaderLinks;;;headerlinks
+;HeaderAccountNavigation;;;
+;BreadCrumb;;;
+;SearchBox;;;searchbox
+;MiniCart;;;minicart
+;MobileMiniCart;;;mobileminicart
+;NavigationBar;;;navigation
+;MobileNavigationBar;;;navigation
+;SideContent;;;narrow
+;TopContent;;;wide
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;PlaceholderContentSlot;;;
+
+# Account Page Template
+# Template used for all of the Account pages
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='AccountPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;MobileSiteLogo;;;logo
+;MobileCountrySelector;;;
+;CountrySelector;;;
+;HeaderAccountNavigation;;;
+;BreadCrumb;;;
+;SearchBox;;;searchbox
+;MiniCart;;;minicart
+;MobileMiniCart;;;mobileminicart
+;NavigationBar;;;navigation
+;MobileNavigationBar;;;navigation
+;ProfileBarJumpTo;;;
+;Section1A;;;
+;Section1B;;;
+;Section1C;;;
+;Section2A;;;
+;Section2B;;;
+;BodyContent;;;wide
+;Footer;;;footer
+
+# Shopping Lists Page Template
+# Template used for shopping lists page
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='ShoppingListsPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;MobileSiteLogo;;;logo
+;MobileCountrySelector;;;
+;CountrySelector;;;
+;HeaderLinks;;;headerlinks
+;HeaderAccountNavigation;;;
+;BreadCrumb;;;
+;SearchBox;;;searchbox
+;MiniCart;;;minicart
+;MobileMiniCart;;;mobileminicart
+;NavigationBar;;;navigation
+;MobileNavigationBar;;;navigation
+;TopContent;;;wide
+;SideContent;;;narrow
+;BodyContent;;;wide
+;BottomContent;;;wide
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;PlaceholderContentSlot;;;
+;ShoppingListQuickShopSearchBoxSlot;;;searchbox
+
+# Category Landing Page Template
+# Template used for category landing page
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='CategoryLandingPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;MobileSiteLogo;;;logo
+;MobileCountrySelector;;;
+;CountrySelector;;;
+;HeaderLinks;;;headerlinks
+;HeaderAccountNavigation;;;
+;BreadCrumb;;;
+;SearchBox;;;searchbox
+;MiniCart;;;minicart
+;MobileMiniCart;;;mobileminicart
+;NavigationBar;;;navigation
+;MobileNavigationBar;;;navigation
+;TopContent;;;wide
+;SideContent;;;narrow
+;BodyContent;;;wide
+;BottomContent;;;wide
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;PlaceholderContentSlot;;;
+
+;TopBannerContentSlot;;;
+;ShopByCategoryContentSlot;;;
+;ShopByCategoryTitleSlot;;;
+;ExperienceBrandsContentSlot;;;
+;BrandBackgroundImageBannerContentSlot;;;
+;SuccessStoryContentSlot1;;;
+;SuccessStoryContentSlot2;;;
+;ToolsAndAdviceContentSlot;;;
+;ToolsAndAdviceBannerContentSlot1;;;
+;ToolsAndAdviceBannerContentSlot2;;;
+;ToolsAndAdviceBannerContentSlot3;;;
+;RecentlyViewedItemCarousel;;AmwayApacRecentViewedItemsComponent;narrow
+
+# Content Article Page Template
+# Template used for content article landing page contentArticlePagesLayout
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='ContentArticlePagesTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;MobileSiteLogo;;;logo
+;MobileCountrySelector;;;
+;CountrySelector;;;
+;HeaderLinks;;;headerlinks
+;HeaderAccountNavigation;;;
+;BreadCrumb;;;
+;SearchBox;;;searchbox
+;MiniCart;;;minicart
+;MobileMiniCart;;;mobileminicart
+;NavigationBar;;;navigation
+;TopContent;;;wide
+;SideContent;;;narrow
+;BodyContent;;;wide
+;BottomContent;;;wide
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;PlaceholderContentSlot;;;
+
+;PathwayToSuccessContentSlot;;;
+;BuildYourBusinessContentSlot;;;
+;ExperienceTheStarterKitContentSlot;;;
+;ArticleSuccessStoryContentSlot1;;;
+;ArticleSuccessStoryContentSlot2;;;
+
+# Template used for register landing page RegisterLandingPageLayout
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='RegisterLandingPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;MobileSiteLogo;;;logo
+;MobileCountrySelector;;;
+;CountrySelector;;;
+;HeaderLinks;;;headerlinks
+;HeaderAccountNavigation;;;
+;BreadCrumb;;;
+;SearchBox;;;searchbox
+;MiniCart;;;minicart
+;MobileMiniCart;;;mobileminicart
+;NavigationBar;;;navigation
+;TopContent;;;wide
+;SideContent;;;narrow
+;BodyContent;;;wide
+;BottomContent;;;wide
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;PlaceholderContentSlot;;;
+
+;JoinAmwayContentSlot;;;
+;WeAreAmwayContentSlot;;;
+;BecomeAnABOContentSlot;;;
+;BecomeACustomerContentSlot;;;
+;FooterNoticeToolTipParagraphContentSlot;;;
+;FooterNoticeParagraphContentSlot;;;
+
+# Store Finder/Locator Page Template
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='StoreFinderPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;MobileSiteLogo;;;logo
+;MobileCountrySelector;;;
+;CountrySelector;;;
+;HeaderLinks;;;headerlinks
+;HeaderAccountNavigation;;;
+;BreadCrumb;;;
+;SearchBox;;;searchbox
+;MiniCart;;;minicart
+;MobileMiniCart;;;mobileminicart
+;NavigationBar;;;navigation
+;MobileNavigationBar;;;navigation
+;TopContent;;;wide
+;SideContent;;;narrow
+;MiddleContent;;;wide
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;PlaceholderContentSlot;;;
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='HomePageMainTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;MobileSiteLogo;;;logo
+;MobileCountrySelector;;;
+;CountrySelector;;;
+;SearchBox;;;searchbox
+;MiniCart;;;minicart
+;MobileMiniCart;;;mobileminicart
+;MobileNavigationBar;;;navigation
+;NavigationBar;;;navigation
+;HeaderAccountNavigation;;;
+;Section1;;;
+;Section2;;;
+;Section3A;;;
+;Section3B;;;
+;Section4;;;
+;Section5;;;
+;Section6A;;;
+;Section6B;;;
+;Section6C;;;
+;Section7;;;
+;Section8;;;
+;Section9A;;;
+;Section9B;;;
+;Section9C;;;
+;Section10;;;
+;Section11;;;
+;Section12;;;
+;Footer;;;footer
+
+# Registration terms and Condition content slots
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='RegistrationTermsTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;MobileSiteLogo;;;logo
+;MobileCountrySelector;;;
+;CountrySelector;;;
+;HeaderLinks;;;headerlinks
+;HeaderAccountNavigation;;;
+;BreadCrumb;;;
+;SearchBox;;;searchbox
+;MiniCart;;;minicart
+;MobileMiniCart;;;mobileminicart
+;NavigationBar;;;navigation
+;MobileNavigationBar;;;navigation
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;TermsBanner;;;
+;Terms1;;;
+;Terms2;;;
+;Terms3;;;
+;Terms4;;;
+;Terms5;;;
+;Terms6;;;
+;Terms7;;;
+
+# Create Content Slots
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active
+;;SiteLogoSlot;Default Site Logo Slot;true
+;;MobileSiteLogoSlot;Default Mobile Site Logo Slot;true
+;;MobileCountrySelectorSlot;Mobile Country Selector Links;true;
+;;CountrySelectorSlot;Country Selector Links;true;
+;;HomepageNavLinkSlot;Default Homepage Link;true
+;;HeaderAccountNavigationSlot;Default Header Account Navigation Slot;true;
+;;BreadCrumbSlot;Breadcrumb slot;true
+;;MiniCartSlot;Mini Cart;true
+;;MobileMiniCartSlot;Mobile Mini Cart;true
+;;NavigationBarSlot;Navigation Bar;true
+;;TabsSlot;Tabs;true
+;;TopContentSlot;Top Content;true
+;;SearchNoResultSideContentSlot;Search No results Side Content;true
+;;BottomContentSlot;Bottom Content;true
+;;FeatureContentSlot;Feature Content;true
+;;FooterSlot;Footer;true
+;;HeaderLinksSlot;Header links;true
+;;SearchBoxSlot;Search Box;true
+;;VariantSelectorSlot;Variant Selector;true
+;;AddToCartSlot;Add To Cart;true
+;;UpSellingSlot;Up Selling;true
+;;RecentlyViewedProductsSlot;Recently Viewed Products;true
+;;CrossSellingSlot;Cross Selling;true
+;;TopHeaderSlot;Top Header;true
+;;BottomHeaderSlot;Bottom Header;true
+;;ProductLeftRefinements;Refinements;true
+;;ProductGridSlot;Product List;true
+;;ProductListSlot;Product Grid;true
+;;SearchResultsListSlot;Search Result List;true
+;;SearchResultsGridSlot;Search Result Grid;true
+;;MiddleContentSlot;Middle Content Slot;true
+;;SearchNoResultsMiddleContentSlot;Search no results page Middle Content Slot;true
+;;LeftContentSlot;Left Content Slot;true
+;;RightContentSlot;Right Content Slot;true
+;;CenterContentSlot;Center Content Slot;true
+;;CenterLeftContentSlot;Center Left Content Slot;true
+;;CenterRightContentSlot;Center Right Content Slot;true
+;;EmptyCartMiddleContent;Empty CartMiddle Content Slot;true
+;;PlaceholderContentSlot;Placeholder for Addon tag files;true
+
+;;TopBannerContentSlot;Top banner content slot;true
+;;ShopByCategoryContentSlot;Shop By category component content slot;true
+;;ShopByCategoryTitleSlot;Shop By category component title slot;true
+;;ExperienceBrandsContentSlot;Experience brands content slot;true
+;;BrandBackgroundImageBannerContentSlot;Brands background image banner component content slot;true
+;;SuccessStoryContentSlot1;Success story content slot 1;true
+;;SuccessStoryContentSlot2;Success story content slot 2;true
+;;ToolsAndAdviceContentSlot;Tools and advice content slot;true
+;;ToolsAndAdviceBannerContentSlot1;Tools and advice banner content slot 1;true
+;;ToolsAndAdviceBannerContentSlot2;Tools and advice banner content slot 2;true
+;;ToolsAndAdviceBannerContentSlot3;Tools and advice banner content slot 3;true
+;;RecentlyViewedItemCarouselContentSlot;Recently Viewed Item Carousel Content Slot;true
+;;MobileNavigationBarSlot;Mobile Navigation Bar;true
+;;ProfileBarJumpToSlot;Profile Bar;true
+;;ToolsAndAdviceProductDetailContentSlot;Tools and advice Product Detail content slot;true
+;;ToolsAndAdviceBannerProductDetailContentSlot1;Tools and advice banner Product Detail content slot 1;true
+;;ToolsAndAdviceBannerProductDetailContentSlot2;Tools and advice banner Product Detail content slot 2;true
+;;ToolsAndAdviceBannerProductDetailContentSlot3;Tools and advice banner ProductDetail  content slot 3;true
+;;LearningOpportunitiesProductDetailContentSlot;Learning Opportunities Product Detail content slot;true
+;;LearningOpportunitiesBannerProductDetailContentSlot1;Learning Opportunities banner Product Detail content slot 1;true
+;;RegistrationTermsContentSlot; Content Slot for ABO Registration Terms;true
+
+;;PathwayToSuccessContentSlot;       Pathway To SuccessContent Slot;                        true
+;;BuildYourBusinessContentSlot;      Build Your Business Content Slot;                      true
+;;ExperienceTheStarterKitContentSlot;Experience The Starter Kit Content Slot;               true
+;;ArticleSuccessStoryContentSlot1;   Article Success Story Content Slot 1;                  true
+;;ArticleSuccessStoryContentSlot2;   Article Success Story Content Slot 2;                  true
+;;JoinAmwayContentSlot;              Join Amway Content Slot;                               true
+;;WeAreAmwayContentSlot;             We Are Amway Content Slot;                             true
+;;BecomeAnABOContentSlot;            Become An ABO Content Slot;                            true
+;;BecomeACustomerContentSlot;        Become A Customer Content Slot;                        true
+;;FooterNoticeToolTipParagraphContentSlot;  Footer Notice ToolTip Paragraph Content Slot;   true 
+;;FooterNoticeParagraphContentSlot;  Footer Notice Paragraph Content Slot;                  true 
+;;NoResultsContentSlot;              No Results PLP content slot;                           true
+;;ProductCarouselSlot;               Product Carousel Slot;                                 true
+;;ShoppingListQuickShopSearchBoxSlot;Shopping List Quick Shop Search Box Slot;              true
+;;ShoppingCartQuickShopSearchBoxSlot;Shopping Cart Quick Shop Search Box Slot;              true
+
+;;Section1CarouselSlot;Home page top carousel slot;true
+;;Section2ContentSlot;Home page section 2 content slot;true
+;;Section3AContentSlot;Success Story 1 Content Slot for Homepage;true
+;;Section3BContentSlot;Success Story 2 Content Slot for Homepage;true
+;;Section4ContentSlot;Our New Product Content Slot for Homepage;true
+;;Section5CarouselSlot;Artistry New Luxury Carousel Slot for Homepage;true
+;;Section6ASlot;Foundational Supplements New Product Slot for Homepage;true
+;;Section6BSlot;Targeted Supplements New Product Slot for Homepage;true
+;;Section6CSlot;Convenience Products New Product Slot for Homepage;true
+;;Section7Slot;Platinum ABO Slot for Homepage;true
+;;Section8Slot;Choose The Right Supplement Slot for Homepage;true
+;;Section9ASlot;Foundational Supplements Supplement Product Slot for Homepage;true
+;;Section9BSlot;Targeted Supplements Supplement Product Slot for Homepage;true
+;;Section9CSlot;Convenience Products Supplement Product Slot for Homepage;true
+;;Section10Slot;Opportunity Component Slot for Homepage;true
+;;Section11Slot;Featured Brands Slot for Homepage;true
+;;Section12Slot;Featured Brands Carousel Slot for Homepage;true
+
+;;ShoppingListQuickShopSearchBoxSlot;Shopping List Quick Shop Search Box Slot;              true
+;;ShoppingCartQuickShopSearchBoxSlot;Shopping Cart Quick Shop Search Box Slot;              true
+;;TermsBannerContentSlot;terms banner component slot;              true
+
+
+# Bind Content Slots to Page Templates
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ProductDetailsPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-ProductDetails;SiteLogo;;SiteLogoSlot;true
+;;MobileSiteLogo-ProductDetails;MobileSiteLogo;;MobileSiteLogoSlot;true
+;;MobileCountrySelector-ProductDetails;MobileCountrySelector;;MobileCountrySelectorSlot;true
+;;CountrySelector-ProductDetails;CountrySelector;;CountrySelectorSlot;true
+;;HomepageLink-ProductDetails;HomepageNavLink;;HomepageNavLinkSlot;true
+;;HeaderAccountNavigation-ProductDetails;HeaderAccountNavigation;;HeaderAccountNavigationSlot;true
+;;BreadCrumb-ProductDetails;BreadCrumb;;BreadCrumbSlot;true
+;;MiniCart-ProductDetails;MiniCart;;MiniCartSlot;true
+;;MobileMiniCart-ProductDetails;MobileMiniCart;;MobileMiniCartSlot;true
+;;NavigationBar-ProductDetails;NavigationBar;;NavigationBarSlot;true
+;;Tabs-ProductDetails;Tabs;;TabsSlot;true
+;;Footer-ProductDetails;Footer;;FooterSlot;true
+;;HeaderLinks-ProductDetails;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-ProductDetails;SearchBox;;SearchBoxSlot;true
+;;ColorVariantSelector-ProductDetails;ColorVariantSelector;;ColorVariantSelectorSlot;true
+;;VariantSelector-ProductDetails;VariantSelector;;VariantSelectorSlot;true
+;;AddToCart-ProductDetails;AddToCart;;AddToCartSlot;true
+;;UpSelling-ProductDetails;UpSelling;;UpSellingSlot;true
+;;RecentlyReviewedProducts-ProductDetails;RecentlyViewedProducts;;RecentlyViewedProductsSlot;true
+;;CrossSelling-ProductDetails;CrossSelling;;CrossSellingSlot;true
+;;TopHeaderSlot-ProductDetails;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-ProductDetails;BottomHeaderSlot;;BottomHeaderSlot;true
+;;PlaceholderContentSlot-ProductDetails;PlaceholderContentSlot;;PlaceholderContentSlot;true
+;;Mobile-NavigationBar-ProductDetails;MobileNavigationBar;;MobileNavigationBarSlot;true
+
+;;ToolsAndAdviceProductDetailSlot-ProductDetails;ToolsAndAdviceProductDetailSlot;;ToolsAndAdviceProductDetailContentSlot;true
+;;ToolsAndAdviceBannerProductDetailSlot1-ProductDetails;ToolsAndAdviceBannerProductDetailSlot1;;ToolsAndAdviceBannerProductDetailContentSlot1;true
+;;ToolsAndAdviceBannerProductDetailSlot2-ProductDetails;ToolsAndAdviceBannerProductDetailSlot2;;ToolsAndAdviceBannerProductDetailContentSlot2;true
+;;ToolsAndAdviceBannerProductDetailSlot3-ProductDetails;ToolsAndAdviceBannerProductDetailSlot3;;ToolsAndAdviceBannerProductDetailContentSlot3;true
+;;LearningOpportunitiesProductDetailSlot-ProductDetails;LearningOpportunitiesProductDetailSlot;;LearningOpportunitiesProductDetailContentSlot;true
+;;LearningOpportunitiesBannerProductDetailSlot1-ProductDetails;LearningOpportunitiesBannerProductDetailSlot1;;LearningOpportunitiesBannerProductDetailContentSlot1;true
+
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='SearchResultsListPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-SearchResultsList;SiteLogo;;SiteLogoSlot;true
+;;MobileSiteLogo-SearchResultsList;MobileSiteLogo;;MobileSiteLogoSlot;true
+;;MobileCountrySelector-SearchResultsList;MobileCountrySelector;;MobileCountrySelectorSlot;true
+;;CountrySelector-SearchResultsList;CountrySelector;;CountrySelectorSlot;true
+;;HomepageLink-SearchResultsList;HomepageNavLink;;HomepageNavLinkSlot;true
+;;HeaderAccountNavigation-SearchResultsList;HeaderAccountNavigation;;HeaderAccountNavigationSlot;true
+;;BreadCrumb-SearchResultsList;BreadCrumb;;BreadCrumbSlot;true
+;;MiniCart-SearchResultsList;MiniCart;;MiniCartSlot;true
+;;MobileMiniCart-SearchResultsList;MobileMiniCart;;MobileMiniCartSlot;true
+;;NavigationBar-SearchResultsList;NavigationBar;;NavigationBarSlot;true
+;;Footer-SearchResultsList;Footer;;FooterSlot;true
+;;HeaderLinks-SearchResultsList;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-SearchResultsList;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-SearchResultsList;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-SearchResultsList;BottomHeaderSlot;;BottomHeaderSlot;true
+;;ProductLeftRefinements-SearchResultsList;ProductLeftRefinements;;ProductLeftRefinements;true
+;;SearchResultsListSlot-SearchResultsList;SearchResultsListSlot;;SearchResultsListSlot;true
+;;PlaceholderContentSlot-SearchResultsList;PlaceholderContentSlot;;PlaceholderContentSlot;true
+;;Mobile-NavigationBar-SearchResultsList;MobileNavigationBar;;MobileNavigationBarSlot;true
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='SearchResultsGridPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-SearchResultsGrid;SiteLogo;;SiteLogoSlot;true
+;;MobileSiteLogo-SearchResultsGrid;MobileSiteLogo;;MobileSiteLogoSlot;true
+;;MobileCountrySelector-SearchResultsGrid;MobileCountrySelector;;MobileCountrySelectorSlot;true
+;;CountrySelector-SearchResultsGrid;CountrySelector;;CountrySelectorSlot;true
+;;HomepageLink-SearchResultsGrid;HomepageNavLink;;HomepageNavLinkSlot;true
+;;HeaderAccountNavigation-SearchResultsGrid;HeaderAccountNavigation;;HeaderAccountNavigationSlot;true
+;;BreadCrumb-SearchResultsGrid;BreadCrumb;;BreadCrumbSlot;true
+;;MiniCart-SearchResultsGrid;MiniCart;;MiniCartSlot;true
+;;MobileMiniCart-SearchResultsGrid;MobileMiniCart;;MobileMiniCartSlot;true
+;;NavigationBar-SearchResultsGrid;NavigationBar;;NavigationBarSlot;true
+;;Footer-SearchResultsGrid;Footer;;FooterSlot;true
+;;HeaderLinks-SearchResultsGrid;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-SearchResultsGrid;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-SearchResultsGrid;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-SearchResultsGrid;BottomHeaderSlot;;BottomHeaderSlot;true
+;;ProductLeftRefinements-SearchResultsGrid;ProductLeftRefinements;;ProductLeftRefinements;true
+;;SearchResultsGridSlot-SearchResultsGrid;SearchResultsGridSlot;;SearchResultsGridSlot;true
+;;PlaceholderContentSlot-SearchResultsGrid;PlaceholderContentSlot;;PlaceholderContentSlot;true
+;;Mobile-NavigationBar-SearchResultsGrid;MobileNavigationBar;;MobileNavigationBarSlot;true
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='SearchResultsEmptyPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-SearchResultsEmpty;SiteLogo;;SiteLogoSlot;true
+;;MobileSiteLogo-SearchResultsEmpty;MobileSiteLogo;;MobileSiteLogoSlot;true
+;;MobileCountrySelector-SearchResultsEmpty;MobileCountrySelector;;MobileCountrySelectorSlot;true
+;;CountrySelector-SearchResultsEmpty;CountrySelector;;CountrySelectorSlot;true
+;;HomepageLink-SearchResultsEmpty;HomepageNavLink;;HomepageNavLinkSlot;true
+;;HeaderAccountNavigation-SearchResultsEmpty;HeaderAccountNavigation;;HeaderAccountNavigationSlot;true
+;;BreadCrumb-SearchResultsEmpty;BreadCrumb;;BreadCrumbSlot;true
+;;NavigationBar-SearchResultsEmpty;NavigationBar;;NavigationBarSlot;true
+;;MiniCart-SearchResultsEmpty;MiniCart;;MiniCartSlot;true
+;;MobileMiniCart-SearchResultsEmpty;MobileMiniCart;;MobileMiniCartSlot;true
+;;Footer-SearchResultsEmpty;Footer;;FooterSlot;true
+;;HeaderLinks-SearchResultsEmpty;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-SearchResultsEmpty;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-SearchResultsEmpty;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-SearchResultsEmpty;BottomHeaderSlot;;BottomHeaderSlot;true
+;;PlaceholderContentSlot-SearchResultsEmpty;PlaceholderContentSlot;;PlaceholderContentSlot;true
+;;Mobile-NavigationBar-SearchResultsEmpty;MobileNavigationBar;;MobileNavigationBarSlot;true
+;;MiddleContent-SearchResultsEmpty;MiddleContent;;SearchNoResultsMiddleContentSlot;true
+;;SideContent-SearchResultsEmpty;SideContent;;SearchNoResultSideContentSlot;true
+;;ProductCarouselSlot-ProductGridPage;ProductCarouselSlot;;ProductCarouselSlot;true
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='CategoryPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-CategoryPage;SiteLogo;;SiteLogoSlot;true
+;;MobileSiteLogo-CategoryPage;MobileSiteLogo;;MobileSiteLogoSlot;true
+;;MobileCountrySelector-CategoryPage;MobileCountrySelector;;MobileCountrySelectorSlot;true
+;;CountrySelector-CategoryPage;CountrySelector;;CountrySelectorSlot;true
+;;HomepageLink-CategoryPage;HomepageNavLink;;HomepageNavLinkSlot;true
+;;HeaderAccountNavigation-CategoryPage;HeaderAccountNavigation;;HeaderAccountNavigationSlot;true
+;;BreadCrumb-CategoryPage;BreadCrumb;;BreadCrumbSlot;true
+;;MiniCart-CategoryPage;MiniCart;;MiniCartSlot;true
+;;MobileMiniCart-CategoryPage;MobileMiniCart;;MobileMiniCartSlot;true
+;;NavigationBar-CategoryPage;NavigationBar;;NavigationBarSlot;true
+;;Footer-CategoryPage;Footer;;FooterSlot;true
+;;HeaderLinks-CategoryPage;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-CategoryPage;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-CategoryPage;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-CategoryPage;BottomHeaderSlot;;BottomHeaderSlot;true
+;;PlaceholderContentSlot-CategoryPage;PlaceholderContentSlot;;PlaceholderContentSlot;true
+;;Mobile-NavigationBar-CategoryPage;MobileNavigationBar;;MobileNavigationBarSlot;true
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='LandingPage1Template'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-LandingPage1;SiteLogo;;SiteLogoSlot;true
+;;MobileSiteLogo-LandingPage1;MobileSiteLogo;;MobileSiteLogoSlot;true
+;;MobileCountrySelector-LandingPage1;MobileCountrySelector;;MobileCountrySelectorSlot;true
+;;CountrySelector-LandingPage1;CountrySelector;;CountrySelectorSlot;true
+;;HomepageLink-LandingPage1;HomepageNavLink;;HomepageNavLinkSlot;true
+;;HeaderAccountNavigation-LandingPage1;HeaderAccountNavigation;;HeaderAccountNavigationSlot;true
+;;BreadCrumb-LandingPage1;BreadCrumb;;BreadCrumbSlot;true
+;;MiniCart-LandingPage1;MiniCart;;MiniCartSlot;true
+;;MobileMiniCart-LandingPage1;MobileMiniCart;;MobileMiniCartSlot;true
+;;NavigationBar-LandingPage1;NavigationBar;;NavigationBarSlot;true
+;;Footer-LandingPage1;Footer;;FooterSlot;true
+;;HeaderLinks-LandingPage1;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-LandingPage1;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-LandingPage1;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-LandingPage1;BottomHeaderSlot;;BottomHeaderSlot;true
+;;PlaceholderContentSlot-LandingPage1;PlaceholderContentSlot;;PlaceholderContentSlot;true
+;;Mobile-NavigationBar-LandingPage1;MobileNavigationBar;;MobileNavigationBarSlot;true
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='LandingPage2Template'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-LandingPage2;SiteLogo;;SiteLogoSlot;true
+;;MobileSiteLogo-LandingPage2;MobileSiteLogo;;MobileSiteLogoSlot;true
+;;MobileCountrySelector-LandingPage2;MobileCountrySelector;;MobileCountrySelectorSlot;true
+;;CountrySelector-LandingPage2;CountrySelector;;CountrySelectorSlot;true
+;;HomepageLink-LandingPage2;HomepageNavLink;;HomepageNavLinkSlot;true
+;;HeaderAccountNavigation-LandingPage2;HeaderAccountNavigation;;HeaderAccountNavigationSlot;true
+;;BreadCrumb-LandingPage2;BreadCrumb;;BreadCrumbSlot;true
+;;NavigationBar-LandingPage2;NavigationBar;;NavigationBarSlot;true
+;;MiniCart-LandingPage2;MiniCart;;MiniCartSlot;true
+;;MobileMiniCart-LandingPage2;MobileMiniCart;;MobileMiniCartSlot;true
+;;Footer-LandingPage2;Footer;;FooterSlot;true
+;;HeaderLinks-LandingPage2;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-LandingPage2;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-LandingPage2;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-LandingPage2;BottomHeaderSlot;;BottomHeaderSlot;true
+;;PlaceholderContentSlot-LandingPage2;PlaceholderContentSlot;;PlaceholderContentSlot;true
+;;Mobile-NavigationBar-LandingPage2;MobileNavigationBar;;MobileNavigationBarSlot;true
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='LandingPage3Template'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-LandingPage3;SiteLogo;;SiteLogoSlot;true
+;;MobileSiteLogo-LandingPage3;MobileSiteLogo;;MobileSiteLogoSlot;true
+;;MobileCountrySelector-LandingPage3;MobileCountrySelector;;MobileCountrySelectorSlot;true
+;;CountrySelector-LandingPage3;CountrySelector;;CountrySelectorSlot;true
+;;HomepageLink-LandingPage3;HomepageNavLink;;HomepageNavLinkSlot;true
+;;HeaderAccountNavigation-LandingPage3;HeaderAccountNavigation;;HeaderAccountNavigationSlot;true
+;;BreadCrumb-LandingPage3;BreadCrumb;;BreadCrumbSlot;true
+;;NavigationBar-LandingPage3;NavigationBar;;NavigationBarSlot;true
+;;MiniCart-LandingPage3;MiniCart;;MiniCartSlot;true
+;;MobileMiniCart-LandingPage3;MobileMiniCart;;MobileMiniCartSlot;true
+;;Footer-LandingPage3;Footer;;FooterSlot;true
+;;HeaderLinks-LandingPage3;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-LandingPage3;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-LandingPage3;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-LandingPage3;BottomHeaderSlot;;BottomHeaderSlot;true
+;;PlaceholderContentSlot-LandingPage3;PlaceholderContentSlot;;PlaceholderContentSlot;true
+;;Mobile-NavigationBar-LandingPage3;MobileNavigationBar;;MobileNavigationBarSlot;true
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='LandingPage4Template'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-LandingPage4;SiteLogo;;SiteLogoSlot;true
+;;MobileSiteLogo-LandingPage4;MobileSiteLogo;;MobileSiteLogoSlot;true
+;;MobileCountrySelector-LandingPage4;MobileCountrySelector;;MobileCountrySelectorSlot;true
+;;CountrySelector-LandingPage4;CountrySelector;;CountrySelectorSlot;true
+;;HomepageLink-LandingPage4;HomepageNavLink;;HomepageNavLinkSlot;true
+;;HeaderAccountNavigation-LandingPage4;HeaderAccountNavigation;;HeaderAccountNavigationSlot;true
+;;BreadCrumb-LandingPage4;BreadCrumb;;BreadCrumbSlot;true
+;;NavigationBar-LandingPage4;NavigationBar;;NavigationBarSlot;true
+;;MiniCart-LandingPage4;MiniCart;;MiniCartSlot;true
+;;MobileMiniCart-LandingPage4;MobileMiniCart;;MobileMiniCartSlot;true
+;;Footer-LandingPage4;Footer;;FooterSlot;true
+;;HeaderLinks-LandingPage4;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-LandingPage4;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-LandingPage4;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-LandingPage4;BottomHeaderSlot;;BottomHeaderSlot;true
+;;PlaceholderContentSlot-LandingPage4;PlaceholderContentSlot;;PlaceholderContentSlot;true
+;;Mobile-NavigationBar-LandingPage4;MobileNavigationBar;;MobileNavigationBarSlot;true
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='LandingPage5Template'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-LandingPage5;SiteLogo;;SiteLogoSlot;true
+;;MobileSiteLogo-LandingPage5;MobileSiteLogo;;MobileSiteLogoSlot;true
+;;MobileCountrySelector-LandingPage5;MobileCountrySelector;;MobileCountrySelectorSlot;true
+;;CountrySelector-LandingPage5;CountrySelector;;CountrySelectorSlot;true
+;;HomepageLink-LandingPage5;HomepageNavLink;;HomepageNavLinkSlot;true
+;;BreadCrumb-LandingPage5;BreadCrumb;;BreadCrumbSlot;true
+;;HeaderAccountNavigation-LandingPage5;HeaderAccountNavigation;;HeaderAccountNavigationSlot;true
+;;NavigationBar-LandingPage5;NavigationBar;;NavigationBarSlot;true
+;;MiniCart-LandingPage5;MiniCart;;MiniCartSlot;true
+;;MobileMiniCart-LandingPage5;MobileMiniCart;;MobileMiniCartSlot;true
+;;Footer-LandingPage5;Footer;;FooterSlot;true
+;;HeaderLinks-LandingPage5;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-LandingPage5;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-LandingPage5;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-LandingPage5;BottomHeaderSlot;;BottomHeaderSlot;true
+;;PlaceholderContentSlot-LandingPage5;PlaceholderContentSlot;;PlaceholderContentSlot;true
+;;Mobile-NavigationBar-LandingPage5;MobileNavigationBar;;MobileNavigationBarSlot;true
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='LandingPage6Template'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-LandingPage6;SiteLogo;;SiteLogoSlot;true
+;;MobileSiteLogo-LandingPage6;MobileSiteLogo;;MobileSiteLogoSlot;true
+;;MobileCountrySelector-LandingPage6;MobileCountrySelector;;MobileCountrySelectorSlot;true
+;;CountrySelector-LandingPage6;CountrySelector;;CountrySelectorSlot;true
+;;HomepageLink-LandingPage6;HomepageNavLink;;HomepageNavLinkSlot;true
+;;HeaderAccountNavigation-LandingPage6;HeaderAccountNavigation;;HeaderAccountNavigationSlot;true
+;;BreadCrumb-LandingPage6;BreadCrumb;;BreadCrumbSlot;true
+;;NavigationBar-LandingPage6;NavigationBar;;NavigationBarSlot;true
+;;MiniCart-LandingPage6;MiniCart;;MiniCartSlot;true
+;;MobileMiniCart-LandingPage6;MobileMiniCart;;MobileMiniCartSlot;true
+;;Footer-LandingPage6;Footer;;FooterSlot;true
+;;HeaderLinks-LandingPage6;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-LandingPage6;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-LandingPage6;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-LandingPage6;BottomHeaderSlot;;BottomHeaderSlot;true
+;;PlaceholderContentSlot-LandingPage6;PlaceholderContentSlot;;PlaceholderContentSlot;true
+;;Mobile-NavigationBar-LandingPage6;MobileNavigationBar;;MobileNavigationBarSlot;true
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ContentPage1Template'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-ContentPage1;SiteLogo;;SiteLogoSlot;true
+;;MobileSiteLogo-ContentPage1;MobileSiteLogo;;MobileSiteLogoSlot;true
+;;MobileCountrySelector-ContentPage1;MobileCountrySelector;;MobileCountrySelectorSlot;true
+;;CountrySelector-ContentPage1;CountrySelector;;CountrySelectorSlot;true
+;;HomepageLink-ContentPage1;HomepageNavLink;;HomepageNavLinkSlot;true
+;;HeaderAccountNavigation-ContentPage1;HeaderAccountNavigation;;HeaderAccountNavigationSlot;true
+;;BreadCrumb-ContentPage1;BreadCrumb;;BreadCrumbSlot;true
+;;NavigationBar-ContentPage1;NavigationBar;;NavigationBarSlot;true
+;;MiniCart-ContentPage1;MiniCart;;MiniCartSlot;true
+;;MobileMiniCart-ContentPage1;MobileMiniCart;;MobileMiniCartSlot;true
+;;Footer-ContentPage1;Footer;;FooterSlot;true
+;;HeaderLinks-ContentPage1;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-ContentPage1;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-ContentPage1;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-ContentPage1;BottomHeaderSlot;;BottomHeaderSlot;true
+;;PlaceholderContentSlot-ContentPage1;PlaceholderContentSlot;;PlaceholderContentSlot;true
+;;Mobile-NavigationBar-ContentPage1;MobileNavigationBar;;MobileNavigationBarSlot;true
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ProductGridPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-ProductGridPage;SiteLogo;;SiteLogoSlot;true
+;;MobileSiteLogo-ProductGridPage;MobileSiteLogo;;MobileSiteLogoSlot;true
+;;MobileCountrySelector-ProductGridPage;MobileCountrySelector;;MobileCountrySelectorSlot;true
+;;CountrySelector-ProductGridPage;CountrySelector;;CountrySelectorSlot;true
+;;HomepageLink-ProductGridPage;HomepageNavLink;;HomepageNavLinkSlot;true
+;;HeaderAccountNavigation-ProductGridPage;HeaderAccountNavigation;;HeaderAccountNavigationSlot;true
+;;BreadCrumb-ProductGridPage;BreadCrumb;;BreadCrumbSlot;true
+;;MiniCart-ProductGridPage;MiniCart;;MiniCartSlot;true
+;;MobileMiniCart-ProductGridPage;MobileMiniCart;;MobileMiniCartSlot;true
+;;NavigationBar-ProductGridPage;NavigationBar;;NavigationBarSlot;true
+;;Footer-ProductGridPage;Footer;;FooterSlot;true
+;;HeaderLinks-ProductGridPage;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-ProductGridPage;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-ProductGridPage;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-ProductGridPage;BottomHeaderSlot;;BottomHeaderSlot;true
+;;ProductLeftRefinemnts-ProductGridPage;ProductLeftRefinements;;ProductLeftRefinements;true
+;;ProductGridSlot-ProductGridPage;ProductGridSlot;;ProductGridSlot;true
+;;PlaceholderContentSlot-ProductGridPage;PlaceholderContentSlot;;PlaceholderContentSlot;true
+;;Mobile-NavigationBar-ProductGridPage;MobileNavigationBar;;MobileNavigationBarSlot;true
+;;NoResultsContentSlot-ProductGridPage;NoResultsContentSlot;;NoResultsContentSlot;true
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ProductListPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-ProductListPage;SiteLogo;ProductListPageTemplate;SiteLogoSlot;true
+;;MobileSiteLogo-ProductListPage;MobileSiteLogo;ProductListPageTemplate;MobileSiteLogoSlot;true
+;;MobileCountrySelector-ProductListPage;MobileCountrySelector;;MobileCountrySelectorSlot;true
+;;CountrySelector-ProductListPage;CountrySelector;;CountrySelectorSlot;true
+;;HomepageLink-ProductListPage;HomepageNavLink;ProductListPageTemplate;HomepageNavLinkSlot;true
+;;HeaderAccountNavigation-ProductListPage;HeaderAccountNavigation;ProductListPageTemplate;HeaderAccountNavigationSlot;true
+;;BreadCrumb-ProductListPage;BreadCrumb;ProductListPageTemplate;BreadCrumbSlot;true
+;;MiniCart-ProductListPage;MiniCart;ProductListPageTemplate;MiniCartSlot;true
+;;MobileMiniCart-ProductListPage;MobileMiniCart;;MobileMiniCartSlot;true
+;;NavigationBar-ProductListPage;NavigationBar;ProductListPageTemplate;NavigationBarSlot;true
+;;Footer-ProductListPage;Footer;ProductListPageTemplate;FooterSlot;true
+;;HeaderLinks-ProductListPage;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-ProductListPage;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-ProductListPage;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-ProductListPage;BottomHeaderSlot;;BottomHeaderSlot;true
+;;ProductLeftRefinemnts-ProductListPage;ProductLeftRefinements;;ProductLeftRefinements;true
+;;ProductListSlot-ProductListPage;ProductListSlot;;ProductListSlot;true
+;;PlaceholderContentSlot-ProductListPage;PlaceholderContentSlot;;PlaceholderContentSlot;true
+;;Mobile-NavigationBar-ProductListPage;MobileNavigationBar;;MobileNavigationBarSlot;true
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='CartPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-CartPage;SiteLogo;;SiteLogoSlot;true
+;;MobileSiteLogo-CartPage;MobileSiteLogo;;MobileSiteLogoSlot;true
+;;MobileCountrySelector-CartPage;MobileCountrySelector;;MobileCountrySelectorSlot;true
+;;CountrySelector-CartPage;CountrySelector;;CountrySelectorSlot;true
+;;HomepageLink-CartPage;HomepageNavLink;;HomepageNavLinkSlot;true
+;;HeaderAccountNavigation-CartPage;HeaderAccountNavigation;;HeaderAccountNavigationSlot;true
+;;BreadCrumb-CartPage;BreadCrumb;;BreadCrumbSlot;true
+;;NavigationBar-CartPage;NavigationBar;;NavigationBarSlot;true
+;;MiniCart-CartPage;MiniCart;;MiniCartSlot;true
+;;MobileMiniCart-CartPage;MobileMiniCart;;MobileMiniCartSlot;true
+;;Footer-CartPage;Footer;;FooterSlot;true
+;;HeaderLinks-CartPage;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-CartPage;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-CartPage;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-CartPage;BottomHeaderSlot;;BottomHeaderSlot;true
+;;BottomContentSlot-CartPage;BottomContentSlot;;BottomContentSlot;true
+;;CenterRightContentSlot-CartPage;CenterRightContentSlot;;CenterRightContentSlot;true
+;;CenterLeftContentSlot-CartPage;CenterLeftContentSlot;;CenterLeftContentSlot;true
+;;EmptyCartMiddleContent-CartPage;EmptyCartMiddleContent;;EmptyCartMiddleContent;true
+;;PlaceholderContentSlot-CartPage;PlaceholderContentSlot;;PlaceholderContentSlot;true
+;;Mobile-NavigationBar-CartPage;MobileNavigationBar;;MobileNavigationBarSlot;true
+;;ShoppingCartQuickShopSearchBoxSlot-CartPage;ShoppingCartQuickShopSearchBoxSlot;;ShoppingCartQuickShopSearchBoxSlot;true
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='LoginPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-LoginPage;SiteLogo;;SiteLogoSlot;true
+;;MobileSiteLogo-LoginPage;MobileSiteLogo;;MobileSiteLogoSlot;true
+;;MobileCountrySelector-LoginPage;MobileCountrySelector;;MobileCountrySelectorSlot;true
+;;CountrySelector-LoginPage;CountrySelector;;CountrySelectorSlot;true
+;;HomepageLink-LoginPage;HomepageNavLink;;HomepageNavLinkSlot;true
+;;HeaderAccountNavigation-LoginPage;HeaderAccountNavigation;;HeaderAccountNavigationSlot;true
+;;BreadCrumb-LoginPage;BreadCrumb;;BreadCrumbSlot;true
+;;NavigationBar-LoginPage;NavigationBar;;NavigationBarSlot;true
+;;MiniCart-LoginPage;MiniCart;;MiniCartSlot;true
+;;MobileMiniCart-LoginPage;MobileMiniCart;;MobileMiniCartSlot;true
+;;Footer-LoginPage;Footer;;FooterSlot;true
+;;HeaderLinks-LoginPage;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-LoginPage;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-LoginPage;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-LoginPage;BottomHeaderSlot;;BottomHeaderSlot;true
+;;LeftContentSlot-LoginPage;LeftContentSlot;;LeftContentSlot;true
+;;RightContentSlot-LoginPage;RightContentSlot;;RightContentSlot;true
+;;PlaceholderContentSlot-LoginPage;PlaceholderContentSlot;;PlaceholderContentSlot;true
+;;Mobile-NavigationBar-LoginPage;MobileNavigationBar;;MobileNavigationBarSlot;true
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='CheckoutLoginPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-CheckoutLoginPage;SiteLogo;;SiteLogoSlot;true
+;;MobileSiteLogo-CheckoutLoginPage;MobileSiteLogo;;MobileSiteLogoSlot;true
+;;MobileCountrySelector-CheckoutLoginPage;MobileCountrySelector;;MobileCountrySelectorSlot;true
+;;CountrySelector-CheckoutLoginPage;CountrySelector;;CountrySelectorSlot;true
+;;HomepageLink-CheckoutLoginPage;HomepageNavLink;;HomepageNavLinkSlot;true
+;;HeaderAccountNavigation-CheckoutLoginPage;HeaderAccountNavigation;;HeaderAccountNavigationSlot;true
+;;BreadCrumb-CheckoutLoginPage;BreadCrumb;;BreadCrumbSlot;true
+;;NavigationBar-CheckoutLoginPage;NavigationBar;;NavigationBarSlot;true
+;;MiniCart-CheckoutLoginPage;MiniCart;;MiniCartSlot;true
+;;MobileMiniCart-CheckoutLoginPage;MobileMiniCart;;MobileMiniCartSlot;true
+;;Footer-CheckoutLoginPage;Footer;;FooterSlot;true
+;;HeaderLinks-CheckoutLoginPage;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-CheckoutLoginPage;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-CheckoutLoginPage;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-CheckoutLoginPage;BottomHeaderSlot;;BottomHeaderSlot;true
+;;LeftContentSlot-CheckoutLoginPage;LeftContentSlot;;LeftContentSlot;true
+;;RightContentSlot-CheckoutLoginPage;RightContentSlot;;RightContentSlot;true
+;;CenterContentSlot-CheckoutLoginPage;CenterContentSlot;;CenterContentSlot;true
+;;PlaceholderContentSlot-CheckoutLoginPage;PlaceholderContentSlot;;PlaceholderContentSlot;true
+;;Mobile-NavigationBar-CheckoutLoginPage;MobileNavigationBar;;MobileNavigationBarSlot;true
+
+# Bind Content Slots to Multi Step Checkout Summary Page Templates
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='MultiStepCheckoutSummaryPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-MultiStepCheckoutSummaryPage;SiteLogo;;SiteLogoSlot;true
+;;MobileSiteLogo-MultiStepCheckoutSummaryPage;MobileSiteLogo;;MobileSiteLogoSlot;true
+;;MobileCountrySelector-MultiStepCheckoutSummaryPage;MobileCountrySelector;;MobileCountrySelectorSlot;true
+;;CountrySelector-MultiStepCheckoutSummaryPage;CountrySelector;;CountrySelectorSlot;true
+;;HomepageLink-MultiStepCheckoutSummaryPage;HomepageNavLink;;HomepageNavLinkSlot;true
+;;HeaderAccountNavigation-MultiStepCheckoutSummaryPage;HeaderAccountNavigation;;HeaderAccountNavigationSlot;true
+;;BreadCrumb-MultiStepCheckoutSummaryPage;BreadCrumb;;BreadCrumbSlot;true
+;;NavigationBar-MultiStepCheckoutSummaryPage;NavigationBar;;NavigationBarSlot;true
+;;MiniCart-MultiStepCheckoutSummaryPage;MiniCart;;MiniCartSlot;true
+;;MobileMiniCart-MultiStepCheckoutSummaryPage;MobileMiniCart;;MobileMiniCartSlot;true
+;;Footer-MultiStepCheckoutSummaryPage;Footer;;FooterSlot;true
+;;HeaderLinks-MultiStepCheckoutSummaryPage;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-MultiStepCheckoutSummaryPage;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-MultiStepCheckoutSummaryPage;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-MultiStepCheckoutSummaryPage;BottomHeaderSlot;;BottomHeaderSlot;true
+;;PlaceholderContentSlot-MultiStepCheckoutSummaryPage;PlaceholderContentSlot;;PlaceholderContentSlot;true
+;;Mobile-NavigationBar-MultiStepCheckoutSummaryPage;MobileNavigationBar;;MobileNavigationBarSlot;true
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='OrderConfirmationPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-OrderConfirmationPage;SiteLogo;;SiteLogoSlot;true
+;;MobileSiteLogo-OrderConfirmationPage;MobileSiteLogo;;MobileSiteLogoSlot;true
+;;MobileCountrySelector-OrderConfirmationPage;MobileCountrySelector;;MobileCountrySelectorSlot;true
+;;CountrySelector-OrderConfirmationPage;CountrySelector;;CountrySelectorSlot;true
+;;HomepageLink-OrderConfirmationPage;HomepageNavLink;;HomepageNavLinkSlot;true
+;;HeaderAccountNavigation-OrderConfirmationPage;HeaderAccountNavigation;;HeaderAccountNavigationSlot;true
+;;BreadCrumb-OrderConfirmationPage;BreadCrumb;;BreadCrumbSlot;true
+;;NavigationBar-OrderConfirmationPage;NavigationBar;;NavigationBarSlot;true
+;;MiniCart-OrderConfirmationPage;MiniCart;;MiniCartSlot;true
+;;MobileMiniCart-OrderConfirmationPage;MobileMiniCart;;MobileMiniCartSlot;true
+;;Footer-OrderConfirmationPage;Footer;;FooterSlot;true
+;;HeaderLinks-OrderConfirmationPage;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-OrderConfirmationPage;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-OrderConfirmationPage;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-OrderConfirmationPage;BottomHeaderSlot;;BottomHeaderSlot;true
+;;PlaceholderContentSlot-OrderConfirmationPage;PlaceholderContentSlot;;PlaceholderContentSlot;true
+;;Mobile-NavigationBar-OrderConfirmationPage;MobileNavigationBar;;MobileNavigationBarSlot;true
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='AccountPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-AccountPage;SiteLogo;;SiteLogoSlot;true
+;;MobileSiteLogo-AccountPage;MobileSiteLogo;;MobileSiteLogoSlot;true
+;;MobileCountrySelector-AccountPage;MobileCountrySelector;;MobileCountrySelectorSlot;true
+;;CountrySelector-AccountPage;CountrySelector;;CountrySelectorSlot;true
+;;HeaderAccountNavigation-AccountPage;HeaderAccountNavigation;;HeaderAccountNavigationSlot;true
+;;BreadCrumb-AccountPage;BreadCrumb;;BreadCrumbSlot;true
+;;NavigationBar-AccountPage;NavigationBar;;NavigationBarSlot;true
+;;MiniCart-AccountPage;MiniCart;;MiniCartSlot;true
+;;MobileMiniCart-AccountPage;MobileMiniCart;;MobileMiniCartSlot;true
+;;Footer-AccountPage;Footer;;FooterSlot;true
+;;HeaderLinks-AccountPage;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-AccountPage;SearchBox;;SearchBoxSlot;true
+;;Mobile-NavigationBar-AccountPage;MobileNavigationBar;;MobileNavigationBarSlot;true
+;;ProfileBarJumpTo-AccountPage;ProfileBarJumpTo;;ProfileBarJumpToSlot;true
+;;BreadCrumb-AccountPage;BreadCrumb;;BreadCrumbSlot;true
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ShoppingListsPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-ShoppingListsPage;SiteLogo;;SiteLogoSlot;true
+;;MobileSiteLogo-ShoppingListsPage;MobileSiteLogo;;MobileSiteLogoSlot;true
+;;MobileCountrySelector-ShoppingListsPage;MobileCountrySelector;;MobileCountrySelectorSlot;true
+;;CountrySelector-ShoppingListsPage;CountrySelector;;CountrySelectorSlot;true
+;;HomepageLink-ShoppingListsPage;HomepageNavLink;;HomepageNavLinkSlot;true
+;;HeaderAccountNavigation-ShoppingListsPage;HeaderAccountNavigation;;HeaderAccountNavigationSlot;true
+;;BreadCrumb-ShoppingListsPage;BreadCrumb;;BreadCrumbSlot;true
+;;NavigationBar-ShoppingListsPage;NavigationBar;;NavigationBarSlot;true
+;;MiniCart-ShoppingListsPage;MiniCart;;MiniCartSlot;true
+;;MobileMiniCart-ShoppingListsPage;MobileMiniCart;;MobileMiniCartSlot;true
+;;Footer-ShoppingListsPage;Footer;;FooterSlot;true
+;;HeaderLinks-ShoppingListsPage;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-ShoppingListsPage;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-ShoppingListsPage;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-ShoppingListsPage;BottomHeaderSlot;;BottomHeaderSlot;true
+;;PlaceholderContentSlot-ShoppingListsPage;PlaceholderContentSlot;;PlaceholderContentSlot;true
+;;Mobile-NavigationBar-ShoppingListsPage;MobileNavigationBar;;MobileNavigationBarSlot;true
+;;ShoppingListQuickShopSearchBoxSlot-ShoppingListsPage;ShoppingListQuickShopSearchBoxSlot;;ShoppingListQuickShopSearchBoxSlot;true
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='CategoryLandingPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-CategoryLandingPage;SiteLogo;;SiteLogoSlot;true
+;;MobileSiteLogo-CategoryLandingPage;MobileSiteLogo;;MobileSiteLogoSlot;true
+;;MobileCountrySelector-CategoryLandingPage;MobileCountrySelector;;MobileCountrySelectorSlot;true
+;;CountrySelector-CategoryLandingPage;CountrySelector;;CountrySelectorSlot;true
+;;HomepageLink-CategoryLandingPage;HomepageNavLink;;HomepageNavLinkSlot;true
+;;HeaderAccountNavigation-CategoryLandingPage;HeaderAccountNavigation;;HeaderAccountNavigationSlot;true
+;;BreadCrumb-CategoryLandingPage;BreadCrumb;;BreadCrumbSlot;true
+;;NavigationBar-CategoryLandingPage;NavigationBar;;NavigationBarSlot;true
+;;MiniCart-CategoryLandingPage;MiniCart;;MiniCartSlot;true
+;;MobileMiniCart-CategoryLandingPage;MobileMiniCart;;MobileMiniCartSlot;true
+;;Footer-CategoryLandingPage;Footer;;FooterSlot;true
+;;HeaderLinks-CategoryLandingPage;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-CategoryLandingPage;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-CategoryLandingPage;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-CategoryLandingPage;BottomHeaderSlot;;BottomHeaderSlot;true
+;;PlaceholderContentSlot-CategoryLandingPage;PlaceholderContentSlot;;PlaceholderContentSlot;true
+
+;;TopBannerContentSlot-CategoryLandingPage;TopBannerContentSlot;;TopBannerContentSlot;true
+;;ShopByCategoryContentSlot-CategoryLandingPage;ShopByCategoryContentSlot;;ShopByCategoryContentSlot;true
+;;ShopByCategoryTitleSlot-CategoryLandingPage;ShopByCategoryTitleSlot;;ShopByCategoryTitleSlot;true
+;;ExperienceBrandsContentSlot-CategoryLandingPage;ExperienceBrandsContentSlot;;ExperienceBrandsContentSlot;true
+;;BrandBackgroundImageBannerContentSlot-CategoryLandingPage;BrandBackgroundImageBannerContentSlot;;BrandBackgroundImageBannerContentSlot;true
+;;SuccessStoryContentSlot1-CategoryLandingPage;SuccessStoryContentSlot1;;SuccessStoryContentSlot1;true
+;;SuccessStoryContentSlot2-CategoryLandingPage;SuccessStoryContentSlot2;;SuccessStoryContentSlot2;true
+;;ToolsAndAdviceContentSlot-CategoryLandingPage;ToolsAndAdviceContentSlot;;ToolsAndAdviceContentSlot;true
+;;ToolsAndAdviceBannerContentSlot1-CategoryLandingPage;ToolsAndAdviceBannerContentSlot1;;ToolsAndAdviceBannerContentSlot1;true
+;;ToolsAndAdviceBannerContentSlot2-CategoryLandingPage;ToolsAndAdviceBannerContentSlot2;;ToolsAndAdviceBannerContentSlot2;true
+;;ToolsAndAdviceBannerContentSlot3-CategoryLandingPage;ToolsAndAdviceBannerContentSlot3;;ToolsAndAdviceBannerContentSlot3;true
+;;RecentlyViewedItemCarouselContentSlot-CategoryLandingPage;RecentlyViewedItemCarousel;;RecentlyViewedItemCarouselContentSlot;true
+;;Mobile-NavigationBar-CategoryLandingPage;MobileNavigationBar;;MobileNavigationBarSlot;true
+
+# Content Article Page Template
+# Template used for content article landing page contentArticlePagesLayout
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ContentArticlePagesTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-ContentArticlePages;SiteLogo;;SiteLogoSlot;true
+;;MobileSiteLogo-ContentArticlePages;MobileSiteLogo;;MobileSiteLogoSlot;true
+;;MobileCountrySelector-ContentArticlePages;MobileCountrySelector;;MobileCountrySelectorSlot;true
+;;CountrySelector-ContentArticlePages;CountrySelector;;CountrySelectorSlot;true
+;;HomepageLink-ContentArticlePages;HomepageNavLink;;HomepageNavLinkSlot;true
+;;HeaderAccountNavigation-ContentArticlePages;HeaderAccountNavigation;;HeaderAccountNavigationSlot;true
+;;BreadCrumb-ContentArticlePages;BreadCrumb;;BreadCrumbSlot;true
+;;NavigationBar-ContentArticlePages;NavigationBar;;NavigationBarSlot;true
+;;MiniCart-ContentArticlePages;MiniCart;;MiniCartSlot;true
+;;MobileMiniCart-ContentArticlePages;MobileMiniCart;;MobileMiniCartSlot;true
+;;Footer-ContentArticlePages;Footer;;FooterSlot;true
+;;HeaderLinks-ContentArticlePages;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-ContentArticlePages;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-ContentArticlePages;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-ContentArticlePages;BottomHeaderSlot;;BottomHeaderSlot;true
+;;PlaceholderContentSlot-ContentArticlePages;PlaceholderContentSlot;;PlaceholderContentSlot;true
+;;Mobile-NavigationBar-ContentArticlePages;MobileNavigationBar;;MobileNavigationBarSlot;true
+
+;;PathwayToSuccessContentSlot-ContentArticlePages;PathwayToSuccessContentSlot;;PathwayToSuccessContentSlot;true
+;;BuildYourBusinessContentSlot-ContentArticlePages;BuildYourBusinessContentSlot;;BuildYourBusinessContentSlot;true
+;;ExperienceTheStarterKitContentSlot-ContentArticlePages;ExperienceTheStarterKitContentSlot;;ExperienceTheStarterKitContentSlot;true
+;;SuccessStoryContentSlot1-ContentArticlePages;ArticleSuccessStoryContentSlot1;;ArticleSuccessStoryContentSlot1;true
+;;SuccessStoryContentSlot2-ContentArticlePages;ArticleSuccessStoryContentSlot2;;ArticleSuccessStoryContentSlot2;true
+
+# Register Landing Page Template
+# Template used for register landing page registerLandingPageLayout
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='RegisterLandingPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-RegisterLandingPage;SiteLogo;;SiteLogoSlot;true
+;;MobileSiteLogo-RegisterLandingPage;MobileSiteLogo;;MobileSiteLogoSlot;true
+;;MobileCountrySelector-RegisterLandingPage;MobileCountrySelector;;MobileCountrySelectorSlot;true
+;;CountrySelector-RegisterLandingPage;CountrySelector;;CountrySelectorSlot;true
+;;HomepageLink-RegisterLandingPage;HomepageNavLink;;HomepageNavLinkSlot;true
+;;HeaderAccountNavigation-RegisterLandingPage;HeaderAccountNavigation;;HeaderAccountNavigationSlot;true
+;;BreadCrumb-RegisterLandingPage;BreadCrumb;;BreadCrumbSlot;true
+;;NavigationBar-RegisterLandingPage;NavigationBar;;NavigationBarSlot;true
+;;MiniCart-RegisterLandingPage;MiniCart;;MiniCartSlot;true
+;;MobileMiniCart-RegisterLandingPage;MobileMiniCart;;MobileMiniCartSlot;true
+;;Footer-RegisterLandingPage;Footer;;FooterSlot;true
+;;HeaderLinks-RegisterLandingPage;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-RegisterLandingPage;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-RegisterLandingPage;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-RegisterLandingPage;BottomHeaderSlot;;BottomHeaderSlot;true
+;;PlaceholderContentSlot-RegisterLandingPage;PlaceholderContentSlot;;PlaceholderContentSlot;true
+;;Mobile-NavigationBar-RegisterLandingPage;MobileNavigationBar;;MobileNavigationBarSlot;true
+
+;;JoinAmwayContentSlot-RegisterLandingPage;JoinAmwayContentSlot;;JoinAmwayContentSlot;true
+;;WeAreAmwayContentSlot-RegisterLandingPage;WeAreAmwayContentSlot;;WeAreAmwayContentSlot;true
+;;BecomeAnABOContentSlot-RegisterLandingPage;BecomeAnABOContentSlot;;BecomeAnABOContentSlot;true
+;;BecomeACustomerContentSlot-RegisterLandingPage;BecomeACustomerContentSlot;;BecomeACustomerContentSlot;true
+;;FooterNoticeToolTipParagraphContentSlot-RegisterLandingPage;FooterNoticeToolTipParagraphContentSlot;;FooterNoticeToolTipParagraphContentSlot;true
+;;FooterNoticeParagraphContentSlot-RegisterLandingPage;FooterNoticeParagraphContentSlot;;FooterNoticeParagraphContentSlot;true
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='StoreFinderPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-StoreFinderPage;SiteLogo;;SiteLogoSlot;true
+;;MobileSiteLogo-StoreFinderPage;MobileSiteLogo;;MobileSiteLogoSlot;true
+;;MobileCountrySelector-StoreFinderPage;MobileCountrySelector;;MobileCountrySelectorSlot;true
+;;CountrySelector-StoreFinderPage;CountrySelector;;CountrySelectorSlot;true
+;;HomepageLink-StoreFinderPage;HomepageNavLink;;HomepageNavLinkSlot;true
+;;HeaderAccountNavigation-StoreFinderPage;HeaderAccountNavigation;;HeaderAccountNavigationSlot;true
+;;BreadCrumb-StoreFinderPage;BreadCrumb;;BreadCrumbSlot;true
+;;NavigationBar-StoreFinderPage;NavigationBar;;NavigationBarSlot;true
+;;MiniCart-StoreFinderPage;MiniCart;;MiniCartSlot;true
+;;MobileMiniCart-StoreFinderPage;MobileMiniCart;;MobileMiniCartSlot;true
+;;Footer-StoreFinderPage;Footer;;FooterSlot;true
+;;HeaderLinks-StoreFinderPage;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-StoreFinderPage;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-StoreFinderPage;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-StoreFinderPage;BottomHeaderSlot;;BottomHeaderSlot;true
+;;MiddleContentSlot-StoreFinderPage;MiddleContent;;MiddleContentSlot;true
+;;PlaceholderContentSlot-StoreFinderPage;PlaceholderContentSlot;;PlaceholderContentSlot;true
+;;Mobile-NavigationBar-StoreFinderPage;MobileNavigationBar;;MobileNavigationBarSlot;true
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ErrorPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-ErrorPage;SiteLogo;;SiteLogoSlot;true
+;;MobileSiteLogo-ErrorPage;MobileSiteLogo;;MobileSiteLogoSlot;true
+;;MobileCountrySelector-ErrorPage;MobileCountrySelector;;MobileCountrySelectorSlot;true
+;;CountrySelector-ErrorPage;CountrySelector;;CountrySelectorSlot;true
+;;HomepageLink-ErrorPage;HomepageNavLink;;HomepageNavLinkSlot;true
+;;HeaderAccountNavigation-ErrorPage;HeaderAccountNavigation;;HeaderAccountNavigationSlot;true
+;;BreadCrumb-ErrorPage;BreadCrumb;;BreadCrumbSlot;true
+;;NavigationBar-ErrorPage;NavigationBar;;NavigationBarSlot;true
+;;MiniCart-ErrorPage;MiniCart;;MiniCartSlot;true
+;;MobileMiniCart-ErrorPage;MobileMiniCart;;MobileMiniCartSlot;true
+;;Footer-ErrorPage;Footer;;FooterSlot;true
+;;HeaderLinks-ErrorPage;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-ErrorPage;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-ErrorPage;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-ErrorPage;BottomHeaderSlot;;BottomHeaderSlot;true
+;;PlaceholderContentSlot-ErrorPage;PlaceholderContentSlot;;PlaceholderContentSlot;true
+;;Mobile-NavigationBar-ErrorPage;MobileNavigationBar;;MobileNavigationBarSlot;true
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='HomePageMainTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-HomePageMain;SiteLogo;;SiteLogoSlot;true
+;;MobileSiteLogo-HomePageMain;MobileSiteLogo;;MobileSiteLogoSlot;true
+;;MobileCountrySelector-HomePageMain;MobileCountrySelector;;MobileCountrySelectorSlot;true
+;;CountrySelector-HomePageMain;CountrySelector;;CountrySelectorSlot;true
+;;MiniCart-HomePageMain;MiniCart;;MiniCartSlot;true
+;;MobileMiniCart-HomePageMain;MobileMiniCart;;MobileMiniCartSlot;true
+;;Footer-HomePageMain;Footer;;FooterSlot;true
+;;SearchBox-HomePageMain;SearchBox;;SearchBoxSlot;true
+;;NavigationBar-HomePageMain;NavigationBar;;NavigationBarSlot;true
+;;Mobile-NavigationBar-HomePageMain;MobileNavigationBar;;MobileNavigationBarSlot;true
+;;HeaderAccountNavigation-HomePageMain;HeaderAccountNavigation;;HeaderAccountNavigationSlot;true
+;;Section1-HomePageMain;Section1;;Section1CarouselSlot;true
+;;Section2-HomePageMain;Section2;;Section2ContentSlot;true
+;;Section3A-HomePageMain;Section3A;;Section3AContentSlot;true
+;;Section3B-HomePageMain;Section3B;;Section3BContentSlot;true
+;;Section4-HomePageMain;Section4;;Section4ContentSlot;true
+;;Section5-HomePageMain;Section5;;Section5CarouselSlot;true
+;;Section6A-HomePageMain;Section6A;;Section6ASlot;true
+;;Section6B-HomePageMain;Section6B;;Section6BSlot;true
+;;Section6C-HomePageMain;Section6C;;Section6CSlot;true
+;;Section7-HomePageMain;Section7;;Section7Slot;true
+;;Section8-HomePageMain;Section8;;Section8Slot;true
+;;Section9A-HomePageMain;Section9A;;Section9ASlot;true
+;;Section9B-HomePageMain;Section9B;;Section9BSlot;true
+;;Section9C-HomePageMain;Section9C;;Section9CSlot;true
+;;Section10-HomePageMain;Section10;;Section10Slot;true
+;;Section11-HomePageMain;Section11;;Section11Slot;true
+;;Section12-HomePageMain;Section12;;Section12Slot;true
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='RegistrationTermsTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-RegisterTerms;SiteLogo;;SiteLogoSlot;true
+;;MobileSiteLogo-RegisterTerms;MobileSiteLogo;;MobileSiteLogoSlot;true
+;;MobileCountrySelector-RegisterTerms;MobileCountrySelector;;MobileCountrySelectorSlot;true
+;;CountrySelector-RegisterTerms;CountrySelector;;CountrySelectorSlot;true
+;;MiniCart-RegisterTerms;MiniCart;;MiniCartSlot;true
+;;Footer-RegisterTerms;Footer;;FooterSlot;true
+;;SearchBox-RegisterTerms;SearchBox;;SearchBoxSlot;true
+;;NavigationBar-RegisterTerms;NavigationBar;;NavigationBarSlot;true
+;;Mobile-NavigationBar-RegisterTerms;MobileNavigationBar;;MobileNavigationBarSlot;true
+;;HeaderAccountNavigation-RegisterTerms;HeaderAccountNavigation;;HeaderAccountNavigationSlot;true
+;;BreadCrumb-RegisterTerms;BreadCrumb;;BreadCrumbSlot;true
+;;Footer-RegisterTerms;Footer;;FooterSlot;true
+;;HeaderLinks-RegisterTerms;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-RegisterTerms;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-RegisterTerms;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-RegisterTerms;BottomHeaderSlot;;BottomHeaderSlot;true
+;;TermsBanner-RegisterTerms;TermsBanner;;TermsBannerContentSlot;true
+
+
+# Create Content Pages
+
+# Site-wide Homepage
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='true']
+;;homepage;Homepage;HomePageMainTemplate;homepage
+
+# Preview Image for use in the CMS Cockpit for special ContentPages
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];mime;realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true]
+;;ContentPageModel__function_preview;text/gif;ContentPageModel__function_preview.gif;$jarResourceCms/preview-images/ContentPageModel__function_preview.gif
+
+# Functional Content Pages
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false'];previewImage(code, $contentCV)[default='ContentPageModel__function_preview']
+;;multiStepCheckoutSummaryPage;Multi Checkout Summary Page;MultiStepCheckoutSummaryPageTemplate;multiStepCheckoutSummary
+;;orderConfirmationPage;Order Confirmation Page;OrderConfirmationPageTemplate;orderConfirmation
+;;cartPage;Cart Page;CartPageTemplate;cart
+;;search;Search Results Page;SearchResultsGridPageTemplate;search
+;;account;Account Page;AccountPageTemplate;account
+;;profile;Profile Page;AccountPageTemplate;profile
+;;address-book;Address Book Page;AccountPageTemplate;address-book
+;;add-edit-address;Add Edit Address Page;AccountPageTemplate;add-edit-address
+;;payment-details;Payment Details Page;AccountPageTemplate;payment-details
+;;order;Order Details Page;AccountPageTemplate;order
+;;orders;Order History Page;AccountPageTemplate;orders
+;;storefinderPage;StoreFinder Page;StoreFinderPageTemplate;storefinder
+;;checkout-login;Checkout-Login Page;CheckoutLoginPageTemplate;checkout-login
+;;login;Login Page;LoginPageTemplate;login
+;;notFound;Not Found Page;ErrorPageTemplate;notFound
+;;searchEmpty;Search Results Empty Page;SearchResultsEmptyPageTemplate;searchEmpty
+;;updatePassword;Update Forgotten Password Page;AccountPageTemplate;updatePassword
+;;update-profile;Update Profile Page;AccountPageTemplate;update-profile
+;;update-email;Update Email Page;AccountPageTemplate;update-email
+;;shopping-lists;Shopping Lists Page;ShoppingListsPageTemplate;shopping-lists
+;;shopping-list-details;Shopping List Details Page;ShoppingListsPageTemplate;shopping-list-details
+;;category-landing-page;Category Landing Page;CategoryLandingPageTemplate;category-landing-page
+;;content-article-pages;Content Article Pages;ContentArticlePagesTemplate;/content-article-pages
+;;register-landing-page;Register;RegisterLandingPageTemplate;/register-landing-page
+;;billing-shipping;Billing Shipping Page;AccountPageTemplate;billing-shipping
+;;business-information;Business Information Page;AccountPageTemplate;business-information
+;;registration-simple-terms;Registration Simple Terms Page;RegistrationTermsTemplate;simple-terms
+;;registration-multiple-terms;Registration Multiple Terms Page;RegistrationTermsTemplate;multiple-terms
+
+# Simple Content Pages
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+;;faq;Frequently Asked Questions FAQ Page;ContentPage1Template;/faq
+
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+;;orderExpired;Order Expired Page;ContentPage1Template;/orderExpired
+
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+;;termsAndConditions;Terms and Conditions Page;ContentPage1Template;/termsAndConditions
+
+# Product Details Page
+INSERT_UPDATE ProductPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);defaultPage;approvalStatus(code)[default='approved']
+;;productDetails;Product Details;ProductDetailsPageTemplate;true;
+
+# Category Pages
+INSERT_UPDATE CategoryPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);defaultPage;approvalStatus(code)[default='approved']
+;;productList;Product List;ProductListPageTemplate;false;
+;;productGrid;Product Grid;ProductGridPageTemplate;true;
+;;category;Default Category Page;CategoryPageTemplate;false;

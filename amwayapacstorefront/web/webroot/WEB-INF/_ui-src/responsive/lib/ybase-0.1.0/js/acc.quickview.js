@@ -1,44 +1,54 @@
 ACC.quickview = {
-
 	_autoload: [
-		"bindToUiCarouselLink",
+		"bindQuickViewPopup",
+        "bindColorVariantSelection",
+        "bindVariantAttribute2Selection",
 	],
 		
-		
-	initQuickviewLightbox:function(){
-		ACC.product.enableAddToCartButton();
-		ACC.product.bindToAddToCartForm();
-		ACC.product.enableStorePickupButton();
-	},
-		
-	refreshScreenReaderBuffer: function ()
-	{
-		// changes a value in a hidden form field in order
-		// to trigger a buffer update in a screen reader
-		$('#accesibility_refreshScreenReaderBufferField').attr('value', new Date().getTime());
-	},
-	
+	bindQuickViewPopup : function(){
+        $(document).on('click', '.quick-view-btn, .add-to-cart-quick-view', function(event) {
+            event.preventDefault();
+            var productCode = $(this).data("productCode");
+            $.ajax({
+    			  url:ACC.config.contextPath + "/p/" + productCode + "/quickView",
+    			  type: "GET",
+    			  success: function(data) {
+    				  ACC.popup.showPopup(data);
+    			  },
+    			  error: function() {
+    				  ACC.global.appendGlobalMessage(ACC.globalMessageTypes.ERROR_MESSAGES_HOLDER, ACC.messages.quickViewFetchError);
+    			  }
+    		  });
+        });
+    },
 
-
-	bindToUiCarouselLink: function ()
-	{
-		var titleHeader = $('#quickViewTitle').html();
-		$(".js-owl-carousel-reference .js-reference-item").colorbox({
-			close:'<span class="glyphicon glyphicon-remove"></span>',
-			title: titleHeader,
-			maxWidth:"100%",
-			onComplete: function ()
-			{
-				ACC.quickview.refreshScreenReaderBuffer();
-				ACC.quickview.initQuickviewLightbox();
-				ACC.ratingstars.bindRatingStars($(".quick-view-stars"));
-			},
-
-			onClosed: function ()
-			{
-				ACC.quickview.refreshScreenReaderBuffer();
-			}
+	bindColorVariantSelection : function(){
+		$("#modal-popup-container").on("click", ".view-box .cart-popup__dialog .lip-color-choose__nav a", function(event){
+			event.preventDefault();
+			var productCode = $(this).closest("li").data("productCode");
+			ACC.quickview.replaceQuickViewDisplayContent(productCode);
 		});
-	}
+	},
 	
+	bindVariantAttribute2Selection : function(){
+		$("#modal-popup-container").on("change", ".view-box .cart-popup__dialog .size-selector-container select", function(event){
+			var productCode = $(this).find(":selected").data("productCode");
+			ACC.quickview.replaceQuickViewDisplayContent(productCode);
+		});
+	},
+	
+	replaceQuickViewDisplayContent : function(productCode) {
+		if (productCode) {
+			$.ajax({
+				  url:ACC.config.contextPath + "/p/" + productCode + "/quickView",
+				  type: "GET",
+				  success: function(data) {
+					  ACC.popup.refreshPopupContent(data);
+				  },
+				  error: function() {
+					  ACC.global.appendGlobalMessage(ACC.globalMessageTypes.ERROR_MESSAGES_HOLDER, ACC.messages.quickViewFetchError);
+				  }
+			 });
+		}
+	}
 };

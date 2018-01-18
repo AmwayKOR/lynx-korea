@@ -42,7 +42,7 @@ public class ResponsivePaymentCheckoutStepValidator extends AbstractCheckoutStep
 		{
 			GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.INFO_MESSAGES_HOLDER,
 					"checkout.multi.deliveryMethod.notprovided");
-			return ValidationResults.REDIRECT_TO_DELIVERY_METHOD;
+			return ValidationResults.REDIRECT_TO_DELIVERY_ADDRESS;
 		}
 		return ValidationResults.SUCCESS;
 	}

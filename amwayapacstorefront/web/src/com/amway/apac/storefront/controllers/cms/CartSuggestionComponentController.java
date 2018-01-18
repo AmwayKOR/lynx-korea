@@ -14,8 +14,6 @@ import de.hybris.platform.acceleratorcms.model.components.CartSuggestionComponen
 import de.hybris.platform.acceleratorcms.model.components.SimpleSuggestionComponentModel;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.cms.AbstractCMSComponentController;
 import de.hybris.platform.commercefacades.order.CartFacade;
-import com.amway.apac.facades.suggestion.SimpleSuggestionFacade;
-import com.amway.apac.storefront.controllers.ControllerConstants;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +22,9 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.amway.apac.facades.suggestion.AmwaySimpleSuggestionFacade;
+import com.amway.apac.storefront.controllers.ControllerConstants;
 
 
 /**
@@ -37,7 +38,7 @@ public class CartSuggestionComponentController extends AbstractCMSComponentContr
 	private CartFacade cartFacade;
 
 	@Resource(name = "simpleSuggestionFacade")
-	private SimpleSuggestionFacade simpleSuggestionFacade;
+	private AmwaySimpleSuggestionFacade simpleSuggestionFacade;
 
 	@Override
 	protected void fillModel(final HttpServletRequest request, final Model model, final CartSuggestionComponentModel component)
@@ -45,10 +46,8 @@ public class CartSuggestionComponentController extends AbstractCMSComponentContr
 		if (cartFacade.hasSessionCart())
 		{
 			model.addAttribute("title", component.getTitle());
-			model.addAttribute(
-					"suggestions",
-					simpleSuggestionFacade.getSuggestionsForProductsInCart(component.getProductReferenceTypes(),
-							component.isFilterPurchased(), component.getMaximumNumberProducts()));
+			model.addAttribute("suggestions", simpleSuggestionFacade.getSuggestionsForProductsInCart(
+					component.getProductReferenceTypes(), component.isFilterPurchased(), component.getMaximumNumberProducts()));
 		}
 	}
 

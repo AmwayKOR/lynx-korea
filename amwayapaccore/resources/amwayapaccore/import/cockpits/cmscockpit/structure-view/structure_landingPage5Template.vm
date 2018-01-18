@@ -16,6 +16,7 @@
 				</td>
 				<td width="20%" rowspan="2" class="structureViewSection">
 					<cockpit code="MiniCart" />
+					<cockpit code="MobileMiniCart" />
 				</td>
 			</tr>
 			<tr>

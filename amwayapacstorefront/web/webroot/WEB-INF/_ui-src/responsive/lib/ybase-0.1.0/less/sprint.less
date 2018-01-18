@@ -1,0 +1,4130 @@
+@import 'main.less';
+//Auto Renewal
+.auto-renewal{
+  .ditto-schedule-table-content{
+    .ditto-schedule-table{
+      .ditto-field-name{
+        width:10%;
+      }
+    }
+  }
+  .bonus-payment-content{
+    .bonus-payment-wrapper{
+      border-bottom:@none;
+      .auto-renewal-signed-message{
+        .stock{
+          .green{
+            padding-left:0;
+          }
+        }
+      }
+      .bonus-payment__title{
+        img{
+          position: absolute;
+          top: 35px;
+          left: -30px;
+          margin-top:0;
+          margin-right:0;
+        }
+      }
+      .bonus-payment__description{
+        width:80%;
+      }
+      .shipping-delivery-ship{
+        border-bottom:none;
+        .shipping-delivery-setup-title{
+          color:@mainColor;
+        }
+        .panel{
+          -webkit-box-shadow: initial;
+          box-shadow: initial;
+          label{
+            padding-top:0;
+            text-transform: initial;
+          }
+        }
+      }
+      .auto-renewal-fees{
+        padding-bottom: 45px;
+        .ditto-sorting-form{
+          button{
+            background-color: transparent;
+            min-width: 0;
+          }
+        }
+        .ditto-schedule-table-content{
+          .new-table-block-wrapper{
+            padding-top:0;
+          }
+          .ditto-schedule-table{
+            thead{
+              tr{
+                .ditto-field-name{
+                  width:10%;
+                }
+                & th:nth-child(2){
+                  width:40%;
+                }
+                & th:nth-child(3){
+                  width:40%;
+                }
+              }
+            }
+            tbody{
+              tr{
+                .ditto-field-name{
+                  padding-left:40px;
+                  ._checkbox-element-global-span{
+                    &:before{
+                      left:2px;
+                      font-size: 12px;
+                      font-weight:100;
+                    }
+                  }
+                }
+                td{
+                  vertical-align: middle;
+                }
+              }
+            }
+          }
+        }
+      }
+      .auto-renewal-fees-signed{
+        padding-top:20px;
+      }
+      .select-payment-method{
+        .billing-shipping{
+          .accordion-billing-shipping{
+            .panel{
+              border-bottom: none;
+              .add-new-payment-info{
+                padding-bottom:0!important;
+              }
+              &:first-child{
+                border-top:none;
+              }
+              .panel-collapse{
+                padding:0;
+                .payment-info-container{
+                  .row{
+                    .block-right{
+                      padding-top:0!important;
+                      height:49px;
+                      line-height: 49px;
+                      &.active{
+                        padding-top:15px;
+                      .button-block{
+                        .payment-selected {
+                          display: @block;
+                        }
+                        .btn-primary{
+                          display: @none;
+                        }
+                      }
+                      }
+                      >div{
+                        vertical-align: middle;
+                      }
+                      .expires-message-warpper{
+                        .expires-label{
+                          color: @blue_1;
+                          font-weight:@weight600;
+                          margin-right: 10px;
+                          text-transform: uppercase;
+                        }
+                      }
+                      .button-block{
+                        .payment-selected{
+                          display: @none;
+                          color:@green;
+                          font-weight:@weight600;
+                          width: 132px;
+                          float: right;
+                          text-align: center;
+                          .payment-selected-icon{
+                            padding-right: 5px;
+                            &:before{
+                              font-family: 'AmwayIcons' !important;
+                              speak: none;
+                              font-style: normal;
+                              font-weight: normal;
+                              font-variant: normal;
+                              text-transform: none;
+                              line-height: 1;
+                              -webkit-font-smoothing: antialiased;
+                              -moz-osx-font-smoothing: grayscale;
+                              font-size: 12px;
+                              content: "\e909";
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+                .payment-selected{
+                  .account-cards{
+                    border-bottom:1px solid @gray_8!important;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      .auto-renewal-agreement{
+        .auto-renewal-agreement-text{
+          width:80%;
+          height: 200px;
+          overflow-y: scroll;
+          border: 1px solid @gray_8;
+          padding: 0 10px;
+        }
+        label{
+          text-transform: inherit;
+          color:@mainColor;
+          padding-top:40px;
+          ._checkbox-element-global-span{
+            &:before{
+              left:2px;
+              font-size: 12px;
+              font-weight:100;
+            }
+          }
+        }
+      }
+      .auto-renewal-actions{
+        margin-top: 20px;
+        .btn-blue-white{
+          font-weight: 100;
+          background-color:@blue_1;
+          color: @white;
+          font-size: 16px;
+          padding: 10px 30px;
+          margin-right:20px;
+          &:hover{
+            background-color: @white;
+            color: @blue_1;
+            border:2px solid @blue_1;
+          }
+        }
+      }
+    }
+  }
+  .card-image{
+    vertical-align: middle!important;
+  }
+  .auto-renewal-signed-message{
+    .product-availability{
+      .text{
+        font-size: 1.25em;
+      }
+    }
+  }
+  .card-info-block {
+    padding-top:0;
+    height: 49px;
+    line-height: 49px;
+  }
+}
+@media(max-width:768px){
+  .auto-renewal {
+    .bonus-payment-content {
+      .bonus-payment-wrapper {
+        .bonus-payment__title{
+          img{
+            top: 27px;
+          }
+        }
+        .bonus-payment__description{
+          width:100%;
+        }
+        .select-payment-method {
+          .billing-shipping {
+            .accordion-billing-shipping {
+              .panel {
+                .panel-collapse {
+                  .payment-info-container {
+                    .row {
+                      .card-info-block {
+                        .card-image {
+                          float: right;
+                        }
+                        .card-code{
+                          display: block;
+                        }
+                      }
+                      .block-right {
+                        .card-info {
+                          display: block;
+                        }
+                        .button-block {
+                          float: left;
+                          padding-top: 20px;
+                          .payment-selected {
+                            text-align: left;
+                          }
+                        }
+                        &.active{
+                          padding-top:0;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        .auto-renewal-agreement {
+          .auto-renewal-agreement-text {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}
+
+//message center
+#message-center {
+  .message-title {
+    padding-bottom: 35px;
+    div {
+      display: inline-block;
+      &:first-child {
+        float: left;
+      }
+      &:last-child {
+        float: right;
+      }
+      .line {
+        padding: 0 10px;
+      }
+    }
+  }
+  .message-center-list {
+    .billing-shipping {
+      .accordion-billing-shipping {
+        .panel {
+          border-top: none;
+          border-bottom:none;
+          &:last-child{
+            border-bottom:1px solid @gray_8;
+          }
+          .panel-collapse {
+            padding: 0;
+            .card-info-block {
+              padding-top: 0;
+              .card-info {
+                .card-data {
+                  .expiration-date {
+                    display: block;
+                  }
+                }
+              }
+            }
+            .block-right {
+              text-align: right;
+              .product-stock {
+                padding-top: 12px;
+                .product-availability {
+                  text-transform: uppercase;
+                  > span {
+                    padding-left: 0;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .account-orderhistory-pagination{
+      .text-center{
+        .btn{
+          text-transform: inherit;
+        }
+        .icon-arrow-dropdown{
+          vertical-align:baseline;
+        }
+      }
+    }
+  }
+
+  //pop common style
+  .message-center-pop{
+    &.bonus-payment-method{
+      &#colorbox {
+        top: 0!important;
+        width: 100%!important;
+        height: 100%!important;
+        #cboxWrapper {
+          height: 100%;
+          #cboxContent{
+            height:100%;
+            #cboxLoadedContent{
+              max-height: calc(100vh);
+              max-width: 1200px;
+              margin: 0 auto;
+              position: relative;
+              padding-top: 60px;
+              .message-center-pop-content{
+                padding: 0 45px 30px;
+                margin-bottom: 65px;
+                @media(max-width:900px) {
+                  padding: 0 15px 30px;
+                }
+                #message-center-list-pop1,#message-center-list-pop2{
+                  .billing-shipping{
+                    .accordion-billing-shipping{
+                      .panel{
+                        #paymentInformationBody.panel-collapse{
+                          .account-list{
+                            .account-cards{
+                              border-left:none;
+                              border-right:none;
+                              .card-info-block{
+                                padding-left:0;
+                                .panel-title-text{
+                                  font-size:24px;
+                                  color:@blue_1;
+                                  text-transform: uppercase;
+                                }
+                              }
+                              .block-right{
+                                padding-right:0;
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+          #cboxClose{
+            right:0;
+            top: 10px;
+            padding-right: 45px;
+            .modal-close-icon{
+              color:inherit!important;
+            }
+          }
+        }
+      }
+
+      .line{
+        border-top:1px solid @gray_8;
+        margin:40px 0;
+      }
+      .message-center-pop1-bottom{
+        text-align: center;
+        position: relative;
+        .btn{
+          border:2px solid @blue_1;
+          color:@blue_1;
+          &:hover{
+            background-color: @blue_1;
+            color:@white;
+          }
+        }
+        .next{
+          float: right;
+          position: absolute;
+          top: -12px;
+          right: 0;
+          width:98px;
+        }
+        .previews{
+          float: left;
+          position: absolute;
+          top: -12px;
+          left: 0;
+        }
+      }
+    }
+  }
+  //pop1 style
+  .message-center-pop1{
+    &.bonus-payment-method{
+      #cboxLoadedContent{
+        margin-top:60px;
+        .message-center-pop-rule{
+          font-size: 16px;
+          p{
+            margin-bottom:20px;
+          }
+        }
+        .message-center-pop-time{
+          font-size: 16px;
+          margin-bottom: 20px;
+        }
+        .message-center-pop-invate{
+          font-size:16px;
+        }
+      }
+    }
+  }
+
+  //pop style2
+  .message-center-pop2{
+    .video-preview{
+      .video-preview__img{
+        min-height:450px;
+      }
+    }
+    .amway-suggest{
+      border-top:none;
+      margin-bottom:40px;
+      .amway-suggest__title{
+        margin-bottom:20px;
+        margin-top:40px;
+      }
+      .pop2-best-product{
+        font-size: 16px;
+        text-align: center;
+        color:@mainColor;
+        font-weight: 100;
+        margin-bottom:30px;
+      }
+      .owl-theme{
+        .owl-controls{
+          .owl-nav{
+            .owl-prev{
+              left:-20px;
+            }
+            .owl-next {
+              right: -20px;
+            }
+          }
+        }
+      }
+    }
+    .category-success-story{
+      .success-story__item{
+        &:first-child{
+          padding-left:0;
+        }
+        &:last-child{
+          padding-right:0;
+        }
+      }
+    }
+    #cboxClose{
+      //right:15px!important;
+    }
+  }
+}
+@media (max-width: 768px) {
+  #message-center {
+    .message-title {
+      padding-bottom: 0;
+      div {
+        display: block;
+        &:first-child {
+          float: none;
+          padding-bottom: 20px;
+        }
+        &:last-child {
+          float: none;
+        }
+        .line {
+          padding: 0 10px;
+        }
+      }
+    }
+    .message-center-list {
+      .billing-shipping {
+        .accordion-billing-shipping {
+          .panel-collapse {
+            .block-right {
+              text-align: left!important;
+              .product-stock {
+                padding-top:0!important;
+              }
+            }
+          }
+        }
+      }
+    }
+    .message-center-pop{
+      #cboxWrapper{
+        #cboxContent{
+          #cboxLoadedContent{
+            padding-top:40px!important;
+            .billing-shipping{
+              .accordion-billing-shipping{
+                padding:20px 0;
+              }
+            }
+            .category-success-story{
+              margin-left:0;
+              margin-right:0;
+            }
+            #cboxClose{
+              right:15px!important;
+              padding-right:0!important;
+              top:6px!important;
+            }
+          }
+        }
+      }
+    }
+
+  }
+}
+@media(max-width: 1030px){
+  .message-center-pop2{
+    .amway-suggest__list {
+      width:920px;
+      margin: 0 auto;
+    }
+  }
+}
+@media(max-width: 768px) {
+  .message-center-pop2 {
+    .amway-suggest__list {
+      width: 700px;
+      margin: 0 auto;
+    }
+  }
+}
+@media(max-width: 640px) {
+  .message-center-pop2 {
+    .amway-suggest__list {
+      width: 300px;
+      margin: 0 auto;
+    }
+  }
+}
+
+//Customer Sales History
+#customer-sales-history{
+  h1.page-title{
+    padding:0 12px;
+  }
+  .account-section-content{
+    .order-history-box{
+      display: inherit;
+      .account-orderhistory{
+        .navigation-tabs-container{
+          .tab-content{
+            .order-history-search-wrapper{
+              .form-wrapper{
+                .view{
+                  color: #002f5f;
+                  font-weight: 600;
+                  padding-right: 10px;
+                }
+                .js-automation-order-history-sort-apply{
+                  position: relative;
+                  top:-1px;
+                }
+                .js-automation-order-history-search-btn {
+                  padding: 6px 25px;
+                  height: 40px!important;
+                  position: relative;
+                  top: -2px;
+                  border:2px solid @blue_1;
+                }
+                #searchData{
+                  width:270px;
+                }
+              }
+            }
+            &.tabs-content-blocks{
+              .ditto-schedule-table{
+                .have-star{
+                  font-family: 'Glyphicons Halflings';
+                  font-style: normal;
+                  font-weight: normal;
+                  font-variant: normal;
+                  text-transform: none;
+                  color: #e11e45;
+                  font-size: 12px;
+                  position: relative;
+                  top: -2px;
+                  left: 8px;
+                  &:after{
+                    content: "\e006";
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .ditto-schedule-table{
+    tbody{
+      tr{
+        td{
+          vertical-align: middle;
+        }
+      }
+    }
+  }
+  .amway-theme{
+    .prw-nav{
+      .prw-nav-container{
+        display: inherit;
+      }
+    }
+  }
+}
+@media(max-width: 768px){
+  #customer-sales-history{
+    .breadcrumb{
+      padding-right:0;
+    }
+    #searchData{
+      width: 100%!important;
+    }
+    .prw-jump-to-button{
+      padding:9px 10px;
+    }
+  }
+}
+
+// Customer Sales History Searched
+#customer-sales-history-searched{
+  h1.page-title{
+    display: inline-block;
+    width: 100%;
+    .message-title{
+      font-size: 16px;
+      float: right;
+      position: relative;
+      top:22px;
+      .line{
+        color:@gray_2;
+      }
+      a{
+        padding: 0 10px;
+        text-transform: initial;
+        font-family: SourceSansPro;
+        font-weight: 600!important;
+      }
+    }
+  }
+  .account-section-content {
+    .order-history-box {
+      display: inherit;
+      .customer-sales-history-searched-content{
+        padding-left:12px;
+        .customer-PV{
+          span{
+            &:first-child{
+              font-size: 24px;
+              span{
+                color:@blue_1;
+              }
+            }
+            &:nth-child(2){
+              &.line{
+                padding:0 10px;
+              }
+            }
+            &:nth-child(3){
+              font-style: italic;
+            }
+          }
+          .qualified-text{
+            font-size: 16px;
+          }
+        }
+      }
+    }
+    &.order-history-account-section-content{
+      .message-center-middle-content{
+        border-top:1px solid @gray_8;
+        padding:30px 0 50px 0;
+        p{
+          font-size:16px;
+          padding-top:30px;
+          margin-bottom:0;
+        }
+        .row{
+          padding-top:40px;
+          .form-group{
+            label{
+              width: 30%;
+              margin-right: 10px;
+              font-size: 16px;
+              line-height: 16px;
+              color: #002f5f;
+              span{
+                font-style: italic;
+                font-weight: 100;
+                padding-left: 10px;
+                text-transform: initial;
+              }
+            }
+            .form-control{
+              width:38%;
+              display: inline-block;
+              height: auto;
+              max-height: 38px;
+            }
+            &.has-date{
+              label{
+                float: left;
+                position: relative;
+                top: 10px;
+              }
+              .box-date-select{
+                width:38%;
+                display: inline-block;
+                height: auto;
+                max-height: 38px;
+                position: relative;
+                .form-control{
+                  width:100%;
+                  z-index: 99;
+                  background-color: transparent;
+                  padding: 6px 0 6px 12px;
+                  position: relative;
+                  cursor: pointer;
+                  font-size:16px;
+                }
+                .calendar-icon{
+                  font-family: 'Glyphicons Halflings';
+                  font-style: normal;
+                  font-weight: normal;
+                  font-variant: normal;
+                  text-transform: none;
+                  color:@blue_2;
+                  position: absolute;
+                  right: 8px;
+                  top: 8px;
+                  z-index:98;
+                  &:before{
+                    content: "\e109";
+                  }
+                }
+              }
+            }
+            .search-customer{
+              padding-left:20px;
+              font-size: 16px;
+              font-weight:600;
+            }
+          }
+        }
+      }
+    }
+    &.inter-account-section{
+      padding-top:35px;
+    }
+  }
+  .datepicker{
+    .datepicker-days{
+      .table-condensed{
+        thead{
+          tr{
+            th{
+              background-color: @white;
+              color:@mainColor;
+              font-size: 16px;
+            }
+            .prev{
+              color:@blue_2;
+              font-size: 16px;
+              cursor: pointer;
+            }
+            .next{
+              color:@blue_2;
+              font-size: 16px;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+  }
+  .datepicker-dropdown{
+    z-index: 100!important;
+  }
+  .headline-text{
+    text-transform: uppercase;
+    font-size: 24px;
+    font-weight: 600;
+  }
+  .have-star{
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    color: #e11e45;
+    font-size: 12px;
+    position: relative;
+    top: -2px;
+    left: 8px;
+    &:after{
+      content: "\e006";
+    }
+  }
+  .ditto-schedule-table{
+    tbody{
+      tr{
+        td{
+          vertical-align: middle;
+        }
+      }
+    }
+  }
+  .amway-theme{
+    .prw-nav{
+      .prw-nav-container{
+        display: inherit;
+      }
+    }
+  }
+}
+@media(max-width: 768px){
+  #customer-sales-history-searched {
+    .breadcrumb{
+      padding-right:0;
+    }
+    .prw-jump-to-button{
+      padding:9px 10px;
+    }
+    .account-section-content {
+      .order-history-box {
+        .customer-sales-history-searched-content{
+          .customer-PV{
+            .m-block{
+                font-size: 24px;
+                display: block;
+            }
+          }
+        }
+      }
+      &.order-history-account-section-content{
+        .message-center-middle-content{
+          p{
+            padding-top:20px;
+            margin-bottom:0;
+          }
+          .row{
+            .form-group{
+              label{
+                width:100%;
+              }
+              .form-control{
+                width:100%;
+                line-height: 16px;
+              }
+              &.has-date{
+                label{
+                  float: left;
+                  position: inherit;
+                  top: 10px;
+                }
+                .box-date-select{
+                  width:100%;
+                  .form-control{
+                    padding:10px 0 10px 15px;
+                  }
+                  .calendar-icon{
+                    font-size: 16px;
+                  }
+                }
+              }
+              .search-customer{
+                padding-left:0;
+                padding-top:5px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+//KPI Tracking
+#key-indicators{
+  .prw-nav-container{
+    display: inherit;
+  }
+}
+.kpi-tracking{
+  .order-history-box{
+    display: inherit;
+  }
+  .customer-sales-history-searched-content {
+    padding-left: 12px;
+  }
+  .inter-account-section{
+    padding-top:40px!important;
+  }
+  .key-indicator-description{
+    width:68%;
+    font-size: 16px;
+  }
+  .chart-block{
+    border-bottom: 1px solid @gray_8;
+    margin-bottom: 40px;
+    padding-bottom: 40px;
+    .chart-pic{
+      .date-cell{
+        color:@gray_6;
+        padding: 10px 0 0;
+      }
+      img{
+        width:100%;
+      }
+    }
+    .chart-select{
+      padding-top:40px;
+      .chart-select-title{
+        font-size: 16px;
+        color:@blue_1;
+        text-transform: uppercase;
+        font-weight:600;
+        display: block;
+        padding-bottom:10px;
+      }
+      .chart-select-item-block{
+        .chart-select-item{
+          .checkbox-element-wrapper{
+            margin-bottom: 0;
+            font-weight: 100;
+            text-transform: inherit;
+            border:1px solid @gray_8;
+            width: 100%;
+            padding: 5px 8px;
+            font-size:16px;
+            ._checkbox-element-global-span{
+              &:before{
+                left:2px;
+                font-size: 12px;
+                font-weight:100;
+              }
+            }
+          }
+          &.active{
+            &:first-child{
+              .checkbox-element-wrapper{
+                border:1px solid @green;
+                ._checkbox-element-global-span{
+                  background: @green;
+                  border-color: @green;
+                }
+              }
+            }
+            &:nth-child(2){
+              .checkbox-element-wrapper{
+                border:1px solid @blue_2;
+                ._checkbox-element-global-span{
+                  background: @blue_2;
+                  border-color: @blue_2;
+                }
+              }
+            }
+            &:nth-child(3){
+              .checkbox-element-wrapper{
+                border:1px solid #721471;
+                ._checkbox-element-global-span{
+                  background: #721471;
+                  border-color: #721471;
+                }
+              }
+            }
+            &:nth-child(4){
+              .checkbox-element-wrapper{
+                border:1px solid @gray_5;
+                ._checkbox-element-global-span{
+                  background: @gray_5;
+                  border-color:@gray_5;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .performance-tab{
+    border: 1px solid @gray_8;
+    padding: 30px 20px;
+    .amway-theme{
+      .ditto-nav-tabs-wrap{
+        margin-bottom:0;
+      }
+      .performance-tab-title{
+        text-transform: uppercase;
+        color:@blue_1;
+        font-size: 16px;
+        font-weight:600;
+        position: absolute;
+      }
+      .tabs-toggles{
+        display: flex;
+        display: -webkit-flex;
+        justify-content: flex-end;
+        .tab-toggle-wrap{
+          .tab-toggle{
+            padding: 1.1875em 3.875em;
+          }
+        }
+      }
+      .new-table-block-wrapper{
+        padding-top:0;
+        table{
+          thead{
+            tr{
+              background-color: @white;
+              border-top:none;
+              .ditto-header-button{
+                font-size:16px;
+                cursor: unset;
+              }
+              .ditto-field-name{
+                padding: 25px 10px 25px 0;
+                width: 100%;
+              }
+            }
+          }
+          tbody{
+            tr{
+              background-color: @white;
+              border-bottom:1px solid @gray_8;
+              .green{
+                color: @green;
+                .green-icon{
+                  width: 0;
+                  height: 0;
+                  border-left: 8px solid transparent;
+                  border-right: 8px solid transparent;
+                  border-bottom: 16px solid #20883e;
+                  display: inline-block;
+                  position: relative;
+                  top: 2px;
+                  left: 10px;
+                }
+              }
+              .red{
+                color:@red;
+                .red-icon{
+                  width: 0;
+                  height: 0;
+                  border-left: 8px solid transparent;
+                  border-right: 8px solid transparent;
+                  border-top: 16px solid @red;
+                  display: inline-block;
+                  position: relative;
+                  top: 2px;
+                  left: 10px;
+                }
+              }
+              .ditto-field-name{
+                color:@blue_1;
+              }
+              td{
+                &:last-child{
+                  text-align: right;
+                  position: relative;
+                  right:70px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media(max-width: 768px){
+  .kpi-tracking {
+    .amway-theme{
+      .prw-nav{
+        margin-bottom:0;
+        .prw-nav-container{
+          display:inherit;
+        }
+      }
+    }
+    .customer-sales-history-searched-content {
+      .key-indicator-description {
+        width: 100%;
+      }
+    }
+    .chart-select-item-block{
+      .chart-select-item{
+        padding:5px 0;
+      }
+    }
+    .performance-tab{
+      .amway-theme{
+        .ditto-nav-tabs-wrap{
+          margin-bottom:0!important;
+        }
+        .performance-tab-title{
+          position: relative;
+          padding-bottom: 20px;
+        }
+        .tabs-toggles{
+          .tab-toggle-wrap{
+            width:50%;
+            .tab-toggle{
+              width:100%;
+              padding: 20px!important;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+//PV Inquiry
+#PV-Inquiry{
+  .prw-nav-container{
+    display: inherit;
+  }
+  #cboxClose{
+    .modal-close-icon{
+      color:inherit!important;
+    }
+  }
+  #cboxTitle{
+    height:60px;
+  }
+  .personal-pv-box{
+    width:74%;
+    //left:13%;
+    #cboxTitle{
+      .headline{
+        padding-left:12px;
+      }
+    }
+    #cboxLoadedContent{
+      margin-top: 135px;
+      .invoice-box-content-items{
+        padding:0;
+        .invoice-box-content-item-header{
+          background-color: @gray_9;
+          padding: 5px 22px;
+          text-transform: uppercase;
+          color:@blue_1;
+          font-size: 16px;
+          font-weight:100;
+        }
+        .invoice-box-content-item-body{
+          padding:20px 22px;
+          div{
+            padding:2px 0;
+            &:first-child{
+              font-size:16px;
+              font-weight:600;
+              padding-bottom: 10px;
+            }
+          }
+          &.last-item{
+            div{
+              font-weight:100;
+              span{
+                color:@blue_1;
+                text-transform: uppercase;
+                padding-right: 30px;
+                font-weight:500;
+                font-size:16px;
+              }
+            }
+          }
+          &.last-item{
+            div{
+              padding:5.5px 0;
+            }
+          }
+        }
+      }
+      .ditto-view-by-month-wrapper{
+        .ditto-list-colomn-wrapper{
+          .ditto-item-list{
+            .product-list-head{
+              div{
+                font-size:16px;
+                font-weight:100;
+              }
+              .head-item-title{
+                &.first-title{
+                  padding-left:22px!important;
+                }
+              }
+            }
+            .ditto-product-item-wrapper{
+              .product-details-wrapper{
+                .product-item-description {
+                  .item-name{
+                    color:@mainColor;
+                  }
+                }
+              }
+              .product-prop-wrapper{
+                padding-top:15px;
+                .product-prop-qty{
+                  color:@blue_1;
+                }
+                .prop-price-text{
+                  color:@blue_1;
+                }
+                .product-prop-text{
+                  padding-top:0;
+                }
+                label{
+                  font-size:16px;
+                }
+              }
+            }
+          }
+        }
+      }
+      .order-history-container{
+        .table-content-rows{
+          border:@none;
+          margin-top:0;
+          .table-row{
+            .row-element{
+              &:first-of-type{
+                padding:10px 0;
+              }
+            }
+            &.total-row{
+              .table-row-wrapper{
+                border-top:@none;
+                margin-top:0;
+                border-bottom: @none;
+              }
+            }
+          }
+          .table-row-wrapper{
+            border-bottom: 1px solid @gray_8;
+            margin-right:0;
+            padding-right:24px;
+            .row-element{
+              &:last-of-type{
+                padding:10px 0;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .downline-pv-box{
+    .headline{
+      font-size:30px!important;
+    }
+    #cboxLoadedContent.downline-box-content{
+      padding:0 40px!important;
+      width:auto!important;
+      .IBO-profile-top{
+        margin-bottom:100px;
+        .IBO-profile-left{
+          width:50%;
+          float: left;
+          img{
+            width:80px;
+          }
+          .user-name{
+            font-size:30px;
+            padding-left: 20px;
+            color:@blue_1;
+          }
+        }
+        .IBO-profile-right{
+          width:50%;
+          float: right;
+          height:80px;
+          line-height: 80px;
+          text-align: right;
+          .list-product{
+            img{
+              position: relative;
+              top:-2px;
+              width:14px;
+              margin-right: 5px;
+            }
+          }
+        }
+      }
+      .IBO-profile-middle{
+        border-top:1px solid @gray_8;
+      }
+      .IBO-profile-bottom{
+        background-color: @gray_9;
+        margin-left:-40px;
+        margin-right:-40px;
+        .invoice-box-content-items{
+          position: relative;
+          padding:20px 32px;
+          border-top: 1px solid @gray_8;
+          border-right:1px solid @gray_8;
+          .invoice-box-content-item-header{
+            font-size:16px;
+            color:@blue_1;
+            padding-bottom: 5px;
+            text-transform: uppercase;
+          }
+          .invoice-box-content-item-body{
+
+            div{
+              padding:2px 0;
+            }
+            img{
+              width:60px;
+              position: absolute;
+              top:20px;
+              right:38px;
+            }
+          }
+
+        }
+      }
+    }
+
+  }
+}
+.PV-inquiry{
+  .account-section-content{
+    .amway-theme{
+      .navigation-tabs-container{
+        position: relative;
+        .form-wrapper{
+          position: absolute;
+          right:0;
+          form{
+            padding-right:0;
+            text-align: right;
+            select{
+              min-width:0;
+              text-transform: initial;
+            }
+            .bonus-period{
+              text-transform: uppercase;
+              &:first-child{
+                color:@blue_1;
+                font-size:16px;
+                padding-right:10px;
+              }
+            }
+            button{
+              height: 40px!important;
+              position: relative;
+              top: -2px;
+              margin-left: 10px;
+            }
+          }
+        }
+        .ditto-schedule-table-content{
+          .ditto-schedule-table{
+            thead{
+              th{
+                padding-top:3px;
+              }
+              .ditto-field-name{
+                width:15%;
+                .ditto-header-button{
+                  min-width:152px;
+                }
+              }
+            }
+          }
+        }
+        #downLine-personal-PV{
+          .ditto-field-name{
+            width:30%;
+          }
+          tbody{
+            tr{
+              td{
+                img{
+                  width:40px;
+                  position: relative;
+                  top: -10px;
+                }
+                &.red{
+                  color:@red;
+                }
+              }
+            }
+          }
+          .sort-refine-bar{
+            margin-top:40px;
+            .form-group{
+              margin-bottom:0;
+              select.cart-detail__size{
+                min-width:0;
+              }
+              .btn-blue-white{
+                color:@white;
+                background-color: @blue_1;
+                border:2px solid @blue_1;
+                height: 40px!important;
+                padding: 0;
+                &:hover{
+                  color:@blue_1;
+                  background-color: @white;
+                  border:2px solid @blue_1;
+                }
+              }
+              label{
+                padding-top:0;
+              }
+            }
+            .pointer-icon{
+              height:40px;
+              line-height:40px;
+              text-align: right;
+              .list-product{
+                img{
+                  width:40px;
+                  position: relative;
+                  top:-2px;
+                }
+                .divider{
+                  padding-left:12px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media(max-width: 768px){
+  .PV-inquiry{
+    .account-section-content{
+      .amway-theme{
+        .navigation-tabs-container{
+          .form-wrapper{
+            position: relative;
+            margin-bottom:30px;
+            form{
+              padding-left:0;
+              text-align: left;
+              select{
+                margin-bottom:10px;
+                width:66%;
+                margin-right:10px;
+              }
+              .bonus-period{
+                &:first-child{
+                  color:@blue_1;
+                  font-size:16px;
+                  padding-right:10px;
+                  display: block;
+                  padding-bottom: 10px;
+                }
+              }
+              button{
+                top: -4px;
+                margin-left:0;
+              }
+            }
+          }
+        }
+      }
+    }
+    #downLine-personal-PV{
+      .sort-refine-bar{
+        select.cart-detail__size{
+          width:100%;
+        }
+        .pointer-icon{
+          height:auto!important;
+          padding-top:20px;
+          .list-product{
+            span{
+              display: block;
+              width: 100%;
+              text-align: left;
+            }
+          }
+        }
+      }
+      .new-table-block-wrapper{
+        padding-top:20px;
+      }
+    }
+  }
+  #PV-Inquiry{
+    .personal-pv-box{
+      width:90%;
+      //left:5%;
+      #cboxLoadedContent{
+        margin-top:100px;
+        .table-content-rows{
+          margin-top:-20px!important;
+        }
+        .ditto-view-by-month-wrapper{
+          .ditto-list-colomn-wrapper{
+            .ditto-item-list{
+              .js-ditto-product-item{
+                &.first-item{
+                  .ditto-product-item-wrapper{
+                      border-top:1px solid @gray_7;
+                      padding-top:30px;
+                  }
+                }
+                .ditto-product-item-wrapper{
+                  .product-prop-wrapper{
+                    padding-top:0;
+                    .product-prop-price{
+                      width:100%;
+                      margin-top:0;
+                      .prop-price-text{
+                        line-height:24px;
+                      }
+                    }
+                    .visible-xs{
+                      &.visible-sm{
+                        display: inline-block!important;
+                      }
+                    }
+                    .amway-theme{
+                      float: right;
+                    }
+                    .product-prop-total{
+                      span{
+                        &:nth-child(2){
+                          line-height:24px;
+                        }
+                      }
+                    }
+                    .product-prop-pvbv{
+                      span{
+                        &:nth-child(2){
+                          line-height:24px;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        .order-history-container{
+          .table-content-rows{
+            .table-row{
+              .row-element{
+                &:first-of-type{
+                  padding:0;
+                }
+                &:last-of-type{
+                  padding:0;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .downline-pv-box,#cboxOverlay{
+      #cboxLoadedContent.downline-box-content{
+        .IBO-profile-top{
+          margin-bottom:150px;
+          .IBO-profile-left{
+            width:100%;
+          }
+          .IBO-profile-right{
+            width:100%;
+            float: left;
+            text-align:left;
+          }
+        }
+      }
+    }
+  }
+
+}
+// sprint5 by leon
+@w768: 768px;
+.size-small{
+font-size:15px;
+}
+.line-through{
+	color: #c1c1c1;
+	@media (max-width: @w768){
+		margin-left: -5px;
+		margin-right: 5px;
+	}
+
+}
+.width-auto{
+	width: auto!important;
+}
+.fr{
+	float:right!important;
+}
+.color-gray{
+color: #55565a;
+}
+.clear-padding-top{
+	padding-top: 0!important;
+}
+.clear-both{
+	clear: both;
+}
+.clear-float{
+	overflow: hidden!important;
+}
+
+.font-italic{
+font-style: italic;
+}
+.font-text-transform-none{
+	text-transform: none!important;
+}
+.font-weight-normal{
+	font-weight: 100;
+}
+.icon-success{
+	display: inline-block;
+	background: url("../images/check.png") no-repeat center center !important;
+	width: 24px;
+	height: 24px;
+	background-size: auto;
+}
+.cartTitile .page-title {
+	margin-bottom: 0;
+}
+.receipt-container{
+
+
+	.checkout-steps{
+		li{
+			&:first-child{
+				.checkout-steps-circleactive{
+					@media (max-width: @w768) {
+						left: 12px;
+					}
+				}
+
+					.checkout-steps-text{
+						@media (max-width: @w768) {
+							left: 50px;
+						}
+				}
+			}
+			.checkout-steps-text{
+			@media (max-width: @w768) {
+				line-height: 16px;
+			}
+			}
+		}
+	}
+	.shipping-delivery-ship{
+		border-top: 1px solid #e3e3e3;
+		border-bottom: none;
+		padding-top: 20px;
+		margin-top:0;
+		.set-wrap{
+			@media (max-width: @w768){
+				margin-top:10px;
+			label.width-auto{
+					display: block;
+					margin-bottom: 10px;
+
+			}
+			}
+		}
+		.form-group{
+			label.width-auto{
+				@media (max-width: @w768){
+					display: block;
+				}
+			}
+			input[type="text"]{
+				@media (max-width: @w768) {
+					width: auto;
+					margin-right: 10px;
+					margin-bottom: 10px;
+					& + button{
+						margin-left: 0;
+					}
+				}
+			}
+		}
+		&:last-child{
+			border-bottom: none;
+			
+		}
+		.collapse {
+			margin-left: 28px;
+		}
+	}
+
+	margin-top: 0px;
+	.cartlist-remove{
+		width: 20%;
+		float: left;
+		margin-top: 68px;
+	}
+	.cartlist-text{
+		width: 60%;
+	}
+
+}
+.width-50{
+	width:30%!important;
+}
+.des-wrapper{
+	padding-top: 40px;
+	clear: both;
+}
+
+.width-auto{
+	width: auto!important;
+}
+
+
+.button-bottom{
+	button{
+		padding-left: 30px;
+		padding-right: 30px;
+
+	}
+	a{
+		margin-right: 5px;
+	}
+}
+
+.cartlist-td {
+	margin-top: 68px;
+}
+
+.cartlist-th {
+	@media (max-width: @w768){
+		display: none;
+	}
+	width:100%;
+	display: table;
+	padding:0 12px;
+	>div {
+		>div {
+			&:first-child {
+				padding-left: 12px;
+				padding-right: 12px;
+			}
+			padding-left: 12px;
+			padding-right: 12px;
+		}
+	}
+}
+.box-date-select{
+	position: relative;
+	.form_datetime{
+		min-width: 150px;
+		outline: none;
+		-webkit-appearance: none;
+		border: 1px solid #CCCCCC;
+		color: #002F5F;
+		text-align: left;
+		padding-left: 10px;
+		position: relative;
+		z-index: 99;
+		background-color: transparent;
+		cursor: pointer;
+	}
+	.glyphicon-calendar{
+		position: absolute;
+		right: 10px;
+		top: 12px;
+		color: #0075a4;
+		z-index: 98;
+		@media (max-width: @w768){
+			right: 20px;
+		}
+	}
+}
+.cartlist-detail-desktop {
+	display: inline-block;
+	vertical-align: middle;
+	@media (max-width: @w768){
+		display: none;
+	}
+}
+.cart-items-wrapper{
+	margin-top: 20px;
+	.cartlist-content{
+		.row{
+			&:last-child{
+				border:0;
+			}
+		}
+		.cartlist-td {
+			line-height: 38px;
+		}
+	}
+	.shipping-delivery-ship{
+		.form-group{
+			label{
+				//width: 200px;
+				margin-bottom: 10px;
+				margin-top:5px;
+				//margin-right: 10px;
+			}
+			button{
+				& + a{
+					margin-left: 10px;
+				}
+			}
+		}
+	}
+
+}
+.label-width-limit{
+	.cart-items-wrapper {
+		.shipping-delivery-ship {
+			.form-group {
+				label{
+					@media (max-width: 768px){
+						//width: 42%;
+						padding-top: 3px
+					}
+				}
+				.form-right-wrapper{
+					@media (max-width: @w768){
+						//width: 50%;
+					}
+				}
+			}
+		}
+	}
+}
+.shipping-delivery-ship{
+	
+	margin-bottom: 0;
+	.form-group{
+		input{
+			vertical-align: top;
+			& + button{
+				margin-left: 10px;
+			}
+		}
+		textarea{
+			width: 300px;
+			min-height: 100px;
+			border: 1px solid #dadada;
+		}
+
+	}
+}
+
+.sort-by-content{
+	float:right;
+}
+.set-wrap{
+	margin-top: 70px;
+	margin-bottom: 10px;
+	@media (max-width: @w768){
+		& > div{
+			label.width-auto{
+				//display: block;
+				//margin-bottom: 5px;
+			}
+			margin-bottom: 15px;
+			.select2-container{
+				margin-bottom: 10px;
+				margin-right: 10px;
+				& + button{
+					margin-left: 0;
+					vertical-align: top;
+				}
+			}
+		}
+	}
+	button{
+		margin-left: 10px;
+	}
+	label{
+		font-size: 16px;
+		font-weight: 600;
+		color: #002F5F;
+		margin-right:10px;
+	}
+.set-price-content{
+	.select2-container{
+
+	}
+
+
+}
+	.sort-by-content{
+		float:right;
+		@media (max-width: @w768){
+			float: none;
+		}
+	}
+}
+.qty-input{
+	width: 50px;
+	height: 38px;
+	line-height: 38px;
+	text-align: center;
+}
+
+.radio-line-form{
+	margin-bottom:20px;
+	label{
+		display: inline-block;
+		text-transform: none;
+	}
+	input[type="text"]{
+		height: 38px;
+		line-height: 38px;
+		padding-left:3px;
+		margin-left: 10px;
+		border: 1px solid #e3e3e3;
+
+		@media (max-width: @w768){
+			margin-left: 28px;
+
+		}
+	}
+}
+
+.subtotal{
+	font-size: 16px;
+	font-weight: 600;
+	margin-left: 30px;
+	color: #55565a;
+}
+.extra1{
+	@media (max-width: @w768){
+		display: block!important;
+	}
+}
+.unit-box{
+	display: inline-block;
+	vertical-align: top;
+	margin: 0 10px;
+	div{
+		background: #f4f4f4;
+		width: 38px;
+		height: 38px;
+		border:1px solid #dedede;
+		color: #a3a3a3;
+		line-height: 38px;
+		font-size: 20px;
+		display: inline-block;
+		text-align: center;
+		&.active{
+			color: #002F5F;
+			background: #fff;
+			position: relative;
+			&:before{
+				content: '';
+				position: absolute;
+				background: #008dc4;
+				height: 4px;
+				top:0;
+				right: 0;
+				left:0;
+			}
+		}
+		&:last-child{
+			border-left:0;
+		}
+	}
+}
+
+.shipping-delivery-summary{
+	.cartlist-instock{
+		color: #20883e;
+		text-align: center;
+		font-weight: 600;
+		display: block;
+		margin: 0px 0 20px;
+		font-size: 16px;
+		.icon {
+			font-size: 14px;
+			margin-right:5px;
+		}
+	}
+	.summary-des{
+		margin: 0 20px 20px;
+	}
+}
+
+.tip-alert{
+	color: #ec1a44;
+	font-size: 18px;
+	font-weight: 800;
+	i{
+		margin-right: 10px;
+		vertical-align: top;
+	}
+}
+.tip-success{
+	position: relative;
+	color: #20883e;
+	font-size: 18px;
+	font-weight: 800;
+	margin-bottom: 16px;
+	.icon {
+		margin-right: 6px;
+		font-size:16px;
+	}
+}
+.pv-table{
+	margin-bottom:50px;
+	z-index: 9;
+	@media (max-width:@w768){
+		margin-bottom: 20px;
+	}
+	table{
+		thead{
+			th{
+				white-space: nowrap;
+			}
+		}
+	}
+	overflow-x:auto;
+}
+.shipping-delivery {
+	.form-group{
+		.form-right-wrapper{
+			line-height: 35px;
+			display: inline-block;
+			margin-left: 10px;
+			vertical-align: top;
+			span{
+				font-size: 16px;
+			}
+			label{
+				font-size: 16px;
+				font-weight: 100;
+				line-height: 1;
+				color: #55565a;
+				margin-bottom: 20px;
+				text-transform: none;
+			}
+			input[type="text"]{
+				margin-left: 0;
+				border:1px solid #dadada;
+				border-radius: 0;
+				box-shadow: none;
+				-webkit-appearance: none;
+			}
+			& > a {
+				margin-left: 10px;
+				@media (max-width:320px){
+					display: block;
+					margin-left: 0;
+				}
+			}
+			@media (max-width:@w768){
+				margin-left: 0;
+			}
+			.collapse{
+
+				label{
+					font-size: 16px;
+					font-weight: 600;
+					color: #002F5F;
+					width: auto!important;
+					display: inline-block;
+					@media (max-width:@w768){
+						display: block;
+					}
+				}
+				input[type="text"]{
+					width: auto;
+					display: inline-block;
+					margin-left: 10px;
+					@media (max-width:@w768){
+						margin-left: 0;
+						margin-bottom: 10px;
+					}
+				}
+				button{
+					display: inline-block;
+					@media (max-width:@w768){
+
+
+					}
+				}
+			}
+		}
+	}
+}
+
+#label1-conainer{
+	display: block;
+}
+#label2-conainer{
+	display: none;
+}
+#label3-conainer{
+	display: none;
+}
+.icon-transfer{
+display: inline-block;
+	width: 20px;
+	height: 20px;
+	background: url("../images/icons/icon-transfer.png") no-repeat center center;
+	background-size: 20px;
+	vertical-align: top;
+}
+.icon-recent{
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	background: url("../images/icons/icon-recent.png") no-repeat center center;
+	background-size: 20px;
+	vertical-align: top;
+}
+
+.icon-history{
+	display: inline-block;
+	vertical-align: top;
+	width: 20px;
+	height: 20px;
+	background: url("../images/icons/icon-history.png") no-repeat center center;
+	background-size: 20px;
+}
+.td-bottom-border tbody tr{
+			border-bottom: 1px solid #dadada;
+}
+
+.transfers-title{
+	font-size: 18px;
+	font-weight: 600;
+	color: #55565a;
+	margin: 30px 0;
+	text-transform: uppercase;
+}
+
+.divide-gray{
+	display: inline-block;
+	font-size: 12px;
+	color: #b5b5b5;
+	margin: 0 5px;
+	line-height: 20px;
+
+}
+.pv-table th:last-child{
+	text-align: left;
+}
+.view-more{
+	text-align: center;
+	margin: 20px 0;
+	a{
+		i{
+			margin-left: 10px;
+			&:before{
+				color: #0075a4;
+
+			}
+		}
+		&:hover{
+			i{
+				&:before{
+					color: #002F5F;
+				}
+			}
+		}
+	}
+}
+
+.order-form-container {
+	@media (max-width:@w768){
+		.col-md-6{
+			width: 45%;
+			.btn-search-mobile{
+				width: 100%;
+				border: 1px solid #dadada;
+				background: #fff;
+				color: #002F5F;
+				position: relative;
+				&:before{
+					font-family: 'Glyphicons Halflings';
+					content: "\e003";
+					font-style: normal;
+					font-weight: 400;
+					font-size: 14px;
+					color: #0075a4;
+					vertical-align: top;
+					margin-right: 10px;
+					position: relative;
+					top: 2px;
+				}
+				&:hover{
+					color: #002F5F;
+					&:before{
+						color: #0075a4;
+					}
+				}
+
+			}
+			&.view-order-search{
+				margin-left: 2%;
+			}
+		}
+	}
+
+	.view-order-title {
+		color: #002F5F;
+	}
+	margin-bottom: 10px;
+	overflow: hidden;
+}
+
+.view-orader-wrap{
+	margin-bottom: 10px;
+	.btn-blue-white{
+		width: 100px;
+		vertical-align: top;
+		position: relative;
+		top:0;
+		margin-left: 4px;
+	}
+	.select2-container{
+		top:0;
+		border: 1px solid #dadada;
+		width: 45%!important;
+		@media (max-width:@w768){
+			width: 100%!important;
+			margin-right: 10px;
+			margin-bottom: 10px;
+			& + a.btn-blue-white{
+				display: none;
+			}
+		}
+		.selection .select2-selection {
+			border: 0;
+			height:38px;
+		}
+	}
+	.select2-container.select2-container--open {
+		border-color: #002f5f;
+	}
+
+}
+
+.view-order-search{
+	text-align: right;
+	@media (max-width:@w768){
+		text-align: left;
+	}
+	input[type="text"]{
+		text-align: left;
+		width: 65%!important;
+		height: 40px;
+		border: 1px solid #dadada;
+		font-size: 16px;
+		color: #55565a;
+		padding-left: 13px;
+		@media (max-width:@w768){
+			display: none;
+			& + a.btn-blue-white{
+				margin-left: 0;
+			}
+		}
+	}
+	.btn-blue-white{
+		vertical-align: top;
+		margin-left: 5px;
+		width: 100px;
+	}
+}
+@media (max-width:@w768) {
+	.col-md-4 a.pull-right {
+		float: left;
+		width:100%;
+	}
+}
+.button-bottom a.btn {
+	font-size: 18px;
+	color: #0075a4;
+	text-transform: capitalize;
+    &:hover {
+       color: #002f5f; 
+    }
+}
+//chart
+.chart-wrap{
+	border: 1px solid #dadada;
+	@media (max-width:@w768){
+		border: 0;
+	}
+	.year-guide{
+		font-size: 16px;
+		color: #002f5f;
+		border: 1px solid #dadada;
+		width: 262px;
+		text-align: center;
+		line-height: 30px;
+		margin: 40px auto 20px;
+	}
+	#chart-circle{
+		width: 260px;
+		margin: 0 auto 20px;
+		position: relative;
+		.owl-controls{
+			position: absolute;
+			top: -42px;
+			left: 0;
+			display: block;
+		}
+	}
+	#chart-circle-des{
+		margin: 40px 20px 10px 20px;
+		h5 {
+			font-size: 14px;
+			color: #56565a;
+			font-style: italic;
+			text-align: right;
+			@media (max-width:440px){
+				text-align: left;
+			}
+		}
+		ul{
+			li{
+				border-top: 1px solid #dadada;
+				color: #002f5f;
+				font-size: 16px;
+				padding: 15px 0;
+				i{
+					display: inline-block;
+					vertical-align: top;
+					width: 21px;
+					height: 21px;
+					margin-right: 10px;
+					border-radius: 3px;
+
+				}
+				.color-purple{
+					background: #731472;
+				}
+
+				.color-green{
+					background: #20893d;
+
+				}
+
+				.color-blue{
+					background: #008fc5;
+
+				}
+				.color-orange{
+					background: #e17c00;
+
+				}
+
+				span{
+					font-size: 16px;
+					color: #56565a;
+					float:right;
+					@media ( max-width: 440px){
+						float: none;
+						display: block;
+						margin-top:10px;
+					}
+					a{
+						font-size: 16px;
+						border-left: 1px solid #dadada;
+						padding-left: 10px;
+						margin-left: 10px;
+
+					}
+				}
+				&:last-child{
+					font-size: 18px;
+					font-weight: 800;
+					span{
+
+						a{
+							font-size: 16px;
+							font-weight: 100;
+						}
+					}
+				}
+			}
+		}
+	}
+
+}
+
+
+#detail-wrap {
+	border: 1px solid #dadada;
+	position: relative;
+	margin-top: 30px;
+	.amway-theme{
+		.tabs-toggles {
+			margin: 20px auto;
+			border: 0;
+			width: 80%;
+			text-align: center;
+			font-size: 0;
+			.tab-toggle-wrap{
+				width: 50%;
+			}
+			.active {
+				.tab-toggle {
+					border-bottom: 1px solid #dadada !important;
+				}
+			}
+			.tab-toggle {
+				padding: 10px 0;
+				text-align: center;
+				display: inline-block;
+				width: 100%;
+			}
+		}
+	}
+	.detail-wrap-left{
+		@media ( max-width: @w768){
+			padding-bottom: 20px;
+			&:before{
+				display: none;
+			}
+		}
+		&:before{
+			content: '';
+			position: absolute;
+			top:0;
+			right: 23px;
+			width: 1px;
+			background: #dadada;
+			bottom:0;
+		}
+	}
+	.detail-wrap-right{
+		@media ( max-width: @w768){
+			position: absolute;
+			top: 140px;
+			img{
+				width: 100%;
+			}
+		}
+
+	}
+	.detail-year-guide{
+		font-size: 16px;
+		color: #002f5f;
+		border-top: 1px solid #dadada;
+		border-bottom: 1px solid #dadada;
+		width: 100%;
+		text-align: center;
+		line-height: 30px;
+		margin: 20px -12px 20px;
+		padding: 5px 0;
+		@media ( max-width: @w768){
+			margin: 20px 0 20px;
+		}
+	}
+	.detail-list-wrap{
+		@media ( max-width: @w768){
+			margin: 0;
+		}
+		margin: 0 -12px;
+		position: relative;
+		.owl-controls{
+			position: absolute;
+			top: -47px;
+			left: 0;
+			right: 0;
+			display: block;
+		}
+
+		h5{
+			font-size: 14px;
+			color: #55565a;
+			font-style: italic;
+			text-align: center;
+		}
+		ul{
+			li{
+				border-bottom: 1px solid #dadada;
+				margin: 0 20px;
+				padding: 10px 0;
+				font-size: 14px;
+				a{
+
+				}
+				span{
+					float:right;
+
+				}
+				&:first-child{
+					border-top: 1px solid #dadada;
+					background: #f4f4f4;
+					margin: 0;
+					padding-left: 20px;
+					padding-right: 20px;
+					span{
+
+					}
+				}
+				&:last-child{
+					font-size: 16px;
+					border-bottom: 0;
+					color: #002f5f;
+					span{
+						color: #002f5f;
+					}
+				}
+			}
+		}
+	}
+}
+
+#BusinessCollapseTwo{
+	h6.toggle-text{
+		text-align: center;
+	}
+}
+#cartlistContent{
+
+		.cartlist-tbody{
+			.row{
+			&:last-child{
+				@media ( max-width: @w768){
+					border-bottom: 1px solid #dadada;
+				}
+			}
+			}
+		}
+
+}
+
+.form-right-wrapper-width{
+	width: 300px;
+	margin: 0;
+	@media ( max-width: @w768){
+		width: auto;
+		.col-xs-8 {
+			padding-right: 10px;
+		}
+	}
+	.col-xs-8{
+		padding-left: 0;
+		input{
+			width: 100%!important;
+		}
+	}
+	.col-xs-4{
+		padding-right: 0;
+		padding-left: 0;
+
+		.select2-container{
+			width: 100%!important;
+		}
+	}
+}
+
+input::-ms-clear{
+	display:none;
+}
+//Sprint6 by angela
+//rewards-tracking
+.rewards-tracking{
+  .icon-minus{
+    &:before{
+      content: "\ea78" !important;
+      color:@blue_2;
+    }
+  }
+  .collapsed{
+    .icon-minus{
+      &:before{
+        content: "\ea79" !important;
+      }
+    }
+  }
+  .order-history-box{
+    display: inherit;
+    .customer-sales-history-searched-content{
+      padding-left:12px;
+      .key-indicator-description{
+        width:68%;
+        font-size:16px;
+      }
+    }
+    .account-section-content{
+      padding-top:40px;
+      margin-bottom:0;
+      .ditto-nav-tabs-wrap{
+        margin-bottom:0;
+        .tabs-toggles{
+          .tab-toggle-wrap{
+            .tab-toggle{
+              min-width: 200px;
+              text-align: center;
+              padding: 1.1875em 1.875em;
+            }
+          }
+        }
+        .tab-content{
+          p{
+            text-align: right;
+            padding:10px 0;
+            font-size: 16px;
+            font-style: italic;
+            margin-top:10px;
+          }
+          .create-new-shopping-list-container{
+            margin-bottom:0;
+            .accordion-panel{
+              .accordion-toggle{
+                .pull-right{
+                  &:before{
+                    color:@blue_2;
+                  }
+                }
+                .title-element{
+                  .divider{
+                    padding:0 10px;
+                  }
+                  .green{
+                    text-transform: initial;
+                  }
+                  .not-tracking{
+                    color:@mainColor;
+                    text-transform: initial;
+                  }
+                }
+              }
+              .tracking-body-list-item{
+                margin: 0 auto;
+                width: 96%;
+                .content-list-item{
+                  border-top: 1px solid @gray_8;
+                  color: @blue_1;
+                  font-size: 16px;
+                  padding: 15px;
+                  font-weight: 600;
+                  span{
+                    float: right;
+                    &.green-number{
+                      width: 24px;
+                      text-align: center;
+                    }
+                    &.double-icon{
+                      margin-right: 20px;
+                    }
+                    &.icon-gray{
+                      margin-right:0;
+                    }
+                  }
+                  &:last-child{
+                    border-bottom: 1px solid #dadada;
+                    margin-bottom: 52px;
+                  }
+                  .icon-gray{
+                    color:@gray_8;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      .extra2{
+        margin-top:70px;
+        .rewards-tracking-tutorial{
+          .experience-brands__content{
+            .wrapper-limit{
+              .wrapper{
+                max-width: 1400px;
+                .banner-content{
+                  position: absolute;
+                  top: 0;
+                  left: 0px;
+                  .banner-title{
+                    margin-top:0;
+                    font-size: 20px;
+                    font-weight: 600;
+                  }
+                  .sub-title-wrap{
+                    width:45%;
+                    .banner-sub-title{
+                      span{
+                        font-size:16px;
+                      }
+                    }
+                  }
+                }
+                .experience-brands__image_magazine{
+                  bottom: auto;
+                  margin-top: 0;
+                  width:45%;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+  }
+}
+@media(max-width:768px){
+  .rewards-tracking{
+    .key-indicator-description{
+      width:100%!important;
+    }
+    .order-history-box{
+      .account-section-content{
+        .ditto-nav-tabs-wrap{
+          margin-bottom: 0 !important;
+          .tabs-toggles{
+            .tab-toggle-wrap{
+              width:25%;
+              .tab-toggle{
+                min-width:0;
+                width:100%;
+                text-align: center;
+              }
+            }
+          }
+          .tracking-body-list-item{
+            .content-list-item{
+              span{
+                float: none!important;
+                display: @block;
+                &.double-icon{
+                  margin-right: 20px;
+                  display: @inlineBlock;
+                }
+                &.icon-gray{
+                  margin-right: 20px!important;
+                }
+              }
+            }
+          }
+        }
+        .extra2{
+          .rewards-tracking-tutorial{
+            .experience-brands__content{
+              .wrapper-limit{
+                .wrapper{
+                  .banner-content{
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    left:50%!important;
+                    width:100%;
+                    .banner-button-wrap {
+                      position: absolute;
+                      bottom: 0;
+                      width: 300px;
+                      left: 50%;
+                      margin-left: -150px;
+                      font-size:16px;
+                    }
+                  }
+                  .experience-brands__image_magazine{
+                    float: none;
+                    margin-top:0;
+                    bottom: 0;
+                    right: auto;
+                    left: auto;
+                    width:100%;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+//fast-tracking
+.fast-tracking{
+  .content-block{
+    display: @block;
+  }
+  .icon-gay{
+    color:@gray_8;
+  }
+}
+// Sprint7 by angela
+
+#about-amway{
+  .video-preview__subtitle{
+    width: 64%;
+    margin: 0 auto;
+  }
+  .clear-border{
+    padding-bottom: 250px!important;
+    border-bottom: 1px solid @gray_8!important;
+  }
+  .content-article-bottom{
+    border-top:@none;
+    .category-success-story{
+      .item-content-wrap{
+        .sub-title-wrap{
+          margin: 10px 0 24px 0;
+        }
+      }
+    }
+  }
+    .experience-brands__content {
+      .banner-content{
+        left:612px;
+        .banner-title{
+          color:@blue_1;
+        }
+        .banner-sub-title{
+          span{
+            color:@blue_1;
+          }
+        }
+      }
+    }
+  .about-amway-content{
+    margin-top: 50px;
+    .block{
+      padding:0 24px;
+      .item-content-wrap{
+        background-color: @blue_1;
+      }
+    }
+  }
+}
+
+@media(max-width: 768px){
+  #about-amway{
+    .video-preview__subtitle{
+      width: 100%;
+      margin: 0 auto;
+    }
+    .clear-border{
+      padding-bottom: 0!important;
+      border-bottom: 1px solid @gray_8!important;
+    }
+      .experience-brands__content {
+        margin-top: 40px;
+        .banner-content{
+          left:50%;
+        }
+      }
+    .about-amway-content{
+      .block{
+        padding:0;
+      }
+    }
+    .video-preview__content{
+      position: absolute;
+      top:30%;
+      width: 75%;
+      left: 14.5%;
+      transform: @none;
+    }
+    .category-success-story{
+      .item-content-wrap{
+        .banner-title{
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+}
+//Sprint7 by leon
+
+.company-banner {
+    position: relative;
+    width:100%;
+    display: table;
+    img {
+        width: 100%;
+    }
+    .mob {
+        display: none;
+    }
+    .banner_wrapper {
+        padding-left:100px;
+        z-index: 99;
+        max-width: 100%;
+        margin: 0 ;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        width:1370px;
+        color: @white;
+        h1 {
+            font-family: @font_roboto;
+            font-size: 45px;
+            line-height: 1.6;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+        }
+        .text {
+            font-size:20px;
+            display: block;
+        }
+        .banner-more {
+            float:left;
+            clear: both;
+            overflow:hidden;
+            padding: 8px 20px 11px;
+            margin: 25px 0;
+            border: 1px solid @white;
+            color: @white;
+            text-transform: uppercase;
+            font-size:18px;
+            &:hover {
+                background: @blue_1;
+                border-color: @blue_1;
+            }
+        }
+        
+    }
+}
+.timeline {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    .timelineMain {
+        margin: 50px auto 120px;
+        width:100%;
+        max-width: 1360px;
+    }
+    .slideBox {
+       font-size: 20px;
+       line-height: 1.2;
+       display: table;
+       width:100%;
+       padding:0 3.5%;
+       margin:70px auto 100px;
+       max-width:1140px;
+       .slide-text, .slide-img {
+           display: table-cell;
+           vertical-align: middle;
+       }
+       .slide-text {
+           padding:0 10% 0 0; 
+           .mob {
+               display: none;
+           }
+           h1 {
+               font-size: 45px;
+               line-height: 1.6;
+               margin-bottom: 20px;
+               font-weight: 700;
+               color: @blue_1;
+           }
+           p {
+               margin-bottom: 25px;
+           }
+       }
+       .slide-img {
+           width:40%;
+       }
+   }
+   .owl-controls {
+       margin:0;
+   }
+   .owl-theme .owl-controls .owl-nav div {
+        width: 32px;
+        height: 32px;
+        &::before {
+            width: 32px;
+            height: 32px;
+            font-size: 30px;
+            line-height: 1;
+            font-weight: 300;
+        }
+   }
+   .owl-theme .owl-controls .owl-nav .owl-prev {
+       left:-8px;
+   }
+   .owl-theme .owl-controls .owl-nav .owl-next {
+       right:-8px;
+   }
+   .owl-dots {
+       background: url("../images/company_timeline_bg.png") no-repeat center top;
+       background-size: 1400px auto;
+       width:1400px;
+       padding: 20px 145px 20px 151.8px;
+       margin: 0 auto;
+       height: 74px;
+       text-align: left;
+       .owl-dot {
+           opacity: 0;
+           span {
+               width:12px;
+               height:12px;
+               margin: 0 0 0 3.3px;
+           }
+       }
+       .active {
+           opacity: 1;
+           span {
+                background: #008fc5;
+           }
+           
+       }
+   }
+}
+#business-page-accordion {
+    .panel-title {
+        .glyphicon {
+            color: @blue_2;
+            font-size:18px;
+            margin-right: 5px;
+        }
+    } 
+}
+@media (max-width: 768px) {
+    .company-banner {
+        .pc {
+            display: none;
+        }
+        .mob {
+            display: block;
+        }
+        .banner_wrapper {
+            padding-left:0;
+            text-align: center;
+            margin-left: auto;
+            h1 {
+                margin:0 auto;
+                font-size:36px;
+                font-weight: 500;
+            }
+            .text {
+                display: none;
+            }
+            .banner-more {
+                float:none;
+                display: inline-block;
+            }
+        }
+    }
+    .timeline {
+        border-bottom: 1px solid #e3e3e3;
+        margin-bottom: 20px;
+        .timelineMain {
+            margin: 0 auto;
+        }
+        .slideBox {
+            padding:0 7%;
+            margin: 0 auto;
+            text-align: center;
+            .slide-text, .slide-img {
+                display: table;
+                width:100%;
+                padding:0;
+                font-size: 16px;
+                h1 {
+                    font-size:36px;
+                    font-weight:600;
+                }
+                .mob {
+                    display: block;
+                }
+                .pc {
+                    display: none;
+                }
+            }
+            
+        }
+        .owl-dots {
+            height:0;
+            margin:0;
+            padding:0;
+            overflow: hidden;
+            .owl-dot {
+                display: nonel
+            }
+        }
+        .owl-theme .owl-controls .owl-nav .owl-prev {
+            left:0;
+        }
+        .owl-theme .owl-controls .owl-nav .owl-next {
+            right:0;
+        }
+        
+    }
+}
+
+//Sprint8 by angela
+
+.coupon-management{
+  .auto-renewal{
+    .bonus-payment-content{
+      .bonus-payment-wrapper{
+        margin-bottom:0;
+        .account-section-content{
+          margin-bottom:0;
+        }
+        .order-history-container{
+          .order-history-search-wrapper{
+            margin:0;
+            .form-wrapper.search-form-wrapper{
+              input[type="text"]{
+                width:250px;
+                margin-right: 10px;
+              }
+            }
+          }
+        }
+        .bonus-payment__description{
+          padding:0;
+        }
+        .bonus-payment__title{
+          img{
+            top:38px;
+          }
+        }
+        .coupon-type{
+          float: right;
+          padding-bottom:20px;
+          div{
+            display: @inlineBlock;
+            .line{
+              padding:0 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .amway-theme{
+    .ditto-nav-tabs-wrap{
+      margin-bottom: 40px;
+    }
+    .account-orderhistory-pagination{
+      margin-bottom:50px;
+      .show-more-orders{
+        text-transform: inherit;
+      }
+    }
+    .ditto-schedule-table-content{
+      padding:0;
+      .new-table-block-wrapper{
+        padding-top:0;
+      }
+      .ditto-schedule-table{
+        thead{
+          tr{
+            th{
+              &:nth-child(3){
+                cursor: pointer;
+              }
+            }
+          }
+          .icon-arrow-dropdown{
+            &:before{
+              font-size: 12px;
+            }
+          }
+        }
+        tbody{
+          tr{
+            td{
+              .coupon-date-date-during{
+                padding:0 10px;
+              }
+              .link-wrapper{
+                padding-left:0;
+              }
+            }
+          }
+          .ditto-field-name{
+            padding-left:10px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.terms-and-conditions-management{
+  .bonus-payment-content{
+    .bonus-payment-wrapper{
+      .bonus-payment__title{
+        img{
+          top:33px;
+        }
+      }
+    }
+  }
+  #terms{
+    padding:0 45px;
+    .terms-title{
+      margin:0;
+      background-color: @gray_9;
+      padding:12px 15px;
+      border: 1px solid #e3e3e3;
+      border-bottom: none;
+      .icon-exports{
+        right:15px;
+        top:16px;
+      }
+    }
+  }
+  .next-control{
+    padding: 0 45px 20px 45px;
+    margin-bottom:60px;
+  }
+}
+
+.point-management{
+  .bonus-payment-content{
+    .bonus-payment-wrapper{
+      .bonus-payment__title{
+        img{
+          top: 36px;
+          left: -33px;
+          width: 25px;
+          @media(max-width:768px){
+            top: 28px;
+            left: -20px;
+            width:18px;
+          }
+        }
+      }
+    }
+  }
+  .point-title{
+    .col-md-2{
+      margin-top: 25px;
+      &:first-child{
+        font-size: 16px;
+        font-weight: 600;
+        color: #002F5F;
+        text-transform: uppercase;
+        width: 168px;
+      }
+    }
+  }
+  .product-competitive__summary{
+    text-align: left;
+    margin-top:30px;
+  }
+  .point-amway-theme{
+    padding:0 45px;
+    .show-more-orders{
+      text-transform: none;
+    }
+    .ditto-nav-tabs-wrap{
+      margin-bottom:40px;
+    }
+  }
+  .form-group{
+    margin-bottom:0;
+    .date-range-select{
+      width:200px;
+      margin-top: 15px;
+      select{
+        width:216px;
+      }
+    }
+    &.date-form-group{
+      display: inline-flex;
+      .box-date-select{
+        input{
+          cursor:pointer;
+          height:40px;
+        }
+      }
+      .date-range-icon {
+        border-top: 2px solid #ddd;
+        width: 25px;
+        position: relative;
+        top: 20px;
+        margin: 0 20px;
+      }
+      .point-search-btn{
+        color: @white;
+        height: 40px;
+        margin-left: 12px;
+        &:hover{
+          color:@blue_1;
+        }
+      }
+    }
+  }
+  .amway-theme{
+    .tabs-content-blocks{
+      .content-block{
+        .ditto-schedule-table{
+          tbody{
+            tr{
+              td{
+                &.ditto-field-name{
+                  .mob-order-num-text{
+                    display: @none;
+                  }
+                  .mob-order-num-number{
+                    display: @none;
+                  }
+                }
+                &:nth-child(4){
+                  .mob-division-text{
+                    display: @none;
+                  }
+                  .mob-division-type{
+                    display: @none;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.news{
+  .news-container{
+    @media(min-width:769px){
+      padding:0 45px;
+      .container{
+        width:auto;
+      }
+    }
+  }
+  .company-banner{
+    .banner_wrapper{
+      .text{
+        width:32%;
+      }
+    }
+  }
+  .account-section-content{
+    margin-bottom:0;
+    .order-history-container{
+      .order-history-search-wrapper{
+        border:@none;
+        .toggle-buttons-container{
+          button{
+            border: 1px solid @gray_8;
+            color:@blue_2;
+          }
+        }
+        .news-search-results{
+          color:@blue_1;
+          text-transform: uppercase;
+          font-weight: 900;
+          font-size: 16px;
+          position: relative;
+          top: 14px;
+        }
+      }
+    }
+  }
+  .account-landing-page{
+    .user-account-options{
+      background-color: @white;
+      padding:0;
+      .option-item-container{
+        height:auto;
+        .featured-product__thumnail{
+          margin:0;
+          width: 100%;
+        }
+        .news-result-item-text{
+          text-align: left;
+          padding: 0 10px 10px;
+          background-color: @gray_9;
+          min-height:184px;
+          p{
+            &.news-date{
+              padding-top:10px;
+              margin-bottom:0;
+            }
+            &.featured-product__title{
+              text-transform: none;
+            }
+          }
+
+        }
+      }
+    }
+  }
+  #show-more{
+    text-transform: inherit;
+  }
+  .order-history-container{
+    .order-history-search-wrapper{
+      .form-wrapper.search-form-wrapper{
+        input[type="text"]{
+          margin-right:5px;
+          height:40px;
+        }
+      }
+    }
+  }
+}
+
+.announcement{
+  .company-banner{
+    .banner_wrapper{
+      .text{
+        width:32%;
+      }
+    }
+  }
+  .announcement-container{
+    @media(min-width:769px){
+      padding:0 45px;
+      .container{
+        width:auto;
+      }
+    }
+    .announcement-description{
+      font-size: 16px;
+      margin: 40px 0 50px;
+    }
+    .announcement-search-result{
+      color: #002F5F;
+      text-transform: uppercase;
+      font-weight: 900;
+      font-size: 16px;
+      margin-top:20px;
+    }
+    .amway-theme{
+      .ditto-schedule-table-content{
+        .ditto-schedule-table{
+          thead{
+            th{
+              button{
+                cursor:inherit;
+              }
+            }
+            .ditto-field-name{
+              width:auto;
+            }
+          }
+          tbody{
+            tr{
+              cursor: pointer;
+              .announcement-number{
+                padding-left:30px;
+              }
+            }
+          }
+        }
+      }
+    }
+    .mob-announcement-table-title-content{
+      display: @none;
+    }
+    #show-more{
+      text-transform: inherit;
+    }
+  }
+  .order-history-container{
+    .order-history-search-wrapper{
+      .form-wrapper.search-form-wrapper{
+        input[type="text"]{
+          margin-right:5px;
+          height:40px;
+        }
+      }
+    }
+  }
+}
+.new-announcement-pop{
+  .panel-title-text{
+    font-weight:600;
+  }
+  .message-center-pop1-bottom{
+    .btn{
+      border:2px solid @blue_1;
+      color:@blue_1;
+      &:hover{
+        background-color: @blue_1;
+        color:@white;
+      }
+    }
+  }
+  .new-announcement-pop-textarea {
+    font-size: 16px;
+    p{
+      padding:15px 0;
+    }
+  }
+}
+
+.promotions{
+  .cartTitile{
+    padding-bottom:0;
+  }
+  .account-section-content{
+    margin-bottom:0;
+    .order-history-container{
+      .order-history-search-wrapper{
+        margin:0;
+        .form-wrapper{
+          form{
+            label{
+              padding-right:20px;
+            }
+            select{
+              margin-right:0;
+              margin-bottom:0;
+              &#category-desk{
+                display: @inlineBlock;
+              }
+              &#category-mob{
+                display: @none;
+              }
+            }
+          }
+        }
+        .news-search-results{
+          color: #002F5F;
+          text-transform: uppercase;
+          font-weight: 900;
+          font-size: 16px;
+          position: relative;
+          top: 14px;
+        }
+      }
+    }
+  }
+  .account-landing-page{
+    .user-account-options{
+      .option-item-container{
+        .news-result-item-text{
+          min-height:120px;
+          padding: 20px;
+          p.featured-product__title{
+            font-size:18px;
+          }
+        }
+      }
+    }
+  }
+}
+@media(max-width: 768px){
+
+  .coupon-management{
+    .auto-renewal{
+      .bonus-payment-content{
+        .bonus-payment-wrapper{
+          .bonus-payment__title{
+            img{
+              top:27px;
+            }
+          }
+          .coupon-type{
+            float: left;
+            padding-bottom:20px;
+            div{
+              display: @block;
+            }
+          }
+          .order-history-container{
+            .order-history-search-wrapper{
+              .form-wrapper.search-form-wrapper{
+                input[type="text"]{
+                  width:100%;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .page-bonus-payment{
+      .bonus-payment{
+        .bonus-payment-content{
+          padding-bottom:30px;
+          .bonus-payment-wrapper{
+            .order-history-container{
+              .order-history-search-wrapper{
+                border:0;
+                margin: 10px 0;
+                .toggle-buttons-container{
+                  button{
+                    color:@blue_2;
+                    border:1px solid @gray_7;
+                    &:hover{
+                      color:@blue_1;
+                    }
+                  }
+                }
+                .form-wrapper.search-form-wrapper{
+                  border:1px solid @gray_7;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .announcement {
+      .announcement-container{
+        padding:0;
+        .amway-theme{
+          .ditto-schedule-table-content{
+            padding:0;
+            .table-block-wrapper{
+              padding-top:0;
+              .ditto-schedule-table{
+                thead{
+                  .ditto-field-name{
+                    padding:0 10px;
+                  }
+                }
+                tbody{
+                  tr{
+                    td{
+                      &:nth-child(3){
+                        text-align: right;
+                      }
+                      &:nth-child(4){
+                        font-weight: 100;
+                        padding-left: 0;
+                        left: 24px;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .terms-and-conditions-management{
+    .bonus-payment-content{
+      .bonus-payment-wrapper{
+        .bonus-payment__title{
+          img{
+            top:24px;
+          }
+        }
+      }
+    }
+    #terms{
+      padding:0 25px;
+    }
+    .next-control{
+      padding: 0 25px;
+    }
+    .page-bonus-payment{
+      .bonus-payment{
+        .bonus-payment-wrapper{
+          margin-bottom:20px;
+        }
+      }
+    }
+  }
+
+  .point-management{
+    .point-amway-theme{
+      padding:0 25px;
+      .tabs-toggles{
+        margin-left: 24px;
+        margin-right: 24px;
+        margin-bottom: -1px;
+      }
+    }
+    .point-title{
+      margin-top:15px;
+      .col-md-2{
+        margin-top:0;
+      }
+    }
+    .form-group{
+      margin-top: 20px;
+      .date-range-select{
+        width:100%;
+        select.form-control{
+          width:100%;
+        }
+      }
+      &.date-form-group{
+        display: @block;
+        margin-top:0;
+        .box-date-select{
+          select{
+            display: @inlineBlock;
+            min-width: 0;
+            margin: 0 1%;
+            &:nth-child(1){
+              width:36%;
+            }
+            &:nth-child(2){
+              width:23%;
+            }
+            &:nth-child(3){
+              width:36%;
+              margin-right:0;
+            }
+          }
+        }
+        .date-range-icon {
+          top:0;
+          margin: 10px auto;
+        }
+        .point-search-btn{
+          margin-top: 15px;
+          margin-left:0;
+          display: @block;
+        }
+      }
+    }
+    .amway-theme{
+      .tabs-content-blocks{
+        .content-block{
+          margin:0 -25px;
+          .ditto-schedule-table{
+            thead{
+              tr{
+                th{
+                  &:nth-child(1){
+                    padding-left:20px;
+                    .ditto-header-button{
+                      min-width:172px;
+                    }
+                  }
+                  &:nth-child(2){
+                    display: @none;
+                  }
+                  &:nth-child(3){
+                    display: @none;
+                  }
+                  &:nth-child(4){
+                    text-align: right;
+                    padding-right:20px;
+                    .ditto-header-button{
+                      text-align: right!important;
+                    }
+                  }
+                }
+              }
+            }
+            tbody{
+              tr{
+                td{
+                  &.ditto-field-name{
+                    span{
+                      padding-left:0;
+                      &.mob-order-num-text{
+                        display: @block;
+                        text-transform: uppercase;
+                      }
+                      &.mob-order-num-number{
+                        display: @block;
+                      }
+                    }
+
+                  }
+                  &:nth-child(2){
+                    display: @none;
+                  }
+                  &:nth-child(3){
+                    display: @none;
+                  }
+                  &:nth-child(4){
+                    text-align: right;
+                    padding-right:20px;
+                    font-weight: 600;
+                    .mob-division-text{
+                      display: @block;
+                      font-weight:100;
+                      text-transform: uppercase;
+                    }
+                    .mob-division-type{
+                      display: @block;
+                      font-weight:100;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .outer-border-bottom {
+      margin-left: -38px;
+      margin-right: -42px;
+    }
+  }
+
+  .news{
+    .company-banner{
+      .banner_wrapper{
+        .text{
+          width: 90%;
+          margin: 0 auto;
+          display: @block;
+        }
+      }
+    }
+    .order-history-container{
+      .order-history-search-wrapper{
+        padding: 0 35px;
+        @media(max-width:440px){
+          padding:0 20px;
+        }
+        .form-wrapper.search-form-wrapper{
+          border: 1px solid #dadada;
+        }
+      }
+    }
+    .account-landing-page{
+      .user-account-options{
+        .option-item-container{
+          padding:10px;
+          .news-result-item-text{
+            min-height:200px;
+            @media(max-width:480px){
+              min-height:inherit;
+            }
+            p{
+              &.featured-product__subtitle {
+                margin-bottom:0;
+              }
+            }
+          }
+
+        }
+      }
+    }
+
+  }
+
+  .announcement{
+    .company-banner{
+      .banner_wrapper{
+        .text{
+          width: 90%;
+          margin: 0 auto;
+          display: @block;
+        }
+      }
+    }
+    .announcement-container{
+      padding:0 20px;
+      .amway-theme{
+        .tabs-toggles{
+          padding-left:20px;
+          margin-left: 0;
+          margin-right: -20px;
+          overflow-x: auto;
+          overflow-y: hidden;
+          border:0;
+          .tab-toggle-wrap {
+            margin-bottom:0;
+            .tab-toggle {
+              display: table;
+              height:100%;
+              vertical-align: middle;
+              h6.toggle-text {
+                display: table-cell;
+                height:100%;
+                vertical-align: middle;
+              }
+            }
+          }
+          .tab-toggle-wrap.active {
+            margin-bottom: -2px;
+            padding-bottom: 1px;
+            .tab-toggle {
+              border-bottom: 1px solid #fff;
+            }
+          }
+        }
+      }
+      .amway-theme{
+        .order-history-container{
+          .order-history-search-wrapper{
+            border-top:@none;
+            .toggle-buttons-container{
+              button{
+                width:48%;
+                border:1px solid @gray_7;
+                &:first-child{
+                  border-left:@none
+                }
+                &:last-child{
+                  float: right;
+                  border-right:@none;
+                }
+              }
+            }
+          }
+        }
+        .ditto-schedule-table-content{
+          .table-block-wrapper{
+            overflow-x:hidden;
+            padding-top:20px;
+          }
+          .ditto-schedule-table{
+            thead{
+              .ditto-field-name{
+                padding:0 5px;
+              }
+              .announcement-table-title{
+                display: @none;
+              }
+              .ditto-sorting-form{
+                .ditto-header-button{
+                  min-width:0;
+                }
+              }
+              tr{
+                th{
+                  padding-left:5px;
+                  padding-right:5px;
+                  .ditto-sorting-form{
+                    width:auto;
+                  }
+                  &:last-child{
+                    text-align: right;
+                    padding-right:15px;
+                  }
+                  &.js-ditto-sorting-option{
+                    width:33%;
+                  }
+                }
+              }
+            }
+            tbody{
+              tr{
+                position: relative;
+                  .announcement-table-title-content{
+                    display: @none;
+                  }
+                .announcement-number{
+                  padding-left:10px;
+                }
+                td{
+                  height:105px;
+                  &:nth-child(1){
+                    font-weight:600;
+                  }
+                  &:nth-child(2){
+                    font-weight:600;
+                  }
+                  &:nth-child(4){
+                    font-weight:600;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      .mob-announcement-table-title-content{
+        display: @block;
+        position: absolute;
+        left: 20px;
+        margin-top: 40px;
+        width: 90%;
+      }
+    }
+  }
+
+  .promotions{
+    .account-section-content{
+      .order-history-container{
+        .order-history-search-wrapper{
+          border:none;
+          .form-wrapper{
+            border-bottom:none;
+            padding:0;
+            float: right;
+            position: relative;
+            top: -18px;
+            form{
+              padding:0;
+              label{
+                display: @none;
+              }
+              select{
+                &#category-desk{
+                  display: @none;
+                }
+                &#category-mob{
+                  display: @block;
+                  border-radius: 5px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .account-landing-page{
+      .container-fluid{
+        padding-left:0;
+        padding-right:0;
+        .user-account-options{
+          .container{
+            padding-left:0;
+            padding-right:0;
+            .option-item-container{
+
+              &:nth-child(2n){
+                padding-right:0;
+              }
+              &:nth-child(2n+1){
+                padding-left:0;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .datepicker-dropdown{
+    left: 0!important;
+    width: 100%!important;
+  }
+}
+
+@media(max-width:440px){
+  .point-management{
+    .form-group{
+      &.date-form-group{
+        .box-date-select{
+          select{
+            &:nth-child(2){
+              width:21.5%;
+            }
+          }
+        }
+      }
+    }
+  }
+  .promotions{
+    .account-landing-page{
+      .container-fluid{
+        .user-account-options{
+          .container{
+            .option-item-container{
+              padding-left:0;
+              padding-right:0;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+

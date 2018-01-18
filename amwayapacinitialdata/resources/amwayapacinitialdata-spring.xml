@@ -22,8 +22,8 @@
 
 	<!-- System Setup -->
 
-	<bean id="yAcceleratorInitialDataSystemSetup"
-	      class="com.amway.apac.initialdata.setup.InitialDataSystemSetup"
+	<bean id="amwayApacInitialDataSystemSetup"
+	      class="com.amway.apac.initialdata.setup.AmwayApacInitialDataSystemSetup"
 	      parent="abstractCoreSystemSetup">
 		<property name="coreDataImportService" ref="coreDataImportService"/>
 		<property name="sampleDataImportService" ref="sampleDataImportService"/>

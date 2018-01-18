@@ -1,0 +1,194 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+# ImpEx for Importing Categories
+
+# Macros / Replacement Parameter definitions
+$productCatalog=amwayapacProductCatalog
+$productCatalogName=Amway Apac Product Catalog
+
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+
+# Language
+$lang=en
+
+# Create Categories
+UPDATE Category;code[unique=true];name[lang=$lang];$catalogVersion
+;root;"Categories"
+;nutrition;"Nutrition"
+;vitamins-and-supplements;"Vitamins & Supplements"
+;bone-health;"Bone Health"
+;childrens-vitamins;"Children's Vitamins"
+;heart-health;"Heart Health"
+;weight-management;"Weight Management"
+;supplements;"Supplements"
+;bar;"Bar"
+;shakes;"Shakes"
+;sports-nutrition;"Sports Nutrition"
+;energize;"Energize"
+;hydrate;"Eydrate"
+;nutrilite-sports-nutrition;"Nutrilite Sports Nutrition"
+;energy-drinks;"Energy Drinks"
+;kosher;"Kosher"
+;sugar-free;"Sugar-Free"
+;low-carb;"Low-Carb"
+;beauty;"Beauty"
+;skin-care;"Skin Care"
+;anti-ageing-solutions;"Anti Ageing Solutions"
+;artistry-special-care;"Artistry Special Care"
+;daily-skincare;"Daily Skincare"
+;colour;"Colour"
+;applicators-and-accessories;"Applicators & Accessories"
+;eye-and-brows;"Eye & Brows"
+;eye-and-cheeks;"Eye & Cheeks"
+;makeup;"Makeup"
+;cheeks;"Cheeks"
+;concealers;"Concealers"
+;foundations-and-powders;"Foundations & Powders"
+;beauty-accessories;"Beauty Accessories"
+;facial-cotton;"Facial Cotton"
+;brush-set;"Brush Set"
+;powder-compact;"Powder Compact"
+;bath-and-body;"Bath & Body"
+;hair-care;"Hair Care"
+;conditioners;"Conditioners"
+;shampoos;"Shampoos"
+;styling-and-treatments;"Styling & Treatments"
+;body-care;"Body Care"
+;body-wash;"Body Wash"
+;deodorants;"Deodorants"
+;lotions;"Lotions"
+;oral-care;"Oral Care"
+;breath-sprays;"Breath Sprays"
+;toothpastes;"Toothpastes"
+;brushes-and-floss;"Brushes & Floss"
+;sun-and-tanning;"Sun and Tanning"
+;sunscreen-lotion;"Sunscreen Lotion"
+;self-tan-mousse;"Self Tan Mousse"
+;home;"Home"
+;household-hygiene;"Household Hygiene"
+;kitchen-cleaner;"Kitchen Cleaner"
+;general-cleaning;"General Cleaning"
+;bathroom-cleaner;"Bathroom Cleaner"
+;laundry;"Laundry"
+;detergents;"Detergents"
+;treatment-and-additives;"Treatment & Additives"
+;lotions;"Lotions"
+;water-treatment;"Water Treatment"
+;purifiers;"Purifiers"
+;replacement-filters;"Replacement Filters"
+;cookware;"Cookware"
+;cutlery;"Cutlery"
+;pans;"Pans"
+;replacement-parts;"Replacement Parts"
+
+##### brands
+UPDATE Category;code[unique=true];name[lang=$lang];$catalogVersion
+;brands;Brands
+;nutrilite;NUTRILITE
+;bodykeybynutrilite;BodyKey by NUTRILITE
+;tropicalherbs;Tropical Herbs
+;beetreasures;Bee Treasures
+;satinique;SATINIQUE
+;allano;ALLANO
+;aloecare;ALOE CARE
+;bodyseries;BODY SERIES
+;gh;G&H
+;glister;GLISTER
+;colourcreation;COLOUR CREATION
+;artistryyouthxtend;ARTISTRY YOUTH XTEND
+;artistryyouthxtendultra;ARTISTRY YOUTH XTEND ULTRA
+;artistrytimedefiance;ARTISTRY TIME DEFIANCE
+;artistryidealradiance;ARTISTRY IDEAL RADIANCE
+;newartistryidealradiance;NEW ARTISTRY IDEAL RADIANCE
+;artistryhydrav;ARTISTRY HYDRA-V
+;artistryessentials;ARTISTRY ESSENTIALS
+;artistryspecialcare;ARTISTRY SPECIAL CARE
+;artistryintensiveskincare;ARTISTRY INTENSIVE SKINCARE
+;artistrysupremelx;ARTISTRY SUPREME LX
+;artistrycremelx;ARTISTRY CREME LX
+;artistrymen;ARTISTRY MEN
+;artistry;ARTISTRY
+;artistryexactfit;ARTISTRY EXACT FIT
+;artistrypurewhite;ARTISTRY PURE WHITE
+;artistryyoutheffect;ARTISTRY YOUTH EFFECT
+;artistryexactfit;ARTISTRY EXACT FIT
+;artistrysignatureeyes;ARTISTRY SIGNATURE EYES
+;artistrysignaturecolor;ARTISTRY SIGNATURE COLOR
+;artistrypurewhite;ARTISTRY PURE WHITE
+;artistry;ARTISTRY
+;sa8;SA8
+;loc;L.O.C.
+;amwayhome;AMWAY HOME
+;amway;AMWAY
+;espring;eSpring
+;amwaywts;AMWAY WTS
+;atmosphere;ATMOSPHERE
+;amwayats;AMWAY ATS
+;homealarmsystem;Home Alarm System
+;amwayqueen;AMWAY QUEEN
+;icook;iCOOK
+;kitchenaid;KitchenAid
+;noxxa;Noxxa
+;sharp;Sharp
+;philips;Philips
+;dreamland;Dreamland
+;isens;iSens
+;rossmax;Rossmax
+;sanita;Sanita
+;femimeplus;Femime Plus
+;bum;B.U.M.
+;crocodile;Crocodile
+;truespring;True Spring
+;fusionx;Fusion X
+;salvatoreferragamo;Salvatore Ferragamo
+;elizabetharden;Elizabeth Arden
+;calvinklein;Calvin Klein
+;orlando;Orlando
+;target;Target
+;coolscents;Coolscents
+;elf;Elf
+;lovelycloth;Lovely Cloth
+;impact;Impact
+;nuk;Nuk
+;evian;Evian
+;ridbac;Ridbac
+;samson;Samson
+;countrybake;Country Bake
+;cookielovers;Cookie Lovers
+;vergold;Vergold
+;progyms;Progyms
+;idamansuri;Idaman Suri
+;caresens;CareSens
+;loacker;Loacker
+;sleepjoy;SleepJoy
+;skylight;Skylight
+;vergold;Vergold
+;lejia;Le Jia
+;mapleton;Mapleton
+;fabercastell;Faber Castell
+;genova;Genova
+;louiscasa;Louis Casa
+;artistry;ARTISTRY
+;amwaywts;Amway WTS
+;inbody;INBODY
+;underarmour;UNDER ARMOUR
+;untold;UNTOLD
+;idamansuri;Idaman Suri
+;impactergo;Impact Ergo
+;isens;I-SENS
+;celebrationmooncake;Celebration Mooncake
+;omron;OMRON
+;premiumgold;Premium Gold
+;samson;Samson
+;target;Target
+;artistrysignaturecolor;ARTISTRY SIGNATURE COLOR
+;personalshopperscatalogue;Personal Shoppers Catalogue
+;amwaylifestylecatalogue;Amway Lifestyle Catalogue

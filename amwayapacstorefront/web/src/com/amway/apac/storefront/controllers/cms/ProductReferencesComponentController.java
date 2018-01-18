@@ -15,7 +15,6 @@ import de.hybris.platform.commercefacades.product.ProductFacade;
 import de.hybris.platform.commercefacades.product.ProductOption;
 import de.hybris.platform.commercefacades.product.data.ProductReferenceData;
 import de.hybris.platform.core.model.product.ProductModel;
-import com.amway.apac.storefront.controllers.ControllerConstants;
 
 import java.util.Arrays;
 import java.util.List;
@@ -27,16 +26,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.amway.apac.storefront.controllers.ControllerConstants;
+
 
 /**
  * Controller for CMS ProductReferencesComponent
  */
 @Controller("ProductReferencesComponentController")
 @RequestMapping(value = ControllerConstants.Actions.Cms.ProductReferencesComponent)
-public class ProductReferencesComponentController extends
-		AbstractAcceleratorCMSComponentController<ProductReferencesComponentModel>
+public class ProductReferencesComponentController
+		extends AbstractAcceleratorCMSComponentController<ProductReferencesComponentModel>
 {
-	protected static final List<ProductOption> PRODUCT_OPTIONS = Arrays.asList(ProductOption.BASIC, ProductOption.PRICE);
+	protected static final List<ProductOption> PRODUCT_OPTIONS = Arrays.asList(ProductOption.BASIC, ProductOption.PRICE,
+			ProductOption.STOCK);
 
 	@Resource(name = "productVariantFacade")
 	private ProductFacade productFacade;

@@ -72,8 +72,8 @@
 		<bean class="com.amway.apac.storefront.interceptors.beforecontroller.SecurityUserCheckBeforeControllerHandler" />
 		<bean class="com.amway.apac.storefront.interceptors.beforecontroller.RequireHardLoginBeforeControllerHandler" >
 				<property name="redirectStrategy" ref="redirectStrategy"/>
-				<property name="loginUrl" value="/login"/>
-				<property name="loginAndCheckoutUrl" value="/login/checkout"/>
+				<property name="loginUrl" value="/"/>
+				<property name="loginAndCheckoutUrl" value="/"/>
 				<property name="requireHardLoginEvaluator" ref="requireHardLoginEvaluator"/>
 		</bean>
 		<bean class="com.amway.apac.storefront.interceptors.beforecontroller.DeviceDetectionBeforeControllerHandler" />
@@ -224,9 +224,11 @@
 		<property name="productService" ref="productService"/>
 	</bean>
 
-	<bean id="searchBreadcrumbBuilder" class="de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.impl.SearchBreadcrumbBuilder" >
+	<bean id="searchBreadcrumbBuilder" class="com.amway.apac.storefront.breadcrumb.impl.AmwayApacSearchBreadcrumbBuilder" >
 		<property name="commerceCategoryService" ref="commerceCategoryService"/>
 		<property name="categoryModelUrlResolver" ref="categoryModelUrlResolver"/>
+		<property name="searchBreadcrumbPrefix" value="search.breadcrumb.prefix"/>
+		<property name="i18nService" ref="i18nService" />
 	</bean>
 
 	<bean id="contentPageBreadcrumbBuilder" class="de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.impl.ContentPageBreadcrumbBuilder" />
@@ -248,7 +250,8 @@
 	<bean id="accountBreadcrumbBuilder" class="de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.impl.DefaultResourceBreadcrumbBuilder" >
 		<property name="i18nService" ref="i18nService" />
 		<property name="parentBreadcrumbLinkPath" value="/my-account"/>
-		<property name="parentBreadcrumbResourceKey" value="#{'responsive' == '${commerceservices.default.desktop.ui.experience}' ? '' : 'header.link.account'}"/>
+		<property name="parentBreadcrumbResourceKey" value="account.header.link"/>
+
 	</bean>
 
 	<bean id="multiStepCheckoutBreadcrumbBuilder" class="de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.impl.DefaultResourceBreadcrumbBuilder" >
@@ -351,4 +354,23 @@
 		<property name="cmsSiteService" ref="cmsSiteService"/>
 		<property name="defaultTheme" value="blue"/>
 	</bean>
+	
+	<alias name="defaultAmwayApacCmsLinkComponentUrlResolver" alias="amwayApacCmsLinkComponentUrlResolver"/>
+	<bean id="defaultAmwayApacCmsLinkComponentUrlResolver" class="com.amway.apac.storefront.url.DefaultAmwayApacCmsLinkComponentUrlResolver">
+		<property name="productUrlConverter" ref="productUrlConverter"/>
+		<property name="categoryUrlConverter" ref="categoryUrlConverter"/>
+	</bean>
+
+	<bean id="shoppingListDetailsBreadcrumbBuilder" class="de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.impl.DefaultResourceBreadcrumbBuilder" >
+		<property name="i18nService" ref="i18nService" />
+		<property name="parentBreadcrumbLinkPath" value="/shopping-lists/all"/>
+		<property name="parentBreadcrumbResourceKey" value="#{'shopping.lists.page.breadcrumb'}"/>
+	</bean>
+
+	<bean id="registrationBreadcrumbBuilder" class="de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.impl.DefaultResourceBreadcrumbBuilder" >
+		<property name="i18nService" ref="i18nService" />
+		<property name="parentBreadcrumbLinkPath" value="/register-landing-page"/>
+		<property name="parentBreadcrumbResourceKey" value="#{'register.landing.page.breadcrumb'}"/>
+	</bean>
+
 </beans>

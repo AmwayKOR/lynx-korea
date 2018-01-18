@@ -39,7 +39,6 @@ import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.product.ProductService;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import de.hybris.platform.util.Config;
-import com.amway.apac.storefront.controllers.ControllerConstants;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -69,8 +68,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.amway.apac.storefront.controllers.ControllerConstants;
+import com.amway.apac.storefront.response.dto.AmwayApacResponseDto;
+import com.amway.apac.storefront.response.dto.AmwayApacResponseMessageDto;
+import com.amway.apac.storefront.util.AmwayApacResponseUtils;
 import com.google.common.collect.Maps;
-
 
 /**
  * Controller for product details page
@@ -123,8 +125,7 @@ public class ProductPageController extends AbstractPageController
 			final HttpServletRequest request, final HttpServletResponse response)
 			throws CMSItemNotFoundException, UnsupportedEncodingException
 	{
-		final List<ProductOption> extraOptions = Arrays.asList(ProductOption.VARIANT_MATRIX_BASE, ProductOption.VARIANT_MATRIX_URL,
-				ProductOption.VARIANT_MATRIX_MEDIA);
+		final List<ProductOption> extraOptions = Arrays.asList(ProductOption.VARIANT_FIRST_VARIANT);
 
 		final ProductData productData = productFacade.getProductForCodeAndOptions(productCode, extraOptions);
 
@@ -136,12 +137,12 @@ public class ProductPageController extends AbstractPageController
 
 		updatePageTitle(productCode, model);
 
-
 		populateProductDetailForDisplay(productCode, model, request, extraOptions);
 
 		model.addAttribute(new ReviewForm());
 		model.addAttribute("pageType", PageType.PRODUCT.name());
 		model.addAttribute("futureStockEnabled", Boolean.valueOf(Config.getBoolean(FUTURE_STOCK_ENABLED, false)));
+		model.addAttribute("reviewsCount", Integer.valueOf(productFacade.getReviews(productCode).size()));
 
 		final String metaKeywords = MetaSanitizerUtil.sanitizeKeywords(productData.getKeywords());
 		final String metaDescription = MetaSanitizerUtil.sanitizeDescription(productData.getDescription());
@@ -203,10 +204,10 @@ public class ProductPageController extends AbstractPageController
 		final ProductModel productModel = productService.getProductForCode(productCode);
 		final ProductData productData = productFacade.getProductForCodeAndOptions(productCode,
 				Arrays.asList(ProductOption.BASIC, ProductOption.PRICE, ProductOption.SUMMARY, ProductOption.DESCRIPTION,
-						ProductOption.CATEGORIES, ProductOption.PROMOTIONS, ProductOption.STOCK, ProductOption.REVIEW,
-						ProductOption.VARIANT_FULL, ProductOption.DELIVERY_MODE_AVAILABILITY));
+						ProductOption.CATEGORIES, ProductOption.PROMOTIONS, ProductOption.STOCK, ProductOption.VARIANT_FULL,
+						ProductOption.IMAGES, ProductOption.VARIANT_FIRST_VARIANT));
 
-		sortVariantOptionData(productData);
+		//sortVariantOptionData(productData);
 		populateProductData(productData, model);
 		getRequestContextData(request).setProduct(productModel);
 
@@ -215,21 +216,22 @@ public class ProductPageController extends AbstractPageController
 
 	@RequestMapping(value = PRODUCT_CODE_PATH_VARIABLE_PATTERN + "/review", method =
 	{ RequestMethod.GET, RequestMethod.POST })
-	public String postReview(@PathVariable final String productCode, final ReviewForm form, final BindingResult result,
-			final Model model, final HttpServletRequest request, final RedirectAttributes redirectAttrs)
-			throws CMSItemNotFoundException
+	public @ResponseBody AmwayApacResponseDto<ReviewForm> postReview(@PathVariable final String productCode, final ReviewForm form,
+			final BindingResult result, final Model model) throws CMSItemNotFoundException
 	{
 		getReviewValidator().validate(form, result);
 
-		final ProductData productData = productFacade.getProductForCodeAndOptions(productCode, null);
 		if (result.hasErrors())
 		{
-			updatePageTitle(productCode, model);
 			GlobalMessages.addErrorMessage(model, "review.general.error");
-			model.addAttribute("showReviewForm", Boolean.TRUE);
-			populateProductDetailForDisplay(productCode, model, request, Collections.emptyList());
-			storeCmsPageInModel(model, getPageForProduct(productCode));
-			return getViewForPage(model);
+			GlobalMessages.addErrorMessage(model, "review.headline.invalid");
+			GlobalMessages.addErrorMessage(model, "review.comment.invalid");
+			GlobalMessages.addErrorMessage(model, "review.rating.invalid");
+
+			final List<AmwayApacResponseMessageDto> message = AmwayApacResponseUtils.populateMessages(result, getMessageSource(),
+					getI18nService());
+
+			return new AmwayApacResponseDto<ReviewForm>(false, message, form);
 		}
 
 		final ReviewData review = new ReviewData();
@@ -237,10 +239,11 @@ public class ProductPageController extends AbstractPageController
 		review.setComment(XSSFilterUtil.filter(form.getComment()));
 		review.setRating(form.getRating());
 		review.setAlias(XSSFilterUtil.filter(form.getAlias()));
-		productFacade.postReview(productCode, review);
-		GlobalMessages.addFlashMessage(redirectAttrs, GlobalMessages.CONF_MESSAGES_HOLDER, "review.confirmation.thank.you.title");
 
-		return REDIRECT_PREFIX + productDataUrlResolver.resolve(productData);
+		productFacade.postReview(productCode, review);
+
+		return new AmwayApacResponseDto<ReviewForm>(true, null, form);
+
 	}
 
 	@RequestMapping(value = PRODUCT_CODE_PATH_VARIABLE_PATTERN + "/reviewhtml/"
@@ -403,23 +406,16 @@ public class ProductPageController extends AbstractPageController
 		final List<ProductOption> options = new ArrayList<>(Arrays.asList(ProductOption.VARIANT_FIRST_VARIANT, ProductOption.BASIC,
 				ProductOption.URL, ProductOption.PRICE, ProductOption.SUMMARY, ProductOption.DESCRIPTION, ProductOption.GALLERY,
 				ProductOption.CATEGORIES, ProductOption.REVIEW, ProductOption.PROMOTIONS, ProductOption.CLASSIFICATION,
-				ProductOption.VARIANT_FULL, ProductOption.STOCK, ProductOption.VOLUME_PRICES, ProductOption.PRICE_RANGE,
-				ProductOption.DELIVERY_MODE_AVAILABILITY));
+				ProductOption.VARIANT_FULL, ProductOption.STOCK));
 
 		options.addAll(extraOptions);
 
 		final ProductData productData = productFacade.getProductForCodeAndOptions(productCode, options);
 
-		sortVariantOptionData(productData);
+		//sortVariantOptionData(productData);
 		storeCmsPageInModel(model, getPageForProduct(productCode));
 		populateProductData(productData, model);
 		model.addAttribute(WebConstants.BREADCRUMBS_KEY, productBreadcrumbBuilder.getBreadcrumbs(productCode));
-
-		if (CollectionUtils.isNotEmpty(productData.getVariantMatrix()))
-		{
-			model.addAttribute(WebConstants.MULTI_DIMENSIONAL_PRODUCT,
-					Boolean.valueOf(CollectionUtils.isNotEmpty(productData.getVariantMatrix())));
-		}
 	}
 
 	protected void populateProductData(final ProductData productData, final Model model)
@@ -516,6 +512,30 @@ public class ProductPageController extends AbstractPageController
 		return cmsPageService.getPageForProduct(productModel);
 	}
 
+	@RequestMapping(value = PRODUCT_CODE_PATH_VARIABLE_PATTERN + "/reviewCount", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public @ResponseBody AmwayApacResponseDto<Map<String, Integer>> getReviewCount(@PathVariable final String productCode)
+	{
+		final Map<String, Integer> result = new HashMap<String, Integer>();
+		final List<ReviewData> reviewDataList = productFacade.getReviews(productCode);
 
+		for (final ReviewData review : reviewDataList)
+		{
+			final Integer rating = Integer.valueOf(review.getRating().intValue());
+			final String key = String.valueOf(rating).concat("star");
+			if (result.containsKey(key))
+			{
+				final Integer value = result.get(key);
+				final int total = value.intValue() + 1;
+				result.put(String.valueOf(key), Integer.valueOf(total));
+			}
+			else
+			{
+				result.put(String.valueOf(key), new Integer(1));
+			}
+		}
+
+		return new AmwayApacResponseDto<Map<String, Integer>>(true, null, result);
+	}
 
 }

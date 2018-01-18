@@ -41,13 +41,8 @@ public class DefaultAddPartyEcommService
 	@Override
 	protected ReturnInfoService executeEvent(final Object input)
 	{
-		LOG.info("Calling webservice EcommService/addPartyEcomm.....");
-		final RestResponse<ReturnInfoService> dmsResultRestResponse = getDmsClient()
-				.executeDmsRequest(getXclientRefId(), getUrlPath(),
-						 input,
-						ReturnInfoService.class);
-		Assert.notNull(dmsResultRestResponse, "Failed to add party Ecomm details");
-		return dmsResultRestResponse.getResult();
+		//see Deprecated comment above
+		return null;
 	}
 
 }

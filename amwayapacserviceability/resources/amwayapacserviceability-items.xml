@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- [y] hybris Platform Copyright (c) 2017 SAP SE or an SAP affiliate company. 
+	All rights reserved. This software is the confidential and proprietary information 
+	of SAP ("Confidential Information"). You shall not disclose such Confidential 
+	Information and shall use it only in accordance with the terms of the license 
+	agreement you entered into with SAP. -->
+
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<itemtypes>
+		<typegroup name="Serviceability">
+			<itemtype code="AbstractAmwayWarehouseServiceability"
+				autocreate="true" generate="true" abstract="true">
+				<description>PIN code to Warehouse mapping</description>
+				<attributes>
+					<attribute qualifier="site" type="BaseSite">
+						<description>Base site for the postal code</description>
+						<modifiers unique="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="warehouse" type="Warehouse">
+						<description>Warehouse mapped against the postal code</description>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="region" type="Region">
+						<description>Region of the area</description>
+						<modifiers unique="true" />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+				<indexes>
+					<index name="AWSSiteIdx" unique="false">
+						<key attribute="site" />
+					</index>
+				</indexes>
+			</itemtype>
+
+			<itemtype code="AmwayPostcodeWarehouseServiceability"
+				autocreate="true" generate="true" extends="AbstractAmwayWarehouseServiceability">
+				<description>Pin code to warehouse mapping for complete postal code model</description>
+				<deployment table="amwayPCWHServiceability" typecode="21065" />
+				<attributes>
+					<attribute qualifier="postalCode" type="java.lang.String">
+						<description>Postal code of the area</description>
+						<modifiers unique="true" />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+			
+		</typegroup>
+	</itemtypes>
+</items>

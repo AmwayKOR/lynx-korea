@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.amway.apac.core.stock.strategies.impl;
 
 import de.hybris.platform.basecommerce.enums.InStockStatus;
@@ -18,17 +15,21 @@ import org.springframework.beans.factory.annotation.Required;
 
 
 /**
- * This class is used to override the OOTB Warehousing Availability Strategy
+ * Availability calculation strategy overridden to add custom InStockStatus at APAC level
+ *
+ * @author Ashish Sabal
+ *
  */
 public class AmwayApacCommerceAvailabilityCalculationStrategy extends WarehousingAvailabilityCalculationStrategy
 {
 	private InventoryEventService inventoryEventService;
 
 	/**
-	 * This method is overridden as the ATP formula per base store is not supported for now
+	 * Returns available quantity for provided stock level models.
 	 *
 	 * @param stockLevels
-	 *           - The collection of stocks for which the availability is being evaluated
+	 *           the stock levels
+	 * @return Available quantity
 	 */
 	@Override
 	public Long calculateAvailability(final Collection<StockLevelModel> stockLevels)
@@ -36,14 +37,17 @@ public class AmwayApacCommerceAvailabilityCalculationStrategy extends Warehousin
 		long totalActualAmount = 0;
 		for (final StockLevelModel stockLevel : stockLevels)
 		{
-			// If any stock level is flagged as FORCEINSTOCK then return null to indicate in stock
+			// If any stock level is flagged as FORCEINSTOCK or BACKORDER then return null to indicate in stock
 			if (InStockStatus.FORCEINSTOCK.equals(stockLevel.getInStockStatus()))
 			{
 				return null;
 			}
 
 			// If any stock level is flagged as FORCEOUTOFSTOCK then we skip over it
-			if (!InStockStatus.FORCEOUTOFSTOCK.equals(stockLevel.getInStockStatus()))
+			if (!(InStockStatus.FORCEOUTOFSTOCK.equals(stockLevel.getInStockStatus())
+					|| InStockStatus.TEMPORARYNOTAVAILABLE.equals(stockLevel.getInStockStatus())
+					|| InStockStatus.NOTYETAVAILABLE.equals(stockLevel.getInStockStatus())
+					|| InStockStatus.NOLONGERAVAILABLE.equals(stockLevel.getInStockStatus())))
 			{
 				final long availableToSellQuantity = getAvailableToSellQuantity(stockLevel);
 				if (availableToSellQuantity > 0 || !stockLevel.isTreatNegativeAsZero())
@@ -54,7 +58,6 @@ public class AmwayApacCommerceAvailabilityCalculationStrategy extends Warehousin
 		}
 		return Long.valueOf(totalActualAmount);
 	}
-
 
 	/**
 	 * Get the Available To Sell quantity for a StockLevel.
@@ -82,7 +85,6 @@ public class AmwayApacCommerceAvailabilityCalculationStrategy extends Warehousin
 		return availability;
 	}
 
-
 	/**
 	 * evaluates and returns the amount of inventory available for stock levels
 	 *
@@ -104,8 +106,6 @@ public class AmwayApacCommerceAvailabilityCalculationStrategy extends Warehousin
 		}
 		return totalInventoryEventQuantity;
 	}
-
-
 
 	/**
 	 * evaluates the availability of stock
@@ -137,5 +137,4 @@ public class AmwayApacCommerceAvailabilityCalculationStrategy extends Warehousin
 	{
 		this.inventoryEventService = inventoryEventService;
 	}
-
 }
