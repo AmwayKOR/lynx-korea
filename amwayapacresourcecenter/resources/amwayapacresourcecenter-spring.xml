@@ -19,7 +19,7 @@
 
 
 	<alias alias="amwayAssetDao" name="defaultAmwayAssetDao"/>
-	<bean id="defaultAmwayAssetDao" class="com.amway.apac.resourcecenter.daos.Impl.DefaultAmwayAssetDao">
+	<bean id="defaultAmwayAssetDao" class="com.amway.apac.resourcecenter.daos.impl.DefaultAmwayAssetDao">
 		<property name="flexibleSearchService" ref="flexibleSearchService"/>
 		<property name="pagedFlexibleSearchService" ref="pagedFlexibleSearchService" />
 		<property name="userService" ref="userService"/>
@@ -27,7 +27,7 @@
 	</bean>
 	
 	<alias alias="amwayApacAssetService" name="defaultAmwayApacAssetService"/>
-	<bean id="defaultAmwayApacAssetService" class="com.amway.apac.resourcecenter.services.Impl.DefaultAmwayApacAssetService">
+	<bean id="defaultAmwayApacAssetService" class="com.amway.apac.resourcecenter.services.impl.DefaultAmwayApacAssetService">
 		<property name="amwayAssetDao" ref="amwayAssetDao"/>
 		<property name="cmsSiteService" ref="cmsSiteService" />
 		<property name="catalogService" ref="catalogService"/>

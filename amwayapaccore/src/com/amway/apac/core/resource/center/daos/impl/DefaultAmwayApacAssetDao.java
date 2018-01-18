@@ -1,4 +1,4 @@
-package com.amway.apac.core.resource.center.daos.Impl;
+package com.amway.apac.core.resource.center.daos.impl;
 
 import de.hybris.platform.commerceservices.search.flexiblesearch.data.SortQueryData;
 
@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Required;
 import com.amway.apac.core.account.service.AmwayApacAccountClassificationService;
 import com.amway.apac.core.constants.AmwayapacCoreConstants;
 import com.amway.apac.core.enums.AccountClassificationEnum;
-import com.amway.apac.resourcecenter.daos.Impl.DefaultAmwayAssetDao;
+import com.amway.apac.resourcecenter.daos.impl.DefaultAmwayAssetDao;
 import com.amway.apac.resourcecenter.enums.AmwayApacAssetsSort;
 
 

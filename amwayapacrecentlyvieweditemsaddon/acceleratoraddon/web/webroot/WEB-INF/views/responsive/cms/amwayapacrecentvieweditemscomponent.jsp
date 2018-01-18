@@ -17,7 +17,7 @@
 			</h2>
 		</div>
 		<div class="product-recentlyviewed__imagelist" id="recentlyViewedListTab">
-			<c:forEach items="${recentlyViewedProducts.results}" var="product">
+			<c:forEach items="${recentlyViewedProducts}" var="product">
 				<div>
 					<product:productPrimaryImage product="${product}" format="recentlyViewed" cssClass="product-recentlyviewed__img" />
 				</div>

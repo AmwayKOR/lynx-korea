@@ -1,4 +1,4 @@
-package com.amway.apac.resourcecenter.daos.Impl;
+package com.amway.apac.resourcecenter.daos.impl;
 
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
 
