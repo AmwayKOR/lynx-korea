@@ -34,6 +34,9 @@ public class AmwayapacFacadesConstants extends GeneratedAmwayapacFacadesConstant
 	public static final String LAST_THIRTY_DAYS = "last30Days";
 	public static final String ORDER_DATE_FORMAT_PATTERN = "yyyy-MM-dd";
 
+	public static final String PRODUCT_MODEL = "productModel";
+	public static final String STOCK_DATA = "stockData";
+
 	private AmwayapacFacadesConstants()
 	{
 		//empty

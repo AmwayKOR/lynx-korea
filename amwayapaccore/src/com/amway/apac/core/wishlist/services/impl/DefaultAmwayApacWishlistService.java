@@ -11,6 +11,7 @@
 package com.amway.apac.core.wishlist.services.impl;
 
 import static com.amway.apac.core.constants.AmwayapacCoreConstants.TWO_HUNDRED_INT;
+import static com.amway.apac.core.constants.AmwayapacCoreConstants.WISHLIST_UID;
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateIfSingleResult;
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
 
@@ -141,7 +142,7 @@ public class DefaultAmwayApacWishlistService extends AmwayWishlistServiceImpl im
 	@Override
 	public boolean deleteWishlist(final String uid)
 	{
-		validateParameterNotNullStandardMessage("uid", uid);
+		validateParameterNotNullStandardMessage(WISHLIST_UID, uid);
 
 		boolean isDeleted = false;
 		final Wishlist2Model wishlist = getWishlistByUid(uid);

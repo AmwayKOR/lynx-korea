@@ -76,7 +76,7 @@ public class DefaultAmwayApacDeliverySlotManagementService implements AmwayApacD
 	{
 		validateParameterNotNullStandardMessage(ORDERING_DATE, orderingDate);
 
-		final List<AmwayDeliverySlotAvailabilityModel> deliverySlotAvailabilityModels = new ArrayList<AmwayDeliverySlotAvailabilityModel>();
+		final List<AmwayDeliverySlotAvailabilityModel> deliverySlotAvailabilityModels = new ArrayList<>();
 
 		if (CollectionUtils.isNotEmpty(applicableDeliverySlots))
 		{
@@ -95,13 +95,16 @@ public class DefaultAmwayApacDeliverySlotManagementService implements AmwayApacD
 			{
 				getModelService().saveAll(deliverySlotAvailabilityModels);
 
-				LOGGER.debug(
-						new StringBuilder(200).append("Delivery slot creation info : ").append(deliverySlotAvailabilityModels.size())
-								.append(" delivery slots created for ordering date ").append(orderingDate).toString());
+				if (LOGGER.isInfoEnabled())
+				{
+					LOGGER.info(
+							new StringBuilder(200).append("Delivery slot creation info : ").append(deliverySlotAvailabilityModels.size())
+									.append(" delivery slots created for ordering date ").append(orderingDate).toString());
+				}
 			}
-			else
+			else if (LOGGER.isInfoEnabled())
 			{
-				LOGGER.debug(new StringBuilder(200).append("Delivery slot creation info : ")
+				LOGGER.info(new StringBuilder(200).append("Delivery slot creation info : ")
 						.append("NO delivery slot created for ordering date ").append(orderingDate).toString());
 			}
 		}
@@ -223,10 +226,13 @@ public class DefaultAmwayApacDeliverySlotManagementService implements AmwayApacD
 					deliveryDate = slotModel.getDeliveryDate();
 				}
 			}
-			LOGGER.info(new StringBuilder(100).append("Modification of Slots data for delivery Date : ").append(deliveryDate)
-					.append(" successfully completed.").toString());
+			if (LOGGER.isInfoEnabled())
+			{
+				LOGGER.info(new StringBuilder(100).append("Modification of Slots data for delivery Date : ").append(deliveryDate)
+						.append(" successfully completed.").toString());
+			}
 		}
-		else
+		else if (LOGGER.isInfoEnabled())
 		{
 			LOGGER.info(new StringBuilder(100).append("NO SLOT MODEL FOUND for delivery Date : ").append(deliveryDate).toString());
 		}
@@ -241,7 +247,10 @@ public class DefaultAmwayApacDeliverySlotManagementService implements AmwayApacD
 		validateParameterNotNullStandardMessage(ORDERING_DATE, orderingDate);
 
 		final DayOfWeek orderingDay = orderingDate.getDayOfWeek();
-		LOGGER.debug("Week Of Day : " + orderingDay);
+		if (LOGGER.isInfoEnabled())
+		{
+			LOGGER.info("Week Of Day : " + orderingDay);
+		}
 
 		// If ordering day is SAT or SUN, data already exists in SYSTEM
 		if ((!orderingDay.equals(DayOfWeek.SATURDAY)) && (!orderingDay.equals(DayOfWeek.SUNDAY)))

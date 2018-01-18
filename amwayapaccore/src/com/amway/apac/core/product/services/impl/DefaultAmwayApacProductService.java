@@ -72,6 +72,7 @@ public class DefaultAmwayApacProductService extends DefaultProductService implem
 	/** The amway user promotion count dao. */
 	private GenericDao<AmwayUserPromotionCountModel> amwayUserPromotionCountDao;
 
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -163,7 +164,7 @@ public class DefaultAmwayApacProductService extends DefaultProductService implem
 
 		int usedQuantity = 0;
 
-		final Map<String, Object> attributes = new HashMap<>();
+		final Map<String, Object> attributes = new HashMap<>(4);
 		attributes.put(USERID, userId);
 		attributes.put(PRODUCTCODE, productCode);
 		attributes.put(PROMOTIONCODE, PRE_LAUNCH_PROMOTION);
@@ -269,7 +270,8 @@ public class DefaultAmwayApacProductService extends DefaultProductService implem
 	 */
 	protected String getNormalizedAmwayAccountCode(final AmwayAccountModel amwayAccount)
 	{
-		return amwayAccount.getControllingAffiliate().getAffiliateNumber() + "-" + amwayAccount.getCode();
+		return amwayAccount.getControllingAffiliate().getAffiliateNumber() + AmwayapacCoreConstants.HYPHEN_CHAR
+				+ amwayAccount.getCode();
 	}
 
 	/**

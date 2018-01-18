@@ -1,7 +1,7 @@
 package com.amway.apac.resourcecenter.services.impl;
 
 import static com.amway.apac.resourcecenter.constants.AmwayapacresourcecenterConstants.COMPONENT_STRING;
-import static com.amway.apac.resourcecenter.constants.AmwayapacresourcecenterConstants.PAGEABLEDATA_STRING;
+import static com.amway.apac.resourcecenter.constants.AmwayapacresourcecenterConstants.PAGEABLE_DATA_STRING;
 import static com.amway.apac.resourcecenter.constants.AmwayapacresourcecenterConstants.PRODUCT_STRING;
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
 
@@ -46,7 +46,7 @@ public class DefaultAmwayApacAssetService implements AmwayApacAssetService
 	public SearchPageData<AmwayAssetModel> getAssets(final String componentId, final PageableData pageableData, final String year)
 	{
 		validateParameterNotNullStandardMessage(COMPONENT_STRING, componentId);
-		validateParameterNotNullStandardMessage(PAGEABLEDATA_STRING, pageableData);
+		validateParameterNotNullStandardMessage(PAGEABLE_DATA_STRING, pageableData);
 
 		return getAmwayAssetDao().getAssets(componentId, pageableData, getCatalogVersion(), year);
 	}
@@ -59,7 +59,7 @@ public class DefaultAmwayApacAssetService implements AmwayApacAssetService
 			final String year)
 	{
 		validateParameterNotNullStandardMessage(PRODUCT_STRING, product);
-		validateParameterNotNullStandardMessage(PAGEABLEDATA_STRING, pageableData);
+		validateParameterNotNullStandardMessage(PAGEABLE_DATA_STRING, pageableData);
 
 		return getAmwayAssetDao().getAssetsForProduct(product, pageableData, getCmsSiteService().getCurrentCatalogVersion(), year);
 	}
@@ -72,7 +72,7 @@ public class DefaultAmwayApacAssetService implements AmwayApacAssetService
 			final String year)
 	{
 		validateParameterNotNullStandardMessage(COMPONENT_STRING, componentId);
-		validateParameterNotNullStandardMessage(PAGEABLEDATA_STRING, pageableData);
+		validateParameterNotNullStandardMessage(PAGEABLE_DATA_STRING, pageableData);
 
 		return getAmwayAssetDao().getAssetsAlbums(componentId, pageableData, getCatalogVersion(), year);
 	}

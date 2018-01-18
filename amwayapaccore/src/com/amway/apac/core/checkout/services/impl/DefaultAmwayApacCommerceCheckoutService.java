@@ -1,5 +1,6 @@
 package com.amway.apac.core.checkout.services.impl;
 
+import static com.amway.apac.core.constants.AmwayapacCoreConstants.COMMERCE_CHECKOUT_PARAMETER;
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
 
 import de.hybris.platform.commerceservices.service.data.CommerceCheckoutParameter;
@@ -28,7 +29,7 @@ public class DefaultAmwayApacCommerceCheckoutService extends DefaultAmwayCommerc
 	@Override
 	public boolean setWarehouse(final CommerceCheckoutParameter parameter)
 	{
-		validateParameterNotNullStandardMessage("parameter", parameter);
+		validateParameterNotNullStandardMessage(COMMERCE_CHECKOUT_PARAMETER, parameter);
 
 		return getAmwayApacCommerceWarehouseStrategy().setWarehouse(parameter);
 	}

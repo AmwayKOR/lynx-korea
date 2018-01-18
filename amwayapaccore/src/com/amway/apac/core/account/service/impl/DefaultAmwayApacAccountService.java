@@ -1,5 +1,7 @@
 package com.amway.apac.core.account.service.impl;
 
+import static com.amway.apac.core.constants.AmwayapacCoreConstants.ABO_ID;
+import static com.amway.apac.core.constants.AmwayapacCoreConstants.AFFILIATE_COUNTRY_CODE;
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
 
 import de.hybris.platform.core.model.c2l.CountryModel;
@@ -38,10 +40,11 @@ public class DefaultAmwayApacAccountService extends DefaultAmwayAccountService i
 	@Override
 	public List<AmwayAccountModel> getAmwayAccount(final String aboId, final String affiliateCountryCode)
 	{
-		validateParameterNotNullStandardMessage("aboId", aboId);
+		validateParameterNotNullStandardMessage(ABO_ID, aboId);
+		validateParameterNotNullStandardMessage(AFFILIATE_COUNTRY_CODE, affiliateCountryCode);
 
 		final CountryModel controllingAffiliate = getAmwayApacCommerceCommonI18NService().getCountryForCode(affiliateCountryCode);
-		final Map<String, Object> attributes = new HashMap<>();
+		final Map<String, Object> attributes = new HashMap<>(2);
 		attributes.put(AmwayAccountModel.CODE, aboId);
 		attributes.put(AmwayAccountModel.CONTROLLINGAFFILIATE, controllingAffiliate);
 		return getAmwayApacAccountDao().find(attributes);
@@ -59,7 +62,7 @@ public class DefaultAmwayApacAccountService extends DefaultAmwayAccountService i
 			final AmwayBusinessLevelModel businessLevel = amwayAccount.getLevel();
 			if ((null != businessLevel) && (null != businessLevel.getQualificationLevel()))
 			{
-				final Map<String, Object> attributes = new HashMap<>();
+				final Map<String, Object> attributes = new HashMap<>(1);
 				attributes.put(AmwayAccountClassificationModel.QUALIFICATIONLEVEL, businessLevel.getQualificationLevel());
 				final AmwayAccountClassificationModel amwayAccountClassification = getAmwayAccountClassificationDao().find(attributes)
 						.iterator().next();
@@ -90,8 +93,6 @@ public class DefaultAmwayApacAccountService extends DefaultAmwayAccountService i
 		this.amwayApacCommerceCommonI18NService = amwayApacCommerceCommonI18NService;
 	}
 
-
-
 	/**
 	 * @return the amwayApacAccountDao
 	 */
@@ -99,8 +100,6 @@ public class DefaultAmwayApacAccountService extends DefaultAmwayAccountService i
 	{
 		return amwayApacAccountDao;
 	}
-
-
 
 	/**
 	 * @param amwayApacAccountDao

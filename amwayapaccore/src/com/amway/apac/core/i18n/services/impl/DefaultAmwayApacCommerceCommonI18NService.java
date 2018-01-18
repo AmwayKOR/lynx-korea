@@ -39,10 +39,14 @@ public class DefaultAmwayApacCommerceCommonI18NService extends DefaultCommerceCo
 	public CountryModel getCountryForCode(final String countryCode)
 	{
 		hasLength(countryCode);
-		LOG.info("Get Country By Code : " + countryCode);
+
+		if (LOG.isInfoEnabled())
+		{
+			LOG.info(new StringBuilder(100).append("Get Country By Code : ").append(countryCode).toString());
+		}
 		final List<CountryModel> countries = getAmwayApacCountryDao()
 				.find(Collections.singletonMap(CountryModel.COUNTRYCODE, countryCode));
-		return CollectionUtils.isEmpty(countries) ? null : countries.get(0);
+		return CollectionUtils.isEmpty(countries) ? null : countries.iterator().next();
 	}
 
 	/**

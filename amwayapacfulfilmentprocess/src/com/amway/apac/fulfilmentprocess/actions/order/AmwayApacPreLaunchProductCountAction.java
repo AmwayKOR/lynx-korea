@@ -39,13 +39,15 @@ public class AmwayApacPreLaunchProductCountAction extends AbstractOrderAction<Or
 		return Transition.OK.toString();
 	}
 
-
-
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Set<String> getTransitions()
 	{
 		return Transition.getStringValues();
 	}
+
 
 	/**
 	 * @return the amwayApacProductService
