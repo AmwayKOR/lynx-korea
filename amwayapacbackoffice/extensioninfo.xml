@@ -20,6 +20,7 @@
 		<requires-extension name="platformbackoffice"/>
 		<requires-extension name="ruleengineservices"/>
 		<requires-extension name="ruleenginebackoffice"/>
+
 		<coremodule generated="true" manager="com.amaway.apac.jalo.AmwayapacbackofficeManager" packageroot="com.amaway.apac"/>
 
 		<meta key="backoffice-module" value="true"/>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<enumtypes>
+
+		<enumtype code="AmwayCouponStatus" autocreate="true" generate="true" dynamic="true">
+		<description>Enum used for managing coupon-status</description>
+			<value code="NEW" />
+			<value code="REISSUED" />
+			<value code="REDEEMED" />
+			<value code="EXPIRED" />
+			<value code="DELETED" />
+			<value code="FREEZED" />
+		</enumtype>
+		
+		<enumtype generate="true" code="AmwayCouponType" autocreate="true" dynamic="true">
+        <description>Enum used for classification of Coupons 'by-type'</description>
+            <value code="DEFAULT" />
+            <value code="REGISTRATION" />
+            <value code="RENEWAL" />
+            <value code="BEC" />
+            <value code="PROMOTION" />
+        </enumtype>
+	</enumtypes>
+	
+	<itemtypes>
+		<typegroup name="Coupons">
+			<itemtype code="SingleCodeCoupon" autocreate="false" generate="true">
+				<attributes>
+					<attribute qualifier="description" type="localized:java.lang.String">
+						<description>Description given here will be used on storefront.</description>
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="value" type="java.math.BigDecimal">
+						<description>Value given here will be on storefront.</description>
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="couponType" type="AmwayCouponType">
+                        <modifiers optional="false"/>
+                        <persistence type="property"/>
+						<description>Type of coupon.</description>
+                        <defaultvalue>em().getEnumerationValue("AmwayCouponType","DEFAULT")</defaultvalue>
+                    </attribute>
+				</attributes>
+			</itemtype>
+			<itemtype code="AmwayCoupon" autocreate="true" generate="true" jaloclass="com.amway.apac.coupon.jalo.AmwayCoupon">
+				<description>Amway Coupon Model</description>
+				<deployment table="amwayCoupon" typecode="21083"/>
+				<attributes>
+					<attribute type="java.lang.String" qualifier="code">
+						<modifiers read="true" write="true" search="true"
+							unique="true" optional="false" />
+						<description>Coupon Number</description>
+						<persistence type="property"/>
+					</attribute>
+					<attribute type="Customer" qualifier="customer">
+						<description>Owner of the Coupon</description>
+						<persistence type="property"/>
+					</attribute>
+					<attribute type="AmwayAccount" qualifier="account">
+						<description>Owner of the Coupon</description>
+						<persistence type="property"/>
+					</attribute>
+					<attribute type="java.util.Date" qualifier="startDate">
+						<description>Issue Date</description>
+						<modifiers optional="false"/>
+						<persistence type="property"/>
+					</attribute>
+					<attribute type="java.util.Date" qualifier="endDate">
+						<description>Expiry Date</description>
+						<modifiers optional="false"/>
+						<persistence type="property"/>
+					</attribute>
+					<attribute type="BaseStore" qualifier="store">
+						<description>Store for the coupon</description>
+						<modifiers optional="false"/>
+						<persistence type="property"/>
+					</attribute>
+					<attribute type="AbstractCoupon" qualifier="redemptionCoupon">
+						<description>Redemption coupon</description>
+						<modifiers optional="false"/>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="status" type="AmwayCouponStatus">
+						<description>Coupon Status</description>
+						<modifiers optional="false"/>
+						<persistence type="property" />
+						<defaultvalue>em().getEnumerationValue("AmwayCouponStatus","NEW")</defaultvalue>
+					</attribute>
+				</attributes>
+            </itemtype>
+		</typegroup>
+	</itemtypes>
+</items>
