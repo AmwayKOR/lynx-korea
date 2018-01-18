@@ -423,7 +423,7 @@
 	</bean>
 	
 	<alias alias="amwayAssetDao" name="defaultAmwayApacAssetDao"/>
-	<bean id="defaultAmwayApacAssetDao"  parent="defaultAmwayAssetDao" class="com.amway.apac.core.resource.center.daos.Impl.DefaultAmwayApacAssetDao">
+	<bean id="defaultAmwayApacAssetDao"  parent="defaultAmwayAssetDao" class="com.amway.apac.core.resource.center.daos.impl.DefaultAmwayApacAssetDao">
 		<property name="amwayApacAccountClassificationService" ref="amwayApacAccountClassificationService"/>
 		<property name="amwayAccountClassificationRankMapping" ref="amwayAccountClassificationRankMapping"/>
 	</bean>
@@ -437,7 +437,7 @@
 	<bean id="defaultAmwayApacPOSRestrictionEvaluator" class="com.amway.apac.core.shopfinder.evaluators.AmwayApacPOSRestrictionEvaluator" scope="tenant"/>
 	
 	<alias alias="amwayApacStockService" name="defaultAmwayApacStockService" />
-	<bean id="defaultAmwayApacStockService" class="com.amway.apac.core.stock.services.Impl.DefaultAmwayApacStockService" parent="amwayStockService">
+	<bean id="defaultAmwayApacStockService" class="com.amway.apac.core.stock.services.impl.DefaultAmwayApacStockService" parent="amwayStockService">
         <property name="amwayApacProductService" ref="productService"/>
     </bean>
     	

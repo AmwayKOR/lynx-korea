@@ -1,4 +1,4 @@
-package com.amway.apac.core.stock.services.Impl;
+package com.amway.apac.core.stock.services.impl;
 
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
 

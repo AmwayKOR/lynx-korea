@@ -1,4 +1,4 @@
-package com.amway.apac.resourcecenter.services.Impl;
+package com.amway.apac.resourcecenter.services.impl;
 
 import static com.amway.apac.resourcecenter.constants.AmwayapacresourcecenterConstants.COMPONENT_STRING;
 import static com.amway.apac.resourcecenter.constants.AmwayapacresourcecenterConstants.PAGEABLEDATA_STRING;
