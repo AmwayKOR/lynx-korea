@@ -201,7 +201,7 @@ public class SearchPageController extends AbstractSearchPageController
 	 * @throws CMSItemNotFoundException
 	 *
 	 */
-	protected void getSearchResults(final String searchQuery, final int page, final ShowMode showMode, final String sortCode,
+	private void getSearchResults(final String searchQuery, final int page, final ShowMode showMode, final String sortCode,
 			final String searchText, final HttpServletRequest request, final Model model) throws CMSItemNotFoundException
 	{
 

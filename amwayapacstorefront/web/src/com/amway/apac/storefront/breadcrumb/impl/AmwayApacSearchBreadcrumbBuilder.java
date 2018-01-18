@@ -55,7 +55,7 @@ public class AmwayApacSearchBreadcrumbBuilder extends SearchBreadcrumbBuilder
 		return breadcrumbs;
 	}
 
-	protected MessageSource getMessageSource()
+	private MessageSource getMessageSource()
 	{
 		final ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
 		if (requestAttributes != null)

@@ -79,7 +79,7 @@ public class AmwayApacPaymentOptionPopulator implements Populator<AmwayPaymentOp
 	 *           the payment option
 	 * @return Product name of product attached in payment option
 	 */
-	protected String getProductName(final AmwayPaymentOptionModel paymentOption)
+	private String getProductName(final AmwayPaymentOptionModel paymentOption)
 	{
 		final ProductModel product = paymentOption.getProduct();
 		String productName = StringUtils.EMPTY;

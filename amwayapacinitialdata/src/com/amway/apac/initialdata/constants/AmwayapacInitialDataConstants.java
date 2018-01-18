@@ -19,7 +19,7 @@ public final class AmwayapacInitialDataConstants extends GeneratedAmwayapacIniti
 
 	private AmwayapacInitialDataConstants()
 	{
-		//
+		//empty
 	}
 
 	/**

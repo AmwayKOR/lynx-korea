@@ -138,7 +138,7 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 	/**
 	 * @param model
 	 */
-	protected void populateAllShoppingLists(final Model model)
+	private void populateAllShoppingLists(final Model model)
 	{
 		model.addAttribute(ControllerConstants.ModelParameters.SHOPPING_LISTS_STRING,
 				amwayApacWishlistFacade.getAllWishlistsWithBasicData(
@@ -166,7 +166,7 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 	 * @throws CMSItemNotFoundException
 	 *            if the shopping lists cms page is not found.
 	 */
-	protected void populateShoppingListsPageView(final Model model, final String sorfField, final String sortOrder)
+	private void populateShoppingListsPageView(final Model model, final String sorfField, final String sortOrder)
 			throws CMSItemNotFoundException
 	{
 		model.addAttribute(AmwayapacCoreConstants.SORT_FIELD_STRING, sorfField);
@@ -189,7 +189,7 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 	 *           sort parameter
 	 * @return resolved value, if parameter is null or invalid, sorting is done by last updated.
 	 */
-	protected String resolveSortField(final String sorfField)
+	private String resolveSortField(final String sorfField)
 	{
 		String resolvedSortField = Wishlist2Model.MODIFIEDTIME;
 		if (StringUtils.isNotBlank(sorfField))
@@ -257,7 +257,7 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 	 *
 	 * @return true if the name is valid, else false
 	 */
-	protected boolean validateShoppingListName(final String shoppingListName, final Model model)
+	private boolean validateShoppingListName(final String shoppingListName, final Model model)
 	{
 		boolean isShoppingListNameValid = true;
 
@@ -307,7 +307,7 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 	 * @throws CMSItemNotFoundException
 	 *            if the shopping lists cms page is not found.
 	 */
-	protected void populateShoppingListDetailsData(final Model model, final String shoppingListUid, final Boolean isAjax)
+	private void populateShoppingListDetailsData(final Model model, final String shoppingListUid, final Boolean isAjax)
 	{
 		if (StringUtils.isBlank(shoppingListUid))
 		{
@@ -346,7 +346,7 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 	 * @throws CMSItemNotFoundException
 	 *            if the cms page is not found
 	 */
-	protected void populateShoppingListDetailsPage(final Model model) throws CMSItemNotFoundException
+	private void populateShoppingListDetailsPage(final Model model) throws CMSItemNotFoundException
 	{
 		model.addAttribute(new AddToCartOrderForm());
 		model.addAttribute("sortOptions", AmwayApacCartSortCode.values());
@@ -526,7 +526,7 @@ public class AmwayApacShoppingListsPageController extends AbstractPageController
 	 * @param prefix
 	 *           prefix to create message key.
 	 */
-	protected void populateMessageForModificationStatus(final AmwayApacWishlistModificationStatus modificationStatus,
+	private void populateMessageForModificationStatus(final AmwayApacWishlistModificationStatus modificationStatus,
 			final Model model, final String prefix)
 	{
 		if (AmwayApacWishlistModificationStatus.SUCCESS.equals(modificationStatus))
