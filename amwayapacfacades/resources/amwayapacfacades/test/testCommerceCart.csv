@@ -142,4 +142,24 @@ INSERT_UPDATE Address;owner(AmwayAccount.code)[unique=true];country(isocode);pos
 INSERT_UPDATE AmwayBusinessLevel;qualificationLevel(code)[unique=true];&businessLevelRef
 ;QualificationLevelTypeEnum_340;testUserQual
 
+INSERT_UPDATE Wishlist2;uid[unique=true];name;description;user(uid)
+;wishlist2A;AA;AAAAAAAAAAAAAAA AAAAAAAAAA AAAAA;ahertz
+;wishlist2B;BB;BBBBBBBBBBBBBBB BBBBBBBBBB BBBBB;abrode
+
+INSERT_UPDATE Wishlist2Entry;wishlist(Wishlist2.uid)[unique=true];addedDate[dateformat=dd.MM.yyyy HH:mm:ss];product(code,catalogVersion(catalog(id),version))[unique=true];quantity;priority(code);
+;wishlist2A;27.04.2010 00:00:00;HW1210-3422:$catalog-id:$catalog-version;1;highest
+;wishlist2A;27.04.2010 00:00:00;HW1210-3423:$catalog-id:$catalog-version;2;highest
+;wishlist2A;27.04.2010 00:00:00;HW1210-3424:$catalog-id:$catalog-version;3;highest
+;wishlist2B;27.04.2010 00:00:00;HW1210-3425:$catalog-id:$catalog-version;4;highest
+;wishlist2B;27.04.2010 00:00:00;HW1210-3425promo:$catalog-id:$catalog-version;5;highest
+
+INSERT_UPDATE Customer;uid[unique=true];customerID;name;description;sessionLanguage(isocode);sessionCurrency(isocode);groups(uid);password;;
+;ahertz;K2006-C0005;Anja Hertz;;en;USD;customergroup;1234;;
+;abrode;K2006-C0006;Arin Brode;;en;USD;customergroup;1234;;
+;dejol;K2006-C0007;Max de Jol;;en;USD;customergroup;1234;;
+;promoted;K2006-C0007;Max promo;;en;EUR;customergroup;1234;;
+;john;K2006-C0007;Test user 1;;en;USD;customergroup;1234;;
+;lesley;K2006-C0007;Test user 2;;en;USD;customergroup;1234;;
+
+
 

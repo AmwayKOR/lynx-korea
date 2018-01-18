@@ -38,6 +38,21 @@ public final class AmwayapacCoreConstants extends GeneratedAmwayapacCoreConstant
 	public static final String SOURCE_STRING = "source";
 
 	/**
+	 * String constant sortField.
+	 */
+	public static final String SORTFIELD_STRING = "sortField";
+
+	/**
+	 * String constant sortOrder.
+	 */
+	public static final String SORTORDER_STRING = "sortOrder";
+
+	/**
+	 * String constant entry.
+	 */
+	public static final String WISHLIST2_ENTRY = "entry";
+
+	/**
 	 * String constant target.
 	 */
 	public static final String TARGET_STRING = "target";
