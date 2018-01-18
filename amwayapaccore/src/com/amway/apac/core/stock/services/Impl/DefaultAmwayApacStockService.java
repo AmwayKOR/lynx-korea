@@ -107,7 +107,7 @@ public class DefaultAmwayApacStockService extends DefaultAmwayStockService imple
 	 * @param code
 	 * @return
 	 */
-	@Override
+
 	protected StockLevelModel checkAndGetStockLevel(final ProductModel product, final WarehouseModel warehouse, final String skuId)
 	{
 		for (final StockLevelModel stockLevelModel : getStockLevels(product, Arrays.asList(warehouse)))
@@ -121,7 +121,7 @@ public class DefaultAmwayApacStockService extends DefaultAmwayStockService imple
 				"no stock level for product [" + product + "] in warehouse [" + warehouse.getName() + "] found.");
 	}
 
-	@Override
+
 	protected void clearCacheForItem(final StockLevelModel stockLevel)
 	{
 		Utilities.invalidateCache(stockLevel.getPk());
