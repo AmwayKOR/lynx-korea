@@ -176,4 +176,13 @@ public final class AmwayapacCoreConstants extends GeneratedAmwayapacCoreConstant
 	 * Close parenthesis constant
 	 */
 	public static final char CLOSE_PARENTHESIS = ')';
+
+	public static final String REFERENCE_CLASSIFICATION = "referenceClassification";
+	public static final String ABO_ID = "aboId";
+	public static final String AFFILIATE_COUNTRY_CODE = "affiliateCountryCode";
+	public static final String COMMERCE_CHECKOUT_PARAMETER = "commerceCheckoutParameter";
+	public static final String CART_MODEL = "cartModel";
+	public static final String WAREHOUSE = "warehouse";
+	public static final String WISHLIST_UID = "wishlistUid";
+
 }

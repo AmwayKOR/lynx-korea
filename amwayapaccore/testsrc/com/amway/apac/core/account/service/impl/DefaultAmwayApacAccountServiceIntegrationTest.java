@@ -12,16 +12,16 @@ import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.platform.site.BaseSiteService;
 
 import java.util.Collections;
+import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.amway.apac.core.account.service.AmwayApacAccountClassificationService;
-import com.amway.apac.core.constants.AmwayapacCoreConstants;
-import com.amway.apac.core.enums.AccountClassificationEnum;
+import com.amway.core.model.AmwayAccountModel;
 
 
 /**
@@ -29,12 +29,12 @@ import com.amway.apac.core.enums.AccountClassificationEnum;
  */
 
 @IntegrationTest
-public class DefaultAmwayApacAccountClassificationServiceIntegrationTest extends ServicelayerTransactionalTest
+public class DefaultAmwayApacAccountServiceIntegrationTest extends ServicelayerTransactionalTest
 {
 	private static final String TEST_BASESITE_UID = "testSite";
 
 	@Resource
-	private AmwayApacAccountClassificationService amwayApacAccountClassificationService;
+	private DefaultAmwayApacAccountService defaultAmwayApacAccountService;
 	@Resource
 	private BaseSiteService baseSiteService;
 	@Resource
@@ -43,6 +43,7 @@ public class DefaultAmwayApacAccountClassificationServiceIntegrationTest extends
 	private CatalogVersionService catalogVersionService;
 	@Resource
 	private SessionService sessionService;
+
 
 	@Before
 	public void setUp() throws ImpExException
@@ -56,29 +57,15 @@ public class DefaultAmwayApacAccountClassificationServiceIntegrationTest extends
 	}
 
 	@Test
-	public void testCheckUserClassification()
+	public void testGetAmwayAccount()
 	{
-		sessionService.setAttribute(AmwayapacCoreConstants.ACCOUNT_CLASSIFICATION_CODE,
-				AccountClassificationEnum.PLATINUM_AND_ABOVE.toString());
-		Assert.assertEquals(Boolean.TRUE, Boolean.valueOf(
-				amwayApacAccountClassificationService.checkUserClassification(AccountClassificationEnum.PLATINUM_AND_ABOVE)));
-		Assert.assertEquals(Boolean.FALSE, Boolean
-				.valueOf(amwayApacAccountClassificationService.checkUserClassification(AccountClassificationEnum.DIAMOND_AND_ABOVE)));
+		final List<AmwayAccountModel> accountList = defaultAmwayApacAccountService.getAmwayAccount("ahertz", "100");
+		if (CollectionUtils.isNotEmpty(accountList))
+		{
+			final AmwayAccountModel account = accountList.iterator().next();
+			Assert.assertEquals("Test User", account.getName());
+		}
 	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void testCheckUserClassificationForNullReferenceClassification()
-	{
-		sessionService.setAttribute(AmwayapacCoreConstants.ACCOUNT_CLASSIFICATION_CODE,
-				AccountClassificationEnum.PLATINUM_AND_ABOVE.toString());
-		amwayApacAccountClassificationService.checkUserClassification(null);
-	}
-
-	@Test
-	public void testCheckUserClassificationForNullSessionClassificationCode()
-	{
-		Assert.assertEquals(Boolean.FALSE,
-				Boolean.valueOf(amwayApacAccountClassificationService.checkUserClassification(AccountClassificationEnum.NORMAL_ABO)));
-	}
 
 }

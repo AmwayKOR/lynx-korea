@@ -81,8 +81,8 @@ public class DefaultAmwayApacNotificationService implements AmwayApacNotificatio
 	{
 		validateParameterNotNull(notificationCode, ERROR_MESSAGE_NULL_NOTIFICATION_CODE);
 
-		final Map<String, Object> params = new HashMap<>();
 		final BaseSiteModel currentBasesite = getBaseSiteService().getCurrentBaseSite();
+		final Map<String, Object> params = new HashMap<>(2);
 		params.put(CODE, notificationCode);
 		params.put(SITE, currentBasesite);
 		if (LOGGER.isInfoEnabled())
@@ -102,7 +102,7 @@ public class DefaultAmwayApacNotificationService implements AmwayApacNotificatio
 		validateParameterNotNullStandardMessage(CUSTOMER_STRING, customer);
 		validateParameterNotNullStandardMessage(NEW_STATUS_STRING, newStatus);
 
-		final Map<String, Object> params = new HashMap<>();
+		final Map<String, Object> params = new HashMap<>(2);
 		params.put(NOTIFICATION, notification);
 		params.put(USER, customer);
 		if (LOGGER.isInfoEnabled())

@@ -1,5 +1,6 @@
 package com.amway.apac.core.account.service.impl;
 
+import static com.amway.apac.core.constants.AmwayapacCoreConstants.REFERENCE_CLASSIFICATION;
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
 
 import de.hybris.platform.servicelayer.session.SessionService;
@@ -29,7 +30,7 @@ public class DefaultAmwayApacAccountClassificationService implements AmwayApacAc
 	@Override
 	public boolean checkUserClassification(final AccountClassificationEnum referenceClassification)
 	{
-		validateParameterNotNullStandardMessage("referenceClassification", referenceClassification);
+		validateParameterNotNullStandardMessage(REFERENCE_CLASSIFICATION, referenceClassification);
 
 		boolean result = false;
 		final String accountClassficationCode = getSessionService()

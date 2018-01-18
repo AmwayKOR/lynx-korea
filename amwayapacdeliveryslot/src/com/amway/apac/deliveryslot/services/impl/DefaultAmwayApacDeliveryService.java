@@ -1,5 +1,6 @@
 package com.amway.apac.deliveryslot.services.impl;
 
+import static com.amway.apac.deliveryslot.constants.AmwayapacdeliveryslotConstants.DELIVERY_SLOT;
 import static com.amway.apac.deliveryslot.model.AmwayDeliverySlotAvailabilityModel.DELIVERYDATE;
 import static com.amway.apac.deliveryslot.model.AmwayDeliverySlotAvailabilityModel.SLOTTIME;
 import static com.amway.apac.deliveryslot.model.AmwayDeliverySlotAvailabilityModel.WAREHOUSE;
@@ -163,7 +164,7 @@ public class DefaultAmwayApacDeliveryService extends DefaultDeliveryService impl
 	@Override
 	public Integer reserve(final AmwayDeliverySlotAvailabilityModel deliverySlot) throws AmwayServiceException
 	{
-		validateParameterNotNullStandardMessage("deliverySlot", deliverySlot);
+		validateParameterNotNullStandardMessage(DELIVERY_SLOT, deliverySlot);
 
 		return (Integer) getTransactionTemplate().execute(new TransactionCallback()
 		{
@@ -204,7 +205,7 @@ public class DefaultAmwayApacDeliveryService extends DefaultDeliveryService impl
 	@Override
 	public Integer release(final AmwayDeliverySlotAvailabilityModel deliverySlot) throws AmwayServiceException
 	{
-		validateParameterNotNullStandardMessage("deliverySlot", deliverySlot);
+		validateParameterNotNullStandardMessage(DELIVERY_SLOT, deliverySlot);
 
 		return (Integer) getTransactionTemplate().execute(new TransactionCallback()
 		{

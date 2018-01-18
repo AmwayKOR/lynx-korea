@@ -1,5 +1,6 @@
 package com.amway.apac.deliveryslot.interceptors;
 
+import static com.amway.apac.deliveryslot.constants.AmwayapacdeliveryslotConstants.DELIVERY_SLOT_CONFIG_MODEL;
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
 
 import de.hybris.platform.servicelayer.interceptor.InterceptorContext;
@@ -53,7 +54,7 @@ public class AmwayApacDeliverySlotConfigUpdateInterceptor implements PrepareInte
 	public void onPrepare(final AmwayDeliverySlotConfigModel slotConfigModel, final InterceptorContext ctx)
 			throws InterceptorException
 	{
-		validateParameterNotNullStandardMessage("Config model", slotConfigModel);
+		validateParameterNotNullStandardMessage(DELIVERY_SLOT_CONFIG_MODEL, slotConfigModel);
 
 		if (Objects.nonNull(slotConfigModel.getDeliveryDay()) && Objects.nonNull(slotConfigModel.getSlotTime()))
 		{
