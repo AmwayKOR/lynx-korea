@@ -74,7 +74,7 @@ public class DefaultAmwayApacAssetDao extends DefaultAmwayAssetDao
 	 *           the query params
 	 * @return Condition clause for account classification
 	 */
-	private String generateRankQuery(final Map<String, Object> queryParams)
+	protected String generateRankQuery(final Map<String, Object> queryParams)
 	{
 		String rankQuery;
 

@@ -94,7 +94,7 @@ public class RegisterPageController extends AbstractRegisterPageController
 	@RequestMapping(value = "/newcustomer", method = RequestMethod.POST)
 	public String doRegister(final RegisterForm form, final BindingResult bindingResult, final Model model,
 			final HttpServletRequest request, final HttpServletResponse response, final RedirectAttributes redirectModel)
-					throws CMSItemNotFoundException
+			throws CMSItemNotFoundException
 	{
 		getRegistrationValidator().validate(form, bindingResult);
 		return processRegisterUserRequest(null, form, bindingResult, model, request, response, redirectModel);
@@ -198,7 +198,7 @@ public class RegisterPageController extends AbstractRegisterPageController
 		return viewPage;
 	}
 
-	private void setCMSPage(final Model model, final String cmsPage) throws CMSItemNotFoundException
+	protected void setCMSPage(final Model model, final String cmsPage) throws CMSItemNotFoundException
 	{
 		storeCmsPageInModel(model, getContentPageForLabelOrId(cmsPage));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(cmsPage));

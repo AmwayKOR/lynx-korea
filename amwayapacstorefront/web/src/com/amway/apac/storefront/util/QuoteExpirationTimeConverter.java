@@ -25,7 +25,7 @@ import org.apache.commons.lang.StringUtils;
  */
 public final class QuoteExpirationTimeConverter
 {
-	private QuoteExpirationTimeConverter()
+	protected QuoteExpirationTimeConverter()
 	{
 		throw new IllegalAccessError("Utility class may not be instantiated");
 	}

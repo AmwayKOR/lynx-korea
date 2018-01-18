@@ -199,7 +199,7 @@ public class AddToCartController extends AbstractController
 	 *           all entries
 	 * @return list containing only the selected entries, empty list if none is selected
 	 */
-	private List<OrderEntryData> filterUnselectedOrderEntries(final List<OrderEntryData> cartEntries)
+	protected List<OrderEntryData> filterUnselectedOrderEntries(final List<OrderEntryData> cartEntries)
 	{
 		final List<OrderEntryData> filteredEntries = new ArrayList<>();
 		if (CollectionUtils.isNotEmpty(cartEntries))
