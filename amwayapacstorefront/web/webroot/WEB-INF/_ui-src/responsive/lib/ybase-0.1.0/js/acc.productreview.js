@@ -5,8 +5,8 @@ ACC.productReview = {
 	],
 
 	loadVM: function(){
-		
-		var productReviewVM = new Vue({
+		if($("#product-review").length){
+			ACC.productReview.productReviewVM = new Vue({
 		    el: '#product-review',
 		    data:{
 		    	headline:"",
@@ -68,6 +68,8 @@ ACC.productReview = {
 		    }
 		});
 		
+		}
+		
 		$('#star').raty({ 
 			  path: ACC.config.themeResourcePath+'/images',
 		      size      : 5,
@@ -75,7 +77,7 @@ ACC.productReview = {
 		      starOn    : 'star-filled.png',
 		      scoreName : 'rating',
 		      click: function (score, e) {
-		    	  productReviewVM.rating = score;
+		    	  ACC.productReview.productReviewVM.rating = score;
 			  }
 		});
 		
@@ -84,12 +86,12 @@ ACC.productReview = {
         });
         
         $(".product-collapse__review").click(function() {
-			productReviewVM.message.headline.error = false;
-			productReviewVM.message.comment.error = false;
-			productReviewVM.message.rating.error = false;
-        	productReviewVM.headline = '';
-        	productReviewVM.comment = '';
-        	productReviewVM.rating = 0;
+        	ACC.productReview.productReviewVM.message.headline.error = false;
+        	ACC.productReview.productReviewVM.message.comment.error = false;
+        	ACC.productReview.productReviewVM.message.rating.error = false;
+        	ACC.productReview.productReviewVM.headline = '';
+        	ACC.productReview.productReviewVM.comment = '';
+        	ACC.productReview.productReviewVM.rating = 0;
         	$("#star").raty("score", 0);
         	
         });
