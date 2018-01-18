@@ -177,6 +177,11 @@ public final class AmwayapacCoreConstants extends GeneratedAmwayapacCoreConstant
 	 */
 	public static final char CLOSE_PARENTHESIS = ')';
 
+	/**
+	 * Hyphen char constant
+	 */
+	public static final char HYPHEN_CHAR = '-';
+
 	public static final String REFERENCE_CLASSIFICATION = "referenceClassification";
 	public static final String ABO_ID = "aboId";
 	public static final String AFFILIATE_COUNTRY_CODE = "affiliateCountryCode";

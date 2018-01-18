@@ -15,6 +15,8 @@ import com.amway.core.model.AmwayAccountModel;
 
 /**
  * Overriding {@link AmwayCommerceCartFactory} to implement APAC specific business logic.
+ *
+ * @author Shubham Goyal
  */
 public class AmwayApacCommerceCartFactory extends AmwayCommerceCartFactory
 {

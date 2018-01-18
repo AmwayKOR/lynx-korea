@@ -5,6 +5,8 @@ import static com.amway.apac.core.constants.AmwayapacCoreConstants.TWO_HUNDRED_I
 import static com.amway.apac.core.constants.AmwayapacCoreConstants.USER_STRING;
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNull;
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
+import static java.time.ZoneId.systemDefault;
+import static java.util.Collections.singletonList;
 
 import de.hybris.platform.commerceservices.search.flexiblesearch.data.SortQueryData;
 import de.hybris.platform.commerceservices.search.pagedata.PageableData;
@@ -19,7 +21,7 @@ import de.hybris.platform.store.BaseStoreModel;
 
 import java.time.LocalDate;
 import java.util.Arrays;
-import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -79,7 +81,7 @@ public class DefaultAmwayApacCustomerAccountDao extends DefaultAmwayCustomerAcco
 		final FlexibleSearchQuery fQuery = new FlexibleSearchQuery(FIND_ORDERCOUNT_FOR_CUSTOMER);
 		fQuery.addQueryParameter(OrderModel.USER, user);
 		fQuery.addQueryParameter(OrderModel.STORE, baseStore);
-		fQuery.setResultClassList(Collections.singletonList(Integer.class));
+		fQuery.setResultClassList(singletonList(Integer.class));
 
 		final SearchResult<Integer> searchResult = search(fQuery);
 		return searchResult.getResult().iterator().next();
@@ -100,8 +102,8 @@ public class DefaultAmwayApacCustomerAccountDao extends DefaultAmwayCustomerAcco
 		queryParams.put("customer", customerModel);
 		queryParams.put("store", store);
 
-		final java.util.Date dateFrom = java.util.Date.from(datefrom.atStartOfDay(java.time.ZoneId.systemDefault()).toInstant());
-		final java.util.Date dateTo = java.util.Date.from(dateto.atStartOfDay(java.time.ZoneId.systemDefault()).toInstant());
+		final Date dateFrom = Date.from(datefrom.atStartOfDay(systemDefault()).toInstant());
+		final Date dateTo = Date.from(dateto.atStartOfDay(systemDefault()).toInstant());
 
 		queryParams.put("startDate", dateFrom);
 		queryParams.put("endDate", dateTo);

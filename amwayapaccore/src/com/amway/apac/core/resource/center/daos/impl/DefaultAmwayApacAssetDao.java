@@ -54,7 +54,7 @@ public class DefaultAmwayApacAssetDao extends DefaultAmwayAssetDao
 		final String yearQuery = generateYearQuery(queryParams, year);
 		final String rankQuery = generateRankQuery(queryParams);
 
-		final List<SortQueryData> sortQueries = Arrays.asList(new SortQueryData[]
+		return Arrays.asList(new SortQueryData[]
 		{ createSortQueryData(AmwayApacAssetsSort.LATEST_DATE.getCode(),
 				typQuery + yearQuery + rankQuery + AmwayApacAssetsSort.LATEST_DATE.getQuery()),
 				createSortQueryData(AmwayApacAssetsSort.TITTLE_ASCENDING.getCode(),
@@ -63,8 +63,6 @@ public class DefaultAmwayApacAssetDao extends DefaultAmwayAssetDao
 						typQuery + yearQuery + rankQuery + AmwayApacAssetsSort.ID_ASCENDING.getQuery()),
 				createSortQueryData(AmwayApacAssetsSort.TITTLE_DESCENDING.getCode(),
 						typQuery + yearQuery + rankQuery + AmwayApacAssetsSort.TITTLE_DESCENDING.getQuery()), });
-
-		return sortQueries;
 	}
 
 	/**
@@ -74,7 +72,7 @@ public class DefaultAmwayApacAssetDao extends DefaultAmwayAssetDao
 	 *           the query params
 	 * @return Condition clause for account classification
 	 */
-	private String generateRankQuery(final Map<String, Object> queryParams)
+	protected String generateRankQuery(final Map<String, Object> queryParams)
 	{
 		String rankQuery;
 

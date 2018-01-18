@@ -26,9 +26,11 @@ public interface AmwayApacProductService extends ProductService
 	 * Returns all payment options available for Alias Code.
 	 *
 	 * @param aliasCode
+	 *           Alias Code
 	 * @param catalogVersion
+	 *           Catalog Version
+	 * 
 	 * @return all payment option models for Alias Code
-	 *
 	 * @throws IllegalArgumentException
 	 *            if aliasCode or catalogVersion is null.
 	 */
@@ -38,9 +40,11 @@ public interface AmwayApacProductService extends ProductService
 	 * Returns all active payment options for approved products
 	 *
 	 * @param aliasCode
+	 *           Alias Code
 	 * @param catalogVersion
-	 * @return payment option for Alias Code
+	 *           Catalog Version
 	 *
+	 * @return payment option for Alias Code
 	 * @throws IllegalArgumentException
 	 *            if aliasCode or catalogVersion is null.
 	 */
@@ -50,8 +54,9 @@ public interface AmwayApacProductService extends ProductService
 	 * Checks if PIF is currently active for product
 	 *
 	 * @param productModel
-	 * @return boolean for payment option availability
+	 *           Product
 	 *
+	 * @return boolean for payment option availability
 	 * @throws IllegalArgumentException
 	 *            if productModel is null.
 	 */
@@ -61,7 +66,9 @@ public interface AmwayApacProductService extends ProductService
 	 * Checks for Alias Code and catalog params to be not empty
 	 *
 	 * @param splitAliasCode
+	 *           Split Alias Code
 	 * @param aliasParams
+	 *           Alias Params
 	 * @return Checks for Alias Code and catalog params not empty
 	 *
 	 * @throws IllegalArgumentException
@@ -73,9 +80,11 @@ public interface AmwayApacProductService extends ProductService
 	 * Returns the Available Purchasable Quantity.
 	 *
 	 * @param userId
+	 *           User ID for which pre-launch used quantity needed
 	 * @param productCode
-	 * @return the Available Purchasable Quantity.
+	 *           Product code for which pre-launch used quantity needed
 	 *
+	 * @return the Available Purchasable Quantity.
 	 * @throws IllegalArgumentException
 	 *            if userId, productCode or store is null.
 	 */
@@ -85,7 +94,9 @@ public interface AmwayApacProductService extends ProductService
 	 * Updates the {@link AmwayUserPromotionCountModel} for given product, quantity and account.
 	 *
 	 * @param productCodeToCount
+	 *           Map of Pre-launch product codes and their corresponding ordered quantity.
 	 * @param order
+	 *           Order for which {@link AmwayUserPromotionCountModel} need to be updated.
 	 *
 	 * @throws IllegalArgumentException
 	 *            if productCodeToCount or order is null.
@@ -96,8 +107,9 @@ public interface AmwayApacProductService extends ProductService
 	 * Returns a map of PreLauch products and their ordered quantity in a given order.
 	 *
 	 * @param orderModel
-	 * @return products
+	 *           Order for which map fetched
 	 *
+	 * @return Map of Pre-launch product codes and their corresponding ordered quantity.
 	 * @throws IllegalArgumentException
 	 *            if orderModel is null.
 	 */
@@ -107,9 +119,11 @@ public interface AmwayApacProductService extends ProductService
 	 * Checks for product if it is a kit product of given type.
 	 *
 	 * @param product
+	 *           Product need to be checked
 	 * @param kitProductType
-	 * @return checks for product if it is a kit product of given type
+	 *           Kit Product Type
 	 *
+	 * @return checks for product if it is a kit product of given type
 	 * @throws IllegalArgumentException
 	 *            if product or kitProductType is null.
 	 */

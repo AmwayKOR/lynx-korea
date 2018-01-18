@@ -129,6 +129,33 @@ public class DefaultAmwayApacWishlistFacade extends DefaultAmwayWishlistFacade i
 		final AmwayApacWishListModification modification = new AmwayApacWishListModification();
 		modification.setStatus(AmwayApacWishlistModificationStatus.SUCCESS);
 
+		final Wishlist2EntryModel entryCreated = addProductToWishlistInternal(productCode, wishlistUid, modification);
+
+		if (entryCreated != null)
+		{
+			final WishlistEntryData entryData = getAmwayWishlistEntryBasicConverter().convert(entryCreated);
+			modification.setEntry(entryData);
+			if (LOGGER.isInfoEnabled())
+			{
+				LOGGER.info(new StringBuilder(TWO_HUNDRED_INT).append("Added product with code [").append(productCode)
+						.append("] to wishlist with uid [").append(wishlistUid).append("].").toString());
+			}
+		}
+
+		return modification;
+	}
+
+	/**
+	 *
+	 * @param productCode
+	 * @param wishlistUid
+	 * @param modification
+	 * @return
+	 */
+	protected Wishlist2EntryModel addProductToWishlistInternal(final String productCode, final String wishlistUid,
+			final AmwayApacWishListModification modification)
+	{
+		Wishlist2EntryModel wishlistEntry = null;
 		final Wishlist2Model wishlistToAddProduct = fetchWishlistByUidInternal(wishlistUid);
 		final ProductModel productModel = fetchProductByCodeInternal(productCode);
 
@@ -153,20 +180,10 @@ public class DefaultAmwayApacWishlistFacade extends DefaultAmwayWishlistFacade i
 		}
 		else
 		{
-			final Wishlist2EntryModel newEntryCreated = getAmwayApacWishlistService().addAndReturnWishlistEntry(wishlistToAddProduct,
-					productModel, ONE_INT, Wishlist2EntryPriority.HIGH, StringUtils.EMPTY);
-
-			final WishlistEntryData entryData = getAmwayWishlistEntryBasicConverter().convert(newEntryCreated);
-			modification.setEntry(entryData);
-
-			if (LOGGER.isInfoEnabled())
-			{
-				LOGGER.info(new StringBuilder(TWO_HUNDRED_INT).append("Added product with code [").append(productCode)
-						.append("] to wishlist with uid [").append(wishlistUid).append("].").toString());
-			}
+			wishlistEntry = getAmwayApacWishlistService().addAndReturnWishlistEntry(wishlistToAddProduct, productModel, ONE_INT,
+					Wishlist2EntryPriority.HIGH, StringUtils.EMPTY);
 		}
-
-		return modification;
+		return wishlistEntry;
 	}
 
 	/**

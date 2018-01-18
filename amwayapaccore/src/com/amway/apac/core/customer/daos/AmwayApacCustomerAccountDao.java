@@ -16,7 +16,6 @@ import com.amway.core.customer.dao.AmwayCustomerAccountDao;
  * Extending {@link AmwayCustomerAccountDao} to add more order functionalities
  *
  * @author Aaron Yong
- *
  */
 public interface AmwayApacCustomerAccountDao extends AmwayCustomerAccountDao
 {

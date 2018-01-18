@@ -36,8 +36,9 @@ public class AmwayApacSearchSolrQueryPopulator<INDEXED_PROPERTY_TYPE, INDEXED_TY
 	 *           the source
 	 * @param target
 	 *           the target
-	 * 
+	 *
 	 * @throws IllegalArgumentException
+	 *            if source or target is null.
 	 */
 	@Override
 	public void populate(final SearchQueryPageableData<SolrSearchQueryData> source,

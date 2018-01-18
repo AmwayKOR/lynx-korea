@@ -1,6 +1,7 @@
 package com.amway.apac.deliveryslot.services.impl;
 
 import static com.amway.apac.deliveryslot.constants.AmwayapacdeliveryslotConstants.DELIVERY_SLOT;
+import static com.amway.apac.deliveryslot.constants.AmwayapacdeliveryslotConstants.TIME_FORMAT;
 import static com.amway.apac.deliveryslot.model.AmwayDeliverySlotAvailabilityModel.DELIVERYDATE;
 import static com.amway.apac.deliveryslot.model.AmwayDeliverySlotAvailabilityModel.SLOTTIME;
 import static com.amway.apac.deliveryslot.model.AmwayDeliverySlotAvailabilityModel.WAREHOUSE;
@@ -45,7 +46,7 @@ import com.amway.core.exceptions.AmwayServiceException;
  */
 public class DefaultAmwayApacDeliveryService extends DefaultDeliveryService implements AmwayApacDeliveryService
 {
-	private final SimpleDateFormat dateFormat = new SimpleDateFormat(AmwayapacdeliveryslotConstants.TIME_FORMAT);
+	private final SimpleDateFormat dateFormat = new SimpleDateFormat(TIME_FORMAT);
 
 	/** The LOGGER Constant. */
 	private static final Logger LOGGER = LoggerFactory.getLogger(DefaultAmwayApacDeliveryService.class);
@@ -65,7 +66,7 @@ public class DefaultAmwayApacDeliveryService extends DefaultDeliveryService impl
 	@Override
 	public List<AmwayDeliverySlotAvailabilityModel> getDeliverySlotsAvailability()
 	{
-		List<AmwayDeliverySlotAvailabilityModel> slotAvailabilityModels = new ArrayList<AmwayDeliverySlotAvailabilityModel>();
+		List<AmwayDeliverySlotAvailabilityModel> slotAvailabilityModels = new ArrayList<>();
 		if (getCartService().hasSessionCart())
 		{
 			final CartModel sessionCart = getCartService().getSessionCart();
@@ -113,8 +114,8 @@ public class DefaultAmwayApacDeliveryService extends DefaultDeliveryService impl
 		calendar.setTime(now);
 		final int dayofWeek = calendar.get(Calendar.DAY_OF_WEEK);
 
-		final String formattedDate = dateFormat.format(new Date()).toString();
-		final Time orderingTime = Time.valueOf(formattedDate);
+		final String formattedTime = dateFormat.format(Calendar.getInstance());
+		final Time orderingTime = Time.valueOf(formattedTime);
 
 		final WeekDay[] deliveryDays = WeekDay.values();
 		WeekDay deliveryDay = null;
@@ -216,7 +217,7 @@ public class DefaultAmwayApacDeliveryService extends DefaultDeliveryService impl
 				{
 					getModelService().refresh(deliverySlot);
 					final int updatedConsumedSlot = deliverySlot.getConsumedCount().intValue() - 1;
-					deliverySlot.setConsumedCount(new Integer(updatedConsumedSlot));
+					deliverySlot.setConsumedCount(Integer.valueOf(updatedConsumedSlot));
 					getModelService().save(deliverySlot);
 					getModelService().refresh(deliverySlot);
 

@@ -93,8 +93,6 @@ public class DefaultAmwayApacAccountService extends DefaultAmwayAccountService i
 		this.amwayApacCommerceCommonI18NService = amwayApacCommerceCommonI18NService;
 	}
 
-
-
 	/**
 	 * @return the amwayApacAccountDao
 	 */
@@ -102,8 +100,6 @@ public class DefaultAmwayApacAccountService extends DefaultAmwayAccountService i
 	{
 		return amwayApacAccountDao;
 	}
-
-
 
 	/**
 	 * @param amwayApacAccountDao

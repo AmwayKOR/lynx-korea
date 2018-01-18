@@ -1,5 +1,8 @@
 package com.amway.apac.resourcecenter.daos.impl;
 
+import static com.amway.apac.resourcecenter.constants.AmwayapacresourcecenterConstants.CATALOG_VERSION_STRING;
+import static com.amway.apac.resourcecenter.constants.AmwayapacresourcecenterConstants.COMPONENT_STRING;
+import static com.amway.apac.resourcecenter.constants.AmwayapacresourcecenterConstants.PAGEABLE_DATA_STRING;
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
 
 import de.hybris.platform.catalog.model.CatalogVersionModel;
@@ -46,7 +49,7 @@ public class DefaultAmwayAssetDao implements AmwayAssetDao
 	private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ssz";
 
 	/** The Constant CATALOG VERSION. */
-	private static final String CATALOG_VERSION_PARAM = "catalogVersion";
+	private static final String CATALOG_VERSION_PARAM = CATALOG_VERSION_STRING;
 
 	/** The Constant COMPONENT ID. */
 	private static final String COMPONENT_ID_PARAM = "componentId";
@@ -91,9 +94,9 @@ public class DefaultAmwayAssetDao implements AmwayAssetDao
 	public SearchPageData<AmwayAssetModel> getAssets(final String componentId, final PageableData pageableData,
 			final CatalogVersionModel catalogVersion, final String year)
 	{
-		validateParameterNotNullStandardMessage("Component", componentId);
-		validateParameterNotNullStandardMessage("PageableData", pageableData);
-		validateParameterNotNullStandardMessage("CatalogVersion", catalogVersion);
+		validateParameterNotNullStandardMessage(COMPONENT_STRING, componentId);
+		validateParameterNotNullStandardMessage(PAGEABLE_DATA_STRING, pageableData);
+		validateParameterNotNullStandardMessage(CATALOG_VERSION_STRING, catalogVersion);
 
 		final Map<String, Object> queryParams = new HashMap<>();
 		queryParams.put(COMPONENT_ID_PARAM, componentId);
@@ -109,9 +112,9 @@ public class DefaultAmwayAssetDao implements AmwayAssetDao
 	public SearchPageData<AmwayAssetModel> getAssetsForProduct(final ProductModel product, final PageableData pageableData,
 			final CatalogVersionModel catalogVersion, final String year)
 	{
-		validateParameterNotNullStandardMessage("Product", product);
-		validateParameterNotNullStandardMessage("PageableData", pageableData);
-		validateParameterNotNullStandardMessage("CatalogVersion", catalogVersion);
+		validateParameterNotNullStandardMessage(COMPONENT_STRING, product);
+		validateParameterNotNullStandardMessage(PAGEABLE_DATA_STRING, pageableData);
+		validateParameterNotNullStandardMessage(CATALOG_VERSION_STRING, catalogVersion);
 
 		final Map<String, Object> queryParams = new HashMap<>();
 		queryParams.put(PRODUCT_PARAM, product);
@@ -127,9 +130,9 @@ public class DefaultAmwayAssetDao implements AmwayAssetDao
 	public SearchPageData<AmwayAssetAlbumModel> getAssetsAlbums(final String componentId, final PageableData pageableData,
 			final CatalogVersionModel catalogVersion, final String year)
 	{
-		validateParameterNotNullStandardMessage("Component", componentId);
-		validateParameterNotNullStandardMessage("PageableData", pageableData);
-		validateParameterNotNullStandardMessage("CatalogVersion", catalogVersion);
+		validateParameterNotNullStandardMessage(COMPONENT_STRING, componentId);
+		validateParameterNotNullStandardMessage(PAGEABLE_DATA_STRING, pageableData);
+		validateParameterNotNullStandardMessage(CATALOG_VERSION_STRING, catalogVersion);
 
 		final Map<String, Object> queryParams = new HashMap<>();
 		queryParams.put(COMPONENT_ID_PARAM, componentId);
@@ -146,7 +149,7 @@ public class DefaultAmwayAssetDao implements AmwayAssetDao
 	@Override
 	public List<MediaContainerModel> getAssetsAlbumMedia(final CatalogVersionModel catalogVersion, final String componentId)
 	{
-		validateParameterNotNullStandardMessage("Component", componentId);
+		validateParameterNotNullStandardMessage(COMPONENT_STRING, componentId);
 
 		final Map queryParams = new HashMap();
 		queryParams.put(COMPONENT_ID_PARAM, componentId);
@@ -197,7 +200,7 @@ public class DefaultAmwayAssetDao implements AmwayAssetDao
 	{
 		final String yearQuery = generateYearQuery(queryParams, year);
 
-		final List<SortQueryData> sortQueries = Arrays.asList(new SortQueryData[]
+		return Arrays.asList(new SortQueryData[]
 		{ createSortQueryData(AmwayApacAssetsSort.LATEST_DATE.getCode(),
 				typQuery + yearQuery + AmwayApacAssetsSort.LATEST_DATE.getQuery()),
 				createSortQueryData(AmwayApacAssetsSort.TITTLE_ASCENDING.getCode(),
@@ -206,8 +209,6 @@ public class DefaultAmwayAssetDao implements AmwayAssetDao
 						typQuery + yearQuery + AmwayApacAssetsSort.ID_ASCENDING.getQuery()),
 				createSortQueryData(AmwayApacAssetsSort.TITTLE_DESCENDING.getCode(),
 						typQuery + yearQuery + AmwayApacAssetsSort.TITTLE_DESCENDING.getQuery()), });
-
-		return sortQueries;
 	}
 
 	/**

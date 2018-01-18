@@ -61,8 +61,11 @@ public class AmwayApacDeliverySlotConfigUpdateInterceptor implements PrepareInte
 			final LocalDate currentDate = LocalDate.now();
 			final LocalDate deliveryDate = getAmwayApacDeliverySlotManagementService().getDeliveryDate(currentDate,
 					slotConfigModel.getDeliveryDay());
-			LOGGER.info(new StringBuilder(100).append("Modification of Slot data for  Delivery Date : ").append(deliveryDate)
-					.append(" started ...").toString());
+			if (LOGGER.isInfoEnabled())
+			{
+				LOGGER.info(new StringBuilder(100).append("Modification of Slot data for  Delivery Date : ").append(deliveryDate)
+						.append(" started ...").toString());
+			}
 
 			// Fetch slot models from slot management service
 			final List<AmwayDeliverySlotAvailabilityModel> slotModels = getAmwayApacDeliverySlotManagementService()

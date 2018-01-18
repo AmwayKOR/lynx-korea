@@ -40,9 +40,11 @@ public final class AmwayapacresourcecenterConstants extends GeneratedAmwayapacre
 	/**
 	 * PageableData Parameter String
 	 */
-	public static final String PAGEABLEDATA_STRING = "PageableData";
+	public static final String PAGEABLE_DATA_STRING = "PageableData";
 	/**
 	 * Product Parameter String
 	 */
 	public static final String PRODUCT_STRING = "Product";
+
+	public static final String CATALOG_VERSION_STRING = "catalogVersion";
 }

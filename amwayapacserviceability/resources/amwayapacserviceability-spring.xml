@@ -30,7 +30,7 @@
 
 	<alias name="defaultAmwayApacWarehouseServiceabilityService" alias="amwayApacWarehouseServiceabilityService"/>
 	<bean id="defaultAmwayApacWarehouseServiceabilityService"
-		class="com.amway.apac.serviceability.services.impl.DefaultAmwayApacWarehouseServiceabilityServiceImpl">
+		class="com.amway.apac.serviceability.services.impl.DefaultAmwayApacWarehouseServiceabilityService">
 		<property name="amwayApacWarehouseServiceabilityDao" ref="amwayApacWarehouseServiceabilityDao"/>	
 		<property name="baseSiteService" ref="baseSiteService"/>
 	</bean>

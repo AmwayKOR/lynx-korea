@@ -135,6 +135,9 @@ public class DefaultAmwayApacProductDao extends DefaultProductDao implements Amw
 		return result.getResult();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<AmwayUserPromotionCountModel> getPromotionRuleCountByUserAndProduct(final String userId,
 			final List<String> productCodes, final String promotionCode, final BaseStoreModel store)
