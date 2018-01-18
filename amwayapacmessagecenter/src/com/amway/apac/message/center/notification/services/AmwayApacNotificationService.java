@@ -19,16 +19,17 @@ import com.amway.apac.message.center.model.AmwayNotificationUserActionModel;
 public interface AmwayApacNotificationService
 {
 	/**
-	 * Returns AmwayNotificaionModels in the form of searchPageData for given customer, statuses and search text.
+	 * Fetches the notifications in the form of searchPageData for given customer, statuses and search text.
 	 *
 	 * @param pageableData
+	 *           pageable data to search the notifications
 	 * @param userModel
 	 *           Customer for whom notifications needed
 	 * @param statuses
 	 *           List of statuses to be filtered.
 	 * @param searchText
 	 *           searchText to search notifications
-	 * @return {@link AmwayNotificationModel}
+	 * @return AmwayNotificaionModels in the form of searchPageData
 	 * @throws IllegalArgumentException
 	 *            if pageableData or customer is null
 	 */
@@ -36,11 +37,11 @@ public interface AmwayApacNotificationService
 			final List<AmwayNotificationUserActionStatus> statuses, final String searchText);
 
 	/**
-	 * Returns {@link AmwayNotificationModel} for a given unique code.
+	 * Fetches a notification for a given unique code.
 	 *
 	 * @param notificationCode
 	 *           Unique code for a notification
-	 * @return AmwayNotification
+	 * @return AmwayNotification notification found
 	 * @throws IllegalArgumentException
 	 *            if notificationCode is null or empty.
 	 */
