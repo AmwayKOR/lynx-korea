@@ -75,5 +75,11 @@
 	<bean class="de.hybris.platform.commercefacades.product.data.ProductData">
 		<property name="isSellable" type="java.lang.Boolean" />
 	</bean>
+	
+	<bean class="de.hybris.platform.commercefacades.search.data.SearchStateData">
+		<property name="filterRawQueries" type="java.lang.String">
+			<description>Raw query to be populated in Search Query.</description>
+		</property>
+	</bean>
 
 </beans>

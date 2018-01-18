@@ -16,9 +16,6 @@
 
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
 
-	<bean class="de.hybris.platform.commerceservices.search.solrfacetsearch.data.SolrSearchQueryData">
-		<description>POJO representing a Search query.</description>
-		<property name="rawQuery" type="String"/>
-	</bean>
+
 
 </beans>

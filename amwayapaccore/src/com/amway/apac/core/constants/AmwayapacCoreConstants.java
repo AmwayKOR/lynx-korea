@@ -152,4 +152,13 @@ public final class AmwayapacCoreConstants extends GeneratedAmwayapacCoreConstant
 	 */
 	public static final String PRE_LAUNCH_PROMOTION = "PRE_LAUNCH_PROMOTION";
 
+	/**
+	 * Space char constant
+	 */
+	public static final String SPACE = " ";
+
+	/**
+	 * Close parenthesis constant
+	 */
+	public static final char CLOSE_PARENTHESIS = ')';
 }
