@@ -28,7 +28,7 @@ import com.amway.apac.serviceability.services.AmwayApacWarehouseServiceabilitySe
 public class DefaultAmwayApacWarehouseServiceabilityService implements AmwayApacWarehouseServiceabilityService
 {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(DefaultAmwayApacWarehouseServiceabilityServiceImpl.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(DefaultAmwayApacWarehouseServiceabilityService.class);
 
 	private AmwayApacWarehouseServiceabilityDao amwayApacWarehouseServiceabilityDao;
 	private BaseSiteService baseSiteService;
