@@ -291,9 +291,7 @@
 				</attributes>
 			</itemtype>
 			
-			<itemtype code="AmwayCategoryProductReference" generate="true"
-				jaloclass="com.amway.lynxcore.jalo.catalog.AmwayCategoryProductReference"
-				extends="GenericItem" autocreate="true">
+			<itemtype code="AmwayCategoryProductReference" generate="true" autocreate="true">
 				<deployment table="CategoryProductReference" typecode="21015" />
 				<attributes>
 					<attribute qualifier="qualifier" type="java.lang.String">
