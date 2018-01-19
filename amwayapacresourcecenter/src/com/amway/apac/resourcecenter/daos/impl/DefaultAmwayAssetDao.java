@@ -10,11 +10,8 @@ import de.hybris.platform.commerceservices.search.flexiblesearch.PagedFlexibleSe
 import de.hybris.platform.commerceservices.search.flexiblesearch.data.SortQueryData;
 import de.hybris.platform.commerceservices.search.pagedata.PageableData;
 import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
-import de.hybris.platform.core.model.media.MediaContainerModel;
 import de.hybris.platform.core.model.product.ProductModel;
-import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 import de.hybris.platform.servicelayer.search.FlexibleSearchService;
-import de.hybris.platform.servicelayer.search.SearchResult;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.servicelayer.user.UserService;
 
@@ -33,7 +30,6 @@ import org.springframework.beans.factory.annotation.Required;
 import com.amway.apac.resourcecenter.constants.AmwayapacresourcecenterConstants;
 import com.amway.apac.resourcecenter.daos.AmwayAssetDao;
 import com.amway.apac.resourcecenter.enums.AmwayApacAssetsSort;
-import com.amway.apac.resourcecentre.model.media.AmwayAssetAlbumModel;
 import com.amway.apac.resourcecentre.model.media.AmwayAssetModel;
 
 
@@ -51,26 +47,11 @@ public class DefaultAmwayAssetDao implements AmwayAssetDao
 	/** The Constant CATALOG VERSION. */
 	private static final String CATALOG_VERSION_PARAM = CATALOG_VERSION_STRING;
 
-	/** The Constant COMPONENT ID. */
-	private static final String COMPONENT_ID_PARAM = "componentId";
-
 	/** The Constant PRODUCT. */
 	private static final String PRODUCT_PARAM = "product";
 
-	/** The Constant Current USER. */
-	private static final String USER_PARAM = "currentUser";
-
-	/** ASSET_QUERY to fetch assets with component ID and catalog. */
-	private static final String ASSET_QUERY = "SELECT {a.pk} FROM {AmwayResSectCompForAssetRel as pw JOIN AmwayResourceSectionComponent as p ON {pw.source} = {p.pk} JOIN AbstractAmwayAsset as a ON {pw.target}={a.pk}} WHERE {p.uid} IN (?componentId) AND {p.catalogVersion} IN (?catalogVersion) ";
-
 	/** ASSET_QUERY to fetch assets with product and catalog. */
 	private static final String PRODUCT_QUERY = "SELECT {a.pk} FROM {AmwayProd2AssetRel as pw JOIN Product as p ON {pw.source} = {p.pk} JOIN AbstractAmwayAsset as a ON {pw.target}={a.pk}} WHERE {p.pk} IN (?product) AND {p.catalogVersion} IN (?catalogVersion) ";
-
-	/** ASSET_ALBUM_QUERY to fetch asset album with component ID and catalog. */
-	private static final String ASSET_ALBUM_QUERY = "SELECT {a.pk} FROM {AmwayPhotoSectCompForAssetAlbumRel as pw JOIN AmwayPhotoGallerySectionComponent as p ON {pw.source} = {p.pk} JOIN AmwayAssetAlbum as a ON {pw.target}={a.pk} LEFT JOIN AmwayAlbum2AmwayAccount as ac ON {ac.source}={a.pk}} WHERE {p.uid} IN (?componentId) AND {p.catalogVersion} IN (?catalogVersion) AND (({ac.target} IN ({{SELECT {pk} FROM {AmwayAccount} WHERE {primaryParty}=?currentUser}})) OR ({ac.target} IS NULL)) ";
-
-	/** ASSET_ALBUM_MEDIA_QUERY to fetch asset media with component ID and catalog. */
-	private static final String ASSET_ALBUM_MEDIA_QUERY = "SELECT {a.pk} FROM {AmwayAssetAlbum2MediaContainerRel as pw JOIN AmwayAssetAlbum as p ON {pw.source} = {p.pk} JOIN MediaContainer as a ON {pw.target}={a.pk}} WHERE {p.assetId} IN (?componentId) AND {a.catalogVersion} IN (?catalogVersion) ";
 
 	/** The Constant YEAR query part. */
 	private static final String YEAR_QUERY_PART = "AND {a.date} >= ?startDate AND {a.date} < ?endDate ";
@@ -91,24 +72,6 @@ public class DefaultAmwayAssetDao implements AmwayAssetDao
 	 * {@inheritDoc}
 	 */
 	@Override
-	public SearchPageData<AmwayAssetModel> getAssets(final String componentId, final PageableData pageableData,
-			final CatalogVersionModel catalogVersion, final String year)
-	{
-		validateParameterNotNullStandardMessage(COMPONENT_STRING, componentId);
-		validateParameterNotNullStandardMessage(PAGEABLE_DATA_STRING, pageableData);
-		validateParameterNotNullStandardMessage(CATALOG_VERSION_STRING, catalogVersion);
-
-		final Map<String, Object> queryParams = new HashMap<>();
-		queryParams.put(COMPONENT_ID_PARAM, componentId);
-		queryParams.put(CATALOG_VERSION_PARAM, catalogVersion);
-
-		return getAssets(queryParams, pageableData, year, ASSET_QUERY);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
 	public SearchPageData<AmwayAssetModel> getAssetsForProduct(final ProductModel product, final PageableData pageableData,
 			final CatalogVersionModel catalogVersion, final String year)
 	{
@@ -121,44 +84,6 @@ public class DefaultAmwayAssetDao implements AmwayAssetDao
 		queryParams.put(CATALOG_VERSION_PARAM, catalogVersion);
 
 		return getAssets(queryParams, pageableData, year, PRODUCT_QUERY);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public SearchPageData<AmwayAssetAlbumModel> getAssetsAlbums(final String componentId, final PageableData pageableData,
-			final CatalogVersionModel catalogVersion, final String year)
-	{
-		validateParameterNotNullStandardMessage(COMPONENT_STRING, componentId);
-		validateParameterNotNullStandardMessage(PAGEABLE_DATA_STRING, pageableData);
-		validateParameterNotNullStandardMessage(CATALOG_VERSION_STRING, catalogVersion);
-
-		final Map<String, Object> queryParams = new HashMap<>();
-		queryParams.put(COMPONENT_ID_PARAM, componentId);
-		queryParams.put(CATALOG_VERSION_PARAM, catalogVersion);
-		queryParams.put(USER_PARAM, getUserService().getCurrentUser());
-
-
-		return getAssets(queryParams, pageableData, year, ASSET_ALBUM_QUERY);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public List<MediaContainerModel> getAssetsAlbumMedia(final CatalogVersionModel catalogVersion, final String componentId)
-	{
-		validateParameterNotNullStandardMessage(COMPONENT_STRING, componentId);
-
-		final Map queryParams = new HashMap();
-		queryParams.put(COMPONENT_ID_PARAM, componentId);
-		queryParams.put(CATALOG_VERSION_PARAM, catalogVersion);
-		final FlexibleSearchQuery query = new FlexibleSearchQuery(ASSET_ALBUM_MEDIA_QUERY);
-		query.addQueryParameters(queryParams);
-		final SearchResult<MediaContainerModel> result = getFlexibleSearchService().search(query);
-		return result.getResult();
-
 	}
 
 	/**

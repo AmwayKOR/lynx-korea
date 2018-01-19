@@ -30,6 +30,5 @@
 	<bean id="defaultAmwayApacAssetService" class="com.amway.apac.resourcecenter.services.impl.DefaultAmwayApacAssetService">
 		<property name="amwayAssetDao" ref="amwayAssetDao"/>
 		<property name="cmsSiteService" ref="cmsSiteService" />
-		<property name="catalogService" ref="catalogService"/>
 	</bean>
 </beans>
