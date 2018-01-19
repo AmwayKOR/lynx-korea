@@ -65,20 +65,18 @@
 						<persistence type="property" />
 					</attribute>
 					<attribute qualifier="shippingFee" type="java.math.BigDecimal">
-						<description>Total shipping fee of the single shipping group
-							order.</description>
+						<description>Total shipping fee of the single shipping group order.</description>
 						<persistence type="property" />
 					</attribute>
 					<attribute qualifier="shippingFeeTax" type="java.math.BigDecimal">
-						<description>Total shipping fee tax of the single shipping group
-							order.</description>
+						<description>Total shipping fee tax of the single shipping group order.</description>
 						<persistence type="property" />
 					</attribute>
-					<attribute type="Address" qualifier="deliveryAddress">
+					<attribute qualifier="deliveryAddress" type="Address">
 						<description>This represents the single delivery address for Combined order.</description>
 						<persistence type="property" />
 					</attribute>
-					<attribute type="DeliveryMode" qualifier="deliveryMode">
+					<attribute qualifier="deliveryMode" type="DeliveryMode">
 						<description>This represents the single delivery address for Combined order.</description>
 						<persistence type="property" />
 					</attribute>
@@ -89,7 +87,7 @@
 				<description>This type represents a single payment group order.</description>
 				<deployment table="groupOrder" typecode="21071" />
 				<attributes>
-					<attribute type="java.lang.String" qualifier="paymentOrderNumber">
+					<attribute qualifier="paymentOrderNumber" type="java.lang.String">
 						<description>This represents order number with which payment will be associated.</description>
 						<persistence type="property" />
 					</attribute>
@@ -102,19 +100,16 @@
 
 			<itemtype code="AmwayGroupCombinedOrder" autocreate="true"
 				generate="true">
-				<description>This type represents the single payment single shipping
-					group order.</description>
+				<description>This type represents the single payment single shipping group order.</description>
 				<deployment table="groupCombinedOrder" typecode="21072" />
 				<attributes>
 					<attribute qualifier="groupOrder" type="AmwayGroupOrder">
-						<description>This attribute represents the single payment part of
-							the group combined order.</description>
+						<description>This attribute represents the single payment part of the group combined order.</description>
 						<modifiers optional="false" />
 						<persistence type="property" />
 					</attribute>
 					<attribute qualifier="combinedOrder" type="AmwayCombinedOrder">
-						<description>This attribute represents the single shipping part of
-							the group combined order.</description>
+						<description>This attribute represents the single shipping part of the group combined order.</description>
 						<modifiers optional="false" />
 						<persistence type="property" />
 					</attribute>
@@ -123,8 +118,7 @@
 
 			<itemtype code="AmwayGroupPaymentInfo" extends="PaymentInfo"
 				autocreate="true" generate="true">
-				<description>This type represents the payment information
-					corresponding to a single payment group order.</description>
+				<description>This type represents the payment information corresponding to a single payment group order.</description>
 			</itemtype>
 		</typegroup>
 	</itemtypes>

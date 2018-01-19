@@ -172,29 +172,22 @@ public class DefaultAmwayApacDeliveryService extends DefaultDeliveryService impl
 			@Override
 			public Integer doInTransaction(final TransactionStatus status)
 			{
-				try
+				getModelService().refresh(deliverySlot);
+				if (deliverySlot.getSlotCapacity().intValue()
+						- deliverySlot.getConsumedCount().intValue() > AmwayapacdeliveryslotConstants.ZERO_INT.intValue())
 				{
+					final Integer updatedConsumedSlot = Integer
+							.valueOf(deliverySlot.getConsumedCount().intValue() + AmwayapacdeliveryslotConstants.ONE_INT.intValue());
+					deliverySlot.setConsumedCount(updatedConsumedSlot);
+					getModelService().save(deliverySlot);
 					getModelService().refresh(deliverySlot);
-					if (deliverySlot.getSlotCapacity().intValue()
-							- deliverySlot.getConsumedCount().intValue() > AmwayapacdeliveryslotConstants.ZERO_INT.intValue())
-					{
-						final Integer updatedConsumedSlot = Integer
-								.valueOf(deliverySlot.getConsumedCount().intValue() + AmwayapacdeliveryslotConstants.ONE_INT.intValue());
-						deliverySlot.setConsumedCount(updatedConsumedSlot);
-						getModelService().save(deliverySlot);
-						getModelService().refresh(deliverySlot);
-						return deliverySlot.getConsumedCount();
-					}
-					else
-					{
-						throw new AmwayServiceException(new StringBuilder(200).append("Selected delivery slot [ ")
-								.append(deliverySlot.getPk()).append(" ] for time: [ ").append(deliverySlot.getSlotTime())
-								.append(" ] not available.").toString());
-					}
+					return deliverySlot.getConsumedCount();
 				}
-				catch (final Exception e)
+				else
 				{
-					throw new AmwayServiceException("Exception Occured while reserving delivery slot");
+					throw new AmwayServiceException(
+							new StringBuilder(200).append("Selected delivery slot [ ").append(deliverySlot.getPk())
+									.append(" ] for time: [ ").append(deliverySlot.getSlotTime()).append(" ] not available.").toString());
 				}
 			}
 		});
@@ -256,7 +249,10 @@ public class DefaultAmwayApacDeliveryService extends DefaultDeliveryService impl
 			getModelService().refresh(cart);
 			successfullySet = true;
 		}
-		LOGGER.info(new StringBuilder(50).append("Slot returned was: [ ").append(slot).append(" ]").toString());
+		if (LOGGER.isInfoEnabled())
+		{
+			LOGGER.info(new StringBuilder(50).append("Slot returned was: [ ").append(slot).append(" ]").toString());
+		}
 		return successfullySet;
 	}
 
