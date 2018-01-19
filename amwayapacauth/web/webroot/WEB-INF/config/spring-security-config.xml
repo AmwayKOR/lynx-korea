@@ -76,8 +76,8 @@
     </security:authentication-manager>
 
     <bean id="amwayAuthenticationProvider" parent="acceleratorAuthenticationProvider" class="com.amway.apac.auth.security.impl.DefaultAmwayApacAuthenticationProvider">
-        <property name="lynxUserService" ref="lynxUserService" />
-        <property name="lynxAccountService" ref="lynxAccountService" />
+        <property name="amwayApacUserService" ref="amwayApacUserService" />
+        <property name="amwayApacAccountService" ref="amwayAccountService" />
         <property name="sessionService" ref="sessionService" />
     </bean>
 
@@ -203,7 +203,7 @@
 
     <alias name="defaultAmwayApacJWTCreator" alias="jwtCreator" />
     <bean id="defaultAmwayApacJWTCreator" class="com.amway.apac.auth.security.impl.DefaultAmwayApacJWTCreator">
-        <property name="accountService" ref="lynxAccountService" />
+        <property name="accountService" ref="amwayAccountService" />
         <property name="userService" ref="userService" />
         <property name="customerNameStrategy" ref="customerNameStrategy" />
         <property name="jwtKeyMaker" ref="jwtKeyMaker" />

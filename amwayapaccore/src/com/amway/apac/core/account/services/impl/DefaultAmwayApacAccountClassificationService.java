@@ -1,4 +1,4 @@
-package com.amway.apac.core.account.service.impl;
+package com.amway.apac.core.account.services.impl;
 
 import static com.amway.apac.core.constants.AmwayapacCoreConstants.REFERENCE_CLASSIFICATION;
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
@@ -9,7 +9,7 @@ import java.util.Comparator;
 
 import org.springframework.beans.factory.annotation.Required;
 
-import com.amway.apac.core.account.service.AmwayApacAccountClassificationService;
+import com.amway.apac.core.account.services.AmwayApacAccountClassificationService;
 import com.amway.apac.core.constants.AmwayapacCoreConstants;
 import com.amway.apac.core.enums.AccountClassificationEnum;
 

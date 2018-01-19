@@ -1,25 +1,29 @@
-package com.amway.apac.core.account.service.impl;
+package com.amway.apac.core.account.services.impl;
 
 import static com.amway.apac.core.constants.AmwayapacCoreConstants.ABO_ID;
 import static com.amway.apac.core.constants.AmwayapacCoreConstants.AFFILIATE_COUNTRY_CODE;
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
 
 import de.hybris.platform.core.model.c2l.CountryModel;
+import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.internal.dao.GenericDao;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Required;
 
-import com.amway.apac.core.account.service.AmwayApacAccountService;
+import com.amway.apac.core.account.services.AmwayApacAccountService;
+import com.amway.apac.core.customer.daos.AmwayApacCustomerAccountDao;
 import com.amway.apac.core.enums.AccountClassificationEnum;
 import com.amway.apac.core.i18n.services.AmwayApacCommerceCommonI18NService;
 import com.amway.apac.core.model.AmwayAccountClassificationModel;
 import com.amway.core.account.service.impl.DefaultAmwayAccountService;
 import com.amway.core.model.AmwayAccountModel;
 import com.amway.core.model.AmwayBusinessLevelModel;
+import com.amway.core.model.AmwayBusinessRestrictionModel;
 
 
 /**
@@ -33,6 +37,8 @@ public class DefaultAmwayApacAccountService extends DefaultAmwayAccountService i
 	private GenericDao<AmwayAccountModel> amwayApacAccountDao;
 	private GenericDao<AmwayAccountClassificationModel> amwayAccountClassificationDao;
 	private AmwayApacCommerceCommonI18NService amwayApacCommerceCommonI18NService;
+
+	private AmwayApacCustomerAccountDao AmwayApacCustomerAccountDao;
 
 	/**
 	 * {@inheritDoc}
@@ -73,6 +79,37 @@ public class DefaultAmwayApacAccountService extends DefaultAmwayAccountService i
 			}
 		}
 		return accountClassification;
+	}
+
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see
+	 * com.amway.apac.core.account.services.AmwayApacAccountService#getAmwayAccount(de.hybris.platform.core.model.user.
+	 * CustomerModel)
+	 */
+	@Override
+	public AmwayAccountModel getAmwayAccount(final CustomerModel customerModel)
+	{
+		final Optional<AmwayAccountModel> amwayAccount = customerModel.getAccounts().stream().findFirst();
+		if (amwayAccount.isPresent())
+		{
+			return amwayAccount.get();
+		}
+		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see com.amway.apac.core.account.services.AmwayApacAccountService#getMOPRestriction(com.amway.core.model.
+	 * AmwayAccountModel)
+	 */
+	@Override
+	public AmwayBusinessRestrictionModel getMOPRestriction(final AmwayAccountModel amwayAccount)
+	{
+		return AmwayApacCustomerAccountDao.getMOPRestriction(amwayAccount);
 	}
 
 	/**
@@ -128,7 +165,4 @@ public class DefaultAmwayApacAccountService extends DefaultAmwayAccountService i
 	{
 		this.amwayAccountClassificationDao = amwayAccountClassificationDao;
 	}
-
-
-
 }

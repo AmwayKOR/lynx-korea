@@ -12,7 +12,8 @@
 
 	<extension abstractclassprefix="Generated" classprefix="Amwayapacauth" name="amwayapacauth" usemaven="true">		
         <requires-extension name="acceleratorstorefrontcommons"/>
-		<requires-extension name="amwayapacfacades"/>
+		<requires-extension name="amwayapaccore"/>
+		
 		<webmodule jspcompile="false" webroot="/amwayapacauth"/>
 
 		<meta key="modulegen-name" value="accelerator"/>

@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.amway.apac.auth.security;
 
 import java.util.Date;

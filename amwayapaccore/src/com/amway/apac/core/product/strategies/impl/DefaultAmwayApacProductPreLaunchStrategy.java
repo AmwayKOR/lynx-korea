@@ -8,7 +8,7 @@ import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Required;
 
-import com.amway.apac.core.account.service.AmwayApacAccountClassificationService;
+import com.amway.apac.core.account.services.AmwayApacAccountClassificationService;
 import com.amway.apac.core.constants.AmwayapacCoreConstants;
 import com.amway.apac.core.model.AmwayPreLaunchConfigModel;
 import com.amway.apac.core.product.AmwayPreLaunchResponse;

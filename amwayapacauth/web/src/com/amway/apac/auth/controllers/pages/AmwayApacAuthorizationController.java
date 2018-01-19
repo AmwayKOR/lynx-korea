@@ -1,13 +1,3 @@
-/*
- * [y] hybris Platform
- *
- * Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
- *
- * This software is the confidential and proprietary information of SAP
- * ("Confidential Information"). You shall not disclose such Confidential
- * Information and shall use it only in accordance with the terms of the
- * license agreement you entered into with SAP.
- */
 package com.amway.apac.auth.controllers.pages;
 
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractLoginPageController;
@@ -49,14 +39,18 @@ import com.amway.apac.auth.validation.AmwayApacIdpLoginValidationService;
 @RequestMapping(value = "/oauth2/default/v1/authorize")
 public class AmwayApacAuthorizationController extends AbstractLoginPageController
 {
+	/** The http session request cache. */
 	private HttpSessionRequestCache httpSessionRequestCache;
 
+	/** The jwt creator. */
 	@Resource(name = "jwtCreator")
 	private AmwayApacJWTCreator jwtCreator;
 
+	/** The user service. */
 	@Resource(name = "userService")
 	private UserService userService;
 
+	/** The Amway APAC idp login validation service. */
 	@Resource(name = "idpLoginValidationService")
 	private AmwayApacIdpLoginValidationService idpLoginValidationService;
 
@@ -67,7 +61,7 @@ public class AmwayApacAuthorizationController extends AbstractLoginPageControlle
 	 * @param model
 	 * @param request
 	 * @param session
-	 * @return
+	 * @return default login page
 	 * @throws CMSItemNotFoundException
 	 */
 	@RequestMapping(method = RequestMethod.GET)
@@ -109,7 +103,7 @@ public class AmwayApacAuthorizationController extends AbstractLoginPageControlle
 	 * @param request
 	 * @param response
 	 * @param session
-	 * @return JWT
+	 * @return JWT DTO
 	 * @throws CMSItemNotFoundException
 	 * @throws IOException
 	 */
@@ -132,7 +126,7 @@ public class AmwayApacAuthorizationController extends AbstractLoginPageControlle
 	 *
 	 * @param request
 	 * @param response
-	 * @return JWT
+	 * @return JWT DTO
 	 * @throws CMSItemNotFoundException
 	 * @throws IOException
 	 */
@@ -195,12 +189,17 @@ public class AmwayApacAuthorizationController extends AbstractLoginPageControlle
 	}
 
 	/**
+	 * Populate JWT dto.
+	 *
 	 * @param request
+	 *           the request
 	 * @param date
+	 *           the date
 	 * @param customer
-	 * @return
+	 *           the customer
+	 * @return JWT DTO
 	 */
-	private JWTokenDto populateJWTDto(final HttpServletRequest request, final Date date, final CustomerModel customer)
+	protected JWTokenDto populateJWTDto(final HttpServletRequest request, final Date date, final CustomerModel customer)
 	{
 		final String idToken = jwtCreator.createJWToken(customer.getUid(), date, request);
 		final String state = request.getParameter(IDPLogin.STATE);

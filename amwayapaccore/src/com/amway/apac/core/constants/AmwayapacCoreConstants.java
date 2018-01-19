@@ -194,6 +194,12 @@ public final class AmwayapacCoreConstants extends GeneratedAmwayapacCoreConstant
 	 */
 	public static final String PRE_LAUNCH_PROMOTION = "PRE_LAUNCH_PROMOTION";
 
+	/** MOP value to SUSPEND amway account. */
+	public static final String RESTRICTED_ID_ACCOUNT_SUSPEND = "7";
+
+	/** Account Suspended Constant String. */
+	public static final String ACCOUNT_SUSPENDED = "accountSuspended";
+
 	/**
 	 * Space char constant
 	 */

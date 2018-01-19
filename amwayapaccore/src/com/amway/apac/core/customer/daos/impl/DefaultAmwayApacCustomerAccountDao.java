@@ -3,7 +3,6 @@ package com.amway.apac.core.customer.daos.impl;
 import static com.amway.apac.core.constants.AmwayapacCoreConstants.BASE_STORE_STRING;
 import static com.amway.apac.core.constants.AmwayapacCoreConstants.TWO_HUNDRED_INT;
 import static com.amway.apac.core.constants.AmwayapacCoreConstants.USER_STRING;
-import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNull;
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
 import static java.time.ZoneId.systemDefault;
 import static java.util.Collections.singletonList;
@@ -26,8 +25,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections.CollectionUtils;
+
 import com.amway.apac.core.customer.daos.AmwayApacCustomerAccountDao;
 import com.amway.core.customer.dao.impl.DefaultAmwayCustomerAccountDao;
+import com.amway.core.model.AmwayAccountModel;
+import com.amway.core.model.AmwayBusinessRestrictionModel;
 
 
 /**
@@ -69,6 +72,8 @@ public class DefaultAmwayApacCustomerAccountDao extends DefaultAmwayCustomerAcco
 			.append(OrderModel.CODE).append("},{").append(OrderModel.CREATIONTIME).append("} DESC, {").append(OrderModel.PK)
 			.append("}").toString();
 
+	private static final String GET_MOP_QUERY = "select {br.pk} from {AmBusRestrsForAmwayAccount as rel join AmwayBusinessRestriction as br ON {rel.target} = {br.pk} join RestrictionTypeEnum as type on {br.type} = {type.pk} } where {rel.source} = ?pk  ORDER BY {rel.creationtime} DESC";
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -95,8 +100,8 @@ public class DefaultAmwayApacCustomerAccountDao extends DefaultAmwayCustomerAcco
 			final BaseStoreModel store, final LocalDate datefrom, final LocalDate dateto, final String type,
 			final PageableData pageableData)
 	{
-		validateParameterNotNull(customerModel, "Customer must not be null");
-		validateParameterNotNull(store, "Store must not be null");
+		validateParameterNotNullStandardMessage("Customer", customerModel);
+		validateParameterNotNullStandardMessage("Store", store);
 
 		final Map<String, Object> queryParams = new HashMap<>();
 		queryParams.put("customer", customerModel);
@@ -131,4 +136,25 @@ public class DefaultAmwayApacCustomerAccountDao extends DefaultAmwayCustomerAcco
 		parameters.forEach(ServicesUtil::validateParameterNotNullStandardMessage);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public AmwayBusinessRestrictionModel getMOPRestriction(final AmwayAccountModel amwayAccount)
+	{
+		validateParameterNotNullStandardMessage("Amway Account", amwayAccount);
+
+		final Map<String, Object> params = new HashMap<>();
+		params.put(AmwayAccountModel.PK, amwayAccount.getPk());
+
+		final FlexibleSearchQuery query = new FlexibleSearchQuery(GET_MOP_QUERY);
+		query.addQueryParameters(params);
+
+		final SearchResult<AmwayBusinessRestrictionModel> result = getFlexibleSearchService().search(query);
+		if (CollectionUtils.isNotEmpty(result.getResult()))
+		{
+			return result.getResult().get(0);
+		}
+		return null;
+	}
 }

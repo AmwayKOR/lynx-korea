@@ -334,7 +334,7 @@
     </bean>
 	
 	<alias name="defaultAmwayApacAccountService" alias="amwayAccountService" />
-	<bean id="defaultAmwayApacAccountService" class="com.amway.apac.core.account.service.impl.DefaultAmwayApacAccountService" parent="defaultAmwayAccountService">
+	<bean id="defaultAmwayApacAccountService" class="com.amway.apac.core.account.services.impl.DefaultAmwayApacAccountService" parent="defaultAmwayAccountService">
 		<property name="amwayApacAccountDao" ref="amwayApacAccountDao"/>
 		<property name="amwayApacCommerceCommonI18NService" ref="commerceCommonI18NService"/>
 		<property name="amwayAccountClassificationDao" ref="amwayAccountClassificationDao"/>
@@ -358,7 +358,7 @@
 	</bean>
 	
 	<alias name="defaultAmwayApacAccountClassificationService" alias="amwayApacAccountClassificationService"/>
-	<bean id="defaultAmwayApacAccountClassificationService" class="com.amway.apac.core.account.service.impl.DefaultAmwayApacAccountClassificationService">
+	<bean id="defaultAmwayApacAccountClassificationService" class="com.amway.apac.core.account.services.impl.DefaultAmwayApacAccountClassificationService">
 		<property name="amwayApacAccountClassificationComparator" ref="amwayApacAccountClassificationComparator"/>
 		<property name="sessionService" ref="sessionService"/>
 	</bean>
@@ -522,4 +522,13 @@
 		<property name="businessProcessService" ref="businessProcessService" />
 	</bean>
 	
+	<alias alias="amwayApacUserDao" name="defaultAmwayApacUserDao" />
+    <bean id="defaultAmwayApacUserDao" parent="userDao" class="com.amway.apac.core.user.daos.impl.DefaultAmwayApacUserDao"/>
+    
+    <alias alias="userService" name="defaultAmwayApacUserService" />
+    <alias alias="amwayApacUserService" name="defaultAmwayApacUserService" />
+    <bean id="defaultAmwayApacUserService" parent="defaultUserService" class="com.amway.apac.core.user.services.impl.DefaultAmwayApacUserService" primary="true">
+        <property name="baseStoreService" ref="baseStoreService" />
+        <property name="amwayApacUserDao" ref="amwayApacUserDao" />
+    </bean>
 </beans>

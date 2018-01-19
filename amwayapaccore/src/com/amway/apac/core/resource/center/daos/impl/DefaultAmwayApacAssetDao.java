@@ -9,7 +9,7 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Required;
 
-import com.amway.apac.core.account.service.AmwayApacAccountClassificationService;
+import com.amway.apac.core.account.services.AmwayApacAccountClassificationService;
 import com.amway.apac.core.constants.AmwayapacCoreConstants;
 import com.amway.apac.core.enums.AccountClassificationEnum;
 import com.amway.apac.resourcecenter.daos.impl.DefaultAmwayAssetDao;

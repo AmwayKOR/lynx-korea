@@ -1,13 +1,3 @@
-/*
- * [y] hybris Platform
- *
- * Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
- *
- * This software is the confidential and proprietary information of SAP
- * ("Confidential Information"). You shall not disclose such Confidential
- * Information and shall use it only in accordance with the terms of the
- * license agreement you entered into with SAP.
- */
 package com.amway.apac.auth.controllers.pages;
 
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
@@ -30,7 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.amway.apac.auth.controllers.ControllerConstants.IDPLogin;
 import com.amway.apac.auth.security.AmwayApacJWTCreator;
-import com.amway.apac.auth.security.impl.DefaultAmwayApacJWTKeyMaker;
+import com.amway.apac.auth.security.AmwayApacJWTKeyMaker;
 
 
 /**
@@ -41,18 +31,21 @@ import com.amway.apac.auth.security.impl.DefaultAmwayApacJWTKeyMaker;
 @RequireHardLogIn
 public class HomePageController extends AbstractPageController
 {
+
+	/** The Amway APAC jwt creator. */
 	@Resource(name = "jwtCreator")
 	private AmwayApacJWTCreator jwtCreator;
 
+	/** The Amway APAC jwt key maker. */
 	@Resource(name = "jwtKeyMaker")
-	private DefaultAmwayApacJWTKeyMaker jwtKeyMaker;
+	private AmwayApacJWTKeyMaker jwtKeyMaker;
 
 	/**
 	 * @param logout
 	 * @param model
 	 * @param request
 	 * @param redirectModel
-	 * @return
+	 * @return IDP page
 	 * @throws CMSItemNotFoundException
 	 */
 	@RequestMapping(method = RequestMethod.GET)
@@ -81,6 +74,12 @@ public class HomePageController extends AbstractPageController
 		return IDPLogin.PAGES_ACCOUNT_IDP_PAGE;
 	}
 
+	/**
+	 * Updates the page title.
+	 *
+	 * @param model
+	 * @param cmsPage
+	 */
 	protected void updatePageTitle(final Model model, final AbstractPageModel cmsPage)
 	{
 		storeContentPageTitleInModel(model, getPageTitleResolver().resolveHomePageTitle(cmsPage.getTitle()));

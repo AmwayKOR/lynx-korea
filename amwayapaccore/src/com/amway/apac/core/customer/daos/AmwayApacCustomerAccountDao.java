@@ -10,6 +10,8 @@ import de.hybris.platform.store.BaseStoreModel;
 import java.time.LocalDate;
 
 import com.amway.core.customer.dao.AmwayCustomerAccountDao;
+import com.amway.core.model.AmwayAccountModel;
+import com.amway.core.model.AmwayBusinessRestrictionModel;
 
 
 /**
@@ -53,4 +55,13 @@ public interface AmwayApacCustomerAccountDao extends AmwayCustomerAccountDao
 	SearchPageData<OrderModel> findOrdersByCustomerAndStoreAndFilterByDateAndType(final CustomerModel customerModel,
 			final BaseStoreModel store, final LocalDate datefrom, final LocalDate dateto, final String type,
 			final PageableData pageableData);
+
+	/**
+	 * Gets the MOP restriction.
+	 *
+	 * @param amwayAccount
+	 *           the amway account
+	 * @return the MOP restriction
+	 */
+	AmwayBusinessRestrictionModel getMOPRestriction(AmwayAccountModel amwayAccount);
 }

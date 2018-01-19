@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.amway.apac.auth.validation.impl;
 
 import java.util.Collection;
@@ -10,7 +7,9 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.security.oauth2.common.exceptions.RedirectMismatchException;
 import org.springframework.security.oauth2.provider.ClientDetails;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
@@ -23,24 +22,29 @@ import com.amway.apac.auth.validation.AmwayApacIdpLoginValidationService;
 
 
 /**
- *
+ * Default implementation of {@link AmwayApacIdpLoginValidationService}
  */
 public class DefaultAmwayApacIdpLoginValidationService implements AmwayApacIdpLoginValidationService
 {
-	private static final Logger LOG = Logger.getLogger(DefaultAmwayApacIdpLoginValidationService.class);
+	/** The LOGGER Constant. */
+	private static final Logger LOGGER = LoggerFactory.getLogger(DefaultAmwayApacIdpLoginValidationService.class);
+
+	/** The client details service. */
 	private ClientDetailsService clientDetailsService;
+
+	/** The redirect resolver. */
 	private final RedirectResolver redirectResolver;
 
+	/**
+	 * Instantiates a new default amway apac idp login validation service.
+	 */
 	public DefaultAmwayApacIdpLoginValidationService()
 	{
 		redirectResolver = new DefaultRedirectResolver();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.amway.apac.auth.validation.AmwayIdpLoginValidationService#validationLoginRequest(javax.servlet.http.
-	 * HttpServletRequest)
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public Collection<String> validationLoginRequest(final HttpServletRequest request)
@@ -72,15 +76,18 @@ public class DefaultAmwayApacIdpLoginValidationService implements AmwayApacIdpLo
 	}
 
 	/**
+	 * Validate redirect url.
+	 *
 	 * @param client
 	 * @param redirectUrl
+	 * @return true, if successful
 	 */
-	private boolean validateRedirectUrl(final ClientDetails client, final String redirectUrl)
+	protected boolean validateRedirectUrl(final ClientDetails client, final String redirectUrl)
 	{
 		boolean result = false;
 		try
 		{
-			final String resolvedRedirect = redirectResolver.resolveRedirect(redirectUrl, client);
+			final String resolvedRedirect = getRedirectResolver().resolveRedirect(redirectUrl, client);
 			if (!(StringUtils.isNotEmpty(resolvedRedirect)))
 			{
 				throw new RedirectMismatchException("A redirectUri must be either supplied or preconfigured in the ClientDetails");
@@ -89,35 +96,60 @@ public class DefaultAmwayApacIdpLoginValidationService implements AmwayApacIdpLo
 		catch (final Exception exp)
 		{
 			result = true;
-			LOG.error(exp.getMessage(), exp);
+			LOGGER.error(exp.getMessage(), exp);
 		}
 		return result;
 	}
 
 	/**
+	 * Validate client id.
+	 *
 	 * @param clientId
 	 * @return client details
 	 */
-	private ClientDetails validateClientId(final String clientId)
+	protected ClientDetails validateClientId(final String clientId)
 	{
 		ClientDetails client = null;
 		try
 		{
-			client = clientDetailsService.loadClientByClientId(clientId);
+			client = getClientDetailsService().loadClientByClientId(clientId);
 		}
 		catch (final NoSuchClientException exp)
 		{
-			LOG.error(exp.getMessage(), exp);
+			LOGGER.error(exp.getMessage(), exp);
 		}
 		return client;
 	}
 
 	/**
+	 * Sets the client details service.
+	 *
 	 * @param clientDetailsService
 	 *           the clientDetailsService to set
 	 */
+	@Required
 	public void setClientDetailsService(final ClientDetailsService clientDetailsService)
 	{
 		this.clientDetailsService = clientDetailsService;
+	}
+
+	/**
+	 * Gets the client details service.
+	 *
+	 * @return the clientDetailsService
+	 */
+	public ClientDetailsService getClientDetailsService()
+	{
+		return clientDetailsService;
+	}
+
+	/**
+	 * Gets the redirect resolver.
+	 *
+	 * @return the redirectResolver
+	 */
+	public RedirectResolver getRedirectResolver()
+	{
+		return redirectResolver;
 	}
 }

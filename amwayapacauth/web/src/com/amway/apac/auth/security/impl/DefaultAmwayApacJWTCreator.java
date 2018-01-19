@@ -1,8 +1,6 @@
-/**
- *
- */
 package com.amway.apac.auth.security.impl;
 
+import de.hybris.platform.commerceservices.strategies.CustomerNameStrategy;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.platform.util.Config;
@@ -14,13 +12,14 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Required;
 
 import com.amway.apac.auth.controllers.ControllerConstants.IDPLogin;
 import com.amway.apac.auth.controllers.ControllerConstants.JWT;
 import com.amway.apac.auth.security.AmwayApacJWTCreator;
+import com.amway.apac.auth.security.AmwayApacJWTKeyMaker;
+import com.amway.apac.core.account.services.AmwayApacAccountService;
 import com.amway.core.model.AmwayAccountModel;
-import com.amway.lynxcore.account.LynxAccountService;
-import com.amway.lynxcore.strategies.LynxCustomerNameStrategy;
 import com.nimbusds.jose.JOSEException;
 import com.nimbusds.jose.JWSAlgorithm;
 import com.nimbusds.jose.JWSHeader;
@@ -31,38 +30,44 @@ import com.nimbusds.jwt.SignedJWT;
 
 
 /**
- * Creates JWT
+ * Default implementation of {@link AmwayApacJWTCreator}
  */
 public class DefaultAmwayApacJWTCreator implements AmwayApacJWTCreator
 {
+	/** The LOG Constant. */
 	private static final Logger LOG = Logger.getLogger(DefaultAmwayApacJWTCreator.class);
 
+	/** The user service. */
 	private UserService userService;
-	private LynxAccountService accountService;
-	private DefaultAmwayApacJWTKeyMaker jwtKeyMaker;
-	private LynxCustomerNameStrategy customerNameStrategy;
 
+	/** The Amway APAC account service. */
+	private AmwayApacAccountService accountService;
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see com.amway.apac.auth.security.AmwayJWTTokenProvider#createJWToken(com.amway.core.model.AmwayAccountModel)
+	/** The Amway APAC jwt key maker. */
+	private AmwayApacJWTKeyMaker jwtKeyMaker;
+
+	/** The customer name strategy. */
+	private CustomerNameStrategy customerNameStrategy;
+
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public String createJWToken(final String userId, final Date creationDate, final HttpServletRequest request)
 	{
 		try
 		{
-			final CustomerModel customer = userService.getUserForUID(userId, CustomerModel.class);
+			final CustomerModel customer = getUserService().getUserForUID(userId, CustomerModel.class);
 			if (null != customer)
 			{
 				// 	get AmwayAccount
-				final AmwayAccountModel amwayAccount = accountService.getAmwayAccount(customer);
+				final AmwayAccountModel amwayAccount = getAccountService().getAmwayAccount(customer);
 				// Create RSA-signer with the private key
-				final JWSSigner signer = new RSASSASigner(jwtKeyMaker.getPrivateKey());
-				final SignedJWT signedJWT = new SignedJWT(new JWSHeader(JWSAlgorithm.RS256, null, null, null, null, null, null, null,
-						null, null, Config.getParameter(IDPLogin.AMWAY_IDP_JWT_KEYID), null, null), prepareJWTClaimsSet(amwayAccount,
-						creationDate, request));
+				final JWSSigner signer = new RSASSASigner(getJwtKeyMaker().getPrivateKey());
+				final SignedJWT signedJWT = new SignedJWT(
+						new JWSHeader(JWSAlgorithm.RS256, null, null, null, null, null, null, null, null, null,
+								Config.getParameter(IDPLogin.AMWAY_IDP_JWT_KEYID), null, null),
+						prepareJWTClaimsSet(amwayAccount, creationDate, request));
 				// Compute the RSA signature
 				signedJWT.sign(signer);
 				final String jwt = signedJWT.serialize();
@@ -79,15 +84,20 @@ public class DefaultAmwayApacJWTCreator implements AmwayApacJWTCreator
 	}
 
 	/**
+	 * Prepare JWT claims set.
+	 *
 	 * @param amwayAccount
+	 *           the amway account
 	 * @param creationDate
+	 *           the creation date
 	 * @param request
+	 *           the request
 	 * @return - JWTClaimsSet
 	 */
-	private JWTClaimsSet prepareJWTClaimsSet(final AmwayAccountModel amwayAccount, final Date creationDate,
+	protected JWTClaimsSet prepareJWTClaimsSet(final AmwayAccountModel amwayAccount, final Date creationDate,
 			final HttpServletRequest request)
 	{
-		final String[] names = customerNameStrategy.splitName(amwayAccount.getPrimaryParty().getName());
+		final String[] names = getCustomerNameStrategy().splitName(amwayAccount.getPrimaryParty().getName());
 		final Long ttlMillis = Long.valueOf(Config.getParameter(IDPLogin.AMWAY_IDP_JWT_TTLMILES));
 		final Calendar calendar = Calendar.getInstance();
 		calendar.setTime(creationDate);
@@ -111,38 +121,90 @@ public class DefaultAmwayApacJWTCreator implements AmwayApacJWTCreator
 	}
 
 	/**
-	 * @param customerNameStrategy
-	 *           the customerNameStrategy to set
+	 * Gets the user service.
+	 *
+	 * @return the userService
 	 */
-	public void setCustomerNameStrategy(final LynxCustomerNameStrategy customerNameStrategy)
+	public UserService getUserService()
 	{
-		this.customerNameStrategy = customerNameStrategy;
+		return userService;
 	}
 
 	/**
-	 * @param accountService
-	 *           the accountService to set
-	 */
-	public void setAccountService(final LynxAccountService accountService)
-	{
-		this.accountService = accountService;
-	}
-
-	/**
+	 * Sets the user service.
+	 *
 	 * @param userService
 	 *           the userService to set
 	 */
+	@Required
 	public void setUserService(final UserService userService)
 	{
 		this.userService = userService;
 	}
 
 	/**
+	 * Gets the account service.
+	 *
+	 * @return the accountService
+	 */
+	public AmwayApacAccountService getAccountService()
+	{
+		return accountService;
+	}
+
+	/**
+	 * Sets the account service.
+	 *
+	 * @param accountService
+	 *           the accountService to set
+	 */
+	@Required
+	public void setAccountService(final AmwayApacAccountService accountService)
+	{
+		this.accountService = accountService;
+	}
+
+	/**
+	 * Gets the jwt key maker.
+	 *
+	 * @return the jwtKeyMaker
+	 */
+	public AmwayApacJWTKeyMaker getJwtKeyMaker()
+	{
+		return jwtKeyMaker;
+	}
+
+	/**
+	 * Sets the jwt key maker.
+	 *
 	 * @param jwtKeyMaker
 	 *           the jwtKeyMaker to set
 	 */
-	public void setJwtKeyMaker(final DefaultAmwayApacJWTKeyMaker jwtKeyMaker)
+	@Required
+	public void setJwtKeyMaker(final AmwayApacJWTKeyMaker jwtKeyMaker)
 	{
 		this.jwtKeyMaker = jwtKeyMaker;
+	}
+
+	/**
+	 * Gets the customer name strategy.
+	 *
+	 * @return the customerNameStrategy
+	 */
+	public CustomerNameStrategy getCustomerNameStrategy()
+	{
+		return customerNameStrategy;
+	}
+
+	/**
+	 * Sets the customer name strategy.
+	 *
+	 * @param customerNameStrategy
+	 *           the customerNameStrategy to set
+	 */
+	@Required
+	public void setCustomerNameStrategy(final CustomerNameStrategy customerNameStrategy)
+	{
+		this.customerNameStrategy = customerNameStrategy;
 	}
 }

@@ -1,10 +1,13 @@
-package com.amway.apac.core.account.service;
+package com.amway.apac.core.account.services;
+
+import de.hybris.platform.core.model.user.CustomerModel;
 
 import java.util.List;
 
 import com.amway.apac.core.enums.AccountClassificationEnum;
 import com.amway.core.account.service.AmwayAccountService;
 import com.amway.core.model.AmwayAccountModel;
+import com.amway.core.model.AmwayBusinessRestrictionModel;
 
 
 /**
@@ -32,4 +35,16 @@ public interface AmwayApacAccountService extends AmwayAccountService
 	 * @return AccountClassificationEnum
 	 */
 	AccountClassificationEnum getClassificationForAccount(final AmwayAccountModel amwayAccount);
+
+	/**
+	 * @param customer
+	 * @return
+	 */
+	AmwayAccountModel getAmwayAccount(CustomerModel customer);
+
+	/**
+	 * @param amwayAccount
+	 * @return
+	 */
+	AmwayBusinessRestrictionModel getMOPRestriction(AmwayAccountModel amwayAccount);
 }

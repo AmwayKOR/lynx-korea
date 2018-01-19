@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.amway.apac.auth.security.impl;
 
 import de.hybris.platform.core.model.user.CustomerModel;
@@ -12,6 +9,7 @@ import java.util.Optional;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -21,12 +19,12 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.amway.apac.auth.security.AcceleratorAuthenticationProvider;
+import com.amway.apac.core.account.services.AmwayApacAccountService;
+import com.amway.apac.core.constants.AmwayapacCoreConstants;
+import com.amway.apac.core.user.services.AmwayApacUserService;
 import com.amway.core.enums.AmwayAccountStatus;
 import com.amway.core.model.AmwayAccountModel;
 import com.amway.core.model.AmwayBusinessRestrictionModel;
-import com.amway.lynxcore.account.LynxAccountService;
-import com.amway.lynxcore.constants.LynxCoreConstants;
-import com.amway.lynxcore.services.LynxUserService;
 
 
 /**
@@ -40,8 +38,8 @@ public class DefaultAmwayApacAuthenticationProvider extends AcceleratorAuthentic
 	private static Logger LOG = Logger.getLogger(DefaultAmwayApacAuthenticationProvider.class);
 
 	private SessionService sessionService;
-	private LynxUserService lynxUserService;
-	private LynxAccountService lynxAccountService;
+	private AmwayApacUserService amwayApacUserService;
+	private AmwayApacAccountService amwayApacAccountService;
 
 	/*
 	 * (non-Javadoc)
@@ -57,7 +55,7 @@ public class DefaultAmwayApacAuthenticationProvider extends AcceleratorAuthentic
 		final UserModel userModel;
 		try
 		{
-			userModel = lynxUserService.getUserForUIDAndAmwayAccount(StringUtils.lowerCase(username));
+			userModel = getAmwayApacUserService().getUserForUIDAndAmwayAccount(StringUtils.lowerCase(username));
 		}
 		catch (final UnknownIdentifierException e)
 		{
@@ -78,18 +76,18 @@ public class DefaultAmwayApacAuthenticationProvider extends AcceleratorAuthentic
 	protected void additionalAuthenticationChecks(final UserDetails details, final AbstractAuthenticationToken authentication)
 			throws AuthenticationException
 	{
-		final CustomerModel customer = (CustomerModel) lynxUserService.getUserForUID(details.getUsername());
-		final AmwayAccountModel account = lynxAccountService.getAmwayAccount(customer);
+		final CustomerModel customer = (CustomerModel) getAmwayApacUserService().getUserForUID(details.getUsername());
+		final AmwayAccountModel account = getAmwayApacAccountService().getAmwayAccount(customer);
 		final Optional<AmwayAccountModel> optionalAccount = Optional.ofNullable(account);
 
 		if (optionalAccount.isPresent())
 		{
 			final AmwayAccountModel amwayAccount = optionalAccount.get();
-			final AmwayBusinessRestrictionModel restriction = lynxAccountService.getMOPRestriction(amwayAccount);
-			if (AmwayAccountStatus.INACTIVE.equals(account.getStatus())
-					|| (restriction != null && restriction.getRestrictionId().equals(LynxCoreConstants.RESTRICTED_ID_ACCOUNT_SUSPEND)))
+			final AmwayBusinessRestrictionModel restriction = getAmwayApacAccountService().getMOPRestriction(amwayAccount);
+			if (AmwayAccountStatus.INACTIVE.equals(account.getStatus()) || (restriction != null
+					&& restriction.getRestrictionId().equals(AmwayapacCoreConstants.RESTRICTED_ID_ACCOUNT_SUSPEND)))
 			{
-				getSessionService().setAttribute(LynxCoreConstants.ACCOUNT_SUSPENDED, Boolean.TRUE);
+				getSessionService().setAttribute(AmwayapacCoreConstants.ACCOUNT_SUSPENDED, Boolean.TRUE);
 				throw new BadCredentialsException("Account is not active or suspended as per restriction 7 ");
 			}
 		}
@@ -112,27 +110,45 @@ public class DefaultAmwayApacAuthenticationProvider extends AcceleratorAuthentic
 	 * @param sessionService
 	 *           the sessionService to set
 	 */
+	@Required
 	public void setSessionService(final SessionService sessionService)
 	{
 		this.sessionService = sessionService;
 	}
 
 	/**
-	 * @param lynxUserService
-	 *           the lynxUserService to set
+	 * @return the amwayApacUserService
 	 */
-	public void setLynxUserService(final LynxUserService lynxUserService)
+	public AmwayApacUserService getAmwayApacUserService()
 	{
-		this.lynxUserService = lynxUserService;
+		return amwayApacUserService;
 	}
 
 	/**
-	 * @param lynxAccountService
-	 *           the lynxAccountService to set
+	 * @param amwayApacUserService
+	 *           the amwayApacUserService to set
 	 */
-	public void setLynxAccountService(final LynxAccountService lynxAccountService)
+	@Required
+	public void setAmwayApacUserService(final AmwayApacUserService amwayApacUserService)
 	{
-		this.lynxAccountService = lynxAccountService;
+		this.amwayApacUserService = amwayApacUserService;
 	}
 
+	/**
+	 * @return the amwayApacAccountService
+	 */
+	public AmwayApacAccountService getAmwayApacAccountService()
+	{
+		return amwayApacAccountService;
+	}
+
+	/**
+	 * @param amwayApacAccountService
+	 *           the amwayApacAccountService to set
+	 */
+	@Required
+	public void setAmwayApacAccountService(final AmwayApacAccountService amwayApacAccountService)
+	{
+		this.amwayApacAccountService = amwayApacAccountService;
+	}
 }

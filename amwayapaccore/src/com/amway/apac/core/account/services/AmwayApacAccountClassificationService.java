@@ -1,4 +1,4 @@
-package com.amway.apac.core.account.service;
+package com.amway.apac.core.account.services;
 
 import com.amway.apac.core.enums.AccountClassificationEnum;
 

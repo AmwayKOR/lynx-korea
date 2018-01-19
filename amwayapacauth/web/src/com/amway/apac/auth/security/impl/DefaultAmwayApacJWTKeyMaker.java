@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.amway.apac.auth.security.impl;
 
 import de.hybris.platform.util.Config;
@@ -21,10 +18,12 @@ import java.security.cert.CertificateException;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.amway.apac.auth.controllers.ControllerConstants.IDPLogin;
 import com.amway.apac.auth.controllers.ControllerConstants.IdpKey;
+import com.amway.apac.auth.security.AmwayApacJWTKeyMaker;
 import com.nimbusds.jose.JWSAlgorithm;
 import com.nimbusds.jose.jwk.KeyUse;
 import com.nimbusds.jose.jwk.RSAKey;
@@ -33,19 +32,31 @@ import com.nimbusds.jose.jwk.RSAKey;
 /**
  * generate key pair from certificate on server start up
  */
-public class DefaultAmwayApacJWTKeyMaker
+public class DefaultAmwayApacJWTKeyMaker implements AmwayApacJWTKeyMaker
 {
-	private static final Logger LOG = Logger.getLogger(DefaultAmwayApacJWTKeyMaker.class);
 
+	/** The LOGGER Constant. */
+	private static final Logger LOGGER = LoggerFactory.getLogger(DefaultAmwayApacJWTKeyMaker.class);
+
+	/** The modulus for the public key and the private keys. */
 	private String n;
+
+	/** The public key exponent. */
 	private String e;
+
+	/** The key id. */
 	private String kid;
+
+	/** The private key which is used to signed the document. */
 	private RSAPrivateKey privateKey;
+
+	/** The public key which is used to verify the document at received end. */
 	private RSAPublicKey publicKey;
 
 	/**
 	 * read the certificate on server start up and store private, public key in spring session
 	 */
+	@Override
 	public void init()
 	{
 		try
@@ -64,7 +75,7 @@ public class DefaultAmwayApacJWTKeyMaker
 		}
 		catch (final Exception exp)
 		{
-			LOG.error(exp.getMessage(), exp);
+			LOGGER.error(exp.getMessage(), exp);
 		}
 	}
 
@@ -78,8 +89,8 @@ public class DefaultAmwayApacJWTKeyMaker
 	 * @throws IOException
 	 * @throws CertificateException
 	 */
-	private KeyPair generateKeyPairFromCertificate() throws UnrecoverableKeyException, KeyStoreException,
-			NoSuchAlgorithmException, CertificateException, IOException
+	protected KeyPair generateKeyPairFromCertificate()
+			throws UnrecoverableKeyException, KeyStoreException, NoSuchAlgorithmException, CertificateException, IOException
 	{
 		final ClassLoader classLoader = this.getClass().getClassLoader();
 		// Getting resource(File) from class loader
@@ -87,7 +98,7 @@ public class DefaultAmwayApacJWTKeyMaker
 		final FileInputStream is = new FileInputStream(configFile);
 		final KeyStore keystore = KeyStore.getInstance(KeyStore.getDefaultType());
 		keystore.load(is, IdpKey.KEYSTORE_PASSWORD.toCharArray());
-		LOG.debug("Alias " + IdpKey.KEYSTORE_ALIAS + " Found ::" + keystore.containsAlias(IdpKey.KEYSTORE_ALIAS));
+		LOGGER.debug("Alias " + IdpKey.KEYSTORE_ALIAS + " Found ::" + keystore.containsAlias(IdpKey.KEYSTORE_ALIAS));
 		final Key key = keystore.getKey(IdpKey.KEYSTORE_ALIAS, IdpKey.KEYSTORE_PASSWORD.toCharArray());
 
 		if (key instanceof PrivateKey)
@@ -103,8 +114,9 @@ public class DefaultAmwayApacJWTKeyMaker
 	}
 
 	/**
-	 * @return the n
+	 * {@inheritDoc}
 	 */
+	@Override
 	public String getN()
 	{
 		return n;
@@ -120,8 +132,9 @@ public class DefaultAmwayApacJWTKeyMaker
 	}
 
 	/**
-	 * @return the e
+	 * {@inheritDoc}
 	 */
+	@Override
 	public String getE()
 	{
 		return e;
@@ -137,8 +150,9 @@ public class DefaultAmwayApacJWTKeyMaker
 	}
 
 	/**
-	 * @return the kid
+	 * {@inheritDoc}
 	 */
+	@Override
 	public String getKid()
 	{
 		return kid;
@@ -154,8 +168,9 @@ public class DefaultAmwayApacJWTKeyMaker
 	}
 
 	/**
-	 * @return the privateKey
+	 * {@inheritDoc}
 	 */
+	@Override
 	public RSAPrivateKey getPrivateKey()
 	{
 		return privateKey;

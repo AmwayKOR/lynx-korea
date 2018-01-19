@@ -1,13 +1,3 @@
-/*
- * [y] hybris Platform
- *
- * Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
- *
- * This software is the confidential and proprietary information of SAP
- * ("Confidential Information"). You shall not disclose such Confidential
- * Information and shall use it only in accordance with the terms of the
- * license agreement you entered into with SAP.
- */
 package com.amway.apac.auth.controllers.pages;
 
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
@@ -26,7 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.amway.apac.auth.controllers.ControllerConstants.IDPLogin;
 import com.amway.apac.auth.dto.JWTKeysDto;
 import com.amway.apac.auth.dto.KeyDto;
-import com.amway.apac.auth.security.impl.DefaultAmwayApacJWTKeyMaker;
+import com.amway.apac.auth.security.AmwayApacJWTKeyMaker;
 
 
 /**
@@ -36,10 +26,13 @@ import com.amway.apac.auth.security.impl.DefaultAmwayApacJWTKeyMaker;
 @RequestMapping("/oauth2/v1/keys")
 public class AmwayApacKeysController extends AbstractPageController
 {
+	/** The Amway APAC jwt key maker. */
 	@Resource(name = "jwtKeyMaker")
-	DefaultAmwayApacJWTKeyMaker jwtKeyMaker;
+	AmwayApacJWTKeyMaker jwtKeyMaker;
 
 	/**
+	 * Gets the keys.
+	 *
 	 * @return jwtKeysDto
 	 * @throws CMSItemNotFoundException
 	 */
@@ -60,14 +53,5 @@ public class AmwayApacKeysController extends AbstractPageController
 		keies.add(key);
 		jwtKey.setKeys(keies);
 		return jwtKey;
-	}
-
-	/**
-	 * @param jwtKeyMaker
-	 *           the jwtKeyMaker to set
-	 */
-	public void setJwtKeyMaker(final DefaultAmwayApacJWTKeyMaker jwtKeyMaker)
-	{
-		this.jwtKeyMaker = jwtKeyMaker;
 	}
 }

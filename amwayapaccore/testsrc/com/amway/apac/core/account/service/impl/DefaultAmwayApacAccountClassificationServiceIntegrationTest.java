@@ -19,7 +19,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.amway.apac.core.account.service.AmwayApacAccountClassificationService;
+import com.amway.apac.core.account.services.AmwayApacAccountClassificationService;
 import com.amway.apac.core.constants.AmwayapacCoreConstants;
 import com.amway.apac.core.enums.AccountClassificationEnum;
 
