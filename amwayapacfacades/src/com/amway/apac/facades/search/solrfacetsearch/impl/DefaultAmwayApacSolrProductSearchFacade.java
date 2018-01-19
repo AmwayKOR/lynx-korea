@@ -5,6 +5,8 @@ import de.hybris.platform.commercefacades.search.data.SearchStateData;
 import de.hybris.platform.commercefacades.search.solrfacetsearch.impl.DefaultSolrProductSearchFacade;
 import de.hybris.platform.commerceservices.search.solrfacetsearch.data.SolrSearchQueryData;
 
+import org.apache.commons.lang.StringUtils;
+
 
 /**
  * Default Solr Product search facade overridden to set custom filtered raw query.
@@ -29,7 +31,7 @@ public class DefaultAmwayApacSolrProductSearchFacade extends DefaultSolrProductS
 		final SolrSearchQueryData searchQueryData = super.decodeState(searchState, categoryCode);
 
 		// populating filter raw queries in the solr search query data.
-		if (!(searchState.getFilterRawQueries().isEmpty()))
+		if (StringUtils.isNotBlank(searchState.getFilterRawQueries()))
 		{
 			searchQueryData.setRawQuery(searchState.getFilterRawQueries());
 		}
