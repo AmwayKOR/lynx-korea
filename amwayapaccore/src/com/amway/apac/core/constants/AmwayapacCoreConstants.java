@@ -58,6 +58,33 @@ public final class AmwayapacCoreConstants extends GeneratedAmwayapacCoreConstant
 	public static final String TARGET_STRING = "target";
 
 	/**
+	 * String constant source.
+	 */
+	public static final String WISHLIST_STRING = "wishlist";
+
+	/**
+	 * String constant source.
+	 */
+	public static final String PRODUCT_STRING = "product";
+
+	/**
+	 * String constant source.
+	 */
+	public static final String DESIRED_STRING = "desired";
+
+	/**
+	 * String constant source.
+	 */
+	public static final String PRIORITY_STRING = "priority";
+
+	/**
+	 * String constant source.
+	 */
+	public static final String COMMENT_STRING = "comment";
+
+
+
+	/**
 	 * Integer constant - 0.
 	 */
 	public static final Integer ZERO_INTEGER = Integer.valueOf(0);

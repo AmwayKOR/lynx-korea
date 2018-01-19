@@ -89,7 +89,11 @@ public class DefaultAmwayApacWishlistService extends AmwayWishlistServiceImpl im
 	{
 		final Wishlist2EntryModel entry = getModelService().create(Wishlist2EntryModel.class);
 
-		validateParameterNotNullStandardMessage(AmwayapacCoreConstants.SOURCE_STRING, entry);
+		validateParameterNotNullStandardMessage(AmwayapacCoreConstants.WISHLIST_STRING, wishlist);
+		validateParameterNotNullStandardMessage(AmwayapacCoreConstants.PRODUCT_STRING, product);
+		validateParameterNotNullStandardMessage(AmwayapacCoreConstants.DESIRED_STRING, desired);
+		validateParameterNotNullStandardMessage(AmwayapacCoreConstants.PRIORITY_STRING, priority);
+		validateParameterNotNullStandardMessage(AmwayapacCoreConstants.COMMENT_STRING, comment);
 
 		final Date currentDate = new Date();
 		entry.setProduct(product);

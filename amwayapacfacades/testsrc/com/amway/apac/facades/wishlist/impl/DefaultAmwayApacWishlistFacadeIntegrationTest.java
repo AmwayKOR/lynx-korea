@@ -59,7 +59,7 @@ public class DefaultAmwayApacWishlistFacadeIntegrationTest extends ServicelayerT
 
 	private AmwayApacCartSortCode sortBy;
 
-	private List<WishlistData> wishlistData1;
+	private List<WishlistData> wishlistDataList;
 
 	private WishlistData wishlistData;
 
@@ -70,10 +70,30 @@ public class DefaultAmwayApacWishlistFacadeIntegrationTest extends ServicelayerT
 	 * Wishlist uid string constant
 	 */
 	private static final String WISHLIST_UID = "wishlist2A";
+
+	/**
+	 * Wishlist Name string constant
+	 */
 	private static final String WISHLIST_NAME = "AA";
+
+	/**
+	 * Product Code string constant
+	 */
 	private static final String PRODUCT_CODE = "HW1210-3422";
+
+	/**
+	 * Customer uid string constant
+	 */
 	private static final String CUSTOMER_UID = "ahertz";
+
+	/**
+	 * SortField string constant
+	 */
 	private static final String SORT_FIELD = "Name";
+
+	/**
+	 * SortOrder string constant
+	 */
 	private static final String SORT_ORDER = "DESC";
 
 	@Before
@@ -161,7 +181,7 @@ public class DefaultAmwayApacWishlistFacadeIntegrationTest extends ServicelayerT
 	public void testGetAllWishlistsWithBasicData()
 	{
 
-		wishlistData1 = defaultAmwayApacWishlistFacade.getAllWishlistsWithBasicData(SORT_FIELD, SORT_ORDER);
+		wishlistDataList = defaultAmwayApacWishlistFacade.getAllWishlistsWithBasicData(SORT_FIELD, SORT_ORDER);
 	}
 
 	/**
