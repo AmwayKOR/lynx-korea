@@ -70,6 +70,15 @@
 			autocreate="true" dynamic="true">
 			<value code="GENERAL_ENQUIRIES" />
 		</enumtype>
+
+		<enumtype code="AmwayBackOrderStatus" generate="true"
+			autocreate="true" dynamic="true">
+			<value code="ACTIVE" />
+			<value code="CANCELLED" />
+			<value code="COMPLETED" />
+			<value code="RELEASED" />
+			<value code="EXPIRED" />
+		</enumtype>
 	</enumtypes>
 
 	<relations>
@@ -139,7 +148,7 @@
 				cardinality="many">
 			</targetElement>
 		</relation>
-		
+
 		<relation code="CategoryProductReferenceRelation" generate="true"
 			localized="false" autocreate="true">
 			<sourceElement qualifier="sourceCategory" type="Category"
@@ -290,7 +299,7 @@
 					</attribute>
 				</attributes>
 			</itemtype>
-			
+
 			<itemtype code="AmwayCategoryProductReference" generate="true" autocreate="true">
 				<deployment table="CategoryProductReference" typecode="21015" />
 				<attributes>
@@ -421,6 +430,16 @@
 					</attribute>
 				</attributes>
 			</itemtype>
+			<itemtype code="BaseStore" autocreate="false" generate="false">
+				<description>Extending BaseStore type with additional attributes.</description>
+				<attributes>
+					<attribute qualifier="backOrderFulfillmentPeriod" type="java.lang.Integer">
+						<description>Specifies the number of days for fulfillment of back order.</description>
+						<defaultvalue>Integer.valueOf(0)</defaultvalue>
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
 		</typegroup>
 
 		<typegroup name="Customer">
@@ -447,7 +466,8 @@
 				</attributes>
 			</itemtype>
 
-			<itemtype code="PhoneContactInfo" autocreate="false" generate="false">
+			<itemtype code="PhoneContactInfo" autocreate="false"
+				generate="false">
 				<description>Overriding Phone contact info to add APAC specific fields.</description>
 				<attributes>
 					<attribute autocreate="true" qualifier="country" type="Country"
@@ -584,5 +604,80 @@
 			</itemtype>
 		</typegroup>
 
+		<!-- Type groups for BackOrder -->
+		<typegroup name="backOrder">
+			<itemtype code="AmwayBackOrder" autocreate="true" generate="true">
+				<description>Model to capture back order details in Hybris.</description>
+				<deployment table="BackOrder" typecode="21082" />
+				<attributes>
+					<attribute qualifier="product" type="Product">
+						<description>Specifies the product in the backorder.</description>
+						<modifiers optional="false" unique="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="warehouse" type="Warehouse">
+						<description>Specifies the warehouse of the backorder.</description>
+						<modifiers optional="false" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="releaseByDate" type="java.util.Date">
+						<description>Specifies the date by which the backorder should be released.</description>
+						<modifiers optional="false" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="originalOrder" type="Order">
+						<description>Specifies the original order which has B/O.</description>
+						<modifiers optional="false" unique="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="consignment" type="Consignment">
+						<description>Specifies the Consignment which was created in original order for the backorder.</description>
+						<modifiers optional="false" unique="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="orderingAbo" type="User">
+						<description>Specifies the ABO who placed the backorder.</description>
+						<modifiers optional="false" unique="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="status" type="AmwayBackOrderStatus">
+						<description>Specifies the status of backorder.</description>
+						<modifiers optional="false" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="baseStore" type="BaseStore">
+						<description>Attribute contains base store reference.</description>
+						<modifiers optional="false" />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+		</typegroup>
+
+		<typegroup name="StockLevel">
+			<itemtype code="StockLevel" autocreate="false" generate="false">
+				<description>Extending the StockLevel type from core with additional attributes.</description>
+				<attributes>
+					<attribute qualifier="maxBoReleaseLimit" type="int">
+						<description>Maximum Back orders that can be released from this stock level</description>
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+		</typegroup>
+
+		<typegroup name="cronjob">
+			<itemtype code="AmwayApacStoreSpecificCronJob" extends="CronJob"
+				autocreate="true" generate="true">
+				<description>Job to create market specific cron jobs.</description>
+				<attributes>
+					<attribute qualifier="baseStore" type="BaseStore">
+						<description>Base Store unique to the site.</description>
+						<modifiers optional="false" />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+		</typegroup>
 	</itemtypes>
 </items>
