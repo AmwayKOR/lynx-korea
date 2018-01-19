@@ -198,7 +198,7 @@ public class RegisterPageController extends AbstractRegisterPageController
 		return viewPage;
 	}
 
-	protected void setCMSPage(final Model model, final String cmsPage) throws CMSItemNotFoundException
+	private void setCMSPage(final Model model, final String cmsPage) throws CMSItemNotFoundException
 	{
 		storeCmsPageInModel(model, getContentPageForLabelOrId(cmsPage));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(cmsPage));

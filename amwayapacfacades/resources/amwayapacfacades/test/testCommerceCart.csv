@@ -142,9 +142,9 @@ INSERT_UPDATE Address;owner(AmwayAccount.code)[unique=true];country(isocode);pos
 INSERT_UPDATE AmwayBusinessLevel;qualificationLevel(code)[unique=true];&businessLevelRef
 ;QualificationLevelTypeEnum_340;testUserQual
 
-INSERT_UPDATE Wishlist2;uid[unique=true];name;description;user(uid)
-;wishlist2A;AA;AAAAAAAAAAAAAAA AAAAAAAAAA AAAAA;ahertz
-;wishlist2B;BB;BBBBBBBBBBBBBBB BBBBBBBBBB BBBBB;abrode
+INSERT_UPDATE Wishlist2;uid[unique=true];name;description;user(uid);site(uid)
+;wishlist2A;AA;AAAAAAAAAAAAAAA AAAAAAAAAA AAAAA;ahertz;testSite
+;wishlist2B;BB;BBBBBBBBBBBBBBB BBBBBBBBBB BBBBB;abrode;testSite
 
 INSERT_UPDATE Wishlist2Entry;wishlist(Wishlist2.uid)[unique=true];addedDate[dateformat=dd.MM.yyyy HH:mm:ss];product(code,catalogVersion(catalog(id),version))[unique=true];quantity;priority(code);
 ;wishlist2A;27.04.2010 00:00:00;HW1210-3422:$catalog-id:$catalog-version;1;highest
