@@ -30,7 +30,7 @@
 					<c:when test="${isUserAbo}">
 						<li class=" nav-item">
 							<a href="javascript:void(0);" data-toggle="collapse" data-target="#login-drop-content"
-								class="pos-relative img-nav-link js-my-account-menu opened">
+								class="pos-relative img-nav-link js-my-account-menu collapsed">
 								<img src="${themeResourcePath}/images/yui.png" alt="" width="34px">
 								<span class="message-num-1">24</span>
 								<span class="user-name">Yui Mori</span>
@@ -41,7 +41,7 @@
 					<c:otherwise>
 						<li class="yCmsComponent nav-item">
 							<a href="#" data-toggle="collapse" data-target="#login-drop-content"
-								class="pos-relative img-nav-link js-my-account-menu opened">
+								class="pos-relative img-nav-link js-my-account-menu collapsed">
 								<img src="${themeResourcePath}/images/user_avatar_pre_login.png" alt="" width="34px">
 							</a>
 						</li>
