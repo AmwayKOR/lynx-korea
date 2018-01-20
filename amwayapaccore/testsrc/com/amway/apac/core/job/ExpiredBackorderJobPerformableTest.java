@@ -42,7 +42,7 @@ public class ExpiredBackorderJobPerformableTest extends ServicelayerTransactiona
 	@Before
 	public void setUp() throws Exception
 	{
-		importCsv("/amwaycore/test/AmwayBackOrderTestData.csv", "windows-1252");
+		importCsv("/amwayapaccore/test/AmwayBackOrderTestData.csv", "windows-1252");
 
 		expiredBackorderJob = cronJobService.getCronJob(CRONJOB_CODE);
 

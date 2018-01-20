@@ -47,7 +47,7 @@ public class ReleaseBackOrderJobPerformableTest extends ServicelayerTransactiona
 	@Before
 	public void setUp() throws Exception
 	{
-		importCsv("/amwaycore/test/AmwayBackOrderTestData.csv", "windows-1252");
+		importCsv("/amwayapaccore/test/AmwayBackOrderTestData.csv", "windows-1252");
 
 		cronJobmalasia = (AmwayApacStoreSpecificCronJobModel) cronJobService.getCronJob(CRONJOB_CODE_MALASIA);
 		cronJobbrunei = (AmwayApacStoreSpecificCronJobModel) cronJobService.getCronJob(CRONJOB_CODE_BRUNEI);
