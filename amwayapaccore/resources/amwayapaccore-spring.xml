@@ -441,7 +441,7 @@
 	<alias alias="stockService" name="defaultAmwayApacStockService" />
 	<bean id="defaultAmwayApacStockService" class="com.amway.apac.core.stock.services.impl.DefaultAmwayApacStockService" parent="amwayStockService">
         <property name="amwayApacProductService" ref="productService"/>
-         <property name="amwayApacStockLevelDao" ref="amwayApacStockLevelDao" />
+         <property name="amwayApacStockLevelDao" ref="stockLevelDao" />
     </bean>
     
 	<alias alias="stockLevelDao" name="defaultAmwayApacStockLevelDao"/>
