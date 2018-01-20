@@ -37,14 +37,6 @@
 			<value code="notSpecified" />
 		</enumtype>
 
-		<enumtype code="WarehouseServiceabilityType" autocreate="true"
-			generate="true">
-			<value code="PIS" />
-			<value code="HD" />
-			<value code="BOTH" />
-			<value code="NONE" />
-		</enumtype>
-
 		<enumtype generate="true" code="AccountClassificationEnum"
 			autocreate="true" dynamic="true">
 			<value code="NORMAL_ABO" />
@@ -419,17 +411,6 @@
 		</typegroup>
 
 		<typegroup name="BaseCommerce">
-			<itemtype code="Warehouse" autocreate="false" generate="false">
-				<description>Extending Warehouse to add APAC specific attributes.</description>
-				<attributes>
-					<attribute qualifier="warehouseType" type="WarehouseServiceabilityType">
-						<description>Decides whether the warehouse can support delivery or pickup.</description>
-						<modifiers optional="false" />
-						<defaultvalue>em().getEnumerationValue("WarehouseServiceabilityType","BOTH")</defaultvalue>
-						<persistence type="property" />
-					</attribute>
-				</attributes>
-			</itemtype>
 			<itemtype code="BaseStore" autocreate="false" generate="false">
 				<description>Extending BaseStore type with additional attributes.</description>
 				<attributes>
