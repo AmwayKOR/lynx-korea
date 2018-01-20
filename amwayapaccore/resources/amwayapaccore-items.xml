@@ -362,6 +362,10 @@
 						<description>Defines the order type of order.</description>
 						<persistence type="property" />
 					</attribute>
+					<attribute qualifier="paymentType" type="PaymentType">
+						<description>Payment Type of order.</description>
+						<persistence type="property" />
+					</attribute>
 				</attributes>
 				<indexes>
 					<index name="AbVolumeAmwayAccount">
