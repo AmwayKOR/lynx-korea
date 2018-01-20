@@ -109,7 +109,7 @@ public class BackOrderConsignmentEntriesRendererTest
 		taxValues.add(taxValue);
 		when(orderEntryModel.getTaxValues()).thenReturn(taxValues);
 		when(amwayBackOrderModel.getOriginalOrder()).thenReturn(orderModel);
-		when(orderModel.getPaymentType()).thenReturn(paymentType.ZIPP);
+		when(orderModel.getPaymentType()).thenReturn(paymentType.PIF);
 		when(orderEntryModel.getProduct()).thenReturn(productModel);
 		when(consignmentEntryModel.getOrderEntry()).thenReturn(orderEntryModel);
 	}
