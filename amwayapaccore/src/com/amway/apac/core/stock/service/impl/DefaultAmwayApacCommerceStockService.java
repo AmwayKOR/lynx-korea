@@ -3,6 +3,7 @@
  */
 package com.amway.apac.core.stock.service.impl;
 
+import de.hybris.platform.core.model.order.AbstractOrderModel;
 import de.hybris.platform.core.model.order.OrderEntryModel;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.util.ServicesUtil;
@@ -27,6 +28,15 @@ public class DefaultAmwayApacCommerceStockService extends DefaultAmwayCommerceSt
 {
 	private InventoryEventService inventoryEventService;
 	private ModelService modelService;
+
+	/**
+	 * Overding amwaycore implementation to continue the checkout flow.
+	 */
+	@Override
+	public void reserve(final AbstractOrderModel abstractOrderModel)
+	{
+		// TODO implement stock reserve logic here
+	}
 
 	/**
 	 * {@inheritDoc}
