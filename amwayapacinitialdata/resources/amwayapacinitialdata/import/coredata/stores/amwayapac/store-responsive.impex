@@ -48,3 +48,46 @@ INSERT_UPDATE BaseStore2DeliveryModeRel;source(uid)[unique=true];target(code)[un
 
 UPDATE BaseStore;uid[unique=true];warehouses(code)
 ;$storeUid;01;
+
+
+
+INSERT_UPDATE AmwayAccountClassification;classification(code);code[unique=true]                ;qualificationLevel(code)
+                                        ;NORMAL_ABO          ;3PercentAndAbove                 ;QualificationLevelTypeEnum_203
+                                        ;NORMAL_ABO          ;6PercentAndAbove                 ;QualificationLevelTypeEnum_206
+                                        ;NORMAL_ABO          ;9PercentAndAbove                 ;QualificationLevelTypeEnum_209
+                                        ;NORMAL_ABO          ;12PercentAndAbove                ;QualificationLevelTypeEnum_212
+                                        ;NORMAL_ABO          ;15PercentAndAbove                ;QualificationLevelTypeEnum_215
+                                        ;NORMAL_ABO          ;18PercentAndAbove                ;QualificationLevelTypeEnum_218
+                                        ;NORMAL_ABO          ;21PercentAndAbove                ;QualificationLevelTypeEnum_221
+                                        ;NORMAL_ABO          ;23PercentAndAbove                ;QualificationLevelTypeEnum_223
+                                        ;NORMAL_ABO          ;SilverSponsorAndAbove            ;QualificationLevelTypeEnum_305
+                                        ;NORMAL_ABO          ;SilverAndAbove                   ;QualificationLevelTypeEnum_310
+                                        ;NORMAL_ABO          ;GoldAndAbove                     ;QualificationLevelTypeEnum_320
+                                        ;PLATINUM_AND_ABOVE    ;PlatinumAndAbove                 ;QualificationLevelTypeEnum_330
+                                        ;PLATINUM_AND_ABOVE    ;RubyAndAbove                     ;QualificationLevelTypeEnum_340
+                                        ;PLATINUM_AND_ABOVE    ;FoundersPlatinumAndAbove         ;QualificationLevelTypeEnum_342
+                                        ;PLATINUM_AND_ABOVE    ;FoundersRubyAndAbove             ;QualificationLevelTypeEnum_345
+                                        ;PLATINUM_AND_ABOVE    ;PearlAndAbove                    ;QualificationLevelTypeEnum_350
+                                        ;PLATINUM_AND_ABOVE    ;SapphireAndAbove                 ;QualificationLevelTypeEnum_365
+                                        ;PLATINUM_AND_ABOVE    ;FoundersSapphireAndAbove         ;QualificationLevelTypeEnum_367
+                                        ;PLATINUM_AND_ABOVE    ;EmeraldAndAbove                  ;QualificationLevelTypeEnum_370
+                                        ;PLATINUM_AND_ABOVE    ;FoundersEmeraldAndAbove          ;QualificationLevelTypeEnum_375
+                                        ;DIAMOND_AND_ABOVE     ;DiamondAndAbove                  ;QualificationLevelTypeEnum_380
+                                        ;DIAMOND_AND_ABOVE     ;FoundersDiamondAndAbove          ;QualificationLevelTypeEnum_385
+                                        ;DIAMOND_AND_ABOVE     ;ExecutiveDiamondAndAbove         ;QualificationLevelTypeEnum_390
+                                        ;DIAMOND_AND_ABOVE     ;FoundersExecutiveDiamondAndAbove ;QualificationLevelTypeEnum_395
+                                        ;DIAMOND_AND_ABOVE     ;DoubleDiamondAndAbove            ;QualificationLevelTypeEnum_400
+                                        ;DIAMOND_AND_ABOVE     ;FoundersDoubleDiamondAndAbove    ;QualificationLevelTypeEnum_405
+                                        ;DIAMOND_AND_ABOVE     ;TripleDiamondAndAbove            ;QualificationLevelTypeEnum_410
+                                        ;DIAMOND_AND_ABOVE     ;FoundersTripleDiamondAndAbove    ;QualificationLevelTypeEnum_415
+                                        ;DIAMOND_AND_ABOVE     ;CrownAndAbove                    ;QualificationLevelTypeEnum_420
+                                        ;DIAMOND_AND_ABOVE     ;FoundersCrownAndAbove            ;QualificationLevelTypeEnum_425
+                                        ;DIAMOND_AND_ABOVE     ;CrownAmbassadorAndAbove          ;QualificationLevelTypeEnum_430
+                                        ;DIAMOND_AND_ABOVE     ;FoundersCrownAmbassadorAndAbove  ;QualificationLevelTypeEnum_435
+                                        ;DIAMOND_AND_ABOVE     ;FCA40AndAbove                    ;QualificationLevelTypeEnum_440
+                                        ;DIAMOND_AND_ABOVE     ;FCA45AndAbove                    ;QualificationLevelTypeEnum_445
+                                        ;DIAMOND_AND_ABOVE     ;FCA50AndAbove                    ;QualificationLevelTypeEnum_450
+                                        ;DIAMOND_AND_ABOVE     ;FCA55AndAbove                    ;QualificationLevelTypeEnum_455
+                                        ;DIAMOND_AND_ABOVE     ;FCA60AndAbove                    ;QualificationLevelTypeEnum_460
+                                        ;DIAMOND_AND_ABOVE     ;FCA65AndAbove                    ;QualificationLevelTypeEnum_465
+                                        ;DIAMOND_AND_ABOVE     ;FCA70AndAbove                    ;QualificationLevelTypeEnum_470
