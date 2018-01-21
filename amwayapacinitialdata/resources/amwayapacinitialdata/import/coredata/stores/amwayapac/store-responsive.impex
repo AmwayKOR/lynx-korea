@@ -91,3 +91,17 @@ INSERT_UPDATE AmwayAccountClassification;classification(code);code[unique=true] 
                                         ;DIAMOND_AND_ABOVE     ;FCA60AndAbove                    ;QualificationLevelTypeEnum_460
                                         ;DIAMOND_AND_ABOVE     ;FCA65AndAbove                    ;QualificationLevelTypeEnum_465
                                         ;DIAMOND_AND_ABOVE     ;FCA70AndAbove                    ;QualificationLevelTypeEnum_470
+
+                                        
+INSERT_UPDATE Customer;uid[unique=true]    ;customerId  ;password   ;name        ;accounts(code)
+;testuser            ;testuser    ;1234   ;"Test User" ;testuser
+
+INSERT_UPDATE AmwayAccount;code[unique=true]     ;businessNature(code)    ;primaryParty(uid);name       ;userPriceGroup(code)     ;registeredAddress(&addRef);level(&businessLevelRef)
+                          ;testuser              ;"AmwayBusinessNature_1" ;testuser         ;"Test User";AmwayDefaultABOPriceGroup;testuserAdd               ;testUserQual
+
+INSERT_UPDATE Address;owner(Customer.uid)[unique=true];country(isocode);postalcode;firstname;lastname;streetname;streetnumber;shippingAddress;billingAddress;&addRef
+;testuser;US;151001;TestFirstName;TestLastName;TestStreetName;TestStreetNumber;true;true;testuserAdd
+
+
+INSERT_UPDATE AmwayBusinessLevel;qualificationLevel(code)[unique=true];&businessLevelRef
+;QualificationLevelTypeEnum_340;testUserQual
