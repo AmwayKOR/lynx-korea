@@ -1,5 +1,20 @@
 package com.amway.apac.auth.controllers.pages;
 
+import static com.amway.apac.auth.controllers.ControllerConstants.IDPLogin.BASE_URL;
+import static com.amway.apac.auth.controllers.ControllerConstants.IDPLogin.CLIENT_ID;
+import static com.amway.apac.auth.controllers.ControllerConstants.IDPLogin.ERROR_PAGE;
+import static com.amway.apac.auth.controllers.ControllerConstants.IDPLogin.IDP_REFRESH_URL;
+import static com.amway.apac.auth.controllers.ControllerConstants.IDPLogin.IDP_SESSIONS_ME_URL;
+import static com.amway.apac.auth.controllers.ControllerConstants.IDPLogin.LOGIN;
+import static com.amway.apac.auth.controllers.ControllerConstants.IDPLogin.LOGIN_ERROR;
+import static com.amway.apac.auth.controllers.ControllerConstants.IDPLogin.NONCE;
+import static com.amway.apac.auth.controllers.ControllerConstants.IDPLogin.REDIRECT_URI;
+import static com.amway.apac.auth.controllers.ControllerConstants.IDPLogin.RESPONSE_MODE;
+import static com.amway.apac.auth.controllers.ControllerConstants.IDPLogin.RESPONSE_TYPE;
+import static com.amway.apac.auth.controllers.ControllerConstants.IDPLogin.SCOPE;
+import static com.amway.apac.auth.controllers.ControllerConstants.IDPLogin.STATE;
+import static com.amway.apac.auth.controllers.ControllerConstants.IDPLogin.loginSuccessUrl;
+
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractLoginPageController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
@@ -26,7 +41,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.amway.apac.auth.controllers.ControllerConstants;
-import com.amway.apac.auth.controllers.ControllerConstants.IDPLogin;
 import com.amway.apac.auth.dto.JWTokenDto;
 import com.amway.apac.auth.security.AmwayApacJWTCreator;
 import com.amway.apac.auth.validation.AmwayApacIdpLoginValidationService;
@@ -42,7 +56,7 @@ public class AmwayApacAuthorizationController extends AbstractLoginPageControlle
 	/** The http session request cache. */
 	private HttpSessionRequestCache httpSessionRequestCache;
 
-	/** The jwt creator. */
+	/** The Amway APAC jwt creator. */
 	@Resource(name = "jwtCreator")
 	private AmwayApacJWTCreator jwtCreator;
 
@@ -73,26 +87,26 @@ public class AmwayApacAuthorizationController extends AbstractLoginPageControlle
 
 		if (CollectionUtils.isNotEmpty(errors))
 		{
-			model.addAttribute("loginError", Boolean.TRUE);
+			model.addAttribute(LOGIN_ERROR, Boolean.TRUE);
 			errors.stream().forEach(error -> GlobalMessages.addErrorMessage(model, error));
-			return IDPLogin.ERROR_PAGE;
+			return ERROR_PAGE;
 		}
 
 		// redirect to IdP homepage controller
 		final CustomerModel customer = (CustomerModel) userService.getCurrentUser();
 		if (!userService.isAnonymousUser(customer))
 		{
-			return REDIRECT_PREFIX + ROOT + IDPLogin.loginSuccessUrl(request);
+			return REDIRECT_PREFIX + ROOT + loginSuccessUrl(request);
 		}
 
 		// values are set as hidden parameters in login form
-		model.addAttribute(IDPLogin.RESPONSE_TYPE, request.getParameter(IDPLogin.RESPONSE_TYPE));
-		model.addAttribute(IDPLogin.CLIENT_ID, request.getParameter(IDPLogin.CLIENT_ID));
-		model.addAttribute(IDPLogin.RESPONSE_MODE, request.getParameter(IDPLogin.RESPONSE_MODE));
-		model.addAttribute(IDPLogin.SCOPE, request.getParameter(IDPLogin.SCOPE));
-		model.addAttribute(IDPLogin.NONCE, request.getParameter(IDPLogin.NONCE));
-		model.addAttribute(IDPLogin.STATE, request.getParameter(IDPLogin.STATE));
-		model.addAttribute(IDPLogin.REDIRECT_URI, request.getParameter(IDPLogin.REDIRECT_URI));
+		model.addAttribute(RESPONSE_TYPE, request.getParameter(RESPONSE_TYPE));
+		model.addAttribute(CLIENT_ID, request.getParameter(CLIENT_ID));
+		model.addAttribute(RESPONSE_MODE, request.getParameter(RESPONSE_MODE));
+		model.addAttribute(SCOPE, request.getParameter(SCOPE));
+		model.addAttribute(NONCE, request.getParameter(NONCE));
+		model.addAttribute(STATE, request.getParameter(STATE));
+		model.addAttribute(REDIRECT_URI, request.getParameter(REDIRECT_URI));
 
 		return getDefaultLoginPage(loginError, session, model);
 	}
@@ -108,7 +122,7 @@ public class AmwayApacAuthorizationController extends AbstractLoginPageControlle
 	 * @throws IOException
 	 */
 	@ResponseBody
-	@RequestMapping(method = RequestMethod.GET, value = IDPLogin.IDP_SESSIONS_ME_URL)
+	@RequestMapping(method = RequestMethod.GET, value = IDP_SESSIONS_ME_URL)
 	public JWTokenDto doValidateSession(final HttpServletRequest request, final HttpServletResponse response,
 			final HttpSession session) throws CMSItemNotFoundException, IOException
 	{
@@ -131,7 +145,7 @@ public class AmwayApacAuthorizationController extends AbstractLoginPageControlle
 	 * @throws IOException
 	 */
 	@ResponseBody
-	@RequestMapping(method = RequestMethod.POST, value = IDPLogin.IDP_REFRESH_URL)
+	@RequestMapping(method = RequestMethod.POST, value = IDP_REFRESH_URL)
 	public JWTokenDto doRefreshSession(final HttpServletRequest request, final HttpServletResponse response)
 			throws CMSItemNotFoundException, IOException
 	{
@@ -153,7 +167,7 @@ public class AmwayApacAuthorizationController extends AbstractLoginPageControlle
 	 * @throws IOException
 	 */
 	@ResponseBody
-	@RequestMapping(method = RequestMethod.DELETE, value = IDPLogin.IDP_SESSIONS_ME_URL)
+	@RequestMapping(method = RequestMethod.DELETE, value = IDP_SESSIONS_ME_URL)
 	public void doInValidateSession(final HttpServletResponse response, final HttpSession session)
 			throws CMSItemNotFoundException, IOException
 	{
@@ -179,13 +193,13 @@ public class AmwayApacAuthorizationController extends AbstractLoginPageControlle
 		{
 			return httpSessionRequestCache.getRequest(request, response).getRedirectUrl();
 		}
-		return "/";
+		return BASE_URL;
 	}
 
 	@Override
 	protected AbstractPageModel getCmsPage() throws CMSItemNotFoundException
 	{
-		return getContentPageForLabelOrId("login");
+		return getContentPageForLabelOrId(LOGIN);
 	}
 
 	/**
@@ -202,7 +216,7 @@ public class AmwayApacAuthorizationController extends AbstractLoginPageControlle
 	protected JWTokenDto populateJWTDto(final HttpServletRequest request, final Date date, final CustomerModel customer)
 	{
 		final String idToken = jwtCreator.createJWToken(customer.getUid(), date, request);
-		final String state = request.getParameter(IDPLogin.STATE);
+		final String state = request.getParameter(STATE);
 
 		final JWTokenDto token = new JWTokenDto();
 		token.setState(state);

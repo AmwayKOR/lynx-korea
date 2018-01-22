@@ -1,5 +1,10 @@
 package com.amway.apac.auth.security.impl;
 
+import static com.amway.apac.auth.controllers.ControllerConstants.IDPLogin.AMWAY_IDP_JWT_KEYID;
+import static com.amway.apac.auth.controllers.ControllerConstants.IdpKey.KEYSTORE_ALIAS;
+import static com.amway.apac.auth.controllers.ControllerConstants.IdpKey.KEYSTORE_FILENAME;
+import static com.amway.apac.auth.controllers.ControllerConstants.IdpKey.KEYSTORE_PASSWORD;
+
 import de.hybris.platform.util.Config;
 
 import java.io.File;
@@ -21,8 +26,6 @@ import java.security.interfaces.RSAPublicKey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.amway.apac.auth.controllers.ControllerConstants.IDPLogin;
-import com.amway.apac.auth.controllers.ControllerConstants.IdpKey;
 import com.amway.apac.auth.security.AmwayApacJWTKeyMaker;
 import com.nimbusds.jose.JWSAlgorithm;
 import com.nimbusds.jose.jwk.KeyUse;
@@ -34,7 +37,6 @@ import com.nimbusds.jose.jwk.RSAKey;
  */
 public class DefaultAmwayApacJWTKeyMaker implements AmwayApacJWTKeyMaker
 {
-
 	/** The LOGGER Constant. */
 	private static final Logger LOGGER = LoggerFactory.getLogger(DefaultAmwayApacJWTKeyMaker.class);
 
@@ -66,7 +68,7 @@ public class DefaultAmwayApacJWTKeyMaker implements AmwayApacJWTKeyMaker
 			{
 				setPrivateKey((RSAPrivateKey) kp.getPrivate());
 				setPublicKey((RSAPublicKey) kp.getPublic());
-				setKid(Config.getParameter(IDPLogin.AMWAY_IDP_JWT_KEYID));
+				setKid(Config.getParameter(AMWAY_IDP_JWT_KEYID));
 				final RSAKey rsaKey = new RSAKey.Builder(publicKey).privateKey(privateKey).keyUse(KeyUse.SIGNATURE)
 						.algorithm(JWSAlgorithm.RS256).keyID(kid).build();
 				setN(rsaKey.getModulus().toString());
@@ -94,17 +96,18 @@ public class DefaultAmwayApacJWTKeyMaker implements AmwayApacJWTKeyMaker
 	{
 		final ClassLoader classLoader = this.getClass().getClassLoader();
 		// Getting resource(File) from class loader
-		final File configFile = new File(classLoader.getResource(IdpKey.KEYSTORE_FILENAME).getFile());
+		final File configFile = new File(classLoader.getResource(KEYSTORE_FILENAME).getFile());
 		final FileInputStream is = new FileInputStream(configFile);
 		final KeyStore keystore = KeyStore.getInstance(KeyStore.getDefaultType());
-		keystore.load(is, IdpKey.KEYSTORE_PASSWORD.toCharArray());
-		LOGGER.debug("Alias " + IdpKey.KEYSTORE_ALIAS + " Found ::" + keystore.containsAlias(IdpKey.KEYSTORE_ALIAS));
-		final Key key = keystore.getKey(IdpKey.KEYSTORE_ALIAS, IdpKey.KEYSTORE_PASSWORD.toCharArray());
+		keystore.load(is, KEYSTORE_PASSWORD.toCharArray());
+		LOGGER.debug(new StringBuilder(200).append("Alias ").append(KEYSTORE_ALIAS).append(" Found ::")
+				.append(keystore.containsAlias(KEYSTORE_ALIAS)).toString());
+		final Key key = keystore.getKey(KEYSTORE_ALIAS, KEYSTORE_PASSWORD.toCharArray());
 
 		if (key instanceof PrivateKey)
 		{
 			// Get certificate of public key
-			final Certificate cert = keystore.getCertificate(IdpKey.KEYSTORE_ALIAS);
+			final Certificate cert = keystore.getCertificate(KEYSTORE_ALIAS);
 			// Get public key
 			final PublicKey certPublicKey = cert.getPublicKey();
 			// Return a key pair

@@ -1,5 +1,11 @@
 package com.amway.apac.auth.security.impl;
 
+import static com.amway.apac.auth.controllers.ControllerConstants.IDPLogin.AMWAY_IDP_JWT_KEYID;
+import static com.amway.apac.auth.controllers.ControllerConstants.IDPLogin.AMWAY_IDP_JWT_TTLMILES;
+import static com.amway.apac.auth.controllers.ControllerConstants.IDPLogin.CLIENT_ID;
+import static com.amway.apac.auth.controllers.ControllerConstants.IDPLogin.ISSUER;
+import static com.amway.apac.auth.controllers.ControllerConstants.IDPLogin.NONCE;
+
 import de.hybris.platform.commerceservices.strategies.CustomerNameStrategy;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.user.UserService;
@@ -11,10 +17,10 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Required;
 
-import com.amway.apac.auth.controllers.ControllerConstants.IDPLogin;
 import com.amway.apac.auth.controllers.ControllerConstants.JWT;
 import com.amway.apac.auth.security.AmwayApacJWTCreator;
 import com.amway.apac.auth.security.AmwayApacJWTKeyMaker;
@@ -34,8 +40,8 @@ import com.nimbusds.jwt.SignedJWT;
  */
 public class DefaultAmwayApacJWTCreator implements AmwayApacJWTCreator
 {
-	/** The LOG Constant. */
-	private static final Logger LOG = Logger.getLogger(DefaultAmwayApacJWTCreator.class);
+	/** The LOGGER Constant. */
+	private static final Logger LOGGER = LoggerFactory.getLogger(DefaultAmwayApacJWTCreator.class);
 
 	/** The user service. */
 	private UserService userService;
@@ -66,18 +72,22 @@ public class DefaultAmwayApacJWTCreator implements AmwayApacJWTCreator
 				final JWSSigner signer = new RSASSASigner(getJwtKeyMaker().getPrivateKey());
 				final SignedJWT signedJWT = new SignedJWT(
 						new JWSHeader(JWSAlgorithm.RS256, null, null, null, null, null, null, null, null, null,
-								Config.getParameter(IDPLogin.AMWAY_IDP_JWT_KEYID), null, null),
+								Config.getParameter(AMWAY_IDP_JWT_KEYID), null, null),
 						prepareJWTClaimsSet(amwayAccount, creationDate, request));
 				// Compute the RSA signature
 				signedJWT.sign(signer);
 				final String jwt = signedJWT.serialize();
-				LOG.debug("TOKEN :: " + jwt);
+				if (LOGGER.isDebugEnabled())
+				{
+					LOGGER.debug("TOKEN :: " + jwt);
+				}
+
 				return jwt;
 			}
 		}
 		catch (final JOSEException exp)
 		{
-			LOG.error(exp.getMessage(), exp);
+			LOGGER.error(exp.getMessage(), exp);
 		}
 
 		return null;
@@ -98,22 +108,21 @@ public class DefaultAmwayApacJWTCreator implements AmwayApacJWTCreator
 			final HttpServletRequest request)
 	{
 		final String[] names = getCustomerNameStrategy().splitName(amwayAccount.getPrimaryParty().getName());
-		final Long ttlMillis = Long.valueOf(Config.getParameter(IDPLogin.AMWAY_IDP_JWT_TTLMILES));
+		final Long ttlMillis = Long.valueOf(Config.getParameter(AMWAY_IDP_JWT_TTLMILES));
 		final Calendar calendar = Calendar.getInstance();
 		calendar.setTime(creationDate);
 		calendar.add(Calendar.MILLISECOND, ttlMillis.intValue());
 
 		// Prepare & return JWT with claims set
-		return new JWTClaimsSet.Builder().audience(request.getParameter(IDPLogin.CLIENT_ID)).subject(JWT.ALICE)
-				.issueTime(new Date()).notBeforeTime(new Date()).issuer(Config.getParameter(IDPLogin.ISSUER))
-				.claim(JWT.NAME, amwayAccount.getName())
+		return new JWTClaimsSet.Builder().audience(request.getParameter(CLIENT_ID)).subject(JWT.ALICE).issueTime(new Date())
+				.notBeforeTime(new Date()).issuer(Config.getParameter(ISSUER)).claim(JWT.NAME, amwayAccount.getName())
 				.claim(JWT.LOCALE, request.getLocale().getLanguage() + "-" + request.getLocale().getCountry())
 				.claim(JWT.PREFERRED_USERNAME, amwayAccount.getPrimaryParty().getCustomerID())
 				.claim(JWT.AUTH_TIME, Long.valueOf(new Date().getTime()))
 				.claim(JWT.PARTY_ID, amwayAccount.getPrimaryParty().getCustomerID())
 				.claim(JWT.ZONEINFO, Calendar.getInstance(request.getLocale()).getTimeZone().getID())
 				.claim(JWT.UPDATED_AT, Long.valueOf(new Date().getTime()))
-				.claim(JWT.NONCE, StringUtils.replace(request.getParameter(IDPLogin.NONCE), " ", "+"))
+				.claim(JWT.NONCE, StringUtils.replace(request.getParameter(NONCE), " ", "+"))
 				.claim(JWT.GIVEN_NAME, (null != names && names.length > 0) ? names[0] : StringUtils.EMPTY)
 				.claim(JWT.HYBRIS_LOGIN_CODE, amwayAccount.getCode())
 				.claim(JWT.FAMILY_NAME, (names.length == 2) ? names[1] : StringUtils.EMPTY).expirationTime(calendar.getTime())

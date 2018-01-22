@@ -8,7 +8,8 @@ import de.hybris.platform.servicelayer.session.SessionService;
 import java.util.Optional;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
@@ -35,23 +36,36 @@ import com.amway.core.model.AmwayBusinessRestrictionModel;
  */
 public class DefaultAmwayApacAuthenticationProvider extends AcceleratorAuthenticationProvider
 {
-	private static Logger LOG = Logger.getLogger(DefaultAmwayApacAuthenticationProvider.class);
+	/** The LOGGER Constant. */
+	private static final Logger LOGGER = LoggerFactory.getLogger(DefaultAmwayApacAuthenticationProvider.class);
 
+	/** The Constant credentials error string. */
+	private static final String BAD_CREDENTIALS = "Bad credentials";
+
+	/** The Constant NONE_PROVIDED. */
+	private static final String NONE_PROVIDED = "NONE_PROVIDED";
+
+	/** The session service. */
 	private SessionService sessionService;
+
+	/** The amway apac user service. */
 	private AmwayApacUserService amwayApacUserService;
+
+	/** The amway apac account service. */
 	private AmwayApacAccountService amwayApacAccountService;
 
-	/*
-	 * (non-Javadoc)
+
+	/**
+	 * Checks authentication for provided authentication data
 	 *
-	 * @see
-	 * de.hybris.platform.acceleratorstorefrontcommons.security.AbstractAcceleratorAuthenticationProvider#authenticate
-	 * (org.springframework.security.core.Authentication)
+	 * @param authentication
+	 * @return authentication
+	 * @throws AuthenticationException
 	 */
 	@Override
 	public Authentication authenticate(final Authentication authentication) throws AuthenticationException
 	{
-		final String username = (authentication.getPrincipal() == null) ? "NONE_PROVIDED" : authentication.getName();
+		final String username = (authentication.getPrincipal() == null) ? NONE_PROVIDED : authentication.getName();
 		final UserModel userModel;
 		try
 		{
@@ -59,8 +73,9 @@ public class DefaultAmwayApacAuthenticationProvider extends AcceleratorAuthentic
 		}
 		catch (final UnknownIdentifierException e)
 		{
-			LOG.warn("Brute force attack attempt for non existing user name: " + username, e);
-			throw new BadCredentialsException(messages.getMessage("CoreAuthenticationProvider.badCredentials", "Bad credentials"));
+			LOGGER.warn(new StringBuilder(200).append("Brute force attack attempt for non existing user name: ").append(username)
+					.toString(), e);
+			throw new BadCredentialsException(messages.getMessage("CoreAuthenticationProvider.badCredentials", BAD_CREDENTIALS));
 		}
 		UsernamePasswordAuthenticationToken newUPA = null;
 		if (authentication instanceof UsernamePasswordAuthenticationToken)
@@ -72,6 +87,14 @@ public class DefaultAmwayApacAuthenticationProvider extends AcceleratorAuthentic
 		return super.authenticate(newUPA != null ? newUPA : authentication);
 	}
 
+	/**
+	 * Additional authentication for user details provided
+	 *
+	 * @param details
+	 *           User details
+	 * @param authentication
+	 * @throws AuthenticationException
+	 */
 	@Override
 	protected void additionalAuthenticationChecks(final UserDetails details, final AbstractAuthenticationToken authentication)
 			throws AuthenticationException

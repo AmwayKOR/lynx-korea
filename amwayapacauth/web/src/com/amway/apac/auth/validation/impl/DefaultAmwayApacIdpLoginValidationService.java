@@ -1,5 +1,10 @@
 package com.amway.apac.auth.validation.impl;
 
+import static com.amway.apac.auth.controllers.ControllerConstants.IDPLogin.CLIENT_ID;
+import static com.amway.apac.auth.controllers.ControllerConstants.IDPLogin.REDIRECT_URI;
+import static com.amway.apac.auth.controllers.ControllerConstants.IDPLogin.RESPONSE_TYPE;
+import static com.amway.apac.auth.controllers.ControllerConstants.IDPLogin.TOKEN;
+
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -17,7 +22,6 @@ import org.springframework.security.oauth2.provider.NoSuchClientException;
 import org.springframework.security.oauth2.provider.endpoint.DefaultRedirectResolver;
 import org.springframework.security.oauth2.provider.endpoint.RedirectResolver;
 
-import com.amway.apac.auth.controllers.ControllerConstants.IDPLogin;
 import com.amway.apac.auth.validation.AmwayApacIdpLoginValidationService;
 
 
@@ -52,22 +56,23 @@ public class DefaultAmwayApacIdpLoginValidationService implements AmwayApacIdpLo
 		final Set<String> errors = new HashSet<>();
 
 		// validate response Type it should be token
-		final String responseType = request.getParameter(IDPLogin.RESPONSE_TYPE);
-		if (!IDPLogin.TOKEN.equals(responseType))
+		final String responseType = request.getParameter(RESPONSE_TYPE);
+		if (!TOKEN.equals(responseType))
 		{
 			errors.add("Invalid Response type : Valid response type is 'id_token'");
 		}
 
 		//validate client id
-		final String clientId = request.getParameter(IDPLogin.CLIENT_ID);
+		final String clientId = request.getParameter(CLIENT_ID);
 		final ClientDetails client = validateClientId(clientId);
 		if (null == client)
 		{
-			errors.add("Invalid Client Id : No client exists with client id : " + clientId);
+			errors.add(new StringBuilder(100).append("Invalid Client Id : No client exists with client id : ").append(clientId)
+					.toString());
 		}
 
 		// validate redirect url
-		final String redirectUrl = request.getParameter(IDPLogin.REDIRECT_URI);
+		final String redirectUrl = request.getParameter(REDIRECT_URI);
 		if (validateRedirectUrl(client, redirectUrl))
 		{
 			errors.add("Invalid redirect url : redirect url is invalid");

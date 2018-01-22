@@ -1,11 +1,11 @@
 package com.amway.apac.auth.handler;
 
+import static com.amway.apac.auth.controllers.ControllerConstants.IDPLogin.loginSuccessUrl;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
-
-import com.amway.apac.auth.controllers.ControllerConstants.IDPLogin;
 
 
 /**
@@ -18,6 +18,6 @@ public class AmwayApacStorefrontAuthenticationSuccessHandler extends SavedReques
 	@Override
 	protected String determineTargetUrl(final HttpServletRequest request, final HttpServletResponse response)
 	{
-		return this.getDefaultTargetUrl() + IDPLogin.loginSuccessUrl(request);
+		return this.getDefaultTargetUrl() + loginSuccessUrl(request);
 	}
 }
