@@ -73,11 +73,6 @@ public class DefaultAmwayApacWishlistServiceIntegrationTest extends Servicelayer
 	private static final String WISHLIST_UID = "wishlist2A";
 
 	/**
-	 * Added Date string constant
-	 */
-	private static final String ADDED_DATE = "27.04.2010 00:00:00";
-
-	/**
 	 * Product Code string constant
 	 */
 	private static final String PRODUCT_CODE = "HW1210-3422";
@@ -86,11 +81,6 @@ public class DefaultAmwayApacWishlistServiceIntegrationTest extends Servicelayer
 	 * Comment string constant
 	 */
 	private static final String COMMENT = "Hi";
-
-	/**
-	 * Priority string constant
-	 */
-	private static final String WISHLISTENTRY_PRIORITY = "HIGH";
 
 	/**
 	 * Wishlist Entries int constant
@@ -184,14 +174,9 @@ public class DefaultAmwayApacWishlistServiceIntegrationTest extends Servicelayer
 		Assert.assertNotNull(wishlist2EntryModel.getProduct());
 		Assert.assertEquals(wishlist2EntryModel.getProduct().getCode(), PRODUCT_CODE);
 
-		Assert.assertNotNull(wishlist2EntryModel.getPriority());
-		Assert.assertEquals(wishlist2EntryModel.getPriority(), WISHLISTENTRY_PRIORITY);
-
 		Assert.assertNotNull(wishlist2EntryModel.getComment());
 		Assert.assertEquals(wishlist2EntryModel.getComment(), COMMENT);
 
-		Assert.assertNotNull(wishlist2EntryModel.getAddedDate());
-		Assert.assertEquals(wishlist2EntryModel.getAddedDate(), ADDED_DATE);
 	}
 
 	@Test
