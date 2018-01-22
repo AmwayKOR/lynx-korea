@@ -1429,7 +1429,6 @@ INSERT_UPDATE AmwayApacPathToSuccessPitchPerfectComponent;$contentCV[unique=true
 
 INSERT_UPDATE Media;mediaFormat(qualifier)[default=desktop];$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;folder(qualifier)[default='images'];altText
 ;;;aboutAmwayOpportunityMedia;$siteResource/about-amway-desk.jpg;;AboutAmwayDesk;;"About Amway"
-;;;aboutAmwayOpportunityMobileMedia;$siteResource/about-anway-mob.jpg;;AboutAmwayMobile;;"About Amway"
 ;;;aboutAmwayPlayButtonMedia;$siteResource/play_button.png;;PlayButton1;;"Play"
 
 INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content;
@@ -1438,16 +1437,12 @@ INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];con
 
 INSERT_UPDATE MediaContainer;$contentCV[unique=true];qualifier[unique=true];$medias;
 ;;aboutAmwayOpportunityMediaContainer;aboutAmwayOpportunityMedia;
-;;aboutAmwayOpportunityMediaMobileContainer;aboutAmwayOpportunityMobileMedia;
 
 INSERT_UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang];&componentRef;
 ;;amwayApacAboutAmwayOpportunityBannerComponent;aboutAmwayPlayButtonMedia;amwayApacAboutAmwayOpportunityBannerComponent
 
 INSERT_UPDATE AmwayApacYourOpportunityComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
 ;;amwayApacAboutAmwayYourOpportunityComponent;aboutAmwayOpportunityMediaContainer
-
-INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
-;;amwayApacAboutAmwayOpportunityMobileBannerComponent;aboutAmwayOpportunityMediaMobileContainer
 
 #################### About Amway Success Story Component #########################
 

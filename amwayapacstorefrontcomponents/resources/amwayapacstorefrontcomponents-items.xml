@@ -174,10 +174,6 @@
 				autocreate="true" generate="true">
 				<description>Homepage your opportunity component.</description>
 				<attributes>
-					<attribute qualifier="mobileImage" type="SimpleResponsiveBannerComponent">
-						<persistence type="property" />
-						<description>Banner for mobile</description>
-					</attribute>
 					<attribute qualifier="iconImage" type="BannerComponent">
 						<description>Icon displayed over the component.</description>
 						<persistence type="property" />

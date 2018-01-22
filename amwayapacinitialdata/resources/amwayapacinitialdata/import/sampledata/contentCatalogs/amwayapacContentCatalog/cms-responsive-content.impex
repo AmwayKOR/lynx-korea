@@ -1615,14 +1615,11 @@ INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&co
 ;;amwayApacAboutAmwayOpportunityParagraphComponent;amwayApacAboutAmwayOpportunityParagraphComponent
 ;;amwayApacAboutAmwayMainParagraphComponent;amwayApacAboutAmwayMainParagraphComponent
 
-INSERT_UPDATE AmwayApacYourOpportunityComponent;$contentCV[unique=true];uid[unique=true];name;text(&componentRef);iconImage(&componentRef);mobileImage(&componentRef);&componentRef;
-;;amwayApacAboutAmwayYourOpportunityComponent;About Amway Your Opportunity Component;amwayApacAboutAmwayOpportunityParagraphComponent;amwayApacAboutAmwayOpportunityBannerComponent;amwayApacAboutAmwayOpportunityMobileBannerComponent;amwayApacAboutAmwayYourOpportunityComponent;
+INSERT_UPDATE AmwayApacYourOpportunityComponent;$contentCV[unique=true];uid[unique=true];name;text(&componentRef);iconImage(&componentRef);&componentRef;
+;;amwayApacAboutAmwayYourOpportunityComponent;About Amway Your Opportunity Component;amwayApacAboutAmwayOpportunityParagraphComponent;amwayApacAboutAmwayOpportunityBannerComponent;amwayApacAboutAmwayYourOpportunityComponent;
 
 INSERT_UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];name;urlLink;&componentRef;
 ;;amwayApacAboutAmwayOpportunityBannerComponent;About Amway Your Opportunity Banner Component;/;amwayApacAboutAmwayOpportunityBannerComponent;
-
-INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
-;;amwayApacAboutAmwayOpportunityMobileBannerComponent;About Amway Your Opportunity Mobile Banner Component;amwayApacAboutAmwayOpportunityMobileBannerComponent
 
 #################### About Amway Main Title Component #########################
 
