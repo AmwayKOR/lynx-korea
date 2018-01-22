@@ -18,8 +18,6 @@
 	  <requires-extension name="couponservices" />      
 	  <requires-extension name="amwayapaccore" />
       <coremodule generated="true" manager="com.amway.apac.coupon.jalo.AmwayapaccouponManager" packageroot="com.amway.apac.coupon"/>
-
-      <!-- <webmodule jspcompile="false" webroot="/amwayapaccoupon"/> --> 
 					
 	
 
