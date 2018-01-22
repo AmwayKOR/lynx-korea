@@ -12,5 +12,6 @@
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/amwayapacserviceability"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/amwayapacresourcecenter"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/warehousing"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/wishlist"/>
 	<classpathentry kind="output" path="eclipsebin/notused"/>
 </classpath>

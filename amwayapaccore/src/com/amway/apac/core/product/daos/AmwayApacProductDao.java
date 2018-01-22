@@ -27,7 +27,7 @@ public interface AmwayApacProductDao extends ProductDao
 	 *           the catalog version
 	 * @return list of all payment option available for Alias Code
 	 * @throws IllegalArgumentException
-	 *            the illegal argument exception
+	 *            if aliasCode or catalogVersion is null.
 	 */
 	List<AmwayPaymentOptionModel> getAllAmwayPaymentOptionFromAliasCode(final String aliasCode,
 			final CatalogVersionModel catalogVersion);
@@ -41,7 +41,7 @@ public interface AmwayApacProductDao extends ProductDao
 	 *           the catalog version
 	 * @return payment option for Alias Code
 	 * @throws IllegalArgumentException
-	 *            the illegal argument exception
+	 *            if aliasCode or catalogVersion is null.
 	 */
 	List<AmwayPaymentOptionModel> getAmwayPaymentOptionFromAliasCode(final String aliasCode,
 			final CatalogVersionModel catalogVersion);
@@ -59,7 +59,7 @@ public interface AmwayApacProductDao extends ProductDao
 	 *           the store
 	 * @return List<AmwayUserPromotionCountModel>
 	 * @throws IllegalArgumentException
-	 *            the illegal argument exception
+	 *            if userId, productCodes, promomtionCodes or store is null.
 	 */
 	List<AmwayUserPromotionCountModel> getPromotionRuleCountByUserAndProduct(final String userId, final List<String> productCodes,
 			final String promotionCode, final BaseStoreModel store);

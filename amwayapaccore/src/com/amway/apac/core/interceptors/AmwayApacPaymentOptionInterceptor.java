@@ -17,7 +17,7 @@ import com.amway.apac.core.model.AmwayPaymentOptionModel;
 
 /**
  * Interceptor to update product modified time while removing and updating payment option model
- * 
+ *
  * @author Ashish Sabal
  *
  */
@@ -32,6 +32,7 @@ public class AmwayApacPaymentOptionInterceptor
 	 * Method to update product model modified time while removing payment option
 	 *
 	 * @throws IllegalArgumentException
+	 *            if model is null
 	 */
 	@Override
 	public void onRemove(final AmwayPaymentOptionModel model, final InterceptorContext ctx) throws InterceptorException
@@ -54,6 +55,7 @@ public class AmwayApacPaymentOptionInterceptor
 	 * Method to update product model modified time while updating payment option
 	 *
 	 * @throws IllegalArgumentException
+	 *            if model is null
 	 */
 	@Override
 	public void onPrepare(final AmwayPaymentOptionModel model, final InterceptorContext ctx) throws InterceptorException

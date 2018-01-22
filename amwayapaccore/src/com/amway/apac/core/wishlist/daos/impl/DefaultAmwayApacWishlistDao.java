@@ -86,7 +86,7 @@ public class DefaultAmwayApacWishlistDao extends AmwayWishlistDaoImpl implements
 	 *           decides whether search results will be ascending or descending, if empty order will be descending
 	 * @return query generated
 	 */
-	private String createSearchQuery(final String sortField, final String sortOrder)
+	protected String createSearchQuery(final String sortField, final String sortOrder)
 	{
 		final String query;
 

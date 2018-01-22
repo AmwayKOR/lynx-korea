@@ -34,9 +34,9 @@ INSERT_UPDATE Title;code[unique=true];name[lang=de];name[lang=en]
 ;dr;Dr.;dr.
 ;prof;Prof.;prof.
 
-INSERT_UPDATE Country;isocode[unique=true];name[lang=de];name[lang=en];active;;;;;;
-;DE;Deutschland;Germany;true;;;;;;
-;US;Vereinigte Staaten von Amerika;United States of America;true;;;;;;
+INSERT_UPDATE Country;isocode[unique=true];name[lang=de];name[lang=en];active;countryCode;;;;;
+;DE;Deutschland;Germany;true;101;;;;;
+;US;Vereinigte Staaten von Amerika;United States of America;true;100;;;;;
 
 INSERT_UPDATE UserGroup;uid[unique=true];groups(uid);
 ;cockpitgroup;;
@@ -132,6 +132,26 @@ INSERT_UPDATE Product;code[unique=true];$catalogversion;stockLevels(productCode,
 
 INSERT_UPDATE ProductPercentageDiscountPromotion;code[unique=true];title;description;enabled;products(code,$promoCatalogVersion);percentageDiscount;PromotionGroup(Identifier);priority;messageFired[lang=$defaultLanguage];
 ;PercentageDiscount_3425promo;Percentage discount 19%;19% off on HW1210-3425promo;true;HW1210-3425promo;19;default;1000;19% Discount.<br>You saved {2}.;
+
+INSERT_UPDATE AmwayAccount;code[unique=true]     ;businessNature(code)    ;primaryParty(uid);name       ;registeredAddress(&addRef);level(&businessLevelRef);controllingAffiliate(isocode)
+                          ;ahertz                ;"AmwayBusinessNature_1" ;ahertz           ;Test User  ;testuserAdd               ;testUserQual            ;US
+
+INSERT_UPDATE Address;owner(AmwayAccount.code)[unique=true];country(isocode);postalcode;firstname;lastname;streetname;streetnumber;shippingAddress;billingAddress;&addRef
+;ahertz;US;100000;TestFirstName;TestLastName;TestStreetName;TestStreetNumber;true;true;testuserAdd
+
+INSERT_UPDATE AmwayBusinessLevel;qualificationLevel(code)[unique=true];&businessLevelRef
+;QualificationLevelTypeEnum_340;testUserQual
+
+INSERT_UPDATE Wishlist2;uid[unique=true];name;description;user(uid);site(uid)
+;wishlist2A;AA;AAAAAAAAAAAAAAA AAAAAAAAAA AAAAA;ahertz;testSite
+;wishlist2B;BB;BBBBBBBBBBBBBBB BBBBBBBBBB BBBBB;abrode;testSite
+
+INSERT_UPDATE Wishlist2Entry;wishlist(Wishlist2.uid)[unique=true];addedDate[dateformat=dd.MM.yyyy HH:mm:ss];product(code,catalogVersion(catalog(id),version))[unique=true];quantity;priority(code);
+;wishlist2A;27.04.2010 00:00:00;HW1210-3422:$catalog-id:$catalog-version;1;highest
+;wishlist2A;27.04.2010 00:00:00;HW1210-3423:$catalog-id:$catalog-version;2;highest
+;wishlist2A;27.04.2010 00:00:00;HW1210-3424:$catalog-id:$catalog-version;3;highest
+;wishlist2B;27.04.2010 00:00:00;HW1210-3425:$catalog-id:$catalog-version;4;highest
+;wishlist2B;27.04.2010 00:00:00;HW1210-3425promo:$catalog-id:$catalog-version;5;highest
 
 
 

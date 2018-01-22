@@ -42,6 +42,7 @@ public interface AmwayApacWishllistService extends AmwayWishlistService
 	 *           to identify the wish list
 	 *
 	 * @return wish list model
+	 *
 	 * @throws IllegalArgumentException
 	 *            if the uid is null or empty
 	 * @throws UnknownIdentifierException

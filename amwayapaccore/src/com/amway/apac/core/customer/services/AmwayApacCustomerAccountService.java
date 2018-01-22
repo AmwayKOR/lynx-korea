@@ -20,12 +20,30 @@ import com.amway.core.customer.service.AmwayCustomerAccountService;
 public interface AmwayApacCustomerAccountService extends AmwayCustomerAccountService
 {
 	/**
-	 * Featches the number of orders for the current user in current base store.
+	 * Fetches the number of orders for the current user in current base store.
 	 *
 	 * @return number of orders found.
 	 */
 	Integer getOrdersCount();
 
+	/**
+	 * Returns orders list for given customer, basestore, date limits and order type.
+	 *
+	 * @param customerModel
+	 *           Customer for whom, orders need to be searched.
+	 * @param store
+	 *           Base Store
+	 * @param datefrom
+	 *           From Date
+	 * @param dateto
+	 *           To Date
+	 * @param type
+	 *           Order Type
+	 * @param pageableData
+	 * @return OrderModels as per given restrictions.
+	 * @throws IllegalArgumentException
+	 *            if customerModel, store or pageableData is null.
+	 */
 	SearchPageData<OrderModel> getOrderListByFilter(final CustomerModel customerModel, final BaseStoreModel store,
 			final LocalDate datefrom, final LocalDate dateto, final String type, final PageableData pageableData);
 }

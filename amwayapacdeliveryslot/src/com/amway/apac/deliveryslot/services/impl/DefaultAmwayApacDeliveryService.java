@@ -1,5 +1,7 @@
 package com.amway.apac.deliveryslot.services.impl;
 
+import static com.amway.apac.deliveryslot.constants.AmwayapacdeliveryslotConstants.DELIVERY_SLOT;
+import static com.amway.apac.deliveryslot.constants.AmwayapacdeliveryslotConstants.TIME_FORMAT;
 import static com.amway.apac.deliveryslot.model.AmwayDeliverySlotAvailabilityModel.DELIVERYDATE;
 import static com.amway.apac.deliveryslot.model.AmwayDeliverySlotAvailabilityModel.SLOTTIME;
 import static com.amway.apac.deliveryslot.model.AmwayDeliverySlotAvailabilityModel.WAREHOUSE;
@@ -44,6 +46,7 @@ import com.amway.core.exceptions.AmwayServiceException;
  */
 public class DefaultAmwayApacDeliveryService extends DefaultDeliveryService implements AmwayApacDeliveryService
 {
+	private final SimpleDateFormat dateFormat = new SimpleDateFormat(TIME_FORMAT);
 
 	/** The LOGGER Constant. */
 	private static final Logger LOGGER = LoggerFactory.getLogger(DefaultAmwayApacDeliveryService.class);
@@ -63,7 +66,7 @@ public class DefaultAmwayApacDeliveryService extends DefaultDeliveryService impl
 	@Override
 	public List<AmwayDeliverySlotAvailabilityModel> getDeliverySlotsAvailability()
 	{
-		List<AmwayDeliverySlotAvailabilityModel> slotAvailabilityModels = new ArrayList<AmwayDeliverySlotAvailabilityModel>();
+		List<AmwayDeliverySlotAvailabilityModel> slotAvailabilityModels = new ArrayList<>();
 		if (getCartService().hasSessionCart())
 		{
 			final CartModel sessionCart = getCartService().getSessionCart();
@@ -111,9 +114,8 @@ public class DefaultAmwayApacDeliveryService extends DefaultDeliveryService impl
 		calendar.setTime(now);
 		final int dayofWeek = calendar.get(Calendar.DAY_OF_WEEK);
 
-		final SimpleDateFormat dateFormat = new SimpleDateFormat(AmwayapacdeliveryslotConstants.TIME_FORMAT);
-		final String formattedDate = dateFormat.format(new Date()).toString();
-		final Time orderingTime = Time.valueOf(formattedDate);
+		final String formattedTime = dateFormat.format(Calendar.getInstance());
+		final Time orderingTime = Time.valueOf(formattedTime);
 
 		final WeekDay[] deliveryDays = WeekDay.values();
 		WeekDay deliveryDay = null;
@@ -163,36 +165,29 @@ public class DefaultAmwayApacDeliveryService extends DefaultDeliveryService impl
 	@Override
 	public Integer reserve(final AmwayDeliverySlotAvailabilityModel deliverySlot) throws AmwayServiceException
 	{
-		validateParameterNotNullStandardMessage("deliverySlot", deliverySlot);
+		validateParameterNotNullStandardMessage(DELIVERY_SLOT, deliverySlot);
 
 		return (Integer) getTransactionTemplate().execute(new TransactionCallback()
 		{
 			@Override
 			public Integer doInTransaction(final TransactionStatus status)
 			{
-				try
+				getModelService().refresh(deliverySlot);
+				if (deliverySlot.getSlotCapacity().intValue()
+						- deliverySlot.getConsumedCount().intValue() > AmwayapacdeliveryslotConstants.ZERO_INT.intValue())
 				{
+					final Integer updatedConsumedSlot = Integer
+							.valueOf(deliverySlot.getConsumedCount().intValue() + AmwayapacdeliveryslotConstants.ONE_INT.intValue());
+					deliverySlot.setConsumedCount(updatedConsumedSlot);
+					getModelService().save(deliverySlot);
 					getModelService().refresh(deliverySlot);
-					if (deliverySlot.getSlotCapacity().intValue()
-							- deliverySlot.getConsumedCount().intValue() > AmwayapacdeliveryslotConstants.ZERO_INT.intValue())
-					{
-						final Integer updatedConsumedSlot = Integer
-								.valueOf(deliverySlot.getConsumedCount().intValue() + AmwayapacdeliveryslotConstants.ONE_INT.intValue());
-						deliverySlot.setConsumedCount(updatedConsumedSlot);
-						getModelService().save(deliverySlot);
-						getModelService().refresh(deliverySlot);
-						return deliverySlot.getConsumedCount();
-					}
-					else
-					{
-						throw new AmwayServiceException(new StringBuilder(200).append("Selected delivery slot [ ")
-								.append(deliverySlot.getPk()).append(" ] for time: [ ").append(deliverySlot.getSlotTime())
-								.append(" ] not available.").toString());
-					}
+					return deliverySlot.getConsumedCount();
 				}
-				catch (final Exception e)
+				else
 				{
-					throw new AmwayServiceException("Exception Occured while reserving delivery slot");
+					throw new AmwayServiceException(
+							new StringBuilder(200).append("Selected delivery slot [ ").append(deliverySlot.getPk())
+									.append(" ] for time: [ ").append(deliverySlot.getSlotTime()).append(" ] not available.").toString());
 				}
 			}
 		});
@@ -204,7 +199,7 @@ public class DefaultAmwayApacDeliveryService extends DefaultDeliveryService impl
 	@Override
 	public Integer release(final AmwayDeliverySlotAvailabilityModel deliverySlot) throws AmwayServiceException
 	{
-		validateParameterNotNullStandardMessage("deliverySlot", deliverySlot);
+		validateParameterNotNullStandardMessage(DELIVERY_SLOT, deliverySlot);
 
 		return (Integer) getTransactionTemplate().execute(new TransactionCallback()
 		{
@@ -215,7 +210,7 @@ public class DefaultAmwayApacDeliveryService extends DefaultDeliveryService impl
 				{
 					getModelService().refresh(deliverySlot);
 					final int updatedConsumedSlot = deliverySlot.getConsumedCount().intValue() - 1;
-					deliverySlot.setConsumedCount(new Integer(updatedConsumedSlot));
+					deliverySlot.setConsumedCount(Integer.valueOf(updatedConsumedSlot));
 					getModelService().save(deliverySlot);
 					getModelService().refresh(deliverySlot);
 
@@ -254,7 +249,10 @@ public class DefaultAmwayApacDeliveryService extends DefaultDeliveryService impl
 			getModelService().refresh(cart);
 			successfullySet = true;
 		}
-		LOGGER.info(new StringBuilder(50).append("Slot returned was: [ ").append(slot).append(" ]").toString());
+		if (LOGGER.isInfoEnabled())
+		{
+			LOGGER.info(new StringBuilder(50).append("Slot returned was: [ ").append(slot).append(" ]").toString());
+		}
 		return successfullySet;
 	}
 

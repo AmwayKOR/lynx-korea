@@ -10,26 +10,8 @@ ACC.productdetail = {
         "bindCreateNewDitto",
         "bindContactsPopup",
         "bindPreviousScreenPopup",
-        "bindAddToShoppingList",
-        "bindNewList"
+        "bindAddToShoppingList"
 	],
-	
-	bindNewList: function() {
-		 $(document).on("click", '#newlist', function(event) {
-			 var a = $(this);
-			 $.ajax({
-    				success: function(data) 
-       				{
-       				 window.location='shopping-lists/all';
-       			    },
-       				error: function(error) 
-       				{
-       					console.log(error);
-       		    		ACC.global.appendGlobalMessage(ACC.globalMessageTypes.ERROR_MESSAGES_HOLDER, ACC.messages.shoppingListAddProductError);
-       				}
-		 });
-		 })
-	},
 	
 	bindAddToShoppingListForm: function(form) {
 		

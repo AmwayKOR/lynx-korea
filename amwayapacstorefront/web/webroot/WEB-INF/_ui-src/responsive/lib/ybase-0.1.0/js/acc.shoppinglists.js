@@ -42,6 +42,7 @@ ACC.shoppinglists = {
     			},
     			success : function(data) {
     				ACC.shoppinglists.refreshShoppingListDetailsPage(data);
+    				ACC.autocomplete.bindShoppingListQuickShopAutoComplete();
     				ACC.global.findAndUpdateGlobalMessages(data);
     			},
     			error : function(error) {
@@ -157,6 +158,7 @@ ACC.shoppinglists = {
 						success: function(data) 
 						{
 							ACC.shoppinglists.refreshShoppingListDetailsPage(data);
+							ACC.autocomplete.bindShoppingListQuickShopAutoComplete();
 					    },
 						error: function() 
 						{

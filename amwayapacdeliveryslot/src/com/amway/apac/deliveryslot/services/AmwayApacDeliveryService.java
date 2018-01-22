@@ -34,6 +34,7 @@ public interface AmwayApacDeliveryService extends DeliveryService
 	 * @return delivery date.
 	 *
 	 * @throws IllegalArgumentException
+	 *            if warehouse is null
 	 */
 	Date getDeliveryDate(final WarehouseModel warehouse);
 
@@ -42,8 +43,6 @@ public interface AmwayApacDeliveryService extends DeliveryService
 	 *
 	 * @return consumed Count
 	 *
-	 * @throws IllegalArgumentException,
-	 *            AmwayServiceException
 	 */
 	Integer reserve(final AmwayDeliverySlotAvailabilityModel deliverySlot) throws AmwayServiceException;
 
@@ -51,9 +50,9 @@ public interface AmwayApacDeliveryService extends DeliveryService
 	 * Release the selected delivery slot
 	 *
 	 * @return consumed Count
-	 *
-	 * @throws IllegalArgumentException,
-	 *            AmwayServiceException
+	 * @throws AmwayServiceException
+	 * @throws IllegalArgumentException
+	 *            if deliverySlot is null
 	 */
 	Integer release(final AmwayDeliverySlotAvailabilityModel deliverySlot) throws AmwayServiceException;
 
@@ -65,8 +64,8 @@ public interface AmwayApacDeliveryService extends DeliveryService
 	 * @param slotTime
 	 *
 	 * @return true if successfully set the delivery slot, otherwise false
-	 *
 	 * @throws IllegalArgumentException
+	 *            if warehouse, deliveryDate or slotTime is null
 	 */
 	boolean setDeliverySlot(final WarehouseModel warehouse, final Date deliveryDate, final String slotTime);
 
@@ -82,6 +81,7 @@ public interface AmwayApacDeliveryService extends DeliveryService
 	 * @return the delivery slot
 	 *
 	 * @throws IllegalArgumentException
+	 *            if warehouse, deliveryDate or slotTime is null
 	 */
 	AmwayDeliverySlotAvailabilityModel getDeliverySlot(final WarehouseModel warehouse, final Date deliveryDate,
 			final String slotTime);

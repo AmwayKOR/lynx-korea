@@ -17,7 +17,6 @@ import com.amway.core.stock.strategies.impl.AmwayCommerceStockLevelStatusStrateg
  */
 public class AmwayApacCommerceStockLevelStatusStrategy extends AmwayCommerceStockLevelStatusStrategy
 {
-
 	/**
 	 * Returns Stock level status enum for provided stock level model.
 	 *
@@ -40,6 +39,10 @@ public class AmwayApacCommerceStockLevelStatusStrategy extends AmwayCommerceStoc
 		else if ((null != stockLevel) && (InStockStatus.TEMPORARYNOTAVAILABLE.equals(stockLevel.getInStockStatus())))
 		{
 			resultStatus = StockLevelStatus.TEMPORARYNOTAVAILABLE;
+		}
+		else if ((null != stockLevel) && (InStockStatus.SHIPELSEBACKORDER.equals(stockLevel.getInStockStatus())))
+		{
+			resultStatus = stockLevel.getAvailable() > 0 ? StockLevelStatus.INSTOCK : StockLevelStatus.BACKORDER;
 		}
 		else
 		{

@@ -11,6 +11,7 @@ import java.util.Set;
 import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Required;
 
+import com.amway.apac.core.model.AmwayUserPromotionCountModel;
 import com.amway.apac.core.product.services.AmwayApacProductService;
 
 
@@ -23,6 +24,9 @@ public class AmwayApacPreLaunchProductCountAction extends AbstractOrderAction<Or
 {
 	private AmwayApacProductService amwayApacProductService;
 
+	/**
+	 * Order process for creating or updating new {@link AmwayUserPromotionCountModel} for pre-launch product order.
+	 */
 	@Override
 	public String execute(final OrderProcessModel orderProcess) throws RetryLaterException, Exception
 	{
@@ -35,13 +39,15 @@ public class AmwayApacPreLaunchProductCountAction extends AbstractOrderAction<Or
 		return Transition.OK.toString();
 	}
 
-
-
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Set<String> getTransitions()
 	{
 		return Transition.getStringValues();
 	}
+
 
 	/**
 	 * @return the amwayApacProductService

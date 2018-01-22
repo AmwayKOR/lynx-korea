@@ -8,7 +8,7 @@ import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Required;
 
-import com.amway.apac.core.account.service.AmwayApacAccountClassificationService;
+import com.amway.apac.core.account.services.AmwayApacAccountClassificationService;
 import com.amway.apac.core.constants.AmwayapacCoreConstants;
 import com.amway.apac.core.model.AmwayPreLaunchConfigModel;
 import com.amway.apac.core.product.AmwayPreLaunchResponse;
@@ -74,7 +74,9 @@ public class DefaultAmwayApacProductPreLaunchStrategy implements AmwayApacProduc
 	 * Creates and returns {@link AmwayPreLaunchResponse} for given preLaunchStatus and allowedQuantity.
 	 *
 	 * @param preLaunchStatus
+	 *           Pre-Launch Status
 	 * @param allowedQuantity
+	 *           Orderable Quantity
 	 * @return AmwayPreLaunchResponse
 	 */
 	protected AmwayPreLaunchResponse createPreLaunchResponse(final AmwayProductPreLaunchStatus preLaunchStatus,

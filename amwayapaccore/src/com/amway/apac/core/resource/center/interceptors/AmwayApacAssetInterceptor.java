@@ -30,10 +30,7 @@ public class AmwayApacAssetInterceptor
 	/** The Constant ASSET_MODEL. */
 	private static final String ASSET_MODEL = "Asset model";
 
-	/** The model service. */
 	private ModelService modelService;
-
-	/** The amway account classification rank mapping. */
 	private Map<AccountClassificationEnum, Integer> amwayAccountClassificationRankMapping;
 
 	/**
@@ -75,10 +72,11 @@ public class AmwayApacAssetInterceptor
 	 *
 	 * @param amwayAssetModel
 	 *           the new asset rank
-	 * @throws InterceptorException,
-	 *            IllegalArgumentException
+	 * @throws InterceptorException
+	 * @throws IllegalArgumentException
+	 *            if amwayAssetModel is null.
 	 */
-	private void setAssetRank(final AbstractAmwayAssetModel amwayAssetModel) throws InterceptorException
+	protected void setAssetRank(final AbstractAmwayAssetModel amwayAssetModel) throws InterceptorException
 	{
 		validateParameterNotNullStandardMessage(ASSET_MODEL, amwayAssetModel);
 

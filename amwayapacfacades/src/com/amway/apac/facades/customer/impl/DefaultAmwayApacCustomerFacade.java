@@ -8,7 +8,7 @@ import java.util.List;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Required;
 
-import com.amway.apac.core.account.service.AmwayApacAccountService;
+import com.amway.apac.core.account.services.AmwayApacAccountService;
 import com.amway.apac.core.constants.AmwayapacCoreConstants;
 import com.amway.apac.facades.customer.AmwayApacCustomerFacade;
 import com.amway.core.constants.AmwaycoreConstants;

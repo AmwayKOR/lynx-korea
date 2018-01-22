@@ -183,7 +183,6 @@
 	<alias name="defaultAmwayApacOrderFacade" alias="amwayOrderFacade"/>
     <bean id="defaultAmwayApacOrderFacade" class="com.amway.apac.facades.customeraccount.impl.DefaultAmwayApacOrderFacade" parent="defaultAmwayOrderFacade">
         <property name="amwayApacCustomerAccountService" ref="customeraccountService"/>
-        <property name="orderHistoryTypeOptions" ref="orderHistoryTypeOptions"/>
     </bean>
     
     <alias name="defaultAmwayApacCustomerFacade" alias="customerFacade"/>
@@ -277,4 +276,13 @@
         <property name="amwayApacCommerceCheckoutService" ref="amwayCommerceCheckoutService"/>
     </bean>
     
+    <alias alias="productSearchFacade" name="defaultAmwayApacSolrProductSearchFacade"/>
+	<bean id="defaultAmwayApacSolrProductSearchFacade" class="com.amway.apac.facades.search.solrfacetsearch.impl.DefaultAmwayApacSolrProductSearchFacade" parent="defaultSolrProductSearchFacade" />
+
+	<alias alias="amwayApacProductFacade" name="defaultAmwayApacProductFacade"/>
+	<bean id="defaultAmwayApacProductFacade" class="com.amway.apac.facades.product.impl.DefaultAmwayApacProductFacade"
+			parent="defaultProductFacade">
+		<property name="productSearchFacade" ref="productSearchFacade" />
+	</bean>
+	
 </beans>

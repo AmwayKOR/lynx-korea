@@ -23,6 +23,7 @@ public interface AmwayApacDeliverySlotManagementDao
 	 * @return List of {@link AmwayDeliverySlotConfigModel}
 	 *
 	 * @throws IllegalArgumentException
+	 *            if orderingDay is null.
 	 */
 	List<AmwayDeliverySlotConfigModel> getDeliverySlotByOrderDay(final DayOfWeek orderingDay);
 
@@ -36,6 +37,7 @@ public interface AmwayApacDeliverySlotManagementDao
 	 * @return the next delivery slot by delivery date and slot
 	 *
 	 * @throws IllegalArgumentException
+	 *            if deliveryDate or slot is null.
 	 */
 	List<AmwayDeliverySlotAvailabilityModel> getNextDeliverySlotByDeliveryDateAndSlot(final LocalDate deliveryDate,
 			final String slot);

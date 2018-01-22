@@ -32,7 +32,6 @@ public class DefaultAmwayApacOrderFacade extends DefaultAmwayOrderFacade impleme
 {
 
 	private AmwayApacCustomerAccountService amwayApacCustomerAccountService;
-	private List<String> orderHistoryTypeOptions;
 
 	/**
 	 * {@inheritDoc}
@@ -136,22 +135,4 @@ public class DefaultAmwayApacOrderFacade extends DefaultAmwayOrderFacade impleme
 		this.amwayApacCustomerAccountService = amwayApacCustomerAccountService;
 	}
 
-	/**
-	 * @return the orderHistoryTypeOptions
-	 */
-	@Override
-	public List<String> getOrderHistoryTypeOptions()
-	{
-		return orderHistoryTypeOptions;
-	}
-
-	/**
-	 * @param orderHistoryTypeOptions
-	 *           the orderHistoryTypeOptions to set
-	 */
-	@Required
-	public void setOrderHistoryTypeOptions(final List<String> orderHistoryTypeOptions)
-	{
-		this.orderHistoryTypeOptions = orderHistoryTypeOptions;
-	}
 }

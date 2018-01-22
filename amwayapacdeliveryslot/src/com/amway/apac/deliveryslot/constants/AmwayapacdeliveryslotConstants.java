@@ -34,4 +34,8 @@ public final class AmwayapacdeliveryslotConstants extends GeneratedAmwayapacdeli
 	 * int constant - 1.
 	 */
 	public static final Integer ONE_INT = Integer.valueOf(1);
+
+	public static final String DELIVERY_SLOT_CONFIG_MODEL = "deliverySlotConfigModel";
+	public static final String DELIVERY_SLOT = "deliverySlot";
+
 }

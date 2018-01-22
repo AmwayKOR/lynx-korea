@@ -26,6 +26,7 @@ public interface AmwayApacDeliverySlotDao
 	 * @return the delivery slots list
 	 *
 	 * @throws IllegalArgumentException
+	 *            if warehouse or deliveryDate is null.
 	 */
 	List<AmwayDeliverySlotAvailabilityModel> getDeliverySlotsAvailability(final WarehouseModel warehouse, final Date deliveryDate);
 
@@ -41,6 +42,7 @@ public interface AmwayApacDeliverySlotDao
 	 * @return delivery slot model
 	 *
 	 * @throws IllegalArgumentException
+	 *            if warehouse, slotTime or deliveryDate is null.
 	 */
 	AmwayDeliverySlotAvailabilityModel getDeliverySlot(final WarehouseModel warehouse, final Date deliveryDate,
 			final String slotTime);
@@ -57,6 +59,7 @@ public interface AmwayApacDeliverySlotDao
 	 * @return delivery day
 	 *
 	 * @throws IllegalArgumentException
+	 *            if warehouse, orderingDay or orderingTime is null.
 	 */
 	WeekDay getDeliveryDay(final WarehouseModel warehouse, final WeekDay orderingDay, final Date orderingTime);
 }
