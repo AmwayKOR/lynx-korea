@@ -24,6 +24,9 @@
 	<div class="video-preview__img">
 		<img class="video-preview__img js-responsive-image" data-media='{${imagerData}}' alt='${altText}' title='${altText}' />
 	</div>
+	<div class="video-preview__img-mob">
+		<cms:component component="${component.mobileImage}" />
+	</div>
 	<div class="video-preview__content">
         <img class="video-preview__play" src="${component.iconImage.media.url}" alt="icon" />
         <cms:component component="${component.text}" />

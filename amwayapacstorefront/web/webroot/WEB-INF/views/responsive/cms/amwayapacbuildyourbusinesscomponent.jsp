@@ -19,6 +19,7 @@
 
 <div class="wrapper-limit">
 	<div class="wrapper">
+		<img class="experience-brands__image experience-brands__image_iphone js-responsive-image" data-media='{${imagerData}}' title='${altText}' alt='${altText}' />
 		<div class="banner-content banner-right">
 			<div class="banner-title-wrapper">
 				<cms:component component="${component.text}" />
@@ -27,6 +28,5 @@
 				<cms:component component="${component.link}" />
 			</div>
 		</div>
-		<img class="experience-brands__image experience-brands__image_iphone js-responsive-image" data-media='{${imagerData}}' title='${altText}' alt='${altText}' />
 	</div>
 </div>

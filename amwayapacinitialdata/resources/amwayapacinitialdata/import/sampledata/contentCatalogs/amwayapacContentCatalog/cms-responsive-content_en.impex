@@ -1421,3 +1421,94 @@ INSERT_UPDATE AmwayApacPathToSuccessPitchPerfectComponent;$contentCV[unique=true
 ########### Home #########
 
 ####################### Category Landing Page ###################################
+
+
+#################### About Amway Page #########################
+
+#################### About Amway Your Opportunity Component #########################
+
+INSERT_UPDATE Media;mediaFormat(qualifier)[default=desktop];$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;folder(qualifier)[default='images'];altText
+;;;aboutAmwayOpportunityMedia;$siteResource/about-amway-desk.jpg;;AboutAmwayDesk;;"About Amway"
+;;;aboutAmwayOpportunityMobileMedia;$siteResource/about-anway-mob.jpg;;AboutAmwayMobile;;"About Amway"
+;;;aboutAmwayPlayButtonMedia;$siteResource/play_button.png;;PlayButton1;;"Play"
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content;
+;;amwayApacAboutAmwayPageTitleParagraphComponent;"ABOUT AMWAY";
+;;amwayApacAboutAmwayOpportunityParagraphComponent;"<p class=""video-preview__title"">HELPING PEOPLE LIVE BETTER LIVES</p><p class=""video-preview__subtitle"">Millions of Amway Independent Buisness Owners and 20,000 employees worldwide contribute to our mission.</p>";
+
+INSERT_UPDATE MediaContainer;$contentCV[unique=true];qualifier[unique=true];$medias;
+;;aboutAmwayOpportunityMediaContainer;aboutAmwayOpportunityMedia;
+;;aboutAmwayOpportunityMediaMobileContainer;aboutAmwayOpportunityMobileMedia;
+
+INSERT_UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang];&componentRef;
+;;amwayApacAboutAmwayOpportunityBannerComponent;aboutAmwayPlayButtonMedia;amwayApacAboutAmwayOpportunityBannerComponent
+
+INSERT_UPDATE AmwayApacYourOpportunityComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
+;;amwayApacAboutAmwayYourOpportunityComponent;aboutAmwayOpportunityMediaContainer
+
+INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
+;;amwayApacAboutAmwayOpportunityMobileBannerComponent;aboutAmwayOpportunityMediaMobileContainer
+
+#################### About Amway Success Story Component #########################
+
+INSERT_UPDATE Media;mediaFormat(qualifier)[default=desktop];$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;folder(qualifier)[default='images'];altText
+;;;innovativeBrandsSuccessStoryMedia;$siteResource/about-anway-pic2.jpg;;innovativeBrandsSuccessStoryMedia;;"INNOVATIVE BRANDS"
+;;;earnMoreWithPartnersSuccessStoryMedia;$siteResource/about-anway-pic3.jpg;;earnMoreWithPartnersSuccessStoryMedia;;"EARN MORE WITH PARTNERS"
+
+INSERT_UPDATE MediaContainer;$contentCV[unique=true];qualifier[unique=true];$medias;
+;;innovativeBrandsSuccessStoryMediaContainer;innovativeBrandsSuccessStoryMedia
+;;earnMoreWithPartnersSuccessStoryMediaContainer;earnMoreWithPartnersSuccessStoryMedia
+
+INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang];buttonStyleAttributes;styleAttributes;
+;;amwayApacInnovativeBrandsSuccessStoryLink;"PRODUCT DEVELOPMENT";btn-blue-white;banner-button-link;
+;;amwayApacEarnMoreWithPartnersSuccessStoryLink;"VIEW PARTNER OFFERS";btn-blue-white;banner-button-link;
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=$lang]
+;;innovativeBrandsSuccessStoryParagraphComponent;"<h2 class=""banner-title""><span>Innovative<br> Brands</span></h2><div class=""sub-title-wrap""><span class=""banner-sub-title"">From the start,Amway USA seeks<br/>excellence in all that we do.</span></div>"
+;;earnMoreWithPartnersSuccessStoryParagraphComponent;"<h2 class=""banner-title""><span>Earn More with<br>Partners</span></h2><div class=""sub-title-wrap""><span class=""banner-sub-title"">Amway has partnered with a<br />wide variety of business.</span></div>"
+
+INSERT_UPDATE AmwayApacPathToSuccessPitchPerfectComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
+;;innovativeBrandsSuccessStoryComponent;innovativeBrandsSuccessStoryMediaContainer
+;;earnMoreWithPartnersSuccessStoryComponent;earnMoreWithPartnersSuccessStoryMediaContainer
+
+#################### About Amway Tools And Advice Component #########################
+
+INSERT_UPDATE AmwayApacToolsAndAdviceComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
+;;responsibilityReportToolsAndAdviceComponent;responsibilityReportToolsAndAdviceMediaContainer;
+;;exploreAmwayJobsToolsAndAdviceComponent;exploreAmwayJobsToolsAndAdviceMediaContainer;
+;;amwayInTheNewsToolsAndAdviceComponent;amwayInTheNewsToolsAndAdviceMediaContainer;
+
+INSERT_UPDATE Media;mediaFormat(qualifier)[default=desktop];$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;folder(qualifier)[default='images'];altText
+;;;responsibilityReportToolsAndAdviceMedia;$siteResource/about-anway-spot1.jpg;;responsibilityReportToolsAndAdviceMedia;;"Global Citizenship Read Our Responsibility Report "
+;;;exploreAmwayJobsToolsAndAdviceMedia;$siteResource/about-anway-spot2.jpg;;exploreAmwayJobsToolsAndAdviceMedia;;"Careers Explore Amway Jobs"
+;;;amwayInTheNewsToolsAndAdviceMedia;$siteResource/about-anway-spot3.jpg;;amwayInTheNewsToolsAndAdviceMedia;;"Making Headlines Amway In the News"
+
+INSERT_UPDATE MediaContainer;$contentCV[unique=true];qualifier[unique=true];$medias;
+;;responsibilityReportToolsAndAdviceMediaContainer;responsibilityReportToolsAndAdviceMedia
+;;exploreAmwayJobsToolsAndAdviceMediaContainer;exploreAmwayJobsToolsAndAdviceMedia
+;;amwayInTheNewsToolsAndAdviceMediaContainer;amwayInTheNewsToolsAndAdviceMedia
+
+UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=$lang]
+;;responsibilityReportToolsAndAdviceTextComponent;"<span>Global Citizenship:<br/>Read Our Responsibility Report </span>"
+;;exploreAmwayJobsToolsAndAdviceTextComponent;"<span>Careers:<br/>Explore Amway Jobs</span>"
+;;amwayInTheNewsToolsAndAdviceTextComponent;"<span>Making Headlines:<br/>Amway In the News</span>"
+
+#################### About Amway Tools And Advice Component #########################
+
+INSERT_UPDATE AmwayApacBuildYourBusinessComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
+;;amwayApacOurCompanyBuildYourBusinessComponent;ourCompanyImageMediaContainer
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content;
+;;ourCompanyDesc;"<h2 class=""banner-title""><span>Our Company</span></h2><div class=""sub-title-wrap""><span class=""banner-sub-title""><span>Amway is a family-owned business, founded in<br/>1959, with a desire to provide a path to greater<br/>personal freedom. </span></span></div>"
+
+INSERT_UPDATE Media;mediaFormat(qualifier)[default=desktop];$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;folder(qualifier)[default='images'];altText
+;;;ourCompanyImageMedia;$siteResource/about-anway-pic1.jpg;;about-anway-pic1.jpg;;ourCompanyImageMedia;;
+
+INSERT_UPDATE MediaContainer;$contentCV[unique=true];qualifier[unique=true];$medias;
+;;ourCompanyImageMediaContainer;ourCompanyImageMedia
+
+INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=true];linkName;buttonStyleAttributes;styleAttributes
+;;amwayApacOurCompanyButtonlink;HOW DOES AMWAY WORK;btn-blue-white;banner-button-link
+
+#################### About Amway Page #########################
+
