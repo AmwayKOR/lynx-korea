@@ -1,20 +1,11 @@
-/*
- * [y] hybris Platform
- *
- * Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
- *
- * This software is the confidential and proprietary information of SAP
- * ("Confidential Information"). You shall not disclose such Confidential
- * Information and shall use it only in accordance with the terms of the
- * license agreement you entered into with SAP.
- */
 package com.amway.apac.coupon.services.impl;
+
+import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNull;
 
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.couponservices.model.AbstractCouponModel;
 import de.hybris.platform.couponservices.services.impl.DefaultCouponService;
 import de.hybris.platform.servicelayer.keygenerator.KeyGenerator;
-import de.hybris.platform.servicelayer.util.ServicesUtil;
 import de.hybris.platform.store.BaseStoreModel;
 
 import java.util.ArrayList;
@@ -24,8 +15,6 @@ import java.util.Map;
 import java.util.Objects;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.amway.apac.coupon.dao.AmwayApacCouponDao;
@@ -37,18 +26,20 @@ import com.amway.core.model.AmwayAccountModel;
 
 
 /**
- * Amway Coupon Service for generating/retrieving/modifying Amway coupons
+ * Amway Coupon Service for generating/retrieving/modifying Amway coupons. Default implementation of
+ * {@link AmwayApacCouponService}
  *
  * @author kanwarpreetkaur
  */
 public class DefaultAmwayApacCouponService extends DefaultCouponService implements AmwayApacCouponService
 {
-	private static final Logger LOG = LoggerFactory.getLogger(DefaultAmwayApacCouponService.class);
-
+	/**
+	 * Coupon key generator.
+	 */
 	private static final String DEFAULT_APAC_COUPON_KEY_GENERATOR = "defaultApacCouponKeyGenerator";
 
 	private AmwayApacCouponDao amwayApacCouponDao;
-	Map<String, KeyGenerator> couponCodeGeneratorMap;
+	private Map<String, KeyGenerator> couponCodeGeneratorMap;
 
 	/**
 	 * {@inheritDoc}
@@ -59,10 +50,10 @@ public class DefaultAmwayApacCouponService extends DefaultCouponService implemen
 		final List<AmwayCouponModel> amwayCouponList = new ArrayList<>();
 		for (final AmwayCouponCreationParameter couponCreationParameter : couponCreationParam)
 		{
-			ServicesUtil.validateParameterNotNull(couponCreationParameter.getRedemptionCoupon(), "Coupon should not be null!");
-			ServicesUtil.validateParameterNotNull(couponCreationParameter.getStartDate(), "coupon start date should not be null!");
-			ServicesUtil.validateParameterNotNull(couponCreationParameter.getEndDate(), "coupon end date should not be null!");
-			ServicesUtil.validateParameterNotNull(couponCreationParameter.getStore(), "store should not be null!");
+			validateParameterNotNull(couponCreationParameter.getRedemptionCoupon(), "Coupon should not be null!");
+			validateParameterNotNull(couponCreationParameter.getStartDate(), "coupon start date should not be null!");
+			validateParameterNotNull(couponCreationParameter.getEndDate(), "coupon end date should not be null!");
+			validateParameterNotNull(couponCreationParameter.getStore(), "store should not be null!");
 			if (Objects.isNull(couponCreationParameter.getCustomer()) && Objects.isNull(couponCreationParameter.getAmwayAccount()))
 			{
 				throw new IllegalArgumentException("Both account and customer should not be null!");
@@ -168,6 +159,7 @@ public class DefaultAmwayApacCouponService extends DefaultCouponService implemen
 	/**
 	 * setter for AmwayApacCouponDao
 	 */
+	@Required
 	public void setAmwayApacCouponDao(final AmwayApacCouponDao amwayApacCouponDao)
 	{
 		this.amwayApacCouponDao = amwayApacCouponDao;
