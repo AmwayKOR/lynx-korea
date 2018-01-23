@@ -16,8 +16,8 @@ import com.amway.apac.core.base.daos.BaseDao;
 /**
  * Default implementation for BaseDao.
  *
- * @param <T>
- *           the generic type
+ * @author Aaron Yong
+ *
  */
 public class DefaultBaseDaoImpl<T extends ItemModel> extends DefaultGenericDao implements BaseDao
 {

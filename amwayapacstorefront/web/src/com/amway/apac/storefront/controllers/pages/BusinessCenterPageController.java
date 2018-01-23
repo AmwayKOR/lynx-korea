@@ -69,23 +69,5 @@ public class BusinessCenterPageController extends AbstractSearchPageController
 		return getViewForPage(model);
 	}
 
-	public AmwayApacNotificationSectionData getNotificationResults(final Model model,
-			@RequestParam(value = "page", defaultValue = "1") final int page,
-			@RequestParam(value = "pageSize", defaultValue = "10") final int pageSize,
-			@RequestParam(value = "sortCode", required = false) final String sortCode,
-			@RequestParam(value = "status", required = false) final String status,
-			@RequestParam(value = "searchText", required = false) final String searchText) throws CMSItemNotFoundException
-	{
-		AmwayNotificationUserActionStatus[] statuses = new AmwayNotificationUserActionStatus[]
-		{ AmwayNotificationUserActionStatus.UNREAD, AmwayNotificationUserActionStatus.READ };
-		if (status != null)
-		{
-			statuses = new AmwayNotificationUserActionStatus[]
-			{ AmwayNotificationUserActionStatus.valueOf(status) };
-		}
-
-		return amwayApacNotificationFacade.getAmwayNotificationSectionForCurrentUser(page - 1, pageSize, sortCode, statuses,
-				searchText);
-	}
 
 }

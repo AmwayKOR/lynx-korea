@@ -8,6 +8,8 @@ import com.amway.apacfacades.notification.data.AmwayApacNotificationSectionData;
 
 
 /**
+ * Interface for Notification facade
+ *
  * @author Aaron Yong
  *
  */
