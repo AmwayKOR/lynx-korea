@@ -487,6 +487,11 @@ public interface ControllerConstants
 		 * Business & Information breadcrumb key
 		 */
 		String BUSINESS_INFORMATION_PAGE_BREADCRUMB_KEY = "account.businessinformation.page.breadcrumb";
+
+		/**
+		 * Business & Information breadcrumb key
+		 */
+		String MESSAGE_CENTER_PAGE_BREADCRUMB_KEY = "businesscenter.messagecenter.page.breadcrumb";
 	}
 
 	/**

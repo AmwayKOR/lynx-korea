@@ -1644,3 +1644,18 @@ INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=tr
 ;;amwayApacOurCompanyButtonlink;HOW DOES AMWAY WORK;/;amwayApacOurCompanyButtonlink;;amwayApacOurCompanyButtonlink;
 
 #################### About Amway Page #########################
+
+
+####################### Message Center Page ###################################
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;BodyContentMessageCenterrSlot;Body Content Slot for Message Center;true;MessageCenterBodyComponent;;;
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='message-center'];contentSlot(uid,$contentCV)[unique=true];;;
+;;BodyContent-messageCenterr;Body;;BodyContentMessageCenterrSlot;;;
+
+INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;actions(uid,$contentCV);&componentRef
+;;MessageCenterBodyComponent;Message Center Body Component;messageCenterBodyPage.jsp;;MessageCenterBodyComponent
+
+
+
+####################### Message Center Page ###################################

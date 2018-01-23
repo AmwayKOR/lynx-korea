@@ -71,8 +71,8 @@ public class DefaultAmwayApacNotificationDao implements AmwayApacNotificationDao
 	private final SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
 
 	/**
-	 * Query to search active PUBLISHED AmwayNotifications with publishDate before and expiryDate after the current time
-	 * and given baseSite, affiliate.
+	 * Query to search active PUBLISHED AmwayNotifications with publishDate before and expiryDate after the current time and
+	 * given baseSite, affiliate.
 	 */
 	private static final StringBuilder AMWAY_NOTIFICATION_MAPPING_QUERY = new StringBuilder().append("SELECT {an.")
 			.append(AmwayNotificationModel.PK).append("} FROM {").append(AmwayNotificationModel._TYPECODE).append(" as an ")
@@ -93,9 +93,9 @@ public class DefaultAmwayApacNotificationDao implements AmwayApacNotificationDao
 	 * {@inheritDoc}
 	 */
 	@Override
-	public SearchPageData<AmwayNotificationModel> getNotifications(final PageableData pageableData,
-			final BaseSiteModel baseSite, final CustomerModel customer, final List<AmwayNotificationUserActionStatus> statuses,
-			final String searchText, final String accountClassficationCode)
+	public SearchPageData<AmwayNotificationModel> getNotifications(final PageableData pageableData, final BaseSiteModel baseSite,
+			final CustomerModel customer, final List<AmwayNotificationUserActionStatus> statuses, final String searchText,
+			final String accountClassficationCode)
 	{
 		validateParameterNotNull(pageableData, ERROR_MESSAGE_NULL_PAGEABLE_DATA);
 		validateParameterNotNull(customer, ERROR_MESSAGE_NULL_CUSTOMER);
@@ -118,8 +118,8 @@ public class DefaultAmwayApacNotificationDao implements AmwayApacNotificationDao
 	}
 
 	/**
-	 * Changes the passed query for filtering on the basis of given customers classification level, user groups in which
-	 * the user is present and the NotificationUserActionStatus.
+	 * Changes the passed query for filtering on the basis of given customers classification level, user groups in which the
+	 * user is present and the NotificationUserActionStatus.
 	 *
 	 * @param baseSite
 	 * @param customer
@@ -135,9 +135,9 @@ public class DefaultAmwayApacNotificationDao implements AmwayApacNotificationDao
 		final String currentDate = dateFormat.format(start);
 
 		//This section appends the group and classification based restriction to the query in the queryBuilder.
-		queryBuilder.append(" AND (({aagt.").append(GROUPTYPE).append("} = ").append(CLASSIFICATION).append(" AND {aagt.")
+		queryBuilder.append(" AND (({aagt.").append(GROUPTYPE).append("} = ?").append(CLASSIFICATION).append(" AND {aagt.")
 				.append(AmwayAccountGroupTagModel.CODE).append("} IN (?").append(CLASSIFICATION_LIST).append(")) OR ({aagt.")
-				.append(GROUPTYPE).append("} = ").append(HYBRIS_GROUP).append(" AND {aagt.").append(AmwayAccountGroupTagModel.CODE)
+				.append(GROUPTYPE).append("} = ?").append(HYBRIS_GROUP).append(" AND {aagt.").append(AmwayAccountGroupTagModel.CODE)
 				.append("} IN (?").append(GROUP_LIST).append(")))");
 
 		//This Section appends the restriction based on user notification action.

@@ -71,6 +71,14 @@
 			<value code="RELEASED" />
 			<value code="EXPIRED" />
 		</enumtype>
+		
+		<enumtype generate="true" code="AmwayApacNotificationStatusEnum" autocreate="true"
+			dynamic="true">
+			<value code="UNREAD" />
+			<value code="READ" />
+			<value code="DELETED" />
+		</enumtype>	
+		
 	</enumtypes>
 
 	<relations>

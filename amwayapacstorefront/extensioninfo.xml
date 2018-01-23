@@ -12,13 +12,13 @@
 
 	<extension abstractclassprefix="Generated" classprefix="AmwayapacStorefront" name="amwayapacstorefront" usemaven="true">
         
-
 <requires-extension name="smarteditaddon"/>
 <requires-extension name="amwayapacrecentlyvieweditemsaddon"/>
 
 <requires-extension name="acceleratorstorefrontcommons"/>
 		<requires-extension name="amwayapacfacades"/>
 		<requires-extension name="amwayapacstorefrontcomponents"/>
+		<requires-extension name="amwayapacmessagecenter"/>
 
 		<webmodule jspcompile="false" webroot="/amwayapacstorefront"/>
 
