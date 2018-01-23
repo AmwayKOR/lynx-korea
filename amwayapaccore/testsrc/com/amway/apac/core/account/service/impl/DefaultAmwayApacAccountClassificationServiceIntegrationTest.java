@@ -47,7 +47,7 @@ public class DefaultAmwayApacAccountClassificationServiceIntegrationTest extends
 	@Before
 	public void setUp() throws ImpExException
 	{
-		importCsv("/amwayapacfacades/test/testCommerceCart.csv", "utf-8");
+		importCsv("/amwayapaccore/test/testCommerceCart.csv", "utf-8");
 		baseSiteService.setCurrentBaseSite(baseSiteService.getBaseSiteForUID(TEST_BASESITE_UID), false);
 
 		final CatalogVersionModel catalogVersionModel = catalogVersionService.getCatalogVersion("testCatalog", "Online");

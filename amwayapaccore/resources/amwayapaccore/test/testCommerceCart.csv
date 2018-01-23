@@ -85,11 +85,14 @@ INSERT_UPDATE Cart;user(uid);code[unique=true];currency(isocode);date[dateformat
 ;lesley;lesleysOldCart;EUR;27.04.2010 00:00:00;false;false;testSite;testStore;lesleysOldCart;;;;
 ;lesley;lesleysNewCart;EUR;27.04.2010 00:00:01;false;false;testSite;testStore;lesleysNewCart;;;;
 
+INSERT_UPDATE Cart;code[unique=true];warehouse(code)
+;ahertzCart;warehouse_s
+
 INSERT CartEntry;order(Cart.code);creationTime[dateformat=dd.MM.yyyy HH:mm:ss];product(code,catalogVersion(catalog(id),version));quantity;unit(code);entryNumber;totalPrice;;;
-;ahertzCart;27.04.2010 00:00:00;HW1210-3422:$catalog-id:$catalog-version;2;pieces;1;7000;;;
-;ahertzCart;27.04.2010 00:00:00;HW1210-3423:$catalog-id:$catalog-version;2;pieces;2;30;;;
-;ahertzCart;27.04.2010 00:00:00;HW1210-3425:$catalog-id:$catalog-version;10;pieces;4;800;;;
-;ahertzCart;27.04.2010 00:00:00;HW1210-3424:$catalog-id:$catalog-version;5;pieces;3;300;;;
+;ahertzCart;27.04.2010 00:01:00;HW1210-3422:$catalog-id:$catalog-version;2;pieces;1;7000;;;
+;ahertzCart;27.04.2010 00:02:00;HW1210-3423:$catalog-id:$catalog-version;2;pieces;2;30;;;
+;ahertzCart;27.04.2010 00:03:00;HW1210-3425:$catalog-id:$catalog-version;10;pieces;4;800;;;
+;ahertzCart;27.04.2010 00:04:00;HW1210-3424:$catalog-id:$catalog-version;5;pieces;3;300;;;
 
 ;abrodeCart;27.04.2010 00:00:00;HW1210-3423:$catalog-id:$catalog-version;2;pieces;1;30;;;
 ;abrodeCart;27.04.2010 00:00:00;HW1210-3424:$catalog-id:$catalog-version;5;pieces;2;300;;;
@@ -130,6 +133,10 @@ INSERT_UPDATE Product;code[unique=true];$catalogversion;stockLevels(productCode,
 ;HW1210-3425;;HW1210-3425:warehouse_s;electro;;;;;;
 ;HW1210-3425promo;;HW1210-3425promo:warehouse_s;electro;;;;;;
 
+INSERT_UPDATE AmwayAccountClassification;classification(code);code[unique=true]                ;qualificationLevel(code)
+                                        ;PLATINUM_AND_ABOVE    ;RubyAndAbove                     ;QualificationLevelTypeEnum_340
+                                        ;PLATINUM_AND_ABOVE    ;FoundersPlatinumAndAbove         ;QualificationLevelTypeEnum_342
+
 INSERT_UPDATE ProductPercentageDiscountPromotion;code[unique=true];title;description;enabled;products(code,$promoCatalogVersion);percentageDiscount;PromotionGroup(Identifier);priority;messageFired[lang=$defaultLanguage];
 ;PercentageDiscount_3425promo;Percentage discount 19%;19% off on HW1210-3425promo;true;HW1210-3425promo;19;default;1000;19% Discount.<br>You saved {2}.;
 
@@ -153,6 +160,32 @@ INSERT_UPDATE Wishlist2Entry;wishlist(Wishlist2.uid)[unique=true];addedDate[date
 ;wishlist2B;27.04.2010 00:00:00;HW1210-3425:$catalog-id:$catalog-version;4;highest
 ;wishlist2B;27.04.2010 00:00:00;HW1210-3425promo:$catalog-id:$catalog-version;5;highest
 
+
+INSERT_UPDATE AmwayDeliverySlotConfig;warehouse(code);orderingDay(code)[unique=true];orderingTime[dateformat=HH:mm:ss];deliveryDay(code)[unique=true];slotTime[unique=true]   ;slotCapacity;notifyCount;instructions[lang=en];active;
+									 ;warehouse_s             ;MONDAY           ;23:59:59            ;WEDNESDAY        ;9 AM - 1 PM;150         ;10         ;"MONDAY DATA" ;true  ; 
+									 ;warehouse_s             ;MONDAY           ;23:59:59            ;WEDNESDAY        ;2 PM - 6 PM;150         ;10         ;"MONDAY DATA" ;true  ; 
+									 ;warehouse_s             ;MONDAY           ;23:59:59            ;WEDNESDAY        ;7 PM - 10 PM;150        ;10         ;"MONDAY DATA" ;true  ; 
+
+									 ;warehouse_s             ;TUESDAY          ;23:59:59            ;THURSDAY         ;9 AM - 1 PM;150         ;10         ;"TUESDAY DATA" ;true  ;
+									 ;warehouse_s             ;TUESDAY          ;23:59:59            ;THURSDAY         ;2 PM - 6 PM;150         ;10         ;"TUESDAY DATA" ;true  ;
+									 ;warehouse_s             ;TUESDAY          ;23:59:59            ;THURSDAY         ;7 PM - 10 PM;150        ;10         ;"TUESDAY DATA" ;true  ;
+									  
+									 ;warehouse_s             ;WEDNESDAY        ;23:59:59            ;FRIDAY           ;9 AM - 1 PM;150         ;10         ;"WEDNESDAY DATA" ;true  ;
+									 ;warehouse_s             ;WEDNESDAY        ;23:59:59            ;FRIDAY           ;2 PM - 6 PM;150         ;10         ;"WEDNESDAY DATA" ;true  ;
+									 ;warehouse_s             ;WEDNESDAY        ;23:59:59            ;FRIDAY           ;7 PM - 10 PM;150        ;10         ;"WEDNESDAY DATA" ;true  ;
+									  
+									  
+									 ;warehouse_s             ;THURSDAY         ;23:59:59            ;SATURDAY         ;9 AM - 1 PM;150         ;10         ;"THURSDAY DATA" ;true  ; 
+									 ;warehouse_s             ;THURSDAY         ;23:59:59            ;SATURDAY         ;2 PM - 6 PM;150         ;10         ;"THURSDAY DATA" ;true  ; 
+									 ;warehouse_s             ;THURSDAY         ;23:59:59            ;SATURDAY         ;7 PM - 10 PM;150        ;10         ;"THURSDAY DATA" ;true  ; 
+									  
+									 ;warehouse_s             ;FRIDAY           ;11:59:59   			;MONDAY           ;9 AM - 1 PM;150         ;10         ;"FRIDAY DATA" ;true  ;
+									 ;warehouse_s             ;FRIDAY           ;11:59:59    		;MONDAY           ;2 PM - 6 PM;150         ;10         ;"FRIDAY DATA" ;true  ;
+									 ;warehouse_s             ;FRIDAY           ;11:59:59    		;MONDAY           ;7 PM - 10 PM;150        ;10         ;"FRIDAY DATA" ;true  ;
+									  
+									 ;warehouse_s             ;FRIDAY           ;23:59:59    		;TUESDAY          ;9 AM - 1 PM;150         ;10         ;"FRIDAY DATA" ;true  ;
+									 ;warehouse_s             ;FRIDAY           ;23:59:59    		;TUESDAY          ;2 PM - 6 PM;150         ;10         ;"FRIDAY DATA" ;true  ;
+									 ;warehouse_s             ;FRIDAY           ;23:59:59   			;TUESDAY          ;7 PM - 10 PM;150        ;10         ;"FRIDAY DATA" ;true  ;
 
 
 
