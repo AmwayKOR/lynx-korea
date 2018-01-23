@@ -801,7 +801,6 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 ;Terms6;;;
 ;Terms7;;;
 
-
 # About Amway content slots
 INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='AboutAmwayTemplate'];validComponentTypes(code);compTypeGroup(code)
 ;SiteLogo;;;logo
@@ -809,13 +808,13 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 ;MobileCountrySelector;;;
 ;CountrySelector;;;
 ;HeaderLinks;;;headerlinks
+;HeaderAccountNavigation;;;
 ;SearchBox;;;searchbox
 ;MiniCart;;;minicart
 ;BreadCrumb;;;
 ;MobileMiniCart;;;mobileminicart
 ;MobileNavigationBar;;;navigation
 ;NavigationBar;;;navigation
-
 ;AboutAmwayPageTitleContentSlot1;;;
 ;VideoPreviewAboutAmwayContentSlot1;;;
 ;OurCompanyAboutAmwayContentSlot1;;;
@@ -825,6 +824,7 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 ;ToolsAndAdviceBannerAboutAmwayContentSlot2;;;
 ;ToolsAndAdviceBannerAboutAmwayContentSlot3;;;
 ;Footer;;;footer
+
 # Business Center content slots
 INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='BusinessCenterTemplate'];validComponentTypes(code);compTypeGroup(code)
 ;SiteLogo;;;logo
@@ -1581,8 +1581,8 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 ;;Footer-AboutAmway;Footer;;FooterSlot;true
 ;;SearchBox-AboutAmway;SearchBox;;SearchBoxSlot;true
 ;;NavigationBar-AboutAmway;NavigationBar;;NavigationBarSlot;true
+;;HeaderAccountNavigation-AboutAmway;HeaderAccountNavigation;;HeaderAccountNavigationSlot;true
 ;;Mobile-NavigationBar-AboutAmway;MobileNavigationBar;;MobileNavigationBarSlot;true
-
 ;;PageTitleAboutAmwayContentSlot1-AboutAmway;AboutAmwayPageTitleContentSlot1;;AboutAmwayPageTitleContentSlot1;true
 ;;VideoPreviewContentSlot1-AboutAmway;VideoPreviewAboutAmwayContentSlot1;;VideoPreviewAboutAmwayContentSlot1;true
 ;;OurCompanyContentSlot1-AboutAmway;OurCompanyAboutAmwayContentSlot1;;OurCompanyAboutAmwayContentSlot1;true
@@ -1650,7 +1650,6 @@ INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTe
 ;;business-information;Business Information Page;AccountPageTemplate;business-information
 ;;registration-simple-terms;Registration Simple Terms Page;RegistrationTermsTemplate;simple-terms
 ;;registration-multiple-terms;Registration Multiple Terms Page;RegistrationTermsTemplate;multiple-terms
-
 ;;about-amway;About Amway;AboutAmwayTemplate;/about-amway
 ;;message-center;Message Center Page;BusinessCenterTemplate;message-center
 
