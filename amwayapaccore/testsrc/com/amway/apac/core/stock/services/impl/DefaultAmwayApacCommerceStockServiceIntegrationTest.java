@@ -1,7 +1,7 @@
 /**
  *
  */
-package com.amway.apac.core.stock.service.impl;
+package com.amway.apac.core.stock.services.impl;
 
 import de.hybris.bootstrap.annotations.IntegrationTest;
 import de.hybris.platform.commerceservices.order.dao.CommerceOrderDao;
@@ -28,14 +28,14 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.amway.apac.core.stock.service.AmwayApacCommerceStockService;
+import com.amway.apac.core.stock.services.AmwayApacCommerceStockService;
 
 
 /**
  * Integration Test class for {@DefaultAmwayApacCommerceStockService}
  */
 @IntegrationTest
-public class DefaultAmwayApacCommerceStockServiceIT extends ServicelayerTransactionalTest
+public class DefaultAmwayApacCommerceStockServiceIntegrationTest extends ServicelayerTransactionalTest
 {
 	private static final String TEST_ORDER_1 = "testOrder1";
 	private static final String TEST_ORDER_2 = "testOrder2";

@@ -1,7 +1,7 @@
 /**
  *
  */
-package com.amway.apac.core.stock.service.impl;
+package com.amway.apac.core.stock.services.impl;
 
 import de.hybris.platform.core.model.order.AbstractOrderModel;
 import de.hybris.platform.core.model.order.OrderEntryModel;
@@ -15,7 +15,7 @@ import java.util.Collection;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Required;
 
-import com.amway.apac.core.stock.service.AmwayApacCommerceStockService;
+import com.amway.apac.core.stock.services.AmwayApacCommerceStockService;
 import com.amway.core.stock.service.impl.DefaultAmwayCommerceStockService;
 
 

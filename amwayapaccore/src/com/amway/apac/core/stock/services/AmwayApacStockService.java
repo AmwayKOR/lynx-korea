@@ -1,7 +1,7 @@
 /**
  *
  */
-package com.amway.apac.core.stock.service;
+package com.amway.apac.core.stock.services;
 
 import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.ordersplitting.model.WarehouseModel;

@@ -1,7 +1,7 @@
 /**
  *
  */
-package com.amway.apac.core.stock.service.impl;
+package com.amway.apac.core.stock.services.impl;
 
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -22,7 +22,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import com.amway.apac.core.stock.service.AmwayApacCommerceStockService;
+import com.amway.apac.core.stock.services.AmwayApacCommerceStockService;
+import com.amway.apac.core.stock.services.impl.DefaultAmwayApacCommerceStockService;
 
 
 /**

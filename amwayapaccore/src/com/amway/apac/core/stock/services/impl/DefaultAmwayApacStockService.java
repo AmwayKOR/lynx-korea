@@ -23,7 +23,7 @@ import org.springframework.beans.factory.annotation.Required;
 
 import com.amway.apac.core.product.services.AmwayApacProductService;
 import com.amway.apac.core.stock.dao.AmwayApacStockLevelDao;
-import com.amway.apac.core.stock.service.AmwayApacStockService;
+import com.amway.apac.core.stock.services.AmwayApacStockService;
 import com.amway.core.enums.AmwayKitProductType;
 import com.amway.core.model.AmwayKitEntryProductModel;
 import com.amway.core.model.AmwayKitProductModel;

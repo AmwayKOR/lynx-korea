@@ -508,7 +508,7 @@
 
 	<alias alias="commerceStockService" name="defaultAmwayApacCommerceStockService" />
 	<bean id="defaultAmwayApacCommerceStockService"
-		class="com.amway.apac.core.stock.service.impl.DefaultAmwayApacCommerceStockService"
+		class="com.amway.apac.core.stock.services.impl.DefaultAmwayApacCommerceStockService"
 		parent="defaultAmwayCommerceStockService">
 		<property name="inventoryEventService" ref="inventoryEventService" />
 		<property name="modelService" ref="modelService" />

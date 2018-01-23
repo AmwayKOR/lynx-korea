@@ -32,7 +32,7 @@ import com.amway.apac.core.backorder.service.AmwayApacBackOrderService;
 import com.amway.apac.core.backorder.strategies.AmwayApacBackOrderSelectionStrategy;
 import com.amway.apac.core.enums.AmwayBackOrderStatus;
 import com.amway.apac.core.model.AmwayBackOrderModel;
-import com.amway.apac.core.stock.service.AmwayApacStockService;
+import com.amway.apac.core.stock.services.AmwayApacStockService;
 import com.amway.apac.core.stock.strategies.impl.AmwayApacCommerceAvailabilityCalculationStrategy;
 
 
