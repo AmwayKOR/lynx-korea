@@ -1,5 +1,6 @@
 package com.amway.apac.deliveryslot.daos.impl;
 
+import static com.amway.apac.deliveryslot.constants.AmwayapacdeliveryslotConstants.ZERO_INT;
 import static com.amway.apac.deliveryslot.model.AmwayDeliverySlotAvailabilityModel.ACTIVE;
 import static com.amway.apac.deliveryslot.model.AmwayDeliverySlotAvailabilityModel.DELIVERYDATE;
 import static com.amway.apac.deliveryslot.model.AmwayDeliverySlotAvailabilityModel.SLOTTIME;
@@ -24,7 +25,6 @@ import java.util.Map;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Required;
 
-import com.amway.apac.deliveryslot.constants.AmwayapacdeliveryslotConstants;
 import com.amway.apac.deliveryslot.daos.AmwayApacDeliverySlotDao;
 import com.amway.apac.deliveryslot.model.AmwayDeliverySlotAvailabilityModel;
 import com.amway.apac.deliveryslot.model.AmwayDeliverySlotConfigModel;
@@ -114,7 +114,7 @@ public class DefaultAmwayApacDeliverySlotDao implements AmwayApacDeliverySlotDao
 
 		if (CollectionUtils.isNotEmpty(result.getResult()))
 		{
-			return result.getResult().get(AmwayapacdeliveryslotConstants.ZERO_INT.intValue());
+			return result.getResult().get(ZERO_INT.intValue());
 		}
 		return null;
 	}
@@ -145,7 +145,7 @@ public class DefaultAmwayApacDeliverySlotDao implements AmwayApacDeliverySlotDao
 
 		if (CollectionUtils.isNotEmpty(result.getResult()))
 		{
-			return result.getResult().get(AmwayapacdeliveryslotConstants.ZERO_INT.intValue()).getDeliveryDay();
+			return result.getResult().get(ZERO_INT.intValue()).getDeliveryDay();
 		}
 
 		return null;
