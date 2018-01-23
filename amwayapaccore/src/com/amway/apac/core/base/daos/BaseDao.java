@@ -9,8 +9,8 @@ import java.util.List;
 /**
  * Base interface for all daos.
  *
- * @param <T>
- *           the generic type
+ * @author Aaron Yong
+ *
  */
 public interface BaseDao<T extends ItemModel> extends GenericDao
 {

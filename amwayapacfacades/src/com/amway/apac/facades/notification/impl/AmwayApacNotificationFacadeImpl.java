@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.amway.apac.facades.notification.impl;
 
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
@@ -16,7 +13,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
 
 import com.amway.apac.facades.notification.AmwayApacNotificationFacade;
 import com.amway.apac.message.center.enums.AmwayNotificationUserActionStatus;
@@ -26,12 +22,13 @@ import com.amway.apacfacades.notification.data.AmwayApacNotificationSectionData;
 
 
 /**
+ * Default implementation of {@link AmwayApacNotificationFacade}
+ *
  * @author Aaron Yong
  *
  */
 public class AmwayApacNotificationFacadeImpl implements AmwayApacNotificationFacade
 {
-	private static final Logger LOGGER = Logger.getLogger(AmwayApacNotificationFacadeImpl.class);
 	public static final int MAX_PAGE_LIMIT = 100;
 
 	private UserService userService;
@@ -40,12 +37,6 @@ public class AmwayApacNotificationFacadeImpl implements AmwayApacNotificationFac
 	private CMSComponentService cmsComponentService;
 	private Converter<SearchPageData<AmwayNotificationModel>, AmwayApacNotificationSectionData> amwayApacNotificationSectionConverter;
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see com.amway.apac.facades.notification.AmwayApacNotificationFacade#getAmwayNotificationSection(int, int,
-	 * java.lang.String)
-	 */
 	@Override
 	public AmwayApacNotificationSectionData getAmwayNotificationSection(final int pageNumber, final int pageSize,
 			final String sortCode)
@@ -54,11 +45,6 @@ public class AmwayApacNotificationFacadeImpl implements AmwayApacNotificationFac
 		return null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see com.amway.apac.facades.notification.AmwayApacNotificationFacade#getDetailedMessage(java.lang.String)
-	 */
 	@Override
 	public CMSParagraphComponentModel getDetailedMessage(final String compId) throws CMSItemNotFoundException
 	{
@@ -88,17 +74,9 @@ public class AmwayApacNotificationFacadeImpl implements AmwayApacNotificationFac
 
 		final SearchPageData<AmwayNotificationModel> searchData = amwayApacNotificationService.getNotifications(pageableData,
 				(CustomerModel) getUserService().getCurrentUser(), notificationStatuses, searchText);
-		//		final SearchPageData<AmwayNotificationModel> searchData = amwayApacNotificationService.getNotifications(pageableData,
-		//				(CustomerModel) getUserService().getCurrentUser(), notificationStatuses, searchText);
 		return getAmwayApacNotificationSectionConverter().convert(searchData);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see com.amway.apac.facades.notification.AmwayApacNotificationFacade#changeUserNotificationStatus(java.lang.String,
-	 * com.amway.apac.core.constants.GeneratedAmwayapacCoreConstants.Enumerations.AmwayApacNotificationStatusEnum)
-	 */
 	@Override
 	public boolean changeUserNotificationStatus(final String notificationCode, final AmwayNotificationUserActionStatus newStatus)
 	{

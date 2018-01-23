@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.amway.apac.facades.populators;
 
 import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
@@ -14,7 +11,10 @@ import com.amway.apacfacades.notification.data.AmwayApacNotificationSectionData;
 
 
 /**
- * The Class AmwayApacNotificationSectionPopulator.
+ * Populator for Notification facade
+ *
+ * @author Aaron Yong
+ *
  */
 public class AmwayApacNotificationSectionPopulator
 		implements Populator<SearchPageData<AmwayNotificationModel>, AmwayApacNotificationSectionData>
@@ -40,11 +40,6 @@ public class AmwayApacNotificationSectionPopulator
 		this.amwayApacNotificationConverter = amwayApacNotificationConverter;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see de.hybris.platform.converters.Populator#populate(java.lang.Object, java.lang.Object)
-	 */
 	@Override
 	public void populate(final SearchPageData<AmwayNotificationModel> source, final AmwayApacNotificationSectionData target)
 			throws ConversionException

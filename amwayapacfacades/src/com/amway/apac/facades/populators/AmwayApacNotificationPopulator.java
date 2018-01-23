@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.amway.apac.facades.populators;
 
 import de.hybris.platform.converters.Populator;
@@ -26,6 +23,8 @@ import com.amway.apacfacades.notification.data.AmwayApacNotificationData;
 
 
 /**
+ * Implementation of Notification Populator
+ *
  * @author Aaron Yong
  *
  */
@@ -41,11 +40,7 @@ public class AmwayApacNotificationPopulator implements Populator<AmwayNotificati
 
 	private UserService userService;
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see de.hybris.platform.converters.Populator#populate(java.lang.Object, java.lang.Object)
-	 */
+
 	@Override
 	public void populate(final AmwayNotificationModel source, final AmwayApacNotificationData target) throws ConversionException
 	{
@@ -53,11 +48,6 @@ public class AmwayApacNotificationPopulator implements Populator<AmwayNotificati
 		target.setLongDescription(source.getLongDescription());
 		target.setShortDescription(source.getShortDescription());
 		target.setCode(source.getCode());
-
-		//		if (null != source.getDetailMessage())
-		//		{
-		//			target.setCmsComponentId(source.getDetailMessage().getUid());
-		//		}
 
 		if (null != source.getPublishDate())
 		{
