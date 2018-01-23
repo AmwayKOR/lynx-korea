@@ -319,7 +319,7 @@
 	
 	<bean id="defaultAmwayApacPaymentOptionInterceptorMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
         <property name="interceptor" ref="amwayApacPaymentOptionInterceptor" />
-        <property name="typeCode" value="AmwayDeliverySlotConfig" />
+        <property name="typeCode" value="AmwayPaymentOption" />
     </bean>
     
     <alias alias="amwayApacAssetInterceptor" name="defaultAmwayApacAssetInterceptor"/>
