@@ -44,7 +44,6 @@ amwayapacstorefront/web/webroot/WEB-INF/messages/addons
 amwayapacstorefront/web/webroot/WEB-INF/views/addons
 amwayapacstorefront/web/webroot/WEB-INF/tags/addons
 amwayapaccmssmartedit/node_modules/**
-amwayapaccmssmartedit/bower_components/**
 temp/
 data/
 /amwayapacstorefront/web/webroot/WEB-INF/tld
