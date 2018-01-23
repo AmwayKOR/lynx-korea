@@ -114,7 +114,7 @@ public class DefaultAmwayApacDeliveryService extends DefaultDeliveryService impl
 		calendar.setTime(now);
 		final int dayofWeek = calendar.get(Calendar.DAY_OF_WEEK);
 
-		final String formattedTime = dateFormat.format(Calendar.getInstance());
+		final String formattedTime = dateFormat.format(Calendar.getInstance().getTime());
 		final Time orderingTime = Time.valueOf(formattedTime);
 
 		final WeekDay[] deliveryDays = WeekDay.values();
