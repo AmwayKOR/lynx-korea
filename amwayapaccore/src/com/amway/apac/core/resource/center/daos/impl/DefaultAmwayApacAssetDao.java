@@ -32,7 +32,7 @@ public class DefaultAmwayApacAssetDao extends DefaultAmwayAssetDao
 	private static final String QUERY_STRING_WITH_RANK_PARAM_AND_CLASSIFICATION_NULL = "AND ({a.rank}<=?rank OR ({a.classification} IS NULL)) ";
 
 	/** Query condition part with classification NULL. */
-	private static final String QUERY_STRING_WITH_CLASSIFICATION_NULL = "AND {a.accountClassification} IS NULL ";
+	//	private static final String QUERY_STRING_WITH_CLASSIFICATION_NULL = "AND {a.accountClassification} IS NULL ";
 
 	private AmwayApacAccountClassificationService amwayApacAccountClassificationService;
 	private Map<AccountClassificationEnum, Integer> amwayAccountClassificationRankMapping;
@@ -74,7 +74,7 @@ public class DefaultAmwayApacAssetDao extends DefaultAmwayAssetDao
 	 */
 	protected String generateRankQuery(final Map<String, Object> queryParams)
 	{
-		String rankQuery;
+		String rankQuery = "";
 
 		final String accountClassficationCode = getSessionService()
 				.getAttribute(AmwayapacCoreConstants.ACCOUNT_CLASSIFICATION_CODE);
@@ -84,10 +84,10 @@ public class DefaultAmwayApacAssetDao extends DefaultAmwayAssetDao
 					getAmwayAccountClassificationRankMapping().get(AccountClassificationEnum.valueOf(accountClassficationCode)));
 			rankQuery = QUERY_STRING_WITH_RANK_PARAM_AND_CLASSIFICATION_NULL;
 		}
-		else
-		{
-			rankQuery = QUERY_STRING_WITH_CLASSIFICATION_NULL;
-		}
+		//		else
+		//		{
+		//			rankQuery = QUERY_STRING_WITH_CLASSIFICATION_NULL;
+		//		}
 		return rankQuery;
 	}
 

@@ -324,7 +324,6 @@
     
     <alias alias="amwayApacAssetInterceptor" name="defaultAmwayApacAssetInterceptor"/>
     <bean id="defaultAmwayApacAssetInterceptor" class="com.amway.apac.core.resource.center.interceptors.AmwayApacAssetInterceptor">
-    	<property name="modelService" ref="modelService"/>
     	<property name="amwayAccountClassificationRankMapping" ref="amwayAccountClassificationRankMapping"/>
     </bean>
 

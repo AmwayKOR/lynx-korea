@@ -6,7 +6,6 @@ import de.hybris.platform.servicelayer.interceptor.InitDefaultsInterceptor;
 import de.hybris.platform.servicelayer.interceptor.InterceptorContext;
 import de.hybris.platform.servicelayer.interceptor.InterceptorException;
 import de.hybris.platform.servicelayer.interceptor.PrepareInterceptor;
-import de.hybris.platform.servicelayer.model.ModelService;
 
 import java.util.Map;
 import java.util.Objects;
@@ -26,11 +25,9 @@ import com.amway.apac.resourcecentre.model.media.AbstractAmwayAssetModel;
 public class AmwayApacAssetInterceptor
 		implements InitDefaultsInterceptor<AbstractAmwayAssetModel>, PrepareInterceptor<AbstractAmwayAssetModel>
 {
-
 	/** The Constant ASSET_MODEL. */
 	private static final String ASSET_MODEL = "Asset model";
 
-	private ModelService modelService;
 	private Map<AccountClassificationEnum, Integer> amwayAccountClassificationRankMapping;
 
 	/**
@@ -86,7 +83,6 @@ public class AmwayApacAssetInterceptor
 			if (null != rank)
 			{
 				amwayAssetModel.setRank(rank);
-				getModelService().save(amwayAssetModel);
 			}
 			else
 			{
@@ -94,32 +90,6 @@ public class AmwayApacAssetInterceptor
 						.append(amwayAssetModel.getClassification().toString()).toString());
 			}
 		}
-		else
-		{
-			throw new InterceptorException("Asset classification enum is NULL.");
-		}
-	}
-
-	/**
-	 * Gets the model service.
-	 *
-	 * @return the modelService
-	 */
-	public ModelService getModelService()
-	{
-		return modelService;
-	}
-
-	/**
-	 * Sets the model service.
-	 *
-	 * @param modelService
-	 *           the modelService to set
-	 */
-	@Required
-	public void setModelService(final ModelService modelService)
-	{
-		this.modelService = modelService;
 	}
 
 	/**
