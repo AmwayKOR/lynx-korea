@@ -951,7 +951,7 @@ INSERT_UPDATE ProductVariantSelectorComponent;$contentCV[unique=true];uid[unique
 ;;VariantSelector;Product Variant Selector;VariantSelector
 
 # CMS VariantSelector Components
-INSERT_UPDATE ProductColorVariantSelectorComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+INSERT_UPDATE AmwayApacProductColorVariantSelectorComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
 ;;ColorVariantSelector;Product Color Variant Selector;ColorVariantSelector
 
 # CMS ProductAddToCart Components
