@@ -23,7 +23,6 @@ import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 import de.hybris.platform.servicelayer.search.FlexibleSearchService;
 import de.hybris.platform.servicelayer.search.SearchResult;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -54,7 +53,6 @@ import com.amway.apac.message.center.notification.daos.AmwayApacNotificationDao;
  */
 public class DefaultAmwayApacNotificationDao implements AmwayApacNotificationDao
 {
-	private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ssz";
 	private static final String STATUSES = "statuses";
 	private static final String PUBLISHED = "published";
 	private static final String CLASSIFICATION = "classification";
@@ -68,7 +66,6 @@ public class DefaultAmwayApacNotificationDao implements AmwayApacNotificationDao
 	private static final String CLASSIFICATION_LIST = "classificationsList";
 	private static final String GROUP_LIST = "groupsList";
 
-	private final SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
 
 	/**
 	 * Query to search active PUBLISHED AmwayNotifications with publishDate before and expiryDate after the current time and
@@ -131,8 +128,7 @@ public class DefaultAmwayApacNotificationDao implements AmwayApacNotificationDao
 			final List<AmwayNotificationUserActionStatus> statuses, final Map<String, Object> queryParams,
 			final StringBuilder queryBuilder, final String accountClassficationCode)
 	{
-		final Date start = Calendar.getInstance().getTime();
-		final String currentDate = dateFormat.format(start);
+		final Date currentDate = Calendar.getInstance().getTime();
 
 		//This section appends the group and classification based restriction to the query in the queryBuilder.
 		queryBuilder.append(" AND (({aagt.").append(GROUPTYPE).append("} = ?").append(CLASSIFICATION).append(" AND {aagt.")

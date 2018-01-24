@@ -318,12 +318,5 @@
 		<property name="enumConverter" ref="defaultAmwayApacEnumDataConverter" />
 		<property name="amwayNotificationUserActionDao" ref="amwayNotificationUserActionDao" />
 		<property name="userService" ref="userService" />
-	</bean>
-	
-	<bean id="amwayNotificationUserActionDao"
-	      class="com.amway.apac.core.base.daos.impl.DefaultBaseDaoImpl">
-		 <constructor-arg name="typecode" value="AmwayNotificationUserAction"/>
-		 <constructor-arg name="codePropertyName" value="code"/>
-	</bean>
-	
+	</bean>	
 </beans>

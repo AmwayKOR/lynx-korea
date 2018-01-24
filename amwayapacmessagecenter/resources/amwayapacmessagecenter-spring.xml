@@ -44,16 +44,16 @@
 		<property name="sessionService" ref="sessionService"/>
 	</bean>
 	
-	<alias name="defaultAmwayNotificationUserActionDao" alias="amwayNotificationUserActionDao"/>
-	<bean id="defaultAmwayNotificationUserActionDao"
-	      class="de.hybris.platform.servicelayer.internal.dao.DefaultGenericDao">
-		 <constructor-arg name="typecode" value="AmwayAccount"/>
+	<alias alias="amwayNotificationUserActionDao" name="defaultAmwayNotificationUserActionDao"/>
+	<bean id="defaultAmwayNotificationUserActionDao" class="com.amway.apac.core.base.daos.impl.DefaultBaseDaoImpl">
+		 <constructor-arg name="typecode" value="AmwayNotificationUserAction"/>
+		 <constructor-arg name="codePropertyName" value="code"/>
 	</bean>
 	
-	<alias name="defaultAmwayNotificationDao" alias="amwayNotificationDao"/>
-	<bean id="defaultAmwayNotificationDao"
-	      class="de.hybris.platform.servicelayer.internal.dao.DefaultGenericDao">
-		 <constructor-arg name="typecode" value="AmwayAccount"/>
+	<alias alias="amwayNotificationDao" name="defaultAmwayNotificationDao"/>
+	<bean id="defaultAmwayNotificationDao" class="com.amway.apac.core.base.daos.impl.DefaultBaseDaoImpl">
+		 <constructor-arg name="typecode" value="AmwayNotification"/>
+		 <constructor-arg name="codePropertyName" value="code"/>
 	</bean>
 	
 	<alias name="defaultAmwayApacNotificationDao" alias="amwayApacNotificationDao"/>
