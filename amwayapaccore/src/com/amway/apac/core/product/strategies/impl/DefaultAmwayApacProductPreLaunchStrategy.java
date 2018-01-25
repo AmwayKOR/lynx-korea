@@ -1,6 +1,7 @@
 package com.amway.apac.core.product.strategies.impl;
 
 import de.hybris.platform.core.model.product.ProductModel;
+import de.hybris.platform.servicelayer.util.ServicesUtil;
 import de.hybris.platform.store.services.BaseStoreService;
 
 import java.util.Calendar;
@@ -37,6 +38,7 @@ public class DefaultAmwayApacProductPreLaunchStrategy implements AmwayApacProduc
 	@Override
 	public AmwayPreLaunchResponse getProductPrelaunchStatusForCurrentUser(final ProductModel product)
 	{
+		ServicesUtil.validateParameterNotNullStandardMessage(AmwayapacCoreConstants.PRODUCT_STRING, product);
 		final AmwayPreLaunchConfigModel preLaunchConfig = product.getPreLaunchConfig();
 		AmwayProductPreLaunchStatus preLaunchStatus = AmwayProductPreLaunchStatus.NOT_IN_PRELAUNCH;
 		Integer allowedQuantity = product.getMaxOrderQuantity();

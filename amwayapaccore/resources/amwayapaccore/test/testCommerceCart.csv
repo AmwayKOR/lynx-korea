@@ -76,6 +76,19 @@ INSERT_UPDATE Product;code[unique=true];$catalogversion;name[lang=de];name[lang=
 ;HW1210-3425;;DDD;DDD;pieces;95 EUR;approved;ahertz;0;$testCategory1-id
 ;HW1210-3425promo;;EEE;EEE;pieces;95 EUR;approved;ahertz;0;$testCategory1-id
 
+INSERT_UPDATE Product;code[unique=true];preLaunchConfig(code);maxOrderQuantity
+;HW1210-3422;platinum_before;99;
+;HW1210-3423;platinum_in    ;99;
+;HW1210-3424;platinum_after ;99;
+
+INSERT_UPDATE AmwayPreLaunchConfig;code[unique=true];classification(code);startDate[dateformat=dd.MM.yyyy HH:mm:ss];endDate[dateformat=dd.MM.yyyy HH:mm:ss];maxShoppingCount
+;platinum_before;PLATINUM_AND_ABOVE;01.12.2017 23:00:00;01.01.2018 23:00:00;5;
+;platinum_in    ;PLATINUM_AND_ABOVE;01.12.2017 23:00:00;01.01.2018 23:00:00;5;
+;platinum_after ;PLATINUM_AND_ABOVE;01.12.2017 23:00:00;01.01.2018 23:00:00;5;
+
+INSERT_UPDATE AmwayUserPromotionCount;userId[unique=true];promotionCode[unique=true];productCode[unique=true];currentCount;store(uid)
+;abrode;PRE_LAUNCH_PROMOTION;HW1210-3423;5;testStore;
+
 INSERT_UPDATE Cart;user(uid);code[unique=true];currency(isocode);date[dateformat=dd.MM.yyyy HH:mm:ss];net;calculated;site(uid);store(uid);guid;;;;
 ;ahertz;ahertzCart;EUR;27.04.2010 00:00:00;false;false;;;;;;
 ;abrode;abrodeCart;EUR;27.04.2010 00:00:00;false;false;;;;;;
@@ -142,9 +155,11 @@ INSERT_UPDATE ProductPercentageDiscountPromotion;code[unique=true];title;descrip
 
 INSERT_UPDATE AmwayAccount;code[unique=true]     ;businessNature(code)    ;primaryParty(uid);name       ;registeredAddress(&addRef);level(&businessLevelRef);controllingAffiliate(isocode)
                           ;ahertz                ;"AmwayBusinessNature_1" ;ahertz           ;Test User  ;testuserAdd               ;testUserQual            ;US
+                          ;abrode                ;"AmwayBusinessNature_1" ;abrode           ;Test User Abrode  ;testuserAddAbrode               ;testUserQual            ;US
 
 INSERT_UPDATE Address;owner(AmwayAccount.code)[unique=true];country(isocode);postalcode;firstname;lastname;streetname;streetnumber;shippingAddress;billingAddress;&addRef
 ;ahertz;US;100000;TestFirstName;TestLastName;TestStreetName;TestStreetNumber;true;true;testuserAdd
+;abrode;US;100000;TestFirstNameAbrode;TestLastNameAbrode;TestStreetNameAbrode;TestStreetNumberAbrode;true;true;testuserAddAbrode
 
 INSERT_UPDATE AmwayBusinessLevel;qualificationLevel(code)[unique=true];&businessLevelRef
 ;QualificationLevelTypeEnum_340;testUserQual
