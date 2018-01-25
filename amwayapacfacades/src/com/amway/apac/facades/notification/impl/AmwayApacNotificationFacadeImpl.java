@@ -1,5 +1,7 @@
 package com.amway.apac.facades.notification.impl;
 
+import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
+
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.contents.components.CMSParagraphComponentModel;
 import de.hybris.platform.cms2.servicelayer.services.CMSComponentService;
@@ -12,7 +14,8 @@ import de.hybris.platform.servicelayer.user.UserService;
 import java.util.Arrays;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.amway.apac.facades.notification.AmwayApacNotificationFacade;
 import com.amway.apac.message.center.enums.AmwayNotificationUserActionStatus;
@@ -29,6 +32,8 @@ import com.amway.apacfacades.notification.data.AmwayApacNotificationSectionData;
  */
 public class AmwayApacNotificationFacadeImpl implements AmwayApacNotificationFacade
 {
+	private static final Logger LOGGER = LoggerFactory.getLogger(AmwayApacNotificationFacadeImpl.class);
+
 	public static final int MAX_PAGE_LIMIT = 100;
 
 	private UserService userService;
@@ -48,17 +53,16 @@ public class AmwayApacNotificationFacadeImpl implements AmwayApacNotificationFac
 	@Override
 	public CMSParagraphComponentModel getDetailedMessage(final String compId) throws CMSItemNotFoundException
 	{
-		// YTODO Auto-generated method stub
-		return null;
+		return getCmsComponentService().getAbstractCMSComponent(compId);
 	}
 
-	@Override
-	public AmwayApacNotificationSectionData getAmwayNotificationSectionForCurrentUser(final int pageNumber, final int pageSize,
-			final String sortCode, final AmwayNotificationUserActionStatus[] statuses)
-	{
-		return getAmwayNotificationSectionForCurrentUser(pageNumber, pageSize, sortCode, statuses, StringUtils.EMPTY);
-
-	}
+	//	@Override
+	//	public AmwayApacNotificationSectionData getAmwayNotificationSectionForCurrentUser(final int pageNumber, final int pageSize,
+	//			final String sortCode, final AmwayNotificationUserActionStatus[] statuses)
+	//	{
+	//		return getAmwayNotificationSectionForCurrentUser(pageNumber, pageSize, sortCode, statuses, StringUtils.EMPTY);
+	//
+	//	}
 
 	@Override
 	public AmwayApacNotificationSectionData getAmwayNotificationSectionForCurrentUser(final int pageNumber, final int pageSize,
@@ -80,8 +84,27 @@ public class AmwayApacNotificationFacadeImpl implements AmwayApacNotificationFac
 	@Override
 	public boolean changeUserNotificationStatus(final String notificationCode, final AmwayNotificationUserActionStatus newStatus)
 	{
-		// YTODO Auto-generated method stub
-		return false;
+		validateParameterNotNullStandardMessage("Notification code", notificationCode);
+		validateParameterNotNullStandardMessage("New Status", newStatus);
+
+		LOGGER.debug(new StringBuilder(100).append("Parameters=[").append(notificationCode).append(", ").append(newStatus)
+				.append("]").toString());
+
+		boolean successful = true;
+		try
+		{
+			final AmwayNotificationModel notification = amwayApacNotificationService.getNotificationByCode(notificationCode);
+			amwayApacNotificationService.changeUserNotificationStatus(notification, (CustomerModel) userService.getCurrentUser(),
+					newStatus);
+		}
+		catch (final Exception e)
+		{
+			LOGGER.error(new StringBuilder(100).append("Error updating status of notification=").append(notificationCode)
+					.append(", customer=").append(userService.getCurrentUser()).append(" to new status=").append(newStatus).toString(),
+					e);
+			successful = false;
+		}
+		return successful;
 	}
 
 	protected PageableData createPageableData(final int pageNumber, final int pageSize, final String sortCode)

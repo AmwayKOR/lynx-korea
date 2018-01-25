@@ -174,6 +174,11 @@ public interface ControllerConstants
 				String CartContentPage = "pages/cart/cartContent";
 			}
 
+			interface MessageCenter // NOSONAR
+			{
+				String DetailedMessagePage = "fragments/messagecenter/detailedMessage"; // NOSONAR
+			}
+
 			interface StoreFinder // NOSONAR
 			{
 				String StoreFinderSearchPage = "pages/storeFinder/storeFinderSearchPage"; // NOSONAR

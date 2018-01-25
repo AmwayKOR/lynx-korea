@@ -43,8 +43,8 @@ public interface AmwayApacNotificationFacade
 	 * @param status
 	 * @return
 	 */
-	AmwayApacNotificationSectionData getAmwayNotificationSectionForCurrentUser(int pageNumber, int pageSize, String sortCode,
-			AmwayNotificationUserActionStatus[] statuses);
+	//	AmwayApacNotificationSectionData getAmwayNotificationSectionForCurrentUser(int pageNumber, int pageSize, String sortCode,
+	//			AmwayNotificationUserActionStatus[] statuses);
 
 	/**
 	 * @param pageNumber

@@ -46,7 +46,6 @@ public class DefaultAmwayApacNotificationService implements AmwayApacNotificatio
 	private static final String ERROR_MESSAGE_NULL_PAGEABLE_DATA = "[pageableData] must not be null";
 	private static final String ERROR_MESSAGE_NULL_CUSTOMER = "[customer] must not be null";
 	private static final String ERROR_MESSAGE_NULL_NOTIFICATION_CODE = "[notificationCode] field can not be null";
-	private static final String NOTIFICATION_STRING = "notification";
 	private static final String CUSTOMER_STRING = "customer";
 	private static final String NEW_STATUS_STRING = "newStatus";
 
@@ -98,7 +97,6 @@ public class DefaultAmwayApacNotificationService implements AmwayApacNotificatio
 	public void changeUserNotificationStatus(final AmwayNotificationModel notification, final CustomerModel customer,
 			final AmwayNotificationUserActionStatus newStatus)
 	{
-		validateParameterNotNullStandardMessage(NOTIFICATION_STRING, notification);
 		validateParameterNotNullStandardMessage(CUSTOMER_STRING, customer);
 		validateParameterNotNullStandardMessage(NEW_STATUS_STRING, newStatus);
 
