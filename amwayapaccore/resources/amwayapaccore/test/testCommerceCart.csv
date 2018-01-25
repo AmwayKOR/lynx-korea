@@ -69,6 +69,14 @@ INSERT_UPDATE Category;code[unique=true];$catalogversion;name[lang=de];name[lang
 ;$testCategory0-id;;$testCategory0-id;$testCategory0-id;;;;;;
 ;$testCategory1-id;;$testCategory1-id;$testCategory1-id;$testCategory0-id;;;;;
 
+INSERT_UPDATE Product;code[unique=true];$catalogversion;variantType(code);name[lang=de];name[lang=en];unit(code);$prices;approvalStatus(code);owner(Principal.uid);startLineNumber;$supercategories
+;HW1210-3421;;AmwayApacVariantProduct;XXX;XXX;pieces;;approved;ahertz;0;$testCategory0-id
+
+INSERT_UPDATE AmwayApacVariantProduct;code[unique=true];baseProduct(code);variantAttributeName1;variantAttribute1;$catalogversion;name[lang=de];name[lang=en];unit(code);$prices;approvalStatus(code);owner(Principal.uid);startLineNumber;$supercategories
+;HW1210-3421A;HW1210-3421;size;A;;XXXA;XXXA;pieces;42,95 EUR;approved;ahertz;0;$testCategory0-id
+;HW1210-3421B;HW1210-3421;size;B;;XXXB;XXXB;pieces;33,95 EUR;approved;ahertz;0;$testCategory0-id
+;HW1210-3421C;HW1210-3421;size;C;;XXXC;XXXC;pieces;63,95 EUR;approved;ahertz;0;$testCategory0-id
+
 INSERT_UPDATE Product;code[unique=true];$catalogversion;name[lang=de];name[lang=en];unit(code);$prices;approvalStatus(code);owner(Principal.uid);startLineNumber;$supercategories
 ;HW1210-3422;;AAA;AAA;pieces;57,95 EUR;approved;ahertz;0;$testCategory0-id
 ;HW1210-3423;;BBB;BBB;pieces;67,95 EUR;approved;ahertz;0;$testCategory1-id
