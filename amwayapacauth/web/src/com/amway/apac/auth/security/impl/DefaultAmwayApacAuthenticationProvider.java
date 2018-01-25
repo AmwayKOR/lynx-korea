@@ -69,7 +69,7 @@ public class DefaultAmwayApacAuthenticationProvider extends AcceleratorAuthentic
 		final UserModel userModel;
 		try
 		{
-			userModel = getAmwayApacUserService().getUserForUIDAndAmwayAccount(StringUtils.lowerCase(username));
+			userModel = getAmwayApacUserService().getUserForUIDForCurrentAffiliate(StringUtils.lowerCase(username));
 		}
 		catch (final UnknownIdentifierException e)
 		{

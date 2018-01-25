@@ -17,5 +17,5 @@ public interface AmwayApacUserService extends UserService
 	 * @param id
 	 * @return
 	 */
-	UserModel getUserForUIDAndAmwayAccount(String id);
+	UserModel getUserForUIDForCurrentAffiliate(String id);
 }

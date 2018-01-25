@@ -23,7 +23,7 @@ public class DefaultAmwayApacUserService extends DefaultUserService implements A
 	private AmwayApacUserDao amwayApacUserDao;
 
 	@Override
-	public UserModel getUserForUIDAndAmwayAccount(final String id)
+	public UserModel getUserForUIDForCurrentAffiliate(final String id)
 	{
 		ServicesUtil.validateParameterNotNull(id, "The given userID is null!");
 		final String affiliacteNo = getBaseStoreService().getCurrentBaseStore().getAffiliateNumber();
