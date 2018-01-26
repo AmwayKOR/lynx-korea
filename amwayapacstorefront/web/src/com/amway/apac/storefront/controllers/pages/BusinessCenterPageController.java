@@ -6,6 +6,8 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyCon
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractSearchPageController;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.contents.components.CMSParagraphComponentModel;
+import de.hybris.platform.commerceservices.search.pagedata.PageableData;
+import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -27,7 +29,7 @@ import com.amway.apac.facades.notification.AmwayApacNotificationFacade;
 import com.amway.apac.message.center.enums.AmwayNotificationUserActionStatus;
 import com.amway.apac.storefront.controllers.ControllerConstants;
 import com.amway.apac.storefront.forms.AmwayApacNotificationEntryForm;
-import com.amway.apacfacades.notification.data.AmwayApacNotificationSectionData;
+import com.amway.apacfacades.notification.data.AmwayApacNotificationData;
 
 
 /**
@@ -52,8 +54,9 @@ public class BusinessCenterPageController extends AbstractSearchPageController
 
 	@RequestMapping(value = "/message-center", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String businessInformation(final Model model, @RequestParam(value = "page", defaultValue = "1") final int page,
-			@RequestParam(value = "pageSize", defaultValue = "10") final int pageSize,
+	public String notificationMain(final Model model, @RequestParam(value = "page", defaultValue = "1") final int page,
+			@RequestParam(value = "show", defaultValue = "Page") final ShowMode showMode,
+			@RequestParam(value = "pageSize", defaultValue = "5") final int pageSize,
 			@RequestParam(value = "sortCode", required = false) final String sortCode,
 			@RequestParam(value = "status", required = false) final String status, final RedirectAttributes redirectModel)
 			throws CMSItemNotFoundException
@@ -72,9 +75,12 @@ public class BusinessCenterPageController extends AbstractSearchPageController
 			statuses = new AmwayNotificationUserActionStatus[]
 			{ AmwayNotificationUserActionStatus.valueOf(status) };
 		}
-		final AmwayApacNotificationSectionData amwayApacNotificationSectionData = amwayApacNotificationFacade
-				.getAmwayNotificationSectionForCurrentUser(page - 1, pageSize, sortCode, statuses, "");
-		model.addAttribute("notification", amwayApacNotificationSectionData);
+
+		final PageableData pageableData = createPageableData(page - 1, pageSize, sortCode, showMode);
+		final SearchPageData<AmwayApacNotificationData> searchPageData = amwayApacNotificationFacade
+				.getAmwayNotificationSectionForCurrentUserWithPageData(pageableData, statuses, "");
+		model.addAttribute("countOfNotifications", searchPageData.getPagination().getTotalNumberOfResults());
+		populateModel(model, searchPageData, showMode);
 
 		return getViewForPage(model);
 	}

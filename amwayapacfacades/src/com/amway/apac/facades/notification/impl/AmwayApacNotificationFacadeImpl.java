@@ -7,6 +7,7 @@ import de.hybris.platform.cms2.model.contents.components.CMSParagraphComponentMo
 import de.hybris.platform.cms2.servicelayer.services.CMSComponentService;
 import de.hybris.platform.commerceservices.search.pagedata.PageableData;
 import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
+import de.hybris.platform.converters.Converters;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
 import de.hybris.platform.servicelayer.user.UserService;
@@ -21,6 +22,7 @@ import com.amway.apac.facades.notification.AmwayApacNotificationFacade;
 import com.amway.apac.message.center.enums.AmwayNotificationUserActionStatus;
 import com.amway.apac.message.center.model.AmwayNotificationModel;
 import com.amway.apac.message.center.notification.services.AmwayApacNotificationService;
+import com.amway.apacfacades.notification.data.AmwayApacNotificationData;
 import com.amway.apacfacades.notification.data.AmwayApacNotificationSectionData;
 
 
@@ -41,6 +43,7 @@ public class AmwayApacNotificationFacadeImpl implements AmwayApacNotificationFac
 	private AmwayApacNotificationService amwayApacNotificationService;
 	private CMSComponentService cmsComponentService;
 	private Converter<SearchPageData<AmwayNotificationModel>, AmwayApacNotificationSectionData> amwayApacNotificationSectionConverter;
+	private Converter<AmwayNotificationModel, AmwayApacNotificationData> amwayApacNotificationConverter;
 
 	@Override
 	public AmwayApacNotificationSectionData getAmwayNotificationSection(final int pageNumber, final int pageSize,
@@ -107,6 +110,21 @@ public class AmwayApacNotificationFacadeImpl implements AmwayApacNotificationFac
 		return successful;
 	}
 
+	@Override
+	public SearchPageData<AmwayApacNotificationData> getAmwayNotificationSectionForCurrentUserWithPageData(
+			final PageableData pageableData, final AmwayNotificationUserActionStatus[] statuses, final String messageType)
+	{
+
+		final List<AmwayNotificationUserActionStatus> notificationStatuses = Arrays.asList(statuses);
+		final SearchPageData<AmwayNotificationModel> searchData = amwayApacNotificationService.getNotifications(pageableData,
+				(CustomerModel) getUserService().getCurrentUser(), notificationStatuses, "");
+
+		final SearchPageData<AmwayApacNotificationData> searchPageData = convertPageData(searchData,
+				getAmwayApacNotificationConverter());
+
+		return searchPageData;
+	}
+
 	protected PageableData createPageableData(final int pageNumber, final int pageSize, final String sortCode)
 	{
 		final PageableData pageableData = new PageableData();
@@ -116,6 +134,14 @@ public class AmwayApacNotificationFacadeImpl implements AmwayApacNotificationFac
 		return pageableData;
 	}
 
+	protected <S, T> SearchPageData<T> convertPageData(final SearchPageData<S> source, final Converter<S, T> converter)
+	{
+		final SearchPageData<T> result = new SearchPageData<T>();
+		result.setPagination(source.getPagination());
+		result.setSorts(source.getSorts());
+		result.setResults(Converters.convertAll(source.getResults(), converter));
+		return result;
+	}
 
 	/**
 	 * @return the amwayApacNotificationService
@@ -187,4 +213,23 @@ public class AmwayApacNotificationFacadeImpl implements AmwayApacNotificationFac
 	{
 		this.userService = userService;
 	}
+
+	/**
+	 * @return the amwayApacNotificationConverter
+	 */
+	public Converter<AmwayNotificationModel, AmwayApacNotificationData> getAmwayApacNotificationConverter()
+	{
+		return amwayApacNotificationConverter;
+	}
+
+	/**
+	 * @param amwayApacNotificationConverter
+	 *           the amwayApacNotificationConverter to set
+	 */
+	public void setAmwayApacNotificationConverter(
+			final Converter<AmwayNotificationModel, AmwayApacNotificationData> amwayApacNotificationConverter)
+	{
+		this.amwayApacNotificationConverter = amwayApacNotificationConverter;
+	}
+
 }

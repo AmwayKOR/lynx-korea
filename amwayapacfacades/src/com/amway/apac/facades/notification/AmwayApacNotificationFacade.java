@@ -2,8 +2,11 @@ package com.amway.apac.facades.notification;
 
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.contents.components.CMSParagraphComponentModel;
+import de.hybris.platform.commerceservices.search.pagedata.PageableData;
+import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
 
 import com.amway.apac.message.center.enums.AmwayNotificationUserActionStatus;
+import com.amway.apacfacades.notification.data.AmwayApacNotificationData;
 import com.amway.apacfacades.notification.data.AmwayApacNotificationSectionData;
 
 
@@ -55,6 +58,9 @@ public interface AmwayApacNotificationFacade
 	 */
 	AmwayApacNotificationSectionData getAmwayNotificationSectionForCurrentUser(int pageNumber, int pageSize, String sortCode,
 			AmwayNotificationUserActionStatus[] statuses, String searchText);
+
+	SearchPageData<AmwayApacNotificationData> getAmwayNotificationSectionForCurrentUserWithPageData(
+			final PageableData pageableData, final AmwayNotificationUserActionStatus[] statuses, final String messageType);
 
 	boolean changeUserNotificationStatus(String notificationCode, AmwayNotificationUserActionStatus newStatus);
 

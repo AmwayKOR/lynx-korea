@@ -290,6 +290,7 @@
 	 	<property name="cmsComponentService" ref="cmsComponentService" />
 	 	<property name="userService" ref="userService" />
 		<property name="amwayApacNotificationSectionConverter" ref="amwayApacNotificationSectionConverter"/>
+		<property name="amwayApacNotificationConverter" ref="amwayApacNotificationConverter"/>
 	</bean>
     
     <bean id="amwayApacNotificationSectionConverter" parent="abstractPopulatingConverter">
@@ -319,4 +320,5 @@
 		<property name="amwayNotificationUserActionDao" ref="amwayNotificationUserActionDao" />
 		<property name="userService" ref="userService" />
 	</bean>	
+	
 </beans>
