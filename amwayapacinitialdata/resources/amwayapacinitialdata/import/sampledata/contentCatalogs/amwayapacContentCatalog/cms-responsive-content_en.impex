@@ -1507,3 +1507,38 @@ INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=tr
 
 #################### About Amway Page #########################
 
+
+#################### Our Company Page #########################
+
+INSERT_UPDATE Media;mediaFormat(qualifier)[default=desktop];$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;folder(qualifier)[default='images'];altText
+;;;ourCompanyBannerDekstopImageMedia;$siteResource/company_bg_pc.jpg;;ourCompanyBannerDekstopImageMedia;;"Our Company"
+
+INSERT_UPDATE Media;mediaFormat(qualifier)[default=desktop];$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;folder(qualifier)[default='images'];altText
+;;;ourCompanyBannerMobileImageMedia;$siteResource/company_bg_mob.jpg;;ourCompanyBannerMobileImageMedia;;"Our Company"
+
+UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content;
+;;ourCompanyPara;"Amway uses a direct sales model, relying on distributors <br>(Independent Business Owners) to sell products and <br>sales groups reach more customers."
+
+UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang];url
+;;amwayApacOurCompanyLearnMoreButtonlink;LEARN MORE;"/"
+
+
+INSERT_UPDATE AmwayApacOurCompanyBannerComponent;$contentCV[unique=true];uid[unique=true];name;bannertitle;bannerDekstopImg(code, $contentCV)[lang=$lang];bannerMobileImg(code, $contentCV)[lang=$lang]
+;;amwayApacOurCompanyBannerComponent;Our Company banner Component;"OUR COMPANY";ourCompanyBannerDekstopImageMedia;ourCompanyBannerMobileImageMedia
+
+#################### Our Company Carousel Slider #########################
+
+UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content;
+;;mobileDescription;"Amway is founded by Jay Van Andel and Rich DeVos in Ada, Michigan but this could wrap to three lines."
+;;desktopDescription;"<p>Amway is founded by Jay Van Andel and Rich DeVos in Ada, Michigan.</p><p>Amway launches its first product, Liquid Organic Cleaner. Liquid Organic Cleaner becomes a high seller and initiates the legacy of taking our stewardship for the earth seriously.</p>"
+
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;folder(qualifier)[default='images'];altText
+;;carouselSliderImg;$siteResource/company_timeline_img_01.png;;carouselSliderImg;;"Carousel Slider Image"
+
+UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
+;;CarouselSliderComponent;carouselSliderImg
+
+INSERT_UPDATE AmwayApacOurCompanyCarouselComponent;$contentCV[unique=true];uid[unique=true];name;year
+;;AmwayApacOurCompanyCarouselComponent;Our Company Carousel Component;"1950"
+
+#################### Our Company Page #########################

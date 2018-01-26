@@ -43,6 +43,7 @@
 		<script type="text/javascript" src="${commonResourcePath}/js/jquery.raty.min.js"></script>
 		
 		<%-- Custom ACC JS --%>
+		<script type="text/javascript" src="${commonResourcePath}/js/acc.ourcompany.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.myaccount.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.billingshipping.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.businessinformation.js"></script>
@@ -99,9 +100,11 @@
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.popup.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.profile.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.productreview.js"></script>
+		
 
 		<script src="${commonResourcePath}/js/owl.carousel.js"></script>
 		<script src="${commonResourcePath}/js/select2.js"></script>
+
 
 		<%-- Cms Action JavaScript files --%>
 		<c:forEach items="${cmsActionsJsFiles}" var="actionJsFile">

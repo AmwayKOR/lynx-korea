@@ -379,5 +379,11 @@
 		<property name="parentBreadcrumbLinkPath" value="/register-landing-page"/>
 		<property name="parentBreadcrumbResourceKey" value="#{'register.landing.page.breadcrumb'}"/>
 	</bean>
+	<bean id="ourCompanyBreadcrumbBuilder" class="de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.impl.DefaultResourceBreadcrumbBuilder" >
+		<property name="i18nService" ref="i18nService" />
+		<property name="parentBreadcrumbLinkPath" value="/about-amway"/>
+		<property name="parentBreadcrumbResourceKey" value="about.amway.header.link"/>
+
+	</bean>
 
 </beans>

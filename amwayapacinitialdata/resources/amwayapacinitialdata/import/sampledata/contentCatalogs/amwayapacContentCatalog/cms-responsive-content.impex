@@ -1659,3 +1659,41 @@ INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;
 
 
 ####################### Message Center Page ###################################
+
+
+#################### Our Company Page #########################
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;CompanyContentslot1;amwayApacOurCompanyBannerComponent 
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
+;;ourCompanyPara;ourCompanyPara;
+
+
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;target(code)[default='sameWindow'];&componentRef
+;;amwayApacOurCompanyLearnMoreButtonlink; Learn More Link;/;amwayApacOurCompanyLearnMoreButtonlink;;amwayApacOurCompanyLearnMoreButtonlink;
+
+
+INSERT_UPDATE AmwayApacOurCompanyBannerComponent;$contentCV[unique=true];uid[unique=true];name;text(uid, $contentCV);link(&linkRef);&componentRef
+;;amwayApacOurCompanyBannerComponent;Our Company banner Component;ourCompanyPara;amwayApacOurCompanyLearnMoreButtonlink;amwayApacOurCompanyBannerComponent
+
+
+#################### Our Company Carousel Slider #########################
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;CompanyContentslot2;AmwayApacOurCompanyCarouselMainComponent 
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
+;;mobileDescription;mobileDescription;
+;;desktopDescription;desktopDescription;
+
+INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink
+;;CarouselSliderComponent;Carousel Slider Component;CarouselSliderComponent;"/"
+
+INSERT_UPDATE AmwayApacOurCompanyCarouselComponent;$contentCV[unique=true];uid[unique=true];name;mobiledesc(uid, $contentCV);desktopdesc(uid, $contentCV);bannerImg(&componentRef);&componentRef
+;;AmwayApacOurCompanyCarouselComponent;Our Company Carousel Component;mobileDescription;desktopDescription;CarouselSliderComponent;AmwayApacOurCompanyCarouselComponent
+
+INSERT_UPDATE AmwayApacOurCompanyCarouselMainComponent;$contentCV[unique=true];uid[unique=true];name;carouselComponents(&componentRef);&componentRef
+;;AmwayApacOurCompanyCarouselMainComponent;Carousel Main Component;AmwayApacOurCompanyCarouselComponent;AmwayApacOurCompanyCarouselMainComponent
+
+#################### Our Company Page #########################

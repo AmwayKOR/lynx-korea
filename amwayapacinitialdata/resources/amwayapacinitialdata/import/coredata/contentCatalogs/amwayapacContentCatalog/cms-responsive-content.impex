@@ -48,7 +48,7 @@ INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;fronten
 ;;OrderConfirmationPageTemplate;Order Confirmation Page Template;checkout/checkoutConfirmationLayoutPage;ContentPage
 ;;AboutAmwayTemplate;About Amway Page Template;business/aboutAmwayPage;ContentPage
 ;;BusinessCenterTemplate;Business Center Page Template;businessCenter/businessCenterLayoutPage;ContentPage;
-
+;;OurCompanyPageTemplate;Our Company Page Template;about/ourcompanyLayoutPage;ContentPage
 
 # Templates without a frontendTemplateName
 ;;CartPageTemplate;Cart Page Template;;ContentPage;false;
@@ -91,6 +91,7 @@ UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];velocityTemplate[tr
 ;;RegistrationTermsTemplate      ;$jarResourceCms/structure-view/structure_registrationTermsTemplate.vm
 ;;AboutAmwayTemplate      ;$jarResourceCms/structure-view/structure_aboutAmwayTemplate.vm
 ;;BusinessCenterTemplate			;$jarResourceCms/structure-view/structure_businessCenterTemplate.vm
+;;OurCompanyPageTemplate      ;$jarResourceCms/structure-view/structure_ourCompanyPageTemplate.vm
 
 
 # Create ContentSlotNames
@@ -844,6 +845,23 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 ;BottomHeaderSlot;;;wide
 ;Body;;;
 
+# Our Company Page Template
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='OurCompanyPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;MobileSiteLogo;;;logo
+;MobileCountrySelector;;;
+;CountrySelector;;;
+;HeaderLinks;;;headerlinks
+;BreadCrumb;;;
+;SearchBox;;;searchbox
+;MiniCart;;;minicart
+;MobileMiniCart;;;mobileminicart
+;NavigationBar;;;navigation
+;MobileNavigationBar;;;navigation
+;Footer;;;footer
+;Contentslot1;;;
+;Contentslot2;;;
+
 # Create Content Slots
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active
 ;;SiteLogoSlot;Default Site Logo Slot;true
@@ -954,6 +972,8 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active
 ;;ToolsAndAdviceBannerAboutAmwayContentSlot1;About Amway Tools And Advice Banner Content Slot 1;true
 ;;ToolsAndAdviceBannerAboutAmwayContentSlot2;About Amway Tools And Advice Banner Content Slot 2;true
 ;;ToolsAndAdviceBannerAboutAmwayContentSlot3;About Amway Tools And Advice Banner Content Slot 3;true
+;;CompanyContentslot1;Our Company Banner;              true
+;;CompanyContentslot2;Our Company History;              true
 
 
 # Bind Content Slots to Page Templates
@@ -1611,6 +1631,24 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 ;;TopHeaderSlot-BusinessCenter;TopHeaderSlot;;TopHeaderSlot;true
 ;;BottomHeaderSlot-BusinessCenter;BottomHeaderSlot;;BottomHeaderSlot;true
 
+# our company template
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='OurCompanyPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-OurCompanyPage;SiteLogo;;SiteLogoSlot;true
+;;MobileSiteLogo-OurCompanyPage;MobileSiteLogo;;MobileSiteLogoSlot;true
+;;MobileCountrySelector-OurCompanyPage;MobileCountrySelector;;MobileCountrySelectorSlot;true
+;;CountrySelector-OurCompanyPage;CountrySelector;;CountrySelectorSlot;true
+;;HeaderLinks-OurCompanyPage;HeaderLinks;;HeaderLinksSlot;true
+;;BreadCrumb-OurCompanyPage;BreadCrumb;;BreadCrumbSlot;true
+;;MiniCart-OurCompanyPage;MiniCart;;MiniCartSlot;true
+;;MobileMiniCart-OurCompanyPage;MobileMiniCart;;MobileMiniCartSlot;true
+;;Footer-OurCompanyPage;Footer;;FooterSlot;true
+;;SearchBox-OurCompanyPage;SearchBox;;SearchBoxSlot;true
+;;NavigationBar-OurCompanyPage;NavigationBar;;NavigationBarSlot;true
+;;Mobile-NavigationBar-OurCompanyPage;MobileNavigationBar;;MobileNavigationBarSlot;true
+;;Contentslot1-OurCompanyPage;Contentslot1;;CompanyContentslot1;true
+;;Contentslot2-OurCompanyPage;Contentslot2;;CompanyContentslot2;true
+
+
 # Create Content Pages
 
 # Site-wide Homepage
@@ -1653,6 +1691,7 @@ INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTe
 ;;registration-multiple-terms;Registration Multiple Terms Page;RegistrationTermsTemplate;multiple-terms
 ;;about-amway;About Amway;AboutAmwayTemplate;/about-amway
 ;;message-center;Message Center Page;BusinessCenterTemplate;message-center
+;;our-company;Our Company;OurCompanyPageTemplate;our-company
 
 # Simple Content Pages
 INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']

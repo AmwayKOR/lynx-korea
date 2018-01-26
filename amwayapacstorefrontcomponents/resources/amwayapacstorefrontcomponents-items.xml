@@ -106,6 +106,16 @@
 			<targetElement qualifier="termsTabComponents" type="AmwayApacTermsTabComponent"
 				cardinality="many" collectiontype="list" ordered="true" />
 		</relation>
+		
+		<relation code="AmwayApacCarouselMainRelation" localized="false"
+			generate="true" autocreate="true">
+			<description>Relation between carousel and banners in carousel component.</description>
+			<sourceElement qualifier="carouselMainComponent"
+				type="AmwayApacOurCompanyCarouselMainComponent" cardinality="one" />
+			<targetElement qualifier="carouselComponents"
+				type="AmwayApacOurCompanyCarouselComponent" cardinality="many"
+				collectiontype="list" ordered="true" />
+		</relation>
 
 	</relations>
 
@@ -546,6 +556,60 @@
 				autocreate="true" generate="true"
 				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacMobileMiniCartComponent">
 				<description>Mobile Mini Cart Component</description>
+			</itemtype>
+			
+			<itemtype code="AmwayApacOurCompanyBannerComponent"
+				extends="AmwayApacAbstractTextLinkImageComponent"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacOurCompanyBannerComponent"
+				autocreate="true" generate="true">
+				<description>Our Company top banner.</description>
+				<attributes>
+					<attribute qualifier="bannerDekstopImg" type="localized:Media">
+						<description>Desktop banner image</description>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="bannerMobileImg" type="localized:Media">
+						<description>Mobile banner image</description>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="bannertitle" type="localized:java.lang.String">
+						<description>Header Text</description>
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+			
+			<itemtype code="AmwayApacOurCompanyCarouselComponent"
+				extends="SimpleCMSComponent"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacOurCompanyCarouselComponent"
+				autocreate="true" generate="true">
+				<description>Our Company Carousel Slider</description>
+				<attributes>
+					<attribute qualifier="year" type="localized:java.lang.String">
+						<description>Year of History</description>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="mobiledesc" type="CMSParagraphComponent">
+						<description>Description Mobile</description>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="desktopdesc" type="CMSParagraphComponent">
+						<description>Description Desktop</description>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="bannerImg" type="SimpleBannerComponent">
+						<description>Slider Banner Image</description>
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+			
+			
+			<itemtype code="AmwayApacOurCompanyCarouselMainComponent"
+				extends="SimpleCMSComponent"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacOurCompanyCarouselMainComponent"
+				autocreate="true" generate="true">
+				<description>Our Company Carousel Main Component</description>
 			</itemtype>
 			
 		</typegroup>
