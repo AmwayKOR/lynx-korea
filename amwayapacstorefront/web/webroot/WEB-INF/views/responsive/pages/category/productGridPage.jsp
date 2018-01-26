@@ -6,6 +6,9 @@
 <%@ taglib prefix="storepickup" tagdir="/WEB-INF/tags/responsive/storepickup" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="category" tagdir="/WEB-INF/tags/responsive/category" %>
+<%@ taglib prefix="product" tagdir="/WEB-INF/tags/responsive/product"%>
+<%@ taglib prefix="component" tagdir="/WEB-INF/tags/shared/component"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <template:page pageTitle="${pageTitle}">
             <div class="container-fluid main-container new-plp">
@@ -38,5 +41,10 @@
                         </div>
                     </div>
                 </div>
+
+                <cms:pageSlot position="UpSelling" var="comp">
+                    <cms:component component="${comp}" />
+                </cms:pageSlot>
+
             </div>
 </template:page>

@@ -4,24 +4,34 @@ import static com.amway.apac.core.constants.AmwayapacCoreConstants.CLOSE_PARENTH
 import static com.amway.apac.core.constants.AmwayapacCoreConstants.SPACE;
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
 
+import com.amway.apac.core.product.services.AmwayApacProductReferenceService;
+import com.amway.apac.facades.constants.AmwayapacFacadesConstants;
+import de.hybris.platform.catalog.enums.ProductReferenceTypeEnum;
+import de.hybris.platform.category.model.CategoryModel;
 import de.hybris.platform.commercefacades.product.data.CategoryData;
 import de.hybris.platform.commercefacades.product.data.ProductData;
 import de.hybris.platform.commercefacades.product.impl.DefaultProductFacade;
 import de.hybris.platform.commercefacades.search.ProductSearchFacade;
 import de.hybris.platform.commercefacades.search.data.SearchQueryData;
 import de.hybris.platform.commercefacades.search.data.SearchStateData;
+import de.hybris.platform.commerceservices.product.data.ReferenceData;
 import de.hybris.platform.commerceservices.search.facetdata.ProductCategorySearchPageData;
+import de.hybris.platform.commerceservices.search.pagedata.PageableData;
 import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.servicelayer.dto.converter.ConversionException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
+import de.hybris.platform.servicelayer.util.ServicesUtil;
+import de.hybris.platform.variants.model.VariantProductModel;
 import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.amway.apac.facades.product.AmwayApacProductFacade;
+import org.springframework.util.Assert;
 
 
 /**
@@ -47,6 +57,8 @@ public class DefaultAmwayApacProductFacade extends DefaultProductFacade<ProductM
 	/** The product search facade. */
 	private ProductSearchFacade<ProductData> productSearchFacade;
 
+	/** The product reference service. */
+	private AmwayApacProductReferenceService<ProductReferenceTypeEnum, ProductModel> amwayApacProductReferenceService;
 
 	/**
 	 * Gets recently viewed items by solr serch for product codes
@@ -108,6 +120,110 @@ public class DefaultAmwayApacProductFacade extends DefaultProductFacade<ProductM
 		return searchState;
 	}
 
+	@Override
+	public List<ProductData> getCategoryProductReferencesForCode(final CategoryModel category,
+														  final List<ProductReferenceTypeEnum> referenceTypes,
+														  final Integer limit) {
+		ServicesUtil.validateParameterNotNull(category, AmwayapacFacadesConstants.PARAMETER_CATEGORY_CAN_NOT_BE_EMPTY);
+
+		final List<ReferenceData<ProductReferenceTypeEnum, ProductModel>> references =
+				this.getAmwayApacProductReferenceService().getProductReferencesForCategory(category, referenceTypes, limit);
+
+		return convertProductRerferencesByCategorySearch(category.getCode(), limit, references);
+	}
+
+	/**
+	 * Converts the references for the category code, max number of results and references given.
+	 *
+	 * @param categoryCode
+	 *           category code to to perform the category search
+	 * @param limit
+	 *           max number of results
+	 * @param references
+	 *           references to convert
+	 * @return list of product datas converted
+	 */
+	private List<ProductData> convertProductRerferencesByCategorySearch(final String categoryCode, final Integer limit,
+																		final List<ReferenceData<ProductReferenceTypeEnum, ProductModel>> references)
+	{
+		final List<ProductData> productReferencesFound = new ArrayList<>();
+		if (org.apache.commons.collections4.CollectionUtils.isNotEmpty(references))
+		{
+			try
+			{
+				final ProductCategorySearchPageData<SearchStateData, ProductData, CategoryData> searchPageData = getProductSearchFacade()
+						.categorySearch(categoryCode, createProductReferenceSearchQueryData(references),
+								createSearchPageDataForProductReferenceSearch(limit));
+
+				if (org.apache.commons.collections4.CollectionUtils.isNotEmpty(searchPageData.getResults()))
+				{
+					productReferencesFound.addAll(searchPageData.getResults());
+				}
+			}
+			catch (final ConversionException cE)
+			{
+				LOGGER.error(new StringBuilder(100).append("Error while fetching product references for category [")
+						.append(categoryCode).append("].").toString(), cE);
+			}
+		}
+		return productReferencesFound;
+	}
+
+	/**
+	 * Creates the Solr query to fetch the product data for product references given.
+	 *
+	 * @param references
+	 *           list of reference products to search for
+	 * @return solr query data
+	 */
+	private SearchStateData createProductReferenceSearchQueryData(final List<ReferenceData<ProductReferenceTypeEnum, ProductModel>> references)
+	{
+		final SearchStateData searchState = new SearchStateData();
+
+		final StringBuilder filterQueryBuilder = new StringBuilder(100).append(SOLR_CODE_STRING_QUERY_LABEL);
+		for (final ReferenceData<ProductReferenceTypeEnum, ProductModel> productReference : references)
+		{
+			filterQueryBuilder.append(SPACE).append(getBaseProductCode(productReference));
+		}
+		filterQueryBuilder.append(CLOSE_PARENTHESIS).toString();
+
+		searchState.setFilterRawQueries(filterQueryBuilder.toString());
+
+		final SearchQueryData searchQueryData = new SearchQueryData();
+		searchQueryData.setValue(SOLR_RELEVANCE_SEARCH_QUERY);
+		searchState.setQuery(searchQueryData);
+		return searchState;
+	}
+
+	/**
+	 * Returns the product code if the product is single article, else returns the product code of the base product
+	 *
+	 * @param productReference
+	 *           product reference
+	 * @return code of the base product
+	 */
+	private String getBaseProductCode(final ReferenceData<ProductReferenceTypeEnum, ProductModel> productReference)
+	{
+		return (productReference.getTarget() instanceof VariantProductModel) ? ((VariantProductModel) productReference.getTarget())
+				.getBaseProduct().getCode() : productReference.getTarget().getCode();
+	}
+
+	/**
+	 * Creates page data for product references search. Page number is always kept zero. Max limit decides the page size.
+	 * If limit parameter is null, then max value for solr listing is considered.
+	 *
+	 * @param limit
+	 *           max number of product references to search
+	 * @return page data
+	 */
+	private PageableData createSearchPageDataForProductReferenceSearch(final Integer limit)
+	{
+		final PageableData pageableData = new PageableData();
+		pageableData.setCurrentPage(AmwayapacFacadesConstants.ZERO);
+		pageableData.setPageSize(Objects.nonNull(limit) ? limit : AmwayapacFacadesConstants.PRODUCT_LISTING_MAX_NUMBER_OF_RECORDS);
+		return pageableData;
+	}
+
 	/**
 	 * Gets the product search facade.
 	 *
@@ -128,4 +244,34 @@ public class DefaultAmwayApacProductFacade extends DefaultProductFacade<ProductM
 	{
 		this.productSearchFacade = productSearchFacade;
 	}
+
+	/**
+	 * Gets the product reference service.
+	 * @return the amwayApacProductReferenceService.
+	 */
+	public AmwayApacProductReferenceService<ProductReferenceTypeEnum, ProductModel> getAmwayApacProductReferenceService() {
+		return amwayApacProductReferenceService;
+	}
+
+	/**
+	 * Sets the product reference service.
+	 * @param amwayApacProductReferenceService
+	 * 				the amwayApacProductReferenceService to set
+	 */
+	public void setAmwayApacProductReferenceService(AmwayApacProductReferenceService<ProductReferenceTypeEnum, ProductModel> amwayApacProductReferenceService) {
+		this.amwayApacProductReferenceService = amwayApacProductReferenceService;
+	}
+
+	@Override
+	public List<ProductData> getProductReferencesProductDataForCode(final String code,
+																	final List<ProductReferenceTypeEnum> referenceTypes, final Integer limit)
+	{
+		Assert.hasLength(code, AmwayapacFacadesConstants.PARAMETER_CODE_CAN_NOT_BE_NULL);
+
+		final List<ReferenceData<ProductReferenceTypeEnum, ProductModel>> references = getAmwayApacProductReferenceService()
+				.getProductReferencesForCode(code, referenceTypes, limit);
+
+		return convertProductRerferencesByCategorySearch(null, limit, references);
+	}
+
 }

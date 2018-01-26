@@ -300,7 +300,8 @@
 				</attributes>
 			</itemtype>
 
-			<itemtype code="AmwayCategoryProductReference" generate="true" autocreate="true">
+			<itemtype code="AmwayCategoryProductReference" generate="true" autocreate="true"
+					  jaloclass="com.amway.apac.core.jalo.AmwayCategoryProductReference" extends="GenericItem" >
 				<deployment table="CategoryProductReference" typecode="21015" />
 				<attributes>
 					<attribute qualifier="qualifier" type="java.lang.String">

@@ -530,4 +530,28 @@
         <property name="baseStoreService" ref="baseStoreService" />
         <property name="amwayApacUserDao" ref="amwayApacUserDao" />
     </bean>
+
+	<alias name="defaultAmwayApacProductReferenceService" alias="amwayApacProductReferenceService" />
+
+	<bean id="defaultAmwayApacProductReferenceService"
+		  class="com.amway.apac.core.product.services.impl.AmwayApacProductReferenceServiceImpl" parent="defaultCommerceProductReferenceService" />
+
+	<bean id="amwayApacCategoryProductReferenceInterceptor"
+		  class="com.amway.apac.core.interceptors.AmwayApacCategoryProductReferenceInterceptor"
+		  scope="tenant">
+	</bean>
+
+	<bean id="amwayCategoryProductReferenceInterceptorMapping" scope="tenant"
+		  class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="amwayApacCategoryProductReferenceInterceptor" />
+		<property name="typeCode" value="AmwayCategoryProductReference" />
+	</bean>
+
+	<bean id="amwayApacCategoryProductReferenceRemoveInterceptor" class="com.amway.apac.core.interceptors.AmwayApacCategoryProductReferenceRemoveInterceptor"/>
+
+	<bean id="amwayCategoryProductReferenceRemoveInterceptorMapping"
+		  class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="amwayApacCategoryProductReferenceRemoveInterceptor"/>
+		<property name="typeCode" value="AmwayCategoryProductReference"/>
+	</bean>
 </beans>

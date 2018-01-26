@@ -27,5 +27,6 @@
 			<description>Raw query to be populated in Search Query.</description>
 		</property>
 	</bean>
-	
+
+
 </beans>
