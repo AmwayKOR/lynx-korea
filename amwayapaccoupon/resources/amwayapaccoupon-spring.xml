@@ -35,7 +35,7 @@
     	<property name="couponService" ref="couponService"/>
 	 </bean>
     
-    <bean id="amwayCouponPrepareInterceptorMapping" scope="tenant"
+    <bean id="amwayCouponPrepareInterceptorMapping"
 		class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
 		<property name="interceptor" ref="amwayCouponPrepareInterceptor" />
 		<property name="typeCode" value="AmwayCoupon" />
