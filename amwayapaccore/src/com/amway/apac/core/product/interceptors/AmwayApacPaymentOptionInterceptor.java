@@ -1,7 +1,5 @@
 package com.amway.apac.core.product.interceptors;
 
-import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
-
 import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.servicelayer.interceptor.InterceptorContext;
 import de.hybris.platform.servicelayer.interceptor.InterceptorException;
@@ -25,61 +23,53 @@ public class AmwayApacPaymentOptionInterceptor
 		implements PrepareInterceptor<AmwayPaymentOptionModel>, RemoveInterceptor<AmwayPaymentOptionModel>
 {
 
-	/** The Constant PAYMENT_OPTION. */
-	private static final String PAYMENT_OPTION = "Payment Option Model";
-
 	/**
 	 * Method to update product model modified time while removing payment option
-	 *
-	 * @throws IllegalArgumentException
-	 *            if model is null
 	 */
 	@Override
 	public void onRemove(final AmwayPaymentOptionModel model, final InterceptorContext ctx) throws InterceptorException
 	{
-		validateParameterNotNullStandardMessage(PAYMENT_OPTION, model);
-
-		final ProductModel productModel = model.getProduct();
-		if (null != productModel)
-		{
-			productModel.setModifiedtime(Calendar.getInstance().getTime());
-			if (!(ctx.contains(productModel, PersistenceOperation.SAVE)))
-			{
-				ctx.registerElementFor(productModel, PersistenceOperation.SAVE);
-			}
-		}
+		registerProductHierarchyForSave(model, ctx);
 	}
 
 	/**
 	 * Method to update product model modified time while updating payment option
-	 *
-	 * @throws IllegalArgumentException
-	 *            if model is null
 	 */
 	@Override
 	public void onPrepare(final AmwayPaymentOptionModel model, final InterceptorContext ctx) throws InterceptorException
 	{
-		validateParameterNotNullStandardMessage(PAYMENT_OPTION, model);
+		registerProductHierarchyForSave(model, ctx);
+	}
 
+	/**
+	 * Registers the product hierarchy of the payment option for save.
+	 *
+	 * @param model
+	 *           payment option model
+	 * @param ctx
+	 *           Intercepter context
+	 */
+	protected void registerProductHierarchyForSave(final AmwayPaymentOptionModel model, final InterceptorContext ctx)
+	{
 		final ProductModel productModel = model.getProduct();
-
 		if (null != productModel)
 		{
-			final Calendar cal = Calendar.getInstance();
-			productModel.setModifiedtime(cal.getTime());
+			final Calendar calender = Calendar.getInstance();
+			productModel.setModifiedtime(calender.getTime());
 			if (!ctx.contains(productModel, PersistenceOperation.SAVE))
 			{
 				ctx.registerElementFor(productModel, PersistenceOperation.SAVE);
 			}
 
+			// if there is a base product, also register that for save
 			if (productModel instanceof VariantProductModel)
 			{
 				final VariantProductModel variant = (VariantProductModel) productModel;
 				final ProductModel baseProduct = variant.getBaseProduct();
-				baseProduct.setModifiedtime(cal.getTime());
-				if (!ctx.contains(variant.getBaseProduct(), PersistenceOperation.SAVE))
+				baseProduct.setModifiedtime(calender.getTime());
+				if (!ctx.contains(baseProduct, PersistenceOperation.SAVE))
 				{
-					ctx.registerElementFor(variant.getBaseProduct(), PersistenceOperation.SAVE);
+					ctx.registerElementFor(baseProduct, PersistenceOperation.SAVE);
 				}
 			}
 		}
