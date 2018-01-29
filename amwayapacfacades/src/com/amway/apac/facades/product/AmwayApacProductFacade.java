@@ -17,13 +17,11 @@ public interface AmwayApacProductFacade extends ProductFacade
 {
 
 	/**
-	 * Gets the recently viewed product data.
+	 * Gets product lists from Solr based on product codes given.
 	 *
-	 * @param list
-	 *           the list
-	 * @return the recently viewed product data
+	 * @return List of {@link ProductData} for the codes given
 	 */
-	List<ProductData> getRecentlyViewedProductData(final List<String> list);
+	List<ProductData> getProductDataUsingSolrSearch(final List<String> productCodes);
 
 	/**
 	 * Retrieves product references of a given category
@@ -40,22 +38,21 @@ public interface AmwayApacProductFacade extends ProductFacade
 	 * @return the product references
 	 */
 	List<ProductData> getCategoryProductReferencesForCode(final CategoryModel category,
-														  final List<ProductReferenceTypeEnum> referenceTypes,
-														  final Integer limit);
+			final List<ProductReferenceTypeEnum> referenceTypes, final Integer limit);
 
-    /**
-     * Retrieves product references of a product given its code.
-     *
-     * @param code
-     *           the product code
-     * @param referenceTypes
-     *           the product reference types to return.
-     * @param limit
-     *           maximum number of references to retrieve. If null, all available references will be retrieved.
-     * @throws IllegalArgumentException
-     *            if the product code is null or empty
-     * @return the product references
-     */
-    List<ProductData> getProductReferencesProductDataForCode(final String code,
-                                                             final List<ProductReferenceTypeEnum> referenceTypes, final Integer limit);
+	/**
+	 * Retrieves product references of a product given its code.
+	 *
+	 * @param productCode
+	 *           the product code
+	 * @param referenceTypes
+	 *           the product reference types to return.
+	 * @param limit
+	 *           maximum number of references to retrieve. If null, all available references will be retrieved.
+	 * @throws IllegalArgumentException
+	 *            if the product code is null or empty
+	 * @return the product references
+	 */
+	List<ProductData> getProductReferencesProductDataForCode(final String productCode,
+			final List<ProductReferenceTypeEnum> referenceTypes, final Integer limit);
 }

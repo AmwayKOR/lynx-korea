@@ -52,7 +52,7 @@ public class AmwayapacFacadesConstants extends GeneratedAmwayapacFacadesConstant
 	/**
 	 * Max number of results for product listing screens.
 	 */
-	public static final Integer PRODUCT_LISTING_MAX_NUMBER_OF_RECORDS = Integer.valueOf(150);
+	public static final int PRODUCT_LISTING_MAX_NUMBER_OF_RECORDS = 150;
 
 	private AmwayapacFacadesConstants()
 	{

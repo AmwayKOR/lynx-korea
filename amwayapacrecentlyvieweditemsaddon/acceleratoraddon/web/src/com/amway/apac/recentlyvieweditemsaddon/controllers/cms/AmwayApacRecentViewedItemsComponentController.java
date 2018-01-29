@@ -27,47 +27,52 @@ import de.hybris.platform.commercefacades.product.data.ProductData;
  */
 @Controller("AmwayApacRecentViewedItemsComponentController")
 @RequestMapping(value = "/view/AmwayApacRecentViewedItemsComponentController")
-public class AmwayApacRecentViewedItemsComponentController extends AbstractCMSAddOnComponentController<AmwayApacRecentViewedItemsComponentModel> {
+public class AmwayApacRecentViewedItemsComponentController
+		extends AbstractCMSAddOnComponentController<AmwayApacRecentViewedItemsComponentModel> {
 
 	/** The Constant LOGGER to log events at class level. */
 	private static final Logger LOGGER = LoggerFactory.getLogger(AmwayApacRecentViewedItemsComponentController.class);
-	
-    /** The recent viewed items service. */
-    @Resource(name = "recentViewedItemsService")
-    private RecentViewedItemsService recentViewedItemsService;
-    
-    /** The amway apac product facade. */
-    @Resource(name = "amwayApacProductFacade")
-    private AmwayApacProductFacade amwayApacProductFacade;
 
-    @Override
-    protected String getAddonUiExtensionName(final AmwayApacRecentViewedItemsComponentModel component)
-    {
-        return AmwayapacrecentlyvieweditemsaddonConstants.EXTENSIONNAME;
-    }
+	/** The recent viewed items service. */
+	@Resource(name = "recentViewedItemsService")
+	private RecentViewedItemsService recentViewedItemsService;
 
-    /**
-     * Gets recently viewed product data to use in component.
-     *
-     * @param request the request
-     * @param model the model
-     * @param component the component
-     */
-    @Override
-    protected void fillModel(HttpServletRequest request, Model model, AmwayApacRecentViewedItemsComponentModel component) {
-    	
-    	final List<ProductData> recentlyViewedProducts = amwayApacProductFacade.getRecentlyViewedProductData(recentViewedItemsService.getRecentViewedProducts());
-    	
-		if (CollectionUtils.isNotEmpty(recentlyViewedProducts))
-		{
-			LOGGER.info(new StringBuilder(100).append("Found ").append(recentlyViewedProducts.size())
-					.append(" recently viewed products.").toString());
-			
+	/** The amway apac product facade. */
+	@Resource(name = "productFacade")
+	private AmwayApacProductFacade amwayApacProductFacade;
+
+	@Override
+	protected String getAddonUiExtensionName(final AmwayApacRecentViewedItemsComponentModel component) {
+		return AmwayapacrecentlyvieweditemsaddonConstants.EXTENSIONNAME;
+	}
+
+	/**
+	 * Gets recently viewed product data to use in component.
+	 *
+	 * @param request
+	 *            the request
+	 * @param model
+	 *            the model
+	 * @param component
+	 *            the component
+	 */
+	@Override
+	protected void fillModel(HttpServletRequest request, Model model,
+			AmwayApacRecentViewedItemsComponentModel component) {
+
+		final List<ProductData> recentlyViewedProducts = amwayApacProductFacade
+				.getProductDataUsingSolrSearch(recentViewedItemsService.getRecentViewedProducts());
+
+		if (CollectionUtils.isNotEmpty(recentlyViewedProducts)) {
+			if (LOGGER.isDebugEnabled()) {
+				LOGGER.debug(new StringBuilder(100).append("Found ").append(recentlyViewedProducts.size())
+						.append(" recently viewed products.").toString());
+			}
 			model.addAttribute("recentlyViewedProducts", recentlyViewedProducts);
+		} else {
+			if (LOGGER.isDebugEnabled()) {
+				LOGGER.debug(new StringBuilder(50).append("No recently viewed product found.").toString());
+			}
 		}
-		else
-		{
-			LOGGER.info(new StringBuilder(50).append("No recently viewed product found.").toString());
-		}
-    }
+	}
 }
