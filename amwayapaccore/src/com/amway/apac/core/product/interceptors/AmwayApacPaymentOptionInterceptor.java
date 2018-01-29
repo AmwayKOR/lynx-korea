@@ -1,4 +1,4 @@
-package com.amway.apac.core.interceptors;
+package com.amway.apac.core.product.interceptors;
 
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
 
@@ -42,8 +42,7 @@ public class AmwayApacPaymentOptionInterceptor
 		final ProductModel productModel = model.getProduct();
 		if (null != productModel)
 		{
-			final Calendar calendar = Calendar.getInstance();
-			productModel.setModifiedtime(calendar.getTime());
+			productModel.setModifiedtime(Calendar.getInstance().getTime());
 			if (!(ctx.contains(productModel, PersistenceOperation.SAVE)))
 			{
 				ctx.registerElementFor(productModel, PersistenceOperation.SAVE);
