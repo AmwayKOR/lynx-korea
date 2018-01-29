@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -54,11 +55,15 @@ public class BusinessCenterPageController extends AbstractSearchPageController
 
 	@RequestMapping(value = "/message-center", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String notificationMain(final Model model, @RequestParam(value = "page", defaultValue = "1") final int page,
+	public String notificationMain(final Model model, @RequestParam(value = "page", defaultValue = "0") final int page,
 			@RequestParam(value = "show", defaultValue = "Page") final ShowMode showMode,
 			@RequestParam(value = "pageSize", defaultValue = "5") final int pageSize,
+			@RequestParam(value = "type", required = false) final String messageType,
 			@RequestParam(value = "sortCode", required = false) final String sortCode,
-			@RequestParam(value = "status", required = false) final String status, final RedirectAttributes redirectModel)
+			@RequestParam(value = "status", required = false) final String status,
+			@RequestHeader(value = "x-requested-with", required = false) final String requestType,
+			final RedirectAttributes redirectModel)
+
 			throws CMSItemNotFoundException
 	{
 		storeCmsPageInModel(model, getContentPageForLabelOrId(MESSAGE_CENTER_CMS_PAGE));
@@ -76,13 +81,22 @@ public class BusinessCenterPageController extends AbstractSearchPageController
 			{ AmwayNotificationUserActionStatus.valueOf(status) };
 		}
 
-		final PageableData pageableData = createPageableData(page - 1, pageSize, sortCode, showMode);
+		final PageableData pageableData = createPageableData(page, pageSize, sortCode, showMode);
 		final SearchPageData<AmwayApacNotificationData> searchPageData = amwayApacNotificationFacade
 				.getAmwayNotificationSectionForCurrentUserWithPageData(pageableData, statuses, "");
 		model.addAttribute("countOfNotifications", searchPageData.getPagination().getTotalNumberOfResults());
 		populateModel(model, searchPageData, showMode);
 
-		return getViewForPage(model);
+		if ("XMLHttpRequest".equals(requestType))
+		{
+			return ControllerConstants.Views.Fragments.MessageCenter.MessageCenterFragment;
+		}
+		else
+		{
+			return getViewForPage(model);
+		}
+
+
 	}
 
 	/**
