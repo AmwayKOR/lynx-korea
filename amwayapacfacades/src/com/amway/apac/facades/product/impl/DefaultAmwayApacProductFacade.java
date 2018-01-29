@@ -91,7 +91,25 @@ public class DefaultAmwayApacProductFacade extends DefaultProductFacade<ProductM
 		final List<ReferenceData<ProductReferenceTypeEnum, ProductModel>> references = this.getAmwayApacProductReferenceService()
 				.getProductReferencesForCategory(category, referenceTypes, limit);
 
-		return fetchProductDataUsingSolrSearch(createSearchQueryDataForProductReference(references), limit);
+		return convertProductReferences(limit, references);
+	}
+
+	/**
+	 * Converts the product references
+	 * 
+	 * @param limit
+	 * @param references
+	 * @return
+	 */
+	protected List<ProductData> convertProductReferences(final Integer limit,
+			final List<ReferenceData<ProductReferenceTypeEnum, ProductModel>> references)
+	{
+		final List<ProductData> productsFound = new ArrayList<>();
+		if (CollectionUtils.isNotEmpty(references))
+		{
+			productsFound.addAll(fetchProductDataUsingSolrSearch(createSearchQueryDataForProductReference(references), limit));
+		}
+		return productsFound;
 	}
 
 	/**
@@ -106,7 +124,7 @@ public class DefaultAmwayApacProductFacade extends DefaultProductFacade<ProductM
 		final List<ReferenceData<ProductReferenceTypeEnum, ProductModel>> references = getAmwayApacProductReferenceService()
 				.getProductReferencesForCode(productCode, referenceTypes, limit);
 
-		return fetchProductDataUsingSolrSearch(createSearchQueryDataForProductReference(references), limit);
+		return convertProductReferences(limit, references);
 	}
 
 	/**
