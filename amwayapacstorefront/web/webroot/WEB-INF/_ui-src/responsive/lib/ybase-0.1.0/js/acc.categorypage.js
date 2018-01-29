@@ -9,7 +9,7 @@ ACC.categorypage = {
     ],
 
     bindShowMoreButton : function(){
-    	$(document).on("click", "#show-more", function(){
+    	$(document).on("click", ".btn-show-more-product-listing", function(){
     		var listingDiv = $(this).closest(".product-list-right-component").find(".product__list--item").last();
     		var seeMoreDiv = $(this).closest(".show-more-products-wrapper");
     		$form = $(this).closest(".show-more-products-wrapper").find("form");

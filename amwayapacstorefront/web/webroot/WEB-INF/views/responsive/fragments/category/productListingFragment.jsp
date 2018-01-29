@@ -23,7 +23,7 @@
 	       		<input type="hidden" name="q" value="${searchPageData.currentQuery.query.value}"/>
 	       		<input type="hidden" name="sort" value=""/>
 	       		<input type="hidden" name="page" value="${searchPageData.pagination.currentPage + 1}"/>
-	            <button type="button" id="show-more" class="btn btn-link">
+	            <button type="button" id="show-more" class="btn btn-link btn-show-more-product-listing">
 	                <span class="text-wrap">Show more</span>
 	                <span class="icon icon-arrow-dropdown"></span>
 	            </button>
