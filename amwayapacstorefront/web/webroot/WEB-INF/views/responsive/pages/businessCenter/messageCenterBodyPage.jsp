@@ -8,10 +8,11 @@
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="nav" tagdir="/WEB-INF/tags/responsive/nav" %>
 
 <div id ="message-center">
   <div class="container-fluid main-container">
-        <h1 class="page-title">Message Center</h1>
+        <h1 class="page-title"><spring:theme code="text.account.messageCenter"/></h1>
         <div class="message-title">
         		<c:choose>
 	        		<c:when test="${countOfNotifications eq 0}">
@@ -29,6 +30,19 @@
                 <div class="panel-group accordion-billing-shipping" >
                 		
                 		<c:if test="${not empty searchPageData.results}">
+			            <div class="account-message-center-section-content">
+			                <div class="account-message-center-messages container-fluid">
+			                    <c:set var="numberOfPages" value="${searchPageData.pagination.totalNumberOfResults / searchPageData.pagination.pageSize}"/>
+			                    <input type="hidden" class="js-message-center-number-of-pages" value="<fmt:formatNumber value="${numberOfPages + (numberOfPages % 1 == 0 ? 0 : 0.5)}" pattern="#" />"/>
+			
+			                    <div class="js-message-center-search-result">
+			                        <jsp:include page="../../fragments/businessCenter/messageCenterListingFragment.jsp"/>
+			                    </div>
+			                </div>
+			            </div>
+			        </c:if>
+			        <!-- 
+                		<c:if test="${not empty searchPageData.results}">
                 			<c:forEach items="${searchPageData.results}" var="notification">
                 				<div class="panel">
                 					<div id="paymentInformationBody" class="panel-collapse">
@@ -37,6 +51,9 @@
 		                                    <div class="account-cards card-select">
 		                                        <div>
 		                                            <div class="payment-info-container container-fluid">
+		                                            <c:set var="numberOfPages" value="${searchPageData.pagination.totalNumberOfResults / searchPageData.pagination.pageSize}"/>
+                    									<input type="hidden" class="js-message-center-number-of-pages" value="<fmt:formatNumber value="${numberOfPages + (numberOfPages % 1 == 0 ? 0 : 0.5)}" pattern="#" />"/>
+		                                            
 		                                                <div class="row">
 		                                                    <div class="col-lg-6 col-md-6 col-xs-12 card-info-block">
 		                                                        <div class="card-info">
@@ -86,15 +103,25 @@
                 			</c:forEach>
                 		</c:if>
                 
-                
+                		 -->
                     
                 </div>
             </div>
-            <!-- 
-            <div class="account-orderhistory-pagination">
-				<nav:pagination top="false" msgKey="text.account.orderHistory.page" showCurrentPageInfo="true" hideRefineButton="true" supportShowPaged="${isShowPageAllowed}" supportShowAll="${isShowAllAllowed}" searchPageData="${searchPageData}" searchUrl="${searchUrl}"  numberPagesShown="${numberPagesShown}"/>
-			</div>
-             -->
+            <br/>
+
+        <c:if test="${countOfNotifications > 0}">
+            <div class="account-message-center-pagination">
+                <p class="text-center display-none">
+                    <a id="show-more" class="js-message-center-show-more">
+                      <span>
+                        <spring:theme code="text.account.messageCenter.viewMore"/>
+                      </span>
+                      <span class="icon icon-arrow-dropdown"></span>
+                    </a>
+                </p>
+            </div>
+        </c:if>
+             
         </div>
     </div>
 </div>
