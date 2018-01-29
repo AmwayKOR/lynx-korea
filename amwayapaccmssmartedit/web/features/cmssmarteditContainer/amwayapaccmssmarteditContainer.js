@@ -12,6 +12,7 @@
 angular.module('amwayapaccmssmarteditModule', [
 	'editorFieldMappingServiceModule',
 	'amwayApacCmsItemDropdownModule',
+	'amwayApacEditableItemPrinterModule',
 	'amwayapaccmssmartedit/cmssmarteditContainerTemplates'
 ])
 .run(function(editorFieldMappingService) {

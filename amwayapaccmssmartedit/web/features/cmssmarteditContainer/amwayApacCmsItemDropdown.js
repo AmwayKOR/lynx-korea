@@ -12,7 +12,7 @@ angular.module('amwayApacCmsItemDropdownModule', ['amwayapaccmssmartedit/cmssmar
     .controller('amwayApacCmsItemDropdownController', function() {
 
         this.$onInit = function() {
-            this.itemTemplateUrl = 'amwayApacCmsItemSearchTemplate.html';
+            this.itemTemplateUrl = 'amwayApacEditableItemPrinterWrapperTemplate.html';
             this.field.uri = this.field.uri || "/cmswebservices/v1/sites/CURRENT_CONTEXT_SITE_ID/cmsitems";
             this.field.params = this.field.params || {};
             this.field.params.catalogId = 'CURRENT_CONTEXT_CATALOG';
