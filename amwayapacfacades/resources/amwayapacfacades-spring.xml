@@ -279,11 +279,11 @@
     <alias alias="productSearchFacade" name="defaultAmwayApacSolrProductSearchFacade"/>
 	<bean id="defaultAmwayApacSolrProductSearchFacade" class="com.amway.apac.facades.search.solrfacetsearch.impl.DefaultAmwayApacSolrProductSearchFacade" parent="defaultSolrProductSearchFacade" />
 
-	<alias alias="amwayApacProductFacade" name="defaultAmwayApacProductFacade"/>
+	<alias alias="productFacade" name="defaultAmwayApacProductFacade"/>
 	<bean id="defaultAmwayApacProductFacade" class="com.amway.apac.facades.product.impl.DefaultAmwayApacProductFacade"
 			parent="defaultProductFacade">
 		<property name="productSearchFacade" ref="productSearchFacade" />
-		<property name="amwayApacProductReferenceService" ref="amwayApacProductReferenceService"/>
+		<property name="amwayApacProductReferenceService" ref="commerceProductReferenceService"/>
 	</bean>
 	
 	<bean id="AmwayApacNotificationFacade" class="com.amway.apac.facades.notification.impl.AmwayApacNotificationFacadeImpl">
