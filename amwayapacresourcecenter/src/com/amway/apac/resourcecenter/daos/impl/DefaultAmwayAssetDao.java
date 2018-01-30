@@ -15,7 +15,6 @@ import de.hybris.platform.servicelayer.search.FlexibleSearchService;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.servicelayer.user.UserService;
 
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
@@ -40,10 +39,6 @@ import com.amway.apac.resourcecentre.model.media.AmwayAssetModel;
  */
 public class DefaultAmwayAssetDao implements AmwayAssetDao
 {
-
-	/** The Constant DATE FORMAT. */
-	private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ssz";
-
 	/** The Constant CATALOG VERSION. */
 	private static final String CATALOG_VERSION_PARAM = CATALOG_VERSION_STRING;
 
@@ -170,8 +165,6 @@ public class DefaultAmwayAssetDao implements AmwayAssetDao
 			final Calendar cal = new GregorianCalendar(Integer.parseInt(year), AmwayapacresourcecenterConstants.ZERO_INT.intValue(),
 					AmwayapacresourcecenterConstants.ONE_INT.intValue());
 			final Date start = cal.getTime();
-			final SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
-			final String startDate = dateFormat.format(start);
 
 			//set date to last day of year
 			final Calendar calender = new GregorianCalendar(
@@ -179,9 +172,8 @@ public class DefaultAmwayAssetDao implements AmwayAssetDao
 					AmwayapacresourcecenterConstants.ZERO_INT.intValue(), AmwayapacresourcecenterConstants.ONE_INT.intValue());
 
 			final Date end = calender.getTime();
-			final String endDate = dateFormat.format(end);
-			queryParams.put("startDate", startDate);
-			queryParams.put("endDate", endDate);
+			queryParams.put("startDate", start);
+			queryParams.put("endDate", end);
 
 			yearQuery = YEAR_QUERY_PART;
 		}
