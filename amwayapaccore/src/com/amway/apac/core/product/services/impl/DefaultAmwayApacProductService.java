@@ -270,8 +270,11 @@ public class DefaultAmwayApacProductService extends DefaultProductService implem
 	 */
 	protected String getNormalizedAmwayAccountCode(final AmwayAccountModel amwayAccount)
 	{
-		return amwayAccount.getControllingAffiliate().getAffiliateNumber() + AmwayapacCoreConstants.HYPHEN_CHAR
-				+ amwayAccount.getCode();
+		/*
+		 * return amwayAccount.getControllingAffiliate().getAffiliateNumber() + AmwayapacCoreConstants.HYPHEN_CHAR +
+		 * amwayAccount.getCode();
+		 */
+		return amwayAccount.getCode();
 	}
 
 	/**
