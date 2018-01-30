@@ -49,13 +49,9 @@
 	<alias alias="deliveryService" name="defaultAmwayApacDeliveryService"/>
 	<bean id="defaultAmwayApacDeliveryService" parent="defaultDeliveryService"
 		class="com.amway.apac.deliveryslot.services.impl.DefaultAmwayApacDeliveryService">
-		<property name="amwayApacDeliverySlotDao" ref="amwayApacDeliverySlotDao" />	
+		 <property name="amwayApacDeliverySlotDao" ref="amwayApacDeliverySlotDao" />	
 		 <property name="cartService" ref="cartService" />
-         <property name="transactionTemplate">
-            <bean class="org.springframework.transaction.support.TransactionTemplate">
-                <property name="transactionManager" ref="txManager"/>
-            </bean>
-        </property>
+		 <property name="amwayApacDeliverySlotManagementService" ref="amwayApacDeliverySlotManagementService"/>
 	</bean>
 	
 	<alias alias="amwayApacDeliverySlotValidationHook" name="defaultAmwayApacDeliverySlotValidationHook"/>
