@@ -318,6 +318,11 @@ public interface ControllerConstants
 				String SortProductInShoppingListDetailsResponse = "fragments/shoppingList/sortProductInShoppingListDetailsResponse"; //NOSONAR
 
 			}
+
+			interface MessageCenter
+			{
+				String MessageCenterFragment = "fragments/businessCenter/messageCenterListingFragment"; //NOSONAR
+			}
 		}
 	}
 
@@ -497,7 +502,7 @@ public interface ControllerConstants
 		 * Business & Information breadcrumb key
 		 */
 		String MESSAGE_CENTER_PAGE_BREADCRUMB_KEY = "businesscenter.messagecenter.page.breadcrumb";
-		
+
 		/**
 		 * Our Company breadcrumb key
 		 */
