@@ -602,7 +602,7 @@
 		<typegroup name="backOrder">
 			<itemtype code="AmwayBackOrder" autocreate="true" generate="true">
 				<description>Model to capture back order details in Hybris.</description>
-				<deployment table="BackOrder" typecode="21082" />
+				<deployment table="BackOrder" typecode="21085" />
 				<attributes>
 					<attribute qualifier="product" type="Product">
 						<description>Specifies the product in the backorder.</description>
