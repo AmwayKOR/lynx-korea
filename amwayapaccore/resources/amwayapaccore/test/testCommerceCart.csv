@@ -41,9 +41,10 @@ INSERT_UPDATE Country;isocode[unique=true];name[lang=de];name[lang=en];active;co
 INSERT_UPDATE UserGroup;uid[unique=true];groups(uid);
 ;cockpitgroup;;
 ;customergroup;cockpitgroup;
+;testgroup;
 
 INSERT_UPDATE Customer;uid[unique=true];customerID;name;description;sessionLanguage(isocode);sessionCurrency(isocode);groups(uid);password;;
-;ahertz;K2006-C0005;Anja Hertz;;en;USD;customergroup;1234;;
+;ahertz;K2006-C0005;Anja Hertz;;en;USD;customergroup,testgroup;1234;;
 ;abrode;K2006-C0006;Arin Brode;;en;USD;customergroup;1234;;
 ;dejol;K2006-C0007;Max de Jol;;en;USD;customergroup;1234;;
 ;promoted;K2006-C0007;Max promo;;en;EUR;customergroup;1234;;
@@ -96,6 +97,20 @@ INSERT_UPDATE AmwayPreLaunchConfig;code[unique=true];classification(code);startD
 
 INSERT_UPDATE AmwayUserPromotionCount;userId[unique=true];promotionCode[unique=true];productCode[unique=true];currentCount;store(uid)
 ;abrode;PRE_LAUNCH_PROMOTION;HW1210-3423;5;testStore;
+
+INSERT_UPDATE Order;user(uid);code[unique=true];currency(isocode);date[dateformat=dd.MM.yyyy HH:mm:ss];net;calculated;site(uid);store(uid);guid;;;;
+;ahertz;ahertzOrder;EUR;27.04.2010 00:00:00;false;false;testSite;testStore;;;;
+;abrode;abrodeOrder;EUR;27.04.2010 00:00:00;false;false;testSite;testStore;;;;
+
+INSERT_UPDATE Order;user(uid);code[unique=true];account(code)
+;ahertz;ahertzOrder;ahertz
+;abrode;abrodeOrder;abrode
+
+INSERT OrderEntry;order(Order.code);creationTime[dateformat=dd.MM.yyyy HH:mm:ss];product(code,catalogVersion(catalog(id),version));quantity;unit(code);entryNumber;totalPrice;;;
+;ahertzOrder;27.04.2010 00:01:00;HW1210-3422:$catalog-id:$catalog-version;2;pieces;1;7000;;;
+;ahertzOrder;27.04.2010 00:02:00;HW1210-3423:$catalog-id:$catalog-version;2;pieces;2;30;;;
+;ahertzOrder;27.04.2010 00:03:00;HW1210-3425:$catalog-id:$catalog-version;10;pieces;4;800;;;
+;ahertzOrder;27.04.2010 00:04:00;HW1210-3424:$catalog-id:$catalog-version;5;pieces;3;300;;;
 
 INSERT_UPDATE Cart;user(uid);code[unique=true];currency(isocode);date[dateformat=dd.MM.yyyy HH:mm:ss];net;calculated;site(uid);store(uid);guid;;;;
 ;ahertz;ahertzCart;EUR;27.04.2010 00:00:00;false;false;;;;;;
@@ -212,3 +227,17 @@ INSERT_UPDATE AmwayDeliverySlotConfig;warehouse(code);orderingDay(code)[unique=t
 
 
 
+
+##################################################### Notifications [START] #########################################
+
+INSERT_UPDATE AmwayAccountGroupTag;code[unique=true];affiliate;active;groupType(code);notification(code)
+;PLATINUM_AND_ABOVE;100;true;ClASSIFICATION;diamond_notification
+;DIAMOND_AND_ABOVE;100;true;ClASSIFICATION;platinum_notification
+;testgroup;100;true;HYBRIS_GROUP;group_notification
+
+INSERT_UPDATE AmwayNotification;code[unique=true];shortDescription;longDescription;publishDate;site(uid);expiryDate;status(code);accountGroupTag(code)
+;diamond_notification;Diamond Test Notification;This notification tests for the diamond and above classification level;Jan 17, 2018 11:59:20 AM;testSite;Dec 17, 2018 11:59:23 AM;PUBLISHED;PLATINUM_AND_ABOVE
+;platinum_notification;Platinum Test Notification;This notification tests for platinum and above classification level;Jan 17, 2018 11:59:20 AM;testSite;Dec 17, 2018 11:59:23 AM;PUBLISHED;DIAMOND_AND_ABOVE
+;group_notification;Group test notification;This notification will test the functioning of notifications for group.;Jan 17, 2018 11:59:20 AM;testSite;Dec 17, 2018 11:59:23 AM;PUBLISHED;testgroup
+
+##################################################### Notifications [END] #########################################

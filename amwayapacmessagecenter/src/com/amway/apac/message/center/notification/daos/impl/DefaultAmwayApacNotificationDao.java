@@ -68,8 +68,8 @@ public class DefaultAmwayApacNotificationDao implements AmwayApacNotificationDao
 
 
 	/**
-	 * Query to search active PUBLISHED AmwayNotifications with publishDate before and expiryDate after the current time and
-	 * given baseSite, affiliate.
+	 * Query to search active PUBLISHED AmwayNotifications with publishDate before and expiryDate after the current time
+	 * and given baseSite, affiliate.
 	 */
 	private static final StringBuilder AMWAY_NOTIFICATION_MAPPING_QUERY = new StringBuilder().append("SELECT {an.")
 			.append(AmwayNotificationModel.PK).append("} FROM {").append(AmwayNotificationModel._TYPECODE).append(" as an ")
@@ -115,8 +115,8 @@ public class DefaultAmwayApacNotificationDao implements AmwayApacNotificationDao
 	}
 
 	/**
-	 * Changes the passed query for filtering on the basis of given customers classification level, user groups in which the
-	 * user is present and the NotificationUserActionStatus.
+	 * Changes the passed query for filtering on the basis of given customers classification level, user groups in which
+	 * the user is present and the NotificationUserActionStatus.
 	 *
 	 * @param baseSite
 	 * @param customer
@@ -212,9 +212,13 @@ public class DefaultAmwayApacNotificationDao implements AmwayApacNotificationDao
 	 */
 	protected List<String> getClassificationNames(final String accountClassficationCode)
 	{
-		final Integer currentAccountRank = getAmwayAccountClassificationRankMapping()
-				.get(AccountClassificationEnum.valueOf(accountClassficationCode));
+		Integer currentAccountRank = Integer.valueOf(0);
 
+		if (StringUtils.isNotBlank(accountClassficationCode))
+		{
+			currentAccountRank = getAmwayAccountClassificationRankMapping()
+					.get(AccountClassificationEnum.valueOf(accountClassficationCode));
+		}
 		final List<String> classificationNames = new ArrayList<>();
 		for (final Entry<AccountClassificationEnum, Integer> mapEntry : getAmwayAccountClassificationRankMapping().entrySet())
 		{
