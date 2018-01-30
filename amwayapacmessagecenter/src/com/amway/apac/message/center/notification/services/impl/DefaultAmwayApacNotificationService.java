@@ -40,12 +40,12 @@ import com.amway.apac.message.center.notification.services.AmwayApacNotification
  */
 public class DefaultAmwayApacNotificationService implements AmwayApacNotificationService
 {
-
 	private static final Logger LOGGER = LoggerFactory.getLogger(DefaultAmwayApacNotificationService.class);
 
 	private static final String ERROR_MESSAGE_NULL_PAGEABLE_DATA = "[pageableData] must not be null";
 	private static final String ERROR_MESSAGE_NULL_CUSTOMER = "[customer] must not be null";
 	private static final String ERROR_MESSAGE_NULL_NOTIFICATION_CODE = "[notificationCode] field can not be null";
+	private static final String NOTIFICATION_STRING = "Notification";
 	private static final String CUSTOMER_STRING = "customer";
 	private static final String NEW_STATUS_STRING = "newStatus";
 
@@ -97,18 +97,11 @@ public class DefaultAmwayApacNotificationService implements AmwayApacNotificatio
 	public void changeUserNotificationStatus(final AmwayNotificationModel notification, final CustomerModel customer,
 			final AmwayNotificationUserActionStatus newStatus)
 	{
+		validateParameterNotNullStandardMessage(NOTIFICATION_STRING, notification);
 		validateParameterNotNullStandardMessage(CUSTOMER_STRING, customer);
 		validateParameterNotNullStandardMessage(NEW_STATUS_STRING, newStatus);
 
-		final Map<String, Object> params = new HashMap<>(2);
-		params.put(NOTIFICATION, notification);
-		params.put(USER, customer);
-		if (LOGGER.isInfoEnabled())
-		{
-			LOGGER.info(new StringBuilder(100).append("Searching AmwayNotificationUserActionModels for notificationCode [")
-					.append(notification.getCode()).append("] and user [").append(customer.getCustomerID()).append("].").toString());
-		}
-		final List<AmwayNotificationUserActionModel> results = getAmwayNotificationUserActionDao().find(params);
+		final List<AmwayNotificationUserActionModel> results = getNotificationActionByUserAndNotification(customer, notification);
 
 		if (CollectionUtils.isNotEmpty(results))
 		{
@@ -135,6 +128,21 @@ public class DefaultAmwayApacNotificationService implements AmwayApacNotificatio
 		}
 	}
 
+	@Override
+	public List<AmwayNotificationUserActionModel> getNotificationActionByUserAndNotification(final CustomerModel customer,
+			final AmwayNotificationModel notification)
+	{
+		final Map<String, Object> params = new HashMap<>(2);
+		params.put(NOTIFICATION, notification);
+		params.put(USER, customer);
+		if (LOGGER.isDebugEnabled())
+		{
+			LOGGER.info(new StringBuilder(100).append("Searching AmwayNotificationUserActionModels for notificationCode [")
+					.append(notification.getCode()).append("] and user [").append(customer.getCustomerID()).append("].").toString());
+		}
+
+		return getAmwayNotificationUserActionDao().find(params);
+	}
 
 	/**
 	 * @return the amwayApacNotificationDao

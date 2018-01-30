@@ -34,6 +34,46 @@
 	your web/webroot/WEB-INF/<extname>-web-spring.xml.
 	-->
 	
+	<alias alias="amwayApacNotificationFacade" name="defaultAmwayApacNotificationFacade"/>
+	<bean id="defaultAmwayApacNotificationFacade" class="com.amway.apac.message.center.notification.facades.impl.DefaultAmwayApacNotificationFacade">
+	 	<property name="userService" ref="userService" />
+	 	<property name="cmsComponentService" ref="cmsComponentService" />
+	 	<property name="amwayApacNotificationService" ref="amwayApacNotificationService" />
+		<property name="amwayApacNotificationSectionConverter" ref="amwayApacNotificationSectionConverter"/>
+	</bean>
+    
+    <alias alias="amwayApacNotificationSectionConverter" name="defaultAmwayApacNotificationSectionConverter"/>
+    <bean id="defaultAmwayApacNotificationSectionConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commerceservices.search.pagedata.SearchPageData" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayApacNotificationSectionPopulator" />
+			</list>
+		</property>
+	</bean>
+	
+	<alias alias="amwayApacNotificationSectionPopulator" name="defaultAmwayApacNotificationSectionPopulator"/>
+	<bean id="defaultAmwayApacNotificationSectionPopulator" class="com.amway.apac.message.center.notification.populators.AmwayApacNotificationSectionPopulator">
+		<property name="amwayApacNotificationConverter" ref="amwayApacNotificationConverter" />
+	</bean>
+	
+	<alias alias="amwayApacNotificationConverter" name="defaultAmwayApacNotificationConverter"/>
+	<bean id="defaultAmwayApacNotificationConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.amway.apac.message.center.notification.AmwayApacNotificationData" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayApacNotificationPopulator"/>
+			</list>
+		</property>
+	</bean>
+	
+	<alias alias="amwayApacNotificationPopulator" name="defaultAmwayApacNotificationPopulator"/>
+	<bean id="defaultAmwayApacNotificationPopulator" class="com.amway.apac.message.center.notification.populators.AmwayApacNotificationPopulator">
+		<property name="enumConverter" ref="defaultAmwayApacEnumDataConverter" />
+		<property name="amwayApacNotificationService" ref="amwayApacNotificationService"/>
+		<property name="userService" ref="userService" />
+	</bean>	
+	
 	<alias name="defaultAmwayApacNotificationService" alias="amwayApacNotificationService"/>
 	<bean id="defaultAmwayApacNotificationService" class="com.amway.apac.message.center.notification.services.impl.DefaultAmwayApacNotificationService">
 		<property name="amwayApacNotificationDao" ref="amwayApacNotificationDao"/>

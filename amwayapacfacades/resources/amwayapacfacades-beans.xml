@@ -81,19 +81,4 @@
 			<description>Raw query to be populated in Search Query.</description>
 		</property>
 	</bean>
-	
-	<bean class="com.amway.apacfacades.notification.data.AmwayApacNotificationData">
-		<property name="shortDescription" type="String"></property>
-		<property name="longDescription" type="String" />
-		<property name="publishDate" type="String"/>
-		<property name="cmsComponentId" type="String"/>
-		<property name="status" type="com.amway.apacfacades.data.EnumData"/>
-		<property name="code" type="String"/>
-	</bean>
-	
-	<bean class="com.amway.apacfacades.notification.data.AmwayApacNotificationSectionData">
-    	<property name="noOfPages" type="int"/>
-    	<property name="notificationData" type="java.util.List&lt;com.amway.apacfacades.notification.data.AmwayApacNotificationData>"/>
-	</bean>
-
 </beans>

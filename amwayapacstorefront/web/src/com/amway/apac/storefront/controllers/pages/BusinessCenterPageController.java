@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -26,11 +25,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.amway.apac.facades.notification.AmwayApacNotificationFacade;
 import com.amway.apac.message.center.enums.AmwayNotificationUserActionStatus;
+import com.amway.apac.message.center.notification.AmwayApacNotificationData;
+import com.amway.apac.message.center.notification.facades.AmwayApacNotificationFacade;
 import com.amway.apac.storefront.controllers.ControllerConstants;
 import com.amway.apac.storefront.forms.AmwayApacNotificationEntryForm;
-import com.amway.apacfacades.notification.data.AmwayApacNotificationData;
 
 
 /**
@@ -41,18 +40,33 @@ import com.amway.apacfacades.notification.data.AmwayApacNotificationData;
 @RequestMapping("/business-center")
 public class BusinessCenterPageController extends AbstractSearchPageController
 {
+	/** The LOGGER Constant. */
 	private static final Logger LOGGER = LoggerFactory.getLogger(BusinessCenterPageController.class);
 
+	/** The BREADCRUMBS Constant String. */
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
-	// CMS Pages
+
+	/** MESSAGE CENTER CMS PAGE Constant String. */
 	private static final String MESSAGE_CENTER_CMS_PAGE = "message-center";
 
 	@Resource(name = "businessCenterBreadcrumbBuilder")
 	private ResourceBreadcrumbBuilder businessCenterBreadcrumbBuilder;
 
-	@Autowired
+	@Resource(name = "amwayApacNotificationFacade")
 	private AmwayApacNotificationFacade amwayApacNotificationFacade;
 
+	/**
+	 * Returns message center main page containing notifications list
+	 *
+	 * @param model
+	 * @param page
+	 * @param showMode
+	 * @param pageSize
+	 * @param sortCode
+	 * @param status
+	 * @return message center CMS page
+	 * @throws CMSItemNotFoundException
+	 */
 	@RequestMapping(value = "/message-center", method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String notificationMain(final Model model, @RequestParam(value = "page", defaultValue = "0") final int page,
@@ -72,7 +86,6 @@ public class BusinessCenterPageController extends AbstractSearchPageController
 				.getBreadcrumbs(ControllerConstants.GeneralConstants.MESSAGE_CENTER_PAGE_BREADCRUMB_KEY));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
-
 		AmwayNotificationUserActionStatus[] statuses = new AmwayNotificationUserActionStatus[]
 		{ AmwayNotificationUserActionStatus.UNREAD, AmwayNotificationUserActionStatus.READ };
 		if (status != null)
@@ -84,7 +97,7 @@ public class BusinessCenterPageController extends AbstractSearchPageController
 		final PageableData pageableData = createPageableData(page, pageSize, sortCode, showMode);
 		final SearchPageData<AmwayApacNotificationData> searchPageData = amwayApacNotificationFacade
 				.getAmwayNotificationSectionForCurrentUserWithPageData(pageableData, statuses, "");
-		model.addAttribute("countOfNotifications", searchPageData.getPagination().getTotalNumberOfResults());
+		model.addAttribute("countOfNotifications", Long.valueOf(searchPageData.getPagination().getTotalNumberOfResults()));
 		populateModel(model, searchPageData, showMode);
 
 		if ("XMLHttpRequest".equals(requestType))
@@ -96,21 +109,21 @@ public class BusinessCenterPageController extends AbstractSearchPageController
 			return getViewForPage(model);
 		}
 
-
 	}
 
 	/**
-	 * Gets the detailed message.
+	 * Returns CMS component of detailed message.
 	 *
 	 * @param model
-	 *           the model
 	 * @param compId
 	 *           the component id
+	 * @param messageCode
+	 *           message code
 	 * @param request
-	 *           the request
+	 *           HTTP request
 	 * @param response
-	 *           the response
-	 * @return the detailed message
+	 *           HTTP response
+	 * @return detailed message CMS component
 	 */
 	@RequestMapping(value = "/detailed-message", method = RequestMethod.GET)
 	@RequireHardLogIn
@@ -133,6 +146,13 @@ public class BusinessCenterPageController extends AbstractSearchPageController
 		return ControllerConstants.Views.Pages.MessageCenter.DetailedMessagePage;
 	}
 
+	/**
+	 * Change notification status of notification passed through form.
+	 *
+	 * @param formentries
+	 *           notification form entries
+	 * @return true, if status changed successfully
+	 */
 	@ResponseBody
 	@RequestMapping(value = "/change-status", method = RequestMethod.POST)
 	public boolean changeNotificationStatus(@ModelAttribute final AmwayApacNotificationEntryForm formentries)

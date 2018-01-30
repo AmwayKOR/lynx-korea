@@ -1,16 +1,14 @@
-package com.amway.apac.facades.populators;
+package com.amway.apac.message.center.notification.populators;
 
 import de.hybris.platform.converters.Populator;
 import de.hybris.platform.core.HybrisEnumValue;
+import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.dto.converter.ConversionException;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
-import de.hybris.platform.servicelayer.internal.dao.DefaultGenericDao;
 import de.hybris.platform.servicelayer.user.UserService;
 
 import java.text.SimpleDateFormat;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Required;
@@ -18,8 +16,9 @@ import org.springframework.beans.factory.annotation.Required;
 import com.amway.apac.message.center.enums.AmwayNotificationUserActionStatus;
 import com.amway.apac.message.center.model.AmwayNotificationModel;
 import com.amway.apac.message.center.model.AmwayNotificationUserActionModel;
+import com.amway.apac.message.center.notification.AmwayApacNotificationData;
+import com.amway.apac.message.center.notification.services.AmwayApacNotificationService;
 import com.amway.apacfacades.data.EnumData;
-import com.amway.apacfacades.notification.data.AmwayApacNotificationData;
 
 
 /**
@@ -30,16 +29,11 @@ import com.amway.apacfacades.notification.data.AmwayApacNotificationData;
  */
 public class AmwayApacNotificationPopulator implements Populator<AmwayNotificationModel, AmwayApacNotificationData>
 {
-
-
 	private static final String DATE_FORMAT = "dd/MM/yyyy";
 
 	private Converter<HybrisEnumValue, EnumData> enumConverter;
-	private DefaultGenericDao<AmwayNotificationUserActionModel> amwayNotificationUserActionDao;
-
-
+	private AmwayApacNotificationService amwayApacNotificationService;
 	private UserService userService;
-
 
 	@Override
 	public void populate(final AmwayNotificationModel source, final AmwayApacNotificationData target) throws ConversionException
@@ -56,10 +50,8 @@ public class AmwayApacNotificationPopulator implements Populator<AmwayNotificati
 			target.setPublishDate(stringDate);
 		}
 
-		final Map<String, Object> params = new HashMap<String, Object>();
-		params.put(AmwayNotificationUserActionModel.NOTIFICATION, source);
-		params.put(AmwayNotificationUserActionModel.USER, userService.getCurrentUser());
-		final List<AmwayNotificationUserActionModel> notificationMappings = amwayNotificationUserActionDao.find(params);
+		final List<AmwayNotificationUserActionModel> notificationMappings = amwayApacNotificationService
+				.getNotificationActionByUserAndNotification((CustomerModel) userService.getCurrentUser(), source);
 
 		if (CollectionUtils.isNotEmpty(notificationMappings))
 		{
@@ -93,21 +85,20 @@ public class AmwayApacNotificationPopulator implements Populator<AmwayNotificati
 	}
 
 	/**
-	 * @param amwayNotificationUserActionDao
-	 *           the amwayNotificationUserActionDao to set
+	 * @return the amwayApacNotificationService
 	 */
-	public void setAmwayNotificationUserActionDao(
-			final DefaultGenericDao<AmwayNotificationUserActionModel> amwayNotificationUserActionDao)
+	public AmwayApacNotificationService getAmwayApacNotificationService()
 	{
-		this.amwayNotificationUserActionDao = amwayNotificationUserActionDao;
+		return amwayApacNotificationService;
 	}
 
 	/**
-	 * @return the amwayNotificationUserActionDao
+	 * @param amwayApacNotificationService
+	 *           the amwayApacNotificationService to set
 	 */
-	public DefaultGenericDao<AmwayNotificationUserActionModel> getAmwayNotificationUserActionDao()
+	public void setAmwayApacNotificationService(final AmwayApacNotificationService amwayApacNotificationService)
 	{
-		return amwayNotificationUserActionDao;
+		this.amwayApacNotificationService = amwayApacNotificationService;
 	}
 
 	/**
@@ -125,7 +116,4 @@ public class AmwayApacNotificationPopulator implements Populator<AmwayNotificati
 	{
 		return userService;
 	}
-
-
-
 }

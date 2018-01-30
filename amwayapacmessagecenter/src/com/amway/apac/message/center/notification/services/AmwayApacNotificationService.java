@@ -63,4 +63,16 @@ public interface AmwayApacNotificationService
 	void changeUserNotificationStatus(final AmwayNotificationModel notification, final CustomerModel customer,
 			final AmwayNotificationUserActionStatus newStatus);
 
+	/**
+	 * Gets the notification action by user and notification.
+	 *
+	 * @param customer
+	 *           the customer
+	 * @param notification
+	 *           the notification
+	 * @return notification action list
+	 */
+	List<AmwayNotificationUserActionModel> getNotificationActionByUserAndNotification(CustomerModel customer,
+			AmwayNotificationModel notification);
+
 }

@@ -284,42 +284,5 @@
 			parent="defaultProductFacade">
 		<property name="productSearchFacade" ref="productSearchFacade" />
 		<property name="amwayApacProductReferenceService" ref="commerceProductReferenceService"/>
-	</bean>
-	
-	<bean id="AmwayApacNotificationFacade" class="com.amway.apac.facades.notification.impl.AmwayApacNotificationFacadeImpl">
-	 	<property name="amwayApacNotificationService" ref="amwayApacNotificationService" />
-	 	<property name="cmsComponentService" ref="cmsComponentService" />
-	 	<property name="userService" ref="userService" />
-		<property name="amwayApacNotificationSectionConverter" ref="amwayApacNotificationSectionConverter"/>
-		<property name="amwayApacNotificationConverter" ref="amwayApacNotificationConverter"/>
-	</bean>
-    
-    <bean id="amwayApacNotificationSectionConverter" parent="abstractPopulatingConverter">
-		<property name="targetClass" value="com.amway.apacfacades.notification.data.AmwayApacNotificationSectionData" />
-		<property name="populators">
-			<list>
-				<ref bean="amwayApacNotificationSectionPopulator" />
-			</list>
-		</property>
-	</bean>
-	
-	<bean id="amwayApacNotificationSectionPopulator" class="com.amway.apac.facades.populators.AmwayApacNotificationSectionPopulator">
-		 	<property name="amwayApacNotificationConverter" ref="amwayApacNotificationConverter" />
-	</bean>
-	
-	<bean id="amwayApacNotificationConverter" parent="abstractPopulatingConverter">
-		<property name="targetClass" value="com.amway.apacfacades.notification.data.AmwayApacNotificationData" />
-		<property name="populators">
-			<list>
-				<ref bean="amwayApacNotificationPopulator" />
-			</list>
-		</property>
-	</bean>
-	
-	<bean id="amwayApacNotificationPopulator" class="com.amway.apac.facades.populators.AmwayApacNotificationPopulator">
-		<property name="enumConverter" ref="defaultAmwayApacEnumDataConverter" />
-		<property name="amwayNotificationUserActionDao" ref="amwayNotificationUserActionDao" />
-		<property name="userService" ref="userService" />
 	</bean>	
-	
 </beans>
