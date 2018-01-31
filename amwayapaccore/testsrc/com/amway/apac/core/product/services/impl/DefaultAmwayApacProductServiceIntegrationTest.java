@@ -35,11 +35,11 @@ import com.amway.apac.core.product.services.AmwayApacProductService;
 @IntegrationTest
 public class DefaultAmwayApacProductServiceIntegrationTest extends ServicelayerTransactionalTest
 {
-	private static final String OMS_CODE_1 = "220136";
-	private static final String OMS_CODE_2 = "220245";
-	private static final String OMS_CODE_3 = "220246";
-	private static final String OMS_CODE_4 = "220301";
-	private static final String OMS_CODE_5 = "220302";
+	private static final String ALIAS_CODE_1 = "220136";
+	private static final String ALIAS_CODE_2 = "220245";
+	private static final String ALIAS_CODE_3 = "220246";
+	private static final String ALIAS_CODE_4 = "220301";
+	private static final String ALIAS_CODE_5 = "220302";
 	private static final String PRODUCT_CATALOG = "testProductCatalog";
 	private static final String VERSION = "Online";
 	private static final String PRODUCT_WITHOUT_PRELAUNCH = "HW1210-3425";
@@ -81,58 +81,58 @@ public class DefaultAmwayApacProductServiceIntegrationTest extends ServicelayerT
 
 		final CatalogVersionModel catalogVersion = catalogVersionService.getCatalogVersion(PRODUCT_CATALOG, VERSION);
 
-		final AmwayPaymentOptionModel paymentOption = amwayApacProductService.getPaymentOptionForAliasCode(OMS_CODE_1,
+		final AmwayPaymentOptionModel paymentOption = amwayApacProductService.getPaymentOptionForAliasCode(ALIAS_CODE_1,
 				catalogVersion);
-		Assert.assertTrue(paymentOption.getAliasCode().equalsIgnoreCase(OMS_CODE_1));
+		Assert.assertTrue(paymentOption.getAliasCode().equalsIgnoreCase(ALIAS_CODE_1));
 
 		// ONE Payment Option is attached with approved product, so only one payment option exists
-		final AmwayPaymentOptionModel paymentOption1 = amwayApacProductService.getPaymentOptionForAliasCode(OMS_CODE_3,
+		final AmwayPaymentOptionModel paymentOption1 = amwayApacProductService.getPaymentOptionForAliasCode(ALIAS_CODE_3,
 				catalogVersion);
-		Assert.assertTrue(paymentOption1.getAliasCode().equalsIgnoreCase(OMS_CODE_3));
+		Assert.assertTrue(paymentOption1.getAliasCode().equalsIgnoreCase(ALIAS_CODE_3));
 	}
 
 	@Test
-	public void testAllPaymentOptionForOmsCode()
+	public void testAllPaymentOptionForAliasCode()
 	{
 		final CatalogVersionModel catalogVersion = catalogVersionService.getCatalogVersion(PRODUCT_CATALOG, VERSION);
 
-		final AmwayPaymentOptionModel paymentOption = amwayApacProductService.getAllPaymentOptionForAliasCode(OMS_CODE_1,
+		final AmwayPaymentOptionModel paymentOption = amwayApacProductService.getAllPaymentOptionForAliasCode(ALIAS_CODE_1,
 				catalogVersion);
-		Assert.assertTrue(paymentOption.getAliasCode().equalsIgnoreCase(OMS_CODE_1));
+		Assert.assertTrue(paymentOption.getAliasCode().equalsIgnoreCase(ALIAS_CODE_1));
 
-		final AmwayPaymentOptionModel paymentOption1 = amwayApacProductService.getAllPaymentOptionForAliasCode(OMS_CODE_2,
+		final AmwayPaymentOptionModel paymentOption1 = amwayApacProductService.getAllPaymentOptionForAliasCode(ALIAS_CODE_2,
 				catalogVersion);
-		Assert.assertTrue(paymentOption1.getAliasCode().equalsIgnoreCase(OMS_CODE_2));
+		Assert.assertTrue(paymentOption1.getAliasCode().equalsIgnoreCase(ALIAS_CODE_2));
 	}
 
 	@Test(expected = UnknownIdentifierException.class)
-	public void testAllPaymentOptionForOmsCodeException1()
+	public void testAllPaymentOptionForAliasCodeException1()
 	{
 		final CatalogVersionModel catalogVersion = catalogVersionService.getCatalogVersion(PRODUCT_CATALOG, VERSION);
 
-		final AmwayPaymentOptionModel paymentOption = amwayApacProductService.getAllPaymentOptionForAliasCode(OMS_CODE_4,
+		final AmwayPaymentOptionModel paymentOption = amwayApacProductService.getAllPaymentOptionForAliasCode(ALIAS_CODE_4,
 				catalogVersion);
-		Assert.assertFalse(paymentOption.getAliasCode().equalsIgnoreCase(OMS_CODE_4));
+		Assert.assertFalse(paymentOption.getAliasCode().equalsIgnoreCase(ALIAS_CODE_4));
 	}
 
 	@Test(expected = AmbiguousIdentifierException.class)
-	public void testAllPaymentOptionForOmsCodeException2()
+	public void testAllPaymentOptionForAliasCodeException2()
 	{
 		final CatalogVersionModel catalogVersion = catalogVersionService.getCatalogVersion(PRODUCT_CATALOG, VERSION);
 
-		final AmwayPaymentOptionModel paymentOption = amwayApacProductService.getAllPaymentOptionForAliasCode(OMS_CODE_5,
+		final AmwayPaymentOptionModel paymentOption = amwayApacProductService.getAllPaymentOptionForAliasCode(ALIAS_CODE_5,
 				catalogVersion);
-		Assert.assertFalse(paymentOption.getAliasCode().equalsIgnoreCase(OMS_CODE_5));
+		Assert.assertFalse(paymentOption.getAliasCode().equalsIgnoreCase(ALIAS_CODE_5));
 	}
 
 	@Test(expected = UnknownIdentifierException.class)
-	public void testAllPaymentOptionForOmsCodeException3()
+	public void testAllPaymentOptionForAliasCodeException3()
 	{
 		final CatalogVersionModel catalogVersion = catalogVersionService.getCatalogVersion(PRODUCT_CATALOG, VERSION);
 
-		final AmwayPaymentOptionModel paymentOption = amwayApacProductService.getAllPaymentOptionForAliasCode(OMS_CODE_4,
+		final AmwayPaymentOptionModel paymentOption = amwayApacProductService.getAllPaymentOptionForAliasCode(ALIAS_CODE_4,
 				catalogVersion);
-		Assert.assertFalse(paymentOption.getAliasCode().equalsIgnoreCase(OMS_CODE_5));
+		Assert.assertFalse(paymentOption.getAliasCode().equalsIgnoreCase(ALIAS_CODE_5));
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -206,5 +206,43 @@ public class DefaultAmwayApacProductServiceIntegrationTest extends ServicelayerT
 				baseStoreService.getBaseStoreForUid("testStore")) == 0);
 	}
 
+	@Test(expected = IllegalArgumentException.class)
+	public void testGetPreLaunchConfigProductsForNullOrder()
+	{
+		amwayApacProductService.getPreLaunchConfigProducts(null);
+	}
+
+	@Test
+	public void testGetPreLaunchConfigProducts()
+	{
+		final Map<String, Integer> productToCountMap = amwayApacProductService.getPreLaunchConfigProducts(orderModel);
+		Assert.assertEquals(3, productToCountMap.size());
+	}
+
+	@Test
+	public void testGetPreLaunchConfigProductsForEmptyOrder()
+	{
+		orderModel = customerAccountService.getOrderForCode("abrodeOrder", baseStoreService.getBaseStoreForUid("testStore"));
+		final Map<String, Integer> productToCountMap = amwayApacProductService.getPreLaunchConfigProducts(orderModel);
+		Assert.assertEquals(0, productToCountMap.size());
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testCheckIfPIFActiveForNullProduct()
+	{
+		amwayApacProductService.checkIfPIFIsActive(null);
+	}
+
+	@Test
+	public void testCheckIfPIFActiveForNoPaymentOptions()
+	{
+		amwayApacProductService.checkIfPIFIsActive(amwayApacProductService.getProductForCode(PRODUCT_IN_PRELAUNCH));
+	}
+
+	@Test
+	public void testCheckIfPIFActiveForActivePIF()
+	{
+		amwayApacProductService.checkIfPIFIsActive(amwayApacProductService.getProductForCode(ALIAS_CODE_1));
+	}
 
 }
