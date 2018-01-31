@@ -24,8 +24,10 @@
                       <div>
                           <span class="stock">
                               <span class="product-availability">
+                              
                 					<c:choose>
-						        		<c:when test="${notification.status.code eq 'READ'}">
+                					
+						        		<c:when test="${message.status.code eq 'READ'}">
 						        			<span class="green">
                                          <span class="icon icon-alert"></span>
                                        	<span class="text text-uppercase">Message Type</span>
