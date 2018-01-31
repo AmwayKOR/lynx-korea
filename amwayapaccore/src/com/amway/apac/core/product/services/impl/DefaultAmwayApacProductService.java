@@ -19,6 +19,7 @@ import de.hybris.platform.servicelayer.internal.dao.GenericDao;
 import de.hybris.platform.store.BaseStoreModel;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -38,7 +39,6 @@ import com.amway.apac.core.model.AmwayUserPromotionCountModel;
 import com.amway.apac.core.product.daos.AmwayApacProductDao;
 import com.amway.apac.core.product.services.AmwayApacProductService;
 import com.amway.core.enums.AmwayKitProductType;
-import com.amway.core.model.AmwayAccountModel;
 import com.amway.core.model.AmwayKitProductModel;
 
 
@@ -147,7 +147,7 @@ public class DefaultAmwayApacProductService extends DefaultProductService implem
 	 */
 	protected boolean isPaymentOptionCurrentlyAvailable(final AmwayPaymentOptionModel paymentOption)
 	{
-		final Date currentDate = new Date();
+		final Date currentDate = Calendar.getInstance().getTime();
 		return (Objects.isNull(paymentOption.getStartDate()) && Objects.isNull(paymentOption.getEndDate()))
 				|| (currentDate.after(paymentOption.getStartDate()) && currentDate.before(paymentOption.getEndDate()));
 	}
@@ -188,7 +188,7 @@ public class DefaultAmwayApacProductService extends DefaultProductService implem
 		validateParameterNotNullStandardMessage(PRODUCT_CODE_MAP, productCodeToCount);
 		validateParameterNotNullStandardMessage(ORDER, order);
 
-		final String amwayAccountCode = getNormalizedAmwayAccountCode(order.getAccount());
+		final String amwayAccountCode = order.getAccount().getCode();
 		final List<String> preLaunchProducts = new ArrayList<>(productCodeToCount.keySet());
 		final List<AmwayUserPromotionCountModel> userSavedCountList = getAmwayApacProductDao()
 				.getPromotionRuleCountByUserAndProduct(amwayAccountCode, preLaunchProducts, PRE_LAUNCH_PROMOTION, order.getStore());
@@ -260,21 +260,6 @@ public class DefaultAmwayApacProductService extends DefaultProductService implem
 			return Boolean.TRUE.booleanValue();
 		}
 		return Boolean.FALSE.booleanValue();
-	}
-
-	/**
-	 * Get Amway Account Code with affiliate number and Amway Account
-	 *
-	 * @param amwayAccount
-	 * @return Affiliate and Amway account number string
-	 */
-	protected String getNormalizedAmwayAccountCode(final AmwayAccountModel amwayAccount)
-	{
-		/*
-		 * return amwayAccount.getControllingAffiliate().getAffiliateNumber() + AmwayapacCoreConstants.HYPHEN_CHAR +
-		 * amwayAccount.getCode();
-		 */
-		return amwayAccount.getCode();
 	}
 
 	/**
