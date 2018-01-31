@@ -1,7 +1,5 @@
 package com.amway.apac.core.resource.center.interceptors;
 
-import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
-
 import de.hybris.platform.servicelayer.interceptor.InitDefaultsInterceptor;
 import de.hybris.platform.servicelayer.interceptor.InterceptorContext;
 import de.hybris.platform.servicelayer.interceptor.InterceptorException;
@@ -25,9 +23,6 @@ import com.amway.apac.resourcecentre.model.media.AbstractAmwayAssetModel;
 public class AmwayApacAssetInterceptor
 		implements InitDefaultsInterceptor<AbstractAmwayAssetModel>, PrepareInterceptor<AbstractAmwayAssetModel>
 {
-	/** The Constant ASSET_MODEL. */
-	private static final String ASSET_MODEL = "Asset model";
-
 	private Map<AccountClassificationEnum, Integer> amwayAccountClassificationRankMapping;
 
 	/**
@@ -70,25 +65,12 @@ public class AmwayApacAssetInterceptor
 	 * @param amwayAssetModel
 	 *           the new asset rank
 	 * @throws InterceptorException
-	 * @throws IllegalArgumentException
-	 *            if amwayAssetModel is null.
 	 */
-	protected void setAssetRank(final AbstractAmwayAssetModel amwayAssetModel) throws InterceptorException
+	protected void setAssetRank(final AbstractAmwayAssetModel amwayAssetModel)
 	{
-		validateParameterNotNullStandardMessage(ASSET_MODEL, amwayAssetModel);
-
 		if (Objects.nonNull(amwayAssetModel.getClassification()))
 		{
-			final Integer rank = getAmwayAccountClassificationRankMapping().get(amwayAssetModel.getClassification());
-			if (null != rank)
-			{
-				amwayAssetModel.setRank(rank);
-			}
-			else
-			{
-				throw new InterceptorException(new StringBuilder().append("No rank mapping exist for classification enum : ")
-						.append(amwayAssetModel.getClassification().toString()).toString());
-			}
+			amwayAssetModel.setRank(getAmwayAccountClassificationRankMapping().get(amwayAssetModel.getClassification()));
 		}
 	}
 
