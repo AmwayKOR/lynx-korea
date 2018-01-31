@@ -2,12 +2,12 @@ package com.amway.apac.core.user.daos.impl;
 
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.core.model.user.UserModel;
-import de.hybris.platform.servicelayer.exceptions.AmbiguousIdentifierException;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 import de.hybris.platform.servicelayer.search.SearchResult;
 import de.hybris.platform.servicelayer.user.daos.impl.DefaultUserDao;
 import de.hybris.platform.servicelayer.util.ServicesUtil;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,7 +33,7 @@ public class DefaultAmwayApacUserDao extends DefaultUserDao implements AmwayApac
 	 * @see com.amway.apac.core.user.daos.AmwayApacUserDao#getUsersForUidAndAboID(java.lang.String, java.lang.String)
 	 */
 	@Override
-	public UserModel getUsersForUidAndAboID(final String id, final String affilicateCountryCode)
+	public List<UserModel> getUsersForUIDandAffiliateCode(final String id, final String affilicateCountryCode)
 	{
 		ServicesUtil.validateParameterNotNullStandardMessage("id", id);
 
@@ -45,12 +45,10 @@ public class DefaultAmwayApacUserDao extends DefaultUserDao implements AmwayApac
 		final FlexibleSearchQuery query = new FlexibleSearchQuery(USERS_FOR_UID_AND_ABOID_QUERY);
 		query.addQueryParameters(params);
 		final SearchResult<UserModel> result = getFlexibleSearchService().search(query);
-		final List resList = result.getResult();
-		if (resList.size() > 1)
-		{
-			throw new AmbiguousIdentifierException("Found " + resList.size() + " users with the unique uid '" + id + "'");
-		}
-		return ((resList.isEmpty()) ? null : (UserModel) resList.get(0));
+
+		final List resList = new ArrayList<>();
+		resList.addAll(result.getResult());
+		return resList;
 	}
 
 }

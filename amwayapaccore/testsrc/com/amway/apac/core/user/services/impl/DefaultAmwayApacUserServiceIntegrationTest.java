@@ -5,6 +5,7 @@ import de.hybris.platform.catalog.CatalogVersionService;
 import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.impex.jalo.ImpExException;
 import de.hybris.platform.servicelayer.ServicelayerTransactionalTest;
+import de.hybris.platform.servicelayer.exceptions.AmbiguousIdentifierException;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.servicelayer.user.UserService;
@@ -61,5 +62,11 @@ public class DefaultAmwayApacUserServiceIntegrationTest extends ServicelayerTran
 	public void testGetUserForUIDForCurrentAffiliateFonNonExistingUser()
 	{
 		defaultAmwayApacUserService.getUserForUIDForCurrentAffiliate("nonExistingUser");
+	}
+
+	@Test(expected = AmbiguousIdentifierException.class)
+	public void testGetUserForUIDForCurrentAffiliateFonMultipleUsersWithSameId()
+	{
+		defaultAmwayApacUserService.getUserForUIDForCurrentAffiliate("dejol");
 	}
 }
