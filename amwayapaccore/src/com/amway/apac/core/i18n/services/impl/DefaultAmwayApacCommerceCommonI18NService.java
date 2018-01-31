@@ -2,7 +2,6 @@ package com.amway.apac.core.i18n.services.impl;
 
 import static org.springframework.util.Assert.hasLength;
 
-import de.hybris.platform.cms2.servicelayer.services.CMSSiteService;
 import de.hybris.platform.commerceservices.i18n.impl.DefaultCommerceCommonI18NService;
 import de.hybris.platform.core.model.c2l.CountryModel;
 import de.hybris.platform.servicelayer.internal.dao.GenericDao;
@@ -29,7 +28,6 @@ public class DefaultAmwayApacCommerceCommonI18NService extends DefaultCommerceCo
 {
 	private static final Logger LOG = LoggerFactory.getLogger(DefaultAmwayApacCommerceCommonI18NService.class);
 
-	private CMSSiteService cmsSiteService;
 	private GenericDao<CountryModel> amwayApacCountryDao;
 
 	/**
@@ -47,24 +45,6 @@ public class DefaultAmwayApacCommerceCommonI18NService extends DefaultCommerceCo
 		final List<CountryModel> countries = getAmwayApacCountryDao()
 				.find(Collections.singletonMap(CountryModel.COUNTRYCODE, countryCode));
 		return CollectionUtils.isEmpty(countries) ? null : countries.iterator().next();
-	}
-
-	/**
-	 * @return the cmsSiteService
-	 */
-	public CMSSiteService getCmsSiteService()
-	{
-		return cmsSiteService;
-	}
-
-	/**
-	 * @param cmsSiteService
-	 *           the cmsSiteService to set
-	 */
-	@Required
-	public void setCmsSiteService(final CMSSiteService cmsSiteService)
-	{
-		this.cmsSiteService = cmsSiteService;
 	}
 
 	/**

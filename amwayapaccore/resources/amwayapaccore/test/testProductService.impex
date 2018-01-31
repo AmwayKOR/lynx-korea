@@ -30,8 +30,8 @@ INSERT_UPDATE Product ;code[unique=true] ;catalogVersion(catalog(id),version)[un
 
 ##########################
 
-INSERT_UPDATE AmwayPaymentOption;aliasCode[unique=true];title;active;type(code);product(code,catalogVersion(catalog(id),version))[unique=true];tenure
-       ;220136;<ignore>;true;PIF;220136:testProductCatalog:Online;
+INSERT_UPDATE AmwayPaymentOption;aliasCode[unique=true];title;startDate[dateformat=dd.MM.yyyy HH:mm:ss];endDate[dateformat=dd.MM.yyyy HH:mm:ss];active;type(code);product(code,catalogVersion(catalog(id),version))[unique=true];tenure
+       ;220136;<ignore>;27.04.2010 00:01:00;27.04.2099 00:01:00;true;PIF;220136:testProductCatalog:Online;
 	   
 ################################
 
