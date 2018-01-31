@@ -45,7 +45,6 @@ public interface AmwayApacNotificationFacade
 	 *           the notification code
 	 * @param newStatus
 	 *           the new status
-	 * @return true, if successful
 	 */
-	boolean changeUserNotificationStatus(final String notificationCode, final AmwayNotificationUserActionStatus newStatus);
+	void changeUserNotificationStatus(final String notificationCode, final AmwayNotificationUserActionStatus newStatus);
 }

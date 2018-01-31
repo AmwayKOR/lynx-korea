@@ -12,9 +12,7 @@ import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.platform.site.BaseSiteService;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -196,7 +194,7 @@ public class DefaultAmwayApacNotificationServiceIntegrationTest extends Servicel
 	 * Integration test method of notification status change for Message Center
 	 */
 	@Test
-	public void testChangeUserNotificationStatusToRead()
+	public void testChangeUserNotificationStatus()
 	{
 		final CustomerModel user = (CustomerModel) userService.getUserForUID(TEST_USER_UID_ONE);
 		userService.setCurrentUser(user);
@@ -204,29 +202,31 @@ public class DefaultAmwayApacNotificationServiceIntegrationTest extends Servicel
 				.getNotificationByCode(GROUP_NOTIFICATION_CODE);
 		defaultAmwayApacNotificationService.changeUserNotificationStatus(notification, user,
 				AmwayNotificationUserActionStatus.valueOf(READ));
-		final Map<String, Object> params = new HashMap<String, Object>();
-		params.put(AmwayNotificationUserActionModel.NOTIFICATION, notification);
-		params.put(AmwayNotificationUserActionModel.USER, user);
-		final List<AmwayNotificationUserActionModel> results = amwayNotificationUserActionDao.find(params);
-		Assert.assertEquals(AmwayNotificationUserActionStatus.valueOf(READ), results.get(0).getStatus());
+
+		final List<AmwayNotificationUserActionModel> resultsWithRead = defaultAmwayApacNotificationService
+				.getNotificationActionByUserAndNotification(user, notification);
+		Assert.assertEquals(AmwayNotificationUserActionStatus.valueOf(READ), resultsWithRead.get(0).getStatus());
+
+		defaultAmwayApacNotificationService.changeUserNotificationStatus(notification, user,
+				AmwayNotificationUserActionStatus.valueOf(UNREAD));
+		final List<AmwayNotificationUserActionModel> resultsWithUnread = defaultAmwayApacNotificationService
+				.getNotificationActionByUserAndNotification(user, notification);
+		Assert.assertEquals(AmwayNotificationUserActionStatus.valueOf(UNREAD), resultsWithUnread.get(0).getStatus());
 	}
 
-	/**
-	 * Integration test method of notification status change for Message Center
-	 */
 	@Test
-	public void testChangeUserNotificationStatusToUnread()
+	public void testGetNotificationActionByUserAndNotification()
 	{
 		final CustomerModel user = (CustomerModel) userService.getUserForUID(TEST_USER_UID_ONE);
-		userService.setCurrentUser(user);
 		final AmwayNotificationModel notification = defaultAmwayApacNotificationService
 				.getNotificationByCode(GROUP_NOTIFICATION_CODE);
 		defaultAmwayApacNotificationService.changeUserNotificationStatus(notification, user,
 				AmwayNotificationUserActionStatus.valueOf(UNREAD));
-		final Map<String, Object> params = new HashMap<String, Object>();
-		params.put(AmwayNotificationUserActionModel.NOTIFICATION, notification);
-		params.put(AmwayNotificationUserActionModel.USER, user);
-		final List<AmwayNotificationUserActionModel> results = amwayNotificationUserActionDao.find(params);
-		Assert.assertEquals(AmwayNotificationUserActionStatus.valueOf(UNREAD), results.get(0).getStatus());
+
+		final List<AmwayNotificationUserActionModel> results = defaultAmwayApacNotificationService
+				.getNotificationActionByUserAndNotification(user, notification);
+
+		Assert.assertEquals(TEST_USER_UID_ONE, results.get(0).getUser().getUid());
+		Assert.assertEquals(UNREAD, results.get(0).getStatus().toString());
 	}
 }

@@ -81,7 +81,7 @@ public class DefaultAmwayApacNotificationFacade implements AmwayApacNotification
 	 *
 	 */
 	@Override
-	public boolean changeUserNotificationStatus(final String notificationCode, final AmwayNotificationUserActionStatus newStatus)
+	public void changeUserNotificationStatus(final String notificationCode, final AmwayNotificationUserActionStatus newStatus)
 	{
 		validateParameterNotNullStandardMessage("Notification code", notificationCode);
 		validateParameterNotNullStandardMessage("New Status", newStatus);
@@ -89,21 +89,9 @@ public class DefaultAmwayApacNotificationFacade implements AmwayApacNotification
 		LOGGER.debug(new StringBuilder(100).append("Parameters=[").append(notificationCode).append(", ").append(newStatus)
 				.append("]").toString());
 
-		boolean successful = true;
-		try
-		{
-			final AmwayNotificationModel notification = amwayApacNotificationService.getNotificationByCode(notificationCode);
-			amwayApacNotificationService.changeUserNotificationStatus(notification, (CustomerModel) userService.getCurrentUser(),
-					newStatus);
-		}
-		catch (final Exception e)
-		{
-			LOGGER.error(new StringBuilder(100).append("Error updating status of notification=").append(notificationCode)
-					.append(", customer=").append(userService.getCurrentUser()).append(" to new status=").append(newStatus).toString(),
-					e);
-			successful = false;
-		}
-		return successful;
+		final AmwayNotificationModel notification = amwayApacNotificationService.getNotificationByCode(notificationCode);
+		amwayApacNotificationService.changeUserNotificationStatus(notification, (CustomerModel) userService.getCurrentUser(),
+				newStatus);
 	}
 
 	/**

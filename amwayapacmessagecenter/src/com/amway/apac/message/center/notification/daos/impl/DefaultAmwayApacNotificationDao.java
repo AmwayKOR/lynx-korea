@@ -222,7 +222,7 @@ public class DefaultAmwayApacNotificationDao implements AmwayApacNotificationDao
 		final List<String> classificationNames = new ArrayList<>();
 		for (final Entry<AccountClassificationEnum, Integer> mapEntry : getAmwayAccountClassificationRankMapping().entrySet())
 		{
-			if (mapEntry.getValue().intValue() < currentAccountRank.intValue())
+			if (mapEntry.getValue().intValue() <= currentAccountRank.intValue())
 			{
 				classificationNames.add(mapEntry.getKey().toString());
 			}

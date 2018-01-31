@@ -90,7 +90,7 @@ public class DefaultAmwayApacNotificationService implements AmwayApacNotificatio
 					.append(notificationCode).append("] and basesite [").append(currentBasesite.getName()).append("].").toString());
 		}
 		final List<AmwayNotificationModel> results = getAmwayNotificationDao().find(params);
-		return results.iterator().next();
+		return CollectionUtils.isNotEmpty(results) ? results.iterator().next() : null;
 	}
 
 	@Override

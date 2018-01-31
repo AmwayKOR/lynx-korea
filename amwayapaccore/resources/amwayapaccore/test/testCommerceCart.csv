@@ -261,14 +261,17 @@ INSERT_UPDATE AmwayDeliverySlotConfig;warehouse(code);orderingDay(code)[unique=t
 ################### Notifications Test Data ##########################
 
 INSERT_UPDATE AmwayAccountGroupTag;code[unique=true];affiliate;active;groupType(code);notification(code)
-;PLATINUM_AND_ABOVE;100;true;ClASSIFICATION;diamond_notification
-;DIAMOND_AND_ABOVE;100;true;ClASSIFICATION;platinum_notification
+;PLATINUM_AND_ABOVE;100;true;ClASSIFICATION;platinum_notification
+;DIAMOND_AND_ABOVE;100;true;ClASSIFICATION;diamond_notification
 ;testgroup;100;true;HYBRIS_GROUP;group_notification
 
 INSERT_UPDATE AmwayNotification;code[unique=true];shortDescription;longDescription;publishDate;site(uid);expiryDate;status(code);accountGroupTag(code)
-;diamond_notification;Diamond Test Notification;This notification tests for the diamond and above classification level;Jan 17, 2018 11:59:20 AM;testSite;Dec 17, 2018 11:59:23 AM;PUBLISHED;PLATINUM_AND_ABOVE
-;platinum_notification;Platinum Test Notification;This notification tests for platinum and above classification level;Jan 17, 2018 11:59:20 AM;testSite;Dec 17, 2018 11:59:23 AM;PUBLISHED;DIAMOND_AND_ABOVE
+;diamond_notification;Diamond Test Notification;This notification tests for the diamond and above classification level;Jan 17, 2018 11:59:20 AM;testSite;Dec 17, 2018 11:59:23 AM;PUBLISHED;DIAMOND_AND_ABOVE
+;platinum_notification;Platinum Test Notification;This notification tests for platinum and above classification level;Jan 17, 2018 11:59:20 AM;testSite;Dec 17, 2018 11:59:23 AM;PUBLISHED;PLATINUM_AND_ABOVE
 ;group_notification;Group test notification;This notification will test the functioning of notifications for group.;Jan 17, 2018 11:59:20 AM;testSite;Dec 17, 2018 11:59:23 AM;PUBLISHED;testgroup
+
+INSERT_UPDATE CMSParagraphComponent;$catalogversion[unique=true];uid[unique=true]  ;content[lang=en];
+                                   ;                            ;group_notification;"TestGroupNotification"
 
 ################### Notifications Test Data ##########################
 
