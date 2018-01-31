@@ -55,4 +55,19 @@ public class AmwayApacCategoryReferenceInterceptorIntegrationTest extends Servic
 		final Date afterUpdate = category.getModifiedtime();
 		Assert.assertTrue(beforeUpdate.before(afterUpdate));
 	}
+
+	@Test
+	public void testGetAmwayAccountForReferenceRemoval()
+	{
+		final CategoryModel category = categoryService.getCategoryForCode("testCategory0");
+		final Date beforeUpdate = category.getModifiedtime();
+		final List<AmwayCategoryProductReferenceModel> categoryReferences = (List<AmwayCategoryProductReferenceModel>) category
+				.getProductReferences();
+		final AmwayCategoryProductReferenceModel referenceModelToBeSaved = categoryReferences.iterator().next();
+		referenceModelToBeSaved.setDescription("new description");
+		modelService.remove(referenceModelToBeSaved);
+		modelService.refresh(category);
+		final Date afterUpdate = category.getModifiedtime();
+		Assert.assertTrue(beforeUpdate.before(afterUpdate));
+	}
 }

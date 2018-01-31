@@ -2,7 +2,6 @@ package com.amway.apac.core.checkout.services.impl;
 
 import static com.amway.apac.core.constants.AmwayapacCoreConstants.CART_MODEL;
 import static com.amway.apac.core.constants.AmwayapacCoreConstants.COMMERCE_CHECKOUT_PARAMETER;
-import static com.amway.apac.core.constants.AmwayapacCoreConstants.WAREHOUSE;
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
 
 import de.hybris.platform.commerceservices.order.CommerceCartCalculationStrategy;
@@ -44,7 +43,6 @@ public class DefaultAmwayApacCommerceWarehouseStrategy implements AmwayApacComme
 		final WarehouseModel warehouse = parameter.getWarehouse();
 
 		validateParameterNotNullStandardMessage(CART_MODEL, cartModel);
-		validateParameterNotNullStandardMessage(WAREHOUSE, warehouse);
 
 		cartModel.setWarehouse(warehouse);
 		cartModel.setCalculated(Boolean.FALSE);
