@@ -28,14 +28,14 @@ public interface AmwayApacCouponService extends CouponService
 	 * @param amwayCoupon
 	 * @return generated coupon code
 	 */
-	String generateCodeForAmwayCoupon(AmwayCouponModel amwayCoupon);
+	String generateCodeForAmwayCoupon(final AmwayCouponModel amwayCoupon);
 
 	/**
 	 * get Amway Coupon on the basis of unique coupon code
 	 *
 	 * @param couponCode
 	 */
-	AmwayCouponModel getAmwayCouponForCode(String couponCode);
+	AmwayCouponModel getAmwayCouponForCode(final String couponCode);
 
 	/**
 	 * get Amway coupons for customer, particular status and within date range
@@ -45,8 +45,8 @@ public interface AmwayApacCouponService extends CouponService
 	 * @param showActive
 	 * @return AmwayCouponModel
 	 */
-	List<AmwayCouponModel> getAmwayCouponsForAbo(CustomerModel customer, List<AmwayCouponStatus> couponStatuses,
-			boolean showActive);
+	List<AmwayCouponModel> getAmwayCouponsForAbo(final CustomerModel customer, final List<AmwayCouponStatus> couponStatuses,
+			final boolean showActive);
 
 	/**
 	 * Returns list of expired coupons.
