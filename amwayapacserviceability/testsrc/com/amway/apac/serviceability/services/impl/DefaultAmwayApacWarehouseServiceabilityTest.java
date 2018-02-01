@@ -16,13 +16,17 @@ import org.junit.Test;
 import com.amway.apac.serviceability.services.AmwayApacWarehouseServiceabilityService;
 
 
+/**
+ * 
+ * @author Shubham Goyal
+ */
+
 @IntegrationTest
-public class DefaultAmwayApacWarehouseServiceabilityServiceIntegrationTest extends ServicelayerTransactionalTest
+public class DefaultAmwayApacWarehouseServiceabilityTest extends ServicelayerTransactionalTest
 {
-	private static final String TEST_SITE = "amwayapac";
-	private final String postalCode = "8803";
-	private final String postalCodeZero = "0000";
-	private final String postalCodeWithNoWarehouse = "8800";
+	private static final String TEST_SITE = "testSite";
+	private static final String POSTAL_CODE = "151001";
+	private static final String NON_SERVICEABLE_POSTALCODE = "8800";
 	private BaseSiteModel baseSite;
 
 	@Resource(name = "amwayApacWarehouseServiceabilityService")
@@ -42,39 +46,47 @@ public class DefaultAmwayApacWarehouseServiceabilityServiceIntegrationTest exten
 		baseSiteService.setCurrentBaseSite(baseSite, true);
 	}
 
+	@Test(expected = IllegalArgumentException.class)
+	public void testGetServiceableWareHouseForNullBasesite()
+	{
+		amwayApacWarehouseServiceabilityService.getServiceableWareHouse(POSTAL_CODE, null);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testGetServiceableWareHouseForNullPostcode()
+	{
+		amwayApacWarehouseServiceabilityService.getServiceableWareHouse(null, baseSite);
+	}
+
 	@Test
 	public void testGetServiceableWareHouse()
 	{
-		final WarehouseModel warehouse = amwayApacWarehouseServiceabilityService.getServiceableWareHouse(postalCode, baseSite);
-		Assert.assertNotNull("Warehouse is null", warehouse);
-		Assert.assertFalse("Warehouse does not have stock", warehouse.getStockLevels().isEmpty());
+		final WarehouseModel warehouse = amwayApacWarehouseServiceabilityService.getServiceableWareHouse(POSTAL_CODE, baseSite);
+		Assert.assertNotNull(warehouse);
+		Assert.assertEquals("Warehouse South", warehouse.getName());
 	}
 
-	/**
-	 * GetServiceableWareHouse with postal code
-	 */
 	@Test
-	public void testGetServiceableWareHouseWithPostalCodeZero()
+	public void testGetServiceableWareHouseWithNoServiceableWarehouse()
 	{
-		final WarehouseModel warehouse = amwayApacWarehouseServiceabilityService.getServiceableWareHouse(postalCodeZero, baseSite);
-		Assert.assertNull("Warehouse is not null", warehouse);
+		final WarehouseModel warehouse = amwayApacWarehouseServiceabilityService.getServiceableWareHouse(NON_SERVICEABLE_POSTALCODE,
+				baseSite);
+		Assert.assertNull(warehouse);
 	}
 
 	@Test
 	public void testIsPostalCodeServiceableForCurrentBaseSite()
 	{
-		final Boolean isServiceable = amwayApacWarehouseServiceabilityService.isPostalCodeServiceableForCurrentBaseSite(postalCode);
-		Assert.assertTrue("Warehouse is not Serviceable", isServiceable.booleanValue());
+		final Boolean isServiceable = amwayApacWarehouseServiceabilityService
+				.isPostalCodeServiceableForCurrentBaseSite(POSTAL_CODE);
+		Assert.assertTrue(isServiceable.booleanValue());
 	}
 
-	/**
-	 * Test IsPostalCodeServiceableForCurrentBaseSite without a serviceable warehouse
-	 */
 	@Test
 	public void testIsPostalCodeServiceableForCurrentBaseSiteWithNoServiceableWarehouse()
 	{
 		final Boolean isServiceable = amwayApacWarehouseServiceabilityService
-				.isPostalCodeServiceableForCurrentBaseSite(postalCodeWithNoWarehouse);
-		Assert.assertFalse("Warehouse is Serviceable", isServiceable.booleanValue());
+				.isPostalCodeServiceableForCurrentBaseSite(NON_SERVICEABLE_POSTALCODE);
+		Assert.assertFalse(isServiceable.booleanValue());
 	}
 }

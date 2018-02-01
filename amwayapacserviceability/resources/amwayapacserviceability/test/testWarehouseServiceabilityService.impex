@@ -1,96 +1,61 @@
-$lang=en
-$currencies=USD
-$defaultCurrency=USD
+$currencies=EUR
+$defaultCurrency=EUR
 $defaultLanguage=en
-$deliveryCountries=PH
-$regulargroup=regulargroup
-$customergroup=customergroup
-$catalog-id=testProductCatalog
+$deliveryCountries=US
+
+$catalog-id=testCatalog
 $catalog-version=Online
-$promoGrp=amwayapacPromotionGroup
-$catalogVersion=catalogVersion(catalog(id),version)[unique=true,default=$catalog-id:$catalog-version]
-#$promocatalogVersion=catalogVersion(catalogVersion.catalog(Catalog.id[default=$catalog-id]),catalogVersion.version[default=$catalog-version])[default=$catalog-id:$catalog-version]
 
-$supercategories=supercategories(code,catalogVersion(catalog(id[default=$catalog-id]),version[default=$catalog-version]))
+$testCategory0-id=testCategory0;
+$testCategory1-id=testCategory1;
+
+$catalogversion=catalogversion(catalog(id),version)[unique=true,default=$catalog-id:$catalog-version]
+$catVersion=catalogversion(catalog(id[default=$catalog-id]),version[default=$catalog-version])
+$promoCatalogVersion=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$catalog-id]),CatalogVersion.version[default=$catalog-version])[default=$catalog-id:$catalog-version]
+
+$supercategories=supercategories(code,$catVersion)
 $prices=europe1prices[translator=de.hybris.platform.europe1.jalo.impex.Europe1PricesTranslator]
-#################################################################
 
-$supercategories=supercategories(code,catalogVersion(catalog(id[default=$catalog-id]),version[default=$catalog-version]))
-$prices=europe1prices[translator=de.hybris.platform.europe1.jalo.impex.Europe1PricesTranslator]
+INSERT_UPDATE Language;isocode[unique=true];active;
+;de;true;
+;en;true;
 
-# Create Customer Group
-INSERT_UPDATE Usergroup;uid[unique=true];groups(uid)[mode=append];userPriceGroup(code)
-;distributorgroup;;AmwayDefaultABOPriceGroup
+UPDATE Language;isocode[unique=true];name[lang=de];name[lang=en]
+;de;Deutsch;German
+;en;Englisch;English
 
-INSERT_UPDATE Usergroup;uid[unique=true];groups(uid)[mode=append];userPriceGroup(code)
-;distributorgroup;;AmwayDefaultABOPriceGroup
+INSERT_UPDATE Unit;unitType[unique=true];code[unique=true];name[lang=de];name[lang=en];conversion;;;;;
+;pieces;pieces;pieces;pieces;1;;;;;
 
-INSERT_UPDATE Usergroup;uid[unique=true];groups(uid)[mode=append];userPriceGroup(code)
-;0608CustomerGroup;;
+INSERT_UPDATE Currency;isocode[unique=true];name[lang=de];name[lang=en];active;base;conversion;digits;symbol;;
+;EUR;Euro;Euro;true;true;1;2;E;;
+;USD;US-Dollar;US Dollar;true;false;1,38;2;$;;
 
-##########################
+INSERT_UPDATE Title;code[unique=true];name[lang=de];name[lang=en]
+;dr;Dr.;dr.
+;prof;Prof.;prof.
 
-INSERT_UPDATE Catalog;id[unique=true];name[lang=en];defaultCatalog;;;;;;
-;$catalog-id;$catalog-id;true;;;;;;
+INSERT_UPDATE Country;isocode[unique=true];name[lang=de];name[lang=en];active;countryCode;;;;;
+;DE;Deutschland;Germany;true;101;;;;;
+;US;Vereinigte Staaten von Amerika;United States of America;true;100;;;;;
 
-INSERT_UPDATE catalogVersion; catalog(id)[unique=true]; version[unique=true];active;defaultCurrency(isocode);;;;;;
-;$catalog-id;$catalog-version;true;USD;;;;;;
+############################# Site and Store Data ##################
 
+INSERT_UPDATE Vendor;code[unique=true];name[lang=en];name[lang=de]
+;electro;Electro;Electro
 
-##################################################### Product creation for User Group[START] ###############################################
+INSERT_UPDATE BaseStore;uid[unique=true];affiliateNumber;catalogs(id);currencies(isocode);net;taxGroup(code);storelocatorDistanceUnit(code);defaultCurrency(isocode);languages(isocode);defaultLanguage(isocode);deliveryCountries(isocode);solrFacetSearchConfiguration(name);submitOrderProcessCode
+;testStore;100;$catalog-id;$currencies;false;;km;$defaultCurrency;$defaultLanguage;$defaultLanguage;$deliveryCountries;;
 
-INSERT_UPDATE Product;code[unique=true];;name;variantType(code);maxOrderQuantity;Description[lang=$lang];bvcode;approvalstatus(code);isSellable;$catalogVersion
-;220135;;Salmon Omega-3;AmwayApacVariantProduct;;;false;check;;
+INSERT_UPDATE BaseSite;uid[unique=true];stores(uid);defaultPromotionGroup(Identifier)
+;testSite;testStore;default;
+;testSite2;testStore;;
 
-##########################
+INSERT_UPDATE Warehouse;code[unique=true];name[lang=en];name[lang=de];vendor(code);default;baseStores(uid);;;;
+;warehouse_s;Warehouse South;Warehouse South;electro;true;testStore;;;;
 
-INSERT_UPDATE AmwayPaymentOption;aliasCode[unique=true];title;active;type(code);product(code,catalogVersion(catalog(id),version))[unique=true];tenure
-							;220135;<ignore>;true;PIF;220135:testProductCatalog:Online;
-							;2201355;<ignore>;true;PIF;220135:testProductCatalog:Online;
+INSERT_UPDATE AmwayPostcodeWarehouseServiceability;postalCode;site(uid)[unique=true];warehouse(code)[unique=true];
+;151001;testSite;warehouse_s;
 
+############################# Site and Store Data ##################
 
-INSERT_UPDATE PriceRow[forceWrite=true];;net;unit(code[unique=true,default=pieces]);ug(code)[unique=true];endTime[dateformat=yyyyMMdd][unique=true];startTime[dateformat=yyyyMMdd][unique=true];price;currency(isocode)[unique=true];businessVolume;pointValue;productId[unique=true]
-
-						;;true;pieces;AmwayDefaultRetailPriceGroup;21001201;20160415;75;USD;0;0;220135
-						;;true;pieces;AmwayDefaultABOPriceGroup;21001201;20160415;75;USD;0;0;220135
-
-INSERT_UPDATE Tax;;absolute;currency(isocode);value;code[unique=true,forceWrite=True]
-
-							;;true;USD;10.2;220135_ABOTax_PHP
-							;;true;USD;12.77;220135_RetailTax_PHP
-
-
-# Create some Warehouses for the Vendor
-INSERT_UPDATE Vendor;code[unique=true];name[lang=en];;;;;;;
-;testVendor;testVendor;;;;;;;
-
-INSERT_UPDATE Warehouse;code[unique=true];name             ;vendor(code);default[default='false']
-                       ;PH-01            ;Central Warehouse;testVendor  ;true
-                       ;PH-03            ;Mandaluyong      ;testVendor  ;
-
-INSERT_UPDATE StockLevel;available;warehouse(code)[unique=true];inStockStatus(code);maxPreOrder;maxStockLevelHistoryCount;overSelling;preOrder;productCode[unique=true];reserved;
-
-						;175		;01							;shipped			;0			;20							;0			;0		;220135					;0
-
-
-INSERT_UPDATE StockLevel;available;warehouse(code)[unique=true];inStockStatus(code);maxPreOrder;maxStockLevelHistoryCount;overSelling;preOrder;productCode[unique=true];reserved;
-;10;PH-01;forceInStock;50;-1;0;0;HW1210-3422;0;
-;0;PH-03;forceInStock;50;-1;0;0;HW1210-3422;0;
-##############################  Base Site ###########################
-INSERT_UPDATE BaseSite;uid[unique=true]
-;amwayapac
-
-##############################  Country ###########################
-INSERT_UPDATE Country;isocode[unique=true];name[lang=en];active[default=true];adaCountryCode;affiliateNumber
-                     ;PH                  ;"Philippines";                 ;350           ;350
-
-
-############################# Create Provinces  ###############################
-INSERT_UPDATE Region;country(isocode);isocodeShort;isocode[unique=true];name;active[default=true]
-;PH;CV;PH-CV;Cavite
-
-################################ Create WarehouseServiceability #################################
-INSERT_UPDATE AmwayPostcodeWarehouseServiceability;region(isocode);postalCode[unique=true];warehouse(code);site(uid)
-;PH-CV;8803;PH-01;amwayapac
-;PH-CV;8810;PH-01;amwayapac
-;PH-CV;8800;PH-03;amwayapac
