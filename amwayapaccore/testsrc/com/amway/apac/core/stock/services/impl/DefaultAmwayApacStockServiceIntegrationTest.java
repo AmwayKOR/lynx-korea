@@ -13,6 +13,8 @@ import de.hybris.platform.product.ProductService;
 import de.hybris.platform.servicelayer.ServicelayerTransactionalTest;
 import de.hybris.platform.servicelayer.user.UserService;
 
+import java.util.Arrays;
+
 import javax.annotation.Resource;
 
 import org.junit.Assert;
@@ -82,6 +84,50 @@ public class DefaultAmwayApacStockServiceIntegrationTest extends ServicelayerTra
 		Assert.assertEquals(StockLevelStatus.INSTOCK,
 				amwayApacStockService.getProductStatus(getProductByCode(TEST_BUNDLE_PRODUCT_1), getWarehouseByUid(TEST_WAREHOUSE_1)));
 	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testUpdateAvailableAmountForNullProduct()
+	{
+		amwayApacStockService.updateAvailableAmount(null, getWarehouseByUid(TEST_WAREHOUSE_1), 10);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testUpdateAvailableAmountForNullWarehouse()
+	{
+		amwayApacStockService.updateAvailableAmount(getProductByCode(TEST_PRODUCT_1), null, 10);
+	}
+
+	@Test
+	public void testUpdateAvailableAmount()
+	{
+		amwayApacStockService.updateAvailableAmount(getProductByCode(TEST_PRODUCT_1), getWarehouseByUid(TEST_WAREHOUSE_1), 15);
+		Assert.assertEquals(15,
+				amwayApacStockService.getStockLevelAmount(getProductByCode(TEST_PRODUCT_1), getWarehouseByUid(TEST_WAREHOUSE_1)));
+
+		amwayApacStockService.updateAvailableAmount(getProductByCode(TEST_PRODUCT_1), getWarehouseByUid(TEST_WAREHOUSE_1), 20);
+		Assert.assertEquals(20,
+				amwayApacStockService.getStockLevelAmount(getProductByCode(TEST_PRODUCT_1), getWarehouseByUid(TEST_WAREHOUSE_1)));
+	}
+
+	@Test
+	public void testGetProductStatusForWarehouseListForProduct()
+	{
+		cartService.setSessionCart(commerceCartService.getCartForCodeAndUser(CART_1, userService.getUserForUID(TEST_USER)));
+		Assert.assertEquals(StockLevelStatus.INSTOCK,
+				amwayApacStockService.getProductStatus(getProductByCode(TEST_PRODUCT_1),
+						Arrays.asList(getWarehouseByUid(TEST_WAREHOUSE_1))));
+	}
+
+	@Test
+	public void testGetProductStatusForWarehouseListForBundle()
+	{
+		cartService.setSessionCart(commerceCartService.getCartForCodeAndUser(CART_1, userService.getUserForUID(TEST_USER)));
+		Assert.assertEquals(StockLevelStatus.INSTOCK,
+				amwayApacStockService.getProductStatus(getProductByCode(TEST_BUNDLE_PRODUCT_1),
+						Arrays.asList(getWarehouseByUid(TEST_WAREHOUSE_1))));
+	}
+
+
 
 	/**
 	 * Gets product by code
