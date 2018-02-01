@@ -133,8 +133,7 @@ public class DefaultAmwayApacAccountServiceIntegrationTest extends ServicelayerT
 	{
 		accountModel = defaultAmwayApacAccountService.getAmwayAccount("abrode", "100").iterator().next();
 		final AmwayBusinessRestrictionModel restriction = defaultAmwayApacAccountService.getMOPRestriction(accountModel);
-		Assert.assertNotNull(restriction);
-		Assert.assertEquals("testrestriction", restriction.getCode());
+		Assert.assertNull(restriction);
 	}
 
 }

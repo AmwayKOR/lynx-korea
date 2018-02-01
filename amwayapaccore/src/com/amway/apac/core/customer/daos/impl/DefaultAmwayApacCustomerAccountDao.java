@@ -143,7 +143,7 @@ public class DefaultAmwayApacCustomerAccountDao extends DefaultAmwayCustomerAcco
 	public AmwayBusinessRestrictionModel getMOPRestriction(final AmwayAccountModel amwayAccount)
 	{
 		validateParameterNotNullStandardMessage("Amway Account", amwayAccount);
-
+		AmwayBusinessRestrictionModel restriction = null;
 		final Map<String, Object> params = new HashMap<>();
 		params.put(AmwayAccountModel.PK, amwayAccount.getPk());
 
@@ -153,8 +153,8 @@ public class DefaultAmwayApacCustomerAccountDao extends DefaultAmwayCustomerAcco
 		final SearchResult<AmwayBusinessRestrictionModel> result = getFlexibleSearchService().search(query);
 		if (CollectionUtils.isNotEmpty(result.getResult()))
 		{
-			return result.getResult().get(0);
+			restriction = result.getResult().get(0);
 		}
-		return null;
+		return restriction;
 	}
 }

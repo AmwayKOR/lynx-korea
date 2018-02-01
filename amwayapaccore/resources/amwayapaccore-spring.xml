@@ -337,6 +337,7 @@
 		<property name="amwayApacAccountDao" ref="amwayApacAccountDao"/>
 		<property name="amwayApacCommerceCommonI18NService" ref="commerceCommonI18NService"/>
 		<property name="amwayAccountClassificationDao" ref="amwayAccountClassificationDao"/>
+		<property name="amwayApacCustomerAccountDao" ref="customeraccountDao" />
 	</bean>
 	
 	<alias name="defaultAmwayApacCommerceCheckoutService" alias="amwayCommerceCheckoutService" />

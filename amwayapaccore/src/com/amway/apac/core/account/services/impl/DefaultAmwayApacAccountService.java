@@ -37,8 +37,7 @@ public class DefaultAmwayApacAccountService extends DefaultAmwayAccountService i
 	private GenericDao<AmwayAccountModel> amwayApacAccountDao;
 	private GenericDao<AmwayAccountClassificationModel> amwayAccountClassificationDao;
 	private AmwayApacCommerceCommonI18NService amwayApacCommerceCommonI18NService;
-
-	private AmwayApacCustomerAccountDao AmwayApacCustomerAccountDao;
+	private AmwayApacCustomerAccountDao amwayApacCustomerAccountDao;
 
 	/**
 	 * {@inheritDoc}
@@ -105,7 +104,7 @@ public class DefaultAmwayApacAccountService extends DefaultAmwayAccountService i
 	@Override
 	public AmwayBusinessRestrictionModel getMOPRestriction(final AmwayAccountModel amwayAccount)
 	{
-		return AmwayApacCustomerAccountDao.getMOPRestriction(amwayAccount);
+		return getAmwayApacCustomerAccountDao().getMOPRestriction(amwayAccount);
 	}
 
 
@@ -162,5 +161,22 @@ public class DefaultAmwayApacAccountService extends DefaultAmwayAccountService i
 	public void setAmwayAccountClassificationDao(final GenericDao<AmwayAccountClassificationModel> amwayAccountClassificationDao)
 	{
 		this.amwayAccountClassificationDao = amwayAccountClassificationDao;
+	}
+
+	/**
+	 * @return the amwayApacCustomerAccountDao
+	 */
+	public AmwayApacCustomerAccountDao getAmwayApacCustomerAccountDao()
+	{
+		return amwayApacCustomerAccountDao;
+	}
+
+	/**
+	 * @param amwayApacCustomerAccountDao the amwayApacCustomerAccountDao to set
+	 */
+	@Required
+	public void setAmwayApacCustomerAccountDao(final AmwayApacCustomerAccountDao amwayApacCustomerAccountDao)
+	{
+		this.amwayApacCustomerAccountDao = amwayApacCustomerAccountDao;
 	}
 }
