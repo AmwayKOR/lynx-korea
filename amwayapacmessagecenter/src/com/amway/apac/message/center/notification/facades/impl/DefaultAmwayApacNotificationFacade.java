@@ -77,8 +77,11 @@ public class DefaultAmwayApacNotificationFacade implements AmwayApacNotification
 		validateParameterNotNullStandardMessage("Notification code", notificationCode);
 		validateParameterNotNullStandardMessage("New Status", newStatus);
 
-		LOGGER.debug(new StringBuilder(100).append("Parameters=[").append(notificationCode).append(", ").append(newStatus)
-				.append("]").toString());
+		if (LOGGER.isInfoEnabled())
+		{
+			LOGGER.debug(new StringBuilder(100).append("Parameters=[").append(notificationCode).append(", ").append(newStatus)
+					.append("]").toString());
+		}
 
 		final AmwayNotificationModel notification = amwayApacNotificationService.getNotificationByCode(notificationCode);
 		amwayApacNotificationService.changeUserNotificationStatus(notification, (CustomerModel) userService.getCurrentUser(),

@@ -32,7 +32,6 @@
     
     <alias alias="amwayApacDeliverySlotConfigUpdateInterceptor" name="defaultAmwayApacDeliverySlotConfigUpdateInterceptor"/>
     <bean id="defaultAmwayApacDeliverySlotConfigUpdateInterceptor" class="com.amway.apac.deliveryslot.interceptors.AmwayApacDeliverySlotConfigUpdateInterceptor">
-    	<property name="modelService" ref="modelService"/>
     	<property name="amwayApacDeliverySlotManagementService" ref="amwayApacDeliverySlotManagementService"/>
     </bean>
 

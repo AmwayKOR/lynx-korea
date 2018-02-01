@@ -98,8 +98,11 @@ public class DefaultAmwayApacNotificationService implements AmwayApacNotificatio
 
 		if (Objects.nonNull(actionResult))
 		{
-			LOGGER.info(new StringBuilder(100).append("Notification action found. Updating the status to ")
-					.append(newStatus.getCode()).toString());
+			if (LOGGER.isInfoEnabled())
+			{
+				LOGGER.info(new StringBuilder(100).append("Notification action found. Updating the status to ")
+						.append(newStatus.getCode()).toString());
+			}
 			actionResult.setStatus(newStatus);
 			getModelService().save(actionResult);
 		}

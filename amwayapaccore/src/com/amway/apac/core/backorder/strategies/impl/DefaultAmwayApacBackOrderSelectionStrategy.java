@@ -46,7 +46,7 @@ public class DefaultAmwayApacBackOrderSelectionStrategy implements AmwayApacBack
 	public Map<StockLevelModel, List<AmwayBackOrderModel>> getBackOrdersForRelease(final List<StockLevelModel> stockLevels)
 	{
 		ServicesUtil.validateParameterNotNull(stockLevels, "stockLevels cannot be null!");
-		final Map<StockLevelModel, List<AmwayBackOrderModel>> amwayBackOrdersMap = new HashMap<StockLevelModel, List<AmwayBackOrderModel>>();
+		final Map<StockLevelModel, List<AmwayBackOrderModel>> amwayBackOrdersMap = new HashMap<>();
 		if (CollectionUtils.isNotEmpty(stockLevels))
 		{
 			for (final StockLevelModel stockLevel : stockLevels)

@@ -6,7 +6,6 @@ import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParamete
 import de.hybris.platform.servicelayer.interceptor.InterceptorContext;
 import de.hybris.platform.servicelayer.interceptor.InterceptorException;
 import de.hybris.platform.servicelayer.interceptor.PrepareInterceptor;
-import de.hybris.platform.servicelayer.model.ModelService;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -32,9 +31,6 @@ public class AmwayApacDeliverySlotConfigUpdateInterceptor implements PrepareInte
 {
 	/** The LOGGER Constant. */
 	private static final Logger LOGGER = LoggerFactory.getLogger(AmwayApacDeliverySlotConfigUpdateInterceptor.class);
-
-	/** The model service. */
-	private ModelService modelService;
 
 	/** The amway apac delivery slot management service. */
 	private AmwayApacDeliverySlotManagementService amwayApacDeliverySlotManagementService;
@@ -77,28 +73,6 @@ public class AmwayApacDeliverySlotConfigUpdateInterceptor implements PrepareInte
 		{
 			throw new InterceptorException("Delivery Day or Slot Time is NULL ");
 		}
-	}
-
-	/**
-	 * Gets the model service.
-	 *
-	 * @return the modelService
-	 */
-	public ModelService getModelService()
-	{
-		return modelService;
-	}
-
-	/**
-	 * Sets the model service.
-	 *
-	 * @param modelService
-	 *           the modelService to set
-	 */
-	@Required
-	public void setModelService(final ModelService modelService)
-	{
-		this.modelService = modelService;
 	}
 
 	/**

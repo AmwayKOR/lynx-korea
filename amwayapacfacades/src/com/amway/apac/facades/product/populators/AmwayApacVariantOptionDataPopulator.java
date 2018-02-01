@@ -39,7 +39,7 @@ public class AmwayApacVariantOptionDataPopulator extends AcceleratorVariantOptio
 
 		if (source.getBaseProduct() != null)
 		{
-			final Collection<VariantOptionQualifierData> variantOptionQualifiers = new ArrayList<VariantOptionQualifierData>();
+			final Collection<VariantOptionQualifierData> variantOptionQualifiers = new ArrayList<>();
 
 			populateVariantOptionQualifierData(source, variantOptionQualifiers);
 			target.setVariantOptionQualifiers(variantOptionQualifiers);
