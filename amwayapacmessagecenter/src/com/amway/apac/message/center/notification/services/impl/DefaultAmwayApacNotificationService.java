@@ -1,25 +1,24 @@
 package com.amway.apac.message.center.notification.services.impl;
 
-import static com.amway.apac.core.constants.AmwayapacCoreConstants.ACCOUNT_CLASSIFICATION_CODE;
 import static com.amway.apac.message.center.model.AmwayNotificationModel.CODE;
 import static com.amway.apac.message.center.model.AmwayNotificationModel.SITE;
 import static com.amway.apac.message.center.model.AmwayNotificationUserActionModel.NOTIFICATION;
 import static com.amway.apac.message.center.model.AmwayNotificationUserActionModel.USER;
-import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNull;
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
 
 import de.hybris.platform.basecommerce.model.site.BaseSiteModel;
-import de.hybris.platform.commerceservices.search.pagedata.PageableData;
 import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
 import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.servicelayer.internal.dao.GenericDao;
 import de.hybris.platform.servicelayer.model.ModelService;
-import de.hybris.platform.servicelayer.session.SessionService;
+import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.platform.site.BaseSiteService;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
@@ -29,6 +28,7 @@ import org.springframework.beans.factory.annotation.Required;
 import com.amway.apac.message.center.enums.AmwayNotificationUserActionStatus;
 import com.amway.apac.message.center.model.AmwayNotificationModel;
 import com.amway.apac.message.center.model.AmwayNotificationUserActionModel;
+import com.amway.apac.message.center.notification.NotificationSearchParamData;
 import com.amway.apac.message.center.notification.daos.AmwayApacNotificationDao;
 import com.amway.apac.message.center.notification.services.AmwayApacNotificationService;
 
@@ -42,34 +42,27 @@ public class DefaultAmwayApacNotificationService implements AmwayApacNotificatio
 {
 	private static final Logger LOGGER = LoggerFactory.getLogger(DefaultAmwayApacNotificationService.class);
 
-	private static final String ERROR_MESSAGE_NULL_PAGEABLE_DATA = "[pageableData] must not be null";
-	private static final String ERROR_MESSAGE_NULL_CUSTOMER = "[customer] must not be null";
-	private static final String ERROR_MESSAGE_NULL_NOTIFICATION_CODE = "[notificationCode] field can not be null";
 	private static final String NOTIFICATION_STRING = "Notification";
-	private static final String CUSTOMER_STRING = "customer";
-	private static final String NEW_STATUS_STRING = "newStatus";
+	private static final String CUSTOMER_STRING = "Customer";
+	private static final String NEW_STATUS_STRING = "New Status";
+	private static final String PAGEABLE_DATA = "Pageable Data";
 
 	private AmwayApacNotificationDao amwayApacNotificationDao;
 	private GenericDao<AmwayNotificationUserActionModel> amwayNotificationUserActionDao;
 	private GenericDao<AmwayNotificationModel> amwayNotificationDao;
 	private BaseSiteService baseSiteService;
 	private ModelService modelService;
-	private SessionService sessionService;
+	private UserService userService;
 
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public SearchPageData<AmwayNotificationModel> getNotifications(final PageableData pageableData, final CustomerModel customer,
-			final List<AmwayNotificationUserActionStatus> statuses, final String searchText)
+	public SearchPageData<AmwayNotificationModel> getNotifications(final NotificationSearchParamData notificationSearchParam)
 	{
-		validateParameterNotNull(pageableData, ERROR_MESSAGE_NULL_PAGEABLE_DATA);
-		validateParameterNotNull(customer, ERROR_MESSAGE_NULL_CUSTOMER);
-		final String accountClassficationCode = getSessionService().getAttribute(ACCOUNT_CLASSIFICATION_CODE);
-
-		return getAmwayApacNotificationDao().getNotifications(pageableData, getBaseSiteService().getCurrentBaseSite(), customer,
-				statuses, searchText, accountClassficationCode);
+		validateParameterNotNullStandardMessage(PAGEABLE_DATA, notificationSearchParam.getPageableData());
+		return getAmwayApacNotificationDao().getNotifications(notificationSearchParam, getBaseSiteService().getCurrentBaseSite());
 	}
 
 	/**
@@ -78,7 +71,7 @@ public class DefaultAmwayApacNotificationService implements AmwayApacNotificatio
 	@Override
 	public AmwayNotificationModel getNotificationByCode(final String notificationCode)
 	{
-		validateParameterNotNull(notificationCode, ERROR_MESSAGE_NULL_NOTIFICATION_CODE);
+		validateParameterNotNullStandardMessage(NOTIFICATION_STRING, notificationCode);
 
 		final BaseSiteModel currentBasesite = getBaseSiteService().getCurrentBaseSite();
 		final Map<String, Object> params = new HashMap<>(2);
@@ -101,23 +94,21 @@ public class DefaultAmwayApacNotificationService implements AmwayApacNotificatio
 		validateParameterNotNullStandardMessage(CUSTOMER_STRING, customer);
 		validateParameterNotNullStandardMessage(NEW_STATUS_STRING, newStatus);
 
-		final List<AmwayNotificationUserActionModel> results = getNotificationActionByUserAndNotification(customer, notification);
+		final AmwayNotificationUserActionModel actionResult = getNotificationAction(notification, customer);
 
-		if (CollectionUtils.isNotEmpty(results))
+		if (Objects.nonNull(actionResult))
 		{
-			LOGGER.info(new StringBuilder(100).append(results.size()).append(" match found. Updating the status to ")
+			LOGGER.info(new StringBuilder(100).append("Notification action found. Updating the status to ")
 					.append(newStatus.getCode()).toString());
-			final AmwayNotificationUserActionModel notificationMapping = results.get(0);
-			notificationMapping.setStatus(newStatus);
-			getModelService().save(notificationMapping);
+			actionResult.setStatus(newStatus);
+			getModelService().save(actionResult);
 		}
 		else
 		{
 			if (LOGGER.isInfoEnabled())
 			{
 				LOGGER.info(new StringBuilder(100)
-						.append("Could not find any instance of AmwayNotificationUserActionModels. Creating a new instance.")
-						.toString());
+						.append("Could not find any instance of AmwayNotificationUserAction. Creating a new instance.").toString());
 			}
 			final AmwayNotificationUserActionModel userNotificationMapping = getModelService()
 					.create(AmwayNotificationUserActionModel.class);
@@ -129,8 +120,30 @@ public class DefaultAmwayApacNotificationService implements AmwayApacNotificatio
 	}
 
 	@Override
-	public List<AmwayNotificationUserActionModel> getNotificationActionByUserAndNotification(final CustomerModel customer,
+	public AmwayNotificationUserActionModel getNotificationActionByUserAndNotification(final CustomerModel customer,
 			final AmwayNotificationModel notification)
+	{
+		return getNotificationAction(notification, customer);
+	}
+
+	@Override
+	public AmwayNotificationUserActionModel getNotificationActionForCurrentUser(final AmwayNotificationModel notification)
+	{
+		final UserModel user = getUserService().getCurrentUser();
+		AmwayNotificationUserActionModel userAction = null;
+
+		if (user instanceof CustomerModel)
+		{
+			final CustomerModel customer = (CustomerModel) user;
+
+			userAction = getNotificationAction(notification, customer);
+
+		}
+		return userAction;
+	}
+
+	protected AmwayNotificationUserActionModel getNotificationAction(final AmwayNotificationModel notification,
+			final CustomerModel customer)
 	{
 		final Map<String, Object> params = new HashMap<>(2);
 		params.put(NOTIFICATION, notification);
@@ -140,8 +153,7 @@ public class DefaultAmwayApacNotificationService implements AmwayApacNotificatio
 			LOGGER.info(new StringBuilder(100).append("Searching AmwayNotificationUserActionModels for notificationCode [")
 					.append(notification.getCode()).append("] and user [").append(customer.getCustomerID()).append("].").toString());
 		}
-
-		return getAmwayNotificationUserActionDao().find(params);
+		return getAmwayNotificationUserActionDao().find(params).iterator().next();
 	}
 
 	/**
@@ -219,24 +231,6 @@ public class DefaultAmwayApacNotificationService implements AmwayApacNotificatio
 	}
 
 	/**
-	 * @return the sessionService
-	 */
-	public SessionService getSessionService()
-	{
-		return sessionService;
-	}
-
-	/**
-	 * @param sessionService
-	 *           the sessionService to set
-	 */
-	@Required
-	public void setSessionService(final SessionService sessionService)
-	{
-		this.sessionService = sessionService;
-	}
-
-	/**
 	 * @return the baseSiteService
 	 */
 	public BaseSiteService getBaseSiteService()
@@ -254,5 +248,20 @@ public class DefaultAmwayApacNotificationService implements AmwayApacNotificatio
 		this.baseSiteService = baseSiteService;
 	}
 
+	/**
+	 * @return the userService
+	 */
+	public UserService getUserService()
+	{
+		return userService;
+	}
 
+	/**
+	 * @param userService
+	 *           the userService to set
+	 */
+	public void setUserService(final UserService userService)
+	{
+		this.userService = userService;
+	}
 }

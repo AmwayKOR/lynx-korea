@@ -10,12 +10,10 @@ import static com.amway.apac.message.center.model.AmwayNotificationModel.SHORTDE
 import static com.amway.apac.message.center.model.AmwayNotificationModel.SITE;
 import static com.amway.apac.message.center.model.AmwayNotificationUserActionModel.NOTIFICATION;
 import static de.hybris.platform.core.model.security.PrincipalGroupModel._PRINCIPALGROUPRELATION;
-import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNull;
 
 import de.hybris.platform.basecommerce.model.site.BaseSiteModel;
 import de.hybris.platform.commerceservices.search.flexiblesearch.PagedFlexibleSearchService;
 import de.hybris.platform.commerceservices.search.flexiblesearch.data.SortQueryData;
-import de.hybris.platform.commerceservices.search.pagedata.PageableData;
 import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
 import de.hybris.platform.core.model.security.PrincipalGroupModel;
 import de.hybris.platform.core.model.user.CustomerModel;
@@ -39,10 +37,10 @@ import org.springframework.beans.factory.annotation.Required;
 import com.amway.apac.core.enums.AccountClassificationEnum;
 import com.amway.apac.message.center.enums.AmwayAccountGroupTagType;
 import com.amway.apac.message.center.enums.AmwayNotificationStatus;
-import com.amway.apac.message.center.enums.AmwayNotificationUserActionStatus;
 import com.amway.apac.message.center.model.AmwayAccountGroupTagModel;
 import com.amway.apac.message.center.model.AmwayNotificationModel;
 import com.amway.apac.message.center.model.AmwayNotificationUserActionModel;
+import com.amway.apac.message.center.notification.NotificationSearchParamData;
 import com.amway.apac.message.center.notification.daos.AmwayApacNotificationDao;
 
 
@@ -59,8 +57,6 @@ public class DefaultAmwayApacNotificationDao implements AmwayApacNotificationDao
 	private static final String HYBRIS_GROUP = "hybrisGroup";
 	private static final String CURRENT_DATE = "currentDate";
 	private static final String USER = "user";
-	private static final String ERROR_MESSAGE_NULL_PAGEABLE_DATA = "pageableData must not be null";
-	private static final String ERROR_MESSAGE_NULL_CUSTOMER = "[customer] must not be null";
 	private static final String SORT_BY_DESC_DATE = " ORDER BY {an.publishDate} DESC";
 	private static final String SORT_BY_ASC_DATE = " ORDER BY {an.publishDate} ASC";
 	private static final String CLASSIFICATION_LIST = "classificationsList";
@@ -71,7 +67,7 @@ public class DefaultAmwayApacNotificationDao implements AmwayApacNotificationDao
 	 * Query to search active PUBLISHED AmwayNotifications with publishDate before and expiryDate after the current time
 	 * and given baseSite, affiliate.
 	 */
-	private static final StringBuilder AMWAY_NOTIFICATION_MAPPING_QUERY = new StringBuilder().append("SELECT {an.")
+	private static final String AMWAY_NOTIFICATION_MAPPING_QUERY = new StringBuilder().append("SELECT {an.")
 			.append(AmwayNotificationModel.PK).append("} FROM {").append(AmwayNotificationModel._TYPECODE).append(" as an ")
 			.append(" JOIN ").append(_AMWAYNOTIFICATIONACCOUNTGROUPTAGREL).append(" as anagt ON {anagt.source} = {an.")
 			.append(AmwayNotificationModel.PK).append("} JOIN ").append(AmwayAccountGroupTagModel._TYPECODE)
@@ -79,8 +75,28 @@ public class DefaultAmwayApacNotificationDao implements AmwayApacNotificationDao
 			.append(AmwayNotificationModel.STATUS).append("}=?").append(PUBLISHED).append(" AND {an.").append(PUBLISHDATE)
 			.append("} <= ?").append(CURRENT_DATE).append(" AND {an.").append(EXPIRYDATE).append("} >= ?").append(CURRENT_DATE)
 			.append(" AND {an.").append(SITE).append("} = ?").append(SITE).append(" AND {aagt.").append(AFFILIATE).append("}=?")
-			.append(AFFILIATE).append(" AND {aagt.").append(ACTIVE).append("}=?").append(ACTIVE);
+			.append(AFFILIATE).append(" AND {aagt.").append(ACTIVE).append("}=?").append(ACTIVE).toString();
 
+	/** This section appends the group and classification based restriction to the query in the queryBuilder. */
+	private static final String GROUP_AND_CLASSIFICATION_QUERY = new StringBuilder().append(" AND (({aagt.").append(GROUPTYPE)
+			.append("} = ?").append(CLASSIFICATION).append(" AND {aagt.").append(AmwayAccountGroupTagModel.CODE).append("} IN (?")
+			.append(CLASSIFICATION_LIST).append(")) OR ({aagt.").append(GROUPTYPE).append("} = ?").append(HYBRIS_GROUP)
+			.append(" AND {aagt.").append(AmwayAccountGroupTagModel.CODE).append("} IN (?").append(GROUP_LIST).append(")))")
+			.toString();
+
+	/** This Section appends the restriction based on user notification action. */
+	private static final String NOTIFICATION_ACTION_QUERY = new StringBuilder().append(" AND ({an.")
+			.append(AmwayNotificationModel.PK).append("} NOT IN ({{Select {").append(NOTIFICATION).append("} FROM {")
+			.append(AmwayNotificationUserActionModel._TYPECODE).append("} WHERE {").append(AmwayNotificationUserActionModel.STATUS)
+			.append("} NOT IN (?").append(STATUSES).append(") AND {").append(USER).append("} = ?").append(USER).append("  }}))")
+			.toString();
+
+	/** Query to find user groups list of a user. */
+	private static final StringBuilder USER_GROUP_QUERY = new StringBuilder().append("Select {pg.").append(PrincipalGroupModel.UID)
+			.append("} FROM {").append(CustomerModel._TYPECODE).append(" as c JOIN ").append(_PRINCIPALGROUPRELATION)
+			.append(" as pgr ON {pgr.source}={c.").append(CustomerModel.PK).append("} JOIN ").append(PrincipalGroupModel._TYPECODE)
+			.append(" as pg ON {pgr.target}={pg.").append(PrincipalGroupModel.PK).append("}} where {c.").append(CustomerModel.PK)
+			.append("} = ?").append(USER);
 
 	private PagedFlexibleSearchService pagedFlexibleSearchService;
 	private FlexibleSearchService flexibleSearchService;
@@ -90,69 +106,53 @@ public class DefaultAmwayApacNotificationDao implements AmwayApacNotificationDao
 	 * {@inheritDoc}
 	 */
 	@Override
-	public SearchPageData<AmwayNotificationModel> getNotifications(final PageableData pageableData, final BaseSiteModel baseSite,
-			final CustomerModel customer, final List<AmwayNotificationUserActionStatus> statuses, final String searchText,
-			final String accountClassficationCode)
+	public SearchPageData<AmwayNotificationModel> getNotifications(final NotificationSearchParamData notificationSearchParam,
+			final BaseSiteModel currentBaseSite)
 	{
-		validateParameterNotNull(pageableData, ERROR_MESSAGE_NULL_PAGEABLE_DATA);
-		validateParameterNotNull(customer, ERROR_MESSAGE_NULL_CUSTOMER);
-
 		final Map<String, Object> queryParams = new HashMap<>();
 		final StringBuilder queryBuilder = new StringBuilder(AMWAY_NOTIFICATION_MAPPING_QUERY);
 
-		buildNotificationQuery(baseSite, customer, statuses, queryParams, queryBuilder, accountClassficationCode);
+		buildNotificationQuery(notificationSearchParam, currentBaseSite, queryParams, queryBuilder);
 
-		if (StringUtils.isNotEmpty(searchText))
+		if (StringUtils.isNotEmpty(notificationSearchParam.getSearchText()))
 		{
-			buildSearchQuery(queryBuilder, queryParams, searchText);
+			buildSearchQuery(queryBuilder, queryParams, notificationSearchParam.getSearchText());
 		}
 
 		final List<SortQueryData> sortQueries = Arrays.asList(new SortQueryData[]
-		{ createSortQueryData("descDate", queryBuilder.toString() + SORT_BY_DESC_DATE),
-				createSortQueryData("ascDate", queryBuilder.toString() + SORT_BY_ASC_DATE), });
+		{ createSortQueryData("descDate", queryBuilder.append(SORT_BY_DESC_DATE).toString()),
+				createSortQueryData("ascDate", queryBuilder.append(SORT_BY_ASC_DATE).toString()) });
 
-		return getPagedFlexibleSearchService().search(sortQueries, "descDate", queryParams, pageableData);
+		return getPagedFlexibleSearchService().search(sortQueries, "descDate", queryParams,
+				notificationSearchParam.getPageableData());
 	}
 
 	/**
 	 * Changes the passed query for filtering on the basis of given customers classification level, user groups in which
 	 * the user is present and the NotificationUserActionStatus.
 	 *
-	 * @param baseSite
-	 * @param customer
-	 * @param statuses
 	 * @param queryParams
 	 * @param queryBuilder
 	 */
-	protected void buildNotificationQuery(final BaseSiteModel baseSite, final CustomerModel customer,
-			final List<AmwayNotificationUserActionStatus> statuses, final Map<String, Object> queryParams,
-			final StringBuilder queryBuilder, final String accountClassficationCode)
+	protected void buildNotificationQuery(final NotificationSearchParamData notificationSearchParam, final BaseSiteModel baseSite,
+			final Map<String, Object> queryParams, final StringBuilder queryBuilder)
 	{
 		final Date currentDate = Calendar.getInstance().getTime();
+		queryBuilder.append(GROUP_AND_CLASSIFICATION_QUERY).append(NOTIFICATION_ACTION_QUERY);
 
-		//This section appends the group and classification based restriction to the query in the queryBuilder.
-		queryBuilder.append(" AND (({aagt.").append(GROUPTYPE).append("} = ?").append(CLASSIFICATION).append(" AND {aagt.")
-				.append(AmwayAccountGroupTagModel.CODE).append("} IN (?").append(CLASSIFICATION_LIST).append(")) OR ({aagt.")
-				.append(GROUPTYPE).append("} = ?").append(HYBRIS_GROUP).append(" AND {aagt.").append(AmwayAccountGroupTagModel.CODE)
-				.append("} IN (?").append(GROUP_LIST).append(")))");
-
-		//This Section appends the restriction based on user notification action.
-		queryBuilder.append(" AND ({an.").append(AmwayNotificationModel.PK).append("} NOT IN ({{Select {").append(NOTIFICATION)
-				.append("} FROM {").append(AmwayNotificationUserActionModel._TYPECODE).append("} WHERE {")
-				.append(AmwayNotificationUserActionModel.STATUS).append("} NOT IN (?").append(STATUSES).append(") AND {").append(USER)
-				.append("} = ?").append(USER).append("  }}))");
-
-		queryParams.put(STATUSES, Collections.unmodifiableList(statuses));
+		queryParams.put(STATUSES, Collections.unmodifiableList(notificationSearchParam.getNotificationStatuses()));
 		queryParams.put(CURRENT_DATE, currentDate);
 		queryParams.put(SITE, baseSite);
 		queryParams.put(CLASSIFICATION, AmwayAccountGroupTagType.CLASSIFICATION);
 		queryParams.put(HYBRIS_GROUP, AmwayAccountGroupTagType.HYBRIS_GROUP);
 		queryParams.put(PUBLISHED, AmwayNotificationStatus.PUBLISHED);
 		queryParams.put(ACTIVE, Boolean.TRUE);
-		queryParams.put(USER, customer);
+		queryParams.put(USER, notificationSearchParam.getCurrentCustomer());
 		queryParams.put(AFFILIATE, baseSite.getStores().iterator().next().getAffiliateNumber());
-		queryParams.put(GROUP_LIST, Collections.unmodifiableList(getCurrentUserGroupNames(customer)));
-		queryParams.put(CLASSIFICATION_LIST, Collections.unmodifiableList(getClassificationNames(accountClassficationCode)));
+		queryParams.put(GROUP_LIST,
+				Collections.unmodifiableList(getCurrentUserGroupNames(notificationSearchParam.getCurrentCustomer())));
+		queryParams.put(CLASSIFICATION_LIST,
+				Collections.unmodifiableList(getClassificationNames(notificationSearchParam.getAccountClassficationCode())));
 
 	}
 
@@ -190,19 +190,12 @@ public class DefaultAmwayApacNotificationDao implements AmwayApacNotificationDao
 	 */
 	protected List<String> getCurrentUserGroupNames(final CustomerModel customer)
 	{
-		final StringBuilder queryBuilder = new StringBuilder().append("Select {pg.").append(PrincipalGroupModel.UID)
-				.append("} FROM {").append(CustomerModel._TYPECODE).append(" as c JOIN ").append(_PRINCIPALGROUPRELATION)
-				.append(" as pgr ON {pgr.source}={c.").append(CustomerModel.PK).append("} JOIN ")
-				.append(PrincipalGroupModel._TYPECODE).append(" as pg ON {pgr.target}={pg.").append(PrincipalGroupModel.PK)
-				.append("}} where {c.").append(CustomerModel.PK).append("} = ?").append(USER);
-
 		final Map<String, Object> queryParams = new HashMap<>();
 		queryParams.put(USER, customer);
-		final FlexibleSearchQuery query = new FlexibleSearchQuery(queryBuilder.toString(), queryParams);
+		final FlexibleSearchQuery query = new FlexibleSearchQuery(USER_GROUP_QUERY.toString(), queryParams);
 		query.setResultClassList(Collections.singletonList(String.class));
 		final SearchResult<String> result = getFlexibleSearchService().search(query);
 		return result.getResult();
-
 	}
 
 	/**

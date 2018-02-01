@@ -1,14 +1,12 @@
 package com.amway.apac.message.center.notification.services;
 
-import de.hybris.platform.commerceservices.search.pagedata.PageableData;
 import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
 import de.hybris.platform.core.model.user.CustomerModel;
-
-import java.util.List;
 
 import com.amway.apac.message.center.enums.AmwayNotificationUserActionStatus;
 import com.amway.apac.message.center.model.AmwayNotificationModel;
 import com.amway.apac.message.center.model.AmwayNotificationUserActionModel;
+import com.amway.apac.message.center.notification.NotificationSearchParamData;
 
 
 /**
@@ -18,23 +16,16 @@ import com.amway.apac.message.center.model.AmwayNotificationUserActionModel;
  */
 public interface AmwayApacNotificationService
 {
+
 	/**
-	 * Fetches the notifications in the form of searchPageData for given customer, statuses and search text.
+	 * Fetches the notifications in the form of searchPageData for given search params : customer, statuses and search
+	 * text.
 	 *
-	 * @param pageableData
-	 *           pageable data to search the notifications
-	 * @param userModel
-	 *           Customer for whom notifications needed
-	 * @param statuses
-	 *           List of statuses to be filtered.
-	 * @param searchText
-	 *           searchText to search notifications
+	 * @param notificationSearchParam
+	 *           the notification search params
 	 * @return AmwayNotificaionModels in the form of searchPageData
-	 * @throws IllegalArgumentException
-	 *            if pageableData or customer is null
 	 */
-	SearchPageData<AmwayNotificationModel> getNotifications(final PageableData pageableData, final CustomerModel userModel,
-			final List<AmwayNotificationUserActionStatus> statuses, final String searchText);
+	SearchPageData<AmwayNotificationModel> getNotifications(NotificationSearchParamData notificationSearchParam);
 
 	/**
 	 * Fetches a notification for a given unique code.
@@ -72,7 +63,15 @@ public interface AmwayApacNotificationService
 	 *           the notification
 	 * @return notification action list
 	 */
-	List<AmwayNotificationUserActionModel> getNotificationActionByUserAndNotification(CustomerModel customer,
+	AmwayNotificationUserActionModel getNotificationActionByUserAndNotification(CustomerModel customer,
 			AmwayNotificationModel notification);
 
+	/**
+	 * Gets the notification action by notification for current user.
+	 *
+	 * @param notification
+	 *           the notification
+	 * @return notification action list
+	 */
+	AmwayNotificationUserActionModel getNotificationActionForCurrentUser(AmwayNotificationModel notification);
 }

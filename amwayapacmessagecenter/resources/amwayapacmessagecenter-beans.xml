@@ -20,7 +20,16 @@
 		<property name="longDescription" type="String" />
 		<property name="publishDate" type="String"/>
 		<property name="cmsComponentId" type="String"/>
-		<property name="status" type="com.amway.apacfacades.data.EnumData"/>
+		<property name="status" type="String"/>
 		<property name="code" type="String"/>
+	</bean>
+	
+	<bean class="com.amway.apac.message.center.notification.NotificationSearchParamData">
+		<property name="pageableData" type="de.hybris.platform.commerceservices.search.pagedata.PageableData"/>
+		<property name="currentCustomer" type="de.hybris.platform.core.model.user.CustomerModel"/>
+		<property name="notificationStatuses" type="java.util.List&lt;com.amway.apac.message.center.enums.AmwayNotificationUserActionStatus>"/>
+		<property name="searchText" type="String"/>
+		<property name="accountClassficationCode" type="String"/>
+		<property name="userGroupCode" type="String"/>
 	</bean>
 </beans>

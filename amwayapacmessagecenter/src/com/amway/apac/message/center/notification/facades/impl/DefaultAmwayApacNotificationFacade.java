@@ -1,25 +1,27 @@
 package com.amway.apac.message.center.notification.facades.impl;
 
+import static com.amway.apac.core.constants.AmwayapacCoreConstants.ACCOUNT_CLASSIFICATION_CODE;
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
 
-import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
-import de.hybris.platform.cms2.model.contents.components.CMSParagraphComponentModel;
-import de.hybris.platform.cms2.servicelayer.services.CMSComponentService;
 import de.hybris.platform.commerceservices.search.pagedata.PageableData;
 import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
+import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.servicelayer.user.UserService;
 
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Required;
 
 import com.amway.apac.message.center.enums.AmwayNotificationUserActionStatus;
 import com.amway.apac.message.center.model.AmwayNotificationModel;
 import com.amway.apac.message.center.notification.AmwayApacNotificationData;
+import com.amway.apac.message.center.notification.NotificationSearchParamData;
 import com.amway.apac.message.center.notification.facades.AmwayApacNotificationFacade;
 import com.amway.apac.message.center.notification.services.AmwayApacNotificationService;
 
@@ -41,8 +43,8 @@ public class DefaultAmwayApacNotificationFacade implements AmwayApacNotification
 	/** The user service. */
 	private UserService userService;
 
-	/** The cms component service. */
-	private CMSComponentService cmsComponentService;
+	/** The session service. */
+	private SessionService sessionService;
 
 	/** The amway apac notification service. */
 	private AmwayApacNotificationService amwayApacNotificationService;
@@ -55,22 +57,11 @@ public class DefaultAmwayApacNotificationFacade implements AmwayApacNotification
 	 *
 	 */
 	@Override
-	public CMSParagraphComponentModel getDetailedMessage(final String compId) throws CMSItemNotFoundException
+	public SearchPageData<AmwayApacNotificationData> getNotificationsForCurrentUser(final PageableData pageableData)
 	{
-		return getCmsComponentService().getAbstractCMSComponent(compId);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 */
-	@Override
-	public SearchPageData<AmwayApacNotificationData> getAmwayNotificationSectionForCurrentUserWithPageData(
-			final PageableData pageableData, final AmwayNotificationUserActionStatus[] statuses, final String messageType)
-	{
-		final List<AmwayNotificationUserActionStatus> notificationStatuses = Arrays.asList(statuses);
-		final SearchPageData<AmwayNotificationModel> searchData = amwayApacNotificationService.getNotifications(pageableData,
-				(CustomerModel) getUserService().getCurrentUser(), notificationStatuses, "");
+		final NotificationSearchParamData notificationSearchParam = setNotificationSearchParams(pageableData);
+		final SearchPageData<AmwayNotificationModel> searchData = amwayApacNotificationService
+				.getNotifications(notificationSearchParam);
 
 		final SearchPageData<AmwayApacNotificationData> searchPageData = amwayApacNotificationSectionConverter.convert(searchData);
 		return searchPageData;
@@ -92,6 +83,21 @@ public class DefaultAmwayApacNotificationFacade implements AmwayApacNotification
 		final AmwayNotificationModel notification = amwayApacNotificationService.getNotificationByCode(notificationCode);
 		amwayApacNotificationService.changeUserNotificationStatus(notification, (CustomerModel) userService.getCurrentUser(),
 				newStatus);
+	}
+
+	protected NotificationSearchParamData setNotificationSearchParams(final PageableData pageableData)
+	{
+		final NotificationSearchParamData searchParams = new NotificationSearchParamData();
+		searchParams.setPageableData(pageableData);
+		searchParams.setCurrentCustomer((CustomerModel) getUserService().getCurrentUser());
+		searchParams.setSearchText(StringUtils.EMPTY);
+		searchParams.setAccountClassficationCode(getSessionService().getAttribute(ACCOUNT_CLASSIFICATION_CODE));
+
+		final List<AmwayNotificationUserActionStatus> notificationStatuses = Arrays.asList(new AmwayNotificationUserActionStatus[]
+		{ AmwayNotificationUserActionStatus.UNREAD, AmwayNotificationUserActionStatus.READ });
+		searchParams.setNotificationStatuses(notificationStatuses);
+
+		return searchParams;
 	}
 
 	/**
@@ -130,25 +136,6 @@ public class DefaultAmwayApacNotificationFacade implements AmwayApacNotification
 	}
 
 	/**
-	 * Gets the cmsComponentService the cmsComponentService.
-	 *
-	 * @return the cmsComponentService
-	 */
-	public CMSComponentService getCmsComponentService()
-	{
-		return cmsComponentService;
-	}
-
-	/**
-	 * @param cmsComponentService
-	 *           the cmsComponentService to set
-	 */
-	public void setCmsComponentService(final CMSComponentService cmsComponentService)
-	{
-		this.cmsComponentService = cmsComponentService;
-	}
-
-	/**
 	 * @return the userService
 	 */
 	public UserService getUserService()
@@ -163,5 +150,23 @@ public class DefaultAmwayApacNotificationFacade implements AmwayApacNotification
 	public void setUserService(final UserService userService)
 	{
 		this.userService = userService;
+	}
+
+	/**
+	 * @return the sessionService
+	 */
+	public SessionService getSessionService()
+	{
+		return sessionService;
+	}
+
+	/**
+	 * @param sessionService
+	 *           the sessionService to set
+	 */
+	@Required
+	public void setSessionService(final SessionService sessionService)
+	{
+		this.sessionService = sessionService;
 	}
 }

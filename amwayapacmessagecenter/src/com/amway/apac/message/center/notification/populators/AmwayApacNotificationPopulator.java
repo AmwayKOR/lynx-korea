@@ -1,24 +1,20 @@
 package com.amway.apac.message.center.notification.populators;
 
+import static com.amway.apac.core.constants.AmwayapacCoreConstants.SOURCE_STRING;
+import static com.amway.apac.core.constants.AmwayapacCoreConstants.TARGET_STRING;
+import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
+
 import de.hybris.platform.converters.Populator;
-import de.hybris.platform.core.HybrisEnumValue;
-import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.dto.converter.ConversionException;
-import de.hybris.platform.servicelayer.dto.converter.Converter;
-import de.hybris.platform.servicelayer.user.UserService;
 
 import java.text.SimpleDateFormat;
-import java.util.List;
-
-import org.apache.commons.collections.CollectionUtils;
-import org.springframework.beans.factory.annotation.Required;
+import java.util.Objects;
 
 import com.amway.apac.message.center.enums.AmwayNotificationUserActionStatus;
 import com.amway.apac.message.center.model.AmwayNotificationModel;
 import com.amway.apac.message.center.model.AmwayNotificationUserActionModel;
 import com.amway.apac.message.center.notification.AmwayApacNotificationData;
 import com.amway.apac.message.center.notification.services.AmwayApacNotificationService;
-import com.amway.apacfacades.data.EnumData;
 
 
 /**
@@ -30,14 +26,15 @@ import com.amway.apacfacades.data.EnumData;
 public class AmwayApacNotificationPopulator implements Populator<AmwayNotificationModel, AmwayApacNotificationData>
 {
 	private static final String DATE_FORMAT = "dd/MM/yyyy";
+	private final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat(DATE_FORMAT);
 
-	private Converter<HybrisEnumValue, EnumData> enumConverter;
 	private AmwayApacNotificationService amwayApacNotificationService;
-	private UserService userService;
 
 	@Override
 	public void populate(final AmwayNotificationModel source, final AmwayApacNotificationData target) throws ConversionException
 	{
+		validateParameterNotNullStandardMessage(SOURCE_STRING, source);
+		validateParameterNotNullStandardMessage(TARGET_STRING, target);
 
 		target.setLongDescription(source.getLongDescription());
 		target.setShortDescription(source.getShortDescription());
@@ -45,43 +42,25 @@ public class AmwayApacNotificationPopulator implements Populator<AmwayNotificati
 
 		if (null != source.getPublishDate())
 		{
-			final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_FORMAT);
-			final String stringDate = simpleDateFormat.format(source.getPublishDate());
-			target.setPublishDate(stringDate);
+			target.setPublishDate(SIMPLE_DATE_FORMAT.format(source.getPublishDate()));
 		}
 
-		final List<AmwayNotificationUserActionModel> notificationMappings = amwayApacNotificationService
-				.getNotificationActionByUserAndNotification((CustomerModel) userService.getCurrentUser(), source);
+		populateNotificationStatus(source, target);
+	}
 
-		if (CollectionUtils.isNotEmpty(notificationMappings))
+	protected void populateNotificationStatus(final AmwayNotificationModel source, final AmwayApacNotificationData target)
+	{
+		final AmwayNotificationUserActionModel userAction = getAmwayApacNotificationService()
+				.getNotificationActionForCurrentUser(source);
+
+		if (Objects.nonNull(userAction))
 		{
-			target.setStatus(enumConverter.convert(notificationMappings.iterator().next().getStatus()));
+			target.setStatus(userAction.getStatus().getCode());
 		}
 		else
 		{
-			target.setStatus(enumConverter.convert(AmwayNotificationUserActionStatus.UNREAD));
+			target.setStatus(AmwayNotificationUserActionStatus.UNREAD.getCode());
 		}
-
-	}
-
-	/**
-	 * @param enumConverter
-	 *           the enumConverter to set
-	 */
-	@Required
-	public void setEnumConverter(final Converter<HybrisEnumValue, EnumData> enumConverter)
-	{
-		this.enumConverter = enumConverter;
-	}
-
-	/**
-	 * @param lynxUserService
-	 *           the lynxUserService to set
-	 */
-	@Required
-	public void setUserService(final UserService lynxUserService)
-	{
-		this.userService = lynxUserService;
 	}
 
 	/**
@@ -99,21 +78,5 @@ public class AmwayApacNotificationPopulator implements Populator<AmwayNotificati
 	public void setAmwayApacNotificationService(final AmwayApacNotificationService amwayApacNotificationService)
 	{
 		this.amwayApacNotificationService = amwayApacNotificationService;
-	}
-
-	/**
-	 * @return the enumConverter
-	 */
-	public Converter<HybrisEnumValue, EnumData> getEnumConverter()
-	{
-		return enumConverter;
-	}
-
-	/**
-	 * @return the userService
-	 */
-	public UserService getUserService()
-	{
-		return userService;
 	}
 }

@@ -37,7 +37,7 @@
 	<alias alias="amwayApacNotificationFacade" name="defaultAmwayApacNotificationFacade"/>
 	<bean id="defaultAmwayApacNotificationFacade" class="com.amway.apac.message.center.notification.facades.impl.DefaultAmwayApacNotificationFacade">
 	 	<property name="userService" ref="userService" />
-	 	<property name="cmsComponentService" ref="cmsComponentService" />
+	 	<property name="sessionService" ref="sessionService"/>
 	 	<property name="amwayApacNotificationService" ref="amwayApacNotificationService" />
 		<property name="amwayApacNotificationSectionConverter" ref="amwayApacNotificationSectionConverter"/>
 	</bean>
@@ -69,9 +69,7 @@
 	
 	<alias alias="amwayApacNotificationPopulator" name="defaultAmwayApacNotificationPopulator"/>
 	<bean id="defaultAmwayApacNotificationPopulator" class="com.amway.apac.message.center.notification.populators.AmwayApacNotificationPopulator">
-		<property name="enumConverter" ref="defaultAmwayApacEnumDataConverter" />
 		<property name="amwayApacNotificationService" ref="amwayApacNotificationService"/>
-		<property name="userService" ref="userService" />
 	</bean>	
 	
 	<alias name="defaultAmwayApacNotificationService" alias="amwayApacNotificationService"/>
@@ -81,7 +79,7 @@
 		<property name="amwayNotificationDao" ref="amwayNotificationDao"/>
 		<property name="baseSiteService" ref="baseSiteService"/>
 		<property name="modelService" ref="modelService"/>
-		<property name="sessionService" ref="sessionService"/>
+		<property name="userService" ref="userService" />
 	</bean>
 	
 	<alias alias="amwayNotificationUserActionDao" name="defaultAmwayNotificationUserActionDao"/>
