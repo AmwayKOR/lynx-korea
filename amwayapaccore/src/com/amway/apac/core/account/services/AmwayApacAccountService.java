@@ -37,14 +37,18 @@ public interface AmwayApacAccountService extends AmwayAccountService
 	AccountClassificationEnum getClassificationForAccount(final AmwayAccountModel amwayAccount);
 
 	/**
+	 * Returns AmwayAccount for the given customer.
+	 *
 	 * @param customer
-	 * @return
+	 * @return AmwayAccount for the customer
 	 */
 	AmwayAccountModel getAmwayAccount(CustomerModel customer);
 
 	/**
+	 * Returns MOP restriction for the AmwayAccount.
+	 *
 	 * @param amwayAccount
-	 * @return
+	 * @return {@link AmwayBusinessRestrictionModel} for the amwayAccount.
 	 */
 	AmwayBusinessRestrictionModel getMOPRestriction(AmwayAccountModel amwayAccount);
 }

@@ -82,16 +82,14 @@ public class DefaultAmwayApacAccountService extends DefaultAmwayAccountService i
 	}
 
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see
-	 * com.amway.apac.core.account.services.AmwayApacAccountService#getAmwayAccount(de.hybris.platform.core.model.user.
-	 * CustomerModel)
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public AmwayAccountModel getAmwayAccount(final CustomerModel customerModel)
 	{
+		validateParameterNotNullStandardMessage("customerModel", customerModel);
+
 		final Optional<AmwayAccountModel> amwayAccount = customerModel.getAccounts().stream().findFirst();
 		if (amwayAccount.isPresent())
 		{
@@ -100,17 +98,17 @@ public class DefaultAmwayApacAccountService extends DefaultAmwayAccountService i
 		return null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see com.amway.apac.core.account.services.AmwayApacAccountService#getMOPRestriction(com.amway.core.model.
-	 * AmwayAccountModel)
+
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public AmwayBusinessRestrictionModel getMOPRestriction(final AmwayAccountModel amwayAccount)
 	{
 		return AmwayApacCustomerAccountDao.getMOPRestriction(amwayAccount);
 	}
+
+
 
 	/**
 	 * @return the amwayApacCommerceCommonI18NService
