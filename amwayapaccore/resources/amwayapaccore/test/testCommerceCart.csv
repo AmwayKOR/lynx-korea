@@ -196,9 +196,9 @@ INSERT_UPDATE ProductPercentageDiscountPromotion;code[unique=true];title;descrip
 
 #################Amway Account Test Data###############
 
-INSERT_UPDATE AmwayAccount;code[unique=true]     ;businessNature(code)    ;primaryParty(uid);name       ;registeredAddress(&addRef);level(&businessLevelRef);controllingAffiliate(isocode)
-                          ;ahertz                ;"AmwayBusinessNature_1" ;ahertz           ;Test User  ;testuserAdd               ;testUserQual            ;US
-                          ;abrode                ;"AmwayBusinessNature_1" ;abrode           ;Test User Abrode  ;testuserAddAbrode               ;testUserQual            ;US
+INSERT_UPDATE AmwayAccount;code[unique=true]     ;businessNature(code)    ;primaryParty(uid);name              ;registeredAddress(&addRef);level(&businessLevelRef);controllingAffiliate(isocode)
+                          ;ahertz                ;"AmwayBusinessNature_1" ;ahertz           ;Test User         ;testuserAdd               ;testUserQual            ;US
+                          ;abrode                ;"AmwayBusinessNature_1" ;abrode           ;Test User Abrode  ;testuserAddAbrode         ;testUserQual            ;US
 
 INSERT_UPDATE AmwayAccountClassification;classification(code);code[unique=true]                ;qualificationLevel(code)
                                         ;PLATINUM_AND_ABOVE    ;RubyAndAbove                     ;QualificationLevelTypeEnum_340
@@ -207,9 +207,17 @@ INSERT_UPDATE AmwayAccountClassification;classification(code);code[unique=true] 
 INSERT_UPDATE AmwayBusinessLevel;qualificationLevel(code)[unique=true];&businessLevelRef
 ;QualificationLevelTypeEnum_340;testUserQual
 
+INSERT_UPDATE AmwayBusinessRestriction;code[unique=true];accounts(code);
+;testrestriction;ahertz;
+
 INSERT_UPDATE Address;owner(AmwayAccount.code)[unique=true];country(isocode);postalcode;firstname;lastname;streetname;streetnumber;shippingAddress;billingAddress;&addRef
 ;ahertz;US;100000;TestFirstName;TestLastName;TestStreetName;TestStreetNumber;true;true;testuserAdd
 ;abrode;US;100000;TestFirstNameAbrode;TestLastNameAbrode;TestStreetNameAbrode;TestStreetNumberAbrode;true;true;testuserAddAbrode
+
+INSERT_UPDATE Customer;uid[unique=true];accounts(code)
+;ahertz;ahertz;
+;abrode;abrode;
+
 
 #################Amway Account Test Data###############
 

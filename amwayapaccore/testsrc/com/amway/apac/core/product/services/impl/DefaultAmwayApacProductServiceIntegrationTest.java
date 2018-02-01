@@ -42,10 +42,7 @@ public class DefaultAmwayApacProductServiceIntegrationTest extends ServicelayerT
 	private static final String ALIAS_CODE_5 = "220302";
 	private static final String PRODUCT_CATALOG = "testProductCatalog";
 	private static final String VERSION = "Online";
-	private static final String PRODUCT_WITHOUT_PRELAUNCH = "HW1210-3425";
-	private static final String PRODUCT_BEFORE_PRELAUNCH = "HW1210-3422";
 	private static final String PRODUCT_IN_PRELAUNCH = "HW1210-3423";
-	private static final String PRODUCT_AFTER_PRELAUNCH = "HW1210-3424";
 
 	@Resource(name = "catalogVersionService")
 	private CatalogVersionService catalogVersionService;
