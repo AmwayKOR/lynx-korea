@@ -63,8 +63,7 @@ public class DefaultAmwayApacNotificationFacade implements AmwayApacNotification
 		final SearchPageData<AmwayNotificationModel> searchData = amwayApacNotificationService
 				.getNotifications(notificationSearchParam);
 
-		final SearchPageData<AmwayApacNotificationData> searchPageData = amwayApacNotificationSectionConverter.convert(searchData);
-		return searchPageData;
+		return amwayApacNotificationSectionConverter.convert(searchData);
 	}
 
 	/**

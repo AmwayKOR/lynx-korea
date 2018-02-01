@@ -85,21 +85,21 @@ public interface ControllerConstants
 			String AmwayApacButtonLinkComponent = _Prefix + AmwayApacButtonLinkComponentModel._TYPECODE + _Suffix; // NOSONAR
 			String AmwayApacIconLinkComponent = _Prefix + AmwayApacIconLinkComponentModel._TYPECODE + _Suffix; // NOSONAR
 			String AmwayApacImageLinkComponent = _Prefix + AmwayApacImageLinkComponentModel._TYPECODE + _Suffix; // NOSONAR
-			String AmwayApacAccountProfileBarLinkComponent = _Prefix + AmwayApacAccountProfileBarLinkComponentModel._TYPECODE
+			String AmwayApacAccountProfileBarLinkComponent = _Prefix + AmwayApacAccountProfileBarLinkComponentModel._TYPECODE //NOSONAR
 					+ _Suffix; // NOSONAR
 			String AmwayApacCategoryTopBannerComponent = _Prefix + AmwayApacCategoryTopBannerComponentModel._TYPECODE + _Suffix; // NOSONAR
 			String AmwayApacToolsAndAdviceComponent = _Prefix + AmwayApacToolsAndAdviceComponentModel._TYPECODE + _Suffix; // NOSONAR
-			String AmwayApacPathToSuccessPitchPerfectComponent = _Prefix + AmwayApacPathToSuccessPitchPerfectComponentModel._TYPECODE
+			String AmwayApacPathToSuccessPitchPerfectComponent = _Prefix + AmwayApacPathToSuccessPitchPerfectComponentModel._TYPECODE //NOSONAR
 					+ _Suffix; // NOSONAR
 			String AmwayApacPathwayToSuccessComponent = _Prefix + AmwayApacPathwayToSuccessComponentModel._TYPECODE + _Suffix; // NOSONAR
 			String AmwayApacBuildYourBusinessComponent = _Prefix + AmwayApacBuildYourBusinessComponentModel._TYPECODE + _Suffix; // NOSONAR
 			String AmwayApacPlatinumABOComponent = _Prefix + AmwayApacPlatinumABOComponentModel._TYPECODE + _Suffix; // NOSONAR
-			String AmwayApacExperienceTheStarterKitComponent = _Prefix + AmwayApacExperienceTheStarterKitComponentModel._TYPECODE
+			String AmwayApacExperienceTheStarterKitComponent = _Prefix + AmwayApacExperienceTheStarterKitComponentModel._TYPECODE //NOSONAR
 					+ _Suffix; // NOSONAR
 			String AmwayApacJoinAmwayComponent = _Prefix + AmwayApacJoinAmwayComponentModel._TYPECODE + _Suffix; // NOSONAR
-			String AmwayApacArtistryDealCarouselComponent = _Prefix + AmwayApacArtistryDealCarouselComponentModel._TYPECODE
+			String AmwayApacArtistryDealCarouselComponent = _Prefix + AmwayApacArtistryDealCarouselComponentModel._TYPECODE //NOSONAR
 					+ _Suffix; // NOSONAR
-			String AmwayApacArtistryNewLuxuryCarouselComponent = _Prefix + AmwayApacArtistryNewLuxuryCarouselComponentModel._TYPECODE
+			String AmwayApacArtistryNewLuxuryCarouselComponent = _Prefix + AmwayApacArtistryNewLuxuryCarouselComponentModel._TYPECODE //NOSONAR
 					+ _Suffix; // NOSONAR
 			String AmwayApacNewProductComponent = _Prefix + AmwayApacNewProductComponentModel._TYPECODE + _Suffix; // NOSONAR
 			String AmwayApacSupplementsComponent = _Prefix + AmwayApacSupplementsComponentModel._TYPECODE + _Suffix; // NOSONAR
@@ -171,7 +171,7 @@ public interface ControllerConstants
 			interface Cart // NOSONAR
 			{
 				String CartPage = "pages/cart/cartPage"; // NOSONAR
-				String CartContentPage = "pages/cart/cartContent";
+				String CartContentPage = "pages/cart/cartContent"; //NOSONAR
 			}
 
 			interface StoreFinder // NOSONAR
@@ -264,7 +264,7 @@ public interface ControllerConstants
 				String StorePickupSearchResults = "fragments/product/storePickupSearchResults"; // NOSONAR
 			}
 
-			interface Category
+			interface Category //NOSONAR
 			{
 				String ProductListingFragment = "fragments/category/productListingFragment"; //NOSONAR
 			}
@@ -275,7 +275,7 @@ public interface ControllerConstants
 			 * @author Parvesh Goyal
 			 *
 			 */
-			interface ShoppingList
+			interface ShoppingList //NOSONAR
 			{
 				/**
 				 * Complete shopping lists page view
@@ -313,6 +313,11 @@ public interface ControllerConstants
 				String SortProductInShoppingListDetailsResponse = "fragments/shoppingList/sortProductInShoppingListDetailsResponse"; //NOSONAR
 
 			}
+
+			interface MessageCenter //NOSONAR
+			{
+				String MessageCenterFragment = "fragments/businessCenter/messageCenterListingFragment"; //NOSONAR
+			}
 		}
 	}
 
@@ -322,7 +327,7 @@ public interface ControllerConstants
 	 * @author Parvesh goyal
 	 *
 	 */
-	interface ModelParameters
+	interface ModelParameters //NOSONAR
 	{
 		/**
 		 * String constant numberOfOrders
@@ -423,7 +428,7 @@ public interface ControllerConstants
 	 * @author Parvesh goyal
 	 *
 	 */
-	interface GeneralConstants
+	interface GeneralConstants //NOSONAR
 	{
 		/**
 		 * Shopping lists cms page id
@@ -512,7 +517,7 @@ public interface ControllerConstants
 		 *
 		 * @author Parvesh Goyal
 		 */
-		interface AddToCart
+		interface AddToCart //NOSONAR
 		{
 			/**
 			 * Error message when a negative quantity is given for add to cart.
@@ -535,7 +540,7 @@ public interface ControllerConstants
 		 *
 		 * @author Parvesh Goyal
 		 */
-		interface ShoppingList
+		interface ShoppingList //NOSONAR
 		{
 			/**
 			 * Error message to be displayed when the name is empty.
@@ -580,7 +585,7 @@ public interface ControllerConstants
 
 		}
 
-		interface Registration
+		interface Registration //NOSONAR
 		{
 			/**
 			 * Error Message for the case when some of the terms not accepted.
@@ -607,7 +612,7 @@ public interface ControllerConstants
 		 * @author Parvesh Goyal
 		 *
 		 */
-		interface ShoppingList
+		interface ShoppingList //NOSONAR
 		{
 			/**
 			 * Success message to be displayed when shopping list is sucessfully created.

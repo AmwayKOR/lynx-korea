@@ -72,9 +72,9 @@ public class DefaultAmwayApacBackOrderSelectionStrategy implements AmwayApacBack
 				null, null, baseStore);
 		validatePaymentAndUpdateList(amwayBackOrdersList);
 		//Grouping the AmwayBackOrders as per the stockLevels for stock calculation
-		final Map<StockLevelModel, List<AmwayBackOrderModel>> amwayBackOrdersMap = amwayBackOrdersList.stream().collect(
+		return amwayBackOrdersList.stream()
+				.collect(
 				Collectors.groupingBy(backOrder -> getStockLevel(backOrder), Collectors.toList()));
-		return amwayBackOrdersMap;
 	}
 
 	/**
