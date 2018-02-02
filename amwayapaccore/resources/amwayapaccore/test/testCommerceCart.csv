@@ -278,8 +278,9 @@ INSERT_UPDATE AmwayNotification;code[unique=true];shortDescription;longDescripti
 ;platinum_notification;Platinum Test Notification;This notification tests for platinum and above classification level;Jan 17, 2018 11:59:20 AM;testSite;Dec 17, 2018 11:59:23 AM;PUBLISHED;PLATINUM_AND_ABOVE
 ;group_notification;Group test notification;This notification will test the functioning of notifications for group.;Jan 17, 2018 11:59:20 AM;testSite;Dec 17, 2018 11:59:23 AM;PUBLISHED;testgroup
 
-INSERT_UPDATE CMSParagraphComponent;$catalogversion[unique=true];uid[unique=true]  ;content[lang=en];
-                                   ;                            ;group_notification;"TestGroupNotification"
+INSERT_UPDATE AmwayNotificationUserAction;notification(code)[unique=true];status(code);user(uid)[unique=true]
+;platinum_notification;UNREAD;ahertz;
+;diamond_notification;READ;abrode;
 
 ################### Notifications Test Data ##########################
 

@@ -86,11 +86,12 @@
 					</attribute>
 					<attribute qualifier="user" type="Customer">
 						<description>Customer for mapping</description>
-						<modifiers unique="true" />
+						<modifiers unique="true" optional="false" />
 						<persistence type="property" />
 					</attribute>
 					<attribute qualifier="status" type="AmwayNotificationUserActionStatus">
 						<description>Status of the notification for the user</description>
+						<modifiers optional="false" />
 						<persistence type="property" />
 					</attribute>
 				</attributes>
