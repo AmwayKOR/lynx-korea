@@ -86,25 +86,20 @@ public class DefaultAmwayApacNotificationDao extends DefaultGenericDao implement
 			.toString();
 
 	/** This Section appends the restriction based on user notification action. */
-	private static final String NOTIFICATION_ACTION_QUERY = new StringBuilder().append(" AND ({an.")
+	private static final String NOTIFICATION_ACTION_PART_FOR_BUILDQUERY = new StringBuilder().append(" AND ({an.")
 			.append(AmwayNotificationModel.PK).append("} NOT IN ({{Select {").append(NOTIFICATION).append("} FROM {")
 			.append(AmwayNotificationUserActionModel._TYPECODE).append("} WHERE {").append(AmwayNotificationUserActionModel.STATUS)
 			.append("} NOT IN (?").append(STATUSES).append(") AND {").append(USER).append("} = ?").append(USER).append("  }}))")
 			.toString();
 
-	private static final String NOTIFICATION_ACTION_QUERY2 = new StringBuilder().append("Select {actn.")
+	/** Query to fetch notification action using customer and notification model. */
+	private static final String NOTIFICATION_ACTION_QUERY = new StringBuilder().append("Select {actn.")
 			.append(AmwayNotificationUserActionModel.PK).append("} FROM {").append(AmwayNotificationUserActionModel._TYPECODE)
 			.append(" as actn JOIN ").append(AmwayNotificationModel._TYPECODE).append(" as msg ON {actn.").append(NOTIFICATION)
 			.append("} = {msg.").append(AmwayNotificationModel.PK).append("} JOIN ").append(CustomerModel._TYPECODE)
 			.append(" as cstmr ON {actn.").append(USER).append("} = {cstmr.").append(CustomerModel.PK).append("}} WHERE {actn.")
 			.append(NOTIFICATION).append("}=?").append(NOTIFICATION).append(" AND {actn.").append(USER).append("}=?").append(USER)
 			.toString();
-
-	//	private static final String TEMP = new StringBuilder()
-	//			.append(
-	//					"Select {actn.AmwayNotificationUserActionModel.PK} FROM {AmwayNotificationUserAction as actn JOIN AmwayNotification as msg ON {actn.notification} = "
-	//							+ "{msg.AmwayNotificationModel.PK} JOIN Customer as cstmr ON {actn.user} = {cstmr.CustomerModel.PK}} WHERE {actn.notification}=?notification AND {actn.user}=?user")
-	//			.toString();
 
 	/** Query to find user groups list of a user. */
 	private static final StringBuilder USER_GROUP_QUERY = new StringBuilder().append("Select {pg.").append(PrincipalGroupModel.UID)
@@ -132,7 +127,7 @@ public class DefaultAmwayApacNotificationDao extends DefaultGenericDao implement
 		params.put(NOTIFICATION, notification);
 		params.put(USER, customer);
 
-		final FlexibleSearchQuery query = new FlexibleSearchQuery(NOTIFICATION_ACTION_QUERY2, params);
+		final FlexibleSearchQuery query = new FlexibleSearchQuery(NOTIFICATION_ACTION_QUERY, params);
 
 		final SearchResult<AmwayNotificationUserActionModel> result = getFlexibleSearchService().search(query);
 
@@ -175,7 +170,7 @@ public class DefaultAmwayApacNotificationDao extends DefaultGenericDao implement
 			final Map<String, Object> queryParams, final StringBuilder queryBuilder)
 	{
 		final Date currentDate = Calendar.getInstance().getTime();
-		queryBuilder.append(GROUP_AND_CLASSIFICATION_QUERY).append(NOTIFICATION_ACTION_QUERY);
+		queryBuilder.append(GROUP_AND_CLASSIFICATION_QUERY).append(NOTIFICATION_ACTION_PART_FOR_BUILDQUERY);
 
 		queryParams.put(STATUSES, Collections.unmodifiableList(notificationSearchParam.getNotificationStatuses()));
 		queryParams.put(CURRENT_DATE, currentDate);

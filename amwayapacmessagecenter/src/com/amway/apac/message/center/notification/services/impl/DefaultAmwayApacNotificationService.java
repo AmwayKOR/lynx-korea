@@ -146,11 +146,6 @@ public class DefaultAmwayApacNotificationService implements AmwayApacNotificatio
 					.append(notification.getCode()).append("] and user [").append(customer.getCustomerID()).append("].").toString());
 		}
 
-		//		final List<AmwayNotificationUserActionModel> notificationActions = getAmwayApacNotificationDao()
-		//				.getNotificationAction(notification, customer);
-		//		validateIfSingleResult(notificationActions, "No notification action found.",
-		//				new StringBuilder(50).append(notificationActions.size()).append(" notification actions found.").toString());
-
 		return getAmwayApacNotificationDao().getNotificationAction(notification, customer);
 	}
 
