@@ -95,8 +95,8 @@ public class DefaultAmwayApacNotificationFacade implements AmwayApacNotification
 		searchParams.setSearchText(StringUtils.EMPTY);
 		searchParams.setAccountClassficationCode(getSessionService().getAttribute(ACCOUNT_CLASSIFICATION_CODE));
 
-		final List<AmwayNotificationUserActionStatus> notificationStatuses = Arrays.asList(new AmwayNotificationUserActionStatus[]
-		{ AmwayNotificationUserActionStatus.UNREAD, AmwayNotificationUserActionStatus.READ });
+		final List<AmwayNotificationUserActionStatus> notificationStatuses = Arrays.asList(AmwayNotificationUserActionStatus.UNREAD,
+				AmwayNotificationUserActionStatus.READ);
 		searchParams.setNotificationStatuses(notificationStatuses);
 
 		return searchParams;

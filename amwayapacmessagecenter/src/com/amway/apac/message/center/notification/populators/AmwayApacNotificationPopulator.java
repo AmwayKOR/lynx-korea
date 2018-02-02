@@ -26,7 +26,7 @@ import com.amway.apac.message.center.notification.services.AmwayApacNotification
 public class AmwayApacNotificationPopulator implements Populator<AmwayNotificationModel, AmwayApacNotificationData>
 {
 	private static final String DATE_FORMAT = "dd/MM/yyyy";
-	private final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat(DATE_FORMAT);
+	private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_FORMAT);
 
 	private AmwayApacNotificationService amwayApacNotificationService;
 
@@ -42,7 +42,7 @@ public class AmwayApacNotificationPopulator implements Populator<AmwayNotificati
 
 		if (null != source.getPublishDate())
 		{
-			target.setPublishDate(SIMPLE_DATE_FORMAT.format(source.getPublishDate()));
+			target.setPublishDate(simpleDateFormat.format(source.getPublishDate()));
 		}
 
 		populateNotificationStatus(source, target);

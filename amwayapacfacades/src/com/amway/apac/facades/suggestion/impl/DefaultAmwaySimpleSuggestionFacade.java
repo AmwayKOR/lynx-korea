@@ -39,7 +39,7 @@ public class DefaultAmwaySimpleSuggestionFacade extends DefaultSimpleSuggestionF
 	{
 		if (getCartService().hasSessionCart())
 		{
-			final Set<ProductModel> products = new HashSet<ProductModel>();
+			final Set<ProductModel> products = new HashSet<>();
 			for (final AbstractOrderEntryModel entry : getCartService().getSessionCart().getEntries())
 			{
 				products.addAll(getAllBaseProducts(entry.getProduct()));

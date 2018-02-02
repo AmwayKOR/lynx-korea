@@ -67,14 +67,15 @@ public class DefaultAmwayApacCouponDao extends DefaultCouponDao implements Amway
 			final boolean showActive)
 	{
 		ServicesUtil.validateParameterNotNull(customer, "customer cannot be null");
-		final Optional<AmwayAccountModel> amwayAccountModel = customer.getAccounts().stream()
+		final Optional<AmwayAccountModel> amwayAccountModelOptional = customer.getAccounts().stream()
 				.filter(account -> account.getPrimaryParty().equals(customer)).findFirst();
+		final AmwayAccountModel amwayAccountModel = amwayAccountModelOptional.isPresent() ? amwayAccountModelOptional.get() : null;
 		final Map<String, Object> params = new HashMap<>();
 
 		final StringBuilder selectAmwayCouponQuery = new StringBuilder(100).append("SELECT {").append(Item.PK).append("} ")
 				.append("FROM   { ").append(AmwayCouponModel._TYPECODE).append(" as coupon } ");
 
-		buildSelectRestrictions(customer, couponStatuses, showActive, amwayAccountModel.get(), params, selectAmwayCouponQuery);
+		buildSelectRestrictions(customer, couponStatuses, showActive, amwayAccountModel, params, selectAmwayCouponQuery);
 		final SearchResult<AmwayCouponModel> result = getFlexibleSearchService()
 				.search(new FlexibleSearchQuery(selectAmwayCouponQuery.toString(), params));
 		return result.getResult();

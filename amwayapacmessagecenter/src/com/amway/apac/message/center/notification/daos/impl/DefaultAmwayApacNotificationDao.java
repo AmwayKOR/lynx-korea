@@ -151,9 +151,9 @@ public class DefaultAmwayApacNotificationDao extends DefaultGenericDao implement
 			buildSearchQuery(queryBuilder, queryParams, notificationSearchParam.getSearchText());
 		}
 
-		final List<SortQueryData> sortQueries = Arrays.asList(new SortQueryData[]
-		{ createSortQueryData("descDate", queryBuilder.append(SORT_BY_DESC_DATE).toString()),
-				createSortQueryData("ascDate", queryBuilder.append(SORT_BY_ASC_DATE).toString()) });
+		final List<SortQueryData> sortQueries = Arrays.asList(
+				createSortQueryData("descDate", queryBuilder.append(SORT_BY_DESC_DATE).toString()),
+				createSortQueryData("ascDate", queryBuilder.append(SORT_BY_ASC_DATE).toString()));
 
 		return getPagedFlexibleSearchService().search(sortQueries, "descDate", queryParams,
 				notificationSearchParam.getPageableData());

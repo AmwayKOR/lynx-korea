@@ -8,6 +8,7 @@ import de.hybris.platform.servicelayer.session.SessionExecutionBody;
 import de.hybris.platform.util.Config;
 
 import java.util.Collection;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Required;
 
@@ -51,7 +52,13 @@ public class AmwayApacProductPricePopulator extends AmwayProductPricePopulator
 				if (!getUserService().isAnonymousUser(getUserService().getCurrentUser()))
 				{
 					final Collection<PriceRowModel> prices = productModel.getEurope1Prices();
-					priceRow = prices.stream().filter(p -> group.equalsIgnoreCase(p.getUg().getCode())).findFirst().get();
+					final Optional<PriceRowModel> firstPriceRow = prices.stream()
+							.filter(p -> group.equalsIgnoreCase(p.getUg().getCode()))
+							.findFirst();
+					if (firstPriceRow.isPresent())
+					{
+						priceRow = firstPriceRow.get();
+					}
 				}
 				return priceRow;
 			}

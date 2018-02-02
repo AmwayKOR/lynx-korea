@@ -68,11 +68,10 @@ public class AmwayApacDeliverySlotValidationHook implements CartValidationHook
 
 		final CartModel cartModel = parameter.getCart();
 
-		if (cartModel != null && CollectionUtils.isNotEmpty(cartModel.getEntries()))
+		if ((cartModel != null) && (CollectionUtils.isNotEmpty(cartModel.getEntries())) && (cartModel.getDeliveryMode() != null)
+				&& (!(cartModel.getDeliveryMode() instanceof PickUpDeliveryModeModel))
+				&& (!OrderType.REGISTRATION.equals(cartModel.getOrderType())))
 		{
-			if ((cartModel.getDeliveryMode() != null) && (!(cartModel.getDeliveryMode() instanceof PickUpDeliveryModeModel))
-					&& !CollectionUtils.isEmpty(cartModel.getEntries()) && !OrderType.REGISTRATION.equals(cartModel.getOrderType()))
-			{
 				final List<AmwayDeliverySlotAvailabilityModel> deliverySlotsFound = getAmwayApacDeliveryService()
 						.getDeliverySlotsAvailability();
 
@@ -85,7 +84,6 @@ public class AmwayApacDeliverySlotValidationHook implements CartValidationHook
 					LOGGER.info(
 							new StringBuilder(50).append("No delivery Slot found for cart: ").append(cartModel.getCode()).toString());
 				}
-			}
 		}
 	}
 
@@ -118,14 +116,7 @@ public class AmwayApacDeliverySlotValidationHook implements CartValidationHook
 			final Date deliveryDate = getAmwayApacDeliveryService().getDeliveryDate(cartModel.getWarehouse());
 			final AmwayDeliverySlotAvailabilityModel slot = getAmwayApacDeliveryService().getDeliverySlot(cartModel.getWarehouse(),
 					deliveryDate, cartModel.getSelectedDeliverySlot().getSlotTime());
-			if (null != slot && !slot.equals(cartModel.getSelectedDeliverySlot()))
-			{
-				modifications.add(createAddToCartResp(AmwayApacCommerceCartModificationStatus.INVALID_DELIVERY_SLOT_ERROR,
-						(CartEntryModel) cartModel.getEntries().iterator().next(), AmwayapacdeliveryslotConstants.ZERO_INT.intValue()));
-				cartModel.setSelectedDeliverySlot(null);
-				getModelService().save(cartModel);
-			}
-			else if (null == slot)
+			if ((null == slot) || (!slot.equals(cartModel.getSelectedDeliverySlot())))
 			{
 				modifications.add(createAddToCartResp(AmwayApacCommerceCartModificationStatus.INVALID_DELIVERY_SLOT_ERROR,
 						(CartEntryModel) cartModel.getEntries().iterator().next(), AmwayapacdeliveryslotConstants.ZERO_INT.intValue()));

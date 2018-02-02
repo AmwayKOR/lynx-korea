@@ -54,15 +54,14 @@ public class DefaultAmwayApacAssetDao extends DefaultAmwayAssetDao
 		final String yearQuery = generateYearQuery(queryParams, year);
 		final String rankQuery = generateRankQuery(queryParams);
 
-		return Arrays.asList(new SortQueryData[]
-		{ createSortQueryData(AmwayApacAssetsSort.LATEST_DATE.getCode(),
+		return Arrays.asList(createSortQueryData(AmwayApacAssetsSort.LATEST_DATE.getCode(),
 				typQuery + yearQuery + rankQuery + AmwayApacAssetsSort.LATEST_DATE.getQuery()),
 				createSortQueryData(AmwayApacAssetsSort.TITTLE_ASCENDING.getCode(),
 						typQuery + yearQuery + rankQuery + AmwayApacAssetsSort.TITTLE_ASCENDING.getQuery()),
 				createSortQueryData(AmwayApacAssetsSort.ID_ASCENDING.getCode(),
 						typQuery + yearQuery + rankQuery + AmwayApacAssetsSort.ID_ASCENDING.getQuery()),
 				createSortQueryData(AmwayApacAssetsSort.TITTLE_DESCENDING.getCode(),
-						typQuery + yearQuery + rankQuery + AmwayApacAssetsSort.TITTLE_DESCENDING.getQuery()), });
+						typQuery + yearQuery + rankQuery + AmwayApacAssetsSort.TITTLE_DESCENDING.getQuery()));
 	}
 
 	/**

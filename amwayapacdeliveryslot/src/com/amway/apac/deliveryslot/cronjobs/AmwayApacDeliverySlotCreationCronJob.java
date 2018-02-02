@@ -60,8 +60,10 @@ public class AmwayApacDeliverySlotCreationCronJob extends AbstractJobPerformable
 	public LocalDate getOrderingDate()
 	{
 		final LocalDate orderingDate = LocalDate.now().plusDays(DAYS_TO_ADD);
+		if (LOGGER.isInfoEnabled())
+		{
 		LOGGER.debug(new StringBuilder(50).append("Preparing data for date : ").append(orderingDate).toString());
-
+		}
 		return orderingDate;
 	}
 
