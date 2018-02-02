@@ -1,0 +1,55 @@
+$catalog-id=testCatalog
+$catalog-version=Online
+$testCategory0-id=testCategory0
+$testCategory1-id=testCategory1
+$catalogVersion=catalogversion(catalog(id),version)[unique=true,default=$catalog-id:$catalog-version]
+$supercategories=supercategories(code,catalogversion(catalog(id[default=$catalog-id]),version[default=$catalog-version]))
+$prices=europe1prices[translator=de.hybris.platform.europe1.jalo.impex.Europe1PricesTranslator]
+$baseProduct=baseProduct(code, catalogVersion(catalog(id[default='$catalog-id']),version[default='$catalog-version']))
+$approved=approvalstatus(code)[default='approved']
+$lang=en
+
+INSERT_UPDATE Language;isocode[unique=true];fallbackLanguages(isocode);active[default=true]
+;en;;;
+
+INSERT_UPDATE Currency;isocode[unique=true];conversion;digits;symbol;base
+;USD;1,4;2;$;true
+
+INSERT_UPDATE Unit;unitType[unique=true];code[unique=true];name[lang=$lang];conversion;;;
+;pieces;pieces;pieces;1
+
+INSERT_UPDATE UserGroup;UID[unique=true];groups(uid)[mode=append]
+;cmsmanagergroup;employeegroup
+;customergroup;;
+
+# Product catalog
+INSERT_UPDATE Catalog;id[unique=true]
+;$catalog-id
+
+# Product versions for product catalogs
+INSERT_UPDATE CatalogVersion;catalog(id)[unique=true];version[unique=true];active;languages(isoCode);readPrincipals(uid)
+;$catalog-id;$catalog-version;false;$lang;employeegroup
+
+# Insert Categories
+INSERT_UPDATE Category;code[unique=true];allowedPrincipals(uid)[default='customergroup'];$catalogVersion;$supercategories
+;$testCategory0-id;;;;
+;$testCategory1-id;;;$testCategory0-id
+
+INSERT_UPDATE UserPriceGroup;code[unique=true];name[lang=en];
+;AmwayDefaultEmployeePriceGroup;Amway Default Employee Price Group;
+;AmwayDefaultRetailPriceGroup;Amway Default Retail Price Group;
+;AmwayDefaultABOPriceGroup;Amway Default ABO Price Group;
+
+INSERT_UPDATE Customer;uid[unique=true];customerId;password;name;accounts(code)
+;testuser;testuser;1234;Test User;testuser
+
+INSERT_UPDATE AmwayAccount;code[unique=true];businessNature(code);primaryParty(uid);name;userPriceGroup(code)
+;testuser;AmwayBusinessNature_1;testuser;Test User;AmwayDefaultABOPriceGroup
+
+
+INSERT_UPDATE Product;code[unique=true];Description[lang=$lang];variantType(code);maxOrderQuantity;name;bvcode;$catalogVersion;$approved
+;100099A;;;99;BODY SERIES G&H SHAMPOO;TRUE;;
+
+INSERT_UPDATE PriceRow;productId[unique=true];pointValue;businessVolume;currency(isocode)[unique=true];price[unique=true];startTime[dateformat=yyyyMMdd];endTime[dateformat=yyyyMMdd];pg(code)[unique=true];ug(code)[unique=true];unit(code[unique=true]);net
+;100099A;36;36;USD;46.08;20160215;21001201;;AmwayDefaultRetailPriceGroup;pieces;true
+;100099A;36;36;USD;35.99;20160215;21001201;;AmwayDefaultABOPriceGroup;pieces;true
