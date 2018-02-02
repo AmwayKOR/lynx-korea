@@ -3,16 +3,21 @@
  */
 package com.amway.apac.core.stock.services.impl;
 
+import de.hybris.platform.core.model.order.AbstractOrderEntryModel;
 import de.hybris.platform.core.model.order.AbstractOrderModel;
 import de.hybris.platform.core.model.order.OrderEntryModel;
+import de.hybris.platform.ordersplitting.model.WarehouseModel;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.util.ServicesUtil;
+import de.hybris.platform.stock.exception.InsufficientStockLevelException;
 import de.hybris.platform.warehousing.inventoryevent.service.InventoryEventService;
 import de.hybris.platform.warehousing.model.AllocationEventModel;
 
 import java.util.Collection;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.amway.apac.core.stock.services.AmwayApacCommerceStockService;
@@ -26,6 +31,7 @@ import com.amway.core.stock.service.impl.DefaultAmwayCommerceStockService;
 public class DefaultAmwayApacCommerceStockService extends DefaultAmwayCommerceStockService
 		implements AmwayApacCommerceStockService
 {
+	private static final Logger LOG = LoggerFactory.getLogger(DefaultAmwayCommerceStockService.class);
 	private InventoryEventService inventoryEventService;
 	private ModelService modelService;
 
@@ -35,7 +41,21 @@ public class DefaultAmwayApacCommerceStockService extends DefaultAmwayCommerceSt
 	@Override
 	public void reserve(final AbstractOrderModel abstractOrderModel)
 	{
-		// TODO implement stock reserve logic here
+		for (final AbstractOrderEntryModel abstractOrderEntryModel : abstractOrderModel.getEntries())
+		{
+			try
+			{
+				final WarehouseModel warehouse = abstractOrderEntryModel.getWareHouse();
+
+				getAmwayStockService().reserve(abstractOrderEntryModel.getProduct(), warehouse,
+						abstractOrderEntryModel.getQuantity().intValue(), abstractOrderEntryModel.getSkuVersion());
+			}
+			catch (final InsufficientStockLevelException e)
+			{
+				LOG.error("Error in reserving stock for skuId " + abstractOrderEntryModel.getSkuVersion() + " on order "
+						+ abstractOrderModel.getCode(), e);
+			}
+		}
 	}
 
 	/**
