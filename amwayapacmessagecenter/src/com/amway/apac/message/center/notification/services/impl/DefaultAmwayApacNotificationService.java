@@ -2,15 +2,12 @@ package com.amway.apac.message.center.notification.services.impl;
 
 import static com.amway.apac.message.center.model.AmwayNotificationModel.CODE;
 import static com.amway.apac.message.center.model.AmwayNotificationModel.SITE;
-import static com.amway.apac.message.center.model.AmwayNotificationUserActionModel.NOTIFICATION;
-import static com.amway.apac.message.center.model.AmwayNotificationUserActionModel.USER;
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
 
 import de.hybris.platform.basecommerce.model.site.BaseSiteModel;
 import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.core.model.user.UserModel;
-import de.hybris.platform.servicelayer.internal.dao.GenericDao;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.platform.site.BaseSiteService;
@@ -48,8 +45,6 @@ public class DefaultAmwayApacNotificationService implements AmwayApacNotificatio
 	private static final String PAGEABLE_DATA = "Pageable Data";
 
 	private AmwayApacNotificationDao amwayApacNotificationDao;
-	private GenericDao<AmwayNotificationUserActionModel> amwayNotificationUserActionDao;
-	private GenericDao<AmwayNotificationModel> amwayNotificationDao;
 	private BaseSiteService baseSiteService;
 	private ModelService modelService;
 	private UserService userService;
@@ -82,7 +77,7 @@ public class DefaultAmwayApacNotificationService implements AmwayApacNotificatio
 			LOGGER.info(new StringBuilder(100).append("Searching AmwayNotificationModels for notificationCode [")
 					.append(notificationCode).append("] and basesite [").append(currentBasesite.getName()).append("].").toString());
 		}
-		final List<AmwayNotificationModel> results = getAmwayNotificationDao().find(params);
+		final List<AmwayNotificationModel> results = getAmwayApacNotificationDao().find(params);
 		return CollectionUtils.isNotEmpty(results) ? results.iterator().next() : null;
 	}
 
@@ -98,11 +93,8 @@ public class DefaultAmwayApacNotificationService implements AmwayApacNotificatio
 
 		if (Objects.nonNull(actionResult))
 		{
-			if (LOGGER.isInfoEnabled())
-			{
-				LOGGER.info(new StringBuilder(100).append("Notification action found. Updating the status to ")
-						.append(newStatus.getCode()).toString());
-			}
+			LOGGER.info(new StringBuilder(100).append("Notification action found. Updating the status to ")
+					.append(newStatus.getCode()).toString());
 			actionResult.setStatus(newStatus);
 			getModelService().save(actionResult);
 		}
@@ -148,15 +140,18 @@ public class DefaultAmwayApacNotificationService implements AmwayApacNotificatio
 	protected AmwayNotificationUserActionModel getNotificationAction(final AmwayNotificationModel notification,
 			final CustomerModel customer)
 	{
-		final Map<String, Object> params = new HashMap<>(2);
-		params.put(NOTIFICATION, notification);
-		params.put(USER, customer);
 		if (LOGGER.isDebugEnabled())
 		{
 			LOGGER.info(new StringBuilder(100).append("Searching AmwayNotificationUserActionModels for notificationCode [")
 					.append(notification.getCode()).append("] and user [").append(customer.getCustomerID()).append("].").toString());
 		}
-		return getAmwayNotificationUserActionDao().find(params).iterator().next();
+
+		//		final List<AmwayNotificationUserActionModel> notificationActions = getAmwayApacNotificationDao()
+		//				.getNotificationAction(notification, customer);
+		//		validateIfSingleResult(notificationActions, "No notification action found.",
+		//				new StringBuilder(50).append(notificationActions.size()).append(" notification actions found.").toString());
+
+		return getAmwayApacNotificationDao().getNotificationAction(notification, customer);
 	}
 
 	/**
@@ -178,26 +173,6 @@ public class DefaultAmwayApacNotificationService implements AmwayApacNotificatio
 	}
 
 	/**
-	 * @return the amwayNotificationUserActionDao
-	 */
-	public GenericDao<AmwayNotificationUserActionModel> getAmwayNotificationUserActionDao()
-	{
-		return amwayNotificationUserActionDao;
-	}
-
-	/**
-	 * @param amwayNotificationUserActionDao
-	 *           the amwayNotificationUserActionDao to set
-	 */
-	@Required
-	public void setAmwayNotificationUserActionDao(
-			final GenericDao<AmwayNotificationUserActionModel> amwayNotificationUserActionDao)
-	{
-		this.amwayNotificationUserActionDao = amwayNotificationUserActionDao;
-	}
-
-
-	/**
 	 * @return the modelService
 	 */
 	public ModelService getModelService()
@@ -213,24 +188,6 @@ public class DefaultAmwayApacNotificationService implements AmwayApacNotificatio
 	public void setModelService(final ModelService modelService)
 	{
 		this.modelService = modelService;
-	}
-
-	/**
-	 * @return the amwayNotificationDao
-	 */
-	public GenericDao<AmwayNotificationModel> getAmwayNotificationDao()
-	{
-		return amwayNotificationDao;
-	}
-
-	/**
-	 * @param amwayNotificationDao
-	 *           the amwayNotificationDao to set
-	 */
-	@Required
-	public void setAmwayNotificationDao(final GenericDao<AmwayNotificationModel> amwayNotificationDao)
-	{
-		this.amwayNotificationDao = amwayNotificationDao;
 	}
 
 	/**

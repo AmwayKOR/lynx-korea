@@ -11,22 +11,22 @@ import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.platform.site.BaseSiteService;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang.StringUtils;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import com.amway.apac.core.account.services.impl.DefaultAmwayApacAccountService;
-import com.amway.apac.core.base.daos.BaseDao;
-import com.amway.apac.core.constants.AmwayapacCoreConstants;
 import com.amway.apac.core.enums.AccountClassificationEnum;
 import com.amway.apac.message.center.enums.AmwayNotificationUserActionStatus;
 import com.amway.apac.message.center.model.AmwayNotificationModel;
 import com.amway.apac.message.center.model.AmwayNotificationUserActionModel;
+import com.amway.apac.message.center.notification.NotificationSearchParamData;
 import com.amway.core.model.AmwayAccountModel;
 
 
@@ -68,8 +68,6 @@ public class DefaultAmwayApacNotificationServiceIntegrationTest extends Servicel
 	@Resource
 	private DefaultAmwayApacNotificationService defaultAmwayApacNotificationService;
 	@Resource
-	private BaseDao<AmwayNotificationUserActionModel> amwayNotificationUserActionDao;
-	@Resource
 	private DefaultAmwayApacAccountService defaultAmwayApacAccountService;
 	@Resource
 	private SessionService sessionService;
@@ -104,16 +102,21 @@ public class DefaultAmwayApacNotificationServiceIntegrationTest extends Servicel
 	@Test
 	public void testGetMessageNotificationByMappingForGroupUser()
 	{
-		//		final CustomerModel user = (CustomerModel) userService.getUserForUID(TEST_USER_UID_ONE);
-		//		userService.setCurrentUser(user);
-		//		final List<AmwayNotificationUserActionStatus> statuses = new ArrayList<AmwayNotificationUserActionStatus>();
-		//		statuses.add(AmwayNotificationUserActionStatus.valueOf(UNREAD));
-		//		statuses.add(AmwayNotificationUserActionStatus.valueOf(READ));
-		//		final SearchPageData<AmwayNotificationModel> result = defaultAmwayApacNotificationService.getNotifications(pageableData,
-		//				user, statuses, "");
-		//		final List<AmwayNotificationModel> resultList = result.getResults();
-		//		final String resultNotificationCode = resultList.get(0).getCode();
-		//		Assert.assertEquals(GROUP_NOTIFICATION_CODE, resultNotificationCode);
+		final CustomerModel user = (CustomerModel) userService.getUserForUID(TEST_USER_UID_ONE);
+		userService.setCurrentUser(user);
+
+		final NotificationSearchParamData searchParams = new NotificationSearchParamData();
+		searchParams.setPageableData(pageableData);
+		searchParams.setCurrentCustomer(user);
+		searchParams.setSearchText(StringUtils.EMPTY);
+		final List<AmwayNotificationUserActionStatus> statuses = Arrays.asList(new AmwayNotificationUserActionStatus[]
+		{ AmwayNotificationUserActionStatus.UNREAD, AmwayNotificationUserActionStatus.READ });
+		searchParams.setNotificationStatuses(statuses);
+
+		final SearchPageData<AmwayNotificationModel> result = defaultAmwayApacNotificationService.getNotifications(searchParams);
+		final List<AmwayNotificationModel> resultList = result.getResults();
+		final String resultNotificationCode = resultList.get(0).getCode();
+		Assert.assertEquals(GROUP_NOTIFICATION_CODE, resultNotificationCode);
 	}
 
 	/**
@@ -122,20 +125,24 @@ public class DefaultAmwayApacNotificationServiceIntegrationTest extends Servicel
 	@Test
 	public void testGetMessageNotificationByMappingForPlatinumUser()
 	{
-		//		sessionService.setAttribute(AmwayapacCoreConstants.ACCOUNT_CLASSIFICATION_CODE,
-		//				AccountClassificationEnum.PLATINUM_AND_ABOVE.toString());
-		//		final AmwayAccountModel account = defaultAmwayApacAccountService.getAmwayAccount(TEST_USER_UID_ONE, "100").iterator()
-		//				.next();
-		//		final CustomerModel user = account.getPrimaryParty();
-		//		userService.setCurrentUser(user);
-		//		final List<AmwayNotificationUserActionStatus> statuses = new ArrayList<AmwayNotificationUserActionStatus>();
-		//		statuses.add(AmwayNotificationUserActionStatus.valueOf(UNREAD));
-		//		statuses.add(AmwayNotificationUserActionStatus.valueOf(READ));
-		//		final SearchPageData<AmwayNotificationModel> result = defaultAmwayApacNotificationService.getNotifications(pageableData,
-		//				user, statuses, "");
-		//		final List<AmwayNotificationModel> resultList = result.getResults();
-		//		final String resultNotificationCode = resultList.get(0).getCode();
-		//		Assert.assertEquals(PLATINUM_NOTIFICATION_CODE, resultNotificationCode);
+		final AmwayAccountModel account = defaultAmwayApacAccountService.getAmwayAccount(TEST_USER_UID_ONE, "100").iterator()
+				.next();
+		final CustomerModel user = account.getPrimaryParty();
+		userService.setCurrentUser(user);
+
+		final NotificationSearchParamData searchParams = new NotificationSearchParamData();
+		searchParams.setPageableData(pageableData);
+		searchParams.setCurrentCustomer(user);
+		searchParams.setSearchText(StringUtils.EMPTY);
+		searchParams.setAccountClassficationCode(AccountClassificationEnum.PLATINUM_AND_ABOVE.toString());
+		final List<AmwayNotificationUserActionStatus> statuses = Arrays.asList(new AmwayNotificationUserActionStatus[]
+		{ AmwayNotificationUserActionStatus.UNREAD, AmwayNotificationUserActionStatus.READ });
+		searchParams.setNotificationStatuses(statuses);
+
+		final SearchPageData<AmwayNotificationModel> result = defaultAmwayApacNotificationService.getNotifications(searchParams);
+		final List<AmwayNotificationModel> resultList = result.getResults();
+		final String resultNotificationCode = resultList.get(0).getCode();
+		Assert.assertEquals(PLATINUM_NOTIFICATION_CODE, resultNotificationCode);
 	}
 
 	/**
@@ -144,20 +151,25 @@ public class DefaultAmwayApacNotificationServiceIntegrationTest extends Servicel
 	@Test
 	public void testGetMessageNotificationByMappingForDiamondUser()
 	{
-		//		sessionService.setAttribute(AmwayapacCoreConstants.ACCOUNT_CLASSIFICATION_CODE,
-		//				AccountClassificationEnum.DIAMOND_AND_ABOVE.toString());
-		//		final AmwayAccountModel account = defaultAmwayApacAccountService.getAmwayAccount(TEST_USER_UID_ONE, "100").iterator()
-		//				.next();
-		//		final CustomerModel user = account.getPrimaryParty();
-		//		userService.setCurrentUser(user);
-		//		final List<AmwayNotificationUserActionStatus> statuses = new ArrayList<AmwayNotificationUserActionStatus>();
-		//		statuses.add(AmwayNotificationUserActionStatus.valueOf(UNREAD));
-		//		statuses.add(AmwayNotificationUserActionStatus.valueOf(READ));
-		//		final SearchPageData<AmwayNotificationModel> result = defaultAmwayApacNotificationService.getNotifications(pageableData,
-		//				user, statuses, "");
-		//		final List<AmwayNotificationModel> resultList = result.getResults();
-		//		final String resultNotificationCode = resultList.get(0).getCode();
-		//		Assert.assertEquals(DIAMOND_NOTIFICATION_CODE, resultNotificationCode);
+		final AmwayAccountModel account = defaultAmwayApacAccountService.getAmwayAccount(TEST_USER_UID_ONE, "100").iterator()
+				.next();
+		final CustomerModel user = account.getPrimaryParty();
+		userService.setCurrentUser(user);
+
+		final NotificationSearchParamData searchParams = new NotificationSearchParamData();
+		searchParams.setPageableData(pageableData);
+		searchParams.setCurrentCustomer(user);
+		searchParams.setSearchText(StringUtils.EMPTY);
+		searchParams.setAccountClassficationCode(AccountClassificationEnum.DIAMOND_AND_ABOVE.toString());
+		final List<AmwayNotificationUserActionStatus> statuses = Arrays.asList(new AmwayNotificationUserActionStatus[]
+		{ AmwayNotificationUserActionStatus.UNREAD, AmwayNotificationUserActionStatus.READ });
+		searchParams.setNotificationStatuses(statuses);
+
+
+		final SearchPageData<AmwayNotificationModel> result = defaultAmwayApacNotificationService.getNotifications(searchParams);
+		final List<AmwayNotificationModel> resultList = result.getResults();
+		final String resultNotificationCode = resultList.get(0).getCode();
+		Assert.assertEquals(DIAMOND_NOTIFICATION_CODE, resultNotificationCode);
 	}
 
 	/**
@@ -196,37 +208,37 @@ public class DefaultAmwayApacNotificationServiceIntegrationTest extends Servicel
 	@Test
 	public void testChangeUserNotificationStatus()
 	{
-		//		final CustomerModel user = (CustomerModel) userService.getUserForUID(TEST_USER_UID_ONE);
-		//		userService.setCurrentUser(user);
-		//		final AmwayNotificationModel notification = defaultAmwayApacNotificationService
-		//				.getNotificationByCode(GROUP_NOTIFICATION_CODE);
-		//		defaultAmwayApacNotificationService.changeUserNotificationStatus(notification, user,
-		//				AmwayNotificationUserActionStatus.valueOf(READ));
-		//
-		//		final List<AmwayNotificationUserActionModel> resultsWithRead = defaultAmwayApacNotificationService
-		//				.getNotificationActionByUserAndNotification(user, notification);
-		//		Assert.assertEquals(AmwayNotificationUserActionStatus.valueOf(READ), resultsWithRead.get(0).getStatus());
-		//
-		//		defaultAmwayApacNotificationService.changeUserNotificationStatus(notification, user,
-		//				AmwayNotificationUserActionStatus.valueOf(UNREAD));
-		//		final List<AmwayNotificationUserActionModel> resultsWithUnread = defaultAmwayApacNotificationService
-		//				.getNotificationActionByUserAndNotification(user, notification);
-		//		Assert.assertEquals(AmwayNotificationUserActionStatus.valueOf(UNREAD), resultsWithUnread.get(0).getStatus());
+		final CustomerModel user = (CustomerModel) userService.getUserForUID(TEST_USER_UID_ONE);
+		userService.setCurrentUser(user);
+		final AmwayNotificationModel notification = defaultAmwayApacNotificationService
+				.getNotificationByCode(GROUP_NOTIFICATION_CODE);
+		defaultAmwayApacNotificationService.changeUserNotificationStatus(notification, user,
+				AmwayNotificationUserActionStatus.valueOf(READ));
+
+		final AmwayNotificationUserActionModel resultsWithRead = defaultAmwayApacNotificationService
+				.getNotificationActionByUserAndNotification(user, notification);
+		Assert.assertEquals(AmwayNotificationUserActionStatus.valueOf(READ), resultsWithRead.getStatus());
+
+		defaultAmwayApacNotificationService.changeUserNotificationStatus(notification, user,
+				AmwayNotificationUserActionStatus.valueOf(UNREAD));
+		final AmwayNotificationUserActionModel resultsWithUnread = defaultAmwayApacNotificationService
+				.getNotificationActionByUserAndNotification(user, notification);
+		Assert.assertEquals(AmwayNotificationUserActionStatus.valueOf(UNREAD), resultsWithUnread.getStatus());
 	}
 
 	@Test
 	public void testGetNotificationActionByUserAndNotification()
 	{
-		//		final CustomerModel user = (CustomerModel) userService.getUserForUID(TEST_USER_UID_ONE);
-		//		final AmwayNotificationModel notification = defaultAmwayApacNotificationService
-		//				.getNotificationByCode(GROUP_NOTIFICATION_CODE);
-		//		defaultAmwayApacNotificationService.changeUserNotificationStatus(notification, user,
-		//				AmwayNotificationUserActionStatus.valueOf(UNREAD));
-		//
-		//		final List<AmwayNotificationUserActionModel> results = defaultAmwayApacNotificationService
-		//				.getNotificationActionByUserAndNotification(user, notification);
-		//
-		//		Assert.assertEquals(TEST_USER_UID_ONE, results.get(0).getUser().getUid());
-		//		Assert.assertEquals(UNREAD, results.get(0).getStatus().toString());
+		final CustomerModel user = (CustomerModel) userService.getUserForUID(TEST_USER_UID_ONE);
+		final AmwayNotificationModel notification = defaultAmwayApacNotificationService
+				.getNotificationByCode(GROUP_NOTIFICATION_CODE);
+		defaultAmwayApacNotificationService.changeUserNotificationStatus(notification, user,
+				AmwayNotificationUserActionStatus.valueOf(UNREAD));
+
+		final AmwayNotificationUserActionModel results = defaultAmwayApacNotificationService
+				.getNotificationActionByUserAndNotification(user, notification);
+
+		Assert.assertEquals(TEST_USER_UID_ONE, results.getUser().getUid());
+		Assert.assertEquals(UNREAD, results.getStatus().toString());
 	}
 }

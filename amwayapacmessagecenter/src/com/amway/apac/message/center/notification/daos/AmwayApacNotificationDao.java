@@ -2,8 +2,11 @@ package com.amway.apac.message.center.notification.daos;
 
 import de.hybris.platform.basecommerce.model.site.BaseSiteModel;
 import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
+import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.servicelayer.internal.dao.GenericDao;
 
 import com.amway.apac.message.center.model.AmwayNotificationModel;
+import com.amway.apac.message.center.model.AmwayNotificationUserActionModel;
 import com.amway.apac.message.center.notification.NotificationSearchParamData;
 
 
@@ -12,7 +15,7 @@ import com.amway.apac.message.center.notification.NotificationSearchParamData;
  *
  * @author Shubham Goyal
  */
-public interface AmwayApacNotificationDao
+public interface AmwayApacNotificationDao extends GenericDao
 {
 
 	/**
@@ -29,5 +32,13 @@ public interface AmwayApacNotificationDao
 	 */
 	SearchPageData<AmwayNotificationModel> getNotifications(final NotificationSearchParamData notificationSearchParam,
 			final BaseSiteModel currentBaseSite);
+
+	/**
+	 * @param customer
+	 * @param notification
+	 *
+	 */
+	AmwayNotificationUserActionModel getNotificationAction(final AmwayNotificationModel notification,
+			final CustomerModel customer);
 
 }

@@ -9,6 +9,7 @@ import static com.amway.apac.message.center.model.AmwayNotificationModel.PUBLISH
 import static com.amway.apac.message.center.model.AmwayNotificationModel.SHORTDESCRIPTION;
 import static com.amway.apac.message.center.model.AmwayNotificationModel.SITE;
 import static com.amway.apac.message.center.model.AmwayNotificationUserActionModel.NOTIFICATION;
+import static com.amway.apac.message.center.model.AmwayNotificationUserActionModel.USER;
 import static de.hybris.platform.core.model.security.PrincipalGroupModel._PRINCIPALGROUPRELATION;
 
 import de.hybris.platform.basecommerce.model.site.BaseSiteModel;
@@ -17,8 +18,8 @@ import de.hybris.platform.commerceservices.search.flexiblesearch.data.SortQueryD
 import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
 import de.hybris.platform.core.model.security.PrincipalGroupModel;
 import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.servicelayer.internal.dao.DefaultGenericDao;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
-import de.hybris.platform.servicelayer.search.FlexibleSearchService;
 import de.hybris.platform.servicelayer.search.SearchResult;
 
 import java.util.ArrayList;
@@ -31,6 +32,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Required;
 
@@ -49,14 +51,13 @@ import com.amway.apac.message.center.notification.daos.AmwayApacNotificationDao;
  *
  * @author Shubham Goyal
  */
-public class DefaultAmwayApacNotificationDao implements AmwayApacNotificationDao
+public class DefaultAmwayApacNotificationDao extends DefaultGenericDao implements AmwayApacNotificationDao
 {
 	private static final String STATUSES = "statuses";
 	private static final String PUBLISHED = "published";
 	private static final String CLASSIFICATION = "classification";
 	private static final String HYBRIS_GROUP = "hybrisGroup";
 	private static final String CURRENT_DATE = "currentDate";
-	private static final String USER = "user";
 	private static final String SORT_BY_DESC_DATE = " ORDER BY {an.publishDate} DESC";
 	private static final String SORT_BY_ASC_DATE = " ORDER BY {an.publishDate} ASC";
 	private static final String CLASSIFICATION_LIST = "classificationsList";
@@ -91,6 +92,20 @@ public class DefaultAmwayApacNotificationDao implements AmwayApacNotificationDao
 			.append("} NOT IN (?").append(STATUSES).append(") AND {").append(USER).append("} = ?").append(USER).append("  }}))")
 			.toString();
 
+	private static final String NOTIFICATION_ACTION_QUERY2 = new StringBuilder().append("Select {actn.")
+			.append(AmwayNotificationUserActionModel.PK).append("} FROM {").append(AmwayNotificationUserActionModel._TYPECODE)
+			.append(" as actn JOIN ").append(AmwayNotificationModel._TYPECODE).append(" as msg ON {actn.").append(NOTIFICATION)
+			.append("} = {msg.").append(AmwayNotificationModel.PK).append("} JOIN ").append(CustomerModel._TYPECODE)
+			.append(" as cstmr ON {actn.").append(USER).append("} = {cstmr.").append(CustomerModel.PK).append("}} WHERE {actn.")
+			.append(NOTIFICATION).append("}=?").append(NOTIFICATION).append(" AND {actn.").append(USER).append("}=?").append(USER)
+			.toString();
+
+	//	private static final String TEMP = new StringBuilder()
+	//			.append(
+	//					"Select {actn.AmwayNotificationUserActionModel.PK} FROM {AmwayNotificationUserAction as actn JOIN AmwayNotification as msg ON {actn.notification} = "
+	//							+ "{msg.AmwayNotificationModel.PK} JOIN Customer as cstmr ON {actn.user} = {cstmr.CustomerModel.PK}} WHERE {actn.notification}=?notification AND {actn.user}=?user")
+	//			.toString();
+
 	/** Query to find user groups list of a user. */
 	private static final StringBuilder USER_GROUP_QUERY = new StringBuilder().append("Select {pg.").append(PrincipalGroupModel.UID)
 			.append("} FROM {").append(CustomerModel._TYPECODE).append(" as c JOIN ").append(_PRINCIPALGROUPRELATION)
@@ -99,8 +114,30 @@ public class DefaultAmwayApacNotificationDao implements AmwayApacNotificationDao
 			.append("} = ?").append(USER);
 
 	private PagedFlexibleSearchService pagedFlexibleSearchService;
-	private FlexibleSearchService flexibleSearchService;
 	private Map<AccountClassificationEnum, Integer> amwayAccountClassificationRankMapping;
+
+	/**
+	 * DefaultGenericDao is only usable when typecode is set.
+	 */
+	public DefaultAmwayApacNotificationDao()
+	{
+		super(AmwayNotificationModel._TYPECODE);
+	}
+
+	@Override
+	public AmwayNotificationUserActionModel getNotificationAction(final AmwayNotificationModel notification,
+			final CustomerModel customer)
+	{
+		final Map<String, Object> params = new HashMap<>(2);
+		params.put(NOTIFICATION, notification);
+		params.put(USER, customer);
+
+		final FlexibleSearchQuery query = new FlexibleSearchQuery(NOTIFICATION_ACTION_QUERY2, params);
+
+		final SearchResult<AmwayNotificationUserActionModel> result = getFlexibleSearchService().search(query);
+
+		return (CollectionUtils.isNotEmpty(result.getResult())) ? result.getResult().iterator().next() : null;
+	}
 
 	/**
 	 * {@inheritDoc}
@@ -259,24 +296,6 @@ public class DefaultAmwayApacNotificationDao implements AmwayApacNotificationDao
 	}
 
 	/**
-	 * @return the flexibleSearchService
-	 */
-	public FlexibleSearchService getFlexibleSearchService()
-	{
-		return flexibleSearchService;
-	}
-
-	/**
-	 * @param flexibleSearchService
-	 *           the flexibleSearchService to set
-	 */
-	@Required
-	public void setFlexibleSearchService(final FlexibleSearchService flexibleSearchService)
-	{
-		this.flexibleSearchService = flexibleSearchService;
-	}
-
-	/**
 	 * @return the amwayAccountClassificationRankMapping
 	 */
 	public Map<AccountClassificationEnum, Integer> getAmwayAccountClassificationRankMapping()
@@ -294,5 +313,4 @@ public class DefaultAmwayApacNotificationDao implements AmwayApacNotificationDao
 	{
 		this.amwayAccountClassificationRankMapping = amwayAccountClassificationRankMapping;
 	}
-
 }

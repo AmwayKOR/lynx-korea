@@ -75,23 +75,9 @@
 	<alias name="defaultAmwayApacNotificationService" alias="amwayApacNotificationService"/>
 	<bean id="defaultAmwayApacNotificationService" class="com.amway.apac.message.center.notification.services.impl.DefaultAmwayApacNotificationService">
 		<property name="amwayApacNotificationDao" ref="amwayApacNotificationDao"/>
-		<property name="amwayNotificationUserActionDao" ref="amwayNotificationUserActionDao"/>
-		<property name="amwayNotificationDao" ref="amwayNotificationDao"/>
 		<property name="baseSiteService" ref="baseSiteService"/>
 		<property name="modelService" ref="modelService"/>
 		<property name="userService" ref="userService" />
-	</bean>
-	
-	<alias alias="amwayNotificationUserActionDao" name="defaultAmwayNotificationUserActionDao"/>
-	<bean id="defaultAmwayNotificationUserActionDao" class="com.amway.apac.core.base.daos.impl.DefaultBaseDaoImpl">
-		 <constructor-arg name="typecode" value="AmwayNotificationUserAction"/>
-		 <constructor-arg name="codePropertyName" value="code"/>
-	</bean>
-	
-	<alias alias="amwayNotificationDao" name="defaultAmwayNotificationDao"/>
-	<bean id="defaultAmwayNotificationDao" class="com.amway.apac.core.base.daos.impl.DefaultBaseDaoImpl">
-		 <constructor-arg name="typecode" value="AmwayNotification"/>
-		 <constructor-arg name="codePropertyName" value="code"/>
 	</bean>
 	
 	<alias name="defaultAmwayApacNotificationDao" alias="amwayApacNotificationDao"/>
