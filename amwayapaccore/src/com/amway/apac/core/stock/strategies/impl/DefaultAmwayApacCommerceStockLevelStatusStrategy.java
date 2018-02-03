@@ -5,7 +5,11 @@ import de.hybris.platform.basecommerce.enums.StockLevelStatus;
 import de.hybris.platform.ordersplitting.model.StockLevelModel;
 
 import java.util.Collection;
+import java.util.Set;
 
+import org.apache.commons.collections.CollectionUtils;
+
+import com.amway.apac.core.stock.strategies.AmwayApacCommerceStockLevelStatusStrategy;
 import com.amway.core.stock.strategies.impl.AmwayCommerceStockLevelStatusStrategy;
 
 
@@ -15,7 +19,8 @@ import com.amway.core.stock.strategies.impl.AmwayCommerceStockLevelStatusStrateg
  * @author Ashish Sabal
  *
  */
-public class AmwayApacCommerceStockLevelStatusStrategy extends AmwayCommerceStockLevelStatusStrategy
+public class DefaultAmwayApacCommerceStockLevelStatusStrategy extends AmwayCommerceStockLevelStatusStrategy
+		implements AmwayApacCommerceStockLevelStatusStrategy
 {
 	/**
 	 * Returns Stock level status enum for provided stock level model.
@@ -79,5 +84,41 @@ public class AmwayApacCommerceStockLevelStatusStrategy extends AmwayCommerceStoc
 			}
 		}
 		return resultStatus;
+	}
+
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public StockLevelStatus evaluateKitProductStockStatus(final Set<StockLevelStatus> majorItemsStatusSet,
+			final Set<StockLevelStatus> minorItemsStatusSet)
+	{
+		StockLevelStatus finalStatus = null;
+		if (CollectionUtils.isNotEmpty(majorItemsStatusSet))
+		{
+			if (majorItemsStatusSet.contains(StockLevelStatus.TEMPORARYNOTAVAILABLE))
+			{
+				finalStatus = StockLevelStatus.TEMPORARYNOTAVAILABLE;
+			}
+			else if (majorItemsStatusSet.contains(StockLevelStatus.NOTYETAVAILABLE))
+			{
+				finalStatus = StockLevelStatus.NOTYETAVAILABLE;
+			}
+			else if (majorItemsStatusSet.contains(StockLevelStatus.NOLONGERAVAILABLE))
+			{
+				finalStatus = StockLevelStatus.NOLONGERAVAILABLE;
+			}
+			else if ((majorItemsStatusSet.size() == 1) && (majorItemsStatusSet.contains(StockLevelStatus.BACKORDER)))
+			{
+				finalStatus = StockLevelStatus.BACKORDER;
+			}
+		}
+		else if ((minorItemsStatusSet.size() == 1) && (minorItemsStatusSet.contains(StockLevelStatus.BACKORDER)))
+		{
+			finalStatus = StockLevelStatus.BACKORDER;
+		}
+
+		return finalStatus;
 	}
 }

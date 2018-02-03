@@ -389,7 +389,7 @@
 	</bean>
 	
 	<alias alias="stockLevelStatusStrategy" name="defaultAmwayApacCommerceStockLevelStatusStrategy"/>
-    <bean id="defaultAmwayApacCommerceStockLevelStatusStrategy" class="com.amway.apac.core.stock.strategies.impl.AmwayApacCommerceStockLevelStatusStrategy" parent="amwayCommerceStockLevelStatusStrategy"/>
+    <bean id="defaultAmwayApacCommerceStockLevelStatusStrategy" class="com.amway.apac.core.stock.strategies.impl.DefaultAmwayApacCommerceStockLevelStatusStrategy" parent="amwayCommerceStockLevelStatusStrategy"/>
     
     <alias alias="commerceStockLevelCalculationStrategy" name="amwayApacCommerceAvailabilityCalculationStrategy"/>
 	<bean id="amwayApacCommerceAvailabilityCalculationStrategy" class="com.amway.apac.core.stock.strategies.impl.AmwayApacCommerceAvailabilityCalculationStrategy"
@@ -439,8 +439,9 @@
 	
 	<alias alias="stockService" name="defaultAmwayApacStockService" />
 	<bean id="defaultAmwayApacStockService" class="com.amway.apac.core.stock.services.impl.DefaultAmwayApacStockService" parent="amwayStockService">
-        <property name="amwayApacProductService" ref="productService"/>
+         <property name="amwayApacProductService" ref="productService"/>
          <property name="amwayApacStockLevelDao" ref="stockLevelDao" />
+         <property name="amwayApacCommerceStockLevelStatusStrategy" ref="stockLevelStatusStrategy"/>
     </bean>
     
 	<alias alias="stockLevelDao" name="defaultAmwayApacStockLevelDao"/>
@@ -497,12 +498,6 @@
 		class="com.amway.apac.core.backorder.dao.impl.DefaultAmwayApacBackOrderDao">
 		<property name="flexibleSearchService" ref="flexibleSearchService" />
 		<property name="amwayBackOrderGenericDao" ref="amwayApacBackOrderGenericDao" />
-	</bean>
-
-	<alias alias="stockLevelStatusStrategy" name="amwayApacCommerceStockLevelStatusStrategy" />
-	<bean id="amwayApacCommerceStockLevelStatusStrategy"
-		class="com.amway.apac.core.stock.strategies.impl.AmwayApacCommerceStockLevelStatusStrategy"
-		parent="amwayCommerceStockLevelStatusStrategy">
 	</bean>
 
 	<alias alias="commerceStockService" name="defaultAmwayApacCommerceStockService" />
