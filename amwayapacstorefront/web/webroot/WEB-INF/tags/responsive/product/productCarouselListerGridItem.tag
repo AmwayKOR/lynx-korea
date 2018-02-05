@@ -19,53 +19,51 @@
 						<product:productTileBadge stockLevel="${product.stock.stockLevelStatus.code}" />
 					</c:if>
 				</sec:authorize>
-				<div class="product-list__item-content amwahover">
+				<div class="amway-suggest__item-content amwahover">
 					
-					<span class="product-list__thum" >
+					<span class="product-list__thum">
 						<product:productPrimaryImage product="${product}" format="productGrid" cssClass="product-list__thumbnail" />
-						<button class="quick-view-btn" data-product-code="${product.code}">
-						<spring:theme code="plp.producttile.quick.view" /></button>
 					</span>
-					<div class="product-list__item-detail">
-						<p class="product-list__item-title">
-							<a class="product-list__item-title" target="_self" href="${productPDPurl}">${product.name}</a>
+					<div class="amway-suggest__item-detail">
+						<p class="amway-suggest__item-title">
+							<a class="amway-suggest__item-title" target="_self" href="${productPDPurl}">${product.name}</a>
 						</p>
-						<p class="product-list__item-number">
+						<p class="amway-suggest__item-number">
 							<spring:theme code="plp.producttile.item.no" />
 							${product.code}
 						</p>
 						<sec:authorize access="hasAnyRole('ROLE_ANONYMOUS')">
-							<div class="product-list__item-title product-list__item-aboprice">
-								<span class="product-list__item-abolabel">
+							<div class="amway-suggest__item-title product-list__item-aboprice">
+								<span class="amway-suggest__item-abolabel">
 									<spring:theme code="plp.producttile.price" />
 								</span>
-								<span class="product-list__item-abovalue">${product.price.formattedValue}</span>
+								<span class="amway-suggest__item-abovalue">${product.price.formattedValue}</span>
 							</div>
 						</sec:authorize>
 						<sec:authorize access="!hasAnyRole('ROLE_ANONYMOUS')">
-							<div class="product-list__item-title product-list__item-aboprice">
-								<span class="product-list__item-abolabel">
+							<div class="amway-suggest__item-title product-list__item-aboprice">
+								<span class="amway-suggest__item-abolabel">
 									<spring:theme code="plp.producttile.abo.price" />
 								</span>
-								<span class="product-list__item-abovalue">${product.price.formattedValue}</span>
+								<span class="amway-suggest__item-abovalue">${product.price.formattedValue}</span>
 							</div>
-							<div class="product-list__item-retailprice">
-								<span class="product-list__item-abolabel">
+							<div class="amway-suggest__item-retailprice">
+								<span class="amway-suggest__item-abolabel">
 									<spring:theme code="plp.producttile.retail.price" />
 								</span>
-								<span class="product-list__item-abovalue">${product.retailPrice.formattedValue}</span>
+								<span class="amway-suggest__item-abovalue">${product.retailPrice.formattedValue}</span>
 							</div>
-							<div class="product-list__item-retailprice">
-								<span class="product-list__item-abolabel">
+							<div class="amway-suggest__item-retailprice">
+								<span class="amway-suggest__item-abolabel">
 									<spring:theme code="plp.producttile.pvbv" />
 								</span>
-								<span class="product-list__item-abovalue">${product.price.amwayValue.pointValue} /
+								<span class="amway-suggest__item-abovalue">${product.price.amwayValue.pointValue} /
 									${product.price.amwayValue.businessVolume}</span>
 							</div>
 						</sec:authorize>
 					</div>
 				</div>
-				<div class="product-list__item-link col-md-12">
+				<div class="amway-suggest__item-link col-md-12">
 					<sec:authorize access="hasAnyRole('ROLE_ANONYMOUS')">
 						<button class="btn-blue-white sign-in-register" data-target="#login-drop-content" data-toggle="collapse">
 							<spring:theme code="plp.producttile.signin.register" />
@@ -78,7 +76,7 @@
 									<spring:theme code="plp.producttile.addtocart" />
 								</button>
 								<a
-									class="product-list__item-link-text product-list__item-link-common col-xs-12 col-md-12 add-to-cart-quick-view"
+									class="amway-suggest__item-link-text product-list__item-link-common col-xs-12 col-md-12 add-to-cart-quick-view"
 									data-product-code="${product.code}" href="#">
 									<spring:theme code="plp.producttile.shoppinglist" />
 								</a>
@@ -95,13 +93,6 @@
 										</button>
 									
 								</form>
-								<c:url var="addToShoppingListUrl" value="/shopping-lists/data/all" />
-								<a class="addToList product-list__item-link-text product-list__item-link-common col-xs-12 col-md-12"
-									data-add-to-shopping-list-url="${addToShoppingListUrl}" data-product-code="${product.code}">
-									<spring:theme code="plp.producttile.shoppinglist" />
-								</a>
-								<div class="cart-detail__dropdown-menu dropdown-menu shopping-list-popup-wrapper plp-add-to-shopping-list-popup shoppinglist-popup" role="menu">
-								</div>
 							</c:otherwise>
 						</c:choose>
 					</sec:authorize>

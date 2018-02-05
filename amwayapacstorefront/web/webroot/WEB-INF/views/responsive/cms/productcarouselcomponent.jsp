@@ -12,7 +12,7 @@
 	<h1 class="amway-suggest__title">${component.name}</h1>
 	<div id="productSuggestListTabs" class="amway-suggest__list">
 		<c:forEach items="${productData}" var="product">
-			<product:productListerGridItem product="${product}"/>
+			<product:productCarouselListerGridItem product="${product}"/>
 		</c:forEach>
 	</div>
 </div>
