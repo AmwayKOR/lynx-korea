@@ -195,6 +195,7 @@
 		<property name="requestCache" ref="httpSessionRequestCache" />
 		<property name="uiExperienceService" ref="uiExperienceService"/>
 		<property name="cartFacade" ref="cartFacade"/>
+		<property name="customerConsentDataStrategy" ref="customerConsentDataStrategy"/>
 		<property name="cartRestorationStrategy" ref="cartRestorationStrategy"/>
 		<property name="forceDefaultTargetForUiExperienceLevel">
 			<map key-type="de.hybris.platform.commerceservices.enums.UiExperienceLevel" value-type="java.lang.Boolean">
@@ -223,6 +224,7 @@
 		<property name="defaultTargetUrl" value="/checkout"/>
 		<property name="uiExperienceService" ref="uiExperienceService"/>
 		<property name="cartFacade" ref="cartFacade"/>
+		<property name="customerConsentDataStrategy" ref="customerConsentDataStrategy"/>
 		<property name="cartRestorationStrategy" ref="cartRestorationStrategy"/>
 		<property name="forceDefaultTargetForUiExperienceLevel">
 			<map key-type="de.hybris.platform.commerceservices.enums.UiExperienceLevel" value-type="java.lang.Boolean">
@@ -271,6 +273,7 @@
 		<property name="guidCookieStrategy" ref="guidCookieStrategy"/>
 		<property name="useReferer" value="true"/>
 		<property name="restrictedPages" ref="logoutRestrictedPages"/>
+		<property name="sessionService" ref="sessionService"/>
 	</bean>
 	
      <bean id="logoutFilter" class="org.springframework.security.web.authentication.logout.LogoutFilter">

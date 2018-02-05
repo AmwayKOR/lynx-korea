@@ -65,42 +65,6 @@
 		<property name="cmsSiteService" ref="cmsSiteService"/>
 	</bean>
 
-
-	<!-- checkout flow configuration -->
-
-	<bean id="pickUpInStoreCheckoutFlowStrategy" class="com.amway.apac.core.checkout.flow.impl.PickUpInStoreCheckoutFlowStrategy" >
-		<property name="pickupStrategy" ref="pickupStrategy" />
-		<property name="defaultStrategy" ref="siteCheckoutFlowStrategy"/>
-		<property name="multiStepCheckoutFlowStrategy" ref="multiStepCheckoutFlowStrategy" />
-	</bean>
-
-	<bean id="siteCheckoutFlowStrategy"
-	      class="com.amway.apac.core.checkout.flow.impl.SiteCheckoutFlowStrategy" >
-		<!-- This strategy looks up a strategy based on the current site UID -->
-		<property name="cmsSiteService" ref="cmsSiteService"/>
-		<property name="siteMappings">
-			<map>
-				<entry key="electronics" value-ref="newCustomerCheckoutFlowStrategy"/>
-				<entry key="apparel-de" value-ref="multiStepCheckoutFlowStrategy"/>
-				<entry key="apparel-uk" value-ref="multiStepCheckoutFlowStrategy"/>
-				<entry key="powertoolsstore" value-ref="multiStepCheckoutFlowStrategy"/>
-			</map>
-		</property>
-		<!-- Default to SINGLE step checkout -->
-		<property name="defaultStrategy" ref="multiStepCheckoutFlowStrategy"/>
-	</bean>
-
-	<bean id="newCustomerCheckoutFlowStrategy"
-	      class="com.amway.apac.core.checkout.flow.impl.NewCustomerCheckoutFlowStrategy" >
-		<!-- This strategy works out if the user has created any data -->
-		<property name="userService" ref="userService"/>
-		<property name="customerAccountService" ref="customerAccountService"/>
-		<property name="defaultStrategy" ref="multiStepCheckoutFlowStrategy"/>
-		<property name="newCustomerStrategy" ref="multiStepCheckoutFlowStrategy"/>
-	</bean>
-
-
-
 	<!-- Sales quote process actions -->
 
 	<!-- quote-->

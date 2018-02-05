@@ -248,6 +248,9 @@
     <alias name="defaultAmwayApaccmsItemDropdownTypePopulator" alias="cmsItemDropdownComponentTypeAttributePopulator"/>
     <bean id="defaultAmwayApaccmsItemDropdownTypePopulator" class="com.amway.apac.facades.cms.types.populator.AmwayApacCMSItemDropdownComponentTypeAttributePopulator" >
         <property name="attributeDescriptorModelHelperService" ref="attributeDescriptorModelHelperService"/>
+		<property name="i18nComponentTypePopulator" ref="i18nComponentTypePopulator" />
+		<property name="typeService" ref="typeService" />
+		<property name="componentTypeDataFactory" ref="componentTypeDataFactory" />
     </bean>    
     
     <alias alias="amwayApacPaymentOptionConverter" name="defaultAmwayApacPaymentOptionConverter" />

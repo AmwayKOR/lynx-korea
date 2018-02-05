@@ -27,6 +27,7 @@ import de.hybris.platform.commerceservices.search.facetdata.ProductCategorySearc
 import de.hybris.platform.servicelayer.dto.converter.ConversionException;
 
 import java.io.UnsupportedEncodingException;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -172,7 +173,8 @@ public class CategoryPageController extends AbstractCategoryPageController
 			model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_FOLLOW);
 		}
 
-		final String metaKeywords = MetaSanitizerUtil.sanitizeKeywords(category.getKeywords());
+		final String metaKeywords = MetaSanitizerUtil.sanitizeKeywords(category.getKeywords().stream()
+				.map(keywordModel -> keywordModel.getKeyword()).collect(Collectors.toSet()));
 		final String metaDescription = MetaSanitizerUtil.sanitizeDescription(category.getDescription());
 		setUpMetaData(model, metaKeywords, metaDescription);
 
