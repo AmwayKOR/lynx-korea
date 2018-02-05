@@ -66,11 +66,14 @@ INSERT_UPDATE Address;owner(PointOfService.name)[unique=true];&addrID;streetname
 ;testPointOfService;pos1-address;Zennerstrasse;45;28277;false;Bremen;US;false;false;false;true;Anja;Hertz;testmail@test.com;FEMALE;;;;;;
 
 
-INSERT_UPDATE StockLevel;available;warehouse(code)[unique=true];inStockStatus(code);maxPreOrder;maxStockLevelHistoryCount;overSelling;preOrder;productCode[unique=true];reserved;
-;10;testWarehouse1;shipped;0;-1;0;0;testProduct1;0;
-;10;testWarehouse2;shipped;0;-1;0;0;testProduct2;0;
-;10;testWarehouse1;shipped;0;-1;0;0;testBundleProduct1;0;
-;10;testWarehouse2;shipped;0;-1;0;0;testBundleProduct2;0;
+INSERT_UPDATE StockLevel;available;warehouse(code)[unique=true];inStockStatus(code);maxPreOrder;maxStockLevelHistoryCount;overSelling;preOrder;productCode[unique=true];skuId;reserved;
+;10;testWarehouse1;shipped;0;-1;0;0;testProduct1;testProduct1;0;
+;10;testWarehouse1;shipped;0;-1;0;0;testProduct2;testProduct2;0;
+;10;testWarehouse1;shipped;0;-1;0;0;testProduct3;testProduct3;0;
+;10;testWarehouse1;shipped;0;-1;0;0;testProduct4;testProduct4;0;
+;10;testWarehouse2;shipped;0;-1;0;0;testProduct2;testProduct2;0;
+;10;testWarehouse1;shipped;0;-1;0;0;testBundleProduct1;testBundleProduct1;0;
+;10;testWarehouse2;shipped;0;-1;0;0;testBundleProduct2;testBundleProduct2;0;
 
 # Customers
 INSERT_UPDATE Customer;originalUid[unique=true];uid[unique=true];title(code);name;description;sessionLanguage(isocode);sessionCurrency(isocode);groups(uid);password[default=$defaultPassword];&userId;defaultPaymentAddress(&addId);defaultShipmentAddress(&addId)
@@ -98,4 +101,244 @@ INSERT_UPDATE AmwayKitProduct;code[unique=true]  ;bvcode;variantType(code);maxOr
                              
 INSERT_UPDATE AmwayKitEntryProduct;code[unique=true]               ;$catalogversion;configuredQty;entry(code,$catalogversion);kitProduct(code,$catalogversion)
                                   ;testBundleProduct1-testProduct1 ;               ;4            ;testProduct1                    ;testBundleProduct1
+								  ;testBundleProduct1-testProduct2 ;               ;4            ;testProduct2                    ;testBundleProduct1
+								  ;testBundleProduct1-testProduct3 ;               ;4            ;testProduct3                    ;testBundleProduct1
+								  ;testBundleProduct1-testProduct4 ;               ;4            ;testProduct4                    ;testBundleProduct1
 								  ;testBundleProduct2-testProduct2 ;               ;4            ;testProduct2                    ;testBundleProduct2
+								  
+
+
+INSERT_UPDATE AmwayKitProduct;code[unique=true]  ;bvcode;variantType(code);maxOrderQuantity;approvalstatus(code);isSellable;$catalogversion;type(code);unit(code);owner(Principal.uid)
+                             ;testProduct11Bundle ;true  ;                 ;                ;approved            ;true      ;               ;BUNDLED   ;pieces    ;admin
+                             ;testProduct12Bundle ;true  ;                 ;                ;approved            ;true      ;               ;BUNDLED   ;pieces    ;admin
+                             ;testProduct13Bundle ;true  ;                 ;                ;approved            ;true      ;               ;BUNDLED   ;pieces    ;admin
+                             ;testProduct21Bundle ;true  ;                 ;                ;approved            ;true      ;               ;BUNDLED   ;pieces    ;admin
+                             ;testProduct23Bundle ;true  ;                 ;                ;approved            ;true      ;               ;BUNDLED   ;pieces    ;admin
+                             ;testProduct31Bundle ;true  ;                 ;                ;approved            ;true      ;               ;BUNDLED   ;pieces    ;admin
+                             ;testProduct33Bundle ;true  ;                 ;                ;approved            ;true      ;               ;BUNDLED   ;pieces    ;admin
+                             ;testProduct41Bundle ;true  ;                 ;                ;approved            ;true      ;               ;BUNDLED   ;pieces    ;admin
+                             ;testProduct43Bundle ;true  ;                 ;                ;approved            ;true      ;               ;BUNDLED   ;pieces    ;admin
+
+
+######## Kit Product 1 ############
+######## All Major ####
+######## Should Return Backorder #####
+INSERT_UPDATE Product;code[unique=true];$catalogversion;name[lang=de];name[lang=en];unit(code);approvalStatus(code);owner(Principal.uid)
+;testProduct111;testProductCatalog:Online;testProduct111;testProduct111;pieces;approved;admin
+;testProduct112;testProductCatalog:Online;testProduct112;testProduct112;pieces;approved;admin
+;testProduct113;testProductCatalog:Online;testProduct113;testProduct113;pieces;approved;admin
+;testProduct114;testProductCatalog:Online;testProduct114;testProduct114;pieces;approved;admin
+
+INSERT_UPDATE AmwayKitEntryProduct;code[unique=true]               ;$catalogversion;configuredQty;entry(code,$catalogversion);kitProduct(code,$catalogversion);isMajor
+                                  ;testProduct11Bundle-testProduct111;               ;4            ;testProduct111               ;testProduct11Bundle             ;true
+                                  ;testProduct11Bundle-testProduct112;               ;4            ;testProduct112               ;testProduct11Bundle             ;true
+                                  ;testProduct11Bundle-testProduct113;               ;4            ;testProduct113               ;testProduct11Bundle             ;true
+                                  ;testProduct11Bundle-testProduct114;               ;4            ;testProduct114               ;testProduct11Bundle             ;true
+                                  
+INSERT_UPDATE StockLevel;available;warehouse(code)[unique=true];inStockStatus(code);maxPreOrder;maxStockLevelHistoryCount;overSelling;preOrder;productCode[unique=true];skuId;reserved;
+;10;testWarehouse1;backOrder;0;-1;0;0;testProduct111;testProduct111;0;
+;10;testWarehouse1;backOrder;0;-1;0;0;testProduct112;testProduct112;0;
+;10;testWarehouse1;backOrder;0;-1;0;0;testProduct113;testProduct113;0;
+;10;testWarehouse1;backOrder;0;-1;0;0;testProduct114;testProduct114;0;
+######## Kit Product 1 ############
+
+
+
+######## Kit Product 2 ############
+######## All Minor ####
+######## Should Return Backorder #####
+INSERT_UPDATE Product;code[unique=true];$catalogversion;name[lang=de];name[lang=en];unit(code);approvalStatus(code);owner(Principal.uid)
+;testProduct121;testProductCatalog:Online;testProduct121;testProduct121;pieces;approved;admin
+;testProduct122;testProductCatalog:Online;testProduct122;testProduct122;pieces;approved;admin
+;testProduct123;testProductCatalog:Online;testProduct123;testProduct123;pieces;approved;admin
+;testProduct124;testProductCatalog:Online;testProduct124;testProduct124;pieces;approved;admin
+
+INSERT_UPDATE AmwayKitEntryProduct;code[unique=true]               ;$catalogversion;configuredQty;entry(code,$catalogversion);kitProduct(code,$catalogversion);isMajor
+                                  ;testProduct12Bundle-testProduct121;               ;4            ;testProduct121               ;testProduct12Bundle             ;false
+                                  ;testProduct12Bundle-testProduct122;               ;4            ;testProduct122               ;testProduct12Bundle             ;false
+                                  ;testProduct12Bundle-testProduct123;               ;4            ;testProduct123               ;testProduct12Bundle             ;false
+                                  ;testProduct12Bundle-testProduct124;               ;4            ;testProduct124               ;testProduct12Bundle             ;false
+                                  
+INSERT_UPDATE StockLevel;available;warehouse(code)[unique=true];inStockStatus(code);maxPreOrder;maxStockLevelHistoryCount;overSelling;preOrder;productCode[unique=true];skuId;reserved;
+;10;testWarehouse1;backOrder;0;-1;0;0;testProduct121;testProduct121;0;
+;10;testWarehouse1;backOrder;0;-1;0;0;testProduct122;testProduct122;0;
+;10;testWarehouse1;backOrder;0;-1;0;0;testProduct123;testProduct123;0;
+;10;testWarehouse1;backOrder;0;-1;0;0;testProduct124;testProduct124;0;
+######## Kit Product 2 ############
+
+
+
+######## Kit Product 3 ############
+######## Mixed ####
+######## Should Return Backorder #####
+INSERT_UPDATE Product;code[unique=true];$catalogversion;name[lang=de];name[lang=en];unit(code);approvalStatus(code);owner(Principal.uid)
+;testProduct131;testProductCatalog:Online;testProduct131;testProduct131;pieces;approved;admin
+;testProduct132;testProductCatalog:Online;testProduct132;testProduct132;pieces;approved;admin
+;testProduct133;testProductCatalog:Online;testProduct133;testProduct133;pieces;approved;admin
+;testProduct134;testProductCatalog:Online;testProduct134;testProduct134;pieces;approved;admin
+
+INSERT_UPDATE AmwayKitEntryProduct;code[unique=true]               ;$catalogversion;configuredQty;entry(code,$catalogversion);kitProduct(code,$catalogversion);isMajor
+                                  ;testProduct13Bundle-testProduct131;               ;4            ;testProduct131               ;testProduct13Bundle             ;true
+                                  ;testProduct13Bundle-testProduct132;               ;4            ;testProduct132               ;testProduct13Bundle             ;true
+                                  ;testProduct13Bundle-testProduct133;               ;4            ;testProduct133               ;testProduct13Bundle             ;false
+                                  ;testProduct13Bundle-testProduct134;               ;4            ;testProduct134               ;testProduct13Bundle             ;false
+                                  
+INSERT_UPDATE StockLevel;available;warehouse(code)[unique=true];inStockStatus(code);maxPreOrder;maxStockLevelHistoryCount;overSelling;preOrder;productCode[unique=true];skuId;reserved;
+;10;testWarehouse1;backOrder;0;-1;0;0;testProduct131;testProduct131;0;
+;10;testWarehouse1;backOrder;0;-1;0;0;testProduct132;testProduct132;0;
+;10;testWarehouse1;temporaryNotAvailable;0;-1;0;0;testProduct133;testProduct133;0;
+;10;testWarehouse1;backOrder;0;-1;0;0;testProduct134;testProduct134;0;
+######## Kit Product 3 ############
+
+
+######## Kit Product 4 ############
+######## All Major ####
+######## Should Return TNA #####
+INSERT_UPDATE Product;code[unique=true];$catalogversion;name[lang=de];name[lang=en];unit(code);approvalStatus(code);owner(Principal.uid)
+;testProduct211;testProductCatalog:Online;testProduct211;testProduct211;pieces;approved;admin
+;testProduct212;testProductCatalog:Online;testProduct212;testProduct212;pieces;approved;admin
+;testProduct213;testProductCatalog:Online;testProduct213;testProduct213;pieces;approved;admin
+;testProduct214;testProductCatalog:Online;testProduct214;testProduct214;pieces;approved;admin
+
+INSERT_UPDATE AmwayKitEntryProduct;code[unique=true]               ;$catalogversion;configuredQty;entry(code,$catalogversion);kitProduct(code,$catalogversion);isMajor
+                                  ;testProduct21Bundle-testProduct211;               ;4            ;testProduct211               ;testProduct21Bundle             ;true
+                                  ;testProduct21Bundle-testProduct212;               ;4            ;testProduct212               ;testProduct21Bundle             ;true
+                                  ;testProduct21Bundle-testProduct213;               ;4            ;testProduct213               ;testProduct21Bundle             ;true
+                                  ;testProduct21Bundle-testProduct214;               ;4            ;testProduct214               ;testProduct21Bundle             ;true
+                                  
+INSERT_UPDATE StockLevel;available;warehouse(code)[unique=true];inStockStatus(code);maxPreOrder;maxStockLevelHistoryCount;overSelling;preOrder;productCode[unique=true];skuId;reserved;
+;10;testWarehouse1;notYetAvailable;0;-1;0;0;testProduct211;testProduct211;0;
+;10;testWarehouse1;noLongerAvailable;0;-1;0;0;testProduct212;testProduct212;0;
+;10;testWarehouse1;temporaryNotAvailable;0;-1;0;0;testProduct213;testProduct213;0;
+;10;testWarehouse1;backOrder;0;-1;0;0;testProduct214;testProduct214;0;
+######## Kit Product 4 ############
+
+
+######## Kit Product 6 ############
+######## Mixed ####
+######## Should Return TNA #####
+INSERT_UPDATE Product;code[unique=true];$catalogversion;name[lang=de];name[lang=en];unit(code);approvalStatus(code);owner(Principal.uid)
+;testProduct231;testProductCatalog:Online;testProduct231;testProduct231;pieces;approved;admin
+;testProduct232;testProductCatalog:Online;testProduct232;testProduct232;pieces;approved;admin
+;testProduct233;testProductCatalog:Online;testProduct233;testProduct233;pieces;approved;admin
+;testProduct234;testProductCatalog:Online;testProduct234;testProduct234;pieces;approved;admin
+
+INSERT_UPDATE AmwayKitEntryProduct;code[unique=true]               ;$catalogversion;configuredQty;entry(code,$catalogversion);kitProduct(code,$catalogversion);isMajor
+                                  ;testProduct23Bundle-testProduct231;               ;4            ;testProduct231               ;testProduct23Bundle             ;true
+                                  ;testProduct23Bundle-testProduct232;               ;4            ;testProduct232               ;testProduct23Bundle             ;true
+                                  ;testProduct23Bundle-testProduct233;               ;4            ;testProduct233               ;testProduct23Bundle             ;false
+                                  ;testProduct23Bundle-testProduct234;               ;4            ;testProduct234               ;testProduct23Bundle             ;false
+                                  
+INSERT_UPDATE StockLevel;available;warehouse(code)[unique=true];inStockStatus(code);maxPreOrder;maxStockLevelHistoryCount;overSelling;preOrder;productCode[unique=true];skuId;reserved;
+;10;testWarehouse1;noLongerAvailable;0;-1;0;0;testProduct231;testProduct231;0;
+;10;testWarehouse1;temporaryNotAvailable;0;-1;0;0;testProduct232;testProduct232;0;
+;10;testWarehouse1;notYetAvailable;0;-1;0;0;testProduct233;testProduct233;0;
+;10;testWarehouse1;backOrder;0;-1;0;0;testProduct234;testProduct234;0;
+######## Kit Product 6 ############
+
+
+
+######## Kit Product 7 ############
+######## All Major ####
+######## Should Return NYA #####
+INSERT_UPDATE Product;code[unique=true];$catalogversion;name[lang=de];name[lang=en];unit(code);approvalStatus(code);owner(Principal.uid)
+;testProduct311;testProductCatalog:Online;testProduct311;testProduct311;pieces;approved;admin
+;testProduct312;testProductCatalog:Online;testProduct312;testProduct312;pieces;approved;admin
+;testProduct313;testProductCatalog:Online;testProduct313;testProduct313;pieces;approved;admin
+;testProduct314;testProductCatalog:Online;testProduct314;testProduct314;pieces;approved;admin
+
+INSERT_UPDATE AmwayKitEntryProduct;code[unique=true]               ;$catalogversion;configuredQty;entry(code,$catalogversion);kitProduct(code,$catalogversion);isMajor
+                                  ;testProduct31Bundle-testProduct311;               ;4            ;testProduct311               ;testProduct31Bundle             ;true
+                                  ;testProduct31Bundle-testProduct312;               ;4            ;testProduct312               ;testProduct31Bundle             ;true
+                                  ;testProduct31Bundle-testProduct313;               ;4            ;testProduct313               ;testProduct31Bundle             ;true
+                                  ;testProduct31Bundle-testProduct314;               ;4            ;testProduct314               ;testProduct31Bundle             ;true
+                                  
+INSERT_UPDATE StockLevel;available;warehouse(code)[unique=true];inStockStatus(code);maxPreOrder;maxStockLevelHistoryCount;overSelling;preOrder;productCode[unique=true];skuId;reserved;
+;10;testWarehouse1;backOrder;0;-1;0;0;testProduct311;testProduct311;0;
+;10;testWarehouse1;noLongerAvailable;0;-1;0;0;testProduct312;testProduct312;0;
+;10;testWarehouse1;notYetAvailable;0;-1;0;0;testProduct313;testProduct313;0;
+;10;testWarehouse1;backOrder;0;-1;0;0;testProduct314;testProduct314;0;
+######## Kit Product 7 ############
+
+
+
+######## Kit Product 9 ############
+######## Mixed ####
+######## Should Return NYA #####
+INSERT_UPDATE Product;code[unique=true];$catalogversion;name[lang=de];name[lang=en];unit(code);approvalStatus(code);owner(Principal.uid)
+;testProduct331;testProductCatalog:Online;testProduct331;testProduct331;pieces;approved;admin
+;testProduct332;testProductCatalog:Online;testProduct332;testProduct332;pieces;approved;admin
+;testProduct333;testProductCatalog:Online;testProduct333;testProduct333;pieces;approved;admin
+;testProduct334;testProductCatalog:Online;testProduct334;testProduct334;pieces;approved;admin
+
+INSERT_UPDATE AmwayKitEntryProduct;code[unique=true]               ;$catalogversion;configuredQty;entry(code,$catalogversion);kitProduct(code,$catalogversion);isMajor
+                                  ;testProduct33Bundle-testProduct331;               ;4            ;testProduct331               ;testProduct33Bundle             ;true
+                                  ;testProduct33Bundle-testProduct332;               ;4            ;testProduct332               ;testProduct33Bundle             ;true
+                                  ;testProduct33Bundle-testProduct333;               ;4            ;testProduct333               ;testProduct33Bundle             ;false
+                                  ;testProduct33Bundle-testProduct334;               ;4            ;testProduct334               ;testProduct33Bundle             ;false
+                                  
+INSERT_UPDATE StockLevel;available;warehouse(code)[unique=true];inStockStatus(code);maxPreOrder;maxStockLevelHistoryCount;overSelling;preOrder;productCode[unique=true];skuId;reserved;
+;10;testWarehouse1;noLongerAvailable;0;-1;0;0;testProduct331;testProduct331;0;
+;10;testWarehouse1;notYetAvailable;0;-1;0;0;testProduct332;testProduct332;0;
+;10;testWarehouse1;backOrder;0;-1;0;0;testProduct333;testProduct333;0;
+;10;testWarehouse1;temporaryNotAvailable;0;-1;0;0;testProduct334;testProduct334;0;
+######## Kit Product 9 ############
+
+
+######## Kit Product 10 ############
+######## All Major ####
+######## Should Return NLA #####
+INSERT_UPDATE Product;code[unique=true];$catalogversion;name[lang=de];name[lang=en];unit(code);approvalStatus(code);owner(Principal.uid)
+;testProduct411;testProductCatalog:Online;testProduct411;testProduct411;pieces;approved;admin
+;testProduct412;testProductCatalog:Online;testProduct412;testProduct412;pieces;approved;admin
+;testProduct413;testProductCatalog:Online;testProduct413;testProduct413;pieces;approved;admin
+;testProduct414;testProductCatalog:Online;testProduct414;testProduct414;pieces;approved;admin
+
+INSERT_UPDATE AmwayKitEntryProduct;code[unique=true]               ;$catalogversion;configuredQty;entry(code,$catalogversion);kitProduct(code,$catalogversion);isMajor
+                                  ;testProduct41Bundle-testProduct411;               ;4            ;testProduct411               ;testProduct41Bundle             ;true
+                                  ;testProduct41Bundle-testProduct412;               ;4            ;testProduct412               ;testProduct41Bundle             ;true
+                                  ;testProduct41Bundle-testProduct413;               ;4            ;testProduct413               ;testProduct41Bundle             ;true
+                                  ;testProduct41Bundle-testProduct414;               ;4            ;testProduct414               ;testProduct41Bundle             ;true
+                                  
+INSERT_UPDATE StockLevel;available;warehouse(code)[unique=true];inStockStatus(code);maxPreOrder;maxStockLevelHistoryCount;overSelling;preOrder;productCode[unique=true];skuId;reserved;
+;10;testWarehouse1;backOrder;0;-1;0;0;testProduct411;testProduct411;0;
+;10;testWarehouse1;noLongerAvailable;0;-1;0;0;testProduct412;testProduct412;0;
+;10;testWarehouse1;backOrder;0;-1;0;0;testProduct413;testProduct413;0;
+;10;testWarehouse1;backOrder;0;-1;0;0;testProduct414;testProduct414;0;
+######## Kit Product 10 ############
+
+
+######## Kit Product 12 ############
+######## Mixed ####
+######## Should Return NLA #####
+INSERT_UPDATE Product;code[unique=true];$catalogversion;name[lang=de];name[lang=en];unit(code);approvalStatus(code);owner(Principal.uid)
+;testProduct431;testProductCatalog:Online;testProduct431;testProduct431;pieces;approved;admin
+;testProduct432;testProductCatalog:Online;testProduct432;testProduct432;pieces;approved;admin
+;testProduct433;testProductCatalog:Online;testProduct433;testProduct433;pieces;approved;admin
+;testProduct434;testProductCatalog:Online;testProduct434;testProduct434;pieces;approved;admin
+
+INSERT_UPDATE AmwayKitEntryProduct;code[unique=true]               ;$catalogversion;configuredQty;entry(code,$catalogversion);kitProduct(code,$catalogversion);isMajor
+                                  ;testProduct43Bundle-testProduct431;               ;4            ;testProduct431               ;testProduct43Bundle             ;true
+                                  ;testProduct43Bundle-testProduct432;               ;4            ;testProduct432               ;testProduct43Bundle             ;true
+                                  ;testProduct43Bundle-testProduct433;               ;4            ;testProduct433               ;testProduct43Bundle             ;false
+                                  ;testProduct43Bundle-testProduct434;               ;4            ;testProduct434               ;testProduct43Bundle             ;false
+                                  
+INSERT_UPDATE StockLevel;available;warehouse(code)[unique=true];inStockStatus(code);maxPreOrder;maxStockLevelHistoryCount;overSelling;preOrder;productCode[unique=true];skuId;reserved;
+;10;testWarehouse1;backOrder;0;-1;0;0;testProduct431;testProduct431;0;
+;10;testWarehouse1;noLongerAvailable;0;-1;0;0;testProduct432;testProduct432;0;
+;10;testWarehouse1;backOrder;0;-1;0;0;testProduct433;testProduct433;0;
+;10;testWarehouse1;temporaryNotAvailable;0;-1;0;0;testProduct434;testProduct434;0; ###Minor Product Stock
+######## Kit Product 12 ############
+
+
+
+####;testProduct11Bundle;testProductCatalog:Online;testProduct11Bundle;testProduct11Bundle;pieces;approved;admin
+####;testProduct12Bundle;testProductCatalog:Online;testProduct12Bundle;testProduct12Bundle;pieces;approved;admin
+####;testProduct13Bundle;testProductCatalog:Online;testProduct13Bundle;testProduct13Bundle;pieces;approved;admin
+####;testProduct21Bundle;testProductCatalog:Online;testProduct21Bundle;testProduct21Bundle;pieces;approved;admin
+####;testProduct23Bundle;testProductCatalog:Online;testProduct23Bundle;testProduct23Bundle;pieces;approved;admin
+####;testProduct31Bundle;testProductCatalog:Online;testProduct31Bundle;testProduct31Bundle;pieces;approved;admin
+####;testProduct33Bundle;testProductCatalog:Online;testProduct33Bundle;testProduct33Bundle;pieces;approved;admin
+####;testProduct41Bundle;testProductCatalog:Online;testProduct41Bundle;testProduct41Bundle;pieces;approved;admin
+####;testProduct43Bundle;testProductCatalog:Online;testProduct43Bundle;testProduct43Bundle;pieces;approved;admin
+                                                                                                            

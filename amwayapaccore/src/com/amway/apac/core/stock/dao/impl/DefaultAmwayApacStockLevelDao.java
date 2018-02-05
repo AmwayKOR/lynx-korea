@@ -172,6 +172,7 @@ public class DefaultAmwayApacStockLevelDao extends DefaultAmwayStockLevelDao imp
 	public void setTransactionTemplate(final TransactionTemplate transactionTemplate)
 	{
 		super.setTransactionTemplate(transactionTemplate);
+		this.transactionTemplate = transactionTemplate;
 	}
 
 	/**
@@ -191,6 +192,7 @@ public class DefaultAmwayApacStockLevelDao extends DefaultAmwayStockLevelDao imp
 	public void setTypeService(final TypeService typeService)
 	{
 		super.setTypeService(typeService);
+		this.typeService = typeService;
 	}
 
 	/**
@@ -210,6 +212,7 @@ public class DefaultAmwayApacStockLevelDao extends DefaultAmwayStockLevelDao imp
 	public void setJdbcTemplate(final JdbcTemplate jdbcTemplate)
 	{
 		super.setJdbcTemplate(jdbcTemplate);
+		this.jdbcTemplate = jdbcTemplate;
 	}
 
 
