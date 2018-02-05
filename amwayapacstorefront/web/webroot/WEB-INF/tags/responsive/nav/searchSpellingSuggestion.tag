@@ -9,7 +9,7 @@
 
 <c:if test="${not empty spellingSuggestion}">
 	<div class="searchSpellingSuggestionPrompt">
-		<c:url value="${spellingSuggestion.query.url}" var="spellingSuggestionQueryUrl"/>
-		<spring:theme code="search.spellingSuggestion.prompt" />&nbsp;<a href="${spellingSuggestionQueryUrl}">${fn:escapeXml(spellingSuggestion.suggestion)}</a>?
+		<c:url value="/search/?text=${fn:escapeXml(spellingSuggestion.suggestion)}" var="spellingSuggestionQueryUrl"/>
+		<spring:theme code="search.spelling.suggestion.prompt"/>&nbsp;<a href="${spellingSuggestionQueryUrl}">${fn:escapeXml(spellingSuggestion.suggestion)}</a>?
 	</div>
 </c:if>

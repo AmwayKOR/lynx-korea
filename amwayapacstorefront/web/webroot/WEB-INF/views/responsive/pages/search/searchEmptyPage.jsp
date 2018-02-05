@@ -4,6 +4,7 @@
 <%@ taglib prefix="theme" tagdir="/WEB-INF/tags/shared/theme"%>
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="nav" tagdir="/WEB-INF/tags/responsive/nav" %>
 
 <template:page pageTitle="${pageTitle}">
 	<div class="container-fluid main-container">
@@ -17,6 +18,7 @@
 								<img src="${themeResourcePath}/images/new-search-icon.png" />
 							</div>
 							<cms:component component="${comp}" />
+							<br/><nav:searchSpellingSuggestion spellingSuggestion="${searchPageData.spellingSuggestion}" />
 						</cms:pageSlot>
 					</div>
 				</div>
