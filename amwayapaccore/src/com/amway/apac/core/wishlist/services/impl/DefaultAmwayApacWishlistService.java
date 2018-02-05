@@ -1,7 +1,19 @@
+/*
+ * [y] hybris Platform
+ *
+ * Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+ *
+ * This software is the confidential and proprietary information of SAP
+ * ("Confidential Information"). You shall not disclose such Confidential
+ * Information and shall use it only in accordance with the terms of the
+ * license agreement you entered into with SAP.
+ */
 package com.amway.apac.core.wishlist.services.impl;
 
 import static com.amway.apac.core.constants.AmwayapacCoreConstants.TWO_HUNDRED_INT;
+import static com.amway.apac.core.constants.AmwayapacCoreConstants.WISHLIST_UID;
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateIfSingleResult;
+import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
 
 import de.hybris.platform.basecommerce.model.site.BaseSiteModel;
 import de.hybris.platform.core.model.product.ProductModel;
@@ -19,6 +31,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.util.Assert;
 
+import com.amway.apac.core.constants.AmwayapacCoreConstants;
 import com.amway.apac.core.wishlist.daos.AmwayApacWishlistDao;
 import com.amway.apac.core.wishlist.services.AmwayApacWishllistService;
 import com.amway.core.wishlist.services.impl.AmwayWishlistServiceImpl;
@@ -45,6 +58,9 @@ public class DefaultAmwayApacWishlistService extends AmwayWishlistServiceImpl im
 	@Override
 	public List<Wishlist2Model> getWishlists(final String sortField, final String sortOrder)
 	{
+		validateParameterNotNullStandardMessage(AmwayapacCoreConstants.SORTFIELD_STRING, sortField);
+		validateParameterNotNullStandardMessage(AmwayapacCoreConstants.SORTORDER_STRING, sortOrder);
+
 		final UserModel currentUser = getCurrentUser();
 		final BaseSiteModel currentSite = getBaseSiteService().getCurrentBaseSite();
 
@@ -72,6 +88,13 @@ public class DefaultAmwayApacWishlistService extends AmwayWishlistServiceImpl im
 			final Integer desired, final Wishlist2EntryPriority priority, final String comment)
 	{
 		final Wishlist2EntryModel entry = getModelService().create(Wishlist2EntryModel.class);
+
+		validateParameterNotNullStandardMessage(AmwayapacCoreConstants.WISHLIST_STRING, wishlist);
+		validateParameterNotNullStandardMessage(AmwayapacCoreConstants.PRODUCT_STRING, product);
+		validateParameterNotNullStandardMessage(AmwayapacCoreConstants.DESIRED_STRING, desired);
+		validateParameterNotNullStandardMessage(AmwayapacCoreConstants.PRIORITY_STRING, priority);
+		validateParameterNotNullStandardMessage(AmwayapacCoreConstants.COMMENT_STRING, comment);
+
 		final Date currentDate = new Date();
 		entry.setProduct(product);
 		entry.setDesired(desired);
@@ -123,6 +146,8 @@ public class DefaultAmwayApacWishlistService extends AmwayWishlistServiceImpl im
 	@Override
 	public boolean deleteWishlist(final String uid)
 	{
+		validateParameterNotNullStandardMessage(WISHLIST_UID, uid);
+
 		boolean isDeleted = false;
 		final Wishlist2Model wishlist = getWishlistByUid(uid);
 		if (null != wishlist)

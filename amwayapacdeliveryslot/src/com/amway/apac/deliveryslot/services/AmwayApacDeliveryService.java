@@ -1,14 +1,3 @@
-/*
- * [y] hybris Platform
- *
- * Copyright (c) 2000-2018 SAP SE
- * All rights reserved.
- *
- * This software is the confidential and proprietary information of SAP
- * Hybris ("Confidential Information"). You shall not disclose such
- * Confidential Information and shall use it only in accordance with the
- * terms of the license agreement you entered into with SAP Hybris.
- */
 package com.amway.apac.deliveryslot.services;
 
 import de.hybris.platform.commerceservices.delivery.DeliveryService;
@@ -38,42 +27,62 @@ public interface AmwayApacDeliveryService extends DeliveryService
 	List<AmwayDeliverySlotAvailabilityModel> getDeliverySlotsAvailability();
 
 	/**
-	 * Finds the delivery date as per time when user has requested to confirm the order
+	 * Finds the delivery date as per time when user has requested to confirm the order.
 	 *
+	 * @param warehouse
+	 *           the warehouse
 	 * @return delivery date.
+	 *
+	 * @throws IllegalArgumentException
+	 *            if warehouse is null
 	 */
-	Date getDeliveryDate(WarehouseModel warehouse);
+	Date getDeliveryDate(final WarehouseModel warehouse);
 
 	/**
 	 * Reserve the selected delivery slot for this order.
 	 *
 	 * @return consumed Count
+	 *
 	 */
-	Integer reserve(AmwayDeliverySlotAvailabilityModel deliverySlot) throws AmwayServiceException;
+	Integer reserve(final AmwayDeliverySlotAvailabilityModel deliverySlot) throws AmwayServiceException;
 
 	/**
 	 * Release the selected delivery slot
 	 *
 	 * @return consumed Count
+	 * @throws AmwayServiceException
+	 * @throws IllegalArgumentException
+	 *            if deliverySlot is null
 	 */
-	Integer release(AmwayDeliverySlotAvailabilityModel deliverySlot) throws AmwayServiceException;
+	Integer release(final AmwayDeliverySlotAvailabilityModel deliverySlot) throws AmwayServiceException;
 
 	/**
-	 * Set delivery slot on the basis of slotTime, deliveryDate and slotTime.
+	 * Set delivery slot on the basis of warehouse, deliveryDate and slotTime.
 	 *
 	 * @param warehouse
 	 * @param deliveryDate
 	 * @param slotTime
 	 *
 	 * @return true if successfully set the delivery slot, otherwise false
+	 * @throws IllegalArgumentException
+	 *            if warehouse, deliveryDate or slotTime is null
 	 */
-	boolean setDeliverySlot(WarehouseModel warehouse, Date deliveryDate, String slotTime);
+	boolean setDeliverySlot(final WarehouseModel warehouse, final Date deliveryDate, final String slotTime);
 
 	/**
+	 * Gets the delivery slot.
+	 *
 	 * @param warehouse
+	 *           the warehouse
 	 * @param deliveryDate
+	 *           the delivery date
 	 * @param slotTime
-	 * @return
+	 *           the slot time
+	 * @return the delivery slot
+	 *
+	 * @throws IllegalArgumentException
+	 *            if warehouse, deliveryDate or slotTime is null
 	 */
-	AmwayDeliverySlotAvailabilityModel getDeliverySlot(WarehouseModel warehouse, Date deliveryDate, String slotTime);
+	AmwayDeliverySlotAvailabilityModel getDeliverySlot(final WarehouseModel warehouse, final Date deliveryDate,
+			final String slotTime);
 }

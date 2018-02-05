@@ -3,7 +3,7 @@ package com.amway.apac.facades.wishlist.impl;
 import static com.amway.apac.core.constants.AmwayapacCoreConstants.HUNDRED_INT;
 import static com.amway.apac.core.constants.AmwayapacCoreConstants.ONE_INT;
 import static com.amway.apac.core.constants.AmwayapacCoreConstants.TWO_HUNDRED_INT;
-import static org.springframework.util.Assert.hasLength;
+import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
 
 import de.hybris.platform.converters.Converters;
 import de.hybris.platform.core.model.product.ProductModel;
@@ -17,6 +17,7 @@ import de.hybris.platform.wishlist2.model.Wishlist2Model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -25,6 +26,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.util.Assert;
 
+import com.amway.apac.core.constants.AmwayapacCoreConstants;
 import com.amway.apac.core.wishlist.services.AmwayApacWishllistService;
 import com.amway.apac.facades.cart.enums.AmwayApacCartSortCode;
 import com.amway.apac.facades.wishlist.AmwayApacWishlistFacade;
@@ -59,7 +61,7 @@ public class DefaultAmwayApacWishlistFacade extends DefaultAmwayWishlistFacade i
 	@Override
 	public WishlistData getShoppingListDetailsSortBySortCode(final AmwayApacCartSortCode sortBy, final WishlistData data)
 	{
-		if (CollectionUtils.isNotEmpty(data.getEntries()))
+		if (Objects.nonNull(data) && CollectionUtils.isNotEmpty(data.getEntries()))
 		{
 			final List<WishlistEntryData> recentlyAddedListEntries = new ArrayList<>(data.getEntries());
 			final AmwayApacCartSortCode resolvedSortCode = sortBy == null ? AmwayApacCartSortCode.LAST_ITEM_ADDED : sortBy;
@@ -97,6 +99,9 @@ public class DefaultAmwayApacWishlistFacade extends DefaultAmwayWishlistFacade i
 	@Override
 	public List<WishlistData> getAllWishlistsWithBasicData(final String sortField, final String sortOrder)
 	{
+		validateParameterNotNullStandardMessage(AmwayapacCoreConstants.SORTFIELD_STRING, sortField);
+		validateParameterNotNullStandardMessage(AmwayapacCoreConstants.SORTORDER_STRING, sortOrder);
+
 		return Converters.convertAll(getAmwayApacWishlistService().getWishlists(sortField, sortOrder),
 				getAmwayApacWishlistBasicConverter());
 	}
@@ -109,10 +114,7 @@ public class DefaultAmwayApacWishlistFacade extends DefaultAmwayWishlistFacade i
 	{
 		Assert.hasLength(uid, "Parameter uid can not be null or empty.");
 
-		final WishlistData wishlistData = getWishlistConverter()
-				.convert(getAmwayApacWishlistService().getWishlistByUidForCurrentUser(uid));
-
-		return wishlistData;
+		return getWishlistConverter().convert(getAmwayApacWishlistService().getWishlistByUidForCurrentUser(uid));
 	}
 
 	/**
@@ -127,6 +129,33 @@ public class DefaultAmwayApacWishlistFacade extends DefaultAmwayWishlistFacade i
 		final AmwayApacWishListModification modification = new AmwayApacWishListModification();
 		modification.setStatus(AmwayApacWishlistModificationStatus.SUCCESS);
 
+		final Wishlist2EntryModel entryCreated = addProductToWishlistInternal(productCode, wishlistUid, modification);
+
+		if (entryCreated != null)
+		{
+			final WishlistEntryData entryData = getAmwayWishlistEntryBasicConverter().convert(entryCreated);
+			modification.setEntry(entryData);
+			if (LOGGER.isInfoEnabled())
+			{
+				LOGGER.info(new StringBuilder(TWO_HUNDRED_INT).append("Added product with code [").append(productCode)
+						.append("] to wishlist with uid [").append(wishlistUid).append("].").toString());
+			}
+		}
+
+		return modification;
+	}
+
+	/**
+	 *
+	 * @param productCode
+	 * @param wishlistUid
+	 * @param modification
+	 * @return
+	 */
+	protected Wishlist2EntryModel addProductToWishlistInternal(final String productCode, final String wishlistUid,
+			final AmwayApacWishListModification modification)
+	{
+		Wishlist2EntryModel wishlistEntry = null;
 		final Wishlist2Model wishlistToAddProduct = fetchWishlistByUidInternal(wishlistUid);
 		final ProductModel productModel = fetchProductByCodeInternal(productCode);
 
@@ -151,20 +180,10 @@ public class DefaultAmwayApacWishlistFacade extends DefaultAmwayWishlistFacade i
 		}
 		else
 		{
-			final Wishlist2EntryModel newEntryCreated = getAmwayApacWishlistService().addAndReturnWishlistEntry(wishlistToAddProduct,
-					productModel, ONE_INT, Wishlist2EntryPriority.HIGH, StringUtils.EMPTY);
-
-			final WishlistEntryData entryData = getAmwayWishlistEntryBasicConverter().convert(newEntryCreated);
-			modification.setEntry(entryData);
-
-			if (LOGGER.isInfoEnabled())
-			{
-				LOGGER.info(new StringBuilder(TWO_HUNDRED_INT).append("Added product with code [").append(productCode)
-						.append("] to wishlist with uid [").append(wishlistUid).append("].").toString());
-			}
+			wishlistEntry = getAmwayApacWishlistService().addAndReturnWishlistEntry(wishlistToAddProduct, productModel, ONE_INT,
+					Wishlist2EntryPriority.HIGH, StringUtils.EMPTY);
 		}
-
-		return modification;
+		return wishlistEntry;
 	}
 
 	/**
@@ -230,8 +249,8 @@ public class DefaultAmwayApacWishlistFacade extends DefaultAmwayWishlistFacade i
 	@Override
 	public AmwayApacWishlistModificationStatus updateWishlistNameAndReturnStatus(final String uid, final String newName)
 	{
-		hasLength(uid, "Parameter uid can not be null or empty.");
-		hasLength(newName, "Parameter newName can not be null or empty.");
+		Assert.hasLength(uid, "Parameter uid can not be null or empty.");
+		Assert.hasLength(newName, "Parameter newName can not be null or empty.");
 
 		AmwayApacWishlistModificationStatus modificationstatus = AmwayApacWishlistModificationStatus.SUCCESS;
 		if (null == getWishlistService().getWishlistByName(newName))

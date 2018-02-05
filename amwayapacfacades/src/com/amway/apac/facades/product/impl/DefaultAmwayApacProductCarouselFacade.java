@@ -68,10 +68,8 @@ public class DefaultAmwayApacProductCarouselFacade extends DefaultProductCarouse
 	@Override
 	protected List<ProductData> fetchProductsForPreviewMode(final ProductCarouselComponentModel component)
 	{
-
 		return getSessionService().executeInLocalView(new SessionExecutionBody()
 		{
-
 			@Override
 			public Object execute()
 			{
@@ -94,17 +92,13 @@ public class DefaultAmwayApacProductCarouselFacade extends DefaultProductCarouse
 							products.add(getProductForOptions(productModel, AMWAY_APAC_PRODUCT_OPTIONS));
 						}
 					}
-
 					return products;
-
-
 				}
 				finally
 				{
 					getSearchRestrictionService().enableSearchRestrictions();
 				}
 			}
-
 		});
 
 	}

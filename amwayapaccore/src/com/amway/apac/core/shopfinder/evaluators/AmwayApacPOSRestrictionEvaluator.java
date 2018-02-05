@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.amway.apac.core.shopfinder.evaluators;
 
 import de.hybris.platform.cms2.servicelayer.data.RestrictionData;
@@ -11,26 +8,30 @@ import com.amway.apac.core.model.AmwayPOSRestrictionModel;
 
 
 /**
- * Class to evaluate POS Restriction
+ * Class to evaluate POS Restriction.
  *
  * @author Ashish Sabal
- *
  */
 public class AmwayApacPOSRestrictionEvaluator implements CMSRestrictionEvaluator<AmwayPOSRestrictionModel>
 {
-	/*
-	 * (non-Javadoc)
+	/** The Constant POS. */
+	private static final String POS = "pos";
+
+	/**
+	 * Checks if current shop in context exist in restriction model shop list.
 	 *
-	 * @see
-	 * de.hybris.platform.cms2.servicelayer.services.evaluator.CMSRestrictionEvaluator#evaluate(de.hybris.platform.cms2.
-	 * model.restrictions.AbstractRestrictionModel, de.hybris.platform.cms2.servicelayer.data.RestrictionData)
+	 * @param model
+	 *           the model
+	 * @param context
+	 *           the context
+	 * @return true, if successful
 	 */
 	@Override
 	public boolean evaluate(final AmwayPOSRestrictionModel model, final RestrictionData context)
 	{
 		boolean allowed = false;
 
-		final Object pos = context.getValue("pos");
+		final Object pos = context.getValue(POS);
 		final PointOfServiceModel currentShop = (pos instanceof PointOfServiceModel) ? (PointOfServiceModel) pos : null;
 		if (null != currentShop)
 		{

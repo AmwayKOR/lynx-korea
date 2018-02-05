@@ -18,7 +18,7 @@ ACC.shoppinglists = {
         ],
         
         bindAddToCartPopup : function() {
-			 $(".cart-detail__addto.dropdown-toggle").click(function () {
+        	 $(document).on("click",".cart-detail__addto.dropdown-toggle", function(){
            if($(".cart-detail__dropdown-menu.dropdown-menu").css('display')=='none'){
                $(".cart-detail__dropdown-menu.dropdown-menu").show();
            }else{
@@ -42,6 +42,7 @@ ACC.shoppinglists = {
     			},
     			success : function(data) {
     				ACC.shoppinglists.refreshShoppingListDetailsPage(data);
+    				ACC.autocomplete.bindShoppingListQuickShopAutoComplete();
     				ACC.global.findAndUpdateGlobalMessages(data);
     			},
     			error : function(error) {
@@ -60,11 +61,11 @@ ACC.shoppinglists = {
     
 
     bindShoppingListSelectAllCheckbox:function(){
-        $(".shopping-list-header").on("click" , function () {
+   	 $(document).on("click",".shopping-list-header", function(){
             $(this).parents('.shopping-cart-item-list').find('.shopping-list-entry-checkbox').prop('checked', this.checked);
         });
             //clicking the last unchecked or checked checkbox should check or uncheck the parent checkbox
-        $('.shopping-list-entry-checkbox').click(function() {
+        $(document).on("click",".shopping-list-entry-checkbox", function(){
                     if ($(this).parents('.shopping-cart-item-list').find('.shopping-list-header').prop('checked') == true && this.checked == false)
                         $(this).parents('.shopping-cart-item-list').find('.shopping-list-header').prop('checked', false);
                     if (this.checked == true) {
@@ -157,6 +158,7 @@ ACC.shoppinglists = {
 						success: function(data) 
 						{
 							ACC.shoppinglists.refreshShoppingListDetailsPage(data);
+							ACC.autocomplete.bindShoppingListQuickShopAutoComplete();
 					    },
 						error: function() 
 						{

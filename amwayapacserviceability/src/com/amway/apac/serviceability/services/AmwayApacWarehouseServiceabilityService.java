@@ -1,54 +1,38 @@
 package com.amway.apac.serviceability.services;
 
 import de.hybris.platform.basecommerce.model.site.BaseSiteModel;
-import de.hybris.platform.core.model.c2l.RegionModel;
 import de.hybris.platform.ordersplitting.model.WarehouseModel;
-
-import java.util.List;
 
 
 /**
- * Service to find the serviceable warehouse for the user pincode
+ * Service layer for warehouse serviceablity.
  *
  * @author Shubham Goyal
  */
 public interface AmwayApacWarehouseServiceabilityService
 {
 	/**
-	 * Get the warehouse from the postal code.
+	 * Returns a serviceable warehouse for the postalCode and baseSite.
 	 *
 	 * @param postalCode
-	 *           the postal code
+	 *           Postal Code
 	 * @param baseSite
+	 *           Base Site
 	 * @return the warehouse model
+	 * @throws IllegalArgumentException
+	 *            if postalCode or baseSite is null.
 	 */
 	WarehouseModel getServiceableWareHouse(final String postalCode, final BaseSiteModel baseSite);
 
-	/**
-	 * This service checks if the postal code is serviceable or not
-	 *
-	 * @param postalCode
-	 * @param baseSite
-	 * @param region
-	 *
-	 * @return true if the postal code is serviceable else false
-	 */
-	Boolean isPostalCodeServiceable(final String postalCode, BaseSiteModel baseSite, final RegionModel region);
-
-	/**
-	 * Get the warehouse Serviceability from the postal code.
-	 *
-	 * @param postalCode
-	 * @param baseSite
-	 * @return List of regions for given postal code
-	 */
-	List<RegionModel> getRegionsForPostalCode(final String postalCode, final BaseSiteModel baseSite);
 
 	/**
 	 * This service checks if the postal code is serviceable or not for current basestore
 	 *
 	 * @param postalCode
+	 *           Postal Code
 	 * @return true if the postal code is serviceable else false
+	 * @throws IllegalArgumentException
+	 *            if postalCode is null.
 	 */
 	Boolean isPostalCodeServiceableForCurrentBaseSite(final String postalCode);
 }

@@ -3,36 +3,29 @@
  */
 package com.amway.apac.core.stock.services;
 
-import de.hybris.platform.basecommerce.enums.StockLevelStatus;
+import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.ordersplitting.model.WarehouseModel;
-import de.hybris.platform.store.BaseStoreModel;
-import de.hybris.platform.storelocator.model.PointOfServiceModel;
 
-import com.amway.core.model.AmwayKitProductModel;
+import com.amway.core.stock.service.AmwayStockService;
 
 
 /**
  * Interface to define methods for stock at APAC level
- *
- * @author Ashish Sabal
- *
  */
-public interface AmwayApacStockService
+public interface AmwayApacStockService extends AmwayStockService
 {
 
 	/**
-	 * @param stockStatus
-	 * @return
-	 */
-	boolean isStockAvailable(StockLevelStatus stockStatus);
-
-	/**
-	 * @param parentBundle
-	 * @param baseStore
-	 * @param pointOfService
+	 * Method to update stock level with a specified amount.This update will only change the AVAILABLE amount in the
+	 * stock level
+	 * 
+	 * @param product
+	 *           -The product for which the stock is to be updated
 	 * @param warehouse
-	 * @return
+	 *           -The WH for which the stock is to updated
+	 * @param amount
+	 *           -The actual amount that shall be updated into the stock
+	 *
 	 */
-	StockLevelStatus updateParentBundleStockStatus(AmwayKitProductModel parentBundle, BaseStoreModel baseStore,
-			PointOfServiceModel pointOfService, WarehouseModel warehouse);
+	void updateAvailableAmount(final ProductModel product, final WarehouseModel warehouse, final int amount);
 }

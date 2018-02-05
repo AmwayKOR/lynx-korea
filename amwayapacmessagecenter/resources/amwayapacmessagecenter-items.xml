@@ -9,9 +9,6 @@
  Information and shall use it only in accordance with the terms of the
  license agreement you entered into with SAP.
 -->
-<!--
-	ATTENTION: This is just an example file. You have to edit it according to your needs.
--->
 
 <items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 			xsi:noNamespaceSchemaLocation="items.xsd">
@@ -52,11 +49,12 @@
 	<itemtypes>
 		<typegroup name="MessageCenter">
 			<itemtype code="AmwayAccountGroupTag" autocreate="true"
-				generate="true" extends="GenericItem">
+				generate="true">
 				<description>Amway Account Group Tag</description>
 				<deployment table="AmwayAccountGroupTag" typecode="21076" />
 				<attributes>
 					<attribute qualifier="code" type="java.lang.String">
+						<description>The code of group or classification level for which tag is created</description>
 						<modifiers optional="false" unique="true" />
 						<persistence type="property" />
 					</attribute>
@@ -65,60 +63,73 @@
 						<persistence type="property" />
 					</attribute>
 					<attribute qualifier="active" type="java.lang.Boolean">
+						<description>Status of the tag to receive notifications</description>
 						<defaultvalue>Boolean.TRUE</defaultvalue>
 						<persistence type="property" />
 					</attribute>
 					<attribute qualifier="groupType" type="AmwayAccountGroupTagType">
+						<description>The type of group for which tag to be created.</description>
 						<persistence type="property" />
 					</attribute>
 				</attributes>
 			</itemtype>			
 			
 			<itemtype code="AmwayNotificationUserAction" autocreate="true"
-				generate="true" extends="GenericItem">
+				generate="true">
 				<description>Amway Notification and user action mapping</description>
 				<deployment table="notificationUserAction" typecode="21077" />
 				<attributes>
 					<attribute qualifier="notification" type="AmwayNotification">
+						<description>Notification model</description>
 						<modifiers optional="false" unique="true" />
 						<persistence type="property" />
 					</attribute>
 					<attribute qualifier="user" type="Customer">
-						<modifiers unique="true" />
+						<description>Customer for mapping</description>
+						<modifiers unique="true" optional="false" />
 						<persistence type="property" />
 					</attribute>
 					<attribute qualifier="status" type="AmwayNotificationUserActionStatus">
+						<description>Status of the notification for the user</description>
+						<modifiers optional="false" />
 						<persistence type="property" />
 					</attribute>
 				</attributes>
 			</itemtype>			
 
 			<itemtype code="AmwayNotification" autocreate="true"
-				generate="true" extends="GenericItem">
+				generate="true">
 				<description>Message for Message Center</description>
 				<deployment table="AmwayNotification" typecode="21044" />
 				<attributes>
 					<attribute qualifier="code" type="java.lang.String">
-						<persistence type="property" />
+						<description>Unique code for notification model</description>
 						<modifiers optional="false" unique="true" />
+						<persistence type="property" />
 					</attribute>
 					<attribute qualifier="shortDescription" type="localized:java.lang.String">
+						<description>Short description for brief insight of the notification</description>
 						<persistence type="property" />
 					</attribute>
 					<attribute qualifier="longDescription" type="localized:java.lang.String">
+						<description>Long description for the notification</description>
 						<persistence type="property" />
 						<modifiers dontOptimize="true" />
 					</attribute>
 					<attribute qualifier="publishDate" type="java.Util.Date">
+						<description>Date of publishing or activation for the notification</description>
 						<persistence type="property" />
 					</attribute>
 					<attribute qualifier="site" type="BaseSite">
+						<description>Site for which notification is created</description>
 						<persistence type="property" />
 					</attribute>
 					<attribute qualifier="expiryDate" type="java.Util.Date">
+						<description>Expiry or deactivation date of notification</description>
 						<persistence type="property" />
 					</attribute>
                     <attribute qualifier="status" type="AmwayNotificationStatus">
+						<description>Current status of the notification for all users</description>
                     	<defaultvalue>em().getEnumerationValue("AmwayNotificationStatus","PUBLISHED")</defaultvalue>
                         <persistence type="property" />
                     </attribute>

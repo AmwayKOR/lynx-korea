@@ -32,7 +32,6 @@ public class DefaultAmwayApacOrderFacade extends DefaultAmwayOrderFacade impleme
 {
 
 	private AmwayApacCustomerAccountService amwayApacCustomerAccountService;
-	private List<String> orderHistoryTypeOptions;
 
 	/**
 	 * {@inheritDoc}
@@ -44,6 +43,9 @@ public class DefaultAmwayApacOrderFacade extends DefaultAmwayOrderFacade impleme
 
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<String> getOrderHistoryDateOptions()
 	{
@@ -57,6 +59,9 @@ public class DefaultAmwayApacOrderFacade extends DefaultAmwayOrderFacade impleme
 		return orderDateOptions;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public SearchPageData<OrderHistoryData> getPagedOrderHistoryByFilterAndSearch(final PageableData pageableData,
 			final String date, final String type)
@@ -72,7 +77,14 @@ public class DefaultAmwayApacOrderFacade extends DefaultAmwayOrderFacade impleme
 		return convertPageData(orderResults, getOrderHistoryConverter());
 	}
 
-	private LocalDate getStartDate(final String date)
+	/**
+	 * Returns the start date parsed from the passed date as string.
+	 *
+	 * @param date
+	 *           Date as String.
+	 * @return Parsed Date
+	 */
+	protected LocalDate getStartDate(final String date)
 	{
 		if (StringUtils.isEmpty(date) || AmwayapacFacadesConstants.LAST_THIRTY_DAYS.equals(date))
 		{
@@ -85,7 +97,14 @@ public class DefaultAmwayApacOrderFacade extends DefaultAmwayOrderFacade impleme
 		}
 	}
 
-	private LocalDate getEndDate(final String date)
+	/**
+	 * Returns the end date parsed from the passed date as string.
+	 *
+	 * @param date
+	 *           Date as String.
+	 * @return Parsed Date
+	 */
+	protected LocalDate getEndDate(final String date)
 	{
 		if (StringUtils.isEmpty(date) || AmwayapacFacadesConstants.LAST_THIRTY_DAYS.equals(date))
 		{
@@ -116,22 +135,4 @@ public class DefaultAmwayApacOrderFacade extends DefaultAmwayOrderFacade impleme
 		this.amwayApacCustomerAccountService = amwayApacCustomerAccountService;
 	}
 
-	/**
-	 * @return the orderHistoryTypeOptions
-	 */
-	@Override
-	public List<String> getOrderHistoryTypeOptions()
-	{
-		return orderHistoryTypeOptions;
-	}
-
-	/**
-	 * @param orderHistoryTypeOptions
-	 *           the orderHistoryTypeOptions to set
-	 */
-	@Required
-	public void setOrderHistoryTypeOptions(final List<String> orderHistoryTypeOptions)
-	{
-		this.orderHistoryTypeOptions = orderHistoryTypeOptions;
-	}
 }

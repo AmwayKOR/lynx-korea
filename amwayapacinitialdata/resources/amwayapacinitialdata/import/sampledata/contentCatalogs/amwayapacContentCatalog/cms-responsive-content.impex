@@ -167,7 +167,7 @@ INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url
 
 ;;NavShopLink;Navigation Bar- Shop Link;/;NavShopLink;NavShopLink;;;
 ;;NavBusinessCenterLink;Navigation Bar- Business Center Link;/;NavBusinessCenterLink;NavBusinessCenterLink;;;
-;;NavAboutAmwayLink;Navigation Bar- About Amway Link;/;NavAboutAmwayLink;NavAboutAmwayLink;;;
+;;NavAboutAmwayLink;Navigation Bar- About Amway Link;/about-amway;NavAboutAmwayLink;NavAboutAmwayLink;;;
 ;;NavEducationLink;Navigation Bar- Education Link;/;NavEducationLink;NavEducationLink;;;
 
 ;;NavShopNutritionLink;Navigation Bar- Shop- Nutrition Link;/category/nutrition;NavShopNutritionLink;NavShopNutritionLink;;;
@@ -951,7 +951,7 @@ INSERT_UPDATE ProductVariantSelectorComponent;$contentCV[unique=true];uid[unique
 ;;VariantSelector;Product Variant Selector;VariantSelector
 
 # CMS VariantSelector Components
-INSERT_UPDATE ProductColorVariantSelectorComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+INSERT_UPDATE AmwayApacProductColorVariantSelectorComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
 ;;ColorVariantSelector;Product Color Variant Selector;ColorVariantSelector
 
 # CMS ProductAddToCart Components
@@ -1568,3 +1568,132 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents
 
 
 ####################### Category Landing Page ###################################
+
+#################### About Amway Page #########################
+
+#################### About Amway Success Story Component #########################
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;SuccessStoryAboutAmwayContentSlot1;innovativeBrandsSuccessStoryComponent
+;;SuccessStoryAboutAmwayContentSlot2;earnMoreWithPartnersSuccessStoryComponent
+
+INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;target(code)[default='sameWindow'];&componentRef
+;;amwayApacInnovativeBrandsSuccessStoryLink;Innovative Brands Nav Link;/;amwayApacInnovativeBrandsSuccessStoryLink;;amwayApacInnovativeBrandsSuccessStoryLink;
+;;amwayApacEarnMoreWithPartnersSuccessStoryLink;Earn More Nav Link;/;amwayApacEarnMoreWithPartnersSuccessStoryLink;;amwayApacEarnMoreWithPartnersSuccessStoryLink;
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
+;;innovativeBrandsSuccessStoryParagraphComponent;innovativeBrandsSuccessStoryParagraphComponent
+;;earnMoreWithPartnersSuccessStoryParagraphComponent;earnMoreWithPartnersSuccessStoryParagraphComponent
+
+INSERT_UPDATE AmwayApacPathToSuccessPitchPerfectComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;link(&componentRef);text(&componentRef)
+;;innovativeBrandsSuccessStoryComponent;Innovative Brands Path To Success;innovativeBrandsSuccessStoryComponent;amwayApacInnovativeBrandsSuccessStoryLink;innovativeBrandsSuccessStoryParagraphComponent
+;;earnMoreWithPartnersSuccessStoryComponent;Earn More Path To Success;earnMoreWithPartnersSuccessStoryComponent;amwayApacEarnMoreWithPartnersSuccessStoryLink;earnMoreWithPartnersSuccessStoryParagraphComponent
+
+#################### About Amway Tools And Advice Component #########################
+
+INSERT_UPDATE AmwayApacToolsAndAdviceComponent;$contentCV[unique=true];uid[unique=true];name;text(&componentRef);&componentRef
+;;responsibilityReportToolsAndAdviceComponent;Responsibility Report Component;responsibilityReportToolsAndAdviceTextComponent;responsibilityReportToolsAndAdviceComponent
+;;exploreAmwayJobsToolsAndAdviceComponent;Explore Amway Jobs Component;exploreAmwayJobsToolsAndAdviceTextComponent;exploreAmwayJobsToolsAndAdviceComponent
+;;amwayInTheNewsToolsAndAdviceComponent;Amway In The News Component;amwayInTheNewsToolsAndAdviceTextComponent;amwayInTheNewsToolsAndAdviceComponent
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
+;;responsibilityReportToolsAndAdviceTextComponent;responsibilityReportToolsAndAdviceTextComponent
+;;exploreAmwayJobsToolsAndAdviceTextComponent;exploreAmwayJobsToolsAndAdviceTextComponent
+;;amwayInTheNewsToolsAndAdviceTextComponent;amwayInTheNewsToolsAndAdviceTextComponent
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;ToolsAndAdviceBannerAboutAmwayContentSlot1;responsibilityReportToolsAndAdviceComponent
+;;ToolsAndAdviceBannerAboutAmwayContentSlot2;exploreAmwayJobsToolsAndAdviceComponent
+;;ToolsAndAdviceBannerAboutAmwayContentSlot3;amwayInTheNewsToolsAndAdviceComponent
+
+#################### About Amway Your Opportunity Component #########################
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;VideoPreviewAboutAmwayContentSlot1;amwayApacAboutAmwayYourOpportunityComponent
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
+;;amwayApacAboutAmwayOpportunityParagraphComponent;amwayApacAboutAmwayOpportunityParagraphComponent
+;;amwayApacAboutAmwayMainParagraphComponent;amwayApacAboutAmwayMainParagraphComponent
+
+INSERT_UPDATE AmwayApacYourOpportunityComponent;$contentCV[unique=true];uid[unique=true];name;text(&componentRef);iconImage(&componentRef);&componentRef;
+;;amwayApacAboutAmwayYourOpportunityComponent;About Amway Your Opportunity Component;amwayApacAboutAmwayOpportunityParagraphComponent;amwayApacAboutAmwayOpportunityBannerComponent;amwayApacAboutAmwayYourOpportunityComponent;
+
+INSERT_UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];name;urlLink;&componentRef;
+;;amwayApacAboutAmwayOpportunityBannerComponent;About Amway Your Opportunity Banner Component;/;amwayApacAboutAmwayOpportunityBannerComponent;
+
+#################### About Amway Main Title Component #########################
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
+;;amwayApacAboutAmwayPageTitleParagraphComponent;amwayApacAboutAmwayPageTitleParagraphComponent
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;AboutAmwayPageTitleContentSlot1;amwayApacAboutAmwayPageTitleParagraphComponent
+
+################# About Amway Build Your Business Component ####################
+
+INSERT_UPDATE AmwayApacBuildYourBusinessComponent;$contentCV[unique=true];uid[unique=true];name;text(uid, $contentCV);link(&linkRef);&componentRef
+;;amwayApacOurCompanyBuildYourBusinessComponent;About Amway Build Your Business Component;ourCompanyDesc;amwayApacOurCompanyButtonlink;amwayApacOurCompanyBuildYourBusinessComponent
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
+;;ourCompanyDesc;ourCompanyDesc;
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;OurCompanyAboutAmwayContentSlot1;amwayApacOurCompanyBuildYourBusinessComponent
+
+INSERT_UPDATE AmwayApacButtonLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;target(code)[default='sameWindow'];&componentRef
+;;amwayApacOurCompanyButtonlink;HOW DOES AMWAY WORK;/;amwayApacOurCompanyButtonlink;;amwayApacOurCompanyButtonlink;
+
+#################### About Amway Page #########################
+
+
+####################### Message Center Page ###################################
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;BodyContentMessageCenterrSlot;Body Content Slot for Message Center;true;MessageCenterBodyComponent;;;
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='message-center'];contentSlot(uid,$contentCV)[unique=true];;;
+;;BodyContent-messageCenterr;Body;;BodyContentMessageCenterrSlot;;;
+
+INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;actions(uid,$contentCV);&componentRef
+;;MessageCenterBodyComponent;Message Center Body Component;messageCenterBodyPage.jsp;;MessageCenterBodyComponent
+
+
+
+####################### Message Center Page ###################################
+
+
+#################### Our Company Page #########################
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;CompanyContentslot1;amwayApacOurCompanyBannerComponent 
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
+;;ourCompanyPara;ourCompanyPara;
+
+
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;target(code)[default='sameWindow'];&componentRef
+;;amwayApacOurCompanyLearnMoreButtonlink; Learn More Link;/;amwayApacOurCompanyLearnMoreButtonlink;;amwayApacOurCompanyLearnMoreButtonlink;
+
+
+INSERT_UPDATE AmwayApacOurCompanyBannerComponent;$contentCV[unique=true];uid[unique=true];name;text(uid, $contentCV);link(&linkRef);&componentRef
+;;amwayApacOurCompanyBannerComponent;Our Company banner Component;ourCompanyPara;amwayApacOurCompanyLearnMoreButtonlink;amwayApacOurCompanyBannerComponent
+
+
+#################### Our Company Carousel Slider #########################
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;CompanyContentslot2;AmwayApacOurCompanyCarouselMainComponent 
+
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];&componentRef
+;;mobileDescription;mobileDescription;
+;;desktopDescription;desktopDescription;
+
+INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink
+;;CarouselSliderComponent;Carousel Slider Component;CarouselSliderComponent;"/"
+
+INSERT_UPDATE AmwayApacOurCompanyCarouselComponent;$contentCV[unique=true];uid[unique=true];name;mobiledesc(uid, $contentCV);desktopdesc(uid, $contentCV);bannerImg(&componentRef);&componentRef
+;;AmwayApacOurCompanyCarouselComponent;Our Company Carousel Component;mobileDescription;desktopDescription;CarouselSliderComponent;AmwayApacOurCompanyCarouselComponent
+
+INSERT_UPDATE AmwayApacOurCompanyCarouselMainComponent;$contentCV[unique=true];uid[unique=true];name;carouselComponents(&componentRef);&componentRef
+;;AmwayApacOurCompanyCarouselMainComponent;Carousel Main Component;AmwayApacOurCompanyCarouselComponent;AmwayApacOurCompanyCarouselMainComponent
+
+#################### Our Company Page #########################

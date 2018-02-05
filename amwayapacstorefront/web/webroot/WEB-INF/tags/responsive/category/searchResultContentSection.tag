@@ -244,7 +244,7 @@
                     </li>
                 </div>
                 <p class="text-center show-more-products-wrapper">
-                    <button type="button" id="show-more" class="btn btn-link js-show-more">
+                    <button type="button" id="show-more" class="btn btn-link js-show-more btn-show-more-search-result">
                         <span class="text-wrap">Show more</span>
                         <span class="icon icon-arrow-dropdown"></span>
                     </button>

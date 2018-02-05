@@ -38,14 +38,61 @@ public final class AmwayapacCoreConstants extends GeneratedAmwayapacCoreConstant
 	public static final String SOURCE_STRING = "source";
 
 	/**
+	 * String constant sortField.
+	 */
+	public static final String SORTFIELD_STRING = "sortField";
+
+	/**
+	 * String constant sortOrder.
+	 */
+	public static final String SORTORDER_STRING = "sortOrder";
+
+	/**
+	 * String constant entry.
+	 */
+	public static final String WISHLIST2_ENTRY = "entry";
+
+	/**
 	 * String constant target.
 	 */
 	public static final String TARGET_STRING = "target";
 
 	/**
+	 * String constant source.
+	 */
+	public static final String WISHLIST_STRING = "wishlist";
+
+	/**
+	 * String constant source.
+	 */
+	public static final String PRODUCT_STRING = "product";
+
+	/**
+	 * String constant source.
+	 */
+	public static final String DESIRED_STRING = "desired";
+
+	/**
+	 * String constant source.
+	 */
+	public static final String PRIORITY_STRING = "priority";
+
+	/**
+	 * String constant source.
+	 */
+	public static final String COMMENT_STRING = "comment";
+
+
+
+	/**
+	 * Integer constant - 0.
+	 */
+	public static final Integer ZERO_INTEGER = Integer.valueOf(0);
+
+	/**
 	 * int constant - 0.
 	 */
-	public static final Integer ZERO_INT = Integer.valueOf(0);
+	public static final int ZERO_INT = 0;
 
 	/**
 	 * int constant - 50.
@@ -146,5 +193,34 @@ public final class AmwayapacCoreConstants extends GeneratedAmwayapacCoreConstant
 	 * Pre Launch Promotion Code
 	 */
 	public static final String PRE_LAUNCH_PROMOTION = "PRE_LAUNCH_PROMOTION";
+
+	/** MOP value to SUSPEND amway account. */
+	public static final String RESTRICTED_ID_ACCOUNT_SUSPEND = "7";
+
+	/** Account Suspended Constant String. */
+	public static final String ACCOUNT_SUSPENDED = "accountSuspended";
+
+	/**
+	 * Space char constant
+	 */
+	public static final String SPACE = " ";
+
+	/**
+	 * Close parenthesis constant
+	 */
+	public static final char CLOSE_PARENTHESIS = ')';
+
+	/**
+	 * Hyphen char constant
+	 */
+	public static final char HYPHEN_CHAR = '-';
+
+	public static final String REFERENCE_CLASSIFICATION = "referenceClassification";
+	public static final String ABO_ID = "aboId";
+	public static final String AFFILIATE_COUNTRY_CODE = "affiliateCountryCode";
+	public static final String COMMERCE_CHECKOUT_PARAMETER = "commerceCheckoutParameter";
+	public static final String CART_MODEL = "cartModel";
+	public static final String WAREHOUSE = "warehouse";
+	public static final String WISHLIST_UID = "wishlistUid";
 
 }

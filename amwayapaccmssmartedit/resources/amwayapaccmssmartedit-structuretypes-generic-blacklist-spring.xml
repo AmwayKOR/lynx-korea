@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2017 SAP SE or an SAP affiliate company. All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xmlns:aop="http://www.springframework.org/schema/aop"
+		xmlns:context="http://www.springframework.org/schema/context" 
+		xmlns:util="http://www.springframework.org/schema/util"
+		xmlns:p="http://www.springframework.org/schema/p"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<alias name="defaultAmwayApacCmsStructureTypeBlacklistActualSet" alias="amwayApacCmsStructureTypeBlacklistActualSet"/>
+	<util:set id="defaultAmwayApacCmsStructureTypeBlacklistActualSet" value-type="java.lang.String">
+				<!--COMPONENTS -->
+	
+				<value>AbstractBannerComponent</value>
+				<value>AbstractCMSAction</value>
+				<value>AbstractCMSComponent</value>
+				<value>AbstractCMSComponentContainer</value>
+				<value>AbstractMediaContainerComponent</value>
+				<value>AbstractResponsiveBannerComponent</value>
+				<value>ABTestCMSComponentContainer</value>
+				<value>AccountBookmarkComponent</value>
+				<value>AccountControlComponent</value>
+				<value>AccountNavigationCollectionComponent</value>
+				<value>AccountNavigationComponent</value>
+				<value>AddToCartAction</value>
+				<value>ApproveOrderAction</value>
+				<value>AsmDevicesUsedComponent</value>
+				<value>AsmFavoriteColorsComponent</value>
+				<value>AssistedServiceComponent</value>
+				<value>CancelOrderAction</value>
+				<value>CartSuggestionComponent</value>
+				<value>CategoryFeatureComponent</value>
+				<value>CMSActionRestriction</value>
+				<value>CMSActionType</value>
+				<value>CMSComponentType</value>
+				<value>CMSImageComponent</value>
+				<value>CMSProductListComponent</value>
+				<value>CMSTabParagraphComponent</value>
+				<value>CMSTabParagraphContainer</value>
+				<value>CxCmsComponentContainer</value>
+				<value>ComponentTypeGroup</value>
+				<value>DynamicBannerComponent</value>
+				<value>FlashComponent</value>
+				<value>JspIncludeComponent</value>
+				<value>LanguageCurrencyComponent</value>
+				<value>ListAddToCartAction</value>
+				<value>ListAddToEntryGroupAction</value>
+				<value>ListOrderFormAction</value>
+				<value>ListPickUpInStoreAction</value>
+				<value>PickUpInStoreAction</value>
+				<value>ProductAddToCartComponent</value>
+				<value>ProductListComponent</value>
+				<value>ProductDetailComponent</value>
+				<value>ProductFeatureComponent</value>
+				<value>ProductGridComponent</value>
+				<value>ProductRefinementComponent</value>
+				<value>ProductVariantSelectorComponent</value>
+				<value>PurchasedCategorySuggestionComponent</value>
+				<value>ReorderAction</value>
+				<value>ReturnOrderAction</value>
+				<value>SearchResultsListComponent</value>
+				<value>SearchResultsGridComponent</value>
+				<value>ShareOnSocialNetworkAction</value>
+				<value>SimpleCMSAction</value>
+				<value>SimpleCMSComponent</value>
+				<value>SimpleSuggestionComponent</value>
+				<value>StoreFinderComponent</value>
+				<value>SubCategoryListComponent</value>
+				<value>ViewOrderAction</value>
+				<value>ViewStoreAction</value>
+
+				<!--RESTRICTIONS -->
+				<value>CMSUserRestriction</value>
+	</util:set>
+	
+
+   	<!-- blacklist type set -->
+	<alias name="defaultAmwayApacCmsStructureTypeBlacklistSet" alias="cmsStructureTypeBlacklistSet" />
+	<bean id="defaultAmwayApacCmsStructureTypeBlacklistSet" class="org.springframework.beans.factory.config.SetFactoryBean"
+		scope="singleton">
+		<property name="sourceSet" ref="amwayApacCmsStructureTypeBlacklistActualSet" />
+	</bean>
+</beans>

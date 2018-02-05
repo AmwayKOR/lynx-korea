@@ -23,8 +23,7 @@ import com.amway.facades.populators.AcceleratorVariantOptionDataPopulator;
 /**
  * Overriding {@link AcceleratorVariantOptionDataPopulator} to update variant option qualifiers population.
  *
- * @author shubhamgoyal
- *
+ * @author Shubham Goyal
  */
 public class AmwayApacVariantOptionDataPopulator extends AcceleratorVariantOptionDataPopulator
 {
@@ -40,7 +39,7 @@ public class AmwayApacVariantOptionDataPopulator extends AcceleratorVariantOptio
 
 		if (source.getBaseProduct() != null)
 		{
-			final Collection<VariantOptionQualifierData> variantOptionQualifiers = new ArrayList<VariantOptionQualifierData>();
+			final Collection<VariantOptionQualifierData> variantOptionQualifiers = new ArrayList<>();
 
 			populateVariantOptionQualifierData(source, variantOptionQualifiers);
 			target.setVariantOptionQualifiers(variantOptionQualifiers);
@@ -75,7 +74,9 @@ public class AmwayApacVariantOptionDataPopulator extends AcceleratorVariantOptio
 	 * Method to populate variant option qualifier data.
 	 *
 	 * @param source
+	 *           VariantProductModel
 	 * @param variantOptionQualifiers
+	 *           Variant Option Qualifiers
 	 */
 	protected void populateVariantOptionQualifierData(final VariantProductModel source,
 			final Collection<VariantOptionQualifierData> variantOptionQualifiers)

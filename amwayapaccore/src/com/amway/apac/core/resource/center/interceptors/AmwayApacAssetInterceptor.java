@@ -1,38 +1,39 @@
-/**
- *
- */
 package com.amway.apac.core.resource.center.interceptors;
 
 import de.hybris.platform.servicelayer.interceptor.InitDefaultsInterceptor;
 import de.hybris.platform.servicelayer.interceptor.InterceptorContext;
 import de.hybris.platform.servicelayer.interceptor.InterceptorException;
 import de.hybris.platform.servicelayer.interceptor.PrepareInterceptor;
-import de.hybris.platform.servicelayer.model.ModelService;
 
 import java.util.Map;
 import java.util.Objects;
 
-import org.assertj.core.util.Preconditions;
+import org.springframework.beans.factory.annotation.Required;
 
 import com.amway.apac.core.enums.AccountClassificationEnum;
 import com.amway.apac.resourcecentre.model.media.AbstractAmwayAssetModel;
 
 
 /**
+ * Interceptor to set and update classification rank in asset
+ *
  * @author Ashish Sabal
  *
  */
 public class AmwayApacAssetInterceptor
 		implements InitDefaultsInterceptor<AbstractAmwayAssetModel>, PrepareInterceptor<AbstractAmwayAssetModel>
 {
-	private ModelService modelService;
 	private Map<AccountClassificationEnum, Integer> amwayAccountClassificationRankMapping;
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Sets rank during asset object initialize.
 	 *
-	 * @see de.hybris.platform.servicelayer.interceptor.InitDefaultsInterceptor#onInitDefaults(java.lang.Object,
-	 * de.hybris.platform.servicelayer.interceptor.InterceptorContext)
+	 * @param amwayAssetModel
+	 *           the amway asset model
+	 * @param ctx
+	 *           the ctx
+	 * @throws InterceptorException
+	 *            the interceptor exception
 	 */
 	@Override
 	public void onInitDefaults(final AbstractAmwayAssetModel amwayAssetModel, final InterceptorContext ctx)
@@ -41,11 +42,16 @@ public class AmwayApacAssetInterceptor
 		setAssetRank(amwayAssetModel);
 	}
 
-	/*
-	 * (non-Javadoc)
+
+	/**
+	 * Sets rank during asset object update.
 	 *
-	 * @see de.hybris.platform.servicelayer.interceptor.PrepareInterceptor#onPrepare(java.lang.Object,
-	 * de.hybris.platform.servicelayer.interceptor.InterceptorContext)
+	 * @param amwayAssetModel
+	 *           the amway asset model
+	 * @param ctx
+	 *           the ctx
+	 * @throws InterceptorException
+	 *            the interceptor exception
 	 */
 	@Override
 	public void onPrepare(final AbstractAmwayAssetModel amwayAssetModel, final InterceptorContext ctx) throws InterceptorException
@@ -54,51 +60,23 @@ public class AmwayApacAssetInterceptor
 	}
 
 	/**
+	 * Sets classification rank from classification model to asset model.
+	 *
 	 * @param amwayAssetModel
+	 *           the new asset rank
 	 * @throws InterceptorException
 	 */
-	private void setAssetRank(final AbstractAmwayAssetModel amwayAssetModel) throws InterceptorException
+	protected void setAssetRank(final AbstractAmwayAssetModel amwayAssetModel)
 	{
-		Preconditions.checkArgument(Objects.nonNull(amwayAssetModel), "Asset model cannot be NULL.");
-
 		if (Objects.nonNull(amwayAssetModel.getClassification()))
 		{
-			final Integer rank = getAmwayAccountClassificationRankMapping().get(amwayAssetModel.getClassification());
-			if (null != rank)
-			{
-				amwayAssetModel.setRank(rank);
-				getModelService().save(amwayAssetModel);
-			}
-			else
-			{
-				throw new InterceptorException(new StringBuilder().append("No rank mapping exist for classification enum : ")
-						.append(amwayAssetModel.getClassification().toString()).toString());
-			}
-		}
-		else
-		{
-			throw new InterceptorException("Asset classification enum is NULL.");
+			amwayAssetModel.setRank(getAmwayAccountClassificationRankMapping().get(amwayAssetModel.getClassification()));
 		}
 	}
 
 	/**
-	 * @return the modelService
-	 */
-	public ModelService getModelService()
-	{
-		return modelService;
-	}
-
-	/**
-	 * @param modelService
-	 *           the modelService to set
-	 */
-	public void setModelService(final ModelService modelService)
-	{
-		this.modelService = modelService;
-	}
-
-	/**
+	 * Gets the amway account classification rank mapping.
+	 *
 	 * @return the amwayAccountClassificationRankMapping
 	 */
 	public Map<AccountClassificationEnum, Integer> getAmwayAccountClassificationRankMapping()
@@ -107,9 +85,12 @@ public class AmwayApacAssetInterceptor
 	}
 
 	/**
+	 * Sets the amway account classification rank mapping.
+	 *
 	 * @param amwayAccountClassificationRankMapping
 	 *           the amwayAccountClassificationRankMapping to set
 	 */
+	@Required
 	public void setAmwayAccountClassificationRankMapping(
 			final Map<AccountClassificationEnum, Integer> amwayAccountClassificationRankMapping)
 	{

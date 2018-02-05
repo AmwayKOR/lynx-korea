@@ -1,7 +1,6 @@
-/**
- *
- */
 package com.amway.apac.core.model;
+
+import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
 
 import de.hybris.platform.servicelayer.model.attribute.DynamicAttributeHandler;
 import de.hybris.platform.storelocator.model.PointOfServiceModel;
@@ -13,21 +12,31 @@ import org.apache.commons.collections.CollectionUtils;
 
 
 /**
- * @author Ashish Sabal
+ * The Class POS Description Handler.
  *
+ * @author Ashish Sabal
  */
 public class AmwayApacPOSDescriptionHandler implements DynamicAttributeHandler<String, AmwayPOSRestrictionModel>
 {
-	/*
-	 * (non-Javadoc)
+
+	/** The Constant POS_RESTRICTION. */
+	private static final String POS_RESTRICTION = "POS Restriction Model";
+
+	/**
+	 * Returns string list of all shops with POS available.
 	 *
-	 * @see
-	 * de.hybris.platform.servicelayer.model.attribute.DynamicAttributeHandler#get(de.hybris.platform.servicelayer.model.
-	 * AbstractItemModel)
+	 * @param model
+	 *           the model
+	 * @return the string
+	 *
+	 * @throws IllegalArgumentException
+	 *            if model is null.
 	 */
 	@Override
 	public String get(final AmwayPOSRestrictionModel model)
 	{
+		validateParameterNotNullStandardMessage(POS_RESTRICTION, model);
+
 		final Collection<PointOfServiceModel> shops = model.getShops();
 		final StringBuilder result = new StringBuilder();
 		if (CollectionUtils.isNotEmpty(shops))
@@ -42,12 +51,14 @@ public class AmwayApacPOSDescriptionHandler implements DynamicAttributeHandler<S
 		return result.toString();
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Setter method for message string in POS restriction model.
 	 *
-	 * @see
-	 * de.hybris.platform.servicelayer.model.attribute.DynamicAttributeHandler#set(de.hybris.platform.servicelayer.model.
-	 * AbstractItemModel, java.lang.Object)
+	 * @param model
+	 *           the model
+	 * @param value
+	 *           the value
+	 * @throws UnsupportedOperationException
 	 */
 	@Override
 	public void set(final AmwayPOSRestrictionModel model, final String value)

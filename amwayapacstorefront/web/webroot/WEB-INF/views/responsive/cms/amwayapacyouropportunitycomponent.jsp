@@ -21,9 +21,7 @@
 </c:forEach>
 
 <div class="video-preview col-sm-12">
-	<div class="video-preview__img">
-		<img class="video-preview__img js-responsive-image" data-media='{${imagerData}}' alt='${altText}' title='${altText}' />
-	</div>
+	<img class="video-preview-img-container js-responsive-image" data-media='{${imagerData}}' alt='${altText}' title='${altText}' />
 	<div class="video-preview__content">
         <img class="video-preview__play" src="${component.iconImage.media.url}" alt="icon" />
         <cms:component component="${component.text}" />

@@ -1,14 +1,3 @@
-/*
- * [y] hybris Platform
- *
- * Copyright (c) 2000-2018 SAP SE
- * All rights reserved.
- *
- * This software is the confidential and proprietary information of SAP
- * Hybris ("Confidential Information"). You shall not disclose such
- * Confidential Information and shall use it only in accordance with the
- * terms of the license agreement you entered into with SAP Hybris.
- */
 package com.amway.apac.deliveryslot.daos;
 
 import de.hybris.platform.basecommerce.enums.WeekDay;
@@ -21,29 +10,56 @@ import com.amway.apac.deliveryslot.model.AmwayDeliverySlotAvailabilityModel;
 
 
 /**
- * @author Ashish Sabal
+ * DAO interface for fetch delivery slot data.
  *
+ * @author Ashish Sabal
  */
 public interface AmwayApacDeliverySlotDao
 {
 	/**
-	 * * Finds the delivery slots available
+	 * * Gets the delivery slots list for provided delivery date
 	 *
-	 * @return list of delivery slots found
+	 * @param warehouse
+	 *           the warehouse
+	 * @param deliveryDate
+	 *           the delivery date
+	 * @return the delivery slots list
+	 *
+	 * @throws IllegalArgumentException
+	 *            if warehouse or deliveryDate is null.
 	 */
-	List<AmwayDeliverySlotAvailabilityModel> getDeliverySlotsAvailability(WarehouseModel warehouse, Date deliveryDate);
+	List<AmwayDeliverySlotAvailabilityModel> getDeliverySlotsAvailability(final WarehouseModel warehouse, final Date deliveryDate);
 
 	/**
-	 * * Finds delivery slot
+	 * * Finds delivery slot with delivery date and slot time
 	 *
-	 * @return delivery slot
+	 * @param warehouse
+	 *           the warehouse
+	 * @param deliveryDate
+	 *           the delivery date
+	 * @param slotTime
+	 *           the slot time
+	 * @return delivery slot model
+	 *
+	 * @throws IllegalArgumentException
+	 *            if warehouse, slotTime or deliveryDate is null.
 	 */
-	AmwayDeliverySlotAvailabilityModel getDeliverySlot(WarehouseModel warehouse, Date deliveryDate, String slotTime);
+	AmwayDeliverySlotAvailabilityModel getDeliverySlot(final WarehouseModel warehouse, final Date deliveryDate,
+			final String slotTime);
 
 	/**
-	 * * Get delivery Day
+	 * * Get delivery Day for ordering day and time
 	 *
+	 * @param warehouse
+	 *           the warehouse
+	 * @param orderingDay
+	 *           the ordering day
+	 * @param orderingTime
+	 *           the ordering time
 	 * @return delivery day
+	 *
+	 * @throws IllegalArgumentException
+	 *            if warehouse, orderingDay or orderingTime is null.
 	 */
-	WeekDay getDeliveryDay(WarehouseModel warehouse, WeekDay orderingDay, Date orderingTime);
+	WeekDay getDeliveryDay(final WarehouseModel warehouse, final WeekDay orderingDay, final Date orderingTime);
 }

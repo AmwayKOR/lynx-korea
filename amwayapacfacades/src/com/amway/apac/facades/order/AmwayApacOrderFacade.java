@@ -18,16 +18,29 @@ import com.amway.core.facades.order.AmwayOrderFacade;
 public interface AmwayApacOrderFacade extends AmwayOrderFacade
 {
 	/**
-	 * Featches the number of orders for the current user in current base store.
+	 * Fetches the number of orders for the current user in current base store.
 	 *
 	 * @return number of orders found.
 	 */
 	Integer getCustomerOrderCounts();
 
+	/**
+	 * Returns the Order History Date Options
+	 *
+	 * @return List of date options
+	 */
 	List<String> getOrderHistoryDateOptions();
 
-	List<String> getOrderHistoryTypeOptions();
-
+	/**
+	 * Returns the paginated order history for the given date and type.
+	 *
+	 * @param pageableData
+	 * @param date
+	 *           Date
+	 * @param type
+	 *           Type
+	 * @return Order History Data
+	 */
 	SearchPageData<OrderHistoryData> getPagedOrderHistoryByFilterAndSearch(final PageableData pageableData, final String date,
 			final String type);
 

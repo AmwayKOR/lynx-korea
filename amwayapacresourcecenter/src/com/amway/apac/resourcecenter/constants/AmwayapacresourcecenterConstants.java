@@ -23,6 +23,28 @@ public final class AmwayapacresourcecenterConstants extends GeneratedAmwayapacre
 		//empty to avoid instantiating this constant class
 	}
 
-	// implement here constants used by this extension
+	/**
+	 * int constant - 0.
+	 */
+	public static final Integer ZERO_INT = Integer.valueOf(0);
 
+	/**
+	 * int constant - 1.
+	 */
+	public static final Integer ONE_INT = Integer.valueOf(1);
+
+	/**
+	 * Component Parameter String
+	 */
+	public static final String COMPONENT_STRING = "Component";
+	/**
+	 * PageableData Parameter String
+	 */
+	public static final String PAGEABLE_DATA_STRING = "PageableData";
+	/**
+	 * Product Parameter String
+	 */
+	public static final String PRODUCT_STRING = "Product";
+
+	public static final String CATALOG_VERSION_STRING = "catalogVersion";
 }

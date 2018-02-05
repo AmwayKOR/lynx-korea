@@ -1,15 +1,6 @@
-/*
- * [y] hybris Platform
- *
- * Copyright (c) 2000-2018 SAP SE
- * All rights reserved.
- *
- * This software is the confidential and proprietary information of SAP
- * Hybris ("Confidential Information"). You shall not disclose such
- * Confidential Information and shall use it only in accordance with the
- * terms of the license agreement you entered into with SAP Hybris.
- */
 package com.amway.apac.deliveryslot.hooks.impl;
+
+import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
 
 import de.hybris.platform.commerceservices.model.PickUpDeliveryModeModel;
 import de.hybris.platform.commerceservices.order.CommerceCartModification;
@@ -23,109 +14,128 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.amway.apac.core.enums.OrderType;
+import com.amway.apac.deliveryslot.constants.AmwayapacdeliveryslotConstants;
 import com.amway.apac.deliveryslot.model.AmwayDeliverySlotAvailabilityModel;
 import com.amway.apac.deliveryslot.orders.AmwayApacCommerceCartModificationStatus;
 import com.amway.apac.deliveryslot.services.AmwayApacDeliveryService;
 
 
 /**
- * Delivery slot validation hook default implementation to validate slot changes
+ * Delivery slot validation hook default implementation to validate slot changes.
  *
  * @author Ashish Sabal
- *
  */
 public class AmwayApacDeliverySlotValidationHook implements CartValidationHook
 {
-	private static final Logger LOG = Logger.getLogger(AmwayApacDeliverySlotValidationHook.class);
+	/** The LOGGER Constant. */
+	private static final Logger LOGGER = LoggerFactory.getLogger(AmwayApacDeliverySlotValidationHook.class);
 
+	/** The Constant String CART PARAM. */
+	private static final String CART_PARAM = "Cart Parameter";
+
+	/** The amway apac delivery service. */
 	private AmwayApacDeliveryService amwayApacDeliveryService;
+
+	/** The model service. */
 	private ModelService modelService;
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see
-	 * de.hybris.platform.commerceservices.strategies.hooks.CartValidationHook#beforeValidateCart(de.hybris.platform.
-	 * commerceservices.service.data.CommerceCartParameter, java.util.List)
+	/**
+	 * Blank method stub
 	 */
 	@Override
 	public void beforeValidateCart(final CommerceCartParameter parameter, final List<CommerceCartModification> modifications)
 	{
-		// YTODO Auto-generated method stub
+		// Blank method stub
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * After validate cart.
 	 *
-	 * @see de.hybris.platform.commerceservices.strategies.hooks.CartValidationHook#afterValidateCart(de.hybris.platform.
-	 * commerceservices.service.data.CommerceCartParameter, java.util.List)
+	 * @param parameter
+	 *           the parameter
+	 * @param modifications
+	 *           the modifications
 	 */
 	@Override
 	public void afterValidateCart(final CommerceCartParameter parameter, final List<CommerceCartModification> modifications)
 	{
+		validateParameterNotNullStandardMessage(CART_PARAM, parameter);
+
 		final CartModel cartModel = parameter.getCart();
 
-		if (cartModel != null && CollectionUtils.isNotEmpty(cartModel.getEntries()))
+		if ((cartModel != null) && (CollectionUtils.isNotEmpty(cartModel.getEntries())) && (cartModel.getDeliveryMode() != null)
+				&& (!(cartModel.getDeliveryMode() instanceof PickUpDeliveryModeModel))
+				&& (!OrderType.REGISTRATION.equals(cartModel.getOrderType())))
 		{
-			if ((cartModel.getDeliveryMode() != null) && (!(cartModel.getDeliveryMode() instanceof PickUpDeliveryModeModel))
-					&& !CollectionUtils.isEmpty(cartModel.getEntries()) && !OrderType.REGISTRATION.equals(cartModel.getOrderType()))
-			{
 				final List<AmwayDeliverySlotAvailabilityModel> deliverySlotsFound = getAmwayApacDeliveryService()
 						.getDeliverySlotsAvailability();
 
 				if (CollectionUtils.isNotEmpty(deliverySlotsFound))
 				{
-					final int filledSlots = (int) deliverySlotsFound.stream().filter(slotAvailable -> isFilled(slotAvailable)).count();
-					if (filledSlots == deliverySlotsFound.size())
-					{
-						modifications.add(createAddToCartResp(AmwayApacCommerceCartModificationStatus.NO_DELIVERY_SLOT_EMPTY_ERROR,
-								(CartEntryModel) cartModel.getEntries().iterator().next(), 0));
-					}
-					else if (cartModel.getSelectedDeliverySlot() == null)
-					{
-						modifications.add(createAddToCartResp(AmwayApacCommerceCartModificationStatus.NO_DELIVERY_SLOT_ERROR,
-								(CartEntryModel) cartModel.getEntries().iterator().next(), 0));
-					}
-					else
-					{
-						final Date deliveryDate = getAmwayApacDeliveryService().getDeliveryDate(cartModel.getWarehouse());
-						final AmwayDeliverySlotAvailabilityModel slot = getAmwayApacDeliveryService().getDeliverySlot(
-								cartModel.getWarehouse(), deliveryDate, cartModel.getSelectedDeliverySlot().getSlotTime());
-						if (null != slot && !slot.equals(cartModel.getSelectedDeliverySlot()))
-						{
-							modifications.add(createAddToCartResp(AmwayApacCommerceCartModificationStatus.INVALID_DELIVERY_SLOT_ERROR,
-									(CartEntryModel) cartModel.getEntries().iterator().next(), 0));
-							cartModel.setSelectedDeliverySlot(null);
-							getModelService().save(cartModel);
-						}
-						else if (null == slot)
-						{
-							modifications.add(createAddToCartResp(AmwayApacCommerceCartModificationStatus.INVALID_DELIVERY_SLOT_ERROR,
-									(CartEntryModel) cartModel.getEntries().iterator().next(), 0));
-							cartModel.setSelectedDeliverySlot(null);
-							getModelService().save(cartModel);
-						}
-					}
+					createCommerceModificationsForSlotsFound(deliverySlotsFound, cartModel, modifications);
 				}
 				else
 				{
-					LOG.info("No delivery Slot found for cart: " + cartModel.getCode());
+					LOGGER.info(
+							new StringBuilder(50).append("No delivery Slot found for cart: ").append(cartModel.getCode()).toString());
 				}
+		}
+	}
+
+	/**
+	 * Creates the modifications for slots found.
+	 *
+	 * @param deliverySlotsFound
+	 *           the delivery slots found
+	 * @param cartModel
+	 *           the cart model
+	 * @param modifications
+	 *           the modifications
+	 */
+	protected void createCommerceModificationsForSlotsFound(final List<AmwayDeliverySlotAvailabilityModel> deliverySlotsFound,
+			final CartModel cartModel, final List<CommerceCartModification> modifications)
+	{
+		final int filledSlots = (int) deliverySlotsFound.stream().filter(slotAvailable -> isFilled(slotAvailable)).count();
+		if (filledSlots == deliverySlotsFound.size())
+		{
+			modifications.add(createAddToCartResp(AmwayApacCommerceCartModificationStatus.NO_DELIVERY_SLOT_EMPTY_ERROR,
+					(CartEntryModel) cartModel.getEntries().iterator().next(), AmwayapacdeliveryslotConstants.ZERO_INT.intValue()));
+		}
+		else if (cartModel.getSelectedDeliverySlot() == null)
+		{
+			modifications.add(createAddToCartResp(AmwayApacCommerceCartModificationStatus.NO_DELIVERY_SLOT_ERROR,
+					(CartEntryModel) cartModel.getEntries().iterator().next(), AmwayapacdeliveryslotConstants.ZERO_INT.intValue()));
+		}
+		else
+		{
+			final Date deliveryDate = getAmwayApacDeliveryService().getDeliveryDate(cartModel.getWarehouse());
+			final AmwayDeliverySlotAvailabilityModel slot = getAmwayApacDeliveryService().getDeliverySlot(cartModel.getWarehouse(),
+					deliveryDate, cartModel.getSelectedDeliverySlot().getSlotTime());
+			if ((null == slot) || (!slot.equals(cartModel.getSelectedDeliverySlot())))
+			{
+				modifications.add(createAddToCartResp(AmwayApacCommerceCartModificationStatus.INVALID_DELIVERY_SLOT_ERROR,
+						(CartEntryModel) cartModel.getEntries().iterator().next(), AmwayapacdeliveryslotConstants.ZERO_INT.intValue()));
+				cartModel.setSelectedDeliverySlot(null);
+				getModelService().save(cartModel);
 			}
 		}
 	}
 
 	/**
-	 * Creates commerce cart modification for cart
+	 * Creates commerce cart modification for cart.
 	 *
 	 * @param status
+	 *           the status
 	 * @param entry
+	 *           the entry
 	 * @param quantityAdded
-	 * @return
+	 *           the quantity added
+	 * @return the commerce cart modification
 	 */
 	protected CommerceCartModification createAddToCartResp(final String status, final CartEntryModel entry,
 			final long quantityAdded)
@@ -141,8 +151,11 @@ public class AmwayApacDeliverySlotValidationHook implements CartValidationHook
 	}
 
 	/**
+	 * Checks if slot is filled.
+	 *
 	 * @param deliverySlotModel
-	 * @return
+	 *           the delivery slot model
+	 * @return true, if slot is filled
 	 */
 	protected boolean isFilled(final AmwayDeliverySlotAvailabilityModel deliverySlotModel)
 	{
@@ -150,6 +163,8 @@ public class AmwayApacDeliverySlotValidationHook implements CartValidationHook
 	}
 
 	/**
+	 * Gets the model service.
+	 *
 	 * @return the modelService
 	 */
 	public ModelService getModelService()
@@ -158,6 +173,8 @@ public class AmwayApacDeliverySlotValidationHook implements CartValidationHook
 	}
 
 	/**
+	 * Sets the model service.
+	 *
 	 * @param modelService
 	 *           the modelService to set
 	 */
@@ -168,6 +185,8 @@ public class AmwayApacDeliverySlotValidationHook implements CartValidationHook
 	}
 
 	/**
+	 * Gets the amway apac delivery service.
+	 *
 	 * @return the amwayApacDeliveryService
 	 */
 	public AmwayApacDeliveryService getAmwayApacDeliveryService()
@@ -176,6 +195,8 @@ public class AmwayApacDeliverySlotValidationHook implements CartValidationHook
 	}
 
 	/**
+	 * Sets the amway apac delivery service.
+	 *
 	 * @param amwayApacDeliveryService
 	 *           the amwayApacDeliveryService to set
 	 */

@@ -52,14 +52,10 @@ public class DefaultAmwayApacPriceDataFactory extends AmwayPriceDataFactory impl
 	 */
 	protected AmwayValueData createAmwayValueData(final double pointValue, final double businessVolume)
 	{
-		final AmwayValueData amwayValueData = createAmwayValueData();
+		final AmwayValueData amwayValueData = new AmwayValueData();
 		amwayValueData.setPointValue(pointValue);
 		amwayValueData.setBusinessVolume(businessVolume);
 		return amwayValueData;
 	}
 
-	protected AmwayValueData createAmwayValueData()
-	{
-		return new AmwayValueData();
-	}
 }

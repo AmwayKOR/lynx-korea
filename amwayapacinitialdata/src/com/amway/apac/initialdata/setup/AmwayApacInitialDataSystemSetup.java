@@ -58,7 +58,7 @@ public class AmwayApacInitialDataSystemSetup extends AbstractSystemSetup
 	@SystemSetupParameterMethod
 	public List<SystemSetupParameter> getInitializationOptions()
 	{
-		final List<SystemSetupParameter> params = new ArrayList<SystemSetupParameter>();
+		final List<SystemSetupParameter> params = new ArrayList<>();
 
 		params.add(createBooleanSystemSetupParameter(IMPORT_CORE_DATA, "Import Core Data", true));
 		params.add(createBooleanSystemSetupParameter(IMPORT_SAMPLE_DATA, "Import Sample Data", true));
@@ -90,7 +90,7 @@ public class AmwayApacInitialDataSystemSetup extends AbstractSystemSetup
 	@SystemSetup(type = Type.PROJECT, process = Process.ALL)
 	public void createProjectData(final SystemSetupContext context)
 	{
-		final List<ImportData> importData = new ArrayList<ImportData>();
+		final List<ImportData> importData = new ArrayList<>();
 
 		final ImportData sampleImportData = new ImportData();
 		sampleImportData.setProductCatalogName(AMWAY_APAC);

@@ -18,8 +18,8 @@
 				<attribute qualifier="done" type="boolean">
 					<description>Mark process as done</description>
 					<modifiers optional="false" initial="false"/>
-					<persistence type="property" />
 					<defaultvalue>Boolean.FALSE</defaultvalue>					
+					<persistence type="property" />
 				</attribute>			
 				
 				<attribute qualifier="waitingForConsignment" type="boolean">

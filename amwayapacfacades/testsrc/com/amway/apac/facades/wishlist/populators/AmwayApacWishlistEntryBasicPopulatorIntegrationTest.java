@@ -85,7 +85,7 @@ public class AmwayApacWishlistEntryBasicPopulatorIntegrationTest extends Service
 	{
 		wishlistEntryData = new WishlistEntryData();
 
-		importCsv("/amwayapacfacades/test/testCommerceProduct.csv", "utf-8");
+		importCsv("/amwayapaccore/test/testCommerceProduct.csv", "utf-8");
 		baseSiteService.setCurrentBaseSite(baseSiteService.getBaseSiteForUID(TEST_BASESITE_UID), false);
 
 		final CatalogVersionModel catalogVersionModel = catalogVersionService.getCatalogVersion("testCatalog", "Online");

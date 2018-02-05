@@ -1,14 +1,3 @@
-/*
- * [y] hybris Platform
- *
- * Copyright (c) 2000-2018 SAP SE
- * All rights reserved.
- *
- * This software is the confidential and proprietary information of SAP
- * Hybris ("Confidential Information"). You shall not disclose such
- * Confidential Information and shall use it only in accordance with the
- * terms of the license agreement you entered into with SAP Hybris.
- */
 package com.amway.apac.deliveryslot.cronjobs;
 
 import de.hybris.platform.cronjob.enums.CronJobResult;
@@ -19,7 +8,8 @@ import de.hybris.platform.servicelayer.cronjob.PerformResult;
 
 import java.time.LocalDate;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.amway.apac.deliveryslot.model.AmwayDeliverySlotAvailabilityModel;
@@ -36,27 +26,29 @@ import com.amway.apac.deliveryslot.services.AmwayApacDeliverySlotManagementServi
  */
 public class AmwayApacDeliverySlotCreationCronJob extends AbstractJobPerformable<CronJobModel>
 {
-	private static final Logger LOG = Logger.getLogger(AmwayApacDeliverySlotCreationCronJob.class);
+	/** The LOGGER Constant. */
+	private static final Logger LOGGER = LoggerFactory.getLogger(AmwayApacDeliverySlotCreationCronJob.class);
 
+	/** Days count to add to get ordering date. */
+	private static final long DAYS_TO_ADD = 1L;
+
+	/** The amway apac delivery slot management service. */
 	private AmwayApacDeliverySlotManagementService amwayApacDeliverySlotManagementService;
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Cronjob default perform method to create delivery slot data.
 	 *
-	 * @see de.hybris.platform.servicelayer.cronjob.AbstractJobPerformable#perform(de.hybris.platform.cronjob.model.
-	 * CronJobModel)
+	 * @param cronjob
+	 *           the cronjob
+	 * @return the perform result
 	 */
 	@Override
-	public PerformResult perform(final CronJobModel arg0)
+	public PerformResult perform(final CronJobModel cronjob)
 	{
-		PerformResult result = null;
-
-		// Create data and persist, result will be 1 for success.
+		// Create slot data and persist in DB
 		getAmwayApacDeliverySlotManagementService().createDeliverySlotData(getOrderingDate());
 
-		result = new PerformResult(CronJobResult.SUCCESS, CronJobStatus.FINISHED);
-
-		return result;
+		return new PerformResult(CronJobResult.SUCCESS, CronJobStatus.FINISHED);
 	}
 
 	/**
@@ -67,13 +59,17 @@ public class AmwayApacDeliverySlotCreationCronJob extends AbstractJobPerformable
 	 */
 	public LocalDate getOrderingDate()
 	{
-		final LocalDate orderingDate = LocalDate.now().plusDays(1L);
-		LOG.debug("Preparing data for date : " + orderingDate);
-
+		final LocalDate orderingDate = LocalDate.now().plusDays(DAYS_TO_ADD);
+		if (LOGGER.isInfoEnabled())
+		{
+		LOGGER.debug(new StringBuilder(50).append("Preparing data for date : ").append(orderingDate).toString());
+		}
 		return orderingDate;
 	}
 
 	/**
+	 * Gets the amway apac delivery slot management service.
+	 *
 	 * @return the amwayApacDeliverySlotManagementService
 	 */
 	public AmwayApacDeliverySlotManagementService getAmwayApacDeliverySlotManagementService()
@@ -82,6 +78,8 @@ public class AmwayApacDeliverySlotCreationCronJob extends AbstractJobPerformable
 	}
 
 	/**
+	 * Sets the amway apac delivery slot management service.
+	 *
 	 * @param amwayApacDeliverySlotManagementService
 	 *           the amwayApacDeliverySlotManagementService to set
 	 */

@@ -10,7 +10,7 @@
  license agreement you entered into with SAP.
 -->
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
-
+ 
 	<!-- Enumeration representing the response status for wishlist update operations-->
 	<enum class="com.amway.facades.wishlist.modification.status.AmwayApacWishlistModificationStatus">
 		<value>SUCCESS</value>
@@ -75,5 +75,10 @@
 	<bean class="de.hybris.platform.commercefacades.product.data.ProductData">
 		<property name="isSellable" type="java.lang.Boolean" />
 	</bean>
-
+	
+	<bean class="de.hybris.platform.commercefacades.search.data.SearchStateData">
+		<property name="filterRawQueries" type="java.lang.String">
+			<description>Raw query to be populated in Search Query.</description>
+		</property>
+	</bean>
 </beans>

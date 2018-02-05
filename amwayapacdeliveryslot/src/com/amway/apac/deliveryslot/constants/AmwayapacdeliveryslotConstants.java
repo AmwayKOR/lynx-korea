@@ -1,17 +1,8 @@
-/*
- * [y] hybris Platform
- *
- * Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
- *
- * This software is the confidential and proprietary information of SAP
- * ("Confidential Information"). You shall not disclose such Confidential
- * Information and shall use it only in accordance with the terms of the
- * license agreement you entered into with SAP.
- */
 package com.amway.apac.deliveryslot.constants;
 
 /**
- * Global class for all Amwayapacdeliveryslot constants. You can add global constants for your extension into this class.
+ * Global class for all Amwayapacdeliveryslot constants. You can add global constants for your extension into this
+ * class.
  */
 public final class AmwayapacdeliveryslotConstants extends GeneratedAmwayapacdeliveryslotConstants
 {
@@ -33,4 +24,18 @@ public final class AmwayapacdeliveryslotConstants extends GeneratedAmwayapacdeli
 	 * Time stamp pattern string
 	 */
 	public static final String TIME_FORMAT = "HH:mm:ss";
+
+	/**
+	 * int constant - 0.
+	 */
+	public static final Integer ZERO_INT = Integer.valueOf(0);
+
+	/**
+	 * int constant - 1.
+	 */
+	public static final Integer ONE_INT = Integer.valueOf(1);
+
+	public static final String DELIVERY_SLOT_CONFIG_MODEL = "deliverySlotConfigModel";
+	public static final String DELIVERY_SLOT = "deliverySlot";
+
 }

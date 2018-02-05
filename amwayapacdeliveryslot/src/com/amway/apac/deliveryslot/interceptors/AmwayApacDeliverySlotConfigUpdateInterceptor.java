@@ -1,27 +1,18 @@
-/*
- * [y] hybris Platform
- *
- * Copyright (c) 2000-2018 SAP SE
- * All rights reserved.
- *
- * This software is the confidential and proprietary information of SAP
- * Hybris ("Confidential Information"). You shall not disclose such
- * Confidential Information and shall use it only in accordance with the
- * terms of the license agreement you entered into with SAP Hybris.
- */
 package com.amway.apac.deliveryslot.interceptors;
+
+import static com.amway.apac.deliveryslot.constants.AmwayapacdeliveryslotConstants.DELIVERY_SLOT_CONFIG_MODEL;
+import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
 
 import de.hybris.platform.servicelayer.interceptor.InterceptorContext;
 import de.hybris.platform.servicelayer.interceptor.InterceptorException;
 import de.hybris.platform.servicelayer.interceptor.PrepareInterceptor;
-import de.hybris.platform.servicelayer.model.ModelService;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
-import org.apache.log4j.Logger;
-import org.assertj.core.util.Preconditions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.amway.apac.deliveryslot.model.AmwayDeliverySlotAvailabilityModel;
@@ -38,29 +29,39 @@ import com.amway.apac.deliveryslot.services.AmwayApacDeliverySlotManagementServi
  */
 public class AmwayApacDeliverySlotConfigUpdateInterceptor implements PrepareInterceptor<AmwayDeliverySlotConfigModel>
 {
-	private static final Logger LOG = Logger.getLogger(AmwayApacDeliverySlotConfigUpdateInterceptor.class);
+	/** The LOGGER Constant. */
+	private static final Logger LOGGER = LoggerFactory.getLogger(AmwayApacDeliverySlotConfigUpdateInterceptor.class);
 
-	private ModelService modelService;
+	/** The amway apac delivery slot management service. */
 	private AmwayApacDeliverySlotManagementService amwayApacDeliverySlotManagementService;
 
-	/*
-	 * (non-Javadoc)
+
+	/**
+	 * Update availability models if update in slot config model
 	 *
-	 * @see de.hybris.platform.servicelayer.interceptor.PrepareInterceptor#onPrepare(java.lang.Object,
-	 * de.hybris.platform.servicelayer.interceptor.InterceptorContext)
+	 * @param slotConfigModel
+	 *           the slot config model
+	 * @param ctx
+	 *           the ctx
+	 * @throws InterceptorException
+	 *            the interceptor exception
 	 */
 	@Override
-	public void onPrepare(final AmwayDeliverySlotConfigModel slotConfigModel, final InterceptorContext arg1)
+	public void onPrepare(final AmwayDeliverySlotConfigModel slotConfigModel, final InterceptorContext ctx)
 			throws InterceptorException
 	{
-		Preconditions.checkArgument(Objects.nonNull(slotConfigModel), "Config model cannot be NULL here.");
+		validateParameterNotNullStandardMessage(DELIVERY_SLOT_CONFIG_MODEL, slotConfigModel);
 
 		if (Objects.nonNull(slotConfigModel.getDeliveryDay()) && Objects.nonNull(slotConfigModel.getSlotTime()))
 		{
 			final LocalDate currentDate = LocalDate.now();
 			final LocalDate deliveryDate = getAmwayApacDeliverySlotManagementService().getDeliveryDate(currentDate,
 					slotConfigModel.getDeliveryDay());
-			LOG.info("Modification of Slot data for  Delivery Date : " + deliveryDate + " started ...");
+			if (LOGGER.isInfoEnabled())
+			{
+				LOGGER.info(new StringBuilder(100).append("Modification of Slot data for  Delivery Date : ").append(deliveryDate)
+						.append(" started ...").toString());
+			}
 
 			// Fetch slot models from slot management service
 			final List<AmwayDeliverySlotAvailabilityModel> slotModels = getAmwayApacDeliverySlotManagementService()
@@ -75,24 +76,8 @@ public class AmwayApacDeliverySlotConfigUpdateInterceptor implements PrepareInte
 	}
 
 	/**
-	 * @return the modelService
-	 */
-	public ModelService getModelService()
-	{
-		return modelService;
-	}
-
-	/**
-	 * @param modelService
-	 *           the modelService to set
-	 */
-	@Required
-	public void setModelService(final ModelService modelService)
-	{
-		this.modelService = modelService;
-	}
-
-	/**
+	 * Gets the amway apac delivery slot management service.
+	 *
 	 * @return the amwayApacDeliverySlotManagementService
 	 */
 	public AmwayApacDeliverySlotManagementService getAmwayApacDeliverySlotManagementService()
@@ -101,6 +86,8 @@ public class AmwayApacDeliverySlotConfigUpdateInterceptor implements PrepareInte
 	}
 
 	/**
+	 * Sets the amway apac delivery slot management service.
+	 *
 	 * @param amwayApacDeliverySlotManagementService
 	 *           the amwayApacDeliverySlotManagementService to set
 	 */

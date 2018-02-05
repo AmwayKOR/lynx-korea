@@ -1,13 +1,15 @@
 package com.amway.apac.core.product.strategies.impl;
 
 import de.hybris.platform.core.model.product.ProductModel;
+import de.hybris.platform.servicelayer.util.ServicesUtil;
 import de.hybris.platform.store.services.BaseStoreService;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Required;
 
-import com.amway.apac.core.account.service.AmwayApacAccountClassificationService;
+import com.amway.apac.core.account.services.AmwayApacAccountClassificationService;
 import com.amway.apac.core.constants.AmwayapacCoreConstants;
 import com.amway.apac.core.model.AmwayPreLaunchConfigModel;
 import com.amway.apac.core.product.AmwayPreLaunchResponse;
@@ -36,36 +38,55 @@ public class DefaultAmwayApacProductPreLaunchStrategy implements AmwayApacProduc
 	@Override
 	public AmwayPreLaunchResponse getProductPrelaunchStatusForCurrentUser(final ProductModel product)
 	{
+		ServicesUtil.validateParameterNotNullStandardMessage(AmwayapacCoreConstants.PRODUCT_STRING, product);
 		final AmwayPreLaunchConfigModel preLaunchConfig = product.getPreLaunchConfig();
-		final AmwayPreLaunchResponse response = new AmwayPreLaunchResponse();
-		response.setPreLaunchStatus(AmwayProductPreLaunchStatus.NOT_IN_PRELAUNCH);
-		response.setAllowedQuantity(product.getMaxOrderQuantity());
+		AmwayProductPreLaunchStatus preLaunchStatus = AmwayProductPreLaunchStatus.NOT_IN_PRELAUNCH;
+		Integer allowedQuantity = product.getMaxOrderQuantity();
 
 		if (null != preLaunchConfig)
 		{
-			final Date currentDate = new Date();
+			final Date currentDate = Calendar.getInstance().getTime();
 			if (currentDate.before(preLaunchConfig.getStartDate()))
 			{
-				response.setPreLaunchStatus(AmwayProductPreLaunchStatus.NOT_YET_LAUNCHED);
-				response.setAllowedQuantity(AmwayapacCoreConstants.ZERO_INT);
+				preLaunchStatus = AmwayProductPreLaunchStatus.NOT_YET_LAUNCHED;
+				allowedQuantity = AmwayapacCoreConstants.ZERO_INTEGER;
 			}
 			else if ((currentDate.after(preLaunchConfig.getStartDate())) && (currentDate.before(preLaunchConfig.getEndDate())))
 			{
-				response.setPreLaunchStatus(AmwayProductPreLaunchStatus.IN_PRE_LAUNCH_PERIOD);
-				response.setAllowedQuantity(AmwayapacCoreConstants.ZERO_INT);
+				preLaunchStatus = AmwayProductPreLaunchStatus.IN_PRE_LAUNCH_PERIOD;
+				allowedQuantity = AmwayapacCoreConstants.ZERO_INTEGER;
 				if (getAmwayApacAccountClassificationService().checkUserClassification(preLaunchConfig.getClassification()))
 				{
 					if (preLaunchConfig.getMaxShoppingCount().intValue() < 0)
 					{
-						response.setAllowedQuantity(product.getMaxOrderQuantity());
+						allowedQuantity = product.getMaxOrderQuantity();
 					}
 					else
 					{
-						response.setAllowedQuantity(getOrderableQuantityForCurrentUserInPreLaunch(product));
+						allowedQuantity = getOrderableQuantityForCurrentUserInPreLaunch(product);
 					}
 				}
 			}
 		}
+
+		return createPreLaunchResponse(preLaunchStatus, allowedQuantity);
+	}
+
+	/**
+	 * Creates and returns {@link AmwayPreLaunchResponse} for given preLaunchStatus and allowedQuantity.
+	 *
+	 * @param preLaunchStatus
+	 *           Pre-Launch Status
+	 * @param allowedQuantity
+	 *           Orderable Quantity
+	 * @return AmwayPreLaunchResponse
+	 */
+	protected AmwayPreLaunchResponse createPreLaunchResponse(final AmwayProductPreLaunchStatus preLaunchStatus,
+			final Integer allowedQuantity)
+	{
+		final AmwayPreLaunchResponse response = new AmwayPreLaunchResponse();
+		response.setPreLaunchStatus(preLaunchStatus);
+		response.setAllowedQuantity(allowedQuantity);
 		return response;
 	}
 
@@ -73,8 +94,9 @@ public class DefaultAmwayApacProductPreLaunchStrategy implements AmwayApacProduc
 	 * Returns the current orderable quantity for given preLaunchConfig and current user evaluated by comparing the max
 	 * count of preLaunchConfig and the count of units already ordered.
 	 *
-	 * @param preLaunchConfig
-	 * @return
+	 * @param product
+	 *           Prelaunch product
+	 * @return Orderable quantity for the product
 	 */
 	protected Integer getOrderableQuantityForCurrentUserInPreLaunch(final ProductModel product)
 	{

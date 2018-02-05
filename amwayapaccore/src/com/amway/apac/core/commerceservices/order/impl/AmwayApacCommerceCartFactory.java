@@ -14,12 +14,17 @@ import com.amway.core.model.AmwayAccountModel;
 
 
 /**
- * To set the {@link WarehouseModel} and {@link AddressModel} to the {@link CartModel}
+ * Overriding {@link AmwayCommerceCartFactory} to implement APAC specific business logic.
+ *
+ * @author Shubham Goyal
  */
 public class AmwayApacCommerceCartFactory extends AmwayCommerceCartFactory
 {
 	private AmwayApacWarehouseServiceabilityService amwayApacWarehouseServiceabilityService;
 
+	/**
+	 * Overriding to set the {@link WarehouseModel} and {@link AddressModel} in the {@link CartModel}
+	 */
 	@Override
 	protected CartModel createCartInternal()
 	{

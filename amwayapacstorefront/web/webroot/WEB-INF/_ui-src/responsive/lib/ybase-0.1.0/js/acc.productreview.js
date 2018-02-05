@@ -1,25 +1,23 @@
-ACC.productreview = {
+ACC.productReview = {
 
 	_autoload: [
-		"loadVM",
+		"loadVM"
 	],
 
 	loadVM: function(){
-		
-		var productReview = new Vue({
+		if($("#product-review").length){
+			ACC.productReview.productReviewVM = new Vue({
 		    el: '#product-review',
-		    data: {
-		    	headline: '',
-		    	comment: '',
-		    	rating: 0,
-		    	alias: '',
-		        response: null,
-		        headlineError: false,
-		        commentError: false,
-		        ratingError: false,
-		        headlineMessage: '',
-		        commentMessage: '',
-		        ratingMessage: ''
+		    data:{
+		    	headline:"",
+		    	comment:"",
+		    	rating:0,
+		    	alias:"",
+		    	message : {
+		    		headline : { error: false, message: ""},
+		    		comment : { error: false, message: ""},
+		    		rating : { error: false, message: ""}
+		    	}
 		    },
 		    methods: {
 		        submit: function(e) {
@@ -40,25 +38,25 @@ ACC.productreview = {
 		    			type : 'GET',
 		    			success : function(data) 
 		    			{
-	    					self.headlineError = false;
-	    					self.commentError = false;
-	    					self.ratingError = false;
+	    					self.message.headline.error = false;
+	    					self.message.comment.error = false;
+	    					self.message.rating.error = false;
 	    					
 		    				if(data.success){
-		    					ACC.productreview.openPrompt();
+		    					ACC.productReview.openPrompt();
 		    				}
 		    				else
 		    				{
 		    					data.message.forEach(function(value, index) {
-		    						if(value.field == 'headline'){
-		    							self.headlineError = true;
-		    							self.headlineMessage = value.message;
-		    						}else if(value.field == 'comment'){
-		    							self.commentError = true;
-		    							self.commentMessage = value.message;
-		    						}else if(value.field == 'rating'){
-		    							self.ratingError = true;
-		    							self.ratingMessage = value.message;
+		    						if(value.field == "headline"){
+		    							self.message.headline.error = true;
+		    							self.message.headline.message = value.message;
+		    						}else if(value.field == "comment"){
+		    							self.message.comment.error = true;
+		    							self.message.comment.message = value.message;
+		    						}else if(value.field == "rating"){
+		    							self.message.rating.error = true;
+		    							self.message.rating.message = value.message;
 		    						}
 		    			        });
 		    				}
@@ -70,6 +68,8 @@ ACC.productreview = {
 		    }
 		});
 		
+		}
+		
 		$('#star').raty({ 
 			  path: ACC.config.themeResourcePath+'/images',
 		      size      : 5,
@@ -77,7 +77,7 @@ ACC.productreview = {
 		      starOn    : 'star-filled.png',
 		      scoreName : 'rating',
 		      click: function (score, e) {
-		    	  productReview.rating = score;
+		    	  ACC.productReview.productReviewVM.rating = score;
 			  }
 		});
 		
@@ -86,13 +86,13 @@ ACC.productreview = {
         });
         
         $(".product-collapse__review").click(function() {
-        	
-        	productReview.headlineError = false;
-        	productReview.commentError = false;
-        	productReview.ratingError = false;
-        	productReview.headline = '';
-        	productReview.comment = '';
-        	$('#star').raty('set', { score: 0 });
+        	ACC.productReview.productReviewVM.message.headline.error = false;
+        	ACC.productReview.productReviewVM.message.comment.error = false;
+        	ACC.productReview.productReviewVM.message.rating.error = false;
+        	ACC.productReview.productReviewVM.headline = '';
+        	ACC.productReview.productReviewVM.comment = '';
+        	ACC.productReview.productReviewVM.rating = 0;
+        	$("#star").raty("score", 0);
         	
         });
 
@@ -103,19 +103,7 @@ ACC.productreview = {
 	    
 	    $('.js-tabs #tabreview').click(function(event) {
 	        event.preventDefault();
-            $.ajax({
-    			url : $("#reviewgraph").data("url"),
-    			cache : true,
-    			success : function(response) 
-    			{
-    				if(response.success){
-    					var reviewArray = response.data;
-    				    ACC.productreview.yellowGraph(reviewArray);
-    				}
-    			},
-    			error : function (request, status, error){
-    			}
-    		});
+	        ACC.productReview.populateGraph();
 	    });
 
 	},
@@ -136,11 +124,27 @@ ACC.productreview = {
     },
     
     yellowGraph: function(arra) {
-        var max = ACC.productreview.maxValue(arra);
+        var max = ACC.productReview.maxValue(arra);
         $(".comuserinfo dl").each(function(index, element){
             var percent = arra[(5 - index) + 'star']/max*100;
             $(element).find("div").css('width', percent + "%" );
             $(element).find("span").html(arra[(5 - index) + 'star']);
         });
+    },
+    
+    populateGraph: function() {
+        $.ajax({
+			url : $("#reviewgraph").data("url"),
+			cache : true,
+			success : function(response) 
+			{
+				if(response.success){
+					var reviewArray = response.data;
+				    ACC.productReview.yellowGraph(reviewArray);
+				}
+			},
+			error : function (request, status, error){
+			}
+		});
     }
 };

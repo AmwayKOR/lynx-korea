@@ -20,7 +20,7 @@ public class DefaultAmwayApacCommerceAddToCartStrategy extends DefaultCommerceAd
 	 * @param parameter
 	 *           Cart parameters
 	 * @return Cart modification information
-	 * @throws de.hybris.platform.commerceservices.order.CommerceCartModificationException
+	 * @throws CommerceCartModificationException
 	 *
 	 */
 	@Override

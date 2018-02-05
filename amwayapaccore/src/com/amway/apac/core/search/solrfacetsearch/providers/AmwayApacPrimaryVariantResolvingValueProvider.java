@@ -89,7 +89,7 @@ public class AmwayApacPrimaryVariantResolvingValueProvider implements FieldValue
 	 * @param productModel
 	 * @return resolved primary variant, null if no variant is found
 	 */
-	private ProductModel resolveVariantProduct(final CurrencyModel currency, final ProductModel productModel)
+	protected ProductModel resolveVariantProduct(final CurrencyModel currency, final ProductModel productModel)
 	{
 		final Collection<CatalogVersionModel> filteredCatalogVersions = filterCatalogVersions(
 				getCatalogVersionService().getSessionCatalogVersions());
@@ -139,7 +139,7 @@ public class AmwayApacPrimaryVariantResolvingValueProvider implements FieldValue
 	 */
 	protected Collection<CatalogVersionModel> filterCatalogVersions(final Collection<CatalogVersionModel> sessionCatalogVersions)
 	{
-		final List<CatalogVersionModel> result = new ArrayList<CatalogVersionModel>(sessionCatalogVersions.size());
+		final List<CatalogVersionModel> result = new ArrayList<>(sessionCatalogVersions.size());
 
 		for (final CatalogVersionModel catalogVersion : sessionCatalogVersions)
 		{

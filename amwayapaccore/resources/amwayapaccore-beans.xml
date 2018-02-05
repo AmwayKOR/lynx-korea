@@ -22,4 +22,11 @@
 		</property>
 	</bean>
 	
+	<bean class="de.hybris.platform.commerceservices.search.solrfacetsearch.data.SolrSearchQueryData">
+		<property name="rawQuery" type="java.lang.String">
+			<description>Raw query to be populated in Search Query.</description>
+		</property>
+	</bean>
+
+
 </beans>

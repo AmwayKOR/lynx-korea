@@ -1,0 +1,45 @@
+$contentCatalog=amwayapacContentCatalog
+$productCatalog=amwayapacProductCatalog
+$lang=en
+
+$siteResource=jar:com.amway.apac.core.constants.AmwayapacCoreConstants&/amwayapaccore/test
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Online'])[unique=true,default=$productCatalog:Online]
+$productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Online'])[unique=true,default=$productCatalog:Online]
+$contentMedias=medias(code, $contentCV)
+
+# Import config properties into impex macros
+UPDATE GenericItem[processor=de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor];pk[unique=true]
+$jarResourceCms=$config-jarResourceCmsValue
+
+###
+## Media
+###
+
+INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images]
+;desktop;test-primary-img;$siteResource/images/test-primary-img.jpg;test-primary-img.jpg;
+;desktop;test-img1;$siteResource/images/test-video-img.jpg;test-video-img.jpg;
+;desktop;test-img2;$siteResource/images/test-video-img.jpg;test-video-img.jpg;
+;desktop;test-img3;$siteResource/images/test-video-img.jpg;test-video-img.jpg;
+;desktop;test-img4;$siteResource/images/test-video-img.jpg;test-video-img.jpg;
+
+###
+## Assets
+###
+
+INSERT_UPDATE AmwayAsset;$contentCV[unique=true];assetId[unique=true];title;description;displayImage(code,$contentCV);date[dateformat=yyyy-MM-dd];active[default=true];classification(code)
+;;testPrimaryAsset;Test Primary Asset Title;"<p>Test Primary Asset Description</p>";test-primary-img;2018-01-01;;DIAMOND_AND_ABOVE
+;;testAsset1;Test Asset 1 Title;Test Primary Asset 1 Description;test-img1;2018-01-01;;DIAMOND_AND_ABOVE
+;;testAsset2;Test Asset 2 Title;Test Primary Asset 2 Description;test-img2;2018-01-01;;DIAMOND_AND_ABOVE
+;;testAsset3;Test Asset 3 Title;Test Primary Asset 3 Description;test-img3;2018-01-01;;DIAMOND_AND_ABOVE
+;;testAsset4;Test Asset 4 Title;Test Primary Asset 4 Description;test-img4;2018-01-01;;DIAMOND_AND_ABOVE
+
+INSERT_UPDATE AmwayAsset;$contentCV[unique=true];assetId[unique=true];subTitle
+;;testPrimaryAsset;Test Primary Image Subtitle
+
+###
+## Product
+###
+
+UPDATE Product;$productCV[unique=true];code[unique=true];assets(assetId,$contentCV)
+;;220136;testAsset1,testAsset2,testAsset3

@@ -50,7 +50,7 @@ public class AmwayApacCoreSystemSetup extends AbstractSystemSetup
 	@SystemSetupParameterMethod
 	public List<SystemSetupParameter> getInitializationOptions()
 	{
-		return new ArrayList<SystemSetupParameter>();
+		return new ArrayList<>();
 	}
 
 	/**

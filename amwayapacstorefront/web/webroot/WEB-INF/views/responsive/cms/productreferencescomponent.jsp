@@ -17,7 +17,7 @@
                 <h1 class="amway-suggest__title">${fn:escapeXml(component.title)}</h1>
                 <div id="productSuggestListTabs" class="amway-suggest__list">
                     <c:forEach end="${component.maximumNumberProducts}" items="${productReferences}" var="productReference">
-                        <product:productListerGridItem product="${productReference.target}"/>
+                        <product:productListerGridItem product="${productReference}"/>
                     </c:forEach>
                 </div>
             </div>

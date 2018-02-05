@@ -1,5 +1,7 @@
 package com.amway.apac.facades.product.populators;
 
+import static com.amway.apac.facades.constants.AmwayapacFacadesConstants.PRODUCT_MODEL;
+import static com.amway.apac.facades.constants.AmwayapacFacadesConstants.STOCK_DATA;
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
 
 import de.hybris.platform.commercefacades.product.converters.populator.StockPopulator;
@@ -27,8 +29,8 @@ public class AmwayApacStockPopulator extends StockPopulator<ProductModel, StockD
 	@Override
 	public void populate(final ProductModel productModel, final StockData stockData) throws ConversionException
 	{
-		validateParameterNotNullStandardMessage("productModel", productModel);
-		validateParameterNotNullStandardMessage("stockData", stockData);
+		validateParameterNotNullStandardMessage(PRODUCT_MODEL, productModel);
+		validateParameterNotNullStandardMessage(STOCK_DATA, stockData);
 
 		super.populate(productModel, stockData);
 

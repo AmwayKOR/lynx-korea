@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.amway.apac.facades.paymentoption.populators;
 
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
@@ -14,6 +11,7 @@ import de.hybris.platform.servicelayer.dto.converter.Converter;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Required;
 
+import com.amway.apac.core.constants.AmwayapacCoreConstants;
 import com.amway.apac.core.enums.PaymentType;
 import com.amway.apac.core.model.AmwayApacVariantProductModel;
 import com.amway.apac.core.model.AmwayPaymentOptionModel;
@@ -22,23 +20,32 @@ import com.amway.apacfacades.payment.data.AmwayPaymentOptionData;
 
 
 /**
+ * Payment option Populator
  *
  * @author Ashish Sabal
  *
  */
 public class AmwayApacPaymentOptionPopulator implements Populator<AmwayPaymentOptionModel, AmwayPaymentOptionData>
 {
+
+	/** The enum converter. */
 	private Converter<HybrisEnumValue, EnumData> enumConverter;
 
 	/**
-	 * {@inheritDoc}
+	 * Payment option populate method.
+	 *
+	 * @param source
+	 *           the source
+	 * @param target
+	 *           the target
+	 * @throws ConversionException
+	 *            the conversion exception
 	 */
 	@Override
 	public void populate(final AmwayPaymentOptionModel source, final AmwayPaymentOptionData target) throws ConversionException
 	{
-		validateParameterNotNullStandardMessage("target", source);
-		validateParameterNotNullStandardMessage("source", target);
-
+		validateParameterNotNullStandardMessage(AmwayapacCoreConstants.TARGET_STRING, source);
+		validateParameterNotNullStandardMessage(AmwayapacCoreConstants.SOURCE_STRING, target);
 
 		target.setAliasCode(source.getAliasCode());
 
@@ -66,10 +73,13 @@ public class AmwayApacPaymentOptionPopulator implements Populator<AmwayPaymentOp
 	}
 
 	/**
-	 * @param source
-	 * @return
+	 * Gets the product name.
+	 *
+	 * @param paymentOption
+	 *           the payment option
+	 * @return Product name of product attached in payment option
 	 */
-	private String getProductName(final AmwayPaymentOptionModel paymentOption)
+	protected String getProductName(final AmwayPaymentOptionModel paymentOption)
 	{
 		final ProductModel product = paymentOption.getProduct();
 		String productName = StringUtils.EMPTY;
@@ -86,6 +96,8 @@ public class AmwayApacPaymentOptionPopulator implements Populator<AmwayPaymentOp
 	}
 
 	/**
+	 * Gets the enum converter.
+	 *
 	 * @return the enumConverter
 	 */
 	public Converter<HybrisEnumValue, EnumData> getEnumConverter()
@@ -94,6 +106,8 @@ public class AmwayApacPaymentOptionPopulator implements Populator<AmwayPaymentOp
 	}
 
 	/**
+	 * Sets the enum converter.
+	 *
 	 * @param enumConverter
 	 *           the enumConverter to set
 	 */

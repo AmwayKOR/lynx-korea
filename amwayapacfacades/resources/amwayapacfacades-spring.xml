@@ -183,7 +183,6 @@
 	<alias name="defaultAmwayApacOrderFacade" alias="amwayOrderFacade"/>
     <bean id="defaultAmwayApacOrderFacade" class="com.amway.apac.facades.customeraccount.impl.DefaultAmwayApacOrderFacade" parent="defaultAmwayOrderFacade">
         <property name="amwayApacCustomerAccountService" ref="customeraccountService"/>
-        <property name="orderHistoryTypeOptions" ref="orderHistoryTypeOptions"/>
     </bean>
     
     <alias name="defaultAmwayApacCustomerFacade" alias="customerFacade"/>
@@ -241,9 +240,7 @@
     <bean id="defaultAmwayApacAddressPopulator" class="com.amway.apac.facades.populators.AmwayApacAddressPopulator" parent="defaultAddressPopulator" />
 	
 	<alias name="defaultAmwayApacOrderHistoryPopulator" alias="orderHistoryPopulator"/>
-    <bean id="defaultAmwayApacOrderHistoryPopulator" class="com.amway.apac.facades.populators.AmwayApacOrderHistoryPopulator" parent="defaultOrderHistoryPopulator" >
-    		<property name="orderEntryConverter" ref="orderEntryConverter"/>
-    </bean>
+    <bean id="defaultAmwayApacOrderHistoryPopulator" class="com.amway.apac.facades.populators.AmwayApacOrderHistoryPopulator" parent="defaultOrderHistoryPopulator" />
 
 	<alias name="defaultAmwayApacCommerceSearchSolrQueryPopulator" alias="commerceSearchSolrQueryPopulator" />
 	<bean id="defaultAmwayApacCommerceSearchSolrQueryPopulator" class="com.amway.apac.facades.product.populators.AmwayApacSearchSolrQueryPopulator" parent="defaultCommerceSearchSolrQueryPopulator" />
@@ -279,4 +276,13 @@
         <property name="amwayApacCommerceCheckoutService" ref="amwayCommerceCheckoutService"/>
     </bean>
     
+    <alias alias="productSearchFacade" name="defaultAmwayApacSolrProductSearchFacade"/>
+	<bean id="defaultAmwayApacSolrProductSearchFacade" class="com.amway.apac.facades.search.solrfacetsearch.impl.DefaultAmwayApacSolrProductSearchFacade" parent="defaultSolrProductSearchFacade" />
+
+	<alias alias="productFacade" name="defaultAmwayApacProductFacade"/>
+	<bean id="defaultAmwayApacProductFacade" class="com.amway.apac.facades.product.impl.DefaultAmwayApacProductFacade"
+			parent="defaultProductFacade">
+		<property name="productSearchFacade" ref="productSearchFacade" />
+		<property name="amwayApacProductReferenceService" ref="commerceProductReferenceService"/>
+	</bean>	
 </beans>

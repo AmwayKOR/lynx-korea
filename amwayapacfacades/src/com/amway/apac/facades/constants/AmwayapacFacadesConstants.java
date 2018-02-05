@@ -34,6 +34,26 @@ public class AmwayapacFacadesConstants extends GeneratedAmwayapacFacadesConstant
 	public static final String LAST_THIRTY_DAYS = "last30Days";
 	public static final String ORDER_DATE_FORMAT_PATTERN = "yyyy-MM-dd";
 
+	public static final String PRODUCT_MODEL = "productModel";
+	public static final String STOCK_DATA = "stockData";
+
+	/**
+	 * Error message for when parameter category is empty.
+	 */
+	public static final String PARAMETER_CATEGORY_CAN_NOT_BE_EMPTY = "Parameter category can not be empty.";
+
+	/**
+	 * Error message for when parameter code is null
+	 */
+	public static final String PARAMETER_CODE_CAN_NOT_BE_NULL = "Parameter code can not be null.";
+
+	public static final int ZERO = 0;
+
+	/**
+	 * Max number of results for product listing screens.
+	 */
+	public static final int PRODUCT_LISTING_MAX_NUMBER_OF_RECORDS = 150;
+
 	private AmwayapacFacadesConstants()
 	{
 		//empty

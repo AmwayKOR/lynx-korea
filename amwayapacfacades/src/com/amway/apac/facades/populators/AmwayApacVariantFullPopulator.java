@@ -20,7 +20,7 @@ import org.apache.commons.lang.StringUtils;
 /**
  * Overriding {@link VariantFullPopulator} to update base options population.
  *
- * @author shubhamgoyal
+ * @author Shubham Goyal
  *
  */
 public class AmwayApacVariantFullPopulator extends VariantFullPopulator<ProductModel, ProductData>
@@ -52,8 +52,11 @@ public class AmwayApacVariantFullPopulator extends VariantFullPopulator<ProductM
 	 * Method populates Variant Attribute 1 values.
 	 *
 	 * @param baseProduct
+	 *           Base Product
 	 * @param baseOptions
+	 *           Base Options
 	 * @param currentProduct
+	 *           Product for which base options to be populated
 	 */
 	protected void populateBaseOptionDataForAttribute2(final ProductModel baseProduct, final List<BaseOptionData> baseOptions,
 			final ProductModel currentProduct)
@@ -80,8 +83,11 @@ public class AmwayApacVariantFullPopulator extends VariantFullPopulator<ProductM
 	 * Method populates Variant Attribute 2 values.
 	 *
 	 * @param baseProduct
+	 *           Base Product
 	 * @param baseOptions
+	 *           Base Options
 	 * @param currentProduct
+	 *           Product for which base options to be populated
 	 */
 	protected void populateBaseOptionDataForAttribute1(final ProductModel baseProduct, final List<BaseOptionData> baseOptions,
 			final ProductModel currentProduct)

@@ -11,6 +11,7 @@ import com.amway.apac.core.model.AmwayUserPromotionCountModel;
 
 
 /**
+ * DAO containing all product related APIs
  *
  * @author Ashish Sabal
  */
@@ -18,24 +19,47 @@ public interface AmwayApacProductDao extends ProductDao
 {
 
 	/**
-	 * @param omsCode
+	 * Gets the all amway payment option from alias code.
+	 *
+	 * @param aliasCode
+	 *           the alias code
 	 * @param catalogVersion
-	 * @return list of all payment option available for OMS code
+	 *           the catalog version
+	 * @return list of all payment option available for Alias Code
+	 * @throws IllegalArgumentException
+	 *            if aliasCode or catalogVersion is null.
 	 */
-	List<AmwayPaymentOptionModel> getAllAmwayPaymentOptionFromOmsCode(String omsCode, CatalogVersionModel catalogVersion);
+	List<AmwayPaymentOptionModel> getAllAmwayPaymentOptionFromAliasCode(final String aliasCode,
+			final CatalogVersionModel catalogVersion);
 
 	/**
-	 * @param omsCode
+	 * Gets active amway payment option from alias code.
+	 *
+	 * @param aliasCode
+	 *           the alias code
 	 * @param catalogVersion
-	 * @return payment option for OMS code
+	 *           the catalog version
+	 * @return payment option for Alias Code
+	 * @throws IllegalArgumentException
+	 *            if aliasCode or catalogVersion is null.
 	 */
-	List<AmwayPaymentOptionModel> getAmwayPaymentOptionFromOmsCode(String omsCode, CatalogVersionModel catalogVersion);
+	List<AmwayPaymentOptionModel> getAmwayPaymentOptionFromAliasCode(final String aliasCode,
+			final CatalogVersionModel catalogVersion);
 
 	/**
+	 * Gets the promotion rule count by user and product.
+	 *
 	 * @param userId
+	 *           the user id
 	 * @param productCodes
+	 *           the product codes
 	 * @param promotionCode
+	 *           the promotion code
+	 * @param store
+	 *           the store
 	 * @return List<AmwayUserPromotionCountModel>
+	 * @throws IllegalArgumentException
+	 *            if userId, productCodes, promomtionCodes or store is null.
 	 */
 	List<AmwayUserPromotionCountModel> getPromotionRuleCountByUserAndProduct(final String userId, final List<String> productCodes,
 			final String promotionCode, final BaseStoreModel store);

@@ -4,6 +4,8 @@ import de.hybris.platform.commerceservices.service.data.CommerceCheckoutParamete
 
 
 /**
+ * Strategy layer for warehouse evaluations.
+ *
  * @author Shubham Goyal
  */
 public interface AmwayApacCommerceWarehouseStrategy
@@ -16,7 +18,7 @@ public interface AmwayApacCommerceWarehouseStrategy
 	 * @return true, if warehouse was successfully updated in cart
 	 *
 	 * @throws IllegalArgumentException
-	 *            if parameter does not have cart or warehouse
+	 *            if parameter is null or it does not have cart.
 	 */
-	boolean setWarehouse(CommerceCheckoutParameter parameter);
+	boolean setWarehouse(final CommerceCheckoutParameter parameter);
 }

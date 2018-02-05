@@ -1,9 +1,11 @@
 package com.amway.apac.core.customer.daos.impl;
 
+import static com.amway.apac.core.constants.AmwayapacCoreConstants.BASE_STORE_STRING;
 import static com.amway.apac.core.constants.AmwayapacCoreConstants.TWO_HUNDRED_INT;
 import static com.amway.apac.core.constants.AmwayapacCoreConstants.USER_STRING;
-import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNull;
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
+import static java.time.ZoneId.systemDefault;
+import static java.util.Collections.singletonList;
 
 import de.hybris.platform.commerceservices.search.flexiblesearch.data.SortQueryData;
 import de.hybris.platform.commerceservices.search.pagedata.PageableData;
@@ -18,14 +20,17 @@ import de.hybris.platform.store.BaseStoreModel;
 
 import java.time.LocalDate;
 import java.util.Arrays;
-import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.amway.apac.core.constants.AmwayapacCoreConstants;
+import org.apache.commons.collections.CollectionUtils;
+
 import com.amway.apac.core.customer.daos.AmwayApacCustomerAccountDao;
 import com.amway.core.customer.dao.impl.DefaultAmwayCustomerAccountDao;
+import com.amway.core.model.AmwayAccountModel;
+import com.amway.core.model.AmwayBusinessRestrictionModel;
 
 
 /**
@@ -47,14 +52,27 @@ public class DefaultAmwayApacCustomerAccountDao extends DefaultAmwayCustomerAcco
 	/**
 	 * Query to search for order history based on filter by user.
 	 */
-	private static final String FIND_ORDERS_BY_CUSTOMER_STORE_FILTER_QUERY = "SELECT {" + OrderModel.PK + "}, {"
-			+ OrderModel.CREATIONTIME + "}, {" + OrderModel.CODE + "} FROM {" + OrderModel._TYPECODE + "} WHERE {" + OrderModel.USER
-			+ "} = ?customer AND {" + OrderModel.VERSIONID + "} IS NULL AND {" + OrderModel.STORE + "} = ?store " + "AND {"
-			+ OrderModel.DATE + "} <= ?endDate " + "AND {" + OrderModel.DATE + "} >= ?startDate ";
+	private static final String FIND_ORDERS_BY_CUSTOMER_STORE_FILTER_QUERY = new StringBuilder(TWO_HUNDRED_INT).append("SELECT {")
+			.append(OrderModel.PK).append("}, {").append(OrderModel.CREATIONTIME).append("}, {").append(OrderModel.CODE)
+			.append("} FROM {").append(OrderModel._TYPECODE).append("} WHERE {").append(OrderModel.USER)
+			.append("} = ?customer AND {").append(OrderModel.VERSIONID).append("} IS NULL AND {").append(OrderModel.STORE)
+			.append("} = ?store ").append("AND {").append(OrderModel.DATE).append("} <= ?endDate ").append("AND {")
+			.append(OrderModel.DATE).append("} >= ?startDate ").toString();
 
-	private static final String SORT_ORDERS_BY_DATE = " ORDER BY {" + OrderModel.CREATIONTIME + "} DESC, {" + OrderModel.PK + "}";
-	private static final String SORT_ORDERS_BY_CODE = " ORDER BY {" + OrderModel.CODE + "},{" + OrderModel.CREATIONTIME
-			+ "} DESC, {" + OrderModel.PK + "}";
+	/**
+	 * Query to sort results by date.
+	 */
+	private static final String SORT_ORDERS_BY_DATE = new StringBuilder(TWO_HUNDRED_INT).append(" ORDER BY {")
+			.append(OrderModel.CREATIONTIME).append("} DESC, {").append(OrderModel.PK).append("}").toString();
+
+	/**
+	 * Query to sort results by code
+	 */
+	private static final String SORT_ORDERS_BY_CODE = new StringBuilder(TWO_HUNDRED_INT).append(" ORDER BY {")
+			.append(OrderModel.CODE).append("},{").append(OrderModel.CREATIONTIME).append("} DESC, {").append(OrderModel.PK)
+			.append("}").toString();
+
+	private static final String GET_MOP_QUERY = "select {br.pk} from {AmBusRestrsForAmwayAccount as rel join AmwayBusinessRestriction as br ON {rel.target} = {br.pk} join RestrictionTypeEnum as type on {br.type} = {type.pk} } where {rel.source} = ?pk  ORDER BY {rel.creationtime} DESC";
 
 	/**
 	 * {@inheritDoc}
@@ -63,12 +81,12 @@ public class DefaultAmwayApacCustomerAccountDao extends DefaultAmwayCustomerAcco
 	public Integer findOrderCountsForUser(final UserModel user, final BaseStoreModel baseStore)
 	{
 		validateParameterNotNullStandardMessage(USER_STRING, user);
-		validateParameterNotNullStandardMessage(AmwayapacCoreConstants.BASE_STORE_STRING, baseStore);
+		validateParameterNotNullStandardMessage(BASE_STORE_STRING, baseStore);
 
 		final FlexibleSearchQuery fQuery = new FlexibleSearchQuery(FIND_ORDERCOUNT_FOR_CUSTOMER);
 		fQuery.addQueryParameter(OrderModel.USER, user);
 		fQuery.addQueryParameter(OrderModel.STORE, baseStore);
-		fQuery.setResultClassList(Collections.singletonList(Integer.class));
+		fQuery.setResultClassList(singletonList(Integer.class));
 
 		final SearchResult<Integer> searchResult = search(fQuery);
 		return searchResult.getResult().iterator().next();
@@ -82,15 +100,15 @@ public class DefaultAmwayApacCustomerAccountDao extends DefaultAmwayCustomerAcco
 			final BaseStoreModel store, final LocalDate datefrom, final LocalDate dateto, final String type,
 			final PageableData pageableData)
 	{
-		validateParameterNotNull(customerModel, "Customer must not be null");
-		validateParameterNotNull(store, "Store must not be null");
+		validateParameterNotNullStandardMessage("Customer", customerModel);
+		validateParameterNotNullStandardMessage("Store", store);
 
-		final Map<String, Object> queryParams = new HashMap<String, Object>();
+		final Map<String, Object> queryParams = new HashMap<>();
 		queryParams.put("customer", customerModel);
 		queryParams.put("store", store);
 
-		final java.util.Date dateFrom = java.util.Date.from(datefrom.atStartOfDay(java.time.ZoneId.systemDefault()).toInstant());
-		final java.util.Date dateTo = java.util.Date.from(dateto.atStartOfDay(java.time.ZoneId.systemDefault()).toInstant());
+		final Date dateFrom = Date.from(datefrom.atStartOfDay(systemDefault()).toInstant());
+		final Date dateTo = Date.from(dateto.atStartOfDay(systemDefault()).toInstant());
 
 		queryParams.put("startDate", dateFrom);
 		queryParams.put("endDate", dateTo);
@@ -106,9 +124,37 @@ public class DefaultAmwayApacCustomerAccountDao extends DefaultAmwayCustomerAcco
 		return getPagedFlexibleSearchService().search(sortQueries, "byDate", queryParams, pageableData);
 	}
 
-	private void validateParameters(final Map<String, Object> parameters)
+	/**
+	 * Validates each parameter for null value.
+	 *
+	 * @param parameters
+	 * @throws IllegalArgumentException
+	 *            if any of the parameters is null.
+	 */
+	protected void validateParameters(final Map<String, Object> parameters)
 	{
 		parameters.forEach(ServicesUtil::validateParameterNotNullStandardMessage);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public AmwayBusinessRestrictionModel getMOPRestriction(final AmwayAccountModel amwayAccount)
+	{
+		validateParameterNotNullStandardMessage("Amway Account", amwayAccount);
+		AmwayBusinessRestrictionModel restriction = null;
+		final Map<String, Object> params = new HashMap<>();
+		params.put(AmwayAccountModel.PK, amwayAccount.getPk());
+
+		final FlexibleSearchQuery query = new FlexibleSearchQuery(GET_MOP_QUERY);
+		query.addQueryParameters(params);
+
+		final SearchResult<AmwayBusinessRestrictionModel> result = getFlexibleSearchService().search(query);
+		if (CollectionUtils.isNotEmpty(result.getResult()))
+		{
+			restriction = result.getResult().get(0);
+		}
+		return restriction;
+	}
 }
