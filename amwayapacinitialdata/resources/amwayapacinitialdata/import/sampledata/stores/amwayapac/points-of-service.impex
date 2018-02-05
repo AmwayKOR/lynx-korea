@@ -11,10 +11,11 @@
 # ImpEx for Points of Service
 
 # Macros / Replacement Parameter definitions
-$storeUid=amwayapac
-$productCatalog=amwayapacProductCatalog
+#%impex.enableCodeExecution(true)
+#%impex.enableExternalSyntaxParsing(true)
+#%impex.includeExternalData(System.getProperty("HYBRIS_BIN_DIR") + "/custom/amwayapac/amwayapacinitialdata/resources/amwayapacinitialdata/import/coredata/common/macros-definition.impex", "UTF-8", 0)
 
-$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+
 $storeImage=storeImage(qualifier, $catalogVersion)
 
 INSERT_UPDATE OpeningSchedule;code[unique=true];

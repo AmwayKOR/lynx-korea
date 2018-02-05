@@ -10,27 +10,13 @@
 # -----------------------------------------------------------------------
 # ImpEx for Importing CMS Content
 
-# Macros / Replacement Parameter definitions
-$contentCatalog=amwayapacContentCatalog
-$contentCatalogName=Amway Apac Content Catalog
-$productCatalog=amwayapacProductCatalog
-$productCatalogName=Amway Apac Product Catalog
+#%impex.enableCodeExecution(true)
+#%impex.enableExternalSyntaxParsing(true)
+#%impex.includeExternalData(System.getProperty("HYBRIS_BIN_DIR") + "/custom/amwayapac/amwayapacinitialdata/resources/amwayapacinitialdata/import/coredata/common/macros-definition.impex", "UTF-8", 0)
 
-$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
-$productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
-$picture=media(code, $contentCV);
-$image=image(code, $contentCV);
 $media=media(code, $contentCV);
-$medias=medias(code, $contentCV);
-$page=page(uid, $contentCV);
-$contentPage=contentPage(uid, $contentCV);
 $mediaContainer=media(qualifier, $contentCV);
 
-$siteResource=jar:com.amway.apac.initialdata.setup.AmwayApacInitialDataSystemSetup&/amwayapacinitialdata/import/sampledata/contentCatalogs/$contentCatalog/images
-$productResource=jar:com.amway.apac.initialdata.setup.AmwayApacInitialDataSystemSetup&/amwayapacinitialdata/import/productCatalogs/$productCatalog
-$jarResourceCms=jar:com.amway.apac.initialdata.setup.AmwayApacInitialDataSystemSetup&/amwayapacinitialdata/import/cockpits/cmscockpit
-
-$lang=en
 
 ########## Top Header Logo
 

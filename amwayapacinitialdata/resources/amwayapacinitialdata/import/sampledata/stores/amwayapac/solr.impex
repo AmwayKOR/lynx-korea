@@ -10,17 +10,17 @@
 # -----------------------------------------------------------------------
 # ImpEx for SOLR Configuration
 
-# Macros / Replacement Parameter definitions
-$classificationCatalog=amwayapacClassification
-$contentCatalog=amwayapacContentCatalog
+#%impex.enableCodeExecution(true)
+#%impex.enableExternalSyntaxParsing(true)
+#%impex.includeExternalData(System.getProperty("HYBRIS_BIN_DIR") + "/custom/amwayapac/amwayapacinitialdata/resources/amwayapacinitialdata/import/coredata/common/macros-definition.impex", "UTF-8", 0)
 
-$classSystemVersion=systemVersion(catalog(id[default='$classificationCatalog']),version[default='1.0'])
+
 $classCatalogVersion=catalogVersion(catalog(id[default='$classificationCatalog']),version[default='1.0'])
 $classAttribute=classificationAttribute(code,$classSystemVersion)
 $classClass=classificationClass(code,$classCatalogVersion)
 $classAttributeAssignment=classAttributeAssignment($classClass,$classAttribute,$classSystemVersion)
 $contentCatalogVersion=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalogName]),CatalogVersion.version[default=Staged])[default=$contentCatalogName:Staged]
-$productCatalog=amwayapacProductCatalog
+
 $productCatalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
 
 

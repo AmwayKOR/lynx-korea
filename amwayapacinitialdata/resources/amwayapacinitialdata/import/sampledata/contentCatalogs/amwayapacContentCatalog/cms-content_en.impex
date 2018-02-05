@@ -11,15 +11,12 @@
 # ImpEx for Importing CMS Content
 # English Localisation
 
-# Macros / Replacement Parameter definitions
-$contentCatalog=amwayapacContentCatalog
+#%impex.enableCodeExecution(true)
+#%impex.enableExternalSyntaxParsing(true)
+#%impex.includeExternalData(System.getProperty("HYBRIS_BIN_DIR") + "/custom/amwayapac/amwayapacinitialdata/resources/amwayapacinitialdata/import/coredata/common/macros-definition.impex", "UTF-8", 0)
 
-$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
-$picture=media(code, $contentCV);
 $siteResource=jar:com.amway.apac.initialdata.setup.InitialDataSystemSetup&/amwayapacinitialdata/import/contentCatalogs/$contentCatalog
 
-# Language
-$lang=en
 
 # Site Logo Component
 UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]

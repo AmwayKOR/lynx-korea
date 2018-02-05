@@ -11,7 +11,11 @@
 #
 # Import the Content Catalog
 #
-$contentCatalog=amwayapacContentCatalog
+
+#%impex.enableCodeExecution(true)
+#%impex.enableExternalSyntaxParsing(true)
+#%impex.includeExternalData(System.getProperty("HYBRIS_BIN_DIR") + "/custom/amwayapac/amwayapacinitialdata/resources/amwayapacinitialdata/import/coredata/common/macros-definition.impex", "UTF-8", 0)
+
 $languages=ja,en,de,zh
 
 # Content catalog for CMS contents

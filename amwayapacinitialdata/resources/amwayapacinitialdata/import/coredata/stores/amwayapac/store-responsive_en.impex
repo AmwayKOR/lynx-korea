@@ -9,13 +9,14 @@
 # license agreement you entered into with SAP.
 # -----------------------------------------------------------------------
 #
-# Import the Electronics BaseStore
+# Import the Amway Apac BaseStore
 #
 
-# Language
-$lang=en
-$storeUid=amwayapac
+#%impex.enableCodeExecution(true)
+#%impex.enableExternalSyntaxParsing(true)
+#%impex.includeExternalData(System.getProperty("HYBRIS_BIN_DIR") + "/custom/amwayapac/amwayapacinitialdata/resources/amwayapacinitialdata/import/coredata/common/macros-definition.impex", "UTF-8", 0)
+
 
 # Create Base Store
 UPDATE BaseStore;uid[unique=true];name[lang=$lang]
- ;storeUid;"Amway APAC Store"
+ ;$storeUid;"Amway APAC Store"

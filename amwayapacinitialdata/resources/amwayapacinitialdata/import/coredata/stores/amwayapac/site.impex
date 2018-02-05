@@ -11,18 +11,12 @@
 #
 # Import the CMS Site configuration for the store
 #
-$productCatalog=amwayapacProductCatalog
-$contentCatalog=amwayapacContentCatalog
-$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
-$defaultLanguage=en
-$storeUid=amwayapac
-$siteUid=amwayapac
-$promoGrp=amwayapacPromotionGroup
-$siteMapUrlLimitPerFile=50000
+
+#%impex.enableCodeExecution(true)
+#%impex.enableExternalSyntaxParsing(true)
+#%impex.includeExternalData(System.getProperty("HYBRIS_BIN_DIR") + "/custom/amwayapac/amwayapacinitialdata/resources/amwayapacinitialdata/import/coredata/common/macros-definition.impex", "UTF-8", 0)
 
 $siteMapLangCur=enEur
-$siteMapPage=Homepage,Product,CategoryLanding,Category,Store,Content,Custom
-$customSiteMapUrls=
 
 # Import config properties into impex macros
 UPDATE GenericItem[processor=de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor];pk[unique=true]

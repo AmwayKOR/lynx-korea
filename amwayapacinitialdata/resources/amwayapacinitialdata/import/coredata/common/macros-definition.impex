@@ -1,11 +1,20 @@
+############### Macros / Replacement Parameter definitions ###############
+
 ############### Base Store and Base Site specific macros ###############
 
-$languages=ja,en,de,zh
+# Currencies #
+$ukCurrency=GBP
+$jpCurrency=JPY
+$usCurrency=USD
+$europeCurrency=EUR
 $currencies=JPY,USD
+$defaultCurrency=USD
+
 $net=false
 $storeUid=amwayapac
 $siteUid=amwayapac
-$defaultCurrency=USD
+$themeUid=amwayapac
+$languages=ja,en,de,zh
 $defaultLanguage=en
 $unitedKingdom=GB,GG,IM,JE
 $europeNotUK=AD,AL,AT,BA,BE,BG,BY,CH,CY,CZ,DE,DK,EE,ES,FI,FO,FR,GI,GL,GR,HR,HU,IE,IS,IT,LI,LT,LU,LV,MC,MD,ME,MK,MT,NL,NO,PL,PT,RO,RS,RU,SE,SI,SK,SM,TR,UA,VA
@@ -16,7 +25,7 @@ $pickupInStoreMode=BUY_AND_COLLECT
 $customerAllowedToIgnoreSuggestions=true
 $paymentProvider=Mockup
 $promoGrp=amwayapacPromotionGroup
-$checkoutFlowGroup=responsiveCheckoutGroup
+$checkoutFlowGroup=defaultCheckoutGroup
 # $responsiveCheckoutGroup=responsiveCheckoutGroup
 $siteMapUrlLimitPerFile=50000
 $vendor=amwayapacVendor
@@ -30,6 +39,7 @@ $contentCatalogName=Amway Apac Content Catalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
 $wideContent=CMSImageComponent,BannerComponent
 
+$defaultCountry=US
 $siteMapLangCur=enUsd
 $siteMapPage=Homepage,Product,CategoryLanding,Category,Store,Content,Custom
 $customSiteMapUrls=
@@ -38,7 +48,6 @@ $picture=media(code, $contentCV);
 $jarResource=$config-jarResource
 # $jarResource=jar:com.amway.initialdata.setup.InitialDataSystemSetup&/amwayinitialdata/import
 $siteResource=jar:com.amway.apac.initialdata.setup.AmwayApacInitialDataSystemSetup&/amwayapacinitialdata/import/sampledata/contentCatalogs/$contentCatalog/images
-
 $page=page(uid, $contentCV);
 $contentPage=contentPage(uid, $contentCV);
 
@@ -52,6 +61,7 @@ $mediaContainer=media(qualifier, $contentCV)[lang=$lang];
 $productCatalog=amwayapacProductCatalog
 $productCatalogName=Amway Apac Product Catalog
 $classificationCatalog=amwayapacClassification
+# $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default='$productCatalog:Staged']
 $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
 $productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
 $clAttrModifiers=system='$classificationCatalog',version='1.0',translator=de.hybris.platform.catalog.jalo.classification.impex.ClassificationAttributeTranslator
@@ -59,6 +69,8 @@ $systemVersion=systemVersion(catalog(id[default='$classificationCatalog']),versi
 $productResource=jar:com.amway.apac.initialdata.setup.AmwayApacInitialDataSystemSetup&/amwayapacinitialdata/import/productCatalogs/$productCatalog
 $jarResourceCms=jar:com.amway.apac.initialdata.setup.AmwayApacInitialDataSystemSetup&/amwayapacinitialdata/import/cockpits/cmscockpit
 $media=@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator]
+
+# Set product approval status to Approved only for those products that have prices.
 $approved=approvalstatus(code)[default='approved']
 $thumbnail=thumbnail(code, $catalogVersion)
 $categories=target(code, $catalogVersion)[unique=true]
@@ -78,7 +90,8 @@ $detail=detail(code, $catalogVersion)
 $normal=normal(code, $catalogVersion)
 $others=others(code, $catalogVersion)
 $data_sheet=data_sheet(code, $catalogVersion)
-$medias=medias(code, $catalogVersion)
+# $medias=medias(code, $catalogVersion)
+$medias=medias(code, $contentCV);
 $galleryImages=galleryImages(qualifier, $catalogVersion)
 $category=category(code, $productCV)
 $unit=unit(code,$catalogVersion)

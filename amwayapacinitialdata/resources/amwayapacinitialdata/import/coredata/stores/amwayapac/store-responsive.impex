@@ -12,24 +12,10 @@
 # Create the BaseStore
 #
 
-$productCatalog=amwayapacProductCatalog
-$classificationCatalog=amwayapacClassification
-$currencies=JPY,USD
-$net=false
-$storeUid=amwayapac
-$defaultCurrency=USD
-$languages=ja,en,de,zh
-$defaultLanguage=en
-$unitedKingdom=GB,GG,IM,JE
-$europeNotUK=AD,AL,AT,BA,BE,BG,BY,CH,CY,CZ,DE,DK,EE,ES,FI,FO,FR,GI,GL,GR,HR,HU,IE,IS,IT,LI,LT,LU,LV,MC,MD,ME,MK,MT,NL,NO,PL,PT,RO,RS,RU,SE,SI,SK,SM,TR,UA,VA
-$asianCountries=CN,JP,VN,HK,KP,KR
-$deliveryCountries=$unitedKingdom,$europeNotUK,$asianCountries,US
-$orderProcessCode=order-process
-$pickupInStoreMode=BUY_AND_COLLECT
-$customerAllowedToIgnoreSuggestions=true
-$paymentProvider=Mockup
-$promoGrp=amwayapacPromotionGroup
-$checkoutFlowGroup=responsiveCheckoutGroup
+#%impex.enableCodeExecution(true)
+#%impex.enableExternalSyntaxParsing(true)
+#%impex.includeExternalData(System.getProperty("HYBRIS_BIN_DIR") + "/custom/amwayapac/amwayapacinitialdata/resources/amwayapacinitialdata/import/coredata/common/macros-definition.impex", "UTF-8", 0)
+
 
 INSERT_UPDATE PromotionGroup;Identifier[unique=true];
 ;$promoGrp;

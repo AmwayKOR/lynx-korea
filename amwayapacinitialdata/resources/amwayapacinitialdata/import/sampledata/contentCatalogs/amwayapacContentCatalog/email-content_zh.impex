@@ -11,12 +11,10 @@
 # ImpEx for Importing Email Content
 # ZH Localisation
 
-# Macros / Replacement Parameter definitions
-$contentCatalog=amwayapacContentCatalog
+#%impex.enableCodeExecution(true)
+#%impex.enableExternalSyntaxParsing(true)
+#%impex.includeExternalData(System.getProperty("HYBRIS_BIN_DIR") + "/custom/amwayapac/amwayapacinitialdata/resources/amwayapacinitialdata/import/coredata/common/macros-definition.impex", "UTF-8", 0)
 
-$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
-$picture=media(code, $contentCV);
-$wideContent=CMSImageComponent,BannerComponent
 $jarResource=jar:com.amway.apac.initialdata.setup.InitialDataSystemSetup&/amwayapacinitialdata/import
 $siteResource=jar:com.amway.apac.initialdata.setup.InitialDataSystemSetup&/amwayapacinitialdata/import/contentCatalogs/$contentCatalog
 
