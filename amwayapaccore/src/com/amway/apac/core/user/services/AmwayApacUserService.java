@@ -3,7 +3,8 @@ package com.amway.apac.core.user.services;
 import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.servicelayer.exceptions.AmbiguousIdentifierException;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
-import de.hybris.platform.servicelayer.user.UserService;
+
+import com.amway.core.user.services.AmwayUserService;
 
 
 /**
@@ -12,7 +13,7 @@ import de.hybris.platform.servicelayer.user.UserService;
  * @author Ashish Sabal
  *
  */
-public interface AmwayApacUserService extends UserService
+public interface AmwayApacUserService extends AmwayUserService
 {
 
 	/**

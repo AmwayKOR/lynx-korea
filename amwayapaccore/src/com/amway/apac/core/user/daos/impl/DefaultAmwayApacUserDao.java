@@ -4,7 +4,6 @@ import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 import de.hybris.platform.servicelayer.search.SearchResult;
-import de.hybris.platform.servicelayer.user.daos.impl.DefaultUserDao;
 import de.hybris.platform.servicelayer.util.ServicesUtil;
 
 import java.util.ArrayList;
@@ -13,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.amway.apac.core.user.daos.AmwayApacUserDao;
+import com.amway.core.user.dao.impl.DefaultAmwayUserDao;
 
 
 /**
@@ -21,7 +21,7 @@ import com.amway.apac.core.user.daos.AmwayApacUserDao;
  * @author Ashish Sabal
  *
  */
-public class DefaultAmwayApacUserDao extends DefaultUserDao implements AmwayApacUserDao
+public class DefaultAmwayApacUserDao extends DefaultAmwayUserDao implements AmwayApacUserDao
 {
 	private static final String USERS_FOR_UID_AND_ABOID_QUERY = new StringBuilder(100).append("SELECT {").append(CustomerModel.PK)
 			.append("} FROM {").append(CustomerModel._TYPECODE).append("} WHERE {uid} = ?").append(CustomerModel.UID)

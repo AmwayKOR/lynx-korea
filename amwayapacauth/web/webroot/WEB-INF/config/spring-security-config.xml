@@ -76,7 +76,7 @@
     </security:authentication-manager>
 
     <bean id="amwayAuthenticationProvider" parent="acceleratorAuthenticationProvider" class="com.amway.apac.auth.security.impl.DefaultAmwayApacAuthenticationProvider">
-        <property name="amwayApacUserService" ref="amwayApacUserService" />
+        <property name="amwayApacUserService" ref="userService" />
         <property name="amwayApacAccountService" ref="amwayAccountService" />
         <property name="sessionService" ref="sessionService" />
     </bean>

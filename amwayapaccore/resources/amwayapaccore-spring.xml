@@ -480,14 +480,14 @@
 		<property name="businessProcessService" ref="businessProcessService" />
 	</bean>
 	
-	<alias alias="amwayApacUserDao" name="defaultAmwayApacUserDao" />
-    <bean id="defaultAmwayApacUserDao" parent="userDao" class="com.amway.apac.core.user.daos.impl.DefaultAmwayApacUserDao"/>
+	<alias alias="userDao" name="defaultAmwayApacUserDao" />
+	<alias alias="amwayUserDao" name="defaultAmwayApacUserDao" />
+    <bean id="defaultAmwayApacUserDao" parent="defaultAmwayUserDao" class="com.amway.apac.core.user.daos.impl.DefaultAmwayApacUserDao"/>
     
     <alias alias="userService" name="defaultAmwayApacUserService" />
-    <alias alias="amwayApacUserService" name="defaultAmwayApacUserService" />
-    <bean id="defaultAmwayApacUserService" parent="defaultUserService" class="com.amway.apac.core.user.services.impl.DefaultAmwayApacUserService" primary="true">
+    <bean id="defaultAmwayApacUserService" parent="defaultAmwayUserService" class="com.amway.apac.core.user.services.impl.DefaultAmwayApacUserService" primary="true">
         <property name="baseStoreService" ref="baseStoreService" />
-        <property name="amwayApacUserDao" ref="amwayApacUserDao" />
+        <property name="amwayApacUserDao" ref="userDao" />
     </bean>
 
 	<alias alias="commerceProductReferenceService" name="defaultAmwayApacProductReferenceService"/>

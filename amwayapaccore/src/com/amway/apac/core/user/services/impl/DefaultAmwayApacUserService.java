@@ -2,15 +2,14 @@ package com.amway.apac.core.user.services.impl;
 
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateIfSingleResult;
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNull;
-
 import de.hybris.platform.core.model.user.UserModel;
-import de.hybris.platform.servicelayer.user.impl.DefaultUserService;
 import de.hybris.platform.store.services.BaseStoreService;
 
 import java.util.List;
 
 import com.amway.apac.core.user.daos.AmwayApacUserDao;
 import com.amway.apac.core.user.services.AmwayApacUserService;
+import com.amway.core.user.services.impl.DefaultAmwayUserService;
 
 
 /**
@@ -19,7 +18,7 @@ import com.amway.apac.core.user.services.AmwayApacUserService;
  * @author Ashish Sabal
  *
  */
-public class DefaultAmwayApacUserService extends DefaultUserService implements AmwayApacUserService
+public class DefaultAmwayApacUserService extends DefaultAmwayUserService implements AmwayApacUserService
 {
 	private BaseStoreService baseStoreService;
 
