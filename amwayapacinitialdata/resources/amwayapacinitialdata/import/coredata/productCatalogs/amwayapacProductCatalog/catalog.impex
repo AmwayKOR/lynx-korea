@@ -11,11 +11,10 @@
 # 
 # Import the Product Catalog and Classification Catalog
 #
+#%impex.enableCodeExecution(true)
+#%impex.enableExternalSyntaxParsing(true)
+#%impex.includeExternalData(System.getProperty("HYBRIS_BIN_DIR") + "/custom/amwayapac/amwayapacinitialdata/resources/amwayapacinitialdata/import/coredata/common/macros-definition.impex", "UTF-8", 0)
 
-$productCatalog=amwayapacProductCatalog
-$classificationCatalog=amwayapacClassification
-$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
-$languages=ja,en,de,zh
 
 # Product catalog
 INSERT_UPDATE Catalog;id[unique=true]

@@ -10,12 +10,9 @@
 # -----------------------------------------------------------------------
 # ImpEx for Importing Products Store Stock Levels into the Store
 
-# Macros / Replacement Parameter definitions
-$productCatalog=amwayapacProductCatalog
-$productCatalogName=Amway Apac Product Catalog
-$vendor=amwayapacVendor
-
-$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+#%impex.enableCodeExecution(true)
+#%impex.enableExternalSyntaxParsing(true)
+#%impex.includeExternalData(System.getProperty("HYBRIS_BIN_DIR") + "/custom/amwayapac/amwayapacinitialdata/resources/amwayapacinitialdata/import/coredata/common/macros-definition.impex", "UTF-8", 0)
 
 
 # Create some Warehouses for the Vendor

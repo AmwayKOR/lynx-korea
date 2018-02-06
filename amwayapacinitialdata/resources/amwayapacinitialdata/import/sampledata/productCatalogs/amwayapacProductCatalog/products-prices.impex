@@ -10,14 +10,10 @@
 # -----------------------------------------------------------------------
 # ImpEx for Importing Prices
 
-# Macros / Replacement Parameter definitions
-$productCatalog=amwayapacProductCatalog
+#%impex.enableCodeExecution(true)
+#%impex.enableExternalSyntaxParsing(true)
+#%impex.includeExternalData(System.getProperty("HYBRIS_BIN_DIR") + "/custom/amwayapac/amwayapacinitialdata/resources/amwayapacinitialdata/import/coredata/common/macros-definition.impex", "UTF-8", 0)
 
-$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default='$productCatalog:Staged']
-$prices=Europe1prices[translator=de.hybris.platform.europe1.jalo.impex.Europe1PricesTranslator]
-
-# Set product approval status to Approved only for those products that have prices.
-$approved=approvalstatus(code)[default='approved']
 
 INSERT_UPDATE PriceRow;productId[unique=true];pointValue;businessVolume;currency(isocode)[unique=true];price[unique=true];startTime[dateformat=yyyyMMdd];endTime[dateformat=yyyyMMdd];pg(code)[unique=true];ug(code)[unique=true];unit(code[unique=true]);net
 ;245306;2,200;2,200;USD;2,500;20110322;21001201;245306PriceGroup;;pieces;true

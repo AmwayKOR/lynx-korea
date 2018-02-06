@@ -13,13 +13,12 @@
 #
 #% impex.setLocale(Locale.GERMAN)
 
-$storeUid=amwayapac
+#%impex.enableCodeExecution(true)
+#%impex.enableExternalSyntaxParsing(true)
+#%impex.includeExternalData(System.getProperty("HYBRIS_BIN_DIR") + "/custom/amwayapac/amwayapacinitialdata/resources/amwayapacinitialdata/import/coredata/common/macros-definition.impex", "UTF-8", 0)
 
-# Currencies
-$ukCurrency=GBP
-$jpCurrency=JPY
-$usCurrency=USD
-$europeCurrency=EUR
+
+
 
 # Delivery Zones
 INSERT_UPDATE Zone                  ; code[unique=true]               ; countries(isocode)

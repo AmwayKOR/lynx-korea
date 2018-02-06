@@ -20,12 +20,12 @@
 					</c:if>
 				</sec:authorize>
 				<div class="product-list__item-content amwahover">
-					<button class="quick-view-btn" data-product-code="${product.code}">
-						<spring:theme code="plp.producttile.quick.view" />
-					</button>
-					<a class="product-list__thum" target="_self" href="${productPDPurl}">
+					
+					<span class="product-list__thum" >
 						<product:productPrimaryImage product="${product}" format="productGrid" cssClass="product-list__thumbnail" />
-					</a>
+						<button class="quick-view-btn" data-product-code="${product.code}">
+						<spring:theme code="plp.producttile.quick.view" /></button>
+					</span>
 					<div class="product-list__item-detail">
 						<p class="product-list__item-title">
 							<a class="product-list__item-title" target="_self" href="${productPDPurl}">${product.name}</a>

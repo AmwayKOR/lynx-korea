@@ -15,12 +15,10 @@
 # ApparelProduct > ApparelStyleVariantProduct > ApparelSizeVariantProduct
 # ApparelProducts may have no variations, only style variations or both style and size variations.
 
-# Macros / Replacement Parameter definitions
-$productCatalog=amwayapacProductCatalog
+#%impex.enableCodeExecution(true)
+#%impex.enableExternalSyntaxParsing(true)
+#%impex.includeExternalData(System.getProperty("HYBRIS_BIN_DIR") + "/custom/amwayapac/amwayapacinitialdata/resources/amwayapacinitialdata/import/coredata/common/macros-definition.impex", "UTF-8", 0)
 
-$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
-$prices=europe1prices[translator=de.hybris.platform.europe1.jalo.impex.Europe1PricesTranslator]
-$baseProduct=baseProduct(code, catalogVersion(catalog(id[default='$productCatalog']),version[default='Staged']))
 $approved=approvalstatus(code)[default='check']
 
 # Create Products

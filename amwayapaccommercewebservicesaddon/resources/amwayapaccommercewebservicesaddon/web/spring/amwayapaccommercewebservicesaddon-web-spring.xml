@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd">
+           
+    <context:component-scan base-package="com.amway.apac.controllers"/>
+
+	<import resource="dto-level-mappings-spring.xml"/>
+	<import resource="dto-mappings-spring.xml"/>
+	<import resource="filter-config-spring.xml"/>
+	<import resource="validators-spring.xml"/>
+
+
+	<!-- Cache manager for addon -->
+
+	<alias name="defaultAmwayapaccommercewebservicesaddonCacheManager" alias="amwayapaccommercewebservicesaddonCacheManager"/>
+	<bean id="defaultAmwayapaccommercewebservicesaddonCacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
+		<property name="cacheManager" ref="amwayapaccommercewebservicesaddonEhcache"/>
+	</bean>
+
+	<alias name="defaultAmwayapaccommercewebservicesaddonEhcache" alias="amwayapaccommercewebservicesaddonEhcache"/>
+	<bean id="defaultAmwayapaccommercewebservicesaddonEhcache" class="de.hybris.platform.webservicescommons.cache.TenantAwareEhCacheManagerFactoryBean">
+		<property name="cacheNamePrefix" value="amwayapaccommercewebservicesaddonCache_"/>
+		<property name="configLocation" value="/WEB-INF/cache/addons/amwayapaccommercewebservicesaddon/ehcache.xml"/>
+	</bean>
+
+	<bean depends-on="wsCacheManagerList" parent="listMergeDirective">
+		<property name="add" ref="amwayapaccommercewebservicesaddonCacheManager"/>
+	</bean>
+
+</beans>

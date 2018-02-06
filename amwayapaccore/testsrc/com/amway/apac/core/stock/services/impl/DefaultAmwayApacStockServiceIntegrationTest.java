@@ -39,7 +39,16 @@ public class DefaultAmwayApacStockServiceIntegrationTest extends ServicelayerTra
 	private static final String TEST_CATALOG_VERSION = "Online";
 	private static final String CART_1 = "testCart1";
 	private static final String TEST_USER = "amwaytestuser";
-	private static final String TEST_BUNDLE_PRODUCT_1 = "testBundleProduct1";
+
+	private static final String TEST_PRODUCT_11_BUNDLE = "testProduct11Bundle";
+	private static final String TEST_PRODUCT_12_BUNDLE = "testProduct12Bundle";
+	private static final String TEST_PRODUCT_13_BUNDLE = "testProduct13Bundle";
+	private static final String TEST_PRODUCT_21_BUNDLE = "testProduct21Bundle";
+	private static final String TEST_PRODUCT_23_BUNDLE = "testProduct23Bundle";
+	private static final String TEST_PRODUCT_31_BUNDLE = "testProduct31Bundle";
+	private static final String TEST_PRODUCT_33_BUNDLE = "testProduct33Bundle";
+	private static final String TEST_PRODUCT_41_BUNDLE = "testProduct41Bundle";
+	private static final String TEST_PRODUCT_43_BUNDLE = "testProduct43Bundle";
 
 	@Resource(name = "catalogVersionService")
 	private CatalogVersionService catalogVersionService;
@@ -77,12 +86,13 @@ public class DefaultAmwayApacStockServiceIntegrationTest extends ServicelayerTra
 				amwayApacStockService.getProductStatus(getProductByCode(TEST_PRODUCT_1), getWarehouseByUid(TEST_WAREHOUSE_1)));
 	}
 
+
 	@Test
-	public void testGetProductStatusForBundle()
+	public void testGetProductStatusForWarehouseListForProduct()
 	{
 		cartService.setSessionCart(commerceCartService.getCartForCodeAndUser(CART_1, userService.getUserForUID(TEST_USER)));
-		Assert.assertEquals(StockLevelStatus.INSTOCK,
-				amwayApacStockService.getProductStatus(getProductByCode(TEST_BUNDLE_PRODUCT_1), getWarehouseByUid(TEST_WAREHOUSE_1)));
+		Assert.assertEquals(StockLevelStatus.INSTOCK, amwayApacStockService.getProductStatus(getProductByCode(TEST_PRODUCT_1),
+				Arrays.asList(getWarehouseByUid(TEST_WAREHOUSE_1))));
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -97,36 +107,206 @@ public class DefaultAmwayApacStockServiceIntegrationTest extends ServicelayerTra
 		amwayApacStockService.updateAvailableAmount(getProductByCode(TEST_PRODUCT_1), null, 10);
 	}
 
-	@Test
-	public void testUpdateAvailableAmount()
-	{
-		amwayApacStockService.updateAvailableAmount(getProductByCode(TEST_PRODUCT_1), getWarehouseByUid(TEST_WAREHOUSE_1), 15);
-		Assert.assertEquals(15,
-				amwayApacStockService.getStockLevelAmount(getProductByCode(TEST_PRODUCT_1), getWarehouseByUid(TEST_WAREHOUSE_1)));
 
-		amwayApacStockService.updateAvailableAmount(getProductByCode(TEST_PRODUCT_1), getWarehouseByUid(TEST_WAREHOUSE_1), 20);
-		Assert.assertEquals(20,
-				amwayApacStockService.getStockLevelAmount(getProductByCode(TEST_PRODUCT_1), getWarehouseByUid(TEST_WAREHOUSE_1)));
-	}
-
+	/**
+	 * Stock level test for [All Major Products] & [All Backorder]
+	 */
 	@Test
-	public void testGetProductStatusForWarehouseListForProduct()
+	public void testGetProductStatusForBundleTest1()
 	{
 		cartService.setSessionCart(commerceCartService.getCartForCodeAndUser(CART_1, userService.getUserForUID(TEST_USER)));
-		Assert.assertEquals(StockLevelStatus.INSTOCK,
-				amwayApacStockService.getProductStatus(getProductByCode(TEST_PRODUCT_1),
+		Assert.assertEquals(StockLevelStatus.BACKORDER,
+				amwayApacStockService.getProductStatus(getProductByCode(TEST_PRODUCT_11_BUNDLE),
+						getWarehouseByUid(TEST_WAREHOUSE_1)));
+	}
+
+	/**
+	 * Stock level test for [All Major Products] & [All Backorder]
+	 */
+	@Test
+	public void testGetProductStatusForWarehouseListForBundleTest1()
+	{
+		cartService.setSessionCart(commerceCartService.getCartForCodeAndUser(CART_1, userService.getUserForUID(TEST_USER)));
+		Assert.assertEquals(StockLevelStatus.BACKORDER,
+				amwayApacStockService.getProductStatus(getProductByCode(TEST_PRODUCT_11_BUNDLE),
 						Arrays.asList(getWarehouseByUid(TEST_WAREHOUSE_1))));
 	}
 
+	/**
+	 * Stock level test for [All Minor Products] & [All Backorder]
+	 */
 	@Test
-	public void testGetProductStatusForWarehouseListForBundle()
+	public void testGetProductStatusForBundleTest2()
 	{
 		cartService.setSessionCart(commerceCartService.getCartForCodeAndUser(CART_1, userService.getUserForUID(TEST_USER)));
-		Assert.assertEquals(StockLevelStatus.INSTOCK,
-				amwayApacStockService.getProductStatus(getProductByCode(TEST_BUNDLE_PRODUCT_1),
-						Arrays.asList(getWarehouseByUid(TEST_WAREHOUSE_1))));
+		Assert.assertEquals(StockLevelStatus.BACKORDER,
+				amwayApacStockService.getProductStatus(getProductByCode(TEST_PRODUCT_12_BUNDLE), getWarehouseByUid(TEST_WAREHOUSE_1)));
 	}
 
+	/**
+	 * Stock level test for [All Minor Products] & [All Backorder]
+	 */
+	@Test
+	public void testGetProductStatusForWarehouseListForBundleTest2()
+	{
+		cartService.setSessionCart(commerceCartService.getCartForCodeAndUser(CART_1, userService.getUserForUID(TEST_USER)));
+		Assert.assertEquals(StockLevelStatus.BACKORDER, amwayApacStockService
+				.getProductStatus(getProductByCode(TEST_PRODUCT_12_BUNDLE), Arrays.asList(getWarehouseByUid(TEST_WAREHOUSE_1))));
+	}
+
+	/**
+	 * Stock level test for [Mixed Products] & [All Major Backorder]
+	 */
+	@Test
+	public void testGetProductStatusForBundleTest3()
+	{
+		cartService.setSessionCart(commerceCartService.getCartForCodeAndUser(CART_1, userService.getUserForUID(TEST_USER)));
+		Assert.assertEquals(StockLevelStatus.BACKORDER,
+				amwayApacStockService.getProductStatus(getProductByCode(TEST_PRODUCT_13_BUNDLE), getWarehouseByUid(TEST_WAREHOUSE_1)));
+	}
+
+	/**
+	 * Stock level test for [Mixed Products] & [All Major Backorder]
+	 */
+	@Test
+	public void testGetProductStatusForWarehouseListForBundleTest3()
+	{
+		cartService.setSessionCart(commerceCartService.getCartForCodeAndUser(CART_1, userService.getUserForUID(TEST_USER)));
+		Assert.assertEquals(StockLevelStatus.BACKORDER, amwayApacStockService
+				.getProductStatus(getProductByCode(TEST_PRODUCT_13_BUNDLE), Arrays.asList(getWarehouseByUid(TEST_WAREHOUSE_1))));
+	}
+
+	/**
+	 * Stock level test for [All Major Products] & [One TNA]
+	 */
+	@Test
+	public void testGetProductStatusForBundleTest4()
+	{
+		cartService.setSessionCart(commerceCartService.getCartForCodeAndUser(CART_1, userService.getUserForUID(TEST_USER)));
+		Assert.assertEquals(StockLevelStatus.TEMPORARYNOTAVAILABLE,
+				amwayApacStockService.getProductStatus(getProductByCode(TEST_PRODUCT_21_BUNDLE), getWarehouseByUid(TEST_WAREHOUSE_1)));
+	}
+
+	/**
+	 * Stock level test for [All Major Products] & [One TNA]
+	 */
+	@Test
+	public void testGetProductStatusForWarehouseListForBundleTest4()
+	{
+		cartService.setSessionCart(commerceCartService.getCartForCodeAndUser(CART_1, userService.getUserForUID(TEST_USER)));
+		Assert.assertEquals(StockLevelStatus.TEMPORARYNOTAVAILABLE, amwayApacStockService
+				.getProductStatus(getProductByCode(TEST_PRODUCT_21_BUNDLE), Arrays.asList(getWarehouseByUid(TEST_WAREHOUSE_1))));
+	}
+
+	/**
+	 * Stock level test for [Mixed Products] & [One Major TNA]
+	 */
+	@Test
+	public void testGetProductStatusForBundleTest5()
+	{
+		cartService.setSessionCart(commerceCartService.getCartForCodeAndUser(CART_1, userService.getUserForUID(TEST_USER)));
+		Assert.assertEquals(StockLevelStatus.TEMPORARYNOTAVAILABLE,
+				amwayApacStockService.getProductStatus(getProductByCode(TEST_PRODUCT_23_BUNDLE), getWarehouseByUid(TEST_WAREHOUSE_1)));
+	}
+
+	/**
+	 * Stock level test for [Mixed Products] & [One Major TNA]
+	 */
+	@Test
+	public void testGetProductStatusForWarehouseListForBundleTest5()
+	{
+		cartService.setSessionCart(commerceCartService.getCartForCodeAndUser(CART_1, userService.getUserForUID(TEST_USER)));
+		Assert.assertEquals(StockLevelStatus.TEMPORARYNOTAVAILABLE, amwayApacStockService
+				.getProductStatus(getProductByCode(TEST_PRODUCT_23_BUNDLE), Arrays.asList(getWarehouseByUid(TEST_WAREHOUSE_1))));
+	}
+
+	/**
+	 * Stock level test for [All Major Products] & [One NYA and No TNA]
+	 */
+	@Test
+	public void testGetProductStatusForBundleTest6()
+	{
+		cartService.setSessionCart(commerceCartService.getCartForCodeAndUser(CART_1, userService.getUserForUID(TEST_USER)));
+		Assert.assertEquals(StockLevelStatus.NOTYETAVAILABLE,
+				amwayApacStockService.getProductStatus(getProductByCode(TEST_PRODUCT_31_BUNDLE), getWarehouseByUid(TEST_WAREHOUSE_1)));
+	}
+
+	/**
+	 * Stock level test for [All Major Products] & [One NYA and No TNA]
+	 */
+	@Test
+	public void testGetProductStatusForWarehouseListForBundleTest6()
+	{
+		cartService.setSessionCart(commerceCartService.getCartForCodeAndUser(CART_1, userService.getUserForUID(TEST_USER)));
+		Assert.assertEquals(StockLevelStatus.NOTYETAVAILABLE, amwayApacStockService
+				.getProductStatus(getProductByCode(TEST_PRODUCT_31_BUNDLE), Arrays.asList(getWarehouseByUid(TEST_WAREHOUSE_1))));
+	}
+
+	/**
+	 * Stock level test for [Mixed Products] & [One major NYA and No TNA]
+	 */
+	@Test
+	public void testGetProductStatusForBundleTest7()
+	{
+		cartService.setSessionCart(commerceCartService.getCartForCodeAndUser(CART_1, userService.getUserForUID(TEST_USER)));
+		Assert.assertEquals(StockLevelStatus.NOTYETAVAILABLE,
+				amwayApacStockService.getProductStatus(getProductByCode(TEST_PRODUCT_33_BUNDLE), getWarehouseByUid(TEST_WAREHOUSE_1)));
+	}
+
+	/**
+	 * Stock level test for [Mixed Products] & [One major NYA and No TNA]
+	 */
+	@Test
+	public void testGetProductStatusForWarehouseListForBundleTest7()
+	{
+		cartService.setSessionCart(commerceCartService.getCartForCodeAndUser(CART_1, userService.getUserForUID(TEST_USER)));
+		Assert.assertEquals(StockLevelStatus.NOTYETAVAILABLE, amwayApacStockService
+				.getProductStatus(getProductByCode(TEST_PRODUCT_33_BUNDLE), Arrays.asList(getWarehouseByUid(TEST_WAREHOUSE_1))));
+	}
+
+	/**
+	 * Stock level test for [All Major Products] & [One NLA and no TNA or NYA]
+	 */
+	@Test
+	public void testGetProductStatusForBundleTest8()
+	{
+		cartService.setSessionCart(commerceCartService.getCartForCodeAndUser(CART_1, userService.getUserForUID(TEST_USER)));
+		Assert.assertEquals(StockLevelStatus.NOLONGERAVAILABLE,
+				amwayApacStockService.getProductStatus(getProductByCode(TEST_PRODUCT_41_BUNDLE), getWarehouseByUid(TEST_WAREHOUSE_1)));
+	}
+
+	/**
+	 * Stock level test for [All Major Products] & [One NLA and no TNA or NYA]
+	 */
+	@Test
+	public void testGetProductStatusForWarehouseListForBundleTest8()
+	{
+		cartService.setSessionCart(commerceCartService.getCartForCodeAndUser(CART_1, userService.getUserForUID(TEST_USER)));
+		Assert.assertEquals(StockLevelStatus.NOLONGERAVAILABLE, amwayApacStockService
+				.getProductStatus(getProductByCode(TEST_PRODUCT_41_BUNDLE), Arrays.asList(getWarehouseByUid(TEST_WAREHOUSE_1))));
+	}
+
+	/**
+	 * Stock level test for [Mixed Products] & [One major NLA and No TNA or NYA]
+	 */
+	@Test
+	public void testGetProductStatusForBundleTest9()
+	{
+		cartService.setSessionCart(commerceCartService.getCartForCodeAndUser(CART_1, userService.getUserForUID(TEST_USER)));
+		Assert.assertEquals(StockLevelStatus.NOLONGERAVAILABLE,
+				amwayApacStockService.getProductStatus(getProductByCode(TEST_PRODUCT_43_BUNDLE), getWarehouseByUid(TEST_WAREHOUSE_1)));
+	}
+
+	/**
+	 * Stock level test for [Mixed Products] & [One major NLA and No TNA or NYA]
+	 */
+	@Test
+	public void testGetProductStatusForWarehouseListForBundleTest9()
+	{
+		cartService.setSessionCart(commerceCartService.getCartForCodeAndUser(CART_1, userService.getUserForUID(TEST_USER)));
+		Assert.assertEquals(StockLevelStatus.NOLONGERAVAILABLE, amwayApacStockService
+				.getProductStatus(getProductByCode(TEST_PRODUCT_43_BUNDLE), Arrays.asList(getWarehouseByUid(TEST_WAREHOUSE_1))));
+	}
 
 
 	/**
