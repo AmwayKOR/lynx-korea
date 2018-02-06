@@ -11,18 +11,10 @@
 #
 # Import the Solr configuration for the Amway APAC store
 #
-$productCatalog=amwayapacProductCatalog
-$catalogVersions=catalogVersions(catalog(id),version);
-$serverConfigName=amwayamwayapacSolrServerConfig
-$indexConfigName=amwayamwayapacSolrIndexConfig
-$searchConfigName=amwayamwayapacPageSize
-$facetSearchConfigName=amwayapacIndex
-$facetSearchConfigDescription=APAC Solr Index
-$searchIndexNamePrefix=amwayapac
-$solrIndexedType=amwayapacProductType
-$indexBaseSite=amwayapac
-$indexLanguages=ja,en,de,zh
-$indexCurrencies=USD
+
+#%impex.enableCodeExecution(true)
+#%impex.enableExternalSyntaxParsing(true)
+#%impex.includeExternalData(System.getProperty("HYBRIS_BIN_DIR") + "/custom/amwayapac/amwayapacinitialdata/resources/amwayapacinitialdata/import/coredata/common/macros-definition.impex", "UTF-8", 0)
 
 
 # Import config properties into impex macros

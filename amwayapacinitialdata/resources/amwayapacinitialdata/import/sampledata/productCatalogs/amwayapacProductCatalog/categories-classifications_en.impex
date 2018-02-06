@@ -10,13 +10,9 @@
 # -----------------------------------------------------------------------
 # ImpEx for Importing Category Classifications
 
-# Macros / Replacement Parameter definitions
-$productCatalog=amwayapacProductCatalog
-$productCatalogName=Amway Apac Product Catalog
-$classificationCatalog=amwayapacClassification
-
-$classCatalogVersion=catalogversion(catalog(id[default='$classificationCatalog']),version[default='1.0'])[unique=true,default='$classificationCatalog:1.0']
-$classSystemVersion=systemVersion(catalog(id[default='$classificationCatalog']),version[default='1.0'])[unique=true]
+#%impex.enableCodeExecution(true)
+#%impex.enableExternalSyntaxParsing(true)
+#%impex.includeExternalData(System.getProperty("HYBRIS_BIN_DIR") + "/custom/amwayapac/amwayapacinitialdata/resources/amwayapacinitialdata/import/coredata/common/macros-definition.impex", "UTF-8", 0)
 
 # Language
 $lang=en
