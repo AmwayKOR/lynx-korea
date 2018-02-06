@@ -9,119 +9,51 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="nav" tagdir="/WEB-INF/tags/responsive/nav" %>
+<%@ taglib prefix="messageCenter" tagdir="/WEB-INF/tags/responsive/messageCenter" %>
+
+<c:url value="/message-center/messagelist-data" var="messageBodyUrl"/>
 
 <div id ="message-center">
-  <div class="container-fluid main-container">
+  <div class="container-fluid main-container" id="message-centers">
         <h1 class="page-title"><spring:theme code="text.account.messageCenter"/></h1>
         <div class="message-title">
-        		<c:choose>
-	        		<c:when test="${countOfNotifications eq 0}">
-	        			<div class="notice">You have 0 messages</div>
-	        		</c:when>
-	        		<c:otherwise>
-	        			<div class="notice">${countOfNotifications} messages</div>
-	        		</c:otherwise>
-        		</c:choose>
+        
+        		<div v-if="pagination.totalNumberOfResults > 0" class="notice">
+			  {{ pagination.totalNumberOfResults }} messages
+			</div>
+			<div v-else class="notice">
+			  You have 0 messages
+			</div>
+        		
             <div>Type of Messages:<div>&nbsp; All<span class="line">|</span><a href="<c:url value="/business-center/message-center" />">Message Type 1</a><span class="line">|</span><a>Message Type 2</a></div></div>
         </div>
       
         <div id="message-center-list" class="message-center-list">
             <div class="billing-shipping">
                 <div class="panel-group accordion-billing-shipping" >
-                		
-                		<c:if test="${not empty searchPageData.results}">
-			            <div class="account-message-center-section-content">
+                			<div class="account-message-center-section-content">
 			                <div class="account-message-center-messages container-fluid">
-			                    <c:set var="numberOfPages" value="${searchPageData.pagination.totalNumberOfResults / searchPageData.pagination.pageSize}"/>
-			                    <input type="hidden" class="js-message-center-number-of-pages" value="<fmt:formatNumber value="${numberOfPages + (numberOfPages % 1 == 0 ? 0 : 0.5)}" pattern="#" />"/>
-			
-			                    <div class="js-message-center-search-result">
-			                        <jsp:include page="../../fragments/businessCenter/messageCenterListingFragment.jsp"/>
-			                    </div>
-			                </div>
-			            </div>
-			        </c:if>
-			        <!-- 
-                		<c:if test="${not empty searchPageData.results}">
-                			<c:forEach items="${searchPageData.results}" var="notification">
-                				<div class="panel">
-                					<div id="paymentInformationBody" class="panel-collapse">
-		                            <div class="panel-body">
-		                                <div class="account-paymentdetails account-list ">
-		                                    <div class="account-cards card-select">
-		                                        <div>
-		                                            <div class="payment-info-container container-fluid">
-		                                            <c:set var="numberOfPages" value="${searchPageData.pagination.totalNumberOfResults / searchPageData.pagination.pageSize}"/>
-                    									<input type="hidden" class="js-message-center-number-of-pages" value="<fmt:formatNumber value="${numberOfPages + (numberOfPages % 1 == 0 ? 0 : 0.5)}" pattern="#" />"/>
-		                                            
-		                                                <div class="row">
-		                                                    <div class="col-lg-6 col-md-6 col-xs-12 card-info-block">
-		                                                        <div class="card-info">
-		                                                            <div class="card-data">
-		                                                                <a><span class="panel-title-text">${notification.shortDescription}</span></a>
-		                                                                
-		                                                                <fmt:parseDate value="${notification.publishDate}" pattern="mm/dd/yyyy" var="parsedDate"/>
-								                                        <fmt:formatDate value='${parsedDate}' pattern="mm/dd/yyyy hh:mma" var="formattedParsedDate"/>
-		                                                                
-		                                                                <span class="expiration-date">${fn:toLowerCase(formattedParsedDate)}</span>
-		                                                            </div>
-		                                                        </div>
-		
-		                                                    </div>
-		                                                    <div class="col-lg-6 col-md-6 col-xs-12 block-right">
-		                                                        <div class="product-stock">
-		                                                            <div>
-		                                                                <span class="stock">
-		                                                                    <span class="product-availability">
-		                                                                    	<c:choose>
-																	        		<c:when test="${notification.status.code eq 'READ'}">
-																	        			<span class="green">
-		                                                                              <span class="icon icon-alert"></span>
-		                                                                            	<span class="text text-uppercase">Message Type</span>
-		                                                                            	</span>
-																	        		</c:when>
-																	        		<c:otherwise>
-																	        			<span class="red">
-		                                                                              <span class="icon icon-alert"></span>
-		                                                                            	<span class="text text-uppercase">Message Type</span>
-		                                                                            	</span>
-																	        		</c:otherwise>
-																        		</c:choose>
-		                                                                    </span>
-		                                                                </span>
-		                                                            </div>
-		                                                        </div>
-		                                                    </div>
-		                                                </div>
-		                                            </div>
-		                                        </div>
-		                                    </div>
-		                                </div>
-		                            	  </div>
-                        				</div>
-                        			</div>
-                			</c:forEach>
-                		</c:if>
-                
-                		 -->
-                    
-                </div>
+			                    <%-- <c:set var="numberOfPages" value="${searchPageData.pagination.totalNumberOfResults / searchPageData.pagination.pageSize}"/> --%>
+			                    <input type="hidden" class="js-message-center-number-of-pages" v-bind:value="hiddenTotalNumberPage"/>
+								<div class="js-message-center-search-result" >
+			                     	<messageCenter:messageCenterListing/></div>	                       
+		                    </div>
+		                </div>
+			   </div>
             </div>
+            
             <br/>
-
-        <c:if test="${countOfNotifications > 0}">
-            <div class="account-message-center-pagination">
-                <p class="text-center display-none">
-                    <a id="show-more" class="js-message-center-show-more">
-                      <span>
-                        <spring:theme code="text.account.messageCenter.viewMore"/>
-                      </span>
-                      <span class="icon icon-arrow-dropdown"></span>
-                    </a>
-                </p>
-            </div>
-        </c:if>
-             
-        </div>
+			
+			<div v-if="pagination.totalNumberOfResults > pagination.pageSize" class="account-message-center-pagination">
+				<p class="text-center">
+	                   <a id="show-more" class="js-message-center-show-more" v-on:click.stop.prevent="viewMore(pagination.currentPage)">
+	                     <span>
+	                       <spring:theme code="text.account.messageCenter.viewMore"/>
+	                     </span>
+	                     <span class="icon icon-arrow-dropdown"></span>
+	                   </a>
+	            </p>
+			</div>
+       </div>    
     </div>
 </div>

@@ -11,12 +11,9 @@
 # ImpEx for Importing Units
 # English Localisation
 
-# Macros / Replacement Parameter definitions
-$classificationCatalog=amwayapacClassification
+#%impex.enableCodeExecution(true)
+#%impex.enableExternalSyntaxParsing(true)
+#%impex.includeExternalData(System.getProperty("HYBRIS_BIN_DIR") + "/custom/amwayapac/amwayapacinitialdata/resources/amwayapacinitialdata/import/coredata/common/macros-definition.impex", "UTF-8", 0)
 
-$systemVersion=systemVersion(catalog(id[default='$classificationCatalog']),version[default='1.0'])
-
-# Language
-$lang=en
 
 UPDATE ClassificationAttributeUnit;code[unique=true];name[lang=$lang];$systemVersion[unique=true]

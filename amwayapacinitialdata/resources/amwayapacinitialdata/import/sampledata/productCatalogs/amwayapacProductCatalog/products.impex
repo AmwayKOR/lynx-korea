@@ -10,23 +10,12 @@
 # -----------------------------------------------------------------------
 # ImpEx for Importing Products
 
-# Macros / Replacement Parameter definitions
-$productCatalog=amwayapacProductCatalog
-$productCatalogName=Amway Apac Product Catalog
+#%impex.enableCodeExecution(true)
+#%impex.enableExternalSyntaxParsing(true)
+#%impex.includeExternalData(System.getProperty("HYBRIS_BIN_DIR") + "/custom/amwayapac/amwayapacinitialdata/resources/amwayapacinitialdata/import/coredata/common/macros-definition.impex", "UTF-8", 0)
 
-$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
-$supercategories=supercategories(code, $catalogVersion)
-$baseProduct=baseProduct(code,$catalogVersion)
-$approved=approvalstatus(code)[default='approved']
-$dimensions=dimensions(code,$catalogVersion)
-
-$length=length(code,$catalogVersion)
-$width=width(code,$catalogVersion)
-$volume=volume(code,$catalogVersion)
-$height=height(code,$catalogVersion)
-$weight=weight(code,$catalogVersion)
 $unit=unit(code,$catalogVersion)
-$lang=en
+$supercategories=supercategories(code, $catalogVersion)
 
 $siteResource=jar:com.amway.apac.initialdata.setup.AmwayApacInitialDataSystemSetup&/amwayapacinitialdata/import/sampledata/productCatalogs/$productCatalog
 

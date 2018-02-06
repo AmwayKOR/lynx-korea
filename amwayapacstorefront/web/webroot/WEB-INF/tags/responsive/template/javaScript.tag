@@ -41,6 +41,7 @@
 		<script type="text/javascript" src="${commonResourcePath}/js/jquery.waitforimages.min.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/jquery.slideviewer.custom.1.2.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/jquery.raty.min.js"></script>
+		<script type="text/javascript" src="${commonResourcePath}/js/moment.min.js"></script>
 		
 		<%-- Custom ACC JS --%>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.messagecenter.js"></script>

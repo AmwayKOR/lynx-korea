@@ -12,13 +12,10 @@
 
 #% impex.setLocale(Locale.ENGLISH);
 
-# Macros / Replacement Parameter definitions
-$productCatalog=amwayapacProductCatalog
-$productCatalogName=Amway Apac Product Catalog
-$classificationCatalog=amwayapacClassification
+#%impex.enableCodeExecution(true)
+#%impex.enableExternalSyntaxParsing(true)
+#%impex.includeExternalData(System.getProperty("HYBRIS_BIN_DIR") + "/custom/amwayapac/amwayapacinitialdata/resources/amwayapacinitialdata/import/coredata/common/macros-definition.impex", "UTF-8", 0)
 
-$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
-$clAttrModifiers=system='$classificationCatalog',version='1.0',translator=de.hybris.platform.catalog.jalo.classification.impex.ClassificationAttributeTranslator
 
 # Insert Product Classifications
 

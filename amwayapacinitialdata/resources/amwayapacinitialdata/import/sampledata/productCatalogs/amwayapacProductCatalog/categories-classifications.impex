@@ -10,19 +10,13 @@
 # -----------------------------------------------------------------------
 # ImpEx for Importing Category Classifications
 
-# Macros / Replacement Parameter definitions
-$productCatalog=amwayapacProductCatalog
-$productCatalogName=Amway Apac Product Catalog
-$classificationCatalog=amwayapacClassification
+#%impex.enableCodeExecution(true)
+#%impex.enableExternalSyntaxParsing(true)
+#%impex.includeExternalData(System.getProperty("HYBRIS_BIN_DIR") + "/custom/amwayapac/amwayapacinitialdata/resources/amwayapacinitialdata/import/coredata/common/macros-definition.impex", "UTF-8", 0)
 
-$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
-$classCatalogVersion=catalogversion(catalog(id[default='$classificationCatalog']),version[default='1.0'])[unique=true,default='$classificationCatalog:1.0']
-$classSystemVersion=systemVersion(catalog(id[default='$classificationCatalog']),version[default='1.0'])[unique=true]
-$class=classificationClass(ClassificationClass.code,$classCatalogVersion)[unique=true]
-$supercategories=source(code, $classCatalogVersion)[unique=true]
-$categories=target(code, $catalogVersion)[unique=true]
-$attribute=classificationAttribute(code,$classSystemVersion)[unique=true]
 $unit=unit(code,$classSystemVersion)
+$supercategories=source(code, $classCatalogVersion)[unique=true]
+
 
 # Insert Classifications
 INSERT_UPDATE ClassificationClass;$classCatalogVersion;code[unique=true];allowedPrincipals(uid)[default='customergroup']

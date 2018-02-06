@@ -1,6 +1,8 @@
 ACC.messagecenter = {
     
     _autoload: [
+        
+        "bindLoadResults",
         "bindShowMoreResults",
         "bindShowMessage"
     ],
@@ -8,7 +10,100 @@ ACC.messagecenter = {
     currentPath: window.location.pathname,
     currentPage: 0,
     numberOfPages: $('.js-message-center-number-of-pages').val() || Number.MAX_VALUE,
-
+    
+    bindLoadResults: function () {
+    		if($("#message-centers").length){
+    			ACC.messagecenter.messageCenterVM = new Vue({
+			    el: '#message-centers',
+			    data:{
+			    		hiddenTotalNumberPage:0,
+			    		pagination : {
+			    			pageSize : "",
+			    			currentPage : "",
+			    			sort : "",
+			    			numberOfPages : "",
+			    			totalNumberOfResults : ""
+				    	},
+				    	results : [{
+				    		shortDescription : "",
+				    		longDescription : "",
+				    		publishDate : "",
+				    		cmsComponentId : "",
+				    		status : "",
+				    		code : ""
+				    	}]
+				    
+			    },
+			    methods: {
+			    		dataMessageNumber: function(index){
+			    			return this.pagination.currentPage * this.pagination.pageSize + index;
+			    		},
+			    		messageCenterPublishDate: function(date){
+			    			return moment(date,'DD/MM/YYYY',true).format('MM/DD/YYYY, h:mm a');
+			    		},
+			    		viewMore: function(currentPageSize){
+			    			
+			    			var individual = this;
+			    			if (currentPageSize < individual.pagination.numberOfPages) {
+			    				
+			    				var resultList = $('.js-message-center-search-result');
+			    		        var messageType = $("#messageType").val();
+			    		        var params = '?page=' + currentPageSize + 1;
+			    				
+			    		        if (resultList.length > 0) {
+			    		            $.ajax({
+			    		                url: window.location.pathname+"/messagelist-data" + params,
+			    		                success: function (data) {
+			    		                    //individual.results.push(data.results);
+			    		                		for (var i = 0; i < data.results.length; i++) {
+			    		                			individual.results.push( data.results[i]
+			    		                        )
+			    		                    }
+			    		                		individual.pagination = data.pagination;
+			    		                		individual.hiddenTotalNumberPage = data.pagination.numberOfPages + (data.pagination.numberOfPages % 1 == 0 ? 0 : 0.5);
+			    		                    
+			    		                    
+			    		                    //update Pagination Infos();
+			    		                		individual.pagination.currentPage++;
+			    		                    if (individual.pagination.currentPage >= individual.pagination.numberOfPages - 1) {
+			    		                        $('.js-message-center-show-more').parent().addClass("display-none");
+			    		                    }
+			    		                }
+			    		            });
+			    		        }
+			    				
+			    	        }
+			    			if (currentPageSize < this.pagination.numberOfPages - 1) {
+			    	            $('.js-message-center-show-more').parent().removeClass("display-none");
+			    	        }
+			    		}
+			    },
+			    created: function(e){
+			        
+			        var individual = this;
+			        
+			        $.ajax({
+			    			url : window.location.pathname+"/messagelist-data",
+			    			data : "",
+			    			cache : false,
+			    			type : 'GET',
+			    			success : function(data) 
+			    			{
+		    					individual.results = data.results;
+		    					individual.pagination = data.pagination;
+		    					individual.hiddenTotalNumberPage = data.pagination.numberOfPages + (data.pagination.numberOfPages % 1 == 0 ? 0 : 0.5);
+		    					
+			    			},
+			    			error : function (request, status, error){
+			    			}
+			    		});
+			        
+			    }
+    			});
+    		}
+		
+	},
+    
     bindShowMoreResults: function () {
         $('.js-message-center-show-more').on('click', function () {
             ACC.messagecenter.triggerLoadMoreResults();
@@ -17,27 +112,6 @@ ACC.messagecenter = {
             $('.js-message-center-show-more').parent().removeClass("display-none");
         }
     },
-
-    bindShowMessage: function() {
-       $(".js-account-show-detailed-message").on("click", function(e) {
-            e.preventDefault();
-
-            var messageTitle = $(this).data("message-title");
-            var button = $(this);
-
-//            ACC.colorbox.open('', {
-//                inline: true,
-//                height: "100%",
-//                width: "100%",
-//                className: "account-detailed-message",
-//                href: "#accountMessageBlockId",
-//                onComplete: function() {
-//                    ACC.messagecenter.updateMessageView(button, $(this).colorbox);
-//                }
-//            });
-        });
-    },
-
 
     navigate(button) {
         var totalMessages = $(".js-account-message-center-total-messages").data("total-messages");
@@ -65,37 +139,5 @@ ACC.messagecenter = {
        $(buttonSelector).removeAttr('disabled');
     },
 
-    triggerLoadMoreResults: function () {
-        if (ACC.messagecenter.currentPage < ACC.messagecenter.numberOfPages) {
-            ACC.messagecenter.loadMoreResults(ACC.messagecenter.currentPage + 1);
-        }
-    },
-
-    loadMoreResults: function (page) {
-        var resultList = $('.js-message-center-search-result');
-        var messageType = $("#messageType").val();
-        var params = '?page=' + page;
-
-        if(messageType) {
-            params = params + "&type=" + messageType;
-        }
-
-        if (resultList.length > 0) {
-            $.ajax({
-                url: ACC.messagecenter.currentPath + params,
-                success: function (data) {
-                    resultList.append(data);
-                    ACC.messagecenter.updatePaginationInfos();
-                    ACC.messagecenter.bindShowMessage();
-                }
-            });
-        }
-    },
-
-    updatePaginationInfos: function () {
-        ACC.messagecenter.currentPage++;
-        if (ACC.messagecenter.currentPage >= ACC.messagecenter.numberOfPages - 1) {
-            $('.js-message-center-show-more').parent().addClass("display-none");
-        }
-    }
+    
 };

@@ -10,9 +10,10 @@
 # -----------------------------------------------------------------------
 # ImpEx for Promotions
 
-# Macros / Replacement Parameter definitions
-$productCatalog=amwayapacProductCatalog
-$defaultPromoGrp=amwayapacPromotionGroup
+#%impex.enableCodeExecution(true)
+#%impex.enableExternalSyntaxParsing(true)
+#%impex.includeExternalData(System.getProperty("HYBRIS_BIN_DIR") + "/custom/amwayapac/amwayapacinitialdata/resources/amwayapacinitialdata/import/coredata/common/macros-definition.impex", "UTF-8", 0)
+
 
 #Attach Catalog to Rule Engine Context
 INSERT_UPDATE CatalogVersionToRuleEngineContextMapping;context(name)[unique=true];catalogVersion(catalog(id),version)[unique=true]
