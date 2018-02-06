@@ -26,7 +26,7 @@
 
 
 	<!-- Cache manager for addon -->
-
+<!-- 
 	<alias name="defaultAmwayapaccommercewebservicesaddonCacheManager" alias="amwayapaccommercewebservicesaddonCacheManager"/>
 	<bean id="defaultAmwayapaccommercewebservicesaddonCacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
 		<property name="cacheManager" ref="amwayapaccommercewebservicesaddonEhcache"/>
@@ -41,5 +41,5 @@
 	<bean depends-on="wsCacheManagerList" parent="listMergeDirective">
 		<property name="add" ref="amwayapaccommercewebservicesaddonCacheManager"/>
 	</bean>
-
+ -->
 </beans>
