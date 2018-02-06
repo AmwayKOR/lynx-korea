@@ -14,6 +14,7 @@
 #%impex.enableExternalSyntaxParsing(true)
 #%impex.includeExternalData(System.getProperty("HYBRIS_BIN_DIR") + "/custom/amwayapac/amwayapacinitialdata/resources/amwayapacinitialdata/import/coredata/common/macros-definition.impex", "UTF-8", 0)
 
+$unit=unit(code,$catalogVersion)
 $supercategories=supercategories(code, $catalogVersion)
 
 $siteResource=jar:com.amway.apac.initialdata.setup.AmwayApacInitialDataSystemSetup&/amwayapacinitialdata/import/sampledata/productCatalogs/$productCatalog
