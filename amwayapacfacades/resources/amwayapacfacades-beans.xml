@@ -81,4 +81,22 @@
 			<description>Raw query to be populated in Search Query.</description>
 		</property>
 	</bean>
+	
+	<bean class="de.hybris.platform.commercefacades.order.data.CommerceCartMetadata">
+		<property name="deliveryAddress" type="de.hybris.platform.core.model.user.AddressModel">
+            <description>The delivery address to be associated with the cart</description>
+        </property>
+        <property name="deliveryMode" type="java.lang.String">
+            <description>Specifies the delivery Mode</description>
+        </property>        
+        <property name="warehouseCode" type="java.lang.String">
+            <description>Specifies the warehouse code to be updated to the cart</description>
+        </property>    
+        <property name="volumeAmwayAccount" type="java.lang.String">
+            <description>Specifies the volumeAmwayAccount to be updated to the cart</description>
+        </property> 
+         <property name="orderType" type="com.amway.apac.core.enums.OrderType">
+            <description>Specifies the OrderType for cart(e.g:NORMAL_ORDER,BACK_ORDER)</description>
+        </property>    
+	</bean>
 </beans>

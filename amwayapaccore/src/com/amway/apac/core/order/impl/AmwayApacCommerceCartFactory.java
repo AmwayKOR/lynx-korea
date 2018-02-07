@@ -1,16 +1,16 @@
-package com.amway.apac.core.commerceservices.order.impl;
+package com.amway.apac.core.order.impl;
 
-import de.hybris.platform.basecommerce.model.site.BaseSiteModel;
+import de.hybris.platform.commerceservices.order.strategies.CommerceCartMetadataUpdateStrategy;
+import de.hybris.platform.commerceservices.service.data.CommerceCartMetadataParameter;
+import de.hybris.platform.commerceservices.util.CommerceCartMetadataParameterUtils;
 import de.hybris.platform.core.model.order.CartModel;
 import de.hybris.platform.core.model.user.AddressModel;
 import de.hybris.platform.ordersplitting.model.WarehouseModel;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.amway.apac.serviceability.services.AmwayApacWarehouseServiceabilityService;
 import com.amway.core.commerceservices.order.impl.AmwayCommerceCartFactory;
-import com.amway.core.model.AmwayAccountModel;
 
 
 /**
@@ -22,27 +22,18 @@ public class AmwayApacCommerceCartFactory extends AmwayCommerceCartFactory
 {
 	private AmwayApacWarehouseServiceabilityService amwayApacWarehouseServiceabilityService;
 
+	private CommerceCartMetadataUpdateStrategy commerceCartMetadataUpdateStrategy;
+
 	/**
 	 * Overriding to set the {@link WarehouseModel} and {@link AddressModel} in the {@link CartModel}
 	 */
 	@Override
-	protected CartModel createCartInternal()
+	public CartModel createCart()
 	{
-		final CartModel cart = super.createCartInternal();
-		final AmwayAccountModel currentAccount = getAmwayAccountCommerceService().getCurrentAccount();
-		if (null != currentAccount)
-		{
-			final AddressModel registeredAddress = currentAccount.getRegisteredAddress();
-			final BaseSiteModel currentBaseSite = getBaseSiteService().getCurrentBaseSite();
-			cart.setDeliveryAddress(registeredAddress);
-			if ((null != registeredAddress)
-					&& (StringUtils.isNotBlank(registeredAddress.getPostalcode()) && (null != currentBaseSite)))
-			{
-				cart.setWarehouse(amwayApacWarehouseServiceabilityService.getServiceableWareHouse(registeredAddress.getPostalcode(),
-						currentBaseSite));
-			}
-			cart.setVolumeAmwayAccount(currentAccount.getCode());
-		}
+		final CartModel cart = super.createCart();
+		final CommerceCartMetadataParameter commerceCartMetadataParameter = CommerceCartMetadataParameterUtils.parameterBuilder()
+				.cart(cart).enableHooks(true).build();
+		commerceCartMetadataUpdateStrategy.updateCartMetadata(commerceCartMetadataParameter);
 		return cart;
 	}
 
@@ -64,4 +55,24 @@ public class AmwayApacCommerceCartFactory extends AmwayCommerceCartFactory
 	{
 		this.amwayApacWarehouseServiceabilityService = amwayApacWarehouseServiceabilityService;
 	}
+
+	/**
+	 * @return the commerceCartMetadataUpdateStrategy
+	 */
+	public CommerceCartMetadataUpdateStrategy getCommerceCartMetadataUpdateStrategy()
+	{
+		return commerceCartMetadataUpdateStrategy;
+	}
+
+	/**
+	 * @param commerceCartMetadataUpdateStrategy
+	 *           the commerceCartMetadataUpdateStrategy to set
+	 */
+	@Required
+	public void setCommerceCartMetadataUpdateStrategy(final CommerceCartMetadataUpdateStrategy commerceCartMetadataUpdateStrategy)
+	{
+		this.commerceCartMetadataUpdateStrategy = commerceCartMetadataUpdateStrategy;
+	}
+
+
 }

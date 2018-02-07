@@ -274,9 +274,10 @@
 			parent="defaultCommerceAddToCartStrategy"/>
 	
 	<alias alias="cartFactory" name="amwayApacCommerceCartFactory" />
-	<bean id="amwayApacCommerceCartFactory" class="com.amway.apac.core.commerceservices.order.impl.AmwayApacCommerceCartFactory" parent="amwayCommerceCartFactory">
-		<property name="amwayApacWarehouseServiceabilityService" ref="amwayApacWarehouseServiceabilityService"/>
-	</bean>
+    <bean id="amwayApacCommerceCartFactory" class="com.amway.apac.core.order.impl.AmwayApacCommerceCartFactory" parent="amwayCommerceCartFactory">
+        <property name="amwayApacWarehouseServiceabilityService" ref="amwayApacWarehouseServiceabilityService"/>
+        <property name="commerceCartMetadataUpdateStrategy" ref="commerceCartMetadataUpdateStrategy"/>
+    </bean>
 	
 	<alias alias="amwayApacPaymentOptionInterceptor" name="defaultAmwayApacPaymentOptionInterceptor"/>
 	<bean id="defaultAmwayApacPaymentOptionInterceptor" class="com.amway.apac.core.product.interceptors.AmwayApacPaymentOptionInterceptor"/>
@@ -504,4 +505,24 @@
 		<property name="typeCode" value="AmwayCategoryProductReference" />
 	</bean>
 	
+	<alias alias="amwayApacCommerceCartMetadataUpdateHook" name="defaultAmwayApacCommerceCartMetadataUpdateHook" />
+    <bean id="defaultAmwayApacCommerceCartMetadataUpdateHook"
+          class="com.amway.apac.core.order.hook.impl.AmwayApacCommerceCartMetadataUpdateHook">
+          <property name="baseSiteService" ref="baseSiteService" />
+          <property name="amwayAccountCommerceService" ref="amwayAccountCommerceService" />
+          <property name="sessionService" ref="sessionService" />
+          <property name="amwayApacWarehouseServiceabilityService" ref="amwayApacWarehouseServiceabilityService" />
+    </bean>
+    
+    <util:list id="commerceCartMetadataUpdateMethodHooks"
+               value-type="de.hybris.platform.commerceservices.order.hook.CommerceCartMetadataUpdateMethodHook">
+        <ref bean="amwayApacCommerceCartMetadataUpdateHook"/>
+    </util:list>
+    
+    <alias alias="commerceCartMetadataUpdateStrategy" name="defaultAmwayApacCommerceCartMetadataUpdateStrategy"/>
+    <bean id="defaultAmwayApacCommerceCartMetadataUpdateStrategy"
+          class="com.amway.apac.core.order.strategies.impl.AmwayApacCommerceCartMetadataUpdateStrategy" parent="defaultCommerceCartMetadataUpdateStrategy">
+        <property name="deliveryModeService" ref="deliveryModeService"/>
+        <property name="warehouseService" ref="warehouseService"/>
+    </bean>
 </beans>

@@ -1,7 +1,12 @@
 package com.amway.apac.facades.cart.impl;
 
+import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
+
 import de.hybris.platform.commercefacades.order.data.CartData;
+import de.hybris.platform.commercefacades.order.data.CommerceCartMetadata;
 import de.hybris.platform.commercefacades.order.data.OrderEntryData;
+import de.hybris.platform.commerceservices.service.data.CommerceCartMetadataParameter;
+import de.hybris.platform.commerceservices.util.CommerceCartMetadataParameterUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -59,5 +64,30 @@ public class DefaultAmwayApacCartFacade extends DefaultAmwayCartFacade implement
 			data.setEntries(Collections.unmodifiableList(recentlyAddedListEntries));
 		}
 		return data;
+	}
+
+	/**
+	 * @param metadata
+	 *           -CommerceCartMetadata API to update the cart with additional metadata. This API populates the
+	 *           {@link CommerceCartMetadataParameter} with additional
+	 *           parameters[warehouseCode,deliveryMode,deliveryAddress,volumeAmwayAccount and orderType]
+	 */
+	@Override
+	public void updateCartMetadata(final CommerceCartMetadata metadata)
+	{
+		validateParameterNotNullStandardMessage("metadata", metadata);
+
+		final CommerceCartMetadataParameter parameter = CommerceCartMetadataParameterUtils.parameterBuilder()
+				.name(metadata.getName()).description(metadata.getDescription()).expirationTime(metadata.getExpirationTime())
+				.removeExpirationTime(metadata.isRemoveExpirationTime()).enableHooks(false).cart(getCartService().getSessionCart())
+				.build();
+
+		parameter.setDeliveryAddress(metadata.getDeliveryAddress());
+		parameter.setDeliveryMode(metadata.getDeliveryMode());
+		parameter.setVolumeAmwayAccount(metadata.getVolumeAmwayAccount());
+		parameter.setOrderType(metadata.getOrderType());
+		parameter.setWarehouseCode(metadata.getWarehouseCode());
+
+		getCommerceCartService().updateCartMetadata(parameter);
 	}
 }
