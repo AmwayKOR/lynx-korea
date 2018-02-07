@@ -12,84 +12,78 @@
 
     <patternset id="extension.amwayapaccmssmartedit.binary.filter">
         <patternset refid="extension.binary.filter"/>
+        <exclude name="build/"/>
+        <exclude name="smartedit-build/"/>
         <exclude name="node_modules/"/>
         <exclude name="jsTarget/"/>
-        <exclude name="**/static-resources/dist/"/>
-        <exclude name="**/webroot/amwayapaccmssmartedit/"/>
-        <exclude name="**/webroot/css/style.css"/>
-        <exclude name="buildArtifacts/"/>
+        <exclude name="package.json"/>
     </patternset>
 
     <patternset id="extension.amwayapaccmssmartedit.source.filter">
         <patternset refid="extension.source.filter"/>
+        <exclude name="build/"/>
+        <exclude name="smartedit-build/"/>
         <exclude name="node_modules/"/>
         <exclude name="jsTarget/"/>
-        <exclude name="**/static-resources/dist/"/>
-        <exclude name="**/webroot/amwayapaccmssmartedit/"/>
-        <exclude name="**/webroot/css/style.css"/>
-        <exclude name="buildArtifacts/"/>
+        <exclude name="package.json"/>
     </patternset>
 
-	<patternset id="extension.amwayapaccmssmartedit.production.filter">
-	    <patternset refid="extension.production.filter"/>
-	    <exclude name="node_modules/**"/>
-		<exclude name="jsTarget/"/>
-        <exclude name="seLibraries/"/>
-		<exclude name="buildArtifacts/"/>
-	</patternset>
+    <patternset id="extension.amwayapaccmssmartedit.production.filter">
+        <patternset refid="extension.production.filter"/>
+        <exclude name="build/"/>
+        <exclude name="smartedit-build/"/>
+        <exclude name="node_modules/"/>
+        <exclude name="jsTarget/"/>
+        <exclude name="package.json"/>
+    </patternset>
 
-	<macrodef name="amwayapaccmssmartedit_before_clean">
-		<sequential>
-			<if>
-				<isset property="ext.npmancillary.path"/>
-				<then>
-					<removeLinkToSELibraries path="${ext.amwayapaccmssmartedit.path}"/>
-					<removeLink path="${ext.amwayapaccmssmartedit.path}/tmp"/>
-					<removeLink path="${ext.amwayapaccmssmartedit.path}/jsTarget"/>
-					
-					<removeNodeModulesSymlink path="${ext.amwayapaccmssmartedit.path}"/>
-					
-					<if>
-		                <isset property="ext.cmssmartedit.path"/>
-		                <then>
-		                    <echo level="info" message="copying amwayapaccmssmartedit features to the cmssmartedit extension"/>
-		                    <copy overwrite="true" todir="${ext.cmssmartedit.path}/web/featureExtensions/amwayapaccmssmartedit" verbose="true">
-		                        <fileset dir="${ext.amwayapaccmssmartedit.path}/web/features/">
-		                            <include name="**/**.*"/>
-		                        </fileset>
-		                    </copy>
-		                </then>
-		            </if>
+    <macrodef name="amwayapaccmssmartedit_before_clean">
+        <sequential>
+            <if>
+				<available file="${ext.npmancillary.path}${file.separator}resources${file.separator}npm${file.separator}node_modules" type="dir"/>
+                <then>
+                    <delete dir="${ext.amwayapaccmssmartedit.path}${file.separator}temp"/>
+                    <delete dir="${ext.amwayapaccmssmartedit.path}${file.separator}jsTarget"/>
+                    <unLinkSmarteditBundle target="${ext.amwayapaccmssmartedit.path}"/>
+                    <removeNodeModulesSymlink path="${ext.amwayapaccmssmartedit.path}"/>
+                    <if>
+                        <isset property="ext.cmssmartedit.path"/>
+                        <then>
+                            <echo level="info" message="copying amwayapaccmssmartedit features to the cmssmartedit extension"/>
+                            <copy overwrite="true" todir="${ext.cmssmartedit.path}/web/featureExtensions/amwayapaccmssmartedit" verbose="true">
+                                <fileset dir="${ext.amwayapaccmssmartedit.path}/web/features/">
+                                    <include name="**/**.*"/>
+                                </fileset>
+                            </copy>
+                        </then>
+                    </if>
+                </then>
+            </if>
+        </sequential>
+    </macrodef>
 
-				</then>
-			</if>
-		</sequential>
-	</macrodef>
+    <macrodef name="amwayapaccmssmartedit_before_build">
+        <sequential>
+            <if>
+				<available file="${ext.npmancillary.path}${file.separator}resources${file.separator}npm${file.separator}node_modules" type="dir"/>
+                <then>
+                    <linkSmarteditBundle target="${ext.amwayapaccmssmartedit.path}"/>
+                    <gruntBuild path="${ext.amwayapaccmssmartedit.path}" phase="linting"/>
+                </then>
+            </if>
+        </sequential>
+    </macrodef>
 
-	<macrodef name="amwayapaccmssmartedit_before_build">
-		<sequential>
-			<copy file="${ext.smartedit.path}${file.separator}smarteditcontainerJSTests${file.separator}protractor-conf.js" tofile="${ext.amwayapaccmssmartedit.path}${file.separator}jsTests${file.separator}protractor-conf.js"/>
-			<if>
-				<isset property="ext.npmancillary.path"/>
-				<then>
-					<linkToSELibraries path="${ext.amwayapaccmssmartedit.path}"/>
-					<gruntBuild path="${ext.amwayapaccmssmartedit.path}" phase="compile"/>
-				</then>
-			</if>
-		</sequential>
-	</macrodef>
-
-	<macrodef name="amwayapaccmssmartedit_before_yunit">
-		<sequential>
-			<if>
-				<isset property="ext.npmancillary.path"/>
-				<then>
-					<gruntBuild path="${ext.amwayapaccmssmartedit.path}" phase="test_only"/>
-					<!--<gruntBuild path="${ext.cmssmartedit.path}" phase="verify_only" />-->
-				</then>
-			</if>
-		</sequential>
-	</macrodef>
+    <macrodef name="amwayapaccmssmartedit_before_yunit">
+        <sequential>
+            <if>
+				<available file="${ext.npmancillary.path}${file.separator}resources${file.separator}npm${file.separator}node_modules" type="dir"/>
+                <then>
+                    <gruntBuild path="${ext.amwayapaccmssmartedit.path}" phase="test_only"/>
+                </then>
+            </if>
+        </sequential>
+    </macrodef>
 
     
 
