@@ -266,6 +266,10 @@
         <property name="pickupDateTime" type="java.util.Date"/>
     </bean>
 
+    <bean class="de.hybris.platform.commercefacades.storelocator.data.PointOfServiceDataList">
+        <property name="pointOfServices" type="java.util.List&lt;de.hybris.platform.commercefacades.storelocator.data.PointOfServiceData>"/>
+    </bean>
+
     <bean class="de.hybris.platform.commercewebservicescommons.dto.store.PointOfServiceListWsDTO">
         <property name="pointOfServices" type="java.util.List&lt;de.hybris.platform.commercewebservicescommons.dto.store.PointOfServiceWsDTO>"/>
     </bean>
