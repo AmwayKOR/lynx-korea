@@ -1,10 +1,8 @@
 ACC.messagecenter = {
-    
     _autoload: [
         
         "bindLoadResults",
-        "bindShowMoreResults",
-        "bindShowMessage"
+        "bindShowMoreResults"
     ],
 
     currentPath: window.location.pathname,
@@ -113,7 +111,7 @@ ACC.messagecenter = {
         }
     },
 
-    navigate(button) {
+    navigate: function(button) {
         var totalMessages = $(".js-account-message-center-total-messages").data("total-messages");
         var pageNumber = button.data("message-page-number");
         var previousButtonSelector = ".js-account-message-previous";
@@ -131,13 +129,13 @@ ACC.messagecenter = {
         }
     },
 
-    disableButton(buttonSelector) {
+    disableButton: function(buttonSelector) {
        $(buttonSelector).attr('disabled', 'disabled');
     },
 
-    enableButton(buttonSelector) {
+    enableButton: function(buttonSelector) {
        $(buttonSelector).removeAttr('disabled');
-    },
+    }
 
     
 };
