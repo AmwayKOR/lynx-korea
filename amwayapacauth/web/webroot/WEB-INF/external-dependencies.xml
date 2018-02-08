@@ -27,6 +27,13 @@
 			<groupId>ro.isdc.wro4j</groupId>
 			<artifactId>wro4j-core</artifactId>
 			<version>1.7.9</version>
+		</dependency>
+		
+		<!-- Nimber awt jar -->
+		<dependency>
+			<groupId>com.nimbusds</groupId>
+			<artifactId>nimbus-jose-jwt</artifactId>
+			<version>5.1</version>
 		</dependency>	
 	</dependencies>
 </project>
