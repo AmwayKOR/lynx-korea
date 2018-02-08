@@ -107,7 +107,7 @@ public class DefaultAmwayApacNotificationFacadeIntegrationTest extends Servicela
 		userService.setCurrentUser(user);
 
 		final SearchPageData<AmwayApacNotificationData> result = defaultAmwayApacNotificationFacade
-				.getNotificationsForCurrentUser(pageableData);
+				.getNotificationsForCurrentUser(pageableData, "");
 
 		final List<AmwayApacNotificationData> resultList = result.getResults();
 		final String resultNotificationCode = resultList.get(0).getCode();
@@ -128,7 +128,7 @@ public class DefaultAmwayApacNotificationFacadeIntegrationTest extends Servicela
 		userService.setCurrentUser(user);
 
 		final SearchPageData<AmwayApacNotificationData> result = defaultAmwayApacNotificationFacade
-				.getNotificationsForCurrentUser(pageableData);
+				.getNotificationsForCurrentUser(pageableData, "");
 
 		final List<AmwayApacNotificationData> resultList = result.getResults();
 		final String resultNotificationCode = resultList.get(0).getCode();

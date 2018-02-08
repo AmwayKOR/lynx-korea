@@ -73,11 +73,13 @@ public class MessageCenterPageController extends AbstractSearchPageController
 			@RequestParam(value = "page", defaultValue = "0") final int page,
 			@RequestParam(value = "pageSize", defaultValue = "5") final int pageSize,
 			@RequestParam(value = "sortCode", required = false) final String sortCode,
-			@RequestParam(value = "show", defaultValue = "Page") final ShowMode showMode)
+			@RequestParam(value = "show", defaultValue = "Page") final ShowMode showMode,
+			@RequestParam(value = "messageType", required = false) final String messageType)
 	{
+
 		final PageableData pageableData = createPageableData(page, pageSize, sortCode, showMode);
 		final SearchPageData<AmwayApacNotificationData> searchPageData = amwayApacNotificationFacade
-				.getNotificationsForCurrentUser(pageableData);
+				.getNotificationsForCurrentUser(pageableData, messageType);
 
 		populateModel(model, searchPageData, showMode);
 

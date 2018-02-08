@@ -22,7 +22,8 @@ public interface AmwayApacNotificationFacade
 	 *           the pageable data
 	 * @return the amway notification section for current user with page data
 	 */
-	SearchPageData<AmwayApacNotificationData> getNotificationsForCurrentUser(final PageableData pageableData);
+	SearchPageData<AmwayApacNotificationData> getNotificationsForCurrentUser(final PageableData pageableData,
+			final String messageType);
 
 	/**
 	 * Change user notification status.

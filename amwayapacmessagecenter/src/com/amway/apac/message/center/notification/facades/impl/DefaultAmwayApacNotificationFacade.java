@@ -57,9 +57,14 @@ public class DefaultAmwayApacNotificationFacade implements AmwayApacNotification
 	 *
 	 */
 	@Override
-	public SearchPageData<AmwayApacNotificationData> getNotificationsForCurrentUser(final PageableData pageableData)
+	public SearchPageData<AmwayApacNotificationData> getNotificationsForCurrentUser(final PageableData pageableData,
+			final String messageType)
 	{
 		final NotificationSearchParamData notificationSearchParam = setNotificationSearchParams(pageableData);
+		if (!StringUtils.isEmpty(messageType))
+		{
+			notificationSearchParam.setNotificationStatuses(Arrays.asList(AmwayNotificationUserActionStatus.valueOf(messageType)));
+		}
 		final SearchPageData<AmwayNotificationModel> searchData = amwayApacNotificationService
 				.getNotifications(notificationSearchParam);
 

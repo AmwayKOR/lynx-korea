@@ -25,7 +25,7 @@
 			  You have 0 messages
 			</div>
         		
-            <div>Type of Messages:<div>&nbsp; All<span class="line">|</span><a href="<c:url value="/business-center/message-center" />">Message Type 1</a><span class="line">|</span><a>Message Type 2</a></div></div>
+            <div>Type of Messages:<div>&nbsp; All<span class="line">|</span><a v-on:click.stop.prevent="filterByMessageType('READ')" />Message Type 1</a><span class="line">|</span><a v-on:click.stop.prevent="filterByMessageType('UNREAD')">Message Type 2</a></div></div>
         </div>
       
         <div id="message-center-list" class="message-center-list">
@@ -35,6 +35,7 @@
 			                <div class="account-message-center-messages container-fluid">
 			                    <%-- <c:set var="numberOfPages" value="${searchPageData.pagination.totalNumberOfResults / searchPageData.pagination.pageSize}"/> --%>
 			                    <input type="hidden" class="js-message-center-number-of-pages" v-bind:value="hiddenTotalNumberPage"/>
+			                    <input type="hidden" v-bind:value="hiddenMessageTypeFilter"/>
 								<div class="js-message-center-search-result" >
 			                     	<messageCenter:messageCenterListing/></div>	                       
 		                    </div>
