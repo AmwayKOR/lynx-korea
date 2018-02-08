@@ -99,4 +99,18 @@
             <description>Specifies the OrderType for cart(e.g:NORMAL_ORDER,BACK_ORDER)</description>
         </property>    
 	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.order.dto.CartParameters">
+		<property name="pickupStore" type="java.lang.String">
+			<description>Specified the store from where cart creation is requested. It can be used to set warehouse in cart.</description>
+		</property>
+		<property name="deliveryMode" type="java.lang.String">
+			<description>Specifies the delivery Mode</description>
+		</property>
+		<property name="cartType" type="java.lang.String">
+			<description>Specifies the type of cart to be created. E.g WEB, POS, etc</description>
+		</property>
+
+	</bean>
+
 </beans>

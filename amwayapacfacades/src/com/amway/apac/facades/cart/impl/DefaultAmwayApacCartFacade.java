@@ -1,22 +1,23 @@
 package com.amway.apac.facades.cart.impl;
 
-import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
-
-import de.hybris.platform.commercefacades.order.data.CartData;
-import de.hybris.platform.commercefacades.order.data.CommerceCartMetadata;
-import de.hybris.platform.commercefacades.order.data.OrderEntryData;
-import de.hybris.platform.commerceservices.service.data.CommerceCartMetadataParameter;
-import de.hybris.platform.commerceservices.util.CommerceCartMetadataParameterUtils;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import org.apache.commons.collections.CollectionUtils;
-
 import com.amway.apac.facades.cart.AmwayApacCartFacade;
 import com.amway.apac.facades.cart.enums.AmwayApacCartSortCode;
 import com.amway.facades.cart.impl.DefaultAmwayCartFacade;
+import de.hybris.platform.commercefacades.order.data.CartData;
+import de.hybris.platform.commercefacades.order.data.CommerceCartMetadata;
+import de.hybris.platform.commercefacades.order.data.OrderEntryData;
+import de.hybris.platform.commercefacades.order.dto.CartParameters;
+import de.hybris.platform.commerceservices.service.data.CommerceCartMetadataParameter;
+import de.hybris.platform.commerceservices.util.CommerceCartMetadataParameterUtils;
+import de.hybris.platform.ordersplitting.model.WarehouseModel;
+import de.hybris.platform.storelocator.model.PointOfServiceModel;
+import de.hybris.platform.storelocator.pos.PointOfServiceService;
+import org.apache.commons.collections.CollectionUtils;
+
+import javax.annotation.Resource;
+import java.util.*;
+
+import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
 
 
 /**
@@ -26,6 +27,8 @@ import com.amway.facades.cart.impl.DefaultAmwayCartFacade;
  */
 public class DefaultAmwayApacCartFacade extends DefaultAmwayCartFacade implements AmwayApacCartFacade
 {
+	@Resource(name = "pointOfServiceService")
+	private PointOfServiceService pointOfServiceService;
 
 	/**
 	 * {@inheritDoc}
@@ -64,6 +67,25 @@ public class DefaultAmwayApacCartFacade extends DefaultAmwayCartFacade implement
 			data.setEntries(Collections.unmodifiableList(recentlyAddedListEntries));
 		}
 		return data;
+	}
+
+	@Override
+	public CommerceCartMetadata createCommerceCartMetadata(CartParameters cartParameters) {
+		CommerceCartMetadata commerceCartMetadata = new CommerceCartMetadata();
+		commerceCartMetadata.setName(Optional.empty());
+		commerceCartMetadata.setDescription(Optional.empty());
+		commerceCartMetadata.setExpirationTime(Optional.empty());
+
+		PointOfServiceModel pointOfService = pointOfServiceService.getPointOfServiceForName(cartParameters.getPickupStore());
+
+		if(Objects.nonNull(pointOfService) && CollectionUtils.isNotEmpty(pointOfService.getWarehouses())){
+			WarehouseModel defaultWarehouse = pointOfService.getWarehouses().iterator().next();
+			commerceCartMetadata.setWarehouseCode(defaultWarehouse.getCode());
+		}
+
+		//TODO: set cart type
+
+		return commerceCartMetadata;
 	}
 
 	/**

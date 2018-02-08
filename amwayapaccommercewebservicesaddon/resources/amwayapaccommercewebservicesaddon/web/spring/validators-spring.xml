@@ -14,5 +14,23 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 	                       http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <bean id="cartParametersValidator" class="de.hybris.platform.webservicescommons.validators.CompositeValidator">
+        <property name="validators">
+            <list>
+                <bean class="com.amway.apac.validators.AmwayApacPointOfServiceValidator">
+                    <property name="pointOfServiceService" ref="pointOfServiceService"/>
+                    <property name="fieldPath" value="pickupStore"/>
+                </bean>
+
+                <bean class="de.hybris.platform.webservicescommons.validators.FieldNotEmptyValidator">
+                    <property name="fieldPath" value="deliveryMode"/>
+                </bean>
+
+                <bean class="de.hybris.platform.webservicescommons.validators.FieldNotEmptyValidator">
+                    <property name="fieldPath" value="cartType"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
 
  </beans>

@@ -15,4 +15,9 @@ package com.amway.apac.controllers;
 public interface AmwayapaccommercewebservicesaddonControllerConstants
 {
 	// implement here controller constants used by this extension
+
+    interface AmwayApacOAuthTokenScope{
+        String SALES = "sales";
+        String REPORTS = "reports";
+    }
 }

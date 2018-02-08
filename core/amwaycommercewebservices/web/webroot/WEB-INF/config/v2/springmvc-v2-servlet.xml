@@ -28,7 +28,7 @@
 
 	<context:annotation-config/>
 	<context:component-scan
-			base-package="com.amway.core.v2, com.amway.core.auth, com.amway.core.context, com.amway.core.conv, com.amway.core.errors, com.amway.core.exceptions, com.amway.core.filter, com.amway.core.formatters, com.amway.core.oauth2, com.amway.core.resolver, com.amway.core.util.ws, com.amway.core.validator, com.amway.core.xstream, de.hybris.platform.webservicescommons.mapping"
+			base-package="com.amway.core.v2, com.amway.core.auth, com.amway.core.context, com.amway.core.conv, com.amway.core.errors, com.amway.core.exceptions, com.amway.core.filter, com.amway.core.formatters, com.amway.core.oauth2, com.amway.core.resolver, com.amway.core.util.ws, com.amway.core.validator, com.amway.core.xstream, de.hybris.platform.webservicescommons.mapping, com.amway.apac.controllers"
 			scope-resolver="de.hybris.platform.spring.IgnoreTenantScopeMetadataResolver"/>
 
 	<cache:annotation-driven cache-manager="compositeWsCacheManager" key-generator="commerceCacheKeyGenerator"/>

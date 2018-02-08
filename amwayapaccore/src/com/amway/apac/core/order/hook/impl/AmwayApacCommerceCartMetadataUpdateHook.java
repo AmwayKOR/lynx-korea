@@ -40,11 +40,15 @@ public class AmwayApacCommerceCartMetadataUpdateHook implements CommerceCartMeta
 	 */
 	@Override
 	public void beforeMetadataUpdate(final CommerceCartMetadataParameter parameter) {
+
+		final AmwayAccountModel currentAccount = getAmwayAccountCommerceService().getCurrentAccount();
 		final SalesApplication salesApplication = getSalesApplicationFromSession();
-		if (null == salesApplication || !salesApplication.equals(SalesApplication.POS))
-		{
-			final AmwayAccountModel currentAccount = getAmwayAccountCommerceService().getCurrentAccount();
-			if (null != currentAccount) {
+
+		if (null != currentAccount){
+			parameter.setVolumeAmwayAccount(currentAccount.getCode());
+
+			if (null == salesApplication || !salesApplication.equals(SalesApplication.POS))
+			{
 				final AddressModel registeredAddress = currentAccount.getRegisteredAddress();
 				final BaseSiteModel currentBaseSite = getBaseSiteService().getCurrentBaseSite();
 				parameter.setDeliveryAddress(registeredAddress);
@@ -54,9 +58,8 @@ public class AmwayApacCommerceCartMetadataUpdateHook implements CommerceCartMeta
 							.getServiceableWareHouse(registeredAddress.getPostalcode(), currentBaseSite);
 					parameter.setWarehouseCode(warehouse.getCode());
 				}
-				parameter.setVolumeAmwayAccount(currentAccount.getCode());
+				parameter.setOrderType(OrderType.NORMAL_ORDER);
 			}
-			parameter.setOrderType(OrderType.NORMAL_ORDER);
 		}
 	}
 

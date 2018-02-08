@@ -16,5 +16,41 @@
 		http://www.springframework.org/schema/util
 		http://www.springframework.org/schema/util/spring-util.xsd">
 
+    <util:list id="defaultCommerceWebServicesFilterChainListV2">
+        <!-- filter that catches and resolves exceptions thrown from other filters -->
+        <ref bean="exceptionTranslationFilter" />
+
+        <!-- generic platform filters -->
+        <ref bean="log4jFilter" />
+        <ref bean="restSessionFilterV2" />
+
+        <!-- commerceWebservices filters -->
+        <ref bean="baseSiteMatchingFilter" />
+
+        <!-- Security -->
+        <ref bean="springSecurityFilterChain" />
+        <!-- POS must be before userMatch -->
+        <ref bean="posMatchingFilter" />
+        <ref bean="userMatchingFilter" />
+
+
+        <!-- Matching filters -->
+
+        <ref bean="cartMatchingFilter" />
+        <ref bean="commerceWebServicesSessionAttributesFilterV2" />
+
+        <ref bean="guestRoleFilterV2" />
+
+        <!-- Set sales application in session -->
+        <ref bean="amwaySalesApplicationFilter" />
+
+    </util:list>
+
+
+    <alias alias="posMatchingFilter" name="amwayApacPosMatchingFilter" />
+    <bean id="amwayApacPosMatchingFilter" class="com.amway.core.v2.filter.PosMatchingFilter">
+        <property name="regexp" value="/accounts/([^/]+)" />
+    </bean>
+
 
 </beans>

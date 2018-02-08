@@ -4,6 +4,8 @@ import de.hybris.platform.commercefacades.order.data.CartData;
 
 import com.amway.apac.facades.cart.enums.AmwayApacCartSortCode;
 import com.amway.facades.cart.AmwayCartFacade;
+import de.hybris.platform.commercefacades.order.data.CommerceCartMetadata;
+import de.hybris.platform.commercefacades.order.dto.CartParameters;
 
 
 /**
@@ -21,4 +23,6 @@ public interface AmwayApacCartFacade extends AmwayCartFacade
 	 * @return CartData This method accepts CartData and sort by and returns CartData in given order.
 	 */
 	CartData getSessionCartWithSortBySortCode(final AmwayApacCartSortCode sortBy);
+
+	CommerceCartMetadata createCommerceCartMetadata(CartParameters cartParameters);
 }
