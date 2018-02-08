@@ -13,9 +13,11 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.amway.apac.core.enums.OrderType;
+import com.amway.apac.core.strategies.AmwayApacDeliveryAddressesLookupStrategy;
 import com.amway.apac.serviceability.services.AmwayApacWarehouseServiceabilityService;
 import com.amway.core.model.AmwayAccountModel;
 import com.amway.core.service.AmwayAccountCommerceService;
+import com.amway.core.user.services.AmwayUserService;
 
 
 /**
@@ -23,13 +25,18 @@ import com.amway.core.service.AmwayAccountCommerceService;
  *
  *         Responsible for populating additional data into CommerceCartMetadataParamter for updating the cart
  */
-public class AmwayApacCommerceCartMetadataUpdateHook implements CommerceCartMetadataUpdateMethodHook {
+public class AmwayApacCommerceCartMetadataUpdateHook implements CommerceCartMetadataUpdateMethodHook
+{
 
 	private BaseSiteService baseSiteService;
 
 	private AmwayAccountCommerceService amwayAccountCommerceService;
 
+	private AmwayApacDeliveryAddressesLookupStrategy amwayApacDeliveryAddressesLookupStrategy;
+
 	private AmwayApacWarehouseServiceabilityService amwayApacWarehouseServiceabilityService;
+
+	private AmwayUserService amwayUserService;
 
 	private SessionService sessionService;
 
@@ -39,25 +46,30 @@ public class AmwayApacCommerceCartMetadataUpdateHook implements CommerceCartMeta
 	 * the parameter only if the session salesApplication channel is other than {@link SalesApplication.POS}
 	 */
 	@Override
-	public void beforeMetadataUpdate(final CommerceCartMetadataParameter parameter) {
+	public void beforeMetadataUpdate(final CommerceCartMetadataParameter parameter)
+	{
 		final SalesApplication salesApplication = getSalesApplicationFromSession();
-		if (null == salesApplication || !salesApplication.equals(SalesApplication.POS))
+		final AmwayAccountModel currentAccount = getAmwayAccountCommerceService().getCurrentAccount();
+		if (null != currentAccount)
 		{
-			final AmwayAccountModel currentAccount = getAmwayAccountCommerceService().getCurrentAccount();
-			if (null != currentAccount) {
-				final AddressModel registeredAddress = currentAccount.getRegisteredAddress();
+			parameter.setVolumeAmwayAccount(currentAccount.getCode());
+			if (null == salesApplication || !salesApplication.equals(SalesApplication.POS))
+			{
+				final AddressModel registeredAddress = getAmwayApacDeliveryAddressesLookupStrategy()
+						.getDeliveryAddressForCustomer(getAmwayUserService().getCurrentCustomer());
 				final BaseSiteModel currentBaseSite = getBaseSiteService().getCurrentBaseSite();
 				parameter.setDeliveryAddress(registeredAddress);
 				if ((null != registeredAddress)
-						&& (StringUtils.isNotBlank(registeredAddress.getPostalcode()) && (null != currentBaseSite))) {
+						&& (StringUtils.isNotBlank(registeredAddress.getPostalcode()) && (null != currentBaseSite)))
+				{
 					final WarehouseModel warehouse = amwayApacWarehouseServiceabilityService
 							.getServiceableWareHouse(registeredAddress.getPostalcode(), currentBaseSite);
 					parameter.setWarehouseCode(warehouse.getCode());
 				}
-				parameter.setVolumeAmwayAccount(currentAccount.getCode());
+				parameter.setOrderType(OrderType.NORMAL_ORDER);
 			}
-			parameter.setOrderType(OrderType.NORMAL_ORDER);
 		}
+
 	}
 
 	/*
@@ -68,7 +80,8 @@ public class AmwayApacCommerceCartMetadataUpdateHook implements CommerceCartMeta
 	 * platform.commerceservices.service.data.CommerceCartMetadataParameter)
 	 */
 	@Override
-	public void afterMetadataUpdate(final CommerceCartMetadataParameter parameter) {
+	public void afterMetadataUpdate(final CommerceCartMetadataParameter parameter)
+	{
 		// empty
 	}
 
@@ -77,9 +90,11 @@ public class AmwayApacCommerceCartMetadataUpdateHook implements CommerceCartMeta
 	 *
 	 * @return SalesApplication - The salesApplicationChannel set in the session
 	 */
-	private SalesApplication getSalesApplicationFromSession() {
+	private SalesApplication getSalesApplicationFromSession()
+	{
 		SalesApplication salesApplication = null;
-		if (sessionService.hasCurrentSession()) {
+		if (sessionService.hasCurrentSession())
+		{
 			salesApplication = sessionService.getAttribute("currentChannel");
 		}
 		return salesApplication;
@@ -88,66 +103,112 @@ public class AmwayApacCommerceCartMetadataUpdateHook implements CommerceCartMeta
 	/**
 	 * @return the baseSiteService
 	 */
-	public BaseSiteService getBaseSiteService() {
+	public BaseSiteService getBaseSiteService()
+	{
 		return baseSiteService;
 	}
 
 	/**
 	 * @param baseSiteService
-	 *            the baseSiteService to set
+	 *           the baseSiteService to set
 	 */
 	@Required
-	public void setBaseSiteService(final BaseSiteService baseSiteService) {
+	public void setBaseSiteService(final BaseSiteService baseSiteService)
+	{
 		this.baseSiteService = baseSiteService;
 	}
 
 	/**
 	 * @return the amwayAccountCommerceService
 	 */
-	public AmwayAccountCommerceService getAmwayAccountCommerceService() {
+	public AmwayAccountCommerceService getAmwayAccountCommerceService()
+	{
 		return amwayAccountCommerceService;
 	}
 
 	/**
 	 * @param amwayAccountCommerceService
-	 *            the amwayAccountCommerceService to set
+	 *           the amwayAccountCommerceService to set
 	 */
 	@Required
-	public void setAmwayAccountCommerceService(final AmwayAccountCommerceService amwayAccountCommerceService) {
+	public void setAmwayAccountCommerceService(final AmwayAccountCommerceService amwayAccountCommerceService)
+	{
 		this.amwayAccountCommerceService = amwayAccountCommerceService;
 	}
 
 	/**
 	 * @return the amwayApacWarehouseServiceabilityService
 	 */
-	public AmwayApacWarehouseServiceabilityService getAmwayApacWarehouseServiceabilityService() {
+	public AmwayApacWarehouseServiceabilityService getAmwayApacWarehouseServiceabilityService()
+	{
 		return amwayApacWarehouseServiceabilityService;
 	}
 
 	/**
 	 * @param amwayApacWarehouseServiceabilityService
-	 *            the amwayApacWarehouseServiceabilityService to set
+	 *           the amwayApacWarehouseServiceabilityService to set
 	 */
 	@Required
 	public void setAmwayApacWarehouseServiceabilityService(
-			final AmwayApacWarehouseServiceabilityService amwayApacWarehouseServiceabilityService) {
+			final AmwayApacWarehouseServiceabilityService amwayApacWarehouseServiceabilityService)
+	{
 		this.amwayApacWarehouseServiceabilityService = amwayApacWarehouseServiceabilityService;
+	}
+
+	/**
+	 * @return the amwayApacDeliveryAddressesLookupStrategy
+	 */
+	public AmwayApacDeliveryAddressesLookupStrategy getAmwayApacDeliveryAddressesLookupStrategy()
+	{
+		return amwayApacDeliveryAddressesLookupStrategy;
+	}
+
+	/**
+	 * @param amwayApacDeliveryAddressesLookupStrategy
+	 *           the amwayApacDeliveryAddressesLookupStrategy to set
+	 */
+	@Required
+	public void setAmwayApacDeliveryAddressesLookupStrategy(
+			final AmwayApacDeliveryAddressesLookupStrategy amwayApacDeliveryAddressesLookupStrategy)
+	{
+		this.amwayApacDeliveryAddressesLookupStrategy = amwayApacDeliveryAddressesLookupStrategy;
+	}
+
+	/**
+	 * @return the amwayUserService
+	 */
+	public AmwayUserService getAmwayUserService()
+	{
+		return amwayUserService;
+	}
+
+	/**
+	 * @param amwayUserService
+	 *           the amwayUserService to set
+	 */
+	@Required
+	public void setAmwayUserService(final AmwayUserService amwayUserService)
+	{
+		this.amwayUserService = amwayUserService;
 	}
 
 	/**
 	 * @return the sessionService
 	 */
-	public SessionService getSessionService() {
+	public SessionService getSessionService()
+	{
 		return sessionService;
 	}
 
 	/**
 	 * @param sessionService
-	 *            the sessionService to set
+	 *           the sessionService to set
 	 */
 	@Required
-	public void setSessionService(final SessionService sessionService) {
+	public void setSessionService(final SessionService sessionService)
+	{
 		this.sessionService = sessionService;
 	}
+
 
 }

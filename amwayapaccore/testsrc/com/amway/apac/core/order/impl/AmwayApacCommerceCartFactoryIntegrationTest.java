@@ -114,7 +114,7 @@ public class AmwayApacCommerceCartFactoryIntegrationTest extends ServicelayerTra
 	{
 		sessionService.setAttribute("currentChannel", SalesApplication.POS);
 		final CartModel cartModel = commerceCartFactory.createCart();
-		Assert.assertNull(cartModel.getVolumeAmwayAccount());
+		Assert.assertEquals(TEST_ACCOUNT, cartModel.getVolumeAmwayAccount());
 	}
 
 	@Test

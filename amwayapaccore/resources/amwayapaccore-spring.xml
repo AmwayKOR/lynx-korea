@@ -505,13 +505,21 @@
 		<property name="typeCode" value="AmwayCategoryProductReference" />
 	</bean>
 	
+	<alias alias="deliveryAddressesLookupStrategy" name="defaultAmwayApacDeliveryAddressesLookupStrategy"/>
+    <bean id="defaultAmwayApacDeliveryAddressesLookupStrategy"
+          class="com.amway.apac.core.strategies.impl.DefaultAmwayApacDeliveryAddressesLookupStrategy" parent="defaultDeliveryAddressesLookupStrategy">
+        <property name="amwayApacAccountService" ref="amwayAccountService"/>
+    </bean>
+    
 	<alias alias="amwayApacCommerceCartMetadataUpdateHook" name="defaultAmwayApacCommerceCartMetadataUpdateHook" />
     <bean id="defaultAmwayApacCommerceCartMetadataUpdateHook"
           class="com.amway.apac.core.order.hook.impl.AmwayApacCommerceCartMetadataUpdateHook">
           <property name="baseSiteService" ref="baseSiteService" />
           <property name="amwayAccountCommerceService" ref="amwayAccountCommerceService" />
+          <property name="amwayApacDeliveryAddressesLookupStrategy" ref="deliveryAddressesLookupStrategy" />
           <property name="sessionService" ref="sessionService" />
           <property name="amwayApacWarehouseServiceabilityService" ref="amwayApacWarehouseServiceabilityService" />
+           <property name="amwayUserService" ref="userService" />
     </bean>
     
     <util:list id="commerceCartMetadataUpdateMethodHooks"
