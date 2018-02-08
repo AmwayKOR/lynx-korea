@@ -22,6 +22,8 @@
         http://www.springframework.org/schema/context/spring-context.xsd">
 		
 	<context:annotation-config/> 
+		<import
+		resource="cmssmartedit-structuretypes-generic-blacklist-spring.xml" />
 
 	<bean id="carouselProductConverter" parent="defaultProductConverter">
 		<property name="populators">
@@ -244,14 +246,16 @@
 
 	<alias name="defaultAmwayApacCommerceSearchSolrQueryPopulator" alias="commerceSearchSolrQueryPopulator" />
 	<bean id="defaultAmwayApacCommerceSearchSolrQueryPopulator" class="com.amway.apac.facades.product.populators.AmwayApacSearchSolrQueryPopulator" parent="defaultCommerceSearchSolrQueryPopulator" />
-    
+
+	<!-- AHC-358 commenting out this bean as it was done to support nested components and that is available with Hybris 6.6 OOTB --> 
+    <!--   
     <alias name="defaultAmwayApaccmsItemDropdownTypePopulator" alias="cmsItemDropdownComponentTypeAttributePopulator"/>
     <bean id="defaultAmwayApaccmsItemDropdownTypePopulator" class="com.amway.apac.facades.cms.types.populator.AmwayApacCMSItemDropdownComponentTypeAttributePopulator" >
         <property name="attributeDescriptorModelHelperService" ref="attributeDescriptorModelHelperService"/>
 		<property name="i18nComponentTypePopulator" ref="i18nComponentTypePopulator" />
 		<property name="typeService" ref="typeService" />
 		<property name="componentTypeDataFactory" ref="componentTypeDataFactory" />
-    </bean>    
+    </bean>   -->  
     
     <alias alias="amwayApacPaymentOptionConverter" name="defaultAmwayApacPaymentOptionConverter" />
     <bean id="defaultAmwayApacPaymentOptionConverter" parent="abstractPopulatingConverter">
