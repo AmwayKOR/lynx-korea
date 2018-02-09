@@ -75,9 +75,14 @@ public class DefaultAmwayApacStockService extends DefaultAmwayStockService imple
 		validateParameterNotNullStandardMessage(PRODUCT, product);
 		validateParameterNotNullStandardMessage(WAREHOUSE, warehouse);
 
-		StockLevelStatus stockStatus = super.getProductStatus(product, warehouse);
-		if (product instanceof AmwayKitProductModel)
+		StockLevelStatus stockStatus = null;
+		if (null != product.getVariantType())
 		{
+			stockStatus = getStockLevelStatusForVariantProductWarehouse(product, warehouse);
+		}
+		else if (product instanceof AmwayKitProductModel)
+		{
+			stockStatus = super.getProductStatus(product, warehouse);
 			final AmwayKitProductModel kitProduct = (AmwayKitProductModel) product;
 			if ((kitProduct.getType().equals(AmwayKitProductType.BUNDLED)) && (isStockAvailable(stockStatus))
 					&& (CollectionUtils.isNotEmpty(kitProduct.getKitEntry())))
@@ -89,6 +94,10 @@ public class DefaultAmwayApacStockService extends DefaultAmwayStockService imple
 					stockStatus = childStatus;
 				}
 			}
+		}
+		else
+		{
+			stockStatus = super.getProductStatus(product, warehouse);
 		}
 		return stockStatus;
 	}
@@ -152,9 +161,15 @@ public class DefaultAmwayApacStockService extends DefaultAmwayStockService imple
 		validateParameterNotNullStandardMessage(PRODUCT, product);
 		validateParameterNotNullStandardMessage(WAREHOUSE_LIST, warehouses);
 
-		StockLevelStatus stockStatus = super.getProductStatus(product, warehouses);
-		if (product instanceof AmwayKitProductModel)
+		StockLevelStatus stockStatus = null;
+
+		if (null != product.getVariantType())
 		{
+			stockStatus = getStockLevelStatusForVariantProductWarehouse(product, warehouses);
+		}
+		else if (product instanceof AmwayKitProductModel)
+		{
+			super.getProductStatus(product, warehouses);
 			final AmwayKitProductModel kitProduct = (AmwayKitProductModel) product;
 			if ((kitProduct.getType().equals(AmwayKitProductType.BUNDLED)) && (isStockAvailable(stockStatus))
 					&& (CollectionUtils.isNotEmpty(kitProduct.getKitEntry())))
@@ -166,6 +181,10 @@ public class DefaultAmwayApacStockService extends DefaultAmwayStockService imple
 					stockStatus = childStatus;
 				}
 			}
+		}
+		else
+		{
+			stockStatus = super.getProductStatus(product, warehouses);
 		}
 		return stockStatus;
 	}
@@ -207,7 +226,7 @@ public class DefaultAmwayApacStockService extends DefaultAmwayStockService imple
 
 		for (final AmwayKitEntryProductModel kitEntryProduct : parentBundle.getKitEntry())
 		{
-			final StockLevelStatus childStockStatus = getChildStockStatus(warehouses, kitEntryProduct.getEntry());
+			final StockLevelStatus childStockStatus = getProductStatus(kitEntryProduct.getEntry(), warehouses);
 			if (kitEntryProduct.getIsMajor().booleanValue())
 			{
 				majorItemsStatusSet.add(childStockStatus);
@@ -239,7 +258,7 @@ public class DefaultAmwayApacStockService extends DefaultAmwayStockService imple
 
 		for (final AmwayKitEntryProductModel kitEntryProduct : parentBundle.getKitEntry())
 		{
-			final StockLevelStatus childStockStatus = getChildStockStatus(warehouse, kitEntryProduct.getEntry());
+			final StockLevelStatus childStockStatus = getProductStatus(kitEntryProduct.getEntry(), warehouse);
 			if (kitEntryProduct.getIsMajor().booleanValue())
 			{
 				majorItemsStatusSet.add(childStockStatus);
@@ -253,55 +272,6 @@ public class DefaultAmwayApacStockService extends DefaultAmwayStockService imple
 				minorItemsStatusSet);
 	}
 
-	/**
-	 * Returns Child Stock Status based upon different parameter and warehouses.
-	 *
-	 * @param warehouses
-	 *           the warehouses
-	 * @param kitEntryProduct
-	 *           the kit entry product
-	 * @return StockLevelStatus
-	 */
-	protected StockLevelStatus getChildStockStatus(final Collection<WarehouseModel> warehouses, final ProductModel kitEntryProduct)
-	{
-		StockLevelStatus childStockStatus = null;
-
-		if (CollectionUtils.isNotEmpty(kitEntryProduct.getVariants()))
-		{
-			childStockStatus = getStockLevelStatusForVariantProductWarehouse(kitEntryProduct, warehouses);
-		}
-		else
-		{
-			childStockStatus = super.getProductStatus(kitEntryProduct, warehouses);
-		}
-
-		return childStockStatus;
-	}
-
-	/**
-	 * Returns Child Stock Status based upon different parameter and a warehouse.
-	 *
-	 * @param warehouses
-	 *           the warehouses
-	 * @param kitEntryProduct
-	 *           the kit entry product
-	 * @return StockLevelStatus
-	 */
-	protected StockLevelStatus getChildStockStatus(final WarehouseModel warehouse, final ProductModel kitEntryProduct)
-	{
-		StockLevelStatus childStockStatus = null;
-
-		if (CollectionUtils.isNotEmpty(kitEntryProduct.getVariants()))
-		{
-			childStockStatus = getStockLevelStatusForVariantProductWarehouse(kitEntryProduct, warehouse);
-		}
-		else
-		{
-			childStockStatus = super.getProductStatus(kitEntryProduct, warehouse);
-		}
-
-		return childStockStatus;
-	}
 
 	/**
 	 * Gets stock level status for variant product and warehouses.

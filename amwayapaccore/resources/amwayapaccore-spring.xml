@@ -181,6 +181,13 @@
 		parent="abstractValueResolver">
 	</bean>
 	
+	<bean id="amwayApacProductWarehouseStockValueResolver" class="com.amway.apac.core.search.solrfacetsearch.resolvers.AmwayApacProductWarehouseStockValueResolver"
+		parent="abstractValueResolver">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider"/>
+		<property name="amwayApacStockService" ref="stockService"/>
+		<property name="amwayApacCommerceStockLevelStatusStrategy" ref="stockLevelStatusStrategy"/>
+	</bean>
+	
 	<bean id="amwayApacStockFacetDisplayNameProvider" class="com.amway.apac.core.search.solrfacetsearch.providers.AmwayApacStockFacetDisplayNameProvider">
 		<property name="enumerationService" ref="enumerationService" />
 	</bean>
@@ -345,8 +352,8 @@
 		 <constructor-arg name="typecode" value="AmwayAccount"/>
 	</bean>
 	
-	<!-- <alias alias="warehouseSelectionStrategy" name="defaultAmwayApacWarehouseSelectionStrategy"/>
-	<alias alias="pickupWarehouseSelectionStrategy" name="defaultAmwayApacWarehouseSelectionStrategy"/> -->
+	<alias alias="warehouseSelectionStrategy" name="defaultAmwayApacWarehouseSelectionStrategy"/>
+	<alias alias="pickupWarehouseSelectionStrategy" name="defaultAmwayApacWarehouseSelectionStrategy"/>
 	<bean id="defaultAmwayApacWarehouseSelectionStrategy"
 			class="com.amway.apac.core.warehousing.strategies.impl.DefaultAmwayApacWarehouseSelectionStrategy">
 			<property name="cartService" ref="cartService" />

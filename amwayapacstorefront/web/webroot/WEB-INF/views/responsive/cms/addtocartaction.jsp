@@ -27,13 +27,12 @@
 		<c:set var="productCode" value="${product.code}" />
 		<input type="hidden" name="productCodePost" value="${fn:escapeXml(product.code)}" />
 		<input type="hidden" id="cartUrl" value="${cartUrl}" />
-		<button type="submit"
-			class="btn btn-primary btn-block js-add-to-cart js-enable-btn col-md-6 <c:if test="${outOfStock}">out-of-stock</c:if>"
-			disabled="disabled">
+		<c:set var="disableAddToCart"
+			value="${(product.stock.stockLevelStatus.code eq 'outOfStock') || (product.stock.stockLevelStatus.code eq 'noLongerAvailable') || (product.stock.stockLevelStatus.code eq 'temporaryNotAvailable') || (product.stock.stockLevelStatus.code eq 'notYetAvailable') || (product.stock.stockLevelStatus.code eq 'backOrder') || (product.stock.stockLevelStatus.code eq 'notSpecified')}" />
+		<button type="submit" class="btn btn-primary btn-block js-add-to-cart js-enable-btn col-md-6 <c:if test="${disableAddToCart}">out-of-stock</c:if>" disabled="disabled">
 			<spring:theme code="basket.add.to.basket" />
 		</button>
-		<button type="button" id="BuyNow" class="btn btn-primary btn-block js-add-to-cart js-enable-btn col-md-6"
-			onclick="window.location.href='${cartUrl}'">
+		<button type="button" id="BuyNow" class="btn btn-primary btn-block js-add-to-cart js-enable-btn col-md-6" onclick="window.location.href='${cartUrl}'">
 			<spring:theme code="checkout.checkout" />
 		</button>
 	</sec:authorize>
@@ -48,13 +47,12 @@
 	<div class="row add-to-cart-extra-actions col-xs-12 col-sm-12 col-md-12 js-add-to-actions-wrapper">
 		<div class="add-button-wrap add-to-shopping-list-container new-add-to-shopping-list-container">
 			<c:url var="addToShoppingListUrl" value="/shopping-lists/data/all" />
-			<button type="button" class="btn btn-link btn-block js-add-list-shopping-button acc addToList" data-product-code="${productCode}" data-add-to-shopping-list-url="${addToShoppingListUrl}">
+			<button type="button" class="btn btn-link btn-block js-add-list-shopping-button acc addToList" data-product-code="${productCode}"
+				data-add-to-shopping-list-url="${addToShoppingListUrl}">
 				<span class="icon-add-shopping-list"></span>
 				<span class="shopping-list-button-text">Add To Shopping List</span>
 			</button>
-			<div class="cart-detail__dropdown-menu dropdown-menu shopping-list-popup-wrapper shoppinglist-popup" role="menu">
-			
-			</div>
+			<div class="cart-detail__dropdown-menu dropdown-menu shopping-list-popup-wrapper shoppinglist-popup" role="menu"></div>
 		</div>
 		<div class="add-button-wrap add-to-ditto-container">
 			<button type="button" class="btn btn-link btn-block add-to-ditto js-add-to-ditto-button" data-toggle="dropdown">

@@ -20,11 +20,12 @@
 					</c:if>
 				</sec:authorize>
 				<div class="product-list__item-content amwahover">
-					
-					<span class="product-list__thum" >
+
+					<span class="product-list__thum">
 						<product:productPrimaryImage product="${product}" format="productGrid" cssClass="product-list__thumbnail" />
 						<button class="quick-view-btn" data-product-code="${product.code}">
-						<spring:theme code="plp.producttile.quick.view" /></button>
+							<spring:theme code="plp.producttile.quick.view" />
+						</button>
 					</span>
 					<div class="product-list__item-detail">
 						<p class="product-list__item-title">
@@ -59,8 +60,7 @@
 								<span class="product-list__item-abolabel">
 									<spring:theme code="plp.producttile.pvbv" />
 								</span>
-								<span class="product-list__item-abovalue">${product.price.amwayValue.pointValue} /
-									${product.price.amwayValue.businessVolume}</span>
+								<span class="product-list__item-abovalue">${product.price.amwayValue.pointValue} / ${product.price.amwayValue.businessVolume}</span>
 							</div>
 						</sec:authorize>
 					</div>
@@ -77,31 +77,26 @@
 								<button class="btn-blue-white add-to-cart-quick-view" type="submit" data-product-code="${product.code}">
 									<spring:theme code="plp.producttile.addtocart" />
 								</button>
-								<a
-									class="product-list__item-link-text product-list__item-link-common col-xs-12 col-md-12 add-to-cart-quick-view"
-									data-product-code="${product.code}" href="#">
+								<a class="product-list__item-link-text product-list__item-link-common col-xs-12 col-md-12 add-to-cart-quick-view" data-product-code="${product.code}" href="#">
 									<spring:theme code="plp.producttile.shoppinglist" />
 								</a>
 							</c:when>
 							<c:otherwise>
 
 								<form action="${addToCartUrl}" method="post" class="add_to_cart_form">
+									<c:set var="disableAddToCart"
+										value="${(product.stock.stockLevelStatus.code eq 'outOfStock') || (product.stock.stockLevelStatus.code eq 'noLongerAvailable') || (product.stock.stockLevelStatus.code eq 'temporaryNotAvailable') || (product.stock.stockLevelStatus.code eq 'notYetAvailable') || (product.stock.stockLevelStatus.code eq 'backOrder') || (product.stock.stockLevelStatus.code eq 'notSpecified')}" />
 									<input type="hidden" name="productCodePost" value="${product.code}" />
-									
-										<button class="btn-blue-white btn-primary" type="submit"  
-											<c:if test="${product.stock.stockLevelStatus.code eq 'outOfStock'}">disabled="disabled"</c:if>>
-											
-											<spring:theme code="plp.producttile.addtocart" />
-										</button>
-									
+									<button class="btn-blue-white btn-primary" type="submit" <c:if test="${disableAddToCart}">disabled="disabled"</c:if>>
+										<spring:theme code="plp.producttile.addtocart" />
+									</button>
 								</form>
 								<c:url var="addToShoppingListUrl" value="/shopping-lists/data/all" />
-								<a class="addToList product-list__item-link-text product-list__item-link-common col-xs-12 col-md-12"
-									data-add-to-shopping-list-url="${addToShoppingListUrl}" data-product-code="${product.code}">
+								<a class="addToList product-list__item-link-text product-list__item-link-common col-xs-12 col-md-12" data-add-to-shopping-list-url="${addToShoppingListUrl}"
+									data-product-code="${product.code}">
 									<spring:theme code="plp.producttile.shoppinglist" />
 								</a>
-								<div class="cart-detail__dropdown-menu dropdown-menu shopping-list-popup-wrapper plp-add-to-shopping-list-popup shoppinglist-popup" role="menu">
-								</div>
+								<div class="cart-detail__dropdown-menu dropdown-menu shopping-list-popup-wrapper plp-add-to-shopping-list-popup shoppinglist-popup" role="menu"></div>
 							</c:otherwise>
 						</c:choose>
 					</sec:authorize>

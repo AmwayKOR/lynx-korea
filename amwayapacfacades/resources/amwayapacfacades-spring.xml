@@ -134,6 +134,7 @@
     <alias name="defaultAmwayApacSearchResultProductPopulator" alias="commerceSearchResultProductPopulator"/>
 	<bean id="defaultAmwayApacSearchResultProductPopulator"
 		  class="com.amway.apac.facades.populators.AmwayApacSearchResultProductPopulator" parent="amwayCommerceSearchResultProductPopulator">
+		<property name="cartService" ref="cartService"/>
 	</bean>
 
     <alias name="defaultAmwayApacProductPrimaryImagePopulator" alias="productPrimaryImagePopulator" />
@@ -213,6 +214,11 @@
         <property name="modelService" ref="modelService"/>
         <property name="sessionService" ref="sessionService"/>
         <property name="userService" ref="userService"/>
+    </bean>
+    
+    <alias name="defaultAmwayApacStockLevelStatusPopulator" alias="stockLevelStatusPopulator"/>
+    <bean id="defaultAmwayApacStockLevelStatusPopulator"
+        class="com.amway.apac.facades.product.populators.AmwayApacStockLevelStatusPopulator">
     </bean>
 
     <alias name="defaultAmwayApacPriceDataFactory" alias="priceDataFactory"/>
