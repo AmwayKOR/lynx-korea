@@ -31,8 +31,8 @@ public class DefaultAmwayApacDeliveryAddressesLookupStrategy extends DefaultDeli
 	@Override
 	public AddressModel getDeliveryAddressForCustomer(final CustomerModel customer)
 	{
-		AddressModel address = null;
 		validateParameterNotNull(customer, "Customer must not be null");
+		AddressModel address = null;
 		final AmwayAccountModel amwayAccount = amwayApacAccountService.getAmwayAccount(customer);
 		if (null != amwayAccount)
 		{
