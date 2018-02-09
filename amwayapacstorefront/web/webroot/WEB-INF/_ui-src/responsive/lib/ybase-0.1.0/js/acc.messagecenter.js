@@ -16,6 +16,8 @@ ACC.messagecenter = {
 			    data:{
 			    		hiddenTotalNumberPage:0,
 			    		hiddenMessageTypeFilter : "",
+			    		isShow : true,
+			    		isShowPopup : false,
 			    		pagination : {
 			    			pageSize : "",
 			    			currentPage : "",
@@ -40,6 +42,32 @@ ACC.messagecenter = {
 			    		messageCenterPublishDate: function(date){
 			    			return moment(date,'DD/MM/YYYY',true).format('MM/DD/YYYY, h:mm a');
 			    		},
+			    		getDetailedDescription: function(code){
+			    			//$(".message-center-pop1").addClass("display-block");
+			    			this.isShowPopup = true;
+			    			$(".message-center-pop1,.overlay").show();
+			    			var contentBox = $(".message-center-pop-content");
+			    			contentBox.empty();
+			    			
+			    			$.ajax({
+				    			url : window.location.pathname+"/dummyDetail",
+				    			data : "",
+				    			cache : false,
+				    			type : 'GET',
+				    			success : function(data) 
+				    			{
+				    				contentBox.html(data);
+				    			},
+				    			error : function (request, status, error){
+				    			}
+				    		});
+			    			
+			    		},
+			    		viewMoreChecking: function(individual){
+			    			if (individual.pagination.currentPage < individual.pagination.numberOfPages - 1) {
+			    				individual.isShow = true;
+			    	        }
+			    		},
 			    		filterByMessageType: function(messageType){
 			    			var individual = this;
 					    $.ajax({
@@ -53,7 +81,7 @@ ACC.messagecenter = {
 			    					individual.pagination = data.pagination;
 			    					individual.hiddenTotalNumberPage = data.pagination.numberOfPages + (data.pagination.numberOfPages % 1 == 0 ? 0 : 0.5);
 			    					individual.hiddenMessageTypeFilter = messageType;
-			    					ACC.messagecenter.viewMoreChecking(individual.pagination.currentPage,individual.pagination.numberOfPages);
+			    					individual.viewMoreChecking(individual);
 				    			},
 				    			error : function (request, status, error){
 				    			}
@@ -86,14 +114,14 @@ ACC.messagecenter = {
 			    		                		individual.hiddenTotalNumberPage = data.pagination.numberOfPages + (data.pagination.numberOfPages % 1 == 0 ? 0 : 0.5);
 			    		                    
 			    		                    if (individual.pagination.currentPage >= individual.pagination.numberOfPages-1) {
-			    		                        $('.js-message-center-show-more').parent().addClass("display-none");
+			    		                    		individual.isShow = false;
 			    		                    }
 			    		                }
 			    		            });
 			    		        }
 			    				
 			    	        }
-			    			ACC.messagecenter.viewMoreChecking(individual.pagination.currentPage,individual.pagination.numberOfPages);
+			    			individual.viewMoreChecking(individual);
 			    		}
 			    },
 			    created: function(e){
@@ -110,7 +138,7 @@ ACC.messagecenter = {
 		    					individual.results = data.results;
 		    					individual.pagination = data.pagination;
 		    					individual.hiddenTotalNumberPage = data.pagination.numberOfPages + (data.pagination.numberOfPages % 1 == 0 ? 0 : 0.5);
-		    					ACC.messagecenter.viewMoreChecking(individual.pagination.currentPage,individual.pagination.numberOfPages);
+		    					individual.viewMoreChecking(individual);
 			    			},
 			    			error : function (request, status, error){
 			    			}
@@ -119,13 +147,11 @@ ACC.messagecenter = {
 			    }
     			});
     		}
+    		
+    		$(".message-center-pop1 #cboxClose").click(function() {
+                $(".message-center-pop1,.overlay").hide();
+        });
 		
-	},
-    
-	viewMoreChecking: function(currentPage,numberOfPages){
-		if (currentPage < numberOfPages - 1) {
-            $('.js-message-center-show-more').parent().removeClass("display-none");
-        }
 	},
 	
     bindShowMoreResults: function () {

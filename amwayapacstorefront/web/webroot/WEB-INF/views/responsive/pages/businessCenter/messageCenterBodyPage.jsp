@@ -47,7 +47,7 @@
 			
 			<div v-if="pagination.totalNumberOfResults > pagination.pageSize" class="account-message-center-pagination">
 				<p class="text-center">
-	                   <a id="show-more" class="js-message-center-show-more" v-on:click.stop.prevent="viewMore(pagination.currentPage)">
+	                   <a id="show-more" v-show="isShow" class="js-message-center-show-more" v-on:click.stop.prevent="viewMore(pagination.currentPage)">
 	                     <span>
 	                       <spring:theme code="text.account.messageCenter.viewMore"/>
 	                     </span>
@@ -56,5 +56,17 @@
 	            </p>
 			</div>
        </div>    
+    </div>
+</div>
+<div id="colorbox" v-show="isShowPopup" class="bonus-payment-modal bonus-payment-method lynx-modal-window--opened historyBox message-center-pop message-center-pop1 display-block" >
+    <div id="cboxWrapper">
+        <div id="cboxContent">
+            <div id="cboxLoadedContent">
+                <div class="message-center-pop-content">
+                            
+                </div>
+                <button type="button" id="cboxClose" class="cClose"><span class="modal-close-icon">x</span></button>
+            </div>
+        </div>
     </div>
 </div>

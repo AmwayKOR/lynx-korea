@@ -99,5 +99,12 @@ public class MessageCenterPageController extends AbstractSearchPageController
 			@RequestParam(value = "newStatus", required = true) final String newStatus)
 	{
 		amwayApacNotificationFacade.changeUserNotificationStatus(messageCode, AmwayNotificationUserActionStatus.valueOf(newStatus));
+
+	}
+
+	@RequestMapping(value = "/dummyDetail", method = RequestMethod.GET)
+	public String getPopUp(final Model model)
+	{
+		return "fragments/messagecenter/messageNotificationPopUp";
 	}
 }

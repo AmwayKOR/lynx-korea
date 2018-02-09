@@ -14,7 +14,7 @@
 	<div v-for="(message,index) of results" class="account-message-center-message row">
 		<div class="col-xs-9">
             <div>
-                <a class="account-message-page js-account-show-detailed-message"
+                <a class="account-message-page js-account-show-detailed-message" v-on:click.stop.prevent="getDetailedDescription(message.code)"
                     v-bind:data-message-page-number="dataMessageNumber(index)" v-bind:data-message-title="message.shortDescription">{{message.shortDescription}}</a>
             </div>
             <div>
