@@ -115,8 +115,7 @@ public class DefaultAmwayApacJWTCreator implements AmwayApacJWTCreator
 		calendar.setTime(creationDate);
 		calendar.add(Calendar.MILLISECOND, ttlMillis.intValue());
 
-
-
+		// Add 2 minutes in AuthTime and Updated Time
 		Calendar date = Calendar.getInstance();
 		long t= date.getTimeInMillis();
 		Date afterAddingTwoMins=new Date(t + (2 * ONE_MINUTE_IN_MILLIS));
@@ -127,7 +126,7 @@ public class DefaultAmwayApacJWTCreator implements AmwayApacJWTCreator
 				.claim(JWT.LOCALE, request.getLocale().getLanguage() + "-" + request.getLocale().getCountry())
 				.claim(JWT.PREFERRED_USERNAME, amwayAccount.getPrimaryParty().getCustomerID())
 				.claim(JWT.AUTH_TIME, Long.valueOf(afterAddingTwoMins.getTime()))
-				.claim(JWT.PARTY_ID, "47929860")//amwayAccount.getPrimaryParty().getCustomerID())
+				.claim(JWT.PARTY_ID, amwayAccount.getPrimaryParty().getCustomerID()) 
 				.claim(JWT.ZONEINFO, Calendar.getInstance(request.getLocale()).getTimeZone().getID())
 				.claim(JWT.UPDATED_AT, Long.valueOf(afterAddingTwoMins.getTime()))
 				.claim(JWT.NONCE, StringUtils.replace(request.getParameter(NONCE), " ", "+"))
