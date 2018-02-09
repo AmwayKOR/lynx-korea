@@ -27,9 +27,6 @@
         <property name="amwayValue" type="com.amway.facades.order.data.AmwayValueData" />
 	</bean>
 	
-
-	
-	
 	<bean class="de.hybris.platform.commercefacades.product.data.PromotionData">
         <property name="name" type="java.lang.String"/>
 		<property name="promotionPrice" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
@@ -40,7 +37,6 @@
 		<property name="entry" type="de.hybris.platform.commercefacades.product.data.ProductData" />
 		<property name="configuredQty" type="java.lang.Double" />
 	</bean>
-
 
 	<bean class="de.hybris.platform.commercefacades.product.data.ProductData">
 		<property name="alias" type="String" />
@@ -76,7 +72,6 @@
 		<property name="userGroups" type="java.util.List&lt;String>"/>
         <property name="customerID" type="String"/>
 	</bean>
-
 
     <bean class="com.amway.facades.product.data.WishlistData">
         <property name="name" type="String" />
@@ -250,7 +245,6 @@
         <property name="deliveryTax" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
         <property name="paymentDetails" type="com.amway.facades.cart.data.PaymentDetailsData"/>
     </bean>
-
 
 	<bean class="com.amway.facades.order.data.ArCreditPaymentInfoData">
 		<description>POJO representation of ArCreditPaymentInfo Data.</description>
