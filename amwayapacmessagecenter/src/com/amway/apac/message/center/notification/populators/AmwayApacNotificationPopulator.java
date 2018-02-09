@@ -36,7 +36,7 @@ public class AmwayApacNotificationPopulator implements Populator<AmwayNotificati
 		validateParameterNotNullStandardMessage(SOURCE_STRING, source);
 		validateParameterNotNullStandardMessage(TARGET_STRING, target);
 
-		target.setLongDescription(source.getLongDescription());
+		//		target.setLongDescription(source.getLongDescription());
 		target.setShortDescription(source.getShortDescription());
 		target.setCode(source.getCode());
 

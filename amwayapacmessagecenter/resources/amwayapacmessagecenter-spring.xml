@@ -44,7 +44,7 @@
     
     <alias alias="amwayApacNotificationSectionConverter" name="defaultAmwayApacNotificationSectionConverter"/>
     <bean id="defaultAmwayApacNotificationSectionConverter" parent="abstractPopulatingConverter">
-		<property name="targetClass" value="de.hybris.platform.commerceservices.search.pagedata.SearchPageData" />
+		<property name="targetClass" value="de.hybris.platform.core.servicelayer.data.SearchPageData" />
 		<property name="populators">
 			<list>
 				<ref bean="amwayApacNotificationSectionPopulator" />
@@ -82,7 +82,7 @@
 	
 	<alias name="defaultAmwayApacNotificationDao" alias="amwayApacNotificationDao"/>
 	<bean id="defaultAmwayApacNotificationDao" class="com.amway.apac.message.center.notification.daos.impl.DefaultAmwayApacNotificationDao">
-		<property name="pagedFlexibleSearchService" ref="pagedFlexibleSearchService" />
+		<property name="paginatedFlexibleSearchService" ref="paginatedFlexibleSearchService" />
 		<property name="flexibleSearchService" ref="flexibleSearchService"/>
 		<property name="amwayAccountClassificationRankMapping" ref="amwayAccountClassificationRankMapping"/>
 	</bean>

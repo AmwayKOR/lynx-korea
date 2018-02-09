@@ -3,9 +3,8 @@ package com.amway.apac.message.center.notification.facades.impl;
 import static com.amway.apac.core.constants.AmwayapacCoreConstants.ACCOUNT_CLASSIFICATION_CODE;
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
 
-import de.hybris.platform.commerceservices.search.pagedata.PageableData;
-import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
 import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.core.servicelayer.data.SearchPageData;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.servicelayer.user.UserService;
@@ -57,18 +56,36 @@ public class DefaultAmwayApacNotificationFacade implements AmwayApacNotification
 	 *
 	 */
 	@Override
-	public SearchPageData<AmwayApacNotificationData> getNotificationsForCurrentUser(final PageableData pageableData,
+	public SearchPageData<AmwayApacNotificationData> getNotificationsForCurrentUser(final SearchPageData userParams,
 			final String messageType)
 	{
-		final NotificationSearchParamData notificationSearchParam = setNotificationSearchParams(pageableData);
-		if (!StringUtils.isEmpty(messageType))
-		{
-			notificationSearchParam.setNotificationStatuses(Arrays.asList(AmwayNotificationUserActionStatus.valueOf(messageType)));
-		}
+		final NotificationSearchParamData notificationSearchParam = setNotificationSearchParams(userParams, messageType);
 		final SearchPageData<AmwayNotificationModel> searchData = amwayApacNotificationService
 				.getNotifications(notificationSearchParam);
 
 		return amwayApacNotificationSectionConverter.convert(searchData);
+	}
+
+	private NotificationSearchParamData setNotificationSearchParams(final SearchPageData userParams, final String messageType)
+	{
+		final NotificationSearchParamData searchParams = new NotificationSearchParamData();
+		searchParams.setSearchPageData(userParams);
+		searchParams.setCurrentCustomer((CustomerModel) getUserService().getCurrentUser());
+		searchParams.setSearchText(StringUtils.EMPTY);
+		searchParams.setAccountClassficationCode(getSessionService().getAttribute(ACCOUNT_CLASSIFICATION_CODE));
+
+		if (!StringUtils.isEmpty(messageType))
+		{
+			searchParams.setNotificationStatuses(Arrays.asList(AmwayNotificationUserActionStatus.valueOf(messageType)));
+		}
+		else
+		{
+			final List<AmwayNotificationUserActionStatus> notificationStatuses = Arrays
+					.asList(AmwayNotificationUserActionStatus.UNREAD, AmwayNotificationUserActionStatus.READ);
+			searchParams.setNotificationStatuses(notificationStatuses);
+		}
+
+		return searchParams;
 	}
 
 	/**
@@ -90,21 +107,6 @@ public class DefaultAmwayApacNotificationFacade implements AmwayApacNotification
 		final AmwayNotificationModel notification = amwayApacNotificationService.getNotificationByCode(notificationCode);
 		amwayApacNotificationService.changeUserNotificationStatus(notification, (CustomerModel) userService.getCurrentUser(),
 				newStatus);
-	}
-
-	protected NotificationSearchParamData setNotificationSearchParams(final PageableData pageableData)
-	{
-		final NotificationSearchParamData searchParams = new NotificationSearchParamData();
-		searchParams.setPageableData(pageableData);
-		searchParams.setCurrentCustomer((CustomerModel) getUserService().getCurrentUser());
-		searchParams.setSearchText(StringUtils.EMPTY);
-		searchParams.setAccountClassficationCode(getSessionService().getAttribute(ACCOUNT_CLASSIFICATION_CODE));
-
-		final List<AmwayNotificationUserActionStatus> notificationStatuses = Arrays.asList(AmwayNotificationUserActionStatus.UNREAD,
-				AmwayNotificationUserActionStatus.READ);
-		searchParams.setNotificationStatuses(notificationStatuses);
-
-		return searchParams;
 	}
 
 	/**

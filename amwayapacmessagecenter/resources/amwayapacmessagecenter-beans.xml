@@ -25,7 +25,7 @@
 	</bean>
 	
 	<bean class="com.amway.apac.message.center.notification.NotificationSearchParamData">
-		<property name="pageableData" type="de.hybris.platform.commerceservices.search.pagedata.PageableData"/>
+		<property name="searchPageData" type="de.hybris.platform.core.servicelayer.data.SearchPageData"/>
 		<property name="currentCustomer" type="de.hybris.platform.core.model.user.CustomerModel"/>
 		<property name="notificationStatuses" type="java.util.List&lt;com.amway.apac.message.center.enums.AmwayNotificationUserActionStatus>"/>
 		<property name="searchText" type="String"/>

@@ -13,17 +13,17 @@ import static com.amway.apac.message.center.model.AmwayNotificationUserActionMod
 import static de.hybris.platform.core.model.security.PrincipalGroupModel._PRINCIPALGROUPRELATION;
 
 import de.hybris.platform.basecommerce.model.site.BaseSiteModel;
-import de.hybris.platform.commerceservices.search.flexiblesearch.PagedFlexibleSearchService;
-import de.hybris.platform.commerceservices.search.flexiblesearch.data.SortQueryData;
-import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
 import de.hybris.platform.core.model.security.PrincipalGroupModel;
 import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.core.servicelayer.data.SearchPageData;
+import de.hybris.platform.core.servicelayer.data.SortData;
 import de.hybris.platform.servicelayer.internal.dao.DefaultGenericDao;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 import de.hybris.platform.servicelayer.search.SearchResult;
+import de.hybris.platform.servicelayer.search.paginated.PaginatedFlexibleSearchParameter;
+import de.hybris.platform.servicelayer.search.paginated.PaginatedFlexibleSearchService;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
@@ -58,11 +58,8 @@ public class DefaultAmwayApacNotificationDao extends DefaultGenericDao implement
 	private static final String CLASSIFICATION = "classification";
 	private static final String HYBRIS_GROUP = "hybrisGroup";
 	private static final String CURRENT_DATE = "currentDate";
-	private static final String SORT_BY_DESC_DATE = " ORDER BY {an.publishDate} DESC";
-	private static final String SORT_BY_ASC_DATE = " ORDER BY {an.publishDate} ASC";
 	private static final String CLASSIFICATION_LIST = "classificationsList";
 	private static final String GROUP_LIST = "groupsList";
-
 
 	/**
 	 * Query to search active PUBLISHED AmwayNotifications with publishDate before and expiryDate after the current time
@@ -108,7 +105,7 @@ public class DefaultAmwayApacNotificationDao extends DefaultGenericDao implement
 			.append(" as pg ON {pgr.target}={pg.").append(PrincipalGroupModel.PK).append("}} where {c.").append(CustomerModel.PK)
 			.append("} = ?").append(USER);
 
-	private PagedFlexibleSearchService pagedFlexibleSearchService;
+	private PaginatedFlexibleSearchService paginatedFlexibleSearchService;
 	private Map<AccountClassificationEnum, Integer> amwayAccountClassificationRankMapping;
 
 	/**
@@ -151,12 +148,34 @@ public class DefaultAmwayApacNotificationDao extends DefaultGenericDao implement
 			buildSearchQuery(queryBuilder, queryParams, notificationSearchParam.getSearchText());
 		}
 
-		final List<SortQueryData> sortQueries = Arrays.asList(
-				createSortQueryData("descDate", queryBuilder.append(SORT_BY_DESC_DATE).toString()),
-				createSortQueryData("ascDate", queryBuilder.append(SORT_BY_ASC_DATE).toString()));
+		return getPaginatedFlexibleSearchService()
+				.search(buildPaginatedSearchParams(queryBuilder, queryParams, notificationSearchParam));
+	}
 
-		return getPagedFlexibleSearchService().search(sortQueries, "descDate", queryParams,
-				notificationSearchParam.getPageableData());
+	/**
+	 *
+	 */
+	protected PaginatedFlexibleSearchParameter buildPaginatedSearchParams(final StringBuilder queryBuilder,
+			final Map<String, Object> queryParams, final NotificationSearchParamData notificationSearchParam)
+	{
+		final PaginatedFlexibleSearchParameter params = new PaginatedFlexibleSearchParameter();
+		params.setFlexibleSearchQuery(new FlexibleSearchQuery(queryBuilder.toString(), queryParams));
+		params.setSearchPageData(notificationSearchParam.getSearchPageData());
+
+		if (null != notificationSearchParam.getSearchPageData()
+				&& CollectionUtils.isNotEmpty(notificationSearchParam.getSearchPageData().getSorts()))
+		{
+			final Map sortMap = new HashMap<String, String>();
+
+			final List<SortData> requestedSorts = notificationSearchParam.getSearchPageData().getSorts();
+			for (final SortData thisSort : requestedSorts)
+			{
+				sortMap.put(thisSort.getCode(), thisSort.getCode());
+			}
+
+			params.setSortCodeToQueryAlias(sortMap);
+		}
+		return params;
 	}
 
 	/**
@@ -256,41 +275,6 @@ public class DefaultAmwayApacNotificationDao extends DefaultGenericDao implement
 	}
 
 	/**
-	 * Creates the sort query data.
-	 *
-	 * @param sortCode
-	 *           the sort code
-	 * @param query
-	 *           the query
-	 * @return the sort query data
-	 */
-	protected SortQueryData createSortQueryData(final String sortCode, final String query)
-	{
-		final SortQueryData result = new SortQueryData();
-		result.setSortCode(sortCode);
-		result.setQuery(query);
-		return result;
-	}
-
-	/**
-	 * @return the pagedFlexibleSearchService
-	 */
-	public PagedFlexibleSearchService getPagedFlexibleSearchService()
-	{
-		return pagedFlexibleSearchService;
-	}
-
-	/**
-	 * @param pagedFlexibleSearchService
-	 *           the pagedFlexibleSearchService to set
-	 */
-	@Required
-	public void setPagedFlexibleSearchService(final PagedFlexibleSearchService pagedFlexibleSearchService)
-	{
-		this.pagedFlexibleSearchService = pagedFlexibleSearchService;
-	}
-
-	/**
 	 * @return the amwayAccountClassificationRankMapping
 	 */
 	public Map<AccountClassificationEnum, Integer> getAmwayAccountClassificationRankMapping()
@@ -307,5 +291,22 @@ public class DefaultAmwayApacNotificationDao extends DefaultGenericDao implement
 			final Map<AccountClassificationEnum, Integer> amwayAccountClassificationRankMapping)
 	{
 		this.amwayAccountClassificationRankMapping = amwayAccountClassificationRankMapping;
+	}
+
+	/**
+	 * @return the paginatedFlexibleSearchService
+	 */
+	public PaginatedFlexibleSearchService getPaginatedFlexibleSearchService()
+	{
+		return paginatedFlexibleSearchService;
+	}
+
+	/**
+	 * @param paginatedFlexibleSearchService
+	 *           the paginatedFlexibleSearchService to set
+	 */
+	public void setPaginatedFlexibleSearchService(final PaginatedFlexibleSearchService paginatedFlexibleSearchService)
+	{
+		this.paginatedFlexibleSearchService = paginatedFlexibleSearchService;
 	}
 }

@@ -1,7 +1,7 @@
 package com.amway.apac.message.center.notification.facades;
 
-import de.hybris.platform.commerceservices.search.pagedata.PageableData;
-import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
+
+import de.hybris.platform.core.servicelayer.data.SearchPageData;
 
 import com.amway.apac.message.center.enums.AmwayNotificationUserActionStatus;
 import com.amway.apac.message.center.notification.AmwayApacNotificationData;
@@ -16,16 +16,6 @@ import com.amway.apac.message.center.notification.AmwayApacNotificationData;
 public interface AmwayApacNotificationFacade
 {
 	/**
-	 * Gets the amway notification section for current user with page data.
-	 *
-	 * @param pageableData
-	 *           the pageable data
-	 * @return the amway notification section for current user with page data
-	 */
-	SearchPageData<AmwayApacNotificationData> getNotificationsForCurrentUser(final PageableData pageableData,
-			final String messageType);
-
-	/**
 	 * Change user notification status.
 	 *
 	 * @param notificationCode
@@ -34,4 +24,15 @@ public interface AmwayApacNotificationFacade
 	 *           the new status
 	 */
 	void changeUserNotificationStatus(final String notificationCode, final AmwayNotificationUserActionStatus newStatus);
+
+	/**
+	 * Gets the notifications for current user.
+	 *
+	 * @param userParams
+	 *           the user params
+	 * @param messageType
+	 *           the message type
+	 * @return the notifications for current user
+	 */
+	SearchPageData<AmwayApacNotificationData> getNotificationsForCurrentUser(SearchPageData userParams, String messageType);
 }

@@ -3,13 +3,18 @@ package com.amway.apac.storefront.controllers.pages;
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
 import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
-import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractSearchPageController;
+import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
-import de.hybris.platform.commerceservices.search.pagedata.PageableData;
-import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
+import de.hybris.platform.core.servicelayer.data.PaginationData;
+import de.hybris.platform.core.servicelayer.data.SearchPageData;
+import de.hybris.platform.core.servicelayer.data.SortData;
+import de.hybris.platform.servicelayer.search.paginated.util.PaginatedSearchUtils;
+
+import java.util.Arrays;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +34,7 @@ import com.amway.apac.storefront.controllers.ControllerConstants;
  */
 @Controller
 @RequestMapping("/message-center")
-public class MessageCenterPageController extends AbstractSearchPageController
+public class MessageCenterPageController extends AbstractPageController
 {
 	/** The BREADCRUMBS Constant String. */
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
@@ -37,11 +42,21 @@ public class MessageCenterPageController extends AbstractSearchPageController
 	/** MESSAGE CENTER CMS PAGE Constant String. */
 	private static final String MESSAGE_CENTER_CMS_PAGE = "message-center";
 
+	private static final int RESULTS_COUNT_FOR_PAGINATION = 5;
+	public static final int MAX_PAGE_LIMIT = 100;
+
 	@Resource(name = "businessCenterBreadcrumbBuilder")
 	private ResourceBreadcrumbBuilder businessCenterBreadcrumbBuilder;
 
 	@Resource(name = "amwayApacNotificationFacade")
 	private AmwayApacNotificationFacade amwayApacNotificationFacade;
+
+	public enum ShowMode
+	{
+		// Constant names cannot be changed due to their usage in dependant extensions, thus nosonar
+		Page, // NOSONAR
+		All // NOSONAR
+	}
 
 	/**
 	 * Returns message center main page containing notifications list.
@@ -75,15 +90,62 @@ public class MessageCenterPageController extends AbstractSearchPageController
 			@RequestParam(value = "messageType", required = false) final String messageType)
 	{
 
-		final PageableData pageableData = createPageableData(page, pageSize, sortCode, showMode);
 		final SearchPageData<AmwayApacNotificationData> searchPageData = amwayApacNotificationFacade
-				.getNotificationsForCurrentUser(pageableData, messageType);
+				.getNotificationsForCurrentUser(setUserCustomParams(page, pageSize, showMode, sortCode), messageType);
 
 		populateModel(model, searchPageData, showMode);
 
-		model.addAttribute("countOfNotifications", Long.valueOf(searchPageData.getPagination().getTotalNumberOfResults()));
-
 		return searchPageData;
+	}
+
+	/**
+	 * @param model
+	 * @param searchPageData
+	 * @param showMode
+	 */
+	private void populateModel(final Model model, final SearchPageData<AmwayApacNotificationData> searchPageData,
+			final ShowMode showMode)
+	{
+		model.addAttribute("numberPagesShown", Integer.valueOf(RESULTS_COUNT_FOR_PAGINATION));
+		model.addAttribute("searchPageData", searchPageData);
+
+		model.addAttribute("countOfNotifications", Long.valueOf(searchPageData.getPagination().getTotalNumberOfResults()));
+	}
+
+
+	/**
+	 * Sets the user params.
+	 *
+	 * @param page
+	 *           the page
+	 * @param pageSize
+	 *           the page size
+	 * @param showMode
+	 *           the show mode
+	 * @param sortCode
+	 *           the sort code
+	 * @return the search page data
+	 */
+	private SearchPageData setUserCustomParams(final int page, final int pageSize, final ShowMode showMode, final String sortCode)
+	{
+		final SearchPageData userParams = new SearchPageData();
+
+		final PaginationData paginationData = PaginatedSearchUtils.createPaginationData(pageSize, page, false);
+
+		if (ShowMode.All == showMode)
+		{
+			paginationData.setNeedsTotal(true);
+		}
+
+		userParams.setPagination(paginationData);
+
+		if (!StringUtils.isEmpty(sortCode))
+		{
+			final SortData sortData = PaginatedSearchUtils.createSortData(sortCode, false);
+			userParams.setResults(Arrays.asList(sortData));
+		}
+
+		return userParams;
 	}
 
 	/**

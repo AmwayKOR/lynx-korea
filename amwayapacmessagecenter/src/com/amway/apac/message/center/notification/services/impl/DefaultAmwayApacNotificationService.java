@@ -5,9 +5,9 @@ import static com.amway.apac.message.center.model.AmwayNotificationModel.SITE;
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
 
 import de.hybris.platform.basecommerce.model.site.BaseSiteModel;
-import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.core.model.user.UserModel;
+import de.hybris.platform.core.servicelayer.data.SearchPageData;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.platform.site.BaseSiteService;
@@ -56,7 +56,9 @@ public class DefaultAmwayApacNotificationService implements AmwayApacNotificatio
 	@Override
 	public SearchPageData<AmwayNotificationModel> getNotifications(final NotificationSearchParamData notificationSearchParam)
 	{
-		validateParameterNotNullStandardMessage(PAGEABLE_DATA, notificationSearchParam.getPageableData());
+		validateParameterNotNullStandardMessage("Search Page Data", notificationSearchParam.getSearchPageData());
+		validateParameterNotNullStandardMessage(PAGEABLE_DATA, notificationSearchParam.getSearchPageData().getPagination());
+
 		return getAmwayApacNotificationDao().getNotifications(notificationSearchParam, getBaseSiteService().getCurrentBaseSite());
 	}
 

@@ -1,7 +1,7 @@
 package com.amway.apac.message.center.notification.services;
 
-import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
 import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.core.servicelayer.data.SearchPageData;
 
 import com.amway.apac.message.center.enums.AmwayNotificationUserActionStatus;
 import com.amway.apac.message.center.model.AmwayNotificationModel;
