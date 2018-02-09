@@ -3,9 +3,6 @@
  */
 package com.amway.apac.core.strategies.impl;
 
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-
 import de.hybris.bootstrap.annotations.UnitTest;
 import de.hybris.platform.core.model.user.AddressModel;
 import de.hybris.platform.core.model.user.CustomerModel;
@@ -58,8 +55,8 @@ public class DefaultAmwayApacDeliveryAddressesLookupStrategyUnitTest
 		Mockito.when(amwayApacAccountService.getAmwayAccount(customer)).thenReturn(amwayAccount);
 		Mockito.when(amwayAccount.getRegisteredAddress()).thenReturn(address);
 		final AddressModel lookupAddress = amwayApacDeliveryAddressesLookupStrategy.getDeliveryAddressForCustomer(customer);
+
 		Assert.assertEquals(address, lookupAddress);
-		verify(amwayAccount.getRegisteredAddress(), times(1));
 	}
 
 	@Test
@@ -73,7 +70,6 @@ public class DefaultAmwayApacDeliveryAddressesLookupStrategyUnitTest
 		final AddressModel lookupAddress = amwayApacDeliveryAddressesLookupStrategy.getDeliveryAddressForCustomer(customer);
 
 		Assert.assertNull(lookupAddress);
-		verify(amwayAccount.getRegisteredAddress(), times(0));
 	}
 
 }
