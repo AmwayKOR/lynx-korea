@@ -4,12 +4,12 @@
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
 <%@ taglib prefix="footer" tagdir="/WEB-INF/tags/responsive/common/footer"  %>
 
-<div class="container-fluid">
+ <div class="container-fluid">
     <div class="footer__top">
         <div class="row">
             <div class="footer__left col-xs-12 col-sm-12 col-md-9">
                 <div class="row">
-                    <c:forEach items="${navigationNodes}" var="node">
+                   <%-- <c:forEach items="${navigationNodes}" var="node">
                         <c:if test="${node.visible}">
                             <c:forEach items="${node.links}" step="${component.wrapAfter}"
                                        varStatus="i">
@@ -28,7 +28,7 @@
                                 </div>
                             </c:forEach>
                         </c:if>
-                    </c:forEach>
+                    </c:forEach> --%>
                 </div>
             </div>
             <div class="footer__right col-xs-12 col-md-3">

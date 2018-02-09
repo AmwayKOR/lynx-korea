@@ -148,6 +148,7 @@
         <property name="guidCookieStrategy" ref="guidCookieStrategy" />
         <property name="useReferer" value="true" />
         <property name="restrictedPages" ref="logoutRestrictedPages" />
+        <property name="sessionService" ref="sessionService" />
     </bean>
 
     <bean id="logoutFilter" class="org.springframework.security.web.authentication.logout.LogoutFilter">

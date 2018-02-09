@@ -119,7 +119,7 @@ public interface ControllerConstants
 	{
 		String KEYSTORE_ALIAS = "amwayqaidp";
 		String KEYSTORE_PASSWORD = "hybrismsb";
-		String KEYSTORE_FILENAME = "keystore.jks";
+		String KEYSTORE_FILENAME = "keystore/keystore.jks";
 	}
 
 	interface JWT //NOSONAR

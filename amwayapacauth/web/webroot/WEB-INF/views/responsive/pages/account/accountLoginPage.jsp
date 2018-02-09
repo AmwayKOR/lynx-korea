@@ -6,7 +6,7 @@
 <template:page pageTitle="${pageTitle}">
 	<div class="row">
 		<div class="col-md-6">
-			<cms:pageSlot position="RightContentSlot" var="feature" element="div" class="login-right-content-slot">
+			<cms:pageSlot position="LeftContentSlot" var="feature" element="div" class="login-right-content-slot">
 				<cms:component component="${feature}"  element="div" class="login-right-content-component"/>
 			</cms:pageSlot>
 		</div>
