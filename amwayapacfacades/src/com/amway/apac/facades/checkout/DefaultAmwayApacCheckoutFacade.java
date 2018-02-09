@@ -6,9 +6,6 @@ import de.hybris.platform.core.model.order.CartModel;
 import de.hybris.platform.core.model.user.AddressModel;
 import de.hybris.platform.site.BaseSiteService;
 
-import java.util.List;
-
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Required;
 
@@ -50,13 +47,9 @@ public class DefaultAmwayApacCheckoutFacade extends DefaultAmwayCheckoutFacade
 			{
 				if (isRegisteredAddress(addressData))
 				{
-					final List<AmwayAccountModel> amwayAccountsFound = getAmwayApacAccountService().getAmwayAccount(
+					final AmwayAccountModel amwayAccount = getAmwayApacAccountService().getAmwayAccount(
 							getCartService().getSessionCart().getVolumeAmwayAccount(), cartModel.getStore().getAffiliateNumber());
-					if (CollectionUtils.isNotEmpty(amwayAccountsFound))
-					{
-						final AmwayAccountModel amwayAccount = amwayAccountsFound.iterator().next();
-						addressModel = amwayAccount.getRegisteredAddress();
-					}
+					addressModel = amwayAccount.getRegisteredAddress();
 				}
 				else
 				{
@@ -154,6 +147,7 @@ public class DefaultAmwayApacCheckoutFacade extends DefaultAmwayCheckoutFacade
 	/**
 	 * @return the baseSiteService
 	 */
+	@Override
 	public BaseSiteService getBaseSiteService()
 	{
 		return baseSiteService;
@@ -163,6 +157,7 @@ public class DefaultAmwayApacCheckoutFacade extends DefaultAmwayCheckoutFacade
 	 * @param baseSiteService
 	 *           the baseSiteService to set
 	 */
+	@Override
 	@Required
 	public void setBaseSiteService(final BaseSiteService baseSiteService)
 	{

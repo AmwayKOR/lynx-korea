@@ -9,8 +9,6 @@ import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.platform.site.BaseSiteService;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 
 import org.junit.Assert;
@@ -52,13 +50,13 @@ public class DefaultAmwayApacAccountServiceIntegrationTest extends ServicelayerT
 		importCsv("/amwayapaccore/test/testCommerceCart.csv", "utf-8");
 		baseSiteService.setCurrentBaseSite(baseSiteService.getBaseSiteForUID(TEST_BASESITE_UID), false);
 		customer = (CustomerModel) userService.getUserForUID("ahertz");
-		accountModel = defaultAmwayApacAccountService.getAmwayAccount("ahertz", "100").iterator().next();
+		accountModel = defaultAmwayApacAccountService.getAmwayAccount("ahertz", "100");
 	}
 
 	@Test
 	public void testGetAmwayAccount()
 	{
-		final AmwayAccountModel account = defaultAmwayApacAccountService.getAmwayAccount("ahertz", "100").iterator().next();
+		final AmwayAccountModel account = defaultAmwayApacAccountService.getAmwayAccount("ahertz", "100");
 		Assert.assertEquals("Test User", account.getName());
 	}
 
@@ -77,8 +75,7 @@ public class DefaultAmwayApacAccountServiceIntegrationTest extends ServicelayerT
 	@Test
 	public void testGetClassificationForAccount()
 	{
-		final List<AmwayAccountModel> accountList = defaultAmwayApacAccountService.getAmwayAccount("ahertz", "100");
-		final AmwayAccountModel account = accountList.iterator().next();
+		final AmwayAccountModel account = defaultAmwayApacAccountService.getAmwayAccount("ahertz", "100");
 		Assert.assertEquals(AccountClassificationEnum.PLATINUM_AND_ABOVE,
 				defaultAmwayApacAccountService.getClassificationForAccount(account));
 	}
@@ -131,7 +128,7 @@ public class DefaultAmwayApacAccountServiceIntegrationTest extends ServicelayerT
 	@Test
 	public void testGetMOPRestrictionForAccountWithoutRestriction()
 	{
-		accountModel = defaultAmwayApacAccountService.getAmwayAccount("abrode", "100").iterator().next();
+		accountModel = defaultAmwayApacAccountService.getAmwayAccount("abrode", "100");
 		final AmwayBusinessRestrictionModel restriction = defaultAmwayApacAccountService.getMOPRestriction(accountModel);
 		Assert.assertNull(restriction);
 	}

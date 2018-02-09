@@ -125,8 +125,7 @@ public class DefaultAmwayApacNotificationServiceIntegrationTest extends Servicel
 	@Test
 	public void testGetMessageNotificationByMappingForPlatinumUser()
 	{
-		final AmwayAccountModel account = defaultAmwayApacAccountService.getAmwayAccount(TEST_USER_UID_ONE, "100").iterator()
-				.next();
+		final AmwayAccountModel account = defaultAmwayApacAccountService.getAmwayAccount(TEST_USER_UID_ONE, "100");
 		final CustomerModel user = account.getPrimaryParty();
 		userService.setCurrentUser(user);
 
@@ -151,8 +150,7 @@ public class DefaultAmwayApacNotificationServiceIntegrationTest extends Servicel
 	@Test
 	public void testGetMessageNotificationByMappingForDiamondUser()
 	{
-		final AmwayAccountModel account = defaultAmwayApacAccountService.getAmwayAccount(TEST_USER_UID_ONE, "100").iterator()
-				.next();
+		final AmwayAccountModel account = defaultAmwayApacAccountService.getAmwayAccount(TEST_USER_UID_ONE, "100");
 		final CustomerModel user = account.getPrimaryParty();
 		userService.setCurrentUser(user);
 

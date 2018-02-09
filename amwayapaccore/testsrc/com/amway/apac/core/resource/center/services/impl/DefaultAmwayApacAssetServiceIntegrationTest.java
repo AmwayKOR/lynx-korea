@@ -16,7 +16,6 @@ import de.hybris.platform.servicelayer.exceptions.AmbiguousIdentifierException;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 
 import java.util.Calendar;
-import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -71,10 +70,8 @@ public class DefaultAmwayApacAssetServiceIntegrationTest extends ServicelayerTra
 		importCsv("/amwayapaccore/test/common.impex", "UTF-8");
 		importCsv("/amwayapaccore/test/testAssetService.impex", "UTF-8");
 		cmsSiteService.setCurrentSiteAndCatalogVersions(AMWAY_APAC_SITE_UID, true);
-		final List<AmwayAccountModel> accountResults = amwayApacAccountService.getAmwayAccount(TEST_AMWAY_ACCOUNT_ID,
+		final AmwayAccountModel testAccount = amwayApacAccountService.getAmwayAccount(TEST_AMWAY_ACCOUNT_ID,
 				TEST_AMWAY_ACCOUNT_AFFIALIATE_COUNTRY_CODE);
-		final AmwayAccountModel testAccount = null != accountResults ? (accountResults.size() == 1 ? accountResults.get(0) : null)
-				: null;
 		if (null == testAccount)
 		{
 			throw new IllegalStateException("Test account is not properly setup. Please check.");

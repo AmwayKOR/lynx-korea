@@ -3,9 +3,6 @@ package com.amway.apac.facades.customer.impl;
 import de.hybris.platform.commercefacades.user.converters.populator.AddressPopulator;
 import de.hybris.platform.commercefacades.user.data.AddressData;
 
-import java.util.List;
-
-import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.amway.apac.core.account.services.AmwayApacAccountService;
@@ -34,6 +31,7 @@ public class DefaultAmwayApacCustomerFacade extends DefaultAmwayCustomerFacade i
 	@Override
 	public void loginSuccess()
 	{
+		getCartService().getSessionCart();
 		super.loginSuccess();
 		getAmwayAccountCommerceService().setCurrentAccount(getCurrentUser());
 		final AmwayAccountModel currentAccount = getSessionService().getAttribute(AmwaycoreConstants.SessionVariables.ACCOUNT);
@@ -50,18 +48,13 @@ public class DefaultAmwayApacCustomerFacade extends DefaultAmwayCustomerFacade i
 		AddressData addressData = null;
 		if (getCartService().hasSessionCart())
 		{
-			final List<AmwayAccountModel> amwayAccountsFound = getAmwayApacAccountService().getAmwayAccount(
+			final AmwayAccountModel amwayAccount = getAmwayApacAccountService().getAmwayAccount(
 					getCartService().getSessionCart().getVolumeAmwayAccount(),
 					getCartService().getSessionCart().getStore().getAffiliateNumber());
-
-			if (CollectionUtils.isNotEmpty(amwayAccountsFound))
+			if (amwayAccount.getRegisteredAddress() != null)
 			{
-				final AmwayAccountModel amwayAccount = amwayAccountsFound.iterator().next();
-				if (amwayAccount.getRegisteredAddress() != null)
-				{
-					addressData = new AddressData();
-					getAddressPopulator().populate(amwayAccount.getRegisteredAddress(), addressData);
-				}
+				addressData = new AddressData();
+				getAddressPopulator().populate(amwayAccount.getRegisteredAddress(), addressData);
 			}
 		}
 		return addressData;

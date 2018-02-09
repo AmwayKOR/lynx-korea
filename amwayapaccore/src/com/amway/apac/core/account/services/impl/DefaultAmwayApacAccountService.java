@@ -7,6 +7,7 @@ import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParamete
 import de.hybris.platform.core.model.c2l.CountryModel;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.internal.dao.GenericDao;
+import de.hybris.platform.servicelayer.util.ServicesUtil;
 
 import java.util.HashMap;
 import java.util.List;
@@ -43,7 +44,7 @@ public class DefaultAmwayApacAccountService extends DefaultAmwayAccountService i
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<AmwayAccountModel> getAmwayAccount(final String aboId, final String affiliateCountryCode)
+	public AmwayAccountModel getAmwayAccount(final String aboId, final String affiliateCountryCode)
 	{
 		validateParameterNotNullStandardMessage(ABO_ID, aboId);
 		validateParameterNotNullStandardMessage(AFFILIATE_COUNTRY_CODE, affiliateCountryCode);
@@ -52,7 +53,11 @@ public class DefaultAmwayApacAccountService extends DefaultAmwayAccountService i
 		final Map<String, Object> attributes = new HashMap<>(2);
 		attributes.put(AmwayAccountModel.CODE, aboId);
 		attributes.put(AmwayAccountModel.CONTROLLINGAFFILIATE, controllingAffiliate);
-		return getAmwayApacAccountDao().find(attributes);
+		final List<AmwayAccountModel> accountsList = getAmwayApacAccountDao().find(attributes);
+		ServicesUtil.validateIfSingleResult(accountsList,
+				"No AmwayAccount found for code" + aboId + " and affiliate code " + affiliateCountryCode,
+				"More than 1 AmwayAccounts found for code " + aboId + " and affiliate code " + affiliateCountryCode);
+		return accountsList.iterator().next();
 	}
 
 	/**

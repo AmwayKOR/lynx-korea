@@ -69,7 +69,7 @@ public class DefaultAmwayApacLowestPriceVariantStrategyIntegrationTest extends S
 		sessionService.setAttribute(AmwayapacCoreConstants.ACCOUNT_CLASSIFICATION_CODE,
 				AccountClassificationEnum.PLATINUM_AND_ABOVE.toString());
 		sessionService.setAttribute(SessionVariables.ACCOUNT,
-				defaultAmwayApacAccountService.getAmwayAccount("ahertz", "100").iterator().next());
+				defaultAmwayApacAccountService.getAmwayAccount("ahertz", "100"));
 	}
 
 	@Test(expected = IllegalArgumentException.class)

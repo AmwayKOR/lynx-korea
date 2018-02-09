@@ -2,8 +2,6 @@ package com.amway.apac.core.account.services;
 
 import de.hybris.platform.core.model.user.CustomerModel;
 
-import java.util.List;
-
 import com.amway.apac.core.enums.AccountClassificationEnum;
 import com.amway.core.account.service.AmwayAccountService;
 import com.amway.core.model.AmwayAccountModel;
@@ -26,7 +24,7 @@ public interface AmwayApacAccountService extends AmwayAccountService
 	 * @throws IllegalArgumentException
 	 *            if aboId is null.
 	 */
-	List<AmwayAccountModel> getAmwayAccount(final String aboId, final String affiliateCountryCode);
+	AmwayAccountModel getAmwayAccount(final String aboId, final String affiliateCountryCode);
 
 	/**
 	 * Returns {@link AccountClassificationEnum} as classification for given amwayAccount

@@ -76,7 +76,7 @@ public class DefaultAmwayApacProductPreLaunchStrategyIntegrationTest extends Ser
 		sessionService.setAttribute(AmwayapacCoreConstants.ACCOUNT_CLASSIFICATION_CODE,
 				AccountClassificationEnum.PLATINUM_AND_ABOVE.toString());
 		sessionService.setAttribute(SessionVariables.ACCOUNT,
-				defaultAmwayApacAccountService.getAmwayAccount("ahertz", "100").iterator().next());
+				defaultAmwayApacAccountService.getAmwayAccount("ahertz", "100"));
 		setProductsPrelaunchProperties();
 	}
 
@@ -158,7 +158,7 @@ public class DefaultAmwayApacProductPreLaunchStrategyIntegrationTest extends Ser
 	public void testGetProductPrelaunchStatusForCurrentUserForClassifiedInPrelaunchPeriodCompleteConsumption()
 	{
 		sessionService.setAttribute(SessionVariables.ACCOUNT,
-				defaultAmwayApacAccountService.getAmwayAccount("abrode", "100").iterator().next());
+				defaultAmwayApacAccountService.getAmwayAccount("abrode", "100"));
 		final AmwayPreLaunchResponse prelaunchResponse = defaultAmwayApacProductPreLaunchStrategy
 				.getProductPrelaunchStatusForCurrentUser(productService.getProductForCode(PRODUCT_IN_PRELAUNCH));
 		Assert.assertEquals(AmwayProductPreLaunchStatus.IN_PRE_LAUNCH_PERIOD, prelaunchResponse.getPreLaunchStatus());

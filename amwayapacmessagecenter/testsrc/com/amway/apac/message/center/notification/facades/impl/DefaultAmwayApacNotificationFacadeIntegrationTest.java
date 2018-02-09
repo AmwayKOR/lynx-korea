@@ -122,8 +122,7 @@ public class DefaultAmwayApacNotificationFacadeIntegrationTest extends Servicela
 	{
 		sessionService.setAttribute(AmwayapacCoreConstants.ACCOUNT_CLASSIFICATION_CODE,
 				AccountClassificationEnum.PLATINUM_AND_ABOVE.toString());
-		final AmwayAccountModel account = defaultAmwayApacAccountService.getAmwayAccount(TEST_USER_UID_ONE, "100").iterator()
-				.next();
+		final AmwayAccountModel account = defaultAmwayApacAccountService.getAmwayAccount(TEST_USER_UID_ONE, "100");
 		final CustomerModel user = account.getPrimaryParty();
 		userService.setCurrentUser(user);
 
