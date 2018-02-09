@@ -12,7 +12,6 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,7 +21,6 @@ import com.amway.apac.message.center.enums.AmwayNotificationUserActionStatus;
 import com.amway.apac.message.center.notification.AmwayApacNotificationData;
 import com.amway.apac.message.center.notification.facades.AmwayApacNotificationFacade;
 import com.amway.apac.storefront.controllers.ControllerConstants;
-import com.amway.apac.storefront.forms.AmwayApacNotificationEntryForm;
 
 
 /**
@@ -91,19 +89,15 @@ public class MessageCenterPageController extends AbstractSearchPageController
 	/**
 	 * Change notification status of notification passed through form.
 	 *
-	 * @param formentries
-	 *           notification form entries
+	 * @param messageCode
+	 *           the message code
+	 * @param newStatus
+	 *           the new status
 	 */
 	@RequestMapping(value = "/change-status", method = RequestMethod.POST)
-	public void changeNotificationStatus(@ModelAttribute final AmwayApacNotificationEntryForm formentries)
+	public void changeNotificationStatus(@RequestParam(value = "messageCode", required = true) final String messageCode,
+			@RequestParam(value = "newStatus", required = true) final String newStatus)
 	{
-		final String[] checkedMessageCodes = formentries.getCheckedMessagesCodes().split(",");
-		final String messageStatus = formentries.getMessageStatus();
-
-		for (final String messageCode : checkedMessageCodes)
-		{
-			amwayApacNotificationFacade.changeUserNotificationStatus(messageCode,
-					AmwayNotificationUserActionStatus.valueOf(messageStatus));
-		}
+		amwayApacNotificationFacade.changeUserNotificationStatus(messageCode, AmwayNotificationUserActionStatus.valueOf(newStatus));
 	}
 }
