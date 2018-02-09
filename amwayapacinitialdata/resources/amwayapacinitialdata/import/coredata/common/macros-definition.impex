@@ -26,7 +26,6 @@ $customerAllowedToIgnoreSuggestions=true
 $paymentProvider=Mockup
 $promoGrp=amwayapacPromotionGroup
 $checkoutFlowGroup=defaultCheckoutGroup
-# $responsiveCheckoutGroup=responsiveCheckoutGroup
 $siteMapUrlLimitPerFile=50000
 $vendor=amwayapacVendor
 $prices=Europe1prices[translator=de.hybris.platform.europe1.jalo.impex.Europe1PricesTranslator]
@@ -46,7 +45,6 @@ $customSiteMapUrls=
 
 $picture=media(code, $contentCV);
 $jarResource=$config-jarResource
-# $jarResource=jar:com.amway.initialdata.setup.InitialDataSystemSetup&/amwayinitialdata/import
 $siteResource=jar:com.amway.apac.initialdata.setup.AmwayApacInitialDataSystemSetup&/amwayapacinitialdata/import/sampledata/contentCatalogs/$contentCatalog/images
 $page=page(uid, $contentCV);
 $contentPage=contentPage(uid, $contentCV);
@@ -54,14 +52,13 @@ $contentPage=contentPage(uid, $contentCV);
 $lang=en
 $contentMedias=medias(code, $contentCV)
 $mediaContainer=media(qualifier, $contentCV)[lang=$lang];
-# $mediaConversionGroup=
 
 
 ############### Product catalog specific macros ###############
 $productCatalog=amwayapacProductCatalog
 $productCatalogName=Amway Apac Product Catalog
 $classificationCatalog=amwayapacClassification
-# $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default='$productCatalog:Staged']
+
 $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
 $productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
 $clAttrModifiers=system='$classificationCatalog',version='1.0',translator=de.hybris.platform.catalog.jalo.classification.impex.ClassificationAttributeTranslator
@@ -78,18 +75,14 @@ $classCatalogVersion=catalogversion(catalog(id[default='$classificationCatalog']
 $classSystemVersion=systemVersion(catalog(id[default='$classificationCatalog']),version[default='1.0'])[unique=true]
 $class=classificationClass(ClassificationClass.code,$classCatalogVersion)[unique=true]
 $supercategories=source(code, $catalogVersion)[unique=true]
-# $productsupercategories=supercategories(code, $catalogVersion)
-# $classificationSupercategories=source(code, $classCatalogVersion)[unique=true]
 $attribute=classificationAttribute(code,$classSystemVersion)[unique=true]
 $baseProduct=baseProduct(code,$catalogVersion)
 $image=image(code, $contentCV);
-# $productmedia=media(code, $contentCV);
 $thumbnails=thumbnails(code, $catalogVersion)
 $detail=detail(code, $catalogVersion)
 $normal=normal(code, $catalogVersion)
 $others=others(code, $catalogVersion)
 $data_sheet=data_sheet(code, $catalogVersion)
-# $medias=medias(code, $catalogVersion)
 $medias=medias(code, $contentCV);
 $galleryImages=galleryImages(qualifier, $catalogVersion)
 $category=category(code, $productCV)
@@ -116,10 +109,6 @@ $indexBaseSite=amwayapac
 $indexLanguages=ja,en,de,zh
 $indexCurrencies=USD
 $name_en=name[lang=en]
-
-# $standardHours=amway-malaysia-standard-hours
-# $weekendHours=amway-malaysia-weekend-hours
-# $productOtherImages=others(code,$catalogVersion)
 
 $contentCatalogSyncJobName=sync amwayapacContentCatalog:Staged->Online
 $sourceContentCV=sourceVersion(catalog(id[default=$contentCatalog]),version[default='Staged'])[unique=true]

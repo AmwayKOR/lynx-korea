@@ -28,24 +28,15 @@ UPDATE Product;code[unique=true];$catalogVersion;name[lang=$lang];summary[lang=$
 ;120237A;;ARTISTRY Signature Color Light Up Lip Gloss - Rose Petal (6ml);Formulated with Jojoba and Avocado oils, ARTISTRY SIGNATURE COLOR Light Up Lip Gloss complements every skin tone and enhances any look. This luscious gloss features an ingenious built-in mirror and flattering LED light to make your touch-ups easy and convenient, anytime and anywhere.
 ;120238A;;ARTISTRY Signature Color Light Up Lip Gloss - Juicy Peach (6ml);Formulated with Jojoba and Avocado oils, ARTISTRY SIGNATURE COLOR Light Up Lip Gloss complements every skin tone and enhances any look. This luscious gloss features an ingenious built-in mirror and flattering LED light to make your touch-ups easy and convenient, anytime and anywhere.
 
-INSERT_UPDATE Variant;code[unique=true];name[lang=$lang];value[lang=$lang];$image
-;1;Size;60 Tab;;
-;2;Size;180 Tab;;
-;3;Color;Rose Petal;/300Wx300H/120237A_2.png;
-;4;Color;Juicy Peach;/300Wx300H/120238A_2.png;
-;5;Size;6ml;;
-;6;Size;12ml;;
-;7;Size;18ml;;
+UPDATE Product;code[unique=true];$catalogVersion
+;A4271M;
+;A4272M;
+;120237A;
+;120238A;
 
-UPDATE Product;code[unique=true];$catalogVersion;firstVariant(code);
-;A4271M;;1;
-;A4272M;;2;
-;120237A;;3;
-;120238A;;4;
-
-INSERT_UPDATE Product;code[unique=true];$catalogVersion;secondVariant(code);
-;120237A1;;5;
-;120237A2;;6;
-;120237A3;;7;
-;120238A1;;5;
-;120238A2;;6;
+INSERT_UPDATE Product;code[unique=true];$catalogVersion
+;120237A1;
+;120237A2;
+;120237A3;
+;120238A1;
+;120238A2;
