@@ -98,6 +98,9 @@
          <property name="orderType" type="com.amway.apac.core.enums.OrderType">
             <description>Specifies the OrderType for cart(e.g:NORMAL_ORDER,BACK_ORDER)</description>
         </property>    
+        <property name="amwayCartType" type="com.amway.core.enums.AmwayCartType" >
+			<description>Specifies the Cart type for cart(e.g:WEB,POS)</description>
+		</property> 
 	</bean>
 
 	<bean class="de.hybris.platform.commercefacades.order.dto.CartParameters">

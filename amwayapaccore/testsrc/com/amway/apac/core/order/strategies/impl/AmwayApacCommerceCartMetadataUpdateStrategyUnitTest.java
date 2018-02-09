@@ -24,6 +24,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import com.amway.apac.core.enums.OrderType;
+import com.amway.core.enums.AmwayCartType;
 
 
 
@@ -117,6 +118,17 @@ public class AmwayApacCommerceCartMetadataUpdateStrategyUnitTest
 		parameter.setOrderType(OrderType.NORMAL_ORDER);
 		final boolean shouldSaveCart = amwayApacCommerceCartMetadataUpdateStrategy.doMetadataUpdate(parameter);
 		Mockito.verify(cart, times(1)).setOrderType(OrderType.NORMAL_ORDER);
+		Assert.assertTrue(shouldSaveCart);
+	}
+
+	@Test
+	public void testDoMetadataUpdateWithAmwayCartType()
+	{
+		final CommerceCartMetadataParameter parameter = CommerceCartMetadataParameterUtils.parameterBuilder().cart(cart)
+				.enableHooks(true).build();
+		parameter.setAmwayCartType(AmwayCartType.WEB);
+		final boolean shouldSaveCart = amwayApacCommerceCartMetadataUpdateStrategy.doMetadataUpdate(parameter);
+		Mockito.verify(cart, times(1)).setType(AmwayCartType.WEB);
 		Assert.assertTrue(shouldSaveCart);
 	}
 

@@ -109,6 +109,7 @@ public class DefaultAmwayApacCartFacade extends DefaultAmwayCartFacade implement
 		parameter.setVolumeAmwayAccount(metadata.getVolumeAmwayAccount());
 		parameter.setOrderType(metadata.getOrderType());
 		parameter.setWarehouseCode(metadata.getWarehouseCode());
+		parameter.setAmwayCartType(metadata.getAmwayCartType());
 
 		getCommerceCartService().updateCartMetadata(parameter);
 	}

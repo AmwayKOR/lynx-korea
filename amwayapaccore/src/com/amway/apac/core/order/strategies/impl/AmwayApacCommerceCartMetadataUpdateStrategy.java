@@ -56,6 +56,11 @@ public class AmwayApacCommerceCartMetadataUpdateStrategy extends DefaultCommerce
 			cart.setOrderType(parameter.getOrderType());
 			shouldSaveCart = true;
 		}
+		if (null != parameter.getAmwayCartType())
+		{
+			cart.setType(parameter.getAmwayCartType());
+			shouldSaveCart = true;
+		}
 		return shouldSaveCart;
 
 	}
