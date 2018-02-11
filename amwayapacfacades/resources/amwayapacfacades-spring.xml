@@ -134,7 +134,6 @@
     <alias name="defaultAmwayApacSearchResultProductPopulator" alias="commerceSearchResultProductPopulator"/>
 	<bean id="defaultAmwayApacSearchResultProductPopulator"
 		  class="com.amway.apac.facades.populators.AmwayApacSearchResultProductPopulator" parent="amwayCommerceSearchResultProductPopulator">
-		<property name="cartService" ref="cartService"/>
 	</bean>
 
     <alias name="defaultAmwayApacProductPrimaryImagePopulator" alias="productPrimaryImagePopulator" />

@@ -351,7 +351,7 @@
 	      class="de.hybris.platform.servicelayer.internal.dao.DefaultGenericDao">
 		 <constructor-arg name="typecode" value="AmwayAccount"/>
 	</bean>
-	
+		<!--
 	<alias alias="warehouseSelectionStrategy" name="defaultAmwayApacWarehouseSelectionStrategy"/>
 	<alias alias="pickupWarehouseSelectionStrategy" name="defaultAmwayApacWarehouseSelectionStrategy"/>
 	<bean id="defaultAmwayApacWarehouseSelectionStrategy"
@@ -359,6 +359,7 @@
 			<property name="cartService" ref="cartService" />
 			<property name="baseStoreService" ref="baseStoreService" />
 	</bean>
+	-->
 	
 	<alias alias="stockLevelStatusStrategy" name="defaultAmwayApacCommerceStockLevelStatusStrategy"/>
     <bean id="defaultAmwayApacCommerceStockLevelStatusStrategy" class="com.amway.apac.core.stock.strategies.impl.DefaultAmwayApacCommerceStockLevelStatusStrategy" parent="amwayCommerceStockLevelStatusStrategy"/>
