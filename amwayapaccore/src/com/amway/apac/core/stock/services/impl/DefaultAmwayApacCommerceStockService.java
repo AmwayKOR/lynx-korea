@@ -45,7 +45,7 @@ public class DefaultAmwayApacCommerceStockService extends DefaultAmwayCommerceSt
 		{
 			try
 			{
-				final WarehouseModel warehouse = abstractOrderEntryModel.getWareHouse();
+				final WarehouseModel warehouse = abstractOrderModel.getWarehouse();
 
 				getAmwayStockService().reserve(abstractOrderEntryModel.getProduct(), warehouse,
 						abstractOrderEntryModel.getQuantity().intValue(), abstractOrderEntryModel.getSkuVersion());
