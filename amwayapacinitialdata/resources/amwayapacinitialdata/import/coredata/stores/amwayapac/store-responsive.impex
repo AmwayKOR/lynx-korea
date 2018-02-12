@@ -91,3 +91,8 @@ INSERT_UPDATE Address;owner(Customer.uid)[unique=true];country(isocode);postalco
 
 INSERT_UPDATE AmwayBusinessLevel;qualificationLevel(code)[unique=true];&businessLevelRef
 ;QualificationLevelTypeEnum_340;testUserQual
+
+# Remove first section once platform moved back to singular scop and registeredRedirectUri
+INSERT_UPDATE OAuthClientDetails;clientId[unique=true];resourceIds;scope;authorizedGrantTypes;authorities;clientSecret;registeredRedirectUri
+;apaccore;hybris;basic;implicit,client_credentials,password;ROLE_CLIENT;secret;https://hybrisqa.preprod.apac.amway.net:9002/oauth2_implicit_callback;
+;apaccore;hybris;basic;implicit,client_credentials,password;ROLE_CLIENT;secret;https://api-ts.amwayglobal.com/rest;
