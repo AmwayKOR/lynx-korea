@@ -90,5 +90,35 @@
             </map>
         </property>
     </bean>
+    
+    <bean parent="fieldMapper">
+        <property name="sourceClass"
+                  value="com.amway.facades.data.AmwayPointOfSaleReceiptData"/>
+        <property name="destClass"
+                  value="de.hybris.platform.commercewebservicescommons.dto.pos.AmwayPointOfSaleReceiptWsDTO"/>
+        <property name="fieldMapping">
+            <map>
+                <entry key="orderData" value="orderWsDTO"/>
+                <entry key="pointOfServiceData" value="storeWsDTO"/>
+                <entry key="employeeData" value="placedBy"/>
+                <entry key="amwayAccountData" value="customerABODetailWsDto"/>
+                <entry key="paymentData" value="paymentDetails"/>
+            </map>
+        </property>
+    </bean>
+    
+
+    <bean parent="fieldMapper">
+        <property name="sourceClass"
+                  value="com.amway.facades.renewal.data.AmwayAutoRenewalResponseData"/>
+        <property name="destClass"
+                  value="com.amway.core.commercewebservices.dto.renewal.AmwayAutoRenewalResponseWsDTO"/>
+        <property name="fieldMapping">
+            <map>
+                <entry key="status" value="status"/>
+                <entry key="orderNumber" value="orderNumber"/>
+            </map>
+        </property>
+    </bean>
 
 </beans>

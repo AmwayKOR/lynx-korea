@@ -12,6 +12,7 @@ package com.amway.core.v2.filter;
 
 import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
+import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.servicelayer.user.UserService;
 
 import java.io.IOException;
@@ -40,18 +41,23 @@ public class UserMatchingFilter extends AbstractUrlMatchingFilter
 	public static final String ROLE_TRUSTED_CLIENT = "ROLE_TRUSTED_CLIENT";
 	private static final String CURRENT_USER = "current";
 	private static final String ANONYMOUS_USER = "anonymous";
+	private static final String ACTING_USER_UID = "ACTING_USER_UID";
 	private static final Logger LOG = Logger.getLogger(UserMatchingFilter.class);
 	private String regexp;
 	private UserService userService;
+	private SessionService sessionService;
 
 	@Override
 	protected void doFilterInternal(final HttpServletRequest request, final HttpServletResponse response,
 			final FilterChain filterChain) throws ServletException, IOException
 	{
 		final Authentication auth = getAuth();
+		if (hasRole(ROLE_CUSTOMERGROUP, auth) || hasRole(ROLE_CUSTOMERMANAGERGROUP, auth))
+		{
+			getSessionService().setAttribute(ACTING_USER_UID, auth.getPrincipal());
+		}
 
 		final String userID = getValue(request, regexp);
-
 		if (userID == null)
 		{
 			if (hasRole(ROLE_CUSTOMERGROUP, auth) || hasRole(ROLE_CUSTOMERMANAGERGROUP, auth))
@@ -119,13 +125,27 @@ public class UserMatchingFilter extends AbstractUrlMatchingFilter
 		this.userService = userService;
 	}
 
+	protected SessionService getSessionService()
+	{
+		return sessionService;
+	}
+
+	@Required
+	public void setSessionService(final SessionService sessionService)
+	{
+		this.sessionService = sessionService;
+	}
+
 	protected boolean hasRole(final String role, final Authentication auth)
 	{
-		for (final GrantedAuthority ga : auth.getAuthorities())
+		if (auth != null)
 		{
-			if (ga.getAuthority().equals(role))
+			for (final GrantedAuthority ga : auth.getAuthorities())
 			{
-				return true;
+				if (ga.getAuthority().equals(role))
+				{
+					return true;
+				}
 			}
 		}
 		return false;

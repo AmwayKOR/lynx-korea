@@ -23,12 +23,23 @@
         <property name="mediaType" value="application/json"></property>
     </bean>
 
+    <alias alias="dmsMasheryAuthDecorator" name="defaultMasheryAuthDecorator" />
+    <bean id="defaultMasheryAuthDecorator" class="com.amway.integration.cis.dms.utils.AmwayMasheryAuthDecorator">
+        <property name="clientId" value="${dms.security.mashery.clientId}"/>
+        <property name="scope" value="${dms.security.mashery.scope}"/>
+        <property name="userService" ref="userService"/>
+        <property name="accountCommerceService" ref="amwayAccountCommerceService"/>
+        <property name="baseStoreService" ref="baseStoreService"/>
+        <property name="sessionService" ref="sessionService"/>
+    </bean>
+
     <!-- Each rest client needs its own instance to not share the decorator configuration, so it is prototype -->
     <bean id="dmsRestCallDecoratorRegistry" class="com.hybris.commons.client.RestCallDecoratorRegistry" scope="prototype">
         <property name="decorators">
             <list>
                 <ref bean="dmsTypeDefaultRestCallDecorator"/>
                 <ref bean="dmsClientDecorator"/>
+                <ref bean="dmsMasheryAuthDecorator"/>
             </list>
         </property>
     </bean>
@@ -44,12 +55,10 @@
                 </property>
                 <property name="endpointName" value="${dms.client.endpoint.name:dms}"/>
                 <property name="restResponseHandlers" ref="cisRestResponseHandlers"/>
-                <!--property name="clientDecorator" ref="dmsClientDecorator"/-->
                 <property name="restCallDecoratorRegistry" ref="dmsRestCallDecoratorRegistry"/>
-                <!--property name="httpSecurityEnabled" value="${dms.security.http.basic.auth.enable}"/-->
             </bean>
         </property>
     </bean>
-    
+
     <bean id="amwayJsonMessageBodyWriter" class="com.amway.integration.cis.dms.jaxb.JsonMessageBodyWriter" />
 </beans>

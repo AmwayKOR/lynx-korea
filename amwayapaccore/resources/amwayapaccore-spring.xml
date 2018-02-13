@@ -21,8 +21,9 @@
 
      <context:annotation-config/>
 
+	<bean id="amwayApacCoreSystemSetup" class="com.amway.apac.core.setup.AmwayApacCoreSystemSetup" parent="abstractCoreSystemSetup"/>
 
-    <bean id="volumePriceComparator" class="com.amway.apac.core.comparators.VolumeAwarePriceInformationComparator" scope="singleton"/>
+    <bean id="volumePriceComparator" class="com.amway.apac.core.comparators.VolumeAwarePriceInformationComparator"/>
 
 
 	<!--
@@ -63,42 +64,6 @@
 		<property name="siteBaseUrlResolutionService" ref="siteBaseUrlResolutionService"/>
 		<property name="cmsSiteService" ref="cmsSiteService"/>
 	</bean>
-
-
-	<!-- checkout flow configuration -->
-
-	<bean id="pickUpInStoreCheckoutFlowStrategy" class="com.amway.apac.core.checkout.flow.impl.PickUpInStoreCheckoutFlowStrategy" >
-		<property name="pickupStrategy" ref="pickupStrategy" />
-		<property name="defaultStrategy" ref="siteCheckoutFlowStrategy"/>
-		<property name="multiStepCheckoutFlowStrategy" ref="multiStepCheckoutFlowStrategy" />
-	</bean>
-
-	<bean id="siteCheckoutFlowStrategy"
-	      class="com.amway.apac.core.checkout.flow.impl.SiteCheckoutFlowStrategy" >
-		<!-- This strategy looks up a strategy based on the current site UID -->
-		<property name="cmsSiteService" ref="cmsSiteService"/>
-		<property name="siteMappings">
-			<map>
-				<entry key="electronics" value-ref="newCustomerCheckoutFlowStrategy"/>
-				<entry key="apparel-de" value-ref="multiStepCheckoutFlowStrategy"/>
-				<entry key="apparel-uk" value-ref="multiStepCheckoutFlowStrategy"/>
-				<entry key="powertoolsstore" value-ref="multiStepCheckoutFlowStrategy"/>
-			</map>
-		</property>
-		<!-- Default to SINGLE step checkout -->
-		<property name="defaultStrategy" ref="multiStepCheckoutFlowStrategy"/>
-	</bean>
-
-	<bean id="newCustomerCheckoutFlowStrategy"
-	      class="com.amway.apac.core.checkout.flow.impl.NewCustomerCheckoutFlowStrategy" >
-		<!-- This strategy works out if the user has created any data -->
-		<property name="userService" ref="userService"/>
-		<property name="customerAccountService" ref="customerAccountService"/>
-		<property name="defaultStrategy" ref="multiStepCheckoutFlowStrategy"/>
-		<property name="newCustomerStrategy" ref="multiStepCheckoutFlowStrategy"/>
-	</bean>
-
-
 
 	<!-- Sales quote process actions -->
 
@@ -203,7 +168,42 @@
 		<property name="eventService" ref="eventService" />
 		<property name="timeService" ref="timeService" />
 	</bean>
+	
+	
+	<bean id="amwayBrandCategorySource" parent="abstractCategorySource">
+		<property name="rootCategory" value="brands" />
+	</bean>
+	<bean id="amwayCategorySource" parent="abstractCategorySource">
+		<property name="rootCategory" value="root" />
+	</bean>
 
+	<bean id="amwayApacProductCreationTimeValueResolver" class="com.amway.apac.core.search.solrfacetsearch.resolvers.AmwayApacProductCreationTimeValueResolver"
+		parent="abstractValueResolver">
+	</bean>
+	
+	<bean id="amwayApacProductWarehouseStockValueResolver" class="com.amway.apac.core.search.solrfacetsearch.resolvers.AmwayApacProductWarehouseStockValueResolver"
+		parent="abstractValueResolver">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider"/>
+		<property name="amwayApacStockService" ref="stockService"/>
+		<property name="amwayApacCommerceStockLevelStatusStrategy" ref="stockLevelStatusStrategy"/>
+	</bean>
+	
+	<bean id="amwayApacStockFacetDisplayNameProvider" class="com.amway.apac.core.search.solrfacetsearch.providers.AmwayApacStockFacetDisplayNameProvider">
+		<property name="enumerationService" ref="enumerationService" />
+	</bean>
+	
+	<bean id="image176ValueProvider" parent="abstractImageValueProvider" >
+        <property name="mediaFormat" value="Product_176Wx245H"/>
+    </bean>
+	
+	<bean id="image96ValueProvider" parent="abstractImageValueProvider" >
+        <property name="mediaFormat" value="Product_96Wx96H"/>
+    </bean>
+    
+    <bean id="image133ValueProvider" parent="abstractImageValueProvider" >
+        <property name="mediaFormat" value="Product_133Wx133H"/>
+    </bean>
+	
 	<import resource="/amwayapaccore/processes/quote/quote-buyer-process-spring.xml"/>
 	<import resource="/amwayapaccore/processes/quote/quote-salesrep-process-spring.xml"/>
 	<import resource="/amwayapaccore/processes/quote/quote-seller-approval-process-spring.xml"/>
@@ -212,5 +212,333 @@
 	<import resource="/amwayapaccore/processes/quote/quote-expired-email-process-spring.xml"/>
 
 	<import resource="/amwayapaccore/processes/quote/quote-post-cancellation-process-spring.xml"/>
+
+    <alias alias="wishlistService" name="defaultAmwayApacWishlistService" />
+    <bean id="defaultAmwayApacWishlistService" class="com.amway.apac.core.wishlist.services.impl.DefaultAmwayApacWishlistService" parent="amwayWishlistService">
+        <property name="amwayApacWishlistDao" ref="wishlistDao" />
+    </bean>
+
+    <alias alias="wishlistDao" name="defaultAmwayApacWishlistDao" />
+    <bean id="defaultAmwayApacWishlistDao" class="com.amway.apac.core.wishlist.daos.impl.DefaultAmwayApacWishlistDao" parent="amwayWishlistDao" />
 	
+	<alias alias="customeraccountService" name="defaultAmwayApacCustomerAccountService" />
+    <bean id="defaultAmwayApacCustomerAccountService" class="com.amway.apac.core.customer.services.impl.DefaultAmwayApacCustomerAccountService" parent="defaultAmwayCustomerAccountService">
+        <property name="amwayApacCustomerAccountDao" ref="customeraccountDao" />
+    </bean>
+    
+	<alias alias="customeraccountDao" name="defaultAmwayApacCustomerAccountDao" />
+    <bean id="defaultAmwayApacCustomerAccountDao" class="com.amway.apac.core.customer.daos.impl.DefaultAmwayApacCustomerAccountDao" parent="amwayCustomerAccountDao" />
+    
+    <alias name="defaultAmwayApacProductService" alias="productService" />
+    <bean id="defaultAmwayApacProductService"
+          class="com.amway.apac.core.product.services.impl.DefaultAmwayApacProductService" parent="defaultProductService">
+        <property name="amwayApacProductDao" ref="productDao" />
+        <property name="amwayUserPromotionCountDao" ref="amwayUserPromotionCountDao"/>
+    </bean>
+    
+    <alias name="defaultAmwayApacProductDao" alias="productDao"/>
+    <bean id="defaultAmwayApacProductDao" class="com.amway.apac.core.product.daos.impl.DefaultAmwayApacProductDao" parent="defaultProductDao">
+    </bean> 
+    
+	<alias name="defaultAmwayApacLowestPriceVariantStrategy" alias="amwayApacPrimaryVariantSelectionStrategy"/>
+	<bean id="defaultAmwayApacLowestPriceVariantStrategy" class="com.amway.apac.core.product.strategies.impl.DefaultAmwayApacLowestPriceVariantStrategy">
+        <property name="priceService" ref="netPriceService" />
+    </bean>
+
+	<bean id="amwayApacPrimaryVariantResolvingValueProvider" class="com.amway.apac.core.search.solrfacetsearch.providers.AmwayApacPrimaryVariantResolvingValueProvider"
+		abstract="true">
+		<property name="amwayApacPrimaryVariantSelectionStrategy" ref="amwayApacPrimaryVariantSelectionStrategy" />
+		<property name="sessionService" ref="sessionService" />
+		<property name="userService" ref="userService" />
+		<property name="catalogVersionService" ref="catalogVersionService" />
+	</bean>
+	
+	<bean id="amwayApacBusinessVolumeValueProvider" parent="amwayApacPrimaryVariantResolvingValueProvider">
+		<property name="actualProvider" ref="businessVolumeValueProvider" />
+	</bean>
+
+	<bean id="amwayApacPointValueValueProvider" parent="amwayApacPrimaryVariantResolvingValueProvider">
+		<property name="actualProvider" ref="pointValueValueProvider" />
+	</bean>
+
+	<bean id="amwayApacABOPriceValueProvider" parent="amwayApacPrimaryVariantResolvingValueProvider">
+		<property name="actualProvider" ref="aboPriceValueProvider" />
+	</bean>
+	
+	<bean id="amwayApacProductUrlValueProvider" parent="amwayApacPrimaryVariantResolvingValueProvider">
+		<property name="actualProvider" ref="productUrlValueProvider" />
+	</bean>
+	
+	<bean id="amwayApacProductPricesValueResolver" class="com.amway.apac.core.search.solrfacetsearch.resolvers.AmwayApacProductPricesValueResolver"
+		parent="productPricesValueResolver">
+		<property name="amwayApacPrimaryVariantSelectionStrategy" ref="amwayApacPrimaryVariantSelectionStrategy"/>
+	</bean>
+	
+	
+	<alias name="defaultAmwayApacCommerceAddToCartStrategy" alias="commerceAddToCartStrategy"/>
+	<bean id="defaultAmwayApacCommerceAddToCartStrategy"
+			class="com.amway.apac.core.order.impl.DefaultAmwayApacCommerceAddToCartStrategy"
+			parent="defaultCommerceAddToCartStrategy"/>
+	
+	<alias alias="cartFactory" name="amwayApacCommerceCartFactory" />
+    <bean id="amwayApacCommerceCartFactory" class="com.amway.apac.core.order.impl.AmwayApacCommerceCartFactory" parent="amwayCommerceCartFactory">
+        <property name="amwayApacWarehouseServiceabilityService" ref="amwayApacWarehouseServiceabilityService"/>
+        <property name="commerceCartMetadataUpdateStrategy" ref="commerceCartMetadataUpdateStrategy"/>
+    </bean>
+	
+	<alias alias="amwayApacPaymentOptionInterceptor" name="defaultAmwayApacPaymentOptionInterceptor"/>
+	<bean id="defaultAmwayApacPaymentOptionInterceptor" class="com.amway.apac.core.product.interceptors.AmwayApacPaymentOptionInterceptor"/>
+	
+	<bean id="defaultAmwayApacPaymentOptionInterceptorMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+        <property name="interceptor" ref="amwayApacPaymentOptionInterceptor" />
+        <property name="typeCode" value="AmwayPaymentOption" />
+    </bean>
+    
+    <alias alias="amwayApacAssetInterceptor" name="defaultAmwayApacAssetInterceptor"/>
+    <bean id="defaultAmwayApacAssetInterceptor" class="com.amway.apac.core.resource.center.interceptors.AmwayApacAssetInterceptor">
+    	<property name="amwayAccountClassificationRankMapping" ref="amwayAccountClassificationRankMapping"/>
+    </bean>
+
+    <bean id="defaultAmwayApacAssetInterceptorMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+        <property name="interceptor" ref="amwayApacAssetInterceptor" />
+        <property name="typeCode" value="AbstractAmwayAsset" />
+    </bean>
+	
+	<alias name="defaultAmwayApacAccountService" alias="amwayAccountService" />
+	<bean id="defaultAmwayApacAccountService" class="com.amway.apac.core.account.services.impl.DefaultAmwayApacAccountService" parent="defaultAmwayAccountService">
+		<property name="amwayApacAccountDao" ref="amwayApacAccountDao"/>
+		<property name="amwayApacCommerceCommonI18NService" ref="commerceCommonI18NService"/>
+		<property name="amwayAccountClassificationDao" ref="amwayAccountClassificationDao"/>
+		<property name="amwayApacCustomerAccountDao" ref="customeraccountDao" />
+	</bean>
+	
+	<alias name="defaultAmwayApacCommerceCheckoutService" alias="amwayCommerceCheckoutService" />
+	<bean id="defaultAmwayApacCommerceCheckoutService" class="com.amway.apac.core.checkout.services.impl.DefaultAmwayApacCommerceCheckoutService" parent="defaultAmwayCommerceCheckoutService">
+		<property name="amwayApacCommerceWarehouseStrategy" ref="defaultAmwayApacCommerceWarehouseStrategy"/>
+	</bean>
+	
+	<alias name="defaultAmwayApacCommerceWarehouseStrategy" alias="amwayApacCommerceWarehouseStrategy"/>
+	<bean id="defaultAmwayApacCommerceWarehouseStrategy" class="com.amway.apac.core.checkout.services.impl.DefaultAmwayApacCommerceWarehouseStrategy">
+		<property name="commerceCartCalculationStrategy" ref="commerceCartCalculationStrategy"/>
+		<property name="modelService" ref="modelService"/>
+	</bean>
+	
+	<alias alias="commerceCommonI18NService" name="defaultAmwayApacCommerceCommonI18NService" />
+	<bean id="defaultAmwayApacCommerceCommonI18NService" class="com.amway.apac.core.i18n.services.impl.DefaultAmwayApacCommerceCommonI18NService" parent="defaultCommerceCommonI18NService">
+		<property name="amwayApacCountryDao" ref="amwayApacCountryDao"/>
+	</bean>
+	
+	<alias name="defaultAmwayApacAccountClassificationService" alias="amwayApacAccountClassificationService"/>
+	<bean id="defaultAmwayApacAccountClassificationService" class="com.amway.apac.core.account.services.impl.DefaultAmwayApacAccountClassificationService">
+		<property name="amwayApacAccountClassificationComparator" ref="amwayApacAccountClassificationComparator"/>
+		<property name="sessionService" ref="sessionService"/>
+	</bean>
+	
+	<alias name="defaultAmwayAccountClassificationDao" alias="amwayAccountClassificationDao"/>
+	<bean id="defaultAmwayAccountClassificationDao"
+	      class="de.hybris.platform.servicelayer.internal.dao.DefaultGenericDao">
+		 <constructor-arg name="typecode" value="AmwayAccountClassification"/>
+	</bean>
+
+	<alias name="defaultAmwayApacCountryDao" alias="amwayApacCountryDao"/>
+	<bean id="defaultAmwayApacCountryDao"
+	      class="de.hybris.platform.servicelayer.internal.dao.DefaultGenericDao">
+		 <constructor-arg name="typecode" value="Country"/>
+	</bean>
+	
+	<alias name="defaultAmwayApacAccountDao" alias="amwayApacAccountDao"/>
+	<bean id="defaultAmwayApacAccountDao"
+	      class="de.hybris.platform.servicelayer.internal.dao.DefaultGenericDao">
+		 <constructor-arg name="typecode" value="AmwayAccount"/>
+	</bean>
+		<!--
+	<alias alias="warehouseSelectionStrategy" name="defaultAmwayApacWarehouseSelectionStrategy"/>
+	<alias alias="pickupWarehouseSelectionStrategy" name="defaultAmwayApacWarehouseSelectionStrategy"/>
+	<bean id="defaultAmwayApacWarehouseSelectionStrategy"
+			class="com.amway.apac.core.warehousing.strategies.impl.DefaultAmwayApacWarehouseSelectionStrategy">
+			<property name="cartService" ref="cartService" />
+			<property name="baseStoreService" ref="baseStoreService" />
+	</bean>
+	-->
+	
+	<alias alias="stockLevelStatusStrategy" name="defaultAmwayApacCommerceStockLevelStatusStrategy"/>
+    <bean id="defaultAmwayApacCommerceStockLevelStatusStrategy" class="com.amway.apac.core.stock.strategies.impl.DefaultAmwayApacCommerceStockLevelStatusStrategy" parent="amwayCommerceStockLevelStatusStrategy"/>
+    
+    <alias alias="commerceStockLevelCalculationStrategy" name="amwayApacCommerceAvailabilityCalculationStrategy"/>
+	<bean id="amwayApacCommerceAvailabilityCalculationStrategy" class="com.amway.apac.core.stock.strategies.impl.AmwayApacCommerceAvailabilityCalculationStrategy"
+			parent="warehousingAvailabilityCalculationStrategy">
+		<property name="inventoryEventService" ref="inventoryEventService" />
+	</bean>
+			
+	<alias name="defaultAmwayApacAccountClassificationComparator" alias="amwayApacAccountClassificationComparator"/>
+	<bean id="defaultAmwayApacAccountClassificationComparator" class="com.amway.apac.core.comparators.AmwayApacAccountClassificationComparator">
+		<property name="amwayAccountClassificationRankMapping" ref="amwayAccountClassificationRankMapping"/>
+	</bean>
+	
+	<util:map id="amwayAccountClassificationRankMapping" key-type="com.amway.apac.core.enums.AccountClassificationEnum" value-type="java.lang.Integer">
+		<description>Mapping for various classification levels against ranks</description>
+		<entry key="NORMAL_ABO" value="0"/>
+        <entry key="PLATINUM_AND_ABOVE" value="330"/>
+        <entry key="DIAMOND_AND_ABOVE" value="380"/>
+	</util:map>
+	
+	<alias name="defaultAmwayApacProductPreLaunchStrategy" alias="amwayApacProductPreLaunchStrategy"/>
+    <bean id="defaultAmwayApacProductPreLaunchStrategy" class="com.amway.apac.core.product.strategies.impl.DefaultAmwayApacProductPreLaunchStrategy">
+		<property name="amwayApacAccountClassificationService" ref="amwayApacAccountClassificationService" />
+		<property name="amwayApacProductService" ref="productService"/>
+		<property name="amwayAccountCommerceService" ref="amwayAccountCommerceService"/>
+		<property name="baseStoreService" ref="baseStoreService" />
+    </bean>
+    
+    <alias name="defaultAmwayUserPromotionCountDao" alias="amwayUserPromotionCountDao"/>
+	<bean id="defaultAmwayUserPromotionCountDao"
+	      class="de.hybris.platform.servicelayer.internal.dao.DefaultGenericDao">
+		 <constructor-arg name="typecode" value="AmwayUserPromotionCount"/>
+	</bean>
+	
+	<alias alias="amwayAssetDao" name="defaultAmwayApacAssetDao"/>
+	<bean id="defaultAmwayApacAssetDao"  parent="defaultAmwayAssetDao" class="com.amway.apac.core.resource.center.daos.impl.DefaultAmwayApacAssetDao">
+		<property name="amwayApacAccountClassificationService" ref="amwayApacAccountClassificationService"/>
+		<property name="amwayAccountClassificationRankMapping" ref="amwayAccountClassificationRankMapping"/>
+	</bean>
+	
+	<!--     AmwayPOSRestriction Model Dynamic Handler -->
+	<alias alias="amwayApacPOSDynamicDescriptionHandler" name="defaultAmwayApacPOSDynamicDescriptionHandler"/>
+    <bean id="defaultAmwayApacPOSDynamicDescriptionHandler" class="com.amway.apac.core.model.AmwayApacPOSDescriptionHandler"/>
+    
+    <!-- Custom Restriction for Amway ShopFinder -->
+    <alias alias="amwayApacPOSRestrictionEvaluator" name="defaultAmwayApacPOSRestrictionEvaluator"/>
+	<bean id="defaultAmwayApacPOSRestrictionEvaluator" class="com.amway.apac.core.shopfinder.evaluators.AmwayApacPOSRestrictionEvaluator"/>
+	
+	<alias alias="stockService" name="defaultAmwayApacStockService" />
+	<bean id="defaultAmwayApacStockService" class="com.amway.apac.core.stock.services.impl.DefaultAmwayApacStockService" parent="amwayStockService">
+         <property name="amwayApacProductService" ref="productService"/>
+         <property name="amwayApacStockLevelDao" ref="stockLevelDao" />
+         <property name="amwayApacCommerceStockLevelStatusStrategy" ref="stockLevelStatusStrategy"/>
+    </bean>
+    
+	<alias alias="stockLevelDao" name="defaultAmwayApacStockLevelDao"/>
+	<bean id="defaultAmwayApacStockLevelDao"
+        class="com.amway.apac.core.stock.dao.impl.DefaultAmwayApacStockLevelDao" parent="defaultAmwayStockLevelDao">
+    </bean>
+
+	<alias alias="amwayApacBackOrderSelectionStrategy" name="defaultAmwayApacBackOrderSelectionStrategy" />
+    <bean id="defaultAmwayApacBackOrderSelectionStrategy"
+		class="com.amway.apac.core.backorder.strategies.impl.DefaultAmwayApacBackOrderSelectionStrategy">
+		<property name="amwayApacBackOrderDao" ref="amwayApacBackOrderDao" />
+		<property name="stockService" ref="stockService" />
+		<property name="amwayApacOrderService" ref="orderService" />
+	</bean>
+
+	<alias name="defaultAmwayApacOrderService" alias="orderService" />
+	<bean id="defaultAmwayApacOrderService"
+		class="com.amway.apac.core.order.service.impl.DefaultAmwayApacOrderService" parent="defaultAmwayOrderService">
+	</bean>
+	
+	<alias alias="amwayApacBackOrderService" name="defaultAmwayApacBackOrderService" />
+	<bean id="defaultAmwayApacBackOrderService"
+		class="com.amway.apac.core.backorder.service.impl.DefaultAmwayApacBackOrderService">
+		<property name="businessProcessService" ref="businessProcessService" />
+		<property name="amwayApacBackOrderSelectionStrategy" ref="amwayApacBackOrderSelectionStrategy" />
+		<property name="modelService" ref="modelService" />
+		<property name="amwayApacBackOrderDao" ref="amwayApacBackOrderDao" />
+		<property name="commerceAvailabilityCalculationStrategy" ref="commerceStockLevelCalculationStrategy"/>
+		<property name="inventoryEventService" ref="inventoryEventService"/>
+		<property name="stockService" ref="stockService"/>
+	</bean>
+
+	<alias alias="expiredBackorderJob" name="defaultExpiredBackorderJob" />
+	<bean id="defaultExpiredBackorderJob" class="com.amway.apac.core.job.ExpiredBackorderJobPerformable"
+		parent="abstractJobPerformable">		
+		<property name="backOrderSelectionStrategy" ref="amwayApacBackOrderSelectionStrategy" />
+		<property name="backOrderService" ref="amwayApacBackOrderService" />
+		<property name="timeService" ref="timeService" />
+	</bean>
+
+	<alias alias="releaseBackorderJob" name="defaultReleaseBackorderJob" />
+	<bean id="defaultReleaseBackorderJob" class="com.amway.apac.core.job.ReleaseBackOrderJobPerformable"
+		parent="abstractJobPerformable">		
+		<property name="backOrderService" ref="amwayApacBackOrderService" />		
+	</bean>
+
+	<alias alias="amwayApacBackOrderGenericDao" name="defaultAmwayApacBackOrderGenericDao"/>
+	<bean name="defaultAmwayApacBackOrderGenericDao" class="de.hybris.platform.servicelayer.internal.dao.DefaultGenericDao">
+		<constructor-arg value="AmwayBackOrder"/>
+	</bean>
+
+	<alias alias="amwayApacBackOrderDao" name="defaultAmwayApacBackOrderDao" />
+	<bean id="defaultAmwayApacBackOrderDao"
+		class="com.amway.apac.core.backorder.dao.impl.DefaultAmwayApacBackOrderDao">
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+		<property name="amwayBackOrderGenericDao" ref="amwayApacBackOrderGenericDao" />
+	</bean>
+
+	<alias alias="commerceStockService" name="defaultAmwayApacCommerceStockService" />
+	<bean id="defaultAmwayApacCommerceStockService"
+		class="com.amway.apac.core.stock.services.impl.DefaultAmwayApacCommerceStockService"
+		parent="defaultAmwayCommerceStockService">
+		<property name="inventoryEventService" ref="inventoryEventService" />
+		<property name="modelService" ref="modelService" />
+	</bean>
+
+	<alias alias="consignmentService" name="defaultAmwayApacConsignmentService" />
+	<bean id="defaultAmwayApacConsignmentService"
+		class="com.amway.apac.core.order.consignment.service.impl.DefaultAmwayApacConsignmentService"
+		parent="defaultAmwayConsignmentService">
+		<property name="modelService" ref="modelService" />
+		<property name="businessProcessService" ref="businessProcessService" />
+	</bean>
+	
+	<alias alias="amwayUserDao" name="defaultAmwayApacUserDao" />
+    <bean id="defaultAmwayApacUserDao" parent="defaultAmwayUserDao" class="com.amway.apac.core.user.daos.impl.DefaultAmwayApacUserDao"/>
+    
+    <alias alias="userService" name="defaultAmwayApacUserService" />
+    <bean id="defaultAmwayApacUserService" parent="defaultAmwayUserService" class="com.amway.apac.core.user.services.impl.DefaultAmwayApacUserService" primary="true">
+        <property name="baseStoreService" ref="baseStoreService" />
+        <property name="amwayApacUserDao" ref="amwayUserDao" />
+    </bean>
+
+	<alias alias="commerceProductReferenceService" name="defaultAmwayApacProductReferenceService"/>
+	<bean id="defaultAmwayApacProductReferenceService"
+		  class="com.amway.apac.core.product.services.impl.DefaultAmwayApacProductReferenceService" parent="defaultCommerceProductReferenceService" />
+
+	<alias alias="amwayApacCategoryReferenceInterceptor" name="defaultAmwayApacCategoryReferenceInterceptor"/>
+	<bean id="defaultAmwayApacCategoryReferenceInterceptor"
+		  class="com.amway.apac.core.product.interceptors.AmwayApacCategoryReferenceInterceptor">
+	</bean>
+
+	<bean id="amwayApacCategoryReferenceInterceptorMapping" 
+		  class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="amwayApacCategoryReferenceInterceptor" />
+		<property name="typeCode" value="AmwayCategoryProductReference" />
+	</bean>
+	
+	<alias alias="deliveryAddressesLookupStrategy" name="defaultAmwayApacDeliveryAddressesLookupStrategy"/>
+    <bean id="defaultAmwayApacDeliveryAddressesLookupStrategy"
+          class="com.amway.apac.core.strategies.impl.DefaultAmwayApacDeliveryAddressesLookupStrategy" parent="defaultDeliveryAddressesLookupStrategy">
+        <property name="amwayApacAccountService" ref="amwayAccountService"/>
+    </bean>
+    
+	<alias alias="amwayApacCommerceCartMetadataUpdateHook" name="defaultAmwayApacCommerceCartMetadataUpdateHook" />
+    <bean id="defaultAmwayApacCommerceCartMetadataUpdateHook"
+          class="com.amway.apac.core.order.hook.impl.AmwayApacCommerceCartMetadataUpdateHook">
+          <property name="baseSiteService" ref="baseSiteService" />
+          <property name="amwayAccountCommerceService" ref="amwayAccountCommerceService" />
+          <property name="amwayApacDeliveryAddressesLookupStrategy" ref="deliveryAddressesLookupStrategy" />
+          <property name="sessionService" ref="sessionService" />
+          <property name="amwayApacWarehouseServiceabilityService" ref="amwayApacWarehouseServiceabilityService" />
+           <property name="amwayUserService" ref="userService" />
+    </bean>
+    
+    <util:list id="commerceCartMetadataUpdateMethodHooks"
+               value-type="de.hybris.platform.commerceservices.order.hook.CommerceCartMetadataUpdateMethodHook">
+        <ref bean="amwayApacCommerceCartMetadataUpdateHook"/>
+    </util:list>
+    
+    <alias alias="commerceCartMetadataUpdateStrategy" name="defaultAmwayApacCommerceCartMetadataUpdateStrategy"/>
+    <bean id="defaultAmwayApacCommerceCartMetadataUpdateStrategy"
+          class="com.amway.apac.core.order.strategies.impl.AmwayApacCommerceCartMetadataUpdateStrategy" parent="defaultCommerceCartMetadataUpdateStrategy">
+        <property name="deliveryModeService" ref="deliveryModeService"/>
+        <property name="warehouseService" ref="warehouseService"/>
+    </bean>
 </beans>

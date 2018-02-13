@@ -10,7 +10,9 @@ import de.hybris.platform.tx.TransactionBody;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.util.Assert;
@@ -82,17 +84,44 @@ public class DefaultAmwayBusinessEventQueueService implements AmwayBusinessEvent
 
 	/**
 	 * {@inheritDoc}
-	 * In the current implementation it is only possible to change {@link AmwayBusinessEvent#getRetrievalTime()} field.
+	 * In the current implementation it is only possible to change following fields:
+	 * <ul>
+	 *    <li>{@link AmwayBusinessEvent#getRetrievalTime()}</li>
+	 *    <li>{@link AmwayBusinessEvent#getMeta()}</li>
+	 * </ul>
 	 */
 	@Override
 	public void setEventProperties(String code, AmwayBusinessEvent properties) throws IllegalArgumentException
+	{
+		setEventProperties(code, properties, false);
+	}
+
+	@Override
+	public void setEventProperties(String code, AmwayBusinessEvent properties, boolean ignoreNullValues)
+			throws IllegalArgumentException
 	{
 		AmwayEventQueueEntryModel e = queueDao.getEventByCode(code);
 		if (e == null)
 		{
 			throw new IllegalArgumentException("Can't find event with code " + code);
 		}
-		e.setRetrievalTime(properties.getRetrievalTime());
+
+		if (properties.getRetrievalTime() != null || !ignoreNullValues)
+		{
+			e.setRetrievalTime(properties.getRetrievalTime());
+		}
+
+		if (properties.getMeta() != null)
+		{
+			Map<String, String> mergedMeta = new HashMap<>(e.getMeta());
+			mergedMeta.putAll(properties.getMeta());
+			e.setMeta(mergedMeta);
+		}
+		else if (!ignoreNullValues)
+		{
+			e.setMeta(null);
+		}
+
 		modelService.save(e);
 	}
 

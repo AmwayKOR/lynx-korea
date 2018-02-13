@@ -1,0 +1,53 @@
+@import 'main.less';
+
+//shop finder
+.shop-finder-container{
+  .mb25{
+    margin-bottom:0;
+  }
+  .order-history-container{
+    .order-history-search-wrapper{
+      border:@none;
+      .form-wrapper{
+        border:@none;
+        form{
+          padding:0;
+        }
+      }
+    }
+  }
+  .account-section-content{
+    margin-bottom:0;
+  }
+  .shop-finder-main-content{
+    .shop-finder-main-content-title{
+      color: #002F5F;
+      text-transform: uppercase;
+      font-weight: 900;
+      font-size: 16px;
+    }
+  }
+
+}
+@media(max-width:768px){
+  .shop-finder-container{
+    .order-history-container{
+      .order-history-search-wrapper{
+        .form-wrapper{
+          form{
+            select.form-control{
+              width:48%!important;
+              &:first-child{
+                margin-right:1%;
+              }
+              &:nth-child(2){
+                margin-left:1%;
+                margin-right:0;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

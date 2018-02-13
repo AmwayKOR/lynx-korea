@@ -22,9 +22,9 @@ import com.amway.amwayfulfillment.order.PackageEntry;
 import com.amway.amwayfulfillment.order.SerialNumber;
 import com.amway.amwayfulfillment.order.ShippingEvent;
 import com.amway.amwayfulfillment.order.ShippingPackage;
-import com.amway.amwayfulfillment.model.ConsignmentSerialNumberModel;
 import com.amway.amwayfulfillment.order.data.AmwayConsignmentCreationInfo;
 import com.amway.amwayfulfillment.services.shipment.AmwayExternalConsignmentService;
+import com.amway.core.model.AmwayProductSerialNumberModel;
 
 
 /**
@@ -124,12 +124,18 @@ public class DefaultAmwayExternalConsignmentService implements AmwayExternalCons
 		consignmentEntry.setVersion(packageEntry.getVersion());
 
 		// @formatter:off
-		final List<ConsignmentSerialNumberModel> serialNumbers = new ArrayList<>();
+		final List<AmwayProductSerialNumberModel> serialNumbers = new ArrayList<>();
 		CollectionUtils.emptyIfNull(packageEntry.getSerialNumbers()).stream()
 				.filter(sn -> StringUtils.isNotBlank(sn.getSerialNumber()))
 				.forEach(sn -> serialNumbers.add(createConsignmentEntrySerialNumber(sn)));
-		consignmentEntry.setSerialNumbers(serialNumbers);
 		// @formatter:on
+
+		consignmentEntry.setSerialNumbers(serialNumbers);
+		if (!ConsignmentStatus.IGNORE.equals(consignment.getStatus()))
+		{
+			orderEntry.setSerialNumbers(serialNumbers);
+			getModelService().save(orderEntry);
+		}
 
 		consignmentEntry.setOrderEntry(orderEntry);
 
@@ -140,9 +146,9 @@ public class DefaultAmwayExternalConsignmentService implements AmwayExternalCons
 		return consignmentEntry;
 	}
 
-	private ConsignmentSerialNumberModel createConsignmentEntrySerialNumber(final SerialNumber serialNumber)
+	private AmwayProductSerialNumberModel createConsignmentEntrySerialNumber(final SerialNumber serialNumber)
 	{
-		final ConsignmentSerialNumberModel serialNumberModel = getModelService().create(ConsignmentSerialNumberModel.class);
+		final AmwayProductSerialNumberModel serialNumberModel = getModelService().create(AmwayProductSerialNumberModel.class);
 		serialNumberModel.setSerialNumber(serialNumber.getSerialNumber());
 		getModelService().save(serialNumberModel);
 		return serialNumberModel;

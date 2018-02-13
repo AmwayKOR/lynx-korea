@@ -1,6 +1,7 @@
 package com.amway.core.payment.service.impl;
 
 
+import com.amway.core.annotations.AmwayBean;
 import de.hybris.platform.core.model.order.CartModel;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.core.model.order.payment.PaymentInfoModel;
@@ -40,6 +41,7 @@ import com.amway.core.refund.amount.strategies.AmwayRefundAmountCalculationStrat
 /**
  * Default service for amway payment.
  */
+@AmwayBean(docs="https://jira.amway.com:8444/display/HC/Payment+customization")
 public class DefaultAmwayPaymentService extends DefaultPaymentServiceImpl implements AmwayPaymentService
 {
 	private final Logger LOG = Logger.getLogger(DefaultAmwayPaymentService.class.getName());

@@ -17,11 +17,11 @@ import de.hybris.platform.site.BaseSiteService;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -36,12 +36,10 @@ import com.amway.core.model.AmwayCreditPaymentInfoModel;
 import com.amway.core.model.AmwayMonetaryPaymentInfoModel;
 import com.amway.core.order.data.AmwayPaymentModeData;
 
-
 /**
  * Default Implementation
  */
-public class AmwayCartHelper
-{
+public class AmwayCartHelper {
 	private static final Logger LOG = Logger.getLogger(AmwayCartHelper.class);
 	private static ApplicationContext context = null;
 	private static SessionService sessionService = null;
@@ -51,8 +49,7 @@ public class AmwayCartHelper
 	private static final String CC_CPFNUMBER = "cpfNumber";
 	private static final String CC_INSTALLMENTS = "installments";
 
-	static
-	{
+	static {
 		context = Registry.getApplicationContext();
 		sessionService = (SessionService) context.getBean("sessionService");
 		baseSiteService = (BaseSiteService) context.getBean("baseSiteService");
@@ -64,28 +61,26 @@ public class AmwayCartHelper
 	 *
 	 * @param orderModel
 	 */
-	public static void checkCartType(final AbstractOrderModel orderModel)
-	{
-		final SalesApplication currentChannel = (SalesApplication) JaloSession.getCurrentSession().getAttribute("currentChannel");
+	public static void checkCartType(final AbstractOrderModel orderModel) {
+		final SalesApplication currentChannel = (SalesApplication) JaloSession.getCurrentSession()
+				.getAttribute("currentChannel");
 		// as of now we have group order functionality from WEB
-		if (SalesApplication.WEB.equals(currentChannel))
-		{
+		if (SalesApplication.WEB.equals(currentChannel)) {
 			final AmwayCartType oldCartType = orderModel.getType();
-			if (AmwayCartType.WEBRECURRING.equals(oldCartType))
-			{
+			if (AmwayCartType.WEBRECURRING.equals(oldCartType)) {
 				LOG.debug("Ignoring cart type check for recurring order: " + orderModel.getCode());
 				return;
 			}
 
 			// only if abo the switching is allowed.
-			if (AmwayCustomerHelper.isABOCustomer())
-			{
-				final AmwayCartType newCartType = hasEntryWithOtherVolumeABO(orderModel) ? AmwayCartType.WEBGROUP : AmwayCartType.WEB;
+			if (AmwayCustomerHelper.isABOCustomer()) {
+				final AmwayCartType newCartType = hasEntryWithOtherVolumeABO(orderModel) ? AmwayCartType.WEBGROUP
+						: AmwayCartType.WEB;
 
-				//switching is only allowed between web and webgroup
-				if (!newCartType.equals(oldCartType))
-				{
-					LOG.info("Cart : " + orderModel.getCode() + " changed from " + oldCartType + " to " + newCartType + " type.");
+				// switching is only allowed between web and webgroup
+				if (!newCartType.equals(oldCartType)) {
+					LOG.info("Cart : " + orderModel.getCode() + " changed from " + oldCartType + " to " + newCartType
+							+ " type.");
 					orderModel.setType(newCartType);
 					modelService.save(orderModel);
 					modelService.refresh(orderModel);
@@ -100,12 +95,10 @@ public class AmwayCartHelper
 	 * @param cartModel
 	 * @return paymentInfoList
 	 */
-	public static Set<PaymentInfoModel> getPaymentInfoList(final CartModel cartModel)
-	{
+	public static Set<PaymentInfoModel> getPaymentInfoList(final CartModel cartModel) {
 		final Set<PaymentInfoModel> paymentInfoList = new LinkedHashSet<>();
 		final Set<PaymentInfoModel> cartPaymentInfoList = cartModel.getPaymentInfos();
-		if (cartPaymentInfoList != null && CollectionUtils.isNotEmpty(cartPaymentInfoList))
-		{
+		if (cartPaymentInfoList != null && CollectionUtils.isNotEmpty(cartPaymentInfoList)) {
 			paymentInfoList.addAll(cartPaymentInfoList);
 		}
 		return paymentInfoList;
@@ -117,12 +110,10 @@ public class AmwayCartHelper
 	 * @param cartModel
 	 * @param paymentInfo
 	 */
-	public static void setSplitPaymentInfoList(final CartModel cartModel, final PaymentInfoModel paymentInfo)
-	{
+	public static void setSplitPaymentInfoList(final CartModel cartModel, final PaymentInfoModel paymentInfo) {
 		final Set<PaymentInfoModel> paymentInfoList = getPaymentInfoList(cartModel);
 
-		if (paymentInfoList != null)
-		{
+		if (paymentInfoList != null) {
 			paymentInfoList.add(paymentInfo);
 		}
 		cartModel.setPaymentInfos(paymentInfoList);
@@ -130,19 +121,16 @@ public class AmwayCartHelper
 		modelService.refresh(cartModel);
 	}
 
-
 	/**
 	 * to get the list of payment info.
 	 *
 	 * @param abstractOrderModel
 	 * @return paymentInfoList
 	 */
-	public static Set<PaymentInfoModel> getPaymentInfoList(final AbstractOrderModel abstractOrderModel)
-	{
+	public static Set<PaymentInfoModel> getPaymentInfoList(final AbstractOrderModel abstractOrderModel) {
 		final Set<PaymentInfoModel> paymentInfoList = new LinkedHashSet();
 		final Set<PaymentInfoModel> cartPaymentInfoList = abstractOrderModel.getPaymentInfos();
-		if (cartPaymentInfoList != null && CollectionUtils.isNotEmpty(cartPaymentInfoList))
-		{
+		if (cartPaymentInfoList != null && CollectionUtils.isNotEmpty(cartPaymentInfoList)) {
 			paymentInfoList.addAll(cartPaymentInfoList);
 		}
 		return paymentInfoList;
@@ -154,12 +142,10 @@ public class AmwayCartHelper
 	 * @param abstractOrderModel
 	 * @return transactions
 	 */
-	public static List<PaymentTransactionModel> getPaymentTransactionList(final AbstractOrderModel abstractOrderModel)
-	{
+	public static List<PaymentTransactionModel> getPaymentTransactionList(final AbstractOrderModel abstractOrderModel) {
 		final List<PaymentTransactionModel> transactions = new ArrayList<PaymentTransactionModel>();
 		final List<PaymentTransactionModel> savedTransactions = abstractOrderModel.getPaymentTransactions();
-		if (savedTransactions != null && CollectionUtils.isNotEmpty(savedTransactions))
-		{
+		if (savedTransactions != null && CollectionUtils.isNotEmpty(savedTransactions)) {
 			transactions.addAll(savedTransactions);
 		}
 		return transactions;
@@ -170,15 +156,13 @@ public class AmwayCartHelper
 	 *
 	 * @param abstractOrderModel
 	 */
-	public static void removeARPaymentForWeb(final AbstractOrderModel abstractOrderModel)
-	{
-		for (final PaymentInfoModel paymentInfoModel : getPaymentInfoList(abstractOrderModel))
-		{
-			if (paymentInfoModel instanceof AmwayCreditPaymentInfoModel || paymentInfoModel instanceof AmwayMonetaryPaymentInfoModel)
-			{
+	public static void removeARPaymentForWeb(final AbstractOrderModel abstractOrderModel) {
+		for (final PaymentInfoModel paymentInfoModel : getPaymentInfoList(abstractOrderModel)) {
+			if (paymentInfoModel instanceof AmwayCreditPaymentInfoModel
+					|| paymentInfoModel instanceof AmwayMonetaryPaymentInfoModel) {
 				modelService.remove(paymentInfoModel);
-				LOG.info("AR Payment Info Remove : [ " + paymentInfoModel.getPk() + " ] from Cart : [ " + abstractOrderModel.getCode()
-						+ " ]");
+				LOG.info("AR Payment Info Remove : [ " + paymentInfoModel.getPk() + " ] from Cart : [ "
+						+ abstractOrderModel.getCode() + " ]");
 			}
 		}
 	}
@@ -189,17 +173,13 @@ public class AmwayCartHelper
 	 * @param cart
 	 * @return creditCardDetails
 	 */
-	public static Map<String, Object> getPaymentDetails(final CartModel cart)
-	{
+	public static Map<String, Object> getPaymentDetails(final CartModel cart) {
 		final Map<String, Object> creditCardDetails = new LinkedHashMap<>();
 		final Map cartPaymentDetails = cart.getPaymentDetails();
-		if (cartPaymentDetails != null && CollectionUtils.isNotEmpty(cartPaymentDetails.values()))
-		{
-			for (final PaymentInfoModel paymentInfoModel : getPaymentInfoList(cart))
-			{
+		if (cartPaymentDetails != null && CollectionUtils.isNotEmpty(cartPaymentDetails.values())) {
+			for (final PaymentInfoModel paymentInfoModel : getPaymentInfoList(cart)) {
 				final String pk = paymentInfoModel.getPk().toString();
-				if (cartPaymentDetails.get(pk) != null)
-				{
+				if (cartPaymentDetails.get(pk) != null) {
 					creditCardDetails.put(pk, cartPaymentDetails.get(pk));
 				}
 			}
@@ -214,17 +194,14 @@ public class AmwayCartHelper
 	 * @param paymentInfoModel
 	 * @return double
 	 */
-	public static double getAmountForPayment(final CartModel cart, final PaymentInfoModel paymentInfoModel)
-	{
+	public static double getAmountForPayment(final CartModel cart, final PaymentInfoModel paymentInfoModel) {
 		final Map<String, Object> cartPaymentMap = getPaymentDetails(cart);
-		if (cartPaymentMap.get(paymentInfoModel.getPk().toString()) != null)
-		{
+		if (cartPaymentMap.get(paymentInfoModel.getPk().toString()) != null) {
 			return Double.valueOf(((Map<String, String>) cartPaymentMap.get(paymentInfoModel.getPk().toString()))
-							.get(AmwaycoreConstants.PaymentDetailsMap.AMOUNT)).doubleValue();
+					.get(AmwaycoreConstants.PaymentDetailsMap.AMOUNT)).doubleValue();
 		}
 		return 0;
 	}
-
 
 	/**
 	 * to set payment mode is ARCREDIT.
@@ -232,12 +209,9 @@ public class AmwayCartHelper
 	 * @param paymentModeDatas
 	 * @return boolean
 	 */
-	public static boolean isARCreditOnPaymentModeList(final Set<AmwayPaymentModeData> paymentModeDatas)
-	{
-		for (final AmwayPaymentModeData modeData : paymentModeDatas)
-		{
-			if (StringUtils.equalsIgnoreCase(modeData.getCode(), AmwaycoreConstants.PaymentMode.ARCREDIT))
-			{
+	public static boolean isARCreditOnPaymentModeList(final Set<AmwayPaymentModeData> paymentModeDatas) {
+		for (final AmwayPaymentModeData modeData : paymentModeDatas) {
+			if (StringUtils.equalsIgnoreCase(modeData.getCode(), AmwaycoreConstants.PaymentMode.ARCREDIT)) {
 				return true;
 			}
 		}
@@ -251,12 +225,9 @@ public class AmwayCartHelper
 	 * @param paymentModeDatas
 	 * @return boolean
 	 */
-	public static boolean isCreditCardOnPaymentModeList(final Set<AmwayPaymentModeData> paymentModeDatas)
-	{
-		for (final AmwayPaymentModeData modeData : paymentModeDatas)
-		{
-			if (StringUtils.equalsIgnoreCase(AmwaycoreConstants.PaymentMode.CREDITCARD, modeData.getCode()))
-			{
+	public static boolean isCreditCardOnPaymentModeList(final Set<AmwayPaymentModeData> paymentModeDatas) {
+		for (final AmwayPaymentModeData modeData : paymentModeDatas) {
+			if (StringUtils.equalsIgnoreCase(AmwaycoreConstants.PaymentMode.CREDITCARD, modeData.getCode())) {
 				return true;
 			}
 		}
@@ -266,26 +237,85 @@ public class AmwayCartHelper
 	/**
 	 * to get the total paid amount from payment info.
 	 *
-	 * @param cart
+	 * @param order
 	 * @return double
 	 */
-	public static Double getTotalPaidAmount(final CartModel cart)
-	{
+	public static Double getTotalPaidAmount(final AbstractOrderModel order) {
 		BigDecimal totalPaidAmount = BigDecimal.ZERO;
-		final Set<PaymentInfoModel> allAppliedPayments = cart.getPaymentInfos();
-		final Map<String, Map<String, Object>> addedPaymentDetails = cart.getPaymentDetails();
-		final Iterator<PaymentInfoModel> iterator = allAppliedPayments.iterator();
-		while (iterator.hasNext())
-		{
-			final String paymentinfo = iterator.next().getPk().toString();
-			if (addedPaymentDetails.containsKey(paymentinfo))
-			{
-				final Map<String, Object> eachPaymentDetails = addedPaymentDetails.get(paymentinfo);
-				totalPaidAmount = totalPaidAmount
-						.add(BigDecimal.valueOf(Double.parseDouble(eachPaymentDetails.get(AMOUNT).toString())));
+		final List<PaymentTransactionModel> paymentTransactionList = order.getPaymentTransactions();
+		if (CollectionUtils.isNotEmpty(paymentTransactionList)) {
+			for (final PaymentTransactionModel paymentTransaction : paymentTransactionList) {
+				final Optional<PaymentTransactionEntryModel> cancelledTransactionEntry = paymentTransaction.getEntries()
+						.stream().filter(pte -> PaymentTransactionType.CANCEL.equals(pte.getType())
+								&& TransactionStatus.ACCEPTED.name().equals(pte.getTransactionStatus()))
+						.findFirst();
+
+				if (!cancelledTransactionEntry.isPresent()) {
+					final Optional<PaymentTransactionEntryModel> capturedTransactionEntry = paymentTransaction
+							.getEntries().stream()
+							.filter(pte -> PaymentTransactionType.EXTERNAL_CAPTURE.equals(pte.getType())
+									&& TransactionStatus.ACCEPTED.name().equals(pte.getTransactionStatus()))
+							.findFirst();
+					if (capturedTransactionEntry.isPresent()) {
+						totalPaidAmount = totalPaidAmount.add(capturedTransactionEntry.get().getAmount());
+					}
+				}
 			}
 		}
+
 		return Double.valueOf(totalPaidAmount.doubleValue());
+	}
+	
+	/**
+	 * To get the list of payment transactions.
+	 *
+	 * @param abstractOrderModel
+	 * @return transactions
+	 */
+	public static List<PaymentTransactionModel> getCapturedTransactions(final AbstractOrderModel abstractOrderModel)
+	{
+		final List<PaymentTransactionModel> capturedTransactions = new ArrayList<PaymentTransactionModel>();
+		final List<PaymentTransactionModel> paymentTransactionList = abstractOrderModel.getPaymentTransactions();
+		if (CollectionUtils.isNotEmpty(paymentTransactionList))
+		{
+			for (final PaymentTransactionModel paymentTransaction : paymentTransactionList) {
+				final Optional<PaymentTransactionEntryModel> cancelledTransactionEntry = paymentTransaction.getEntries()
+						.stream().filter(pte -> PaymentTransactionType.CANCEL.equals(pte.getType())
+								&& TransactionStatus.ACCEPTED.name().equals(pte.getTransactionStatus()))
+						.findFirst();
+
+				if (!cancelledTransactionEntry.isPresent()) {
+					final Optional<PaymentTransactionEntryModel> capturedTransactionEntry = paymentTransaction
+							.getEntries().stream()
+							.filter(pte -> PaymentTransactionType.EXTERNAL_CAPTURE.equals(pte.getType())
+									&& TransactionStatus.ACCEPTED.name().equals(pte.getTransactionStatus()))
+							.findFirst();
+					if (capturedTransactionEntry.isPresent()) {
+						capturedTransactions.add(capturedTransactionEntry.get().getPaymentTransaction());
+					}
+				}
+			}
+		}
+		return capturedTransactions;
+	}
+
+	/**
+	 * Method to get the overpay return amount from the order refund
+	 * transactions.
+	 * 
+	 * @param order
+	 *            the abstract order
+	 * @return the overpay return amount
+	 */
+	public static BigDecimal getOverpayReturnAmount(final AbstractOrderModel order) {
+		final BigDecimal totalOverpayReturnAmount = BigDecimal.ZERO;
+		final List<PaymentTransactionModel> refundTransactionList = order.getRefundTransactions();
+		if (CollectionUtils.isNotEmpty(refundTransactionList)) {
+			order.getRefundTransactions().stream().map(PaymentTransactionModel::getEntries).flatMap(List::stream)
+					.filter(entry -> PaymentTransactionType.OVERPAY_RETURN == entry.getType())
+					.map(PaymentTransactionEntryModel::getAmount).reduce(BigDecimal.ZERO, BigDecimal::add);
+		}
+		return totalOverpayReturnAmount;
 	}
 
 	/**
@@ -294,21 +324,19 @@ public class AmwayCartHelper
 	 * @param cart
 	 * @return boolean
 	 */
-	public static boolean isMapAmountDifferentWithCartTotal(final CartModel cart)
-	{
-		return cart.getTotalPrice().compareTo(getTotalPaidAmount(cart)) != 0 && getPaymentInfoList(cart).size() > 0;
+	public static boolean isMapAmountDifferentWithCartTotal(final CartModel cart) {
+		return getCartTotalPayablePrice(cart).compareTo(BigDecimal.valueOf(getTotalPaidAmount(cart))) != 0 && getPaymentInfoList(cart).size() > 0;
 	}
 
 	/**
 	 * To get the balance amount.
 	 *
-	 * @param cart
+	 * @param abstractOrderModel
 	 * @return double
 	 */
-	public static Double getBalanceAmount(final CartModel cart)
-	{
-		final BigDecimal cartTotal = BigDecimal.valueOf(cart.getTotalPrice().doubleValue());
-		return Double.valueOf((cartTotal.subtract(BigDecimal.valueOf(getTotalPaidAmount(cart).doubleValue()))).doubleValue());
+	public static Double getBalanceAmount(final AbstractOrderModel abstractOrderModel) {
+		return Double.valueOf((getCartTotalPayablePrice(abstractOrderModel)
+				.subtract(BigDecimal.valueOf(getTotalPaidAmount(abstractOrderModel).doubleValue()))).doubleValue());
 	}
 
 	/**
@@ -317,15 +345,11 @@ public class AmwayCartHelper
 	 * @param abstractOrderModel
 	 * @return boolean
 	 */
-	public static boolean isBopisOrder(final AbstractOrderModel abstractOrderModel)
-	{
-		//ADDING BOPIS IN AMWAYCARTTYPE would be best solution
-		if (!AmwayCartType.POS.equals(abstractOrderModel.getType()))
-		{
-			for (final AbstractOrderEntryModel orderEntryModel : abstractOrderModel.getEntries())
-			{
-				if (orderEntryModel.getDeliveryPointOfService() != null)
-				{
+	public static boolean isBopisOrder(final AbstractOrderModel abstractOrderModel) {
+		// ADDING BOPIS IN AMWAYCARTTYPE would be best solution
+		if (!AmwayCartType.POS.equals(abstractOrderModel.getType())) {
+			for (final AbstractOrderEntryModel orderEntryModel : abstractOrderModel.getEntries()) {
+				if (orderEntryModel.getDeliveryPointOfService() != null) {
 					return true;
 				}
 			}
@@ -334,24 +358,19 @@ public class AmwayCartHelper
 		return false;
 	}
 
-	private static boolean hasEntryWithOtherVolumeABO(final AbstractOrderModel orderModel)
-	{
+	private static boolean hasEntryWithOtherVolumeABO(final AbstractOrderModel orderModel) {
 		final List<AbstractOrderEntryModel> entries = orderModel.getEntries();
 
-		if (entries.isEmpty())
-		{
+		if (entries.isEmpty()) {
 			return false;
 		}
 
 		final String currentAccountNumber = getCurrentAccountNumber();
 
-		for (final AbstractOrderEntryModel entry : entries)
-		{
+		for (final AbstractOrderEntryModel entry : entries) {
 			// check only if set
-			if (entry.getVolumeAbo() != null)
-			{
-				if (!entry.getVolumeAbo().equals(currentAccountNumber))
-				{
+			if (entry.getVolumeAbo() != null) {
+				if (!entry.getVolumeAbo().equals(currentAccountNumber)) {
 					return true;
 				}
 			}
@@ -361,11 +380,9 @@ public class AmwayCartHelper
 		return false;
 	}
 
-	private static String getCurrentAccountNumber()
-	{
+	private static String getCurrentAccountNumber() {
 		final AmwayAccountModel account = sessionService.getAttribute(AmwaycoreConstants.SessionVariables.ACCOUNT);
-		if (account != null)
-		{
+		if (account != null) {
 			return account.getCode();
 		}
 		return StringUtils.EMPTY;
@@ -376,15 +393,11 @@ public class AmwayCartHelper
 	 *
 	 * @param cartModel
 	 */
-	public static void createCancelTransction(final AbstractOrderModel cartModel)
-	{
-		for (final PaymentTransactionModel transaction : cartModel.getPaymentTransactions())
-		{
-			for (final PaymentTransactionEntryModel pte : transaction.getEntries())
-			{
-				if (pte.getType().equals(PaymentTransactionType.AUTHORIZATION) && pte.getTransactionStatus()
-						.equals(TransactionStatus.ACCEPTED.name()))
-				{
+	public static void createCancelTransction(final AbstractOrderModel cartModel) {
+		for (final PaymentTransactionModel transaction : cartModel.getPaymentTransactions()) {
+			for (final PaymentTransactionEntryModel pte : transaction.getEntries()) {
+				if (pte.getType().equals(PaymentTransactionType.AUTHORIZATION)
+						&& pte.getTransactionStatus().equals(TransactionStatus.ACCEPTED.name())) {
 					final PaymentTransactionEntryModel paymentTransactionEntryModel = modelService.clone(pte);
 					paymentTransactionEntryModel.setType(PaymentTransactionType.CANCEL);
 					modelService.save(paymentTransactionEntryModel);
@@ -399,19 +412,36 @@ public class AmwayCartHelper
 	 * @param paymentTransaction
 	 * @return boolean
 	 */
-	public static boolean isValidTransction(final PaymentTransactionModel paymentTransaction)
-	{
-		for (final PaymentTransactionEntryModel pte : paymentTransaction.getEntries())
-		{
-			if (!(pte.getType().equals(PaymentTransactionType.AUTHORIZATION) && pte.getTransactionStatus()
-					.equals(TransactionStatus.ACCEPTED.name())))
-			{
+	public static boolean isValidTransction(final PaymentTransactionModel paymentTransaction) {
+		for (final PaymentTransactionEntryModel pte : paymentTransaction.getEntries()) {
+			if (!(pte.getType().equals(PaymentTransactionType.AUTHORIZATION)
+					&& pte.getTransactionStatus().equals(TransactionStatus.ACCEPTED.name()))) {
 				return false;
 			}
 		}
 		return true;
 	}
 
+	/**
+	 * Method to get cart total price
+	 *
+	 * @param cart
+	 * @return totalprice the cart total price
+	 */
+	public static BigDecimal getCartTotalPayablePrice(final AbstractOrderModel cart) {
+		BigDecimal totalPrice = new BigDecimal(0);
+		if (null != cart.getTotalPrice()) {
+			totalPrice = BigDecimal.valueOf(cart.getTotalPrice().doubleValue());
+		}
 
+		if (null != cart.getTotalTax()) {
+			totalPrice = BigDecimal.valueOf(totalPrice.doubleValue() + cart.getTotalTax().doubleValue());
+		}
+
+		if (null != cart.getDeliveryTax()) {
+			totalPrice = totalPrice.add(new BigDecimal(cart.getDeliveryTax().doubleValue()));
+		}
+		return totalPrice;
+	}
 
 }

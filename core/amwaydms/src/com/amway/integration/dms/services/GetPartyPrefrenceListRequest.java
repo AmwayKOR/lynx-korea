@@ -4,6 +4,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 /**
  * <p>
@@ -31,6 +33,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "getPartyPrefrenceListRequest", propOrder =
 { "aboNum", "partyId", "preferenceId", "salesPlanAff" })
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class GetPartyPrefrenceListRequest extends BaseWebServiceInput
 {
 	protected String aboNum;

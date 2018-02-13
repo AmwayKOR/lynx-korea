@@ -32,9 +32,9 @@ import com.amway.amwayfulfillment.order.SerialNumber;
 import com.amway.amwayfulfillment.order.ShippingEvent;
 import com.amway.amwayfulfillment.order.ShippingPackage;
 import com.amway.amwayfulfillment.exceptions.shipment.AmwayShipmentConfirmationException;
-import com.amway.amwayfulfillment.model.ConsignmentSerialNumberModel;
 import com.amway.amwayfulfillment.order.data.AmwayConsignmentCreationInfo;
 import com.amway.amwayfulfillment.services.shipment.impl.DefaultAmwayExternalConsignmentService;
+import com.amway.core.model.AmwayProductSerialNumberModel;
 
 
 /**
@@ -73,7 +73,7 @@ public class AmwayExternalConsignmentServiceTest
 
 		when(modelService.create(ConsignmentModel.class)).thenReturn(new ConsignmentModel());
 		when(modelService.create(ConsignmentEntryModel.class)).thenReturn(new ConsignmentEntryModel());
-		when(modelService.create(ConsignmentSerialNumberModel.class)).thenReturn(new ConsignmentSerialNumberModel());
+		when(modelService.create(AmwayProductSerialNumberModel.class)).thenReturn(new AmwayProductSerialNumberModel());
 		when(orderModel.getEntries()).thenReturn(Collections.singletonList(orderEntryModel));
 		when(orderModel.getDeliveryStatus()).thenReturn(DeliveryStatus.IN_PROGRESS);
 		when(orderEntryModel.getProduct()).thenReturn(productModel);

@@ -1,5 +1,6 @@
 package com.amway.amwayinventory.validator.stock.impl;
 
+import static com.amway.amwayinventory.constants.AmwayInventoryConstants.ERROR_AVAILABLE_NEGATIVE;
 
 import org.springframework.validation.Errors;
 
@@ -14,11 +15,11 @@ public class AmwayFullInventoryValidator extends AmwayInventoryValidator
 	@Override
 	public void validate(Object inventoryBean, Errors errors)
 	{
-		super.validate(inventoryBean,errors);
+		super.validate(inventoryBean, errors);
 		AmwayInventoryBean amwayInventoryBean = (AmwayInventoryBean) inventoryBean;
-		if(amwayInventoryBean.getAvailable() != null && amwayInventoryBean.getAvailable() < 0)
+		if (amwayInventoryBean.getAvailable() != null && amwayInventoryBean.getAvailable() < 0)
 		{
-			errors.reject("amway.inventory.bean.available.negative");
+			errors.reject(ERROR_AVAILABLE_NEGATIVE);
 		}
 	}
 }

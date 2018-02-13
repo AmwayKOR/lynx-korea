@@ -12,36 +12,27 @@
 
 <c:if test="${not empty reviews}">
 	<c:forEach items="${reviews}" var="review" varStatus="status">
-		<li class="review-entry">
-			<div class="title">${fn:escapeXml(review.headline)}</div>
-			<div class="rating">
-				<div class="rating-stars pull-left js-ratingCalc " data-rating='{"rating":"${review.rating}","total":5}' >
-					<div class="greyStars">
-                        <c:forEach  begin="1" end="5">
-                            <span class="glyphicon glyphicon-star"></span>
-                        </c:forEach>
-					</div>
-					<div class="greenStars js-greenStars">
-                        <c:forEach  begin="1" end="5">
-                            <span class="glyphicon glyphicon-star active"></span>
-                        </c:forEach>
-					</div>
-				</div>
-			</div>
-			<div class="content">${fn:escapeXml(review.comment)}</div>
-			<div class="autor">
-				<c:choose>
-					<c:when test="${not empty review.alias}">
-							${fn:escapeXml(review.alias)}
-						</c:when>
-					<c:otherwise>
-						<spring:theme code="review.submitted.anonymous" />
-					</c:otherwise>
-				</c:choose>
-				<c:set var="reviewDate" value="${review.date}" />
-				<span class="date"> (<fmt:formatDate value="${reviewDate}" pattern="dd/MM/yyyy" />)</span>
-			</div>
-
-		</li>
+		<c:set value="${review.rating > 5 ? 5 : review.rating}" var="totalRating"/>
+		<p class="product-collapse__review">
+		    <c:forEach  begin="1" end="${totalRating}">
+                <img src="${themeResourcePath}/images/star-filled.png" alt="star">
+            </c:forEach>
+            <c:forEach  begin="${totalRating + 1}" end="5">
+                <img src="${themeResourcePath}/images/star-empty.png" alt="star">
+            </c:forEach>
+            ${fn:escapeXml(review.headline)}</p>
+            <p class="product-collapse__info">
+                <c:choose>
+                    <c:when test="${not empty review.alias}">
+                       <spring:theme code="review.submitted.user" arguments="${fn:escapeXml(review.alias)}" /> 
+                    </c:when>
+                    <c:otherwise>
+                        <spring:theme code="review.submitted.anonymous" />
+                    </c:otherwise>
+                </c:choose>
+                <c:set var="reviewDate" value="${review.date}" />
+                &#160;<fmt:formatDate value="${reviewDate}" pattern="MMMM dd, yyyy" />
+            </p>
+            <p class="product-collapse_desc">${fn:escapeXml(review.comment)}</p>
 	</c:forEach>
 </c:if>

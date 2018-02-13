@@ -14,14 +14,6 @@
     </c:forEach>
 </div>
 
-<div id="addToCartTitle" class="display-none">
-    <div class="add-to-cart-header">
-        <div class="headline">
-            <span class="headline-text"><spring:theme code="basket.added.to.basket"/></span>
-        </div>
-    </div>
-</div>
-
 <nav:pagination top="false" supportShowPaged="${isShowPageAllowed}" supportShowAll="${isShowAllAllowed}" searchPageData="${searchPageData}" searchUrl="${searchPageData.currentQuery.url}"  numberPagesShown="${numberPagesShown}"/>
 
 <storepickup:pickupStorePopup/>

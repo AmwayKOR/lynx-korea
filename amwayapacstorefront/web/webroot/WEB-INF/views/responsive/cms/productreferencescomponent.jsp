@@ -6,45 +6,22 @@
 <%@ taglib prefix="product" tagdir="/WEB-INF/tags/responsive/product"%>
 <%@ taglib prefix="component" tagdir="/WEB-INF/tags/shared/component"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-
+<c:url value="${url}" var="addToCartUrl"/>
 <c:choose>
 	<c:when test="${not empty productReferences and component.maximumNumberProducts > 0}">
-		<div class="carousel-component">
-
-			<div class="headline">${fn:escapeXml(component.title)}</div>
-
-			<div class="carousel js-owl-carousel js-owl-lazy-reference js-owl-carousel-reference">
-				
-				<div id="quickViewTitle" class="quickView-header display-none">
-					<div class="headline">		
-						<span class="headline-text"><spring:theme code="popup.quick.view.select"/></span>
-					</div>
-				</div>
-				
-				<c:forEach end="${component.maximumNumberProducts}" items="${productReferences}" var="productReference">
-					<c:url value="${productReference.target.url}/quickView" var="productUrl"/>
-					<div class="item">
-						<a href="${productUrl}" class="js-reference-item" data-quickview-title="<spring:theme code="popup.quick.view.select"/></span>">
-                            <div class="thumb">
-                                <product:productPrimaryReferenceImage product="${productReference.target}" format="product" />
-                            </div>
-						 
-                            <c:if test="${component.displayProductTitles}">
-                                <div class="item-name">${fn:escapeXml(productReference.target.name)}</div>
-                            </c:if>
-                            <c:if test="${component.displayProductPrices}">
-                                <div class="priceContainer">
-                                    <format:fromPrice priceData="${productReference.target.price}" />
-                                </div>
-                            </c:if>
-						</a>
-
-					</div>
-				</c:forEach>
-			</div>
-		</div>
+	    <div class="row">
+            <div class="amway-suggest col-md-12">
+                <h1 class="amway-suggest__title">${fn:escapeXml(component.title)}</h1>
+                <div id="productSuggestListTabs" class="amway-suggest__list">
+                    <c:forEach end="${component.maximumNumberProducts}" items="${productReferences}" var="productReference">
+                        <product:productCarouselListerGridItem product="${productReference}"/>
+                    </c:forEach>
+                </div>
+            </div>
+        </div>
 	</c:when>
 
 	<c:otherwise>

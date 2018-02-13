@@ -1,0 +1,6 @@
+INSERT_UPDATE Customer;uid[unique=true]    ;customerId  ;password   ;name        ;accounts(code)
+                      ;testuser            ;testuser    ;testuser	;"Test User" ;testuser
+
+INSERT_UPDATE AmwayAccount;code[unique=true]     ;businessNature(code)    ;primaryParty(uid);name
+                          ;testuser              ;"AmwayBusinessNature_1" ;testuser         ;"Test User"
+

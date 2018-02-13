@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<import resource="classpath:/amwaydms-profile-spring.xml" />
+	<import resource="classpath:/amwaydms-group-profile-spring.xml" />
+	<import resource="classpath:/amwaydms-address-spring.xml" />
+	<import resource="classpath:/amwaydms-renewal-spring.xml" />
+	<import resource="classpath:/amwaydms-balance-spring.xml" />
+	<import resource="classpath:/amwaydms-blocks-privs-spring.xml" />
+	<import resource="classpath:/amwaydms-business-nature-spring.xml" />
+	<import resource="classpath:/amwaydms-orders-spring.xml" />
+	<import resource="classpath:/amwaydms-subscription-spring.xml" />
+
+	<alias alias="amwayAbstractDmsService" name="defaultAmwayAbtractDmsService" />
+	<bean id="defaultAmwayAbtractDmsService"
+		  class="com.amway.amwaydms.services.impl.AbstractDmsService"
+		  abstract="true">
+		<property name="serviceAvailCode" value="#{configurationService.configuration.getProperty('amwaydms.availablity.code')}"/>
+		<property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
+		<property name="charonClientConfigService" ref="amwayCharonClientConfigService" />
+	</bean>
+
+	<alias alias="amwayCharonClientConfigService" name="defaultAmwayCharonClientConfigService" />
+	<bean id="defaultAmwayCharonClientConfigService"  class="com.amway.core.charon.client.services.impl.DefaultCharonClientConfigService">
+		<property name="amwayCharonClientRegistry" ref="amwayCharonClientRegistry" />
+	</bean>
+
+	<bean id="amwayBaseCharonClientConfig"  class="com.amway.core.charon.client.BaseCharonClientConfig">
+		<property name="oauthUrl" value="${dms.oauth.url}" />
+	</bean>
+
+	<bean id="amwayDmsHybrisProxyClientConfig"  class="com.amway.core.charon.client.CharonClientConfig" parent="amwayBaseCharonClientConfig">
+		<property name="clientId" value="${dms.oauth.proxy.clientId}" />
+		<property name="clientSecret" value="${dms.oauth.proxy.clientSecret}" />
+	</bean>
+
+	<bean id="amwayDmsHybrisCronClientConfig"  class="com.amway.core.charon.client.CharonClientConfig" parent="amwayBaseCharonClientConfig">
+		<property name="clientId" value="${dms.oauth.cron.clientId}" />
+		<property name="clientSecret" value="${dms.oauth.cron.clientSecret}" />
+	</bean>
+
+	<util:map id="amwayCharonClientRegistry" key-type="java.lang.String"
+			  value-type="com.amway.core.charon.client.CharonClientConfig">
+		<entry key="${dms.hybris.proxy.appid}"
+			   value-ref="amwayDmsHybrisProxyClientConfig"/>
+		<entry key="${dms.hybris.cron.appid}"
+			   value-ref="amwayDmsHybrisCronClientConfig"/>
+	</util:map>
+
+
+	<bean id="abstractDmsPopulator" class="com.amway.amwaydms.services.impl.AbstractDmsPopulator" abstract="true"/>
+
+	<!-- Common fields populator for all requests going from Hybris to Magic DMS -->
+	<bean id="amwayCommonResponsePopulator"
+		  class="com.amway.amwaydms.populators.CommonResponsePopulator"/>
+
+
+</beans>

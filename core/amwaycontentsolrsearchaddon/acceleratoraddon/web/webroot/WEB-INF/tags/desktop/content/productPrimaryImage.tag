@@ -5,8 +5,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="theme" tagdir="/WEB-INF/tags/shared/theme" %>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
+<%@ taglib prefix="lynxtags" uri="http://hybris.com/tld/lynxtags"%>
 
-<c:set value="${ycommerce:productImage(product, format)}" var="primaryImage"/>
+
+<c:set value="${lynxtags:productImage(product, format)}" var="primaryImage"/>
 
 <c:choose>
 	<c:when test="${not empty primaryImage}">
@@ -20,6 +22,6 @@
 		</c:choose>
 	</c:when>
 	<c:otherwise>
-		<theme:image code="img.missingProductImage.${format}" alt="${fn:escapeXml(product.name)}" title="${fn:escapeXml(product.name)}"/>
+		<theme:nophoto alt="${fn:escapeXml(product.name)}" title="${fn:escapeXml(product.name)}"/>
 	</c:otherwise>
 </c:choose>

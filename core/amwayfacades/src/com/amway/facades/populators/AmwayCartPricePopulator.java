@@ -125,6 +125,10 @@ public class AmwayCartPricePopulator implements Populator<CartModel, CartData>
 					{
 						//final PriceRowModel priceRow = getPriceRow(entry.getProduct());
 						final PriceInformation info = getPriceInfo(entry.getProduct());
+						if (info == null)
+						{
+							continue;
+						}
 						PriceData entryBasePrice = entryData.getBasePrice();
 						AmwayValueData baseValueData = new AmwayValueData();
 

@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700');
+body {
+  background: #e9e9e9;
+  color: #666666;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 600;font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3{font-family:  'Roboto Condensed', sans-serif;}
+/* Pen Title */
+.main-title {
+  padding: 30px 0 20px;
+  text-align: center;
+  letter-spacing: 2px;
+}
+
+.main-title h1 {
+  margin: 0 0 20px;
+  font-size: 48px;
+  font-weight: 300;
+}
+.main-title h2 {
+  margin: 0 0 10px;
+  font-size: 22px;
+  font-weight: 300;
+}
+.main-title span {
+  font-size: 12px;
+}
+
+
+/* Form Module */
+.form-module {
+  position: relative;
+  background: #ffffff;
+  max-width: 475px;
+  width: 100%;
+  border-top: 5px solid #33b5e5;
+  -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+}
+
+
+.form-module .form {
+  display: block;
+  padding: 40px;
+}
+
+
+
+.form-module h2 {
+  margin: 0 0 20px;
+  color: #33b5e5;
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.form-module input {
+  outline: none;
+  display: block;
+  width: 100%;
+  border: 1px solid #d9d9d9;
+  margin: 0 0 20px;
+  padding: 10px 15px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-wieght: 400;
+  -webkit-transition: 0.3s ease;
+  transition: 0.3s ease;
+}
+
+.form-module input:focus {
+  border: 1px solid #33b5e5;
+  color: #333333;
+}
+
+.form-module button {
+  cursor: pointer;
+  background: #33b5e5;
+  width: 100%;
+  border: 0;
+  padding: 10px 15px;
+  color: #ffffff;
+  -webkit-transition: 0.3s ease;
+  transition: 0.3s ease;
+}
+
+.form-module button:hover {
+  background: #178ab4;
+}
+
+.form-module .forgot-link {
+  background: #f2f2f2;
+  width: 100%;
+  padding: 15px 40px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  color: #666666;
+  font-size: 12px;
+  text-align: center;
+}
+
+.form-module .forgot-link a {
+  color: #333333;
+  text-decoration: none;
+}
+
+footer{ text-align: center; font-weight: 300; margin-top: 10px; }

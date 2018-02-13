@@ -39,6 +39,61 @@
 			<value code="ExcessiveStock" />
 			<value code="Others" />
 		</enumtype>
+		<enumtype code="ReturnShippingStatusEnum" autocreate="true" generate="true" dynamic="true">
+			<value code="NOT_RETURNED"/>
+			<value code="NO_INVENTORY_PENDING"/>
+			<value code="NO_INVENTORY"/>
+			<value code="PENDING_CSA_ACTION"/>
+			<value code="AWAITING_RETURN"/>
+			<value code="RETURNED"/>
+		</enumtype>
+
+		<enumtype code="RefundStatusEnum" autocreate="true" generate="true" dynamic="true">
+			<value code="NOT_REFUNDED"/>
+			<value code="REFUNDED"/>
+			<value code="NO_INVENTORY"/>
+			<value code="AWAITING_RETURN"/>
+			<value code="RETURNED"/>
+		</enumtype>
+
+		<enumtype code="RefundMethodEnum" autocreate="true" generate="true" dynamic="true">
+			<value code="CASH"/>
+			<value code="CARD"/>
+			<value code="PAYPAL"/>
+			<value code="BANK_TRANSFER"/>
+			<value code="A_R"/>
+			<value code="DIRECT_DEBIT"/>
+			<value code="PAYMENT_TERMINALS"/>
+			<value code="POST_DRAFTS"/>
+		</enumtype>
+
+		<enumtype code="ReturnReasonEnum" autocreate="true" generate="true" dynamic="true">
+			<value code="RECEIVER_NOT_AT_HOME" />
+			<value code="RETURNED_BY_WRONG_ADDRESS" />
+			<value code="NOT_SHIPPED_BY_AMWAYS_REQUEST" />
+			<value code="REFUSED_BY_RECEIVER" />
+			<value code="DAMAGED_DURING_TRANSPORTATION" />
+			<value code="ORDER_WRONG_LOADED" />
+			<value code="RETURNED_WITH_UNCLEAR_REASON" />
+			<value code="RETURNED_BY_PARCEL_SHOP" />
+			<value code="WRONG_PRODUCT_WAS_SENT" />
+			<value code="SHIPPING_CARTON_AND_PRODUCT_DAMAGED" />
+			<value code="PRODUCT_ORDERED_BY_MISTAKE" />
+			<value code="SHIPPING_CARTON_INTACT_BUT_PRODUCT_DAMAGED" />
+			<value code="PRODUCT_DEFECT_DOES_NOT_FUNCTION" />
+			<value code="PERFORMANCE_QUALITY_NOT_ADEQUATE" />
+			<value code="NO_REASON_GIVEN" />
+			<value code="PRODUCT_DELIVERED_TOO_LATE" />
+			<value code="DESCRIPTION_ON_WEBSITE_NOT_ACCURATE" />
+		</enumtype>
+
+		<enumtype code="ReturnStatus" autocreate="false" generate="false" dynamic="true">
+			<value code="ACTIVE"/>
+			<value code="DAMAGED" />
+			<value code="ON_HOLD"/>
+			<value code="LOCKED"/>
+			<value code="CONFIRMATION_PENDING"/>
+		</enumtype>
 
 		<enumtype generate="true" code="ServiceTypeEnum" autocreate="true"
 			dynamic="true">
@@ -47,17 +102,17 @@
 			<value code="LATE_RENEWAL" />
 		</enumtype>
 
-        <enumtype code="ProductReferenceTypeEnum" autocreate="false" generate="true">
-            <value code="COMPATIBLE_ITEMS"/>
-        </enumtype>
+		<enumtype code="ProductReferenceTypeEnum" autocreate="false" generate="true">
+			<value code="COMPATIBLE_ITEMS"/>
+		</enumtype>
 
-        <enumtype code="InStockStatus" autocreate="false" generate="true">
-            <value code="shipElseTemporaryNotAvailable" />
-            <value code="shipElseNoLongerAvailable" />
-            <value code="shipElseBackOrder" />
-            <value code="noLongerAvailable" />
-            <value code="backOrder" />
-        </enumtype>
+		<enumtype code="InStockStatus" autocreate="false" generate="true">
+			<value code="shipElseTemporaryNotAvailable" />
+			<value code="shipElseNoLongerAvailable" />
+			<value code="shipElseBackOrder" />
+			<value code="noLongerAvailable" />
+			<value code="backOrder" />
+		</enumtype>
 
 		<enumtype code="StockLevelStatus" generate="true" autocreate="false" dynamic="true">
 			<description>Flag for real stock level status</description>
@@ -185,7 +240,9 @@
 
 		<enumtype code="SalesApplication" generate="false"
 			autocreate="false" dynamic="true">
-			<value code="pos" />
+			<value code="pos" />			<!-- Point of Sale -->
+			<value code="AUTO_RENEW" />		<!-- Auto-renewal (triggered by MAGIC) -->
+			<value code="AMWAY_WEB" />     <!-- Website -->
 		</enumtype>
 
 		<enumtype code="AmwayCartType" generate="true" autocreate="true"
@@ -195,6 +252,8 @@
 			<value code="webgroup" />
 			<value code="webrecurring" />
 			<value code="replacement" />
+			<value code="RENEWAL" />
+			<value code="REGISTRATION" />
 		</enumtype>
 		<enumtype code="OrderStatus" autocreate="false" generate="true"
 			dynamic="true">
@@ -204,14 +263,15 @@
 			<value code="PARTIAL_RETURNED" />
 			<value code="RETURNED_AND_REPLACE" />
 			<value code="PAYMENT_PART_PAID" />
-            <value code="ACTIVE" />
-            <value code="LOCKED" />
+			<value code="ACTIVE" />
+			<value code="LOCKED" />
 		</enumtype>
 
 		<enumtype code="PaymentTransactionType" autocreate="false"
 			generate="false">
 			<value code="EXTERNAL_CAPTURE" />
 			<value code="FRAUD_DECISION" />
+			<value code="OVERPAY_RETURN" />
 		</enumtype>
 
 		<enumtype code="AmwayInfraAvlStatus" autocreate="true"
@@ -228,10 +288,6 @@
 			<value code="hipercard" />
 		</enumtype>
 
-		<enumtype code="ReturnStatus" autocreate="false" generate="false"
-			dynamic="true">
-			<value code="DAMAGED" />
-		</enumtype>
 		<enumtype code="OrderFailureStatusTypeEnum" autocreate="true"
 			generate="true">
 			<value code="CREATED" />
@@ -245,6 +301,17 @@
 			<value code="LOSNOTUPDATED"/>
 			<value code="LOSUPDATED"/>
 			<value code="LOSFAILED"/>
+		</enumtype>
+
+		<enumtype code="AmwayStarterKitType" autocreate="true" generate="true">
+			<value code="NONE"/>
+			<value code="REQUIRED"/>
+			<value code="OPTIONAL"/>
+		</enumtype>
+
+		<enumtype code="AmwayInvoiceType" autocreate="true" generate="true"
+				  dynamic="true">
+			<value code="TYPE1" />
 		</enumtype>
 
 		<enumtype code="AmwayPaymentModeGroupType">
@@ -308,6 +375,11 @@
 			<value code="MOP" />
 			<value code="ORDERING" />
 		</enumtype>
+				
+		<enumtype code="PaymentStatus" autocreate="false" generate="false"
+			dynamic="true">
+			<value code="OVERPAID" />
+		</enumtype>
 		
 	</enumtypes>
 
@@ -321,10 +393,10 @@
 			returntype="java.lang.String" autocreate="true" generate="true" />
 			
 		<maptype code="localized:ProductAttributesMapType"
-               argumenttype="Language"
-               returntype="ProductAttributesMapType"
-               autocreate="true"
-               generate="true"/>
+			   argumenttype="Language"
+			   returntype="ProductAttributesMapType"
+			   autocreate="true"
+			   generate="true"/>
 
 	</maptypes>
 
@@ -349,6 +421,16 @@
 			<targetElement type="PaymentMode" qualifier="paymentModes" cardinality="many" collectiontype="set">
 				<description>Payment modes for given group.</description>
 			</targetElement>
+		</relation>
+	<relation generate="true" localized="false" code="ReturnRequest2RefundInfo" autocreate="true">
+			<sourceElement type="ReturnRequest" qualifier="return" cardinality="one"></sourceElement>
+			<targetElement type="RefundInfo" qualifier="refundInfos" cardinality="many" collectiontype="list">
+				<modifiers read="true" write="true" optional="true" partof="true"/>
+			</targetElement>
+		</relation>
+		<relation code="AmwayProductSerialNumber2ReturnEntryRelation" localized="false">
+			<sourceElement type="ReturnEntry" qualifier="returnEntry" cardinality="one"/>
+			<targetElement type="AmwayProductSerialNumber" qualifier="serialNumbers" cardinality="many"/>
 		</relation>
 
 		<relation code="OrderPeriodsForStore" generate="true"
@@ -516,6 +598,58 @@
 			<sourceElement qualifier="pointOfService" type="PointOfService" cardinality="one"/>
 			<targetElement qualifier="terminals" type="AmwayTerminal" cardinality="many" collectiontype="list" ordered="false" />
 		</relation>
+		
+		<relation generate="true" localized="false" code="Order2RefundPaymentTransaction" autocreate="true">
+			<sourceElement type="AbstractOrder" qualifier="transactionOwner" cardinality="one"></sourceElement>
+			<targetElement type="PaymentTransaction" qualifier="refundTransactions" cardinality="many" collectiontype="list">
+				<modifiers read="true" write="true" optional="true" partof="true"/>
+			</targetElement>
+		</relation>
+		
+		<relation code="AmwayPaymentConfig2ReturnPaymentMode"
+			generate="true" localized="false" autocreate="true">
+			<sourceElement qualifier="config" type="AmwayPaymentConfig"
+				cardinality="one" />
+			<targetElement qualifier="returnPaymentModes" type="PaymentMode"
+				cardinality="many" collectiontype="set" ordered="true" />
+		</relation>
+		
+		<relation code="BaseStore2AmwayPaymentConfig" generate="true" localized="false" autocreate="true">
+			<description>Specifies the payment config's applicable for a base store, to support multiple affiliates </description>
+			<sourceElement qualifier="baseStore" type="BaseStore" cardinality="one" />
+			<targetElement qualifier="paymentConfigs" type="AmwayPaymentConfig" cardinality="many" collectiontype="set" ordered="true" />
+		</relation>
+
+		<relation code="AmwayInvoiceEntriesForInvoice" generate="true"
+				  localized="false" autocreate="true">
+			<sourceElement qualifier="invoice" type="AmwayInvoice"
+						   cardinality="one">
+				<modifiers optional="false" />
+			</sourceElement>
+			<targetElement qualifier="invoiceEntries" type="AmwayInvoiceEntry"
+						   cardinality="many" collectiontype="set" ordered="false" />
+		</relation>
+
+		<relation code="AmwayInvoicesForOrder" generate="true"
+				  localized="false" autocreate="true">
+			<sourceElement qualifier="order" type="Order"
+						   cardinality="one">
+				<modifiers optional="true" unique="true" />
+			</sourceElement>
+			<targetElement qualifier="amwayInvoices" type="AmwayInvoice"
+						   cardinality="many" collectiontype="set" ordered="false" />
+		</relation>
+		<relation code="AmwayInvoicesForReturn" generate="true" localized="false" autocreate="true">
+			<sourceElement qualifier="return" type="ReturnRequest" cardinality="one">
+				<modifiers optional="true" unique="true" />
+			</sourceElement>
+			<targetElement qualifier="invoiceInfo" type="AmwayInvoice" cardinality="many" collectiontype="set" ordered="false" />
+		</relation>
+
+		<relation code="AmwayTerminal2MacAddress" generate="true" localized="false" autocreate="true">
+			<sourceElement qualifier="terminal" type="AmwayTerminal" cardinality="one"/>
+			<targetElement qualifier="macAddresses" type="AmwayTerminalMacAddress" cardinality="many" collectiontype="list" ordered="false" />
+		</relation>
 
 	</relations>
 
@@ -530,7 +664,7 @@
 						<description>Time zone associated to the employee</description>
 					</attribute>
 				</attributes>
-			</itemtype>
+			</itemtype>	
 
 			<itemtype code="Customer" generate="false" autocreate="false">
 				<attributes>
@@ -643,7 +777,7 @@
 					<attribute qualifier="controllingAffiliate" type="Country">
 						<persistence type="property" />
 						<modifiers read="true" write="true" search="true"
-							optional="true" unique="false" />
+							optional="true" unique="true" />
 					</attribute>
 					<attribute qualifier="country" type="Country">
 						<persistence type="property" />
@@ -1007,6 +1141,11 @@
 						<modifiers />
 						<persistence type="property" />
 					</attribute>
+					<attribute qualifier="starterKit" type="AmwayStarterKitType">
+						<persistence type="property"/>
+						<modifiers optional="false"/>
+						<defaultvalue>em().getEnumerationValue("AmwayStarterKitType", "NONE")</defaultvalue>
+					</attribute>
 				</attributes>
 			</itemtype>
 
@@ -1339,6 +1478,12 @@
 					<attribute qualifier="receiptNo" type="java.lang.String">
 						<persistence type="property"></persistence>
 					</attribute>
+					<attribute type="PaymentMode" qualifier="paymentMode">
+						<description>Payment method.</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
 				</attributes>
 			</itemtype>
 
@@ -1353,6 +1498,27 @@
 					</attribute>
 					<attribute qualifier="location" type="java.lang.String">
 						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="AmwayTerminalMacAddress" autocreate="true" generate="true"
+					  jaloclass="com.amway.core.jalo.AmwayTerminalMacAddress">
+				<description>POS Cashier terminal</description>
+				<deployment table="AmwayTerminalMacAddress" typecode="22011"/>
+
+				<attributes>
+					<attribute qualifier="id" type="java.lang.String">
+						<modifiers optional="false" write="true" read="true" search="true" unique="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="type" type="java.lang.String">
+						<description>Type can be WiFi, LAN etc. It will show network adaptor name.</description>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="macAddress" type="java.lang.String" >
+						<modifiers optional="false" write="true" read="true" search="true" unique="true" />
+						<persistence type="property"/>
 					</attribute>
 				</attributes>
 			</itemtype>
@@ -1871,13 +2037,13 @@
 					</attribute>
 				</attributes>
 				 <indexes>
-                    <index name="addPstcdIdx">
-                     	<key attribute="postalcode" />
-                     </index>
-                     <index name="addTwnIdx">
-                     	<key attribute="town" />
-                     </index>
-                </indexes>
+					<index name="addPstcdIdx">
+					 	<key attribute="postalcode" />
+					 </index>
+					 <index name="addTwnIdx">
+					 	<key attribute="town" />
+					 </index>
+				</indexes>
 			</itemtype>
 
 			<itemtype code="CreditCardPaymentInfo" autocreate="false"
@@ -1886,6 +2052,10 @@
 				<attributes>
 					<attribute qualifier="customerTaxId" type="java.lang.String">
 						<description>Tax Id provided while giving credit card details</description>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="paymentProvider" type="java.lang.String">
+						<description>Payment provider code</description>
 						<persistence type="property" />
 					</attribute>
 				</attributes>
@@ -2012,6 +2182,16 @@
 						<modifiers optional="false" />
 						<defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
 					</attribute>
+					<attribute qualifier="allowOverpay" type="java.lang.Boolean">
+						<description>Boolean indicating if the payment mode allows over payment.</description>
+						<modifiers optional="false"/>
+						<persistence type="property" />
+						<defaultvalue>Boolean.FALSE</defaultvalue>
+					</attribute>
+					<attribute qualifier="overpaymentThreshold" type="java.lang.Double">
+						<description>Threshold for the over payment.</description>
+						<persistence type="property" />
+					</attribute>
 				</attributes>
 				<indexes>
 					<index name="pytModeCodeIdx">
@@ -2096,6 +2276,61 @@
 					</index>
 				</indexes>
 			</itemtype>
+
+			<itemtype code="AmwayInvoice"
+					  extends="GenericItem"
+					  jaloclass="com.amway.core.invoice.AmwayInvoice"
+					  autocreate="true"
+					  generate="true">
+				<description>Invoice data</description>
+				<deployment table="amwayinvoicetbl" typecode="20903"/>
+				<attributes>
+					<attribute qualifier="country" type="Country">
+						<description>Invoice country</description>
+						<modifiers unique="true" optional="false" initial="true"/>
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="date" type="java.util.Date" autocreate="true" generate="true">
+						<description>Invoicing date</description>
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="number" type="java.lang.String" autocreate="true" generate="true">
+						<description>Invoice generated number</description>
+						<modifiers unique="true" optional="false" initial="true"/>
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="type" type="AmwayInvoiceType" autocreate="true" generate="true">
+						<description>Invoice type</description>
+						<persistence type="property"/>
+					</attribute>
+				</attributes>
+			</itemtype>
+			<itemtype code="AmwayInvoiceEntry"
+					  extends="GenericItem"
+					  jaloclass="com.amway.core.invoice.AmwayInvoiceEntry"
+					  autocreate="true"
+					  generate="true">
+				<description>Order invoiced entry</description>
+				<deployment table="amwayinvoiceentrytbl" typecode="20904"/>
+				<attributes>
+					<attribute qualifier="orderEntry" type="AbstractOrderEntry" autocreate="true" generate="true">
+						<description>Invoiced order entry</description>
+						<modifiers optional="false" initial="true"/>
+						<persistence type="property"/>
+					</attribute>
+				</attributes>
+			</itemtype>
+			<itemtype code="AmwayProductSerialNumber" generate="true">
+				<description>Serial number for order entry</description>
+				<deployment table="AmwayProductSerialNumber" typecode="25011"/>
+				<attributes>
+					<attribute qualifier="serialNumber" type="java.lang.String">
+						<description>Serial number</description>
+						<modifiers optional="false" initial="true" write="false"/>
+						<persistence type="property"/>
+					</attribute>
+				</attributes>
+			</itemtype>
 		</typegroup>
 
 		<typegroup name="cms">
@@ -2154,6 +2389,11 @@
 						<description>kit product for site</description>
 						<persistence type="property" />
 					</attribute>
+					<attribute qualifier="defaultReturnPaymentMode" type="PaymentMode">
+						<description>Default return payment mode</description>
+						<modifiers />
+						<persistence type="property" />
+					</attribute>
 				</attributes>
 			</itemtype>
 
@@ -2192,7 +2432,7 @@
 						generate="true" type="SalesApplication">
 						<description> Channel for config</description>
 						<persistence type="property" />
-						<modifiers read="true" write="true" search="false"
+						<modifiers read="true" write="true" search="true"
 							optional="true" />
 					</attribute>
 					<attribute qualifier="type" type="AmwayCartType">
@@ -2577,9 +2817,9 @@
 						<persistence type="property" />
 						<defaultvalue>Boolean.TRUE</defaultvalue>
 						<description>
-			       Specifies if this restriction is a positive (true) or negative
-			       (false) one.
-			      </description>
+				   Specifies if this restriction is a positive (true) or negative
+				   (false) one.
+				  </description>
 					</attribute>
 				</attributes>
 			</itemtype>
@@ -2608,6 +2848,17 @@
 					</attribute>
 					<attribute qualifier="batchID" type="AmwayBatch">
 						<description>The POS batch number for the return.</description>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="amwayLegacyOrderCode" type="java.lang.String">
+						<description>ID of the order that was placed outside of hybris.</description>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="amwayRefundPaymentMethod" type="java.lang.String">
+						<description>AR or one of Bank Accounts or Original Payment.</description>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="site" type="BaseSite">
 						<persistence type="property" />
 					</attribute>
 				</attributes>
@@ -2723,5 +2974,261 @@
 				</attributes>
 			</itemtype>
 		</typegroup>
+
+		<typegroup name="returns">
+			<itemtype code="RefundMethod" autocreate="true" generate="true">
+				<deployment table="RefundMethod" typecode="12052"/>
+				<attributes>
+					<attribute qualifier="mode" type="RefundMethodEnum">
+						<description>refund mode</description>
+						<modifiers read="true" write="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+
+					<attribute qualifier="accountNumber" type="java.lang.String">
+						<description>account number for bank transfer</description>
+						<modifiers read="true" write="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+
+					<attribute qualifier="transactionId" type="java.lang.String">
+						<description>Id of the referenced transaction</description>
+						<modifiers read="true" write="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="RefundInfo" autocreate="true" generate="true">
+				<deployment table="RefundInfo" typecode="12051"/>
+				<attributes>
+					<attribute qualifier="requestedRefundMethod" type="RefundMethod">
+						<description>requested refund method</description>
+						<modifiers read="true" write="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+
+					<attribute qualifier="actualRefundMethod" type="RefundMethod">
+						<description>actual refund method</description>
+						<modifiers read="true" write="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+
+					<attribute qualifier="value" type="double">
+						<modifiers read="true" write="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="ReturnRequest" autocreate="false" generate="false">
+				<description>Extending Request type with additional attributes.</description>
+
+				<attributes>
+
+					<attribute qualifier="fullReturn" type="boolean">
+						<description>full or partial return</description>
+						<modifiers read="true" write="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+
+					<attribute qualifier="returnDate" type="java.util.Date">
+						<description>date when return request processed by WH employee, see returnEntry.reachedDate
+						</description>
+						<modifiers read="true" write="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+
+					<attribute qualifier="shippingRequired" type="boolean">
+						<description>is shipping needed</description>
+						<modifiers read="true" write="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+
+					<attribute qualifier="invoiceRequired" type="boolean">
+						<description>is invoice needed</description>
+						<modifiers read="true" write="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+
+					<attribute qualifier="shippingStatus" type="ReturnShippingStatusEnum">
+						<description>shipping status</description>
+						<modifiers read="true" write="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+
+					<attribute qualifier="refundStatus" type="RefundStatusEnum">
+						<description>refund status</description>
+						<modifiers read="true" write="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+
+					<attribute qualifier="externalOrderCode" type="java.lang.String">
+						<description>ID of order placed in AS/400</description>
+						<modifiers read="true" write="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+
+					<attribute qualifier="returnValue" type="double">
+						<description>refund information</description>
+						<modifiers read="true" write="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+
+					<attribute qualifier="businessVolume" type="double">
+						<description>total BV to return</description>
+						<modifiers read="true" write="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+
+					<attribute qualifier="pointValue" type="double">
+						<description>total PV to return</description>
+						<modifiers read="true" write="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+
+					<attribute qualifier="account" type="AmwayAccount">
+						<description>The account for which the cart was created and the order was placed</description>
+						<persistence type="property"/>
+					</attribute>
+
+					<attribute qualifier="totalTaxValuesInternal" type="java.lang.String">
+						<custom-properties>
+							<property name="hiddenForUI">
+								<value>Boolean.TRUE</value>
+							</property>
+						</custom-properties>
+						<modifiers search="false"/>
+						<persistence type="property">
+							<columntype database="oracle">
+								<value>CLOB</value>
+							</columntype>
+							<columntype database="sap">
+								<value>NCLOB</value>
+							</columntype>
+							<columntype database="mysql">
+								<value>TEXT</value>
+							</columntype>
+							<columntype>
+								<value>HYBRIS.LONG_STRING</value>
+							</columntype>
+						</persistence>
+					</attribute>
+
+					<attribute qualifier="totalTaxValues" type="TaxValueCollection">
+						<persistence type="dynamic" attributeHandler="returnRequestTotalTaxValuesAttributeHandler"/>
+						<modifiers search="false"/>
+					</attribute>
+
+					<attribute qualifier="type" type="AmwayReturnRequestType">
+						<description>The type that identifies return flow.</description>
+						<persistence type="property"/>
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="AmwayReturnRequestType" jaloclass="com.amway.core.jalo.returns.AmwayReturnRequestType">
+				<description>Determines the type of return request</description>
+				<deployment table="amwayreturnrequesttype" typecode="20603" />
+				<attributes>
+					<attribute qualifier="code" type="java.lang.String">
+						<description>Code of type.</description>
+						<persistence type="property" />
+						<modifiers write="false" optional="false" unique="true" initial="true" />
+					</attribute>
+					<attribute qualifier="name" type="localized:java.lang.String">
+						<description>Name of type.</description>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="noShippingRequired" type="boolean">
+						<description>The property specifies whether a no shipping required.</description>
+						<persistence type="property" />
+						<modifiers optional="false" />
+						<defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+					</attribute>
+					<attribute qualifier="labelRequired" type="boolean">
+						<description>The property specifies whether a label required.</description>
+						<persistence type="property" />
+						<modifiers optional="false" />
+						<defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+					</attribute>
+				</attributes>
+				<indexes>
+					<index name="typeIDX" unique="true">
+						<key attribute="code" />
+					</index>
+				</indexes>
+			</itemtype>
+
+			<itemtype code="ReturnEntry" autocreate="false" generate="false">
+				<attributes>
+
+					<attribute qualifier="entryNumber" type="int">
+						<description>reference to particular sequence in order, starting from 0</description>
+						<modifiers read="true" write="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+
+					<attribute qualifier="saleableQuantity" type="int">
+						<description>in case we want to add to stock automatically</description>
+						<modifiers read="true" write="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+
+					<attribute qualifier="returnReason" type="ReturnReasonEnum">
+						<modifiers read="true" write="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+
+					<attribute qualifier="businessVolume" type="double">
+						<description>total BV to return</description>
+						<modifiers read="true" write="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+
+					<attribute qualifier="pointValue" type="double">
+						<description>total PV to return</description>
+						<modifiers read="true" write="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+
+					<attribute qualifier="taxValues" type="TaxValueCollection">
+						<persistence type="dynamic" attributeHandler="returnEntryTaxValuesAttributeHandler"/>
+						<modifiers search="false"/>
+					</attribute>
+
+					<attribute qualifier="taxValuesInternal" type="java.lang.String">
+						<custom-properties>
+							<property name="hiddenForUI">
+								<value>Boolean.TRUE</value>
+							</property>
+						</custom-properties>
+						<persistence type="property"/>
+						<modifiers search="false"/>
+					</attribute>
+
+					<attribute qualifier="priceWithTax" type="double">
+						<description>price with tax which is an equivalent of de.hybris.platform.core.model.order.AbstractOrderEntryModel.getTotalPrice </description>
+						<persistence type="property"/>
+					</attribute>
+
+				</attributes>
+
+			</itemtype>
+		</typegroup>
+
+		<typegroup name="OAuth">
+			<itemtype code="OAuthClientDetails" autocreate="false" generate="false">
+				<description>Extends existing OAuthClientDetails with additional attributes.</description>
+				<attributes>
+					<attribute qualifier="channel" autocreate="true" generate="true" type="SalesApplication">
+						<description> Sales Channel for OCC client</description>
+						<persistence type="property" />
+						<modifiers read="true" write="true" search="false" optional="true" />
+					</attribute>
+				</attributes>
+			</itemtype>
+		</typegroup>
+
 	</itemtypes>
 </items>

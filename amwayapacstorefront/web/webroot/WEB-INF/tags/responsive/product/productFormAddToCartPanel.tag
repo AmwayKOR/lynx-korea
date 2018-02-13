@@ -6,8 +6,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="product" tagdir="/WEB-INF/tags/responsive/product" %>
 
-<product:addToCartTitle/>
-
 <li>
 	<product:productFormAddToCartButton addToCartBtnId="${addToCartBtnId}" />
 </li>

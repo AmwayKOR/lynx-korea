@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<!--
+	The hybris platform provides one single Spring application context for beans located at the jalo layer.
+	Each extension can add beans to this context by specifying them at this configuration file.
+	 
+	You can use and/or redefine beans defined at configuration files of other extensions as well as
+	adding new one.
+		
+	If you want to locate this file at a different location or want to use several files for better,
+	structuring, please use the '<yourextension>.application-context' property at your project.properties file.
+	There you can specify a comma separated list of files where first is tried to find a file per classpath and
+	then per file system.
+
+	
+	If you want to configure beans for your web module please have a look at
+	your web/webroot/WEB-INF/<extname>-web-spring.xml.
+	-->
+	
+	<alias alias="amwayApacNotificationFacade" name="defaultAmwayApacNotificationFacade"/>
+	<bean id="defaultAmwayApacNotificationFacade" class="com.amway.apac.message.center.notification.facades.impl.DefaultAmwayApacNotificationFacade">
+	 	<property name="userService" ref="userService" />
+	 	<property name="sessionService" ref="sessionService"/>
+	 	<property name="amwayApacNotificationService" ref="amwayApacNotificationService" />
+		<property name="amwayApacNotificationSectionConverter" ref="amwayApacNotificationSectionConverter"/>
+	</bean>
+    
+    <alias alias="amwayApacNotificationSectionConverter" name="defaultAmwayApacNotificationSectionConverter"/>
+    <bean id="defaultAmwayApacNotificationSectionConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.core.servicelayer.data.SearchPageData" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayApacNotificationSectionPopulator" />
+			</list>
+		</property>
+	</bean>
+	
+	<alias alias="amwayApacNotificationSectionPopulator" name="defaultAmwayApacNotificationSectionPopulator"/>
+	<bean id="defaultAmwayApacNotificationSectionPopulator" class="com.amway.apac.message.center.notification.populators.AmwayApacNotificationSectionPopulator">
+		<property name="amwayApacNotificationConverter" ref="amwayApacNotificationConverter" />
+	</bean>
+	
+	<alias alias="amwayApacNotificationConverter" name="defaultAmwayApacNotificationConverter"/>
+	<bean id="defaultAmwayApacNotificationConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.amway.apac.message.center.notification.AmwayApacNotificationData" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayApacNotificationPopulator"/>
+			</list>
+		</property>
+	</bean>
+	
+	<alias alias="amwayApacNotificationPopulator" name="defaultAmwayApacNotificationPopulator"/>
+	<bean id="defaultAmwayApacNotificationPopulator" class="com.amway.apac.message.center.notification.populators.AmwayApacNotificationPopulator">
+		<property name="amwayApacNotificationService" ref="amwayApacNotificationService"/>
+	</bean>	
+	
+	<alias name="defaultAmwayApacNotificationService" alias="amwayApacNotificationService"/>
+	<bean id="defaultAmwayApacNotificationService" class="com.amway.apac.message.center.notification.services.impl.DefaultAmwayApacNotificationService">
+		<property name="amwayApacNotificationDao" ref="amwayApacNotificationDao"/>
+		<property name="baseSiteService" ref="baseSiteService"/>
+		<property name="modelService" ref="modelService"/>
+		<property name="userService" ref="userService" />
+	</bean>
+	
+	<alias name="defaultAmwayApacNotificationDao" alias="amwayApacNotificationDao"/>
+	<bean id="defaultAmwayApacNotificationDao" class="com.amway.apac.message.center.notification.daos.impl.DefaultAmwayApacNotificationDao">
+		<property name="paginatedFlexibleSearchService" ref="paginatedFlexibleSearchService" />
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+		<property name="amwayAccountClassificationRankMapping" ref="amwayAccountClassificationRankMapping"/>
+	</bean>
+	
+</beans>

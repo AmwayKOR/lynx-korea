@@ -7,6 +7,7 @@ import de.hybris.platform.commerceservices.stock.strategies.impl.CommerceStockLe
 import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.ordersplitting.model.StockLevelModel;
 import de.hybris.platform.product.ProductService;
+import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.util.Config;
 
 import java.util.Collection;
@@ -84,4 +85,6 @@ public class AmwayCommerceStockLevelStatusStrategy extends CommerceStockLevelSta
 		}
 		return resultStatus;
 	}
+
+
 }

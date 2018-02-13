@@ -3,21 +3,6 @@
  */
 package com.amway.core.account.service.impl;
 
-import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
-
-import de.hybris.platform.core.model.order.AbstractOrderModel;
-import de.hybris.platform.core.model.user.CustomerModel;
-import de.hybris.platform.core.model.user.UserModel;
-import de.hybris.platform.servicelayer.session.SessionService;
-import de.hybris.platform.servicelayer.util.ServicesUtil;
-import de.hybris.platform.site.BaseSiteService;
-import de.hybris.platform.store.services.BaseStoreService;
-
-import java.util.List;
-
-import org.apache.log4j.Logger;
-import org.springframework.util.CollectionUtils;
-
 import com.amway.core.account.dao.AmwayAccountDao;
 import com.amway.core.account.service.AmwayAccountService;
 import com.amway.core.data.AmwayProfileRequestData;
@@ -26,6 +11,19 @@ import com.amway.core.dms.service.DmsService;
 import com.amway.core.exceptions.AmwayServiceException;
 import com.amway.core.model.AmwayAccountModel;
 import com.amway.core.service.AmwayAccountCommerceService;
+import de.hybris.platform.core.model.order.AbstractOrderModel;
+import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.core.model.user.UserModel;
+import de.hybris.platform.servicelayer.session.SessionService;
+import de.hybris.platform.servicelayer.util.ServicesUtil;
+import de.hybris.platform.site.BaseSiteService;
+import de.hybris.platform.store.services.BaseStoreService;
+import org.apache.log4j.Logger;
+import org.springframework.util.CollectionUtils;
+
+import java.util.List;
+
+import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
 
 
 /**
@@ -163,8 +161,7 @@ public class DefaultAmwayAccountService implements AmwayAccountService
 		final AmwayAccountModel unit = getAmwayAccountCommerceService().getCurrentAccount();
 
 		LOG.info("Magic call to get amway profile information for abo with abonum : " + unit.getCode());
-		final AmwayProfileResponseData amwayProfileResponse = getAmwayProfileService()
-				.process(createAmwayProfileRequestData(serviceMode, unit));
+		final AmwayProfileResponseData amwayProfileResponse = requestAmwayProfileResponseData(serviceMode, unit);
 
 		if (amwayProfileResponse != null && amwayProfileResponse.getReturnCd() != 1)
 		{
@@ -182,6 +179,13 @@ public class DefaultAmwayAccountService implements AmwayAccountService
 		return amwayProfileResponse;
 	}
 
+	private AmwayProfileResponseData requestAmwayProfileResponseData(String serviceMode, AmwayAccountModel unit)
+	{
+		AmwayProfileRequestData request = AccountRetrievalUtil.createAmwayProfileRequestData(serviceMode, unit,
+				getBaseStoreService(), getBaseSiteService());
+		return getAmwayProfileService().process(request);
+	}
+
 	/**
 	 * {@link #getCustomerAccountProfile(java.lang.String, de.hybris.platform.core.model.user.UserModel)}
 	 */
@@ -193,8 +197,7 @@ public class DefaultAmwayAccountService implements AmwayAccountService
 		final AmwayAccountModel unit = getAmwayAccountCommerceService().getAccountFromUser(userModel);
 
 		LOG.info("Magic call to get amway profile information for abo with abonum : " + unit.getCode());
-		final AmwayProfileResponseData amwayProfileResponse = getAmwayProfileService()
-				.process(createAmwayProfileRequestData(serviceMode, unit));
+		final AmwayProfileResponseData amwayProfileResponse = requestAmwayProfileResponseData(serviceMode, unit);
 		if (amwayProfileResponse != null && amwayProfileResponse.getReturnCd() != 1)
 		{
 			LOG.error("Service call is unsuccessful.");
@@ -215,8 +218,8 @@ public class DefaultAmwayAccountService implements AmwayAccountService
 		validateParameterNotNullStandardMessage("AmwayAccountModel", abstractOrderModel.getAccount());
 
 		LOG.info("Magic call to get amway profile information for abo with abonum : " + abstractOrderModel.getAccount().getCode());
-		final AmwayProfileResponseData amwayProfileResponse = getAmwayProfileService()
-				.process(createAmwayProfileRequestData(serviceMode, abstractOrderModel));
+		AmwayProfileRequestData request = AccountRetrievalUtil.createAmwayProfileRequestData(serviceMode, abstractOrderModel);
+		final AmwayProfileResponseData amwayProfileResponse = getAmwayProfileService().process(request);
 		if (amwayProfileResponse != null && amwayProfileResponse.getReturnCd() != 1)
 		{
 			LOG.error("Service call is unsuccessful. Return code : " + amwayProfileResponse.getReturnCd());
@@ -227,37 +230,6 @@ public class DefaultAmwayAccountService implements AmwayAccountService
 			LOG.info("Service call is successful. Return code : " + amwayProfileResponse.getReturnCd());
 		}
 		return amwayProfileResponse;
-	}
-
-	private AmwayProfileRequestData createAmwayProfileRequestData(final String serviceMode, final AmwayAccountModel unit)
-	{
-		final AmwayProfileRequestData amwayProfileRequestData = new AmwayProfileRequestData();
-
-		amwayProfileRequestData.setSalesPlanAff(getBaseStoreService().getCurrentBaseStore().getAffiliateNumber());
-		if (unit != null)
-		{
-			amwayProfileRequestData.setAboNum(unit.getCode());
-		}
-		amwayProfileRequestData.setClientCntryCd(getBaseSiteService().getCurrentBaseSite().getDefaultCountry().getIsocode());
-		amwayProfileRequestData.setDeltailLevelCd(serviceMode);
-
-		return amwayProfileRequestData;
-	}
-
-	private AmwayProfileRequestData createAmwayProfileRequestData(final String serviceMode,
-			final AbstractOrderModel abstractOrderModel)
-	{
-		final AmwayProfileRequestData amwayProfileRequestData = new AmwayProfileRequestData();
-
-		amwayProfileRequestData.setSalesPlanAff(abstractOrderModel.getStore().getAffiliateNumber());
-		if (abstractOrderModel.getAccount() != null)
-		{
-			amwayProfileRequestData.setAboNum(abstractOrderModel.getAccount().getCode());
-		}
-		amwayProfileRequestData.setClientCntryCd(abstractOrderModel.getSite().getDefaultCountry().getIsocode());
-		amwayProfileRequestData.setDeltailLevelCd(serviceMode);
-
-		return amwayProfileRequestData;
 	}
 
 	/**
@@ -308,23 +280,6 @@ public class DefaultAmwayAccountService implements AmwayAccountService
 		this.baseSiteService = baseSiteService;
 	}
 
-
-	/**
-	 * @return amwayProfileService
-	 */
-	public DmsService<AmwayProfileRequestData, AmwayProfileResponseData> getAmwayProfileService()
-	{
-		return amwayProfileService;
-	}
-
-	/**
-	 * @param amwayProfileService the amwayProfileService to set
-	 */
-	public void setAmwayProfileService(final DmsService<AmwayProfileRequestData, AmwayProfileResponseData> amwayProfileService)
-	{
-		this.amwayProfileService = amwayProfileService;
-	}
-
 	/**
 	 * @return amwayAccountCommerceService
 	 */
@@ -340,7 +295,6 @@ public class DefaultAmwayAccountService implements AmwayAccountService
 	{
 		this.amwayAccountCommerceService = amwayAccountCommerceService;
 	}
-
 
 	/**
 	 * @return the sessionService
@@ -359,5 +313,13 @@ public class DefaultAmwayAccountService implements AmwayAccountService
 		this.sessionService = sessionService;
 	}
 
+	public DmsService<AmwayProfileRequestData, AmwayProfileResponseData> getAmwayProfileService()
+	{
+		return amwayProfileService;
+	}
 
+	public void setAmwayProfileService(DmsService<AmwayProfileRequestData, AmwayProfileResponseData> amwayProfileService)
+	{
+		this.amwayProfileService = amwayProfileService;
+	}
 }

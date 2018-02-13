@@ -14,8 +14,9 @@
 				<cockpit code="HeaderLinks"/>
 				<cockpit code="SearchBox"/>
 			</td>
-			<td width="15%" rowspan="2" class="structureViewSection">
+			<td width="15%" class="structureViewSection">
 				<cockpit code="MiniCart"/>
+				<cockpit code="MobileMiniCart"/>
 			</td>
 		</tr>
 		<tr>

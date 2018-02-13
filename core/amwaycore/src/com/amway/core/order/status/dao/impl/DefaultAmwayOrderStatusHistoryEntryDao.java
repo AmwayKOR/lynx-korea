@@ -1,5 +1,6 @@
 package com.amway.core.order.status.dao.impl;
 
+import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.servicelayer.internal.dao.DefaultGenericDao;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 import de.hybris.platform.servicelayer.search.SearchResult;
@@ -44,9 +45,12 @@ public class DefaultAmwayOrderStatusHistoryEntryDao extends DefaultGenericDao<Am
 		attributes.put("orderCode", orderCode);
 		final StringBuilder queryString = new StringBuilder(100);
 		queryString.append("SELECT {oshe:").append(AmwayOrderStatusHistoryEntryModel.PK).append("} FROM { ")
-				.append(AmwayOrderStatusHistoryEntryModel._TYPECODE).append(" AS oshe }");
-		queryString.append(" WHERE {");
-		queryString.append(AmwayOrderStatusHistoryEntryModel.ORDER).append("}=?orderCode");
+				.append(AmwayOrderStatusHistoryEntryModel._TYPECODE).append(" AS oshe JOIN ").append(OrderModel._TYPECODE)
+				.append(" AS o ON {oshe:").append(AmwayOrderStatusHistoryEntryModel.ORDER).append("} = {o:").append(OrderModel.PK)
+				.append("}").append("}");
+		queryString.append(" WHERE {o:");
+		queryString.append(OrderModel.CODE).append("}=?orderCode ORDER BY {oshe:")
+				.append(AmwayOrderStatusHistoryEntryModel.TIMESTAMP).append("} DESC");
 
 		LOG.debug(queryString);
 

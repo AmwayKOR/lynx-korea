@@ -1,0 +1,9 @@
+#Ant properties
+#Thu Nov 10 15:38:24 UTC 2016
+builddate=20161110 1533
+description=amwaydamintegration
+name=amwaydamintegration
+releasedate=20160923 1341
+vendor=hybris
+version=6.2.0.1
+version.api=6.2.0

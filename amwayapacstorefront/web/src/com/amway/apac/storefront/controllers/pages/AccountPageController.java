@@ -30,44 +30,38 @@ import de.hybris.platform.acceleratorstorefrontcommons.forms.verification.Addres
 import de.hybris.platform.acceleratorstorefrontcommons.util.AddressDataUtil;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.address.AddressVerificationFacade;
-import de.hybris.platform.commercefacades.address.data.AddressVerificationResult;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.i18n.I18NFacade;
 import de.hybris.platform.commercefacades.order.CheckoutFacade;
 import de.hybris.platform.commercefacades.order.OrderFacade;
 import de.hybris.platform.commercefacades.order.data.CCPaymentInfoData;
 import de.hybris.platform.commercefacades.order.data.OrderData;
-import de.hybris.platform.commercefacades.order.data.OrderEntryData;
 import de.hybris.platform.commercefacades.order.data.OrderHistoryData;
 import de.hybris.platform.commercefacades.product.ProductFacade;
 import de.hybris.platform.commercefacades.product.ProductOption;
-import de.hybris.platform.commercefacades.product.data.ProductData;
 import de.hybris.platform.commercefacades.user.UserFacade;
 import de.hybris.platform.commercefacades.user.data.AddressData;
 import de.hybris.platform.commercefacades.user.data.CountryData;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.commercefacades.user.data.TitleData;
 import de.hybris.platform.commercefacades.user.exceptions.PasswordMismatchException;
-import de.hybris.platform.commerceservices.address.AddressVerificationDecision;
 import de.hybris.platform.commerceservices.customer.DuplicateUidException;
 import de.hybris.platform.commerceservices.search.pagedata.PageableData;
 import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
-import de.hybris.platform.commerceservices.util.ResponsiveUtils;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import de.hybris.platform.util.Config;
-import com.amway.apac.storefront.controllers.ControllerConstants;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 
 import javax.annotation.Resource;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.BooleanUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -82,6 +76,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.amway.apac.facades.order.AmwayApacOrderFacade;
+import com.amway.apac.storefront.controllers.ControllerConstants;
+import com.amway.apac.storefront.forms.AmwayApacAddressForm;
+import com.amway.apac.storefront.forms.AmwayApacOrderHistoryFilterForm;
+import com.amway.apac.storefront.forms.AmwayApacOrderHistorySearchForm;
+import com.amway.apac.storefront.validators.AmwayApacAddressValidator;
 
 
 /**
@@ -105,6 +106,7 @@ public class AccountPageController extends AbstractSearchPageController
 	private static final String COUNTRY_ATTR = "country";
 	private static final String REGIONS_ATTR = "regions";
 	private static final String MY_ACCOUNT_ADDRESS_BOOK_URL = "/my-account/address-book";
+	private static final String MY_ACCOUNT_BILLING_SHIPPING_URL = "/my-account/billing-shipping";
 	// Internal Redirects
 	private static final String REDIRECT_TO_ADDRESS_BOOK_PAGE = REDIRECT_PREFIX + MY_ACCOUNT_ADDRESS_BOOK_URL;
 	private static final String REDIRECT_TO_PAYMENT_INFO_PAGE = REDIRECT_PREFIX + "/my-account/payment-details";
@@ -113,6 +115,7 @@ public class AccountPageController extends AbstractSearchPageController
 	private static final String REDIRECT_TO_UPDATE_PROFILE = REDIRECT_PREFIX + "/my-account/update-profile";
 	private static final String REDIRECT_TO_PASSWORD_UPDATE_PAGE = REDIRECT_PREFIX + "/my-account/update-password";
 	private static final String REDIRECT_TO_ORDER_HISTORY_PAGE = REDIRECT_PREFIX + "/my-account/orders";
+
 
 	/**
 	 * We use this suffix pattern because of an issue with Spring 3.1 where a Uri value is incorrectly extracted if it
@@ -133,6 +136,22 @@ public class AccountPageController extends AbstractSearchPageController
 	private static final String PAYMENT_DETAILS_CMS_PAGE = "payment-details";
 	private static final String ORDER_HISTORY_CMS_PAGE = "orders";
 	private static final String ORDER_DETAIL_CMS_PAGE = "order";
+	private static final String BILLING_SHIPPING_CMS_PAGE = "billing-shipping";
+	private static final String BUSINESS_INFORMATION_CMS_PAGE = "business-information";
+
+	//Billing Shipping
+	private static final String BILLING_SHIPPING_ADDRESS_ERROR = "account.form.billingshipping.error";
+
+	//Order history
+	private static final String ORDER_DATE_OPTIONS_PARAMETER = "orderDateOptions";
+	private static final String ORDER_TYPE_OPTIONS_PARAMETER = "orderTypeOptions";
+	private static final String ORDER_DEFAULT_DATE_OPTION_PARAMETER = "orderDateDefaultOption";
+	private static final String LAST_THIRTY_DAYS = "last30Days";
+	private static final String SORT_BY_DATE = "byDate";
+	private static final String ASC = "Asc";
+	private static final String DESC = "Desc";
+	private static final String FIRST_DAY_OF_MONTH = "-01";
+	private static final String LAST_DAY_OF_MONTH = "-31";
 
 	private static final Logger LOG = Logger.getLogger(AccountPageController.class);
 
@@ -180,7 +199,22 @@ public class AccountPageController extends AbstractSearchPageController
 
 	@Resource(name = "addressDataUtil")
 	private AddressDataUtil addressDataUtil;
-	
+
+	@Resource(name = "amwayOrderFacade")
+	private AmwayApacOrderFacade amwayApacOrderFacade;
+
+	@Resource(name = "amwayApacAddressValidator")
+	private AmwayApacAddressValidator amwayApacAddressValidator;
+
+	@Resource(name = "orderHistoryTypeOptions")
+	private List<String> orderHistoryTypeOptions;
+
+
+	protected AmwayApacAddressValidator getAmwayApacAddressValidator()
+	{
+		return amwayApacAddressValidator;
+	}
+
 	protected PasswordValidator getPasswordValidator()
 	{
 		return passwordValidator;
@@ -247,8 +281,12 @@ public class AccountPageController extends AbstractSearchPageController
 		model.addAttribute("supportedCountries", getCountries());
 		populateModelRegionAndCountry(model, countryIsoCode);
 
-		final AddressForm addressForm = new AddressForm();
+		final AmwayApacAddressForm addressForm = new AmwayApacAddressForm();
 		model.addAttribute(ADDRESS_FORM_ATTR, addressForm);
+
+		//Add in region and country to populate edit form
+		model.addAttribute(COUNTRY_ATTR, getCmsSiteService().getCurrentSite().getDefaultCountry().getIsocode());
+
 		for (final AddressData addressData : userFacade.getAddressBook())
 		{
 			if (addressData.getId() != null && addressData.getId().equals(addressCode)
@@ -256,6 +294,12 @@ public class AccountPageController extends AbstractSearchPageController
 			{
 				model.addAttribute(ADDRESS_DATA_ATTR, addressData);
 				addressDataUtil.convert(addressData, addressForm);
+
+				//Temporary put like this, later will override the converter
+				addressForm.setLine3(addressData.getLine3());
+				addressForm.setEmail(addressData.getEmail());
+
+				addressForm.setDefaultAddress(addressData.isDefaultAddress());
 				break;
 			}
 		}
@@ -270,13 +314,10 @@ public class AccountPageController extends AbstractSearchPageController
 
 	@RequestMapping(method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String account(final Model model, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
+	public String account(final Model model) throws CMSItemNotFoundException
 	{
-		if (ResponsiveUtils.isResponsive())
-		{
-			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER, "system.error.page.not.found", null);
-			return REDIRECT_PREFIX + "/";
-		}
+		model.addAttribute(ControllerConstants.ModelParameters.NUMBER_OF_ORDERS, amwayApacOrderFacade.getCustomerOrderCounts());
+
 		storeCmsPageInModel(model, getContentPageForLabelOrId(ACCOUNT_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ACCOUNT_CMS_PAGE));
 		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(null));
@@ -284,17 +325,83 @@ public class AccountPageController extends AbstractSearchPageController
 		return getViewForPage(model);
 	}
 
-	@RequestMapping(value = "/orders", method = RequestMethod.GET)
+	@RequestMapping(value = "/billing-shipping", method = RequestMethod.GET)
+	@RequireHardLogIn
+	public String billingShipping(final Model model) throws CMSItemNotFoundException
+	{
+		//Get address
+		final List<AddressData> listAddressData = userFacade.getAddressBook();
+		model.addAttribute(ADDRESS_DATA_ATTR, listAddressData);
+
+		//Get customer information and credit card payment info
+		model.addAttribute(ControllerConstants.ModelParameters.CUSTOMERDATA_ATTR, customerFacade.getCurrentCustomer());
+		model.addAttribute(ControllerConstants.ModelParameters.PAYMENTINFO_ATTR, userFacade.getCCPaymentInfos(true));
+
+		//Empty form for add new alternate address
+		model.addAttribute(ADDRESS_FORM_ATTR, new AmwayApacAddressForm());
+
+		//Get supported Countries, title codes when filling up new form
+		model.addAttribute(ControllerConstants.ModelParameters.SUPPORTEDCOUNTRIES_ATTR, getCountries());
+		model.addAttribute(TITLE_DATA_ATTR, userFacade.getTitles());
+
+		//Add in region and country for new form
+		final String countryIsoCode = getCmsSiteService().getCurrentSite().getDefaultCountry().getIsocode();
+		model.addAttribute(COUNTRY_ATTR, countryIsoCode);
+
+		storeCmsPageInModel(model, getContentPageForLabelOrId(BILLING_SHIPPING_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(BILLING_SHIPPING_CMS_PAGE));
+		model.addAttribute(BREADCRUMBS_ATTR,
+				accountBreadcrumbBuilder.getBreadcrumbs(ControllerConstants.GeneralConstants.BILLING_SHIPPING_PAGE_BREADCRUMB_KEY));
+		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+		return getViewForPage(model);
+	}
+
+	@RequestMapping(value = "/business-information", method = RequestMethod.GET)
+	@RequireHardLogIn
+	public String businessInformation(final Model model, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
+	{
+		storeCmsPageInModel(model, getContentPageForLabelOrId(BUSINESS_INFORMATION_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(BUSINESS_INFORMATION_CMS_PAGE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder
+				.getBreadcrumbs(ControllerConstants.GeneralConstants.BUSINESS_INFORMATION_PAGE_BREADCRUMB_KEY));
+		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+		return getViewForPage(model);
+	}
+
+	@RequestMapping(value = "/orders", method =
+	{ RequestMethod.GET, RequestMethod.POST })
 	@RequireHardLogIn
 	public String orders(@RequestParam(value = "page", defaultValue = "0") final int page,
 			@RequestParam(value = "show", defaultValue = "Page") final ShowMode showMode,
-			@RequestParam(value = "sort", required = false) final String sortCode, final Model model)
-			throws CMSItemNotFoundException
+			@RequestParam(value = "sort", required = false) final String sortCode, final Model model,
+			@RequestParam(value = "filterBy", required = false, defaultValue = "false") final Boolean filterBy,
+			@RequestParam(value = "searchBy", required = false, defaultValue = "false") final Boolean searchBy,
+			@ModelAttribute("searchForm") final AmwayApacOrderHistorySearchForm searchForm,
+			@ModelAttribute("filterForm") final AmwayApacOrderHistoryFilterForm filterForm) throws CMSItemNotFoundException
 	{
 		// Handle paged search results
-		final PageableData pageableData = createPageableData(page, 5, sortCode, showMode);
-		final SearchPageData<OrderHistoryData> searchPageData = orderFacade.getPagedOrderHistoryForStatuses(pageableData);
+		final PageableData pageableData = createPageableData(page, 5, SORT_BY_DATE + DESC, showMode);
+
+		SearchPageData<OrderHistoryData> searchPageData = new SearchPageData<OrderHistoryData>();
+		if (filterBy)
+		{
+			searchPageData = amwayApacOrderFacade.getPagedOrderHistoryByFilterAndSearch(pageableData, filterForm.getDate(),
+					filterForm.getType());
+		}
+		else
+		{
+			searchPageData = orderFacade.getPagedOrderHistoryForStatuses(pageableData);
+		}
+
 		populateModel(model, searchPageData, showMode);
+
+		model.addAttribute("personalOrder", searchPageData);
+		model.addAttribute("customerOrder", searchPageData);
+
+		//Filter
+		model.addAttribute(ORDER_DEFAULT_DATE_OPTION_PARAMETER, LAST_THIRTY_DAYS);
+		model.addAttribute(ORDER_DATE_OPTIONS_PARAMETER, amwayApacOrderFacade.getOrderHistoryDateOptions());
+		model.addAttribute(ORDER_TYPE_OPTIONS_PARAMETER, orderHistoryTypeOptions);
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(ORDER_HISTORY_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ORDER_HISTORY_CMS_PAGE));
@@ -313,12 +420,6 @@ public class AccountPageController extends AbstractSearchPageController
 			final OrderData orderDetails = orderFacade.getOrderDetailsForCode(orderCode);
 			model.addAttribute("orderData", orderDetails);
 
-			final List<Breadcrumb> breadcrumbs = accountBreadcrumbBuilder.getBreadcrumbs(null);
-			breadcrumbs.add(new Breadcrumb("/my-account/orders", getMessageSource().getMessage("text.account.orderHistory", null,
-					getI18nService().getCurrentLocale()), null));
-			breadcrumbs.add(new Breadcrumb("#", getMessageSource().getMessage("text.account.order.orderBreadcrumb", new Object[]
-			{ orderDetails.getCode() }, "Order {0}", getI18nService().getCurrentLocale()), null));
-			model.addAttribute(BREADCRUMBS_ATTR, breadcrumbs);
 
 		}
 		catch (final UnknownIdentifierException e)
@@ -327,19 +428,18 @@ public class AccountPageController extends AbstractSearchPageController
 			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER, "system.error.page.not.found", null);
 			return REDIRECT_TO_ORDER_HISTORY_PAGE;
 		}
-		storeCmsPageInModel(model, getContentPageForLabelOrId(ORDER_DETAIL_CMS_PAGE));
-		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
-		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ORDER_DETAIL_CMS_PAGE));
-		return getViewForPage(model);
+
+		return ControllerConstants.Views.Fragments.Account.orderDetailsDetails;
 	}
 
-	@RequestMapping(value = "/order/" + ORDER_CODE_PATH_VARIABLE_PATTERN + "/getReadOnlyProductVariantMatrix", method = RequestMethod.GET)
+	@RequestMapping(value = "/order/" + ORDER_CODE_PATH_VARIABLE_PATTERN
+			+ "/getReadOnlyProductVariantMatrix", method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String getProductVariantMatrixForResponsive(@PathVariable("orderCode") final String orderCode,
 			@RequestParam("productCode") final String productCode, final Model model)
 	{
 		final OrderData orderData = orderFacade.getOrderDetailsForCodeWithoutUser(orderCode);
-		
+
 		final Map<String, ReadOnlyOrderGridData> readOnlyMultiDMap = orderGridFormFacade.getReadOnlyOrderGridForProductInOrder(
 				productCode, Arrays.asList(ProductOption.BASIC, ProductOption.CATEGORIES), orderData);
 		model.addAttribute("readOnlyMultiDMap", readOnlyMultiDMap);
@@ -546,8 +646,8 @@ public class AccountPageController extends AbstractSearchPageController
 
 	@RequestMapping(value = "/update-password", method = RequestMethod.POST)
 	@RequireHardLogIn
-	public String updatePassword(final UpdatePasswordForm updatePasswordForm, final BindingResult bindingResult,
-			final Model model, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+	public String updatePassword(final UpdatePasswordForm updatePasswordForm, final BindingResult bindingResult, final Model model,
+			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		getPasswordValidator().validate(updatePasswordForm, bindingResult);
 		if (!bindingResult.hasErrors())
@@ -615,10 +715,11 @@ public class AccountPageController extends AbstractSearchPageController
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ADD_EDIT_ADDRESS_CMS_PAGE));
 
 		final List<Breadcrumb> breadcrumbs = accountBreadcrumbBuilder.getBreadcrumbs(null);
-		breadcrumbs.add(new Breadcrumb(MY_ACCOUNT_ADDRESS_BOOK_URL, getMessageSource().getMessage(TEXT_ACCOUNT_ADDRESS_BOOK, null,
-				getI18nService().getCurrentLocale()), null));
-		breadcrumbs.add(new Breadcrumb("#", getMessageSource().getMessage("text.account.addressBook.addEditAddress", null,
-				getI18nService().getCurrentLocale()), null));
+		breadcrumbs.add(new Breadcrumb(MY_ACCOUNT_ADDRESS_BOOK_URL,
+				getMessageSource().getMessage(TEXT_ACCOUNT_ADDRESS_BOOK, null, getI18nService().getCurrentLocale()), null));
+		breadcrumbs.add(new Breadcrumb("#",
+				getMessageSource().getMessage("text.account.addressBook.addEditAddress", null, getI18nService().getCurrentLocale()),
+				null));
 		model.addAttribute(BREADCRUMBS_ATTR, breadcrumbs);
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 		return getViewForPage(model);
@@ -636,20 +737,23 @@ public class AccountPageController extends AbstractSearchPageController
 
 	@RequestMapping(value = "/add-address", method = RequestMethod.POST)
 	@RequireHardLogIn
-	public String addAddress(final AddressForm addressForm, final BindingResult bindingResult, final Model model,
+	public String addAddress(final AmwayApacAddressForm addressForm, final BindingResult bindingResult, final Model model,
 			final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
-		getAddressValidator().validate(addressForm, bindingResult);
+		getAmwayApacAddressValidator().validate(addressForm, bindingResult);
 		if (bindingResult.hasErrors())
 		{
-			GlobalMessages.addErrorMessage(model, FORM_GLOBAL_ERROR);
-			storeCmsPageInModel(model, getContentPageForLabelOrId(ADD_EDIT_ADDRESS_CMS_PAGE));
-			setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ADD_EDIT_ADDRESS_CMS_PAGE));
-			setUpAddressFormAfterError(addressForm, model);
-			return getViewForPage(model);
+			GlobalMessages.addErrorMessage(model, BILLING_SHIPPING_ADDRESS_ERROR);
+			//			final AddressData addressData = addressDataUtil.convertToAddressData(addressForm);
+			//			model.addAttribute(COUNTRY_ATTR, getCmsSiteService().getCurrentSite().getDefaultCountry().getIsocode());
+			//			model.addAttribute(ADDRESS_DATA_ATTR, addressData);
+			//			model.addAttribute(ADDRESS_FORM_ATTR, addressForm);
+
+			return ControllerConstants.Views.Fragments.Account.ShippingAddressDetailError;
 		}
 
 		final AddressData newAddress = addressDataUtil.convertToVisibleAddressData(addressForm);
+		newAddress.setLine3(addressForm.getLine3());
 
 		if (userFacade.isAddressBookEmpty())
 		{
@@ -658,24 +762,24 @@ public class AccountPageController extends AbstractSearchPageController
 		else
 		{
 			newAddress.setDefaultAddress(addressForm.getDefaultAddress() != null && addressForm.getDefaultAddress().booleanValue());
-		}		
-		
-		final AddressVerificationResult<AddressVerificationDecision> verificationResult = getAddressVerificationFacade()
-				.verifyAddressData(newAddress);
-		final boolean addressRequiresReview = getAddressVerificationResultHandler().handleResult(verificationResult, newAddress,
-				model, redirectModel, bindingResult, getAddressVerificationFacade().isCustomerAllowedToIgnoreAddressSuggestions(),
-				"checkout.multi.address.added");
+		}
+
+		//		final AddressVerificationResult<AddressVerificationDecision> verificationResult = getAddressVerificationFacade()
+		//				.verifyAddressData(newAddress);
+		//		final boolean addressRequiresReview = getAddressVerificationResultHandler().handleResult(verificationResult, newAddress,
+		//				model, redirectModel, bindingResult, getAddressVerificationFacade().isCustomerAllowedToIgnoreAddressSuggestions(),
+		//				"checkout.multi.address.added");
 
 		populateModelRegionAndCountry(model, addressForm.getCountryIso());
 		model.addAttribute("edit", Boolean.TRUE);
 		model.addAttribute(IS_DEFAULT_ADDRESS_ATTR, Boolean.valueOf(isDefaultAddress(addressForm.getAddressId())));
 
-		if (addressRequiresReview)
-		{
-			storeCmsPageInModel(model, getContentPageForLabelOrId(ADD_EDIT_ADDRESS_CMS_PAGE));
-			setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ADD_EDIT_ADDRESS_CMS_PAGE));
-			return getViewForPage(model);
-		}
+		//		if (addressRequiresReview)
+		//		{
+		//			storeCmsPageInModel(model, getContentPageForLabelOrId(BILLING_SHIPPING_CMS_PAGE));
+		//			setUpMetaDataForContentPage(model, getContentPageForLabelOrId(BILLING_SHIPPING_CMS_PAGE));
+		//			return getViewForPage(model);
+		//		}
 
 		userFacade.addAddress(newAddress);
 
@@ -683,7 +787,12 @@ public class AccountPageController extends AbstractSearchPageController
 		GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.CONF_MESSAGES_HOLDER, "account.confirmation.address.added",
 				null);
 
-		return REDIRECT_TO_EDIT_ADDRESS_PAGE + newAddress.getId();
+		//Get address and display list of new & existing address
+		final List<AddressData> listAddressData = userFacade.getAddressBook();
+		model.addAttribute(ADDRESS_DATA_ATTR, listAddressData);
+		return ControllerConstants.Views.Fragments.Account.ShippingAddressBody;
+
+		//return REDIRECT_TO_EDIT_ADDRESS_PAGE + newAddress.getId();
 	}
 
 	protected void setUpAddressFormAfterError(final AddressForm addressForm, final Model model)
@@ -734,14 +843,15 @@ public class AccountPageController extends AbstractSearchPageController
 			}
 		}
 
-		storeCmsPageInModel(model, getContentPageForLabelOrId(ADD_EDIT_ADDRESS_CMS_PAGE));
-		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ADD_EDIT_ADDRESS_CMS_PAGE));
+		storeCmsPageInModel(model, getContentPageForLabelOrId(BILLING_SHIPPING_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(BILLING_SHIPPING_CMS_PAGE));
 
 		final List<Breadcrumb> breadcrumbs = accountBreadcrumbBuilder.getBreadcrumbs(null);
-		breadcrumbs.add(new Breadcrumb(MY_ACCOUNT_ADDRESS_BOOK_URL, getMessageSource().getMessage(TEXT_ACCOUNT_ADDRESS_BOOK, null,
-				getI18nService().getCurrentLocale()), null));
-		breadcrumbs.add(new Breadcrumb("#", getMessageSource().getMessage("text.account.addressBook.addEditAddress", null,
-				getI18nService().getCurrentLocale()), null));
+		breadcrumbs.add(new Breadcrumb(MY_ACCOUNT_BILLING_SHIPPING_URL,
+				getMessageSource().getMessage(TEXT_ACCOUNT_ADDRESS_BOOK, null, getI18nService().getCurrentLocale()), null));
+		breadcrumbs.add(new Breadcrumb("#",
+				getMessageSource().getMessage("text.account.addressBook.addEditAddress", null, getI18nService().getCurrentLocale()),
+				null));
 		model.addAttribute(BREADCRUMBS_ATTR, breadcrumbs);
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 		model.addAttribute("edit", Boolean.TRUE);
@@ -763,52 +873,93 @@ public class AccountPageController extends AbstractSearchPageController
 
 	@RequestMapping(value = "/edit-address/" + ADDRESS_CODE_PATH_VARIABLE_PATTERN, method = RequestMethod.POST)
 	@RequireHardLogIn
-	public String editAddress(final AddressForm addressForm, final BindingResult bindingResult, final Model model,
-			final RedirectAttributes redirectModel) throws CMSItemNotFoundException
+	public String editAddress(final AmwayApacAddressForm addressForm,
+			@RequestParam(value = "primaryAddress", required = false, defaultValue = "false") final Boolean primaryAddress,
+			final BindingResult bindingResult, final Model model, final RedirectAttributes redirectModel)
+					throws CMSItemNotFoundException
 	{
-		getAddressValidator().validate(addressForm, bindingResult);
+		getAmwayApacAddressValidator().validate(addressForm, bindingResult);
 		if (bindingResult.hasErrors())
 		{
-			GlobalMessages.addErrorMessage(model, FORM_GLOBAL_ERROR);
-			storeCmsPageInModel(model, getContentPageForLabelOrId(ADD_EDIT_ADDRESS_CMS_PAGE));
-			setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ADD_EDIT_ADDRESS_CMS_PAGE));
-			setUpAddressFormAfterError(addressForm, model);
-			return getViewForPage(model);
+			GlobalMessages.addErrorMessage(model, BILLING_SHIPPING_ADDRESS_ERROR);
+			//			final AddressData addressData = addressDataUtil.convertToAddressData(addressForm);
+			//			model.addAttribute(COUNTRY_ATTR, getCmsSiteService().getCurrentSite().getDefaultCountry().getIsocode());
+			//			model.addAttribute(ADDRESS_DATA_ATTR, addressData);
+			//			model.addAttribute(ADDRESS_FORM_ATTR, addressForm);
+
+			return ControllerConstants.Views.Fragments.Account.ShippingAddressDetailError;
 		}
 
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
 		final AddressData newAddress = addressDataUtil.convertToVisibleAddressData(addressForm);
 
-		if (Boolean.TRUE.equals(addressForm.getDefaultAddress()) || userFacade.getAddressBook().size() <= 1)
+		if (Boolean.TRUE.equals(addressForm.getDefaultAddress()) || userFacade.getAddressBook().size() <= 1
+				|| Boolean.TRUE.equals(primaryAddress))
 		{
 			newAddress.setDefaultAddress(true);
 		}
 
-		final AddressVerificationResult<AddressVerificationDecision> verificationResult = getAddressVerificationFacade()
-				.verifyAddressData(newAddress);
-		final boolean addressRequiresReview = getAddressVerificationResultHandler().handleResult(verificationResult, newAddress,
-				model, redirectModel, bindingResult, getAddressVerificationFacade().isCustomerAllowedToIgnoreAddressSuggestions(),
-				"checkout.multi.address.updated");
+		//set email
+		if (!StringUtils.isEmpty(addressForm.getEmail()))
+		{
+			newAddress.setEmail(addressForm.getEmail());
+		}
+
+		//set line 3
+		if (!StringUtils.isEmpty(addressForm.getLine3()))
+		{
+			newAddress.setLine3(addressForm.getLine3());
+		}
+
+		//		final AddressVerificationResult<AddressVerificationDecision> verificationResult = getAddressVerificationFacade()
+		//				.verifyAddressData(newAddress);
+		//		final boolean addressRequiresReview = getAddressVerificationResultHandler().handleResult(verificationResult, newAddress,
+		//				model, redirectModel, bindingResult, getAddressVerificationFacade().isCustomerAllowedToIgnoreAddressSuggestions(),
+		//				"checkout.multi.address.updated");
 
 		model.addAttribute(REGIONS_ATTR, getI18NFacade().getRegionsForCountryIso(addressForm.getCountryIso()));
 		model.addAttribute(COUNTRY_ATTR, addressForm.getCountryIso());
 		model.addAttribute("edit", Boolean.TRUE);
 		model.addAttribute(IS_DEFAULT_ADDRESS_ATTR, Boolean.valueOf(isDefaultAddress(addressForm.getAddressId())));
 
-		if (addressRequiresReview)
-		{
-			storeCmsPageInModel(model, getContentPageForLabelOrId(ADD_EDIT_ADDRESS_CMS_PAGE));
-			setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ADD_EDIT_ADDRESS_CMS_PAGE));
-			return getViewForPage(model);
-		}
+		//		if (addressRequiresReview)
+		//		{
+		//			storeCmsPageInModel(model, getContentPageForLabelOrId(ADD_EDIT_ADDRESS_CMS_PAGE));
+		//			setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ADD_EDIT_ADDRESS_CMS_PAGE));
+		//			return getViewForPage(model);
+		//		}
 
 		userFacade.editAddress(newAddress);
 
 		GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.CONF_MESSAGES_HOLDER, "account.confirmation.address.updated",
 				null);
-		return REDIRECT_TO_EDIT_ADDRESS_PAGE + newAddress.getId();
+
+		//Check if set as primary checkbox is being ticked && Primary address being edit should only load the primary address detail
+		if (BooleanUtils.isTrue(addressForm.getDefaultAddress()) && Boolean.FALSE.equals(primaryAddress))
+		{
+			final List<AddressData> listAddressData = userFacade.getAddressBook();
+			model.addAttribute(ADDRESS_DATA_ATTR, listAddressData);
+			return ControllerConstants.Views.Fragments.Account.ShippingAddressBody;
+		}
+		else
+		{
+			//Return new address data back to page
+			for (final AddressData addressData : userFacade.getAddressBook())
+			{
+				if (addressData.getId() != null && addressData.getId().equals(newAddress.getId()))
+				{
+					model.addAttribute(ADDRESS_DATA_ATTR, addressData);
+					break;
+				}
+			}
+
+			return ControllerConstants.Views.Fragments.Account.ShippingAddressDetail;
+		}
+
+
 	}
+
 
 	@RequestMapping(value = "/select-suggested-address", method = RequestMethod.POST)
 	public String doSelectSuggestedAddress(final AddressForm addressForm, final RedirectAttributes redirectModel)
@@ -872,6 +1023,7 @@ public class AccountPageController extends AbstractSearchPageController
 	{
 		model.addAttribute("customerData", customerFacade.getCurrentCustomer());
 		model.addAttribute("paymentInfoData", userFacade.getCCPaymentInfos(true));
+
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PAYMENT_DETAILS_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ADD_EDIT_ADDRESS_CMS_PAGE));
 		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs("text.account.paymentDetails"));

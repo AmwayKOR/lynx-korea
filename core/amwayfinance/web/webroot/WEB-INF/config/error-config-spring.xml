@@ -29,11 +29,6 @@
 		parent="abstractRestHandlerExceptionResolver">
 		<property name="propertySpecificKey" value="amwayfinance"/>
 		<property name="configurationService" ref="configurationService"/>
-		<property name="statusCodeMappings">
-		<map>
-			<entry key="ModelNotFoundException" value="404" />
-		</map>
-		</property>
 	</bean>
 
 

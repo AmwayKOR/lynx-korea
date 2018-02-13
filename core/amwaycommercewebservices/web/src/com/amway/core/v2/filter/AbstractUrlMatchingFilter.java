@@ -33,6 +33,16 @@ public abstract class AbstractUrlMatchingFilter extends OncePerRequestFilter
 		return false;
 	}
 
+	protected String getBaseSiteValue(final HttpServletRequest request, final String regexp)
+	{
+		final Matcher matcher = getMatcher(request, regexp);
+		if (matcher.find())
+		{
+			return matcher.group().substring(1);
+		}
+		return null;
+	}
+
 	protected String getValue(final HttpServletRequest request, final String regexp)
 	{
 		final Matcher matcher = getMatcher(request, regexp);

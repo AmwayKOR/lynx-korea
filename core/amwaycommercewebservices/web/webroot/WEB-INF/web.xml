@@ -248,6 +248,11 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>WEB-INF/amwaycommercewebservices-web-spring.xml</param-value>
 	</context-param>
+	
+	<context-param>
+		<param-name>contextInitializerClasses</param-name>
+		<param-value>de.hybris.platform.webservicescommons.initializer.HybrisPropertiesWebApplicationContextInitializer</param-value>
+	</context-param>
 
 	<listener>
 		<listener-class>de.hybris.platform.spring.HybrisContextLoaderListener</listener-class>

@@ -7,6 +7,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 /**
  * <p>Java class for addressObjectService complex type.
@@ -73,6 +75,7 @@ import javax.xml.bind.annotation.XmlType;
     "tzOffSet",
     "warehouseCd"
 })
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class AddressObjectService
     extends Contact
 {

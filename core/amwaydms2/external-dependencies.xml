@@ -1,0 +1,78 @@
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>de.hybris.platform</groupId>
+	<artifactId>amwaydms2</artifactId>
+	<version>6.4.0.0</version>
+
+	<packaging>jar</packaging>
+
+	<repositories>
+		<repository>
+			<id>amway-public</id>
+			<name>Amway Public Repository</name>
+			<url>http://nexus.intranet.local:8080/content/groups/public/
+			</url>
+		</repository>
+		<repository>
+			<id>amway-third-party</id>
+			<name>Amway 3rd Party Repository</name>
+			<url>http://nexus.intranet.local:8080/content/repositories/thirdparty/
+			</url>
+		</repository>
+	</repositories>
+
+	<dependencies>
+		<dependency>
+			<groupId>io.swagger</groupId>
+			<artifactId>swagger-annotations</artifactId>
+			<version>${swagger-annotations-version}</version>
+		</dependency>
+
+
+		<!-- HTTP client: jersey-client -->
+
+		<dependency>
+			<groupId>com.sun.jersey.contribs</groupId>
+			<artifactId>jersey-multipart</artifactId>
+			<version>${jersey-version}</version>
+		</dependency>
+
+		<!-- JSON processing: jackson -->
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-joda</artifactId>
+			<version>2.1.5</version>
+		</dependency>
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>${jodatime-version}</version>
+		</dependency>
+
+		<!-- Base64 encoding that works in both JVM and Android -->
+		<dependency>
+			<groupId>com.brsanthu</groupId>
+			<artifactId>migbase64</artifactId>
+			<version>2.2</version>
+		</dependency>
+
+	</dependencies>
+	<properties>
+		<swagger-annotations-version>1.5.4</swagger-annotations-version>
+		<jersey-version>1.18</jersey-version>
+		<jodatime-version>2.3</jodatime-version>
+		<maven-plugin-version>1.0.0</maven-plugin-version>
+	</properties>
+</project>

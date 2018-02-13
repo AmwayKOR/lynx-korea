@@ -8,7 +8,6 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-<product:addToCartTitle/>
 <div id="quickViewTitle" class="quickView-header display-none"><spring:theme code="popup.quick.view.select"/></div>
 
 <c:choose>

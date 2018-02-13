@@ -17,7 +17,6 @@ import de.hybris.platform.cms2.servicelayer.services.CMSComponentService;
 import de.hybris.platform.commercefacades.order.CartFacade;
 import de.hybris.platform.commercefacades.order.data.CartData;
 import de.hybris.platform.commercefacades.product.data.PriceData;
-import com.amway.apac.storefront.controllers.ControllerConstants;
 
 import java.util.Collections;
 import java.util.List;
@@ -30,6 +29,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.amway.apac.storefront.controllers.ControllerConstants;
 
 
 /**
@@ -104,4 +105,5 @@ public class MiniCartController extends AbstractController
 
 		return ControllerConstants.Views.Fragments.Cart.CartPopup;
 	}
+
 }

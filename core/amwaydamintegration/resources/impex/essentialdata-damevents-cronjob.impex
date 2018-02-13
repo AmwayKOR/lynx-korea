@@ -1,0 +1,11 @@
+# Allow to use config properties
+UPDATE GenericItem[processor = de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor]; pk[unique = true]
+$nodeGroup = $config-amway.dam.job.nodeGroup
+$cronExpression = $config-amway.dam.job.cron.expression
+
+INSERT_UPDATE CronJob; code[unique = true]             ; job(code)                   ; sessionLanguage(isocode); nodeGroup
+                     ; amwayDamEventQueueProcessCronJob; amwayDamEventQueueProcessJob; en                      ; $nodeGroup
+
+INSERT_UPDATE Trigger; cronJob(code)[unique = true]    ; cronExpression
+#% afterEach: impex.getLastImportedItem().setActivationTime(new Date());
+                     ; amwayDamEventQueueProcessCronJob; $cronExpression

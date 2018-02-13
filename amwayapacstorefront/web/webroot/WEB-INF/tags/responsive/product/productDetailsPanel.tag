@@ -3,41 +3,76 @@
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="format" tagdir="/WEB-INF/tags/shared/format"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
-<div class="product-details page-title">
-	<ycommerce:testId code="productDetails_productNamePrice_label_${product.code}">
-		<div class="name">${fn:escapeXml(product.name)}<span class="sku">ID</span><span class="code">${fn:escapeXml(product.code)}</span></div>
-	</ycommerce:testId>
-	<product:productReviewSummary product="${product}" showLinks="true"/>
-</div>
 <div class="row">
-	<div class="col-xs-10 col-xs-push-1 col-sm-6 col-sm-push-0 col-lg-4">
-		<product:productImagePanel galleryImages="${galleryImages}" />
-	</div>
-	<div class="clearfix hidden-sm hidden-md hidden-lg"></div>
-	<div class="col-sm-6 col-lg-8">
-		<div class="product-main-info">
-			<div class="row">
-				<div class="col-lg-6">
-					<div class="product-details">
-						<product:productPromotionSection product="${product}"/>
-						<ycommerce:testId code="productDetails_productNamePrice_label_${product.code}">
-							<product:productPricePanel product="${product}" />
-						</ycommerce:testId>
-						<div class="description">${ycommerce:sanitizeHTML(product.summary)}</div>
-					</div>
-				</div>
-
-				<div class="col-sm-12 col-md-9 col-lg-6">
-					<cms:pageSlot position="VariantSelector" var="component" element="div" class="page-details-variants-select">
-						<cms:component component="${component}" element="div" class="yComponentWrapper page-details-variants-select-component"/>
-					</cms:pageSlot>
-					<cms:pageSlot position="AddToCart" var="component" element="div" class="page-details-variants-select">
-						<cms:component component="${component}" element="div" class="yComponentWrapper page-details-add-to-cart-component"/>
-					</cms:pageSlot>
+	<div class="title-product-replacement-container">
+		<div class="col-sm-12 col-md-12 pdp-info page-title-container">
+			<div class="product-details page-title">
+				<div class="name">${fn:escapeXml(product.name)}</div>
+				<div class="item-code">
+					<span>
+						<spring:theme code="product.item.number.label" />
+					</span>
+					<span class="code">${fn:escapeXml(product.code)}</span>
 				</div>
 			</div>
 		</div>
-
+	</div>
+	<div class="img-product">
+		<product:productImagePanel galleryImages="${galleryImages}" />
+		<div class="clearfix hidden-sm hidden-md hidden-lg print-hide"></div>
+		<div class="col-sm-12 col-md-6 pdp-info">
+			<div class="product-main-info">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="description">${product.summary}</div>
+						<cms:pageSlot position="ColorVariantSelector" var="component">
+							<cms:component component="${component}" />
+						</cms:pageSlot>
+						<hr class="description__line">
+						<product:productReviewSummary product="${product}" showLinks="true" />
+						<product:productPricePanel product="${product}" />
+					</div>
+					<div class="col-sm-12 col-md-12">
+						<div class="page-details-variants-select">
+							<div class="page-details-add-to-cart-component">
+								<div class="addtocart-component">
+									<div class="amway-theme qty-selector js-qty-selector control-group">
+										<cms:pageSlot position="VariantSelector" var="component">
+											<cms:component component="${component}" />
+										</cms:pageSlot>
+											<div class="row">
+												<div class="pull-left qty-selector-container">
+													<label class="control-label" for="pdpAddtoCartInput">
+														<spring:theme code="product.product.details.future.qty" />
+													</label>
+													<input type="text" maxlength="3" class="text-center js-qty-selector-input" size="1" value="1"
+														data-max="FORCE_IN_STOCK" data-min="1" name="pdpAddtoCartInput" id="pdpAddtoCartInput" />
+												</div>
+											</div>
+									</div>
+									<sec:authorize access="!hasAnyRole('ROLE_ANONYMOUS')">
+										<div class="stock-wrapper clearfix">
+											<product:productStockStatusDisplay product="${product}" />
+										</div>
+									</sec:authorize>
+									<div class="actions-wrapper">
+										<div class="actions">
+											<cms:pageSlot position="AddToCart" var="component">
+												<cms:component component="${component}" />
+											</cms:pageSlot>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>

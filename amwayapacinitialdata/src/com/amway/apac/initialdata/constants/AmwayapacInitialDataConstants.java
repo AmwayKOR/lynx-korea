@@ -19,6 +19,11 @@ public final class AmwayapacInitialDataConstants extends GeneratedAmwayapacIniti
 
 	private AmwayapacInitialDataConstants()
 	{
-		//empty
+		//
 	}
+
+	/**
+	 * Name of the content catalog for amway apac.
+	 */
+	public static final String AMWAY_APAC = "amwayapac";
 }

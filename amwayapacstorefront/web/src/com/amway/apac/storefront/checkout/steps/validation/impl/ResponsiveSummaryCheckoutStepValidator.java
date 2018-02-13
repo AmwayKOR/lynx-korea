@@ -27,19 +27,22 @@ public class ResponsiveSummaryCheckoutStepValidator extends AbstractCheckoutStep
 	public ValidationResults validateOnEnter(final RedirectAttributes redirectAttributes)
 	{
 		final ValidationResults cartResult = checkCartAndDelivery(redirectAttributes);
-		if (cartResult != null) {
+		if (cartResult != null)
+		{
 			return cartResult;
 		}
 
 		final ValidationResults paymentResult = checkPaymentMethodAndPickup(redirectAttributes);
-		if (paymentResult != null) {
+		if (paymentResult != null)
+		{
 			return paymentResult;
 		}
 
 		return ValidationResults.SUCCESS;
 	}
 
-	protected ValidationResults checkPaymentMethodAndPickup(RedirectAttributes redirectAttributes) {
+	protected ValidationResults checkPaymentMethodAndPickup(final RedirectAttributes redirectAttributes)
+	{
 		if (getCheckoutFlowFacade().hasNoPaymentInfo())
 		{
 			GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.INFO_MESSAGES_HOLDER,
@@ -61,7 +64,8 @@ public class ResponsiveSummaryCheckoutStepValidator extends AbstractCheckoutStep
 		return null;
 	}
 
-	protected ValidationResults checkCartAndDelivery(RedirectAttributes redirectAttributes) {
+	protected ValidationResults checkCartAndDelivery(final RedirectAttributes redirectAttributes)
+	{
 		if (!getCheckoutFlowFacade().hasValidCart())
 		{
 			LOGGER.info("Missing, empty or unsupported cart");
@@ -79,7 +83,7 @@ public class ResponsiveSummaryCheckoutStepValidator extends AbstractCheckoutStep
 		{
 			GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.INFO_MESSAGES_HOLDER,
 					"checkout.multi.deliveryMethod.notprovided");
-			return ValidationResults.REDIRECT_TO_DELIVERY_METHOD;
+			return ValidationResults.REDIRECT_TO_DELIVERY_ADDRESS;
 		}
 		return null;
 	}

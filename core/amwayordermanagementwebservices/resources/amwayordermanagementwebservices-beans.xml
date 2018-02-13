@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
+
+    <bean class="de.hybris.platform.ordermanagementwebservices.dto.returns.RefundMethodWsDTO">
+        <property name="mode" type="java.lang.String"/>
+        <property name="accountNumber" type="java.lang.String"/>
+        <property name="transactionId" type="java.lang.String"/>
+    </bean>
+
+    <bean class="de.hybris.platform.ordermanagementfacade.returns.data.RefundMethodData">
+        <property name="mode" type="java.lang.String"/>
+        <property name="accountNumber" type="java.lang.String"/>
+        <property name="transactionId" type="java.lang.String"/>
+    </bean>
+
+    <bean class="de.hybris.platform.ordermanagementwebservices.dto.returns.RefundInfoWsDTO">
+        <property name="requestedRefundMethod"
+                  type="de.hybris.platform.ordermanagementwebservices.dto.returns.RefundMethodWsDTO"/>
+        <property name="actualRefundMethod"
+                  type="de.hybris.platform.ordermanagementwebservices.dto.returns.RefundMethodWsDTO"/>
+        <property name="value" type="double"/>
+    </bean>
+
+    <bean class="de.hybris.platform.ordermanagementfacade.returns.data.RefundInfoData">
+        <property name="requestedRefundMethod"
+                  type="de.hybris.platform.ordermanagementfacade.returns.data.RefundMethodData"/>
+        <property name="actualRefundMethod"
+                  type="de.hybris.platform.ordermanagementfacade.returns.data.RefundMethodData"/>
+        <property name="value" type="double"/>
+    </bean>
+
+    <bean class="de.hybris.platform.ordermanagementfacade.returns.data.ReturnEntryData">
+        <property name="entryNumber" type="int"/>
+        <property name="saleableQuantity" type="int"/>
+        <property name="returnReason" type="java.lang.String"/>
+        <property name="serialNumbers" type="java.util.List&lt;java.lang.String>"/>
+        <property name="businessVolume" type="double"/>
+        <property name="pointValue" type="double"/>
+        <property name="priceWithTax" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
+        <property name="taxValues"
+                  type="java.util.List&lt;de.hybris.platform.commercefacades.order.data.TaxValueData>"/>
+    </bean>
+
+    <bean class="de.hybris.platform.ordermanagementwebservices.dto.returns.ReturnEntryWsDTO">
+        <property name="entryNumber" type="int"/>
+        <property name="saleableQuantity" type="int"/>
+        <property name="returnReason" type="java.lang.String"/>
+        <property name="serialNumbers" type="java.util.List&lt;java.lang.String>"/>
+        <property name="businessVolume" type="double"/>
+        <property name="pointValue" type="double"/>
+        <property name="priceWithTax" type="de.hybris.platform.commercewebservicescommons.dto.product.PriceWsDTO"/>
+        <property name="taxValues"
+                  type="java.util.List&lt;de.hybris.platform.commercewebservicescommons.dto.order.TaxValueWsDTO>"/>
+    </bean>
+
+    <!-- Returns -->
+    <bean class="de.hybris.platform.ordermanagementfacade.returns.data.ReturnRequestData">
+        <property name="date" type="java.util.Date"/>
+        <property name="returnAbo" type="com.amway.facades.data.AmwayAccountData"/>
+        <property name="businessVolume" type="double"/>
+        <property name="externalOrderCode" type="java.lang.String"/>
+        <property name="fullReturn" type="boolean"/>
+        <property name="invoiceInfo" type="java.util.List&lt;de.hybris.platform.commercefacades.order.data.InvoiceInfoData>"/>
+        <property name="invoiceRequired" type="boolean"/>
+        <property name="pointValue" type="double"/>
+        <property name="refundInfo"
+                  type="java.util.List&lt;de.hybris.platform.ordermanagementfacade.returns.data.RefundInfoData>"/>
+        <property name="refundStatus" type="java.lang.String"/>
+        <property name="returnBonusPeriod"
+                  type="com.amway.core.model.AmwayBonusPeriodData"/>
+        <property name="returnDate" type="java.util.Date"/>
+        <property name="returnPeriod"
+                  type="com.amway.core.model.AmwayOrderPeriodData"/>
+        <property name="returnValue" type="double"/>
+        <property name="shippingRequired" type="boolean"/>
+        <property name="shippingStatus" type="java.lang.String"/>
+        <property name="totalPriceWithTax" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
+        <property name="totalTaxValues"
+                  type="java.util.List&lt;de.hybris.platform.commercefacades.order.data.TaxValueData>"/>
+        <property name="returnType" type="java.lang.String"/>
+        <property name="refundMethod" type="java.lang.String"/>
+        <property name="replaceItems" type="boolean"/>
+    </bean>
+    <bean class="de.hybris.platform.ordermanagementwebservices.dto.returns.ReturnRequestWsDTO">
+        <property name="date" type="java.util.Date"/>
+        <property name="returnAbo" type="de.hybris.platform.commercewebservicescommons.dto.user.AmwayAccountWsDTO"/>
+        <property name="businessVolume" type="double"/>
+        <property name="externalOrderCode" type="java.lang.String"/>
+        <property name="fullReturn" type="boolean"/>
+        <property name="invoiceInfo" type="java.util.List&lt;de.hybris.platform.commercewebservicescommons.dto.order.InvoiceInfoWsDTO>"/>
+        <property name="invoiceRequired" type="boolean"/>
+        <property name="pointValue" type="double"/>
+        <property name="refundInfo"
+                  type="java.util.List&lt;de.hybris.platform.ordermanagementwebservices.dto.returns.RefundInfoWsDTO>"/>
+        <property name="refundStatus" type="java.lang.String"/>
+        <property name="returnBonusPeriod"
+                  type="de.hybris.platform.commercewebservicescommons.dto.order.AmwayBonusPeriodWsDTO"/>
+        <property name="returnDate" type="java.util.Date"/>
+        <property name="returnPeriod"
+                  type="de.hybris.platform.commercewebservicescommons.dto.order.AmwayOrderPeriodWsDTO"/>
+        <property name="returnValue" type="double"/>
+        <property name="shippingRequired" type="boolean"/>
+        <property name="shippingStatus" type="java.lang.String"/>
+        <property name="totalPriceWithTax" type="de.hybris.platform.commercewebservicescommons.dto.product.PriceWsDTO"/>
+        <property name="totalTaxValues"
+                  type="java.util.List&lt;de.hybris.platform.commercewebservicescommons.dto.order.TaxValueWsDTO>"/>
+    </bean>
+
+    <bean class="de.hybris.platform.ordermanagementwebservices.dto.order.ReturnOrderPageWsDto">
+        <property name="order" type="de.hybris.platform.ordermanagementwebservices.dto.returns.ReturnRequestWsDTO"/>
+        <property name="errors" type="de.hybris.platform.webservicescommons.dto.error.ErrorListWsDTO"/>
+    </bean>
+
+    <bean class="de.hybris.platform.ordermanagementwebservices.dto.order.PackagingInfoWsDTO">
+        <property name="width" type="java.lang.String"/>
+        <property name="height" type="java.lang.String"/>
+        <property name="length" type="java.lang.String"/>
+        <property name="grossWeight" type="java.lang.String"/>
+        <property name="insuredValue" type="java.lang.String"/>
+        <property name="dimensionUnit" type="java.lang.String"/>
+        <property name="weightUnit" type="java.lang.String"/>
+    </bean>
+</beans>

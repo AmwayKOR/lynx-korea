@@ -27,9 +27,6 @@
         <property name="amwayValue" type="com.amway.facades.order.data.AmwayValueData" />
 	</bean>
 	
-
-	
-	
 	<bean class="de.hybris.platform.commercefacades.product.data.PromotionData">
         <property name="name" type="java.lang.String"/>
 		<property name="promotionPrice" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
@@ -40,7 +37,6 @@
 		<property name="entry" type="de.hybris.platform.commercefacades.product.data.ProductData" />
 		<property name="configuredQty" type="java.lang.Double" />
 	</bean>
-
 
 	<bean class="de.hybris.platform.commercefacades.product.data.ProductData">
 		<property name="alias" type="String" />
@@ -76,7 +72,6 @@
 		<property name="userGroups" type="java.util.List&lt;String>"/>
         <property name="customerID" type="String"/>
 	</bean>
-
 
     <bean class="com.amway.facades.product.data.WishlistData">
         <property name="name" type="String" />
@@ -208,6 +203,7 @@
 		<property name="totalBVString" type="java.lang.String"/>
 		<property name="accountType" type="java.lang.String"/>
         <property name="parties" type="java.util.Set&lt;de.hybris.platform.commercefacades.user.data.CustomerData>"/>
+        <property name="status" type="java.lang.String"/>
     </bean>
 
     <bean class="com.amway.facades.data.AmwayAccountDataList">
@@ -229,6 +225,7 @@
         <property name="totalBV" type="java.lang.Double"/>
         <property name="primaryParty" type="de.hybris.platform.commercewebservicescommons.dto.user.CustomerWsDTO"/>
         <property name="parties" type="java.util.Set&lt;de.hybris.platform.commercewebservicescommons.dto.user.CustomerWsDTO>"/>
+        <property name="status" type="java.lang.String"/>
     </bean>
 
     <bean class="com.amway.facades.dto.AmwayAccountDataListWsDTO">
@@ -236,12 +233,6 @@
         <property name="accounts" type="java.util.List&lt;de.hybris.platform.commercewebservicescommons.dto.user.AmwayAccountWsDTO>"/>
     </bean>
 
-	<bean class="com.amway.facades.order.data.PaymentModeData" >
-		<property name="code" type="String"/>
-		<property name="name" type="String"/>
-		<property name="description" type="String"/>
-		<property name="active" type="boolean" />
-	</bean>
     <bean class="de.hybris.platform.commercefacades.order.data.AbstractOrderData">
         <property name="account" type="com.amway.facades.data.AmwayAccountData"/>
         <property name="savings" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
@@ -252,9 +243,8 @@
         <property name="totalTaxDiscount" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
         <property name="totalDiscountWithTax" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
         <property name="deliveryTax" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
-
+        <property name="paymentDetails" type="com.amway.facades.cart.data.PaymentDetailsData"/>
     </bean>
-
 
 	<bean class="com.amway.facades.order.data.ArCreditPaymentInfoData">
 		<description>POJO representation of ArCreditPaymentInfo Data.</description>
@@ -277,4 +267,48 @@
     <bean class="de.hybris.platform.commercewebservicescommons.dto.store.PointOfServiceListWsDTO">
         <property name="pointOfServices" type="java.util.List&lt;de.hybris.platform.commercewebservicescommons.dto.store.PointOfServiceWsDTO>"/>
     </bean>
+
+    <bean class="com.amway.facades.data.AmwayPointOfSaleReceiptData">
+		<property name="orderData" type="de.hybris.platform.commercefacades.order.data.OrderData"/>
+		<property name="pointOfServiceData" type="de.hybris.platform.commercefacades.storelocator.data.PointOfServiceData"/>
+		<property name="employeeData" type="de.hybris.platform.commercefacades.user.data.PrincipalData"/>
+		<property name="amwayAccountData" type="com.amway.facades.data.AmwayAccountData"/>
+        <property name="paymentData" type="com.amway.facades.cart.data.PaymentDetailsData"></property>
+    </bean>
+
+    <bean class="com.amway.facades.cart.data.PaymentDetailsData">
+        <property name="paymentInfos" type="java.util.List&lt;com.amway.core.cart.data.AmwayPaymentInfoData>"/>
+        <property name="totalPaidAmount" type="java.lang.Double"/>
+        <property name="balanceAmount" type="java.lang.Double"/>
+    </bean>
+
+    <bean class="com.amway.facades.data.CapturePaymentInfoData">
+        <property name="cashPaymentInfo" type="com.amway.core.cart.data.AmwayCashPaymentInfoData"/>
+        <property name="ccPaymentInfo" type="com.amway.core.cart.data.AmwayCCPaymentInfoData"/>
+        <property name="dcPaymentInfo" type="com.amway.core.cart.data.AmwayDCPaymentInfoData"/>
+    </bean>
+
+    <bean class="com.amway.facades.renewal.data.AmwayAutoRenewalRequestData">
+        <property name="country" type="String"/>
+        <property name="language" type="String" />
+        <property name="paymentAlias" type="String" />
+        <property name="registrationDate" type="String" />
+        <property name="address" type="com.amway.facades.renewal.data.AmwayRenewalAddressData" />
+        <property name="preference" type="String" />
+    </bean>
+
+    <bean class="com.amway.facades.renewal.data.AmwayRenewalAddressData">
+        <property name="line1" type="String" />
+        <property name="line2" type="String" />
+        <property name="city" type="String" />
+        <property name="state" type="String" />
+        <property name="country" type="String" />
+        <property name="postCode" type="String" />
+    </bean>
+
+    <bean class="com.amway.facades.renewal.data.AmwayAutoRenewalResponseData">
+        <property name="status" type="String" />
+        <property name="orderNumber" type="String" />
+    </bean>
+
 </beans>

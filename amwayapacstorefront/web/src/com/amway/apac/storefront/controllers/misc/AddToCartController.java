@@ -10,8 +10,11 @@
  */
 package com.amway.apac.storefront.controllers.misc;
 
+import static com.amway.apac.storefront.controllers.ControllerConstants.ModelParameters.QUANTITY_ATTR;
+
 import de.hybris.platform.acceleratorfacades.product.data.ProductWrapperData;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.AbstractController;
+import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.acceleratorstorefrontcommons.forms.AddToCartForm;
 import de.hybris.platform.acceleratorstorefrontcommons.forms.AddToCartOrderForm;
 import de.hybris.platform.acceleratorstorefrontcommons.forms.AddToEntryGroupForm;
@@ -25,19 +28,18 @@ import de.hybris.platform.commercefacades.product.ProductOption;
 import de.hybris.platform.commercefacades.product.data.ProductData;
 import de.hybris.platform.commerceservices.order.CommerceCartModificationException;
 import de.hybris.platform.util.Config;
-import com.amway.apac.storefront.controllers.ControllerConstants;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.BooleanUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.http.MediaType;
@@ -50,6 +52,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.amway.apac.storefront.controllers.ControllerConstants;
+
 
 /**
  * Controller for Add to Cart functionality which is not specific to a certain page.
@@ -57,7 +61,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class AddToCartController extends AbstractController
 {
-	private static final String QUANTITY_ATTR = "quantity";
 	private static final String TYPE_MISMATCH_ERROR_CODE = "typeMismatch";
 	private static final String ERROR_MSG_TYPE = "errorMsg";
 	private static final String QUANTITY_INVALID_BINDING_MESSAGE_KEY = "basket.error.quantity.invalid.binding";
@@ -74,9 +77,9 @@ public class AddToCartController extends AbstractController
 	@Resource(name = "groupCartModificationListPopulator")
 	private GroupCartModificationListPopulator groupCartModificationListPopulator;
 
-	@RequestMapping(value = "/cart/add", method = RequestMethod.POST, produces = "application/json")
-	public String addToCart(@RequestParam("productCodePost") final String code, final Model model,
-			@Valid final AddToCartForm form, final BindingResult bindingErrors)
+	@RequestMapping(value = "/cart/add", method = RequestMethod.POST)
+	public String addToCart(@RequestParam("productCodePost") final String code, final Model model, @Valid final AddToCartForm form,
+			final BindingResult bindingErrors)
 	{
 		if (bindingErrors.hasErrors())
 		{
@@ -87,7 +90,7 @@ public class AddToCartController extends AbstractController
 
 		if (qty <= 0)
 		{
-			model.addAttribute(ERROR_MSG_TYPE, "basket.error.quantity.invalid");
+			GlobalMessages.addErrorMessage(model, ControllerConstants.ErrorMessageKeys.AddToCart.INVALID_QUANTITY);
 			model.addAttribute(QUANTITY_ATTR, Long.valueOf(0L));
 		}
 		else
@@ -102,23 +105,22 @@ public class AddToCartController extends AbstractController
 
 				if (cartModification.getQuantityAdded() == 0L)
 				{
-					model.addAttribute(ERROR_MSG_TYPE, "basket.information.quantity.noItemsAdded." + cartModification.getStatusCode());
+					GlobalMessages.addErrorMessage(model,
+							"basket.information.quantity.noItemsAdded." + cartModification.getStatusCode());
 				}
 				else if (cartModification.getQuantityAdded() < qty)
 				{
-					model.addAttribute(ERROR_MSG_TYPE,
+					GlobalMessages.addErrorMessage(model,
 							"basket.information.quantity.reducedNumberOfItemsAdded." + cartModification.getStatusCode());
 				}
 			}
 			catch (final CommerceCartModificationException ex)
 			{
 				logDebugException(ex);
-				model.addAttribute(ERROR_MSG_TYPE, "basket.error.occurred");
+				GlobalMessages.addErrorMessage(model, ControllerConstants.ErrorMessageKeys.AddToCart.BASKET_ERROR);
 				model.addAttribute(QUANTITY_ATTR, Long.valueOf(0L));
 			}
 		}
-
-		model.addAttribute("product", productFacade.getProductForCodeAndOptions(code, Arrays.asList(ProductOption.BASIC)));
 
 		return ControllerConstants.Views.Fragments.Cart.AddToCartPopup;
 	}
@@ -129,11 +131,11 @@ public class AddToCartController extends AbstractController
 		{
 			if (isTypeMismatchError(error))
 			{
-				model.addAttribute(ERROR_MSG_TYPE, QUANTITY_INVALID_BINDING_MESSAGE_KEY);
+				GlobalMessages.addErrorMessage(model, QUANTITY_INVALID_BINDING_MESSAGE_KEY);
 			}
 			else
 			{
-				model.addAttribute(ERROR_MSG_TYPE, error.getDefaultMessage());
+				GlobalMessages.addErrorMessage(model, error.getDefaultMessage());
 			}
 		}
 		return ControllerConstants.Views.Fragments.Cart.AddToCartPopup;
@@ -144,30 +146,37 @@ public class AddToCartController extends AbstractController
 		return error.getCode().equals(TYPE_MISMATCH_ERROR_CODE);
 	}
 
-	@RequestMapping(value = "/cart/addGrid", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public final String addGridToCart(@RequestBody final AddToCartOrderForm form, final Model model)
+	@RequestMapping(value = "/cart/addGrid", method = RequestMethod.POST)
+	public final String addGridToCart(final AddToCartOrderForm form, final Model model)
 	{
-		final Set<String> multidErrorMsgs = new HashSet<String>();
-		final List<CartModificationData> modificationDataList = new ArrayList<CartModificationData>();
+		final List<CartModificationData> modificationDataList = new ArrayList<>();
 
-		for (final OrderEntryData cartEntry : form.getCartEntries())
+		final List<OrderEntryData> filteredEntries = filterUnselectedOrderEntries(form.getCartEntries());
+
+		if (CollectionUtils.isEmpty(filteredEntries))
 		{
-			if (!isValidProductEntry(cartEntry))
+			GlobalMessages.addErrorMessage(model, "shopping.list.grid.addtocart.none.selected");
+		}
+		else
+		{
+			for (final OrderEntryData cartEntry : filteredEntries)
 			{
-				LOG.error("Error processing entry");
-			}
-			else if (!isValidQuantity(cartEntry))
-			{
-				multidErrorMsgs.add("basket.error.quantity.invalid");
-			}
-			else
-			{
-				final String errorMsg = addEntryToCart(modificationDataList, cartEntry, true);
-				if (StringUtils.isNotEmpty(errorMsg))
+				if (!isValidProductEntry(cartEntry))
 				{
-					multidErrorMsgs.add(errorMsg);
+					LOG.error("Error processing entry");
 				}
-
+				else if (!isValidQuantity(cartEntry))
+				{
+					GlobalMessages.addErrorMessage(model, "basket.error.quantity.invalid");
+				}
+				else
+				{
+					final String errorMsg = addEntryToCart(modificationDataList, cartEntry, true);
+					if (StringUtils.isNotEmpty(errorMsg))
+					{
+						GlobalMessages.addErrorMessage(model, errorMsg);
+					}
+				}
 			}
 		}
 
@@ -178,15 +187,32 @@ public class AddToCartController extends AbstractController
 			model.addAttribute("modifications", modificationDataList);
 		}
 
-		if (CollectionUtils.isNotEmpty(multidErrorMsgs))
-		{
-			model.addAttribute("multidErrorMsgs", multidErrorMsgs);
-		}
-
 		model.addAttribute("numberShowing", Integer.valueOf(Config.getInt(SHOWN_PRODUCT_COUNT, 3)));
 
-
 		return ControllerConstants.Views.Fragments.Cart.AddToCartPopup;
+	}
+
+	/**
+	 * Filters out the entries which are not selected.
+	 *
+	 * @param cartEntries
+	 *           all entries
+	 * @return list containing only the selected entries, empty list if none is selected
+	 */
+	private List<OrderEntryData> filterUnselectedOrderEntries(final List<OrderEntryData> cartEntries)
+	{
+		final List<OrderEntryData> filteredEntries = new ArrayList<>();
+		if (CollectionUtils.isNotEmpty(cartEntries))
+		{
+			for (final OrderEntryData orderEntry : cartEntries)
+			{
+				if (BooleanUtils.isTrue(orderEntry.getSelected()))
+				{
+					filteredEntries.add(orderEntry);
+				}
+			}
+		}
+		return filteredEntries;
 	}
 
 	@RequestMapping(value = "/cart/addQuickOrder", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -300,7 +326,7 @@ public class AddToCartController extends AbstractController
 		try
 		{
 			final long qty = cartEntry.getQuantity().longValue();
-			final CartModificationData cartModificationData = cartFacade.addToCart(cartEntry.getProduct().getCode(), qty);
+			final CartModificationData cartModificationData = cartFacade.addToCart(cartEntry.getProductCode(), qty);
 			if (cartModificationData.getQuantityAdded() == 0L)
 			{
 				errorMsg = "basket.information.quantity.noItemsAdded." + cartModificationData.getStatusCode();
@@ -323,7 +349,7 @@ public class AddToCartController extends AbstractController
 
 	protected boolean isValidProductEntry(final OrderEntryData cartEntry)
 	{
-		return cartEntry.getProduct() != null && StringUtils.isNotBlank(cartEntry.getProduct().getCode());
+		return StringUtils.isNotBlank(cartEntry.getProductCode());
 	}
 
 	protected boolean isValidQuantity(final OrderEntryData cartEntry)

@@ -17,7 +17,10 @@
 		<requires-extension name="acceleratorcms"/>
 		<!-- <requires-extension name="solrserver"/> -->
 		<requires-extension name="amwaycore"/>
-
+		<requires-extension name="amwayapacserviceability"/>
+		<requires-extension name="amwayapacresourcecenter"/>
+		<requires-extension name="amwayapacdeliveryslot"/>
+		
 		<coremodule generated="true" manager="com.amway.apac.core.jalo.AmwayapacCoreManager" packageroot="com.amway.apac.core"/>
 
 		

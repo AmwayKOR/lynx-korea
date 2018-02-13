@@ -1,0 +1,683 @@
+
+#colorbox.bonus-payment-method-history {
+	#cboxClose {
+		color: @blue_1;
+		right: 30px;
+		outline: none;
+		&:before {
+			content: 'close';
+			margin-right: 10px;
+			font-size: 20px;
+			font-weight: 600;
+			vertical-align: middle;
+			text-transform: uppercase;
+		}
+		>span {
+			vertical-align: middle;
+			font-size: 35px;
+			font-weight: 100;
+		}
+	}
+	#cboxTitle {
+		color: @blue_1;
+		padding-top: 80px;
+		.headline {
+			border-top: 1px solid #f2f2f2;
+			padding: 30px 0 10px;
+			text-transform: uppercase;
+			line-height: 20px;
+			font-weight: 600;
+			font-size: 20px;
+			margin: 0;
+		}
+	}
+	#cboxLoadedContent {
+		width: 100% !important;
+		margin-top: 160px;
+		padding: 0;
+		overflow-y: auto !important;
+	}
+	#bonusPaymentDirectDeposit {
+		padding: 20px 45px 30px;
+		.table-header {
+			font-size: 14px;
+			font-weight: 600;
+			padding: 10px;
+			border-top: 1px solid #e3e3e3;
+			border-bottom: 1px solid #e3e3e3;
+			background: #f4f4f4;
+			color: @blue_1;
+			text-transform: uppercase;
+		}
+		.table-body {
+			font-size: 16px;
+			margin-bottom: 15px;
+			.table-row {
+				line-height: 1.25em;
+				font-weight: 100;
+				border-bottom: 1px solid #e3e3e3;
+				width: 100%;
+				display: table;
+				padding: 1em 0;
+				.table-content-item {
+					display: table-cell;
+					vertical-align: middle;
+					float: none;
+				}
+				&:nth-child(even) {
+					background-color: @gray_9;
+				}
+				.method-history__hint {
+					color: @blue_1;
+					font-weight: 600;
+					font-size: 14px;
+				}
+			}
+		}
+	}
+	#bonusPaymentMethodHistory {
+		padding: 20px 45px 30px;
+		.table-header {
+			font-size: 14px;
+			font-weight: 600;
+			padding: 10px;
+			border-top: 1px solid #e3e3e3;
+			border-bottom: 1px solid #e3e3e3;
+			background: #f4f4f4;
+			color: @blue_1;
+			text-transform: uppercase;
+		}
+		.table-body {
+			font-size: 16px;
+			margin-bottom: 15px;
+			.table-row {
+				line-height: 1.25em;
+				font-weight: 100;
+				border-bottom: 1px solid #e3e3e3;
+				width: 100%;
+				display: table;
+				padding: 1em 0;
+				.table-content-item {
+					display: table-cell;
+					vertical-align: middle;
+					float: none;
+				}
+				&:nth-child(even) {
+					background-color: @gray_9;
+				}
+				.method-history__hint {
+					color: @blue_1;
+					font-weight: 600;
+					font-size: 14px;
+				}
+			}
+		}
+	}
+	#bonusPaymentPaperCheck {
+		padding: 20px 45px 30px;
+		.table-header {
+			font-size: 14px;
+			font-weight: 600;
+			padding: 10px;
+			border-top: 1px solid #e3e3e3;
+			border-bottom: 1px solid #e3e3e3;
+			background: #f4f4f4;
+			color: @blue_1;
+			text-transform: uppercase;
+		}
+		.table-body {
+			font-size: 16px;
+			margin-bottom: 15px;
+			.table-row {
+				line-height: 1.25em;
+				font-weight: 100;
+				border-bottom: 1px solid #e3e3e3;
+				width: 100%;
+				display: table;
+				padding: 1em 0;
+				.table-content-item {
+					display: table-cell;
+					vertical-align: middle;
+					float: none;
+				}
+				&:nth-child(even) {
+					background-color: @gray_9;
+				}
+				.method-history__hint {
+					color: @blue_1;
+					font-weight: 600;
+					font-size: 14px;
+				}
+			}
+		}
+	}
+	#bonusPaymentPrepaidCard {
+		padding: 20px 45px 30px;
+		.table-header {
+			font-size: 14px;
+			font-weight: 600;
+			padding: 10px;
+			border-top: 1px solid #e3e3e3;
+			border-bottom: 1px solid #e3e3e3;
+			background: #f4f4f4;
+			color: @blue_1;
+			text-transform: uppercase;
+		}
+		.table-body {
+			font-size: 16px;
+			margin-bottom: 15px;
+			.table-row {
+				line-height: 1.25em;
+				font-weight: 100;
+				border-bottom: 1px solid #e3e3e3;
+				width: 100%;
+				display: table;
+				padding: 1em 0;
+				.table-content-item {
+					display: table-cell;
+					vertical-align: middle;
+					float: none;
+				}
+				&:nth-child(even) {
+					background-color: @gray_9;
+				}
+				.method-history__hint {
+					color: @blue_1;
+					font-weight: 600;
+					font-size: 14px;
+				}
+			}
+		}
+	}
+	.bonus-payment-method__response {
+		font-size: 16px;
+		font-weight: 600;
+		color: @mainColor;
+		margin: 0 20px 0 70px;
+		padding: 10px 0 35px;
+		position: relative;
+	}
+	.bonus-payment-method__response-icon {
+		color: @green;
+		font-size: 20px;
+		font-weight: 600;
+		margin-right: 10px;
+		position: absolute;
+		left: -30px;
+	}
+	.bonus-payment-method__response-icon--error {
+		color: @red;
+	}
+}
+#colorbox.bonus-payment-method {
+	#cboxClose {
+		color: @blue_1;
+		right: 30px;
+		outline: none;
+		&:before {
+			content: 'close';
+			margin-right: 10px;
+			font-size: 20px;
+			font-weight: 600;
+			vertical-align: middle;
+			text-transform: uppercase;
+		}
+		>span {
+			vertical-align: middle;
+			font-size: 35px;
+			font-weight: 100;
+		}
+	}
+	#cboxTitle {
+		color: @blue_1;
+		padding-top: 80px;
+		.headline {
+			border-top: 1px solid #f2f2f2;
+			padding: 30px 0 10px;
+			text-transform: uppercase;
+			line-height: 20px;
+			font-weight: 600;
+			font-size: 20px;
+			margin: 0;
+		}
+	}
+	#cboxLoadedContent {
+		width: 100% !important;
+		margin-top: 160px;
+		padding: 0;
+		overflow-y: auto !important;
+	}
+	#bonusPaymentDirectDeposit {
+		padding: 20px 45px 30px;
+		.table-header {
+			font-size: 14px;
+			font-weight: 600;
+			padding: 10px;
+			border-top: 1px solid #e3e3e3;
+			border-bottom: 1px solid #e3e3e3;
+			background: #f4f4f4;
+			color: @blue_1;
+			text-transform: uppercase;
+		}
+		.table-body {
+			font-size: 16px;
+			margin-bottom: 15px;
+			.table-row {
+				line-height: 1.25em;
+				font-weight: 100;
+				border-bottom: 1px solid #e3e3e3;
+				width: 100%;
+				display: table;
+				padding: 1em 0;
+				.table-content-item {
+					display: table-cell;
+					vertical-align: middle;
+					float: none;
+				}
+				&:nth-child(even) {
+					background-color: @gray_9;
+				}
+				.method-history__hint {
+					color: @blue_1;
+					font-weight: 600;
+					font-size: 14px;
+				}
+			}
+		}
+	}
+	#bonusPaymentMethodHistory {
+		padding: 20px 45px 30px;
+		.table-header {
+			font-size: 14px;
+			font-weight: 600;
+			padding: 10px;
+			border-top: 1px solid #e3e3e3;
+			border-bottom: 1px solid #e3e3e3;
+			background: #f4f4f4;
+			color: @blue_1;
+			text-transform: uppercase;
+		}
+		.table-body {
+			font-size: 16px;
+			margin-bottom: 15px;
+			.table-row {
+				line-height: 1.25em;
+				font-weight: 100;
+				border-bottom: 1px solid #e3e3e3;
+				width: 100%;
+				display: table;
+				padding: 1em 0;
+				.table-content-item {
+					display: table-cell;
+					vertical-align: middle;
+					float: none;
+				}
+				&:nth-child(even) {
+					background-color: @gray_9;
+				}
+				.method-history__hint {
+					color: @blue_1;
+					font-weight: 600;
+					font-size: 14px;
+				}
+			}
+		}
+	}
+	#bonusPaymentPaperCheck {
+		padding: 20px 45px 30px;
+		.table-header {
+			font-size: 14px;
+			font-weight: 600;
+			padding: 10px;
+			border-top: 1px solid #e3e3e3;
+			border-bottom: 1px solid #e3e3e3;
+			background: #f4f4f4;
+			color: @blue_1;
+			text-transform: uppercase;
+		}
+		.table-body {
+			font-size: 16px;
+			margin-bottom: 15px;
+			.table-row {
+				line-height: 1.25em;
+				font-weight: 100;
+				border-bottom: 1px solid #e3e3e3;
+				width: 100%;
+				display: table;
+				padding: 1em 0;
+				.table-content-item {
+					display: table-cell;
+					vertical-align: middle;
+					float: none;
+				}
+				&:nth-child(even) {
+					background-color: @gray_9;
+				}
+				.method-history__hint {
+					color: @blue_1;
+					font-weight: 600;
+					font-size: 14px;
+				}
+			}
+		}
+	}
+	#bonusPaymentPrepaidCard {
+		padding: 20px 45px 30px;
+		.table-header {
+			font-size: 14px;
+			font-weight: 600;
+			padding: 10px;
+			border-top: 1px solid #e3e3e3;
+			border-bottom: 1px solid #e3e3e3;
+			background: #f4f4f4;
+			color: @blue_1;
+			text-transform: uppercase;
+		}
+		.table-body {
+			font-size: 16px;
+			margin-bottom: 15px;
+			.table-row {
+				line-height: 1.25em;
+				font-weight: 100;
+				border-bottom: 1px solid #e3e3e3;
+				width: 100%;
+				display: table;
+				padding: 1em 0;
+				.table-content-item {
+					display: table-cell;
+					vertical-align: middle;
+					float: none;
+				}
+				&:nth-child(even) {
+					background-color: @gray_9;
+				}
+				.method-history__hint {
+					color: @blue_1;
+					font-weight: 600;
+					font-size: 14px;
+				}
+			}
+		}
+	}
+	.bonus-payment-method__response {
+		font-size: 16px;
+		font-weight: 600;
+		color: @mainColor;
+		margin: 0 20px 0 70px;
+		padding: 10px 0 35px;
+		position: relative;
+	}
+	.bonus-payment-method__response-icon {
+		color: @green;
+		font-size: 20px;
+		font-weight: 600;
+		margin-right: 10px;
+		position: absolute;
+		left: -30px;
+	}
+	.bonus-payment-method__response-icon--error {
+		color: @red;
+	}
+}
+.bonus-payment-method {
+	font-family: @font_sans;
+	#bonus-payment-form.bonus-payment-method-form {
+		.control-label {
+			width: 39%;
+			margin-right: 10px;
+			font-size: 16px;
+			line-height: 16px;
+			color: @blue_1;
+		}
+		.form-control {
+			width: 55%;
+			display: inline-block;
+			height: auto;
+			max-height: 38px;
+		}
+		.form-group {
+			margin-bottom: 15px;
+		}
+		.form-group.has-error {
+			input.form-control {
+				background: #fff;
+				border-color: @red_2;
+			}
+		}
+		textarea {
+			width: 100%;
+			padding: 0 15px;
+			font-size: 16px;
+			background: #fff;
+			min-height: 150px;
+			opacity: 0.6;
+			color: @black;
+			-webkit-text-fill-color: #000;
+		}
+		select {
+			height: 2.5em;
+			font-size: 1em;
+			width: 35%;
+			padding-left: 0.5em;
+			border: 1px solid #dadada;
+			outline: none;
+		}
+		input[type="checkbox"] {
+			margin-bottom: 0;
+		}
+		.bonus-payment-method-form__agreement {
+			padding: 50px 0 20px;
+			color: @mainColor;
+		}
+		.bonus-payment-method-form__input {
+			display: flex;
+			align-items: stretch;
+		}
+		.bonus-payment-method-form__input-hint {
+			width: 50%;
+			margin-right: 40px;
+			font-size: 16px;
+			line-height: 16px;
+			display: inline-block;
+			color: @blue_1;
+			text-transform: uppercase;
+		}
+		.bonus-payment-method-form__input-value {
+			font-size: 16px;
+			font-weight: 600;
+		}
+		.bonus-payment-method-form__acceptance {
+			display: block;
+			padding: 25px 0 15px;
+			width: 100%;
+		}
+		.bonus-payment-method-form__agree {
+			padding: 10px 45px;
+		}
+		.bonus-payment-method-form__cancel {
+			margin-left: 15px;
+			font-size: 16px;
+			font-weight: 600;
+			color: @blue_1;
+		}
+		.bonus-payment-method-form__control {
+			margin-top: 25px;
+		}
+	}
+}
+.bonus-payment-method__text {
+	padding-bottom: 30px;
+	font-size: 16px;
+}
+.bonus-payment-method__text--required {
+	font-style: italic;
+}
+.bonus-payment-method__image {
+	width: 100%;
+	max-width: 100%;
+}
+@media (max-width: 768px) {
+	#colorbox.bonus-payment-method-history {
+		#cboxClose {
+			right: 15px;
+			top: 0;
+			padding: 0;
+			&:before {
+				content: '';
+			}
+		}
+		#cboxTitle {
+			padding: 50px 20px 0;
+			.headline {
+				padding: 20px 25px;
+				font-size: 18px;
+			}
+		}
+		#cboxLoadedContent {
+			margin-top: 131px;
+		}
+		#bonusPaymentDirectDeposit {
+			padding: 10px 30px 30px;
+			.table-body {
+				.table-row {
+					font-size: 14px;
+					.method-history__value {
+						text-align: right;
+					}
+				}
+			}
+		}
+		#bonusPaymentMethodHistory {
+			padding: 10px 30px 30px;
+			padding: 10px 15px 30px;
+			.table-body {
+				.table-row {
+					font-size: 14px;
+					.method-history__value {
+						text-align: right;
+					}
+				}
+			}
+		}
+		#bonusPaymentPaperCheck {
+			padding: 10px 30px 30px;
+			.table-body {
+				.table-row {
+					font-size: 14px;
+					.method-history__value {
+						text-align: right;
+					}
+				}
+			}
+		}
+		#bonusPaymentPrepaidCard {
+			padding: 10px 30px 30px;
+			.table-body {
+				.table-row {
+					font-size: 14px;
+					.method-history__value {
+						text-align: right;
+					}
+				}
+			}
+		}
+	}
+	#colorbox.bonus-payment-method {
+		#cboxClose {
+			right: 15px;
+			top: 0;
+			padding: 0;
+			&:before {
+				content: '';
+			}
+		}
+		#cboxTitle {
+			padding: 50px 20px 0;
+			.headline {
+				padding: 20px 25px;
+				font-size: 18px;
+			}
+		}
+		#cboxLoadedContent {
+			margin-top: 131px;
+		}
+		#bonusPaymentDirectDeposit {
+			padding: 10px 30px 30px;
+			.table-body {
+				.table-row {
+					font-size: 14px;
+					.method-history__value {
+						text-align: right;
+					}
+				}
+			}
+		}
+		#bonusPaymentMethodHistory {
+			padding: 10px 30px 30px;
+			padding: 10px 15px 30px;
+			.table-body {
+				.table-row {
+					font-size: 14px;
+					.method-history__value {
+						text-align: right;
+					}
+				}
+			}
+		}
+		#bonusPaymentPaperCheck {
+			padding: 10px 30px 30px;
+			.table-body {
+				.table-row {
+					font-size: 14px;
+					.method-history__value {
+						text-align: right;
+					}
+				}
+			}
+		}
+		#bonusPaymentPrepaidCard {
+			padding: 10px 30px 30px;
+			.table-body {
+				.table-row {
+					font-size: 14px;
+					.method-history__value {
+						text-align: right;
+					}
+				}
+			}
+		}
+	}
+	.bonus-payment-method__image {
+		margin-top: 25px;
+	}
+	.bonus-payment-method {
+		#bonus-payment-form.bonus-payment-method-form {
+			.control-label {
+				width: 100%;
+			}
+			.form-control {
+				width: 100%;
+			}
+			.form-group {
+				margin-bottom: 20px;
+			}
+			select {
+				width: 65%;
+			}
+			.bonus-payment-method-form__agreement {
+				padding: 40px 0 10px;
+			}
+			.bonus-payment-method-form__input {
+				display: block;
+			}
+			.bonus-payment-method-form__acceptance {
+				padding-top: 5px;
+			}
+			.bonus-payment-method-form__acceptance-message {
+				width: 90%;
+				display: inline-block;
+				float: right;
+			}
+		}
+	}
+}

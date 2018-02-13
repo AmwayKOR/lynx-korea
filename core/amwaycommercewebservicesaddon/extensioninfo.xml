@@ -19,7 +19,9 @@
 		<requires-extension name="addonsupport"/>
 		<requires-extension name="commercewebservicescommons"/>
 		<requires-extension name="amwaycore"/>
+		<requires-extension name="amwayreport"/>
 		<requires-extension name="amwayfacades"/>
+		<requires-extension name="amwayoauth2"/>
 
 		<coremodule generated="true" manager="com.amway.core.jalo.AmwaycommercewebservicesaddonManager" packageroot="com.amway.core"/>
 					

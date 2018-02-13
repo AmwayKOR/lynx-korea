@@ -55,5 +55,4 @@ public class AmwayInventoryStockServiceImpl implements AmwayInventoryStockServic
 		modelService.save(stockLevel);
 		return stockLevel;
 	}
-
 }

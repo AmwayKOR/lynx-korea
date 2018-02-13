@@ -24,5 +24,6 @@ public class AmwayBusinessEventToAmwayBusinessEventWsPopulator implements Popula
 		target.setTriggeredBy(source.getTriggeredBy());
 		target.setAccountID(source.getAccountID());
 		target.setCountryCode(source.getCountryCode());
+		target.setMeta(source.getMeta());
 	}
 }

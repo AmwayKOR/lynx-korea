@@ -168,10 +168,10 @@
 		<!-- <property name="baseStoreService" ref="baseStoreService"/> -->
 	</bean>
 
-	<!-- <bean id="dmsSaveAddressOutputConverter" parent="abstractPopulatingConverter"> 
-		<property name="targetClass" value="com.amway.core.data.CommonResponseFieldsData" 
-		/> <property name="populators"> <list> <ref bean="dmsSaveAddressOutputPopulator" 
-		/> </list> </property> </bean> <bean id="dmsSaveAddressOutputPopulator" class="com.amway.integration.cis.dms.populators.DmsSaveAddressOutputPopulator"> 
+	<!-- <bean id="dmsSaveAddressOutputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.amway.core.data.CommonResponseFieldsData"
+		/> <property name="populators"> <list> <ref bean="dmsSaveAddressOutputPopulator"
+		/> </list> </property> </bean> <bean id="dmsSaveAddressOutputPopulator" class="com.amway.integration.cis.dms.populators.DmsSaveAddressOutputPopulator">
 		</bean> -->
 
 	<alias alias="updateAddressInformationService" name="defaultUpdateAddressInformationService" />
@@ -211,7 +211,7 @@
        -->
 
 	<!-- 4. Entries related to deletePartyAddresService -->
-	
+
 	<bean id="dmsDeletePartyAddressInputConverter" parent="abstractPopulatingConverter">
 		<property name="targetClass" value="com.amway.integration.dms.services.DeletePartyAddressRequest" />
 		<property name="populators">

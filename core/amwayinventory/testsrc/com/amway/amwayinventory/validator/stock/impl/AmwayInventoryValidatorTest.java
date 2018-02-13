@@ -1,68 +1,131 @@
 package com.amway.amwayinventory.validator.stock.impl;
 
-import static org.junit.Assert.*;
+import static com.amway.amwayinventory.AmwayInventoryTestConstants.*;
+import static org.apache.commons.lang.StringUtils.EMPTY;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
 import de.hybris.bootstrap.annotations.UnitTest;
 import de.hybris.platform.ordersplitting.WarehouseService;
 import de.hybris.platform.ordersplitting.model.WarehouseModel;
 
-import java.util.Arrays;
-import java.util.List;
-
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.MockitoAnnotations;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.Errors;
-import org.springframework.validation.ObjectError;
 
-import com.amway.amwayinventory.AmwayInventoryTestConstants;
 import com.amway.amwayinventory.data.AmwayInventoryBean;
 
 
 @UnitTest
-@RunWith(MockitoJUnitRunner.class)
 public class AmwayInventoryValidatorTest
 {
-
-	private static final List<String> errorCodes = Arrays.asList("amway.inventory.bean.baseitemnumber.empty",
-			"amway.inventory.bean.warehousecode.empty","amway.inventory.bean.warehousecode.doesnotexist",
-			"amway.inventory.bean.available.empty");
+	@InjectMocks
+	private AmwayInventoryValidator amwayInventoryValidator;
 
 	@Mock
 	private WarehouseService warehouseService;
 
-	@InjectMocks
-	private AmwayInventoryValidator amwayInventoryValidator = new AmwayInventoryValidator();
+	@Mock
+	private AmwayInventoryBean amwayInventoryBean;
+	@Mock
+	private WarehouseModel warehouse;
 
-	@Test
-	public void whenBeanIsInvalidThenErrorsExist() throws Exception
+	private Errors errors;
+
+	@Before
+	public void setUp()
 	{
-		AmwayInventoryBean amwayInventoryBean = new AmwayInventoryBean();
-		Errors errors = new BeanPropertyBindingResult(amwayInventoryBean, AmwayInventoryTestConstants.INVENTORY_BEAN);
-		amwayInventoryValidator.validate(amwayInventoryBean,errors);
-		//@formatter:off
-		assertFalse(errors.getAllErrors().isEmpty() && errors.getAllErrors().stream()
-				.map(ObjectError::getCode)
-				.allMatch(errorCodes::contains));
-		//@formatter:on
+		MockitoAnnotations.initMocks(this);
+
+		errors = new BeanPropertyBindingResult(amwayInventoryBean, INVENTORY_BEAN);
+
+		when(warehouseService.getWarehouseForCode(any())).thenReturn(warehouse);
+		when(amwayInventoryBean.getWarehouseCode()).thenReturn(WAREHOUSE_1);
+		when(amwayInventoryBean.getBaseItemNumber()).thenReturn(BASE_ITEM_NUMBER);
+		when(amwayInventoryBean.getAvailable()).thenReturn(10);
 	}
 
 	@Test
-	public void whenBeanIsValidThenNoErrors () throws Exception
+	public void shouldAddErrorWhenBaseItemNumberNull()
 	{
-		AmwayInventoryBean amwayInventoryBean = new AmwayInventoryBean();
-		amwayInventoryBean.setBaseItemNumber(AmwayInventoryTestConstants.BASE_ITEM_NUMBER);
-		amwayInventoryBean.setWarehouseCode(AmwayInventoryTestConstants.WAREHOUSE_1);
-		amwayInventoryBean.setAvailable(0);
-		WarehouseModel warehouseMock = new WarehouseModel();
-		when(warehouseService.getWarehouseForCode(AmwayInventoryTestConstants.WAREHOUSE_1)).thenReturn(warehouseMock);
-		Errors errors = new BeanPropertyBindingResult(amwayInventoryBean, AmwayInventoryTestConstants.INVENTORY_BEAN);
-		amwayInventoryValidator.validate(amwayInventoryBean,errors);
-		assertTrue(errors.getAllErrors().isEmpty());
+		when(amwayInventoryBean.getBaseItemNumber()).thenReturn(null);
+
+		amwayInventoryValidator.validate(amwayInventoryBean, errors);
+
+		assertTrue(errors.hasErrors());
 	}
 
+	@Test
+	public void shouldAddErrorWhenBaseItemNumberIsEmpty()
+	{
+		when(amwayInventoryBean.getBaseItemNumber()).thenReturn(EMPTY);
+
+		amwayInventoryValidator.validate(amwayInventoryBean, errors);
+
+		assertTrue(errors.hasErrors());
+	}
+
+	@Test
+	public void shouldAddErrorWhenWarehouseCodeIsNull()
+	{
+		when(amwayInventoryBean.getWarehouseCode()).thenReturn(null);
+
+		amwayInventoryValidator.validate(amwayInventoryBean, errors);
+
+		assertTrue(errors.hasErrors());
+	}
+
+	@Test
+	public void shouldAddErrorWhenWarehouseCodeIsEmpty()
+	{
+		when(amwayInventoryBean.getWarehouseCode()).thenReturn(EMPTY);
+
+		amwayInventoryValidator.validate(amwayInventoryBean, errors);
+
+		assertTrue(errors.hasErrors());
+	}
+
+	@Test
+	public void shouldAddErrorWhenWarehouseIsNullByCode()
+	{
+		when(warehouseService.getWarehouseForCode(WAREHOUSE_1)).thenReturn(null);
+
+		amwayInventoryValidator.validate(amwayInventoryBean, errors);
+
+		assertTrue(errors.hasErrors());
+	}
+
+	@Test
+	public void shouldAddErrorWhenWarehouseServiceThrowException()
+	{
+		when(warehouseService.getWarehouseForCode(WAREHOUSE_1)).thenThrow(new IllegalArgumentException());
+
+		amwayInventoryValidator.validate(amwayInventoryBean, errors);
+
+		assertTrue(errors.hasErrors());
+	}
+
+	@Test
+	public void shouldAddErrorWhenAvailableIsNull()
+	{
+		when(amwayInventoryBean.getAvailable()).thenReturn(null);
+
+		amwayInventoryValidator.validate(amwayInventoryBean, errors);
+
+		assertTrue(errors.hasErrors());
+	}
+
+	@Test
+	public void shouldNotAddErrorsWhenBeanIsValid()
+	{
+		amwayInventoryValidator.validate(amwayInventoryBean, errors);
+
+		assertFalse(errors.hasErrors());
+	}
 }

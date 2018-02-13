@@ -3,13 +3,12 @@
  */
 package com.amway.core.account.dao;
 
-import de.hybris.platform.core.model.user.CustomerModel;
-
-import java.util.List;
-
 import com.amway.core.model.AmwayAccountModel;
 import com.amway.core.model.AmwayBusinessRestrictionModel;
 import com.amway.core.model.AmwayUserIdentityModel;
+import de.hybris.platform.core.model.user.CustomerModel;
+
+import java.util.List;
 
 
 /**

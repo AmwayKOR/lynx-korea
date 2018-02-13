@@ -11,7 +11,7 @@ import de.hybris.platform.cms2.servicelayer.services.CMSSiteService;
 import de.hybris.platform.commerceservices.search.solrfacetsearch.strategies.SolrFacetSearchConfigSelectionStrategy;
 import de.hybris.platform.commerceservices.search.solrfacetsearch.strategies.exceptions.NoValidSolrConfigException;
 import de.hybris.platform.site.BaseSiteService;
-import de.hybris.platform.solrfacetsearch.config.impl.FacetSearchConfigDao;
+import de.hybris.platform.solrfacetsearch.daos.SolrFacetSearchConfigDao;
 import de.hybris.platform.solrfacetsearch.model.config.SolrFacetSearchConfigModel;
 import de.hybris.platform.store.BaseStoreModel;
 import de.hybris.platform.store.services.BaseStoreService;
@@ -28,7 +28,7 @@ public class RLContentSolrFacetSearchConfigSelectionStrategy implements SolrFace
 	private BaseSiteService baseSiteService;
 	private BaseStoreService baseStoreService;
 	private CatalogVersionService catalogVersionService;
-	private FacetSearchConfigDao facetSearchConfigDao;
+	private SolrFacetSearchConfigDao facetSearchConfigDao;
 	private CMSSiteService cmsSiteService;
 
 
@@ -73,7 +73,7 @@ public class RLContentSolrFacetSearchConfigSelectionStrategy implements SolrFace
 	protected SolrFacetSearchConfigModel getSolrConfigForProductCatalogVersions()
 	{
 		final Collection sessionProductCatalogVersions = getSessionProductCatalogVersions();
-		for (final SolrFacetSearchConfigModel solrConfigModel : this.facetSearchConfigDao.findAllSolrFacetSearchConfigs())
+		for (final SolrFacetSearchConfigModel solrConfigModel : this.facetSearchConfigDao.findAllFacetSearchConfigs())
 		{
 			if ((solrConfigModel.getCatalogVersions() != null) && (solrConfigModel.getCatalogVersions()
 					.containsAll(sessionProductCatalogVersions)))
@@ -162,12 +162,12 @@ public class RLContentSolrFacetSearchConfigSelectionStrategy implements SolrFace
 	}
 
 	@Required
-	public void setFacetSearchConfigDao(final FacetSearchConfigDao facetSearchConfigDao)
+	public void setFacetSearchConfigDao(final SolrFacetSearchConfigDao facetSearchConfigDao)
 	{
 		this.facetSearchConfigDao = facetSearchConfigDao;
 	}
 
-	protected FacetSearchConfigDao getFacetSearchConfigDao()
+	protected SolrFacetSearchConfigDao getFacetSearchConfigDao()
 	{
 		return this.facetSearchConfigDao;
 	}

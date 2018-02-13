@@ -13,6 +13,10 @@
  */
 package com.amway.core.account.dao.impl;
 
+import com.amway.core.account.dao.AmwayAccountDao;
+import com.amway.core.model.AmwayAccountModel;
+import com.amway.core.model.AmwayBusinessRestrictionModel;
+import com.amway.core.model.AmwayUserIdentityModel;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.internal.dao.DefaultGenericDao;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
@@ -20,19 +24,13 @@ import de.hybris.platform.servicelayer.search.SearchResult;
 import de.hybris.platform.servicelayer.session.SessionExecutionBody;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.servicelayer.user.UserService;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.log4j.Logger;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.log4j.Logger;
-
-import com.amway.core.account.dao.AmwayAccountDao;
-import com.amway.core.model.AmwayAccountModel;
-import com.amway.core.model.AmwayBusinessRestrictionModel;
-import com.amway.core.model.AmwayUserIdentityModel;
 
 
 /**

@@ -36,7 +36,7 @@ public class DefaultAmwayAccountBalanceService implements AmwayAccountBalanceSer
 	 */
 	@Override
 	public CommonResponseFieldsData creditAccountBalance(final PaymentTransactionEntryModel paymentTransactionEntryModel,
-			final String balanceTypeCd, final String referenceNumber)
+														 final String balanceTypeCd, final String referenceNumber)
 	{
 		final CreateBalanceRequestData requestData = new CreateBalanceRequestData();
 		final AbstractOrderModel abstractOrderModel = paymentTransactionEntryModel.getPaymentTransaction().getOrder();
@@ -52,6 +52,7 @@ public class DefaultAmwayAccountBalanceService implements AmwayAccountBalanceSer
 		if (unit != null)
 		{
 			requestData.setAboNum(unit.getCode());
+			requestData.setLoggedInAccountId(unit.getCode());
 		}
 		return getCreateBalanceService().process(requestData);
 	}
@@ -85,7 +86,7 @@ public class DefaultAmwayAccountBalanceService implements AmwayAccountBalanceSer
 	 */
 	@Override
 	public CommonResponseFieldsData debitAccountBalance(final AbstractOrderModel orderModel, final BigDecimal amount,
-			final String balanceTypeCd)
+														final String balanceTypeCd)
 	{
 		final CreateBalanceRequestData requestData = new CreateBalanceRequestData();
 		requestData.setCurrencyCd(orderModel.getCurrency().getIsocode());
@@ -117,6 +118,7 @@ public class DefaultAmwayAccountBalanceService implements AmwayAccountBalanceSer
 		if (unit != null)
 		{
 			requestData.setAboNum(unit.getCode());
+			requestData.setLoggedInAccountId(unit.getCode());
 		}
 
 		return getCreateBalanceService().process(requestData);
@@ -143,6 +145,7 @@ public class DefaultAmwayAccountBalanceService implements AmwayAccountBalanceSer
 		if (unit != null)
 		{
 			requestData.setAboNum(unit.getCode());
+			requestData.setLoggedInAccountId(unit.getCode());
 		}
 		return getGetBalanceService().process(requestData);
 	}

@@ -5,6 +5,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 /**
  * <p>Java class for addPartyAddressRequest complex type.
@@ -29,11 +31,15 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "addPartyAddressRequest", propOrder = {
     "addPartyAddress"
 })
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class AddPartyAddressRequest
     extends BaseWebServiceInput
 {
 
     protected AddPartyAddress addPartyAddress;
+
+    protected AddressInput address;
+    protected String applyToAllLinkedAccountFlag;
 
     /**
      * Gets the value of the addPartyAddress property.
@@ -59,4 +65,23 @@ public class AddPartyAddressRequest
         this.addPartyAddress = value;
     }
 
+    public AddressInput getAddress()
+    {
+        return address;
+    }
+
+    public void setAddress(AddressInput address)
+    {
+        this.address = address;
+    }
+
+    public String getApplyToAllLinkedAccountFlag()
+    {
+        return applyToAllLinkedAccountFlag;
+    }
+
+    public void setApplyToAllLinkedAccountFlag(String applyToAllLinkedAccountFlag)
+    {
+        this.applyToAllLinkedAccountFlag = applyToAllLinkedAccountFlag;
+    }
 }

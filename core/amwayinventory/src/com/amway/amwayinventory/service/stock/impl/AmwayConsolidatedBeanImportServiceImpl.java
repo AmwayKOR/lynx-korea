@@ -1,65 +1,69 @@
 package com.amway.amwayinventory.service.stock.impl;
 
+import static java.util.stream.Collectors.*;
+
 import de.hybris.platform.ordersplitting.model.StockLevelModel;
 import de.hybris.platform.servicelayer.model.ModelService;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
-import java.util.stream.Collectors;
+import java.util.Map;
+import java.util.concurrent.Executor;
+import java.util.function.Function;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+import org.springframework.beans.factory.annotation.Required;
 
 import com.amway.amwayinventory.data.AmwayConsolidatedInventoryBean;
+import com.amway.amwayinventory.service.AmwayInventoryExecutorService;
 import com.amway.amwayinventory.service.stock.AmwayConsolidatedBeanImportService;
-import com.amway.amwayinventory.service.stock.AmwayInventoryStockService;
+import com.amway.amwayinventory.strategy.stock.AmwayInventoryStockChangeStrategy;
 
 
 /**
- * Service to import consolidated beans into system. Import is executed via thread pool executor
+ * Service to import consolidated beans into system.
+ * Import is executed via different thread pool executors specified for each warehouse
  */
 public class AmwayConsolidatedBeanImportServiceImpl implements AmwayConsolidatedBeanImportService
 {
 	@Autowired
-	private ThreadPoolTaskExecutor inventoryExecutor;
-	@Autowired
-	private AmwayInventoryStockService amwayInventoryStockService;
+	private AmwayInventoryExecutorService amwayInventoryExecutorService;
 	@Autowired
 	private ModelService modelService;
 
+	private AmwayInventoryStockChangeStrategy amwayInventoryStockChangeStrategy;
+
 	@Override
-	public void importStocks(Collection<AmwayConsolidatedInventoryBean> amwayConsolidatedInventoryBeans)
-			throws ExecutionException, InterruptedException
+	public void importStocks(Collection<AmwayConsolidatedInventoryBean> consolidatedBeans)
 	{
-		Future<?> future = inventoryExecutor.submit(() -> updateStockLevel(amwayConsolidatedInventoryBeans));
-		future.get();
+		//@formatter:off
+		Map<String, Collection<AmwayConsolidatedInventoryBean>> beansGroupedByWarehouse = consolidatedBeans.stream()
+				.collect(groupingBy(AmwayConsolidatedInventoryBean::getWarehouseCode, toCollection(HashSet::new)));
+		//@formatter:on
+		beansGroupedByWarehouse.entrySet().forEach(this::importStocksByWarehouse);
 	}
 
-	private void updateStockLevel(Collection<AmwayConsolidatedInventoryBean> consolidatedInventoryBeans)
+	private void importStocksByWarehouse(Map.Entry<String, Collection<AmwayConsolidatedInventoryBean>> entry)
 	{
-		//formatter:off
-		List<StockLevelModel> stocksToSave = consolidatedInventoryBeans.stream()
-				.map(this::getStocksToSave)
-				.collect(Collectors.toList());
-		//formatter:on
+		Executor executor = amwayInventoryExecutorService.getExecutorByWarehouse(entry.getKey());
+		executor.execute(() -> updateStockLevel(entry.getValue(), amwayInventoryStockChangeStrategy::changeStockLevel));
+	}
+
+	private void updateStockLevel(Collection<AmwayConsolidatedInventoryBean> consolidatedBeans,
+			Function<AmwayConsolidatedInventoryBean, StockLevelModel> changeStockFunction)
+	{
+		//@formatter:off
+		List<StockLevelModel> stocksToSave = consolidatedBeans.stream()
+				.map(changeStockFunction)
+				.collect(toList());
+		//@formatter:on
 		modelService.saveAll(stocksToSave);
 	}
 
-	private StockLevelModel getStocksToSave(AmwayConsolidatedInventoryBean consolidatedInventoryBean)
+	@Required
+	public void setAmwayInventoryStockChangeStrategy(AmwayInventoryStockChangeStrategy amwayInventoryStockChangeStrategy)
 	{
-		String productCode = consolidatedInventoryBean.getProductCode();
-		String warehouseCode = consolidatedInventoryBean.getWarehouseCode();
-		Integer amount = consolidatedInventoryBean.getAmount();
-		StockLevelModel stockLevel = amwayInventoryStockService.getStockLevel(productCode,warehouseCode);
-		if(stockLevel == null)
-		{
-			return amwayInventoryStockService.createStockLevel(productCode, warehouseCode, amount);
-		}
-		stockLevel.setAvailable(amount);
-		return stockLevel;
+		this.amwayInventoryStockChangeStrategy = amwayInventoryStockChangeStrategy;
 	}
-
-
 }

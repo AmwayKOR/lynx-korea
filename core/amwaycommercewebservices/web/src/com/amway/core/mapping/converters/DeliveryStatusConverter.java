@@ -13,6 +13,7 @@ package com.amway.core.mapping.converters;
 import de.hybris.platform.core.enums.DeliveryStatus;
 import de.hybris.platform.webservicescommons.mapping.WsDTOMapping;
 
+import ma.glasnost.orika.MappingContext;
 import ma.glasnost.orika.converter.BidirectionalConverter;
 import ma.glasnost.orika.metadata.Type;
 
@@ -24,13 +25,14 @@ import ma.glasnost.orika.metadata.Type;
 public class DeliveryStatusConverter extends BidirectionalConverter<DeliveryStatus, String>
 {
 	@Override
-	public DeliveryStatus convertFrom(final String source, final Type<DeliveryStatus> destinationType)
+	public DeliveryStatus convertFrom(final String source, final Type<DeliveryStatus> destinationType,
+			final MappingContext mappingContext)
 	{
 		return DeliveryStatus.valueOf(source);
 	}
 
 	@Override
-	public String convertTo(final DeliveryStatus source, final Type<String> destinationType)
+	public String convertTo(final DeliveryStatus source, final Type<String> destinationType, final MappingContext mappingContext)
 	{
 		return source.toString();
 	}

@@ -1,0 +1,157 @@
+####################################################################################################################
+###################################### SITE TEST DATA ##############################################################
+####################################################################################################################
+
+INSERT_UPDATE Currency;isocode[unique=true];
+;BRL;
+
+INSERT_UPDATE Language;isocode[unique=true];active;;;;;;
+;pt;true;;;;;;
+;en;true;;;;;;
+
+UPDATE Language;isocode[unique=true];name[lang=pt];name[lang=en];;;;;
+;pt;Portugue;Portugue;;;;;
+;en;Englisch;English;;;;;
+
+INSERT_UPDATE Currency;isocode[unique=true];active[default=true]
+;BRL;
+
+INSERT_UPDATE Title;code[unique=true]
+;mr
+;mrs
+;miss
+;ms
+;dr
+;rev
+
+#Base Site
+INSERT_UPDATE CMSSite;uid[unique=true];
+;storetemplate;
+
+INSERT_UPDATE Country;isocode[unique=true];name[lang=en];active;;;;;;
+;US;United States of America;true;;;;;;
+
+INSERT_UPDATE Currency;isocode[unique=true];name[lang=en];active;symbol;
+;USD;US dollars;true;USD;
+
+INSERT_UPDATE Language;isocode[unique=true];active;;;;;;
+;pt;true;;;;;;
+;en;true;;;;;;
+
+UPDATE Language;isocode[unique=true];name[lang=pt];name[lang=en];;;;;
+;pt;Portugue;Portugue;;;;;
+;en;Englisch;English;;;;;
+
+#Base store
+INSERT_UPDATE BaseStore;uid[unique=true];name[lang=en];cmsSites(uid);currencies(isocode);defaultCurrency(isocode);languages(isoCode);defaultLanguage(isoCode);
+;defaultstore;Default Store;storetemplate;USD;USD;en;en;
+
+INSERT_UPDATE CMSSite;uid[unique=true];stores(uid);timeZone;name[lang=en]
+;storetemplate;defaultstore;Brazil/East;test site
+
+INSERT_UPDATE UserPriceGroup;code[unique=true];name[lang=en];
+;AmwayDefaultEmployeePriceGroup;Amway Default Employee Price Group;
+;AmwayDefaultRetailPriceGroup;Amway Default Retail Price Group;
+;AmwayDefaultABOPriceGroup;Amway Default ABO Price Group;
+
+####################################################################################################################
+########################################### CUSTOMER AND ACCOUNT TEST DATA #########################################
+####################################################################################################################
+INSERT_UPDATE UserGroup;uid[unique=true];groups(uid);
+;cockpitgroup;;
+;customergroup;cockpitgroup;
+
+#Sample Customers
+INSERT_UPDATE Customer;uid[unique=true];customerID;name;customerEmail;type(code);taxId;sessionLanguage(isocode)[default='pt'];sessionCurrency(isocode)[default='BRL'];groups(uid)[default='customergroup'] 
+#;USER_ID;PARTY_ID;NAME;EMAIL_ID;TYPE;
+
+#Data given by the client
+;amway_party_test_1;340028;BV ENTERPRISES COM E REPRES LTDA II;testemail01@amway.com;CustomerType_1;1234;
+;amway_party_test_2;340029;VIEIRA, SERGIO DE MOURA - NR;testemail02@amway.com;CustomerType_1;5678;
+;28480830000;340030;VIEIRA, MARIZA A VIEIRA DE;testemail03@amway.com;CustomerType_2;8999;
+;1122;340031;SRAM, VIT;testemail04@amway.com;CustomerType_2;8844;
+
+#Sample Addresses
+INSERT_UPDATE Address;&addrID;streetname;streetnumber;postalcode[unique=true];town[unique=true];country(isocode);region(isocode);phone1;owner(Customer.uid)[unique=true];shippingAddress;
+;420020;Alameda Juriti;946;6540050;SANTANA DE PARNAIBA;BR;BR-SP;55-11-7226929;amway_party_test_1;true
+;420034;R JAIME BALAO;810;80040340;CURITIBA;BR;BR-PR;55-11-7226929;amway_party_test_2;true
+;420037;Avenida Ibirapuera;2927;4078000;SAO PAULO;BR;BR-SP;55-11-7226929;28480830000;true
+;420042;RUA CASTRO ALVES LADO IMPAR;654;1532001;SAO PAULO;BR;BR-SP;55-11-7226929;1122;true
+
+#Sample Association Of Addresses With Customers
+UPDATE Customer;uid[unique=true];defaultShipmentAddress(Address.owner(Customer.uid))
+;amway_party_test_1;amway_party_test_1
+;amway_party_test_2;amway_party_test_2
+;28480830000;28480830000
+;1122;1122
+
+
+#Sample AmwayBusinessLevels
+INSERT_UPDATE AmwayBusinessLevel;segmentaionLevel(code)[unique=true];qualificationLevel(code);bonusPercentage;
+;SegmentationLevelTypeEnum_2;;10
+;SegmentationLevelTypeEnum_4;;20
+;SegmentationLevelTypeEnum_6;;30
+;SegmentationLevelTypeEnum_9;;40
+
+INSERT_UPDATE UserPriceGroup;code[unique=true];name[lang=en];
+;AmwayDefaultEmployeePriceGroup;Amway Default Employee Price Group;
+;AmwayDefaultRetailPriceGroup;Amway Default Retail Price Group;
+;AmwayDefaultABOPriceGroup;Amway Default ABO Price Group;
+
+
+
+
+#Sample Amway Accounts
+INSERT_UPDATE AmwayAccount;controllingAffiliate(affiliateNumber,isoCode)[unique=true];code[unique=true];businessNature(code);userPriceGroup(code);name;owner(Customer.uid);expiryDate[dateformat=dd.MM.yyyy HH:mm];status(code);primaryParty(Customer.uid);level(AmwayBusinessLevel.segmentaionLevel(code)[unique=true])
+#;ABO_NUMBER;TYPE;PRICE_GROUP;DIST_NM;DIST_NM;DEFAULT_PARTY_ID;
+;170:MX;3108051595;AmwayBusinessNature_1;AmwayDefaultABOPriceGroup;"BV ENTERPRISES COM E REPRES LTDA II";amway_party_test_1;01.12.2016 15:10;ACTIVE;amway_party_test_1;SegmentationLevelTypeEnum_2
+;170:MX;3108051850;AmwayBusinessNature_4;AmwayDefaultABOPriceGroup;"FABIO & SHEYLA SOUZA NETO & CIA LTD";amway_party_test_2;01.12.2016 15:10;ACTIVE;amway_party_test_2;SegmentationLevelTypeEnum_4
+;170:MX;3109204069;AmwayBusinessNature_4;AmwayDefaultEmployeePriceGroup;"MULLER MEERKATZ, PETER ERNST";28480830000;01.12.2016 15:10;ACTIVE;28480830000;SegmentationLevelTypeEnum_6
+;170:MX;3106990436;AmwayBusinessNature_7;AmwayDefaultRetailPriceGroup;"MARIANA, PAULO ROBERTO G";1122;01.12.2016 15:10;ACTIVE;1122;SegmentationLevelTypeEnum_9
+
+UPDATE Customer;uid[unique=true];accounts(code)[mode=append]
+;amway_party_test_1;3108051595
+;amway_party_test_2;3108051850
+;28480830000;3109204069
+;1122;3106990436
+
+####################################################################################################################
+########################################### AMWAY COUPON TEST DATA #################################################
+####################################################################################################################
+
+########################Birthday Coupon Creation IMPEX######################################
+$lang=en
+$couponName=Test Coupon
+$couponDescription= Test coupon description
+
+$startDate=2017-12-01
+$endDate=2099-12-31
+$dateformat='yyyy-MM-dd'
+
+INSERT_UPDATE SingleCodeCoupon;couponId[unique=true];name[lang=$lang][default=$couponName];description[lang=$lang][default=$couponDescription];active[default=true];startDate[default=$startDate][dateformat=$dateformat];endDate[default=$endDate][dateformat=$dateformat]
+;amway_test_single_code_coupon
+
+############## CREATING AMWAY COUPON ############
+
+$dateformat='yyyy-MM-dd'
+$store=defaultstore
+
+$startDate=2018-01-01
+$endDate=2099-12-31
+$redeemableCouponCode=amway_test_single_code_coupon
+
+INSERT_UPDATE AMWAYCOUPON;ACCOUNT(CODE)[unique=true];CODE;REDEMPTIONCOUPON(COUPONID[default=$redeemableCouponCode]);STORE(UID[default=$store])[unique=true];STARTDATE[default=$startDate][dateformat=$dateformat][unique=true];ENDDATE[default=$endDate][dateformat=$dateformat][unique=true];
+#create a new with default value
+;3108051595;;;;;;
+
+;3108051595;;;;2018-01-01;2018-01-12;
+;3108051595;;;;2018-01-11;2018-11-12;
+
+UPDATE AMWAYCOUPON;ACCOUNT(CODE)[unique=true];CODE;REDEMPTIONCOUPON(COUPONID[default=$redeemableCouponCode]);STORE(UID[default=$store])[unique=true];STARTDATE[default=$startDate][dateformat=$dateformat][unique=true];ENDDATE[default=$endDate][dateformat=$dateformat][unique=true];
+#Update the amwayCoupon having default value
+;3108051595;20000000000;;;;;
+
+INSERT_UPDATE AMWAYCOUPON;CUSTOMER(UID)[unique=true];CODE;REDEMPTIONCOUPON(COUPONID[default=$redeemableCouponCode]);STORE(UID[default=$store])[unique=true];STARTDATE[default=$startDate][dateformat=$dateformat][unique=true];ENDDATE[default=$endDate][dateformat=$dateformat][unique=true];
+;amway_party_test_1;;;;;;;
+
+

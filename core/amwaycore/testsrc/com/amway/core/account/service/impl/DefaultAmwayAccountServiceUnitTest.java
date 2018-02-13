@@ -3,8 +3,14 @@
  */
 package com.amway.core.account.service.impl;
 
-import static org.mockito.BDDMockito.given;
-
+import com.amway.core.account.dao.AmwayAccountDao;
+import com.amway.core.data.AccountMasterDetailsData;
+import com.amway.core.data.AmwayProfileRequestData;
+import com.amway.core.data.TaxDetailsData;
+import com.amway.core.dms.data.*;
+import com.amway.core.los.data.SponsorDetailsData;
+import com.amway.core.model.AmwayAccountModel;
+import com.amway.core.service.AmwayAccountCommerceService;
 import de.hybris.bootstrap.annotations.UnitTest;
 import de.hybris.platform.cms2.model.site.CMSSiteModel;
 import de.hybris.platform.commercefacades.user.data.AddressData;
@@ -19,12 +25,6 @@ import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.site.BaseSiteService;
 import de.hybris.platform.store.BaseStoreModel;
 import de.hybris.platform.store.services.BaseStoreService;
-
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.log4j.Logger;
 import org.apache.log4j.lf5.util.DateFormatManager;
@@ -36,26 +36,12 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import com.amway.core.account.dao.AmwayAccountDao;
-import com.amway.core.data.AccountMasterDetailsData;
-import com.amway.core.data.AmwayProfileRequestData;
-import com.amway.core.data.TaxDetailsData;
-import com.amway.core.dms.data.AccountBalanceData;
-import com.amway.core.dms.data.AmwayProfileResponseData;
-import com.amway.core.dms.data.BlockPrivDetailsData;
-import com.amway.core.dms.data.EcommMasterData;
-import com.amway.core.dms.data.LocaleNameData;
-import com.amway.core.dms.data.PartyDetailsData;
-import com.amway.core.dms.data.PartyEcommDetailsResponseData;
-import com.amway.core.dms.data.PartyNameDetailsRequestData;
-import com.amway.core.dms.data.PartyPersonalDetailsRequestData;
-import com.amway.core.dms.data.PartyPhoneDetailsRequestData;
-import com.amway.core.dms.data.PersonalIdDetailsData;
-import com.amway.core.dms.data.PhoneMasterRequestData;
-import com.amway.core.dms.data.UsageRequestData;
-import com.amway.core.los.data.SponsorDetailsData;
-import com.amway.core.model.AmwayAccountModel;
-import com.amway.core.service.AmwayAccountCommerceService;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.mockito.BDDMockito.given;
 
 
 
@@ -88,6 +74,7 @@ public class DefaultAmwayAccountServiceUnitTest
 	private AmwayAccountModel account1;
 	private AmwayAccountModel account2;
 	private AmwayAccountModel account3;
+	private AmwayAccountModel account4;
 
 	private AmwayProfileRequestData amwayProfileRequestData;
 	private AmwayProfileResponseData amwayProfileResponseData;
@@ -110,7 +97,6 @@ public class DefaultAmwayAccountServiceUnitTest
 		amwayProfileService = new MockAmwayProfileService();
 		defaultAmwayAccountService.setAmwayAccountDao(amwayAccountDao);
 		defaultAmwayAccountService.setAmwayAccountCommerceService(amwayAccountCommerceService);
-		defaultAmwayAccountService.setAmwayProfileService(amwayProfileService);
 		defaultAmwayAccountService.setBaseSiteService(baseSiteService);
 		defaultAmwayAccountService.setBaseStoreService(baseStoreService);
 		defaultAmwayAccountService.setAmwayProfileService(amwayProfileService);
@@ -125,12 +111,17 @@ public class DefaultAmwayAccountServiceUnitTest
 		account3 = Mockito.mock(AmwayAccountModel.class);
 		account3.setCode("121212");
 		account3.setName("ABC");
+		
+		account4 = Mockito.mock(AmwayAccountModel.class);
+		account4.setCode("4343432");
+		account4.setName("ABC");
 
 		session = new MockSession();
 
 		amwayProfileRequestData = Mockito.mock(AmwayProfileRequestData.class);
 		amwayProfileRequestData.setSalesPlanAff("170");
 		amwayProfileRequestData.setAboNum(account1.getCode());
+		amwayProfileRequestData.setLoggedInAccountId(account1.getCode());
 		amwayProfileRequestData.setClientCntryCd("BR");
 		amwayProfileRequestData.setDeltailLevelCd(FULLDETAIL);
 		createAmwayProfileResponseData("ABO");
@@ -180,6 +171,15 @@ public class DefaultAmwayAccountServiceUnitTest
 		Assert.assertTrue(CollectionUtils.isNotEmpty(accountList));
 		Assert.assertEquals("Account count shout be 3 ", 3, CollectionUtils.size(accountList));
 	}
+	
+	@Test
+	public void testsearchAccountsForAbo()
+	{
+		given(amwayAccountDao.getAccountsForUidOrName(ACCOUNT_NAME)).willReturn(Arrays.asList(account1, account2,account3,account4));
+		final List<AmwayAccountModel> accountList = defaultAmwayAccountService.findAccountsForAbo(ACCOUNT_NAME);
+		Assert.assertTrue(CollectionUtils.isNotEmpty(accountList));
+		Assert.assertEquals("Account count should be 4 ", 4, CollectionUtils.size(accountList));
+	}
 
 	/**
 	 * Test method for
@@ -189,8 +189,9 @@ public class DefaultAmwayAccountServiceUnitTest
 	public void testFullGetAccountProfile()
 	{
 		given(amwayAccountCommerceService.getCurrentAccount()).willReturn(account1);
-		//		given(defaultAmwayAccountService.createAmwayProfileRequestData(FULLDETAIL, account1)).willReturn(amwayProfileRequestData);
-		//		given(amwayProfileService.process(amwayProfileRequestData)).willReturn(amwayProfileResponseData);
+		//given(defaultAmwayAccountService.createAmwayProfileRequestData(FULLDETAIL, account1)).willReturn(amwayProfileRequestData);
+
+		//given(amwayProfileService.process(amwayProfileRequestData)).willReturn(amwayProfileResponseData);
 		given(sessionService.getCurrentSession()).willReturn(session);
 		final AmwayProfileResponseData amwayProfileResponse = defaultAmwayAccountService.getAccountProfile(FULLDETAIL);
 		Assert.assertNotNull(amwayProfileResponse);

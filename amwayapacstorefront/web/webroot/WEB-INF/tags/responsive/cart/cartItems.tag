@@ -10,25 +10,15 @@
 
 <c:set var="errorStatus" value="<%= de.hybris.platform.catalog.enums.ProductInfoStatus.valueOf(\"ERROR\") %>" />
 
-<ul class="item__list item__list__cart">
-    <li class="hidden-xs hidden-sm">
-        <ul class="item__list--header">
-            <li class="item__toggle"></li>
-            <li class="item__image"></li>
-            <li class="item__info"><spring:theme code="basket.page.item"/></li>
-            <li class="item__price"><spring:theme code="basket.page.price"/></li>
-            <li class="item__quantity"><spring:theme code="basket.page.qty"/></li>
-            <li class="item__delivery"><spring:theme code="basket.page.delivery"/></li>
-            <li class="item__total--column"><spring:theme code="basket.page.total"/></li>
-            <li class="item__remove"></li>
-        </ul>
+<ul class="shopping-cart-item-list js-shopping-cart-item-list shopping-cart-product-item-list">
+    <li class="visible-md visible-lg">
+        <div class="col-xs-12 list-header">
+            <div class="col-xs-6 list-item-info"><spring:theme code="basket.page.item"/></div>
+            <div class="col-xs-2 list-item-quantity"><spring:theme code="basket.page.qty"/></div>
+            <div class="col-xs-2 list-item-price"><spring:theme code="basket.page.price"/></div>
+            <div class="col-xs-2 list-item-total"><spring:theme code="basket.page.total"/></div></div>
     </li>
-
-	<c:forEach items="${cartData.rootGroups}" var="group" varStatus="loop">
-    	<cart:rootEntryGroup cartData="${cartData}" entryGroup="${group}"/>
-        <p></p>
+    <c:forEach items="${cartData.entries}" var="entry" varStatus="loop">
+        <cart:cartItem cartData="${cartData}" entry="${entry}" />
     </c:forEach>
 </ul>
-
-<product:productOrderFormJQueryTemplates />
-<storepickup:pickupStorePopup />

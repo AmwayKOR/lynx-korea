@@ -4,29 +4,19 @@
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
+<%@ taglib prefix="account" tagdir="/WEB-INF/tags/responsive/account"%>
 
-<spring:url value="/my-account/update-profile" var="updateProfileUrl"/>
-<spring:url value="/my-account/update-password" var="updatePasswordUrl"/>
-<spring:url value="/my-account/update-email" var="updateEmailUrl"/>
-<spring:url value="/my-account/address-book" var="addressBookUrl"/>
-<spring:url value="/my-account/payment-details" var="paymentDetailsUrl"/>
-<spring:url value="/my-account/orders" var="ordersUrl"/>
-
-<template:page pageTitle="${pageTitle}">
-		<cms:pageSlot position="SideContent" var="feature" class="accountPageSideContent">
-			<cms:component component="${feature}" />
-		</cms:pageSlot>
-        <cms:pageSlot position="TopContent" var="feature" element="div" class="accountPageTopContent">
-            <cms:component component="${feature}" />
-        </cms:pageSlot>
-
-        <div class="account-section">
-            <cms:pageSlot position="BodyContent" var="feature" element="div" class="account-section-content">
+<template:page pageTitle="${pageTitle}">    
+    <div class="container-fluid my-count">
+        <div class="row">
+            <div class="container-lg">
+                <account:accountProfileBar />
+            </div>
+        </div>
+        <div class="row">
+            <cms:pageSlot position="BodyContent" var="feature" element="div">
                 <cms:component component="${feature}" />
             </cms:pageSlot>
         </div>
-
-        <cms:pageSlot position="BottomContent" var="feature" element="div" class="accountPageBottomContent">
-            <cms:component component="${feature}" />
-        </cms:pageSlot>
+    </div>
 </template:page>

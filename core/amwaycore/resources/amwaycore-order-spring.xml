@@ -29,6 +29,10 @@
 		<property name="searchService" ref="flexibleSearchService" />
 		<property name="orderCancelDao" ref="orderCancelDao"/>
 		<property name="amwayOrderDao" ref="orderDao"/>
+		<property name="userService" ref="userService"/>
+ 		<property name="customerAccountService" ref="customerAccountService"/>
+ 		<property name="baseStoreService" ref="baseStoreService"/>
+ 		<property name="checkoutCustomerStrategy" ref="checkoutCustomerStrategy"/>
 	</bean>
 
 	<alias name="defaultAmwayCalculationService" alias="calculationService" />
@@ -44,11 +48,11 @@
 	<alias name="amwayCartCodeGenerator" alias="orderCodeGenerator" />
 	<bean id="amwayCartCodeGenerator"
 		class="de.hybris.platform.servicelayer.keygenerator.impl.PersistentKeyGenerator">
-		<property name="key" value="${keygen.amway.cart.code.name.msb}" />
-		<property name="digits" value="${keygen.amway.cart.code.digits.msb}" />
-		<property name="start" value="${keygen.amway.cart.code.start.msb}" />
-		<property name="numeric" value="${keygen.amway.cart.code.numeric.msb}" />
-		<property name="template" value="${keygen.amway.cart.code.template.msb}" />
+		<property name="key" value="${keygen.amway.cart.code.name}" />
+		<property name="digits" value="${keygen.amway.cart.code.digits}" />
+		<property name="start" value="${keygen.amway.cart.code.start}" />
+		<property name="numeric" value="${keygen.amway.cart.code.numeric}" />
+		<property name="template" value="${keygen.amway.cart.code.template}" />
 	</bean>
 
 	<bean id="amwayOrderCodeGenerator"
@@ -220,12 +224,20 @@
 	<alias name="defaultAmwayReturnRequestDao" alias="returnRequestDao"/>
 	<bean id="defaultAmwayReturnRequestDao" class="com.amway.core.returns.dao.impl.DefaultAmwayReturnRequestDao" parent="defaultReturnRequestDao"/>
 
+	<alias name="defaultAmwayReturnRequestTypeDao" alias="returnRequestTypeDao"/>
+	<bean id="defaultAmwayReturnRequestTypeDao" class="com.amway.core.returns.dao.impl.DefaultAmwayReturnRequestTypeDao"/>
+
 	<alias name="defaultAmwayReturnService" alias="returnService"/>
 	<bean id="defaultAmwayReturnService" class="com.amway.core.returns.services.impl.DefaultAmwayReturnService" parent="defaultReturnService" >
 		<property name="businessProcessService" ref="businessProcessService" />
 		<property name="amwayStockService" ref="amwayStockService" />
 		<property name="amwayCommerceStockService" ref="commerceStockService" />
 		<property name="amwayReturnRequestDao" ref="returnRequestDao" />
+	</bean>
+	
+	<alias name="amwayCommerceCartRestorationStrategy" alias="commerceCartRestorationStrategy"/>
+	<bean id="amwayCommerceCartRestorationStrategy" parent="defaultCommerceCartRestorationStrategy"
+			class="com.amway.core.cart.strategy.impl.AmwayCommerceCartRestorationStrategy">
 	</bean>
 
 </beans>

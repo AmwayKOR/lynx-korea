@@ -1,0 +1,30 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+# ImpEx for Importing Email Content
+# English Localisation
+
+#%impex.enableCodeExecution(true)
+#%impex.enableExternalSyntaxParsing(true)
+#%impex.includeExternalData(System.getProperty("HYBRIS_BIN_DIR") + "/custom/amwayapac/amwayapacinitialdata/resources/amwayapacinitialdata/import/coredata/common/macros-definition.impex", "UTF-8", 0)
+
+
+$jarResource=jar:com.amway.apac.initialdata.setup.InitialDataSystemSetup&/amwayapacinitialdata/import
+$siteResource=jar:com.amway.apac.initialdata.setup.InitialDataSystemSetup&/amwayapacinitialdata/import/contentCatalogs/$contentCatalog
+
+# Language
+$lang=en
+
+# Language
+# Media
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];folder(qualifier)[default='images']
+
+# CMS Image Components
+UPDATE CMSImageComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]

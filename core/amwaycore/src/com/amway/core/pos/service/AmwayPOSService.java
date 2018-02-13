@@ -25,4 +25,8 @@ public interface AmwayPOSService
 	public AmwayBatchModel getBatch(String batch_id);
 	public SearchPageData<OrderModel> getOrders(PageableData pageableData, String batch_id);
 	public SearchPageData<OrderModel> getOrders(PageableData pageableData, String pickupStore, Date startDate, Date endDate);
+	public Long getOrdersCount(String batchId);
+	public Long getCustomersCount(String batchId);
+	public Long getProductsCount(String batchId);
+	public AmwayTerminalModel getPOSTerminalByMacAddress(String macAddress);
 }

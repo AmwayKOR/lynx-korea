@@ -48,7 +48,7 @@ public class DefaultAmwayBonusPeriodService<bp extends AmwayBonusPeriodModel, o 
 	/**
 	 * {@link #assignBonusPeriod(de.hybris.platform.core.model.order.AbstractOrderModel)}
 	 *
-	 * @throws UnknownIdentifierException if no bonus period is available for the give site. *
+	 * @throws BusinessException if no bonus period is available for the give site. *
 	 */
 	@Override
 	public void assignBonusPeriod(final o order) throws BusinessException
@@ -59,7 +59,7 @@ public class DefaultAmwayBonusPeriodService<bp extends AmwayBonusPeriodModel, o 
 	/**
 	 * {@link #assignBonusPeriod(de.hybris.platform.core.model.order.AbstractOrderModel, boolean)}
 	 *
-	 * @throws UnknownIdentifierException if no bonus period is available for the give site. *
+	 * @throws BusinessException if no bonus period is available for the give site. *
 	 */
 	@Override
 	public void assignBonusPeriod(final o order, final boolean forceReset) throws BusinessException

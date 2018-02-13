@@ -1,0 +1,49 @@
+{
+  "jcr:createdBy": "admin",
+  "jcr:created": "Thu Apr 20 2017 12:34:46 GMT+0300",
+  "jcr:primaryType": "nt:folder",
+  "original": {
+    "jcr:createdBy": "admin",
+    "jcr:created": "Thu Apr 20 2017 12:34:46 GMT+0300",
+    "jcr:primaryType": "nt:file",
+    "jcr:content": {
+      ":jcr:data": 240707,
+      "jcr:lastModified": "Thu Apr 20 2017 12:39:10 GMT+0300",
+      "jcr:lastModifiedBy": "admin",
+      "jcr:uuid": "bef93524-5e88-4d06-b694-cf697cc889c5",
+      "jcr:mimeType": "image/jpeg",
+      "jcr:primaryType": "nt:resource"
+    }
+  },
+  "cq5dam.web.1280.1280.jpeg": {
+    "jcr:createdBy": "admin",
+    "jcr:created": "Tue Apr 25 2017 11:05:51 GMT+0300",
+    "jcr:primaryType": "nt:file",
+    "jcr:content": {
+      ":jcr:data": 31099,
+      "jcr:lastModified": "Tue Apr 25 2017 11:05:51 GMT+0300",
+      "jcr:lastModifiedBy": "admin",
+      "jcr:uuid": "fabc3ee5-1c63-4bc4-b4e2-eaa57e4a221f",
+      "jcr:mimeType": "image/jpeg",
+      "jcr:primaryType": "nt:resource"
+    }
+  },
+  "cq5dam.w100.testing-sing1.png": {
+    "jcr:createdBy": "admin",
+    "jcr:created": "Tue Apr 25 2017 11:06:25 GMT+0300",
+    "jcr:primaryType": "nt:file",
+    "jcr:content": {
+      "jcr:primaryType": "nt:resource",
+      "jcr:lastModifiedBy": "admin",
+      "jcr:uuid": "1010ee82-6ebb-4048-a74a-220b00be8426",
+      ":jcr:data": 3236,
+      "jcr:lastModified": "Tue Apr 25 2017 11:06:46 GMT+0300",
+      "jcr:mimeType": "image/png",
+      "jcr:mixinTypes": [
+        "mix:commerceAsset"
+      ],
+      "tiff:ImageHeight": 100,
+      "tiff:ImageWidth": 100
+    }
+  }
+}

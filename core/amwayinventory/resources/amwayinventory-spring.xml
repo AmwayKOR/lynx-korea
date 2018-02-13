@@ -4,42 +4,91 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="amwayConsolidatedBeanImportService"
-          class="com.amway.amwayinventory.service.stock.impl.AmwayConsolidatedBeanImportServiceImpl"/>
+    <bean id="amwayInventoryUpdateFacade" class="com.amway.amwayinventory.facade.impl.AmwayInventoryUpdateFacadeImpl"/>
 
-    <bean id="amwayStockConsolidationService"
-          class="com.amway.amwayinventory.service.stock.impl.AmwayStockConsolidationServiceImpl"/>
+    <bean id="amwayInventoryFullImportService" class="com.amway.amwayinventory.service.stock.impl.AmwayConsolidatedBeanImportServiceImpl">
+        <property name="amwayInventoryStockChangeStrategy">
+            <bean class="com.amway.amwayinventory.strategy.stock.impl.AmwayInventoryFullUpdateStockStrategyImpl"/>
+        </property>
+    </bean>
 
-    <bean id="amwayInventoryStockService"
-          class="com.amway.amwayinventory.service.stock.impl.AmwayInventoryStockServiceImpl"/>
-
-    <bean id="amwayConsolidationStockStrategy"
-          class="com.amway.amwayinventory.strategy.stock.impl.AmwayConsolidationStockByBaseItemNumberStrategy"/>
+    <bean id="amwayInventoryAdjustImportService" class="com.amway.amwayinventory.service.stock.impl.AmwayConsolidatedBeanImportServiceImpl">
+        <property name="amwayInventoryStockChangeStrategy">
+            <bean class="com.amway.amwayinventory.strategy.stock.impl.AmwayInventoryAdjustStockStrategyImpl"/>
+        </property>
+    </bean>
 
     <bean id="amwayInventoryValidator" class="com.amway.amwayinventory.validator.stock.impl.AmwayInventoryValidator"/>
-    <bean id="amwayFullInventoryValidator" parent="amwayInventoryValidator"
-          class="com.amway.amwayinventory.validator.stock.impl.AmwayFullInventoryValidator"/>
+    <bean id="amwayFullInventoryValidator" parent="amwayInventoryValidator" class="com.amway.amwayinventory.validator.stock.impl.AmwayFullInventoryValidator"/>
+    <bean id="amwayInventoryProductExistByCodeValidator" class="com.amway.amwayinventory.validator.stock.impl.AmwayInventoryProductExistByCodeValidator"/>
 
-    <bean id="amwayInventoryProductCodeValidator"
-          class="com.amway.amwayinventory.validator.stock.impl.AmwayInventoryProductCodeValidator"/>
-
-
-    <bean id="inventoryThreadFactory" class="de.hybris.platform.core.TenantAwareThreadFactory">
-        <constructor-arg ref="tenantFactory"/>
-    </bean>
-    <bean id="inventoryExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
-        <property name="maxPoolSize" value="1" />
-        <property name="threadFactory" ref="inventoryThreadFactory"/>
-        <property name="keepAliveSeconds" value="600"/>
+    <bean id="amwayInventoryFullValidationService" class="com.amway.amwayinventory.service.impl.AmwayInventoryValidationServiceImpl">
+        <property name="validators">
+            <list>
+                <ref bean="amwayFullInventoryValidator"/>
+                <ref bean="amwayInventoryProductExistByCodeValidator"/>
+            </list>
+        </property>
     </bean>
 
-    <bean id="amwayInventoryValidationMessageSource"
-          class="org.springframework.context.support.ResourceBundleMessageSource">
+    <bean id="amwayInventoryAdjustValidationService" class="com.amway.amwayinventory.service.impl.AmwayInventoryValidationServiceImpl">
+        <property name="validators">
+            <list>
+                <ref bean="amwayInventoryValidator"/>
+                <ref bean="amwayInventoryProductExistByCodeValidator"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="amwayStockConsolidationService" class="com.amway.amwayinventory.service.stock.impl.AmwayStockConsolidationServiceImpl"/>
+    <bean id="amwayInventoryStockService" class="com.amway.amwayinventory.service.stock.impl.AmwayInventoryStockServiceImpl"/>
+    <bean id="amwayConsolidationStockStrategy" class="com.amway.amwayinventory.strategy.stock.impl.AmwayConsolidationStockByBaseItemNumberStrategy"/>
+
+    <bean id="amwayInventoryValidationMessageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
         <property name="basenames">
             <list>
                 <value>amwayinventory/ValidationMessages</value>
             </list>
         </property>
         <property name="defaultEncoding" value="UTF-8"/>
+    </bean>
+
+    <bean id="amwayInventoryUpdateBeansPopulator" class="com.amway.amwayinventory.populator.AmwayInventoryUpdateBeansPopulator"/>
+    <bean id="amwayInventoryUpdateBeansConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="java.util.ArrayList"/>
+        <property name="populators">
+            <list>
+                <ref bean="amwayInventoryUpdateBeansPopulator"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="amwayInventoryBeanAdjustmentPopulator" class="com.amway.amwayinventory.populator.AmwayInventoryBeanAdjustmentPopulator"/>
+    <bean id="amwayInventoryBeanAdjustmentConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="com.amway.amwayinventory.data.AmwayInventoryBean"/>
+        <property name="populators">
+            <ref bean="amwayInventoryBeanAdjustmentPopulator"/>
+        </property>
+    </bean>
+
+    <bean id="amwayInventoryValidationResultPopulator" class="com.amway.amwayinventory.populator.AmwayInventoryValidationResultPopulator"/>
+    <bean id="amwayInventoryValidationResultConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="com.amway.amwayinventory.data.AmwayInventoryValidationResult"/>
+        <property name="populators">
+            <ref bean="amwayInventoryValidationResultPopulator"/>
+        </property>
+    </bean>
+
+    <bean id="inventoryThreadFactory" class="de.hybris.platform.core.TenantAwareThreadFactory">
+        <constructor-arg ref="tenantFactory"/>
+    </bean>
+    <bean id="inventoryExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor" scope="prototype">
+        <property name="corePoolSize" value="0"/>
+        <property name="maxPoolSize" value="1"/>
+        <property name="threadFactory" ref="inventoryThreadFactory"/>
+        <property name="keepAliveSeconds" value="600"/>
+    </bean>
+    <bean id="amwayInventoryExecutorService" class="com.amway.amwayinventory.service.impl.AmwayInventoryExecutorServiceImpl">
+        <lookup-method name="createExecutor" bean="inventoryExecutor"/>
     </bean>
 </beans>

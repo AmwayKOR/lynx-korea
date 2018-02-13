@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <import resource="amwayapaccoupon-daos.xml" />
+    <bean id="amwayapaccouponSystemSetup" class="com.amway.apac.coupon.setup.AmwayapaccouponSystemSetup" parent="abstractCoreSystemSetup">
+    </bean>
+
+	<alias name="defaultAmwayApacCouponService" alias="couponService"/>
+    <bean id="defaultAmwayApacCouponService" class="com.amway.apac.coupon.services.impl.DefaultAmwayApacCouponService" parent="defaultCouponService">
+    	<property name="couponCodeGeneratorMap">
+    		<map>
+    			<entry key="defaultApacCouponKeyGenerator" value-ref="defaultAmwayCouponCodeGenerator"/>
+    		</map>
+    	</property>
+    	<property name="amwayApacCouponDao" ref="couponDao" />
+    </bean>
+    
+    <bean id="amwayCouponPrepareInterceptor" class="com.amway.apac.coupon.interceptor.impl.AmwayCouponPrepareInterceptor">
+    	<property name="couponService" ref="couponService"/>
+	 </bean>
+    
+    <bean id="amwayCouponPrepareInterceptorMapping"
+		class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="amwayCouponPrepareInterceptor" />
+		<property name="typeCode" value="AmwayCoupon" />
+	</bean>
+    
+     <bean id="defaultAmwayCouponCodeGenerator"
+		class="de.hybris.platform.servicelayer.keygenerator.impl.PersistentKeyGenerator">
+			<property name="key" value="${keygen.amway.coupon.code.name}" />
+			<property name="digits" value="${keygen.amway.coupon.code.digits}" />
+			<property name="start" value="${keygen.amway.coupon.code.start}" />
+			<property name="numeric" value="${keygen.amway.coupon.code.numeric}" />
+			<property name="template" value="${keygen.amway.coupon.code.template}" />
+	 </bean>
+	 
+	<alias name="defaultAmwayApacCouponDao" alias="couponDao" />
+	<bean id="defaultAmwayApacCouponDao"
+		class="com.amway.apac.coupon.dao.impl.DefaultAmwayApacCouponDao" parent="defaultCouponDao">
+		<property name="amwayCouponGenericDao" ref="amwayCouponDao" />
+	</bean>
+</beans>

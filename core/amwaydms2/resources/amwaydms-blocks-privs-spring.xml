@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- ##########################################################################
+        ########## Get Block Prev Service ######################################## -->
+    <alias  alias="getBlockPrevService" name="defaultAmwayGetBlockPrevService" />
+    <bean id="defaultAmwayGetBlockPrevService"
+          class="com.amway.amwaydms.blocksprivileges.services.impl.DefaultBlocksPrivilegesService"
+          parent="amwayAbstractDmsService">
+        <property name="outputConverter" ref="amwayBlockPrevServiceOutputConverter" />
+        <property name="urlPath"
+                  value="${amwaydms.dms.url}" />
+    </bean>
+
+    <bean id="mockGetBlockPrevService"
+          class="com.amway.amwaydms.blocksprivileges.services.impl.mock.MockGetBlockPrivService">
+        <property name="outputConverter" ref="amwayBlockPrevServiceOutputConverter" />
+    </bean>
+
+
+
+    <bean id="amwayBlockPrevServiceOutputConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass"
+                  value="com.amway.core.dms.data.BlockPrevResponseDataList" />
+        <property name="populators">
+            <list>
+                <ref bean="amwayBlockPrivServiceOutputPopulator" />
+            </list>
+        </property>
+    </bean>
+
+    <bean id="amwayBlockPrivServiceOutputPopulator"
+          class="com.amway.amwaydms.populators.BlockPrivOutputPopulator"
+          parent="abstractDmsPopulator" />
+
+</beans>

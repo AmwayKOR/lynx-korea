@@ -1,7 +1,8 @@
 ACC.common = {
 	currentCurrency: $("main").data('currencyIsoCode') || "USD",
-	processingMessage: $("<img src='" + ACC.config.commonResourcePath + "/images/spinner.gif'/>"),
-
+	processingMessage: $("<img src='" + ACC.config.themeResourcePath + "/images/loader-transparent.gif'/>"),
+	processingImageCSS: {'z-index': '9999', 'position': 'fixed', 'padding': '0px', 'margin': '0px', 'width': '30%', 'top': '40%', 'left': '35%', 'text-align': 'center', 'color': 'rgb(0, 0, 0)', 'border': 'none', 'cursor': 'wait'}, 
+	processingImageOverlayCSS : {'z-index': '1050', 'background':'#fff', 'opacity': '0.8'},
 
 	blockFormAndShowProcessingMessage: function (submitButton)
 	{

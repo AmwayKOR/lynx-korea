@@ -7,6 +7,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 /**
  * <p>Java class for partyEcommData complex type.
@@ -41,6 +43,7 @@ import javax.xml.bind.annotation.XmlType;
     "ecommTypeName",
     "statusCd"
 })
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class PartyEcommData
     extends Contact
 {

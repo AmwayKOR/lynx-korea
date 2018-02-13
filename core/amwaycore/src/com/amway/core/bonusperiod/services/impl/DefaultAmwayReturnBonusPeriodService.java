@@ -15,6 +15,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.log4j.Logger;
 
@@ -43,11 +44,20 @@ public class DefaultAmwayReturnBonusPeriodService<bp extends AmwayBonusPeriodMod
 	@Override
 	public void assignBonusPeriod(final ret returnRequest) throws BusinessException
 	{
+		assignBonusPeriod(returnRequest, (BaseSiteModel) null);
+	}
+
+	/**
+	 * {@link #assignBonusPeriod(de.hybris.platform.returns.model.ReturnRequestModel)}
+	 */
+	@Override
+	public void assignBonusPeriod(final ret returnRequest, BaseSiteModel returnSite) throws BusinessException
+	{
 		if (isPeriodSet(returnRequest))
 		{
 			return;
 		}
-		final AmwayBonusPeriodModel currentBonusPeriod = getCurrentBonusPeriod(returnRequest);
+		final AmwayBonusPeriodModel currentBonusPeriod = getCurrentBonusPeriod(returnRequest, returnSite);
 		if (currentBonusPeriod == null)
 		{
 			throw new BusinessException("There is no active period for order \"" + returnRequest.getOrder().getCode() + "\"");
@@ -170,9 +180,9 @@ public class DefaultAmwayReturnBonusPeriodService<bp extends AmwayBonusPeriodMod
 		return returnRequest.getConsolidateDate().compareTo(bonusPeriod.getCutoffDate()) > 0;
 	}
 
-	private bp getCurrentBonusPeriod(final ret returnRequest)
+	private bp getCurrentBonusPeriod(final ret returnRequest, BaseSiteModel returnSite)
 	{
-		for (final AmwayBonusPeriodModel bonusPeriod : getBonusPeriods(returnRequest))
+		for (final AmwayBonusPeriodModel bonusPeriod : getBonusPeriods(returnRequest, returnSite))
 		{
 			if (isInsidePeriod(returnRequest, (bp) bonusPeriod))
 			{
@@ -184,7 +194,7 @@ public class DefaultAmwayReturnBonusPeriodService<bp extends AmwayBonusPeriodMod
 
 	private bp getNextBonusPeriod(final ret returnRequest, final bp bonusPeriod)
 	{
-		final Iterator iterator = getBonusPeriods(returnRequest).iterator();
+		final Iterator iterator = getBonusPeriods(returnRequest, null).iterator();
 		while (iterator.hasNext())
 		{
 			if (bonusPeriod.equals(iterator.next()) && iterator.hasNext())
@@ -195,10 +205,10 @@ public class DefaultAmwayReturnBonusPeriodService<bp extends AmwayBonusPeriodMod
 		return null;
 	}
 
-	private List<AmwayBonusPeriodModel> getBonusPeriods(final ret returnRequest)
+	private List<AmwayBonusPeriodModel> getBonusPeriods(final ret returnRequest, BaseSiteModel returnSite)
 	{
 		validateParameterNotNullStandardMessage("returns", returnRequest);
-		final BaseSiteModel site = returnRequest.getOrder().getSite();
+		final BaseSiteModel site = Optional.ofNullable(returnRequest.getOrder().getSite()).orElse(returnSite);
 		validateParameterNotNullStandardMessage("site", site);
 
 		final List<AmwayBonusPeriodModel> bonusPeriods = findAllActiveBonusPeriodsForSite(site);

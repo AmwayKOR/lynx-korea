@@ -10,6 +10,8 @@
 <%@ attribute name="autocomplete" required="false" type="java.lang.String"%>
 <%@ attribute name="disabled" required="false" type="java.lang.Boolean"%>
 <%@ attribute name="maxlength" required="false" type="java.lang.Integer"%>
+<%@ attribute name="wrappedInput" required="false" type="java.lang.Boolean"%>
+<%@ attribute name="inputWrapperClass" required="false" type="java.lang.String"%>
 
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -30,7 +32,7 @@
 			
 		<spring:theme code="${placeholder}" var="placeHolderMessage" />
 
-		<form:input cssClass="${inputCSS} form-control" id="${idKey}" path="${path}"
+		<form:input cssClass="${inputCSS}" id="${idKey}" path="${path}"
 					tabindex="${tabindex}" autocomplete="${autocomplete}" placeholder="${placeHolderMessage}"
 					disabled="${disabled}" maxlength="${maxlength}"/>
 						

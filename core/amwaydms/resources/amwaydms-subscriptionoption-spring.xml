@@ -62,7 +62,8 @@
 		</property>
 	</bean>
 	<alias name="defaultDmsSubscriptionUpdatePopulator" alias="dmsSubscriptionUpdatePopulator"/>
-    <bean id="defaultDmsSubscriptionUpdatePopulator" class="com.amway.integration.cis.dms.populators.DmsSubscriptionUpdatePopulator">
+
+	<bean id="defaultDmsSubscriptionUpdatePopulator" class="com.amway.integration.cis.dms.populators.DmsSubscriptionUpdatePopulator">
     	<property name="baseStoreService" ref="baseStoreService"/>
     	<property name="amwayAccountCommerceService" ref="amwayAccountCommerceService"/>
     </bean>

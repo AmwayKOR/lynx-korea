@@ -146,8 +146,6 @@ public class DefaultAmwayAccountCommerceService implements AmwayAccountCommerceS
 
 	@Resource
 	private BaseSiteService baseSiteService;
-	@Resource
-	private CommerceCartService commerceCartService;
 
 	private AmwayAccountDao amwayAccountDao;
 
@@ -317,20 +315,6 @@ public class DefaultAmwayAccountCommerceService implements AmwayAccountCommerceS
 		UserModel currentUser = getUserService().getCurrentUser();
 		setUPGInSession(currentAccount, (CustomerModel)currentUser);
 	}
-
-	/*
-	 * public boolean isCartContainsStarterKit(final UserModel user) { final SalesApplication salesApplication =
-	 * (SalesApplication) JaloSession.getCurrentSession().getAttribute("currentChannel");
-	 *
-	 * if (SalesApplication.POS.toString().equals(salesApplication.getCode())) { return false; }
-	 *
-	 * final List<CartModel> cartsForSiteAndUser =
-	 * commerceCartService.getCartsForSiteAndUser(baseSiteService.getCurrentBaseSite(), user); for (final CartModel
-	 * cartModel : cartsForSiteAndUser) { if ((cartModel.getType().equals(AmwayCartType.WEB))) { final String
-	 * staterKitCodes = AmwayProductHelper.getSarterKitProductCodes(cartModel.getSite()); for (final
-	 * AbstractOrderEntryModel eachCartEntry : cartModel.getEntries()) { if
-	 * (staterKitCodes.contains(eachCartEntry.getProduct().getCode())) { return true; } } } } return false; }
-	 */
 
 	/**
 	 * Get the account from the customer, to which it is a primary party (customer).

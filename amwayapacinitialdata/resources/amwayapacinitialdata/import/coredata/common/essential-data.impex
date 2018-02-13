@@ -64,10 +64,7 @@ INSERT_UPDATE Vendor;code[unique=true];name
 # Warehouse
 INSERT_UPDATE Warehouse;code[unique=true];name;vendor(code)[default=default];default[default=true]
 ;default;Default Warehouse;
-;warehouse_s;Warehouse South;
-;warehouse_e;Warehouse East;
-;warehouse_w;Warehouse West;
-;warehouse_n;Warehouse North;
+;01;Hq-Jalan 223;
 
 # Disable preview for email pages
 UPDATE CMSPageType;code[unique=true];previewDisabled
@@ -90,13 +87,16 @@ INSERT_UPDATE MediaFolder;qualifier[unique=true];path[unique=true]
 
 # Media formats
 INSERT_UPDATE MediaFormat;qualifier[unique=true]
-;1200Wx1200H
-;515Wx515H
-;365Wx246H
-;300Wx300H
-;96Wx96H
-;65Wx65H
-;30Wx30H
+;Product_67Wx67H
+;Product_78Wx78H
+;Product_96Wx96H
+;Product_133Wx133H
+;Product_145Wx145H
+;Product_165Wx128H
+;Product_176Wx245H
+;Product_180Wx180H
+;Product_588Wx588H
+;Product_800Wx1112H
 
 # Tax & Tax Groups
 INSERT_UPDATE UserTaxGroup;code[unique=true]
@@ -125,3 +125,12 @@ INSERT_UPDATE Tax;code[unique=true];value;currency(isocode)
 INSERT_UPDATE ServicelayerJob;code[unique=true];springId[unique=true]
 ;cartRemovalJob;cartRemovalJob
 ;siteMapMediaJob;siteMapMediaJob
+
+UPDATE User;uid[unique=true];Europe1PriceFactory_UPG(code)
+;anonymous;AmwayDefaultRetailPriceGroup
+
+INSERT_UPDATE ComponentTypeGroup;code[unique=true]
+;mobileminicart
+
+INSERT_UPDATE ComponentTypeGroups2ComponentType;source(code)[unique=true];target(code)[unique=true]
+;mobileminicart;AmwayApacMobileMiniCartComponent

@@ -1,0 +1,619 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<relations>
+		<relation code="FooterLinksRelation" localized="false"
+			generate="true" autocreate="true">
+			<description>Relation between footer and the links at the bottom.</description>
+			<sourceElement qualifier="footerComponent" type="FooterComponent"
+				cardinality="one" />
+			<targetElement qualifier="links" type="CMSLinkComponent"
+				cardinality="many" collectiontype="list" ordered="true" />
+		</relation>
+		<relation code="FooterSpecialComponentBannerRelation"
+			localized="false" generate="true" autocreate="true">
+			<description>Relation between footer simple banner images and their collection component.</description>
+			<sourceElement qualifier="groupComponent"
+				type="AmwayApacFooterSpecialComponent" cardinality="one" />
+			<targetElement qualifier="simpleBanners" type="SimpleBannerComponent"
+				cardinality="many" collectiontype="list" ordered="true" />
+		</relation>
+
+		<relation code="FooterSpecialComponentRelation" localized="false"
+			generate="true" autocreate="true">
+			<description>Relation between footer simple banner collection component and footer component.</description>
+			<sourceElement qualifier="footerComponent" type="FooterComponent"
+				cardinality="one" />
+			<targetElement qualifier="specialComponents"
+				type="AmwayApacFooterSpecialComponent" cardinality="many"
+				collectiontype="list" ordered="true" />
+		</relation>
+
+		<relation code="NavigationNodeSimpleBannerRelation"
+			localized="false" generate="true" autocreate="true">
+			<description>Relation between navigation nodes and banner components for mega menu.</description>
+			<sourceElement qualifier="navigationNode" type="CMSNavigationNode"
+				cardinality="one" />
+			<targetElement qualifier="brandBanners" type="SimpleBannerComponent"
+				cardinality="many" collectiontype="list" ordered="true" />
+		</relation>
+
+		<relation code="NavigationNodeToolAdviceCMSLinkRelation"
+			localized="false" generate="true" autocreate="true">
+			<description>Relation between navigation nodes and link components for mega menu.</description>
+			<sourceElement qualifier="navigationNodeComponent"
+				type="CMSNavigationNode" cardinality="one" />
+			<targetElement qualifier="toolAdviceLinks" type="CMSLinkComponent"
+				cardinality="many" collectiontype="list" ordered="true" />
+		</relation>
+
+		<relation code="AmwayApacShopByCategoryRelation" localized="false"
+			generate="true" autocreate="true">
+			<description>Relation between shop by category and collection component.</description>
+			<sourceElement qualifier="collectionComponent"
+				type="AmwayApacShopByCategoryCollectionComponent" cardinality="one" />
+			<targetElement qualifier="shopByCategoryComponents"
+				type="AmwayApacShopByCategoryComponent" cardinality="many"
+				collectiontype="list" ordered="true" />
+		</relation>
+
+		<relation code="AmwayApacAccountProfileBarLinksRelation"
+			localized="false" generate="true" autocreate="true">
+			<description>Relation between account profile bar component and links.</description>
+			<sourceElement qualifier="barComponent"
+				type="AmwayApacAccountProfileBarComponent" cardinality="one" />
+			<targetElement qualifier="links"
+				type="AmwayApacAccountProfileBarLinkComponent" cardinality="many"
+				collectiontype="list" ordered="true" />
+		</relation>
+
+		<relation code="AmwayApacCountrySelectorRelation" localized="false"
+			generate="true" autocreate="true">
+			<description>Relation between country selector component and links.</description>
+			<sourceElement qualifier="countrySelector"
+				type="AmwayApacCountrySelectorComponent" cardinality="one" />
+			<targetElement qualifier="links" type="AmwayApacImageLinkComponent"
+				cardinality="many" collectiontype="list" ordered="true" />
+		</relation>
+
+		<relation code="AmwayApacRotatingImagesResponsiveBannerRelation"
+			localized="false" generate="true" autocreate="true">
+			<description>Relation between rotating images component and responsive banners.</description>
+			<sourceElement qualifier="rotatingComponent" type="RotatingImagesComponent"
+				cardinality="one" />
+			<targetElement qualifier="responsiveBanners"
+				type="SimpleResponsiveBannerComponent" cardinality="many"
+				collectiontype="list" ordered="true" />
+		</relation>
+
+		<relation code="AmwayApacTermsCollectionRelation" localized="false"
+			generate="true" autocreate="true">
+			<description>Relation between terms and conditions component and tabs.</description>
+			<sourceElement qualifier="tabbedTermsComponent"
+				type="AmwayApacTabbedTermsComponent" cardinality="one" />
+			<targetElement qualifier="termsTabComponents" type="AmwayApacTermsTabComponent"
+				cardinality="many" collectiontype="list" ordered="true" />
+		</relation>
+		
+		<relation code="AmwayApacCarouselMainRelation" localized="false"
+			generate="true" autocreate="true">
+			<description>Relation between carousel and banners in carousel component.</description>
+			<sourceElement qualifier="carouselMainComponent"
+				type="AmwayApacOurCompanyCarouselMainComponent" cardinality="one" />
+			<targetElement qualifier="carouselComponents"
+				type="AmwayApacOurCompanyCarouselComponent" cardinality="many"
+				collectiontype="list" ordered="true" />
+		</relation>
+
+	</relations>
+
+	<itemtypes>
+
+		<typegroup name="TextLinkImageComponents">
+			<itemtype code="AmwayApacAbstractTextLinkImageComponent"
+				extends="SimpleResponsiveBannerComponent"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacAbstractTextLinkImageComponent"
+				autocreate="true" generate="true" abstract="true">
+				<description>Abstract component which will serve as the parent of all the components with image, text and link.</description>
+				<attributes>
+					<attribute qualifier="text" type="CMSParagraphComponent">
+						<description>Text component of the component</description>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="link" type="CMSLinkComponent">
+						<description>Link component</description>
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="AmwayApacTermsBannerComponent" extends="AmwayApacAbstractTextLinkImageComponent"
+				autocreate="true" generate="true"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacTermsBannerComponent">
+				<description>Terms Banner Component</description>
+			</itemtype>
+
+			<itemtype code="AmwayApacArtistryDealCarouselComponent"
+				extends="AmwayApacAbstractTextLinkImageComponent"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacArtistryDealCarouselComponent"
+				autocreate="true" generate="true">
+				<description>Homepage top carousel banner.</description>
+				<attributes>
+					<attribute qualifier="secondaryImage" type="SimpleResponsiveBannerComponent">
+						<description>Banner for second image.</description>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="secondaryLink" type="CMSLinkComponent">
+						<description>Link component for the second link.</description>
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="AmwayApacCategoryTopBannerComponent"
+				extends="AmwayApacAbstractTextLinkImageComponent"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacCategoryTopBannerComponent"
+				autocreate="true" generate="true">
+				<description>Category page top banner component</description>
+				<attributes>
+					<attribute qualifier="logoImage" type="BannerComponent">
+						<description>Logo media</description>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="headerText" type="localized:java.lang.String">
+						<description>Header Text</description>
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="AmwayApacYourOpportunityComponent" extends="AmwayApacAbstractTextLinkImageComponent"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacYourOpportunityComponent"
+				autocreate="true" generate="true">
+				<description>Homepage your opportunity component.</description>
+				<attributes>
+					<attribute qualifier="iconImage" type="BannerComponent">
+						<description>Icon displayed over the component.</description>
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="AmwayApacPathwayToSuccessComponent" extends="AmwayApacAbstractTextLinkImageComponent"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacPathwayToSuccessComponent"
+				autocreate="true" generate="true">
+				<description>Pathway To Success Component</description>
+			</itemtype>
+
+			<itemtype code="AmwayApacBuildYourBusinessComponent"
+				extends="AmwayApacAbstractTextLinkImageComponent"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacBuildYourBusinessComponent"
+				autocreate="true" generate="true">
+				<description>Build Your Business Component</description>
+			</itemtype>
+
+			<itemtype code="AmwayApacExperienceTheStarterKitComponent"
+				extends="AmwayApacAbstractTextLinkImageComponent"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacExperienceTheStarterKitComponent"
+				autocreate="true" generate="true">
+				<description>Experience The Starter Kit Component</description>
+			</itemtype>
+
+			<itemtype code="AmwayApacJoinAmwayComponent" extends="AmwayApacAbstractTextLinkImageComponent"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacJoinAmwayComponent"
+				autocreate="true" generate="true">
+				<description>Join Amway Component</description>
+			</itemtype>
+
+
+			<itemtype code="AmwayApacShopByCategoryComponent" extends="AmwayApacAbstractTextLinkImageComponent"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacShopByCategoryComponent"
+				autocreate="true" generate="true">
+				<description>Shop By Category component.</description>
+			</itemtype>
+
+			<itemtype code="AmwayApacToolsAndAdviceComponent" generate="true"
+				extends="AmwayApacAbstractTextLinkImageComponent" autocreate="true"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacToolsAndAdviceComponent">
+				<description>Tools and Advice component.</description>
+			</itemtype>
+
+			<itemtype code="AmwayApacPathToSuccessPitchPerfectComponent"
+				extends="AmwayApacAbstractTextLinkImageComponent"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacPathToSuccessPitchPerfectComponent"
+				autocreate="true" generate="true">
+				<description>Success story component</description>
+			</itemtype>
+
+			<itemtype code="AmwayApacArtistryNewLuxuryCarouselComponent"
+				extends="AmwayApacAbstractTextLinkImageComponent"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacArtistryNewLuxuryCarouselComponent"
+				autocreate="true" generate="true">
+				<description>Home page banner single carousel component.</description>
+			</itemtype>
+
+			<itemtype code="AmwayApacNewProductComponent" extends="AmwayApacAbstractTextLinkImageComponent"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacNewProductComponent"
+				autocreate="true" generate="true">
+				<description>Category landing page our new product component.</description>
+			</itemtype>
+
+			<itemtype code="AmwayApacSupplementsComponent" extends="AmwayApacAbstractTextLinkImageComponent"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacSupplementsComponent"
+				autocreate="true" generate="true">
+				<description>Supplements component</description>
+			</itemtype>
+
+			<itemtype code="AmwayApacPlatinumABOComponent" extends="AmwayApacAbstractTextLinkImageComponent"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacPlatinumABOComponent"
+				autocreate="true" generate="true">
+				<description>Platinum ABO description component.</description>
+			</itemtype>
+		</typegroup>
+
+		<typegroup name="NavigationNode">
+			<itemtype code="CMSNavigationNode" generate="false"
+				autocreate="false">
+				<attributes>
+					<attribute qualifier="nodeLink" type="CMSLinkComponent">
+						<description>Link to be used for the navigation node.</description>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="nodeImg" type="localized:Media">
+						<description>Image displayed with the navigation node.</description>
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+		</typegroup>
+
+		<typegroup name="LinkComponents">
+			<itemtype code="AmwayApacButtonLinkComponent" extends="CMSLinkComponent"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacButtonLinkComponent"
+				autocreate="true" generate="true">
+				<description>Link component with button UI.</description>
+				<attributes>
+					<attribute qualifier="buttonStyleAttributes" type="java.lang.String">
+						<description>button style definitions and classes</description>
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="AmwayApacIconLinkComponent" extends="CMSLinkComponent"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacIconLinkComponent"
+				autocreate="true" generate="true">
+				<description>Link component with icon UI.</description>
+				<attributes>
+					<attribute qualifier="iconStyleAttributes" type="java.lang.String">
+						<description>icon style definitions and classes</description>
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="AmwayApacImageLinkComponent" extends="CMSLinkComponent"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacImageLinkComponent"
+				autocreate="true" generate="true">
+				<description>Country component with icon UI.</description>
+				<attributes>
+					<attribute qualifier="image" type="localized:Media">
+						<description> Image Icon definitions and classes</description>
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="AmwayApacAccountProfileBarLinkComponent"
+				extends="CMSLinkComponent"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacAccountProfileBarLinkComponent"
+				autocreate="true" generate="true">
+				<description>Link component that holds the URL that my account page profile bar can jump to</description>
+			</itemtype>
+		</typegroup>
+
+		<typegroup name="TermsComponents">
+			<itemtype code="AmwayApacAbstractTermsComponent" extends="SimpleCMSComponent"
+				autocreate="true" generate="true" abstract="true"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacAbstractTermsComponent">
+				<description>Abstract Terms Component</description>
+				<attributes>
+					<attribute qualifier="title" generate="true" autocreate="true"
+						type="CMSParagraphComponent">
+						<description>Title text for the terms component.</description>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="radio1Description" generate="true"
+						autocreate="true" type="localized:java.lang.String">
+						<description>First radio button label</description>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="radio2Description" generate="true"
+						autocreate="true" type="localized:java.lang.String">
+						<description>Second radio button label</description>
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="AmwayApacSimpleTermsComponent" extends="AmwayApacAbstractTermsComponent"
+				autocreate="true" generate="true"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacSimpleTermsComponent">
+				<description>Simple Terms Component</description>
+				<attributes>
+					<attribute qualifier="content" generate="true"
+						autocreate="true" type="CMSParagraphComponent">
+						<description>The content of terms.</description>
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="AmwayApacSimpleContainerTermsComponent"
+				extends="AmwayApacAbstractTermsComponent" autocreate="true"
+				generate="true"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacSimpleContainerTermsComponent">
+				<description>Multiple Terms Component</description>
+				<attributes>
+					<attribute qualifier="content" generate="true"
+						autocreate="true" type="CMSParagraphComponent">
+						<description>The content of terms.</description>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="maxHeight" type="boolean">
+						<description>Decides whether to fix the height of the component.</description>
+						<defaultvalue>Boolean.TRUE</defaultvalue>
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="AmwayApacTabbedTermsComponent" extends="AmwayApacAbstractTermsComponent"
+				autocreate="true" generate="true"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacTabbedTermsComponent">
+				<description>Tabbed Terms Component</description>
+			</itemtype>
+
+			<itemtype code="AmwayApacTermsTabComponent" extends="SimpleCMSComponent"
+				autocreate="true" generate="true"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacTermsTabComponent">
+				<description>Represents one tab in the tabbed component.</description>
+				<attributes>
+					<attribute qualifier="title" generate="true" autocreate="true"
+						type="CMSParagraphComponent">
+						<description>Title of one tab.</description>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="description" generate="true"
+						autocreate="true" type="CMSParagraphComponent">
+						<description>Terms content of the tab.</description>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="colwidth" generate="true"
+						autocreate="true" type="java.lang.Integer">
+						<description>Decides the number of columns for the tab.</description>
+						<defaultvalue>Integer.valueOf(4)</defaultvalue>
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+		</typegroup>
+		
+		<typegroup name="Miscellaneous">
+			<itemtype code="SearchBoxComponent" generate="false"
+				autocreate="false">
+				<description>Overriding Search Box component to add Placeholder</description>
+				<attributes>
+					<attribute qualifier="placeholder" type="localized:java.lang.String">
+						<description> Used to give Default Text</description>
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="AmwayApacAccountProfileBarComponent"
+				extends="SimpleCMSComponent"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacAccountProfileBarComponent"
+				autocreate="true" generate="true">
+				<description>My account profile bar</description>
+			</itemtype>
+
+			<itemtype code="AmwayApacCountrySelectorComponent" extends="SimpleCMSComponent"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacCountrySelectorComponent"
+				autocreate="true" generate="true">
+				<description>Country Collection component.</description>
+				<attributes>
+					<attribute qualifier="currentCountry" type="AmwayApacImageLinkComponent">
+						<description>The link component to display current country.</description>
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+			
+			<itemtype code="AmwayApacMobileCountrySelectorComponent" extends="AmwayApacCountrySelectorComponent"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacMobileCountrySelectorComponent"
+				autocreate="true" generate="true">
+				<description>Mobile Country Collection component.</description>
+			</itemtype>
+
+			<itemtype code="AmwayApacMobileNavigationComponent" extends="NavigationBarComponent"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacMobileNavigationComponent"
+				autocreate="true" generate="true">
+				<description>Header mobile navigation component.</description>
+			</itemtype>
+
+			<itemtype code="AmwayApacShopByCategoryCollectionComponent"
+				extends="SimpleCMSComponent"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacShopByCategoryCollectionComponent"
+				autocreate="true" generate="true">
+				<description>Shop By Category Collection component</description>
+			</itemtype>
+
+			<itemtype code="AmwayApacArtistryNewLuxuryRotatingComponent"
+				extends="RotatingImagesComponent"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacArtistryNewLuxuryRotatingComponent"
+				autocreate="true" generate="true">
+				<description>Rotating images component with background image.</description>
+				<attributes>
+					<attribute qualifier="image" type="localized:Media">
+						<description>background image</description>
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="AmwayApacFeaturedBrandsCarouselComponent"
+				extends="RotatingImagesComponent"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacFeaturedBrandsCarouselComponent"
+				autocreate="true" generate="true">
+				<description>Featured brands rotating images component.</description>
+			</itemtype>
+
+			<itemtype code="AmwayApacMyAccountComponent" extends="SimpleCMSComponent"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacMyAccountComponent"
+				autocreate="true" generate="true">
+				<description>Account page component for links</description>
+				<attributes>
+					<attribute qualifier="iconClass" type="java.lang.String">
+						<description>Header Text</description>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="title" type="localized:java.lang.String">
+						<description>Header Text</description>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="description" type="localized:java.lang.String">
+						<description>description</description>
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="AmwayApacLearningOpportunityCarouselComponent"
+				extends="RotatingImagesComponent"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacLearningOpportunityCarouselComponent"
+				autocreate="true" generate="true">
+				<description>Learning opportunity carousel component.</description>
+			</itemtype>
+
+			<itemtype code="AmwayApacProductColorVariantSelectorComponent"
+				extends="ProductVariantSelectorComponent"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacProductColorVariantSelectorComponent"
+				autocreate="true" generate="true">
+				<description>Represents product color variant selector component that gives the ability to select different types of the product.</description>
+			</itemtype>
+
+			<itemtype code="AmwayApacFooterSpecialComponent" extends="SimpleCMSComponent"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacFooterSpecialComponent"
+				autocreate="true" generate="true">
+				<description>Footer component with a list of banners.</description>
+				<attributes>
+					<attribute qualifier="sectionTitle" type="localized:java.lang.String">
+						<description>The title to be displayed above the special component banners group.</description>
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="FooterComponent" generate="false"
+				autocreate="false">
+				<description>Adding attributes to the footer component.</description>
+				<attributes>
+					<attribute qualifier="copyRightTitle" type="localized:java.lang.String">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="footerBanner" type="SimpleBannerComponent">
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="AmwayApacShoppingListSearchBoxComponent"
+				autocreate="true" generate="true" extends="SearchBoxComponent"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacShoppingListSearchBoxComponent">
+				<description>Represents the search box component for quick shop product search on shopping list page.</description>
+			</itemtype>
+
+			<itemtype code="AmwayApacShoppingCartSearchBoxComponent"
+				autocreate="true" generate="true" extends="SearchBoxComponent"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacShoppingCartSearchBoxComponent">
+				<description>Represents the search box component for quick shop product search on shopping list page.</description>
+			</itemtype>
+			
+			<itemtype code="AmwayApacMobileMiniCartComponent" extends="MiniCartComponent"
+				autocreate="true" generate="true"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacMobileMiniCartComponent">
+				<description>Mobile Mini Cart Component</description>
+			</itemtype>
+			
+			<itemtype code="AmwayApacOurCompanyBannerComponent"
+				extends="AmwayApacAbstractTextLinkImageComponent"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacOurCompanyBannerComponent"
+				autocreate="true" generate="true">
+				<description>Our Company top banner.</description>
+				<attributes>
+					<attribute qualifier="bannerDekstopImg" type="localized:Media">
+						<description>Desktop banner image</description>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="bannerMobileImg" type="localized:Media">
+						<description>Mobile banner image</description>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="bannertitle" type="localized:java.lang.String">
+						<description>Header Text</description>
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+			
+			<itemtype code="AmwayApacOurCompanyCarouselComponent"
+				extends="SimpleCMSComponent"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacOurCompanyCarouselComponent"
+				autocreate="true" generate="true">
+				<description>Our Company Carousel Slider</description>
+				<attributes>
+					<attribute qualifier="year" type="localized:java.lang.String">
+						<description>Year of History</description>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="mobiledesc" type="CMSParagraphComponent">
+						<description>Description Mobile</description>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="desktopdesc" type="CMSParagraphComponent">
+						<description>Description Desktop</description>
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="bannerImg" type="SimpleBannerComponent">
+						<description>Slider Banner Image</description>
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+			
+			
+			<itemtype code="AmwayApacOurCompanyCarouselMainComponent"
+				extends="SimpleCMSComponent"
+				jaloclass="com.amway.apac.storefront.components.jalo.AmwayApacOurCompanyCarouselMainComponent"
+				autocreate="true" generate="true">
+				<description>Our Company Carousel Main Component</description>
+			</itemtype>
+			
+		</typegroup>
+
+	</itemtypes>
+
+</items>

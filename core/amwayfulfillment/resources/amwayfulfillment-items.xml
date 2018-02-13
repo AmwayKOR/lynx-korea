@@ -15,10 +15,6 @@
 
 <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:noNamespaceSchemaLocation="items.xsd">
-    <collectiontypes>
-        <collectiontype code="SerialNumbersList" elementtype="ConsignmentSerialNumber" autocreate="true" generate="true"
-                        type="list"/>
-    </collectiontypes>
 
     <enumtypes>
         <enumtype code="DeliveryStatus" autocreate="false" generate="true">
@@ -48,8 +44,21 @@
         </enumtype>
     </enumtypes>
 
+    <relations>
+        <relation code="AmwayProductSerialNumber2OrderEntryRelation" localized="false">
+            <sourceElement type="AbstractOrderEntry" qualifier="orderEntry" cardinality="one"/>
+            <targetElement type="AmwayProductSerialNumber" qualifier="serialNumbers" cardinality="many"/>
+        </relation>
+        <relation code="AmwayProductSerialNumber2ConsignmentEntryRelation" localized="false">
+            <sourceElement type="ConsignmentEntry" qualifier="consignmentEntry" cardinality="one"/>
+            <targetElement type="AmwayProductSerialNumber" qualifier="serialNumbers" cardinality="many"/>
+        </relation>
+    </relations>
+
     <itemtypes>
+
         <typegroup name="Consignments">
+
             <itemtype code="Consignment" autocreate="false" generate="false">
                 <attributes>
                     <attribute qualifier="trackingLink" type="java.lang.String">
@@ -59,6 +68,7 @@
                     </attribute>
                 </attributes>
             </itemtype>
+
             <itemtype code="ConsignmentEntry" autocreate="false" generate="false">
                 <attributes>
                     <attribute qualifier="lot" type="java.lang.String">
@@ -81,24 +91,10 @@
                         <modifiers optional="true"/>
                         <persistence type="property"/>
                     </attribute>
-                    <attribute qualifier="serialNumbers" type="SerialNumbersList">
-                        <description>List of serial numbers</description>
-                        <modifiers optional="true"/>
-                        <persistence type="property"/>
-                    </attribute>
                 </attributes>
             </itemtype>
-            <itemtype code="ConsignmentSerialNumber" generate="true">
-                <description>Serial number for consignment entry</description>
-                <deployment table="ConsignmentSerialNumber" typecode="25010"/>
-                <attributes>
-                    <attribute qualifier="serialNumber" type="java.lang.String">
-                        <description>Serial number</description>
-                        <modifiers optional="true"/>
-                        <persistence type="property"/>
-                    </attribute>
-                </attributes>
-            </itemtype>
+
         </typegroup>
+
     </itemtypes>
 </items>

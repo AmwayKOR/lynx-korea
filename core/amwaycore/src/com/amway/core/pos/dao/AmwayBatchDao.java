@@ -9,7 +9,6 @@ import de.hybris.platform.commerceservices.search.pagedata.PageableData;
 import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.core.model.user.UserModel;
-import de.hybris.platform.storelocator.model.PointOfServiceModel;
 
 import java.util.Date;
 import java.util.List;
@@ -28,4 +27,7 @@ public interface AmwayBatchDao
 	public List<AmwayBatchModel> getOpenBatches(AmwayTerminalModel terminal);
 	public SearchPageData<OrderModel> getOrders(PageableData pageableData, AmwayBatchModel batchModel);
 	public SearchPageData<OrderModel> getOrders(PageableData pageableData, List<AmwayBatchModel> batchList, Date startDate, Date endDate);
+	public Long getOrdersCount(AmwayBatchModel batchModel);
+	public Long getCustomersCount(AmwayBatchModel batchModel);
+	public Long getProductsCount(AmwayBatchModel batchModel);
 }

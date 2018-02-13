@@ -6,42 +6,40 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="product" tagdir="/WEB-INF/tags/responsive/product" %>
 
-<div class="image-gallery js-gallery">
-    <span class="image-gallery__zoom-icon glyphicon glyphicon-resize-full"></span>
-
-    <c:choose>
+<div class="col-sm-12 col-md-6 product-image-gallery js-product-image-gallery" style="opacity: 1;">
+	 <c:choose>
         <c:when test="${galleryImages == null || galleryImages.size() == 0}">
-            <div class="carousel image-gallery__image js-gallery-image">
-                <div class="item">
-                    <div>
-                        <spring:theme code="img.missingProductImage.responsive.product" text="/" var="imagePath"/>
-                        <c:choose>
-                            <c:when test="${originalContextPath ne null}">
-                                <c:url value="${imagePath}" var="imageUrl" context="${originalContextPath}"/>
-                            </c:when>
-                            <c:otherwise>
-                                <c:url value="${imagePath}" var="imageUrl" />
-                            </c:otherwise>
-                        </c:choose>
-                        <img class="lazyOwl" data-src="${imageUrl}"/>
-                    </div>
-                </div>
+            <div class="image-gallery js-gallery">
+	            <spring:theme code="img.missingProductImage.responsive.product" text="/" var="imagePath"/>
+	            <c:choose>
+	                <c:when test="${originalContextPath ne null}">
+	                    <c:url value="${imagePath}" var="imageUrl" context="${originalContextPath}"/>
+	                </c:when>
+	                <c:otherwise>
+	                    <c:url value="${imagePath}" var="imageUrl" />
+	                </c:otherwise>
+	            </c:choose>
+	            <img class="product-main-image" src="${imageUrl}"/>
             </div>
         </c:when>
         <c:otherwise>
-
-            <div class="carousel image-gallery__image js-gallery-image">
-                <c:forEach items="${galleryImages}" var="container" varStatus="varStatus">
-                    <div class="item">
-                        <div>
-                            <img class="lazyOwl" data-src="${container.product.url}"
-                                 data-zoom-image="${container.superZoom.url}"
-                                 alt="${fn:escapeXml(container.thumbnail.altText)}" >
-                        </div>
-                    </div>
-                </c:forEach>
-            </div>
-            <product:productGalleryThumbnail galleryImages="${galleryImages}" />
+            <div class="image-gallery js-gallery">
+	             <img class="product-main-image" src="${galleryImages[0].product.url}">
+		    </div>
+		    <div class="buttons zoom-center js-zoom-center">
+		        <button class="enlarge2 btn btn-link">
+		            <span class="glyphicon glyphicon-zoom-in"></span>
+		            <span><spring:theme code="pdp.image.panel.enlarge" /></span></button>
+		    </div>
+		    <product:productGalleryThumbnail galleryImages="${galleryImages}" />
+		    <div class="enlarge-content-wrapper display-none">
+	    		<div class="product-description__super-zoom">
+					<img id="top-image" class="product-description__super-image product-zoom-image"
+						alt="full screen image"
+						src="${galleryImages[0].zoom.url}"
+						data-dismiss="modal" aria-label="Close" aria-hidden="true">
+				</div>
+		    </div>
         </c:otherwise>
     </c:choose>
 </div>

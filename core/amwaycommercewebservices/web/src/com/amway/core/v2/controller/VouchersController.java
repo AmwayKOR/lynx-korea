@@ -13,6 +13,7 @@ package com.amway.core.v2.controller;
 import de.hybris.platform.commercefacades.voucher.VoucherFacade;
 import de.hybris.platform.commercefacades.voucher.exceptions.VoucherOperationException;
 import de.hybris.platform.commercewebservicescommons.dto.voucher.VoucherWsDTO;
+import com.amway.core.swagger.ApiBaseSiteIdParam;
 
 import javax.annotation.Resource;
 
@@ -24,33 +25,30 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.Authorization;
 
-/**
- * Main Controller for Vouchers
- *
- * @pathparam code Voucher identifier (code)
- */
+
 @Controller
 @RequestMapping(value = "/{baseSiteId}/vouchers")
+@Api(tags = "Vouchers")
 public class VouchersController extends BaseController
 {
 	@Resource(name = "voucherFacade")
 	private VoucherFacade voucherFacade;
 
-	/**
-	 * Returns details of a single voucher according to a voucher code.
-	 *
-	 * @queryparam fields Response configuration (list of fields, which should be returned in response)
-	 * @return Voucher details
-	 * @throws VoucherOperationException
-	 *            When voucher with given code doesn't exist
-	 * @security Permitted only for trusted client
-	 */
 	@Secured("ROLE_TRUSTED_CLIENT")
 	@RequestMapping(value = "/{code}", method = RequestMethod.GET)
 	@ResponseBody
-	public VoucherWsDTO getVoucherByCode(@PathVariable final String code,
-			@RequestParam(defaultValue = "BASIC") final String fields) throws VoucherOperationException
+	@ApiOperation(value = "Get a voucher based on code", notes = "Returns details of a single voucher according to a voucher code.", authorizations =
+	{ @Authorization(value = "oauth2_client_credentials") })
+	@ApiBaseSiteIdParam
+	public VoucherWsDTO getVoucherByCode(
+			@ApiParam(value = "Voucher identifier (code)", required = true) @PathVariable final String code,
+			@ApiParam(value = "Response configuration (list of fields, which should be returned in response)", allowableValues = "BASIC, DEFAULT, FULL") @RequestParam(defaultValue = "BASIC") final String fields)
+			throws VoucherOperationException
 	{
 		return getDataMapper().map(voucherFacade.getVoucher(code), VoucherWsDTO.class, fields);
 	}

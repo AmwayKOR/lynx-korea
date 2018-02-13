@@ -20,7 +20,7 @@
 # * User Groups
 # * DistanceUnits for Storelocator
 # * MediaFolders
-# * MediaFormats                               s
+# * MediaFormats                               
 # * Tax & Tax Groups
 # * Jobs
 #% impex.setLocale(Locale.GERMAN);
@@ -64,13 +64,6 @@ INSERT_UPDATE MediaFolder;qualifier[unique=true];path[unique=true]
 
 # Media formats
 INSERT_UPDATE MediaFormat;qualifier[unique=true]
-;1200Wx1200H
-;515Wx515H
-;365Wx246H
-;300Wx300H
-;96Wx96H
-;65Wx65H
-;30Wx30H
 ;mobile
 ;tablet
 ;desktop
@@ -105,6 +98,7 @@ INSERT_UPDATE ServicelayerJob;code[unique=true];springId[unique=true]
 ;siteMapMediaJob;siteMapMediaJob
 ;quoteToExpireSoonJobPerformable;quoteToExpireSoonJobPerformable
 ;quoteExpiredJobPerformable;quoteExpiredJobPerformable
+;expiredBackorderJob;expiredBackorderJob
 
 # Deactivate Frontend Restriction on category by default for perfomance purposes
 UPDATE SearchRestriction;code[unique=true];active[default=false]

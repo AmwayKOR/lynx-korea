@@ -7,7 +7,7 @@
 	<script type="text/javascript">
 		/*<![CDATA[*/
 		<%-- Define a javascript variable to hold the content path --%>
-		var ACC = { config: {} };
+		var ACC = { config: {} , messages:{}, globalMessageTypes:{}};
 			ACC.config.contextPath = "${contextPath}";
 			ACC.config.encodedContextPath = "${encodedContextPath}";
 			ACC.config.commonResourcePath = "${commonResourcePath}";
@@ -15,6 +15,7 @@
 			ACC.config.siteResourcePath = "${siteResourcePath}";
 			ACC.config.rootPath = "${siteRootUrl}";	
 			ACC.config.CSRFToken = "${CSRFToken.token}";
+			ACC.config.currentCurrecySymbol = "${currentCurrency.symbol}";	
 			ACC.pwdStrengthVeryWeak = '<spring:theme code="password.strength.veryweak" />';
 			ACC.pwdStrengthWeak = '<spring:theme code="password.strength.weak" />';
 			ACC.pwdStrengthMedium = '<spring:theme code="password.strength.medium" />';
@@ -43,6 +44,26 @@
 					ACC.${jsVar.qualifier} = '${jsVar.value}';
 				</c:if>
 			</c:forEach>
+			
+			ACC.globalMessageTypes.CONF_MESSAGES_HOLDER = "CONF_MESSAGES_HOLDER";
+			ACC.globalMessageTypes.WARNING_MESSAGES_HOLDER = "WARNING_MESSAGES_HOLDER";
+			ACC.globalMessageTypes.ERROR_MESSAGES_HOLDER = "ERROR_MESSAGES_HOLDER";
+
+			ACC.messages.shoppingListNameEmptyErrorMessage= '<spring:theme code="shopping.list.create.error.empty.name"/>';
+			ACC.messages.shoppingListCreationError='<spring:theme code="shopping.list.create.error"/>';
+			ACC.messages.shoppingListAddProductError='<spring:theme code="shopping.list.add.product.error"/>';
+			ACC.messages.shoppingListRemoveProductError='<spring:theme code="shopping.list.remove.product.error"/>';
+			ACC.messages.quickViewFetchError='<spring:theme code="quick.view.fetch.error"/>';
+			ACC.messages.shoppingListNameUpdateError='<spring:theme code="shoppinglist.update.name.error"/>';
+			ACC.messages.showMoreProductsError='<spring:theme code="show.more.fetch.products.error"/>';
+			ACC.messages.shoppingListUidEmptyErrorMessage= '<spring:theme code="shopping.list.add.product.error.empty.listuid"/>';
+			ACC.messages.productCodeEmptyErrorMessage= '<spring:theme code="shopping.list.add.product.error.empty.name"/>';
+			ACC.messages.productAddToCartError= '<spring:theme code="product.addtocart.error"/>';
+			ACC.messages.shoppingListProductAddToCartError= '<spring:theme code="shopping.list.grid.addtocart.none.selected"/>';
+			ACC.messages.quickShopProductCodeError= '<spring:theme code="quick.shop.product.code.error"/>';
+			ACC.messages.quickShopQuantityError= '<spring:theme code="quick.shop.quantity.error"/>';
+			ACC.messages.shoppingListProductSelectedError= '<spring:theme code="shopping.list.product.selected.error"/>';
+			ACC.messages.shoppingListSortingError='<spring:theme code="shoppinglist.sorting.error"/>';
 		/*]]>*/
 	</script>
 	<template:javaScriptAddOnsVariables/>

@@ -48,6 +48,7 @@
 		<property name="countryCode" type="java.lang.String"/>
 		<property name="targetSystem" type="java.lang.String"/>
 		<property name="processed" type="java.lang.Boolean"/>
+		<property name="meta" type="java.util.Map&lt;java.lang.String,java.lang.String>"/>
 	</bean>
 
 

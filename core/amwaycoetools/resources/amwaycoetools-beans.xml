@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
+	
+	<!-- DATA -->
+	<bean class="com.amway.amwaycoetools.data.AmwayBeanDataList">
+		<property name="count" type="Integer"/>
+		<property name="amwayBeans" type="java.util.List&lt;com.amway.amwaycoetools.data.AmwayBeanData>"/>
+	</bean>
+
+	<bean class="com.amway.amwaycoetools.data.AmwayBeanData" >
+		<property name="parents" type="java.util.List&lt;com.amway.amwaycoetools.data.AmwayBeanParentData>"/>
+		<property name="methods" type="java.util.List&lt;com.amway.amwaycoetools.data.AmwayBeanMethodData>"/>
+		<property name="annotations" type="java.util.List&lt;com.amway.amwaycoetools.data.AmwayBeanAnnotationData>"/>
+		<property name="name" type="String"/>
+		<property name="className" type="String"/>
+		<property name="packageName" type="String"/>
+		<property name="classObj" type="java.lang.Class"/>
+
+	</bean>
+
+	
+	<bean class="com.amway.amwaycoetools.data.AmwayBeanParentData">
+		<property name="className" type="String"/>
+		<property name="packageName" type="String"/>
+	</bean>
+
+	<bean class="com.amway.amwaycoetools.data.AmwayBeanMethodData">
+		<property name="method" type="String"/>
+		<property name="paramCount" type="String"/>
+		<property name="returnTypeName" type="String"/>
+		<property name="returnTypePackage" type="String"/>
+	</bean>
+
+	<bean class="com.amway.amwaycoetools.data.AmwayBeanAnnotationData">
+		<property name="annotation" type="String"/>
+	</bean>
+
+
+	<bean class="com.amway.amwaycoetools.dto.AmwayBeanListWsDTO">
+		<property name="count" type="Integer"/>
+		<property name="amwayBeans" type="java.util.List&lt;com.amway.amwaycoetools.dto.AmwayBeanWsDTO>"/>
+	</bean>
+
+	<bean class="com.amway.amwaycoetools.dto.AmwayBeanWsDTO">
+		<property name="parents" type="java.util.List&lt;com.amway.amwaycoetools.dto.AmwayBeanParentWsDTO>"/>
+		<property name="methods" type="java.util.List&lt;com.amway.amwaycoetools.dto.AmwayBeanMethodWsDTO>"/>
+		<property name="annotations" type="java.util.List&lt;com.amway.amwaycoetools.dto.AmwayBeanAnnotationWsDTO>"/>
+
+		<property name="name" type="String"/>
+		<property name="className" type="String"/>
+		<property name="packageName" type="String"/>
+	</bean>
+
+	
+	<bean class="com.amway.amwaycoetools.dto.AmwayBeanParentWsDTO">
+		<property name="className" type="String"/>
+		<property name="packageName" type="String"/>
+	</bean>
+
+	<bean class="com.amway.amwaycoetools.dto.AmwayBeanMethodWsDTO">
+		<property name="method" type="String"/>
+		<property name="paramCount" type="String"/>
+		<property name="returnTypeName" type="String"/>
+		<property name="returnTypePackage" type="String"/>
+	</bean>
+
+	<bean class="com.amway.amwaycoetools.dto.AmwayBeanAnnotationWsDTO">
+		<property name="annotation" type="String"/>
+	</bean>
+
+
+</beans>

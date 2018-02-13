@@ -35,13 +35,14 @@ public class DefaultAmwayBlocksPrivilegeService implements AmwayBlocksPrivilegeS
 	{
 		final BlockPrevRequestData requestData = new BlockPrevRequestData();
 		requestData.setAboNum(account.getCode());
+		requestData.setLoggedInAccountId(account.getCode());
 		requestData.setBlockPrivTypeId(blockPrivTypeId);
 		final String currentTime = AmwayDateHelper.getTimeForSiteTimeZone(AmwayDateHelper.TIME_FMT_LOS);
 		requestData.setEffectiveDate(currentTime);
 		requestData.setExpirationDate(block ? StringUtils.EMPTY : currentTime);
 		requestData.setSalesPlanAff(salesPlanAff);
 		requestData.setPartyId(user.getCustomerID());
-
+		requestData.setLoggedInPartyId(user.getCustomerID());
 		return getProcessBlockPrevService().process(requestData);
 	}
 
@@ -54,6 +55,7 @@ public class DefaultAmwayBlocksPrivilegeService implements AmwayBlocksPrivilegeS
 	{
 		final BlockPrevRequestData request = new BlockPrevRequestData();
 		request.setAboNum(account.getCode());
+		request.setLoggedInAccountId(account.getCode());
 		request.setEffectiveDate(AmwayDateHelper.getTimeForSiteTimeZone(order.getSite(), AmwayDateHelper.TIME_FMT_LOS));
 		request.setBlockPrivTypeId(blockPrivTypeId);
 		request.setSalesPlanAff(salesPlanAff);

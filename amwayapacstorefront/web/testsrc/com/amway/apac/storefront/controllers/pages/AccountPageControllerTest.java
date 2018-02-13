@@ -58,7 +58,6 @@ import de.hybris.platform.commerceservices.search.pagedata.PaginationData;
 import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import de.hybris.platform.servicelayer.i18n.I18NService;
-import com.amway.apac.storefront.controllers.ControllerConstants;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -79,6 +78,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.support.BindingAwareModelMap;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.amway.apac.storefront.controllers.ControllerConstants;
+import com.amway.apac.storefront.forms.AmwayApacAddressForm;
 
 
 @UnitTest
@@ -158,7 +160,7 @@ public class AccountPageControllerTest
 	@Mock
 	private AbstractPageModel abstractPageModel;
 	@Mock
-	private AddressForm addressForm;
+	private AmwayApacAddressForm addressForm;
 	@Mock
 	private UpdateEmailForm emailForm;
 	@Mock
@@ -181,6 +183,8 @@ public class AccountPageControllerTest
 	private ProfileValidator profileValidator; //NOPMD
 	@Mock
 	private SiteConfigService siteConfigService; //NOPMD
+	@Mock
+	private Boolean primaryAddress;
 
 	private List breadcrumbsList;
 
@@ -370,7 +374,8 @@ public class AccountPageControllerTest
 	{
 		BDDMockito.given(Boolean.valueOf(bindingResult.hasErrors())).willReturn(Boolean.TRUE);
 
-		final String addressBookPage = accountController.editAddress(addressForm, bindingResult, page, redirectModel);
+		final String addressBookPage = accountController.editAddress(addressForm, primaryAddress, bindingResult, page,
+				redirectModel);
 
 		Mockito.verify(accountController).setUpAddressFormAfterError(addressForm, page);
 		assertEquals(FULL_VIEW_PATH, addressBookPage);
@@ -388,7 +393,8 @@ public class AccountPageControllerTest
 						Mockito.eq(redirectModel), Mockito.eq(bindingResult), Mockito.anyBoolean(), Mockito.anyString())))
 				.willReturn(Boolean.TRUE);
 
-		final String addAddressPage = accountController.editAddress(addressForm, bindingResult, page, redirectModel);
+		final String addAddressPage = accountController.editAddress(addressForm, primaryAddress, bindingResult, page,
+				redirectModel);
 
 		assertEquals(FULL_VIEW_PATH, addAddressPage);
 	}
@@ -396,7 +402,8 @@ public class AccountPageControllerTest
 	@Test
 	public void shouldUpdateValidAddress() throws CMSItemNotFoundException
 	{
-		final String editAddressPage = accountController.editAddress(addressForm, bindingResult, page, redirectModel);
+		final String editAddressPage = accountController.editAddress(addressForm, primaryAddress, bindingResult, page,
+				redirectModel);
 
 		Mockito.verify(userFacade).editAddress(Mockito.any(AddressData.class));
 		assertThat(editAddressPage, CoreMatchers.containsString(REDIRECT_TO_EDIT_ADDRESS_PAGE));
@@ -428,7 +435,7 @@ public class AccountPageControllerTest
 		setupExistingOrder();
 		BDDMockito.given(orderFacade.getPagedOrderHistoryForStatuses(Mockito.any(PageableData.class))).willReturn(searchList);
 
-		final String orderHistoryPage = accountController.orders(1, showMode, "desc", page);
+		final String orderHistoryPage = accountController.orders(1, showMode, "desc", page, false, false, null, null);
 		Mockito.verify(orderFacade).getPagedOrderHistoryForStatuses(Mockito.any(PageableData.class));
 		assertEquals(FULL_VIEW_PATH, orderHistoryPage);
 	}

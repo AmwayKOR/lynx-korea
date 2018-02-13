@@ -5,6 +5,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 /**
  * <p>Java class for partyPrivacySvcData complex type.
@@ -37,6 +39,7 @@ import javax.xml.bind.annotation.XmlType;
     "partyId",
     "salesPlanAff"
 })
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class PartyPrivacySvcData {
 
     protected String allowEmailFlag;

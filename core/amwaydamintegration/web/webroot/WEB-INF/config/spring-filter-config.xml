@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Spring managed FilterChain for hybris Filter stack -->
+    <bean id="amwaydamintegrationPlatformFilterChain" class="de.hybris.platform.servicelayer.web.PlatformFilterChain">
+        <constructor-arg>
+            <list>
+                <ref bean="log4jFilter"/>
+                <ref bean="tenantActivationFilter"/>
+                <ref bean="restSessionFilter"/>
+                <ref bean="springSecurityFilterChain"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="restSessionFilter" class="de.hybris.platform.webservicescommons.filter.RestSessionFilter">
+        <property name="sessionService" ref="sessionService"/>
+    </bean>
+
+</beans>

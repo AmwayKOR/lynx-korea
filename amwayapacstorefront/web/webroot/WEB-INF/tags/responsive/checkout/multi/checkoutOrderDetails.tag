@@ -1,27 +1,52 @@
-<%@ tag body-content="empty" trimDirectiveWhitespaces="true" %>
-<%@ attribute name="cartData" required="true" type="de.hybris.platform.commercefacades.order.data.CartData" %>
-<%@ attribute name="showDeliveryAddress" required="true" type="java.lang.Boolean" %>
-<%@ attribute name="showPaymentInfo" required="false" type="java.lang.Boolean" %>
-<%@ attribute name="showTax" required="false" type="java.lang.Boolean" %>
-<%@ attribute name="showTaxEstimate" required="false" type="java.lang.Boolean" %>
+<%@ tag language="java" pageEncoding="ISO-8859-1"%>
+<%@ attribute name="orderData" required="true" type="de.hybris.platform.commercefacades.order.data.AbstractOrderData" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="multi-checkout" tagdir="/WEB-INF/tags/responsive/checkout/multi" %>
-<%@ taglib prefix="order" tagdir="/WEB-INF/tags/responsive/order" %>
 
-<div class="checkout-summary-headline"><spring:theme code="checkout.multi.order.summary" /></div>
-
-<div class="checkout-order-summary">
-    <multi-checkout:deliveryCartItems cartData="${cartData}" showDeliveryAddress="${showDeliveryAddress}" />
-
-    <c:forEach items="${cartData.pickupOrderGroups}" var="groupData" varStatus="status">
-        <multi-checkout:pickupCartItems cartData="${cartData}" groupData="${groupData}" showHead="true" />
-    </c:forEach>
-
-    <order:appliedVouchers order="${cartData}" />
-
-    <multi-checkout:paymentInfo cartData="${cartData}" paymentInfo="${cartData.paymentInfo}" showPaymentInfo="${showPaymentInfo}" />
-
-    <multi-checkout:orderTotals cartData="${cartData}" showTaxEstimate="${showTaxEstimate}" showTax="${showTax}" />
+<div class="shipping-delivery-summary-header">
+	<span>
+		<spring:theme code="checkout.multi.order.summary" />
+	</span>
 </div>
+<div class="shipping-delivery-summary-prices">
+	<ul>
+		<li class="shipping-delivery-list-item">
+			<span class="shipping-delivery-item-label">
+				<spring:theme code="checkout.multi.order.summary.subtotal" />
+			</span>
+			<span class="performance-box-item-abovalue">${orderData.subTotal.formattedValue}</span>
+		</li>
+		<li class="shipping-delivery-list-item">
+			<span class="shipping-delivery-item-label">
+				<spring:theme code="checkout.multi.order.summary.shipping" />
+			</span>
+			<span class="performance-box-item-abovalue">${orderData.deliveryCost.formattedValue}</span>
+		</li>
+		<li class="shipping-delivery-list-item">
+			<span class="shipping-delivery-item-label">Tax One</span>
+			<span class="performance-box-item-abovalue">$0.00</span>
+		</li>
+		<li class="shipping-delivery-list-item">
+			<span class="shipping-delivery-item-label">Tax Two</span>
+			<span class="performance-box-item-abovalue">$0.00</span>
+		</li>
+		<li class="shipping-delivery-list-item">
+			<span class="shipping-delivery-item-label">Service Fee(s)</span>
+			<span class="performance-box-item-abovalue">$0.00</span>
+		</li>
+		<li class="shipping-delivery-list-item-total">
+			<span class="shipping-delivery-item-total">
+				<spring:theme code="checkout.multi.order.summary.total" />
+			</span>
+			<span class="shipping-delivery-item-totalvalue">${orderData.totalPrice.formattedValue}</span>
+		</li>
+		<li class="shipping-delivery-list-item-pvbv">
+			<span class="shipping-delivery-item-total">
+				<spring:theme code="checkout.multi.order.summary.totalpvbv" />
+			</span>
+			<span class="shipping-delivery-item-totalvalue">${orderData.totalPrice.amwayValue.pointValue} /
+				${orderData.totalPrice.amwayValue.businessVolume}</span>
+		</li>
+	</ul>
+</div>
+

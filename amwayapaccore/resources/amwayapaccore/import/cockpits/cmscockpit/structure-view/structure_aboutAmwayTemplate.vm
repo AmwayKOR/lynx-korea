@@ -1,0 +1,94 @@
+<div>
+	<table width="100%" cellspacing="0" style="margin:0;padding:0;table-layout:auto;border:1px solid #1E4EBF;">
+		<tbody>
+			<tr>
+				<td colspan="6" class="structureViewSection">
+					<cockpit code="TopHeaderSlot"/>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" rowspan="1" class="structureViewSection">
+					<cockpit code="SiteLogo" />
+				</td>
+				<td colspan="2" rowspan="1" class="structureViewSection">
+					<cockpit code="CountrySelector" />
+				</td>
+				<td colspan="1" rowspan="1" class="structureViewSection">
+					<cockpit code="HeaderAccountNavigation" />
+				</td>
+				<td colspan="1" rowspan="1" class="structureViewSection">
+					<cockpit code="MiniCart" />
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" rowspan="1" class="structureViewSection">
+					<cockpit code="MobileSiteLogo" />
+				</td>
+				<td colspan="2" rowspan="1" class="structureViewSection">
+					<cockpit code="MobileCountrySelector" />
+				</td>
+				<td colspan="2" rowspan="1" class="structureViewSection">
+					<cockpit code="MobileMiniCart" />
+				</td>
+			</tr>
+			<tr>
+				<td  colspan="2" rowspan="1" class="structureViewSection">
+					<cockpit code="NavigationBar" />
+				</td>
+				<td  colspan="2" rowspan="1" class="structureViewSection">
+					<cockpit code="MobileNavigationBar" />
+				</td>
+				<td  colspan="2" rowspan="1" class="structureViewSection">
+					<cockpit code="SearchBox" />
+				</td>
+			</tr>
+			<tr>
+                <td colspan="6" class="structureViewSection" >
+                        <cockpit code="BreadCrumb"/>
+                </td>
+        	</tr>
+        	<tr>
+				<td colspan="6" style="vertical-align:top;" class="structureViewSection">
+					<cockpit code="AboutAmwayPageTitleContentSlot1" />
+				</td>
+			</tr>
+			<tr>
+				<td colspan="6" style="vertical-align:top;" class="structureViewSection">
+					<cockpit code="VideoPreviewAboutAmwayContentSlot1" />
+				</td>
+			</tr>
+		    <tr>
+				<td colspan="6" style="vertical-align:top;" class="structureViewSection">
+					<cockpit code="OurCompanyAboutAmwayContentSlot1" />
+				</td>
+            </tr>
+            <tr>
+                <td colspan="3" class="structureViewSection" >
+                        <cockpit code="SuccessStoryAboutAmwayContentSlot1"/>
+                </td>
+                <td colspan="3" class="structureViewSection" >
+                        <cockpit code="SuccessStoryAboutAmwayContentSlot2"/>
+                </td>
+            </tr>
+			<tr>
+                <td colspan="2" class="structureViewSection" >
+                        <cockpit code="ToolsAndAdviceBannerAboutAmwayContentSlot1"/>
+                </td>
+                <td colspan="2" class="structureViewSection" >
+                        <cockpit code="ToolsAndAdviceBannerAboutAmwayContentSlot2"/>
+                </td>
+                <td colspan="2" class="structureViewSection" >
+                        <cockpit code="ToolsAndAdviceBannerAboutAmwayContentSlot3"/>
+                </td>
+            </tr>
+			<tr>
+				<td height="270px" colspan="6" class="structureViewSection">
+					<cockpit code="Footer" />
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<div style="width:100%; border-top: 2px solid #bbb" class="cmsContentEditor">
+		<cockpit code="editor" />
+	</div>
+</div>

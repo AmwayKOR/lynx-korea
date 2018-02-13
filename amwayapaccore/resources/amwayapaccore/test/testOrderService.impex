@@ -1,0 +1,123 @@
+$catalog-id=testProductCatalog
+$catalog-version=Online
+$defaultLanguage=en
+$currencies=EUR,USD
+$deliveryCountries=US
+$defaultCurrency=USD
+
+$catalogversion=catalogversion(catalog(id[default='testProductCatalog']),version[default='Online'])[unique=true,default='testProductCatalog:Online']
+
+INSERT_UPDATE Language;isocode[unique=true];active;
+;de;true;
+;en;true;
+
+UPDATE Language;isocode[unique=true];name[lang=de];name[lang=en]
+;de;Deutsch;German
+;en;Englisch;English
+
+INSERT_UPDATE Unit;unitType[unique=true];code[unique=true];name[lang=de];name[lang=en];conversion;;;;;
+;pieces;pieces;pieces;pieces;1;;;;;
+
+INSERT_UPDATE Currency;isocode[unique=true];name[lang=de];name[lang=en];active;base;conversion;digits;symbol;;
+;EUR;Euro;Euro;true;true;1;2;E;;
+;USD;US-Dollar;US Dollar;true;false;1,38;2;$;;
+
+INSERT_UPDATE Title;code[unique=true];name[lang=de];name[lang=en]
+;dr;Dr.;dr.
+;prof;Prof.;prof.
+
+# Zone Delivery Modes
+INSERT_UPDATE ZoneDeliveryMode;code[unique=true];net;active[default=true]
+;standard-gross;true
+
+INSERT_UPDATE PickUpDeliveryMode;code[unique=true];active[default=true];supportedMode(code)
+;pickup;;BUY_AND_COLLECT
+
+
+INSERT_UPDATE UserGroup;uid[unique=true];
+;customergroup;
+
+INSERT_UPDATE Country;isocode[unique=true];name[lang=de];name[lang=en];active;;;;;;
+;DE;Deutschland;Germany;true;;;;;;
+;US;Vereinigte Staaten von Amerika;United States of America;true;;;;;;
+
+INSERT_UPDATE Catalog;id[unique=true];name[lang=de];name[lang=en];defaultCatalog;;;;;;
+;$catalog-id;$catalog-id;$catalog-id;true;;;;;;
+
+INSERT_UPDATE CatalogVersion; catalog(id)[unique=true]; version[unique=true]; active;defaultCurrency(isocode);;;;;;
+;$catalog-id;$catalog-version;true;EUR;de,en;;;;;
+
+INSERT_UPDATE BaseStore;uid[unique=true];catalogs(id);currencies(isocode);net;taxGroup(code);storelocatorDistanceUnit(code);defaultCurrency(isocode);languages(isocode);defaultLanguage(isocode);deliveryCountries(isocode);solrFacetSearchConfiguration(name);submitOrderProcessCode
+;testStore;$catalog-id;$currencies;false;;km;$defaultCurrency;$defaultLanguage;$defaultLanguage;$deliveryCountries;;
+
+INSERT_UPDATE BaseSite;uid[unique=true];stores(uid);channel(code)
+;testSite;testStore;B2C
+
+INSERT_UPDATE Vendor;code[unique=true];name[lang=en];;;;;;;
+;testVendor;testVendor;;;;;;;
+
+INSERT_UPDATE Warehouse;code[unique=true];name[lang=en];vendor(code);default;baseStores(uid);;;;
+;testWarehouse1;Warehouse South;testVendor;false;testStore;;;;
+;testWarehouse2;Warehouse South;testVendor;false;testStore;;;;
+
+INSERT_UPDATE PointOfService;name[unique=true];displayname;description;type(code);address(&addrID);latitude;longitude;basestore(uid)[default=testStore];warehouses(code);
+;testPointOfService;"testPointOfService";"Point of Service";STORE;pos1-address;-23.561833;-46.663968;;;testWarehouse2
+
+INSERT_UPDATE Address;owner(PointOfService.name)[unique=true];&addrID;streetname[unique=true];streetnumber[unique=true];postalcode[unique=true];duplicate[unique=true];town;country(isocode);billingAddress;contactAddress;shippingAddress;unloadingAddress;firstname;lastname;email;gender(code);middlename;phone1;title(code);url;company;fax;department;
+;testPointOfService;pos1-address;Zennerstrasse;45;28277;false;Bremen;US;false;false;false;true;Anja;Hertz;testmail@test.com;FEMALE;;;;;;
+
+
+INSERT_UPDATE StockLevel;available;warehouse(code)[unique=true];inStockStatus(code);maxPreOrder;maxStockLevelHistoryCount;overSelling;preOrder;productCode[unique=true];reserved;
+;0;testWarehouse1;forceInStock;0;-1;0;0;testProduct1;0;
+;10;testWarehouse1;notSpecified;0;-1;0;0;testProduct2;0;
+;10;testWarehouse1;shipped;0;-1;0;0;testProduct3;0;
+;0;testWarehouse1;backOrder;0;-1;0;0;testProduct4;0;
+;0;testWarehouse2;backOrder;0;-1;0;0;testProduct4;0;
+
+# Customers
+INSERT_UPDATE Customer;originalUid[unique=true];uid[unique=true];title(code);name;description;sessionLanguage(isocode);sessionCurrency(isocode);groups(uid);password[default=$defaultPassword];&userId;defaultPaymentAddress(&addId);defaultShipmentAddress(&addId)
+;amwayTestUser;amwayTestUser;;test user;test user;en;EUR;customergroup;;amwayTestUser
+
+# Customer addresses
+INSERT_UPDATE Address;&addId;owner(&userId)[unique=true];streetname[unique=true];postalcode[unique=true];duplicate[unique=true];town;country(isocode);billingAddress;contactAddress;shippingAddress;unloadingAddress;firstname;lastname;email;gender(code);middlename;phone1;title(code);url;company;fax;department
+;amwayTestAddr;amwayTestUser;express Street;10019;false;New York;US;true;true;true;true;Enterprise;User;amwayTestUser;MALE;;+001 1234567;;Hybris;;
+
+# Products
+INSERT_UPDATE Product;code[unique=true];$catalogversion;name[lang=de];name[lang=en];unit(code);approvalStatus(code);owner(Principal.uid)
+;testProduct1;testProductCatalog:Online;testProduct1;testProduct1;pieces;approved;admin
+;testProduct2;testProductCatalog:Online;testProduct2;testProduct2;pieces;approved;admin
+;testProduct3;testProductCatalog:Online;testProduct3;testProduct3;pieces;approved;admin
+;testProduct4;testProductCatalog:Online;testProduct4;testProduct4;pieces;approved;admin
+;testProduct5;testProductCatalog:Online;testProduct5;testProduct5;pieces;approved;admin
+
+
+
+# Order
+INSERT_UPDATE Order;store(uid);user(uid);code[unique=true];currency(isocode);date[dateformat=dd.MM.yyyy HH:mm:ss];net;calculated;site(uid);guid;deliveryMode(code);;;
+;testStore;amwaytestuser;testOrder1;USD;14.09.2017 13:18:05.075;false;false;testSite;;standard-gross;;
+;testStore;amwaytestuser;testOrder2;USD;14.09.2017 13:18:05.075;false;false;testSite;;standard-gross;;
+;testStore;amwaytestuser;testOrder3;USD;14.09.2017 13:18:05.075;false;false;testSite;;standard-gross;;
+;testStore;amwaytestuser;testOrder4;USD;14.09.2017 13:18:05.075;false;false;testSite;;pickup;;
+
+# Order Entries
+INSERT_UPDATE OrderEntry;order(Order.code)[unique=true];creationTime[dateformat=yyyy-MM-dd HH:mm:ss];product(code,$catalogversion)[unique=true];quantity;unit(code);dispositionCode(code);deliveryPointOfService(name);wareHouse(code)
+;testOrder1;2011-04-27 18:54:00;testProduct1;1;pieces;shipped;;testWarehouse1;
+;testOrder1;2011-04-27 18:54:00;testProduct2;1;pieces;shipped;;testWarehouse1;
+;testOrder2;2011-04-27 18:54:00;testProduct3;1;pieces;shipped;;testWarehouse1;
+;testOrder2;2011-04-27 18:54:00;testProduct4;1;pieces;backOrder;;testWarehouse1;
+;testOrder3;2011-04-27 18:54:00;testProduct5;1;pieces;shipped;;testWarehouse1;
+;testOrder4;2011-04-27 18:54:00;testProduct4;1;pieces;shipped;testPointOfService;testWarehouse2
+
+
+
+# Payment Transaction Code = User_Random No
+INSERT_UPDATE PaymentTransaction;code[unique=true]					   ;paymentProvider;plannedAmount;currency(isocode)[unique=true];order(code)[unique=true]
+								;testPaymentTransaction1			   ;PG       	   ;10    		 ;USD						    ;testOrder1
+								;testPaymentTransaction2			   ;PG       	   ;10    		 ;USD						    ;testOrder2
+								;testPaymentTransaction4			   ;PG       	   ;10    		 ;USD						    ;testOrder4	  			   
+								
+# Payment Transaction Entry Code = Unique Series
+# Payment Transaction Entry Request Id = Unique Series
+INSERT_UPDATE PaymentTransactionEntry;code[unique=true]				   ;amount;currency(isocode)[unique=true];paymentTransaction(code,order(code)[unique=true])[unique=true];type(code);transactionStatus
+									 ;testPaymentTransactionEntry1     ;10    ;USD						     ;testPaymentTransaction1:testOrder1             				;CAPTURE   ;success
+									 ;testPaymentTransactionEntry2     ;10    ;USD						     ;testPaymentTransaction2:testOrder2             				;CANCEL    ;cancel
