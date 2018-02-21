@@ -1,0 +1,1143 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2013 hybris AG All rights reserved. 
+	This software is the confidential and proprietary information of hybris ("Confidential 
+	Information"). You shall not disclose such Confidential Information and shall 
+	use it only in accordance with the terms of the license agreement you entered 
+	into with hybris. -->
+
+<!-- ATTENTION: This is just an example file. You have to edit it according 
+	to your needs. -->
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="beans.xsd">
+
+	<enum class="com.amway.core.data.SubscriptionOptions">
+		<value>PAUSE</value>
+		<value>SUBSCRIBED</value>
+		<value>CANCEL</value>
+	</enum>
+
+	<bean class="com.amway.core.dms.data.RegisterRequestData" extends="com.amway.core.data.CommonRequestFieldsData">
+		<property name="allowMarketingMails" type="boolean" />
+		<property name="userName" type="java.lang.String" />
+		<property name="taxId" type="java.lang.String" />
+		<property name="sponsorId" type="java.lang.String" />
+		<property name="emailId" type="java.lang.String" />
+		<property name="address" type="de.hybris.platform.commercefacades.user.data.AddressData" />
+		<property name="registrationType" type="String" />
+		<property name="aboRegistration" type="boolean" />
+		<property name="dob" type="String" />
+		<property name="legalEntity" type="String" />
+		<property name="login" type="String" />
+		<property name="password" type="String" />
+		<property name="titleCode" type="String" />
+		<property name="firstName" type="String" />
+		<property name="lastName" type="String" />
+		<property name="aboNumber" type="String" />
+		<property name="registerAs" type="String" />
+		<property name="hasIntlPrimaryBusiness" type="boolean" />
+		<property name="intlPrimaryAffiliateNumber" type="String" />
+		<property name="intlPrimarySponsorNumber" type="String" />
+		<property name="slectedSponsorFromLocSearch" type="String" />
+		<property name="primarySponsor" type="boolean" />
+		<property name="hasSponsor" type="boolean" />
+		<property name="primaryEmail" type="boolean"/>
+		<property name="contactPointPurposeCd" type="java.lang.String"/>
+		<property name="primaryFlag" type="java.lang.String"/>
+		<property name="phoneDetails" type="java.util.List&lt;com.amway.core.dms.data.PhoneMasterRequestData>"/>
+		<property name="minorFlag" type="boolean"/>
+		<property name="registerdFromCs" type="boolean"/>
+		<property name="starterKitCode" type="java.lang.String"/>
+	</bean>
+
+	<bean class="com.amway.dms.data.AddressInformationRequestData"
+		extends="com.amway.core.data.CommonRequestFieldsData">
+		<property name="contactPointPurposeCd" type="java.lang.String" />
+		<property name="partyId" type="java.lang.String" />
+		<property name="primaryFlag" type="java.lang.String" />
+	</bean>
+
+	<bean class="com.amway.dms.data.UpdateBusinessNatureInputRequestData"
+		extends="com.amway.core.data.CommonRequestFieldsData">
+		<property name="accountSubTypeCd" type="java.lang.String" />
+		<property name="orderNum" type="java.lang.String" />
+		<property name="reasonCd" type="java.lang.String" />
+	</bean>
+
+	<!-- ABO account pojo -->
+	<bean class="com.amway.core.data.AmwayProfileRequestData" extends="com.amway.core.data.CommonRequestFieldsData">
+		<property name="deltailLevelCd" type="java.lang.String" />
+		<property name="accntBalType" type="java.lang.String" />
+	</bean>
+
+	<bean class="com.amway.core.dms.data.PartyNameDetailResponseData" extends="com.amway.core.data.CommonResponseFieldsData">
+		<property name="PartyMasterNameDtlList" type="com.amway.core.dms.data.PartyMasterNameDtlListData"></property>
+	</bean>
+
+	<bean class="com.amway.core.dms.data.PartyPersonalDetailsRequestData"
+		extends="com.amway.core.data.CommonRequestFieldsData">
+		<property name="userId" type="java.lang.String" />
+		<property name="statusCd" type="java.lang.String" />
+		<property name="tzOffset" type="java.lang.String" />
+		<property name="roleCd" type="java.lang.String" />
+		<property name="maritalStatusCd" type="java.lang.String" />
+		<property name="languageCd" type="java.lang.String" />
+		<property name="userPin" type="java.lang.String" />
+		<property name="ethnicCd" type="java.lang.String" />
+		<property name="genderCd" type="java.lang.String" />
+		<property name="birthCountryCd" type="java.lang.String" />
+		<property name="userPasswd" type="java.lang.String" />
+		<property name="primaryOnAccount" type="java.lang.String" />
+		<property name="partyTypeCd" type="java.lang.String" />
+		<property name="professionCd" type="java.lang.String" />
+		<property name="educationTypeCd" type="java.lang.String" />
+		<property name="partyIsMinorFlg" type="java.lang.String" />
+		<property name="relationShipToPrimaryPartyCd" type="java.lang.String" />
+		<property name="birthdate" type="java.lang.String" />
+	</bean>
+
+	<bean class="com.amway.core.dms.data.PartyNameDetailsRequestData"
+		extends="com.amway.core.data.CommonRequestFieldsData">
+		<property name="localeNameData" type="com.amway.core.dms.data.LocaleNameData" />
+		<property name="latinNameData" type="com.amway.core.dms.data.LatinNameData" />
+		<property name="languageCd" type="java.lang.String" />
+		<property name="personNameTypeCd" type="java.lang.String" />
+		<property name="charSetCd" type="java.lang.String" />
+		<property name="preferredName" type="java.lang.String" />
+	</bean>
+
+	<bean class="com.amway.core.dms.data.LocaleNameData">
+		<property name="givenName" type="java.lang.String" />
+		<property name="suffix" type="java.lang.String" />
+		<property name="title" type="java.lang.String" />
+		<property name="familyName" type="java.lang.String" />
+		<property name="middleName" type="java.lang.String" />
+	</bean>
+
+	<bean class="com.amway.core.dms.data.PartyMasterNameDtlListData">
+		<property name="partyMstData"
+			type="com.amway.core.dms.data.PartyPersonalDetailsRequestData" />
+		<property name="partyNameList"
+			type="java.util.List&lt;com.amway.core.dms.data.PartyNameDetailsRequestData>" />
+	</bean>
+
+	<bean class="com.amway.core.data.AccountMasterDetailsData">
+		<property name="accountName" type="java.lang.String" />
+		<property name="accountNumber" type="java.lang.String" />
+		<property name="accountType" type="java.lang.String" />
+		<property name="entryDate" type="java.util.Date" />
+		<property name="expirationDate" type="java.util.Date" />
+		<property name="businessNature" type="java.lang.String" />
+		<property name="segmentCd" type="java.lang.String" />
+		<property name="restrictionId" type="java.lang.String" />
+		<property name="statusCd" type="java.lang.String" />
+		<property name="accountCreditStatusCd" type="java.lang.String" />
+		<property name="cntryCd" type="java.lang.String" />
+		<property name="salesPlanAff" type="java.lang.String" />
+		<property name="lglEntityType" type="java.lang.String" />
+		<property name="languageCd" type="java.lang.String" />
+		<property name="loaCd" type="java.lang.String" />
+		<property name="currencyCd" type="java.lang.String" />
+		<property name="accountCreditLimit" type="java.lang.String" />
+		<property name="orderCreditLimit" type="java.lang.String" />
+		<property name="accountSubTypeCd" type="java.lang.String" />
+		<property name="lateRenewalEligibleFlg" type="java.lang.String" />
+		<property name="renewalFlag" type="java.lang.String"/>
+	</bean>
+
+	<bean class="com.amway.core.los.data.SponsorDetailsData">
+		<property name="sponsorABONo" type="java.lang.String" />
+		<property name="sponsorEmail" type="java.lang.String" />
+		<property name="sponsorName" type="java.lang.String" />
+		<property name="sponsorPhone" type="java.lang.String" />
+	</bean>
+
+		<bean class="com.amway.core.data.TaxDetailsData" extends="com.amway.core.data.CommonRequestFieldsData">
+		<property name="taxId" type="java.lang.String" />
+		<property name="taxIdType" type="java.lang.String" />
+		<property name="taxExpirationDate" type="java.lang.String" />
+		<property name="cntryCd" type="java.lang.String" />
+		<property name="partyId" type="java.lang.String" />
+	</bean>
+	
+	<bean class="com.amway.core.dms.data.TaxIdDetailsResponseData"
+		extends="com.amway.core.data.CommonResponseFieldsData">
+		<property name="partyTaxDetailsListData" type="java.util.List&lt;com.amway.core.data.TaxDetailsData>" />
+	</bean>
+
+	<bean class="com.amway.core.dms.data.AccountBalanceData">
+		<property name="balanceAmount" type="java.lang.String" />
+		<property name="balanceTypeCd" type="java.lang.String" />
+		<property name="instrumentId" type="java.lang.String" />
+		<property name="currencyCd" type="java.lang.String" />
+	</bean>
+
+	<bean class="com.amway.core.dms.data.PartyEcommRequestData" extends="com.amway.core.dms.data.ContactRequestData">
+		<property name="allowForLogIn" type="java.lang.String" />
+		<property name="ecommAddr" type="java.lang.String" />
+		<property name="ecommTypeName" type="java.lang.String" />
+		<property name="ecommTypeCd" type="java.lang.String" />
+		<property name="ecommName" type="java.lang.String" />
+		<property name="statusCd" type="java.lang.String" />
+	</bean>
+
+	<bean class="com.amway.core.dms.data.EcommMasterData" extends="com.amway.core.dms.data.ContactRequestData">
+		<property name="ecommId" type="java.lang.String" />
+		<property name="ecommAddr" type="java.lang.String" />
+		<property name="ecommTypeCd" type="java.lang.String" />
+		<property name="statusCd" type="java.lang.String" />
+		<property name="billing" type="java.lang.boolean" />
+		<property name="notification" type="java.lang.boolean" />
+		<property name="marketing" type="java.lang.boolean" />
+		<property name="generalPurpose" type="java.lang.boolean" />
+		<property name="ecommPartyId" type="java.lang.String" />
+		<property name="ecommContactPointTypeCd" type="java.lang.String" />
+		<property name="ecommContactPointName" type="java.lang.String" />
+		<property name="partyId" type="java.lang.String" />
+	</bean>
+
+	<bean class="com.amway.core.dms.data.PartyEcommDetailsResponseData" extends="com.amway.core.data.CommonResponseFieldsData">
+		<property name="ecommMasterListData" type="java.util.List&lt;com.amway.core.dms.data.EcommMasterData>" />
+	</bean>
+
+	<bean class="com.amway.core.dms.data.PhoneMasterRequestData"
+		extends="com.amway.core.dms.data.ContactRequestData">
+		<property name="phoneId" type="java.lang.String" />
+		<property name="phoneLocalNum" type="java.lang.String" />
+		<property name="phoneExtNum" type="java.lang.String" />
+		<property name="phoneCntryCd" type="java.lang.String" />
+		<property name="phoneAreaCd" type="java.lang.String" />
+		<property name="smsCapableFlag" type="java.lang.String" />
+		<property name="cntryCd" type="java.lang.String" />
+		<property name="dayFlag" type="java.lang.String" />
+		<property name="eveningFlag" type="java.lang.String" />
+		<property name="statusCd" type="java.lang.String" />
+		<property name="registration" type="java.lang.boolean" />
+		<property name="generalPurpose" type="java.lang.boolean" />
+	</bean>
+
+	<bean class="com.amway.core.dms.data.PartyPhoneDetailsRequestData"
+		extends="com.amway.core.data.CommonRequestFieldsData">
+		<property name="phoneMasterListData" type="java.util.List&lt;com.amway.core.dms.data.PhoneMasterRequestData>" />
+	</bean>
+	
+	<bean class="com.amway.core.dms.data.PartyPhoneDetailsResponseData"
+		extends="com.amway.core.data.CommonResponseFieldsData">
+		<property name="phoneMasterListData" type="java.util.List&lt;com.amway.core.dms.data.PhoneMasterRequestData>" />
+	</bean>
+
+	<bean class="com.amway.core.dms.data.LatinNameData">
+		<property name="givenName" type="java.lang.String" />
+		<property name="suffix" type="java.lang.String" />
+		<property name="title" type="java.lang.String" />
+		<property name="familyName" type="java.lang.String" />
+		<property name="middleName" type="java.lang.String" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.user.data.AddressData">
+		<property name="number" type="java.lang.String" />
+		<property name="landmark" type="java.lang.String" />
+		<property name="partyId" type="java.lang.String" />
+		<property name="contactPointName" type="java.lang.String" />
+		<property name="mailingAddress" type="boolean" />
+		<property name="registrationAddress" type="boolean" />
+		<property name="contactPointTypeCd" type="java.lang.String" />
+		<property name="addrDeliveryTypeCd" type="java.lang.String" />
+		<property name="validationResultOverRideFlg" type="String" />
+		<property name="addressValidatedDate" type="String" />
+		<property name="validationResultCd" type="String" />
+		<property name="ignoreAddrssSuggestions" type="boolean" />
+		<property name="compliment" type="String" />
+		<property name="territory" type="de.hybris.platform.commercefacades.user.data.RegionData"/>
+		<property name="primaryShipping" type="boolean"/>
+		<property name="primaryBilling" type="boolean"/>
+		<property name="primaryMailing" type="boolean"/>
+		<property name="applicableForDefault" type="boolean"/>
+		<property name="county" type="String"/>
+		<property name="modificationDate" type="java.util.Date"/>
+	</bean>
+
+	<bean class="com.amway.core.dms.data.PartyDetailsData">
+		<property name="addressMasterData" type="java.util.List&lt;de.hybris.platform.commercefacades.user.data.AddressData>" />
+		<property name="taxDetailsData" type="com.amway.core.data.TaxDetailsData" />
+		<property name="partyPersonalDetailsData" type="com.amway.core.dms.data.PartyPersonalDetailsRequestData" />
+		<property name="partyNameDetailsData" type="com.amway.core.dms.data.PartyNameDetailsRequestData" />
+		<property name="partyEcommDetailsResponseData" type="com.amway.core.dms.data.PartyEcommDetailsResponseData" />
+		<property name="partyPhoneDetailsData" type="com.amway.core.dms.data.PartyPhoneDetailsRequestData" />
+		<property name="personalIdDetailsData" type="java.util.List&lt;com.amway.core.dms.data.PersonalIdDetailsData>" />
+		<property name="userId" type="java.lang.String" />
+		<property name="whishList" type="java.util.List&lt;de.hybris.platform.wishlist2.model.Wishlist2Model>" />
+		<property name="missingInfoList" type="java.util.List&lt;com.amway.core.dms.data.MissingInfoDetailData>" />
+		<property name="isLoggedIn" type="boolean"/>
+		<property name="subscriptions" type="java.util.Set&lt;com.amway.core.dms.data.PartySubscription&gt;" />
+	</bean>
+
+	<bean class="com.amway.core.dms.data.PartySubscription">
+		<property name="subscriptionId" type="String"/>
+		<property name="subscriptionName" type="String"/>
+		<property name="isPublicationCd" type="String"/>
+		<property name="pauseCd" type="String"/>
+		<property name="restoreCd" type="String"/>
+		<property name="cancelCd" type="String"/>
+		<property name="subscribeFlag" type="String"/>
+		<property name="languages" type="java.util.Set&lt;String&gt;"/>
+		<property name="deliveryWays" type="java.util.Set&lt;com.amway.core.dms.data.SubscriptionDeliveryData&gt;"/>
+	</bean>
+    <!-- renamed in core version 3.6 to avoid package conflicts with dms model object with same name -->
+	<bean class="com.amway.core.dms.data.SubscriptionDeliveryData">
+		<property name="deliveryTypeCd" type="String"/>
+		<property name="deliveryChoiceCd" type="String"/>
+	</bean>
+
+	<bean class="com.amway.core.dms.data.MissingInfoDetailData">
+		<property name="partyId" type="long" />
+		<property name="missingInfoId" type="java.lang.String" />
+		<property name="status" type="java.lang.String" />
+	</bean>
+
+	<bean class="com.amway.core.dms.data.BlockPrivDetailsData">
+		<property name="blockPrivTypeId" type="String" />
+	</bean>
+
+	<bean class="com.amway.core.dms.data.AmwayProfileResponseData"
+		extends="com.amway.core.data.CommonResponseFieldsData">
+		<property name="partyDetailList" type="java.util.List&lt;com.amway.core.dms.data.PartyDetailsData>" />
+		<property name="accountMasterDetails" type="com.amway.core.data.AccountMasterDetailsData" />
+		<property name="sponsorDetails" type="com.amway.core.los.data.SponsorDetailsData" />
+		<property name="accountBalance" type="java.util.List&lt;com.amway.core.dms.data.AccountBalanceData>" />
+		<property name="blockPrivDetailsData" type="java.util.List&lt;com.amway.core.dms.data.BlockPrivDetailsData>" />
+		<property name="missingInfoList" type="java.util.List&lt;com.amway.core.dms.data.MissingInfoDetailData>" />
+		<property name="subscriptions" type="java.util.Set&lt;com.amway.core.dms.data.PartySubscription&gt;" />
+	</bean>
+
+	<bean class="com.amway.core.dms.data.PersonalIdDetailsData" extends="com.amway.core.data.CommonRequestFieldsData">
+	<property name="personalIdTypeCd" type="java.lang.String" />
+		<property name="personalId" type="java.lang.String" />
+		<property name="expirationDate" type="java.lang.String" />
+		<property name="effectiveDate" type="java.lang.String" />
+		<property name="partyId" type="java.lang.String" />
+		<property name="partyName" type="java.lang.String" />
+		<property name="salesPlanAff" type="java.lang.String" />
+		<property name="aboNum" type="java.lang.String" />
+	</bean>
+
+	<bean class="com.amway.core.dms.data.PersonalIdResponseData" extends="com.amway.core.data.CommonResponseFieldsData">
+		<property name="personalIdDetailsList" type="java.util.List&lt;com.amway.core.dms.data.PersonalIdDetailsData>" />
+	</bean>
+
+	<bean class="com.amway.core.dms.data.DeletePersonalIdDetailsData" extends="com.amway.core.data.CommonRequestFieldsData">
+		<property name="salesPlanAff" type="java.lang.String" />
+		<property name="aboNum" type="java.lang.String" />
+		<property name="partyId" type="java.lang.String" />
+		<property name="personalIdTypeCd" type="java.lang.String" />
+	</bean>
+
+	<bean class="com.amway.core.dms.data.CreditProfileResponseData" extends="com.amway.core.data.CommonResponseFieldsData">
+		<property name="creditProfileList" type="java.util.List&lt;com.amway.core.dms.data.CreditProfileData>" />
+	</bean>
+
+	<bean class="com.amway.core.dms.data.CreditProfileData" extends="com.amway.core.data.CommonRequestFieldsData">
+		<property name="cntryCd" type="java.lang.String" />
+		<property name="creditScore" type="java.lang.String" />
+		<property name="creditStatusCd" type="java.lang.String" />
+		<property name="ficoScore" type="java.lang.String" />
+		<property name="partyId" type="java.lang.String" />
+		<property name="partyName" type="java.lang.String" />
+	</bean>
+
+	<bean class="com.amway.core.dms.data.AccounttUsageList">
+		<property name="acctUseCode" type="java.lang.String"></property>
+		<property name="useFlag" type="java.lang.String"></property>
+	</bean>
+
+	<bean class="com.amway.core.dms.data.BankAccountDetails" extends="com.amway.core.data.CommonResponseFieldsData">
+		<property name="bankAccountDetailsDataList" type="java.util.List&lt;com.amway.core.dms.data.BankAccountDetailsResponseData>"/>
+		<property name="partyId" type="java.lang.String" />
+		<property name="partyName" type="java.lang.String" />
+	</bean>
+
+	<bean class="com.amway.core.dms.data.BankAccountDetailsResponseData"
+		extends="com.amway.core.data.CommonResponseFieldsData">
+		<property name="bankAcctHolderName" type="java.lang.String" />
+		<property name="bankAcctId" type="java.lang.String" />
+		<property name="bankAcctName" type="java.lang.String" />
+		<property name="bankAcctNum" type="java.lang.String" />
+		<property name="bankAcctTypeCd" type="java.lang.String" />
+		<property name="bankBranchCode" type="java.lang.String" />
+		<property name="bankBranchName" type="java.lang.String" />
+		<property name="currencyCd" type="java.lang.String" />
+		<property name="acctUsageList" type="com.amway.core.dms.data.AccounttUsageList" />
+		<property name="effectiveEndDate" type="java.lang.String" />
+		<property name="effectiveStartDate" type="java.lang.String" />
+		<property name="issuingBankId" type="java.lang.String" />
+		<property name="issuingBankName" type="java.lang.String" />
+		<property name="primaryRoutingNum" type="java.lang.String" />
+		<property name="secondaryRoutingNum" type="java.lang.String" />
+		<property name="partyId" type="java.lang.String" />
+		<property name="partyName" type="java.lang.String" />
+	</bean>
+
+	<bean class="com.amway.core.dms.data.BankAccountRequestData" extends="com.amway.core.data.CommonRequestFieldsData">
+		<property name="bankAcctUseCode" type="java.lang.String" />
+	</bean>
+
+	<bean class="com.amway.core.dms.data.ProcessBankAccountRequestData" extends="com.amway.core.data.CommonRequestFieldsData">
+		<property name="bankAcctTypeCd" type="java.lang.String" />
+		<property name="bankAcctNum" type="java.lang.String" />
+		<property name="effectiveStartDate" type="java.util.Date"/>
+		<property name="effectiveEndDate" type="java.lang.String" />
+		<property name="primaryRoutingNum" type="java.lang.String" />
+		<property name="issuingBankId" type="java.lang.String" />
+		<property name="issuingBankName" type="java.lang.String" />
+		<property name="bankBranchCode" type="java.lang.String" />
+		<property name="bankBranchName" type="java.lang.String" />
+		<property name="secondaryRoutingNum" type="java.lang.String" />
+		<property name="bankAcctHolderName" type="java.lang.String" />
+		<property name="bankAcctName" type="java.lang.String" />
+		<property name="currencyCd" type="java.lang.String" />
+		<property name="statusFlg" type="java.lang.String" />
+		<property name="accountUseCodes" type="java.util.List&lt;java.lang.String>" />
+	</bean>
+
+	<!--ABO data -->
+	<bean class="com.amway.core.dms.data.SubscriptStatus">
+		<property name="name" type="String" />
+		<property name="value" type="boolean" />
+	</bean>
+
+	<bean class="com.amway.core.dms.data.DmsSubscriptionData">
+		<property name="optionValue" type="boolean" />
+		<property name="option" type="String" />
+		<property name="optionId" type="String" />
+		<property name="description" type="String" />
+		<property name="startDate" type="String" />
+		<property name="selectedStatus" type="String" />
+		<property name="aboNumber" type="String" />
+		<property name="endDate" type="String" />
+		<property name="subscriptionStatus" type="java.util.List&lt;com.amway.core.dms.data.SubscriptStatus>" />
+		<property name="subscriptionOptionList" type="java.util.List&lt;com.amway.core.dms.data.SubscriptionOption>" />
+	</bean>
+
+	<bean class="com.amway.core.dms.data.SubscriptionOptionRequestData" extends="com.amway.core.data.CommonRequestFieldsData">
+		<property name="subscriptionDataList" type="java.util.List&lt;com.amway.core.dms.data.SubscriptionData>" />
+	</bean>
+	<bean class="com.amway.core.dms.data.SubscriptionData">
+		<property name="optionValue" type="boolean" />
+		<property name="option" type="String" />
+		<property name="optionId" type="String" />
+		<property name="description" type="String" />
+		<property name="startDate" type="String" />
+		<property name="aboNumber" type="String" />
+		<property name="endDate" type="String" />
+		<property name="subscriptionStatus" type="String" />
+		<property name="subscriptionOptionList" type="java.util.List&lt;com.amway.core.dms.data.SubscriptionOption>" />
+	</bean>
+
+	<bean class="com.amway.core.dms.data.SubscriptionOption">
+		<property name="name" type="String" />
+		<property name="value" type="boolean" />
+	</bean>
+
+	<bean class="com.amway.core.dms.data.SubscriptionInputData"
+		  extends="com.amway.core.data.CommonRequestFieldsData">
+		<property name="affNo" type="String" />
+		<property name="iboNo" type="String" />
+	</bean>
+
+	<bean class="com.amway.core.dms.data.DmsSubscriptionResultData&lt;DECISION, FIELD_ERROR>"
+		  extends="com.amway.core.data.CommonResponseFieldsData">
+		<description>POJO representation of an abo subscription result.</description>
+		<property name="decision" type="DECISION" />
+		<property name="fieldErrors" type="java.util.List&lt;FIELD_ERROR>" />
+		<property name="subscriptionResultData"
+			type="java.util.List&lt;com.amway.core.dms.data.DmsSubscriptionData>" />
+	</bean>
+
+	<bean class="com.amway.core.dms.data.SubscriptionRequestData" extends="com.amway.core.data.CommonRequestFieldsData">
+		<property name="affiliate" type="java.lang.String" />
+		<property name="commUsageType" type="java.lang.String" />
+		<property name="iboNo" type="java.lang.String" />
+		<property name="partyId" type="java.lang.String" />
+		<property name="primaryFlag" type="java.lang.String" />
+	</bean>
+
+	<bean class="com.amway.core.dms.data.OrderRequestData" extends="com.amway.core.data.CommonRequestFieldsData">
+		<property name="actionType" type="java.lang.String" />
+		<property name="orderType" type="java.lang.String" />
+		<property name="invoiceNumber" type="java.lang.String" />
+		<property name="processDate" type="java.lang.String" />
+	</bean>
+
+
+	<bean class="com.amway.core.dms.data.SubscriptionDataResponse&lt;DECISION, FIELD_ERROR>"
+		  extends="com.amway.core.data.CommonResponseFieldsData">
+		<description>POJO representation of an subscription response </description>
+		<property name="decision" type="DECISION" />
+		<property name="fieldErrors" type="java.util.List&lt;FIELD_ERROR>" />
+		<property name="subscriptionDataResponse" type="java.util.List&lt;com.amway.core.dms.data.DmsSubscriptionData>" />
+	</bean>
+
+	<bean class="com.amway.core.dms.data.DmsSubscriptionErrorData&lt;FIELD_TYPE, ERROR_CODE>">
+		<property name="fieldType" type="FIELD_TYPE" />
+		<property name="errorCode" type="ERROR_CODE" />
+	</bean>
+
+	<bean class="com.amway.core.dms.data.UsageRequestData">
+		<property name="contactPointPurposeCd" type="java.lang.String" />
+		<property name="primaryFlag" type="java.lang.String" />
+		<property name="careOf" type="String" />
+	</bean>
+
+	<bean class="com.amway.core.dms.data.ContactRequestData">
+		<property name="contactId" type="java.lang.String" />
+		<property name="partyId" type="java.lang.String" />
+		<property name="contactPointName" type="java.lang.String" />
+		<property name="contactPointTypeCd" type="java.lang.String" />
+		<property name="usageData" type="java.util.List&lt;com.amway.core.dms.data.UsageRequestData>" />
+	</bean>
+
+	<bean class="com.amway.core.dms.data.AddUpdatePartyEcommRequestData" extends="com.amway.core.data.CommonRequestFieldsData">
+		<property name="partyEcommData" type="java.util.List&lt;com.amway.core.dms.data.PartyEcommRequestData>" />
+	</bean>
+
+	<!-- OrderRequest -->
+	<bean class="com.amway.core.los.data.BonusOrderRequestData">
+		<property name="affiliateCode" type="String" />
+		<property name="sourceApplication" type="String" />
+		<property name="isoCountryCode" type="String" />
+		<property name="timestamp" type="javax.xml.datatype.XMLGregorianCalendar" />
+		<property name="id" type="String" />
+		<property name="transactions" type="java.util.List&lt;com.amway.core.los.data.TransactionData>" />
+	</bean>
+
+	<bean class="com.amway.core.los.data.BonusOrderCancelData">
+		<property name="affiliateCode" type="String" />
+		<property name="sourceApplication" type="String" />
+		<property name="isoCountryCode" type="String" />
+		<property name="timestamp" type="javax.xml.datatype.XMLGregorianCalendar" />
+		<property name="id" type="String" />
+		<property name="transactions" type="java.util.List&lt;com.amway.core.los.data.TransactionData>" />
+	</bean>
+
+	<bean class="com.amway.core.los.data.TransactionData">
+		<property name="referenceId" type="String" />
+		<property name="aboId" type="String" />
+		<property name="bonusPeriod" type="String" />
+		<property name="pointValue" type="Double" />
+		<property name="businessVolume" type="Double" />
+		<property name="isoCurrencyCode" type="String" />
+		<property name="amount" type="Double" />
+		<property name="profit" type="Double" />
+		<property name="channel" type="String" />
+		<property name="warehouseCode" type="String" />
+		<property name="referenceInvoice" type="String" />
+	</bean>
+
+	<bean class="com.amway.core.los.data.BonusOrderResultData">
+		<property name="decision" type="String" />
+		<property name="returnMessage" type="String" />
+	</bean>
+
+	<bean class="com.amway.core.dms.data.SponsorSearchRequestData"
+		  extends="com.amway.core.data.CommonRequestFieldsData">
+		<property name="salesPlanAff" type="String" />
+		<property name="postalCode" type="String" />
+		<property name="countryCode" type="String" />
+		<property name="sponsorCount" type="String" />
+	</bean>
+
+	<bean class="com.amway.core.dms.data.SponsorResponseData">
+		<property name="sponsorName" type="String" />
+		<property name="number" type="String" />
+		<property name="cityName" type="String" />
+		<property name="stateCode" type="String" />
+	</bean>
+
+	<bean class="com.amway.core.dms.data.SponsorSearchResponseData"
+		  extends="com.amway.core.data.CommonResponseFieldsData">
+		<property name="sponsorList" type="java.util.List&lt;com.amway.core.dms.data.SponsorResponseData>" />
+	</bean>
+
+	<bean class="com.amway.core.dms.data.GetBalanceResponseData"
+		extends="com.amway.core.data.CommonResponseFieldsData">
+		<property name="accountBalance"
+			type="java.util.List&lt;com.amway.core.dms.data.AccountBalanceData>" />
+	</bean>
+	<bean class="com.amway.core.los.data.BonusStatementRequestData">
+        <property name="requestingAbo" type="String" />
+        <property name="bonusPeriod" type="String" />
+    </bean>
+    
+    <bean class="com.amway.core.los.data.BonusStatementResultData">
+        <property name="bonusStatementPDF" type="java.io.File" />
+        <property name="returnCode" type="java.lang.Integer" />
+        <property name="returnMessage" type="java.lang.String" />
+    </bean>	
+
+	<bean class="com.amway.core.dms.data.CreateBalanceRequestData"
+		extends="com.amway.core.data.CommonRequestFieldsData">
+		<property name="balanceTypeCd" type="String" />
+		<property name="currencyCd" type="String" />
+		<property name="balanceAmount" type="String" />
+		<property name="txSourceCd" type="String" />
+		<property name="sourcRefNum" type="String" />
+		<property name="txTypeCd" type="String" />
+	</bean>
+
+	<!-- POJO'S for Account renewal -->
+	<bean class="com.amway.core.dms.renewal.data.AccountRenewalRequestData"
+		extends="com.amway.core.data.CommonRequestFieldsData">
+		<property name="accountSubTypeCd" type="String" />
+		<property name="renewalDate" type="String" />
+		<property name="renewalCd" type="String" />
+		<property name="legalConsentFlg" type="String" />
+		<property name="invoiceNumber" type="String" />
+		<property name="renewalWithGroupFlg" type="String" />
+	</bean>
+
+	<bean class="com.amway.core.los.data.VerifySponsorRequestData">
+		<property name="affiliateNo" type="String" />
+		<property name="businessNature" type="String" />
+		<property name="countryCode" type="String" />
+		<property name="sponsorNo" type="String" />
+		<property name="sponsorTypeCode" type="String" />
+	</bean>
+
+	<bean class="com.amway.core.dms.data.DeletePartyAddressRequestData" extends="com.amway.core.data.CommonRequestFieldsData">
+		<property name="contactPointName" type="java.lang.String" />
+		<property name="contactPointTypeCd" type="java.lang.String" />
+		<property name="contactId" type="java.lang.String" />
+	</bean>
+
+	<bean class="com.amway.core.los.data.SponsorSearchResponseData" extends="com.amway.core.data.CommonResponseFieldsData">
+		<property name="qualifieddPlatinum" type="boolean" />
+		<property name="lmscertified" type="boolean	" />
+		<property name="affiliateName" type="String" />
+	</bean>
+
+	<bean class="com.amway.core.dms.data.DeletePartyAddressData" extends="com.amway.core.data.CommonRequestFieldsData">
+		<property name="contactPointName" type="java.lang.String" />
+		<property name="contactPointTypeCd" type="java.lang.String" />
+		<property name="contactId" type="java.lang.String" />
+	</bean>
+	<bean class="com.amway.core.dms.applicant.ApplicantResultData&lt;DECISION>" extends="com.amway.core.data.CommonResponseFieldsData">
+		<description>POJO representation of an applicant result.</description>
+		<property name="decision" type="DECISION" />
+		<property name="creationDate" type="java.util.Date" />
+		<property name="returnCode" type="java.lang.Integer" />
+		<property name="returnMessage" type="java.lang.String" />
+		<property name="sequenceNumber" type="java.lang.Long" />
+		<property name="applicantData" type="java.util.List&lt;com.amway.core.dms.applicant.ApplicantData>" />
+	</bean>
+
+	<bean class="com.amway.core.dms.data.ApplicantRequestData">
+		<property name="affiliate" type="java.lang.String" />
+		<property name="iboNo" type="java.lang.String" />
+	</bean>
+
+	<bean class="com.amway.core.dms.data.PartyProfileAndNameInputRequestData"
+		  extends="com.amway.core.data.CommonRequestFieldsData">
+		<property name="salesPlanAff" type="java.lang.String" />
+		<property name="aboNum" type="java.lang.String" />
+		<property name="partyId" type="java.lang.String" />
+		<property name="personNametypeCd" type="java.lang.String" />
+		<property name="primaryFlg" type="java.lang.String" />
+	</bean>
+
+	<bean class="com.amway.core.dms.data.PartyPersonNameServiceInputData">
+		<property name="charSetCd" type="String" />
+		<property name="languageCd" type="String" />
+		<property name="partyId" type="String" />
+		<property name="personNameTypeCd" type="String" />
+		<property name="preferredName" type="String" />
+		<property name="latinName" type="com.amway.core.dms.data.NameDetailsServiceData" />
+		<property name="localeName" type="com.amway.core.dms.data.NameDetailsServiceData" />
+	</bean>
+
+	<bean class="com.amway.core.dms.data.AddApplicantRequestData" extends="com.amway.core.data.CommonRequestFieldsData">
+		<property name="salesPlanAff" type="String" />
+		<property name="aboNum" type="String" />
+		<property name="userId" type="String" />
+		<property name="partyPersonNameInputData" type="com.amway.core.dms.data.PartyPersonNameServiceInputData" />
+	</bean>
+
+	<!-- ApplicantData -->
+	<bean class="com.amway.core.dms.applicant.ApplicantData">
+		<property name="partyId" type="java.lang.String" />
+		<property name="partyType" type="java.lang.String" />
+		<property name="gender" type="java.lang.String" />
+		<property name="isPrimary" type="boolean" />
+		<property name="partyName" type="java.lang.String" />
+		<property name="roleCode" type="java.lang.String" />
+	</bean>
+
+	<bean class="com.amway.core.dms.data.DMSFieldErrorData&lt;FIELD_TYPE, ERROR_CODE>">
+		<description>POJO representation of an MAGIC DMS field error.</description>
+		<property name="fieldType" type="FIELD_TYPE" />
+		<property name="errorCode" type="ERROR_CODE" />
+	</bean>
+
+	<bean class="com.amway.core.dms.data.RegistrationResultData&lt;DECISION>"
+		  extends="com.amway.core.data.CommonResponseFieldsData">
+		<property name="decision" type="DECISION" />
+		<property name="fieldErrors" type="java.util.List&lt;String>" />
+		<property name="aboNumber" type="String" />
+		<property name="partyId" type="String" />
+	</bean>
+
+	<bean class="com.amway.core.dms.registration.data.ContractNumberVerificationResultData&lt;DECISION, FIELD_ERROR>">
+		<description>POJO representation of an Contract Number verification result.</description>
+		<property name="decision" type="DECISION" />
+		<property name="fieldErrors" type="java.util.List&lt;FIELD_ERROR>" />
+	</bean>
+
+	<bean class="com.amway.core.dms.registration.data.ContractNumberFieldErrorData&lt;FIELD_TYPE, ERROR_CODE>">
+		<description>POJO representation of an Contract Number field error.</description>
+		<property name="fieldType" type="FIELD_TYPE" />
+		<property name="errorCode" type="ERROR_CODE" />
+	</bean>
+
+	<bean class="com.amway.core.dms.party.data.PartyData">
+		<property name="address" type="de.hybris.platform.commercefacades.user.data.AddressData" />
+		<property name="maritalStatus" type="String" />
+		<property name="gender" type="String" />
+		<property name="dateOfBirth" type="java.util.Date" />
+		<property name="taxId" type="String" />
+	</bean>
+
+	<bean class="com.amway.core.dms.party.data.AccountInfoData">
+		<property name="affiliateNumber" type="String" />
+		<property name="aboNumber" type="String" />
+		<property name="partyId" type="String" />
+	</bean>
+
+	<bean class="com.amway.core.dms.data.AddressResultData&lt;DECISION>"  extends="com.amway.core.data.CommonResponseFieldsData">
+		<description>POJO representation of an Get Address result.</description>
+		<property name="decision" type="DECISION" />
+		<property name="addressList" type="java.util.List&lt;de.hybris.platform.commercefacades.user.data.AddressData>" />
+		<property name="responseMessage" type="String" />
+	</bean>
+
+	<bean class="com.amway.core.dms.data.PrePrintedNumberResultData">
+		<property name="returnCd" type="int" />
+		<property name="returnMessage" type="String" />
+		<property name="prePrintedNum" type="String" />
+		<property name="serviceItemCode" type="String" />
+	</bean>
+
+	<bean class="com.amway.core.data.CommonRequestFieldsData">
+		<property name="clientIpAddress" type="String" />
+		<property name="loggedInAccountId" type="String" />
+		<property name="loggedInPartyId" type="String" />
+		<property name="clientCntryCd" type="String" />
+		<property name="clientApplicationId" type="String" />
+		<property name="loggedInCustomerServiceId" type="String" />
+		<property name="clientRoleList" type="String" />
+		<property name="aboNum" type="String" />
+		<property name="salesPlanAff" type="String" />
+		<property name="partyId" type="String" />
+	</bean>
+
+	<bean class="com.amway.core.data.CommonResponseFieldsData">
+		<property name="returnCd" type="int" />
+		<property name="returnMessage" type="String" />
+	</bean>
+
+	<bean class="com.amway.core.dms.data.PrePrintedNumberRequestData" extends="com.amway.core.data.CommonRequestFieldsData">
+		<property name="prePrintedNum" type="String" />
+		<property name="salesPlanAff" type="String" />
+		<property name="cntryCd" type="String" />
+	</bean>
+
+	<bean class="com.amway.core.dms.data.AddressRequestData" extends="com.amway.core.dms.data.ContactRequestData">
+		<property name="salesPlanAff" type="String" />
+		<property name="aboNum" type="String" />
+		<property name="addressLine1" type="String" />
+		<property name="cityName" type="String" />
+		<property name="cntryCd" type="String" />
+		<property name="addrDeliveryTypeCd" type="String" />
+		<property name="postalCd" type="String" />
+		<property name="state" type="String" />
+		<property name="languageCd" type="String" />
+		<property name="userId" type="String" />
+		<property name="validationResultOverRideFlg" type="String" />
+		<property name="addressValidatedDate" type="String" />
+		<property name="validationResultCd" type="String" />
+		<property name="neighbour" type="String" />
+		<property name="attention" type="String" />
+		<property name="number" type="String" />
+		<property name="addrId" type="String" />
+		<property name="compliment" type="String" />
+		
+	</bean>
+
+	<bean class="com.amway.core.dms.data.AddUpdatePartyAddressRequestData" extends="com.amway.core.data.CommonRequestFieldsData">
+		<property name="partyAddress" type="com.amway.core.dms.data.AddressRequestData" />
+	</bean>
+
+	<bean class="com.amway.core.dms.data.NameDetailsServiceData">
+		<property name="familyName" type="String" />
+		<property name="givenName" type="String" />
+		<property name="middleName" type="String" />
+		<property name="suffix" type="String" />
+		<property name="title" type="String" />
+	</bean>
+
+	<bean class="com.amway.core.dms.data.ValidateIntlBusSponsorResponseData"
+		  extends="com.amway.core.data.CommonResponseFieldsData">
+		<property name="qualifieddPlatinum" type="boolean" />
+		<property name="lmscertified" type="boolean	" />
+		<property name="affiliateName" type="String" />
+	</bean>
+
+	<!-- LOS Request POJO -->
+	<bean class="com.amway.core.los.data.LosAccountRequestData" extends="com.amway.core.data.CommonRequestFieldsData">
+		<property name="requestingAbo" type="String" />
+		<property name="depth" type="String" />
+		<property name="bonusPeriod" type="String" />
+		<property name="abo" type="String" />
+		<property name="getVolume" type="Boolean" />
+		<property name="getSponsorStats" type="Boolean" />
+		<property name="getExtAttributes" type="Boolean" />
+		<property name="bonusPeriodCount" type="String" />
+		<property name="getQualification" type="Boolean" />
+		<property name="volumetypes" type="String"/>
+	</bean>
+
+	<!-- POJO used for merging the response of LOS Services -->
+	<bean class="com.amway.core.los.data.LosAccountData">
+		<property name="losAccountDataList" type="java.util.List&lt;com.amway.core.los.data.LosAccountDownlinesData>" />
+	</bean>
+
+	<bean class="com.amway.core.los.data.LosAccountDownlinesData" extends="com.amway.core.data.CommonResponseFieldsData">
+		<property name="name" type="String" />
+		<property name="hasDownlines" type="boolean" />
+		<property name="privacyFlag" type="boolean"/>
+		<property name="country" type="String" />
+		<property name="gpv" type="Double" />
+		<property name="ppv" type="Double" />
+		<property name="totalAbos" type="int" />
+		<property name="newAbos" type="int" />
+		<property name="personalOrders" type="int" />
+		<property name="groupOrders" type="int" />
+		<property name="bonus" type="String" />
+		<property name="aboNo" type="String" />
+		<property name="qualifiedLegs" type="int" />
+		<property name="sponsor" type="java.lang.Long"/>
+		<property name="platinumSponsor" type="java.lang.Long"/>
+		<property name="currentAwardRank" type="String"/>
+		<property name="ruby" type="Double" />
+		<property name="pbv" type="Double" />
+		<property name="gbv" type="Double" />
+		<property name="bonusPeriodList" type="java.util.List&lt;com.amway.core.los.data.LosBonusPeriodData>" />
+		<property name="renewalDate" type="java.util.Date"/>
+		<property name="businessEntryDate" type="java.util.Date"/>
+		<property name="highestPinName" type="String"/>
+		<property name="highestPinQualificationPeriod" type="java.util.Date"/>
+		<property name="phone" type="String"/>
+		<property name="email" type="String"/>
+		<property name="address" type="java.util.List&lt;de.hybris.platform.commercefacades.user.data.AddressData>"/>
+		<property name="sponsorName" type="String"/>
+		<property name="sponsorPhone" type="String"/>
+		<property name="sponsorEmail" type="String"/>
+		<property name="platinumSponsorName" type="String"/>
+		<property name="platinumSponsorPhone" type="String"/>
+		<property name="platinumSponsorEmail" type="String"/>
+		<property name="current" type="String"/>
+		<property name="nextPerformance" type="String" />
+		<property name="awardPv" type="Double" />
+		<property name="awardBv" type="Double" />
+		<property name="intlSponserAbo" type="java.lang.Long"/>
+		<property name="personalPer" type="String"/>
+		<property name="leaderShipPer" type="String"/>
+		<property name="spMonth" type="boolean" />
+	</bean>
+
+	<!-- Response POJO for LOS Account -->
+	<bean class="com.amway.core.los.data.CommonLosResponseData">
+		<property name="returnCode" type="int" />
+		<property name="returnMessage" type="String" />
+		<property name="retrieveDate" type="String" />
+	</bean>
+
+	<bean class="com.amway.core.los.data.LosAccountDownlinesResponse">
+		<property name="name" type="String" />
+		<property name="hasDownlines" type="boolean" />
+		<property name="country" type="String" />
+		<property name="aff" type="String"/>
+		<property name="aboNo" type="String" />
+		<property name="currentAwardRank" type="String"/>
+		<property name="highestAwardRank" type="String"/>
+		<property name="privacyFlag" type="boolean"/>
+		<property name="downlines" type="java.util.List&lt;com.amway.core.los.data.LosAccountDownlinesResponse>" />
+	</bean>
+
+	<bean class="com.amway.core.los.data.LosAccountResponseData" extends="com.amway.core.los.data.CommonLosResponseData">
+		<property name="losAccountResponseListData"
+				  type="java.util.List&lt;com.amway.core.los.data.LosAccountDownlinesResponse>" />
+		<property name="abo" type="String" />
+		<property name="listOfAboAndAff" type="java.util.List&lt;java.lang.String>"/>
+	</bean>
+
+	<!-- Response POJO for LOS Account Detail -->
+	<bean class="com.amway.core.los.data.LosAccountDetailDownlinesResponse">
+		<property name="gpv" type="Double" />
+		<property name="aboNo" type="String" />
+		<property name="ppv" type="Double" />
+		<property name="totalAbos" type="int" />
+		<property name="newAbos" type="int" />
+		<property name="personalOrders" type="int" />
+		<property name="groupOrders" type="int" />
+		<property name="bonus" type="String" />
+		<property name="nextPerformance" type="String" />
+		<property name="nextPerformanceValue" type="Double" />
+		<property name="qualifiedLegs" type="int" />
+		<property name="internationalQualifiedLegs" type="int" />
+		<property name="ruby" type="Double" />
+		<property name="pbv" type="Double" />
+		<property name="gbv" type="Double" />
+		<property name="bonusPeriodList" type="java.util.List&lt;com.amway.core.los.data.LosBonusPeriodData>" />
+		<property name="renewalDate" type="java.util.Date"/>
+		<property name="businessEntryDate" type="java.util.Date"/>
+		<property name="highestPinName" type="String"/>
+		<property name="highestPinQualificationPeriod" type="java.util.Date"/>
+		<property name="privacyFlag" type="boolean"/>
+		<property name="phone" type="String"/>
+		<property name="email" type="String"/>
+		<property name="address" type="java.util.List&lt;de.hybris.platform.commercefacades.user.data.AddressData>"/>
+		<property name="sponsor" type="java.lang.Long"/>
+		<property name="platinumSponsor" type="java.lang.Long"/>
+		<property name="name" type="String"/>
+		<property name="sponsorName" type="String"/>
+		<property name="sponsorPhone" type="String"/>
+		<property name="sponsorEmail" type="String"/>
+		<property name="platinumSponsorName" type="String"/>
+		<property name="platinumSponsorPhone" type="String"/>
+		<property name="platinumSponsorEmail" type="String"/>
+		<property name="current" type="String"/>
+		<property name="awardPv" type="Double" />
+		<property name="awardBv" type="Double" />
+		<property name="intlSponserAbo" type="java.lang.Long"/>		
+		<property name="intlSponserAff" type="String"/>
+		<property name="personalPer" type="String"/>
+		<property name="leaderShipPer" type="String"/>
+		<property name="nextPerformancePoints" type="Double" />
+		<property name="spMonth" type="boolean"/>
+		<property name="leadershipPv" type="Double"></property>
+		<property name="highestAwardRank" type="String"/>
+	</bean>
+	<bean class="com.amway.core.los.data.CurrentAwardDetails">
+		<property name="rank" type="String"/>
+		<property name="code" type="String"/>
+		<property name="name" type="String"/>
+	</bean>
+
+	<bean class="com.amway.core.los.data.LosBonusPeriodData">
+		<property name="ppv" type="Double" />
+		<property name="gpv" type="Double" />
+		<property name="bonusPercentage" type="String" />
+		<property name="qualifiedLegs" type="int" />
+		<property name="bonusPeriod" type="String" />
+		<property name="leadershipPv" type="Double" />
+	</bean>
+
+	<bean class="com.amway.core.los.data.LosAccountDetailResponseData" extends="com.amway.core.los.data.CommonLosResponseData">
+		<property name="losAccountDetailResponseListData"
+			type="java.util.List&lt;com.amway.core.los.data.LosAccountDetailDownlinesResponse>" />
+		<property name="currentAwardDetails" type="com.amway.core.los.data.CurrentAwardDetails"/>
+	</bean>
+	
+	<bean class="com.amway.core.dms.data.LosSponsorValidationResultData" extends="com.amway.core.data.CommonResponseFieldsData">
+		<property name="sponsorName" type="String" />
+	</bean>
+
+	<bean class="de.hybris.platform.commerceservices.service.data.CommerceCartParameter">
+		<property name="skipcalculate" type="boolean">
+			<description>Should cart be calculated or skipped because on pos adding multiple products in one shot does not require clacution on each addition</description>
+		</property>
+		<property name="volumeABO" type="String">
+			<description>Volume ABO for an entry</description>
+		</property>
+	</bean>
+	
+	<bean class="com.amway.core.dms.data.AboPartyAccountHistoryData">
+		<property name="aboNum" type="java.lang.String" />
+		<property name="actionCd" type="java.lang.String" />
+		<property name="countryCd" type="java.lang.String" />
+		<property name="detail" type="java.lang.String" />
+		<property name="moduleName" type="java.lang.String" />
+		<property name="processCd" type="java.lang.String" />
+		<property name="processDate" type="java.lang.String" />
+		<property name="processTypeCd" type="java.lang.String" />
+		<property name="reasonCd" type="java.lang.String" />
+		<property name="salesPlanaff" type="java.lang.String" />
+		<property name="transactionDate" type="java.lang.String" />
+		<property name="transactionSourceCd" type="java.lang.String" />
+		<property name="userId" type="java.lang.String" />
+	</bean>
+	
+	<bean class="com.amway.core.dms.data.AccountHistoryDataResponse" extends="com.amway.core.data.CommonResponseFieldsData">
+		<property name="accountHistoryDataList" type="java.util.List&lt;com.amway.core.dms.data.AboPartyAccountHistoryData>" />
+	</bean>
+	
+	<bean class="com.amway.core.dms.data.PartyHistoryDataResponse" extends="com.amway.core.data.CommonResponseFieldsData">
+		<property name="partyHistoryDataList" type="java.util.List&lt;com.amway.core.dms.data.AboPartyAccountHistoryData>" />
+	</bean>
+	
+		<bean class="com.amway.core.dms.data.PartyPreferenceListData">
+		<property name="preferenceListId" type="java.lang.String" />
+		<property name="preferenceValueCd" type="java.lang.String" />
+		<property name="preferenceValueName" type="java.lang.String" />
+	</bean>
+	
+	<bean class="com.amway.core.dms.data.PartyPreferenceData" extends="com.amway.core.data.CommonRequestFieldsData">
+		<property name="isTrueFlag" type="java.lang.String" />
+		<property name="preferenceId" type="java.lang.String" />
+		<property name="preferenceList" type="java.util.List&lt;com.amway.core.dms.data.PartyPreferenceListData>" />
+		<property name="preferenceNote" type="java.lang.String" />
+		<property name="preferenceListId" type="java.lang.String" />
+		<property name="preferenceValueCd" type="java.lang.String" />
+		<property name="preferenceValueName" type="java.lang.String" />
+	</bean>
+	
+	<bean class="com.amway.core.dms.data.PartyPreferenceResponse" extends="com.amway.core.data.CommonResponseFieldsData">
+		<property name="partyPreferenceDataList" type="java.util.List&lt;com.amway.core.dms.data.PartyPreferenceData>" />	
+		<property name="partyId" type="java.lang.String" />
+	</bean>
+	
+		<bean class="com.amway.core.dms.data.PreferenceListData">
+		<property name="isTrueFlag" type="java.lang.String" />
+		<property name="preferenceId" type="java.lang.String" />
+		<property name="preferenceList" type="java.util.List&lt;com.amway.core.dms.data.PartyPreferenceListData>" />
+		<property name="preferenceNote" type="java.lang.String" />
+		<property name="choiceListFlg" type="java.lang.String" />
+		<property name="preferenceCatagoryTypeId" type="java.lang.String" />
+		<property name="preferenceDesc" type="java.lang.String" />
+	</bean>
+	
+	<bean class="com.amway.core.dms.data.PreferenceListResponse" extends="com.amway.core.data.CommonResponseFieldsData">
+		<property name="preferenceListDataList" type="java.util.List&lt;com.amway.core.dms.data.PreferenceListData>" />
+	</bean>
+	
+	<bean class="com.amway.core.order.data.AmwayPaymentModeData">
+		<property name="code" type="String"/>
+		<property name="name" type="String"/>
+		<property name="amount" type="double"/>
+		<property name="repeatableCount" type="int"/>
+		<property name="usedCount" type="int"/>
+		<property name="allowOverpay" type="boolean"/>
+		<property name="overpaymentThreshold" type="java.lang.Double"/>
+	</bean>
+	
+	<bean class="com.amway.core.dms.data.BlockPrevRequestData" extends="com.amway.core.data.CommonRequestFieldsData">
+		<property name="blockPrivTypeId" type="String"/>
+		<property name="effectiveDate" type="String"/>
+		<property name="expirationDate" type="String"/>
+		<property name="businessEventCd" type="String"/>
+		<property name="isBlockFlag" type="String"/>
+ 	</bean>
+ 	
+ 	<bean class="com.amway.core.dms.data.BlockPrevResponseData">
+		<property name="blockPrivTypeId" type="String"/>
+		<property name="effectiveDate" type="String"/>
+		<property name="expirationDate" type="String"/>
+		<property name="isBlockFlag" type="String"/>
+		<property name="aboNum" type="String"/>
+		<property name="salesPlanAff" type="String"/>
+ 	</bean>
+ 	
+ 	<bean class="com.amway.core.dms.data.BlockPrevResponseDataList" extends="com.amway.core.data.CommonResponseFieldsData">
+		<property name="blockPrevResponseData"
+			type="java.util.List&lt;com.amway.core.dms.data.BlockPrevResponseData>" />
+	</bean>
+
+	<bean class="com.amway.core.los.data.OrderPeriodCloseResultData">
+		<property name="decision" type="String" />
+		<property name="returnMessage" type="String" />
+	</bean>
+
+	<bean class="com.amway.core.charon.data.ApiGatewayRequestData">
+		<property name="aboNumber" type="String" />
+		<property name="party" type="String" />
+		<property name="affiliate" type="String" />
+	</bean>
+	
+	<bean class="de.hybris.platform.commercefacades.order.data.AbstractOrderData">
+	</bean>
+	
+	<bean class="com.amway.core.facades.account.los.data.LosHierarchyData">
+		<property name="icon" type="String"/>
+		<property name="depth" type="String"/>
+		<property name="businessNature" type="String"/>
+		<property name="code" type="String"/>
+		<property name="name" type="String"/>
+		<property name="lastName" type="String"/>
+		<property name="pv" type="String"/>
+		<property name="grpPv" type="String"/>
+		<property name="renewed" type="String"/>
+		<property name="handedAddendum" type="String"/>
+		<property name="country" type="String"/>
+		<property name="registrationDate" type="String"/>
+		<property name="lastOrderDate" type="String"/>
+		<property name="newNumber" type="String"/>
+		<property name="primaryEmail" type="String"/>
+		<property name="primaryTelephone" type="String"/>
+		<property name="sponsorshipRequest" type="String"/>
+		<property name="officialIdentification" type="String"/>
+		<property name="downlines" type="java.util.List&lt;com.amway.core.facades.account.los.data.LosHierarchyData>"/>
+	</bean>
+
+	<bean class="com.amway.core.returns.data.AmwayReturnRequestTypeData">
+		<property name="code" type="String"/>
+		<property name="name" type="String"/>
+		<property name="noShippingRequired" type="boolean" />
+		<property name="labelRequired" type="boolean" />
+	</bean>
+
+	<bean class="com.amway.core.cart.data.AmwayPaymentInfoData">
+		<property name="requesttoken" type="String"/>
+		<property name="transactionid" type="String"/>
+		<property name="referenceNumber" type="String"/>
+		<property name="amount" type="java.lang.Double"/>
+		<property name="currency" type="de.hybris.platform.commercefacades.storesession.data.CurrencyData"/>
+		<property name="status" type="String"/>
+		<property name="comments" type="String"/>
+		<property name="paymentMode" type="com.amway.core.order.data.PaymentModeData"/>
+	</bean>
+
+	<bean class="com.amway.core.order.data.PaymentModeData" >
+		<property name="code" type="String"/>
+		<property name="name" type="String"/>
+		<property name="description" type="String"/>
+		<property name="active" type="boolean" />
+	</bean>
+
+	<bean class="com.amway.core.cart.data.AmwayCashPaymentInfoData" extends="com.amway.core.cart.data.AmwayPaymentInfoData" />
+
+	<bean class="com.amway.core.cart.data.AmwayCCPaymentInfoData" extends="com.amway.core.cart.data.AmwayPaymentInfoData">
+		<property name="maskedcardnumber" type="String"/>
+		<property name="validthru" type="String"/>
+		<property name="validfrom" type="String"/>
+		<property name="cardtype" type="String"/>
+	</bean>
+
+	<bean class="com.amway.core.cart.data.AmwayDCPaymentInfoData" extends="com.amway.core.cart.data.AmwayCCPaymentInfoData" />
+
+	<!-- Enterprise Error Messages -->
+	<bean class="com.amway.core.error.dto.EnterpriseErrorMessageContext">
+		<property name="solutionId" type="String"/>
+		<property name="messageId" type="String"/>
+		<property name="countryCode" type="String"/>
+		<property name="languageCode" type="String"/>
+	</bean>
+	
+	<bean class="com.amway.core.error.dto.EnterpriseErrorMessage">
+		<property name="messageId" type="String"/>
+		<property name="description" type="String"/>
+		<property name="severity" type="String"/>
+		<property name="solutionId" type="String"/>
+		<property name="localDescription" type="String"/>
+		<property name="language" type="String"/>
+	</bean>
+
+</beans>

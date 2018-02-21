@@ -1,0 +1,5577 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "",
+    "title": "magiclos.wadl",
+    "description": "",
+    "license": {
+      "name": "MIT",
+      "url": "http://github.com/gruntjs/grunt/blob/master/LICENSE-MIT"
+    }
+  },
+  "host": "magic-beta:9083",
+  "basePath": "/EBS_UI_Service/rest/",
+  "securityDefinitions": {},
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/getMultiBusSponsorList": {
+      "post": {
+        "description": "",
+        "operationId": "Create_getMultiBusSponsorList_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getGlobalMultiBusSponsorList": {
+      "post": {
+        "description": "",
+        "operationId": "Create_getGlobalMultiBusSponsorList_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getIntlSponsorList": {
+      "post": {
+        "description": "",
+        "operationId": "Create_getIntlSponsorList_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/get": {
+      "get": {
+        "description": "",
+        "operationId": "getPrivacyBlock_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "abo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "reqAff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "reqAbo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "effDate",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "blockPrivId",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/retrieveCustomersLOSPVBVDataMultiplePeriods": {
+      "post": {
+        "description": "",
+        "operationId": "Create_retrieveCustomersLOSPVBVDataMultiplePeriods_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getCustomerPVBVDataForPeriod": {
+      "post": {
+        "description": "",
+        "operationId": "Create_getCustomerPVBVDataForPeriod_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getCustomersLOSPVBVDataMultiplePeriods": {
+      "post": {
+        "description": "",
+        "operationId": "Create_getCustomersLOSPVBVDataMultiplePeriods_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getCustomersPVBVDataList": {
+      "post": {
+        "description": "",
+        "operationId": "Create_getCustomersPVBVDataList_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getLiteCustLOS": {
+      "post": {
+        "description": "",
+        "operationId": "Create_getLiteCustLOS_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getLiteCustList": {
+      "post": {
+        "description": "",
+        "operationId": "Create_getLiteCustList_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getLastOrdDate": {
+      "post": {
+        "description": "",
+        "operationId": "Create_getLastOrdDate_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getTimerInfo": {
+      "get": {
+        "description": "",
+        "operationId": "getTimerDetails_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/globalPlatinumMultiTest": {
+      "get": {
+        "description": "",
+        "operationId": "Get_globalPlatinumMultiTest_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "abo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "operationId": "Create_globalPlatinumMultiTest_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/validateSponsor": {
+      "post": {
+        "description": "",
+        "operationId": "Create_validateSponsor_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getEuropeanFAA": {
+      "get": {
+        "description": "",
+        "operationId": "getEuropeanFAA_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "affAbo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getStrongestMarketForPoints": {
+      "get": {
+        "description": "",
+        "operationId": "getStrongestMarketForPoints_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "fiscalYear",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "abo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "reqAff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "reqAbo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getFrontlinerStrongestMktInfo": {
+      "get": {
+        "description": "",
+        "operationId": "getFrontlinerStrongestMktInfo_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "fiscalYear",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "abo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "reqAff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "reqAbo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "operationId": "Create_getFrontlinerStrongestMktInfo_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getQualPointSummary": {
+      "get": {
+        "description": "",
+        "operationId": "getFAAQualPointSummary_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "fiscalYear",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "affAbo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "reqAff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "reqAbo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getFAAStrongestMarketForPoints": {
+      "post": {
+        "description": "",
+        "operationId": "Create_getFAAStrongestMarketForPoints_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getFAAQualPointSummary": {
+      "post": {
+        "description": "",
+        "operationId": "Create_getFAAQualPointSummary_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getLosMB": {
+      "get": {
+        "description": "",
+        "operationId": "getLosMB_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "abo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "reqAff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "reqAbo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getGlobalMB": {
+      "get": {
+        "description": "",
+        "operationId": "getGlobalMB_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "abo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "reqAff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "reqAbo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getIntl": {
+      "get": {
+        "description": "",
+        "operationId": "getIntl_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "abo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "reqAff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "reqAbo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getInMarket": {
+      "get": {
+        "description": "",
+        "operationId": "getInMarket_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "abo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "reqAff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "reqAbo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getAnnualInMarket": {
+      "get": {
+        "description": "",
+        "operationId": "getAnnualInMarket_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "abo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "reqAff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "reqAbo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getAnnualIntl": {
+      "get": {
+        "description": "",
+        "operationId": "getAnnualIntl_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "abo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "reqAff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "reqAbo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getAnnual": {
+      "get": {
+        "description": "",
+        "operationId": "getAnnual_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "abo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "reqAff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "reqAbo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getMonthly": {
+      "get": {
+        "description": "",
+        "operationId": "getMonthly_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "abo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "reqAff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "reqAbo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getAboWithMBSponsorList": {
+      "get": {
+        "description": "",
+        "operationId": "getAboWithMBSponsorList_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/retreiveFrontLines": {
+      "post": {
+        "description": "",
+        "operationId": "Create_retreiveFrontLines_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "affNo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "iboNo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/insertFrontLiners": {
+      "post": {
+        "description": "",
+        "operationId": "insertFrontLiners_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getLastPaidILB": {
+      "get": {
+        "description": "",
+        "operationId": "getLastPaidILB_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getCurrent": {
+      "get": {
+        "description": "",
+        "operationId": "getCurrent_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getCurrentCal": {
+      "get": {
+        "description": "",
+        "operationId": "getCurrentCalPeriod_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getHighestCurrentAwardsInfo": {
+      "post": {
+        "description": "",
+        "operationId": "Create_getHighestCurrentAwardsInfo_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/activeFrontlinersInquiryService": {
+      "post": {
+        "description": "",
+        "operationId": "Create_activeFrontlinersInquiryService_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/activeFrontlinersInquiryServiceForPeriod": {
+      "post": {
+        "description": "",
+        "operationId": "Create_activeFrontlinersInquiryService_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/isHATavailable": {
+      "post": {
+        "description": "",
+        "operationId": "Create_isHATavailable_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/expandedComboLegInquiryService": {
+      "post": {
+        "description": "",
+        "operationId": "Create_expandedComboLegInquiryService_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/expandedComboLegInquiryServiceForPeriod": {
+      "post": {
+        "description": "",
+        "operationId": "Create_expandedComboLegInquiryService_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/qualificationHistoryInquiryService": {
+      "post": {
+        "description": "",
+        "operationId": "Create_qualificationHistoryInquiryService_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/qualificationHistoryInquiryServiceForPeriod": {
+      "post": {
+        "description": "",
+        "operationId": "Create_qualificationHistoryInquiryService_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/awardInformationInquiryService": {
+      "post": {
+        "description": "",
+        "operationId": "Create_awardInformationInquiryService_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/awardInformationInquiryServiceForPeriod": {
+      "post": {
+        "description": "",
+        "operationId": "Create_awardInformationInquiryService_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/trackingLegsInquiryService": {
+      "post": {
+        "description": "",
+        "operationId": "Create_trackingLegsInquiryService_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/trackingLegsInquiryServiceForPeriod": {
+      "post": {
+        "description": "",
+        "operationId": "Create_trackingLegsInquiryService_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/awardTrackingInquiryService": {
+      "post": {
+        "description": "",
+        "operationId": "Create_awardTrackingInquiryService_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/awardTrackingInquiryServiceForPeriod": {
+      "post": {
+        "description": "",
+        "operationId": "Create_awardTrackingInquiryService_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/awardTrackingInquiryForCurrentAward": {
+      "post": {
+        "description": "",
+        "operationId": "Create_awardTrackingInquiryForCurrentAward_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/awardTrackingInquiryForCurrentAwardForPeriod": {
+      "post": {
+        "description": "",
+        "operationId": "Create_awardTrackingInquiryForCurrentAward_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/awardTrackingInquiryForHighestAward": {
+      "post": {
+        "description": "",
+        "operationId": "Create_awardTrackingInquiryForHighestAward_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/awardTrackingInquiryForHighestAwardForPeriod": {
+      "post": {
+        "description": "",
+        "operationId": "Create_awardTrackingInquiryForHighestAward_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/awardTrackingInquiryForHighestGlobalAward": {
+      "post": {
+        "description": "",
+        "operationId": "Create_awardTrackingInquiryForHighestGlobalAward_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/awardTrackingInquiryForHighestGlobalAwardForPeriod": {
+      "post": {
+        "description": "",
+        "operationId": "Create_awardTrackingInquiryForHighestGlobalAward_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/awardTrackingInquiryForHighestTrackingAward": {
+      "post": {
+        "description": "",
+        "operationId": "Create_awardTrackingInquiryForHighestTrackingAward_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/awardTrackingInquiryForHighestTrackingAwardForPeriod": {
+      "post": {
+        "description": "",
+        "operationId": "Create_awardTrackingInquiryForHighestTrackingAward_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/awardTrackingInquiryForHighestGlobalTrackingAward": {
+      "post": {
+        "description": "",
+        "operationId": "Create_awardTrackingInquiryForHighestGlobalTrackingAward_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/awardTrackingInquiryForHighestGlobalTrackingAwardForPeriod": {
+      "post": {
+        "description": "",
+        "operationId": "Create_awardTrackingInquiryForHighestGlobalTrackingAward_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/awardTrackingInquiryForHighestTrackingAwardWithFAA": {
+      "post": {
+        "description": "",
+        "operationId": "Create_awardTrackingInquiryForHighestTrackingAwardWithFAA_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/awardTrackingInquiryForHighestTrackingAwardWithFAAForPeriod": {
+      "post": {
+        "description": "",
+        "operationId": "Create_awardTrackingInquiryForHighestTrackingAwardWithFAA_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/awardTrackingInquiryForHighestGlobalTrackingWithFAA": {
+      "post": {
+        "description": "",
+        "operationId": "Create_awardTrackingInquiryForHighestGlobalTrackingWithFAA_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/awardTrackingInquiryForHighestGlobalTrackingWithFAAForPeriod": {
+      "post": {
+        "description": "",
+        "operationId": "Create_awardTrackingInquiryForHighestGlobalTrackingWithFAA_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/delete": {
+      "delete": {
+        "description": "",
+        "operationId": "delete_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "abo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "source",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "reasonCode",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/add": {
+      "post": {
+        "description": "",
+        "operationId": "addPreferences_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getEligibleByAward": {
+      "post": {
+        "description": "",
+        "operationId": "Create_getEligibleByAward_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/checkStatus": {
+      "post": {
+        "description": "",
+        "operationId": "Create_checkStatus_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getStatusToRunRmsPayment": {
+      "get": {
+        "description": "",
+        "operationId": "getStatusToRunRmsPayment_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/addMenuItem": {
+      "post": {
+        "description": "",
+        "operationId": "addMenuItem_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/editMenuItem": {
+      "post": {
+        "description": "",
+        "operationId": "Create_editMenuItem_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/isIBOBlockPriv": {
+      "post": {
+        "description": "",
+        "operationId": "Create_isIBOBlockPriv_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/createIBOBlockPriv": {
+      "post": {
+        "description": "",
+        "operationId": "createIBOBlockPriv_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/expireIBOBlockPriv": {
+      "post": {
+        "description": "",
+        "operationId": "Create_expireIBOBlockPriv_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/emailUpdateForNRT": {
+      "post": {
+        "description": "",
+        "operationId": "Create_emailUpdateForNRT_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getQualInqData": {
+      "post": {
+        "description": "",
+        "operationId": "Create_getQualInqData_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/changeRestricted": {
+      "put": {
+        "description": "",
+        "operationId": "changeRestriction_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "abo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "restricted",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "boolean",
+            "description": ""
+          },
+          {
+            "name": "imageType",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "reqAff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "reqAbo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "operationId": "changeRestriction_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/removeImage": {
+      "post": {
+        "description": "",
+        "operationId": "Create_removeImage_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "operationId": "removeImage_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "affAboImages",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "reqAff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "reqAbo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/fetchImageInfo": {
+      "get": {
+        "description": "",
+        "operationId": "fetchImageInfo_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "affAboImages",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "reqAff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "reqAbo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "operationId": "Create_fetchImageInfo_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/isAllowed": {
+      "post": {
+        "description": "",
+        "operationId": "Create_isAllowed_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/HighestCurrentAwardsInfo": {
+      "get": {
+        "description": "",
+        "operationId": "getHighestCurrentAwardsInfo_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "reqAff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "reqAbo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "affAbo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "returnInMarketOnly",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "boolean",
+            "description": ""
+          },
+          {
+            "name": "returnGlobalOnly",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "boolean",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getAwardLevel": {
+      "post": {
+        "description": "",
+        "operationId": "Create_LMSIntegrationByAwardLevel_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getCurrHghstAwardLevel": {
+      "post": {
+        "description": "",
+        "operationId": "Create_LMSIntegrationByCurrHghstAwardLevel_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getAwardLevelAndStatus": {
+      "post": {
+        "description": "",
+        "operationId": "Create_LMSIntegrationByAwardLevelAndStatus_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/receiveTestCert": {
+      "post": {
+        "description": "",
+        "operationId": "Create_receiveTestCertification_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/isAllowedMultiIbo": {
+      "post": {
+        "description": "",
+        "operationId": "Create_isAllowedMultiIbo_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getInliners": {
+      "post": {
+        "description": "",
+        "operationId": "Create_getInlinersList_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getCountryInformation": {
+      "post": {
+        "description": "",
+        "operationId": "Create_getCountryInformation_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/remove": {
+      "post": {
+        "description": "",
+        "operationId": "Create_removePreferences_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/fetch": {
+      "post": {
+        "description": "",
+        "operationId": "Create_fetchPreferences_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/updateBusNature": {
+      "put": {
+        "description": "",
+        "operationId": "updateBusNature_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "abo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "source",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "busNature",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "newSponAff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "newSponAbo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/updateCountry": {
+      "put": {
+        "description": "",
+        "operationId": "updateCountry_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "abo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "source",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "isoCountry",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/updateBlock": {
+      "put": {
+        "description": "",
+        "operationId": "updateBlock_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "abo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "source",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "effDate",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "blockType",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/updatePhone": {
+      "put": {
+        "description": "",
+        "operationId": "updatePhone_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "abo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "phoneTypeCd",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "source",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "phoneCountry",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "phoneArea",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "phone",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "phoneExt",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "phoneLegacy",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/updateEmail": {
+      "put": {
+        "description": "",
+        "operationId": "updateEmail_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "abo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "emailTypeCd",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "source",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/updateLegalEntity": {
+      "put": {
+        "description": "",
+        "operationId": "updateLegalEntity_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "abo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "source",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "isBusEntity",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "boolean",
+            "description": ""
+          },
+          {
+            "name": "legalEntityType",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/updateName": {
+      "put": {
+        "description": "",
+        "operationId": "updateName_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "abo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "nameType",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "source",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "firstName",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "middleName",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "lastName",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "title",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "suffix",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "legacyName",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/updateAddress": {
+      "put": {
+        "description": "",
+        "operationId": "updateAddress_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "abo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "addressType",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "source",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "addressLineOne",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "addressLineTwo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "addressLineThree",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "addressLineFour",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "city",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "stateProvince",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "postalCode",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "country",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/newApplication": {
+      "post": {
+        "description": "",
+        "operationId": "newApplication_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/miniPurge": {
+      "delete": {
+        "description": "",
+        "operationId": "Delete_miniPurge_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "abo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "source",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/renew": {
+      "put": {
+        "description": "",
+        "operationId": "Update_processDiamondAutoRenewal_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/renewReverse": {
+      "put": {
+        "description": "",
+        "operationId": "Update_renewReverse_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "abo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "source",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "expireDate",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/reactivate": {
+      "put": {
+        "description": "",
+        "operationId": "Update_reactivate_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "abo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "source",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "withGroup",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "boolean",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/reactivateRenew": {
+      "put": {
+        "description": "",
+        "operationId": "Update_reactivateRenew_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "abo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "source",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "withGroup",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "boolean",
+            "description": ""
+          },
+          {
+            "name": "expireDate",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/updateBirthdateGender": {
+      "put": {
+        "description": "",
+        "operationId": "updateBirthdateGender_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "abo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "source",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "app1birthdate",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "app2birthdate",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "app1gender",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "app2gender",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/isAuthorized": {
+      "get": {
+        "description": "",
+        "operationId": "Get_isAuthorized_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "reqAff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "reqAbo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "abo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/isAuthorizedVerbose": {
+      "get": {
+        "description": "",
+        "operationId": "Get_isAuthorizedVerbose_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "reqAff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "reqAbo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "abo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/isAuthorizedMulti": {
+      "get": {
+        "description": "",
+        "operationId": "Get_isAuthorizedMulti_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "reqAff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "reqAbo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "affAbo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/isAuthorizedMaxPeriod": {
+      "get": {
+        "description": "",
+        "operationId": "Get_isAuthorizedMaxPeriod_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "reqAff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "reqAbo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "abo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/isAuthorizedMultiMaxPeriod": {
+      "get": {
+        "description": "",
+        "operationId": "Get_isAuthorizedMultiMaxPeriod_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "reqAff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "reqAbo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "affAbo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getSponsStats": {
+      "post": {
+        "description": "",
+        "operationId": "Create_getSponsStatsInquiryService_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getGeneratorDetails": {
+      "get": {
+        "description": "",
+        "operationId": "getGeneratorDetails_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "abo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "reqAff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "reqAbo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getIntlPaymentsFlow": {
+      "get": {
+        "description": "",
+        "operationId": "getIntlPaymentsFlow_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "abo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "generatorAff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "generatorAbo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "reqAff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "reqAbo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getMonthlyDetails": {
+      "get": {
+        "description": "",
+        "operationId": "getMonthlyDetails_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "abo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "reqAff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "reqAbo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getLastPaidILBPeriod": {
+      "post": {
+        "description": "",
+        "operationId": "Create_getLastPaidILBPeriod_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getCurrentPeriod": {
+      "post": {
+        "description": "",
+        "operationId": "Create_getCurrentPeriod_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getCurrentCalPeriod": {
+      "post": {
+        "description": "",
+        "operationId": "Create_getCurrentCalPeriod_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/insertNewApplication": {
+      "post": {
+        "description": "",
+        "operationId": "insertNewApplication_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/insertNameAddressChange": {
+      "post": {
+        "description": "",
+        "operationId": "insertNameAddressChange_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/insertMiniPurge": {
+      "post": {
+        "description": "",
+        "operationId": "insertMiniPurge_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getILB": {
+      "get": {
+        "description": "",
+        "operationId": "getILB_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "abo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "reqAff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "reqAbo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getInformation": {
+      "get": {
+        "description": "",
+        "operationId": "getAwardInformation_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "reqAff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "reqAbo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "abo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getGeneratorQual": {
+      "get": {
+        "description": "",
+        "operationId": "getGenQual_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "reqAff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "reqAbo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "abo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "frontlineAff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "frontlineAbo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getFaaGen": {
+      "get": {
+        "description": "",
+        "operationId": "getFaaGen_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "abo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "reqAff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "reqAbo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "frontlineAff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "frontlineAbo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "strongestMkt",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "boolean",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getLegCounts": {
+      "get": {
+        "description": "",
+        "operationId": "getLegCounts_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "fiscalYear",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "affAbo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getQualHistory": {
+      "get": {
+        "description": "",
+        "operationId": "getQualHistory_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "abo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "fiscalOnly",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "boolean",
+            "description": ""
+          },
+          {
+            "name": "reqAff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "reqAbo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/isAvailable": {
+      "get": {
+        "description": "",
+        "operationId": "Get_isAvailable_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "abo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "reqAff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "reqAbo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getAnnualFrontline": {
+      "get": {
+        "description": "",
+        "operationId": "getAnnualFrontline_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "abo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "showPercentages",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "boolean",
+            "description": ""
+          },
+          {
+            "name": "showAllFrontliners",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "boolean",
+            "description": ""
+          },
+          {
+            "name": "showActiveFrontliners",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "boolean",
+            "description": ""
+          },
+          {
+            "name": "showComboLegs",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "boolean",
+            "description": ""
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "reqAff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "reqAbo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getFoundersCouncil": {
+      "get": {
+        "description": "",
+        "operationId": "getFoundersCouncil_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "year",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getLosMb": {
+      "get": {
+        "description": "",
+        "operationId": "getLosMb_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "abo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "reqAff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "reqAbo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getGlobalMb": {
+      "get": {
+        "description": "",
+        "operationId": "getGlobalMb_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "abo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "reqAff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "reqAbo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getISD": {
+      "get": {
+        "description": "",
+        "operationId": "getISD_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "abo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "reqAff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "reqAbo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getSponsorByType": {
+      "get": {
+        "description": "",
+        "operationId": "getSponsorByType_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "abo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "sponsorTypes",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "reqAff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "reqAbo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getUplineLevelInfo": {
+      "get": {
+        "description": "",
+        "operationId": "getUplineLevelInfo_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "abo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "reqAff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "reqAbo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getPlatinum": {
+      "get": {
+        "description": "",
+        "operationId": "getPlatinumUpline_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "affAbo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getABOAttributes": {
+      "post": {
+        "description": "",
+        "operationId": "Create_getABOAttributes_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getEmeraldDiamondMap": {
+      "get": {
+        "description": "",
+        "operationId": "getEmeraldDiamondMap_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "abo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/uploadAff": {
+      "put": {
+        "description": "",
+        "operationId": "Update_pedUpload_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/uploadAbo": {
+      "put": {
+        "description": "",
+        "operationId": "Update_pedUpload_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "abo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/uploadPrior": {
+      "put": {
+        "description": "",
+        "operationId": "Update_pedUpload_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/uploadAboPrior": {
+      "put": {
+        "description": "",
+        "operationId": "Update_pedUpload_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "abo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/create": {
+      "post": {
+        "description": "",
+        "operationId": "addPrivacyBlock_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/updateExpireDate": {
+      "put": {
+        "description": "",
+        "operationId": "updateBlockExpire_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "abo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "reqAff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "reqAbo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "blockPrivId",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "expDate",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getDetails": {
+      "get": {
+        "description": "",
+        "operationId": "getDetails_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "affAbo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "busNature",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "volumeTypes",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "showActiveOnly",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "boolean",
+            "description": ""
+          },
+          {
+            "name": "stopAtPlatinum",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "boolean",
+            "description": ""
+          },
+          {
+            "name": "intlFrontline",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "maxLevels",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "reqAff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "reqAbo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getDetailsList": {
+      "get": {
+        "description": "",
+        "operationId": "getDetailsList_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "affAbo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "busNature",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "volumeTypes",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "showActiveOnly",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "boolean",
+            "description": ""
+          },
+          {
+            "name": "stopAtPlatinum",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "boolean",
+            "description": ""
+          },
+          {
+            "name": "intlFrontline",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "maxLevels",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "reqAff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "reqAbo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getABOPerformancePercentList": {
+      "get": {
+        "description": "",
+        "operationId": "getABOPerformancePercentList_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "country",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "bonusPercent",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "onePeriodOnly",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "boolean",
+            "description": ""
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getLastOrderDate": {
+      "get": {
+        "description": "",
+        "operationId": "getLastOrderDate_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "affAbo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "reqAff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "reqAbo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getPVBV": {
+      "get": {
+        "description": "",
+        "operationId": "getPVBV_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "abo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "reqAff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "reqAbo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          {
+            "name": "volumeTypes",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/transmitData": {
+      "put": {
+        "description": "",
+        "operationId": "Update_transmitData_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "affNo",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "fileTypeCode",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "fileName",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/runMonthEndToRMS": {
+      "put": {
+        "description": "",
+        "operationId": "Update_runMonthEndToRMSaProcess_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "aff",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "processId",
+            "in": "query",
+            "required": false,
+            "x-is-map": false,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/getILBstmtGenInfo": {
+      "get": {
+        "description": "",
+        "operationId": "get_",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    }
+  }
+}

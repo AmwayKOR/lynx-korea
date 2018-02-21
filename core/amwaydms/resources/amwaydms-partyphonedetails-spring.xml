@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		   http://www.springframework.org/schema/beans/spring-beans.xsd
+		   http://www.springframework.org/schema/util
+		   http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<!-- ########################################################################## 
+		########## 1. Add Party Phone Service ##################### ########################################################################## -->
+
+	<alias name="defaultAddPartyPhoneService" alias="addPartyPhoneService" />
+	<bean id="defaultAddPartyPhoneService"
+		class="com.amway.integration.cis.dms.phoneservices.impl.DefaultAddPartyPhoneService"
+		parent="abstractDmsService">
+		<property name="inputConverter" ref="addPartyPhoneServiceInputConverter" />
+		<property name="outputConverter" ref="addPartyPhoneServiceOutputConverter" />
+		<property name="urlPath"
+			value="${cis.client.dms.addPartyPhoneService.urlPath}" />
+	</bean>
+
+	<bean id="mockAddPartyPhoneService"
+		class="com.amway.integration.cis.dms.updateinformation.common.mock.CommonMockService">
+		<property name="inputConverter" ref="addPartyPhoneServiceInputConverter" />
+		<property name="outputConverter" ref="addPartyPhoneServiceOutputConverter" />
+		<property name="hystrixCommandConfig" ref="dmsCommandConfig" />
+		<property name="ondemandHystrixCommandFactory" ref="ondemandHystrixCommandFactory" />
+		<property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
+		<property name="serviceAvailCode" value="#{configurationService.configuration.getProperty('amwaydms.availablity.code')}"/>
+	</bean>
+
+	<bean id="addPartyPhoneServiceInputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.integration.dms.services.AddPartyPhoneRequest" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonRequestFieldsPopulator" />
+				<ref bean="addPartyPhoneServiceInputPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="addPartyPhoneServiceInputPopulator"
+		class="com.amway.integration.cis.dms.populators.DmsAddPartyPhoneDetailsInputPopulator"
+		parent="abstractDmsPopulator" />
+
+	<bean id="addPartyPhoneServiceOutputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.core.data.CommonResponseFieldsData" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonResponseFieldsPopulator" />
+			</list>
+		</property>
+	</bean>
+	<!--
+	<bean id="addPartyPhoneService" parent="abstractMockFactory">
+		<property name="mockInterface" value="com.amway.core.dms.service.DmsService" />
+		<property name="mockMode" value="${cis.client.dms.addPartyPhoneService.mock}" />
+		<lookup-method name="getDefaultObject" bean="defaultAddPartyPhoneService" />
+		<property name="customMock" ref="mockAddPartyPhoneService"/>
+			<!- - <bean
+				class="com.amway.integration.cis.dms.updateinformation.common.mock.MockUpdateInformationService"
+				autowire-candidate="false" />
+		</property> - ->
+	</bean>
+	-->
+
+	<!-- ########################################################################## 
+		########## 2. Update Party Ecommm Service ##################### ########################################################################## -->
+
+	<alias name="defaultUpdatePartyPhoneService" alias="updatePartyPhoneService" />
+	<bean id="defaultUpdatePartyPhoneService"
+		class="com.amway.integration.cis.dms.phoneservices.impl.DefaultUpdatePartyPhoneService"
+		parent="abstractDmsService">
+		<property name="inputConverter" ref="updatePartyPhoneServiceInputConverter" />
+		<property name="outputConverter" ref="updatePartyPhoneServiceOutputConverter" />
+		<property name="urlPath"
+			value="${cis.client.dms.updatePartyPhoneService.urlPath}" />
+	</bean>
+
+	<bean id="mockUpdatePartyPhoneService"
+		class="com.amway.integration.cis.dms.updateinformation.common.mock.CommonMockService">
+		<property name="inputConverter" ref="updatePartyPhoneServiceInputConverter" />
+		<property name="outputConverter" ref="updatePartyPhoneServiceOutputConverter" />
+		<property name="hystrixCommandConfig" ref="dmsCommandConfig" />
+		<property name="ondemandHystrixCommandFactory" ref="ondemandHystrixCommandFactory" />
+		<property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
+		<property name="serviceAvailCode" value="#{configurationService.configuration.getProperty('amwaydms.availablity.code')}"/>
+	</bean> 
+
+
+	<bean id="updatePartyPhoneServiceInputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.integration.dms.services.UpdatePartyPhoneRequest" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonRequestFieldsPopulator" />
+				<ref bean="updatePartyPhoneServiceInputPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="updatePartyPhoneServiceInputPopulator"
+		class="com.amway.integration.cis.dms.populators.DmsUpdatePartyPhoneDetailsInputPopulator"
+		parent="abstractDmsPopulator" />
+
+	<bean id="updatePartyPhoneServiceOutputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.core.data.CommonResponseFieldsData" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonResponseFieldsPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<!--
+	<bean id="updatePartyPhoneService" parent="abstractMockFactory">
+		<property name="mockInterface" value="com.amway.core.dms.service.DmsService" />
+		<property name="mockMode"
+			value="${cis.client.dms.updatePartyPhoneService.mock}" />
+		<lookup-method name="getDefaultObject" bean="defaultUpdatePartyPhoneService" />
+		<property name="customMock" ref="mockUpdatePartyPhoneService"/>
+			<!- - <bean
+				class="com.amway.integration.cis.dms.updateinformation.common.mock.CommonMockService"
+				autowire-candidate="false" />
+		</property> - ->
+	</bean>
+	-->
+
+	<!-- ######################### 3. Delete Party Phone Service ##################### -->
+	
+	<alias name="defaultDeletePartyPhoneService" alias="deletePartyPhoneService" />
+	<bean id="defaultDeletePartyPhoneService"
+		class="com.amway.integration.cis.dms.phoneservices.impl.DefaultDeletePartyPhoneService"
+		parent="abstractDmsService">
+		<property name="inputConverter" ref="deletePartyPhoneServiceInputConverter" />
+		<property name="outputConverter" ref="deletePartyPhoneServiceOutputConverter" />
+		<property name="urlPath"
+			value="${cis.client.dms.deletePartyPhoneService.urlPath}" />
+	</bean>
+
+
+	<bean id="mockDeletePartyPhoneService"
+		class="com.amway.integration.cis.dms.updateinformation.common.mock.CommonMockService">
+		<property name="inputConverter" ref="deletePartyPhoneServiceInputConverter" />
+		<property name="outputConverter" ref="deletePartyPhoneServiceOutputConverter" />
+		<property name="hystrixCommandConfig" ref="dmsCommandConfig" />
+		<property name="ondemandHystrixCommandFactory" ref="ondemandHystrixCommandFactory" />
+		<property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
+		<property name="serviceAvailCode" value="#{configurationService.configuration.getProperty('amwaydms.availablity.code')}"/>
+	</bean> 
+
+	<bean id="deletePartyPhoneServiceInputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.integration.dms.services.DeletePartyPhoneRequest" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonRequestFieldsPopulator" />
+				<ref bean="deletePartyPhoneServiceInputPopulator" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="deletePartyPhoneServiceInputPopulator"
+		class="com.amway.integration.cis.dms.populators.DmsDeletePartyPhoneDetailsInputPopulator"
+		parent="abstractDmsPopulator" />
+		
+	<bean id="deletePartyPhoneServiceOutputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.core.data.CommonResponseFieldsData" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonResponseFieldsPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<!--
+	<bean id="deletePartyPhoneService" parent="abstractMockFactory">
+		<property name="mockInterface" value="com.amway.core.dms.service.DmsService" />
+		<property name="mockMode"
+			value="${cis.client.dms.deletePartyPhoneService.mock}" />
+		<lookup-method name="getDefaultObject" bean="defaultDeletePartyPhoneService" />
+		<property name="customMock">
+			<bean
+				class="com.amway.integration.cis.dms.updateinformation.common.mock.CommonMockService"
+				autowire-candidate="false" />
+		</property>
+	</bean>
+	-->
+
+	<!-- ########################################################################## 
+		########## 4. Get Party Phone Service ##################### ########################################################################## -->
+
+	<alias name="defaultGetPartyPhoneService" alias="getPartyPhoneService" />
+	<bean id="defaultGetPartyPhoneService"
+		class="com.amway.integration.cis.dms.phoneservices.impl.DefaultGetPartyPhoneService"
+		parent="abstractDmsService">
+		<property name="inputConverter" ref="getPartyPhoneServiceInputConverter" />
+		<property name="outputConverter" ref="getPartyPhoneServiceOutputConverter" />
+		<property name="urlPath"
+			value="${cis.client.dms.getPartyPhoneService.urlPath}" />
+	</bean>
+
+
+	<bean id="mockGetPartyPhoneService"
+		class="com.amway.integration.cis.dms.phoneservices.mock.impl.MockGetPartyPhoneService">
+		<property name="inputConverter" ref="getPartyPhoneServiceInputConverter" />
+		<property name="outputConverter" ref="getPartyPhoneServiceOutputConverter" />
+		<property name="hystrixCommandConfig" ref="dmsCommandConfig" />
+		<property name="ondemandHystrixCommandFactory" ref="ondemandHystrixCommandFactory" />
+		<property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
+		<property name="serviceAvailCode" value="#{configurationService.configuration.getProperty('amwaydms.availablity.code')}"/>
+	</bean>
+
+	<bean id="getPartyPhoneServiceInputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.integration.dms.services.GetPartyPhoneRequest" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonRequestFieldsPopulator" />
+				<ref bean="getPartyPhoneServiceInputPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="getPartyPhoneServiceInputPopulator"
+		class="com.amway.integration.cis.dms.populators.DmsGetPartyPhoneDetailsInputPopulator"
+		parent="abstractDmsPopulator" />
+
+	<bean id="getPartyPhoneServiceOutputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.core.dms.data.PartyPhoneDetailsResponseData" />
+		<property name="populators">
+			<list>
+				<ref bean="getPartyPhoneServiceOutputPopulator" />
+				<ref bean="amwayCommonResponseFieldsPopulator" />
+			</list>
+		</property>
+	</bean>
+	<bean id="getPartyPhoneServiceOutputPopulator"
+		class="com.amway.integration.cis.dms.populators.DmsGetPartyPhoneDetailsOutputPopulator"
+		parent="abstractDmsPopulator" />
+
+	<!--
+	<bean id="getPartyPhoneService" parent="abstractMockFactory">
+		<property name="mockInterface" value="com.amway.core.dms.service.DmsService" />
+		<property name="mockMode" value="${cis.client.dms.getPartyPhoneService.mock}" />
+		<lookup-method name="getDefaultObject" bean="defaultGetPartyPhoneService" />
+		<property name="customMock" ref="mockGetPartyPhoneService"/>
+			<!- - <bean
+				class="com.amway.integration.cis.dms.phoneservices.mock.impl.MockGetPartyPhoneService"
+				autowire-candidate="false" />
+		</property> - ->
+	</bean>
+	-->
+
+	<!-- ########################################################################## 
+		########## 5. Party Process Phone Service ##################### ########################-->
+	<bean id="dmsProcessPartyPhoneInputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.integration.dms.services.ProcessPartyPhoneRequest" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonRequestFieldsPopulator" />
+				<ref bean="dmsProcessPartyPhoneInputPopulator" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="dmsProcessPartyPhoneInputPopulator"
+		class="com.amway.integration.cis.dms.populators.DmsProcessPartyPhoneInputPopulator">
+	</bean>
+	
+	<bean id="dmsProcessPartyPhoneOutputConverter" parent="abstractPopulatingConverter">
+		  <property name="targetClass" value="com.amway.core.data.CommonResponseFieldsData" />
+		  <property name="populators">
+		   <list>
+		    <ref bean="amwayCommonResponseFieldsPopulator" />
+		   </list>
+		  </property>
+	</bean>
+	  
+	<bean id="defaultProcessPartyPhoneService"
+		class="com.amway.integration.cis.dms.phoneservices.impl.DefaultProcessPartyPhoneService"
+		parent="abstractDmsService">
+		<property name="inputConverter" ref="dmsProcessPartyPhoneInputConverter" />
+		<property name="outputConverter" ref="dmsProcessPartyPhoneOutputConverter" />
+		<property name="urlPath" value="${cis.client.dms.processPartyPhone.urlPath}" />
+	</bean>
+
+	<bean id="mockProcessPartyPhoneService"
+		class="com.amway.integration.cis.dms.phoneservices.mock.impl.MockProcessPartyPhoneService">
+		<property name="inputConverter" ref="dmsProcessPartyPhoneInputConverter" />
+		<property name="outputConverter" ref="dmsProcessPartyPhoneOutputConverter" />
+		<property name="hystrixCommandConfig" ref="dmsCommandConfig" />
+		<property name="ondemandHystrixCommandFactory" ref="ondemandHystrixCommandFactory" />
+		<property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
+		<property name="serviceAvailCode" value="#{configurationService.configuration.getProperty('amwaydms.availablity.code')}"/>
+	</bean> 
+
+	
+	<alias alias="processPartyPhoneService" name="defaultProcessPartyPhoneService" />
+	<!--
+	<bean id="processPartyPhoneServiceFactory" parent="abstractMockFactory">
+		<property name="mockInterface" value="com.amway.core.dms.service.DmsService" />
+		<property name="mockMode" value="${cis.client.dms.processPartyPhoneService.mock}" />
+		<lookup-method name="getDefaultObject" bean="defaultProcessPartyPhoneService" />
+		<property name="customMock" ref="mockProcessPartyPhoneService"/>
+			<!- - <bean
+				class="com.amway.integration.cis.dms.phoneservices.mock.impl.MockProcessPartyPhoneService"
+				autowire-candidate="false">
+			</bean>
+		</property> - ->
+	</bean> 
+	-->
+</beans>	
+	

@@ -1,0 +1,27 @@
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	                       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <alias name="defaultPaymentModeValidator" alias="paymentModeValidator"/>
+    <bean id="defaultPaymentModeValidator"
+          class="com.amway.core.validator.PaymentModeValidator">
+    </bean>
+
+    <bean id="pointOfSaleValidator"
+          class="com.amway.core.validator.PointOfSaleValidator">
+        <property name="pointOfServiceService" ref="pointOfServiceService"/>
+    </bean>
+
+    <alias name="defaultAmwayPlaceOrderCartValidator" alias="placeOrderCartValidator"/>
+    <bean id="defaultAmwayPlaceOrderCartValidator"
+          class="com.amway.core.validator.AmwayPlaceOrderCartValidator">
+    </bean>
+
+    <alias name="defaultAmwayAutoRenewalRequestDataValidator" alias="autoRenewalRequestDataValidator"/>
+    <bean id="defaultAmwayAutoRenewalRequestDataValidator" class="com.amway.core.validator.AmwayAutoRenewalRequestDataValidator" />
+
+</beans>
+

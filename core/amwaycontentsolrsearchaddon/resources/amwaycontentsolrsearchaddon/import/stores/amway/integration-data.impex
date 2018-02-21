@@ -1,0 +1,13 @@
+#
+# Import the CMS content for the Electronics site
+#
+$contentCatalog=lynxbrazilContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+
+UPDATE ContentPage                                ; $contentCV[unique=true]    ; uid[unique=true]      ;displayInSearch[default=false]                               
+                                                  ;                            ; faq                   ;true
+                                                  ;                            ; mobile-faq                   ;true                                                                                 
+
+UPDATE ContentPage                                ; $contentCV[unique=true]    ; uid[unique=true]      ;displayInSearch[default=false]                                
+                                                  ;                            ; termsAndConditions    ;true
+                                                  ;                            ; mobile-termsAndConditions    ;true                                                                                

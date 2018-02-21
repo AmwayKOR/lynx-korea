@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<!-- Hytrix configuration for los calls-->
+	<alias alias="losCommandConfig" name="losCommandConfig"/>
+	<bean id="losCommandConfig" class="de.hybris.platform.integration.commons.hystrix.OndemandHystrixCommandConfiguration">
+		<property name="groupKey" value="${amway.los.groupKey}"/>
+		<property name="threadTimeout" value="${amway.los.threadTimeout}"/>
+		<property name="threadPoolSize" value="${amway.los.threadPoolSize}"/>
+	</bean>
+	
+	<bean id="abstractLosService" class="com.amway.integration.cis.los.service.impl.AbstractLosService" abstract="true">
+		<property name="hystrixCommandConfig" ref="losCommandConfig" />
+		<property name="losClient" ref="losClient"/>
+		<property name="ondemandHystrixCommandFactory" ref="ondemandHystrixCommandFactory" />
+		<property name="serviceAvailCode" value="#{configurationService.configuration.getProperty('amwaylos.availablity.code')}"/>
+		<property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
+	</bean>
+	
+	<bean id="abstractLosOrderService" parent="abstractLosService" abstract="true">
+		<property name="losClient" ref="losOrderClient"/>
+		<property name="serviceAvailCode" value="#{configurationService.configuration.getProperty('amwaylos.order.availablity.code')}"/>
+	</bean>
+	
+	<import resource="classpath:/hybris-cis-los-client.xml"/>
+	<import resource="classpath:/amwaylos-orderservice-spring.xml"/>
+	<import resource="classpath:/amwaylos-returnorderservice-spring.xml"/>
+ 	<import resource="classpath:/amwaylos-sponsorvalidationservice-spring.xml"/>	
+ 	<import resource="classpath:/hybris-cis-los-order-client.xml"/>
+ 	<import resource="classpath:/amwaylos-cancelorderservice-spring.xml"/>
+ 	<import resource="classpath:/amwaylos-intlbussponsorvalidation-spring.xml"/>
+ 	<import resource="classpath:/amwaylos-accountservice-spring.xml"/>
+ 	<import resource="classpath:/amwaylos-accountdetailservice-spring.xml"/>
+ 	<import resource="classpath:/amwaylos-bonusadjustmentservice-spring.xml"/>
+</beans>

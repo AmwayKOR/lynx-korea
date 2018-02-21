@@ -1,0 +1,14 @@
+#%impex.setLocale(Locale.US)
+
+$kit_order1_date=03.03.2016 00:00:00
+$kit_order2_date=03.03.2016 11:01:27
+
+INSERT_UPDATE Order;code[unique=true];date[dateformat=dd.MM.yyyy HH:mm:ss];net;currency(isocode);calculated;user(uid);type(code)[default='web'];store(uid)[default='defaultstore'];site(uid)[default='storetemplate']
+;kit_order1;$kit_order1_date;false;USD;false;amway_party_test_1;;;
+;kit_order2;$kit_order2_date;false;USD;false;amway_party_test_1;;;
+
+#Order Entries for certain day 01
+INSERT_UPDATE OrderEntry;order(Order.code)[unique=true];creationTime[dateformat=dd.MM.yyyy HH:mm:ss];wareHouse(code);product(code,catalogVersion(catalog(id),version))[unique=true];quantity;unit(code);basePrice;aboBasePrice;
+;kit_order1;$kit_order1_date;warehouseK1;Promotional_Kit_Plus:testCatalog:Online;1;pieces;12.95;10.95;
+;kit_order2;$kit_order2_date;warehouseK1;HW1210-3422:testCatalog:Online;3;pieces;22.95;20.95;
+

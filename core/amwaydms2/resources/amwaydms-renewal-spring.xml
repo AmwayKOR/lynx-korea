@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		   http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <alias name="defaultAccountRenewalService" alias="accountRenewalService"/>
+    <bean id="defaultAccountRenewalService" class="com.amway.amwaydms.accountrenewal.services.impl.DefaultAccountRenewalService"
+          parent="amwayAbstractDmsService">
+        <property name="outputConverter" ref="amwayAccountResponseConverter"/>
+        <property name="urlPath" value="${amwaydms.dms.url}"/>
+    </bean>
+
+
+    <bean id="mockAmwayAccountRenewalService" class="com.amway.amwaydms.aboinformation.services.impl.mock.MockAmwayProfileService">
+        <property name="outputConverter" ref="amwayAccountResponseConverter" />
+        <property name="urlPath"
+                  value="${amwaydms.dms.url}" />
+    </bean>
+
+
+</beans>

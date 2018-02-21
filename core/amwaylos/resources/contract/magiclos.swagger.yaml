@@ -1,0 +1,4302 @@
+swagger: 2.0
+info:
+  version: 
+  title: magiclos.wadl
+  description: 
+  license:
+    name: MIT
+    url: http://github.com/gruntjs/grunt/blob/master/LICENSE-MIT
+host: magic-beta:9083
+basePath: /EBS_UI_Service/rest/
+securityDefinitions: {}
+schemes:
+- http
+consumes:
+- application/json
+produces:
+- application/json
+paths:
+  /getMultiBusSponsorList:
+    post:
+      description: 
+      operationId: Create_getMultiBusSponsorList__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getGlobalMultiBusSponsorList:
+    post:
+      description: 
+      operationId: Create_getGlobalMultiBusSponsorList__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getIntlSponsorList:
+    post:
+      description: 
+      operationId: Create_getIntlSponsorList__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /get:
+    get:
+      description: 
+      operationId: getPrivacyBlock__
+      produces:
+      - application/json
+      parameters:
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: abo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: reqAff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: reqAbo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: effDate
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: blockPrivId
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /retrieveCustomersLOSPVBVDataMultiplePeriods:
+    post:
+      description: 
+      operationId: Create_retrieveCustomersLOSPVBVDataMultiplePeriods__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getCustomerPVBVDataForPeriod:
+    post:
+      description: 
+      operationId: Create_getCustomerPVBVDataForPeriod__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getCustomersLOSPVBVDataMultiplePeriods:
+    post:
+      description: 
+      operationId: Create_getCustomersLOSPVBVDataMultiplePeriods__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getCustomersPVBVDataList:
+    post:
+      description: 
+      operationId: Create_getCustomersPVBVDataList__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getLiteCustLOS:
+    post:
+      description: 
+      operationId: Create_getLiteCustLOS__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getLiteCustList:
+    post:
+      description: 
+      operationId: Create_getLiteCustList__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getLastOrdDate:
+    post:
+      description: 
+      operationId: Create_getLastOrdDate__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getTimerInfo:
+    get:
+      description: 
+      operationId: getTimerDetails__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /globalPlatinumMultiTest:
+    get:
+      description: 
+      operationId: Get_globalPlatinumMultiTest__
+      produces:
+      - application/json
+      parameters:
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: abo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+    post:
+      description: 
+      operationId: Create_globalPlatinumMultiTest__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /validateSponsor:
+    post:
+      description: 
+      operationId: Create_validateSponsor__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getEuropeanFAA:
+    get:
+      description: 
+      operationId: getEuropeanFAA__
+      produces:
+      - application/json
+      parameters:
+      - name: affAbo
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: period
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getStrongestMarketForPoints:
+    get:
+      description: 
+      operationId: getStrongestMarketForPoints__
+      produces:
+      - application/json
+      parameters:
+      - name: fiscalYear
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: abo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: reqAff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: reqAbo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getFrontlinerStrongestMktInfo:
+    get:
+      description: 
+      operationId: getFrontlinerStrongestMktInfo__
+      produces:
+      - application/json
+      parameters:
+      - name: fiscalYear
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: abo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: reqAff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: reqAbo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+    post:
+      description: 
+      operationId: Create_getFrontlinerStrongestMktInfo__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getQualPointSummary:
+    get:
+      description: 
+      operationId: getFAAQualPointSummary__
+      produces:
+      - application/json
+      parameters:
+      - name: fiscalYear
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: period
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: affAbo
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: reqAff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: reqAbo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getFAAStrongestMarketForPoints:
+    post:
+      description: 
+      operationId: Create_getFAAStrongestMarketForPoints__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getFAAQualPointSummary:
+    post:
+      description: 
+      operationId: Create_getFAAQualPointSummary__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getLosMB:
+    get:
+      description: 
+      operationId: getLosMB__
+      produces:
+      - application/json
+      parameters:
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: abo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: reqAff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: reqAbo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: period
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getGlobalMB:
+    get:
+      description: 
+      operationId: getGlobalMB__
+      produces:
+      - application/json
+      parameters:
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: abo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: reqAff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: reqAbo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: period
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getIntl:
+    get:
+      description: 
+      operationId: getIntl__
+      produces:
+      - application/json
+      parameters:
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: abo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: period
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: reqAff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: reqAbo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getInMarket:
+    get:
+      description: 
+      operationId: getInMarket__
+      produces:
+      - application/json
+      parameters:
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: abo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: period
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: reqAff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: reqAbo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getAnnualInMarket:
+    get:
+      description: 
+      operationId: getAnnualInMarket__
+      produces:
+      - application/json
+      parameters:
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: abo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: period
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: reqAff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: reqAbo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getAnnualIntl:
+    get:
+      description: 
+      operationId: getAnnualIntl__
+      produces:
+      - application/json
+      parameters:
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: abo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: period
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: reqAff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: reqAbo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getAnnual:
+    get:
+      description: 
+      operationId: getAnnual__
+      produces:
+      - application/json
+      parameters:
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: abo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: reqAff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: reqAbo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: period
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getMonthly:
+    get:
+      description: 
+      operationId: getMonthly__
+      produces:
+      - application/json
+      parameters:
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: abo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: reqAff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: reqAbo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: period
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getAboWithMBSponsorList:
+    get:
+      description: 
+      operationId: getAboWithMBSponsorList__
+      produces:
+      - application/json
+      parameters:
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: period
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /retreiveFrontLines:
+    post:
+      description: 
+      operationId: Create_retreiveFrontLines__
+      produces:
+      - application/json
+      parameters:
+      - name: affNo
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: iboNo
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /insertFrontLiners:
+    post:
+      description: 
+      operationId: insertFrontLiners__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getLastPaidILB:
+    get:
+      description: 
+      operationId: getLastPaidILB__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getCurrent:
+    get:
+      description: 
+      operationId: getCurrent__
+      produces:
+      - application/json
+      parameters:
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getCurrentCal:
+    get:
+      description: 
+      operationId: getCurrentCalPeriod__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getHighestCurrentAwardsInfo:
+    post:
+      description: 
+      operationId: Create_getHighestCurrentAwardsInfo__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /activeFrontlinersInquiryService:
+    post:
+      description: 
+      operationId: Create_activeFrontlinersInquiryService__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /activeFrontlinersInquiryServiceForPeriod:
+    post:
+      description: 
+      operationId: Create_activeFrontlinersInquiryService__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /isHATavailable:
+    post:
+      description: 
+      operationId: Create_isHATavailable__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /expandedComboLegInquiryService:
+    post:
+      description: 
+      operationId: Create_expandedComboLegInquiryService__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /expandedComboLegInquiryServiceForPeriod:
+    post:
+      description: 
+      operationId: Create_expandedComboLegInquiryService__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /qualificationHistoryInquiryService:
+    post:
+      description: 
+      operationId: Create_qualificationHistoryInquiryService__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /qualificationHistoryInquiryServiceForPeriod:
+    post:
+      description: 
+      operationId: Create_qualificationHistoryInquiryService__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /awardInformationInquiryService:
+    post:
+      description: 
+      operationId: Create_awardInformationInquiryService__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /awardInformationInquiryServiceForPeriod:
+    post:
+      description: 
+      operationId: Create_awardInformationInquiryService__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /trackingLegsInquiryService:
+    post:
+      description: 
+      operationId: Create_trackingLegsInquiryService__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /trackingLegsInquiryServiceForPeriod:
+    post:
+      description: 
+      operationId: Create_trackingLegsInquiryService__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /awardTrackingInquiryService:
+    post:
+      description: 
+      operationId: Create_awardTrackingInquiryService__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /awardTrackingInquiryServiceForPeriod:
+    post:
+      description: 
+      operationId: Create_awardTrackingInquiryService__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /awardTrackingInquiryForCurrentAward:
+    post:
+      description: 
+      operationId: Create_awardTrackingInquiryForCurrentAward__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /awardTrackingInquiryForCurrentAwardForPeriod:
+    post:
+      description: 
+      operationId: Create_awardTrackingInquiryForCurrentAward__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /awardTrackingInquiryForHighestAward:
+    post:
+      description: 
+      operationId: Create_awardTrackingInquiryForHighestAward__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /awardTrackingInquiryForHighestAwardForPeriod:
+    post:
+      description: 
+      operationId: Create_awardTrackingInquiryForHighestAward__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /awardTrackingInquiryForHighestGlobalAward:
+    post:
+      description: 
+      operationId: Create_awardTrackingInquiryForHighestGlobalAward__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /awardTrackingInquiryForHighestGlobalAwardForPeriod:
+    post:
+      description: 
+      operationId: Create_awardTrackingInquiryForHighestGlobalAward__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /awardTrackingInquiryForHighestTrackingAward:
+    post:
+      description: 
+      operationId: Create_awardTrackingInquiryForHighestTrackingAward__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /awardTrackingInquiryForHighestTrackingAwardForPeriod:
+    post:
+      description: 
+      operationId: Create_awardTrackingInquiryForHighestTrackingAward__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /awardTrackingInquiryForHighestGlobalTrackingAward:
+    post:
+      description: 
+      operationId: Create_awardTrackingInquiryForHighestGlobalTrackingAward__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /awardTrackingInquiryForHighestGlobalTrackingAwardForPeriod:
+    post:
+      description: 
+      operationId: Create_awardTrackingInquiryForHighestGlobalTrackingAward__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /awardTrackingInquiryForHighestTrackingAwardWithFAA:
+    post:
+      description: 
+      operationId: Create_awardTrackingInquiryForHighestTrackingAwardWithFAA__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /awardTrackingInquiryForHighestTrackingAwardWithFAAForPeriod:
+    post:
+      description: 
+      operationId: Create_awardTrackingInquiryForHighestTrackingAwardWithFAA__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /awardTrackingInquiryForHighestGlobalTrackingWithFAA:
+    post:
+      description: 
+      operationId: Create_awardTrackingInquiryForHighestGlobalTrackingWithFAA__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /awardTrackingInquiryForHighestGlobalTrackingWithFAAForPeriod:
+    post:
+      description: 
+      operationId: Create_awardTrackingInquiryForHighestGlobalTrackingWithFAA__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /delete:
+    delete:
+      description: 
+      operationId: delete__
+      produces:
+      - application/json
+      parameters:
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: abo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: source
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: userId
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: reasonCode
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      responses:
+        200:
+          description: 
+  /add:
+    post:
+      description: 
+      operationId: addPreferences__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getEligibleByAward:
+    post:
+      description: 
+      operationId: Create_getEligibleByAward__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /checkStatus:
+    post:
+      description: 
+      operationId: Create_checkStatus__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getStatusToRunRmsPayment:
+    get:
+      description: 
+      operationId: getStatusToRunRmsPayment__
+      produces:
+      - application/json
+      parameters:
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: period
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /addMenuItem:
+    post:
+      description: 
+      operationId: addMenuItem__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /editMenuItem:
+    post:
+      description: 
+      operationId: Create_editMenuItem__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /isIBOBlockPriv:
+    post:
+      description: 
+      operationId: Create_isIBOBlockPriv__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /createIBOBlockPriv:
+    post:
+      description: 
+      operationId: createIBOBlockPriv__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /expireIBOBlockPriv:
+    post:
+      description: 
+      operationId: Create_expireIBOBlockPriv__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /emailUpdateForNRT:
+    post:
+      description: 
+      operationId: Create_emailUpdateForNRT__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getQualInqData:
+    post:
+      description: 
+      operationId: Create_getQualInqData__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /changeRestricted:
+    put:
+      description: 
+      operationId: changeRestriction__
+      produces:
+      - application/json
+      parameters:
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: abo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: restricted
+        in: query
+        required: false
+        x-is-map: false
+        type: boolean
+        description: 
+      - name: imageType
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: reqAff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: reqAbo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+    post:
+      description: 
+      operationId: changeRestriction__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /removeImage:
+    post:
+      description: 
+      operationId: Create_removeImage__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+    delete:
+      description: 
+      operationId: removeImage__
+      produces:
+      - application/json
+      parameters:
+      - name: affAboImages
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: reqAff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: reqAbo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      responses:
+        200:
+          description: 
+  /fetchImageInfo:
+    get:
+      description: 
+      operationId: fetchImageInfo__
+      produces:
+      - application/json
+      parameters:
+      - name: affAboImages
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: reqAff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: reqAbo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+    post:
+      description: 
+      operationId: Create_fetchImageInfo__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /isAllowed:
+    post:
+      description: 
+      operationId: Create_isAllowed__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /HighestCurrentAwardsInfo:
+    get:
+      description: 
+      operationId: getHighestCurrentAwardsInfo__
+      produces:
+      - application/json
+      parameters:
+      - name: reqAff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: reqAbo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: affAbo
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: period
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: returnInMarketOnly
+        in: query
+        required: false
+        x-is-map: false
+        type: boolean
+        description: 
+      - name: returnGlobalOnly
+        in: query
+        required: false
+        x-is-map: false
+        type: boolean
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getAwardLevel:
+    post:
+      description: 
+      operationId: Create_LMSIntegrationByAwardLevel__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getCurrHghstAwardLevel:
+    post:
+      description: 
+      operationId: Create_LMSIntegrationByCurrHghstAwardLevel__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getAwardLevelAndStatus:
+    post:
+      description: 
+      operationId: Create_LMSIntegrationByAwardLevelAndStatus__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /receiveTestCert:
+    post:
+      description: 
+      operationId: Create_receiveTestCertification__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /isAllowedMultiIbo:
+    post:
+      description: 
+      operationId: Create_isAllowedMultiIbo__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getInliners:
+    post:
+      description: 
+      operationId: Create_getInlinersList__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getCountryInformation:
+    post:
+      description: 
+      operationId: Create_getCountryInformation__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /remove:
+    post:
+      description: 
+      operationId: Create_removePreferences__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /fetch:
+    post:
+      description: 
+      operationId: Create_fetchPreferences__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /updateBusNature:
+    put:
+      description: 
+      operationId: updateBusNature__
+      produces:
+      - application/json
+      parameters:
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: abo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: source
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: userId
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: busNature
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: newSponAff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: newSponAbo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /updateCountry:
+    put:
+      description: 
+      operationId: updateCountry__
+      produces:
+      - application/json
+      parameters:
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: abo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: source
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: userId
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: isoCountry
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /updateBlock:
+    put:
+      description: 
+      operationId: updateBlock__
+      produces:
+      - application/json
+      parameters:
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: abo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: source
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: userId
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: effDate
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: endDate
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: blockType
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /updatePhone:
+    put:
+      description: 
+      operationId: updatePhone__
+      produces:
+      - application/json
+      parameters:
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: abo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: phoneTypeCd
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: source
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: userId
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: phoneCountry
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: phoneArea
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: phone
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: phoneExt
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: phoneLegacy
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /updateEmail:
+    put:
+      description: 
+      operationId: updateEmail__
+      produces:
+      - application/json
+      parameters:
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: abo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: emailTypeCd
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: source
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: userId
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: email
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /updateLegalEntity:
+    put:
+      description: 
+      operationId: updateLegalEntity__
+      produces:
+      - application/json
+      parameters:
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: abo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: source
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: userId
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: isBusEntity
+        in: query
+        required: false
+        x-is-map: false
+        type: boolean
+        description: 
+      - name: legalEntityType
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /updateName:
+    put:
+      description: 
+      operationId: updateName__
+      produces:
+      - application/json
+      parameters:
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: abo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: nameType
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: source
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: userId
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: firstName
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: middleName
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: lastName
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: title
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: suffix
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: legacyName
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /updateAddress:
+    put:
+      description: 
+      operationId: updateAddress__
+      produces:
+      - application/json
+      parameters:
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: abo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: addressType
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: source
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: userId
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: addressLineOne
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: addressLineTwo
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: addressLineThree
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: addressLineFour
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: city
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: stateProvince
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: postalCode
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: country
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /newApplication:
+    post:
+      description: 
+      operationId: newApplication__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /miniPurge:
+    delete:
+      description: 
+      operationId: Delete_miniPurge__
+      produces:
+      - application/json
+      parameters:
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: abo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: source
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: userId
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      responses:
+        200:
+          description: 
+  /renew:
+    put:
+      description: 
+      operationId: Update_processDiamondAutoRenewal__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /renewReverse:
+    put:
+      description: 
+      operationId: Update_renewReverse__
+      produces:
+      - application/json
+      parameters:
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: abo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: source
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: userId
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: expireDate
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /reactivate:
+    put:
+      description: 
+      operationId: Update_reactivate__
+      produces:
+      - application/json
+      parameters:
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: abo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: source
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: userId
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: withGroup
+        in: query
+        required: false
+        x-is-map: false
+        type: boolean
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /reactivateRenew:
+    put:
+      description: 
+      operationId: Update_reactivateRenew__
+      produces:
+      - application/json
+      parameters:
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: abo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: source
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: userId
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: withGroup
+        in: query
+        required: false
+        x-is-map: false
+        type: boolean
+        description: 
+      - name: expireDate
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /updateBirthdateGender:
+    put:
+      description: 
+      operationId: updateBirthdateGender__
+      produces:
+      - application/json
+      parameters:
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: abo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: source
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: userId
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: app1birthdate
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: app2birthdate
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: app1gender
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: app2gender
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /isAuthorized:
+    get:
+      description: 
+      operationId: Get_isAuthorized__
+      produces:
+      - application/json
+      parameters:
+      - name: reqAff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: reqAbo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: abo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: period
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /isAuthorizedVerbose:
+    get:
+      description: 
+      operationId: Get_isAuthorizedVerbose__
+      produces:
+      - application/json
+      parameters:
+      - name: reqAff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: reqAbo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: abo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: period
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /isAuthorizedMulti:
+    get:
+      description: 
+      operationId: Get_isAuthorizedMulti__
+      produces:
+      - application/json
+      parameters:
+      - name: reqAff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: reqAbo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: affAbo
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: period
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /isAuthorizedMaxPeriod:
+    get:
+      description: 
+      operationId: Get_isAuthorizedMaxPeriod__
+      produces:
+      - application/json
+      parameters:
+      - name: reqAff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: reqAbo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: abo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: period
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /isAuthorizedMultiMaxPeriod:
+    get:
+      description: 
+      operationId: Get_isAuthorizedMultiMaxPeriod__
+      produces:
+      - application/json
+      parameters:
+      - name: reqAff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: reqAbo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: affAbo
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: period
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getSponsStats:
+    post:
+      description: 
+      operationId: Create_getSponsStatsInquiryService__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getGeneratorDetails:
+    get:
+      description: 
+      operationId: getGeneratorDetails__
+      produces:
+      - application/json
+      parameters:
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: abo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: period
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: reqAff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: reqAbo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getIntlPaymentsFlow:
+    get:
+      description: 
+      operationId: getIntlPaymentsFlow__
+      produces:
+      - application/json
+      parameters:
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: abo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: period
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: generatorAff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: generatorAbo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: reqAff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: reqAbo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getMonthlyDetails:
+    get:
+      description: 
+      operationId: getMonthlyDetails__
+      produces:
+      - application/json
+      parameters:
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: abo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: period
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: reqAff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: reqAbo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getLastPaidILBPeriod:
+    post:
+      description: 
+      operationId: Create_getLastPaidILBPeriod__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getCurrentPeriod:
+    post:
+      description: 
+      operationId: Create_getCurrentPeriod__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getCurrentCalPeriod:
+    post:
+      description: 
+      operationId: Create_getCurrentCalPeriod__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /insertNewApplication:
+    post:
+      description: 
+      operationId: insertNewApplication__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /insertNameAddressChange:
+    post:
+      description: 
+      operationId: insertNameAddressChange__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /insertMiniPurge:
+    post:
+      description: 
+      operationId: insertMiniPurge__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getILB:
+    get:
+      description: 
+      operationId: getILB__
+      produces:
+      - application/json
+      parameters:
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: abo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: reqAff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: reqAbo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: period
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getInformation:
+    get:
+      description: 
+      operationId: getAwardInformation__
+      produces:
+      - application/json
+      parameters:
+      - name: reqAff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: reqAbo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: abo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: period
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getGeneratorQual:
+    get:
+      description: 
+      operationId: getGenQual__
+      produces:
+      - application/json
+      parameters:
+      - name: reqAff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: reqAbo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: abo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: period
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: frontlineAff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: frontlineAbo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getFaaGen:
+    get:
+      description: 
+      operationId: getFaaGen__
+      produces:
+      - application/json
+      parameters:
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: abo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: reqAff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: reqAbo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: frontlineAff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: frontlineAbo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: period
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: strongestMkt
+        in: query
+        required: false
+        x-is-map: false
+        type: boolean
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getLegCounts:
+    get:
+      description: 
+      operationId: getLegCounts__
+      produces:
+      - application/json
+      parameters:
+      - name: fiscalYear
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: period
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: affAbo
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getQualHistory:
+    get:
+      description: 
+      operationId: getQualHistory__
+      produces:
+      - application/json
+      parameters:
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: abo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: period
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: fiscalOnly
+        in: query
+        required: false
+        x-is-map: false
+        type: boolean
+        description: 
+      - name: reqAff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: reqAbo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /isAvailable:
+    get:
+      description: 
+      operationId: Get_isAvailable__
+      produces:
+      - application/json
+      parameters:
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: abo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: reqAff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: reqAbo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: period
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getAnnualFrontline:
+    get:
+      description: 
+      operationId: getAnnualFrontline__
+      produces:
+      - application/json
+      parameters:
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: abo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: showPercentages
+        in: query
+        required: false
+        x-is-map: false
+        type: boolean
+        description: 
+      - name: showAllFrontliners
+        in: query
+        required: false
+        x-is-map: false
+        type: boolean
+        description: 
+      - name: showActiveFrontliners
+        in: query
+        required: false
+        x-is-map: false
+        type: boolean
+        description: 
+      - name: showComboLegs
+        in: query
+        required: false
+        x-is-map: false
+        type: boolean
+        description: 
+      - name: period
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: reqAff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: reqAbo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getFoundersCouncil:
+    get:
+      description: 
+      operationId: getFoundersCouncil__
+      produces:
+      - application/json
+      parameters:
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: year
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getLosMb:
+    get:
+      description: 
+      operationId: getLosMb__
+      produces:
+      - application/json
+      parameters:
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: abo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: period
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: reqAff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: reqAbo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getGlobalMb:
+    get:
+      description: 
+      operationId: getGlobalMb__
+      produces:
+      - application/json
+      parameters:
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: abo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: period
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: reqAff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: reqAbo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getISD:
+    get:
+      description: 
+      operationId: getISD__
+      produces:
+      - application/json
+      parameters:
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: abo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: period
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: reqAff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: reqAbo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getSponsorByType:
+    get:
+      description: 
+      operationId: getSponsorByType__
+      produces:
+      - application/json
+      parameters:
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: abo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: period
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: sponsorTypes
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: reqAff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: reqAbo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getUplineLevelInfo:
+    get:
+      description: 
+      operationId: getUplineLevelInfo__
+      produces:
+      - application/json
+      parameters:
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: abo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: period
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: reqAff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: reqAbo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getPlatinum:
+    get:
+      description: 
+      operationId: getPlatinumUpline__
+      produces:
+      - application/json
+      parameters:
+      - name: affAbo
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: period
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getABOAttributes:
+    post:
+      description: 
+      operationId: Create_getABOAttributes__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getEmeraldDiamondMap:
+    get:
+      description: 
+      operationId: getEmeraldDiamondMap__
+      produces:
+      - application/json
+      parameters:
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: abo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: period
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /uploadAff:
+    put:
+      description: 
+      operationId: Update_pedUpload__
+      produces:
+      - application/json
+      parameters:
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /uploadAbo:
+    put:
+      description: 
+      operationId: Update_pedUpload__
+      produces:
+      - application/json
+      parameters:
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: abo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /uploadPrior:
+    put:
+      description: 
+      operationId: Update_pedUpload__
+      produces:
+      - application/json
+      parameters:
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: period
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /uploadAboPrior:
+    put:
+      description: 
+      operationId: Update_pedUpload__
+      produces:
+      - application/json
+      parameters:
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: abo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: period
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /create:
+    post:
+      description: 
+      operationId: addPrivacyBlock__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /updateExpireDate:
+    put:
+      description: 
+      operationId: updateBlockExpire__
+      produces:
+      - application/json
+      parameters:
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: abo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: reqAff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: reqAbo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: blockPrivId
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: expDate
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: userId
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getDetails:
+    get:
+      description: 
+      operationId: getDetails__
+      produces:
+      - application/json
+      parameters:
+      - name: affAbo
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: period
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: busNature
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: volumeTypes
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: showActiveOnly
+        in: query
+        required: false
+        x-is-map: false
+        type: boolean
+        description: 
+      - name: stopAtPlatinum
+        in: query
+        required: false
+        x-is-map: false
+        type: boolean
+        description: 
+      - name: intlFrontline
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: maxLevels
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: reqAff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: reqAbo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getDetailsList:
+    get:
+      description: 
+      operationId: getDetailsList__
+      produces:
+      - application/json
+      parameters:
+      - name: affAbo
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: period
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: busNature
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: volumeTypes
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: showActiveOnly
+        in: query
+        required: false
+        x-is-map: false
+        type: boolean
+        description: 
+      - name: stopAtPlatinum
+        in: query
+        required: false
+        x-is-map: false
+        type: boolean
+        description: 
+      - name: intlFrontline
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: maxLevels
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: reqAff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: reqAbo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getABOPerformancePercentList:
+    get:
+      description: 
+      operationId: getABOPerformancePercentList__
+      produces:
+      - application/json
+      parameters:
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: country
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: bonusPercent
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: onePeriodOnly
+        in: query
+        required: false
+        x-is-map: false
+        type: boolean
+        description: 
+      - name: period
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getLastOrderDate:
+    get:
+      description: 
+      operationId: getLastOrderDate__
+      produces:
+      - application/json
+      parameters:
+      - name: affAbo
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: period
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: reqAff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: reqAbo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getPVBV:
+    get:
+      description: 
+      operationId: getPVBV__
+      produces:
+      - application/json
+      parameters:
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: abo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: reqAff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: reqAbo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int64
+        description: 
+      - name: volumeTypes
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: period
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /transmitData:
+    put:
+      description: 
+      operationId: Update_transmitData__
+      produces:
+      - application/json
+      parameters:
+      - name: affNo
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: fileTypeCode
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: fileName
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /runMonthEndToRMS:
+    put:
+      description: 
+      operationId: Update_runMonthEndToRMSaProcess__
+      produces:
+      - application/json
+      parameters:
+      - name: aff
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: period
+        in: query
+        required: false
+        x-is-map: false
+        type: integer
+        format: int32
+        description: 
+      - name: userId
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      - name: processId
+        in: query
+        required: false
+        x-is-map: false
+        type: string
+        description: 
+      responses:
+        200:
+          description: 
+          schema:
+            type: object
+  /getILBstmtGenInfo:
+    get:
+      description: 
+      operationId: get__
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: 
+          schema:
+            type: object

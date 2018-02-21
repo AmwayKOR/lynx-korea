@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+
+
+<!--
+. WARNING: This is the CUSTOM Spring WEB configuration file used for cmscockpit 
+. web application.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+	default-autowire="byName">
+
+	<alias alias="synchronizationService" name="defaultSynchronizationService" />
+	<bean id="defaultSynchronizationService" class="de.hybris.platform.cmscockpit.sync.CMSSynchronizationService" parent="defaultCMSSynchronizationService" autowire="byName"/>
+
+
+
+	<alias name="accBrowserFilterFactory" alias="browserFilterFactory" />
+	<bean id="accBrowserFilterFactory" class="de.hybris.platform.cockpit.session.BrowserFilterFactory"
+		>
+		<property name="browserFilters">
+			<map>
+				<entry key="AbstractPage">
+					<list>
+						<ref bean="desktopUiExperienceBrowserFilter" />
+						<ref bean="mobileUiExperienceBrowserFilter" />
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="abstractUiExperienceBrowserFilter" abstract="true" class="com.amway.apac.cockpits.cmscockpit.browser.filters.AbstractUiExperienceFilter" >
+		<property name="typeService" ref="cockpitTypeService"/>
+	</bean>
+	<bean id="mobileUiExperienceBrowserFilter" parent="abstractUiExperienceBrowserFilter" class="com.amway.apac.cockpits.cmscockpit.browser.filters.MobileUiExperienceBrowserFilter" />
+	<bean id="desktopUiExperienceBrowserFilter" parent="abstractUiExperienceBrowserFilter" class="com.amway.apac.cockpits.cmscockpit.browser.filters.DesktopUiExperienceBrowserFilter" />
+
+	<alias alias="cmsSearchProvider" name="uiExperienceCmsSearchProvider" />
+	<bean id="uiExperienceCmsSearchProvider"  class="com.amway.apac.cockpits.cmscockpit.services.impl.UiExperienceCmsSearchProvider" />
+
+
+    <alias name="DefaultCmsPageBrowserModel" alias="cmsPageBrowserModel"/>
+    <bean id="DefaultCmsPageBrowserModel" class="com.amway.apac.cockpits.cmscockpit.session.impl.DefaultCmsPageBrowserModel" scope="prototype">
+        <constructor-arg ref="cmsAdminSiteService"/>
+        <constructor-arg ref="cmsCockpitService"/>
+        <constructor-arg ref="modelService"/>
+        <constructor-arg ref="cmsAdminComponentService"/>
+        <constructor-arg ref="cmsAdminContentSlotService"/>
+    </bean>
+
+    <alias alias="synchronizationService" name="defaultAmwayApacCMSSynchronizationService" />
+    <alias alias="defaultSynchronizationService" name="defaultAmwayApacCMSSynchronizationService" />
+	<bean id="defaultAmwayApacCMSSynchronizationService" class="de.hybris.platform.cmscockpit.sync.CMSSynchronizationService" autowire="byName">
+		<property name="relatedReferencesTypesMap">
+			<map>
+				<entry key="AbstractPage">
+					<list>
+						<value>AbstractPage.restrictions</value>
+						<value>AbstractPage.contentSlots</value>
+						<value>ContentSlotForPage.contentSlot</value>
+						<value>ContentSlot.cmsComponents</value>
+						<value>AbstractCMSComponentContainer.simpleCMSComponents</value>
+						<value>AbstractCMSComponentContainer.currentCMSComponents</value>
+						<value>RotatingImagesComponent.banners</value>
+						<value>AbstractCMSComponent.restrictions</value>
+                        <value>abstractMediaContainerComponent.media</value>
+					</list>
+				</entry>
+				<entry key="AbstractCMSComponent">
+					<list>
+						<value>AbstractCMSComponentContainer.simpleCMSComponents</value>
+						<value>AbstractCMSComponentContainer.currentCMSComponents</value>
+						<value>RotatingImagesComponent.banners</value>
+						<value>AbstractCMSComponent.restrictions</value>
+                        <value>abstractMediaContainerComponent.media</value>
+                        <value>MediaContainer.medias</value>
+                        <value>NavigationBarCollectionComponent.components</value>
+                        <value>NavigationBarComponent.navigationNode</value>
+                        <value>NavigationBarComponent.link</value>
+					</list>
+				</entry>
+				<entry key="CMSNavigationNode">
+					<list>
+						<value>CMSNavigationNode.children</value>
+						<value>CMSNavigationNode.entries</value>
+						<value>CMSNavigationNode.links</value>
+						<value>CMSNavigationEntry.item</value>
+						<value>CMSLinkComponent</value>
+					</list>
+				</entry>
+                <entry key="ContentSlot">
+                    <list>
+                        <value>ContentSlot.cmsComponents</value>
+                        <value>abstractMediaContainerComponent.media</value>
+                        <value>NavigationBarCollectionComponent.components</value>
+                        <value>NavigationBarComponent.navigationNode</value>
+                        <value>NavigationBarComponent.link</value>
+                    </list>
+                </entry>
+                <entry key="MediaContainer">
+                    <list>
+                        <value>MediaContainer.medias</value>
+                    </list>
+                </entry>
+                <entry key="AbstractAmwayAsset">
+					<list >
+						<value>AbstractAmwayAsset.assetId</value>
+						<value>AbstractAmwayAsset.catalogVersion</value>
+						<value>AbstractAmwayAsset.title</value>
+						<value>AbstractAmwayAsset.subTitle</value>
+						<value>AbstractAmwayAsset.description</value>
+						<value>AbstractAmwayAsset.date</value>
+						<value>AbstractAmwayAsset.displayImage</value>
+						<value>AmwayAsset.file</value>
+						<value>AmwayAssetAlbum.gallery</value>
+						<value>AmwayExternalAsset.url</value>
+					</list>
+				</entry>
+			</map>
+		</property>
+		<property name="searchRestrictionsDisabled" value="true"/>
+	</bean>
+	
+	<alias alias="amwayApacAssetLabelProvider" name="defaultAmwayApacAssetLabelProvider"/>
+	<bean id="defaultAmwayApacAssetLabelProvider" class="com.amway.apac.cockpits.label.providers.AmwayApacAssetLabelProvider"  parent="abstractModelLabelProvider"/>
+
+
+</beans>

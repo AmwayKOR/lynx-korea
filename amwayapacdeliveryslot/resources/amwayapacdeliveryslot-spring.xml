@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+	<!-- Delivery slot configuration -->
+    <alias alias="amwayApacDeliverySlotManagementDao" name="defaultAmwayApacDeliverySlotManagementDao"/>
+    <bean id="defaultAmwayApacDeliverySlotManagementDao" class="com.amway.apac.deliveryslot.daos.impl.DefaultAmwayApacDeliverySlotManagementDao">
+        <property name="flexibleSearchService" ref="flexibleSearchService"/>
+    </bean>
+    
+    <alias alias="amwayApacDeliverySlotManagementService" name="defaultAmwayApacDeliverySlotManagementService"/>
+    <bean id="defaultAmwayApacDeliverySlotManagementService" class="com.amway.apac.deliveryslot.services.impl.DefaultAmwayApacDeliverySlotManagementService">
+        <property name="modelService" ref="modelService"/>
+        <property name="amwayApacDeliverySlotManagementDao" ref="amwayApacDeliverySlotManagementDao"/>
+    </bean>
+    
+    <alias alias="amwayApacDeliverySlotConfigUpdateInterceptor" name="defaultAmwayApacDeliverySlotConfigUpdateInterceptor"/>
+    <bean id="defaultAmwayApacDeliverySlotConfigUpdateInterceptor" class="com.amway.apac.deliveryslot.interceptors.AmwayApacDeliverySlotConfigUpdateInterceptor">
+    	<property name="amwayApacDeliverySlotManagementService" ref="amwayApacDeliverySlotManagementService"/>
+    </bean>
+
+    <bean id="defaultAmwayApacDeliverySlotConfigUpdateInterceptorMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+        <property name="interceptor" ref="amwayApacDeliverySlotConfigUpdateInterceptor" />
+        <property name="typeCode" value="AmwayDeliverySlotConfig" />
+    </bean>
+    
+    <alias alias="amwayApacDeliverySlotDao" name="defaultAmwayApacDeliverySlotDao"/>
+    <bean id="defaultAmwayApacDeliverySlotDao" class="com.amway.apac.deliveryslot.daos.impl.DefaultAmwayApacDeliverySlotDao">
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+	</bean>
+	
+	<alias alias="deliveryService" name="defaultAmwayApacDeliveryService"/>
+	<bean id="defaultAmwayApacDeliveryService" parent="defaultDeliveryService"
+		class="com.amway.apac.deliveryslot.services.impl.DefaultAmwayApacDeliveryService">
+		 <property name="amwayApacDeliverySlotDao" ref="amwayApacDeliverySlotDao" />	
+		 <property name="cartService" ref="cartService" />
+		 <property name="amwayApacDeliverySlotManagementService" ref="amwayApacDeliverySlotManagementService"/>
+	</bean>
+	
+	<alias alias="amwayApacDeliverySlotValidationHook" name="defaultAmwayApacDeliverySlotValidationHook"/>
+	<bean id="defaultAmwayApacDeliverySlotValidationHook" class="com.amway.apac.deliveryslot.hooks.impl.AmwayApacDeliverySlotValidationHook">
+       <property name="modelService" ref="modelService" />
+       <property name="amwayApacDeliveryService" ref="deliveryService" />
+    </bean>
+    
+    <alias alias="amwayApacDeliverySlotCreationCronJob" name="defaultAmwayApacDeliverySlotCreationCronJob" />
+    <bean id="defaultAmwayApacDeliverySlotCreationCronJob" class="com.amway.apac.deliveryslot.cronjobs.AmwayApacDeliverySlotCreationCronJob" parent="abstractJobPerformable">
+        <property name="amwayApacDeliverySlotManagementService" ref="amwayApacDeliverySlotManagementService"/>
+    </bean>
+
+</beans>

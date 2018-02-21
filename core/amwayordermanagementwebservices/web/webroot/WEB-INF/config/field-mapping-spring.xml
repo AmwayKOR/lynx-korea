@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Field mapping configuration -->
+    <bean id="dataMapper"
+          class="de.hybris.platform.webservicescommons.mapping.impl.DefaultDataMapper">
+        <property name="fieldSetBuilder" ref="fieldSetBuilder"/>
+    </bean>
+
+    <bean id="fieldSetBuilder"
+          class="de.hybris.platform.webservicescommons.mapping.impl.DefaultFieldSetBuilder">
+        <property name="defaultRecurrencyLevel" value="4"/>
+        <property name="defaultMaxFieldSetSize" value="50000"/>
+        <property name="fieldSetLevelHelper" ref="fieldSetLevelHelper"/>
+    </bean>
+
+    <alias alias="fieldSetLevelHelper" name="defaultFieldSetLevelHelper"/>
+    <bean id="defaultFieldSetLevelHelper"
+          class="de.hybris.platform.webservicescommons.mapping.impl.DefaultFieldSetLevelHelper">
+    </bean>
+
+    <bean class="de.hybris.platform.webservicescommons.mapping.filters.GeneralFieldFilter">
+        <property name="fieldSelectionStrategy" ref="fieldSelectionStrategy"/>
+    </bean>
+
+
+    <!-- Field mapping -->
+
+    <bean parent="fieldMapper">
+        <property name="sourceClass"
+                  value="de.hybris.platform.commerceservices.search.pagedata.PaginationData"/>
+        <property name="destClass"
+                  value="de.hybris.platform.commercewebservicescommons.dto.search.pagedata.PaginationWsDTO"/>
+        <property name="fieldMapping">
+            <map>
+                <entry key="totalNumberOfResults" value="totalResults"/>
+                <entry key="numberOfPages" value="totalPages"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean parent="fieldMapper">
+        <property name="sourceClass" value="de.hybris.platform.commercefacades.order.data.OrderData"/>
+        <property name="destClass" value="de.hybris.platform.commercewebservicescommons.dto.order.OrderWsDTO"/>
+    </bean>
+
+    <bean parent="fieldMapper">
+        <property name="sourceClass" value="de.hybris.platform.commerceservices.search.pagedata.SearchPageData"/>
+        <property name="destClass"
+                  value="de.hybris.platform.ordermanagementwebservices.dto.order.OrderSearchPageWsDto"/>
+        <property name="fieldMapping">
+            <map>
+                <entry key="results" value="orders"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean parent="fieldMapper">
+        <property name="sourceClass" value="de.hybris.platform.commerceservices.search.pagedata.SearchPageData"/>
+        <property name="destClass"
+                  value="de.hybris.platform.ordermanagementwebservices.dto.returns.ReturnSearchPageWsDTO"/>
+        <property name="fieldMapping">
+            <map>
+                <entry key="results" value="returns"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean parent="fieldMapper">
+        <property name="sourceClass" value="de.hybris.platform.commerceservices.search.pagedata.SearchPageData"/>
+        <property name="destClass"
+                  value="de.hybris.platform.ordermanagementwebservices.dto.order.OrderEntrySearchPageWsDTO"/>
+        <property name="fieldMapping">
+            <map>
+                <entry key="results" value="orderEntries"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean parent="fieldMapper">
+        <property name="sourceClass" value="de.hybris.platform.warehousingfacade.order.data.PackagingInfoData"/>
+        <property name="destClass" value="de.hybris.platform.ordermanagementwebservices.dto.order.PackagingInfoWsDTO"/>
+    </bean>
+
+    <!-- Fieldset mapping -->
+
+    <bean parent="fieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="de.hybris.platform.ordermanagementwebservices.dto.order.OrderSearchPageWsDto"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC" value="orders(BASIC),sorts(BASIC),pagination(BASIC)"/>
+                <entry key="DEFAULT" value="orders(DEFAULT),sorts(DEFAULT),pagination(DEFAULT)"/>
+                <entry key="FULL" value="orders(FULL),sorts(FULL),pagination(FULL)"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean parent="fieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="de.hybris.platform.commercewebservicescommons.dto.order.OrderWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC" value="code,entries(BASIC)"/>
+                <entry key="DEFAULT" value="code,user,created,status,deliveryMode(DEFAULT),entries(BASIC)"/>
+                <entry key="FULL"
+                       value="account(FULL),appliedOrderPromotions(FULL),appliedProductPromotions(FULL),appliedVouchers(FULL),
+                       batchID(FULL),billingAbo,bonusDiscounts(FULL),bonusPeriod(FULL),businessVolume,calculated,cancelDate,
+                       cancelNotes,cancelReason,clientipaddress,code,consignments(FULL),country,created,damageGoods,
+                       deliveryAddress(FULL),deliveryCost(FULL),deliveryInstruction,deliveryItemsQuantity,deliveryMode(FULL),
+                       deliveryOrderGroups(FULL),deliveryStatus,deliveryStatusDisplay,deliveryTax(FULL),employee(FULL),
+                       entries(FULL),firstOrder,freeEntries,giftCoupons(FULL),giftWrap,giftWrapPrice,globalDiscountValues(FULL),
+                       groupNumber,groupOrdersCount,guestCustomer,guid,internal,invoiceRequired,invoices,leadTime,locale,
+                       losExportStatus,margin,net,nonDeductibleVat,orderDiscounts(FULL),orderPeriod(FULL),party,
+                       paymentAddress(FULL),paymentInfo(FULL),paymentInfos,paymentStatus,paymentTransactions(FULL),personal,
+                       pickupDateTime,pickupItemsQuantity,pickupOrderGroups(FULL),pointValue,processBilling,processInventory,
+                       productDiscounts(FULL),prorated,salesApplication,seller(FULL),shippable,shippingAbo,site,status,
+                       statusDisplay,store,subTotal(FULL),suborderIDs,totalDiscounts(FULL),totalItems,totalPrice(FULL),
+                       totalPriceWithTax(FULL),totalTax(FULL),totalTaxValues(FULL),totalWeight,type,unconsignedEntries(FULL),
+                       user,volumeAbo"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean parent="fieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="de.hybris.platform.commercewebservicescommons.dto.order.OrderEntryWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC" value="entryNumber,quantity,url"/>
+                <entry key="DEFAULT"
+                       value="BASIC,totalPrice,product,quantityAllocated,quantityUnallocated,quantityCancelled,quantityPending,quantityShipped,quantityReturned"/>
+                <entry key="FULL"
+                       value="aboBasePrice,basePrice(FULL),businessVolume,component(FULL),deliveryMode(FULL),
+                       deliveryPointOfService(FULL),discountValues(FULL),entryNumber,kitOrderEntry(BASIC),margin(FULL),
+                       orderEntryNumber,pickupDateTime,pointValue,price(FULL),proRatedPrice,product(FULL),quantity,
+                       quantityAllocated,quantityCancelled,quantityPending,quantityReturned,quantityShipped,quantityUnallocated,
+                       retailBasePrice,retailPrice(FULL),sample,serialNumbers,shippable,skuVersion,taxValues(FULL),tes,
+                       totalPrice(FULL),unitReturnPrice,updateable,url,value(FULL),volumeAbo"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean parent="fieldSetLevelMapping" id="priceWsDTOFieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="de.hybris.platform.commercewebservicescommons.dto.product.PriceWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC" value="value,currencyIso,amwayValue"/>
+                <entry key="DEFAULT"
+                       value="currencyIso,priceType,value,maxQuantity,minQuantity,formattedValue,amwayValue(DEFAULT)"/>
+                <entry key="FULL"
+                       value="currencyIso,priceType,value,maxQuantity,minQuantity,formattedValue,amwayValue(FULL)"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean parent="fieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="de.hybris.platform.ordermanagementwebservices.dto.order.OrderEntrySearchPageWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC" value="orderEntries(BASIC),pagination(BASIC)"/>
+                <entry key="DEFAULT" value="orderEntries(DEFAULT),pagination(DEFAULT)"/>
+                <entry key="FULL" value="orderEntries(FULL),pagination(FULL)"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean parent="fieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="de.hybris.platform.ordermanagementwebservices.dto.order.ReturnOrderPageWsDto"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC" value="order(BASIC),errors(BASIC)"/>
+                <entry key="DEFAULT" value="order(DEFAULT),errors(DEFAULT)"/>
+                <entry key="FULL" value="order(FULL),errors(FULL)"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean parent="fieldSetLevelMapping" id="refundMethodWsDTOFieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="de.hybris.platform.ordermanagementwebservices.dto.returns.RefundMethodWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC" value="mode,accountNumber,transactionId"/>
+                <entry key="DEFAULT" value="mode,accountNumber,transactionId"/>
+                <entry key="FULL" value="mode,accountNumber,transactionId"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean parent="fieldSetLevelMapping" id="refundInfoWsDTOFieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="de.hybris.platform.ordermanagementwebservices.dto.returns.RefundInfoWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC" value="requestedRefundMethod(BASIC),actualRefundMethod(BASIC),value"/>
+                <entry key="DEFAULT" value="requestedRefundMethod(DEFAULT),actualRefundMethod(DEFAULT),value"/>
+                <entry key="FULL" value="requestedRefundMethod(FULL),actualRefundMethod(FULL),value"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean parent="fieldSetLevelMapping" id="amwayReturnRequestWsDTOFieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="de.hybris.platform.ordermanagementwebservices.dto.returns.ReturnRequestWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC"
+                       value="code,rma,fullReturn,date,returnDate,shippingRequired,invoiceRequired,returnAbo(BASIC),status,shippingStatus,refundStatus,
+                       order(BASIC),externalOrderCode,invoiceInfo(BASIC),returnPeriod(BASIC),returnBonusPeriod(BASIC),
+                       entries(BASIC),returnValue,refundInfo(BASIC),businessVolume,pointValue,totalTaxValues(BASIC),totalPriceWithTax(BASIC)"/>
+                <entry key="DEFAULT"
+                       value="code,rma,fullReturn,date,returnDate,shippingRequired,invoiceRequired,returnAbo(DEFAULT),status,shippingStatus,refundStatus,
+                       order(DEFAULT),externalOrderCode,invoiceInfo(DEFAULT),returnPeriod(BASIC),returnBonusPeriod(DEFAULT),
+                       entries(DEFAULT),returnValue,refundInfo(DEFAULT),businessVolume,pointValue,totalTaxValues(DEFAULT),totalPriceWithTax(DEFAULT)"/>
+                <entry key="FULL"
+                       value="code,rma,fullReturn,date,returnDate,shippingRequired,invoiceRequired,returnAbo(FULL),status,shippingStatus,refundStatus,
+                       order(FULL),externalOrderCode,invoiceInfo(FULL),returnPeriod(FULL),returnBonusPeriod(FULL),
+                       entries(FULL),returnValue,refundInfo(FULL),businessVolume,pointValue,totalTaxValues(FULL),totalPriceWithTax(FULL)"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean parent="fieldSetLevelMapping" id="amwayReturnEntryMapping">
+        <property name="dtoClass" value="de.hybris.platform.ordermanagementwebservices.dto.returns.ReturnEntryWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC" value="entryNumber,expectedQuantity,receivedQuantity,saleableQuantity,returnReason,
+                orderEntry(BASIC),serialNumbers,refundAmount,notes,businessVolume,pointValue,taxValues(BASIC),priceWithTax(BASIC)"/>
+                <entry key="DEFAULT" value="entryNumber,expectedQuantity,receivedQuantity,saleableQuantity,returnReason,
+                orderEntry(DEFAULT),serialNumbers,refundAmount,notes,businessVolume,pointValue,taxValues(DEFAULT),priceWithTax(DEFAULT)"/>
+                <entry key="FULL" value="entryNumber,expectedQuantity,receivedQuantity,saleableQuantity,returnReason,
+                orderEntry(FULL),serialNumbers,refundAmount,notes,businessVolume,pointValue,taxValues(FULL),priceWithTax(FULL)"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean parent="fieldSetLevelMapping" id="productWsDTOFieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="de.hybris.platform.commercewebservicescommons.dto.product.ProductWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC"
+                       value="purchasable,stock,name,baseProduct,availableForPickup,code,url,price"/>
+                <entry key="DEFAULT"
+                       value="alias,availableForPickup,averageRating,baseOptions(DEFAULT),baseProduct,categories(BASIC),code,
+                       description,dimensions(DEFAULT),manufacturer,name,numberOfReviews,onlineSince,price(DEFAULT),
+                       productAttributes,purchasable,stock(DEFAULT),summary,url,variantMatrix(DEFAULT),variantOptions(DEFAULT),
+                       weight"/>
+                <entry key="FULL"
+                       value="alias,availableForPickup,averageRating,baseOptions(FULL),baseProduct,businessCategory,businessClass,
+                       businessLine,categories(FULL),classifications(FULL),code,deliveryModes(FULL),description,dimensions(FULL),
+                       futureStocks(FULL),images(FULL),kitEntry(DEFAULT),kitPrice,manufacturer,name,needSerialNumber,
+                       numberOfReviews,onlineSince,potentialPromotions(FULL),price(FULL),productAttributes,
+                       productReferences(FULL),purchasable,retailPrice(FULL),reviews(FULL),stock(FULL),summary,type,unit,
+                       variantMatrix(FULL),variantOptions(FULL),variantType,volumePrices(FULL),volumePricesFlag,weight"/>
+                <entry key="PRICE"
+                       value="code,price(DEFAULT)"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean parent="fieldSetLevelMapping" id="deliveryOrderEntryGroupWsDTOFieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="de.hybris.platform.commercewebservicescommons.dto.order.DeliveryOrderEntryGroupWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC" value="deliveryAddress,totalPriceWithTax,entries"/>
+                <entry key="DEFAULT"
+                       value="deliveryAddress(DEFAULT),entries(DEFAULT),totalPriceWithTax(DEFAULT)"/>
+                <entry key="FULL"
+                       value="deliveryAddress(FULL),entries(FULL),quantity,totalPriceWithTax(FULL)"/>
+            </map>
+        </property>
+    </bean>
+
+</beans>

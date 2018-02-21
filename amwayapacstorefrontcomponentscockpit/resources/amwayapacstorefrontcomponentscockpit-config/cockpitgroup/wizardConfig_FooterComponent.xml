@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<wizard-config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="wizard-config.xsd"
+               showPrefilledValues="true" selectMode="true" createMode="true" displaySubtypes="true">
+	<displayed-properties>
+		<group qualifier="General" visible="true" initially-opened="true">
+			<label key="cockpit.config.label.General" />
+			<property qualifier="CMSItem.name"/>
+		</group>
+		<group qualifier="Properties" visible="true" initially-opened="true">
+			<label key="config.wizardConfig.properties" />
+			<property qualifier="FooterComponent.title1"/>
+			<property qualifier="FooterComponent.title2"/>
+			<property qualifier="FooterComponent.amwayLogoBanner"/>
+			<property qualifier="FooterComponent.connectionsBanner"/>	
+			<property qualifier="FooterComponent.downloadAppStoreBanner"/>
+			<property qualifier="FooterComponent.copyRightTitle"/>
+			<property qualifier="FooterComponent.footerBanner"/>
+			<property qualifier="FooterComponent.brandBanners"/>		
+			<property qualifier="FooterComponent.links"/>
+			<property qualifier="FooterComponent.specialComponents"/>	
+			<property qualifier="FooterComponent.notice"/>
+	    	<property qualifier="FooterComponent.wrapAfter"/>
+		    <property qualifier="FooterComponent.showLanguageCurrency"/>		
+		</group>
+	</displayed-properties>
+</wizard-config>

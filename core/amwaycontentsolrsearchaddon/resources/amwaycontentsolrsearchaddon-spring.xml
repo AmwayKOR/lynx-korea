@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
+
+	<!--
+	The hybris platform provides one single Spring application context for beans located at the jalo layer.
+	Each extension can add beans to this context by specifying them at this configuration file.
+	 
+	You can use and/or redefine beans defined at configuration files of other extensions as well as
+	adding new one.
+		
+	If you want to locate this file at a different location or want to use several files for better,
+	structuring, please use the '<yourextension>.application-context' property at your project.properties file.
+	There you can specify a comma separated list of files where first is tried to find a file per classpath and
+	then per file system.
+	
+	Please be aware of the special 'tenant' scope. If you have a multi tenant system you mostly have to use this
+	scope instead of the default Spring 'singleton' scope.
+	
+	If you want to configure beans for your web module please have a look at
+	your web/webroot/WEB-INF/<extname>-web-spring.xml.
+	-->
+	
+	<!--  Example how to override a manager -->
+	<!--
+	<bean id="core.productManager"   class="com.amway.jalo.AmwaycontentsolrsearchaddonProductManager" 	init-method="init"	destroy-method="destroy" scope="tenant" />
+	-->
+	
+	<alias name="defaultContentAbstractPageModelUrlResolver" alias="contentAbstractPageModelUrlResolver" />
+	<bean id="defaultContentAbstractPageModelUrlResolver" class="com.amway.url.resolver.impl.DefaultContentAbstractPageModelUrlResolver" scope="tenant">
+		<property name="categoryUrlResolver" ref="categoryModelUrlResolver" />
+		<property name="threadContextService" ref="threadContextService"/>
+		<property name="commerceCategoryService" ref="commerceCategoryService"/>
+		<property name="pattern" value="/{category-path}/c/{category-code}"/>
+	</bean>	
+	
+	<bean id="contentUrlValueProvider"
+		class="com.amway.search.solrfacetsearch.provider.impl.ContentUrlValueProvider"
+		parent="abstractPropertyFieldValueProvider" scope="tenant">
+		<property name="urlResolver" ref="contentAbstractPageModelUrlResolver" />
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="i18nService" ref="i18nService" />
+		<property name="commonI18NService" ref="commonI18NService" />
+	</bean>
+	
+	<bean id="contentPageValueProvider"
+		class="com.amway.search.solrfacetsearch.provider.impl.ContentPageValueProvider"
+		parent="abstractPropertyFieldValueProvider" scope="tenant">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="i18nService" ref="i18nService" />
+		<property name="commonI18NService" ref="commonI18NService" />
+	</bean>
+	
+	<bean id="contentUIExperienceValueProvider"
+		class="com.amway.search.solrfacetsearch.provider.impl.ContentUIExperienceValueProvider"
+		parent="abstractPropertyFieldValueProvider" scope="tenant">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="i18nService" ref="i18nService" />
+		<property name="commonI18NService" ref="commonI18NService" />
+	</bean>
+	<alias name="defaultRLSolrContentSearchService" alias="rlContentSearchService"/>
+	<bean id="defaultRLSolrContentSearchService" class="com.amway.service.search.impl.DefaultRLSolrContentSearchService" scope="tenant">
+		<property name="searchQueryPageableConverter" ref="rlSearchContentQueryPageableConverter"/>
+		<property name="searchRequestConverter" ref="commerceSolrSearchRequestConverter"/>
+		<property name="searchResponseConverter" ref="rlSolrSearchContentResponseConverter"/>
+	</bean>
+	
+	<alias name="defaultRLSearchContentQueryPageableConverter" alias="rlSearchContentQueryPageableConverter"/>
+	<bean id="defaultRLSearchContentQueryPageableConverter" parent="abstractPopulatingConverter">
+		<lookup-method name="createTarget" bean="solrSearchRequest"/>
+		<property name="populators">
+			<list merge="false">
+				<ref bean="rlSearchContentSolrQueryPopulator"/>
+				<ref bean="rlContentSearchPagePopulator"/>
+				<ref bean="commerceSearchSortPopulator"/>
+				<ref bean="rlContentSearchTextPopulator"/>
+				<ref bean="commerceContentSearchFiltersPopulator"/>
+			</list>
+		</property>
+	</bean>
+	
+	<alias name="defaultRLContentSearchPagePopulator" alias="rlContentSearchPagePopulator"/>
+	<bean id="defaultRLContentSearchPagePopulator"
+			class="com.amway.service.search.solrfacetsearch.populators.RLSearchContentPagePopulator"/>
+	
+	<alias name="defaultContentCommerceSearchFiltersPopulator" alias="commerceContentSearchFiltersPopulator"/>
+	<bean id="defaultContentCommerceSearchFiltersPopulator" class="de.hybris.platform.commerceservices.search.solrfacetsearch.populators.SearchFiltersPopulator" scope="tenant"/>
+	
+	<alias name="defaultRLContentSearchTextPopulator" alias="rlContentSearchTextPopulator"/>
+	<bean id="defaultRLContentSearchTextPopulator" class="de.hybris.platform.commerceservices.search.solrfacetsearch.populators.SearchTextPopulator" scope="tenant">
+		<property name="freeTextQueryBuilders">
+			<list>
+				<bean class="de.hybris.platform.commerceservices.search.solrfacetsearch.querybuilder.impl.DefaultFreeTextQueryBuilder">
+					<property name="propertyName" value="pagecontent"/>
+					<property name="boost" value="100"/>
+				</bean>
+				<bean class="de.hybris.platform.commerceservices.search.solrfacetsearch.querybuilder.impl.DefaultFreeTextQueryBuilder">
+					<property name="propertyName" value="title"/>
+					<property name="boost" value="90"/>
+				</bean>
+				<bean class="de.hybris.platform.commerceservices.search.solrfacetsearch.querybuilder.impl.DefaultFreeTextQueryBuilder">
+					<property name="propertyName" value="name"/>
+					<property name="boost" value="1"/>
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<alias name="defaultRLSolrSearchContentResponseConverter" alias="rlSolrSearchContentResponseConverter"/>
+	<bean id="defaultRLSolrSearchContentResponseConverter" class="com.amway.facade.search.solrfacetsearch.conversters.RLSolrSearchContentResponseConverter" scope="tenant">
+		<property name="populators">
+			<list>
+				<ref bean="rlSearchContentResponseHighlightSearchPopulator"/>
+				<ref bean="commerceSearchResponseQueryPopulator"/>
+				<ref bean="commerceSearchResponsePaginationPopulator"/>
+				<ref bean="rfContentSearchResponseResultsPopulator"/>
+				<ref bean="commerceSearchResponseFacetsPopulator"/>
+				<ref bean="commerceSearchResponseBreadcrumbsPopulator"/>
+				<ref bean="commerceSearchResponseSortsPopulator"/>
+				<ref bean="rlSearchContentResponseFreeTextSearchPopulator"/>								
+<!-- 				<ref bean="commerceSearchResponseCategoryCodePopulator"/> -->
+<!-- 				<ref bean="commerceSearchResponseSpellingSuggestionPopulator"/> -->
+<!-- 				<ref bean="commerceSearchResponseKeywordRedirectPopulator"/> -->
+			</list>
+		</property>
+	</bean>
+	
+	<alias name="defaultRFContentSearchResponseResultsPopulator" alias="rfContentSearchResponseResultsPopulator"/>
+	<bean id="defaultRFContentSearchResponseResultsPopulator"
+			class="de.hybris.platform.commerceservices.search.solrfacetsearch.populators.SearchResponseResultsPopulator"
+			>
+		<property name="searchResultConverter" ref="rfContentSolrDocumentSearchResultConverter"/>
+	</bean>
+	
+	<alias name="defaultRFContentSolrDocumentSearchResultConverter" alias="rfContentSolrDocumentSearchResultConverter"/>
+	<bean id="defaultRFContentSolrDocumentSearchResultConverter" parent="abstractPopulatingConverter">
+		<lookup-method name="createTarget" bean="searchResultValueData"/>
+		<property name="populators">
+			<list>
+				<ref bean="rfContentSolrDocumentSearchResultValuePopulator"/>
+			</list>
+		</property>
+	</bean>
+	
+	<alias name="defaultRFContentSolrDocumentSearchResultValuePopulator" alias="rfContentSolrDocumentSearchResultValuePopulator"/>
+	<bean id="defaultRFContentSolrDocumentSearchResultValuePopulator"
+			class="com.amway.service.search.solrfacetsearch.populators.RFSolrDocumentSearchResultValuePopulator"
+			>
+		<property name="fieldNameProvider" ref="solrFieldNameProvider"/>
+	</bean>
+	
+	<alias name="defaultRLSearchContentResponseHighlightSearchPopulator" alias="rlSearchContentResponseHighlightSearchPopulator"/>
+	<bean id="defaultRLSearchContentResponseHighlightSearchPopulator" class="com.amway.service.search.solrfacetsearch.populators.RLSearchContentResponseHighlightSearchPopulator" scope="tenant">
+	</bean>
+	
+	<alias name="defaultRLSearchContentResponseFreeTextSearchPopulator" alias="rlSearchContentResponseFreeTextSearchPopulator"/>
+	<bean id="defaultRLSearchContentResponseFreeTextSearchPopulator" class="com.amway.service.search.solrfacetsearch.populators.RLSearchContentResponseFreeTextSearchPopulator" scope="tenant">
+		<property name="facetSearchConfigDao" ref="solrFacetSearchConfigDao"/>
+		<property name="cmsSiteService" ref="cmsSiteService"/>
+	</bean>
+
+	<alias name="defaultRLSearchContentSolrQueryPopulator" alias="rlSearchContentSolrQueryPopulator"/>
+	<bean id="defaultRLSearchContentSolrQueryPopulator" class="com.amway.service.search.solrfacetsearch.populators.RLSearchContentSolrQueryPopulator" scope="tenant">
+		<property name="catalogVersionService" ref="catalogVersionService"/>
+		<property name="facetSearchService" ref="facetSearchService"/>
+		<property name="baseSiteService" ref="baseSiteService"/>
+		<property name="baseStoreService" ref="baseStoreService"/>
+		<property name="facetSearchConfigService" ref="facetSearchConfigService"/>
+		<property name="commonI18NService" ref="commonI18NService"/>
+		<property name="cmsSiteService" ref="cmsSiteService" />
+		<property name="solrFacetSearchConfigSelectionStrategy" ref="contentSolrFacetSearchConfigSelectionStrategy"/>
+	</bean>
+	
+	<alias name="defaultContentSolrFacetSearchConfigSelectionStrategy" alias="contentSolrFacetSearchConfigSelectionStrategy"/>
+	<bean id="defaultContentSolrFacetSearchConfigSelectionStrategy" class="com.amway.facade.search.strategy.impl.RLContentSolrFacetSearchConfigSelectionStrategy">
+		<property name="catalogVersionService" ref="catalogVersionService"/>
+		<property name="baseSiteService" ref="baseSiteService"/>
+		<property name="baseStoreService" ref="baseStoreService"/>
+		<property name="facetSearchConfigDao" ref="solrFacetSearchConfigDao"/>
+		<property name="cmsSiteService" ref="cmsSiteService"/>
+	</bean>
+			
+	<alias name="defaultRLSolrContentSearchFacade" alias="contentSearchFacade"/>
+	<bean id="defaultRLSolrContentSearchFacade" class="com.amway.facade.search.impl.DefaultRLSolrContentSearchFacade" scope="tenant">
+		<property name="contentSearchService" ref="rlContentSearchService" />
+		<property name="autocompleteService" ref="commerceAutocompleteService" />
+		<property name="contentCategorySearchPageConverter" ref="rlContentCategorySearchPageConverter"/>
+		<property name="searchQueryDecoder" ref="solrSearchQueryDecoder"/>
+		<property name="autocompleteSuggestionConverter" ref="autocompleteSuggestionConverter" />
+		<property name="threadContextService" ref="threadContextService"/>
+	</bean>
+	
+	<alias name="defaultRLContentCategorySearchPageConverter" alias="rlContentCategorySearchPageConverter"/>
+	<bean id="defaultRLContentCategorySearchPageConverter" class="com.amway.facades.converters.ContentCategorySearchPageConverter">
+		<property name="breadcrumbConverter" ref="breadcrumbConverter"/>
+		<property name="facetConverter" ref="facetConverter"/>
+		<property name="searchResultContentConverter" ref="rlSearchResultContentConverter"/>
+		<property name="searchStateConverter" ref="solrSearchStateConverter"/>
+		<property name="categoryConverter" ref="categoryConverter"/>
+		<property name="spellingSuggestionConverter" ref="spellingSuggestionConverter"/>
+	</bean>
+	
+	<alias name="defaultRLSearchResultContentConverter" alias="rlSearchResultContentConverter" />
+	<bean id="defaultRLSearchResultContentConverter" class="com.amway.facades.converters.SearchResultContentConverter" scope="tenant">
+		<property name="commonI18NService" ref="commonI18NService"/>
+	</bean>
+	
+<!--Resource  -->
+	<alias name="defaultSolrResourceSearchFacade" alias="resourceSearchFacade"/>
+	<bean id="defaultSolrResourceSearchFacade" class="com.amway.facade.search.impl.DefaultSolrResourceSearchFacade" scope="tenant">
+		<property name="resourceSearchService" ref="resourceSearchService" />
+		<property name="autocompleteService" ref="commerceAutocompleteService"/>
+		<property name="resourceCategorySearchPageConverter" ref="resourceCategorySearchPageConverter"/>
+		<property name="searchQueryDecoder" ref="solrSearchQueryDecoder"/>
+		<property name="autocompleteSuggestionConverter" ref="autocompleteSuggestionConverter"/>
+		<property name="threadContextService" ref="threadContextService"/>
+	</bean>
+	
+	<alias name="defaultResourceCategorySearchPageConverter" alias="resourceCategorySearchPageConverter"/>
+	<bean id="defaultResourceCategorySearchPageConverter" class="com.amway.facades.converters.ResourceCategorySearchPageConverter">
+		<property name="breadcrumbConverter" ref="breadcrumbConverter"/>
+		<property name="facetConverter" ref="facetConverter"/>
+		<property name="searchResultContentConverter" ref="searchResultResourceConverter"/>
+		<property name="searchStateConverter" ref="solrSearchStateConverter"/>
+		<property name="categoryConverter" ref="categoryConverter"/>
+		<property name="spellingSuggestionConverter" ref="spellingSuggestionConverter"/>
+	</bean>
+	
+	<alias name="defaultsearchResultResourceConverter" alias="searchResultResourceConverter" />
+	<bean id="defaultsearchResultResourceConverter" class="com.amway.facades.converters.SearchResultResourceConverter" scope="tenant">
+		<property name="commonI18NService" ref="commonI18NService"/>
+	</bean>
+	
+	<alias name="defaultSolrResourceSearchService" alias="resourceSearchService"/>
+	<bean id="defaultSolrResourceSearchService" class="com.amway.service.search.impl.DefaultSolrResourceSearchService" scope="tenant">
+		<property name="searchQueryPageableConverter" ref="searchResourceQueryPageableConverter"/>
+		<property name="searchRequestConverter" ref="commerceSolrSearchRequestConverter" />
+		<property name="searchResponseConverter" ref="solrSearchResourceResponseConverter" />
+	</bean>
+	
+	<alias name="defaultSearchResourceQueryPageableConverter" alias="searchResourceQueryPageableConverter" />
+	<bean id="defaultSearchResourceQueryPageableConverter" parent="abstractPopulatingConverter">
+		<lookup-method name="createTarget" bean="solrSearchRequest" /> 
+		<property name="populators">
+			<list>
+				<ref bean="resourceSearchSolrQueryPopulator" />
+				<ref bean="commerceSearchPagePopulator" />
+				<ref bean="commerceSearchSortPopulator" />
+				<ref bean="resourceSearchTextPopulator" />
+				<ref bean="commerceResourceSearchFiltersPopulator" />
+			</list>
+		</property>
+	</bean>
+	
+	<alias name="defaultResourceCommerceSearchFiltersPopulator" alias="commerceResourceSearchFiltersPopulator"/>
+	<bean id="defaultResourceCommerceSearchFiltersPopulator" class="de.hybris.platform.commerceservices.search.solrfacetsearch.populators.SearchFiltersPopulator" scope="tenant"/>
+	
+	<alias name="defaultResourceSearchTextPopulator" alias="resourceSearchTextPopulator" />
+	<bean id="defaultResourceSearchTextPopulator" class="de.hybris.platform.commerceservices.search.solrfacetsearch.populators.SearchTextPopulator" >
+		<property name="freeTextQueryBuilders">
+			<list>
+				<bean class="de.hybris.platform.commerceservices.search.solrfacetsearch.querybuilder.impl.DefaultFreeTextQueryBuilder">
+					<property name="propertyName" value="resource" />
+					<property name="boost" value="90" />
+				</bean>
+	</list>
+	</property>
+	</bean>
+	<alias name="defaultResourceSearchSolrQueryPopulator" alias="resourceSearchSolrQueryPopulator" />
+	<bean id="defaultResourceSearchSolrQueryPopulator" class="com.amway.service.search.solrfacetsearch.populators.SearchResourceSolrQueryPopulator">
+		<property name="catalogVersionService" ref="catalogVersionService" />
+		<property name="facetSearchService" ref="facetSearchService"/>
+		<property name="baseSiteService" ref="baseSiteService" />
+		<property name="facetSearchConfigService" ref="facetSearchConfigService" />
+		<property name="commonI18NService" ref="commonI18NService" />
+		<property name="baseStoreService" ref="baseStoreService" />
+		<property name="cmsSiteService" ref="cmsSiteService" />
+		<property name="solrFacetSearchConfigSelectionStrategy" ref="solrFacetSearchConfigSelectionStrategy" />
+	</bean>
+	
+	<alias name="defaultSolrSearchResourceResponseConverter" alias="solrSearchResourceResponseConverter"/>
+	<bean id="defaultSolrSearchResourceResponseConverter" class="com.amway.facade.search.solrfacetsearch.conversters.SolrSearchResourceResponseConverter" scope="tenant">
+		<property name="populators">
+			<list>
+				<ref bean="commerceSearchResponseQueryPopulator"/>
+				<ref bean="commerceSearchResponsePaginationPopulator"/>
+				<ref bean="searchResourceResponseResultsPopulator"/>
+				<ref bean="commerceSearchResponseFacetsPopulator"/>
+				<ref bean="commerceSearchResponseBreadcrumbsPopulator"/>
+				<ref bean="commerceSearchResponseSortsPopulator"/>
+				<ref bean="searchResourceResponseFreeTextSearchPopulator"/>								
+			</list>
+		</property>
+	</bean>
+		<alias name="defaultsearchResourceResponseResultsPopulator" alias="searchResourceResponseResultsPopulator"/>
+	<bean id="defaultsearchResourceResponseResultsPopulator"
+			class="de.hybris.platform.commerceservices.search.solrfacetsearch.populators.SearchResponseResultsPopulator"
+			>
+		<property name="searchResultConverter" ref="resourceSolrDocumentSearchResultConverter"/>
+	</bean>
+	
+		<alias name="defaultResourceSolrDocumentSearchResultConverter" alias="resourceSolrDocumentSearchResultConverter"/>
+	<bean id="defaultResourceSolrDocumentSearchResultConverter" parent="abstractPopulatingConverter">
+		<lookup-method name="createTarget" bean="searchResultValueData"/>
+		<property name="populators">
+			<list>
+				<ref bean="resourceSolrDocumentSearchResultValuePopulator"/>
+			</list>
+		</property>
+	</bean>
+	
+	<alias name="defaultResourceSolrDocumentSearchResultValuePopulator" alias="resourceSolrDocumentSearchResultValuePopulator"/>
+	<bean id="defaultResourceSolrDocumentSearchResultValuePopulator"
+			class="com.amway.service.search.solrfacetsearch.populators.ResourceSolrDocumentSearchResultValuePopulator"
+			>
+		<property name="fieldNameProvider" ref="solrFieldNameProvider"/>
+	</bean>	
+		<alias name="defaultSearchResourceResponseFreeTextSearchPopulator" alias="searchResourceResponseFreeTextSearchPopulator"/>
+	<bean id="defaultSearchResourceResponseFreeTextSearchPopulator" class="com.amway.service.search.solrfacetsearch.populators.DefaultSearchResourceResponseFreeTextSearchPopulator" scope="tenant">
+	</bean>
+	
+<!-- END CODE -->
+	
+	
+			
+</beans>

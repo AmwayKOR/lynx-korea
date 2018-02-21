@@ -1,0 +1,16 @@
+INSERT_UPDATE FetchProcessStatusEmailCronJob;code[unique=true];job(code);sessionLanguage(isocode);processStatusValue(code);returnStatusCode
+;fetchProcessStatusEmailCronJob;amwayFetchProcessStatusEmailJob;en;FAILED;OK
+
+INSERT_UPDATE Trigger;cronJob(code)[unique=true];second;minute;hour;day;month;year;relative;active;maxAcceptableDelay
+;fetchProcessStatusEmailCronJob; 0;5;4;-1;-1;-1;false;true;-1
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,1 @@
+hybris-commons-rest-client-5.5.1.0-M0.jar

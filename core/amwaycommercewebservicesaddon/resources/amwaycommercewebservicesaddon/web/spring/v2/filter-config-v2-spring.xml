@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2000-2016 SAP SE or an SAP affiliate company.
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of SAP
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with SAP.
+  -->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util
+		http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <bean id="commerceWebServicesFilterChainV2" class="de.hybris.platform.servicelayer.web.PlatformFilterChain">
+        <constructor-arg>
+            <ref bean="commerceWebServicesFilterChainListV2" />
+        </constructor-arg>
+    </bean>
+
+    <util:list id="defaultCommerceWebServicesFilterChainListV2">
+        <!-- filter that catches and resolves exceptions thrown from other filters -->
+        <ref bean="exceptionTranslationFilter" />
+
+        <!-- generic platform filters -->
+        <ref bean="log4jFilter" />
+        <ref bean="restSessionFilterV2" />
+
+        <!-- commerceWebservices filters -->
+        <ref bean="baseSiteMatchingFilter" />
+
+        <!-- Security -->
+        <ref bean="springSecurityFilterChain" />
+        <!-- POS must be before userMatch -->
+        <ref bean="posMatchingFilter" />
+        <ref bean="userMatchingFilter" />
+
+
+        <!-- Matching filters -->
+
+        <ref bean="cartMatchingFilter" />
+        <ref bean="commerceWebServicesSessionAttributesFilterV2" />
+
+        <ref bean="guestRoleFilterV2" />
+
+        <!-- Set sales application in session -->
+        <ref bean="amwaySalesApplicationFilter" />
+
+    </util:list>
+
+    <alias alias="userMatchingFilter" name="defaultAmwayUserMatchingFilter" />
+    <bean id="defaultAmwayUserMatchingFilter" class="com.amway.core.v2.filter.AmwayUserMatchingFilter">
+        <property name="regexp" value="^/[^/]+/users/([^/]+)" />
+        <property name="userService" ref="userService" />
+    </bean>
+
+
+    <alias alias="posMatchingFilter" name="defaultposMatchingFilter" />
+    <bean id="defaultposMatchingFilter" class="com.amway.core.v2.filter.PosMatchingFilter">
+        <property name="regexp" value="/account/([^/]+)" />
+    </bean>
+
+    <bean id="amwaySalesApplicationFilter" class="com.amway.core.filter.v2.AmwaySalesApplicationFilter"/>
+
+
+</beans>

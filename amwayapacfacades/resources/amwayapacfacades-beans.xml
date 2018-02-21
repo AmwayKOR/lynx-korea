@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
+ 
+	<!-- Enumeration representing the response status for wishlist update operations-->
+	<enum class="com.amway.facades.wishlist.modification.status.AmwayApacWishlistModificationStatus">
+		<value>SUCCESS</value>
+		<value>WISHLIST_NOT_FOUND</value>
+		<value>PRODUCT_NOT_FONUD</value>
+		<value>PRODUCT_ALREADY_EXISTS</value>
+		<value>WISHLIST_NAME_ALREADY_EXISTS</value>
+	</enum>
+	
+	<enum class="com.amway.apac.facades.cart.enums.AmwayApacCartSortCode">
+		<value>LAST_ITEM_ADDED</value>
+		<value>PRICE_ASCENDING</value>
+		<value>PRICE_DESCEDNING</value>
+		<value>NAME_ASCENDING</value>
+		<value>NAME_DESCEDNING</value>
+	</enum>
+
+	<bean class="com.amway.apacfacades.data.EnumData">
+		<property name="code" type="String" />
+		<property name="label" type="String" />
+	</bean>
+	
+    <bean class="com.amway.facades.product.data.WishlistData">
+        <property name="user" type="de.hybris.platform.commercefacades.user.data.CustomerData" />
+		<property name="lastUpdated" type="java.util.Date" />
+		<property name="creationTime" type="java.util.Date" />
+    </bean>
+    
+       <bean class="com.amway.apac.facades.wishlist.data.AmwayApacWishListModification">
+        <property name="status" type="com.amway.facades.wishlist.modification.status.AmwayApacWishlistModificationStatus" />
+		<property name="entry" type="com.amway.facades.product.data.WishlistEntryData" />
+    </bean>
+
+	<bean class="de.hybris.platform.commercefacades.product.data.StockData">
+		<property name="stockLevelStatusName" type="String"/>
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.order.data.OrderEntryData">
+		<property name="productCode" type="String"/>
+		<property name="selected" type="java.lang.Boolean"/>
+	</bean>
+	
+	<bean class="de.hybris.platform.commercefacades.user.data.AddressData">
+		<property name="line3" type="String"/>
+	</bean>
+	
+	<bean class="de.hybris.platform.commercefacades.order.data.OrderHistoryData">
+		<property name="itemQuantity" type="java.lang.Integer"/>
+	</bean>
+	
+	<bean class="de.hybris.platform.commerceservices.service.data.CommerceCheckoutParameter">
+		<property name="warehouse" type="de.hybris.platform.ordersplitting.model.WarehouseModel"/>
+	</bean>	
+	
+	<bean class="com.amway.apacfacades.payment.data.AmwayPaymentOptionData">
+    	<property name="aliasCode" type="java.lang.String"/>
+    	<property name="title" type="java.lang.String"/>
+    	<property name="paymentType" type="com.amway.apac.core.enums.PaymentType"/>
+    	<property name="paymentTypeData" type="com.amway.apacfacades.data.EnumData"/>
+    </bean>
+    
+	<bean class="de.hybris.platform.commercefacades.product.data.ProductData">
+		<property name="isSellable" type="java.lang.Boolean" />
+	</bean>
+	
+	<bean class="de.hybris.platform.commercefacades.search.data.SearchStateData">
+		<property name="filterRawQueries" type="java.lang.String">
+			<description>Raw query to be populated in Search Query.</description>
+		</property>
+	</bean>
+	
+	<bean class="de.hybris.platform.commercefacades.order.data.CommerceCartMetadata">
+		<property name="deliveryAddress" type="de.hybris.platform.core.model.user.AddressModel">
+            <description>The delivery address to be associated with the cart</description>
+        </property>
+        <property name="deliveryMode" type="java.lang.String">
+            <description>Specifies the delivery Mode</description>
+        </property>        
+        <property name="warehouseCode" type="java.lang.String">
+            <description>Specifies the warehouse code to be updated to the cart</description>
+        </property>    
+        <property name="volumeAmwayAccount" type="java.lang.String">
+            <description>Specifies the volumeAmwayAccount to be updated to the cart</description>
+        </property> 
+         <property name="orderType" type="com.amway.apac.core.enums.OrderType">
+            <description>Specifies the OrderType for cart(e.g:NORMAL_ORDER,BACK_ORDER)</description>
+        </property>    
+        <property name="amwayCartType" type="com.amway.core.enums.AmwayCartType" >
+			<description>Specifies the Cart type for cart(e.g:WEB,POS)</description>
+		</property> 
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.order.dto.CartParameters">
+		<property name="pickupStore" type="java.lang.String">
+			<description>Specified the store from where cart creation is requested. It can be used to set warehouse in cart.</description>
+		</property>
+		<property name="deliveryMode" type="java.lang.String">
+			<description>Specifies the delivery Mode</description>
+		</property>
+		<property name="cartType" type="java.lang.String">
+			<description>Specifies the type of cart to be created. E.g WEB, POS, etc</description>
+		</property>
+
+	</bean>
+
+</beans>

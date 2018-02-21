@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Get update subscription mock and actual service -->
+    <alias alias="dmsUpdateSubscriptionService" name="defaultUpdateSubscriptionService" />
+    <bean id="defaultUpdateSubscriptionService"
+          class="com.amway.amwaydms.subscription.services.impl.DefaultUpdateSubscriptionService"
+          parent="amwayAbstractDmsService">
+        <property name="inputConverter" ref="amwaySubscriptionUpdateInputConverter"></property>
+        <property name="outputConverter" ref="amwayUpdateSubscriptionOutputConverter" />
+        <property name="urlPath" value="${amwaydms.dms.url}" />
+    </bean>
+
+    <bean id="mockUpdateSubscriptionService"
+          class="com.amway.amwaydms.common.mock.CommonMockService">
+        <property name="inputConverter" ref="amwaySubscriptionUpdateInputConverter"></property>
+        <property name="outputConverter" ref="amwayUpdateSubscriptionOutputConverter" />
+        <property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
+        <property name="charonClientConfigService" ref="amwayCharonClientConfigService" />
+        <property name="serviceAvailCode" value="#{configurationService.configuration.getProperty('amwaydms.availablity.code')}"/>
+
+    </bean>
+
+
+    <alias  alias="amwaySubscriptionUpdateInputConverter" name="defaultAmwaySubscriptionUpdateInputConverter"/>
+    <bean id="defaultAmwaySubscriptionUpdateInputConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass"
+                  value="com.amway.amwaydms.model.SubscriptionRequest"/>
+        <property name="populators">
+            <list>
+                <ref bean="amwayDmsSubscriptionUpdateInputPopulator" />
+            </list>
+        </property>
+    </bean>
+    <alias name="amwayDmsSubscriptionUpdateInputPopulator" alias="amwaySubscriptionUpdateInputPopulator"/>
+
+    <bean id="amwayDmsSubscriptionUpdateInputPopulator" class="com.amway.amwaydms.populators.SubscriptionUpdateInputPopulator">
+        <property name="baseStoreService" ref="baseStoreService"/>
+        <property name="amwayAccountCommerceService" ref="amwayAccountCommerceService"/>
+    </bean>
+
+
+    <bean id="amwayUpdateSubscriptionOutputConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass"
+                  value="com.amway.core.data.CommonResponseFieldsData" />
+        <property name="populators">
+            <list>
+                <ref bean="amwayCommonResponsePopulator" />
+            </list>
+        </property>
+    </bean>
+
+
+</beans>

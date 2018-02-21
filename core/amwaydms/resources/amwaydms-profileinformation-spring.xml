@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		   http://www.springframework.org/schema/beans/spring-beans.xsd
+		   http://www.springframework.org/schema/util
+		   http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<bean id="dmsApiClient" class="com.amway.integration.cis.dms.client.impl.DMSClientImpl" >
+		<property name="client">
+			<bean parent="genericRestClient" lazy-init="false">
+				<property name="endpointProvider">
+					<bean class="com.hybris.commons.client.SimpleEndpointProvider">
+						<property name="endpointURI" value="${dms.client.api.uri}"/>
+					</bean>
+				</property>
+				<property name="endpointName" value="${dms.client.endpoint.name:dms}"/>
+				<property name="restResponseHandlers" ref="cisRestResponseHandlers"/>
+				<property name="restCallDecoratorRegistry" ref="dmsRestCallDecoratorRegistry"/>
+			</bean>
+		</property>
+	</bean>
+
+	<alias alias="amwayProfileService" name="defaultAmwayProfileService" />
+	<bean id="defaultAmwayProfileService"
+		class="com.amway.integration.cis.dms.aboinformation.services.impl.DefaultAmwayProfileService"
+		parent="abstractDmsService">
+		<property name="inputConverter" ref="amwayBusinessOwnerInformationInputConverter"/>
+		<property name="outputConverter" ref="amwayBusinessOwnerInformationOutputConverter" />
+		<property name="urlPath" value="${cis.client.dms.amwayProfileService.urlPath}" />
+		<property name="dmsClient" ref="dmsApiClient"></property>
+	</bean>
+
+    <bean id="mockAmwayProfileService" class="com.amway.integration.cis.dms.aboinformation.services.mock.impl.MockAmwayProfileService">
+		<property name="inputConverter" ref="amwayBusinessOwnerInformationInputConverter"/>
+		<property name="outputConverter" ref="amwayBusinessOwnerInformationOutputConverter"/>
+		<property name="hystrixCommandConfig" ref="dmsCommandConfig" />
+		<property name="ondemandHystrixCommandFactory" ref="ondemandHystrixCommandFactory" />
+		<property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
+		<property name="serviceAvailCode" value="#{configurationService.configuration.getProperty('amwaydms.availablity.code')}"/>
+	</bean>
+
+	<bean id="amwayBusinessOwnerInformationInputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.integration.dms.services.AmwayProfileInput" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonRequestFieldsPopulator" />
+				<ref bean="dmsAmwayProfileServiceInputPopulator" />
+			</list>
+		</property>
+	</bean>
+	<bean id="amwayBusinessOwnerInformationOutputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.core.dms.data.AmwayProfileResponseData" />
+		<property name="populators">
+			<list>
+				<ref bean="dmsAmwayProfileServiceOutputPopulator" />
+				<ref bean="dmsAmwayAccountServiceOutputPopulator" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="dmsAmwayProfileServiceInputPopulator"
+		class="com.amway.integration.cis.dms.populators.DmsAmwayProfileServiceInputPopulator">
+	</bean>
+
+	<bean id="dmsAmwayAccountServiceOutputPopulator"
+		  class="com.amway.integration.cis.dms.populators.DmsAmwayAccountServiceOutputPopulator">
+		<property name="countryConverter" ref="countryConverter"/>
+		<property name="regionConverter" ref="regionConverter"/>
+		<property name="commonI18NService" ref="commonI18NService"/>
+	</bean>
+
+	<bean id="dmsAmwayProfileServiceOutputPopulator"
+		class="com.amway.integration.cis.dms.populators.DmsAmwayProfileServiceOutputPopulator" parent="abstractDmsPopulator">
+		<property name="commonI18NService" ref="commonI18NService"/>
+		<property name="regionConverter" ref="regionConverter"/>
+		<property name="countryConverter" ref="countryConverter"/>
+	</bean>
+</beans>

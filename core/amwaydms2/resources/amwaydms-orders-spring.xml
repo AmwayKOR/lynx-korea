@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Update Business nature  mock and actual service -->
+    <alias alias="amwayNotifyOrder" name="amwayDefaultNotifyOrder" />
+    <bean id="amwayDefaultNotifyOrder"
+          class="com.amway.amwaydms.order.services.impl.DefaultAmwayOrderNotification"
+          parent="amwayAbstractDmsService">
+        <property name="inputConverter" ref="amwayNotifyOrderInputConverter" />
+        <property name="outputConverter" ref="amwayNotifyOrderOutputConverter" />
+        <property name="urlPath" value="${amwaydms.dms.url}" />
+    </bean>
+
+    <bean id="mockAmwayNotifyOrderService"
+          class="com.amway.amwaydms.common.mock.CommonMockService">
+        <property name="inputConverter" ref="amwayNotifyOrderInputConverter" />
+        <property name="outputConverter" ref="amwayNotifyOrderOutputConverter" />
+        <property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
+        <property name="charonClientConfigService" ref="amwayCharonClientConfigService" />
+    </bean>
+
+
+    <!-- Entries for Update Business nature converter and populator -->
+
+    <bean id="amwayNotifyOrderInputConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass"
+                  value="com.amway.amwaydms.model.OrderRequest" />
+        <property name="populators">
+            <list>
+                <ref bean="amwayNotifyOrderInputPopulator" />
+            </list>
+        </property>
+    </bean>
+    <bean id="amwayNotifyOrderInputPopulator"
+          class="com.amway.amwaydms.populators.NotifyOrderInputPopulator">
+    </bean>
+
+    <bean id="amwayNotifyOrderOutputConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass"
+                  value="com.amway.core.data.CommonResponseFieldsData" />
+        <property name="populators">
+            <list>
+                <ref bean="amwayCommonResponsePopulator" />
+            </list>
+        </property>
+    </bean>
+
+
+
+</beans>

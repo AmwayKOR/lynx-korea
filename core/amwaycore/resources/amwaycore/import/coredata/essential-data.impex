@@ -1,0 +1,48 @@
+
+
+INSERT_UPDATE UserPriceGroup;code[unique=true];name[lang=en];
+;AmwayDefaultEmployeePriceGroup;Amway Default Employee Price Group;
+;AmwayDefaultRetailPriceGroup;Amway Default Retail Price Group;
+;AmwayDefaultABOPriceGroup;Amway Default ABO Price Group;
+
+INSERT_UPDATE AmwayBusinessRestriction;code[unique=true];restrictionId;description[lang=en];type(code)
+;business_restriction_500;500;Ordering Block;ORDERING
+;business_restriction_560;560;Virtual Store Block;ORDERING
+;business_restriction_570;570;In-store Pickup Block;ORDERING
+
+INSERT_UPDATE ServicelayerJob;code[unique=true];springId[unique=true]
+;amwayInfraAvailJobPerformable;amwayInfraAvailJobPerformable;
+
+INSERT_UPDATE CustomerType;code[unique=true];name[lang=en]
+;CustomerType_1;Person;
+;CustomerType_2;Organization;
+
+INSERT_UPDATE AmwayBusinessNature;code[unique=true];name[lang=en];
+;AmwayBusinessNature_1;AMWAY BUSINESS OWNER;
+;AmwayBusinessNature_4;CLIENT;
+;AmwayBusinessNature_7;EMPLOYEE;
+
+INSERT_UPDATE ComposedType;code[unique=true];jaloclass;
+;PromotionProductRestriction;com.amway.core.jalo.promotions.PromotionProductRestriction
+
+INSERT_UPDATE ServicelayerJob;code[unique=true];springId[unique=true]
+;amwayBonusPeriodStatusJobPerformable;amwayBonusPeriodStatusJobPerformable;
+;amwayOrderPeriodStatusJobPerformable;amwayOrderPeriodStatusJobPerformable;
+
+UPDATE OrderCancelConfig;orderCancelAllowed[unique=true];cancelAfterWarehouseAllowed;completeCancelAfterShippingStartedAllowed;partialCancelAllowed;partialOrderEntryCancelAllowed
+;true;false;false;false;false
+
+### OMS Order export Ticket configuration
+UPDATE CsTicketEventEmailConfiguration;code[unique=true];recipientType(code);
+;1;AssignedGroup;
+;2;AssignedGroup;
+;3;AssignedGroup;
+;4;AssignedGroup;
+
+INSERT_UPDATE CsAgentGroup;uid[unique=true];name;emailDistributionList;
+;omsOrderAgentGroup;OMS Order Export Agent Group;aiu0256@amway.com
+
+INSERT_UPDATE AmwayReturnRequestType;code[unique=true];name[lang=en];noShippingRequired;labelRequired
+;NO_ARRAGEMENTS ;No arrangements (Ship Yourself); false ; false;
+;NO_SHIPPING    ;I request 'No Shipping'        ; true ; false;
+;REQUEST_LABEL  ;I request Label                ; false; true ;

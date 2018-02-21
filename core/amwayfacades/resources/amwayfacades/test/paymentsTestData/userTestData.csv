@@ -1,0 +1,45 @@
+$currencies=EUR,USD
+$defaultCurrency=EUR
+$defaultLanguage=en
+$deliveryCountries=US
+
+INSERT_UPDATE UserGroup;uid[unique=true];groups(uid);
+;cockpitgroup;;
+;customergroup;cockpitgroup;
+
+INSERT_UPDATE Customer;uid[unique=true];customerID;name;description;sessionLanguage(isocode);sessionCurrency(isocode);groups(uid);password;;
+;ahertz;K2006-C0005;Anja Hertz;;en;USD;customergroup;1234;;
+;abrode;K2006-C0006;Arin Brode;;en;USD;customergroup;1234;;
+;dejol;K2006-C0007;Max de Jol;;en;USD;customergroup;1234;;
+;promoted;K2006-C0007;Max promo;;en;EUR;customergroup;1234;;
+;john;K2006-C0007;Test user 1;;en;USD;customergroup;1234;;
+;lesley;K2006-C0007;Test user 2;;en;USD;customergroup;1234;;
+
+INSERT_UPDATE Address;owner(Customer.uid)[unique=true];streetname[unique=true];streetnumber[unique=true];postalcode[unique=true];duplicate[unique=true];town;country(isocode);billingAddress;contactAddress;shippingAddress;unloadingAddress;firstname;lastname;email;gender(code);middlename;phone1;title(code);url;company;fax;department
+;ahertz;Zennerstrasse;45;28277;false;Bremen;DE;false;false;false;true;Anja;Hertz;ahertz@na-du.de;FEMALE;;;;;hybris GmbH;;
+;ahertz;Schiller Allee;8;28277;false;Bremen;DE;true;true;true;false;Anja;Hertz;ahertz@na-du.de;FEMALE;;;;;hybris GmbH;;
+;abrode;Feldweg;7;18551;false;Sagard;DE;true;false;true;true;Arin;Brode;arin@wow-europe.com;MALE;;;;;hybris GmbH;;
+
+INSERT_UPDATE Customer;uid[unique=true];defaultPaymentaddress(owner(Customer.uid), streetname, streetnumber, postalcode,duplicate);defaultShipmentAddress(owner(Customer.uid), streetname, streetnumber, postalcode, duplicate)
+;ahertz;ahertz:Schiller Allee:8:28277:false;ahertz:Zennerstrasse:45:28277:false
+;abrode;abrode:Feldweg:7:18551:false;abrode:Feldweg:7:18551:false
+
+INSERT_UPDATE UserPriceGroup;code[unique=true];
+;AmwayDefaultABOPriceGroup;
+;AmwayDefaultRetailPriceGroup;
+
+INSERT_UPDATE AmwayBusinessNature;code[unique=true];name[lang=en];
+;AmwayBusinessNature_1;AMWAY BUSINESS OWNER;
+;AmwayBusinessNature_4;CLIENT;
+;AmwayBusinessNature_7;EMPLOYEE;
+
+#Sample Amway Accounts
+INSERT_UPDATE AmwayAccount;code[unique=true];businessNature(code);userPriceGroup(code);name;owner(Customer.originalUid);expiryDate[dateformat=dd.MM.yyyy HH:mm];status(code);primaryParty(Customer.originalUid)
+#;ABO_NUMBER;TYPE;PRICE_GROUP;DIST_NM;DEFAULT_PARTY_ID;
+;8888888888;AmwayBusinessNature_1;AmwayDefaultABOPriceGroup;"Test AmwayAccount 8";ahertz;01.12.2017 00:00;ACTIVE;ahertz
+;9999999999;AmwayBusinessNature_4;AmwayDefaultABOPriceGroup;"Test AmwayAccount 9";lesley;01.12.2017 00:00;ACTIVE;lesley
+
+#Sample Association Of Customers And Amway Accounts
+UPDATE Customer;originalUid[unique=true];accounts(code)[mode=append]
+;ahertz;8888888888
+;lesley;9999999999

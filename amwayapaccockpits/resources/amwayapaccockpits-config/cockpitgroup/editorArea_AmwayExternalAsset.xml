@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="editor.xsd">
+	
+	<group qualifier="General" visible="true" initially-opened="true">
+		<label key="cockpit.config.label.General" />
+		<property qualifier="AmwayExternalAsset.assetId" />
+		<property qualifier="AmwayExternalAsset.name" />
+		<property qualifier="AmwayExternalAsset.catalogversion"  editor="shortListEditor"/>
+		<property qualifier="AmwayExternalAsset.title" />
+		<property qualifier="AmwayExternalAsset.description" />
+		<property qualifier="AmwayExternalAsset.date" />
+		<property qualifier="AmwayExternalAsset.classification" />
+	</group>
+
+	
+
+	<group qualifier="Multimedia" visible="true" initially-opened="false">
+		<label key="config.general.multimedia" />
+		<property qualifier="AmwayExternalAsset.displayImage" editor="simpleMediaReferenceSelector">
+			<parameter>
+				<name>mimeTypes</name>
+				<value>image/jpeg;image/gif;image/png</value>
+			</parameter>
+			<parameter>
+				<name>celumMediaFormat</name>
+				<value>picture</value>
+			</parameter>
+			<parameter>
+				<name>allowCreate</name>
+				<value>true</value>
+			</parameter>
+			
+			<parameter>
+				<name>restrictToCreateTypes</name>
+				<value>Media,CelumAsset+</value>
+			</parameter>
+			<parameter>
+				<name>predefinedValuesStrategy</name>
+				<value>imageMediaPredefinedValuesStrategy</value>
+			</parameter>
+		</property>
+
+		<property qualifier="AmwayExternalAsset.url">
+		<parameter>
+				<name>predefinedValuesStrategy</name>
+				<value>cmsItemPredefinedValuesStrategy</value>
+			</parameter>
+			<parameter>
+				<name>editable</name>
+				<value>true</value>
+			</parameter>
+			<parameter>
+				<name>showEditButton</name>
+				<value>true</value>
+			</parameter>
+			<parameter>
+				<name>allowCreate</name>
+				<value>true</value>
+			</parameter>
+		</property>
+		
+	</group>
+
+
+	
+
+	<group qualifier="admin" visible="true" initially-opened="false">
+		<label key="config.general.administration" />
+		<property qualifier="Item.pk" />
+		<property qualifier="Item.creationTime" />
+		<property qualifier="Item.modifiedtime" />
+		<property qualifier="Item.assignedCockpitItemTemplates"/>
+	</group>
+
+	
+	<custom-group 
+		class="de.hybris.platform.cockpit.services.config.impl.UnassignedEditorSectionConfiguration" 
+		qualifier="unassigned"
+		initially-opened="false"
+		>
+		<label key="cockpit.config.label.Other" />
+	</custom-group>
+
+	
+</editor>

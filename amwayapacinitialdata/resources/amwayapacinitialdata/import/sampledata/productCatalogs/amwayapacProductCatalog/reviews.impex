@@ -1,0 +1,36 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+# ImpEx for Importing Product Reviews
+
+# Macros / Replacement Parameter definitions
+$catalog-Online=Online
+$product-catalog=amwayapacProductCatalog
+$productCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$product-catalog]),CatalogVersion.version[default=$catalog-Online])[default=$product-catalog:$catalog-Online]
+
+
+$defaultPassword=password
+
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Online'])[unique=true,default=$productCatalog:Online]
+
+# Reviews from Customers
+
+# Reviews from Customers
+INSERT_UPDATE Customer;groups(uid);uid[unique=true];name;password[default=$defaultPassword];customerId
+;"customergroup";"keenreviewer1@hybris.com";"Kenneth Reviewer";;"keenreviewer1@hybris.com";
+;"customergroup";"keenreviewer2@hybris.com";"Ken Reviewer";;"keenreviewer2@hybris.com";
+;"customergroup";"keenreviewer3@hybris.com";"John Reviewer";;"keenreviewer3@hybris.com";
+;"customergroup";"keenreviewer4@hybris.com";"Steve Reviewer";;"keenreviewer4@hybris.com";
+
+INSERT_UPDATE CustomerReview;product(code, $productCV)[unique=true]; rating; user(uid)[unique=true];headline;comment;approvalStatus(code)[default='approved'];language(isocode)[default='en']
+;101390M;5;keenreviewer1@hybris.com;This is a fantastic product, did everything I wanted it to do.;Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas ut est. Donec suscipit. Donec eget diam vitae purus condentum adipiscing. Suspendisse lorem diam, cursus non,aliquam et, blandit ac, orci. Phasellus malesuada orci sit amet lorem. Sed egestas tortor eget ipsum. Cras mattis,lorem sit amet congue condimentum, nibh tellus sodales augue, ac euismod lectus arcu eu purus. Mauris tellus ligula,molestie vel, cursus at, eleifend ut, diam. Integer felis. Morbi sapien massa, iaculis id, convallis in, laoreet id, leo.Nullam id metus. Suspendisse turpis tellus, fermentum mollis, scelerisque fermentum, hendrerit sed, mi. Pellentesque bibendum.Mauris sit amet dolor. Praesent ullamcorper accumsan purus. Aliquam erat volutpat. Vivamus a sapien sed dui faucibus porttito.;
+;101390M;4;keenreviewer2@hybris.com;A good solid product, worthy of a purchase.;Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas ut est. Donec suscipit. Donec eget diam vitae purus condentum adipiscing. Suspendisse lorem diam, cursus non,aliquam et, blandit ac, orci. Phasellus malesuada orci sit amet lorem. Sed egestas tortor eget ipsum. Cras mattis,lorem sit amet congue condimentum, nibh tellus sodales augue, ac euismod lectus arcu eu purus. Mauris tellus ligula,molestie vel, cursus at, eleifend ut, diam. Integer felis. Morbi sapien massa, iaculis id, convallis in, laoreet id, leo.Nullam id metus. Suspendisse turpis tellus, fermentum mollis, scelerisque fermentum, hendrerit sed, mi. Pellentesque bibendum.Mauris sit amet dolor. Praesent ullamcorper accumsan purus. Aliquam erat volutpat. Vivamus a sapien sed dui faucibus porttito.;
+;101390M;3;keenreviewer3@hybris.com;Satisfactory product, but not overwhelmed.;Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas ut est. Donec suscipit. Donec eget diam vitae purus condentum adipiscing. Suspendisse lorem diam, cursus non,aliquam et, blandit ac, orci. Phasellus malesuada orci sit amet lorem. Sed egestas tortor eget ipsum. Cras mattis,lorem sit amet congue condimentum, nibh tellus sodales augue, ac euismod lectus arcu eu purus. Mauris tellus ligula,molestie vel, cursus at, eleifend ut, diam. Integer felis. Morbi sapien massa, iaculis id, convallis in, laoreet id, leo.Nullam id metus. Suspendisse turpis tellus, fermentum mollis, scelerisque fermentum, hendrerit sed, mi. Pellentesque bibendum.Mauris sit amet dolor. Praesent ullamcorper accumsan purus. Aliquam erat volutpat. Vivamus a sapien sed dui faucibus porttito.;
+;101390M;3;keenreviewer4@hybris.com;I would prefer a product with extra features.;Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas ut est. Donec suscipit. Donec eget diam vitae purus condentum adipiscing. Suspendisse lorem diam, cursus non,aliquam et, blandit ac, orci. Phasellus malesuada orci sit amet lorem. Sed egestas tortor eget ipsum. Cras mattis,lorem sit amet congue condimentum, nibh tellus sodales augue, ac euismod lectus arcu eu purus. Mauris tellus ligula,molestie vel, cursus at, eleifend ut, diam. Integer felis. Morbi sapien massa, iaculis id, convallis in, laoreet id, leo.Nullam id metus. Suspendisse turpis tellus, fermentum mollis, scelerisque fermentum, hendrerit sed, mi. Pellentesque bibendum.Mauris sit amet dolor. Praesent ullamcorper accumsan purus. Aliquam erat volutpat. Vivamus a sapien sed dui faucibus porttito.;
