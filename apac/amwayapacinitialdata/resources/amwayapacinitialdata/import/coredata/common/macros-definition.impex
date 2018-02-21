@@ -1,0 +1,121 @@
+############### Macros / Replacement Parameter definitions ###############
+
+############### Base Store and Base Site specific macros ###############
+
+# Currencies #
+$ukCurrency=GBP
+$jpCurrency=JPY
+$usCurrency=USD
+$europeCurrency=EUR
+$currencies=JPY,USD
+$defaultCurrency=USD
+
+$net=false
+$storeUid=amwayapac
+$siteUid=amwayapac
+$themeUid=amwayapac
+$languages=ja,en,de,zh
+$defaultLanguage=en
+$unitedKingdom=GB,GG,IM,JE
+$europeNotUK=AD,AL,AT,BA,BE,BG,BY,CH,CY,CZ,DE,DK,EE,ES,FI,FO,FR,GI,GL,GR,HR,HU,IE,IS,IT,LI,LT,LU,LV,MC,MD,ME,MK,MT,NL,NO,PL,PT,RO,RS,RU,SE,SI,SK,SM,TR,UA,VA
+$asianCountries=CN,JP,VN,HK,KP,KR
+$deliveryCountries=$unitedKingdom,$europeNotUK,$asianCountries,US
+$orderProcessCode=order-process
+$pickupInStoreMode=BUY_AND_COLLECT
+$customerAllowedToIgnoreSuggestions=true
+$paymentProvider=Mockup
+$promoGrp=amwayapacPromotionGroup
+$checkoutFlowGroup=defaultCheckoutGroup
+$siteMapUrlLimitPerFile=50000
+$vendor=amwayapacVendor
+$prices=Europe1prices[translator=de.hybris.platform.europe1.jalo.impex.Europe1PricesTranslator]
+
+
+############### Content catalog specific macros ###############
+
+$contentCatalog=amwayapacContentCatalog
+$contentCatalogName=Amway Apac Content Catalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$wideContent=CMSImageComponent,BannerComponent
+
+$defaultCountry=US
+$siteMapLangCur=enUsd
+$siteMapPage=Homepage,Product,CategoryLanding,Category,Store,Content,Custom
+$customSiteMapUrls=
+
+$picture=media(code, $contentCV);
+$jarResource=$config-jarResource
+$siteResource=jar:com.amway.apac.initialdata.setup.AmwayApacInitialDataSystemSetup&/amwayapacinitialdata/import/sampledata/contentCatalogs/$contentCatalog/images
+$page=page(uid, $contentCV);
+$contentPage=contentPage(uid, $contentCV);
+
+$lang=en
+$contentMedias=medias(code, $contentCV)
+$mediaContainer=media(qualifier, $contentCV)[lang=$lang];
+
+
+############### Product catalog specific macros ###############
+$productCatalog=amwayapacProductCatalog
+$productCatalogName=Amway Apac Product Catalog
+$classificationCatalog=amwayapacClassification
+
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$clAttrModifiers=system='$classificationCatalog',version='1.0',translator=de.hybris.platform.catalog.jalo.classification.impex.ClassificationAttributeTranslator
+$systemVersion=systemVersion(catalog(id[default='$classificationCatalog']),version[default='1.0'])
+$productResource=jar:com.amway.apac.initialdata.setup.AmwayApacInitialDataSystemSetup&/amwayapacinitialdata/import/productCatalogs/$productCatalog
+$jarResourceCms=jar:com.amway.apac.initialdata.setup.AmwayApacInitialDataSystemSetup&/amwayapacinitialdata/import/cockpits/cmscockpit
+$media=@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator]
+
+# Set product approval status to Approved only for those products that have prices.
+$approved=approvalstatus(code)[default='approved']
+$thumbnail=thumbnail(code, $catalogVersion)
+$categories=target(code, $catalogVersion)[unique=true]
+$classCatalogVersion=catalogversion(catalog(id[default='$classificationCatalog']),version[default='1.0'])[unique=true,default='$classificationCatalog:1.0']
+$classSystemVersion=systemVersion(catalog(id[default='$classificationCatalog']),version[default='1.0'])[unique=true]
+$class=classificationClass(ClassificationClass.code,$classCatalogVersion)[unique=true]
+$supercategories=source(code, $catalogVersion)[unique=true]
+$attribute=classificationAttribute(code,$classSystemVersion)[unique=true]
+$baseProduct=baseProduct(code,$catalogVersion)
+$image=image(code, $contentCV);
+$thumbnails=thumbnails(code, $catalogVersion)
+$detail=detail(code, $catalogVersion)
+$normal=normal(code, $catalogVersion)
+$others=others(code, $catalogVersion)
+$data_sheet=data_sheet(code, $catalogVersion)
+$medias=medias(code, $contentCV);
+$galleryImages=galleryImages(qualifier, $catalogVersion)
+$category=category(code, $productCV)
+$length=length(code,$catalogVersion)
+$width=width(code,$catalogVersion)
+$volume=volume(code,$catalogVersion)
+$height=height(code,$catalogVersion)
+$weight=weight(code,$catalogVersion)
+$dimensions=dimensions(code,$catalogVersion)
+$product=product(code,$catalogVersion)[unique=true]
+
+
+############### Solr configuration specific macros ###############
+
+$catalogVersions=catalogVersions(catalog(id),version);
+$serverConfigName=amwayamwayapacSolrServerConfig
+$indexConfigName=amwayamwayapacSolrIndexConfig
+$searchConfigName=amwayamwayapacPageSize
+$facetSearchConfigName=amwayapacIndex
+$facetSearchConfigDescription=APAC Solr Index
+$searchIndexNamePrefix=amwayapac
+$solrIndexedType=amwayapacProductType
+$indexBaseSite=amwayapac
+$indexLanguages=ja,en,de,zh
+$indexCurrencies=USD
+$name_en=name[lang=en]
+
+$contentCatalogSyncJobName=sync amwayapacContentCatalog:Staged->Online
+$sourceContentCV=sourceVersion(catalog(id[default=$contentCatalog]),version[default='Staged'])[unique=true]
+$targetContentCV=targetVersion(catalog(id[default=$contentCatalog]),version[default='Online'])[unique=true]
+
+$productCatalogSyncJobName=sync amwayapacProductCatalog:Staged->Online
+$sourceProductCV=sourceVersion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true]
+$targetProductCV=targetVersion(catalog(id[default=$productCatalog]),version[default='Online'])[unique=true]
+
+####################################################################

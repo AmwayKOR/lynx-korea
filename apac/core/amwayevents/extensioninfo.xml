@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
+
+   <extension abstractclassprefix="Generated" classprefix="Amwayevents" managername="AmwayeventsManager" managersuperclass="de.hybris.platform.jalo.extension.Extension" name="amwayevents" usemaven="false">
+      <!-- for more information on maven managed libraries please consult https://wiki.hybris.com/x/Nq8sDQ -->
+               
+      <requires-extension name="webservicescommons"/>
+      <requires-extension name="commerceservices"/>
+       
+      <coremodule generated="true" manager="com.amway.core.events.jalo.AmwayeventsManager" packageroot="com.amway.core.events"/>
+
+      <webmodule jspcompile="false" webroot="/amwayevents"/>
+
+   </extension>
+      
+</extensioninfo>

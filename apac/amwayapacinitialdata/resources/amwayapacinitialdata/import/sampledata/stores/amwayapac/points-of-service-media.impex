@@ -1,0 +1,25 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+# ImpEx for Importing Store / Point of Service Media
+
+#%impex.enableCodeExecution(true)
+#%impex.enableExternalSyntaxParsing(true)
+#%impex.includeExternalData(System.getProperty("HYBRIS_BIN_DIR") + "/custom/amwayapac/amwayapacinitialdata/resources/amwayapacinitialdata/import/coredata/common/macros-definition.impex", "UTF-8", 0)
+
+$storeName=amwayapacContentCatalog
+$medias=medias(code, $catalogVersion)
+$siteResource=jar:com.amway.apac.initialdata.setup.InitialDataSystemSetup&/amwayapacinitialdata/import/store/$storeName
+
+# Create Media
+INSERT_UPDATE Media;mediaFormat(qualifier);;code[unique=true];$media;mime[default='image/jpeg'];$catalogVersion;folder(qualifier)
+
+# Create Media Containers
+INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$catalogVersion

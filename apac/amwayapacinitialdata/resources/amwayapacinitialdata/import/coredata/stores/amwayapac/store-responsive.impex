@@ -1,0 +1,98 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+# 
+# Create the BaseStore
+#
+
+#%impex.enableCodeExecution(true)
+#%impex.enableExternalSyntaxParsing(true)
+#%impex.includeExternalData(System.getProperty("HYBRIS_BIN_DIR") + "/custom/amwayapac/amwayapacinitialdata/resources/amwayapacinitialdata/import/coredata/common/macros-definition.impex", "UTF-8", 0)
+
+
+INSERT_UPDATE PromotionGroup;Identifier[unique=true];
+;$promoGrp;
+
+# Base Store
+INSERT_UPDATE BaseStore;uid[unique=true];catalogs(id);currencies(isocode);net;taxGroup(code);storelocatorDistanceUnit(code);defaultCurrency(isocode);languages(isocode);defaultLanguage(isocode);deliveryCountries(isocode);submitOrderProcessCode;pickupInStoreMode(code);customerAllowedToIgnoreSuggestions;paymentProvider;checkoutFlowGroup;
+;$storeUid;$productCatalog,$classificationCatalog;$currencies;$net;jp-taxes;km;$defaultCurrency;$languages;$defaultLanguage;$deliveryCountries;$orderProcessCode;$pickupInStoreMode;$customerAllowedToIgnoreSuggestions;$paymentProvider;$checkoutFlowGroup;
+
+INSERT_UPDATE BaseStore2DeliveryModeRel;source(uid)[unique=true];target(code)[unique=true]
+;$storeUid;premium-net
+;$storeUid;standard-net
+;$storeUid;premium-gross
+;$storeUid;standard-gross
+;$storeUid;pickup
+;$storeUid;free-standard-shipping
+
+UPDATE BaseStore;uid[unique=true];warehouses(code)
+;$storeUid;01;
+
+
+
+INSERT_UPDATE AmwayAccountClassification;classification(code);code[unique=true]                ;qualificationLevel(code)
+                                        ;NORMAL_ABO          ;3PercentAndAbove                 ;QualificationLevelTypeEnum_203
+                                        ;NORMAL_ABO          ;6PercentAndAbove                 ;QualificationLevelTypeEnum_206
+                                        ;NORMAL_ABO          ;9PercentAndAbove                 ;QualificationLevelTypeEnum_209
+                                        ;NORMAL_ABO          ;12PercentAndAbove                ;QualificationLevelTypeEnum_212
+                                        ;NORMAL_ABO          ;15PercentAndAbove                ;QualificationLevelTypeEnum_215
+                                        ;NORMAL_ABO          ;18PercentAndAbove                ;QualificationLevelTypeEnum_218
+                                        ;NORMAL_ABO          ;21PercentAndAbove                ;QualificationLevelTypeEnum_221
+                                        ;NORMAL_ABO          ;23PercentAndAbove                ;QualificationLevelTypeEnum_223
+                                        ;NORMAL_ABO          ;SilverSponsorAndAbove            ;QualificationLevelTypeEnum_305
+                                        ;NORMAL_ABO          ;SilverAndAbove                   ;QualificationLevelTypeEnum_310
+                                        ;NORMAL_ABO          ;GoldAndAbove                     ;QualificationLevelTypeEnum_320
+                                        ;PLATINUM_AND_ABOVE    ;PlatinumAndAbove                 ;QualificationLevelTypeEnum_330
+                                        ;PLATINUM_AND_ABOVE    ;RubyAndAbove                     ;QualificationLevelTypeEnum_340
+                                        ;PLATINUM_AND_ABOVE    ;FoundersPlatinumAndAbove         ;QualificationLevelTypeEnum_342
+                                        ;PLATINUM_AND_ABOVE    ;FoundersRubyAndAbove             ;QualificationLevelTypeEnum_345
+                                        ;PLATINUM_AND_ABOVE    ;PearlAndAbove                    ;QualificationLevelTypeEnum_350
+                                        ;PLATINUM_AND_ABOVE    ;SapphireAndAbove                 ;QualificationLevelTypeEnum_365
+                                        ;PLATINUM_AND_ABOVE    ;FoundersSapphireAndAbove         ;QualificationLevelTypeEnum_367
+                                        ;PLATINUM_AND_ABOVE    ;EmeraldAndAbove                  ;QualificationLevelTypeEnum_370
+                                        ;PLATINUM_AND_ABOVE    ;FoundersEmeraldAndAbove          ;QualificationLevelTypeEnum_375
+                                        ;DIAMOND_AND_ABOVE     ;DiamondAndAbove                  ;QualificationLevelTypeEnum_380
+                                        ;DIAMOND_AND_ABOVE     ;FoundersDiamondAndAbove          ;QualificationLevelTypeEnum_385
+                                        ;DIAMOND_AND_ABOVE     ;ExecutiveDiamondAndAbove         ;QualificationLevelTypeEnum_390
+                                        ;DIAMOND_AND_ABOVE     ;FoundersExecutiveDiamondAndAbove ;QualificationLevelTypeEnum_395
+                                        ;DIAMOND_AND_ABOVE     ;DoubleDiamondAndAbove            ;QualificationLevelTypeEnum_400
+                                        ;DIAMOND_AND_ABOVE     ;FoundersDoubleDiamondAndAbove    ;QualificationLevelTypeEnum_405
+                                        ;DIAMOND_AND_ABOVE     ;TripleDiamondAndAbove            ;QualificationLevelTypeEnum_410
+                                        ;DIAMOND_AND_ABOVE     ;FoundersTripleDiamondAndAbove    ;QualificationLevelTypeEnum_415
+                                        ;DIAMOND_AND_ABOVE     ;CrownAndAbove                    ;QualificationLevelTypeEnum_420
+                                        ;DIAMOND_AND_ABOVE     ;FoundersCrownAndAbove            ;QualificationLevelTypeEnum_425
+                                        ;DIAMOND_AND_ABOVE     ;CrownAmbassadorAndAbove          ;QualificationLevelTypeEnum_430
+                                        ;DIAMOND_AND_ABOVE     ;FoundersCrownAmbassadorAndAbove  ;QualificationLevelTypeEnum_435
+                                        ;DIAMOND_AND_ABOVE     ;FCA40AndAbove                    ;QualificationLevelTypeEnum_440
+                                        ;DIAMOND_AND_ABOVE     ;FCA45AndAbove                    ;QualificationLevelTypeEnum_445
+                                        ;DIAMOND_AND_ABOVE     ;FCA50AndAbove                    ;QualificationLevelTypeEnum_450
+                                        ;DIAMOND_AND_ABOVE     ;FCA55AndAbove                    ;QualificationLevelTypeEnum_455
+                                        ;DIAMOND_AND_ABOVE     ;FCA60AndAbove                    ;QualificationLevelTypeEnum_460
+                                        ;DIAMOND_AND_ABOVE     ;FCA65AndAbove                    ;QualificationLevelTypeEnum_465
+                                        ;DIAMOND_AND_ABOVE     ;FCA70AndAbove                    ;QualificationLevelTypeEnum_470
+
+                                        
+INSERT_UPDATE Customer;uid[unique=true]    ;customerId  ;password   ;name        ;accounts(code)
+;testuser            ;testuser    ;1234   ;"Test User" ;testuser
+
+INSERT_UPDATE AmwayAccount;code[unique=true]     ;businessNature(code)    ;primaryParty(uid);name       ;userPriceGroup(code)     ;registeredAddress(&addRef);level(&businessLevelRef)
+                          ;testuser              ;"AmwayBusinessNature_1" ;testuser         ;"Test User";AmwayDefaultABOPriceGroup;testuserAdd               ;testUserQual
+
+INSERT_UPDATE Address;owner(Customer.uid)[unique=true];country(isocode);postalcode;firstname;lastname;streetname;streetnumber;shippingAddress;billingAddress;&addRef
+;testuser;US;151001;TestFirstName;TestLastName;TestStreetName;TestStreetNumber;true;true;testuserAdd
+
+
+INSERT_UPDATE AmwayBusinessLevel;qualificationLevel(code)[unique=true];&businessLevelRef
+;QualificationLevelTypeEnum_340;testUserQual
+
+# Remove first section once platform moved back to singular scop and registeredRedirectUri
+INSERT_UPDATE OAuthClientDetails;clientId[unique=true];resourceIds;scope;authorizedGrantTypes;authorities;clientSecret;registeredRedirectUri
+;apaccore;hybris;basic;implicit,client_credentials,password;ROLE_CLIENT;secret;https://hybrisqa.preprod.apac.amway.net:9002/oauth2_implicit_callback;
+;apaccore;hybris;basic;implicit,client_credentials,password;ROLE_CLIENT;secret;https://api-ts.amwayglobal.com/rest;

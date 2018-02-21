@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		   http://www.springframework.org/schema/beans/spring-beans.xsd
+		   http://www.springframework.org/schema/util
+		   http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<bean id="losSponsorValidationInputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.glos.dataobject.LosSponsorValidation" />
+		<property name="populators">
+			<list>
+				<ref bean="losSponsorValidationInputPopulator" />
+			</list>
+		</property>
+	</bean>
+	<bean id="losSponsorValidationInputPopulator"
+		class="com.amway.integration.cis.los.populators.LosSponsorValidationInputPopulator"></bean>
+
+	<bean id="losSponsorValidationOutputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.core.dms.data.LosSponsorValidationResultData" />
+		<property name="populators">
+			<list>
+				<ref bean="losSponsorValidationOutputReversePopulator" />
+			</list>
+		</property>
+	</bean>
+	<bean id="losSponsorValidationOutputReversePopulator"
+		class="com.amway.integration.cis.los.populators.LosSponsorValidationOutputReversePopulator"></bean>
+
+	<alias alias="sponsorValidationService" name="defaultSponsorValidationService" />
+	<bean id="defaultSponsorValidationService"
+		class="com.amway.integration.cis.los.sponsorvalidationservice.impl.DefaultSponsorValidationSrevice" parent="abstractLosService">
+		<property name="inputConverter" ref="losSponsorValidationInputConverter" />
+		<property name="outputConverter" ref="losSponsorValidationOutputConverter" />
+		<property name="urlPath" value="${cis.client.los.sponsorvalidationservice.urlPath}"/>
+	</bean>
+
+	<bean id="mockSponsorValidationSrevice"
+		class="com.amway.integration.cis.los.sponsorvalidationservice.mock.impl.MockSponsorValidationSrevice">
+		<property name="inputConverter" ref="losSponsorValidationInputConverter" />
+		<property name="outputConverter" ref="losSponsorValidationOutputConverter" />
+		<property name="hystrixCommandConfig" ref="losCommandConfig" />
+		<property name="ondemandHystrixCommandFactory" ref="ondemandHystrixCommandFactory" />
+		<property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
+		<property name="serviceAvailCode" value="#{configurationService.configuration.getProperty('amwaylos.availablity.code')}"/>
+	</bean>
+<!--
+	<bean id="sponsorValidationServiceFactory" parent="abstractMockFactory">
+		<property name="mockInterface"
+			value="com.amway.core.los.service.LosService" />
+		<property name="mockMode"
+			value="${cis.client.los.sponsorvalidationservice.mock}" />
+		<lookup-method name="getDefaultObject" bean="defaultSponsorValidationService" />
+		<property name="customMock" ref="mockSponsorValidationSrevice"/>
+			<!- - <bean class="com.amway.integration.cis.los.sponsorvalidationservice.mock.impl.MockSponsorValidationSrevice"autowire-candidate="false" />
+		</property> - ->
+	</bean>
+-->
+
+
+</beans>

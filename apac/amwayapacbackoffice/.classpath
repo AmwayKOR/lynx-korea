@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="backoffice/src"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="backoffice/testsrc"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/amwayapaccore"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/backoffice"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/platformbackoffice"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/ruleenginebackoffice"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/ruleengineservices"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/platform"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

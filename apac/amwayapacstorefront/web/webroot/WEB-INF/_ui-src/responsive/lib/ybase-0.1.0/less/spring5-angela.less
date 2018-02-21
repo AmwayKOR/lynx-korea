@@ -1,0 +1,1624 @@
+@import 'main.less';
+
+//Auto Renewal
+.auto-renewal{
+  .ditto-schedule-table-content{
+    .ditto-schedule-table{
+      .ditto-field-name{
+        width:10%;
+      }
+    }
+  }
+  .bonus-payment-content{
+    .bonus-payment-wrapper{
+      border-bottom:@none;
+      .auto-renewal-signed-message{
+        .stock{
+          .green{
+            padding-left:0;
+          }
+        }
+      }
+      .bonus-payment__title{
+        img{
+          position: absolute;
+          top: 35px;
+          left: -30px;
+          margin-top:0;
+          margin-right:0;
+        }
+      }
+      .bonus-payment__description{
+        width:80%;
+      }
+      .shipping-delivery-ship{
+        border-bottom:none;
+        .shipping-delivery-setup-title{
+          color:@mainColor;
+        }
+        .panel{
+          -webkit-box-shadow: initial;
+          box-shadow: initial;
+          label{
+            padding-top:0;
+            text-transform: initial;
+          }
+        }
+      }
+      .auto-renewal-fees{
+        padding-bottom: 45px;
+        .ditto-sorting-form{
+          button{
+            background-color: transparent;
+            min-width: 0;
+          }
+        }
+        .ditto-schedule-table-content{
+          .new-table-block-wrapper{
+            padding-top:0;
+          }
+          .ditto-schedule-table{
+            thead{
+              tr{
+                .ditto-field-name{
+                  width:10%;
+                }
+                & th:nth-child(2){
+                  width:40%;
+                }
+                & th:nth-child(3){
+                  width:40%;
+                }
+              }
+            }
+            tbody{
+              tr{
+                .ditto-field-name{
+                  padding-left:40px;
+                  ._checkbox-element-global-span{
+                    &:before{
+                      left:2px;
+                      font-size: 12px;
+                      font-weight:100;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      .auto-renewal-fees-signed{
+        padding-top:20px;
+      }
+      .select-payment-method{
+        .billing-shipping{
+          .accordion-billing-shipping{
+            .panel{
+              border-bottom: none;
+              .add-new-payment-info{
+                padding-bottom:0!important;
+              }
+              &:first-child{
+                border-top:none;
+              }
+              .panel-collapse{
+                padding:0;
+                .payment-info-container{
+                  .row{
+                    .block-right{
+                      &.active{
+                        padding-top:15px;
+                      .button-block{
+                        .payment-selected {
+                          display: @block;
+                        }
+                        .btn-primary{
+                          display: @none;
+                        }
+                      }
+                      }
+                      >div{
+                        vertical-align: middle;
+                      }
+                      .expires-message-warpper{
+                        .expires-label{
+                          color: @blue_1;
+                          font-weight:@weight600;
+                          margin-right: 10px;
+                          text-transform: uppercase;
+                        }
+                      }
+                      .button-block{
+                        .payment-selected{
+                          display: @none;
+                          color:@green;
+                          font-weight:@weight600;
+                          width: 132px;
+                          float: right;
+                          text-align: center;
+                          .payment-selected-icon{
+                            padding-right: 5px;
+                            &:before{
+                              font-family: 'AmwayIcons' !important;
+                              speak: none;
+                              font-style: normal;
+                              font-weight: normal;
+                              font-variant: normal;
+                              text-transform: none;
+                              line-height: 1;
+                              -webkit-font-smoothing: antialiased;
+                              -moz-osx-font-smoothing: grayscale;
+                              font-size: 8px;
+                              content: "\e909";
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+                .payment-selected{
+                  .account-cards{
+                    border-bottom:1px solid @gray_8!important;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      .auto-renewal-agreement{
+        .auto-renewal-agreement-text{
+          width:80%;
+          height: 200px;
+          overflow-y: scroll;
+          border: 1px solid @gray_8;
+          padding: 0 10px;
+        }
+        label{
+          text-transform: inherit;
+          color:@mainColor;
+          padding-top:40px;
+          ._checkbox-element-global-span{
+            &:before{
+              left:2px;
+              font-size: 12px;
+              font-weight:100;
+            }
+          }
+        }
+      }
+      .auto-renewal-actions{
+        margin-top: 20px;
+        .btn-blue-white{
+          font-weight: 100;
+          background-color:@blue_1;
+          color: @white;
+          font-size: 16px;
+          padding: 10px 30px;
+          margin-right:20px;
+          &:hover{
+            background-color: @white;
+            color: @blue_1;
+            border:2px solid @blue_1;
+          }
+        }
+      }
+    }
+  }
+}
+@media(max-width:768px){
+  .auto-renewal {
+    .bonus-payment-content {
+      .bonus-payment-wrapper {
+        .bonus-payment__title{
+          img{
+            top: 27px;
+          }
+        }
+        .bonus-payment__description{
+          width:100%;
+        }
+        .select-payment-method {
+          .billing-shipping {
+            .accordion-billing-shipping {
+              .panel {
+                .panel-collapse {
+                  .payment-info-container {
+                    .row {
+                      .card-info-block {
+                        .card-image {
+                          float: right;
+                        }
+                        .card-code{
+                          display: block;
+                        }
+                      }
+                      .block-right {
+                        .card-info {
+                          display: block;
+                        }
+                        .button-block {
+                          float: left;
+                          padding-top: 20px;
+                          .payment-selected {
+                            text-align: left;
+                          }
+                        }
+                        &.active{
+                          padding-top:0;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        .auto-renewal-agreement {
+          .auto-renewal-agreement-text {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}
+
+//message center
+#message-center {
+  .message-title {
+    padding-bottom: 35px;
+    div {
+      display: inline-block;
+      &:first-child {
+        float: left;
+      }
+      &:last-child {
+        float: right;
+      }
+      .line {
+        padding: 0 10px;
+      }
+    }
+  }
+  .message-center-list {
+    .billing-shipping {
+      .accordion-billing-shipping {
+        .panel {
+          border-top: none;
+          border-bottom:none;
+          &:last-child{
+            border-bottom:1px solid @gray_8;
+          }
+          .panel-collapse {
+            padding: 0;
+            .card-info-block {
+              padding-top: 0;
+              .card-info {
+                .card-data {
+                  .expiration-date {
+                    display: block;
+                  }
+                }
+              }
+            }
+            .block-right {
+              text-align: right;
+              .product-stock {
+                padding-top: 12px;
+                .product-availability {
+                  text-transform: uppercase;
+                  > span {
+                    padding-left: 0;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .account-orderhistory-pagination{
+      .text-center{
+        .btn{
+          text-transform: inherit;
+        }
+        .icon-arrow-dropdown{
+          vertical-align:baseline;
+        }
+      }
+    }
+  }
+
+  //pop common style
+  .message-center-pop{
+    &.bonus-payment-method{
+      &#colorbox {
+        top: 0!important;
+        left: 0!important;
+        width: 100%!important;
+        height: 100%!important;
+        #cboxWrapper {
+          height: 100%;
+          #cboxContent{
+            height:100%;
+            #cboxLoadedContent{
+              max-height: calc(100vh);
+              max-width: 1200px;
+              margin: 0 auto;
+              position: relative;
+              padding-top: 60px;
+              .message-center-pop-content{
+                padding: 0 45px 30px;
+                margin-bottom: 65px;
+                @media(max-width:900px) {
+                  padding: 0 15px 30px;
+                }
+                #message-center-list-pop1,#message-center-list-pop2{
+                  .billing-shipping{
+                    .accordion-billing-shipping{
+                      .panel{
+                        #paymentInformationBody.panel-collapse{
+                          .account-list{
+                            .account-cards{
+                              border-left:none;
+                              border-right:none;
+                              .card-info-block{
+                                padding-left:0;
+                                .panel-title-text{
+                                  font-size:24px;
+                                  color:@blue_1;
+                                  text-transform: uppercase;
+                                }
+                              }
+                              .block-right{
+                                padding-right:0;
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+          #cboxClose{
+            right:0;
+            top: 10px;
+            padding-right: 45px;
+            .modal-close-icon{
+              color:inherit!important;
+            }
+          }
+        }
+      }
+
+      .line{
+        border-top:1px solid @gray_8;
+        margin:40px 0;
+      }
+      .message-center-pop1-bottom{
+        text-align: center;
+        position: relative;
+        .next{
+          float: right;
+          position: absolute;
+          top: -12px;
+          right: 0;
+          width:98px;
+        }
+        .previews{
+          float: left;
+          position: absolute;
+          top: -12px;
+          left: 0;
+        }
+      }
+    }
+  }
+  //pop1 style
+  .message-center-pop1{
+    &.bonus-payment-method{
+      #cboxLoadedContent{
+        margin-top:60px;
+        .message-center-pop-rule{
+          font-size: 16px;
+          p{
+            margin-bottom:20px;
+          }
+        }
+        .message-center-pop-time{
+          font-size: 16px;
+          margin-bottom: 20px;
+        }
+        .message-center-pop-invate{
+          font-size:16px;
+        }
+      }
+    }
+  }
+
+  //pop style2
+  .message-center-pop2{
+    .video-preview{
+      .video-preview__img{
+        min-height:450px;
+      }
+    }
+    .amway-suggest{
+      border-top:none;
+      margin-bottom:40px;
+      .amway-suggest__title{
+        margin-bottom:20px;
+        margin-top:40px;
+      }
+      .pop2-best-product{
+        font-size: 16px;
+        text-align: center;
+        color:@mainColor;
+        font-weight: 100;
+        margin-bottom:30px;
+      }
+      .owl-theme{
+        .owl-controls{
+          .owl-nav{
+            .owl-prev{
+              left:-20px;
+            }
+            .owl-next {
+              right: -20px;
+            }
+          }
+        }
+      }
+    }
+    .category-success-story{
+      .success-story__item{
+        &:first-child{
+          padding-left:0;
+        }
+        &:last-child{
+          padding-right:0;
+        }
+      }
+    }
+    #cboxClose{
+      //right:15px!important;
+    }
+  }
+}
+@media (max-width: 768px) {
+  #message-center {
+    .message-title {
+      padding-bottom: 0;
+      div {
+        display: block;
+        &:first-child {
+          float: none;
+          padding-bottom: 20px;
+        }
+        &:last-child {
+          float: none;
+        }
+        .line {
+          padding: 0 10px;
+        }
+      }
+    }
+    .message-center-list {
+      .billing-shipping {
+        .accordion-billing-shipping {
+          .panel-collapse {
+            .block-right {
+              text-align: left!important;
+              .product-stock {
+                padding-top:0!important;
+              }
+            }
+          }
+        }
+      }
+    }
+    .message-center-pop{
+      #cboxWrapper{
+        #cboxContent{
+          #cboxLoadedContent{
+            padding-top:40px!important;
+            .billing-shipping{
+              .accordion-billing-shipping{
+                padding:20px 0;
+              }
+            }
+            .category-success-story{
+              margin-left:0;
+              margin-right:0;
+            }
+            #cboxClose{
+              right:15px!important;
+              padding-right:0!important;
+              top:6px!important;
+            }
+          }
+        }
+      }
+    }
+
+  }
+}
+@media(max-width: 1030px){
+  .message-center-pop2{
+    .amway-suggest__list {
+      width:920px;
+      margin: 0 auto;
+    }
+  }
+}
+@media(max-width: 768px) {
+  .message-center-pop2 {
+    .amway-suggest__list {
+      width: 700px;
+      margin: 0 auto;
+    }
+  }
+}
+@media(max-width: 640px) {
+  .message-center-pop2 {
+    .amway-suggest__list {
+      width: 300px;
+      margin: 0 auto;
+    }
+  }
+}
+
+//Customer Sales History
+#customer-sales-history{
+  h1.page-title{
+    padding:0 12px;
+  }
+  .account-section-content{
+    .order-history-box{
+      display: inherit;
+      .account-orderhistory{
+        .navigation-tabs-container{
+          .tab-content{
+            .order-history-search-wrapper{
+              .form-wrapper{
+                .view{
+                  color: #002f5f;
+                  font-weight: 600;
+                  padding-right: 10px;
+                }
+                .js-automation-order-history-sort-apply{
+                  position: relative;
+                  top:-1px;
+                }
+                .js-automation-order-history-search-btn {
+                  padding: 6px 25px;
+                  height: 40px!important;
+                  position: relative;
+                  top: -2px;
+                  border:2px solid @blue_1;
+                }
+                #searchData{
+                  width:270px;
+                }
+              }
+            }
+            &.tabs-content-blocks{
+              .ditto-schedule-table{
+                .have-star{
+                  font-family: 'Glyphicons Halflings';
+                  font-style: normal;
+                  font-weight: normal;
+                  font-variant: normal;
+                  text-transform: none;
+                  color: #e11e45;
+                  font-size: 12px;
+                  position: relative;
+                  top: -2px;
+                  left: 8px;
+                  &:after{
+                    content: "\e006";
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .ditto-schedule-table{
+    tbody{
+      tr{
+        td{
+          vertical-align: middle;
+        }
+      }
+    }
+  }
+  .amway-theme{
+    .prw-nav{
+      .prw-nav-container{
+        display: inherit;
+      }
+    }
+  }
+}
+@media(max-width: 768px){
+  #customer-sales-history{
+    .breadcrumb{
+      padding-right:0;
+    }
+    #searchData{
+      width: 100%!important;
+    }
+    .prw-jump-to-button{
+      padding:9px 10px;
+    }
+  }
+}
+
+// Customer Sales History Searched
+#customer-sales-history-searched{
+  h1.page-title{
+    display: inline-block;
+    width: 100%;
+    .message-title{
+      font-size: 16px;
+      float: right;
+      position: relative;
+      top:22px;
+      .line{
+        color:@gray_2;
+      }
+      a{
+        padding: 0 10px;
+        text-transform: initial;
+        font-family: SourceSansPro;
+        font-weight: 600!important;
+      }
+    }
+  }
+  .account-section-content {
+    .order-history-box {
+      display: inherit;
+      .customer-sales-history-searched-content{
+        padding-left:12px;
+        .customer-PV{
+          span{
+            &:first-child{
+              font-size: 24px;
+              span{
+                color:@blue_1;
+              }
+            }
+            &:nth-child(2){
+              &.line{
+                padding:0 10px;
+              }
+            }
+            &:nth-child(3){
+              font-style: italic;
+            }
+          }
+          .qualified-text{
+            font-size: 16px;
+          }
+        }
+      }
+    }
+    &.order-history-account-section-content{
+      .message-center-middle-content{
+        border-top:1px solid @gray_8;
+        padding:30px 0 50px 0;
+        p{
+          font-size:16px;
+          padding-top:30px;
+          margin-bottom:0;
+        }
+        .row{
+          padding-top:40px;
+          .form-group{
+            label{
+              width: 30%;
+              margin-right: 10px;
+              font-size: 16px;
+              line-height: 16px;
+              color: #002f5f;
+              span{
+                font-style: italic;
+                font-weight: 100;
+                padding-left: 10px;
+                text-transform: initial;
+              }
+            }
+            .form-control{
+              width:38%;
+              display: inline-block;
+              height: auto;
+              max-height: 38px;
+            }
+            &.has-date{
+              label{
+                float: left;
+                position: relative;
+                top: 10px;
+              }
+              .box-date-select{
+                width:38%;
+                display: inline-block;
+                height: auto;
+                max-height: 38px;
+                position: relative;
+                .form-control{
+                  width:100%;
+                  z-index: 99;
+                  background-color: transparent;
+                  padding: 6px 0 6px 12px;
+                  position: relative;
+                  cursor: pointer;
+                  font-size:16px;
+                }
+                .calendar-icon{
+                  font-family: 'Glyphicons Halflings';
+                  font-style: normal;
+                  font-weight: normal;
+                  font-variant: normal;
+                  text-transform: none;
+                  color:@blue_2;
+                  position: absolute;
+                  right: 8px;
+                  top: 8px;
+                  z-index:98;
+                  &:before{
+                    content: "\e109";
+                  }
+                }
+              }
+            }
+            .search-customer{
+              padding-left:20px;
+              font-size: 16px;
+              font-weight:600;
+            }
+          }
+        }
+      }
+    }
+    &.inter-account-section{
+      padding-top:35px;
+    }
+  }
+  .datepicker{
+    .datepicker-days{
+      .table-condensed{
+        thead{
+          tr{
+            th{
+              background-color: @white;
+              color:@mainColor;
+              font-size: 16px;
+            }
+            .prev{
+              color:@blue_2;
+              font-size: 16px;
+              cursor: pointer;
+            }
+            .next{
+              color:@blue_2;
+              font-size: 16px;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+  }
+  .datepicker-dropdown{
+    z-index: 100!important;
+  }
+  .headline-text{
+    text-transform: uppercase;
+    font-size: 24px;
+    font-weight: 600;
+  }
+  .have-star{
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    color: #e11e45;
+    font-size: 12px;
+    position: relative;
+    top: -2px;
+    left: 8px;
+    &:after{
+      content: "\e006";
+    }
+  }
+  .ditto-schedule-table{
+    tbody{
+      tr{
+        td{
+          vertical-align: middle;
+        }
+      }
+    }
+  }
+  .amway-theme{
+    .prw-nav{
+      .prw-nav-container{
+        display: inherit;
+      }
+    }
+  }
+}
+@media(max-width: 768px){
+  #customer-sales-history-searched {
+    .breadcrumb{
+      padding-right:0;
+    }
+    .prw-jump-to-button{
+      padding:9px 10px;
+    }
+    .account-section-content {
+      .order-history-box {
+        .customer-sales-history-searched-content{
+          .customer-PV{
+            .m-block{
+                font-size: 24px;
+                display: block;
+            }
+          }
+        }
+      }
+      &.order-history-account-section-content{
+        .message-center-middle-content{
+          p{
+            padding-top:20px;
+            margin-bottom:0;
+          }
+          .row{
+            .form-group{
+              label{
+                width:100%;
+              }
+              .form-control{
+                width:100%;
+                line-height: 16px;
+              }
+              &.has-date{
+                label{
+                  float: left;
+                  position: inherit;
+                  top: 10px;
+                }
+                .box-date-select{
+                  width:100%;
+                  .form-control{
+                    padding:10px 0 10px 15px;
+                  }
+                  .calendar-icon{
+                    font-size: 16px;
+                  }
+                }
+              }
+              .search-customer{
+                padding-left:0;
+                padding-top:5px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+//KPI Tracking
+#key-indicators{
+  .prw-nav-container{
+    display: inherit;
+  }
+}
+.kpi-tracking{
+  .order-history-box{
+    display: inherit;
+  }
+  .customer-sales-history-searched-content {
+    padding-left: 12px;
+  }
+  .inter-account-section{
+    padding-top:40px!important;
+  }
+  .key-indicator-description{
+    width:68%;
+    font-size: 16px;
+  }
+  .chart-block{
+    border-bottom: 1px solid @gray_8;
+    margin-bottom: 40px;
+    padding-bottom: 40px;
+    .chart-pic{
+      .date-cell{
+        color:@gray_6;
+        padding: 10px 0 0;
+      }
+      img{
+        width:100%;
+      }
+    }
+    .chart-select{
+      padding-top:40px;
+      .chart-select-title{
+        font-size: 16px;
+        color:@blue_1;
+        text-transform: uppercase;
+        font-weight:600;
+        display: block;
+        padding-bottom:10px;
+      }
+      .chart-select-item-block{
+        .chart-select-item{
+          .checkbox-element-wrapper{
+            margin-bottom: 0;
+            font-weight: 100;
+            text-transform: inherit;
+            border:1px solid @gray_8;
+            width: 100%;
+            padding: 5px 8px;
+            font-size:16px;
+            ._checkbox-element-global-span{
+              &:before{
+                left:2px;
+                font-size: 12px;
+                font-weight:100;
+              }
+            }
+          }
+          &.active{
+            &:first-child{
+              .checkbox-element-wrapper{
+                border:1px solid @green;
+                ._checkbox-element-global-span{
+                  background: @green;
+                  border-color: @green;
+                }
+              }
+            }
+            &:nth-child(2){
+              .checkbox-element-wrapper{
+                border:1px solid @blue_2;
+                ._checkbox-element-global-span{
+                  background: @blue_2;
+                  border-color: @blue_2;
+                }
+              }
+            }
+            &:nth-child(3){
+              .checkbox-element-wrapper{
+                border:1px solid #721471;
+                ._checkbox-element-global-span{
+                  background: #721471;
+                  border-color: #721471;
+                }
+              }
+            }
+            &:nth-child(4){
+              .checkbox-element-wrapper{
+                border:1px solid @gray_5;
+                ._checkbox-element-global-span{
+                  background: @gray_5;
+                  border-color:@gray_5;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .performance-tab{
+    border: 1px solid @gray_8;
+    padding: 30px 20px;
+    .amway-theme{
+      .ditto-nav-tabs-wrap{
+        margin-bottom:0;
+      }
+      .performance-tab-title{
+        text-transform: uppercase;
+        color:@blue_1;
+        font-size: 16px;
+        font-weight:600;
+        position: absolute;
+      }
+      .tabs-toggles{
+        display: flex;
+        display: -webkit-flex;
+        justify-content: flex-end;
+        .tab-toggle-wrap{
+          .tab-toggle{
+            padding: 1.1875em 3.875em;
+          }
+        }
+      }
+      .new-table-block-wrapper{
+        padding-top:0;
+        table{
+          thead{
+            tr{
+              background-color: @white;
+              border-top:none;
+              .ditto-header-button{
+                font-size:16px;
+                cursor: unset;
+              }
+              .ditto-field-name{
+                padding: 25px 10px 25px 0;
+                width: 100%;
+              }
+            }
+          }
+          tbody{
+            tr{
+              background-color: @white;
+              border-bottom:1px solid @gray_8;
+              .green{
+                color: @green;
+                .green-icon{
+                  width: 0;
+                  height: 0;
+                  border-left: 8px solid transparent;
+                  border-right: 8px solid transparent;
+                  border-bottom: 16px solid #20883e;
+                  display: inline-block;
+                  position: relative;
+                  top: 2px;
+                  left: 10px;
+                }
+              }
+              .red{
+                color:@red;
+                .red-icon{
+                  width: 0;
+                  height: 0;
+                  border-left: 8px solid transparent;
+                  border-right: 8px solid transparent;
+                  border-top: 16px solid @red;
+                  display: inline-block;
+                  position: relative;
+                  top: 2px;
+                  left: 10px;
+                }
+              }
+              .ditto-field-name{
+                color:@blue_1;
+              }
+              td{
+                &:last-child{
+                  text-align: right;
+                  position: relative;
+                  right:70px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media(max-width: 768px){
+  .kpi-tracking {
+    .amway-theme{
+      .prw-nav{
+        margin-bottom:0;
+        .prw-nav-container{
+          display:inherit;
+        }
+      }
+    }
+    .customer-sales-history-searched-content {
+      .key-indicator-description {
+        width: 100%;
+      }
+    }
+    .chart-select-item-block{
+      .chart-select-item{
+        padding:5px 0;
+      }
+    }
+    .performance-tab{
+      .amway-theme{
+        .ditto-nav-tabs-wrap{
+          margin-bottom:0!important;
+        }
+        .performance-tab-title{
+          position: relative;
+          padding-bottom: 20px;
+        }
+        .tabs-toggles{
+          .tab-toggle-wrap{
+            width:50%;
+            .tab-toggle{
+              width:100%;
+              padding: 20px!important;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+//PV Inquiry
+#PV-Inquiry{
+  .prw-nav-container{
+    display: inherit;
+  }
+  #cboxClose{
+    .modal-close-icon{
+      color:inherit!important;
+    }
+  }
+  #cboxTitle{
+    height:60px;
+  }
+  .personal-pv-box{
+    width:74%;
+    left:13%;
+    #cboxTitle{
+      .headline{
+        padding-left:12px;
+      }
+    }
+    #cboxLoadedContent{
+      margin-top: 135px;
+      .invoice-box-content-items{
+        padding:0;
+        .invoice-box-content-item-header{
+          background-color: @gray_9;
+          padding: 5px 22px;
+          text-transform: uppercase;
+          color:@blue_1;
+          font-size: 16px;
+          font-weight:100;
+        }
+        .invoice-box-content-item-body{
+          padding:20px 22px;
+          div{
+            padding:2px 0;
+            &:first-child{
+              font-size:16px;
+              font-weight:600;
+              padding-bottom: 10px;
+            }
+          }
+          &.last-item{
+            div{
+              font-weight:100;
+              span{
+                color:@blue_1;
+                text-transform: uppercase;
+                padding-right: 30px;
+                font-weight:500;
+                font-size:16px;
+              }
+            }
+          }
+          &.last-item{
+            div{
+              padding:5.5px 0;
+            }
+          }
+        }
+      }
+      .ditto-view-by-month-wrapper{
+        .ditto-list-colomn-wrapper{
+          .ditto-item-list{
+            .product-list-head{
+              div{
+                font-size:16px;
+                font-weight:100;
+              }
+              .head-item-title{
+                &.first-title{
+                  padding-left:22px!important;
+                }
+              }
+            }
+            .ditto-product-item-wrapper{
+              .product-details-wrapper{
+                .product-item-description {
+                  .item-name{
+                    color:@mainColor;
+                  }
+                }
+              }
+              .product-prop-wrapper{
+                padding-top:15px;
+                .product-prop-qty{
+                  color:@blue_1;
+                }
+                .prop-price-text{
+                  color:@blue_1;
+                }
+                .product-prop-text{
+                  padding-top:0;
+                }
+                label{
+                  font-size:16px;
+                }
+              }
+            }
+          }
+        }
+      }
+      .order-history-container{
+        .table-content-rows{
+          border:@none;
+          margin-top:0;
+          .table-row{
+            .row-element{
+              &:first-of-type{
+                padding:10px 0;
+              }
+            }
+            &.total-row{
+              .table-row-wrapper{
+                border-top:@none;
+                margin-top:0;
+                border-bottom: @none;
+              }
+            }
+          }
+          .table-row-wrapper{
+            border-bottom: 1px solid @gray_8;
+            margin-right:0;
+            padding-right:24px;
+            .row-element{
+              &:last-of-type{
+                padding:10px 0;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .downline-pv-box{
+    .headline{
+      font-size:30px!important;
+    }
+    #cboxLoadedContent.downline-box-content{
+      padding:0 40px!important;
+      width:auto!important;
+      .IBO-profile-top{
+        margin-bottom:100px;
+        .IBO-profile-left{
+          width:50%;
+          float: left;
+          img{
+            width:80px;
+          }
+          .user-name{
+            font-size:30px;
+            padding-left: 20px;
+            color:@blue_1;
+          }
+        }
+        .IBO-profile-right{
+          width:50%;
+          float: right;
+          height:80px;
+          line-height: 80px;
+          text-align: right;
+          .list-product{
+            img{
+              position: relative;
+              top:-2px;
+              width:14px;
+              margin-right: 5px;
+            }
+          }
+        }
+      }
+      .IBO-profile-middle{
+        border-top:1px solid @gray_8;
+      }
+      .IBO-profile-bottom{
+        background-color: @gray_9;
+        margin-left:-40px;
+        margin-right:-40px;
+        .invoice-box-content-items{
+          position: relative;
+          padding:20px 32px;
+          border-top: 1px solid @gray_8;
+          border-right:1px solid @gray_8;
+          .invoice-box-content-item-header{
+            font-size:16px;
+            color:@blue_1;
+            padding-bottom: 5px;
+            text-transform: uppercase;
+          }
+          .invoice-box-content-item-body{
+
+            div{
+              padding:2px 0;
+            }
+            img{
+              width:60px;
+              position: absolute;
+              top:20px;
+              right:38px;
+            }
+          }
+
+        }
+      }
+    }
+
+  }
+}
+.PV-inquiry{
+  .account-section-content{
+    .amway-theme{
+      .navigation-tabs-container{
+        position: relative;
+        .form-wrapper{
+          position: absolute;
+          right:0;
+          form{
+            padding-right:0;
+            text-align: right;
+            select{
+              min-width:0;
+              text-transform: initial;
+            }
+            .bonus-period{
+              text-transform: uppercase;
+              &:first-child{
+                color:@blue_1;
+                font-size:16px;
+                padding-right:10px;
+              }
+            }
+            button{
+              height: 40px!important;
+              position: relative;
+              top: -2px;
+              margin-left: 10px;
+            }
+          }
+        }
+        .ditto-schedule-table-content{
+          .ditto-schedule-table{
+            thead{
+              th{
+                padding-top:3px;
+              }
+              .ditto-field-name{
+                width:15%;
+                .ditto-header-button{
+                  min-width:152px;
+                }
+              }
+            }
+          }
+        }
+        #downLine-personal-PV{
+          .ditto-field-name{
+            width:30%;
+          }
+          tbody{
+            tr{
+              td{
+                img{
+                  width:40px;
+                  position: relative;
+                  top: -10px;
+                }
+                &.red{
+                  color:@red;
+                }
+              }
+            }
+          }
+          .sort-refine-bar{
+            margin-top:40px;
+            .form-group{
+              margin-bottom:0;
+              select.cart-detail__size{
+                min-width:0;
+              }
+              .btn-blue-white{
+                color:@white;
+                background-color: @blue_1;
+                border:2px solid @blue_1;
+                height: 40px!important;
+                padding: 0;
+                &:hover{
+                  color:@blue_1;
+                  background-color: @white;
+                  border:2px solid @blue_1;
+                }
+              }
+              label{
+                padding-top:0;
+              }
+            }
+            .pointer-icon{
+              height:40px;
+              line-height:40px;
+              text-align: right;
+              .list-product{
+                img{
+                  width:40px;
+                  position: relative;
+                  top:-2px;
+                }
+                .divider{
+                  padding-left:12px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media(max-width: 768px){
+  .PV-inquiry{
+    .account-section-content{
+      .amway-theme{
+        .navigation-tabs-container{
+          .form-wrapper{
+            position: relative;
+            margin-bottom:30px;
+            form{
+              padding-left:0;
+              text-align: left;
+              select{
+                margin-bottom:10px;
+                width:66%;
+                margin-right:10px;
+              }
+              .bonus-period{
+                &:first-child{
+                  color:@blue_1;
+                  font-size:16px;
+                  padding-right:10px;
+                  display: block;
+                  padding-bottom: 10px;
+                }
+              }
+              button{
+                top: -4px;
+                margin-left:0;
+              }
+            }
+          }
+        }
+      }
+    }
+    #downLine-personal-PV{
+      .sort-refine-bar{
+        select.cart-detail__size{
+          width:100%;
+        }
+        .pointer-icon{
+          height:auto!important;
+          padding-top:20px;
+          .list-product{
+            span{
+              display: block;
+              width: 100%;
+              text-align: left;
+            }
+          }
+        }
+      }
+      .new-table-block-wrapper{
+        padding-top:20px;
+      }
+    }
+  }
+  #PV-Inquiry{
+    .personal-pv-box{
+      width:90%;
+      left:5%;
+      #cboxLoadedContent{
+        margin-top:100px;
+        .table-content-rows{
+          margin-top:-20px!important;
+        }
+        .ditto-view-by-month-wrapper{
+          .ditto-list-colomn-wrapper{
+            .ditto-item-list{
+              .js-ditto-product-item{
+                &.first-item{
+                  .ditto-product-item-wrapper{
+                      border-top:1px solid @gray_7;
+                      padding-top:30px;
+                  }
+                }
+                .ditto-product-item-wrapper{
+                  .product-prop-wrapper{
+                    padding-top:0;
+                    .product-prop-price{
+                      width:100%;
+                      margin-top:0;
+                      .prop-price-text{
+                        line-height:24px;
+                      }
+                    }
+                    .visible-xs{
+                      &.visible-sm{
+                        display: inline-block!important;
+                      }
+                    }
+                    .amway-theme{
+                      float: right;
+                    }
+                    .product-prop-total{
+                      span{
+                        &:nth-child(2){
+                          line-height:24px;
+                        }
+                      }
+                    }
+                    .product-prop-pvbv{
+                      span{
+                        &:nth-child(2){
+                          line-height:24px;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        .order-history-container{
+          .table-content-rows{
+            .table-row{
+              .row-element{
+                &:first-of-type{
+                  padding:0;
+                }
+                &:last-of-type{
+                  padding:0;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .downline-pv-box,#cboxOverlay{
+      #cboxLoadedContent.downline-box-content{
+        .IBO-profile-top{
+          margin-bottom:150px;
+          .IBO-profile-left{
+            width:100%;
+          }
+          .IBO-profile-right{
+            width:100%;
+            float: left;
+            text-align:left;
+          }
+        }
+      }
+    }
+  }
+
+}

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <!-- Update Business nature  mock and actual service -->
+    <alias alias="updateBusinessNatureService" name="defaultAmwayUpdateBusinessNatureService" />
+    <bean id="defaultAmwayUpdateBusinessNatureService"
+          class="com.amway.amwaydms.businessnature.services.impl.DefaultUpdateBusinessNatureService"
+          parent="amwayAbstractDmsService">
+        <property name="inputConverter" ref="amwayBusinessNatureInputConverter" />
+        <property name="outputConverter" ref="amwayUpdateBusinessNatureOutputConverter" />
+        <property name="urlPath" value="${amwaydms.dms.url}" />
+    </bean>
+
+    <bean id="mockUpdateBusinessNatureService"
+          class="com.amway.amwaydms.common.mock.CommonMockService">
+        <property name="inputConverter" ref="amwayBusinessNatureInputConverter" />
+        <property name="outputConverter" ref="amwayUpdateBusinessNatureOutputConverter" />
+        <property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
+        <property name="charonClientConfigService" ref="amwayCharonClientConfigService" />
+    </bean>
+
+
+    <!-- Entries for Update Business nature converter and populator -->
+
+    <bean id="amwayBusinessNatureInputConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass"
+                  value="com.amway.amwaydms.model.BusinessNatureChangeRequest" />
+        <property name="populators">
+            <list>
+                <ref bean="amwayBusinessNatureInputPopulator" />
+            </list>
+        </property>
+    </bean>
+    <bean id="amwayBusinessNatureInputPopulator"
+          class="com.amway.amwaydms.populators.BusinessNatureInputPopulator">
+    </bean>
+
+    <bean id="amwayUpdateBusinessNatureOutputConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass"
+                  value="com.amway.core.data.CommonResponseFieldsData" />
+        <property name="populators">
+            <list>
+                <ref bean="amwayCommonResponsePopulator" />
+            </list>
+        </property>
+    </bean>
+
+
+</beans>

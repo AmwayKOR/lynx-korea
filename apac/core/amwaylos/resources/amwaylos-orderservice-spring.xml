@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ######### PUT DETAILS FOR SERVICE ###########
+###########PUT:  http://uslx135:5656/rest/v1/bonus/order ######-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		   http://www.springframework.org/schema/beans/spring-beans.xsd
+		   http://www.springframework.org/schema/util
+		   http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<bean id="losBonusOrderInputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.amway.integration.cis.los.pojo.TransactionGroup" />
+		<property name="populators">
+			<list>
+				<ref bean="losBonusOrderInputPopulator" />
+			</list>
+		</property>
+	</bean>
+	<bean id="losBonusOrderInputPopulator" class="com.amway.integration.cis.los.populators.LosBonusOrderInputPopulator"/>
+		
+	<bean id="losBonusOrderOutputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.amway.core.los.data.BonusOrderResultData" />
+		<property name="populators">
+			<list>
+				<ref bean="losBonusOrderOutputPopulator" />
+			</list>
+		</property>
+	</bean>
+	<bean id="losBonusOrderOutputPopulator" class="com.amway.integration.cis.los.populators.LosBonusOrderOutputPopulator"/>	
+
+	<alias alias="bonusOrderSubmitService" name="defaultBonusOrderSubmitService" />
+	<bean id="defaultBonusOrderSubmitService"
+		class="com.amway.integration.cis.los.order.service.DefaultLosOrderBonusService" parent="abstractLosOrderService">
+		<property name="inputConverter" ref="losBonusOrderInputConverter" />
+		<property name="outputConverter" ref="losBonusOrderOutputConverter" />
+		<property name="urlPath" value="${cis.client.los.bonusorderservice.urlPath}"/>
+	</bean>
+	<!--
+	<bean id="bonusOrderSubmitServiceFactory" parent="abstractMockFactory">
+		<property name="mockInterface"
+			value="com.amway.core.los.service.LosService" />
+		<property name="mockMode"
+			value="${cis.client.los.bonusorderservice.mock}" />
+		<lookup-method name="getDefaultObject" bean="defaultBonusOrderSubmitService" />
+		<property name="customMock" ref="mockOrderBonusService"/>
+			<!- - <bean
+				class="com.amway.integration.cis.los.orderbonusservice.mock.impl.MockOrderBonusService"
+				autowire-candidate="false" />
+		</property> - ->
+	</bean>
+-->
+	<!-- BonusStatementService -->
+	
+	<bean id="losBonusStatementInputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.amway.core.los.data.BonusStatementRequestData" />
+		<property name="populators">
+			<list>
+				<ref bean="losBonusStatementInputPopulator" />
+			</list>
+		</property>
+	</bean>
+	<bean id="losBonusStatementInputPopulator" class="com.amway.integration.cis.los.populators.LosBonusStatementInputPopulator"/>
+	
+	<bean id="losBonusStatementOutputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.amway.core.los.data.BonusOrderResultData" />
+		<property name="populators">
+			<list>
+				<ref bean="losBonusStatementOutputPopulator" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="losBonusStatementOutputPopulator" class="com.amway.integration.cis.los.populators.LosBonusStatementOutputPopulator"/>
+	
+	<alias alias="bonusStatementService" name="defaultBonusStatementService" />
+	<bean id="defaultBonusStatementService"
+		class="com.amway.integration.cis.los.order.service.DefaultLosBonusStatementService" parent="abstractLosOrderService">
+		<property name="inputConverter" ref="losBonusStatementInputConverter" />
+		<property name="outputConverter" ref="losBonusStatementOutputConverter" />
+		<property name="urlPath" value="${cis.client.los.bonusstatementservice.urlPath}"/>
+	</bean>
+
+	<bean id="mockLosBonusStatementService" class="com.amway.integration.cis.los.bonus.statement.mock.service.MockLosBonusStatementService">
+		<property name="inputConverter" ref="losBonusStatementInputConverter" />
+		<property name="outputConverter" ref="losBonusStatementOutputConverter" />
+		<property name="hystrixCommandConfig" ref="losCommandConfig" />
+		<property name="ondemandHystrixCommandFactory" ref="ondemandHystrixCommandFactory" />
+		<property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
+		<property name="serviceAvailCode" value="#{configurationService.configuration.getProperty('amwaylos.availablity.code')}"/>
+	</bean>
+	<!--
+	<bean id="bonusStatementServiceFactory" parent="abstractMockFactory">
+		<property name="mockInterface" value="com.amway.core.los.service.LosService" />
+		<property name="mockMode" value="${cis.client.los.orderperiodclosed.mock}" />
+		<lookup-method name="getDefaultObject" bean="defaultBonusStatementService" />
+		<property name="customMock" ref="mockLosBonusStatementService"/>
+	</bean>
+	-->
+	
+	<!-- order period closed  service-->
+	<bean id="losOrderPeriodInputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.amway.integration.cis.los.pojo.LosOrderPeriodRequest" />
+		<property name="populators">
+			<list>
+				<ref bean="losOrderPeriodInputPopulator" />
+			</list>
+		</property>
+	</bean>
+	<bean id="losOrderPeriodInputPopulator" class="com.amway.integration.cis.los.populators.LosOrderPeriodInputPopulator"/>
+	
+	
+	<bean id="losOrderPeriodClosedOutputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.amway.core.los.data.OrderPeriodCloseResultData" />
+		<property name="populators">
+			<list>
+				<ref bean="losOrderPeriodCloseOutputPopulator" />
+			</list>
+		</property>
+	</bean>
+	<bean id="losOrderPeriodCloseOutputPopulator" class="com.amway.integration.cis.los.populators.LosOrderPeriodCloseOutputPopulator"/>
+	
+	<alias alias="orderPeriodClosedService" name="defaultLosOrderPeriodCloseService" />
+	<bean id="defaultLosOrderPeriodCloseService"
+		class="com.amway.integration.cis.los.order.service.DefaultLosOrderPeriodCloseService" parent="abstractLosOrderService">
+		<property name="inputConverter" ref="losOrderPeriodInputConverter" />
+		<property name="outputConverter" ref="losOrderPeriodClosedOutputConverter" />
+		<property name="urlPath" value="${cis.client.los.orderperiodclosed.urlPath}"/>
+	</bean>
+
+	<bean id="mockOrderBonusService" class="com.amway.integration.cis.los.orderbonusservice.mock.impl.MockOrderBonusService">
+		<property name="inputConverter" ref="losBonusOrderInputConverter" />
+		<property name="outputConverter" ref="losBonusOrderOutputConverter" />
+		<property name="hystrixCommandConfig" ref="losCommandConfig" />
+		<property name="ondemandHystrixCommandFactory" ref="ondemandHystrixCommandFactory" />
+		<property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
+		<property name="serviceAvailCode" value="#{configurationService.configuration.getProperty('amwaylos.availablity.code')}"/>
+	</bean>	
+	
+	<bean id="mockOrderPeriodClosedService" class="com.amway.integration.cis.los.orderbonusservice.mock.impl.MockOrderPeriodClosedService">
+		<property name="inputConverter" ref="losOrderPeriodInputConverter" />
+		<property name="outputConverter" ref="losOrderPeriodClosedOutputConverter" />
+		<property name="hystrixCommandConfig" ref="losCommandConfig" />
+		<property name="ondemandHystrixCommandFactory" ref="ondemandHystrixCommandFactory" />
+		<property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
+		<property name="serviceAvailCode" value="#{configurationService.configuration.getProperty('amwaylos.availablity.code')}"/>
+	</bean>
+	<!--
+        <bean id="orderPeriodClosedServiceFactory" parent="abstractMockFactory">
+            <property name="mockInterface"
+                value="com.amway.core.los.service.LosService" />
+            <property name="mockMode"
+                value="${cis.client.los.orderperiodclosed.mock}" />
+            <lookup-method name="getDefaultObject" bean="defaultLosOrderPeriodCloseService" />
+            <property name="customMock" ref="mockOrderPeriodClosedService"/>
+                <!- - <bean
+                    class="com.amway.integration.cis.los.orderbonusservice.mock.impl.MockOrderPeriodClosedService"
+                    autowire-candidate="false" />
+            </property> - ->
+        </bean>
+        -->
+</beans>

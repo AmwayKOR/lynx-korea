@@ -1,0 +1,15 @@
+# Import essential data for the tests
+#
+# Includes:
+# * Users
+# * Languages
+# * Currencies
+# * Titles
+# * Warehouses
+
+# Users
+$defaultPassword = 1234
+
+INSERT_UPDATE OAuthClientDetails; clientId[unique = true]; resourceIds; scope; authorizedGrantTypes; authorities; clientSecret; registeredRedirectUri
+; mobile_android ; hybris ; basic    ; authorization_code, refresh_token, password, client_credentials ; ROLE_CLIENT         ; $defaultPassword ; http://localhost:9001/authorizationserver/oauth2_callback
+; oauth2-client  ; hybris ; extended ; authorization_code, refresh_token, password, client_credentials ; ROLE_TRUSTED_CLIENT ; $defaultPassword ; http://localhost:9001/authorizationserver/oauth2_callback

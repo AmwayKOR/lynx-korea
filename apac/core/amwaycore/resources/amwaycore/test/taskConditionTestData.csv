@@ -1,0 +1,6 @@
+$testDate=20/02/2016
+INSERT_UPDATE TaskCondition;uniqueID[unique=true];expirationDate[dateformat=dd/MM/yyy];expirationTimeMillis;processedDate[dateformat=dd/MM/yyy];fulfilled[default=false];consumed[default=false];;
+;lynx_los_services_test_0001;$testDate;2000000;$testDate;;;
+;lynx_los_order_services_test_0001;$testDate;2000000;$testDate;;;
+;lynx_los_return_order_services_test_0001;$testDate;2000000;$testDate;;;
+;lynx_oms_order_services_test_0001;$testDate;2000000;$testDate;;;

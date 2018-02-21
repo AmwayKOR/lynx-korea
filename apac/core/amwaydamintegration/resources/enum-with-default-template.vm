@@ -1,0 +1,55 @@
+#*
+    Template for generating Java enums that contain fromString method.
+    This method has functionality similar to valueOf, but it is searching for Enum value by name without case sensitivity.
+    If value not found it is return default value.
+    [default] postfix need to be specified only ones for enum declaration inside <value> tag.
+    Otherwise will be chosen last declaration with [default] postfix.
+*#
+#set($defaultTag = "[default]")
+
+package $packageName;
+
+#if ( $hasDescription || $hasDeprecated )
+/**
+#end
+#if ( $hasDescription)
+ * $description
+#end
+#if ( $hasDescription && $hasDeprecated )
+ *
+#end
+#if ( $hasDeprecated )
+ * @deprecated $deprecated
+#end
+#if ( $hasDescription || $hasDeprecated )
+ */a
+#end
+#if ( $hasDeprecated )
+@Deprecated
+#end
+public enum $shortClassName
+{
+
+#foreach($v in $enumValue)
+	$v.comment
+	#if(${StringUtils.endsWith($v.name, $defaultTag)})
+	#set($defaultValue = ${StringUtils.substringBefore($v.name, $defaultTag)})
+	${StringUtils.upperCase($defaultValue)}#if ($foreach.last) ; #else , #end
+	#else
+	${StringUtils.upperCase($v.name)}#if ($foreach.last) ; #else , #end
+	#end
+
+#end
+
+	public static $shortClassName fromString(String name)
+	{
+	    for ($shortClassName value : values())
+	    {
+            if (value.name().equalsIgnoreCase(name))
+            {
+                return value;
+            }
+        }
+        return ${StringUtils.upperCase($defaultValue)};
+    }
+}

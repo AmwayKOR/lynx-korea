@@ -1,0 +1,14 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:metrics="http://www.ryantenney.com/schema/metrics"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.ryantenney.com/schema/metrics
+           metrics-3.0.xsd">
+
+
+    <metrics:annotation-driven metric-registry="metricRegistry" />
+    <metrics:reporter type="console" metric-registry="metricRegistry" period="${meterics.reporter.console.period}" enabled="${meterics.reporter.console.enabled}"/>
+    <metrics:reporter type="jmx" metric-registry="metricRegistry" enabled="${meterics.reporter.jmx.enabled}"/>
+
+</beans>

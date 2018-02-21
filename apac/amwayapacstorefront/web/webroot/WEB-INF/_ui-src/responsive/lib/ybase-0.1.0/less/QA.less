@@ -1,0 +1,764 @@
+@import 'main.less';
+//Q&A
+.FAQ-QA{
+  .order-history-container{
+    .order-history-search-wrapper{
+      .form-wrapper.search-form-wrapper{
+        input[type="text"]{
+          margin-right:5px;
+          height:40px;
+          padding: 0 8px;
+        }
+      }
+    }
+  }
+  .announcement-container{
+    padding:0 12px;
+    .amway-theme{
+      .ditto-schedule-table-content{
+        .ditto-schedule-table{
+          tbody{
+            tr{
+              cursor:auto;
+            }
+          }
+        }
+      }
+    }
+  }
+  .account-section-content{
+    margin-bottom:0;
+    .search-form-wrapper{
+      form{
+        position: relative;
+        .question-search-box {
+          display: @none;
+          border: 1px solid #dadada;
+          width: 200px;
+          height: 308px;
+          position: absolute;
+          top: 42px;
+          padding: 0 8px;
+          background-color: #fff;
+          z-index: 99;
+          overflow-y: auto;
+          .question-search-box-content{
+            input[type=text]{
+              width:100%;
+              border:@none;
+              border-bottom:1px solid @gray_8;
+              padding-left:0;
+              outline: none;
+            }
+            ul{
+              text-align: left;
+              color:@blue_1;
+              li{
+                padding:4px 0;
+                cursor:pointer;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .question-main-body{
+    margin-bottom: 40px;
+    #business-page-accordion{
+      padding:0;
+      .panel{
+        //background-color: @gray_9;
+        .panel-heading{
+          padding:0 24px;
+          .panel-title{
+            div{
+              padding:24px 0;
+              .indicator{
+                &:after{
+                  color:@blue_2;
+                }
+              }
+            }
+          }
+        }
+        .panel-collapse{
+          padding: 0 24px;
+          position: relative;
+          top: -18px;
+          width: 64%;
+        }
+      }
+    }
+  }
+  .no-logged-qa{
+    margin: 45px 0;
+    text-align: left;
+    padding-left: 30px;
+    padding-right: 30px;
+    div{
+      padding:10px 0;
+    }
+    .no-logged-qa-text1{
+      color:@blue_1;
+      text-transform: uppercase;
+    }
+    .no-logged-qa-text2{
+      span{
+        text-decoration: underline;
+        color: @blue_1;
+        cursor: pointer;
+      }
+    }
+  }
+  .email-toggle-content{
+    .account-section-content{
+      .logged-qa{
+        margin:0;
+        #business-page-accordion{
+          padding:0;
+          .panel{
+            &:first-child{
+              border-top:none;
+            }
+            .panel-heading{
+              padding:0;
+              .panel-title{
+                div{
+                  span{
+                    &:after{
+                      color:@blue_2;
+                    }
+                  }
+                }
+              }
+            }
+            .panel-collapse{
+              padding:0;
+            }
+          }
+          .logged-qa-top{
+            padding-bottom: 45px;
+            span{
+              text-decoration: underline;
+              color:@blue_1;
+              cursor:pointer;
+            }
+          }
+          .order-history-search-wrapper{
+            margin:0;
+          }
+        }
+        .amway-theme{
+          .ditto-schedule-table-content{
+            .table-block-wrapper{
+              padding-top:0;
+              .ditto-schedule-table{
+                thead{
+                  .ditto-field-name{
+                    width:15%;
+                    padding-left:20px;
+                  }
+                }
+              }
+            }
+          }
+        }
+        #register-step-page{
+          .form-item-row{
+            width:auto;
+            .form-control{
+              text-transform: inherit;
+            }
+          }
+          .form-group{
+            label{
+              padding-top:0;
+              text-transform: uppercase;
+            }
+            .email-alert{
+              text-decoration: underline;
+              font-style: italic;
+              color:@blue_1;
+              cursor:pointer;
+            }
+            .question-input{
+              width:100%;
+              color:@blue_1;
+            }
+            .question-content{
+              height: 150px;
+              min-height: 0;
+              overflow-y: scroll;
+              overflow-x: hidden;
+              resize: none;
+              white-space: pre-wrap;
+              font-weight:100;
+            }
+            .attachment-upload{
+              .attachment-btn{
+                position: absolute;
+                top:5px;
+                z-index: 1;
+                &:before{
+                  content:'UPLOAD';
+                  border:1px solid @blue_1;
+                  color:@blue_1;
+                  padding: 8px 20px;
+                  text-transform: uppercase;
+                }
+              }
+              input[type=file]{
+                position: relative;
+                opacity: 0;
+                z-index: 99;
+                cursor: pointer;
+                font-size: 0;
+              }
+            }
+            &.last-form-group{
+              margin-bottom:70px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .point-management{
+    .amway-theme{
+      .tabs-content-blocks{
+        .content-block{
+          margin:0;
+          .ditto-schedule-table{
+            tbody{
+              .mob-QATitle-text,.mob-submission-date{
+                display: @none;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+//question details &modify question
+.question-details{
+  .back-to-previous{
+    color:@blue_1;
+    position: relative;
+    top:-18px;
+    &:before{
+      content: "\e257";
+      font-family: 'Glyphicons Halflings';
+      font-weight: 100;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      position: relative;
+      top: 2px;
+      color:@blue_2;
+    }
+    span{
+      &:last-child{
+        color:@gray_8;
+        padding:0 10px;
+      }
+    }
+  }
+  .question-details-content{
+    #business-page-accordion{
+      padding:0;
+      .panel{
+        .panel-collapse{
+          padding:0 16px;
+          .amway-theme{
+            .form-group{
+              margin-bottom:0;
+              label{
+                padding-top:0;
+                text-transform: uppercase;
+              }
+              .question-description{
+                line-height: 24px;
+              }
+              &.attachment{
+                margin-top:30px;
+                margin-bottom:10px;
+                ul{
+                  li{
+                    padding:5px 0;
+                  }
+                }
+              }
+              .question-content{
+                height: 150px;
+                min-height: 0;
+                overflow-y: scroll;
+                overflow-x: hidden;
+                resize: none;
+                width:100%;
+                white-space: pre-wrap;
+              }
+              &.last-form-group{
+                margin-bottom:80px;
+              }
+              &.question-title{
+                margin-top:30px;
+              }
+              &.question-content{
+                margin-top:30px;
+              }
+            }
+          }
+        }
+        .panel-title{
+          div{
+            span{
+              &:after{
+                color:@blue_2;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+//modify question
+.modify-question{
+  .cartTitile{
+    padding-bottom:0;
+    a{
+      float:right;
+      position: relative;
+      top:-22px;
+      font-size:16px;
+    }
+    .mb25{
+      margin-bottom:0;
+    }
+  }
+  #business-page-accordion{
+    .panel{
+      border-bottom:0;
+      .form-group{
+        &:first-child{
+          label{
+            position: relative;
+            top: 10px;
+          }
+        }
+        &.attachment-list{
+          ul{
+            li{
+              border-bottom:1px solid @gray_8;
+              padding:10px 0;
+              a{
+                float:right;
+              }
+            }
+          }
+        }
+        &.production-btn{
+          margin-top:50px;
+          border-top:1px solid @gray_8;
+          padding-top: 30px;
+        }
+      }
+      .account-section-content{
+        border-bottom:0;
+      }
+    }
+  }
+    .question-details-content{
+      #business-page-accordion{
+        .panel{
+          .panel-collapse{
+            padding-top:30px;
+            .amway-theme{
+              .form-group{
+                label{
+                  padding-left:0;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+}
+
+//knowledge center
+.knowledge-center{
+  .knowledge-center-one{
+    overflow: visible;
+    padding:0 12px;
+    .cartTitile{
+      padding-bottom:0;
+    }
+    .order-history-account-section-content{
+      margin-bottom:0;
+    }
+  }
+  .promotions{
+    overflow: visible;
+    .account-section-content{
+      .order-history-container{
+        .order-history-search-wrapper{
+          .news-search-results{
+            position: relative;
+            top: 5px;
+            font-size: 20px;
+          }
+          .form-wrapper{
+            form{
+              select#category-desk{
+                margin-right:5px;
+              }
+            }
+          }
+        }
+      }
+    }
+    .account-landing-page{
+      .account-orderhistory-pagination{
+        margin-top:25px;
+      }
+      .option-item-container{
+        .news-result-item-text{
+          min-height:130px;
+          font-size:16px;
+          p.featured-product__title{
+            padding-top:10px;
+          }
+          .click-thumb{
+            text-align: right;
+            .thumb{
+              background: url("../images/thumb.png") no-repeat;
+              width:16px;
+              height:16px;
+              display: inline-block;
+              position: relative;
+              top: 1px;
+              margin-right: 5px;
+              &.click{
+                background: url("../images/thumb-click.png") no-repeat;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+@media(max-width:768px){
+  .FAQ-QA{
+    .QA-container{
+      padding-top: 12px;
+      #business-page-accordion{
+        .panel{
+          .panel-title{
+            div{
+              position: relative;;
+              .indicator{
+                position: absolute;
+                top: 24px;
+                right: 0;
+              }
+            }
+          }
+          .panel-heading{
+            padding:0 12px;
+          }
+          .panel-collapse{
+            padding:0 12px;
+            width: 90%;
+          }
+        }
+      }
+    }
+    .amway-theme{
+      .ditto-schedule-table-content{
+        .table-block-wrapper{
+          .ditto-schedule-table{
+            thead{
+              .ditto-field-name{
+                padding-left:20px!important
+              }
+            }
+          }
+        }
+      }
+    }
+    .email-toggle-content{
+      .account-section-content {
+        .logged-qa {
+          .form-group{
+            .account-profile__label,.account-profile__value{
+              line-height:24px;
+            }
+          }
+          #business-page-accordion{
+            .logged-qa-top{
+              padding-bottom:20px;
+            }
+            .category-filters{
+              background-color: @white;
+              text-transform: uppercase;
+              text-align: left;
+              padding: 0 12px;
+              color:@blue_1;
+              .pull-right{
+                &:before{
+                  content: "\ea79";
+                  color: #0075a4;
+                  font-size: 12px;
+                }
+              }
+              &.collapsed{
+                .pull-right{
+                  &:before{
+                    content: "\ea78"!important;
+                  }
+                }
+              }
+            }
+            .filter-form-category{
+              padding:10px;
+              .form-item-row{
+                padding:0 15px;
+                .col{
+                  padding-right:0;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .order-history-container{
+      .order-history-search-wrapper{
+        margin-top:12px!important;
+        margin-bottom: 12px!important;
+        .toggle-buttons-container{
+          button{
+            color:@blue_2;
+          }
+        }
+      }
+    }
+    .point-management{
+      .amway-theme{
+        .tabs-content-blocks{
+          .content-block{
+            margin:0;
+            .ditto-schedule-table{
+              tbody{
+                tr{
+                  height:118px;
+                  .mob-QATitle-text{
+                    font-weight: 600;
+                    color: @mainColor;
+                  }
+                  .mob-QATitle-text,.mob-submission-date{
+                    display: @block;
+                    position: absolute;
+                    left: 0;
+                    padding-top: 46px;
+                    padding-left:20px;
+                  }
+                  .mob-submission-date{
+                    padding-top:76px;
+                    color:@mainColor;
+                  }
+                  td{
+                    &:nth-child(4){
+                      font-weight: 100;
+                    }
+                  }
+                }
+
+              }
+            }
+          }
+        }
+      }
+    }
+    .account-section-content{
+      .search-form-wrapper{
+        form{
+          .question-search-box {
+            width: 91.5%;
+          }
+        }
+      }
+    }
+  }
+
+  .question-details{
+    .back-to-previous{
+      top:0;
+    }
+    .question-details-content{
+      #business-page-accordion{
+        .panel{
+          .panel-collapse{
+            padding:0;
+            .amway-theme{
+              .form-group{
+                padding:10px 0;
+                label.account-profile__label,.account-profile__value{
+                  line-height:16px;
+                }
+                .question-description{
+                  line-height:24px;
+                }
+                .question-content{
+                  //height: 300px;
+                }
+                &.question-title{
+                  margin-top:0;
+                }
+                &.question-content{
+                  margin-top:0;
+                }
+                &.question-title{
+                  margin-top:30px;
+                }
+                &.attachment{
+                  margin-top:0;
+                  label{
+                    padding-bottom:10px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .modify-question{
+    .cartTitile{
+      padding-bottom:10px;
+      a{
+        float:none;
+        position: relative;
+        top:0;
+      }
+      .mb25{
+        margin-bottom:20px;
+      }
+    }
+    #business-page-accordion{
+      .panel{
+        .form-group{
+          &.production-btn{
+            border-top:none;
+            margin-top:20px;
+          }
+        }
+      }
+    }
+    .question-details-content{
+      #business-page-accordion{
+        .panel{
+          .panel-collapse{
+            padding-top:0;
+          }
+        }
+      }
+    }
+  }
+
+  //knowledge center
+  .knowledge-center{
+    .knowledge-center-one{
+      .order-history-account-section-content{
+        margin-bottom:8px;
+        .order-history-search-wrapper{
+          .toggle-buttons-container{
+            button{
+              span{
+                &:last-child{
+                  color:@blue_2;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .account-section-content{
+      .order-history-container{
+        .order-history-search-wrapper{
+          .form-wrapper{
+            top:0;
+          }
+        }
+      }
+    }
+    .promotions{
+      .account-landing-page{
+        .option-item-container{
+          .news-result-item-text{
+            min-height:163px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media(max-width:420px){
+  .FAQ-QA{
+    .point-management{
+      .amway-theme{
+        .tabs-content-blocks{
+          .content-block{
+            .ditto-schedule-table{
+              tbody{
+                tr{
+                  height:150px;
+                  .mob-QATitle-text{
+                    padding-top: 50px;
+                    font-weight: 600;
+                    color: @mainColor;
+                  }
+                  .mob-submission-date{
+                    padding-top:106px;
+                  }
+                }
+
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  //knowledge center
+  .knowledge-center{
+    .knowledge-center-one{
+      .order-history-account-section-content{
+        margin-bottom:8px;
+      }
+    }
+    .promotions{
+      .account-landing-page{
+        .option-item-container{
+          .news-result-item-text{
+            min-height:130px;
+          }
+        }
+      }
+    }
+  }
+
+}

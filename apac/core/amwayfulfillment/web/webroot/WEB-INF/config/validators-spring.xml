@@ -1,0 +1,61 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <bean id="shippingEventValidator" class="de.hybris.platform.webservicescommons.validators.CompositeValidator">
+        <property name="validators">
+            <list>
+                <bean class="de.hybris.platform.webservicescommons.validators.FieldNotEmptyValidator">
+                    <property name="fieldPath" value="warehouseId"/>
+                </bean>
+                <bean class="de.hybris.platform.webservicescommons.validators.FieldNotEmptyValidator">
+                    <property name="fieldPath" value="carrier"/>
+                </bean>
+                <bean class="de.hybris.platform.webservicescommons.validators.FieldNotEmptyValidator">
+                    <property name="fieldPath" value="trackingId"/>
+                </bean>
+                <bean class="de.hybris.platform.webservicescommons.validators.FieldNotEmptyValidator">
+                    <property name="fieldPath" value="shippingDate"/>
+                </bean>
+                <bean class="com.amway.amwayfulfillment.validators.CollectionNotEmptyValidator">
+                    <property name="fieldPath" value="packages"/>
+                    <property name="validateEntries" value="true"/>
+                    <property name="validator">
+                        <bean class="de.hybris.platform.webservicescommons.validators.CompositeValidator">
+                            <property name="validators">
+                                <list>
+                                    <bean class="com.amway.amwayfulfillment.validators.CollectionNotEmptyValidator">
+                                        <property name="fieldPath" value="entries"/>
+                                        <property name="validateEntries" value="true"/>
+                                        <property name="validator">
+                                            <bean class="de.hybris.platform.webservicescommons.validators.CompositeValidator">
+                                                <property name="validators">
+                                                    <list>
+                                                        <bean class="de.hybris.platform.webservicescommons.validators.FieldNotEmptyValidator">
+                                                            <property name="fieldPath" value="productCode"/>
+                                                        </bean>
+                                                        <bean class="de.hybris.platform.webservicescommons.validators.FieldNotEmptyValidator">
+                                                            <property name="fieldPath" value="shippedQuantity"/>
+                                                        </bean>
+                                                        <bean class="de.hybris.platform.webservicescommons.validators.FieldGreaterThanZeroValidator">
+                                                            <property name="fieldPath" value="shippedQuantity"/>
+                                                        </bean>
+                                                    </list>
+                                                </property>
+                                            </bean>
+                                        </property>
+                                    </bean>
+                                </list>
+                            </property>
+                        </bean>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+</beans>

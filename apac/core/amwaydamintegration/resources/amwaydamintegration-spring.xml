@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <bean name="amwayDamRestTemplate" class="org.springframework.web.client.RestTemplate">
+        <constructor-arg>
+            <list>
+                <bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter"/>
+                <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+            </list>
+        </constructor-arg>
+        <property name="errorHandler">
+            <bean class="com.amway.integration.dam.client.handler.AmwayDamErrorResponseHandler"/>
+        </property>
+    </bean>
+
+    <bean id="amwayDamEventDataPredicate" class="com.amway.integration.dam.util.AmwayDamEventPredicate">
+        <property name="allowedOperations">
+            <list value-type="java.lang.String">
+                <value>create</value>
+                <value>update</value>
+                <value>metadata-update</value>
+                <value>remove</value>
+            </list>
+        </property>
+    </bean>
+
+    <util:map id="amwayDamAssetAliasMap">
+        <entry key="#{T(com.amway.integration.dam.constants.AmwayDamConstants).ATTRIBUTE_ASSET_ID}" value="amway_ID"/>
+        <entry key="#{T(com.amway.integration.dam.constants.AmwayDamConstants).ATTRIBUTE_ASSET_MODIFIED}" value="dc:modified"/>
+        <entry key="#{T(com.amway.integration.dam.constants.AmwayDamConstants).ATTRIBUTE_TYPE}" value="dam:MIMEtype"/>
+        <entry key="#{T(com.amway.integration.dam.constants.AmwayDamConstants).ATTRIBUTE_KEYWORDS}" value="dc:subject"/>
+        <entry key="#{T(com.amway.integration.dam.constants.AmwayDamConstants).ATTRIBUTE_DEFAULT_ASSET}" value="dam:defaultAsset"/>
+        <entry key="#{T(com.amway.integration.dam.constants.AmwayDamConstants).ATTRIBUTE_TAGS}" value="cq:tags"/>
+        <entry key="#{T(com.amway.integration.dam.constants.AmwayDamConstants).ATTRIBUTE_DURATION}" value="dam:duration"/>
+        <entry key="#{T(com.amway.integration.dam.constants.AmwayDamConstants).ATTRIBUTE_VIDEO_ID}" value="dam:brightcoveId"/>
+        <entry key="#{T(com.amway.integration.dam.constants.AmwayDamConstants).ATTRIBUTE_FORMAT}" value="dc:format"/>
+    </util:map>
+
+    <util:map id="amwayDamAssetTagNamesMap">
+        <entry key="#{T(com.amway.integration.dam.constants.AmwayDamConstants).TAG_NAME_COUNTRIES}" value="country"/>
+        <entry key="#{T(com.amway.integration.dam.constants.AmwayDamConstants).TAG_NAME_LANGUAGES}" value="language"/>
+        <entry key="#{T(com.amway.integration.dam.constants.AmwayDamConstants).TAG_NAME_MCP}" value="sub-category"/>
+    </util:map>
+
+    <util:map id="amwayDamAssetTitlesMap">
+        <entry key="#{T(com.amway.integration.dam.constants.AmwayDamConstants).ENGLISH_ISO}" value="dc:title"/>
+    </util:map>
+
+    <util:map id="amwayDamAssetDescriptionMap">
+        <entry key="#{T(com.amway.integration.dam.constants.AmwayDamConstants).ENGLISH_ISO}" value="dc:description"/>
+    </util:map>
+
+    <util:map id="amwayDamRenditionAliasMap">
+        <entry key="#{T(com.amway.integration.dam.constants.AmwayDamConstants).ATTRIBUTE_CONTENT}" value="jcr:content"/>
+        <entry key="#{T(com.amway.integration.dam.constants.AmwayDamConstants).ATTRIBUTE_HEIGHT}" value="tiff:ImageHeight"/>
+        <entry key="#{T(com.amway.integration.dam.constants.AmwayDamConstants).ATTRIBUTE_WIGHT}" value="tiff:ImageWidth"/>
+        <entry key="#{T(com.amway.integration.dam.constants.AmwayDamConstants).ATTRIBUTE_FORMAT}" value="jcr:mimeType"/>
+        <entry key="#{T(com.amway.integration.dam.constants.AmwayDamConstants).ATTRIBUTE_TYPE}" value="jcr:mixinTypes"/>
+    </util:map>
+
+    <util:map id="amwayDamExceptionalTypesMap" value-type="com.amway.integration.dam.data.AmwayDamAssetTypeEnum">
+        <entry key="application/postscript" value="IMAGE"/>
+        <entry key="application/illustrator" value="IMAGE"/>
+    </util:map>
+
+    <bean id="amwayDamAssetDataPopulator" class="com.amway.integration.dam.populator.AmwayDamAssetDataPopulator">
+        <property name="amwayDamAliasMap" ref="amwayDamAssetAliasMap"/>
+        <property name="amwayDamTagNamesMap" ref="amwayDamAssetTagNamesMap"/>
+        <property name="amwayDamTitlesMap" ref="amwayDamAssetTitlesMap"/>
+        <property name="amwayDamDescriptionMap" ref="amwayDamAssetDescriptionMap"/>
+        <property name="amwayDamExceptionalTypes" ref="amwayDamExceptionalTypesMap"/>
+        <property name="amwayDamIsoCodes">
+            <list value-type="java.lang.String">
+                <value>#{T(com.amway.integration.dam.constants.AmwayDamConstants).ENGLISH_ISO}</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="amwayDamAssetDataConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="com.amway.integration.dam.data.AmwayDamAssetData"/>
+        <property name="populators">
+            <list>
+                <ref bean="amwayDamAssetDataPopulator"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="amwayDamRenditionDataPopulator" class="com.amway.integration.dam.populator.AmwayDamRenditionDataPopulator">
+        <property name="amwayDamAliasMap" ref="amwayDamRenditionAliasMap"/>
+        <property name="amwayDamExceptionalTypes" ref="amwayDamExceptionalTypesMap"/>
+    </bean>
+
+    <bean id="amwayDamRenditionDataConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="java.util.ArrayList"/>
+        <property name="populators">
+            <list>
+                <ref bean="amwayDamRenditionDataPopulator"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="amwayDamQueueEntryReversePopulator" class="com.amway.integration.dam.populator.AmwayDamQueueEntryReversePopulator"/>
+    <bean id="amwayDamQueueEntryReverseConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="com.amway.integration.dam.model.AmwayDamQueueEntryModel"/>
+        <property name="populators">
+            <list>
+                <ref bean="amwayDamQueueEntryReversePopulator"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="amwayDamAssetMetadataReversePopulator" class="com.amway.integration.dam.populator.AmwayDamAssetMetadataReversePopulator"/>
+    <bean id="amwayDamAssetMetadataReverseConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="java.util.ArrayList"/>
+        <property name="populators">
+            <list>
+                <ref bean="amwayDamAssetMetadataReversePopulator"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="amwayDamCommandConfig" class="de.hybris.platform.integration.commons.hystrix.OndemandHystrixCommandConfiguration">
+        <property name="groupKey" value="${amway.dam.groupKey}"/>
+        <property name="threadTimeout" value="${amway.dam.threadTimeout}"/>
+        <property name="threadPoolSize" value="${amway.dam.threadPoolSize}"/>
+    </bean>
+
+    <bean name="amwayDamClient" class="com.amway.integration.dam.client.impl.AmwayDamClientImpl"/>
+    <bean id="amwayDamQueueDao" class="com.amway.integration.dam.dao.impl.AmwayDamEventQueueDaoImpl"/>
+    <bean id="amwayDamQueueService" class="com.amway.integration.dam.service.impl.AmwayDamEventQueueServiceImpl"/>
+
+    <bean id="amwayBaseDamService" class="com.amway.integration.dam.service.AmwayAbstractDamService" abstract="true"/>
+    <bean id="amwayDamAssetInfoService" class="com.amway.integration.dam.service.impl.AmwayDamAssetInfoServiceImpl"
+          parent="amwayBaseDamService"/>
+    <bean id="amwayDamRenditionInfoService" class="com.amway.integration.dam.service.impl.AmwayDamRenditionInfoServiceImpl"
+          parent="amwayBaseDamService"/>
+    <bean id="amwayDamBinaryFileService" class="com.amway.integration.dam.service.impl.AmwayDamBinaryFileServiceImpl"
+          parent="amwayBaseDamService"/>
+
+    <bean id="amwayDamAssetDao" class="com.amway.integration.dam.dao.impl.AmwayDamAssetDaoImpl"/>
+    <bean id="amwayDamEventHandler" class="com.amway.integration.dam.service.impl.AmwayDamEventHandlerImpl">
+        <property name="amwayDamEventProcessors">
+            <list value-type="com.amway.integration.dam.processor.AmwayDamEventProcessor">
+                <ref bean="amwayDamCreateEventProcessor"/>
+                <ref bean="amwayDamUpdateEventProcessor"/>
+                <ref bean="amwayDamRemoveEventProcessor"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="amwayDamAssetService" class="com.amway.integration.dam.service.impl.AmwayDamAssetServiceImpl"/>
+    <bean id="amwayDamAssetItemService" class="com.amway.integration.dam.service.impl.AmwayDamAssetItemServiceImpl"/>
+    <bean id="amwayDamAssetMetadataService" class="com.amway.integration.dam.service.impl.AmwayDamAssetMetadataServiceImpl"/>
+
+    <bean id="amwayDamAssetFactory" class="com.amway.integration.dam.factory.impl.AmwayDamAssetFactoryImpl"/>
+    <bean id="amwayDamAssetItemFactory" class="com.amway.integration.dam.factory.impl.AmwayDamAssetItemFactoryImpl"/>
+
+    <bean id="amwayDamAssetProcessor" class="com.amway.integration.dam.processor.impl.AmwayDamAssetProcessorImpl"/>
+
+    <alias name="defaultAmwayDamRemoveEventProcessor" alias="amwayDamRemoveEventProcessor"/>
+    <bean id="defaultAmwayDamRemoveEventProcessor" class="com.amway.integration.dam.processor.impl.AmwayDamRemoveEventProcessor">
+        <property name="validators">
+            <list>
+                <ref bean="amwayDamRemoveEventValidator"/>
+            </list>
+        </property>
+    </bean>
+
+    <alias name="defaultAmwayDamCreateEventProcessor" alias="amwayDamCreateEventProcessor"/>
+    <bean id="defaultAmwayDamCreateEventProcessor" class="com.amway.integration.dam.processor.impl.AmwayDamCreateEventProcessor">
+        <property name="validators">
+            <list>
+                <ref bean="amwayDamAssetDataValidator"/>
+                <ref bean="amwayDamCreateEventValidator"/>
+                <ref bean="amwayDamAssetTypeValidator"/>
+            </list>
+        </property>
+    </bean>
+
+    <alias name="defaultAmwayDamUpdateEventProcessor" alias="amwayDamUpdateEventProcessor"/>
+    <bean id="defaultAmwayDamUpdateEventProcessor" class="com.amway.integration.dam.processor.impl.AmwayDamUpdateEventProcessor">
+        <property name="validators">
+            <list>
+                <ref bean="amwayDamAssetDataValidator"/>
+                <ref bean="amwayDamUpdateEventValidator"/>
+                <ref bean="amwayDamAssetTypeValidator"/>
+            </list>
+        </property>
+    </bean>
+
+    <alias name="defaultAmwayDamCatalogVersionService" alias="amwayDamCatalogVersionService"/>
+    <bean id="defaultAmwayDamCatalogVersionService"
+          class="com.amway.integration.dam.service.impl.AmwayDamCatalogVersionServiceImpl">
+        <property name="amwayCatalogFetchStrategies">
+            <set value-type="com.amway.integration.dam.strategy.AmwayDamCatalogFetchStrategy">
+                <ref bean="amwayCatalogSiteFetchStrategy"/>
+            </set>
+        </property>
+    </bean>
+
+    <bean id="amwayCatalogSiteFetchStrategy" class="com.amway.integration.dam.strategy.impl.AmwayDamSiteCatalogFetchStrategyImpl">
+        <property name="countriesToIsoCodeMap">
+            <map key-type="java.lang.String" value-type="java.lang.String">
+                <entry key="denmark" value="dk"/>
+                <entry key="finland" value="fi"/>
+                <entry key="sweden" value="se"/>
+                <entry key="norway" value="no"/>
+                <entry key="england" value="en"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="amwayDamAssetReversePopulator" class="com.amway.integration.dam.populator.AmwayDamAssetReversePopulator">
+        <property name="languageToIsoCodeMap">
+            <map>
+                <entry key="english" value="en"/>
+                <entry key="danish" value="da"/>
+                <entry key="finnish" value="fi"/>
+                <entry key="swedish" value="sv"/>
+                <entry key="norwegian" value="no"/>
+            </map>
+        </property>
+    </bean>
+    <bean id="amwayDamAssetReverseConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="com.amway.integration.dam.model.AmwayDamAssetModel"/>
+        <property name="populators">
+            <ref bean="amwayDamAssetReversePopulator"/>
+        </property>
+    </bean>
+
+    <bean id="amwayDamAssetItemReversePopulator" class="com.amway.integration.dam.populator.AmwayDamAssetItemReversePopulator"/>
+    <bean id="amwayDamAssetItemReverseConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="com.amway.integration.dam.model.AmwayDamAssetItemModel"/>
+        <property name="populators">
+            <list>
+                <ref bean="amwayDamAssetItemReversePopulator"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="amwayDamAssetQualifierStrategy" class="com.amway.integration.dam.strategy.impl.AmwayDamAssetQualifierStrategyImpl"/>
+    <bean id="amwayDamAssetItemCodeStrategy" class="com.amway.integration.dam.strategy.impl.AmwayDamAssetItemCodeStrategyImpl"/>
+    <bean id="amwayDamAssetItemFileNameStrategy" class="com.amway.integration.dam.strategy.impl.AmwayDamAssetItemFileNameStrategyImpl"/>
+    <bean id="amwayDamRenditionFilterStrategy" class="com.amway.integration.dam.strategy.impl.AmwayDamRenditionFilterStrategyImpl"/>
+
+    <bean id="amwayDamAssetFormatDao" class="com.amway.integration.dam.dao.impl.AmwayDamAssetFormatDaoImpl"/>
+
+    <alias name="defaultAmwayDamMediaFormatService" alias="amwayDamMediaFormatService"/>
+    <bean id="defaultAmwayDamMediaFormatService" class="com.amway.integration.dam.service.impl.AmwayDamMediaFormatServiceImpl">
+        <property name="imageSizeDeviation" value="0.05"/>
+    </bean>
+
+    <bean id="amwayDamEventQueueProcessJob" parent="abstractJobPerformable"
+          class="com.amway.integration.dam.cronjob.AmwayDamEventQueueProcessJob">
+        <property name="processedEventsLimit" value="${amway.dam.job.limit}"/>
+    </bean>
+
+    <bean id="amwayDamAssetDataValidator" class="com.amway.integration.dam.validate.impl.AmwayDamAssetDataValidatorImpl"/>
+    <bean id="amwayDamCreateEventValidator" class="com.amway.integration.dam.validate.impl.AmwayDamCreateEventValidatorImpl"/>
+    <bean id="amwayDamRemoveEventValidator" class="com.amway.integration.dam.validate.impl.AmwayDamRemoveEventValidatorImpl"/>
+    <bean id="amwayDamUpdateEventValidator" class="com.amway.integration.dam.validate.impl.AmwayDamUpdateEventValidatorImpl"/>
+
+    <bean id="amwayDamAssetTypeValidator" class="com.amway.integration.dam.validate.impl.AmwayDamAssetTypeValidatorImpl"/>
+
+    <bean id="amwayDamCommonProcessingDataPopulator" class="com.amway.integration.dam.populator.AmwayDamCommonProcessingDataPopulator"/>
+    <bean id="amwayDamRemoveProcessingDataPopulator" class="com.amway.integration.dam.populator.AmwayDamRemoveProcessingDataPopulator"/>
+
+    <bean id="amwayDamRemoveProcessingDataConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="com.amway.integration.dam.data.AmwayDamProcessingData"/>
+        <property name="populators">
+            <ref bean="amwayDamRemoveProcessingDataPopulator"/>
+        </property>
+    </bean>
+
+    <bean id="amwayDamUpdateProcessingDataConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="com.amway.integration.dam.data.AmwayDamProcessingData"/>
+        <property name="populators">
+            <ref bean="amwayDamCommonProcessingDataPopulator"/>
+        </property>
+    </bean>
+
+    <bean id="amwayDamCreateProcessingDataConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="com.amway.integration.dam.data.AmwayDamProcessingData"/>
+        <property name="populators">
+            <ref bean="amwayDamCommonProcessingDataPopulator"/>
+        </property>
+    </bean>
+
+    <bean id="amwayDamAssetMetadataDao" class="com.amway.integration.dam.dao.impl.AmwayDamAssetMetadataDaoImpl"/>
+
+    <alias name="defaultAmwayDamAssetDefinitionService" alias="amwayDamAssetDefinitionService"/>
+    <bean id="defaultAmwayDamAssetDefinitionService" class="com.amway.integration.dam.service.impl.AmwayDamAssetDefinitionServiceImpl">
+        <property name="assetDefinitions">
+            <list>
+                <bean class="com.amway.integration.dam.data.AmwayDamAssetDefinition">
+                    <property name="type" value="DOCUMENT"/>
+                    <property name="itemType" value="#{T(com.amway.integration.dam.model.AmwayDamAssetDocumentModel)}"/>
+                    <property name="catalogType" value="CONTENT"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+</beans>

@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2014 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+<configuration xmlns="hybris.de/schemas/hmc/generic"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="hybris.de/schemas/hmc/generic hmc.xsd">
+
+	<defaultmappings>
+		<defaultmapping source="de.hybris.platform.hmc.attribute.EnumerationValueSelectEditorChip" target="com.amway.core.hmc.StockLevelEnumerationValueSelectEditorChip"/>
+	</defaultmappings>
+
+	<!-- Configuration for extension amwaycore -->
+	<explorertree mode="append">
+		<group name="user" mode="append">
+			<typeref type="PickupAddress" description="typeref.pickupAddress.description"/>
+		</group>
+	</explorertree>
+
+	<type name="Consignment" mode="append">
+		<organizer>
+			<editor mode="append">
+				<tab name="properties" position="0" mode="append">
+					<section name="consignment.details">
+						<listlayout mode="append">
+							 <action type="item" classname="com.amway.core.hmc.PickupConfirmationHMCAction" name="btn.consignment.confirm.pickup"/>
+						</listlayout>
+					</section>
+				</tab>
+			</editor>
+		</organizer>
+	</type>
+
+	<type name="ProductQuestion" mode="append">
+        <organizer>
+            <editor>
+                <tab name="dimensions">
+                    <section name="dimensions" mode="append">
+                        <listlayout>
+                        <attribute name="dimensions" width="500">
+                         </attribute>                            
+                        </listlayout>
+                    </section>
+                </tab>
+            </editor>
+        </organizer>
+	</type>		
+	<type name="AmwayAccount" icon="images/icons/customer_container.gif" mode="append">
+      <organizer>
+         <search mode="replace">
+         	<condition attribute="code"/>
+         	<condition attribute="name"/> 
+            <condition attribute="businessnature"/>
+         </search>
+         <result>
+            <listview>
+               <itemlayout mode="replace">
+                  <attribute name="code" width="100"/>
+                  <attribute name="name" width="100"/>
+               </itemlayout>
+            </listview>
+            <editview>
+               <itemlayout mode="replace">
+               	  <attribute name="code" width="100"/>
+                  <attribute name="name" width="100"/>
+               </itemlayout>
+            </editview>
+		</result>
+         <editor>
+            <essentials>
+                 <listlayout>
+                    <attribute name="code"/>
+               </listlayout>
+            </essentials>
+         </editor>
+	</organizer>
+	</type>	
+	
+	<type name="Product" mode="append">
+		<organizer>
+         <editor>
+            <exclude>
+               <exclusion attribute="europe1Taxes"/>
+            </exclude>
+            <tab name="tab.product.prices" id="tab_europe1_prices" mode="append" position="4">
+               <section name="section.product.pricesdiscounts">
+                  <listlayout>
+                     <attribute name="europe1Prices">
+                        <referencecollectioneditor editable="true" externalcreate="false" resortable="false" remove="true" create="true" maxcount="20">
+                        	<preset targetattribute="product"/>
+                        	<preset targetattribute="catalogVersion" sourceattribute="catalogVersion"/>
+                           <itemlayout>
+                              <attribute name="ug" width="120"/>
+                              <attribute name="unit" width="90"/>
+                              <attribute name="minqtd" width="45"/>
+                              <attribute name="price" width="60"/>
+                              <attribute name="currency" width="60"/>
+                           </itemlayout>
+                        </referencecollectioneditor>
+                     </attribute>
+					 <table>
+                        <tr>
+                           <td width="146px">
+                           </td>
+                           <td>
+                              <shortcut name="findallpricerows" type="PriceRow" usage="finder" autoperform="true">
+                                    <preset targetattribute="product"/>
+		                        	<preset targetattribute="catalogVersion" sourceattribute="catalogVersion"/>
+                              </shortcut>
+                           </td>
+                        </tr>
+                     </table>                     
+                     <text name="text.product.pg" width="720"/>
+                     <attribute name="Europe1PriceFactory_PPG"/>
+                     <attribute name="europe1Discounts">
+                        <referencecollectioneditor editable="true" externalcreate="false" resortable="false" remove="true" create="true">
+                        	<preset targetattribute="product"/>
+                        	<preset targetattribute="catalogVersion" sourceattribute="catalogVersion"/>
+                           <itemeditorlayout>
+                              <attribute name="user" width="100"/>
+                              <attribute name="ug" width="153"/>
+                              <attribute name="discountstring" width="80"/>
+                              <attribute name="discount" width="60"/>
+                              <attribute name="daterange" width="200">
+                                 <editor classname="de.hybris.platform.hmc.attribute.DateOnlyDateRangeEditorChip">
+                                    <parameter key="wrapvalues" value="false"/>
+                                    <parameter key="showpattern" value="false"/>
+                                 </editor>
+                              </attribute>
+                           </itemeditorlayout>
+                        </referencecollectioneditor>
+                      </attribute>
+                     <text name="text.product.dg" width="720"/>
+                     <attribute name="Europe1PriceFactory_PDG"/>
+                     <attribute name="Europe1PriceFactory_PTG"/>
+                  </listlayout>
+               </section>
+            </tab>
+         </editor>
+      </organizer>
+   </type>
+   
+   <type name="Order" mode="append">
+      <organizer>
+         <editor>
+         		<tab name="order.cronjob.tab" mode="append">
+					<section name="order.cronjob.ordertproceses">
+						<listlayout>
+							<attribute name="orderProcess">
+		                        <referencecollectioneditor editable="true" externalcreate="false" resortable="false" remove="true" create="true" maxcount="10">
+		                        	<preset targetattribute="order"/>
+		                           <itemlayout>
+		                              <attribute name="code" width="60"/>
+		                              <attribute name="processDefenitionName" width="200"/>
+		                              <attribute name="processState" width="100"/>
+		                              <attribute name="endMessage" width="200"/>
+		                           </itemlayout>
+		                        </referencecollectioneditor>
+		                     </attribute>
+							 <table>
+		                        <tr>
+		                           <td width="146px">
+		                           </td>
+		                           <td>
+		                              <shortcut name="findallOrderProcesses" type="OrderProcess" usage="finder" autoperform="true">
+		                                    <preset targetattribute="order"/>
+		                              </shortcut>
+		                           </td>
+		                        </tr>
+		                     </table> 
+						</listlayout>
+					</section>
+				</tab>
+         </editor>
+      </organizer>
+   </type>
+   
+	<type name="AbstractOrder" mode="append">
+		<organizer>
+			<editor mode="append">
+				<tab name="positions_and_prices" id="tab_order_positions_and_prices" position="0" mode="append">
+					<section name="positions" mode="append">
+                  		<listlayout mode="append">
+                  			<attribute name="entries" mode="replace" position="0">
+	                           <referencecollectioneditor editable="true" externalcreate="false" presetattribute="order" remove="true" create="true" autosave="true" >
+	                              <itemeditorlayout>
+	                                 <attribute name="product" width="250"/>
+	                                 <attribute name="quantity" width="50"/>
+	                                 <attribute name="unit" width="90"/>
+	                                 <attribute name="basePrice" width="77">
+										<editor classname="de.hybris.platform.hmc.attribute.DoubleEditorChip">
+											<parameter key="align" value="right"/>
+										</editor>
+									</attribute>
+			                  		<attribute name="totalPrice" width="80">
+										<editor classname="de.hybris.platform.hmc.attribute.DoubleEditorChip">
+											<parameter key="align" value="right"/>
+										</editor>
+									</attribute>
+			                  		<attribute name="proRatedPrice" width="80">
+										<editor classname="de.hybris.platform.hmc.attribute.DoubleEditorChip">
+											<parameter key="align" value="right"/>
+										</editor>
+									</attribute>									
+									<attribute name="warehouse" width="250"/>
+	                              </itemeditorlayout>
+	                           </referencecollectioneditor>
+	                        </attribute>
+                  		</listlayout>
+                  	</section>
+				</tab>
+			</editor>
+		</organizer>
+	</type>        
+   
+    <type name="BaseStore" mode="append">
+        <organizer>
+            <editor>
+                <tab name="amwayPeriod">
+                    <section name="amwayPeriod" mode="append">
+                        <listlayout>
+                        <attribute name="orderPeriods" width="500" >
+                                <referencecollectioneditor editable="true"
+                                    attribute="orderPeriods" externalcreate="true" resortable="true"
+                                    presetattribute="owner" remove="true" create="true" autosave="false" maxcount="10" >
+                                    <itemlayout>
+                                        <attribute name="startDate" width="200" />
+                                        <attribute name="endDate" width="200" />
+                                        <attribute name="status" width="200" />
+                                    </itemlayout>
+                                </referencecollectioneditor>
+                            </attribute>
+							 <table>
+		                        <tr>
+		                           <td width="146px">
+		                           </td>
+		                           <td>
+		                              <shortcut name="findallOrderPeriods" type="AmwayOrderPeriod" usage="finder" autoperform="true">
+		                                    <preset targetattribute="owner"/>
+		                              </shortcut>
+		                           </td>
+		                        </tr>
+		                     </table>                               
+                            <attribute name="bonusPeriods" width="500">
+                                <referencecollectioneditor editable="true"
+                                    attribute="bonusPeriods" externalcreate="true" resortable="false"
+                                    presetattribute="owner" remove="true" create="true" autosave="false" maxcount="10">
+                                    <itemlayout>
+                                        <attribute name="startDate" width="200" />
+                                        <attribute name="endDate" width="200" />
+                                        <attribute name="status" width="200" />
+                                    </itemlayout>
+                                </referencecollectioneditor>
+                            </attribute>         
+							 <table>
+		                        <tr>
+		                           <td width="146px">
+		                           </td>
+		                           <td>
+		                              <shortcut name="findallBonusPeriods" type="AmwayBonusPeriod" usage="finder" autoperform="true">
+		                                    <preset targetattribute="store"/>
+		                              </shortcut>
+		                           </td>
+		                        </tr>
+		                     </table>                                                  
+                        </listlayout>
+                    </section>
+                </tab>
+            </editor>
+        </organizer>
+    </type>	
+    
+    <type name="CronJob" icon="images/ext/cronjob/e_cronjob.gif" mode="append">
+    	<organizer>
+    	<editor>
+    		<tab name="tab.cronjob.protocol">
+					<section name="section.cronjob.protocol">
+						<table>
+							<tr>
+								<td width="13px">
+								</td>
+								<td>
+									<shortcut name="shortcut.cronjob.findlogs" type="JobLog" usage="finder" autoperform="true">
+										<preset targetattribute="cronJob" />
+									</shortcut>
+								</td>
+								<td>
+									<action type="item" classname="de.hybris.platform.cronjob.hmc.DeleteJobLogAction" name="action.deletejoblog" />
+								</td>
+							</tr>
+						</table>
+						<listlayout>
+							<attribute name="logText">
+								<textareaeditor expanded="true" wrap="false" rows="15" cols="100" />
+							</attribute>
+						</listlayout>
+						<columnlayout>
+							<row>
+								<attribute name="logToDatabase" />
+								<attribute name="logLevelDatabase" />
+							</row>
+							<row>
+								<attribute name="logToFile" />
+								<attribute name="logLevelFile" />
+							</row>
+							<row>
+								<attribute name="logFiles">
+									<referencecollectioneditor resortable="true" presetattribute="owner" remove="true" create="true" maxcount="10">
+										<itemlayout>
+											<attribute name="code" width="200" />
+											<attribute name="size" width="80" />
+										</itemlayout>
+									</referencecollectioneditor>
+								</attribute>
+							</row>	
+						</columnlayout>
+					</section>
+	    		</tab>
+    	</editor>		
+    	</organizer>
+    </type>
+    
+     <type name="AmwayCartTypePromotionRestriction" mode="append">
+      <organizer>
+      	<editor>
+	         <essentials mode="replace">
+	            <listlayout>
+	               <text name="text.productrestriction.common" width="353"/>
+	               <attribute name="voucher"/>
+	               <attribute name="description"/>
+	            </listlayout>
+	         </essentials>
+	         <tab name="properties">
+	            <section name="section.restrictions" mode="replace" position="0">
+	               <listlayout>
+	                  <attribute name="cartTypes">
+								<referencecollectioneditor create="false" add="true" remove="true">
+									<itemlayout>
+										<attribute name="code" width="200"/>
+										<attribute name="name" width="200"/>										
+									</itemlayout>
+								</referencecollectioneditor>
+	                  </attribute>
+	                  <attribute name="positive" width="400">
+	                     <advancedbooleaneditor truename="carttyperestriction.positive.true"
+	                                            falsename="carttyperestriction.positive.false"/>
+	                  </attribute>
+	               </listlayout>
+	            </section>
+	         </tab>
+	      </editor>
+      </organizer>
+     </type>
+     
+      <explorertree>
+      <group name="pricesettings" expand="false" mode="append">
+         <typeref type="AmwayPaymentConfig" description="typeref.AmwayPaymentConfig.description"/>
+      </group>
+      <group name="pricesettings" expand="false" mode="append">
+         <typeref type="AmwayPaymentTypeConfig" description="typeref.AmwayPaymentTypeConfig.description"/>
+      </group>
+   </explorertree>
+   
+   <type name="AmwayPaymentConfig" mode="append">
+      <organizer>
+         <search mode="replace">
+            <condition attribute="code"/>
+            <condition attribute="channel"/> 
+         </search>
+         <result>
+            <listview>
+               <itemlayout mode="replace">
+                  <attribute name="code" width="100"/>
+                  <attribute name="channel" width="100"/>
+               </itemlayout>
+            </listview>
+            <editview>
+               <itemlayout mode="replace">
+                    <attribute name="code" width="100"/>
+                  <attribute name="channel" width="100"/>
+                  <attribute name="typeConfigs" width="100"/>
+               </itemlayout>
+            </editview>
+      </result>
+         <editor>
+            <essentials>
+                 <listlayout>
+                    <attribute name="code"/>
+               </listlayout>
+            </essentials>
+         </editor>
+   </organizer>
+   </type>   
+   <type name="AmwayPaymentTypeConfig" mode="append">
+      <organizer>
+         <search mode="replace">
+            <condition attribute="paymentMode"/>
+         </search>
+         <result>
+            <listview>
+               <itemlayout mode="replace">
+                  <attribute name="paymentMode" width="100"/>
+                  <attribute name="config" width="100"/>
+               </itemlayout>
+            </listview>
+            <editview>
+               <itemlayout mode="replace">
+                  <attribute name="paymentMode" width="100"/>
+                  <attribute name="config" width="100"/>
+				  <attribute name="repeatableCount" width="100"/>
+               </itemlayout>
+            </editview>
+      </result>
+         <editor>
+            <essentials>
+                 <listlayout>
+                    <attribute name="paymentMode"/>
+               </listlayout>
+            </essentials>
+         </editor>
+   </organizer>
+   </type>
+   	<type name="PromotionProductRestriction" mode="append">
+		<organizer>
+			<editor mode="append">
+				<tab name="tab.restriction.properties" mode="append">
+					<section name="section.restriction.products" mode="append" position="2">
+						<listlayout>
+							<attribute name="products" labelwidth="100">
+								<referencecollectioneditor autoperform="true" resortable="true" add="true" remove="true" create="false">
+									<itemlayout>
+										<attribute name="code" width="274"/>
+										<attribute name="name" width="274"/>
+									</itemlayout>
+								</referencecollectioneditor>
+							</attribute>
+							<attribute name="positive" labelwidth="100" width="400">
+								<advancedbooleaneditor truename="promotionproductrestriction.positive.true" falsename="promotionproductrestriction.positive.false"/>
+							</attribute>							
+						</listlayout>
+					</section>
+				</tab>
+			</editor>
+		</organizer>
+	</type>
+</configuration>

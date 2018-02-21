@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		   http://www.springframework.org/schema/beans/spring-beans.xsd
+		   http://www.springframework.org/schema/util
+		   http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<alias name="defaultUpdatePartyNameService" alias="updatePartyNameService"/>
+	<bean id="defaultUpdatePartyNameService" class="com.amway.integration.cis.dms.updatepartyname.impl.DefaultUpdatePartyNameService" parent="abstractDmsService">
+		<property name="inputConverter" ref="updatePartyNameServiceInputConverter"/>
+		<property name="outputConverter" ref="updatePartyNameServiceOutputConverter"/>
+		<property name="urlPath" value="${cis.client.dms.updatePartyNameService.urlPath}"/>
+	</bean>
+	
+	<bean id="mockUpdatePartyNameService" class="com.amway.integration.cis.dms.updateinformation.common.mock.CommonMockService">
+		<property name="inputConverter" ref="updatePartyNameServiceInputConverter"/>
+		<property name="outputConverter" ref="updatePartyNameServiceOutputConverter"/>
+		<property name="hystrixCommandConfig" ref="dmsCommandConfig" />
+		<property name="ondemandHystrixCommandFactory" ref="ondemandHystrixCommandFactory" />
+		<property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
+		<property name="serviceAvailCode" value="#{configurationService.configuration.getProperty('amwaydms.availablity.code')}"/>
+	</bean> 
+
+	<bean id="updatePartyNameServiceInputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.amway.integration.dms.services.UpdatePartyNameRequest"/>
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonRequestFieldsPopulator"/>
+				<ref bean="dmsUpdatePartyNameInputPopulator"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="dmsUpdatePartyNameInputPopulator" class="com.amway.integration.cis.dms.populators.DmsUpdatePartyNameInputPopulator"/>
+	
+	<bean id="updatePartyNameServiceOutputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.amway.core.data.CommonResponseFieldsData"/>
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonResponseFieldsPopulator"/>
+			</list> 
+		</property>
+	</bean>
+
+	<!--
+	<bean id="updatePartyInformationService" parent="abstractMockFactory">
+		<property name="mockInterface" value="com.amway.core.dms.service.DmsService"/>
+		<property name="mockMode" value="${cis.client.dms.updatePartyNameService.mock}"/>
+		<lookup-method name="getDefaultObject" bean="defaultUpdatePartyNameService"/>
+		<property name="customMock" ref="mockUpdatePartyNameService"/>
+			<!- - <bean class="com.amway.integration.cis.dms.updateinformation.common.mock.CommonMockService" autowire-candidate="false"/>
+		</property> - ->
+	</bean>
+	-->
+</beans>

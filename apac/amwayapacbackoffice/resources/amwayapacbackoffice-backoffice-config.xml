@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<config xmlns="http://www.hybris.com/cockpit/config"
+		xmlns:y="http://www.hybris.com/cockpit/config/hybris"
+		xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config"
+		xmlns:list-view="http://www.hybris.com/cockpitng/component/listView"
+		xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea"
+		xmlns:explorer-tree="http://www.hybris.com/cockpitng/config/explorertree"
+		xmlns:simple-search="http://www.hybris.com/cockpitng/config/simplesearch"
+		xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch"
+		xmlns:df="http://www.hybris.com/cockpitng/component/dynamicForms"
+		xmlns:dsb="http://www.hybris.com/cockpitng/config/dashboard">
+
+	<!-- amwayapacbackoffice UI configuration should be provided here -->
+
+	<!--<context component="component-code" module="amwayapacbackoffice">-->
+		<!--Please check documentation for code snippets for specific components-->
+	<!--</context>-->
+
+	<context merge-by="type" parent="GenericItem" type="AmwayAccount"
+		component="simple-search">
+		<simple-search:simple-search
+			xmlns:simple-search="http://www.hybris.com/cockpitng/config/simplesearch">
+			<simple-search:field
+				xmlns="http://www.hybris.com/cockpitng/config/simplesearch" name="code" />
+		</simple-search:simple-search>
+	</context>
+
+	<context merge-by="type" parent="GenericItem" type="AmwayCoupon"
+		component="simple-search">
+		<simple-search:simple-search
+			xmlns:simple-search="http://www.hybris.com/cockpitng/config/simplesearch">
+			<simple-search:field
+				xmlns="http://www.hybris.com/cockpitng/config/simplesearch" name="code" />
+		</simple-search:simple-search>
+	</context>
+	
+	<context merge-by="type" parent="GenericItem" type="AmwayCoupon"
+		component="advanced-search">
+		<advanced-search:advanced-search
+			xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list>
+				<advanced-search:field
+					xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="code"
+					selected="true" />
+				<advanced-search:field
+					xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="redemptionCoupon"
+					selected="true" />
+				<advanced-search:field
+					xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="status"
+					selected="true" />
+				<advanced-search:field
+					xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="store"
+					selected="false" />
+				<advanced-search:field
+					xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="account"
+					selected="false" />
+				<advanced-search:field
+					xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="customer"
+					selected="false" />
+				<advanced-search:field
+					xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="startDate"
+					selected="false" />
+				<advanced-search:field
+					xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="expiryDate"
+					selected="false" />	
+			</advanced-search:field-list>
+		</advanced-search:advanced-search>
+	</context>
+	
+	<context merge-by="type" type="AmwayCoupon"
+		component="listview">
+		<list:list-view xmlns:list="http://www.hybris.com/cockpitng/component/listView"
+			merge-mode="REPLACE">
+			<list-view:column qualifier="code" position="0" />
+			<list-view:column qualifier="redemptionCoupon" position="1" />
+			<list-view:column qualifier="store" position="2" />
+			<list-view:column qualifier="status" position="3" />
+			<list-view:column qualifier="account" position="4" />
+			<list-view:column qualifier="customer" position="5" />
+			<list-view:column qualifier="startDate" position="6" />
+			<list-view:column qualifier="endDate" position="7" />
+		</list:list-view>
+	</context>
+
+	<context component="create-wizard" type="AmwayCoupon">
+		<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config"
+			id="AmwayCouponWizard" title="create.AmwayCoupon.title">
+			<wz:prepare id="amwayAccountPrepare">
+				<wz:initialize property="newAmwayCoupon" type="AmwayCoupon" />
+			</wz:prepare>
+			<wz:step id="step1" label="create.AmwayCoupon.general.label">
+				<wz:content id="step1.content">
+					<wz:property-list root="newAmwayCoupon">
+						<wz:property qualifier="store" />
+						<wz:property qualifier="redemptionCoupon" />
+						<wz:property qualifier="account" />
+						<wz:property qualifier="customer" />
+						<wz:property qualifier="startDate" />
+						<wz:property qualifier="endDate" />
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step1.navigation">
+					<wz:cancel />
+					<wz:done visible="(newAmwayCoupon.account != null OR newAmwayCoupon.customer != null) AND newAmwayCoupon.store != null AND newAmwayCoupon.redemptionCoupon != null AND newAmwayCoupon.startDate != null AND newAmwayCoupon.endDate != null">
+						<wz:save property="newAmwayCoupon" />
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+		</wz:flow>
+	</context>
+	
+	<context type="AmwayCoupon" component="base" merge-by="type">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:labels>
+                <y:label>code</y:label>
+            </y:labels>
+        </y:base>
+    </context>
+	<context merge-by="type" type="AmwayCoupon" component="editor-area">
+			<editorArea:editorArea>
+				<editorArea:tab name="tab.configuration.amwayCoupon">
+					<editorArea:section name="section.amwayCoupon.basic.details">
+						<editorArea:attribute qualifier="code"/>
+						<editorArea:attribute qualifier="redemptionCoupon"/>
+						<editorArea:attribute qualifier="store"/>
+						<editorArea:attribute qualifier="startDate"/>
+						<editorArea:attribute qualifier="endDate"/>
+						<editorArea:attribute qualifier="status"/>
+						<editorArea:attribute qualifier="account"/>
+						<editorArea:attribute qualifier="customer"/>
+					</editorArea:section>
+				</editorArea:tab>
+			</editorArea:editorArea>
+		</context>
+	
+	<context component="explorer-tree" merge-by="module">
+		<n:explorer-tree xmlns:n="http://www.hybris.com/cockpitng/config/explorertree">
+			<n:navigation-node id="hmc_treenode_order">
+				<n:type-node code="AmwayBackOrder" id="AmwayBackOrder"
+					position="1"  />
+			</n:navigation-node>
+		</n:explorer-tree>
+	</context>
+	<context merge-mode="append" component="cs-explorer-tree"
+		principal="customersupportagentrole,customersupportadministratorrole,customersupportmanagerrole">
+		<n:explorer-tree xmlns:n="http://www.hybris.com/cockpitng/config/explorertree"
+			title="customer_support">
+			<n:type-node code="AmwayBackOrder" id="AmwayBackOrder"
+					position="1"  />
+		</n:explorer-tree>
+	</context>
+	<context type="AmwayBackOrder" component="listview">
+		<list:list-view xmlns:list="http://www.hybris.com/cockpitng/component/listView">
+			<list:column qualifier="product"  label="amway.backorder.product"/>
+			<list:column qualifier="warehouse" label="amway.backorder.warehouse"/>
+			<list:column qualifier="consignment" label="amway.backorder.consignment"/>
+			<list:column qualifier="originalOrder" label="amway.backorder.originalorder"/>
+			<list:column qualifier="status" label="amway.backorder.status"/>
+			<list:column qualifier="creationtime" label="amway.backorder.creationdate"/>			
+			<list:column qualifier="orderingAbo" label="amway.backorder.orderingabo"/>
+			<list:column qualifier="site" label="amway.backorder.site"/>
+			<!-- <list:column qualifier="" label="amway.backorder.quantity"/> -->			
+		</list:list-view>
+	</context>
+	<context merge-by="type" type="AmwayBackOrder" component="advanced-search" >
+        <advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch"> 
+            <advanced-search:field-list>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="product" selected="true" />
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="warehouse" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="consignment" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="originalOrder" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="status" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="creationtime" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="orderingAbo" selected="true"/>
+                <advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="site" selected="true"/>
+            </advanced-search:field-list>
+        </advanced-search:advanced-search>
+    </context>
+    <context component="cs-editor-area" type="AmwayBackOrder" merge-by="type"  principal="customersupportagentrole,customersupportadministratorrole,customersupportmanagerrole">
+		<editorArea:editorArea
+			xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">			
+			<editorArea:tab name="amway.backorder.tab.properties">				
+				<editorArea:customSection name="amway.backorder.section.essentials" spring-bean="backOrderEssentialsRenderer"/>
+				<editorArea:customSection name="amway.backorder.section.details" spring-bean="backOrderDetailsRenderer"/>
+				<editorArea:customSection name="amway.backorder.section.details.shippingaddress" spring-bean="backOrderShippingAddressRenderer"/>
+				<editorArea:customSection name="amway.backorder.section.consignmententries" spring-bean="backOrderConsignmentEntriesRenderer"/>				
+			</editorArea:tab>			
+		</editorArea:editorArea>
+	</context>
+	<context component="editor-area" type="AmwayBackOrder" merge-by="type">
+		<editorArea:editorArea
+			xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">			
+			<editorArea:tab name="amway.backorder.tab.properties">				
+				<editorArea:section name="amway.backorder.section.essentials">
+					<editorArea:attribute qualifier="consignment" label="amway.backorder.section.essentials.consignment"/>
+					<editorArea:attribute qualifier="status" label="amway.backorder.section.essentials.status"/>
+					<editorArea:attribute qualifier="originalOrder" label="amway.backorder.section.essentials.originalorder"/>					
+					<editorArea:attribute qualifier="orderingAbo" label="amway.backorder.section.essentials.orderingABO"/>
+					<editorArea:attribute qualifier="releaseByDate" label="amway.backorder.section.details.releaseBydate"/>					
+				</editorArea:section>
+				<editorArea:customSection name="amway.backorder.section.details" spring-bean="backOrderDetailsRenderer"/>
+				<editorArea:customSection name="amway.backorder.section.details.shippingaddress" spring-bean="backOrderShippingAddressRenderer"/>
+				<editorArea:customSection name="amway.backorder.section.consignmententries" spring-bean="backOrderConsignmentEntriesRenderer"/>				
+			</editorArea:tab>			
+		</editorArea:editorArea>
+	</context>	
+		<context type="StockLevel" component="editorareaactions" merge-by="type" >
+	         <y:actions xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+	            <y:group qualifier="common" >
+	            	<y:label>actiongroup.common</y:label>
+	            	<y:action action-id="com.hybris.cockpitng.action.delete" property="currentObject"/>
+					<y:action action-id="com.amway.amwayapacbackoffice.actions" property="currentObject"/>
+	            </y:group>
+	         </y:actions>
+   		</context>
+</config>

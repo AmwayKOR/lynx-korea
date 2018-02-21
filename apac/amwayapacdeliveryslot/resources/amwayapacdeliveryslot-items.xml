@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<itemtypes>
+		<typegroup name="BaseCommerce">
+			<itemtype code="AmwayDeliverySlotConfig">
+                <description>Contains template data of delivery slot using which actual delivery availability slots are generated.</description>
+                <deployment table="amwayDeliverySlotConfig" typecode="21080" />
+                <attributes>
+                    <attribute qualifier="warehouse" type="Warehouse">
+                        <description>Warehouse to which the delivery slots belong.</description>
+                        <modifiers optional="false" unique="true" />
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="orderingDay" type="WeekDay">
+                        <description>Day on which ABO is placing order.</description>
+                        <modifiers optional="false" unique="true" />
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="orderingTime" type="java.util.Date">
+                        <description>Time on which ABO is placing order</description>
+                        <modifiers unique="true" />
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="deliveryDay" type="WeekDay">
+                        <description>Day on which order will be delivered</description>
+                        <modifiers optional="false" unique="true" />
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="slotTime" type="java.lang.String">
+                        <description>Slot in which order will be delivered</description>
+                        <modifiers optional="false" unique="true" />
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute type="java.lang.Integer" qualifier="slotCapacity">
+                        <description>Number of deliveries to be taken in this slot</description>
+                        <modifiers optional="false" />
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute type="java.lang.Integer" qualifier="notifyCount">
+                        <description>Notification count after which ABO will be notified on storefront.</description>
+                        <modifiers optional="false" />
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute type="localized:java.lang.String" qualifier="instructions">
+                        <description>Special instruction</description>
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute type="java.lang.Boolean" qualifier="active">
+                        <description>Decides whether this slot is active or not.</description>
+                        <persistence type="property" />
+                        <defaultvalue>Boolean.FALSE</defaultvalue>
+                    </attribute>
+                </attributes>
+            </itemtype>
+
+			<itemtype code="AmwayDeliverySlotAvailability">
+                <description>Delivery Slot Availability for orders.</description>
+                <deployment table="amwayDlvrySlotAvlablty" typecode="21081" />
+                <attributes>
+                    <attribute qualifier="deliveryDate" type="java.util.Date">
+                        <description>Date on order will be delivered</description>
+                        <modifiers optional="false" unique="true" />
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="warehouse" type="Warehouse">
+                        <description>Warehouse to which the delivery slots belong.</description>
+                        <modifiers optional="false" unique="true" />
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="orderingTime" type="java.util.Date">
+                        <description>Time on which ABO is placing order</description>
+                        <modifiers unique="true" />
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="deliveryDay" type="WeekDay">
+                        <description>Day on which order will be delivered</description>
+                        <modifiers optional="false" />
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="slotTime" type="java.lang.String">
+                        <description>Slot in which order will be delivered</description>
+                        <modifiers optional="false" unique="true" />
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="slotCapacity" type="java.lang.Integer">
+                        <description>Total number of deliveries to be taken in this slot</description>
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="consumedCount" type="java.lang.Integer">
+                        <description>Number of deliveries already taken in this slot</description>
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="notifyCount" type="java.lang.Integer">
+                        <description>Notification count after which ABO will be notified on storefront</description>
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="instructions" type="localized:java.lang.String">
+                        <description>Special instruction</description>
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="active" type="java.lang.Boolean">
+                        <description>Decides whether this slot is active or not.</description>
+                        <defaultvalue>Boolean.FALSE</defaultvalue>
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="slotConfig" type="AmwayDeliverySlotConfig">
+                        <description>Config template data from which availability is created</description>
+                        <persistence type="property" />
+                    </attribute>
+                </attributes>
+                <indexes>
+                    <index name="deliveryDateIDX">
+                        <key attribute="deliveryDate" />
+                    </index>
+                </indexes>
+            </itemtype>
+		</typegroup>
+		
+		<typegroup name="Order">
+			<itemtype code="AbstractOrder" autocreate="false" generate="false">
+                <description>Abstract Order additional attributes for Delivery Slots</description>
+                <attributes>
+                    <attribute qualifier="selectedDeliverySlot" type="AmwayDeliverySlotAvailability">
+                        <description>Delivery Slot Selected</description>
+                        <persistence type="property" />
+                    </attribute>
+                </attributes>
+            </itemtype>
+		</typegroup>
+		
+	</itemtypes>
+</items>

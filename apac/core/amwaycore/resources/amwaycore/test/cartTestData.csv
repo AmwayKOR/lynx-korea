@@ -1,0 +1,51 @@
+
+#%impex.setLocale(Locale.US)
+#We need orders that cover most common ranges: a day, a week, a month, 6 months, a year.
+
+$cart1_date=19.02.2016 00:00:00
+$cart2_date=25.02.2016 00:00:00
+$cart3_date=29.02.2016 00:00:00
+
+INSERT_UPDATE cart;code[unique=true];date[dateformat=dd.MM.yyyy HH:mm:ss];net;currency(isocode);calculated;user(uid);store(uid)[default='defaultstore'];site(uid)[default='storetemplate']
+;cart01;$cart1_date;false;USD;false;amway_party_test_1;;;
+;cart02;$cart2_date;false;USD;false;amway_party_test_1;;;
+;cart03;$cart2_date;false;USD;false;amway_party_test_2;;;
+;cart04;$cart2_date;false;USD;false;amway_party_test_2;;;
+;cart05;$cart3_date;false;USD;false;amway_party_test_1;;;
+
+#Order Entries for certain day 01
+INSERT_UPDATE CartEntry;order(Cart.code)[unique=true];creationTime[dateformat=dd.MM.yyyy HH:mm:ss];product(code,catalogVersion(catalog(id),version))[unique=true];quantity;unit(code);basePrice;aboBasePrice;deliveryPointOfService(PointOfService.name)
+;cart01;$cart1_date;HW1210-3422:testCatalog:Online;1;pieces;12.95;10.95;pos1
+;cart01;$cart1_date;HW1210-3423:testCatalog:Online;3;pieces;22.95;20.95;pos1
+
+;cart02;$cart2_date;HW1210-3422:testCatalog:Online;1;pieces;12.95;10.95;
+;cart02;$cart2_date;HW1210-3423:testCatalog:Online;1;pieces;22.95;20.95;
+;cart02;$cart2_date;HW1210-3424:testCatalog:Online;1;pieces;30.95;25.95;
+
+;cart03;$cart2_date;HW1210-3422:testCatalog:Online;1;pieces;12.95;10.95;
+;cart03;$cart2_date;HW1210-3423:testCatalog:Online;1;pieces;22.95;20.95;
+;cart03;$cart2_date;HW1210-3424:testCatalog:Online;1;pieces;30.95;;
+
+;cart04;$cart2_date;HW1210-3424:testCatalog:Online;1;pieces;30.95;;
+;cart04;$cart2_date;HW1210-3425:testCatalog:Online;1;pieces;35.95;;
+
+;cart05;$cart3_date;HW1210-3423:testCatalog:Online;2;pieces;22.95;20.95;
+
+#Recalculating orders for certain day 01
+UPDATE Cart;code[unique=true];status(code)
+;cart01;CREATED
+#%   impex.getLastImportedItem().setPaymentAddress(impex.getLastImportedItem().getUser().getAllAddresses().iterator().next());
+#%   impex.getLastImportedItem().recalculate(); 
+;cart02;CREATED
+#%   impex.getLastImportedItem().setPaymentAddress(impex.getLastImportedItem().getUser().getAllAddresses().iterator().next());
+#%   impex.getLastImportedItem().recalculate();
+;cart03;CREATED
+#%   impex.getLastImportedItem().setPaymentAddress(impex.getLastImportedItem().getUser().getAllAddresses().iterator().next());
+#%   impex.getLastImportedItem().recalculate();
+;cart04;CREATED
+#%   impex.getLastImportedItem().setPaymentAddress(impex.getLastImportedItem().getUser().getAllAddresses().iterator().next());
+#%   impex.getLastImportedItem().recalculate();
+;cart05;CREATED
+#%   impex.getLastImportedItem().setPaymentAddress(impex.getLastImportedItem().getUser().getAllAddresses().iterator().next());
+#%   impex.getLastImportedItem().recalculate();
+

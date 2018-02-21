@@ -1,0 +1,108 @@
+#%impex.enableCodeExecution(true)
+#%impex.enableExternalSyntaxParsing(true)
+
+$contentCatalog=amwayapacContentCatalog
+$productCatalog=amwayapacProductCatalog
+$defaultCurrency=USD
+
+$siteResource=jar:com.amway.lynxcore.constants.LynxCoreConstants&/test
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Online'])[unique=true,default=$productCatalog:Online]
+$productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Online'])[unique=true,default=$productCatalog:Online]
+
+# Create Customer Group
+INSERT_UPDATE Usergroup;uid[unique=true];groups(uid)[mode=append];userPriceGroup(code)
+;distributorgroup;;AmwayDefaultABOPriceGroup
+
+##########################
+
+INSERT_UPDATE Catalog;id[unique=true];name[lang=en];defaultCatalog;;;;;;
+;$productCatalog;$productCatalog;false;;;;;;
+
+INSERT_UPDATE CatalogVersion; catalog(id)[unique=true]; version[default='Online',unique=true];active;defaultCurrency(isocode);;;;;;
+;$productCatalog;;true;$defaultCurrency;;;;;;
+
+## User Impex
+############################################USER CREATION IMPEX[START]###################################################################################
+
+INSERT_UPDATE Country;isocode[unique=true];name[lang=en];active[default=true];affiliateNumber;adaCountryCode;countryCode
+;MY;"Malaysia";;100;100;100
+
+INSERT_UPDATE Country;isocode[unique=true];name[lang=en];active[default=true];adaCountryCode;affiliateNumber
+                     ;MY                  ;"Malaysia"   ;                    ;100           ;100
+
+INSERT_UPDATE customer;citizenship(code);active;isMarried;dateOfBirth[dateformat=yyyy-MM-dd];race(code);groups(uid)[mode=append];name;customerEmail;uid;customerID[unique=true]
+;PERMANENT_CITIZEN;true;<ignore>;1981-05-20;CHINESE;"distributorgroup,customergroup";GOH ENG SEONG;dummy-xyzpqr@yahoo.com;100-8914266-B;100-8914266-B
+
+##########################
+
+INSERT_UPDATE AmwayAccount;code[unique=true];status(code);userPriceGroup(code);primaryParty(customerID);entryDate[dateformat=yyyy-MM-dd];expiryDate[dateformat=yyyy-MM-dd];businessNature(code);name;country(isocode);controllingAffiliate(isocode)[unique=true]
+;8914266;ACTIVE;AmwayDefaultABOPriceGroup;100-8914266-B;2017-05-30;2018-05-30;AmwayBusinessNature_1;GOH ENG SEONG;MY;MY
+
+##########################
+
+INSERT_UPDATE AmwayBusinessLevel;segmentaionLevel(code);owner(AmwayAccount.controllingAffiliate(Country.isocode),AmwayAccount.code)[unique=true]
+;SegmentationLevelTypeEnum_9;MY:8914266
+
+##########################
+
+INSERT_UPDATE amwayaccount;code[unique=true];level(AmwayBusinessLevel.owner(AmwayAccount.controllingAffiliate(Country.isocode),AmwayAccount.code));controllingAffiliate(isocode)[unique=true]
+;8914266;MY:8914266;MY
+
+##########################
+
+INSERT_UPDATE AmwayUserIdentity;type(code)[unique=true];code[unique=true]
+;MYS_NEW_IC_NO;810520075829
+
+##########################
+
+INSERT_UPDATE amwayaccount;code[unique=true];controllingAffiliate(isocode)[unique=true];parties(customerID)[mode=append]
+;8914266;MY;100-8914266-B
+
+##########################
+
+INSERT_UPDATE customer;identity(AmwayUserIdentity.code,AmwayUserIdentity.type(IdentityType.code));spouse;customerID[unique=true]
+;810520075829:MYS_NEW_IC_NO;false;100-8914266-B
+
+##########################
+
+# INSERT_UPDATE amwayaccount;code[unique=true];controllingAffiliate(isocode)[unique=true];registeredAddress(Address.owner(Customer.customerID)[unique=true])
+# ;8914266;MY;100-8914266-B
+
+##########################
+
+INSERT_UPDATE PhoneContactInfo;user(Customer.customerID)[unique=true];type(code);phoneNumber;country(countryCode);code[unique=true]
+;100-8914266-B;MOBILE;dummy-0165627235;100;100-8914266-B-MOBILE
+
+##########################
+
+INSERT_UPDATE customer;primaryMobileNo(code[unique=true]);customerID[unique=true]
+;100-8914266-B-MOBILE;100-8914266-B
+
+##########################
+
+INSERT_UPDATE customer;citizenship(code);active;isMarried;dateOfBirth[dateformat=yyyy-MM-dd];race(code);groups(uid)[mode=append];name;uid;customerID[unique=true]
+;PERMANENT_CITIZEN;true;N;1981-05-20;CHINESE;"distributorgroup,customergroup";GOH ENG SEONG;100-8914266-B;100-8914266-B
+
+##########################
+
+REMOVE AmBusRestrsForAmwayAccount;target(code)[unique=true];source(AmwayAccount.controllingAffiliate(Country.isocode),AmwayAccount.code)[unique=true]
+;business_restriction_10000;MY:8914266
+
+##########################
+
+############################################USER CREATION IMPEX[END]###################################################################################
+
+
+############################################ Product Creation Impex [START] ###########################################
+
+INSERT_UPDATE Unit;unitType[unique=true];code[unique=true];name[lang=en];conversion;;;
+;pieces;pieces;pieces;1
+
+INSERT_UPDATE Product ;code[unique=true] ;$productCV[unique=true,forceWrite=true] ;name[lang=en];unit(code);approvalStatus(code) ;startLineNumber;supercategories(code,$productCV)
+;220136;;;pieces;approved;;
+
+INSERT_UPDATE AmwayPaymentOption;aliasCode[unique=true];title;active;type(code);product(code,$productCV)[unique=true];tenure
+;220136;<ignore>;true;PIF;220136;
+
+############################################ Product Creation Impex [END] ###########################################

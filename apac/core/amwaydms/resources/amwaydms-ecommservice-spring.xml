@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		   http://www.springframework.org/schema/beans/spring-beans.xsd
+		   http://www.springframework.org/schema/util
+		   http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<!--##########################################################################
+		##########  1.  Add Party Ecommm Service  #####################
+		##########################################################################  -->		   
+	<bean id="dmsAddPartyEcommInputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.integration.dms.services.AddPartyEcommRequest" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonRequestFieldsPopulator" />
+				<ref bean="dmsAddPartyEcommInputPopulator" />
+			</list>
+		</property>
+	</bean>
+	<bean id="dmsAddPartyEcommInputPopulator"
+		class="com.amway.integration.cis.dms.populators.DmsAddPartyEcommInputPopulator">
+	</bean>
+		
+	 <bean id="dmsAddEcommResponseConverter" parent="abstractPopulatingConverter">
+		  <property name="targetClass" value="com.amway.core.data.CommonResponseFieldsData" />
+		  <property name="populators">
+		   <list>
+		    <ref bean="amwayCommonResponseFieldsPopulator" />
+		   </list>
+		  </property>
+	  </bean>
+ 
+	<!-- Update Business nature  mock and actual service -->
+	
+	<bean id="defaultAddPartyEcommService"
+		class="com.amway.integration.cis.dms.ecommservice.impl.DefaultAddPartyEcommService"
+		parent="abstractDmsService">
+		<property name="inputConverter" ref="dmsAddPartyEcommInputConverter" />
+		<property name="outputConverter" ref="dmsAddEcommResponseConverter" />
+		<property name="urlPath" value="${cis.client.dms.addPartyEcomm.urlPath}" />
+	</bean>
+
+	<bean id="mockAddPartyEcommService"
+		class="com.amway.integration.cis.dms.ecommservice.mock.impl.MockAddPartyEcommService">
+		<property name="inputConverter" ref="dmsAddPartyEcommInputConverter" />
+		<property name="outputConverter" ref="dmsAddEcommResponseConverter" />
+		<property name="hystrixCommandConfig" ref="dmsCommandConfig" />
+		<property name="ondemandHystrixCommandFactory" ref="ondemandHystrixCommandFactory" />
+		<property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
+		<property name="serviceAvailCode" value="#{configurationService.configuration.getProperty('amwaydms.availablity.code')}"/>
+	</bean> 
+
+	<alias alias="addPartyEcommService" name="defaultAddPartyEcommService" />
+	<!--
+	<bean id="addPartyEcommServiceFactory" parent="abstractMockFactory">
+		<property name="mockInterface" value="com.amway.core.dms.service.DmsService" />
+		<property name="mockMode" value="${cis.client.dms.addPartyEcommService.mock}" />
+		<lookup-method name="getDefaultObject" bean="defaultAddPartyEcommService" />
+		<property name="customMock" ref="mockAddPartyEcommService"/>
+		<!- - 	<bean
+				class="com.amway.integration.cis.dms.ecommservice.mock.impl.MockAddPartyEcommService"
+				autowire-candidate="false">
+			</bean>
+		</property> - ->
+	</bean>
+	-->
+	<!-- ##########################################################################
+		##########  2.  Update Party Ecommm Service  #####################
+		##########################################################################  -->		   
+	<bean id="dmsUpdatePartyEcommInputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.integration.dms.services.UpdatePartyEcommRequest" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonRequestFieldsPopulator" />
+				<ref bean="dmsUpdatePartyEcommInputPopulator" />
+			</list>
+		</property>
+	</bean>
+	<bean id="dmsUpdatePartyEcommInputPopulator"
+		class="com.amway.integration.cis.dms.populators.DmsUpdatePartyEcommInputPopulator">
+	</bean>
+		
+	 <bean id="dmsUpdateEcommResponseConverter" parent="abstractPopulatingConverter">
+		  <property name="targetClass" value="com.amway.core.data.CommonResponseFieldsData" />
+		  <property name="populators">
+		   <list>
+		    <ref bean="amwayCommonResponseFieldsPopulator" />
+		   </list>
+		  </property>
+	  </bean>
+ 
+	<!-- Update Business nature  mock and actual service -->
+	
+	<bean id="defaultUpdatePartyEcommService"
+		class="com.amway.integration.cis.dms.ecommservice.impl.DefaultUpdatePartyEcommService"
+		parent="abstractDmsService">
+		<property name="inputConverter" ref="dmsUpdatePartyEcommInputConverter" />
+		<property name="outputConverter" ref="dmsUpdateEcommResponseConverter" />
+		<property name="urlPath" value="${cis.client.dms.updatePartyEcomm.urlPath}" />
+	</bean>
+
+	<bean id="mockUpdatePartyEcommService"
+		class="com.amway.integration.cis.dms.ecommservice.mock.impl.MockUpdatePartyEcommService">
+		<property name="inputConverter" ref="dmsUpdatePartyEcommInputConverter" />
+		<property name="outputConverter" ref="dmsUpdateEcommResponseConverter" />
+		<property name="hystrixCommandConfig" ref="dmsCommandConfig" />
+		<property name="ondemandHystrixCommandFactory" ref="ondemandHystrixCommandFactory" />
+		<property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
+		<property name="serviceAvailCode" value="#{configurationService.configuration.getProperty('amwaydms.availablity.code')}"/>
+	</bean> 
+
+	<alias alias="updatePartyEcommService" name="defaultUpdatePartyEcommService" />
+	<!--
+	<bean id="updatePartyEcommServiceFactory" parent="abstractMockFactory">
+		<property name="mockInterface" value="com.amway.core.dms.service.DmsService" />
+		<property name="mockMode" value="${cis.client.dms.updatePartyEcommService.mock}" />
+		<lookup-method name="getDefaultObject" bean="defaultUpdatePartyEcommService" />
+		<property name="customMock" ref="mockUpdatePartyEcommService"/>
+			<!- - <bean
+				class="com.amway.integration.cis.dms.ecommservice.mock.impl.MockUpdatePartyEcommService"
+				autowire-candidate="false">
+			</bean>
+		</property> - ->
+	</bean>
+	-->
+	
+	<!-- ##########################################################################
+		##########  3.  Delete Party Ecommm Service  #####################
+		##########################################################################  -->
+		
+	   <bean id="dmsDeletePartyEcommInputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.integration.dms.services.DeletePartyEcommRequest" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonRequestFieldsPopulator" />
+				<ref bean="dmsDeletePartyEcommInputPopulator" />
+			</list>
+		</property>
+	    </bean>
+		<bean id="dmsDeletePartyEcommInputPopulator"
+		class="com.amway.integration.cis.dms.populators.DmsDeletePartyEcommInputPopulator">
+	    </bean>
+		
+		<bean id="dmsDeleteEcommResponseConverter" parent="abstractPopulatingConverter">
+		  <property name="targetClass" value="com.amway.core.data.CommonResponseFieldsData" />
+		  <property name="populators">
+		   <list>
+		    <ref bean="amwayCommonResponseFieldsPopulator" />
+		   </list>
+		  </property>
+	  </bean>
+	  
+	  <bean id="defaultDeletePartyEcommService"
+		class="com.amway.integration.cis.dms.ecommservice.impl.DefaultDeletePartyEcommService"
+		parent="abstractDmsService">
+		<property name="inputConverter" ref="dmsDeletePartyEcommInputConverter" />
+		<property name="outputConverter" ref="dmsDeleteEcommResponseConverter" />
+		<property name="urlPath" value="${cis.client.dms.deletePartyEcomm.urlPath}" />
+	</bean>
+
+	<bean id="mockDeletePartyEcommService"
+		class="com.amway.integration.cis.dms.ecommservice.mock.impl.MockDeletePartyEcommService">
+		<property name="inputConverter" ref="dmsDeletePartyEcommInputConverter" />
+		<property name="outputConverter" ref="dmsDeleteEcommResponseConverter" />
+		<property name="hystrixCommandConfig" ref="dmsCommandConfig" />
+		<property name="ondemandHystrixCommandFactory" ref="ondemandHystrixCommandFactory" />
+		<property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
+		<property name="serviceAvailCode" value="#{configurationService.configuration.getProperty('amwaydms.availablity.code')}"/>
+	</bean> 
+
+	<alias alias="deletePartyEcommService" name="defaultDeletePartyEcommService" />
+	<!--
+	<bean id="deletePartyEcommServiceFactory" parent="abstractMockFactory">
+		<property name="mockInterface" value="com.amway.core.dms.service.DmsService" />
+		<property name="mockMode" value="${cis.client.dms.deletePartyEcommService.mock}" />
+		<lookup-method name="getDefaultObject" bean="defaultDeletePartyEcommService" />
+		<property name="customMock" ref="mockDeletePartyEcommService"/>
+			<!- - <bean
+				class="com.amway.integration.cis.dms.ecommservice.mock.impl.MockDeletePartyEcommService"
+				autowire-candidate="false">
+			</bean>
+		</property> - ->
+	</bean>
+	-->
+	
+	
+	<!-- ##########################################################################
+		##########  4. Get Party Ecommm Service  #####################
+		##########################################################################  -->
+		
+	 <bean id="dmsGetPartyEcommInputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.integration.dms.services.GetPartyEcommRequest" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonRequestFieldsPopulator" />
+				<ref bean="dmsGetPartyEcommInputPopulator" />
+			</list>
+		</property>
+	    </bean>
+	    
+		<bean id="dmsGetPartyEcommInputPopulator"
+		class="com.amway.integration.cis.dms.populators.DmsGetPartyEcommInputPopulator">
+	    </bean>
+		
+		<bean id="dmsGetEcommOutputConverter" parent="abstractPopulatingConverter">
+		  <property name="targetClass" value="com.amway.core.data.CommonResponseFieldsData" />
+		  <property name="populators">
+		   <list>
+		    <ref bean="dmsGetEcommOutputPopulator" />
+		    <ref bean="amwayCommonResponseFieldsPopulator" />
+		   </list>
+		  </property>
+	  </bean>
+	  
+	  	<bean id="dmsGetEcommOutputPopulator"
+		class="com.amway.integration.cis.dms.populators.DmsGetPartyEcommOutPopulator">
+	    </bean>
+	  
+	<alias alias="getPartyEcommService" name="getPartyEcommServiceFactory" />
+	  <bean id="getPartyEcommServiceFactory"
+		class="com.amway.integration.cis.dms.ecommservice.impl.DefaultGetPartyEcommService"
+		parent="abstractDmsService">
+		<property name="inputConverter" ref="dmsGetPartyEcommInputConverter" />
+		<property name="outputConverter" ref="dmsGetEcommOutputConverter" />
+		<property name="urlPath" value="${cis.client.dms.getPartyEcomm.urlPath}" />
+	</bean>
+
+	 <bean id="mockGetPartyEcommService"
+		class="com.amway.integration.cis.dms.ecommservice.mock.impl.MockGetPartyEcommService">
+		<property name="inputConverter" ref="dmsGetPartyEcommInputConverter" />
+		<property name="outputConverter" ref="dmsGetEcommOutputConverter" />
+		<property name="hystrixCommandConfig" ref="dmsCommandConfig" />
+		<property name="ondemandHystrixCommandFactory" ref="ondemandHystrixCommandFactory" />
+		<property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
+		<property name="serviceAvailCode" value="#{configurationService.configuration.getProperty('amwaydms.availablity.code')}"/>
+	</bean> 
+<!--
+	<bean id="getPartyEcommService" parent="abstractMockFactory">
+		<property name="mockInterface" value="com.amway.core.dms.service.DmsService" />
+		<property name="mockMode" value="${cis.client.dms.getPartyEcommService.mock}" />
+		<lookup-method name="getDefaultObject" bean="defaultGetPartyEcommService" />
+		<property name="customMock" ref="mockGetPartyEcommService"/>
+			<!- - <bean
+				class="com.amway.integration.cis.dms.ecommservice.mock.impl.MockGetPartyEcommService"
+				autowire-candidate="false">
+			</bean>
+		</property> - ->
+	</bean>
+		-->
+	<!-- ##########################################################################
+		##########  4. Party Process Ecommm Service  #####################
+		##########################################################################  -->
+	<bean id="dmsProcessPartyEcommInputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.integration.dms.services.ProcessPartyEcommRequest" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonRequestFieldsPopulator" />
+				<ref bean="dmsProcessPartyEcommInputPopulator" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="dmsProcessPartyEcommInputPopulator"
+		class="com.amway.integration.cis.dms.populators.DmsProcessPartyEcommInputPopulator">
+	</bean>
+	
+	<bean id="dmsProcessPartyEcommOutputConverter" parent="abstractPopulatingConverter">
+		  <property name="targetClass" value="com.amway.core.data.CommonResponseFieldsData" />
+		  <property name="populators">
+		   <list>
+		    <ref bean="amwayCommonResponseFieldsPopulator" />
+		   </list>
+		  </property>
+	</bean>
+	
+	<bean id="defaultProcessPartyEcommService"
+		class="com.amway.integration.cis.dms.ecommservice.impl.DefaultProcessPartyEcommService"
+		parent="abstractDmsService">
+		<property name="inputConverter" ref="dmsProcessPartyEcommInputConverter" />
+		<property name="outputConverter" ref="dmsProcessPartyEcommOutputConverter" />
+		<property name="urlPath" value="${cis.client.dms.processPartyEcomm.urlPath}" />
+	</bean>
+
+	<bean id="mockProcessPartyEcommService"
+		class="com.amway.integration.cis.dms.ecommservice.mock.impl.MockProcessPartyEcommService">
+		<property name="inputConverter" ref="dmsProcessPartyEcommInputConverter" />
+		<property name="outputConverter" ref="dmsProcessPartyEcommOutputConverter" />
+		<property name="hystrixCommandConfig" ref="dmsCommandConfig" />
+		<property name="ondemandHystrixCommandFactory" ref="ondemandHystrixCommandFactory" />
+		<property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
+		<property name="serviceAvailCode" value="#{configurationService.configuration.getProperty('amwaydms.availablity.code')}"/>
+	</bean> 
+
+	<alias alias="processPartyEcommService" name="defaultProcessPartyEcommService" />
+	<!--
+	<bean id="processPartyEcommServiceFactory" parent="abstractMockFactory">
+		<property name="mockInterface" value="com.amway.core.dms.service.DmsService" />
+		<property name="mockMode" value="${cis.client.dms.processPartyEcommService.mock}" />
+		<lookup-method name="getDefaultObject" bean="defaultProcessPartyEcommService" />
+		<property name="customMock" ref="mockProcessPartyEcommService"/>
+			<!- - <bean
+				class="com.amway.integration.cis.dms.ecommservice.mock.impl.MockProcessPartyEcommService"
+				autowire-candidate="false">
+			</bean>
+		</property> - ->
+	</bean>
+	-->
+		
+</beans>

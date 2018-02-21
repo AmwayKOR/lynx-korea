@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		   http://www.springframework.org/schema/beans/spring-beans.xsd
+		   http://www.springframework.org/schema/util
+		   http://www.springframework.org/schema/util/spring-util.xsd">
+
+
+    <alias alias="getBalanceAccountService" name="defaultAmwayGetBalanceAccountService" />
+    <bean id="defaultAmwayGetBalanceAccountService"
+          class="com.amway.amwaydms.balance.services.impl.DefaultGetBalanceService"
+          parent="amwayAbstractDmsService">
+        <property name="inputConverter" ref="amwayAccountBalanceInputConverter" />
+        <property name="outputConverter" ref="amwayAccountBalanceOutputConverter" />
+        <property name="urlPath" value="${amwaydms.dms.url}" />
+    </bean>
+
+    <bean id="mockGetBalanceAccountService"
+          class="com.amway.amwaydms.balance.services.impl.mock.MockGetAccountBalanceService">
+        <property name="inputConverter" ref="amwayAccountBalanceInputConverter" />
+        <property name="outputConverter" ref="amwayAccountBalanceOutputConverter" />
+    </bean>
+
+
+    <bean id="amwayAccountBalanceInputConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass"
+                  value="com.amway.amwaydms.model.AccountBalanceRequest" />
+        <property name="populators">
+            <list>
+                <ref bean="amwayAccountBalanceInputPopulator" />
+            </list>
+        </property>
+    </bean>
+
+    <bean id="amwayAccountBalanceOutputConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass"
+                  value="com.amway.core.dms.data.GetBalanceResponseData" />
+        <property name="populators">
+            <list>
+                <ref bean="amwayAccountBalanceOutputPopulator" />
+            </list>
+        </property>
+    </bean>
+
+    <bean id="amwayAccountBalanceOutputPopulator"
+          class="com.amway.amwaydms.populators.AccountBalanceOutputPopulator"
+          parent="abstractDmsPopulator">
+        <property name="commonI18NService" ref="commonI18NService"/>
+    </bean>
+
+    <bean id="amwayAccountBalanceInputPopulator"
+          class="com.amway.amwaydms.populators.AccountBalanceInputPopulator"
+          parent="abstractDmsPopulator">
+    </bean>
+
+
+
+    <alias alias="createBalanceAccountService" name="defaultCreateBalanceAccountService" />
+    <bean id="defaultCreateBalanceAccountService"
+          class="com.amway.amwaydms.balance.services.impl.DefaultCreateBalanceService"
+          parent="amwayAbstractDmsService">
+        <property name="inputConverter" ref="amwayCreateAccountBalanceInputConverter" />
+        <property name="outputConverter" ref="amwayCreateAccountBalanceOutputConverter" />
+        <property name="urlPath" value="${amwaydms.dms.url}" />
+    </bean>
+
+    <bean id="mockCreateBalanceAccountService"
+          class="com.amway.amwaydms.balance.services.impl.mock.MockCreateAccountBalanceService">
+        <property name="inputConverter" ref="amwayCreateAccountBalanceInputConverter" />
+        <property name="outputConverter" ref="amwayCreateAccountBalanceOutputConverter" />
+  </bean>
+
+    <bean id="amwayCreateAccountBalanceInputConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass"
+                  value="com.amway.amwaydms.model.AccountBalanceRequest" />
+        <property name="populators">
+            <list>
+                <ref bean="amwayCreateAccountBalanceInputPopulator"/>
+            </list>
+        </property>
+    </bean>
+
+
+    <bean id="amwayCreateAccountBalanceInputPopulator"
+          class="com.amway.amwaydms.populators.CreateAccountBalanceInputPopulator"
+          parent="abstractDmsPopulator">
+    </bean>
+
+    <bean id="amwayCreateAccountBalanceOutputConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass"
+                  value="com.amway.core.data.CommonResponseFieldsData" />
+        <property name="populators">
+            <list>
+                <ref bean="amwayCommonResponsePopulator" />
+            </list>
+        </property>
+    </bean>
+
+</beans>

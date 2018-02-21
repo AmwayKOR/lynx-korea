@@ -1,0 +1,4 @@
+# AmwayDamAssetFormats
+INSERT_UPDATE AmwayDamAssetFormat; qualifier[unique = true]; name              ; assetType       ; mimeType ; width; height
+; "IMAGE_100_100"         ; "image:100Wx100H" ; IMAGE           ; "jpeg"    ; 100  ; 100
+; "IMAGE"                 ; "image"           ; IMAGE           ; "jpeg"   ; -1   ; -1

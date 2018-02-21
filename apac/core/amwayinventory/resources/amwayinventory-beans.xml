@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
+
+    <bean class="com.amway.amwayinventory.data.AmwayInventoryBean">
+        <property name="baseItemNumber" type="String" equals="true"/>
+        <property name="itemNumber" type="String" equals="true"/>
+        <property name="available" type="Integer"/>
+        <property name="warehouseCode" type="String" equals="true"/>
+    </bean>
+
+    <bean class="com.amway.amwayinventory.data.AmwayConsolidatedInventoryBean">
+        <property name="productCode" type="String" equals="true"/>
+        <property name="warehouseCode" type="String" equals="true"/>
+        <property name="amount" type="Integer"/>
+    </bean>
+
+    <bean class="com.amway.amwayinventory.data.AmwayInventoryUpdateRequest">
+        <property name="array" type="java.util.List&lt;com.amway.amwayinventory.data.AmwayInventoryDeltaAdjustmentData&gt;"/>
+        <property name="warehouseCode" type="String"/>
+    </bean>
+
+    <bean class="com.amway.amwayinventory.data.AmwayInventoryUpdateResponse">
+        <property name="statusCode" type="Integer"/>
+    </bean>
+
+    <bean class="com.amway.amwayinventory.data.AmwayInventoryDeltaAdjustmentData">
+        <property name="baseItemNumber" type="String"/>
+        <property name="itemNumber" type="String"/>
+        <property name="adjustment" type="Integer"/>
+    </bean>
+
+    <bean class="com.amway.amwayinventory.data.AmwayInventoryValidationResult">
+        <property name="beansWithoutErrors" type="java.util.Collection&lt;com.amway.amwayinventory.data.AmwayInventoryBean&gt;"/>
+        <property name="errorMessage" type="String"/>
+        <property name="allInvalid" type="boolean"/>
+        <property name="anyInvalid" type="boolean"/>
+    </bean>
+</beans>

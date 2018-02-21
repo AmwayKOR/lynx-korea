@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		   http://www.springframework.org/schema/beans/spring-beans.xsd
+		   http://www.springframework.org/schema/util
+		   http://www.springframework.org/schema/util/spring-util.xsd">
+
+
+    <bean id="dmsSubscriptionInputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.integration.dms.services.SubscriptionInputRequest"/>
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonRequestFieldsPopulator"/>
+				<ref bean="dmsSubscriptionInputPopulator" />
+			</list>
+		</property>
+	</bean>
+	<alias name="defaultDmsSubscriptionInputPopulator" alias="dmsSubscriptionInputPopulator"/>
+    <bean id="defaultDmsSubscriptionInputPopulator" class="com.amway.integration.cis.dms.populators.DmsSubscriptionInputPopulator"></bean>
+ 
+  <alias name="dmsSubscriptionOutputConverter" alias="dmsSubscriptionOutputConverter"/>
+  <bean id="dmsSubscriptionOutputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.core.dms.data.DmsSubscriptionResultData"/>
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonResponseFieldsPopulator" />
+				<ref bean="dmsSubscriptionOutputReversePopulator" />    
+			</list>
+		</property>
+	</bean>
+	<alias name="defaultDmsSubscriptionOutputReversePopulator" alias="dmsSubscriptionOutputReversePopulator"/>
+    <bean id="defaultDmsSubscriptionOutputReversePopulator" class="com.amway.integration.cis.dms.populators.DmsSubscriptionOutputReversePopulator">
+    </bean>
+   
+   
+   <bean id="dmsUpdateSubscriptionOutputConverter" parent="abstractPopulatingConverter">
+		  <property name="targetClass" value="com.amway.core.dms.data.SubscriptionDataResponse" />
+		  <property name="populators">
+		   <list>
+		    <ref bean="dmsUpdateSubscriptionOutputPopulator" />
+		   </list>
+		  </property>
+	  </bean>
+ 
+	 <bean id="dmsUpdateSubscriptionOutputPopulator" class="com.amway.integration.cis.dms.populators.DmsUpdateSubscriptionOutputPopulator">
+	 </bean>
+   
+    <!-- 
+    dmsSubscriptionUpdateConverter -->
+    	<alias name="dmsSubscriptionUpdateConverter" alias="dmsSubscriptionUpdateConverter"/>
+       <bean id="dmsSubscriptionUpdateConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.integration.dms.services.UpdateSubscriptionRequest"/>
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonRequestFieldsPopulator"/>
+				<ref bean="dmsSubscriptionUpdatePopulator" />
+			</list>
+		</property>
+	</bean>
+	<alias name="defaultDmsSubscriptionUpdatePopulator" alias="dmsSubscriptionUpdatePopulator"/>
+
+	<bean id="defaultDmsSubscriptionUpdatePopulator" class="com.amway.integration.cis.dms.populators.DmsSubscriptionUpdatePopulator">
+    	<property name="baseStoreService" ref="baseStoreService"/>
+    	<property name="amwayAccountCommerceService" ref="amwayAccountCommerceService"/>
+    </bean>
+ 
+
+	<!-- Get address mock and actual service -->
+	<alias alias="dmsSubscriptionService" name="defaultSubscriptionService" />
+	<bean id="defaultSubscriptionService"
+		class="com.amway.integration.cis.dms.subscription.services.impl.DefaultSubscriptionService" parent="abstractDmsService">
+		<property name="inputConverter" ref="dmsSubscriptionInputConverter" />
+		<property name="outputConverter" ref="dmsSubscriptionOutputConverter" />
+		<property name="urlPath" value="${cis.client.dms.getsubscriptionservice.urlPath}" />
+	</bean>
+
+	<bean id="mockSubscriptionService"
+		class="com.amway.integration.cis.dms.subscription.services.mock.impl.MockSubscriptionService">
+		<property name="inputConverter" ref="dmsSubscriptionInputConverter" />
+		<property name="outputConverter" ref="dmsSubscriptionOutputConverter" />
+		<property name="hystrixCommandConfig" ref="dmsCommandConfig" />
+		<property name="ondemandHystrixCommandFactory" ref="ondemandHystrixCommandFactory" />
+		<property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
+		<property name="serviceAvailCode" value="#{configurationService.configuration.getProperty('amwaydms.availablity.code')}"/>
+	</bean> 
+	<!--
+	<bean id="subscriptionServiceFactory" parent="abstractMockFactory">
+			<property name="mockInterface" value="com.amway.core.dms.service.DmsService" />
+		<property name="mockMode" value="${cis.client.dms.subscription.mock}" />
+		<lookup-method name="getDefaultObject" bean="defaultSubscriptionService"/>
+		<property name="customMock" ref="mockSubscriptionService"/>
+			<!- - <bean class="com.amway.integration.cis.dms.subscription.services.mock.impl.MockSubscriptionService"
+				autowire-candidate="false">
+			</bean>
+		</property> - ->
+	</bean>
+
+	-->
+
+	<!-- Get update subscription mock and actual service -->
+	<alias alias="dmsUpdateSubscriptionService" name="defaultUpdateSubscriptionService" />
+	<bean id="defaultUpdateSubscriptionService"
+		class="com.amway.integration.cis.dms.subscription.services.impl.DefaultUpdateSubscriptionService" parent="abstractDmsService">
+		 <property name="inputConverter" ref="dmsSubscriptionUpdateConverter"></property>
+		 <property name="outputConverter" ref="dmsUpdateSubscriptionOutputConverter" />
+		 <property name="urlPath" value="${cis.client.dms.updatesubscriptionservice.urlPath}" />
+	</bean>
+
+	<bean id="mockUpdateSubscriptionService"
+		class="com.amway.integration.cis.dms.subscription.services.mock.impl.MockUpdateSubscriptionService">
+		 <property name="inputConverter" ref="dmsSubscriptionUpdateConverter"></property>
+		 <property name="outputConverter" ref="dmsUpdateSubscriptionOutputConverter" /><property name="hystrixCommandConfig" ref="dmsCommandConfig" />
+		<property name="ondemandHystrixCommandFactory" ref="ondemandHystrixCommandFactory" />
+		<property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
+		<property name="serviceAvailCode" value="#{configurationService.configuration.getProperty('amwaydms.availablity.code')}"/>
+	</bean>
+	<!--
+	<bean id="updateSubscriptionServiceFactory" parent="abstractMockFactory">
+		<property name="mockInterface" value="com.amway.core.dms.service.DmsService" />
+		<property name="mockMode" value="${cis.client.dms.updatesubscription.mock}" />
+		<lookup-method name="getDefaultObject" bean="defaultUpdateSubscriptionService"/>
+		<property name="customMock" ref="mockUpdateSubscriptionService"/>
+			<!- - <bean class="com.amway.integration.cis.dms.subscription.services.mock.impl.MockUpdateSubscriptionService"
+				autowire-candidate="false">
+			</bean>
+		</property> - ->
+	</bean>
+    -->
+</beans>

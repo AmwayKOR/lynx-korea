@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<!-- Order external modifications -->
+    <alias name="amwayPayEventToPayTransactionEntryPopulator" alias="payEventToPayTransactionEntryPopulator"/>
+	<bean id="amwayPayEventToPayTransactionEntryPopulator" class="com.amway.amwayfinance.converters.AmwayPayEventToPayTransactionEntryPopulator">
+        <property name="commonI18NService" ref="commonI18NService"/>
+    </bean>
+
+	<alias name="amwayPayEventToPayTransactionEntryConverter" alias="payEventToPayTransactionEntryConverter"/>
+	<bean id="amwayPayEventToPayTransactionEntryConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.payment.model.PaymentTransactionEntryModel"/>
+		<property name="populators">
+			<list>
+				<ref bean="payEventToPayTransactionEntryPopulator"/>
+			</list>
+		</property>
+	</bean>
+
+	<alias name="amwayOrderExternalFinanceChangesFacade" alias="orderExternalFinanceChangesFacade"/>
+	<bean id="amwayOrderExternalFinanceChangesFacade" class="com.amway.amwayfinance.facades.impl.DefaultAmwayOrderExternalFinanceChangesFacade">
+		<property name="payEventToPayTransactionEntryConverter" ref="payEventToPayTransactionEntryConverter"/>
+		<property name="transactionInfoService" ref="transactionInfoService"/>
+		<property name="eventService" ref="eventService"/>
+		<property name="baseStoreService" ref="baseStoreService"/>
+		<property name="customerAccountService" ref="customerAccountService"/>
+		<property name="validationStrategy" ref="amwayOrderPaymentConfirmationValidationStrategy"/>
+	</bean>
+	<!-- [end] Order external modifications -->
+
+	<alias name="amwayTransactionInfoService" alias="transactionInfoService"/>
+	<bean id="amwayTransactionInfoService" parent="defaultTransactionInfoService" class="com.amway.amwayfinance.services.impl.DefaultAmwayTransactionInfoService">
+		<property name="modelService" ref="modelService"/>
+        <property name="allowedPaymentTypes">
+            <list>
+                <value>OFFLINE_WITH_VERIFICATION</value>
+                <value>OFFLINE_WITHOUT_VERIFICATION</value>
+            </list>
+        </property>
+        <property name="allowedOrderStatuses">
+            <list>
+                <value>ACTIVE</value>
+                <value>LOCKED</value>
+            </list>
+        </property>
+		<property name="allowedPaymentStatuses">
+			<set>
+				<value>NOTPAID</value>
+				<value>PARTPAID</value>
+			</set>
+		</property>
+	</bean>
+
+	<alias name="defaultAmwayOrderPaymentConfirmationValidationStrategy" alias="amwayOrderPaymentConfirmationValidationStrategy" />
+	<bean id="defaultAmwayOrderPaymentConfirmationValidationStrategy" class="com.amway.amwayfinance.services.impl.DefaultAmwayOrderPaymentConfirmationValidationStrategy" />
+
+</beans>

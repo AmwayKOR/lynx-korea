@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		   http://www.springframework.org/schema/beans/spring-beans.xsd
+		   http://www.springframework.org/schema/util
+		   http://www.springframework.org/schema/util/spring-util.xsd">
+
+
+	<!--#################################################################
+	 ##### 1. Entries related to processregistrationservice   ###########
+	 #################################################################### -->
+	
+	
+	<bean id="dmsCustomerRegistrationInputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.integration.dms.services.CustomerRegistrationInput" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonRequestFieldsPopulator" />
+				<ref bean="dmsCustomerRegistrationInputPopulator" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="dmsCustomerRegistrationInputPopulator" class="com.amway.integration.cis.dms.populators.DmsCustomerRegistrationInputPopulator" parent="abstractDmsPopulator">
+		<property name="baseStoreService" ref="baseStoreService"/>
+	</bean>
+	
+	<alias alias="processRegistrationService" name="defaultProcessCustomerRegistrationService"/>
+	<bean id="defaultProcessCustomerRegistrationService" class="com.amway.integration.cis.dms.customerregistration.impl.DefaultProcessCustomerRegistrationService"   parent="abstractDmsService">
+		<property name="inputConverter" ref="dmsCustomerRegistrationInputConverter"/>
+		<property name="outputConverter" ref="dmsCustomerRegistrationOutputConverter"/>
+		<property name="urlPath" value="${cis.client.dms.registration.urlPath}"/>
+	</bean>
+	
+	<bean id="dmsCustomerRegistrationOutputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.core.dms.data.RegistrationResultData" />
+		<property name="populators">
+			<list>
+				<ref bean="dmsCustomerRegistrationOutputPopulator" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="dmsCustomerRegistrationOutputPopulator"
+		class="com.amway.integration.cis.dms.populators.DmsCustomerRegistrationOutputReversePopulator">
+	</bean>
+	
+	<!--
+    <bean id="processRegistrationService" parent="abstractMockFactory">
+        <property name="mockInterface" value="com.amway.core.dms.service.DmsService"/>
+		<property name="mockMode" value="${cis.client.dms.registration.mock}"/>
+        <lookup-method name="getDefaultObject" bean="defaultProcessCustomerRegistrationService" />
+        <property name="customMock" ref="mockProcessRegistrationServiceImpl"/>
+    </bean>
+    -->
+
+	<bean id="mockProcessRegistrationServiceImpl" class="com.amway.integration.cis.dms.customerregistration.mock.impl.MockProcessRegistrationServiceImpl">
+		<property name="inputConverter" ref="dmsCustomerRegistrationInputConverter"/>
+		<property name="outputConverter" ref="dmsCustomerRegistrationOutputConverter"/>
+		<property name="hystrixCommandConfig" ref="dmsCommandConfig" />
+		<property name="ondemandHystrixCommandFactory" ref="ondemandHystrixCommandFactory" />
+		<property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
+		<property name="serviceAvailCode" value="#{configurationService.configuration.getProperty('amwaydms.availablity.code')}"/>
+	</bean>
+
+	<!--#################################################################
+	 ##### 2. Entries related to pre-printed number validation   ###########
+	 #################################################################### -->
+	
+	<bean id="dmsPrePrintedNumberInputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.amway.integration.dms.services.ValidatePrePrntdNmbrnput" />
+		<property name="populators">
+			<list>
+				<ref bean="amwayCommonRequestFieldsPopulator" />
+				<ref bean="dmsPrePrintedNumberInputPopulator" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="dmsPrePrintedNumberInputPopulator" class="com.amway.integration.cis.dms.populators.DmsPrePrintedNumberInputPopulator">
+		<property name="baseStoreService" ref="baseStoreService"/>
+	</bean>
+	
+	<bean id="dmsPrePrintedNumberOutputConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+		 		value="com.amway.core.dms.data.PrePrintedNumberResultData" />
+		<property name="populators">
+			<list>
+				<ref bean="dmsPrePrintedNumberOutputPopulator" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="dmsPrePrintedNumberOutputPopulator"
+		class="com.amway.integration.cis.dms.populators.DmsPrePrintedNumberOutputPopulator">
+	</bean>
+	
+	<alias alias="validatePrePrintedNumberService" name="defaultValidatePrePrintedNumberService"/>
+	<bean id="defaultValidatePrePrintedNumberService" class="com.amway.integration.cis.dms.customerregistration.impl.DefaultValidatePrePrintedNumberService"  parent="abstractDmsService">
+		<property name="inputConverter" ref="dmsPrePrintedNumberInputConverter"/>
+		<property name="outputConverter" ref="dmsPrePrintedNumberOutputConverter"/>
+		<property name="urlPath" value="${cis.client.dms.preprintednumberservice.urlPath}"/>
+	</bean>
+	<!--
+    <bean id="validatePrePrintedNumberServic" parent="abstractMockFactory">
+        <property name="mockInterface" value="com.amway.core.dms.service.DmsService"/>
+		<property name="mockMode" value="${cis.client.dms.preprintednumberservice.mock}"/>
+        <lookup-method name="getDefaultObject" bean="defaultValidatePrePrintedNumberService" />
+        <property name="customMock" ref="mockValidatePrePrintedNumberService"/>
+    </bean>
+-->
+      
+	<bean id="mockValidatePrePrintedNumberService" class="com.amway.integration.cis.dms.customerregistration.mock.impl.MockValidatePrePrintedNumberService">
+		<property name="inputConverter" ref="dmsPrePrintedNumberInputConverter"/>
+		<property name="outputConverter" ref="dmsPrePrintedNumberOutputConverter"/>
+		<property name="hystrixCommandConfig" ref="dmsCommandConfig" />
+		<property name="ondemandHystrixCommandFactory" ref="ondemandHystrixCommandFactory" />
+		<property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
+		<property name="serviceAvailCode" value="#{configurationService.configuration.getProperty('amwaydms.availablity.code')}"/>
+	</bean>
+
+    
+    
+    <!--#################################################################
+ ##  3. Entries related to addadditionalapplicantsrvice   ########
+ #####################################################################  -->
+ <alias alias="addAdditionalApplicantService" name="defaultAddAdditionalApplicantService"/>
+ <bean id="defaultAddAdditionalApplicantService" class="com.amway.integration.cis.dms.customerregistration.impl.DefaultAddAdditionalApplicantService"   parent="abstractDmsService">
+  <property name="inputConverter" ref="dmsPartyServiceDataInputConverter"/>
+  <property name="outputConverter" ref="dmPartyServiceOutputConverter"/>
+  <property name="urlPath" value="${cis.client.dms.addaditionalapplicant.urlPath}"></property>
+ </bean>
+ <!--
+    <bean id="addAdditionalApplicantService" parent="abstractMockFactory">
+        <property name="mockInterface" value="com.amway.core.dms.service.DmsService"/>
+		  <property name="mockMode" value="${cis.client.dms.addaditionalapplicant.mock}"/>
+		        <lookup-method name="getDefaultObject" bean="defaultAddAdditionalApplicantService" />
+		        <property name="customMock" ref="mockAddAdditionalApplicantServiceImpl"/>
+    </bean>
+   -->
+    <bean id="mockAddAdditionalApplicantServiceImpl" class="com.amway.integration.cis.dms.customerregistration.mock.impl.MockAddAdditionalApplicantServiceImpl">
+		<property name="inputConverter" ref="dmsPartyServiceDataInputConverter"/>
+		<property name="outputConverter" ref="dmPartyServiceOutputConverter"/>
+		<property name="hystrixCommandConfig" ref="dmsCommandConfig" />
+		<property name="ondemandHystrixCommandFactory" ref="ondemandHystrixCommandFactory" />
+		<property name="amwayInfraAvailabilityService" ref="amwayInfraAvailabilityService" />
+		<property name="serviceAvailCode" value="#{configurationService.configuration.getProperty('amwaydms.availablity.code')}"/>
+	</bean>
+	
+
+    
+    <bean id="dmsPartyServiceDataInputConverter" parent="abstractPopulatingConverter">
+	  <property name="targetClass"
+	   value="com.amway.integration.dms.services.AddPartyRequest" />
+	  <property name="populators">
+	   <list>
+	  	<ref bean="amwayCommonRequestFieldsPopulator" />
+	    <ref bean="dmsPartyServiceDataInputPopulator" />
+	   </list>
+	  </property>
+	 </bean>
+ 
+	 <bean id="dmsPartyServiceDataInputPopulator" class="com.amway.integration.cis.dms.populators.DmsPartyServiceDataInputPopulator">
+	  <property name="baseStoreService" ref="baseStoreService"/>
+	 </bean>
+	 
+	  <bean id="dmPartyServiceOutputConverter" parent="abstractPopulatingConverter">
+		  <property name="targetClass" value="com.amway.core.dms.data.RegistrationResultData" />
+		  <property name="populators">
+		   <list>
+		    <ref bean="dmsAddPartyOutputPopulator" />
+		   </list>
+		  </property>
+	  </bean>
+ 
+	 <bean id="dmsAddPartyOutputPopulator" class="com.amway.integration.cis.dms.populators.DmsAddPartyServiceOutputPopulator">
+	 </bean>
+	
+	
+	<!--#################################################################
+	##  Put other service from customerregistration module here  ########
+	#####################################################################  -->
+</beans>

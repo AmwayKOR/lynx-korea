@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ~ [y] hybris Platform ~ ~ Copyright (c) 2000-2016 SAP SE or an SAP affiliate company. ~ All rights
+	reserved. ~ ~ This software is the confidential and proprietary information
+	of hybris ~ ("Confidential Information"). You shall not disclose such Confidential
+	~ Information and shall use it only in accordance with the terms of the ~
+	license agreement you entered into with SAP. -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <alias alias="fieldSetBuilder" name="defaultFieldSetBuilder"/>
+    <bean id="defaultFieldSetBuilder"
+          class="de.hybris.platform.webservicescommons.mapping.impl.DefaultFieldSetBuilder">
+        <property name="defaultRecurrencyLevel" value="7"/>
+        <property name="defaultMaxFieldSetSize" value="50000"/>
+        <property name="fieldSetLevelHelper" ref="fieldSetLevelHelper"/>
+    </bean>
+
+    <bean parent="fieldSetLevelMapping" id="CustomerWsDTOFieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="de.hybris.platform.commercewebservicescommons.dto.user.CustomerWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC"
+                       value="lastName,title,titleCode,displayUid,defaultAddress,language,firstName,currency,uid,name,customerID"/>
+                <entry key="DEFAULT"
+                       value="lastName,title,titleCode,displayUid,defaultAddress(DEFAULT),language(DEFAULT),firstName,currency(DEFAULT),uid,name,userGroups,customerID"/>
+                <entry key="FULL"
+                       value="lastName,title,titleCode,displayUid,defaultAddress(FULL),language(FULL),firstName,currency(FULL),uid,name,customerID"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean parent="fieldSetLevelMapping" id="pointOfServiceStockWsDTOFieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="de.hybris.platform.commercewebservicescommons.dto.store.PointOfServiceStockWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC"
+                       value="stockData,storeImages,geoPoint,address,openingHours,description,storeContent,name,mapIcon,formattedDistance,displayName,url,distanceKm"/>
+                <entry key="DEFAULT"
+                       value="stockData(DEFAULT),storeImages(DEFAULT),geoPoint(DEFAULT),address(DEFAULT),openingHours(DEFAULT),description,storeContent,name,mapIcon(DEFAULT),formattedDistance,displayName,url,distanceKm"/>
+                <entry key="FULL"
+                       value="stockData(FULL),storeImages(FULL),geoPoint(FULL),address(FULL),openingHours(FULL),description,storeContent,name,mapIcon(FULL),formattedDistance,displayName,url,distanceKm"/>
+            </map>
+        </property>
+    </bean>
+
+    <!-- Product -->
+    <bean parent="fieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="com.amway.facades.product.data.AmwayKitEntryProductWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="DEFAULT"
+                       value="entry(DEFAULT),configuredQty"/>
+                <entry key="FULL"
+                       value="entry(FULL),configuredQty"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean parent="fieldSetLevelMapping" id="productWsDTOFieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="de.hybris.platform.commercewebservicescommons.dto.product.ProductWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC"
+                       value="purchasable,stock,name,baseProduct,availableForPickup,code,url,price"/>
+                <entry key="DEFAULT"
+                       value="alias,availableForPickup,averageRating,baseOptions(DEFAULT),baseProduct,categories(BASIC),code,description,dimensions(DEFAULT),manufacturer,name,numberOfReviews,onlineSince,price(DEFAULT),productAttributes,purchasable,stock(DEFAULT),summary,url,variantMatrix(DEFAULT),variantOptions(DEFAULT),weight"/>
+                <entry key="FULL"
+                       value="alias,availableForPickup,averageRating,baseOptions(FULL),baseProduct,categories(FULL),classifications(FULL),code,description,dimensions(FULL),futureStocks(FULL),images(FULL),manufacturer,name,numberOfReviews,onlineSince,potentialPromotions(FULL),price(FULL),productAttributes,productReferences(FULL),purchasable,retailPrice(FULL),reviews(FULL),stock(FULL),summary,variantMatrix(FULL),variantOptions(FULL),variantType,volumePrices(FULL),volumePricesFlag,weight,kitEntry(DEFAULT),kitPrice,deliveryModes(FULL)"/>
+                <entry key="PRICE"
+                       value="code,price(DEFAULT)"/>
+            </map>
+        </property>
+    </bean>
+
+
+    <bean parent="fieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="com.amway.core.dto.AmwayDimensionWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC"
+                       value="length,width,height,weight,count,volume"/>
+                <entry key="DEFAULT"
+                       value="BASIC"/>
+                <entry key="FULL"
+                       value="BASIC"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean parent="fieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="com.amway.core.dto.AmwayDimensionDescriptorWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC"
+                       value="value,unit"/>
+                <entry key="DEFAULT"
+                       value="BASIC"/>
+                <entry key="FULL"
+                       value="BASIC"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean parent="fieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="com.amway.core.dto.AmwayUnitWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC"
+                       value="symbol"/>
+                <entry key="DEFAULT"
+                       value="BASIC"/>
+                <entry key="FULL"
+                       value="BASIC"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean parent="fieldSetLevelMapping" id="stockWsDTOFieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="de.hybris.platform.commercewebservicescommons.dto.product.StockWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC" value="stockLevelStatus,stockLevel"/>
+                <entry key="DEFAULT" value="stockLevelStatus,stockLevel"/>
+                <entry key="FULL" value="stockLevelStatus,stockLevel"/>
+            </map>
+        </property>
+    </bean>
+
+
+    <bean parent="fieldSetLevelMapping" id="priceWsDTOFieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="de.hybris.platform.commercewebservicescommons.dto.product.PriceWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC" value="value,currencyIso,amwayValue"/>
+                <entry key="DEFAULT"
+                       value="currencyIso,priceType,value,maxQuantity,minQuantity,formattedValue,amwayValue(DEFAULT)"/>
+                <entry key="FULL"
+                       value="currencyIso,priceType,value,maxQuantity,minQuantity,formattedValue,amwayValue(FULL)"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean parent="fieldSetLevelMapping" id="promotionWsDTOFieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="de.hybris.platform.commercewebservicescommons.dto.product.PromotionWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC" value="code,title,promotionType,restrictions,enabled,promotionPrice(FULL),totalPrice(FULL),name"/>
+                <entry key="DEFAULT"
+                       value="code,title,promotionType,restrictions(DEFAULT),enabled,promotionPrice(FULL),totalPrice(FULL),name"/>
+                <entry key="FULL"
+                       value="firedMessages,enabled,startDate,title,promotionType,restrictions(FULL),priority,description,promotionGroup,endDate,code,productBanner(FULL),couldFireMessages,promotionPrice(FULL),totalPrice(FULL),name"/>
+            </map>
+        </property>
+    </bean>
+
+
+
+    <bean parent="fieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="de.hybris.platform.commercewebservicescommons.dto.queues.OrderStatusUpdateElementListWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC" value="orderStatusUpdateElements"/>
+                <entry key="DEFAULT" value="orderStatusUpdateElements(DEFAULT)"/>
+                <entry key="FULL" value="orderStatusUpdateElements(FULL)"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean parent="fieldSetLevelMapping" >
+        <property name="dtoClass"
+                  value="de.hybris.platform.commercewebservicescommons.dto.queues.OrderStatusUpdateElementListWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC" value="orderStatusUpdateElements"/>
+                <entry key="DEFAULT" value="orderStatusUpdateElements(DEFAULT)"/>
+                <entry key="FULL" value="orderStatusUpdateElements(FULL)"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean parent="fieldSetLevelMapping" id="cartWsDTOFieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="de.hybris.platform.commercewebservicescommons.dto.order.CartWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC" value="code,guid"/>
+                <entry key="DEFAULT"
+                       value="BASIC,totalItems,totalPrice(DEFAULT),totalPriceWithTax(DEFAULT),entries(DEFAULT),savings(DEFAULT),value(DEFAULT)"/>
+                <entry key="FULL"
+                       value="totalUnitCount,store,appliedOrderPromotions(FULL),appliedVouchers(FULL),productDiscounts(FULL),totalDiscounts(FULL),subTotal(FULL),orderDiscounts(FULL),entries(DEFAULT),appliedProductPromotions(FULL),totalPrice(FULL),code,paymentInfo(FULL),totalItems,totalPriceWithTax(FULL),user(FULL),deliveryAddress(FULL),deliveryCost(FULL),value(DEFAULT),potentialProductPromotions(FULL),potentialOrderPromotions(FULL),totalUnitCount,pickupItemsQuantity,net,calculated,appliedVouchers(FULL),productDiscounts(FULL),totalDiscounts(FULL),subTotal(FULL),orderDiscounts(FULL),entries(FULL),appliedProductPromotions(FULL),totalPrice(FULL),site,deliveryMode(FULL),code,deliveryOrderGroups(FULL),guid,paymentInfo(FULL),pickupOrderGroups(FULL),totalItems,totalPriceWithTax(FULL),deliveryItemsQuantity,totalTax(FULL),user(FULL),deliveryAddress(FULL),deliveryCost(FULL),savings(FULL),paymentDetails(FULL)"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean parent="fieldSetLevelMapping" id="orderEntryWsDTOFieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="de.hybris.platform.commercewebservicescommons.dto.order.OrderEntryWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="DEFAULT" value="BASIC,totalPrice,product,basePrice,aboBasePrice,retailBasePrice,proRatedPrice,skuversion,tes,value(DEFAULT)"/>
+                <entry key="BASIC" value="entryNumber,quantity,deliveryPointOfService,retailPrice"/>
+                <entry key="FULL"
+                       value="product(FULL),deliveryPointOfService(FULL),entryNumber,updateable,deliveryMode(FULL),quantity,basePrice(FULL),totalPrice(FULL),retailPrice(FULL),aboBasePrice,retailBasePrice,proRatedPrice,skuversion,tes,margin(FULL),value(FULL),pickupDateTime"/>
+            </map>
+        </property>
+    </bean>
+
+
+    <bean parent="fieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="de.hybris.platform.commercewebservicescommons.dto.order.AmwayValueWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC" value="pointValue,businessVolume"/>
+                <entry key="DEFAULT" value="BASIC"/>
+                <entry key="FULL" value="pointValue,businessVolume"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean parent="fieldSetLevelMapping" id="orderWsDTOFieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="de.hybris.platform.commercewebservicescommons.dto.order.OrderWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC" value="code,guid"/>
+                <entry key="DEFAULT"
+                       value="appliedOrderPromotions(DEFAULT),appliedVouchers(DEFAULT),bonusPeriod(DEFAULT),calculated,code,consignments(DEFAULT),created,deliveryAddress(DEFAULT),deliveryCost(DEFAULT),deliveryMode(DEFAULT),deliveryStatus,deliveryStatusDisplay,entries(DEFAULT),guestCustomer,margin(DEFAULT),net,orderDiscounts(DEFAULT),orderPeriod(DEFAULT),paymentInfo(DEFAULT),pickupItemsQuantity,productDiscounts(DEFAULT),site,status,statusDisplay,store,subTotal(DEFAULT),totalDiscounts(DEFAULT),totalItems,totalPrice(DEFAULT),totalPriceWithTax(DEFAULT),totalTax(DEFAULT),unconsignedEntries(DEFAULT),user(DEFAULT),value(DEFAULT)"/>
+                <entry key="FULL"
+                       value="account,appliedOrderPromotions(FULL),appliedProductPromotions(FULL),appliedVouchers(FULL),bonusPeriod(FULL),calculated,code,consignments(FULL),created,deliveryAddress(FULL),deliveryCost(FULL),deliveryItemsQuantity,deliveryMode(FULL),deliveryOrderGroups(FULL),deliveryStatus,deliveryStatusDisplay,entries(FULL),guestCustomer,guid,margin(FULL),net,orderDiscounts(FULL),orderPeriod(FULL),paymentInfo(FULL),pickupItemsQuantity,pickupOrderGroups(FULL),productDiscounts(FULL),site,status,statusDisplay,store,subTotal(FULL),totalDiscounts(FULL),totalItems,totalPrice(FULL),totalPriceWithTax(FULL),totalTax(FULL),totalWeight,unconsignedEntries(FULL),user(FULL),value(FULL)"/>
+            </map>
+        </property>
+    </bean>
+
+
+    <bean parent="fieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="de.hybris.platform.webservicescommons.dto.error.ErrorWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC" value="message,reason,subject,subjectType,type"/>
+                <entry key="DEFAULT" value="message,reason,subject,subjectType,type"/>
+                <entry key="FULL" value="message,reason,subject,subjectType,type"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean parent="fieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="de.hybris.platform.commercewebservicescommons.dto.store.PointOfServiceListWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC" value="pointOfServices"/>
+                <entry key="DEFAULT" value="pointOfServices(DEFAULT)"/>
+                <entry key="FULL" value="pointOfServices(FULL)"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean parent="fieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="de.hybris.platform.commercewebservicescommons.dto.user.AmwayAccountWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC" value="uid,name,status,accountType"/>
+                <entry key="DEFAULT" value="uid,name,accountType,status,primaryParty(FULL)"/>
+                <entry key="FULL" value="uid,name,accountType,status,primaryParty(FULL),parties(FULL)"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean parent="fieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="com.amway.facades.dto.AmwayAccountDataListWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC" value="accounts(FULL)"/>
+                <entry key="DEFAULT" value="BASIC"/>
+                <entry key="FULL" value="accounts(FULL)"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean parent="fieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="de.hybris.platform.commercewebservicescommons.dto.order.AmwayOrderMarginWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC" value="margin"/>
+                <entry key="DEFAULT" value="BASIC"/>
+                <entry key="FULL" value="margin"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean parent="fieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="de.hybris.platform.commercewebservicescommons.dto.order.AmwayOrderPeriodWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC" value="startDate,endDate"/>
+                <entry key="DEFAULT" value="BASIC,status"/>
+                <entry key="FULL" value="startDate,endDate,status"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean parent="fieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="de.hybris.platform.commercewebservicescommons.dto.order.AmwayBonusPeriodWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC" value="startDate,endDate"/>
+                <entry key="DEFAULT" value="BASIC,status"/>
+                <entry key="FULL" value="startDate,endDate,status"/>
+            </map>
+        </property>
+    </bean>
+
+     <bean parent="fieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="de.hybris.platform.commercewebservicescommons.dto.order.AmwayPaymentDetailsWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC" value="totalPaidAmount,balanceAmount"/>
+                <entry key="DEFAULT" value="paymentInfos(FULL),totalPaidAmount,balanceAmount"/>
+                <entry key="FULL" value="paymentInfos(FULL),totalPaidAmount,balanceAmount"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean parent="fieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="de.hybris.platform.commercewebservicescommons.dto.order.PosPaymentInfoWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC" value="requesttoken,transactionid,amount,status,comments"/>
+                <entry key="DEFAULT" value="requesttoken,transactionid,amount,status,comments,paymentMode(FULL)"/>
+                <entry key="FULL" value="requesttoken,transactionid,amount,status,comments,paymentMode(FULL)"/>
+            </map>
+        </property>
+    </bean>
+
+     <bean parent="fieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="com.amway.core.commercewebservices.dto.order.AmwayPaymentModeDataWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC" value="code,name"/>
+                <entry key="DEFAULT" value="code,name,amount,repeatableCount,usedCount,allowOverpay,overpaymentThreshold"/>
+                <entry key="FULL" value="code,name,amount,repeatableCount,usedCount,allowOverpay,overpaymentThreshold"/>
+            </map>
+        </property>
+    </bean>
+
+
+
+    <bean parent="fieldSetLevelMapping" id="cartModificationListWsDTOFieldSetLevelMapping">
+		<property name="dtoClass"
+		          value="de.hybris.platform.commercewebservicescommons.dto.report.AmwayReportWsDTO"/>
+		<property name="levelMapping">
+			<map>
+				<entry key="BASIC" value="code,name"/>
+				<entry key="DEFAULT" value="code,name"/>
+				<entry key="FULL" value="code,name,jasperMedia"/>
+			</map>
+		</property>
+	</bean>
+
+    <!-- bean parent="fieldSetLevelMapping">
+        <property name="dtoClass"
+                  value="com.amway.lynxcommercewebserviceaddon.dto.login.LoginAuthResponseWsDTO"/>
+        <property name="levelMapping">
+            <map>
+                <entry key="BASIC" value="access_token,expires_in,refresh_token,token_type,scope,error"/>
+                <entry key="DEFAULT" value="access_token,expires_in,refresh_token,token_type,scope,error"/>
+                <entry key="FULL" value="access_token,expires_in,refresh_token,token_type,scope,error"/>
+            </map>
+        </property>
+    </bean -->
+    
+    <bean parent="fieldSetLevelMapping">
+		<property name="dtoClass" value="de.hybris.platform.commercewebservicescommons.dto.pos.AmwayPointOfSaleReceiptWsDTO"/>
+	  <property name="levelMapping">
+            <map>
+                <entry key="BASIC" value="orderWsDTO(BASIC),storeWsDTO(BASIC),placedBy(BASIC),customerABODetailWsDto(BASIC),paymentDetails(BASIC)"/>
+                <entry key="DEFAULT" value="orderWsDTO(DEFAULT),storeWsDTO(DEFAULT),placedBy(DEFAULT),customerABODetailWsDto(DEFAULT),paymentDetails(DEFAULT)"/>
+                <entry key="FULL" value="orderWsDTO(FULL),storeWsDTO(FULL),placedBy(FULL),customerABODetailWsDto(FULL),paymentDetails(FULL)"/>
+            </map>
+        </property>
+	</bean>
+    
+    
+</beans>

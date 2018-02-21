@@ -1,0 +1,93 @@
+$siteUid=storetemplate
+
+$JAN2016_1=05.01.2016 20:00:01
+$JAN2016_2=27.01.2016 20:00:01
+$FEB2016=14.02.2016 00:21:00
+$MAR2016=15.03.2016 01:00:20
+
+$APR2016=16.04.2016 10:00:03
+$MAY2016=17.05.2016 00:13:00
+$JUN2016=18.06.2016 03:00:10
+
+$customergroup=customergroup
+
+$passwordEncoding=md5
+$defaultPassword=test
+$setPassword=@password[translator=de.hybris.platform.impex.jalo.translators.ConvertPlaintextToEncodedUserPasswordTranslator][default='$passwordEncoding:$defaultPassword']
+
+# Sample customer
+INSERT_UPDATE Customer;originalUid[unique=true];uid[unique=true];title(code);name;description;sessionLanguage(isocode);sessionCurrency(isocode);groups(uid);$setPassword;&userId
+;OrderHistoryUser@test.com;orderhistoryuser@test.com;mr;orders test user;a test user for orders;en;GBP;$customergroup;;orderHistoryUser
+
+# Sample customer addresses
+INSERT_UPDATE Address;&addId;owner(&userId)[unique=true];streetname[unique=true];postalcode[unique=true];duplicate[unique=true];town;country(isocode);region(isocode);billingAddress;contactAddress;shippingAddress;unloadingAddress;firstname;lastname;email;gender(code);middlename;phone1;title(code);url;company;fax;department
+;orderHistoryUserAddress;orderHistoryUser;21 Trumpington Street;CB2 1RB;false;Cambridge;GB;;true;true;true;true;OrderHistory;User;OrderHistoryUser@test.com;MALE;;+60616707;mr;;Hybris;;
+
+# Set default payment and shipping addresses for sample customer
+UPDATE Customer;uid[unique=true];defaultPaymentAddress(&addId);defaultShipmentAddress(&addId)
+;orderhistoryuser@test.com;orderHistoryUserAddress;orderHistoryUserAddress
+
+
+# Set payment mode
+INSERT_UPDATE StandardPaymentMode;code[unique=true];name[lang=de];name[lang=en];description[lang=de];description[lang=en];active;paymentinfotype(code)
+;advance;Vorkasse;Advance;per Vorkasse bezahlen;payment in advance;true;AdvancePaymentInfo
+
+INSERT_UPDATE StandardPaymentModeValue;paymentMode(code)[unique=true];value;currency(isocode)[unique=true]
+;advance;0.00;USD
+
+INSERT_UPDATE Order;code[unique=true];date[dateformat=dd.MM.yyyy HH:mm:ss];net;currency(isocode);calculated;user(uid);site(uid);orderName
+;JAN2016_1;$JAN2016_1;false;USD;false;amway_party_test_1;$siteUid;TestOrderJan2016_1
+;JAN2016_2;$JAN2016_2;false;USD;false;amway_party_test_1;$siteUid;TestOrderJan2016_2
+
+;FEB2016;$FEB2016;false;USD;false;amway_party_test_1;$siteUid;TestOrderFeb2016
+;MAR2016;$MAR2016;false;USD;false;amway_party_test_1;$siteUid;TestOrderMar2016
+;APR2016;$APR2016;false;USD;false;amway_party_test_1;$siteUid;TestOrderApr2016
+;MAY2016;$MAY2016;false;USD;false;amway_party_test_1;$siteUid;TestOrderMay2016
+;JUN2016;$JUN2016;false;USD;false;amway_party_test_1;$siteUid;TestOrderJun2016
+
+#Order Entries
+INSERT_UPDATE OrderEntry;order(Order.code)[unique=true];creationTime[dateformat=dd.MM.yyyy HH:mm:ss];product(code,catalogVersion(catalog(id),version))[unique=true];quantity;unit(code)
+;JAN2016_1;$JAN2016_1;HW1210-3422:testCatalog:Online;1;pieces
+;JAN2016_1;$JAN2016_1;HW1210-3423:testCatalog:Online;3;pieces
+
+;JAN2016_2;$JAN2016_2;HW1210-3422:testCatalog:Online;1;pieces
+;JAN2016_2;$JAN2016_2;HW1210-3423:testCatalog:Online;3;pieces
+
+;FEB2016;$FEB2016;HW1210-3422:testCatalog:Online;1;pieces
+;FEB2016;$FEB2016;HW1210-3423:testCatalog:Online;1;pieces
+;FEB2016;$FEB2016;HW1210-3424:testCatalog:Online;1;pieces
+
+;MAR2016;$MAR2016;HW1210-3423:testCatalog:Online;2;pieces
+
+;APR2016;$APR2016;HW1210-3422:testCatalog:Online;1;pieces
+;APR2016;$APR2016;HW1210-3423:testCatalog:Online;3;pieces
+
+;MAY2016;$MAY2016;HW1210-3422:testCatalog:Online;1;pieces
+;MAY2016;$MAY2016;HW1210-3423:testCatalog:Online;1;pieces
+;MAY2016;$MAY2016;HW1210-3424:testCatalog:Online;1;pieces
+
+;JUN2016;$JUN2016;HW1210-3423:testCatalog:Online;2;pieces
+
+#Recalculating orders
+UPDATE Order;code[unique=true];status(code)
+;JAN2016_1;CREATED
+#%   impex.getLastImportedItem().setPaymentAddress(impex.getLastImportedItem().getUser().getAllAddresses().iterator().next());
+#%   impex.getLastImportedItem().recalculate();
+;JAN2016_2;CREATED
+#%   impex.getLastImportedItem().setPaymentAddress(impex.getLastImportedItem().getUser().getAllAddresses().iterator().next());
+#%   impex.getLastImportedItem().recalculate();
+;FEB2016;CREATED
+#%   impex.getLastImportedItem().setPaymentAddress(impex.getLastImportedItem().getUser().getAllAddresses().iterator().next());
+#%   impex.getLastImportedItem().recalculate();
+;MAR2016;CREATED
+#%   impex.getLastImportedItem().setPaymentAddress(impex.getLastImportedItem().getUser().getAllAddresses().iterator().next());
+#%   impex.getLastImportedItem().recalculate();
+;APR2016;CREATED
+#%   impex.getLastImportedItem().setPaymentAddress(impex.getLastImportedItem().getUser().getAllAddresses().iterator().next());
+#%   impex.getLastImportedItem().recalculate();
+;MAY2016;CREATED
+#%   impex.getLastImportedItem().setPaymentAddress(impex.getLastImportedItem().getUser().getAllAddresses().iterator().next());
+#%   impex.getLastImportedItem().recalculate();
+;JUN2016;CREATED
+#%   impex.getLastImportedItem().setPaymentAddress(impex.getLastImportedItem().getUser().getAllAddresses().iterator().next());
+#%   impex.getLastImportedItem().recalculate();

@@ -1,0 +1,205 @@
+$jarResource=jar:com.amway.constants.AmwaycontentsolrsearchaddonConstants&/amwaycontentsolrsearchaddon/cmscockpit/import/config
+
+###############################################################################
+#
+#	Cockpit UI Component configuration import script for CMS 2 components
+#
+#	
+#	This file contains Cockpit UI Component configurations for the 
+#	cms2 types.
+#
+#
+#
+#	Table of Contents
+#	---------------------------------------------------------------------------
+#		i.		Macro definitions
+#	---------------------------------------------------------------------------
+#		1.		Configuration files (media)
+#	---------------------------------------------------------------------------
+#		1.1			List view
+#		1.2			Grid view
+#		1.3			Editor area
+#		1.4			Advanced search
+#		1.5			Base configurations
+#		1.6			Component editor
+#		1.7			Component info
+#		1.8			Wizards
+#		1.9			Preview area
+#	---------------------------------------------------------------------------
+#		2.		Configuration mappings (principal, type, context code)
+#	---------------------------------------------------------------------------
+#		2.1			List view
+#		2.1.1		- Browser
+#		2.1.2		- Context area
+#		2.1.3		- Reference selector dialog
+#		2.1.4		- Browser section
+#		2.1.5		- Component editor lists
+#		2.2			Grid view
+#		2.3			Editor area
+#		2.4			Advanced search
+#		2.5			Base configurations
+#		2.6			Component editor
+#		2.7			Component info
+#		2.8			Wizards
+#		2.9			Preview area
+#
+#
+###############################################################################
+
+###############################################################################
+#	i. Macro definitions
+###############################################################################
+
+###############################################################################
+#
+#	1. Configuration files (media)
+#
+###############################################################################
+
+INSERT_UPDATE CockpitUIConfigurationMedia;code[unique=true];mime;realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true]
+
+
+###############################################################################
+#	1.1 List view
+###############################################################################
+
+;list_abstractpage_cockpitgroup_ui_config;text/xml; ListView_AbstractPage_CockpitGroup.xml; $jarResource/ListView_AbstractPage_CockpitGroup.xml
+
+
+###############################################################################
+#	1.2 Grid view
+###############################################################################
+
+;grid_abstractpage_cockpitgroup_ui_config;text/xml; GridView_AbstractPage_CockpitGroup.xml; $jarResource/GridView_AbstractPage_CockpitGroup.xml
+
+#	1.2.1 Grid view in Personalization view
+#; grid_pers_abstractpage_cockpitgroup_ui_config;text/xml; GridViewPersonalize_AbstractPage_CockpitGroup.xml; $jarResource/GridViewPersonalize_AbstractPage_CockpitGroup.xml
+
+###############################################################################
+#	1.3 Editor area
+###############################################################################
+
+;editor_abstractpage_cockpitgroup_ui_config;text/xml; Editor_AbstractPage_CockpitGroup.xml; $jarResource/Editor_AbstractPage_CockpitGroup.xml
+;editor_abstractpage_cmsmanagergroup_ui_config;text/xml; Editor_AbstractPage_CmsManagerGroup.xml; $jarResource/Editor_AbstractPage_CmsManagerGroup.xml
+
+;editor_contentpage_cockpitgroup_ui_config;text/xml; Editor_ContentPage_CockpitGroup.xml; $jarResource/Editor_ContentPage_CockpitGroup.xml
+;editor_contentpage_cmsmanagergroup_ui_config;text/xml; Editor_ContentPage_CmsManagerGroup.xml; $jarResource/Editor_ContentPage_CmsManagerGroup.xml
+
+
+;editor_categorypage_cockpitgroup_ui_config;text/xml; Editor_CategoryPage_CockpitGroup.xml; $jarResource/Editor_CategoryPage_CockpitGroup.xml
+;editor_catalogpage_cockpitgroup_ui_config;text/xml; Editor_CatalogPage_CockpitGroup.xml; $jarResource/Editor_CatalogPage_CockpitGroup.xml
+
+
+###############################################################################
+#	1.4 Advanced search
+###############################################################################
+
+; advanced_search_abstractpage_cockpitgroup_ui_config;text/xml; AdvancedSearch_AbstractPage_CockpitGroup.xml; $jarResource/AdvancedSearch_AbstractPage_CockpitGroup.xml
+
+###############################################################################
+#	1.5 Base configurations
+###############################################################################
+
+;base_abstractpage_ui_config;text/xml; Base_AbstractPage.xml; $jarResource/Base_AbstractPage.xml
+
+###############################################################################
+#	1.6 Component editor
+###############################################################################
+
+
+###############################################################################
+#	1.8 Wizards
+###############################################################################
+
+; wizard_abstractpage_ui_config; text/xml; Wizard_AbstractPage_CockpitGroup.xml;$jarResource/Wizard_AbstractPage_CockpitGroup.xml
+
+###############################################################################
+#	Special scripteval media		
+###############################################################################
+
+INSERT_UPDATE CockpitUIScriptConfigMedia;code[unique=true];allowScriptEvaluation;mime;realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true]
+
+###############################################################################
+#
+#	2. Configuration mappings (principal, type, context code)
+#
+###############################################################################
+
+INSERT_UPDATE CockpitUIComponentConfiguration;code[unique=true];factoryBean;objectTemplateCode[unique=true];principal(uid)[unique=true];media(code);
+
+
+###############################################################################
+#	2.1 List view
+###############################################################################
+
+# 	2.1.1 Browser
+;listViewContentBrowser;listViewConfigurationFactory;AbstractPage;cockpitgroup;list_abstractpage_cockpitgroup_ui_config;
+
+# 	2.1.2 Context area
+# add stuff
+
+# 	2.1.3 Reference selector dialog
+
+#	2.1.4 Browser section
+;listViewBrowserSection;listViewConfigurationFactory;AbstractPage;cockpitgroup;list_abstractpage_cockpitgroup_ui_config;
+
+###############################################################################
+#	2.2 Grid view
+###############################################################################
+
+;gridView;gridViewConfigurationFactory;AbstractPage;cockpitgroup;grid_abstractpage_cockpitgroup_ui_config;
+
+#	2.2.1 Grid view for personalization view
+;gridViewPersonalize;gridViewConfigurationFactory;AbstractPage;cockpitgroup;grid_pers_abstractpage_cockpitgroup_ui_config;
+
+###############################################################################
+#	2.3 Editor area
+###############################################################################
+
+
+
+;editorArea;editorConfigurationFactory;AbstractPage;cockpitgroup;editor_abstractpage_cockpitgroup_ui_config;
+;editorArea;editorConfigurationFactory;AbstractPage;cmsmanagergroup;editor_abstractpage_cmsmanagergroup_ui_config;
+
+;editorArea;editorConfigurationFactory;ContentPage;cockpitgroup;editor_contentpage_cockpitgroup_ui_config;
+;editorArea;editorConfigurationFactory;ContentPage;cmsmanagergroup;editor_contentpage_cmsmanagergroup_ui_config;
+
+;editorArea;editorConfigurationFactory;CategoryPage;cockpitgroup;editor_categorypage_cockpitgroup_ui_config;
+;editorArea;editorConfigurationFactory;CatalogPage;cockpitgroup;editor_catalogpage_cockpitgroup_ui_config;
+
+
+
+###############################################################################
+#	2.4 Advanced search
+###############################################################################
+
+;advancedSearch;advancedSearchConfigurationFactory;AbstractPage;cockpitgroup;advanced_search_abstractpage_cockpitgroup_ui_config;
+
+###############################################################################
+#	2.5 Base configurations
+###############################################################################
+
+;base;baseConfigurationFactory;AbstractPage;;base_abstractpage_ui_config;
+
+###############################################################################
+#	2.6 Component editor
+###############################################################################
+
+;contentEditor;contentEditorConfigurationFactory;CMSParagraphComponent;cockpitgroup;contentedit_paragraph_cockpitgroup_ui_config;
+;contentEditor;contentEditorConfigurationFactory;CMSImageComponent;cockpitgroup;contentedit_imagecomponent_cockpitgroup_ui_config;
+;contentEditor;contentEditorConfigurationFactory;CMSLinkComponent;cockpitgroup;contentedit_linkcomponent_cockpitgroup_ui_config;
+
+
+###############################################################################
+#	2.8 Wizards
+###############################################################################
+
+;wizardConfig;wizardConfigurationFactory;AbstractPage;cockpitgroup;wizard_abstractpage_ui_config
+
+###############################################################################
+#	2.9 Preview area
+###############################################################################
+
+#2.6 PREVIEW AREA
+;liveEditPreviewArea;editorConfigurationFactory;PreviewData;cockpitgroup;previewarea_previewdata_cockpitgroup_ui_config;
+
